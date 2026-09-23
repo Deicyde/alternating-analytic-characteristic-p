@@ -1,0 +1,9 @@
+'AlternatingAnalytic.mem_sortedFiniteSubsets' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sortedFiniteSubsets' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.schauderProjectionSpan' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.schauder_coord_proj' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.hasSum_sortedBasisTerm' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sorted_coefficient_proj' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sum_sortedBasisTerm_eq_projection' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.tendsto_sortedFiniteSubsets' depends on axioms: [Quot.sound, propext, Classical.choice]
+AUTOFORM_PROBE_OK decls=8

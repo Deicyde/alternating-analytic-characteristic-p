@@ -1,0 +1,36 @@
+{
+  "created_utc": "2026-09-23T23:16:30.842750+00:00",
+  "result": "Complete proved-paper Lean formalization; full kernel builds and all-owned transitive axiom audit passed.",
+  "proof_submodules": 88,
+  "import_umbrella_modules": 1,
+  "lean_source_lines": 13456,
+  "all_owned_declarations": 2026,
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "source_unchanged": true,
+  "complete_library_build": "passed",
+  "standalone_default_build": "passed",
+  "standalone_verifier": "passed",
+  "paper_coverage": "60 fine records accounted for; no material mathematical gaps; initial planning-only generic field-transport abstraction is unnecessary for actual paper passage.",
+  "lean_version": "4.34.0-rc2",
+  "mathlib_revision": "2b73d9821d297b80d92eecc54cc09bfc263e0098",
+  "current_successful_component_receipts": 62,
+  "jury_note": "Independent model review is separate from kernel verification; recorded timeouts are abstentions, never approvals. The finite-field, main-entrypoint and completed-coefficient bundling findings are resolved by their public theorem wrappers. Semantic audits cover the new main and coefficient statements; old verdicts are retained as history.",
+  "pending_jury_at_snapshot": [],
+  "original_characteristic_two_repository": "No changes made.",
+  "comparator_solution_modules": 1,
+  "audited_module_count": 90,
+  "publication_verifier": "passed",
+  "comparator_local": "passed: both statements, permitted axioms and Lean default kernel; upstream macOS development launcher without Linux sandbox",
+  "formalization_metadata": "v0.4 schema validation passed",
+  "challenge_placeholders": {
+    "count": 2,
+    "file": "challenge.lean",
+    "scope": "Intentional theorem specification placeholders excluded from proof-development counts and the proof audit."
+  },
+  "github_repository": "https://github.com/Deicyde/alternating-analytic-characteristic-p",
+  "github_ci": "Configured in .github/workflows/build.yml; current remote run status is reported by GitHub Actions."
+}

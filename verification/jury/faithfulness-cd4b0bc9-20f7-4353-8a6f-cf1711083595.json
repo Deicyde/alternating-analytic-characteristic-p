@@ -1,0 +1,8 @@
+{
+  "axis": "faithfulness",
+  "prompt_sha256": "bee80020aaea8420ebd741132ea9e37c21135e3c23dc3219ad6a558f27446aa7",
+  "result": {
+    "score": 5,
+    "reasoning": "The formalization preserves the finitely supported ternary-input bound, the genuine exterior power of the full sequence space, adjacent permutation exchange, and equality of actual cluster values. The explicit homogeneity hypothesis matches the source\u2019s preceding Ramsey setup and is separately proved for finite fields. `clusterValue_eq_of_order` establishes the connection to \u03c7(\u03c4). Supporting lemmas construct interlaced blocks, identify the actual determinant evaluations with the staircase matrix"
+  }
+}

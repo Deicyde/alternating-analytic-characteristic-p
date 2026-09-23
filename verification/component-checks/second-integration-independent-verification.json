@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Analysis/PositiveCharacteristic.lean",
+      "AlternatingAnalytic/Analysis/SphericalCompleteness.lean",
+      "AlternatingAnalytic/Algebra/Polarization.lean",
+      "AlternatingAnalytic/Algebra/DeterminantArray.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Analysis.PositiveCharacteristic",
+      "AlternatingAnalytic.Analysis.SphericalCompleteness",
+      "AlternatingAnalytic.Algebra.Polarization",
+      "AlternatingAnalytic.Algebra.DeterminantArray"
+    ],
+    "decls": 39,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T19:16:12.777411+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Analysis/PositiveCharacteristic.lean": "367c4e845aecee896b9bc72d07faeaac1aa31566017d6933bbe0c8b47ef3c7b2",
+    "AlternatingAnalytic/Analysis/SphericalCompleteness.lean": "fc1369ea7f0b0ecd59e0d297fec3bb3d79aa0d20c6818f58c457d9bd5ad81ea7",
+    "AlternatingAnalytic/Algebra/Polarization.lean": "95eaeaeafd475abf1b072c9777b99631374939d9e3da5d66963047c139686e95",
+    "AlternatingAnalytic/Algebra/DeterminantArray.lean": "f9310edad9b13fce9dd62d2e4d25a7de13d6d03fce52d1263d559b9ab45ae972"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

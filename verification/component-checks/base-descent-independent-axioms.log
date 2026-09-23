@@ -1,0 +1,21 @@
+'AlternatingAnalytic.baseChangeFormRestriction' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.hasBoundedLift_of_completedBaseChange' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_baseChangeFormRestriction_apply_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.liftSeminormedAddCommGroup' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_baseChangeFormRestriction_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_baseChangeLiftDescent_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.not_analyticAt_completedBaseChange_of_not_analyticAt' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.baseChangeLiftRestriction_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.liftNorm' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_baseChangeLiftRestriction_apply_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeLiftDescent_diag' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_lift_apply_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_baseChangeLiftDescent' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeFormRestriction_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.not_hasBoundedLift_completedBaseChange' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeLiftDescent_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeLiftRestriction' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeLiftDescent' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=18

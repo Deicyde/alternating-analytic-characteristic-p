@@ -1,0 +1,25 @@
+'AlternatingAnalytic.cpolynomialAt_of_orthogonalSchauderBasis' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.sortedSchauderLift_basis' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sortedSchauderLift_diag' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sortedSchauderRetraction_span_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sortedSchauderRetraction_retract' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sortedSchauderRetraction' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.cpolynomialAt_of_orthogonalSchauderBasis_fintype' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.hasBoundedLift_of_orthogonalSchauderBasis' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.analyticAt_of_orthogonalSchauderBasis' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sortedSchauderLiftNorm' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.analyticAt_of_orthogonalSchauderBasis_fintype' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.norm_sortedSchauderRetraction_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sortedSchauderRetraction_basis' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_sortedSchauderLift_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sortedSchauderLift_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sortedSchauderLift' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=16

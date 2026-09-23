@@ -1,0 +1,38 @@
+'AlternatingAnalytic.norm_scalarExtensionTensorMap_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_baseChangeAlternatingForms_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_baseChangeAlternatingForms_apply_le' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.scalarExtensionLinear_apply_tensor' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionAlternating' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_scalarExtensionLinear_apply_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionAlternating_embedding' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionMultilinear_embedding' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionTensorMap_tmul' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionLinearFamily' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeAlternatingForms_embedding' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionMultilinearZero' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionLinear_embedding' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionAlternatingFamily' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_scalarExtensionMultilinearStep_apply_le' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.norm_scalarExtensionMultilinear_apply_le' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.norm_scalarExtensionLinear_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionMultilinear' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionAlternating.congr_simp' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionMultilinearStep_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionLinear' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionTensorContinuous' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionAlternatingLinear' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_scalarExtensionAlternating_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionLinearFamilyContinuous' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionTensorMap.congr_simp' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionLinear.congr_simp' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeAlternatingForms' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionTensorMap' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionTensorMapL' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarExtensionMultilinearStep' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=31

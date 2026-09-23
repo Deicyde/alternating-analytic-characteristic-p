@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "timestamp": "2026-09-23T23:14:29.701950+00:00",
+  "exit_code": 0,
+  "module_count": 89,
+  "declarations": 2021,
+  "command": "python3 scripts/verify.py",
+  "dependency_note": "Actual pinned Mathlib checkout and locked transitive dependencies; pre-existing verified Mathlib caches reused, local proof modules rebuilt in this independent standalone package. All .lake caches excluded from delivery.",
+  "source_manifest_sha256": "9fd92054d3db2d562f9569a6e14b8a835864edf2e7d0b9b2406492b88c02d729",
+  "output": "Verified 89 modules and 2021 owned declarations; standard axioms only.\n"
+}

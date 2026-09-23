@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "cases": [
+    {
+      "case": "altered_axiom_probe",
+      "rejected_before_build": true,
+      "exit_code": 1,
+      "message": "Source hash mismatch: verification/AllAxioms.lean"
+    },
+    {
+      "case": "missing_umbrella_manifest_entry",
+      "rejected_before_build": true,
+      "exit_code": 1,
+      "message": "Required proof, probe, or build files are missing from the authenticated inventory."
+    },
+    {
+      "case": "unlisted_library_module",
+      "rejected_before_build": true,
+      "exit_code": 1,
+      "message": "The delivered library source inventory has changed."
+    }
+  ]
+}

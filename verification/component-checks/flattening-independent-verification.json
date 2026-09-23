@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Algebra/ExteriorFlattening.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Algebra.ExteriorFlattening"
+    ],
+    "decls": 10,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T19:27:41.234887+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Algebra/ExteriorFlattening.lean": "8eac5d1399f4cfb2863512c4a4f3a61ec59d4d9e21a39c8b9a7c38022fe1415b"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

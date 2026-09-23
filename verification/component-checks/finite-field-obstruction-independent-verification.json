@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Algebra/FiniteFieldObstruction.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Algebra.FiniteFieldObstruction"
+    ],
+    "decls": 8,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T20:36:27.697762+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Algebra/FiniteFieldObstruction.lean": "58a99bb58a0f2232c63fb857c1aa4162633a7f354e015cb4c2e369011aa3be7d"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

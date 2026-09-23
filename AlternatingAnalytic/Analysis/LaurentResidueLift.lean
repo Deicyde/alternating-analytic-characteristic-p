@@ -1,0 +1,246 @@
+import AlternatingAnalytic.Analysis.LaurentCompletedCoefficient
+import AlternatingAnalytic.Analysis.LaurentMultipliers
+import AlternatingAnalytic.Analysis.LiftCriterion
+import AlternatingAnalytic.Analysis.BaseChangeLiftDescent
+import AlternatingAnalytic.Algebra.FiniteFieldObstruction
+import AlternatingAnalytic.Algebra.MultiplierObstruction
+import AlternatingAnalytic.Algebra.Polarization
+
+/-! The actual coefficient-field residue of a bounded precomposition lift. -/
+
+noncomputable section
+set_option backward.isDefEq.respectTransparency false
+open Module
+open scoped NNReal BoundedContinuousFunction
+namespace AlternatingAnalytic
+
+variable (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ)
+
+local notation "K" => LaurentField κ r
+local notation "E" => (ℕ →ᵇ LaurentField κ r)
+local notation "B" => ProjectiveExteriorCompletion (LaurentField κ r) ℕ k
+local notation "A" => ((ℕ →ᵇ LaurentField κ r) [⋀^Fin k]→L[LaurentField κ r]
+  ProjectiveExteriorCompletion (LaurentField κ r) ℕ k)
+
+/-- The type of continuous multilinear lifts of alternating precomposition in a fixed degree. -/
+abbrev BoundedPrecompositionLiftCandidate (F : Type*) [NontriviallyNormedField F]
+    (V : Type*) [NormedAddCommGroup V] [NormedSpace F V]
+    (W : Type*) [NormedAddCommGroup W] [NormedSpace F W] (n : ℕ) : Type _ :=
+  ContinuousMultilinearMap F (fun _ : Fin n => V →L[F] V)
+    ((V [⋀^Fin n]→L[F] W) →L[F] (V [⋀^Fin n]→L[F] W))
+
+/-- The actual type of a bounded lift candidate in the prescribed Laurent degree. -/
+abbrev LaurentLiftCandidate : Type _ := BoundedPrecompositionLiftCandidate K E B k
+
+/-- The standard seminormed-group structure, exposed for the nested lift space. -/
+local instance laurentLiftSeminormedAddCommGroup : SeminormedAddCommGroup (LaurentLiftCandidate κ r k) :=
+  ContinuousMultilinearMap.seminormedAddCommGroup (𝕜 := K)
+    («E» := fun _ : Fin k => E →L[K] E) (G := A →L[K] A)
+
+/-- The usual multilinear operator norm, with the nested target made explicit. -/
+local instance laurentLiftNorm : Norm (LaurentLiftCandidate κ r k) :=
+  ContinuousMultilinearMap.hasOpNorm (𝕜 := K)
+    («E» := fun _ : Fin k => E →L[K] E) (G := A →L[K] A)
+
+/-- Evaluating a lift on a bounded linear operator family and a fixed alternating form. -/
+def evaluateBoundedPrecompositionLift (F : Type*) [NontriviallyNormedField F]
+    (V : Type*) [NormedAddCommGroup V] [NormedSpace F V]
+    (W : Type*) [NormedAddCommGroup W] [NormedSpace F W] (n : ℕ)
+    (P : BoundedPrecompositionLiftCandidate F V W n)
+    (D : V →L[F] (V →L[F] V)) (w : V [⋀^Fin n]→L[F] W) :
+    ContinuousMultilinearMap F (fun _ : Fin n => V) (V [⋀^Fin n]→L[F] W) :=
+  (ContinuousLinearMap.apply F (V [⋀^Fin n]→L[F] W) w).compContinuousMultilinearMap
+    (P.compContinuousLinearMap fun _ => D)
+
+/-- Evaluate the lift at pointwise multipliers and the universal completed wedge. -/
+def laurentLiftAlternating (P : LaurentLiftCandidate κ r k) :=
+  evaluateBoundedPrecompositionLift K E B k P (boundedSequenceMultiplier K ℕ)
+    (completedExteriorWedge K ℕ k)
+
+/-- Restrict the vector inputs to constant arrays and take their actual exterior coefficient. -/
+def laurentResiduePost (α : Fin k) :
+    A →ₗ[κ] MultilinearMap κ (fun _ : Fin k => ℕ → κ) (⋀[κ]^k (ℕ → κ)) where
+  toFun f := (completedLaurentCoefficient κ r ℕ k α).compMultilinearMap
+    ((f.toMultilinearMap.restrictScalars κ).compLinearMap
+      (fun _ => constantLaurentArrayLinear ℕ κ r))
+  map_add' f g := by
+    apply MultilinearMap.ext
+    intro x
+    exact map_add (completedLaurentCoefficient κ r ℕ k α) _ _
+  map_smul' c f := by
+    apply MultilinearMap.ext
+    intro x
+    exact map_smul (completedLaurentCoefficient κ r ℕ k α) c _
+
+/-- The paper's genuine doubly multilinear coefficient-field residue map. -/
+def laurentResidueLift (α : Fin k) (P : LaurentLiftCandidate κ r k) :
+    MultiplierMap κ k (ℕ → κ) :=
+  (laurentResiduePost κ r k α).compMultilinearMap
+    (((laurentLiftAlternating κ r k P).toMultilinearMap.restrictScalars κ).compLinearMap
+      (fun _ => constantLaurentArrayLinear ℕ κ r))
+
+@[simp]
+theorem laurentResidueLift_apply (α : Fin k) (P : LaurentLiftCandidate κ r k)
+    (u x : Fin k → ℕ → κ) :
+    laurentResidueLift κ r k α P u x = completedLaurentCoefficient κ r ℕ k α
+      (P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
+        (completedExteriorWedge K ℕ k) (fun i => constantLaurentArray κ r (x i))) := rfl
+
+/-- The residue is alternating in its vector slots. -/
+theorem laurentResidueLift_alternating (α : Fin k) (P : LaurentLiftCandidate κ r k)
+    (u x : Fin k → ℕ → κ) {i j : Fin k} (hij : i ≠ j) (hx : x i = x j) :
+    laurentResidueLift κ r k α P u x = 0 := by
+  rw [laurentResidueLift_apply]
+  have hz := (P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
+    (completedExteriorWedge K ℕ k)).map_eq_zero_of_eq
+      (fun i => constantLaurentArray κ r (x i)) (congrArg (constantLaurentArray κ r) hx) hij
+  rw [hz, map_zero]
+
+/-- Alternation gives the exact permutation-sign identity in every characteristic. -/
+theorem laurentResidueLift_antisymmetric (α : Fin k) (P : LaurentLiftCandidate κ r k)
+    (u x : Fin k → ℕ → κ) (σ : Equiv.Perm (Fin k)) :
+    laurentResidueLift κ r k α P u (x ∘ σ) =
+      Equiv.Perm.sign σ • laurentResidueLift κ r k α P u x := by
+  have h := (P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
+    (completedExteriorWedge K ℕ k)).toAlternatingMap.map_perm
+      (fun i => constantLaurentArray κ r (x i)) σ
+  have h' := congrArg (completedLaurentCoefficient κ r ℕ k α) h
+  simpa only [laurentResidueLift_apply, Function.comp_def, ContinuousAlternatingMap.coe_toAlternatingMap,
+    Units.smul_def, map_zsmul] using h'
+
+/-- The actual lift evaluation is uniformly bounded on coefficient-field inputs. -/
+theorem norm_laurentLift_constant_le (P : LaurentLiftCandidate κ r k)
+    (u x : Fin k → ℕ → κ) :
+    ‖P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
+      (completedExteriorWedge K ℕ k) (fun i => constantLaurentArray κ r (x i))‖ ≤ ‖P‖ := by
+  have hu : ∀ i, ‖boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i))‖ ≤ 1 :=
+    fun i => (norm_boundedSequenceMultiplier_le K ℕ _).trans
+      (norm_constantLaurentArray_le_one κ r (u i))
+  have hprod : (∏ i, ‖boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i))‖) ≤ 1 := by
+    calc
+      _ ≤ ∏ _i : Fin k, (1 : ℝ) :=
+        Finset.prod_le_prod₀ (fun _ _ => norm_nonneg _) (fun i _ => hu i)
+      _ = 1 := by simp
+  have hP : ‖P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))‖ ≤ ‖P‖ := by
+    calc
+      _ ≤ ‖P‖ * ∏ i, ‖boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i))‖ :=
+        norm_lift_apply_le K E B k P _
+      _ ≤ ‖P‖ * 1 := mul_le_mul_of_nonneg_left hprod (norm_nonneg P)
+      _ = _ := mul_one _
+  have hPW : ‖P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
+      (completedExteriorWedge K ℕ k)‖ ≤ ‖P‖ := by
+    calc
+      _ ≤ ‖P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))‖ *
+          ‖completedExteriorWedge K ℕ k‖ := ContinuousLinearMap.le_opNorm _ _
+      _ ≤ ‖P‖ * 1 := mul_le_mul hP (completedExteriorWedge_norm_le K ℕ k)
+        (norm_nonneg _) (norm_nonneg P)
+      _ = _ := mul_one _
+  have hx : ‖P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
+      (completedExteriorWedge K ℕ k) (fun i => constantLaurentArray κ r (x i))‖ ≤
+      ‖P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
+        (completedExteriorWedge K ℕ k)‖ := by
+    simpa using ContinuousAlternatingMap.le_opNorm_mul_prod_of_le
+      (P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
+        (completedExteriorWedge K ℕ k))
+      (fun i => norm_constantLaurentArray_le_one κ r (x i))
+  exact hx.trans hPW
+
+/-- A single natural support bound works for every coefficient-field input tuple. -/
+theorem laurentResidueLift_support_le (α : Fin k) (P : LaurentLiftCandidate κ r k)
+    (u x : Fin k → ℕ → κ) :
+    exteriorSupportDim (laurentResidueLift κ r k α P u x) ≤
+      ⌊(k : ℝ) * geometricWeightMaximum r * ‖P‖⌋₊ := by
+  apply Nat.le_floor
+  rw [laurentResidueLift_apply]
+  exact (completedLaurentCoefficient_support_le κ r ℕ k α _).trans
+    (mul_le_mul_of_nonneg_left (norm_laurentLift_constant_le κ r k P u x)
+      (mul_nonneg (Nat.cast_nonneg k) (zero_le_one.trans (one_le_geometricWeightMaximum r))))
+
+/-- The diagonal lift identity descends to the coefficient-field wedge identity. -/
+theorem laurentResidueLift_diagonal (α : Fin k) (P : LaurentLiftCandidate κ r k)
+    (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f)
+    (a : ℕ → κ) (x : Fin k → ℕ → κ) :
+    laurentResidueLift κ r k α P (fun _ => a) x =
+      exteriorPower.ιMulti κ k (fun i => a * x i) := by
+  rw [laurentResidueLift_apply, hP]
+  change completedLaurentCoefficient κ r ℕ k α
+    (completedExteriorWedge K ℕ k (fun i =>
+      boundedSequenceMultiplier K ℕ (constantLaurentArray κ r a)
+        (constantLaurentArray κ r (x i)))) = _
+  simp only [boundedSequenceMultiplier_constant]
+  exact completedLaurentCoefficient_constant_wedge κ r ℕ k α _
+
+/-- Fixing vector arguments in the doubly multilinear residue gives a multiplier multilinear map. -/
+def laurentResidueFixedVectors (α : Fin k) (P : LaurentLiftCandidate κ r k)
+    (x : Fin k → ℕ → κ) : MultilinearMap κ (fun _ : Fin k => ℕ → κ) (⋀[κ]^k (ℕ → κ)) where
+  toFun u := laurentResidueLift κ r k α P u x
+  map_update_add' u i a b := congrArg (fun f => f x)
+    ((laurentResidueLift κ r k α P).map_update_add u i a b)
+  map_update_smul' u i c a := congrArg (fun f => f x)
+    ((laurentResidueLift κ r k α P).map_update_smul u i c a)
+
+/-- Universal squarefree polarization yields the required polarized multiplier identity. -/
+theorem laurentResidueLift_pol1 (α : Fin k) (P : LaurentLiftCandidate κ r k)
+    (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f)
+    (u x : Fin k → ℕ → κ) :
+    (∑ σ : Equiv.Perm (Fin k), laurentResidueLift κ r k α P (u ∘ σ) x) =
+      ∑ σ : Equiv.Perm (Fin k), exteriorPower.ιMulti κ k (fun i => u (σ i) * x i) := by
+  exact MultilinearMap.sum_perm_eq_of_multiplier_diagonal
+    (laurentResidueFixedVectors κ r k α P x) (exteriorPower.ιMulti κ k).toMultilinearMap
+    (sequenceMultiplier κ) x (fun a => laurentResidueLift_diagonal κ r k α P hP a x) u
+
+/-- The actual residue map is doubly multilinear by construction, alternating in its
+vector slots, uniformly bounded in support, and satisfies the diagonal and polarized identities. -/
+theorem laurentResidueLift_properties (α : Fin k) (P : LaurentLiftCandidate κ r k)
+    (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f) :
+    (∀ (u x : Fin k → ℕ → κ) (i j : Fin k), i ≠ j → x i = x j →
+      laurentResidueLift κ r k α P u x = 0) ∧
+    (∀ (u x : Fin k → ℕ → κ) (σ : Equiv.Perm (Fin k)),
+      laurentResidueLift κ r k α P u (x ∘ σ) =
+        Equiv.Perm.sign σ • laurentResidueLift κ r k α P u x) ∧
+    (∀ u x : Fin k → ℕ → κ,
+      exteriorSupportDim (laurentResidueLift κ r k α P u x) ≤
+        ⌊(k : ℝ) * geometricWeightMaximum r * ‖P‖⌋₊) ∧
+    (∀ (a : ℕ → κ) (x : Fin k → ℕ → κ),
+      laurentResidueLift κ r k α P (fun _ => a) x =
+        exteriorPower.ιMulti κ k (fun i => a * x i)) ∧
+    (∀ u x : Fin k → ℕ → κ,
+      (∑ σ : Equiv.Perm (Fin k), laurentResidueLift κ r k α P (u ∘ σ) x) =
+        ∑ σ : Equiv.Perm (Fin k), exteriorPower.ιMulti κ k (fun i => u (σ i) * x i)) :=
+  ⟨fun u x _ _ hij hx => laurentResidueLift_alternating κ r k α P u x hij hx,
+    laurentResidueLift_antisymmetric κ r k α P,
+    laurentResidueLift_support_le κ r k α P,
+    laurentResidueLift_diagonal κ r k α P hP,
+    laurentResidueLift_pol1 κ r k α P hP⟩
+
+/-- Over a finite coefficient field with vanishing degree factorial, no bounded Laurent lift exists. -/
+theorem laurent_not_hasBoundedLift_of_factorial [Finite κ] (hk : 0 < k)
+    (hfactorial : (k.factorial : κ) = 0) :
+    ¬ Round24Transfer.HasBoundedLift K (Fin k) E E B := by
+  intro h
+  obtain ⟨P, hP⟩ : ∃ P : LaurentLiftCandidate κ r k,
+      ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f := by
+    exact Round24Transfer.hasBoundedLift_iff_exists_ι.mp h
+  let α : Fin k := ⟨0, hk⟩
+  exact finiteField_multiplier_obstruction_full hfactorial (laurentResidueLift κ r k α P)
+    (laurentResidueLift_antisymmetric κ r k α P)
+    (fun u x => laurentResidueLift_pol1 κ r k α P hP
+      (fun i n => u i n) (fun i n => x i n))
+    ⌊(k : ℝ) * geometricWeightMaximum r * ‖P‖⌋₊
+    (laurentResidueLift_support_le κ r k α P)
+
+/-- The Laurent counterexample in every degree at least the positive characteristic. -/
+theorem laurent_not_hasBoundedLift [Finite κ] (p : ℕ) [Fact p.Prime] [CharP κ p]
+    (hpk : p ≤ k) : ¬ Round24Transfer.HasBoundedLift K (Fin k) E E B := by
+  apply laurent_not_hasBoundedLift_of_factorial κ r k ((Fact.out : p.Prime).pos.trans_le hpk)
+  exact (CharP.cast_eq_zero_iff κ p k.factorial).2
+    (Nat.dvd_factorial (Fact.out : p.Prime).pos hpk)
+
+/-- The precomposition map on the actual Laurent spaces is analytic at no base point. -/
+theorem laurent_not_analyticAt [Finite κ] (p : ℕ) [Fact p.Prime] [CharP κ p]
+    (hpk : p ≤ k) (f₀ : E →L[K] E) :
+    ¬ AnalyticAt K (Round24Transfer.Q K (Fin k) E E B) f₀ := by
+  intro h
+  exact laurent_not_hasBoundedLift κ r k p hpk (Round24Transfer.hasBoundedLift_of_analyticAt h)
+
+end AlternatingAnalytic

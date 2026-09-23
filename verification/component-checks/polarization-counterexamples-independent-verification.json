@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Algebra/PolarizationCounterexamples.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Algebra.PolarizationCounterexamples"
+    ],
+    "decls": 40,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T22:05:22.781776+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Algebra/PolarizationCounterexamples.lean": "f4983fd0163a41ae4c47500052602da061f7d7250e54f7a5e770b6f18d5db77d"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

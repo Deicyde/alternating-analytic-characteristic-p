@@ -1,0 +1,8 @@
+{
+  "axis": "code_quality",
+  "prompt_sha256": "950e58536540a49156272db63da6d6ea0e15d34c71671eda900cb42c565b0a24",
+  "result": {
+    "score": 4,
+    "reasoning": "The source lemma has one self-contained top-level declaration, satisfying the one-declaration rule. The proof is clearly factored into construction, cancellation, and rank helpers, with appropriate ext/funext, omega, explicit simp lists, and a readable finrank calc chain. Minor cleanup remains: adjacent_swap_order_cases uses a dense four-way by_cases chain followed by non-terminal unrestricted simp_all (lines 207\u2013209), blockRank_lt_of_order nests inequality combinators where calc would read bett"
+  }
+}

@@ -1,0 +1,21 @@
+'AlternatingAnalytic.norm_completedBaseChangeOperator_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_completedBaseChangeOperator_apply_le' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.baseChangeOperatorsLinear' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeOperatorAlgebraic' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_baseChangeOperatorAlgebraic_apply_le' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.baseChangeOperatorAlgebraic_tmul' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_baseChangeOperators_le_one' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.normedExtensionNontriviallyNormedField' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeOperatorContinuous' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeOperator_embedding' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeOperators' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeOperator' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeOperator_apply_tensor' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.completedBaseChangeOperator_ext' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=14

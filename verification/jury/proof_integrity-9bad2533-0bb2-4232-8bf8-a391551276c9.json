@@ -1,0 +1,9 @@
+{
+  "axis": "proof_integrity",
+  "prompt_sha256": "19b2302d0dbc32a80c0ec64d7022035e977d6af43b6a1e15d726b59b3c4dd966",
+  "result": {
+    "score": null,
+    "reasoning": "Inspected the actual source proof, declaration, finite-support helpers, and relevant Mathlib dependencies. The chain contains genuine finite-support, dual-spanning, and exterior-basis arguments; no structural defects or proof gaps were found. However, independent axiom verification could not be completed, so I cannot certify a score. \u2014 Fresh Lean checks produced no axiom output: the Lake check timed out after 90 seconds, and direct Lean checks\u2014including a single-threaded axiom probe\u2014timed out af",
+    "error": "abstain"
+  }
+}

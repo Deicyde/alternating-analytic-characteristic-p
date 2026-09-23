@@ -1,0 +1,8 @@
+{
+  "axis": "faithfulness",
+  "prompt_sha256": "852acc84bd830b2940c66fbaf6115e142f39d1710f7ff897b055e6065fb00fc6",
+  "result": {
+    "score": 5,
+    "reasoning": "The declarations faithfully cover every conclusion: existence of a \u03ba-linear map into the uncompleted algebraic exterior power, the constant-coefficient array identity, pointwise uniqueness, the exact global bound sdim(\u03b7(b)) \u2264 kM_r\u2016b\u2016, and recovery of constant-input wedges. Supporting definitions genuinely construct the ordinary projective completion, determinant array, minimum finite support dimension, and prescribed geometric maximum. Specializing S to \u2115 recovers the source\u2019s spaces; \u03b1 : Fin k "
+  }
+}

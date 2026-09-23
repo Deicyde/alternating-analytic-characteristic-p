@@ -1,0 +1,8 @@
+{
+  "axis": "proof_integrity",
+  "prompt_sha256": "0ebc0ebf343789c2dc920f5851069619895f14ff1412a0eaf64a251e9b7b8e3c",
+  "result": {
+    "score": 5,
+    "reasoning": "Read the actual Lean file and source equation (W), which explicitly proves all six identities. Fresh compilation of the complete file via `lake env lean --stdin` succeeded; `#print axioms AlternatingAnalytic.cluster_weight_identities` reported only propext, Classical.choice, and Quot.sound. The six helpers genuinely expand the finite sums and prove the ring identities using simp and norm_num; the target assembles these proved results. Explicit weight definitions and the ordinary CommRing hypothe"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "axis": "proof_integrity",
+  "prompt_sha256": "5a417ddd475713a83be0330de92c3ca47d61b59c421a8a1227bcaf28f4bea3f9",
+  "result": {
+    "score": null,
+    "reasoning": "Inspected the real source, lemma C\u2019s complete proof, and local dependencies. The formalization performs genuine multilinear expansion, order-pattern transport, and three-case cancellation. No local sorry, axioms, orphan classes, vacuous constructions, or structural shortcuts were found. Independent kernel verification could not be completed; supplied verification logs were not treated as authoritative. \u2014 Axiom-closure verification blocked: lake env lean stalled, and direct Lean probes timed out,",
+    "error": "abstain"
+  }
+}

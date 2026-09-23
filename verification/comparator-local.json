@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "exit_code": 0,
+  "timestamp": "2026-09-23T23:26:49.034511+00:00",
+  "elapsed_seconds": 134.09,
+  "comparator_revision": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
+  "mode": "Local macOS development launcher provided by upstream. Actual comparator statement comparison, axiom checks and Lean default kernel replay; no Linux sandbox. Real sandbox is configured separately in CI.",
+  "files_sha256": {
+    "challenge.lean": "b4936f384e0e43cd9a982e342f35fba06424522afa9f68e0ba554930549fcda6",
+    "solution.lean": "663d1a1dbfdbb5e4b960976c45cdd99a014d8102cee9e87e49bc5529bba885c1",
+    "comparator.json": "c3a3d2a870d9cdc113ebf2a457d7a66e9ead48aae2007ab56bf72dc4639b94f3"
+  },
+  "lean_default_kernel_accepted": true,
+  "theorems_checked": [
+    "AlternatingAnalyticChallenge.exists_banach_counterexample_full",
+    "AlternatingAnalyticChallenge.factorial_ne_zero_iff_allBanachPrecompositionAnalytic"
+  ]
+}

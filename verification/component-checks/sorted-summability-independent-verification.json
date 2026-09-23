@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Analysis/SortedBasisSummability.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Analysis.SortedBasisSummability"
+    ],
+    "decls": 8,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T22:18:41.406978+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Analysis/SortedBasisSummability.lean": "9578e5d0cdd0eda7ff1e748297b7ad4070d9d2e4ca5a577a0b1d09fc9722382c"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

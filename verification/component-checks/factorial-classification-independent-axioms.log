@@ -1,0 +1,5 @@
+'AlternatingAnalytic.AllBanachPrecompositionAnalytic' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+AUTOFORM_PROBE_OK decls=2

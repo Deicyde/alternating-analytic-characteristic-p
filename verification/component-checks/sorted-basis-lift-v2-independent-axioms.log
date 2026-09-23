@@ -1,0 +1,6 @@
+'AlternatingAnalytic.contractingRetractionLift' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.contractingRetractionLift_diag' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.contractingRetractionLiftNorm' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_contractingRetractionLift_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.contractingRetractionLift_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=5

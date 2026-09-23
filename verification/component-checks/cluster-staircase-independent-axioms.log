@@ -1,0 +1,32 @@
+'AlternatingAnalytic.StaircaseClusters.blockRank_right_lt_left_iff' depends on axioms: [Quot.sound,
+ propext,
+ Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.blockRank_lt_of_order' depends on axioms: [Quot.sound, propext, Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.blockRank_bounds' depends on axioms: [Quot.sound, propext, Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.blockRank' depends on axioms: [Quot.sound]
+'AlternatingAnalytic.StaircaseClusters.block_coordinates_injective' depends on axioms: [Quot.sound,
+ propext,
+ Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.family_input_ternary' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.selected_order' depends on axioms: [Quot.sound, propext, Classical.choice]
+'AlternatingAnalytic.clusterValue_adjacent_eq' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_strictMono_in_infinite_set' depends on axioms: [Classical.choice, propext, Quot.sound]
+'AlternatingAnalytic.cluster_staircase_of_families' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.block_strictMono' depends on axioms: [propext, Quot.sound]
+'AlternatingAnalytic.StaircaseClusters.selected_swapped_order' depends on axioms: [Quot.sound,
+ propext,
+ Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.blockRank_injective' depends on axioms: [Quot.sound, propext, Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.block_separated' depends on axioms: [Quot.sound, propext, Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.selection' depends on axioms: [propext]
+'AlternatingAnalytic.StaircaseClusters.block_lt_of_rank' depends on axioms: [Quot.sound, propext]
+'AlternatingAnalytic.StaircaseClusters.block' depends on axioms: [Quot.sound]
+'AlternatingAnalytic.determinantArray_update_rank_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.sum_clusterInput_ternary' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.StaircaseClusters.adjacent_swap_order_cases' depends on axioms: [Quot.sound,
+ Classical.choice,
+ propext]
+'AlternatingAnalytic.StaircaseClusters.blockRank_left_lt_right_iff' depends on axioms: [Quot.sound,
+ propext,
+ Classical.choice]
+AUTOFORM_PROBE_OK decls=21

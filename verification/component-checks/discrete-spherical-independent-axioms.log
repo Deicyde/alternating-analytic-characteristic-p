@@ -1,0 +1,7 @@
+'AlternatingAnalytic.sphericallyCompleteSpace_of_discreteDist' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.sphericallyCompleteSpace_of_discreteDist_radius' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+AUTOFORM_PROBE_OK decls=2

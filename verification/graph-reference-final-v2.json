@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "referenced_declarations": 109,
+  "prior_direct_lean_check": "graph-reference-final.json",
+  "added_references_verified_by_complete_owned_declaration_probe": [
+    "AlternatingAnalytic.exists_banach_counterexample_full"
+  ],
+  "complete_probe_receipt": "full-owned-declarations-v2-verification.json",
+  "source_note": "All previous declaration definitions are unchanged; the new bundled entrypoint is present in the independently verified88-module environment."
+}

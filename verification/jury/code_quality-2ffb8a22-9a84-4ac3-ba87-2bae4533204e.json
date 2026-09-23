@@ -1,0 +1,8 @@
+{
+  "axis": "code_quality",
+  "prompt_sha256": "880d357d776ed40a6c1be205302abbe87a0f8bc9f8fb225577eda646b5d8d8c6",
+  "result": {
+    "score": 4,
+    "reasoning": "The inspected declaration bundles attainment and all stated properties into one theorem, satisfying the mandatory bundling rule. Its proof cleanly assembles reusable helpers; surrounding proofs use Mathlib APIs, explicit nonterminal `simp only`, readable `calc` blocks, and consistent formatting. Minor improvements remain: use `letI` rather than anonymous `let := hW` for local instances, and weaken the field assumptions on elementary support-submodule helpers that do not require dimension theory."
+  }
+}

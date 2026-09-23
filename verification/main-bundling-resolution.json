@@ -1,0 +1,12 @@
+{
+  "issue": "Automated code-quality mandatory bundling cap for the previous main entrypoint.",
+  "old_entrypoint": "AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample",
+  "old_file": "AlternatingAnalytic/Main.lean",
+  "old_sha256": "9929b99c2237aa7f963f0e567d290bedef9a0d224dc5ff03108bfffa31fe79ed",
+  "resolution": "New single theorem explicitly bundles all requested equivalent conclusions for the same actual Banach witnesses, using the unchanged construction and already proved general criterion.",
+  "new_entrypoint": "AlternatingAnalytic.exists_banach_counterexample_full",
+  "new_file": "AlternatingAnalytic/MainTheorem.lean",
+  "new_sha256": "5709f1914e02646a8fc577ea5e8a90f83e140fbf12bba12cb040cd396f7788f1",
+  "independent_semantic_check": "main-full-bundle-semantic-audit.json",
+  "jury_status": "Old verdict and timeouts preserved. This resolution record is not a replacement3-axis jury verdict."
+}

@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "format": "v0.4",
+  "schema_url": "https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/v0.4.schema.json",
+  "schema_sha256": "25ff6b25ca4511635aff4443cf20480c15e59dddf19591c730950b442ea54fce",
+  "formalization_yaml_sha256": "ae3f8bc21cecfd175e3b02aa4a00f5294b920de2158fd5f19d9d26a3300eeee9",
+  "validation": "Independent metadata worker validated the document against the official schema with zero errors and checked every main-result path and comparator declaration name."
+}

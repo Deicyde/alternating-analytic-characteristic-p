@@ -1,0 +1,14 @@
+'AlternatingAnalytic.finiteField_homogeneous_eq_zero_sameUniverse' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.finiteField_homogeneous_extension_eq_zero' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.finiteField_homogeneous_eq_zero' depends on axioms: [propext, Quot.sound, Classical.choice]
+'VectorPolynomial.coeff_eq_zero_of_homogeneous_eval_eq_zero' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finsupp_eq_single_of_degree_eq' depends on axioms: [propext, Quot.sound, Classical.choice]
+'MultilinearMap.diagonalCoefficients_degree' depends on axioms: [propext, Quot.sound, Classical.choice]
+'VectorPolynomial.eq_zero_of_homogeneous_eval_eq_zero' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.homogeneous_eval_coordinate' depends on axioms: [propext, Quot.sound, Classical.choice]
+'MultilinearMap.sumOfType_eq_of_diagonal_eq_of_card' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=9

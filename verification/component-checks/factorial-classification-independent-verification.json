@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Analysis/FactorialClassification.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Analysis.FactorialClassification"
+    ],
+    "decls": 2,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T22:02:20.350308+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Analysis/FactorialClassification.lean": "35b94afcdfeb13e011c3d2381ad9c4fd9e7a332913dcc86d0ed4ec2eebded1e9"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

@@ -1,0 +1,8 @@
+{
+  "axis": "code_quality",
+  "prompt_sha256": "0b7886075b9a94422b9a462b7c1548f183baad7f06218936d7a252b40287b472",
+  "result": {
+    "score": 4,
+    "reasoning": "The inspected declaration bundles the full conclusion into one theorem, satisfying the one-declaration rule. Its descriptive name, explicit binders, clean layout, and short proof reusing cancellation and separation lemmas are idiomatic. Supporting proofs use calc, funext, suffices, and appropriate finite-sum APIs. Minor issues remain: the generic weighted-sum helpers unnecessarily require Field rather than CommSemiring; sum_weighted_split_at uses cumbersome explicit @Finset.mem_univ arguments; a"
+  }
+}

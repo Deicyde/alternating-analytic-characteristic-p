@@ -1,0 +1,42 @@
+'AlternatingAnalytic.boundedLaurentCoeff_finiteLaurentTruncation' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.finiteLaurentWedgeCoefficient' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finiteLaurentWedgeCoefficient_represents' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.add_one_le_geometricWeightMaximum_mul_zpow' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.finiteLaurentTruncation' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finiteLaurentWedgeCoefficient_support_le' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.norm_laurentDeterminantForm_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.prod_laurentMonomial' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finiteLaurentTruncation_coeff_below' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.one_le_geometricWeightMaximum' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentWedgeCoefficient_properties' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.geometricWeightMaximum' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentMonomial' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.geometricWeight_le_maximum' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finiteLaurentWedgeCoefficient_array' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_laurentWedgeCoefficient' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_laurentMonomial' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.prod_radius_zpow' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.boundedLaurentCoeffAddHom' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentDeterminantForm_constant' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentDeterminantForm_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finiteLaurentWedgeCoefficient_support_norm_le' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.norm_finiteLaurentTruncation_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_laurentWedgeCoefficient_of_small' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finiteLaurentTruncation_coeff_within' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_sub_finiteLaurentTruncation_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentDeterminantForm' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.boundedLaurentCoeff_monomial_smul_constant' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.laurentDeterminantForm_norm_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=29

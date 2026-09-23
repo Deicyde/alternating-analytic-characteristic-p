@@ -1,0 +1,8 @@
+'AlternatingAnalytic.dense_span_completedBaseChangeEmbedding' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.alternating_of_dense_span_range' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.alternating_of_baseChangeEmbedding' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.multilinear_zero_of_dense_span' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.multilinear_zero_of_dense_span_on' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.multilinear_repeated_update_smul' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.multilinear_repeated_update_add' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=7

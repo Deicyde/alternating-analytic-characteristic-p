@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "case": "omitted-solution-audit",
+      "rejected_before_build": true,
+      "message": "The axiom probe does not cover every delivered library module."
+    },
+    {
+      "case": "unlisted-library-module",
+      "rejected_before_build": true,
+      "message": "The delivered library source inventory has changed."
+    }
+  ]
+}

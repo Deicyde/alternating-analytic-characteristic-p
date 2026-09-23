@@ -1,0 +1,8 @@
+{
+  "axis": "faithfulness",
+  "prompt_sha256": "027f41eb44e5ab81100187a14a106c98afecf1df5b1eeae3b7dcf9b1bcc179cc",
+  "result": {
+    "score": 5,
+    "reasoning": "The formalization faithfully captures Theorem FF: genuine doubly multilinear maps on finitely supported sequences, exterior-power output in all sequences, vector-slot antisymmetry, the exact coordinatewise Pol1 identity, and a uniform support bound restricted to ternary inputs. exteriorSupportDim is the minimum dimension of an actual finite-dimensional supporting subspace. Both restriction consequences are also proved. The supporting proofs establish order-pattern homogeneity, actual cluster can"
+  }
+}

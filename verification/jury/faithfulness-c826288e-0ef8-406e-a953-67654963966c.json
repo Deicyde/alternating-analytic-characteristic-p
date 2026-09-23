@@ -1,0 +1,8 @@
+{
+  "axis": "faithfulness",
+  "prompt_sha256": "ac4313f1a0277b0899abd0f62b3cbfc0f7a46e3bd97e47ecaa1f73876af9f8ec",
+  "result": {
+    "score": 5,
+    "reasoning": "The formalization faithfully captures lemma C in its Section 3 context. Finite dependent index types J j encode the finite families; hdisj on Sigma J enforces both disjointness between families and pairwise disjointness of their clusters. Strict monotonicity, membership in H, and hinterval express exactly four consecutive elements of H. The hpattern hypothesis is the coefficient homogeneity established immediately before the source lemma, and its finite-field existence is separately proved in Cl"
+  }
+}

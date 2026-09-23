@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "updated_at": null,
+  "settings": {
+    "dial": "on-demand"
+  },
+  "reviews": {
+    "Infinite Ramsey theorem for fixed-size subsets": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": null,
+        "code_quality": 5,
+        "verdict": "flagged",
+        "at": "2026-09-23T19:07:22Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "Four-position cancellation weights": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": 5,
+        "code_quality": 4,
+        "verdict": "clean",
+        "at": "2026-09-23T19:11:51Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "Exterior support dimension": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": 5,
+        "code_quality": 4,
+        "verdict": "clean",
+        "at": "2026-09-23T19:41:09Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "Order-pattern homogeneity of finite-field arrays": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": 5,
+        "code_quality": null,
+        "verdict": "flagged",
+        "at": "2026-09-23T20:11:23Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "Determinant arrays and injectivity": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": null,
+        "code_quality": 4,
+        "verdict": "flagged",
+        "at": "2026-09-23T20:21:20Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "Flattening rank is bounded by support": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": null,
+        "code_quality": 5,
+        "verdict": "flagged",
+        "at": "2026-09-23T20:27:45Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "Cancellation of clusters without an output index": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": null,
+        "code_quality": 4,
+        "verdict": "flagged",
+        "at": "2026-09-23T21:23:41Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "Staircase rank forces adjacent cluster invariance": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": null,
+        "code_quality": 4,
+        "verdict": "flagged",
+        "at": "2026-09-23T21:35:38Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "No bounded-support finite-field multiplier lift": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": null,
+        "code_quality": 4,
+        "verdict": "flagged",
+        "at": "2026-09-23T22:19:01Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "Nowhere-analytic Banach counterexamples over every prescribed field": {
+      "ai": {
+        "faithfulness": null,
+        "proof_integrity": null,
+        "code_quality": 1,
+        "verdict": "flagged",
+        "at": "2026-09-23T22:49:09Z",
+        "source": "dispatch:runner"
+      }
+    },
+    "Completed coefficient map with uniformly bounded support": {
+      "ai": {
+        "faithfulness": 5,
+        "proof_integrity": null,
+        "code_quality": 1,
+        "verdict": "flagged",
+        "at": "2026-09-23T23:03:14Z",
+        "source": "dispatch:runner"
+      }
+    }
+  }
+}

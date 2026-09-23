@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Analysis/LaurentField.lean",
+      "AlternatingAnalytic/Analysis/LaurentCoefficients.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Analysis.LaurentField",
+      "AlternatingAnalytic.Analysis.LaurentCoefficients"
+    ],
+    "decls": 30,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T20:13:21.444310+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Analysis/LaurentField.lean": "e11fae33914ddc7ea4798c4b26cb88d434511b07d15320cbb5ad402ceac377b2",
+    "AlternatingAnalytic/Analysis/LaurentCoefficients.lean": "bcca5f70b550eba7681d1e358ba3905c5dd8f9caebfb4679555591fb23164978"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

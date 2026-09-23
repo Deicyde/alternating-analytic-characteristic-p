@@ -1,0 +1,11 @@
+'AlternatingAnalytic.norm_sum_eq_of_strictly_largest' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_finiteField_map' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_polynomial_eval₂' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentPolynomialMap_coeff' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentPolynomialMap' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_finiteField_map_le_one' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentPolynomialMap_injective' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.polynomial_eval₂_injective' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentMonomialHom' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentPolynomialMap_single' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=10

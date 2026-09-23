@@ -1,0 +1,9 @@
+{
+  "axis": "proof_integrity",
+  "prompt_sha256": "b4284e3902472f333fd666410855afa8280f50f02e31569e6cd62464ebdc00f4",
+  "result": {
+    "score": null,
+    "reasoning": "Read Section 3\u2019s proof and traced the 14 project dependency modules. The chain contains genuine Ramsey homogeneity, cluster cancellation, determinant-array rank bounds, diagonal polarization, and restriction arguments. No project sorry, nonstandard axiom, orphan class, circular assumption, or vacuous construction was found. However, the required independent axiom verification did not complete; the supplied verification logs cannot substitute for that check. \u2014 Independent lake env lean re-elabora",
+    "error": "abstain"
+  }
+}

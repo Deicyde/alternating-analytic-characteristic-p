@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Analysis.DenseMultilinearExtension"
+    ],
+    "decls": 14,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T22:12:31.573346+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean": "8f65ebba2b7b6bf29bc85240609f783d5c48778e799e704f4e08a510414a59f1"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

@@ -1,0 +1,19 @@
+name = "AlternatingAnalyticCounterexample"
+version = "0.1.0"
+defaultTargets = ["AlternatingAnalytic", "challenge", "solution"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/Deicyde/mathlib4.git"
+rev = "2b73d9821d297b80d92eecc54cc09bfc263e0098"
+
+[[lean_lib]]
+name = "AlternatingAnalytic"
+globs = ["AlternatingAnalytic", "AlternatingAnalytic.+"]
+
+# Separate comparator environments intentionally use the same theorem names.
+[[lean_lib]]
+name = "challenge"
+
+[[lean_lib]]
+name = "solution"

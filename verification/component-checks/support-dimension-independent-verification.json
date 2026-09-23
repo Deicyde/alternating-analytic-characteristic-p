@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Algebra/ExteriorSupportDimension.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Algebra.ExteriorSupportDimension"
+    ],
+    "decls": 16,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T19:09:25.092103+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Algebra/ExteriorSupportDimension.lean": "5289636e8e90d7a6d38e22232ebbf6893d6f513359c52efddc2254b738fa740d"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

@@ -1,0 +1,10 @@
+'AlternatingAnalytic.exteriorContractionSpan_finrank_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorLastContraction_mem_support' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorContractionSpan_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorContractionSpan' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorLastContraction_properties' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorContraction_ιMulti' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorLastContraction' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorContractionSpan_finite' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorLastContraction_ιMulti' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=9

@@ -1,0 +1,8 @@
+{
+  "axis": "code_quality",
+  "prompt_sha256": "66cb7f376c05e233c6c3d6b36f45baacea438b741ccc0e0420e1d7187bc5b50f",
+  "result": {
+    "score": 1,
+    "reasoning": "The explicit bundling rule caps the score at 1: Main.lean:59\u201377 combines Banach witnesses, nowhere analyticity, and absence of an equivalent ultrametric norm, but does not include the stated no-bounded-lift and nowhere-ContDiffAt conclusions in that same declaration. General equivalences in LiftCriterion.lean do not provide the required combined statement. Otherwise, the proof is readable and well factored, with consistent indentation, explicit intermediate facts, and effective reuse of transpor"
+  }
+}

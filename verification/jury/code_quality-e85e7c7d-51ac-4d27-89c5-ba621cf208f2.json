@@ -1,0 +1,8 @@
+{
+  "axis": "code_quality",
+  "prompt_sha256": "229059482225aca58edb92657e4e06eecfb064131513bdc65217ed3193ed054f",
+  "result": {
+    "score": 1,
+    "reasoning": "The mandatory bundling rule caps the score at 1: source theorem FF has two numbered parts, but FiniteFieldObstruction.lean presents them separately as finiteField_multiplier_obstruction (line 47), _full (175), and _finsupp (191), without a single theorem combining both parts. Otherwise, the proof is largely idiomatic: appropriate helper lemmas, Finite rather than Fintype, local classical reasoning, explicit non-terminal simp lists, omega, extensionality, and a clear final calc. Minor issues incl"
+  }
+}

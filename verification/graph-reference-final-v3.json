@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "referenced_declarations": 106,
+  "prior_direct_lean_check": "graph-reference-final.json",
+  "added_references_verified_by_complete_owned_declaration_probe": [
+    "AlternatingAnalytic.completedLaurentCoefficient_full_properties",
+    "AlternatingAnalytic.exists_banach_counterexample_full"
+  ],
+  "complete_probe_receipt": "full-owned-declarations-v3-verification.json",
+  "source_note": "All previous declaration definitions are unchanged. Both new bundled entrypoints are present in the independently verified 89-module environment."
+}

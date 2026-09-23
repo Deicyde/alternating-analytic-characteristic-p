@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Analysis/BaseChangeOperators.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Analysis.BaseChangeOperators"
+    ],
+    "decls": 14,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T20:12:44.376929+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Analysis/BaseChangeOperators.lean": "7c9ac496b8a3b8148a64d832e9b5938a6e03b6b5506e87cb9d40ce3f9e265215"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

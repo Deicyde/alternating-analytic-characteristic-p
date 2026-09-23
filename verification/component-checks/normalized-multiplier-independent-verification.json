@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Algebra/NormalizedMultiplierLift.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Algebra.NormalizedMultiplierLift"
+    ],
+    "decls": 15,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T22:27:55.241776+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Algebra/NormalizedMultiplierLift.lean": "fe41239871726ccf319193c55ccf704f82d8b6bb63d25f4161a3f93739ad8ddf"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

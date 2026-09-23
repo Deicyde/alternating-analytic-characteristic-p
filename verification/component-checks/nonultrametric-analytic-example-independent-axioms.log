@@ -1,0 +1,10 @@
+'AlternatingAnalytic.laurent_analytic_without_equivalentUltrametricNorm' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.degree_three_char_five_analytic_without_equivalentUltrametricNorm' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.instFactPrimeOfNatNat_alternatingAnalytic' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+AUTOFORM_PROBE_OK decls=3

@@ -1,0 +1,10 @@
+'AlternatingAnalytic.laurentBlockWedge' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_laurentBlockWedge_le_one' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_sameUniverse_laurentField_normedAlgebra' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.not_hasEquivalentUltrametricNorm_of_exteriorCoefficient' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.exteriorCoefficient_block_growth' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=5

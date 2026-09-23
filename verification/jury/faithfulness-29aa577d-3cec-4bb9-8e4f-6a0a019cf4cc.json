@@ -1,0 +1,8 @@
+{
+  "axis": "faithfulness",
+  "prompt_sha256": "b7d4e9bc726857aee03b758d52938200c60adc1a4cae498e32fe0f5e60d5faa1",
+  "result": {
+    "score": 5,
+    "reasoning": "The live Lean files faithfully capture lemma H: tuples are Fin N \u2192 \u2115, H is an infinite subset of \u2115, and sameOrderPattern explicitly requires all pairwise strict-order and equality comparisons to agree. The conclusion covers every pair of tuples in H^N. Generalizing to any finite color type and allowing N=0 preserves every source case. The proof implements the source\u2019s Ramsey coloring, padding, and rank argument; the Ramsey dependency is proved, with no hidden hypotheses or stub definitions. Fres"
+  }
+}

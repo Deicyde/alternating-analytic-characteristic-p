@@ -1,0 +1,2377 @@
+{
+  "audit_kind": "Read-only final mathematical statement coverage update; not a compilation gate or independent jury verdict",
+  "scope": "All 60 tier-2 graph records and exact proved-paper claims, including the four omissions identified in the original audit",
+  "graph_sha256": "41eefce19bd9bcfbe7c5801ce3774d021d1791cbaf9818efa0ded554b71cce1a",
+  "source_sha256": "5f53382d4621bef03f5ffef97edc74338a641c9f1b24e59597adc7368f583d55",
+  "node_count": 60,
+  "node_status_counts": {
+    "covered_by_existing_declarations": 59,
+    "paper_need_covered_generic_plan_abstraction_not_separately_proved": 1
+  },
+  "main_result": "No material mathematical statement gap or weakening found in the main theorem or factorial classification. The same actual Banach E=E′ and F work over every prescribed nontrivially normed positive-characteristic K, including incomplete K, in every degree k≥p, at every base point and for every finite index type of that cardinality; F has no equivalent ultrametric norm.",
+  "nodes": [
+    {
+      "id": "Four-position cancellation weights",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, equation (W), cluster weights"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/ClusterWeights.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.cluster_weight_identities"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/ClusterWeights.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/ClusterWeights.lean": "e495f3e87769fa0239c61e3492da6a1a722917c92176ce506aca61a19355c69f"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/weights-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/ClusterWeights.lean"
+          ],
+          "declarations_audited_in_receipt": 10
+        }
+      ]
+    },
+    {
+      "id": "Normed alternating precomposition",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 2, conventions"
+        }
+      ],
+      "files": [
+        "Mathlib/Topology/Algebra/Module/Alternating/Topology.lean"
+      ],
+      "declarations": [
+        "ContinuousAlternatingMap.compContinuousLinearMapCLM",
+        "ContinuousAlternatingMap.continuous_compContinuousLinearMapCLM"
+      ],
+      "present_files": [
+        "Mathlib/Topology/Algebra/Module/Alternating/Topology.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/Topology/Algebra/Module/Alternating/Topology.lean": "08ea978cd710ef37a6aa6e01b85c8f15f3fd5011bd3539623a4fbeb0cd4d5d87"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Algebraic exterior power infrastructure",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 2, exterior powers"
+        }
+      ],
+      "files": [
+        "Mathlib/LinearAlgebra/ExteriorPower/Basic.lean"
+      ],
+      "declarations": [
+        "exteriorPower.ιMulti",
+        "exteriorPower.ιMulti_span",
+        "exteriorPower.alternatingMapLinearEquiv",
+        "exteriorPower.map",
+        "Module.Basis.exteriorPower",
+        "exteriorPower.map_injective_field"
+      ],
+      "present_files": [
+        "Mathlib/LinearAlgebra/ExteriorPower/Basic.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/LinearAlgebra/ExteriorPower/Basic.lean": "dca54210bf084ae3934b0d71e68bda5b981eb7e3010f4570e0f22191ff04738b"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Finite-dimensional continuity and complete extension",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, lemmas findim and ext"
+        }
+      ],
+      "files": [
+        "Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
+        "Mathlib/Analysis/Normed/Operator/Extend.lean",
+        "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean",
+        "AlternatingAnalytic/Analysis/DenseMultilinearFamilyExtension.lean"
+      ],
+      "declarations": [
+        "LinearMap.continuous_of_finiteDimensional",
+        "FiniteDimensional.complete",
+        "AlternatingAnalytic.denseLinearExtension",
+        "AlternatingAnalytic.exists_denseMultilinearExtension",
+        "AlternatingAnalytic.denseMultilinearFamilyExtension",
+        "AlternatingAnalytic.denseMultilinearFamilyExtension_apply",
+        "AlternatingAnalytic.denseMultilinearFamilyExtension_unique",
+        "AlternatingAnalytic.norm_denseMultilinearFamilyExtension",
+        "AlternatingAnalytic.exists_denseMultilinearFamilyExtension_of_bound"
+      ],
+      "note": "The previous heterogeneous gap is closed. Arbitrary finite I, independent D_i and E_i, independent dense linear isometries, a complete target only, unique extension and the original operator bound are all explicit. For subspaces use their induced-norm subtype isometries. The usual nonnegative-bound convention is explicit as 0≤C.",
+      "present_files": [
+        "Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
+        "Mathlib/Analysis/Normed/Operator/Extend.lean",
+        "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean",
+        "AlternatingAnalytic/Analysis/DenseMultilinearFamilyExtension.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/Topology/Algebra/Module/FiniteDimension.lean": "aae1cf2eb90fc1b11375074ec2bb8eccc904e3221d1ee4bfa65b806d971d9367",
+        "Mathlib/Analysis/Normed/Operator/Extend.lean": "2431beff48e2afced6743dc5aeb35dfb0a94a6490ac9481b9fb9eb7fdfba0491",
+        "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean": "8f65ebba2b7b6bf29bc85240609f783d5c48778e799e704f4e08a510414a59f1",
+        "AlternatingAnalytic/Analysis/DenseMultilinearFamilyExtension.lean": "25efb214d7f47fd45b511f2f0c78551c235b9cefcd178497fdefff0aab4d427c"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/dense-multilinear-extension-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean"
+          ],
+          "declarations_audited_in_receipt": 14
+        },
+        {
+          "path": "planning/charp-paper/planning/dense-family-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/DenseMultilinearFamilyExtension.lean"
+          ],
+          "declarations_audited_in_receipt": 20
+        }
+      ]
+    },
+    {
+      "id": "Exterior support dimension",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 2, definition supp and following properties"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/ExteriorSupportDimension.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.exteriorSupportDim_properties"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/ExteriorSupportDimension.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/ExteriorSupportDimension.lean": "5289636e8e90d7a6d38e22232ebbf6893d6f513359c52efddc2254b738fa740d"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/support-dimension-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/ExteriorSupportDimension.lean"
+          ],
+          "declarations_audited_in_receipt": 16
+        }
+      ]
+    },
+    {
+      "id": "Determinant arrays and injectivity",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 2, lemma detinj"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/DeterminantArray.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.determinantArray_properties"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/DeterminantArray.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/DeterminantArray.lean": "f9310edad9b13fce9dd62d2e4d25a7de13d6d03fce52d1263d559b9ab45ae972"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/second-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/DeterminantArray.lean"
+          ],
+          "declarations_audited_in_receipt": 39
+        }
+      ]
+    },
+    {
+      "id": "Flattening rank is bounded by support",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 2, lemma flat"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/ExteriorFlattening.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.exteriorFlattening_rank_le"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/ExteriorFlattening.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/ExteriorFlattening.lean": "8eac5d1399f4cfb2863512c4a4f3a61ec59d4d9e21a39c8b9a7c38022fe1415b"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/flattening-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/ExteriorFlattening.lean"
+          ],
+          "declarations_audited_in_receipt": 10
+        }
+      ]
+    },
+    {
+      "id": "Contractions bound exterior support from below",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 2, lemma contr"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/ExteriorContraction.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.exteriorLastContraction_properties"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/ExteriorContraction.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/ExteriorContraction.lean": "9f985dd393592023fc0650f72a47e32da0f3c2ef1e2dd8ec11ff298013346c0b"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/contraction-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/ExteriorContraction.lean"
+          ],
+          "declarations_audited_in_receipt": 9
+        }
+      ]
+    },
+    {
+      "id": "Positive characteristic forces an ultrametric field",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 2, lemma ultra"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/PositiveCharacteristic.lean",
+        "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean"
+      ],
+      "declarations": [
+        "charP_isUltrametricDist",
+        "AlternatingAnalytic.norm_finiteField_map"
+      ],
+      "note": "The finite-field image norm theorem includes all nonzero prime-field elements; no missing prime-field corollary remains.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/PositiveCharacteristic.lean",
+        "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/PositiveCharacteristic.lean": "367c4e845aecee896b9bc72d07faeaac1aa31566017d6933bbe0c8b47ef3c7b2",
+        "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean": "cf4eaf316dde3debb599e08b52b53297982f0f45699209580023678133598fa1"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/second-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/PositiveCharacteristic.lean"
+          ],
+          "declarations_audited_in_receipt": 39
+        },
+        {
+          "path": "planning/charp-paper/planning/evaluation-foundations-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean"
+          ],
+          "declarations_audited_in_receipt": 10
+        }
+      ]
+    },
+    {
+      "id": "Analyticity at a point is equivalent to a bounded lift",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 2, proposition lift and lemma unique"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean"
+      ],
+      "declarations": [
+        "Round24Transfer.tfae_Q"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean": "6c721d1fdf1ed54a5a89a4e4c00cfd220c29ad18f2d4589dcb73f651e6e378b6"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/first-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LiftCriterion.lean"
+          ],
+          "declarations_audited_in_receipt": 93
+        }
+      ]
+    },
+    {
+      "id": "Vector-valued polynomial identity principle",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, lemma idprinc"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/PolynomialIdentity.lean"
+      ],
+      "declarations": [
+        "VectorPolynomial.coeff_eq_zero_of_sum_eq_zero"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/PolynomialIdentity.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/PolynomialIdentity.lean": "ffa2bef2894c7d3f7e34b31dc99183aa3c55074b28b9449bc920605512afcf96"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/third-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/PolynomialIdentity.lean"
+          ],
+          "declarations_audited_in_receipt": 15
+        }
+      ]
+    },
+    {
+      "id": "Multiplier lifts and polarized identities",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, diagonal identities and proposition diag(1),(2)"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/FullPolarization.lean"
+      ],
+      "declarations": [
+        "Polarization.sum_selectionType",
+        "MultilinearMap.sumOfType_eq_of_diagonal_eq",
+        "MultilinearMap.diagonal_eq_of_sumOfType_eq",
+        "MultilinearMap.map_sumOfType_eq_of_diagonal_eq",
+        "MultilinearMap.sumOfType_eq_of_multiplier_diagonal"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/FullPolarization.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/FullPolarization.lean": "3c33dabc87d0dcbcf84af1fbafb4cac56705e1729c59103e66eea6bea489ab5d"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/full-polarization-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/FullPolarization.lean"
+          ],
+          "declarations_audited_in_receipt": 16
+        }
+      ]
+    },
+    {
+      "id": "Infinite Ramsey theorem for fixed-size subsets",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, quoted infinite Ramsey theorem"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/InfiniteRamsey.lean"
+      ],
+      "declarations": [
+        "InfiniteRamsey.exists_infinite_homogeneous"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/InfiniteRamsey.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/InfiniteRamsey.lean": "0752c85ed58789282f245e99284234b620b1fbe4865b4f35a1fb8fa7edc144ba"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/ramsey-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/InfiniteRamsey.lean"
+          ],
+          "declarations_audited_in_receipt": 2
+        }
+      ]
+    },
+    {
+      "id": "Order-pattern homogeneity of finite-field arrays",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, lemma H"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/OrderPattern.lean"
+      ],
+      "declarations": [
+        "OrderPattern.exists_infinite_order_homogeneous"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/OrderPattern.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/OrderPattern.lean": "79a481f5729dd9925f463769249843093d62b30c53102613139769e439061bbc"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/first-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/OrderPattern.lean"
+          ],
+          "declarations_audited_in_receipt": 93
+        }
+      ]
+    },
+    {
+      "id": "Cluster coefficients and order-pattern values",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, coefficients, clusters, cluster value"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/ClusterValues.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.exists_infinite_clusterValue_order_invariant"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/ClusterValues.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/ClusterValues.lean": "2f7609743b733541a613f53391cbb320333418080bf3da2af93ad63c628ab370"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/cluster-values-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/ClusterValues.lean"
+          ],
+          "declarations_audited_in_receipt": 14
+        }
+      ]
+    },
+    {
+      "id": "Cancellation of clusters without an output index",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, lemma C"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/ClusterCancellation.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.cluster_family_cancellation_of_intervals"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/ClusterCancellation.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/ClusterCancellation.lean": "9600f502582b46dc1cf59ad59b72301c1bdcc8f0458eaf98f43783d83ee0bd53"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/cancellation-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/ClusterCancellation.lean"
+          ],
+          "declarations_audited_in_receipt": 17
+        }
+      ]
+    },
+    {
+      "id": "Staircase rank forces adjacent cluster invariance",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, lemma S"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/ClusterStaircase.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.clusterValue_adjacent_eq"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/ClusterStaircase.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/ClusterStaircase.lean": "48f7f17d2209ca58d50d51b886811606ff98c0ee6c4c62a426bab2e9693f8d8c"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/cluster-staircase-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/ClusterStaircase.lean"
+          ],
+          "declarations_audited_in_receipt": 21
+        }
+      ]
+    },
+    {
+      "id": "Polarized diagonal gives the sum of cluster values",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, lemma D"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/ClusterDiagonal.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.sum_clusterValue_order_eq_one"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/ClusterDiagonal.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/ClusterDiagonal.lean": "380bfde1665be5c4be636fe888888d185646b6a1bf3157638ed1c279a03b3c90"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/cluster-diagonal-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/ClusterDiagonal.lean"
+          ],
+          "declarations_audited_in_receipt": 11
+        }
+      ]
+    },
+    {
+      "id": "No bounded-support finite-field multiplier lift",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, theorem FF"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/FiniteFieldTheorem.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.finiteField_multiplier_theorem"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/FiniteFieldTheorem.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/FiniteFieldTheorem.lean": "3da30c4801af0c07147efc1b3edafcac1ca5fca30ca92f568684d31cd9828f4c"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/finite-field-bundled-v2-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/FiniteFieldTheorem.lean"
+          ],
+          "declarations_audited_in_receipt": 1
+        }
+      ]
+    },
+    {
+      "id": "Valued Laurent series and their completeness",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 4, setting"
+        }
+      ],
+      "files": [
+        "Mathlib/RingTheory/LaurentSeries.lean"
+      ],
+      "declarations": [
+        "LaurentSeries.valued",
+        "LaurentSeries.valuation_single_zpow",
+        "LaurentSeries.instLaurentSeriesComplete"
+      ],
+      "present_files": [
+        "Mathlib/RingTheory/LaurentSeries.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/RingTheory/LaurentSeries.lean": "dc23d8c6ba668df50051223d9099a8f0ce0e7a12385cfeb250bf2cc88f403ad9"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Laurent norms and bounded-sequence coefficients",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 4, setting and equation small"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LaurentField.lean",
+        "AlternatingAnalytic/Analysis/LaurentCoefficients.lean",
+        "AlternatingAnalytic/Analysis/GeometricWeightBound.lean",
+        "AlternatingAnalytic/Analysis/LaurentBlockNorms.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.LaurentField.norm_of_ne_zero",
+        "AlternatingAnalytic.exists_boundedLaurent_order",
+        "AlternatingAnalytic.boundedLaurentCoeff_zero_of_norm_lt_one",
+        "AlternatingAnalytic.norm_constantLaurentArray",
+        "AlternatingAnalytic.geometricWeightMaximum_eq_one"
+      ],
+      "note": "Includes the r≤1/2 exact normalization in the later block-norm module.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LaurentField.lean",
+        "AlternatingAnalytic/Analysis/LaurentCoefficients.lean",
+        "AlternatingAnalytic/Analysis/GeometricWeightBound.lean",
+        "AlternatingAnalytic/Analysis/LaurentBlockNorms.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LaurentField.lean": "e11fae33914ddc7ea4798c4b26cb88d434511b07d15320cbb5ad402ceac377b2",
+        "AlternatingAnalytic/Analysis/LaurentCoefficients.lean": "bcca5f70b550eba7681d1e358ba3905c5dd8f9caebfb4679555591fb23164978",
+        "AlternatingAnalytic/Analysis/GeometricWeightBound.lean": "3487c00a11dd0d99a1223596012141881aa214f957a23371ebf6668e21d78df3",
+        "AlternatingAnalytic/Analysis/LaurentBlockNorms.lean": "d5d534b2432ab86ac7958de5ec3c9b413c8f878d20d70330565e17343eac38a1"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/laurent-block-norms-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentBlockNorms.lean"
+          ],
+          "declarations_audited_in_receipt": 6
+        },
+        {
+          "path": "planning/charp-paper/planning/laurent-coefficients-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentField.lean",
+            "AlternatingAnalytic/Analysis/LaurentCoefficients.lean"
+          ],
+          "declarations_audited_in_receipt": 30
+        },
+        {
+          "path": "planning/charp-paper/planning/laurent-foundations-v2-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/GeometricWeightBound.lean"
+          ],
+          "declarations_audited_in_receipt": 15
+        }
+      ]
+    },
+    {
+      "id": "Projective exterior norm and bounded determinant embedding",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 4, projective norm and lemma proj"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/ProjectiveExterior.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.projectiveExterior_properties"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/ProjectiveExterior.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/ProjectiveExterior.lean": "783eff82ddb0fe329aa8cefa72e55358889f8b5625dd15cdb0ef3375e65f8f63"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/projective-exterior-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/ProjectiveExterior.lean"
+          ],
+          "declarations_audited_in_receipt": 63
+        }
+      ]
+    },
+    {
+      "id": "Banach exterior completion and universal alternating map",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 4, lemma proj"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/ProjectiveExterior.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.projectiveExteriorCompletion_properties"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/ProjectiveExterior.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/ProjectiveExterior.lean": "783eff82ddb0fe329aa8cefa72e55358889f8b5625dd15cdb0ef3375e65f8f63"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/projective-exterior-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/ProjectiveExterior.lean"
+          ],
+          "declarations_audited_in_receipt": 63
+        }
+      ]
+    },
+    {
+      "id": "Constant coefficient of a single Laurent wedge",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 4, proposition supp, Step 1"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LaurentWedgeCoefficient.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.laurentWedgeCoefficient_properties"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LaurentWedgeCoefficient.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LaurentWedgeCoefficient.lean": "ce93bf8779948389be3586d98c4b32cb52a304f603485fc570cef323132bc13a"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/laurent-wedge-coefficient-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentWedgeCoefficient.lean"
+          ],
+          "declarations_audited_in_receipt": 29
+        }
+      ]
+    },
+    {
+      "id": "Algebraic coefficient map with the support estimate",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 4, proposition supp, Step 2"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LaurentAlgebraicCoefficient.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.algebraicLaurentCoefficient_properties"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LaurentAlgebraicCoefficient.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LaurentAlgebraicCoefficient.lean": "dc4762c4a3f59c17e1bf16df09d96c702f0b20f6c7e3dba77f913e88e359663d"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/laurent-algebraic-coefficient-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentAlgebraicCoefficient.lean"
+          ],
+          "declarations_audited_in_receipt": 20
+        }
+      ]
+    },
+    {
+      "id": "Completed coefficient map with uniformly bounded support",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 4, proposition supp, Step 3; lemma Psi proof"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean",
+        "AlternatingAnalytic/Analysis/LaurentCoefficientTheorem.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.completedLaurentCoefficient_array",
+        "AlternatingAnalytic.completedLaurentCoefficient_unique",
+        "AlternatingAnalytic.completedLaurentCoefficient_support_le",
+        "AlternatingAnalytic.completedLaurentCoefficient_constant_wedge",
+        "AlternatingAnalytic.completedLaurentCoefficient_full_properties"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean",
+        "AlternatingAnalytic/Analysis/LaurentCoefficientTheorem.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean": "8eb78af821a50f05a93ce611768d6f1aa393de82a3b949a41a4f15f845f9538f",
+        "AlternatingAnalytic/Analysis/LaurentCoefficientTheorem.lean": "0311b57311b56f38d57488013c42746ac0a115e906a943163cf7ca5c537f3a7b"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/laurent-completed-coefficient-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean"
+          ],
+          "declarations_audited_in_receipt": 10
+        }
+      ],
+      "historical_entrypoints": [
+        "AlternatingAnalytic.completedLaurentCoefficient_array",
+        "AlternatingAnalytic.completedLaurentCoefficient_unique",
+        "AlternatingAnalytic.completedLaurentCoefficient_support_le",
+        "AlternatingAnalytic.completedLaurentCoefficient_constant_wedge"
+      ],
+      "preferred_entrypoint": "AlternatingAnalytic.completedLaurentCoefficient_full_properties",
+      "note": "New full-properties theorem bundles the actual completed κ-linear coefficient map’s array identity, exact k·M_r·‖b‖ support bound, unrestricted pointwise uniqueness and recovery of all constant wedges, under precisely the existing assumptions. Original four proof declarations are preserved.",
+      "bundle_semantic_audit": {
+        "path": "planning/charp-paper/planning/coefficient-full-bundle-semantic-audit.json",
+        "sha256": "bb02157564e76b131a49e038b186b3d64c0d89c58d885d355c70c314ae0b2888"
+      }
+    },
+    {
+      "id": "A bounded analytic lift yields a polarized residue lift",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 4, lemma Psi"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LaurentMultipliers.lean",
+        "AlternatingAnalytic/Analysis/LaurentResidueLift.lean",
+        "AlternatingAnalytic/Analysis/LaurentResiduePolarization.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.laurentResidueLift",
+        "AlternatingAnalytic.laurentResidueLift_properties",
+        "AlternatingAnalytic.laurentLift_grouped",
+        "AlternatingAnalytic.laurentResidueLift_pol"
+      ],
+      "note": "Actual coefficient-field-linear residue; strong alternation, uniform floor bound, Pw, Pol1 and full Pol. Full Pol is polarized over infinite Laurent K before additive coefficient extraction; no infinite κ assumption.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LaurentMultipliers.lean",
+        "AlternatingAnalytic/Analysis/LaurentResidueLift.lean",
+        "AlternatingAnalytic/Analysis/LaurentResiduePolarization.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LaurentMultipliers.lean": "7b09f42a23e39e5f0bf1d1cf75512687c33e76b01d7defab0cd331139bb5f5e1",
+        "AlternatingAnalytic/Analysis/LaurentResidueLift.lean": "4f813a37f8914c751f0165ef95f1060e74f8d2569b8ba26179ac2060dcf2d5df",
+        "AlternatingAnalytic/Analysis/LaurentResiduePolarization.lean": "ce75ca7c8f8608526908ea2f8a831f29d38356eb876eb2d7317dd682131d6c4f"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/laurent-residue-polarization-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentResiduePolarization.lean"
+          ],
+          "declarations_audited_in_receipt": 3
+        },
+        {
+          "path": "planning/charp-paper/planning/laurent-multipliers-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentMultipliers.lean"
+          ],
+          "declarations_audited_in_receipt": 12
+        },
+        {
+          "path": "planning/charp-paper/planning/laurent-residue-lift-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentResidueLift.lean"
+          ],
+          "declarations_audited_in_receipt": 21
+        }
+      ]
+    },
+    {
+      "id": "Nowhere-analytic counterexample over Laurent series",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 4, theorem laurent"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LaurentResidueLift.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.laurent_not_hasBoundedLift_of_factorial",
+        "AlternatingAnalytic.laurent_not_hasBoundedLift",
+        "AlternatingAnalytic.laurent_not_analyticAt"
+      ],
+      "note": "Actual E=bounded Laurent sequences and B=ordinary projective exterior completion; arbitrary r in (0,1), finite κ and p≤k.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LaurentResidueLift.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LaurentResidueLift.lean": "4f813a37f8914c751f0165ef95f1060e74f8d2569b8ba26179ac2060dcf2d5df"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/laurent-residue-lift-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentResidueLift.lean"
+          ],
+          "declarations_audited_in_receipt": 21
+        }
+      ]
+    },
+    {
+      "id": "Discrete-distance completeness implies spherical completeness",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, lemma discdist"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/DiscreteSphericalCompleteness.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.sphericallyCompleteSpace_of_discreteDist",
+        "AlternatingAnalytic.sphericallyCompleteSpace_of_discreteDist_radius"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/DiscreteSphericalCompleteness.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/DiscreteSphericalCompleteness.lean": "96c3cc731430d5966fb3440d0f6deecb2a55fff2c172b9e9aba88dfb15e0b3fe"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/discrete-spherical-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/DiscreteSphericalCompleteness.lean"
+          ],
+          "declarations_audited_in_receipt": 2
+        }
+      ]
+    },
+    {
+      "id": "Isometric Laurent subfield in the completed base",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, lemma laurentsub"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean",
+        "AlternatingAnalytic/Analysis/PolynomialEvaluationNorm.lean",
+        "AlternatingAnalytic/Analysis/LaurentSubfield.lean",
+        "AlternatingAnalytic/Analysis/LaurentSubfieldProperties.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.norm_finiteField_map",
+        "AlternatingAnalytic.norm_polynomial_eval₂",
+        "AlternatingAnalytic.exists_isometric_laurentField_embedding",
+        "AlternatingAnalytic.laurentField_range_properties"
+      ],
+      "note": "The embedding sends constants correctly and X to t, has closed range equal to the closure of its rational-function image, and the actual field range is complete and spherical. This represents the source closure of F_p(t), not an assumed Laurent subfield.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean",
+        "AlternatingAnalytic/Analysis/PolynomialEvaluationNorm.lean",
+        "AlternatingAnalytic/Analysis/LaurentSubfield.lean",
+        "AlternatingAnalytic/Analysis/LaurentSubfieldProperties.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean": "cf4eaf316dde3debb599e08b52b53297982f0f45699209580023678133598fa1",
+        "AlternatingAnalytic/Analysis/PolynomialEvaluationNorm.lean": "0f50c105df274fb61f93e5901c0f36b4af10ef51558a972c2b9faf9acb08989d",
+        "AlternatingAnalytic/Analysis/LaurentSubfield.lean": "2b63dc3085c36206b11ae3787b28aa574a5c91c5dc24ba4c0dc152bcc34bb1ef",
+        "AlternatingAnalytic/Analysis/LaurentSubfieldProperties.lean": "1ad827e9e252bb9f9bd6d0e8e7277bd7bd39b01a3d77caa69c4bc8cbda218ae9"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/laurent-embedding-stability-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentSubfield.lean"
+          ],
+          "declarations_audited_in_receipt": 16
+        },
+        {
+          "path": "planning/charp-paper/planning/evaluation-foundations-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean",
+            "AlternatingAnalytic/Analysis/PolynomialEvaluationNorm.lean"
+          ],
+          "declarations_audited_in_receipt": 10
+        },
+        {
+          "path": "planning/charp-paper/planning/subfield-properties-unit-growth-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentSubfieldProperties.lean"
+          ],
+          "declarations_audited_in_receipt": 4
+        }
+      ]
+    },
+    {
+      "id": "Ingleton extension and the norm-one scalar projection",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, theorem ingleton and corollary proj"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/SphericalCompleteness.lean",
+        "AlternatingAnalytic/Analysis/ScalarProjection.lean"
+      ],
+      "declarations": [
+        "exists_extension_of_sphericallyComplete",
+        "AlternatingAnalytic.exists_scalar_projection"
+      ],
+      "note": "Source cites Ingleton; local imported proof is a stronger extension theorem. Its singleton family (0,C) yields the source bound. Scalar projection is actual and contracting.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/SphericalCompleteness.lean",
+        "AlternatingAnalytic/Analysis/ScalarProjection.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/SphericalCompleteness.lean": "fc1369ea7f0b0ecd59e0d297fec3bb3d79aa0d20c6818f58c457d9bd5ad81ea7",
+        "AlternatingAnalytic/Analysis/ScalarProjection.lean": "d51189072d7ebd5ac57e3c8984b4f115da9e1808457f2411e952b25d283b2a7c"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/second-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/SphericalCompleteness.lean"
+          ],
+          "declarations_audited_in_receipt": 39
+        },
+        {
+          "path": "planning/charp-paper/planning/third-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/ScalarProjection.lean"
+          ],
+          "declarations_audited_in_receipt": 15
+        }
+      ]
+    },
+    {
+      "id": "Projective scalar-extension norm is positive",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, lemma bc(1),(2)"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/ProjectiveBaseChange.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.baseChangeSeminorm_eq_zero_iff"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/ProjectiveBaseChange.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/ProjectiveBaseChange.lean": "13a479396aa536267f7aaace5136bc61898233e76f081ff70b6d84da4f0d8abc"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/projective-base-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/ProjectiveBaseChange.lean"
+          ],
+          "declarations_audited_in_receipt": 38
+        }
+      ]
+    },
+    {
+      "id": "Completed base change has an isometric embedding and retraction",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, lemma bc(3),(4)"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/CompletedBaseChange.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.exists_completedBaseChange_retraction"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/CompletedBaseChange.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/CompletedBaseChange.lean": "5dfa18ca13524a9b5a87edb14d878a42f160368e2b489f3615360589b486dd62"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/completed-base-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/CompletedBaseChange.lean"
+          ],
+          "declarations_audited_in_receipt": 23
+        }
+      ]
+    },
+    {
+      "id": "Base change of bounded endomorphisms",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, lemma ops"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/BaseChangeOperators.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.baseChangeOperators"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/BaseChangeOperators.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/BaseChangeOperators.lean": "7c9ac496b8a3b8148a64d832e9b5938a6e03b6b5506e87cb9d40ce3f9e265215"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/base-operators-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/BaseChangeOperators.lean"
+          ],
+          "declarations_audited_in_receipt": 14
+        }
+      ]
+    },
+    {
+      "id": "Base change of continuous alternating forms",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, lemma forms-bc"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/BaseChangeAlternatingForms.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.baseChangeAlternatingForms"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/BaseChangeAlternatingForms.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/BaseChangeAlternatingForms.lean": "48d2830d693ff3ad85c4a2736595bc7b0036909e5a6960ede85486fcccb89d5e"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/base-forms-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/BaseChangeAlternatingForms.lean"
+          ],
+          "declarations_audited_in_receipt": 31
+        }
+      ]
+    },
+    {
+      "id": "A lift over the scalar extension descends to the subfield",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, proposition ascent"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/BaseChangeLiftDescent.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.exists_baseChangeLiftDescent",
+        "AlternatingAnalytic.hasBoundedLift_of_completedBaseChange",
+        "AlternatingAnalytic.not_hasBoundedLift_completedBaseChange"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/BaseChangeLiftDescent.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/BaseChangeLiftDescent.lean": "b7a6ea11363af1f1a5f0911b0f10d5ab8d0cbc023ff13adfbd62a3d73d4e5f83"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/base-descent-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/BaseChangeLiftDescent.lean"
+          ],
+          "declarations_audited_in_receipt": 18
+        }
+      ]
+    },
+    {
+      "id": "Dense scalar restriction preserves maps and lifts",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, lemma descent"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/DenseScalarLiftTransport.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.denseScalarQTargetEquiv_Q",
+        "AlternatingAnalytic.norm_denseScalarLiftTransport",
+        "AlternatingAnalytic.hasBoundedLift_completion_of_base",
+        "AlternatingAnalytic.not_analyticAt_of_completion_noLift"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/DenseScalarLiftTransport.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/DenseScalarLiftTransport.lean": "465717e47717ab29780cbb344161f3cea03503ecf2c3ac026274ec1fd6d1927a"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/dense-lift-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/DenseScalarLiftTransport.lean"
+          ],
+          "declarations_audited_in_receipt": 23
+        }
+      ]
+    },
+    {
+      "id": "Infinite finite-color pigeonhole principle",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, Ramsey foundation"
+        }
+      ],
+      "files": [
+        "Mathlib/Data/Fintype/Pigeonhole.lean"
+      ],
+      "declarations": [
+        "Finite.exists_infinite_fiber"
+      ],
+      "present_files": [
+        "Mathlib/Data/Fintype/Pigeonhole.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/Data/Fintype/Pigeonhole.lean": "8cfc46ff22cbef1594addded39543bf50ba6d3e314adb6b024b58c1237149b69"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Algebraic tensor products and scalar extension",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, projective base change algebraic setup"
+        }
+      ],
+      "files": [
+        "Mathlib/LinearAlgebra/TensorProduct/Basic.lean"
+      ],
+      "declarations": [
+        "TensorProduct.lift",
+        "TensorProduct.lift.tmul",
+        "TensorProduct.map"
+      ],
+      "present_files": [
+        "Mathlib/LinearAlgebra/TensorProduct/Basic.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/LinearAlgebra/TensorProduct/Basic.lean": "7023a1345de459eb118998c95ab01dde89799ecacd2ae843760880c8e3b214da"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Disjoint block wedges have linearly growing norm",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 6, proposition nonultra, norm estimates"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LaurentBlockNorms.lean",
+        "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.norm_laurentBlockWedge",
+        "AlternatingAnalytic.norm_sum_laurentBlockWedge_le",
+        "AlternatingAnalytic.le_norm_sum_laurentBlockWedge",
+        "AlternatingAnalytic.geometricWeightMaximum_eq_one",
+        "AlternatingAnalytic.norm_sum_laurentBlockWedge_eq"
+      ],
+      "note": "Both exact unit norm and two-sided partial-sum estimate are present, with exact N when r≤1/2.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LaurentBlockNorms.lean",
+        "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LaurentBlockNorms.lean": "d5d534b2432ab86ac7958de5ec3c9b413c8f878d20d70330565e17343eac38a1",
+        "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean": "8eb78af821a50f05a93ce611768d6f1aa393de82a3b949a41a4f15f845f9538f"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/laurent-block-norms-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentBlockNorms.lean"
+          ],
+          "declarations_audited_in_receipt": 6
+        },
+        {
+          "path": "planning/charp-paper/planning/laurent-completed-coefficient-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean"
+          ],
+          "declarations_audited_in_receipt": 10
+        }
+      ]
+    },
+    {
+      "id": "The constructed target has no equivalent ultrametric norm",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 6, proposition nonultra, equivalent norms and scalar extension"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.laurentExterior_not_hasEquivalentUltrametricNorm",
+        "AlternatingAnalytic.HasLinearUnitSumGrowth.map",
+        "AlternatingAnalytic.HasLinearUnitSumGrowth.not_hasEquivalentUltrametricNorm"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean": "8eb78af821a50f05a93ce611768d6f1aa393de82a3b949a41a4f15f845f9538f"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/laurent-completed-coefficient-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean"
+          ],
+          "declarations_audited_in_receipt": 10
+        }
+      ]
+    },
+    {
+      "id": "Isometric field and finite-index transport of lifts",
+      "status": "paper_need_covered_generic_plan_abstraction_not_separately_proved",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Sections 2 and 6, finite index conventions and main proof Step 3"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean",
+        "AlternatingAnalytic/Analysis/LaurentSubfield.lean",
+        "AlternatingAnalytic/Analysis/PrescribedLaurentBase.lean",
+        "AlternatingAnalytic/Main.lean"
+      ],
+      "declarations": [
+        "Round24Transfer.hasBoundedLift_reindex",
+        "Round24Transfer.hasBoundedLift_reindex_iff",
+        "Round24Transfer.not_analyticAt_of_equiv_index",
+        "AlternatingAnalytic.laurentFieldNormedAlgebra",
+        "AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample"
+      ],
+      "note": "All finite-index transport and actual field passage used by the paper are covered. The node additionally promised a single generic transport package for arbitrary isometric field isomorphisms, exterior norms and completions; no such package was found. This is an overbroad planning helper, not an additional standalone proved theorem in charp.tex. Do not claim this whole plan sentence verbatim formalized.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean",
+        "AlternatingAnalytic/Analysis/LaurentSubfield.lean",
+        "AlternatingAnalytic/Analysis/PrescribedLaurentBase.lean",
+        "AlternatingAnalytic/Main.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean": "6c721d1fdf1ed54a5a89a4e4c00cfd220c29ad18f2d4589dcb73f651e6e378b6",
+        "AlternatingAnalytic/Analysis/LaurentSubfield.lean": "2b63dc3085c36206b11ae3787b28aa574a5c91c5dc24ba4c0dc152bcc34bb1ef",
+        "AlternatingAnalytic/Analysis/PrescribedLaurentBase.lean": "a17905d695e141818c64e30c607e100d8e86a8d72326e261a53bf6e7e7146b46",
+        "AlternatingAnalytic/Main.lean": "9929b99c2237aa7f963f0e567d290bedef9a0d224dc5ff03108bfffa31fe79ed"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/growth-and-universe-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/PrescribedLaurentBase.lean"
+          ],
+          "declarations_audited_in_receipt": 5
+        },
+        {
+          "path": "planning/charp-paper/planning/first-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LiftCriterion.lean"
+          ],
+          "declarations_audited_in_receipt": 93
+        },
+        {
+          "path": "planning/charp-paper/planning/laurent-embedding-stability-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LaurentSubfield.lean"
+          ],
+          "declarations_audited_in_receipt": 16
+        },
+        {
+          "path": "planning/charp-paper/planning/main-theorem-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Main.lean"
+          ],
+          "declarations_audited_in_receipt": 2
+        }
+      ]
+    },
+    {
+      "id": "Nowhere-analytic Banach counterexamples over every prescribed field",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 1, theorem main; Section 6, full assembly"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Main.lean",
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean",
+        "AlternatingAnalytic/MainTheorem.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.exists_completeField_counterexample",
+        "AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample",
+        "Round24Transfer.tfae_Q",
+        "AlternatingAnalytic.exists_banach_counterexample_full"
+      ],
+      "note": "Full primary theorem now explicitly bundles the same actual Banach witnesses, no equivalent ultrametric target norm, no bounded lift, nowhere AnalyticAt and nowhere ContDiffAt K ω for every prescribed positive-characteristic K, k≥p, all finite indices of cardinality k and every base point. The original Main theorem and lift criterion remain unchanged.",
+      "present_files": [
+        "AlternatingAnalytic/Main.lean",
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean",
+        "AlternatingAnalytic/MainTheorem.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Main.lean": "9929b99c2237aa7f963f0e567d290bedef9a0d224dc5ff03108bfffa31fe79ed",
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean": "6c721d1fdf1ed54a5a89a4e4c00cfd220c29ad18f2d4589dcb73f651e6e378b6",
+        "AlternatingAnalytic/MainTheorem.lean": "5709f1914e02646a8fc577ea5e8a90f83e140fbf12bba12cb040cd396f7788f1"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/first-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/LiftCriterion.lean"
+          ],
+          "declarations_audited_in_receipt": 93
+        },
+        {
+          "path": "planning/charp-paper/planning/main-theorem-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Main.lean"
+          ],
+          "declarations_audited_in_receipt": 2
+        }
+      ],
+      "historical_main_note": "Audited exact primary statement: every prescribed K, no completeness premise, all k≥p, actual complete E and F, E prime=E, all finite indices of cardinality k, every base point, no equivalent ultrametric norm. The lift and ContDiffAt ω formulations follow from the existing lift criterion.",
+      "preferred_entrypoint": "AlternatingAnalytic.exists_banach_counterexample_full"
+    },
+    {
+      "id": "Nonvanishing factorial gives an everywhere finite power series",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 6, corollary class(1)"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/FactorialInvertible.lean"
+      ],
+      "declarations": [
+        "ContinuousAlternatingMap.cpolynomialAt_compContinuousLinearMapCLM"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/FactorialInvertible.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/FactorialInvertible.lean": "94157be3618d52bf0df698bab9195cfc43cd33aef76e0e731a0cdfaa5c9dd8b5"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/first-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/FactorialInvertible.lean"
+          ],
+          "declarations_audited_in_receipt": 93
+        }
+      ]
+    },
+    {
+      "id": "Factorial criterion for analyticity over all Banach spaces",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 1, corollary class; Section 6, classification proof"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/FactorialClassification.lean",
+        "AlternatingAnalytic/Analysis/FactorialInvertible.lean",
+        "AlternatingAnalytic/Main.lean",
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.AllBanachPrecompositionAnalytic",
+        "AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic",
+        "ContinuousAlternatingMap.cpolynomialAt_compContinuousLinearMapCLM",
+        "AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample",
+        "Round24Transfer.hasBoundedLift_reindex_iff"
+      ],
+      "note": "Mathematically faithful. Named equivalence uses Fin k; arbitrary finite ι follows by reindexing. Positive theorem already covers arbitrary ι and arbitrary normed spaces, including incomplete spaces and degree zero. Negative witnesses have E prime=E and no equivalent ultrametric norm. Universal Banach quantifiers are genuine, not a proxy property assuming the conclusion.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/FactorialClassification.lean",
+        "AlternatingAnalytic/Analysis/FactorialInvertible.lean",
+        "AlternatingAnalytic/Main.lean",
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/FactorialClassification.lean": "35b94afcdfeb13e011c3d2381ad9c4fd9e7a332913dcc86d0ed4ec2eebded1e9",
+        "AlternatingAnalytic/Analysis/FactorialInvertible.lean": "94157be3618d52bf0df698bab9195cfc43cd33aef76e0e731a0cdfaa5c9dd8b5",
+        "AlternatingAnalytic/Main.lean": "9929b99c2237aa7f963f0e567d290bedef9a0d224dc5ff03108bfffa31fe79ed",
+        "AlternatingAnalytic/Analysis/LiftCriterion.lean": "6c721d1fdf1ed54a5a89a4e4c00cfd220c29ad18f2d4589dcb73f651e6e378b6"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/first-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/FactorialInvertible.lean",
+            "AlternatingAnalytic/Analysis/LiftCriterion.lean"
+          ],
+          "declarations_audited_in_receipt": 93
+        },
+        {
+          "path": "planning/charp-paper/planning/factorial-classification-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/FactorialClassification.lean"
+          ],
+          "declarations_audited_in_receipt": 2
+        },
+        {
+          "path": "planning/charp-paper/planning/main-theorem-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Main.lean"
+          ],
+          "declarations_audited_in_receipt": 2
+        }
+      ]
+    },
+    {
+      "id": "Finite-field diagonal identities have sharp degree distinctions",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, lemma forms and proposition diag(2)-(4)"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/FiniteHomogeneousIdentity.lean",
+        "AlternatingAnalytic/Algebra/PolarizationCounterexamples.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.finiteField_homogeneous_extension_eq_zero",
+        "MultilinearMap.sumOfType_eq_of_diagonal_eq_of_card",
+        "PolarizationCounterexamples.factorialCounterexample_pol1",
+        "PolarizationCounterexamples.exists_pw_not_pol"
+      ],
+      "note": "Full finite-field degree bound, extension-field coefficient lemma and actual strongly alternating exterior-valued counterexamples are present. PolarizationCounterexamples independent receipt passes 40 declarations at unchanged SHA f4983fd0163a41ae4c47500052602da061f7d7250e54f7a5e770b6f18d5db77d.",
+      "present_files": [
+        "AlternatingAnalytic/Algebra/FiniteHomogeneousIdentity.lean",
+        "AlternatingAnalytic/Algebra/PolarizationCounterexamples.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/FiniteHomogeneousIdentity.lean": "e6124571b473e40cadc608b84349a5c89b9d4f4372adec0c1c4ca793c88f709f",
+        "AlternatingAnalytic/Algebra/PolarizationCounterexamples.lean": "f4983fd0163a41ae4c47500052602da061f7d7250e54f7a5e770b6f18d5db77d"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/finite-homogeneous-identity-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/FiniteHomogeneousIdentity.lean"
+          ],
+          "declarations_audited_in_receipt": 9
+        },
+        {
+          "path": "planning/charp-paper/planning/polarization-counterexamples-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/PolarizationCounterexamples.lean"
+          ],
+          "declarations_audited_in_receipt": 40
+        }
+      ]
+    },
+    {
+      "id": "Spherically complete ultrametric targets give analytic precomposition",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 7, Theorem A; Section 8, formalization inventory"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/SphericalAnalytic.lean"
+      ],
+      "declarations": [
+        "ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap",
+        "ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete",
+        "ContinuousAlternatingMap.cpolynomialAt_compContinuousLinearMapCLM_of_sphericallyComplete",
+        "ContinuousAlternatingMap.analyticAt_compContinuousLinearMapCLM_of_sphericallyComplete",
+        "ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/SphericalAnalytic.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/SphericalAnalytic.lean": "acfe27e16dc52184844a7e3eff85de57875884256844aab3573631206a36a4b8"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/spherical-analytic-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/SphericalAnalytic.lean"
+          ],
+          "declarations_audited_in_receipt": 47
+        }
+      ]
+    },
+    {
+      "id": "Discrete-base Banach targets with equivalent ultrametric norms",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 7, proposition discrete"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/DiscreteNormRounding.lean",
+        "AlternatingAnalytic/Analysis/DiscreteSphericalCompleteness.lean",
+        "AlternatingAnalytic/Analysis/DiscreteTargetAnalytic.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup",
+        "AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteField_radius"
+      ],
+      "note": "Original target norm, actual equivalent ultrametric renorming, full discrete value-group hypothesis and no completeness assumption on K; stronger CPolynomialAt also present.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/DiscreteNormRounding.lean",
+        "AlternatingAnalytic/Analysis/DiscreteSphericalCompleteness.lean",
+        "AlternatingAnalytic/Analysis/DiscreteTargetAnalytic.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/DiscreteNormRounding.lean": "a955692ac6068cdc0d6d153b797a19c4b0dc731b96a58da39995c4d86014f0c9",
+        "AlternatingAnalytic/Analysis/DiscreteSphericalCompleteness.lean": "96c3cc731430d5966fb3440d0f6deecb2a55fff2c172b9e9aba88dfb15e0b3fe",
+        "AlternatingAnalytic/Analysis/DiscreteTargetAnalytic.lean": "b26befcf1313969c751a7608918f7bfc8eca6d36fa67a84a3d1981427f5c0259"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/discrete-norm-rounding-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/DiscreteNormRounding.lean"
+          ],
+          "declarations_audited_in_receipt": 16
+        },
+        {
+          "path": "planning/charp-paper/planning/discrete-target-analytic-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/DiscreteTargetAnalytic.lean"
+          ],
+          "declarations_audited_in_receipt": 13
+        },
+        {
+          "path": "planning/charp-paper/planning/discrete-spherical-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/DiscreteSphericalCompleteness.lean"
+          ],
+          "declarations_audited_in_receipt": 2
+        }
+      ]
+    },
+    {
+      "id": "Sorted lift for an orthogonal basis",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 7, remark sorted"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/SortedBasisRetraction.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisLift.lean",
+        "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisAnalytic.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisSummability.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisExpansion.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisFormula.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.sortedSchauderLift",
+        "AlternatingAnalytic.norm_sortedSchauderLift_le",
+        "AlternatingAnalytic.sortedSchauderLift_diag",
+        "AlternatingAnalytic.summable_sortedBasisTerm",
+        "AlternatingAnalytic.hasSum_sortedBasisTerm",
+        "AlternatingAnalytic.hasSum_sortedSchauderLift",
+        "AlternatingAnalytic.sortedSchauderLift_eq_tsum",
+        "AlternatingAnalytic.exists_sortedSchauderLift",
+        "AlternatingAnalytic.analyticAt_of_orthogonalSchauderBasis_fintype"
+      ],
+      "note": "All exact source conclusions are now proved: the actual contracting multilinear lift, its precomposition diagonal and convergent infinite determinant formula are bundled by exists_sortedSchauderLift. Final formula wrapper producer confirmed direct Lean exit0, empty diagnostics, and frozen SHA8639c922…. Independent wrapper gate remains parent-owned.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/SortedBasisRetraction.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisLift.lean",
+        "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisAnalytic.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisSummability.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisExpansion.lean",
+        "AlternatingAnalytic/Analysis/SortedBasisFormula.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/SortedBasisRetraction.lean": "b1e517654e6f3bbc13e146a282aa4a58fca75bc5d19f59c34676d5b7949a8ee0",
+        "AlternatingAnalytic/Analysis/SortedBasisLift.lean": "a0e9fbdb6f592d918dce248554680ebc8aee9ed1d3d17c8742b7cdfbeed0df82",
+        "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean": "8f65ebba2b7b6bf29bc85240609f783d5c48778e799e704f4e08a510414a59f1",
+        "AlternatingAnalytic/Analysis/SortedBasisAnalytic.lean": "7a9569271604aad3ed81c970be74b55461622499939e5d48102b43194d15a8c9",
+        "AlternatingAnalytic/Analysis/SortedBasisSummability.lean": "9578e5d0cdd0eda7ff1e748297b7ad4070d9d2e4ca5a577a0b1d09fc9722382c",
+        "AlternatingAnalytic/Analysis/SortedBasisExpansion.lean": "b5adde2f1cdb449513a1b368e5608c50c1eb39304638e8777b6dc587b33eeb89",
+        "AlternatingAnalytic/Analysis/SortedBasisFormula.lean": "8639c922bb6fbccd61fbe0569daac3bbef7c0479023740637342e1e24ace9204"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/sorted-analytic-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/SortedBasisAnalytic.lean"
+          ],
+          "declarations_audited_in_receipt": 16
+        },
+        {
+          "path": "planning/charp-paper/planning/sorted-basis-retraction-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/SortedBasisRetraction.lean"
+          ],
+          "declarations_audited_in_receipt": 12
+        },
+        {
+          "path": "planning/charp-paper/planning/sorted-basis-lift-v2-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/SortedBasisLift.lean"
+          ],
+          "declarations_audited_in_receipt": 5
+        },
+        {
+          "path": "planning/charp-paper/planning/sorted-expansion-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/SortedBasisExpansion.lean"
+          ],
+          "declarations_audited_in_receipt": 8
+        },
+        {
+          "path": "planning/charp-paper/planning/sorted-summability-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/SortedBasisSummability.lean"
+          ],
+          "declarations_audited_in_receipt": 8
+        },
+        {
+          "path": "planning/charp-paper/planning/dense-multilinear-extension-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean"
+          ],
+          "declarations_audited_in_receipt": 14
+        }
+      ]
+    },
+    {
+      "id": "Seminorms on normed modules",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 6, proposition nonultra: an equivalent ultrametric norm"
+        }
+      ],
+      "files": [
+        "Mathlib/Analysis/Normed/Module/Seminorm/Basic.lean"
+      ],
+      "declarations": [
+        "Seminorm"
+      ],
+      "present_files": [
+        "Mathlib/Analysis/Normed/Module/Seminorm/Basic.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/Analysis/Normed/Module/Seminorm/Basic.lean": "7ae059e3e731a2530a2f94bc8520864410310fc39a508be95f8359b02f1a2e41"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Unbounded unit-vector sums exclude equivalent ultrametric norms",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 6, proposition nonultra proof, lines 1314–1320"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/EquivalentUltrametric.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.not_hasEquivalentUltrametricNorm_of_linear_growth"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Analysis/EquivalentUltrametric.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/EquivalentUltrametric.lean": "db1357d4cbc9d29fa943faa6f82fdfb60f14acbd1d52778ac372b0f2a24ad5aa"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/first-integration-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/EquivalentUltrametric.lean"
+          ],
+          "declarations_audited_in_receipt": 93
+        }
+      ]
+    },
+    {
+      "id": "Finite sums",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, finite sums, signs and permutation cardinality in the cluster argument"
+        }
+      ],
+      "files": [
+        "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean"
+      ],
+      "declarations": [
+        "Finset.sum"
+      ],
+      "present_files": [
+        "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean": "e935efa96ad9381658f3158f900d04589c46d7e933cab15f4d8632e1af85527f"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Sign of a finite permutation",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, finite sums, signs and permutation cardinality in the cluster argument"
+        }
+      ],
+      "files": [
+        "Mathlib/GroupTheory/Perm/Sign.lean"
+      ],
+      "declarations": [
+        "Equiv.Perm.sign"
+      ],
+      "present_files": [
+        "Mathlib/GroupTheory/Perm/Sign.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/GroupTheory/Perm/Sign.lean": "b0cfeebd1b9db78f1dc8e96c36ed9c0eb4de808ad2f292cec8d71ff807981bb6"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Sign of a transposition",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, finite sums, signs and permutation cardinality in the cluster argument"
+        }
+      ],
+      "files": [
+        "Mathlib/GroupTheory/Perm/Sign.lean"
+      ],
+      "declarations": [
+        "Equiv.Perm.sign_swap"
+      ],
+      "present_files": [
+        "Mathlib/GroupTheory/Perm/Sign.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/GroupTheory/Perm/Sign.lean": "b0cfeebd1b9db78f1dc8e96c36ed9c0eb4de808ad2f292cec8d71ff807981bb6"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Multiplicativity of permutation signs",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, finite sums, signs and permutation cardinality in the cluster argument"
+        }
+      ],
+      "files": [
+        "Mathlib/GroupTheory/Perm/Sign.lean"
+      ],
+      "declarations": [
+        "Equiv.Perm.sign_mul"
+      ],
+      "present_files": [
+        "Mathlib/GroupTheory/Perm/Sign.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/GroupTheory/Perm/Sign.lean": "b0cfeebd1b9db78f1dc8e96c36ed9c0eb4de808ad2f292cec8d71ff807981bb6"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Cardinality of a finite symmetric group",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, finite sums, signs and permutation cardinality in the cluster argument"
+        }
+      ],
+      "files": [
+        "Mathlib/Data/Fintype/Perm.lean"
+      ],
+      "declarations": [
+        "Fintype.card_perm"
+      ],
+      "present_files": [
+        "Mathlib/Data/Fintype/Perm.lean"
+      ],
+      "file_sha256": {
+        "Mathlib/Data/Fintype/Perm.lean": "1a021b8a92315c3886238a689e3f275e9b74eab635ef4cc26a54bab15bb18548"
+      },
+      "matching_independent_receipts": []
+    },
+    {
+      "id": "Disjoint block wedges have maximal exterior support",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 6, proposition nonultra, disjoint-block contraction proof"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/ExteriorBlocks.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.exteriorSupportDim_consecutive_coordinate_blocks"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/ExteriorBlocks.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/ExteriorBlocks.lean": "f6e9dc604ee837831a3964aefd9755339674d892d7d0ebf236c7a1b8e2460530"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/blocks-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/ExteriorBlocks.lean"
+          ],
+          "declarations_audited_in_receipt": 9
+        }
+      ]
+    },
+    {
+      "id": "Restriction forms of the finite-field multiplier obstruction",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, theorem FF(2)"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/FiniteFieldObstruction.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.finiteField_multiplier_obstruction_of_restriction"
+      ],
+      "present_files": [
+        "AlternatingAnalytic/Algebra/FiniteFieldObstruction.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/FiniteFieldObstruction.lean": "58a99bb58a0f2232c63fb857c1aa4162633a7f354e015cb4c2e369011aa3be7d"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/finite-field-obstruction-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/FiniteFieldObstruction.lean"
+          ],
+          "declarations_audited_in_receipt": 8
+        }
+      ]
+    },
+    {
+      "id": "Nonspherical completeness and descending empty balls",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 5, Remark K2, lines 1003-1014"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Analysis/NonsphericalSequence.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.HasEmptyDescendingBallSequence",
+        "AlternatingAnalytic.HasEmptyDescendingBallSequence.not_sphericallyComplete",
+        "AlternatingAnalytic.hasEmptyDescendingBallSequence_of_not_sphericallyComplete",
+        "AlternatingAnalytic.hasEmptyDescendingBallSequence_iff"
+      ],
+      "note": "Exact K2 equivalence for every ultrametric metric space; no completeness, field or group hypothesis. Nonnegative radii follow from each adjacent-center distance bound, so nonempty balls are not omitted.",
+      "present_files": [
+        "AlternatingAnalytic/Analysis/NonsphericalSequence.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Analysis/NonsphericalSequence.lean": "7024fead31a72f95878f2aac016e78d1891fef0c5ecee1ca7d9dae4b47d00c3e"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/nonspherical-sequence-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Analysis/NonsphericalSequence.lean"
+          ],
+          "declarations_audited_in_receipt": 4
+        }
+      ]
+    },
+    {
+      "id": "Normalized multiplier lift when the factorial is invertible",
+      "status": "covered_by_existing_declarations",
+      "source_refs": [
+        {
+          "file": "sources/charp.tex",
+          "location": "Section 3, Remark FFunit, lines 737-748"
+        }
+      ],
+      "files": [
+        "AlternatingAnalytic/Algebra/NormalizedMultiplierLift.lean"
+      ],
+      "declarations": [
+        "AlternatingAnalytic.normalizedMultiplierLift",
+        "AlternatingAnalytic.normalizedMultiplierLift_apply",
+        "AlternatingAnalytic.normalizedMultiplierLift_alternating",
+        "AlternatingAnalytic.normalizedMultiplierLift_antisymmetric",
+        "AlternatingAnalytic.normalizedMultiplierLift_diagonal",
+        "AlternatingAnalytic.normalizedMultiplierLift_pol1",
+        "AlternatingAnalytic.exteriorSupportDim_normalizedMultiplierLift_le",
+        "AlternatingAnalytic.clusterValue_normalizedClusterLift"
+      ],
+      "note": "Literal normalized permutation sum on full scalar sequences. Strong alternation, diagonal and Pol1, support at most k² from a genuine supporting span of pairwise products, and actual disjoint-cluster value inverse(k!) are proved. Field need not be finite. The factorial nonvanishing hypothesis is used for normalization identities, not smuggled support or cluster assumptions.",
+      "present_files": [
+        "AlternatingAnalytic/Algebra/NormalizedMultiplierLift.lean"
+      ],
+      "file_sha256": {
+        "AlternatingAnalytic/Algebra/NormalizedMultiplierLift.lean": "fe41239871726ccf319193c55ccf704f82d8b6bb63d25f4161a3f93739ad8ddf"
+      },
+      "matching_independent_receipts": [
+        {
+          "path": "planning/charp-paper/planning/normalized-multiplier-independent-verification.json",
+          "files": [
+            "AlternatingAnalytic/Algebra/NormalizedMultiplierLift.lean"
+          ],
+          "declarations_audited_in_receipt": 15
+        }
+      ]
+    }
+  ],
+  "actual_missing_or_active_proved_paper_claims": [],
+  "external_cited_results": [
+    {
+      "claim": "Infinite Ramsey theorem",
+      "source": "Section 3, Ramsey citation",
+      "coverage": "Locally proved in InfiniteRamsey.lean, not an assumed external axiom."
+    },
+    {
+      "claim": "Ingleton Hahn–Banach extension",
+      "source": "Theorem ingleton",
+      "coverage": "Integrated stronger local proof in SphericalCompleteness.lean plus actual scalar projection."
+    },
+    {
+      "claim": "Theorem A for spherically complete ultrametric targets",
+      "source": "Section 7, quoted unpublished formalization",
+      "coverage": "Integrated local proof in SphericalAnalytic.lean, full all-n smoothness and analyticity."
+    },
+    {
+      "claim": "Characteristic-free C^n smoothness for n∈Nat∞",
+      "source": "Introduction, cited draft Mathlib PR",
+      "coverage": "Present in pinned Mathlib/Analysis/Calculus/ContDiff/ContinuousAlternatingMap.lean as ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM."
+    },
+    {
+      "claim": "Every ultrametric Banach space over a complete discretely valued field is topologically isomorphic to c₀(I)",
+      "source": "Remark sorted, Serre citation",
+      "coverage": "External cited classification; not found locally and not proved by this paper. Excluded from missing proved-paper claims."
+    },
+    {
+      "claim": "Earlier characteristic-2 counterexample and parity/Pfaffian arguments",
+      "source": "Introduction, comparison section, citation M",
+      "coverage": "Prior external development, not re-audited as part of this paper coverage task."
+    }
+  ],
+  "announced_open_or_expressly_unproved_items": [
+    {
+      "source": "Remark routeII, lines 750-781",
+      "items": [
+        "Infinite-field multiplier obstruction for arbitrary operator families modulo finite rank",
+        "Equality of exterior support dimension with contraction-matrix rank",
+        "Alternative base-change/minor argument conditional on those inputs"
+      ],
+      "reason": "Source expressly says the critical inputs are not proved; route was excluded from required proof nodes."
+    },
+    {
+      "source": "Remark R, lines 1462-1472",
+      "items": [
+        "Large-cardinal-index ultrametric-target counterexample via Erdős–Rado"
+      ],
+      "reason": "Announced without proof; nothing in the paper depends on it."
+    },
+    {
+      "source": "Open problems, lines 1488-1501",
+      "items": [
+        "Countable-index ultrametric target in characteristic p≥3",
+        "Densely valued spherically complete bases with complete ultrametric targets"
+      ],
+      "reason": "Explicit open questions, not missing proofs of paper theorems."
+    }
+  ],
+  "factorial_classification_audit": {
+    "verdict": "mathematically faithful",
+    "file": "AlternatingAnalytic/Analysis/FactorialClassification.lean",
+    "sha256": "35b94afcdfeb13e011c3d2381ad9c4fd9e7a332913dcc86d0ed4ec2eebded1e9",
+    "primary": "AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic",
+    "checks": [
+      "Every nontrivially normed K, complete or incomplete",
+      "All degrees including zero",
+      "Actual universal complete normed-space triples E,E prime,F",
+      "Actual analytic-at-every-point precomposition, not a placeholder property",
+      "Fin k form transports to arbitrary finite ι with card ι=k by existing lift reindexing",
+      "Positive direction is stronger in FactorialInvertible: arbitrary normed spaces need not be complete",
+      "Vanishing factorial implies positive prime ring characteristic ≤k; Main supplies actual nowhere-analytic Banach witnesses",
+      "No equivalent ultrametric norm is retained in Main witnesses, though not needed inside the abstract iff"
+    ],
+    "statement_rechecked_against_source": "charp.tex Corollary class, lines133–141; positive finite power series on arbitrary normed spaces, and negative Banach E=E′ witnesses with nowhere analyticity and no equivalent ultrametric target norm. Fin-k packaging plus actual finite-index transport is faithful."
+  },
+  "additional_covered_proved_remark": {
+    "source": "Remark notsuff (p,k)=(5,3)",
+    "file": "AlternatingAnalytic/Analysis/NonUltrametricAnalyticExample.lean",
+    "declaration": "AlternatingAnalytic.degree_three_char_five_analytic_without_equivalentUltrametricNorm",
+    "meaning": "Actual Laurent Banach target lacks any equivalent ultrametric norm but its degree-three precomposition is everywhere analytic."
+  },
+  "limitations": [
+    "Read-only statement coverage audit: no Lean source, graph, queues or aggregate imports changed, and no compilation or axiom gate launched. Matching parent receipts are recorded separately from the semantic assessment.",
+    "The original 58-node coverage audit is preserved unchanged; this new file adds current hashes and resolution evidence for all four original omissions.",
+    "External cited classifications, previously formalized characteristic-2 work, announced alternative arguments and explicit open problems retain their prior exclusions.",
+    "The broader planning-only field-transport abstraction is distinguished from the fully covered mathematical claims of the actual paper."
+  ],
+  "post_audit_updates": [
+    "All four original material omissions are closed: heterogeneous dense extension, K2 equivalence, normalized multiplier example, and arbitrary-index infinite sorted-basis formula.",
+    "This audit concludes statement coverage; it does not replace the parent’s independent gates or jury reviews.",
+    "Primary-main packaging update: MainTheorem.exists_banach_counterexample_full explicitly bundles no bounded lift and nowhere ContDiffAt K ω with the original nowhere-analytic/no-equivalent-ultrametric Banach witnesses. Exact frozen-source semantic audit found no weakening; prior coverage findings and the original Main proof are preserved.",
+    "Completed-coefficient packaging update: completedLaurentCoefficient_full_properties now bundles array identity, sharp support bound, pointwise uniqueness and constant-wedge recovery of the same actual κ-linear map. The semantic audit confirms identical assumptions and preserves the prior four-lemma coverage history."
+  ],
+  "previous_audit": {
+    "path": "planning/charp-paper/planning/paper-coverage-audit.json",
+    "sha256": "0a3731a6f61c2a779419b4a41a879258aa91eb6746cc60ebd543da0a821c4170",
+    "preserved_unchanged": true
+  },
+  "timestamp_utc": "2026-09-23T22:32:43.945497+00:00",
+  "audit_completion": "Complete: all four material proved-paper omissions from the original audit are closed; no material mathematical statement gaps found",
+  "material_mathematical_issues": [],
+  "main_semantic_audit": {
+    "path": "planning/charp-paper/planning/laurent-residue-main-semantic-audit.json",
+    "main_file_sha256": "9929b99c2237aa7f963f0e567d290bedef9a0d224dc5ff03108bfffa31fe79ed",
+    "statement_rechecked": true,
+    "full_bundle": {
+      "path": "planning/charp-paper/planning/main-full-bundle-semantic-audit.json",
+      "sha256": "ec0e81272edba4a825d823cb5089393d831fe1cdfa0c1ca83f243f2d3d4808e9",
+      "file_sha256": "5709f1914e02646a8fc577ea5e8a90f83e140fbf12bba12cb040cd396f7788f1",
+      "declaration": "AlternatingAnalytic.exists_banach_counterexample_full"
+    }
+  },
+  "resolved_original_findings": [
+    {
+      "id": "heterogeneous-dense-multilinear-extension",
+      "source": "charp.tex Lemma ext(2), lines 1096-1104",
+      "claim": "Independent normed spaces V_i with independent dense subspaces V_i^0 admit a unique bounded multilinear extension to their product, with the same bound.",
+      "state": "CLOSED",
+      "impact": "Auxiliary source lemma; not a gap in the checked main proof, whose required extensions are proved.",
+      "file": "AlternatingAnalytic/Analysis/DenseMultilinearFamilyExtension.lean",
+      "primary": "AlternatingAnalytic.exists_denseMultilinearFamilyExtension_of_bound",
+      "sha256": "25efb214d7f47fd45b511f2f0c78551c235b9cefcd178497fdefff0aab4d427c"
+    },
+    {
+      "id": "sorted-infinite-basis-formula",
+      "source": "charp.tex Remark sorted, lines 1444-1460; graph Sorted lift for an orthogonal basis",
+      "claim": "The actual sum over strictly increasing basis-index tuples converges, defines a norm≤1 lift and equals alternating precomposition on the diagonal for an arbitrary orthogonal topological basis.",
+      "state": "CLOSED",
+      "impact": "Optional independently proved complement, not used by Main or factorial classification.",
+      "file": "AlternatingAnalytic/Analysis/SortedBasisFormula.lean",
+      "primary": "AlternatingAnalytic.exists_sortedSchauderLift",
+      "sha256": "8639c922bb6fbccd61fbe0569daac3bbef7c0479023740637342e1e24ace9204",
+      "producer_confirmation": "integrate_existing: direct Lean exit0, empty diagnostics,34.43s; whole-library gap scan empty; source frozen"
+    },
+    {
+      "id": "K2-equivalence",
+      "source": "charp.tex Remark K2, lines 1003-1014",
+      "claim": "For an ultrametric space, nonspherical completeness is equivalent to a sequence of strictly decreasing-radius nested nonempty closed balls with empty intersection.",
+      "state": "CLOSED",
+      "impact": "Proved auxiliary remark connecting the prior characteristic-2 hypothesis; not used in the new main proof.",
+      "file": "AlternatingAnalytic/Analysis/NonsphericalSequence.lean",
+      "primary": "AlternatingAnalytic.hasEmptyDescendingBallSequence_iff",
+      "sha256": "7024fead31a72f95878f2aac016e78d1891fef0c5ecee1ca7d9dae4b47d00c3e"
+    },
+    {
+      "id": "normalized-multiplier-lift-example",
+      "source": "charp.tex Remark FFunit, lines 737-748",
+      "claim": "When k!≠0, the explicit normalized permutation sum is strongly alternating, satisfies Pol1, has support at most k² on all inputs, and has cluster value 1/k!.",
+      "state": "CLOSED",
+      "impact": "Proved explanatory sharpness remark, outside the 58-node plan; does not affect Main or classification.",
+      "file": "AlternatingAnalytic/Algebra/NormalizedMultiplierLift.lean",
+      "primary": "AlternatingAnalytic.normalizedMultiplierLift_apply and its alternation/Pol1/support/cluster helper theorems",
+      "sha256": "fe41239871726ccf319193c55ccf704f82d8b6bb63d25f4161a3f93739ad8ddf"
+    }
+  ],
+  "sorted_lift_semantic_audit": {
+    "verdict": "Mathematically faithful; all component proofs including the exact formula wrapper are producer-complete and frozen",
+    "source": "charp.tex Remark sorted, lines1444–1460",
+    "index_scope": "I is any linearly ordered type, with no finiteness, countability or enumeration assumption. Finite subsets of cardinality n correspond to the strictly increasing n-tuples in the source.",
+    "basis": "Mathlib UnconditionalSchauderBasis is GeneralSchauderBasis with the unconditional summation filter: actual continuous linear coordinates, biorthogonality, and HasSum of every coordinate expansion. It is neither a Hamel-only basis nor a proxy assuming the desired lift.",
+    "orthogonality": "hb states precisely the weighted coordinate estimate ‖coord_i(x)‖·‖b_i‖≤‖x‖ used by the source. The paper’s orthogonal-norm hypothesis implies it; using this weaker sufficient hypothesis strengthens rather than weakens the result.",
+    "scalar_and_space_assumptions": "K is a nontrivially normed ultrametric field. E and E′ are normed K-spaces, not assumed complete. F is normed, complete and ultrametric. No spherical completeness assumption occurs.",
+    "degree_and_characteristic": "n is arbitrary Nat with no positivity or factorial assumption. Degree zero is included; the empty sorted set contributes the empty determinant. Characteristic two is included because the codomain is Mathlib ContinuousAlternatingMap with equality-of-two-inputs vanishing, not mere signed antisymmetry.",
+    "operator": "P has the actual continuous n-multilinear type on E→L[K]E′ with values in bounded linear operators from alternating E′-maps to alternating E-maps. Its norm is the standard ContinuousMultilinearMap operator norm and is proved ≤1.",
+    "formula": "The HasSum summand is det(coord_(s_i)(x_j)) • m(fun i=>f_i(b_(s_i))), with precisely the row/column ordering in the source. The wrapper also gives equality with tsum and P(f,…,f)=Q(f).",
+    "convergence": "Actual cofinite decay and Summable are proved in SortedBasisSummability; SortedBasisExpansion proves the exact value by finite exterior-basis expansion, cofinal projected sums and continuity. Convergence is not an extra hypothesis.",
+    "arbitrary_finite_form_index": "SortedBasisAnalytic additionally supplies hasBoundedLift/analyticity for arbitrary finite ι by genuine reindexing, while the explicit sorted formula is naturally in Fin n.",
+    "proof_route": "Construct the sorted retraction on the finite coordinate span, extend it densely with its norm bound, then identify it with the convergent determinant family. This is equivalent to the source’s direct sum construction.",
+    "formula_producer_evidence": {
+      "file": "AlternatingAnalytic/Analysis/SortedBasisFormula.lean",
+      "sha256": "8639c922bb6fbccd61fbe0569daac3bbef7c0479023740637342e1e24ace9204",
+      "direct_lean_exit_code": 0,
+      "diagnostics": [],
+      "independent_gate": "parent owns the separate final build and exhaustive axiom receipt"
+    }
+  },
+  "source_version_audit": {
+    "record": "planning/charp-paper/planning/standalone-reproducibility-audit.json#source_provenance",
+    "record_sha256": "24cae3765dd3fa22d485d64619fdff8ac4356ace0d29701a28c5d0e9a941b59e",
+    "frozen_snapshot": {
+      "charp.tex": "5f53382d4621bef03f5ffef97edc74338a641c9f1b24e59597adc7368f583d55",
+      "charp.pdf": "14125b4d7ccf15216545bbed04597b66b67f23d0ec439d3ba5f7a7a2b69c2177"
+    },
+    "current_original": {
+      "charp.tex": "4aa70bd3e329095336261f0d48535435a2b8bb19938d4c959eb714a5e828975b",
+      "charp.pdf": "e0aa5cec9ce99eb8b077c89b1e1045a2da1f50805a2d2a64d41fd5999ad8fd58"
+    },
+    "hashes_recomputed_and_match_record": true,
+    "diff_hunk_count": 3,
+    "assessment": "Read the actual unified TeX diff independently: three editorial hunks clarify Theorem A provenance/non-use by the main theorem and rename its heading. The theorem body and every other mathematical statement are unchanged. The PDF byte hashes differ; the audited formalization source remains the preserved start-of-task snapshot.",
+    "mathematical_changes_found": false
+  },
+  "planning_only_caveat": "One record, Isometric field and finite-index transport of lifts, includes an overbroad generic isometric-field-isomorphism transport package not separately implemented. All concrete field passage, exterior completion use and finite-index transport required by the paper are proved. This is not a missing proved-paper claim; do not claim that extra plan sentence verbatim as a separate theorem.",
+  "full_bundle_update": {
+    "previous_final_audit_sha256": "12df423aae06f1ebe9ba4d67de8a57d0051dbe534c389ccd99ef341c1db33935",
+    "timestamp_utc": "2026-09-23T22:52:01.109963+00:00",
+    "independent_gate": "parent-owned; this semantic audit does not assert its completion"
+  },
+  "coefficient_bundle_update": {
+    "previous_final_audit_sha256": "89013191f2ecfe5427e73c8493ed8cab372418809ab13105bafca8b626f80eaf",
+    "timestamp_utc": "2026-09-23T23:13:54.755937+00:00",
+    "frozen_source_sha256": "0311b57311b56f38d57488013c42746ac0a115e906a943163cf7ca5c537f3a7b",
+    "independent_gate": "root-owned; not asserted by this read-only semantic audit"
+  }
+}

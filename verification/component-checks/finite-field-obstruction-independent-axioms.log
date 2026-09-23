@@ -1,0 +1,13 @@
+'AlternatingAnalytic.restrictClusterMap_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.restrictClusterMap' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finiteField_multiplier_obstruction_full' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.permutation_value_eq_of_adjacent' depends on axioms: [Quot.sound, Classical.choice, propext]
+'AlternatingAnalytic.finiteField_multiplier_obstruction_of_restriction' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.MultiplierMap' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finiteField_multiplier_obstruction' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.finiteField_multiplier_obstruction_finsupp' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+AUTOFORM_PROBE_OK decls=8

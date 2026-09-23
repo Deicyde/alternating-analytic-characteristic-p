@@ -1,0 +1,9 @@
+{
+  "axis": "proof_integrity",
+  "prompt_sha256": "dedb52089a54632c16f3a68ac0159ccc8226db59e197946ff0afcd58210647e8",
+  "result": {
+    "score": null,
+    "reasoning": "Source theorem FF supplies a full proof. The inspected Lean chain implements genuine Ramsey homogeneity, cluster cancellation, exterior-support rank bounds, diagonal polarization, and the factorial contradiction. No project sorry, custom axioms, orphan classes, or vacuous constructions were found. Independent axiom verification could not be completed; repository verification logs were not treated as authoritative. \u2014 The independent #print axioms probe timed out after 180 seconds; Lean language-s",
+    "error": "abstain"
+  }
+}

@@ -1,0 +1,19 @@
+'AlternatingAnalytic.ιMulti_mem_exteriorPowerSubmodule' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim_add_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim_properties' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim_le_finrank' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim_sum_wedges_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim_smul_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorPowerSubmodule_mono' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorPower_map_mem_exteriorPowerSubmodule' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim_zero' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_finite_exterior_support' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_exterior_support_finrank' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim_map_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim_smul' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorPowerSubmodule' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exteriorSupportDim_attained' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=16

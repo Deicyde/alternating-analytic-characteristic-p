@@ -1,0 +1,8 @@
+{
+  "axis": "code_quality",
+  "prompt_sha256": "cbfc880c0d3396b96b341700277e2fd8194153fecb3a20bd7a9ebb6c581502ff",
+  "result": {
+    "score": 5,
+    "reasoning": "The supplied code is idiomatic: one top-level theorem states the complete bound, supported by focused helpers and a clear calc chain using existing Mathlib rank and finrank lemmas. Layout, documentation, extensionality, and explicit non-terminal simplification follow conventions. CamelCase definition names retained within theorem names are conventional. Live file inspection was unavailable because tool calls repeatedly timed out; this assessment uses the supplied snapshot."
+  }
+}

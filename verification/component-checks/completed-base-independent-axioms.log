@@ -1,0 +1,28 @@
+'AlternatingAnalytic.scalarContractionContinuous' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedScalarContraction' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeNormedAddCommGroup' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.denseRange_baseChangeToCompletion' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.CompletedBaseChange' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeEmbedding_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeIsScalarTower' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeToCompletionK' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeNormedSpace' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedScalarContraction_apply_tensor' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedScalarContraction.congr_simp' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.denseRange_baseChangeToCompletionK' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeEmbedding_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.scalarContractionContinuous_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_completedScalarContraction_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_completedScalarContraction_apply_le' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.baseChangeToCompletion' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeEmbedding' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeCompleteSpace' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_completedBaseChange_retraction' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.baseChangeSeminorm_tmul_one' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.completedBaseChangeNormedSpaceRestrictScalars' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.baseChangeEmbedding' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=23

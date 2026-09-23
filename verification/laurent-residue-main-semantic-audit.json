@@ -1,0 +1,56 @@
+{
+  "review_kind": "source-to-statement semantic audit, separate from independent kernel gate",
+  "reviewer": "native charp_split worker; author of several upstream algebra/Laurent modules, not author of Main.lean",
+  "source": "planning/charp-paper/sources/charp.tex, Main Theorem (thm:main), lines 121-137",
+  "lean_file": "AlternatingAnalytic/Main.lean",
+  "sha256": "9929b99c2237aa7f963f0e567d290bedef9a0d224dc5ff03108bfffa31fe79ed",
+  "primary_declaration": "AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample",
+  "verdict": "faithful main theorem statement; no scope weakening found",
+  "checks": [
+    {
+      "source_requirement": "Every prescribed nontrivially normed field K of positive characteristic p",
+      "formal_evidence": "K is universally quantified with NontriviallyNormedField K; hp : p.Prime and CharP K p; no completeness premise, Main.lean:60-61"
+    },
+    {
+      "source_requirement": "Every degree k at least p",
+      "formal_evidence": "k is universally quantified and the only degree restriction is hpk : p <= k, Main.lean:60-61"
+    },
+    {
+      "source_requirement": "Actual Banach spaces E and F over that K",
+      "formal_evidence": "Existential NormedAddCommGroup structures, compatible NormedSpace K structures, and CompleteSpace instances for both carriers, Main.lean:62-69"
+    },
+    {
+      "source_requirement": "Use E prime equal to E",
+      "formal_evidence": "The domain is E ->L[K] E and both alternating-map spaces use E, Main.lean:72-77"
+    },
+    {
+      "source_requirement": "Same spaces for every finite index type of cardinality k",
+      "formal_evidence": "E,F occur before universal \u03b9 and Fintype.card \u03b9 = k; index universe v is independent of K universe u, Main.lean:62-71"
+    },
+    {
+      "source_requirement": "Nowhere analytic, not merely at zero",
+      "formal_evidence": "Conclusion quantifies every f0 : E ->L[K] E and negates AnalyticAt K at f0, Main.lean:72-77"
+    },
+    {
+      "source_requirement": "The actual precomposition map Q",
+      "formal_evidence": "Conclusion explicitly names ContinuousAlternatingMap.compContinuousLinearMapCLM with standard normed alternating-map/operator spaces, Main.lean:74-77; LiftCriterion.Q is its abbreviation"
+    },
+    {
+      "source_requirement": "F admits no equivalent ultrametric norm",
+      "formal_evidence": "Negation of HasEquivalentUltrametricNorm K F, whose definition is an ultrametric K-seminorm with positive two-sided comparisons against the given norm; lower bound implies definiteness, Main.lean:70 and Analysis/EquivalentUltrametric.lean:26-31"
+    },
+    {
+      "source_requirement": "No hypothetical Laurent lift, support map or obstruction in final assumptions",
+      "formal_evidence": "Main builds actual same-universe Laurent prime field, completed ordinary projective base changes, and calls laurent_not_hasBoundedLift; final theorem assumes none of those conclusions, Main.lean:34-53,78-98"
+    },
+    {
+      "source_requirement": "Incomplete K included",
+      "formal_evidence": "Uses the actual UniformSpace.Completion K and restricts the complete spaces back to K, transporting any putative K lift to the completion using dense scalar inclusion, Main.lean:79-98"
+    }
+  ],
+  "scope_notes": [
+    "The equivalent bounded-lift formulation is not separately conjoined in the final theorem statement; it follows from the existing proved LiftCriterion.tfae_Q/cpolynomialAt_of_lift. This is a presentation choice, not a weakening of nowhere analyticity.",
+    "This audit covers the paper Main Theorem, not all optional complements or the separate universal classification corollary.",
+    "No independent kernel verification is claimed here; the parent-owned exhaustive gate supplies that evidence."
+  ]
+}

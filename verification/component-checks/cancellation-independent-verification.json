@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Algebra/ClusterCancellation.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Algebra.ClusterCancellation"
+    ],
+    "decls": 17,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T19:44:01.388472+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Algebra/ClusterCancellation.lean": "9600f502582b46dc1cf59ad59b72301c1bdcc8f0458eaf98f43783d83ee0bd53"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

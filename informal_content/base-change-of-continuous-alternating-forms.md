@@ -1,0 +1,5 @@
+# Base change of continuous alternating forms
+
+For m∈Alt^k_{K₁}(E₁;F₁), with F₁ Banach, there is m_{K'}∈Alt^k_{K'}(E₁ completed-tensor-π K';F₁ completed-tensor-π K') with ‖m_{K'}‖≤‖m‖ and m_{K'}(iota_E x₁,…,iota_E x_k)=iota_F(m(x)). The assignment m↦m_{K'} is bounded K₁-linear. Alternation is in the strong repeated-coordinate sense in every characteristic.
+
+Complete local actual scalar-extension construction, not upstream Mathlib membership. The genuine tensor extension, completion, all-slot multilinearity, repeated-coordinate alternation in every characteristic, norm bound, and embedding compatibility are proved. The family is a contracting original-field continuous linear map. No completeness of E/F/L or ultrametric norm on E/F is required. BaseChangeAlternatingCriterion proves alternation by density and two-slot expansion. Independently verified in base-forms-independent-verification.json (31 owned declarations) and base-alternating-criterion-independent-verification.json (7): zero exits, only standard axioms, unchanged source. Statement jury pending.

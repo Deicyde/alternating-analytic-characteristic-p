@@ -1,0 +1,97 @@
+{
+  "integrated_date": "2026-09-23",
+  "scope": "Existing positive-characteristic ultrametric theorem and spherical completeness/extension source integration. No new proof of scalar projection, general-group discrete-distance result, FF, or complete characteristic-p counterexample.",
+  "files": [
+    {
+      "source": "/Users/jack/Desktop/notes/alt-analytic-deliverables/round24/ultrametric-huge/lean/CharPUltrametric.lean",
+      "source_sha256": "8c9c978a3f66c7b80c01be9af700e10adf854c4e9ce1f4122a8d758c7ff1f7c7",
+      "destination": "AlternatingAnalytic/Analysis/PositiveCharacteristic.lean",
+      "destination_sha256": "367c4e845aecee896b9bc72d07faeaac1aa31566017d6933bbe0c8b47ef3c7b2",
+      "lean_code_preserved_modulo_comments_and_scratch_print_commands": true
+    },
+    {
+      "source": "/Users/jack/Desktop/notes/alt-analytic-deliverables/round24/charp/lean/r1/SC_01to05.lean",
+      "source_sha256": "55439ac59eb64c075ed9670bd86262fe36c5c8b8bbcbe8ca2082ae4c854772de",
+      "destination": "AlternatingAnalytic/Analysis/SphericalCompleteness.lean",
+      "destination_sha256": "fc1369ea7f0b0ecd59e0d297fec3bb3d79aa0d20c6818f58c457d9bd5ad81ea7",
+      "lean_code_preserved_modulo_comments_and_scratch_print_commands": true
+    }
+  ],
+  "checks": [
+    {
+      "command": [
+        "/Users/jack/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean",
+        "AlternatingAnalytic/Analysis/PositiveCharacteristic.lean"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 110.36,
+      "log": "planning/charp-paper/planning/integration-PositiveCharacteristic-direct-lean.log"
+    },
+    {
+      "command": [
+        "/Users/jack/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean",
+        "AlternatingAnalytic/Analysis/SphericalCompleteness.lean"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 49.43,
+      "log": "planning/charp-paper/planning/integration-SphericalCompleteness-direct-lean.log"
+    },
+    {
+      "command": [
+        "lake",
+        "build",
+        "AlternatingAnalytic.Analysis.PositiveCharacteristic",
+        "AlternatingAnalytic.Analysis.SphericalCompleteness"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 83.6,
+      "log": "planning/charp-paper/planning/integration-positive-modules-build.log"
+    },
+    {
+      "command": [
+        "/Users/jack/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean",
+        "planning/charp-paper/planning/integration-positive-axioms.lean"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 155.9,
+      "log": "planning/charp-paper/planning/integration-positive-axioms.log"
+    }
+  ],
+  "conflict_scan": {
+    "command": "rg charP_isUltrametricDist|SphericallyCompleteSpace|exists_extension_of_sphericallyComplete|sphericallyCompleteSpace_of_discreteNorm|namespace MasterExtension AlternatingAnalytic Mathlib",
+    "before_copy": "No matches; source-generated instance name conflicts remain for the compiler to check."
+  },
+  "validation_method": "Pinned direct-Lean source checks, combined exact-module Lake build, full shared declaration enumeration, and exact exported target axiom checks.",
+  "direct_lean_environment": {
+    "executable": "/Users/jack/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean",
+    "LEAN_PATH": "/Users/jack/Desktop/LEAN/alternating-analytic-formalization/.lake/build/lib/lean:/Users/jack/Desktop/LEAN/alternating-analytic-formalization/.lake/packages/plausible/.lake/build/lib/lean:/Users/jack/Desktop/LEAN/alternating-analytic-formalization/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/jack/Desktop/LEAN/alternating-analytic-formalization/.lake/packages/batteries/.lake/build/lib/lean:/Users/jack/Desktop/LEAN/alternating-analytic-formalization/.lake/packages/Cli/.lake/build/lib/lean:/Users/jack/Desktop/LEAN/alternating-analytic-formalization/.lake/packages/aesop/.lake/build/lib/lean:/Users/jack/Desktop/LEAN/alternating-analytic-formalization/.lake/packages/importGraph/.lake/build/lib/lean:/Users/jack/Desktop/LEAN/alternating-analytic-formalization/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/jack/Desktop/LEAN/alternating-analytic-formalization/.lake/packages/Qq/.lake/build/lib/lean"
+  },
+  "axiom_enumeration": {
+    "passed": true,
+    "enumerated_declarations": 18,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "exact_target_axioms": {
+      "charP_isUltrametricDist": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "exists_extension_of_sphericallyComplete": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "sphericallyCompleteSpace_of_discreteNorm": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    "enumeration_source": "/Users/jack/.codex/plugins/cache/autoform-local/autoform/0.4.4/servers/prover/verify.py::_build_probe",
+    "root_full_gate": "separate, not run by this integration script"
+  }
+}

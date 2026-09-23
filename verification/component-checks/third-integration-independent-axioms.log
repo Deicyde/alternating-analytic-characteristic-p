@@ -1,0 +1,18 @@
+'VectorPolynomial.scalarPolynomial' depends on axioms: [propext, Quot.sound, Classical.choice]
+'VectorPolynomial.eval_eq_sum' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.staircaseMatrix_letters_eq_of_rank_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'VectorPolynomial.eval' depends on axioms: [propext, Quot.sound, Classical.choice]
+'VectorPolynomial.scalarPolynomial_coeff' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.staircaseMatrix' does not depend on any axioms
+'AlternatingAnalytic.det_staircaseMatrix_sub_constant' depends on axioms: [propext, Quot.sound, Classical.choice]
+'VectorPolynomial.eval_scalarPolynomial' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.matrix_rank_sub_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_scalar_retraction_of_linearIsometry' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'VectorPolynomial.coeff_eq_zero_of_eval_eq_zero' depends on axioms: [propext, Quot.sound, Classical.choice]
+'VectorPolynomial.eq_zero_of_eval_eq_zero' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.staircaseMatrix_size_le_rank_add_one' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.exists_scalar_projection' depends on axioms: [propext, Quot.sound, Classical.choice]
+'VectorPolynomial.coeff_eq_zero_of_sum_eq_zero' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=15

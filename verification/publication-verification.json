@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "exit_code": 0,
+  "timestamp": "2026-09-23T23:27:52.564164+00:00",
+  "elapsed_seconds": 64.05,
+  "audited_modules": 90,
+  "audited_declarations": 2026,
+  "scope": "All library and solution declarations, including private and generated declarations. The separate challenge specification has two deliberate theorem placeholders and is excluded from the proof audit.",
+  "command": "python3 scripts/verify.py",
+  "source_manifest_sha256": "c2b46bb28f47d1e6a43b2ea5a0df46f0fd577249a9707c460f91c392c68d803b",
+  "source_manifest_unchanged": true,
+  "output": "Verified 90 modules and 2026 owned declarations; standard axioms only.\n"
+}

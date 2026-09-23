@@ -1,0 +1,15 @@
+'AlternatingAnalytic.boundedSequenceMultiplier_constant' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentBoundedFunctionScalarTower' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.boundedSequenceMultiplier_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.constantLaurentArray_add' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentBoundedFunctionModule' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.constantLaurentArray_smul_const' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentBoundedFunctionContinuousConstSMul' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.constantLaurentArray_mul' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.boundedSequenceMultiplier' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.constantLaurentArrayLinear_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.constantLaurentArrayLinear' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.norm_boundedSequenceMultiplier_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=12

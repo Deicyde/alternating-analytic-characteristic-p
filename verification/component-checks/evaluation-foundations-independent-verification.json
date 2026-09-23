@@ -1,0 +1,37 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean",
+      "AlternatingAnalytic/Analysis/PolynomialEvaluationNorm.lean",
+      "AlternatingAnalytic/Analysis/LaurentPolynomials.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Analysis.FiniteFieldNorm",
+      "AlternatingAnalytic.Analysis.PolynomialEvaluationNorm",
+      "AlternatingAnalytic.Analysis.LaurentPolynomials"
+    ],
+    "decls": 10,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T20:37:49.153029+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Analysis/FiniteFieldNorm.lean": "cf4eaf316dde3debb599e08b52b53297982f0f45699209580023678133598fa1",
+    "AlternatingAnalytic/Analysis/PolynomialEvaluationNorm.lean": "0f50c105df274fb61f93e5901c0f36b4af10ef51558a972c2b9faf9acb08989d",
+    "AlternatingAnalytic/Analysis/LaurentPolynomials.lean": "47089528583af1989e0a17b65aa4c31179b39f2bebf120b84972106e9b82efe1"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

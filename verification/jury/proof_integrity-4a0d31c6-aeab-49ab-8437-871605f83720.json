@@ -1,0 +1,8 @@
+{
+  "axis": "proof_integrity",
+  "prompt_sha256": "1eb2a77d76d4f779182f9c856e549028face01fa4f9151f4fc777e51f47c4109",
+  "result": {
+    "score": 5,
+    "reasoning": "Freshly checked both current source files together using lake env lean --stdin. #print axioms reports only propext, Classical.choice, and Quot.sound for the target and its substantive Ramsey dependency. Section 3, lemma H supplies the coloring-and-padding proof, which the formalization follows: it constructs finite vector colors, pads tuple values above their maximum, proves equal patterns have equal coordinate ranks, and applies homogeneous coloring. The Ramsey dependency is genuinely proved by"
+  }
+}

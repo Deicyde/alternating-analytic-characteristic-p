@@ -1,0 +1,4 @@
+'AlternatingAnalytic.laurentLift_grouped' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentResidueLift_pol' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentLiftFixedVectors' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=3

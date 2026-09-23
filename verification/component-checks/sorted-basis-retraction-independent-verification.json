@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Analysis/SortedBasisRetraction.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Analysis.SortedBasisRetraction"
+    ],
+    "decls": 12,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T22:15:16.487851+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Analysis/SortedBasisRetraction.lean": "b1e517654e6f3bbc13e146a282aa4a58fca75bc5d19f59c34676d5b7949a8ee0"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

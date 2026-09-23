@@ -1,0 +1,30 @@
+'AlternatingAnalytic.DiscreteRenormedTarget' does not depend on any axioms
+'AlternatingAnalytic.DiscreteRenormedTarget.instModule' does not depend on any axioms
+'AlternatingAnalytic.cpolynomialAt_of_equivalentUltrametricNorm_discreteField' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.cpolynomialAt_of_equivalentUltrametricNorm_discreteValueGroup' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.DiscreteRenormedTarget.linearEquiv' depends on axioms: [propext, Quot.sound]
+'AlternatingAnalytic.nontriviallyNormedFieldOfDiscreteValueGroup' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteField_radius' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.cpolynomialAt_of_equivalentUltrametricNorm_discreteField_radius' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.DiscreteRenormedTarget.instAddCommGroup' does not depend on any axioms
+'AlternatingAnalytic.hasBoundedLift_of_equivalentUltrametricNorm_discreteField' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteField' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.norm_mem_zpowers_of_discreteValueGroup' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=13

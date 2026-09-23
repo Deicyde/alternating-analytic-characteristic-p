@@ -1,0 +1,275 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml — https://github.com/mathlib-initiative/formalization.yaml (v0.4)
+version: "v0.4"
+
+project:
+  name: "alternating-analytic-characteristic-p"
+  description: >
+    Lean 4 / Mathlib formalization of alternating precomposition in positive characteristic.
+    For every prescribed nontrivially normed field K of prime characteristic p, including
+    incomplete K, and every k >= p, the construction gives actual K-Banach spaces E and F,
+    with E' = E, such that F has no equivalent ultrametric norm and degree-k alternating
+    precomposition has no bounded multilinear lift, is nowhere analytic, and is nowhere
+    ContDiffAt K omega. The same witnesses work for every finite index type of cardinality k.
+    The exact factorial classification states that precomposition is analytic for all Banach
+    triples over K if and only if k! is nonzero in K. The development includes the finite-field
+    Ramsey obstruction, ordinary-sum projective exterior completion, coefficient support
+    estimate, scalar extension and descent, and the paper's proved complements.
+  authors: ["Jack McCarthy"]
+  responsible_maintainers: ["Jack McCarthy"]
+  license: "No license chosen yet (all rights reserved pending the maintainer's decision)"
+
+repository:
+  role: "substantive-development"
+
+sources:
+  - title: "Precomposition on continuous alternating maps is not analytic in positive characteristic"
+    authors: ["Jack McCarthy"]
+    contributors:
+      - name: "Claude (Anthropic), working in Claude Code"
+        role: "credited by the paper for producing the informal result, proof, and write-up"
+    id: "https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/main/sources/charp.pdf"
+    type: "manuscript"
+    location: "Theorem main, Corollary class, and the proved statements and complements of Sections 2–7"
+    relationship: "formalizes"
+    note: >
+      The bibliographic author is taken from the preserved LaTeX author field. Its thanks
+      paragraph separately credits Anthropic's Claude and independent Claude proof audits.
+      sources/charp.pdf and sources/charp.tex are the exact snapshots captured at task start.
+      Statements in that historical snapshot saying that the new main theorem is not yet
+      machine-checked describe its earlier status, before this formalization. A later original
+      file revision changes only Theorem A's provenance wording; both versions' hashes and
+      the editorial diff are retained in verification/provenance/. The stated mathematical
+      claims are unchanged. The source's announced and open items are not claimed as proved.
+    license: ""
+    author_endorsement: "participated"
+  - title: "Existing Lean ingredients supplied with the round-24 paper materials"
+    authors: []
+    id: "https://github.com/Deicyde/alternating-analytic-characteristic-p/tree/main/verification/provenance"
+    type: "software"
+    relationship: "adapts"
+    note: >
+      Existing proofs of the lift criterion, factorial-invertible positive result, symmetric
+      diagonal obstruction, positive-characteristic ultrametricity, spherical completeness
+      and extension, and Theorem A were integrated and checked. Source paths, source hashes,
+      changes and checks are recorded by integration-manifest.json,
+      integration-positive-manifest.json and spherical-analytic-provenance.json. Their exact
+      original model authorship is not inferred from the current formalization session.
+    license: ""
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/Deicyde/alternating-analytic-counterexample"
+    relationship: "other"
+    note: >
+      Earlier characteristic-two formalization used as a workflow precedent and cited by the
+      paper for comparison. Its different Pfaffian/parity construction is not re-proved or
+      re-audited here, and that repository is unchanged. This project establishes the new
+      every-prescribed-field result with a target having no equivalent ultrametric norm.
+
+classification:
+  arxiv: ["math.FA", "math.DG"]
+  msc2020: ["46S10", "26E30", "15A75", "58B99", "68V20"]
+
+status:
+  scope: >
+    Complete for the proved-paper scope recorded in THEOREM_MAP.md and
+    verification/paper-coverage-final-audit.json. The proof library has zero unresolved sorry,
+    admit, new axiom or native_decide uses. solution.lean contains the two proved comparator
+    declarations; challenge.lean contains exactly two deliberate theorem placeholders and is
+    excluded from these proof-development sorry counts. The comparator states the full main
+    conclusion and factorial classification with Mathlib-only mathematical definitions,
+    including the inlined universal Banach-space classification statement. Library builds
+    and all-owned transitive axiom checks are recorded separately from comparator validation
+    and model review. Excluded are the expressly unproved alternative infinite-field route,
+    announced large-index ultrametric-target construction, mathematical open problems, the
+    external Serre c_0(I) classification, and the earlier characteristic-two proof. A broader
+    generic isometric-field-transport abstraction in the initial plan is not claimed as a
+    separate theorem; every concrete field and finite-index passage used by the paper is proved.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+  main_results:
+    - declaration: "AlternatingAnalyticChallenge.exists_banach_counterexample_full"
+      file: "solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+      literature_dependencies: []
+    - declaration: "AlternatingAnalyticChallenge.factorial_ne_zero_iff_allBanachPrecompositionAnalytic"
+      file: "solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+      literature_dependencies: []
+    - declaration: "AlternatingAnalytic.exists_banach_counterexample_full"
+      file: "AlternatingAnalytic/MainTheorem.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: ""
+      literature_dependencies: []
+    - declaration: "AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample"
+      file: "AlternatingAnalytic/Main.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: ""
+      literature_dependencies: []
+    - declaration: "AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic"
+      file: "AlternatingAnalytic/Analysis/FactorialClassification.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: ""
+      literature_dependencies: []
+    - declaration: "AlternatingAnalytic.finiteField_multiplier_theorem"
+      file: "AlternatingAnalytic/Algebra/FiniteFieldTheorem.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: ""
+      literature_dependencies: []
+    - declaration: "AlternatingAnalytic.completedLaurentCoefficient_full_properties"
+      file: "AlternatingAnalytic/Analysis/LaurentCoefficientTheorem.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: ""
+      literature_dependencies: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["gpt-6-astra"]
+      framework: "Codex desktop with Autoform"
+      tool_setup: >
+        GPT-6 Astra in Codex coordinated native proof workers through Autoform's durable
+        dependency plan. Workers constructed Lean proofs and iterated with the pinned Lean
+        toolchain; separate checks built the modules and audited transitive axiom dependencies.
+        Final library verification enumerated all module-owned declarations, including private
+        and compiler-generated declarations. Statement audits compared the actual Lean objects
+        with the frozen paper. Comparator wrappers and repository metadata were prepared in
+        the same Codex session. Lean 4.34.0-rc2 and the exact Mathlib revision are locked by
+        lean-toolchain, lakefile.toml and lake-manifest.json.
+      prompting_notes: >
+        Jack McCarthy requested formalization of the supplied characteristic-p paper in the
+        style of the earlier characteristic-two project, then requested a private repository,
+        formalization.yaml metadata and comparator files. The proof task retained arbitrary
+        prescribed fields, incomplete bases, every allowed degree, every base point and the
+        actual Banach witnesses; it did not replace the target by an assumed obstruction.
+    - method: "other"
+      models: []
+      framework: "Integration of pre-existing Lean proof sources"
+      tool_setup: >
+        The supplied existing ingredients were preserved or adapted as documented in
+        verification/provenance/. They are not represented as newly authored proofs from
+        the current GPT-6 Astra run. The paper's informal Claude/Claude Code authorship is
+        recorded under sources and is distinct from the current formalization automation.
+  notes: >
+    No total cost, hardware specification or end-to-end runtime is asserted: these were not
+    measured reliably for the whole project. Native-worker proof production, model review and
+    Lean kernel verification are distinct activities. Existing proof integrations and newly
+    constructed proofs are distinguished in the provenance manifests. The preserved source
+    snapshot and earlier review records remain historical evidence rather than being rewritten
+    to suggest that the entire result existed before this run.
+
+fidelity:
+  divergences: >
+    The full main theorem keeps every prescribed nontrivially normed positive-characteristic
+    field, including incomplete fields, and every k >= p. It produces E' = E with actual
+    completeness and no equivalent ultrametric target norm; the same witnesses work for every
+    finite index type of cardinality k and every base point. The no-lift and nowhere-C^omega
+    formulations are bundled explicitly. The classification uses Fin k, with genuine
+    finite-index transport for other finite types; its positive direction applies to arbitrary
+    normed spaces and degree zero. Several auxiliaries are generalized, including arbitrary
+    discrete index sets for the Laurent coefficient construction and arbitrary ordered
+    unconditional Schauder bases with the source's orthogonal coordinate bound for the sorted
+    lift. The coefficient map is kappa-linear, not Laurent-field-linear; the projective norm
+    uses ordinary sums. The formalization does not assert injectivity of the completed
+    determinant-array map. No announced or open paper claim is included as an axiom.
+
+review:
+  status: "agent-reviewed"
+  reviewers: []
+  notes: >
+    Native semantic audits and separate model jury passes reviewed selected declarations for
+    faithfulness, proof integrity and code quality. The retained jury evidence contains mixed
+    scores, abstentions and timeouts; timeouts are never counted as approvals, and no global
+    clean-jury result is claimed. Multi-part theorem packaging findings were addressed by
+    public combined declarations; the original findings remain in the record. Independent
+    Lean builds and the all-owned transitive axiom audit succeeded for the delivered proof
+    library, as recorded in verification/. They are distinct from model judgments. No human
+    expert review is recorded in this package.
+
+alignment:
+  namespace: "AlternatingAnalytic"
+  theorem_map: "THEOREM_MAP.md"
+  coverage_audit: "verification/paper-coverage-final-audit.json"
+  statements:
+    - source: "Theorem main and adjacent C^omega sharpness statement, Sections 1 and 6"
+      lean: "AlternatingAnalytic.exists_banach_counterexample_full"
+      module: "AlternatingAnalytic.MainTheorem"
+      status: "proved"
+      note: "All prescribed fields, actual Banach E = E', no equivalent ultrametric target norm, all finite indices and all base points."
+    - source: "Explicit construction underlying Theorem main, Section 6"
+      lean: "AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample"
+      module: "AlternatingAnalytic.Main"
+      status: "proved"
+    - source: "Corollary class: the exact factorial classification"
+      lean: "AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic"
+      module: "AlternatingAnalytic.Analysis.FactorialClassification"
+      status: "proved"
+    - source: "Proposition lift: bounded lift and analyticity equivalences"
+      lean: "Round24Transfer.tfae_Q"
+      module: "AlternatingAnalytic.Analysis.LiftCriterion"
+      status: "proved"
+      note: "Integrated existing source proof, with provenance retained."
+    - source: "Theorem FF: the finite-field multiplier obstruction"
+      lean: "AlternatingAnalytic.finiteField_multiplier_theorem"
+      module: "AlternatingAnalytic.Algebra.FiniteFieldTheorem"
+      status: "proved"
+      note: "The needed infinite Ramsey theorem is proved locally; the obstruction is not an axiom."
+    - source: "Proposition supp: the completed coefficient map and sharp support estimate"
+      lean: "AlternatingAnalytic.completedLaurentCoefficient_full_properties"
+      module: "AlternatingAnalytic.Analysis.LaurentCoefficientTheorem"
+      status: "proved"
+    - source: "Lemma Psi: all four residue-lift properties, including full grouped polarization"
+      lean: "AlternatingAnalytic.laurentResidueLift_full_properties"
+      module: "AlternatingAnalytic.Analysis.LaurentResidueTheorem"
+      status: "proved"
+    - source: "Proposition nonultra: the target admits no equivalent ultrametric norm"
+      lean: "AlternatingAnalytic.laurentExterior_not_hasEquivalentUltrametricNorm"
+      module: "AlternatingAnalytic.Analysis.LaurentCompletedCoefficient"
+      status: "proved"
+      note: "Disjoint-block growth is also transported to the final prescribed-field witnesses."
+    - source: "Lemma ext(2): heterogeneous dense multilinear extension"
+      lean: "AlternatingAnalytic.exists_denseMultilinearFamilyExtension_of_bound"
+      module: "AlternatingAnalytic.Analysis.DenseMultilinearFamilyExtension"
+      status: "proved"
+    - source: "Remark K2: nonspherical completeness and descending empty balls"
+      lean: "AlternatingAnalytic.hasEmptyDescendingBallSequence_iff"
+      module: "AlternatingAnalytic.Analysis.NonsphericalSequence"
+      status: "proved"
+    - source: "Remark FFunit: the normalized multiplier example and its support and cluster values"
+      lean: "AlternatingAnalytic.normalizedMultiplierLift_pol1, AlternatingAnalytic.exteriorSupportDim_normalizedMultiplierLift_le, AlternatingAnalytic.clusterValue_normalizedClusterLift"
+      module: "AlternatingAnalytic.Algebra.NormalizedMultiplierLift"
+      status: "proved"
+    - source: "Remark sorted: the contracting lift and its actual convergent infinite determinant formula"
+      lean: "AlternatingAnalytic.exists_sortedSchauderLift"
+      module: "AlternatingAnalytic.Analysis.SortedBasisFormula"
+      status: "proved"
+    - source: "Theorem A: spherically complete ultrametric targets"
+      lean: "ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete"
+      module: "AlternatingAnalytic.Analysis.SphericalAnalytic"
+      status: "proved"
+      note: "Quoted by the paper; its existing Lean proof is integrated here."
+    - source: "Proposition discrete: complete targets with an equivalent ultrametric norm"
+      lean: "AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup"
+      module: "AlternatingAnalytic.Analysis.DiscreteTargetAnalytic"
+      status: "proved"
+    - source: "Remark routeII, announced Remark R, explicit mathematical open problems, and externally cited Serre classification"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Explicit exclusions from the proved-paper scope; see THEOREM_MAP.md."
+
+acknowledgements: >
+  Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform;
+  leanprover/comparator; and mathlib-initiative/formalization.yaml. The source paper's
+  attribution to Claude and its bibliographic author are preserved separately above.

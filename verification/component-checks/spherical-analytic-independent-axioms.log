@@ -1,0 +1,62 @@
+'AltFree.hat_sng' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.toFin' depends on axioms: [propext, Quot.sound, Classical.choice]
+'ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'ContinuousAlternatingMap.exists_retraction_toContinuousMultilinearMap' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AltFree.ofLinear_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.norm_def' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.instAddCommGroup' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.instNorm' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.rels' depends on axioms: [propext, Quot.sound, Classical.choice]
+'MultilinearMap.smul_of_agree' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.instSeminormedAddCommGroup' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.core' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.hat_nnnorm_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_retraction' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AltFree.hatL.congr_simp' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.instNormedSpace' depends on axioms: [propext, Quot.sound, Classical.choice]
+'ContinuousAlternatingMap.analyticAt_compContinuousLinearMapCLM_of_sphericallyComplete' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AltFree.nn_add_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.instModule' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.hatL' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.hat_eq_zero_of_mem_relSub' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.le_nn' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.toFin_sng' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.wt' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.sng_mem_relSub' depends on axioms: [propext, Quot.sound, Classical.choice]
+'sphericallyCompleteSpace_continuousAlternatingMap' depends on axioms: [propext, Quot.sound, Classical.choice]
+'ContinuousAlternatingMap.cpolynomialAt_compContinuousLinearMapCLM_of_sphericallyComplete' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AltFree.hat_norm_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.nn_smul' depends on axioms: [propext, Quot.sound, Classical.choice]
+'MultilinearMap.add_of_agree' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.relSub' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.hat' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.ofLinear.congr_simp' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.nn' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.norm_sng' depends on axioms: [propext, Quot.sound, Classical.choice]
+'ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AltFree.instIsUltrametricDist' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.nn_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AltFree.hatL_norm_le' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.hat_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.ofLinear' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.hatL_sub' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.hatL_apply' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.nn_sng' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AltFree.sng' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=47

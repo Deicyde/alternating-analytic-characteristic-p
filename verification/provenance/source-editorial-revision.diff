@@ -1,0 +1,53 @@
+--- /Users/jack/Desktop/LEAN/alternating-analytic-formalization/planning/charp-paper/sources/charp.tex	2026-09-23 14:09:29
++++ /Users/jack/Desktop/notes/alt-analytic-deliverables/round24/paper/charp.tex	2026-09-23 17:48:34
+@@ -98,11 +98,13 @@
+ \item If $\abs\iota!$ is invertible in $K$ then $Q$ is analytic, by polarization. In pull requests to Mathlib, this is
+ done in characteristic~$0$ by Gou\"ezel~\cite{G1}, who uses it to construct the bundle for every $n$ in
+ characteristic~$0$~\cite{G2}. A proof in every characteristic is recalled in \S\ref{sec:proofs}.
+-\item If $K$ is ultrametric and $F$ is ultrametric and spherically complete, then $Q$ is analytic for all normed
+-$E,E'$. A special case, in the setting of~\cite{M}, is stated without proof in~\cite[Remark~16]{M}; a proof of the
+-general statement has been formalized in Lean, in an unpublished development (\S\ref{sec:lean}); we quote it and do not
+-prove it. We call it Theorem~A (\S\ref{sec:complements}). It is not used in the proofs of
+-Theorem~\ref{thm:main} and Corollary~\ref{cor:class}, only in \S\ref{sec:complements}.
++\item (Theorem~A.) If $K$ is ultrametric and $F$ is ultrametric and spherically complete, then $Q$ is analytic for
++all normed $E,E'$. This positive result is not needed for Theorem~\ref{thm:main} or Corollary~\ref{cor:class}; it is
++used only in \S\ref{sec:complements}, to explain which targets a counterexample can have, and we do not prove it in this
++paper. A special case is stated without proof in~\cite[Remark~16]{M}. The general statement is machine-checked in an
++unpublished Lean development, as the declaration
++\texttt{contDiff\_\allowbreak{}compContinuousLinearMapCLM\_\allowbreak{}of\_\allowbreak{}sphericallyComplete}
++(\S\ref{sec:lean}).
+ \item Over every complete ultrametric field of characteristic $2$ that is not spherically complete, $Q$ is \emph{not}
+ analytic at $0$ for $E=E'=\linf$, $\abs\iota=2$ and a suitable ultrametric Banach space $F$~\cite{M}. This is
+ machine-checked in Lean under the hypothesis (K2) of~\cite{M}, a nested sequence of closed balls with empty
+@@ -147,11 +149,10 @@
+ $\abs\iota\ge p$. By Corollary~\ref{cor:class}, it cannot be extended to $\omega$ for general Banach spaces over any
+ field in which $\abs\iota!$ vanishes.
+ 
+-By the third item above (Theorem~A, quoted from that unpublished formalization), no counterexample, over any $K$, can
+-have a spherically complete ultrametric target (a nonzero ultrametric normed space forces $K$ to be ultrametric). Over a
+-discretely valued base, such as $\F_q((t))$, the target of a Banach counterexample cannot even carry an equivalent
+-ultrametric norm; we deduce this from Theorem~A in Proposition~\ref{prop:discrete}, so it rests on the same
+-formalization. The target of
++By Theorem~A, no counterexample, over any $K$, can have a spherically complete ultrametric target (a nonzero
++ultrametric normed space forces $K$ to be ultrametric). Over a discretely valued base, such as $\F_q((t))$, the target
++of a Banach counterexample cannot even carry an equivalent ultrametric norm; we deduce this from Theorem~A in
++Proposition~\ref{prop:discrete}. The target of
+ Theorem~\ref{thm:main} has no equivalent ultrametric norm over any base (Proposition~\ref{prop:nonultra}). For
+ ultrametric targets the question has a different answer, which depends on the base field and is partly open
+ (\S\ref{sec:complements}).
+@@ -1388,11 +1389,11 @@
+ \section{Complements and open problems}\label{sec:complements}
+ 
+ \subsection*{Theorem A and targets over discretely valued bases}
+-The following positive result is the third item of \S\ref{sec:intro}. A special case is stated without proof
+-in~\cite[Remark~16]{M}. We quote the general statement from an unpublished Lean formalization (\S\ref{sec:lean}) and
+-do not prove it. It is used only in this subsection, and not in the proofs of Theorem~\ref{thm:main} and Corollary~\ref{cor:class}.
++The following positive result is Theorem~A of the introduction. We do not prove it here: a special case is stated
++without proof in~\cite[Remark~16]{M}, and the general statement is machine-checked in an unpublished Lean development
++(\S\ref{sec:lean}). It is used only in this subsection.
+ 
+-\begin{thmA}[{\cite[Remark~16]{M}} for a special case; formalized, \S\ref{sec:lean}]
++\begin{thmA}[machine-checked, \S\ref{sec:lean}; not proved here]
+ Let $K$ be an ultrametric nontrivially normed field, let $E,E'$ be normed $K$\nobreakdash-spaces, and let $F$ be a normed $K$\nobreakdash-space
+ whose norm is ultrametric and which is spherically complete as a metric space. Then $Q^K_{E,E',F}$ is $C^n$ for every
+ $n\in\N\cup\{\infty,\omega\}$; in particular it is analytic at every point.

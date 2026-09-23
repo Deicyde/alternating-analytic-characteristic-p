@@ -1,0 +1,37 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Analysis/LaurentEvaluation.lean",
+      "AlternatingAnalytic/Analysis/LaurentSubfield.lean",
+      "AlternatingAnalytic/Analysis/LaurentMultilinearStability.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Analysis.LaurentEvaluation",
+      "AlternatingAnalytic.Analysis.LaurentSubfield",
+      "AlternatingAnalytic.Analysis.LaurentMultilinearStability"
+    ],
+    "decls": 16,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T21:06:06.709243+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Analysis/LaurentEvaluation.lean": "f9b985aa2bd10eff685873f7fe36f21893c9e1bae042aaa227a4bd3e3f0c1f10",
+    "AlternatingAnalytic/Analysis/LaurentSubfield.lean": "2b63dc3085c36206b11ae3787b28aa574a5c91c5dc24ba4c0dc152bcc34bb1ef",
+    "AlternatingAnalytic/Analysis/LaurentMultilinearStability.lean": "78a9b59a556c10e346849df23918083342e56877a723f5a052fd2d49a1ab2020"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}

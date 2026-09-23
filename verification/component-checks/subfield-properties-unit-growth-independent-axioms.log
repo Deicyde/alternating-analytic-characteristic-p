@@ -1,0 +1,7 @@
+'AlternatingAnalytic.HasLinearUnitSumGrowth.not_hasEquivalentUltrametricNorm' depends on axioms: [propext,
+ Quot.sound,
+ Classical.choice]
+'AlternatingAnalytic.HasLinearUnitSumGrowth.map' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.HasLinearUnitSumGrowth' depends on axioms: [propext, Quot.sound, Classical.choice]
+'AlternatingAnalytic.laurentField_range_properties' depends on axioms: [propext, Quot.sound, Classical.choice]
+AUTOFORM_PROBE_OK decls=4

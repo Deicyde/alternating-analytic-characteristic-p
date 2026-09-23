@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "reason": "",
+  "checks": {
+    "verified": true,
+    "files": [
+      "AlternatingAnalytic/Algebra/ClusterDiagonal.lean"
+    ],
+    "build": "clean",
+    "modules": [
+      "AlternatingAnalytic.Algebra.ClusterDiagonal"
+    ],
+    "decls": 11,
+    "kernel": "clean",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "timestamp": "2026-09-23T20:13:21.390705+00:00",
+  "file_sha256": {
+    "AlternatingAnalytic/Algebra/ClusterDiagonal.lean": "380bfde1665be5c4be636fe888888d185646b6a1bf3157638ed1c279a03b3c90"
+  },
+  "exit_codes": {
+    "build": 0,
+    "axioms": 0
+  },
+  "source_unchanged": true,
+  "strict_standard_axioms_only": true
+}
