@@ -78,8 +78,13 @@ status:
     admit, new axiom or native_decide uses. solution.lean contains the two proved comparator
     declarations; challenge.lean contains exactly two deliberate theorem placeholders and is
     excluded from these proof-development sorry counts. The comparator states the full main
-    conclusion and factorial classification with Mathlib-only mathematical definitions,
-    including the inlined universal Banach-space classification statement. Library builds
+    conclusion and factorial classification using the shared transparent definitions in
+    ChallengeDefinitions.lean, which imports only Mathlib and has no proof-library dependency.
+    Its BanachSpace K bundles exactly the original carrier, norm, module and completeness
+    structures; the classification quantifies over all such Banach triples. The main theorem
+    keeps the arbitrary finite index type and its universe visible. The correspondence with
+    both original unbundled propositions is recorded in verification/ChallengeEquivalence.lean,
+    independently of the main construction and classification results. Library builds
     and all-owned transitive axiom checks are recorded separately from comparator validation
     and model review. Excluded are the expressly unproved alternative infinite-field route,
     announced large-index ultrametric-target construction, mathematical open problems, the
@@ -182,7 +187,14 @@ fidelity:
     unconditional Schauder bases with the source's orthogonal coordinate bound for the sorted
     lift. The coefficient map is kappa-linear, not Laurent-field-linear; the projective norm
     uses ordinary sums. The formalization does not assert injectivity of the completed
-    determinant-array map. No announced or open paper claim is included as an axiom.
+    determinant-array map. The readable comparator statements use transparent shared
+    definitions rather than repeating long structure and operator expressions. This is a
+    packaging change: BanachSpace K has the original carrier universe and exact normed-space
+    and completeness structures, and the three mathematical helpers unfold to their original
+    meanings. verification/ChallengeEquivalence.lean records the two equivalences with the
+    unbundled propositions without relying on either principal result. Validation receipts
+    identify the exact tested versions; earlier comparator checks do not certify later edits.
+    No announced or open paper claim is included as an axiom.
 
 review:
   status: "agent-reviewed"
@@ -201,6 +213,8 @@ alignment:
   namespace: "AlternatingAnalytic"
   theorem_map: "THEOREM_MAP.md"
   coverage_audit: "verification/paper-coverage-final-audit.json"
+  comparator_definitions: "ChallengeDefinitions.lean"
+  comparator_equivalences: "verification/ChallengeEquivalence.lean"
   statements:
     - source: "Theorem main and adjacent C^omega sharpness statement, Sections 1 and 6"
       lean: "AlternatingAnalytic.exists_banach_counterexample_full"

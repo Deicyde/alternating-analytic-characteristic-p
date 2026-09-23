@@ -1,6 +1,6 @@
 name = "AlternatingAnalyticCounterexample"
 version = "0.1.0"
-defaultTargets = ["AlternatingAnalytic", "challenge", "solution"]
+defaultTargets = ["AlternatingAnalytic", "ChallengeDefinitions", "challenge", "solution", "ChallengeEquivalence"]
 
 [[require]]
 name = "mathlib"
@@ -17,3 +17,11 @@ name = "challenge"
 
 [[lean_lib]]
 name = "solution"
+
+# Shared mathematical definitions and a proof that the compact statements preserve scope.
+[[lean_lib]]
+name = "ChallengeDefinitions"
+
+[[lean_lib]]
+name = "ChallengeEquivalence"
+roots = ["verification.ChallengeEquivalence"]

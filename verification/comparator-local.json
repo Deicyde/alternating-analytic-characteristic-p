@@ -1,18 +1,21 @@
 {
   "ok": true,
   "exit_code": 0,
-  "timestamp": "2026-09-23T23:26:49.034511+00:00",
-  "elapsed_seconds": 134.09,
+  "timestamp": "2026-09-23T23:52:32.604607+00:00",
+  "elapsed_seconds": 100.32,
+  "source_manifest_sha256": "00ca43227e943b937eaddab60d35589c9e09262f3229ffc8045168620a32c7b8",
+  "source_unchanged": true,
   "comparator_revision": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
-  "mode": "Local macOS development launcher provided by upstream. Actual comparator statement comparison, axiom checks and Lean default kernel replay; no Linux sandbox. Real sandbox is configured separately in CI.",
-  "files_sha256": {
-    "challenge.lean": "b4936f384e0e43cd9a982e342f35fba06424522afa9f68e0ba554930549fcda6",
-    "solution.lean": "663d1a1dbfdbb5e4b960976c45cdd99a014d8102cee9e87e49bc5529bba885c1",
-    "comparator.json": "c3a3d2a870d9cdc113ebf2a457d7a66e9ead48aae2007ab56bf72dc4639b94f3"
-  },
+  "mode": "Actual comparator statement and axiom checks and Lean default kernel replay; upstream macOS development launcher without Linux sandbox. Real Linux sandbox configured separately in CI.",
   "lean_default_kernel_accepted": true,
   "theorems_checked": [
     "AlternatingAnalyticChallenge.exists_banach_counterexample_full",
     "AlternatingAnalyticChallenge.factorial_ne_zero_iff_allBanachPrecompositionAnalytic"
-  ]
+  ],
+  "files_sha256": {
+    "challenge.lean": "92a8c0aa1ff8f57dac3c64efd5079a191006e8495cb703d5de5c7a51c382073f",
+    "solution.lean": "776fe1d339dd2debc545f0e90ce00cf14dbb142743ecfa86770179d77d0dc0c8",
+    "ChallengeDefinitions.lean": "2286e5253d1cca87067aed51bfe973932a3a79d69f08227e5ecbae5bef436d42",
+    "comparator.json": "c3a3d2a870d9cdc113ebf2a457d7a66e9ead48aae2007ab56bf72dc4639b94f3"
+  }
 }

@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "omitted_module": "ChallengeDefinitions",
+      "rejected_before_build": true,
+      "message": "The axiom probe does not cover every delivered library module."
+    },
+    {
+      "omitted_module": "verification.ChallengeEquivalence",
+      "rejected_before_build": true,
+      "message": "The axiom probe does not cover every delivered library module."
+    }
+  ]
+}
