@@ -15,6 +15,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem*{thmA}{Theorem A}
+\newtheorem*{thmMain}{Main Theorem}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \numberwithin{equation}{section}
@@ -49,8 +50,8 @@
 \title[Alternating precomposition in positive characteristic]{Precomposition on continuous alternating maps\\ is not analytic in positive characteristic}
 \author{Jack McCarthy}
 \thanks{The result, its informal proof and the original write-up were produced with Anthropic's Claude (in Claude Code),
-and the informal proofs were audited by independent AI agents. The Main Theorem and its supporting development have
-since been formalized in Lean with Mathlib using Codex and Autoform. Neither the paper nor the formalization has yet
+and the informal proofs were audited by independent AI agents. The operator results underlying the categorical main theorems
+have since been formalized in Lean with Mathlib using Codex and Autoform. Neither the paper nor the formalization has yet
 received a human expert review. See \S\ref{sec:lean} for the verification scope and provenance.}
 % Print the manuscript date beneath the author.
 \makeatletter
@@ -59,26 +60,87 @@ received a human expert review. See \S\ref{sec:lean} for the verification scope 
 
 \begin{document}
 \begin{abstract}
-Let $K$ be a nontrivially normed field and let $k\ge0$. We characterize when precomposition by a continuous linear
-map is analytic on spaces of continuous alternating $k$\nobreakdash-linear maps: it is analytic for every triple of
-$K$\nobreakdash-Banach spaces if and only if $k!\ne0$ in $K$. If $K$ has characteristic $p>0$ and $k\ge p$, we construct
-Banach spaces $E$ and $F$ for which precomposition on $\Alt^k(E;F)$ is analytic at no point, although it is of class
-$C^n$ for every $n\in\N\cup\{\infty\}$. The field $K$ need not be complete, and $F$ admits no equivalent ultrametric
-norm. For ultrametric spherically complete targets, we instead prove analyticity in every degree by constructing
-a contracting retraction onto alternating maps. The algebraic obstruction is a finite-field theorem: coordinatewise multiplication on sequences has no
-multilinear lift to the exterior power satisfying the polarized diagonal identity and a uniform bound on support
-dimension when $k!=0$. We prove this by Ramsey's theorem and a cancellation argument. A constant-coefficient map
-on a completed exterior power over a Laurent series field converts boundedness into the required support bound;
-Ingleton's Hahn--Banach theorem then permits passage to an arbitrary base field. The main theorem and the factorial
-criterion are formalized in Lean with Mathlib.
+Let $K$ be a nontrivially normed field. The alternating-map bifunctor on normed $K$\nobreakdash-spaces is always
+$C^\infty$, and is analytic in degree $k$ if and only if $k!\ne0$ in $K$. The same criterion holds on the category
+of Banach spaces. If $K$ is ultrametric, the restriction to ultrametric, spherically complete spaces in the
+second variable is analytic in every degree and takes values in that same subcategory. Here regularity of a functor means
+regularity of its maps on spaces of morphisms, and the field $K$ need not be complete.
+The negative result is sharp: in characteristic $p>0$ and degree $k\ge p$, there are Banach objects $E,F$ such that $\Alt^k(-;F)$ induces a nowhere-analytic map on the endomorphism
+space of $E$, and $F$ admits no equivalent ultrametric norm.
+The obstruction comes from a finite-field theorem: coordinatewise multiplication on sequences has no multilinear
+lift to an exterior power satisfying a polarized diagonal identity and a uniform support bound when $k!=0$.
+Ramsey's theorem and cancellation prove this algebraic statement. A constant-coefficient map on a completed
+exterior power over a Laurent series field converts boundedness into the support bound; Ingleton's Hahn--Banach
+theorem then permits passage to the prescribed field. The operator theorems underlying the categorical results
+are formalized in Lean with Mathlib.
 \end{abstract}
 \maketitle
 
 \section{Introduction}\label{sec:intro}
-Let $K$ be a nontrivially normed field. For normed $K$\nobreakdash-spaces $E,E',F$ and a finite set $\iota$, write
-$\cL(E,E')$ for the continuous linear maps with the operator norm and $\Alt^\iota(E;F)$ for the continuous alternating
-$\iota$\nobreakdash-linear maps $E^\iota\to F$. Here \emph{alternating} means that the map vanishes whenever two
-arguments coincide, including in characteristic $2$. We study
+The passage from vector spaces to alternating maps is contravariant in the source and covariant in the target.
+We study the regularity of this bifunctor on categories of normed spaces. The distinction between smoothness
+and analyticity is decisive in positive characteristic: the bifunctor is always smooth, but its analyticity
+depends on the degree and on the category chosen for its second variable.
+
+\subsection*{Categories and regularity}
+Fix a nontrivially normed field $K$. Let $\mathsf{Vec}_K$ be the category of normed $K$\nobreakdash-spaces and
+bounded linear maps, and let $\mathsf{Ban}_K$ be its full subcategory of complete spaces. Norms in these
+categories satisfy the ordinary triangle inequality; they need not be ultrametric. This convention is essential
+to the counterexample; see Schikhof~\cite[\S2.1]{Schi} for the distinction from the usual ultrametric convention.
+When $K$ is ultrametric, write $\mathsf{Vec}_K^\circ$ for the full subcategory of ultrametric, spherically
+complete spaces. The field itself need not be complete.
+
+For a finite set $\iota$, let $\Alt^\iota(E;F)$ be the normed space of bounded alternating $\iota$\nobreakdash-linear maps $E^\iota\to F$.
+Here \emph{alternating} means vanishing whenever two arguments coincide, including in characteristic $2$.
+Pullback in $E$ and pushforward in $F$ define the bifunctor
+\[
+\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K,
+\qquad (E,F)\longmapsto\Alt^\iota(E;F).
+\]
+Its action on a pair of morphisms $u\colon E\to E'$ and $v\colon F\to F'$ is
+\[
+\Alt^\iota(u,v)\colon m\longmapsto v\circ m\circ(u,\dots,u).
+\]
+The opposite category in the first variable records pullback. Write $\cL(E,E')$ for the hom space of bounded
+linear maps, equipped with the operator norm.
+We call the bifunctor \emph{analytic}, or \emph{$C^\infty$}, when every induced map on hom spaces
+\[
+\cL(E,E')\times\cL(F,F')\longrightarrow
+\cL\bigl(\Alt^\iota(E';F),\Alt^\iota(E;F')\bigr)
+\]
+has that regularity. The product carries the maximum norm. This definition concerns the joint action on both
+variables, rather than separate regularity. It applies to the restrictions below as well.
+
+\subsection*{Main theorems}
+\begin{thmMain}
+Let $K$ be a nontrivially normed field, let $\iota$ be finite, and put $k=\abs\iota$. The bifunctor
+\[
+\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K
+\]
+is $C^\infty$. It is analytic if and only if $k!\ne0$ in $K$. Both assertions hold also for its restriction
+\[
+\Alt^\iota\colon\mathsf{Ban}_K^{\mathrm{op}}\times\mathsf{Ban}_K\longrightarrow\mathsf{Ban}_K.
+\]
+\end{thmMain}
+Thus in characteristic $p>0$ the exact analytic range is $k<p$; in characteristic zero every finite degree is
+analytic. Restricting the second variable gives a different answer.
+
+\begin{thmA}
+Let $K$ be an ultrametric nontrivially normed field. For every finite set $\iota$, the bifunctor
+\[
+\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
+\longrightarrow\mathsf{Vec}_K^\circ
+\]
+is analytic.
+\end{thmA}
+The codomain in Theorem~A is part of the assertion: alternating maps into a spherically complete ultrametric
+space form a spherically complete ultrametric space. Neither theorem assumes completeness of $K$.
+In all the analytic cases just stated, the maps on hom spaces are in fact given by finite power series.
+
+\subsection*{Operator form and sharpness}
+The proofs work with the action of a fixed-target functor $\Alt^\iota(-;F)$ on hom spaces. We now write this
+action explicitly and record the stronger counterexample underlying the Main Theorem.
+For normed $K$\nobreakdash-spaces $E,E',F$, the pullback action is
 \begin{equation}\label{eq:Q}
 \begin{aligned}
 Q=Q^K_{E,E',F}\colon\cL(E,E')&\longrightarrow\cL\bigl(\Alt^\iota(E';F),\Alt^\iota(E;F)\bigr),\\
@@ -90,13 +152,7 @@ map and is therefore analytic. Requiring the values to remain alternating change
 polarization argument divides by $k!$, where $k=\abs\iota$, and does not apply when that scalar vanishes. We show that
 this obstruction is unavoidable if analyticity is required for all Banach spaces over $K$.
 
-\needspace{15\baselineskip}
-\subsection*{Main results}
-We use \emph{Banach space} to mean a complete normed space; its norm need not satisfy the ultrametric inequality.
-This convention is essential to the result. For the distinction from the usual ultrametric convention,
-see Schikhof~\cite[\S2.1]{Schi}. The base field itself need not be complete.
-
-\begin{theorem}[Main Theorem]\label{thm:main}
+\begin{theorem}[Counterexample theorem]\label{thm:main}
 Let $K$ be a nontrivially normed field of characteristic $p>0$, and let $k\ge p$. There are Banach spaces $E$ and $F$
 over $K$ such that, for every finite set $\iota$ with $\abs\iota=k$, the map
 \[
@@ -126,43 +182,25 @@ degree if either $E$ or $E'$ is finite-dimensional, with no restriction on $F$ (
 We give explicit determinant formulas for these lifts in \S\ref{sec:positive}. Finite-dimensional targets require a
 different analysis, given in Remark~\ref{rem:finite-target-reduction}.
 
-\subsection*{Categorical formulation}
-Let $\mathsf{Vec}_K$ be the category of normed $K$\nobreakdash-spaces, with ordinary, not necessarily
-ultrametric norms, and bounded linear maps. Write $\mathsf{Ban}_K$ for its full subcategory of complete
-spaces, and $\mathsf{Vec}_K^\circ$ for its full subcategory of ultrametric, spherically complete spaces.
-For a fixed finite set $\iota$, the bifunctor $\Alt^\iota$ acts on morphisms by
-\[
-(u,v)\longmapsto\bigl[m\longmapsto v\circ m\circ(u,\dots,u)\bigr].
-\]
-We call this bifunctor \emph{analytic} if, for every fixed choice of objects $E,E',F,F'$, this map
-\[
-\cL(E,E')\times\cL(F,F')\longrightarrow
-\cL\bigl(\Alt^\iota(E';F),\Alt^\iota(E;F')\bigr)
-\]
-is analytic for the operator norms. Corollary~\ref{cor:class} and Theorem~A give the following
-categorical statements, with $k=\abs\iota$.
-\begin{enumerate}
-\item The bifunctor
-\[
-\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K
-\]
-is analytic if and only if $k!\ne0$ in $K$. The same criterion holds for its restriction
-$\Alt^\iota\colon\mathsf{Ban}_K^{\mathrm{op}}\times\mathsf{Ban}_K\to\mathsf{Ban}_K$.
-In characteristic $p>0$, the criterion is exactly $k<p$.
-\item If $K$ is ultrametric, in any characteristic, then
-\[
-\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
-\longrightarrow\mathsf{Vec}_K^\circ
-\]
-is analytic for every finite $\iota$.
-\end{enumerate}
-Indeed, write $v_*a=v\circ a$. The map $(v,T)\mapsto v_*\circ T$ is bounded bilinear, with
-$\norm{v_*\circ T}\le\norm v\,\norm T$, and the displayed morphism map is
-$(u,v)\mapsto v_*\circ Q^K_{E,E',F}(u)$. Corollary~\ref{cor:class} and Theorem~A therefore give the
-positive assertions. Conversely, fixing $v=\id_F$ recovers $Q$, so Corollary~\ref{cor:class} gives
-the necessity in (1), even on Banach spaces. The target categories are correct because
-$\Alt^\iota(E;F)$ is complete whenever $F$ is complete, and Proposition~\ref{prop:alt-spherical}
-gives the stronger closure property in (2). Neither statement assumes completeness of $K$.
+\subsection*{From operators to functors}
+The translation between the two formulations uses only bounded bilinear postcomposition. Write
+$v_*a=v\circ a$. The map $(v,T)\mapsto v_*\circ T$ is bounded bilinear, with
+$\norm{v_*\circ T}\le\norm v\,\norm T$, and the bifunctor's joint action is
+\begin{equation}\label{eq:joint-action}
+\Alt^\iota(u,v)=v_*\circ Q^K_{E,E',F}(u).
+\end{equation}
+Consequently smoothness or analyticity of every $Q$ gives the corresponding regularity of the bifunctor.
+Conversely, restriction to $v=\id_F$ recovers $Q$. The Main Theorem therefore follows from
+Corollary~\ref{cor:class} and the universal smoothness statement in Proposition~\ref{prop:smooth-positive}.
+Theorem~A is proved in \S\ref{sec:theoremA}. A bounded $k$\nobreakdash-linear lift of $Q$ gives a bounded
+$(k+1)$\nobreakdash-linear lift of the joint action by placing the pushforward variable in the last slot.
+Thus the finite-power-series conclusion also passes from the operator statements to the bifunctor.
+
+For completeness of the target category, $\Alt^\iota(E;F)$ is complete whenever $F$ is complete: an operator-norm
+Cauchy sequence converges pointwise in $F$, and its boundedness, multilinearity and alternation pass to the limit.
+Proposition~\ref{prop:alt-spherical} gives the stronger closure property required in Theorem~A.
+In degree zero, $\Alt^\varnothing(E;F)$ is naturally isometric to $F$; pullback is constant and the joint action
+is linear in the pushforward variable.
 
 \subsection*{Motivation and related results}
 The regularity of $Q$ arises in the construction of bundles of differential forms. Applying $\Alt^\iota$ to the
@@ -182,7 +220,7 @@ Mathlib's \texttt{ContDiffAt K $\omega$} fails at every point.
 The answer is different if the target norm is required to be ultrametric. If $K$ is ultrametric and $F$ is
 ultrametric and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Theorem~A).
 The proof in \S\ref{sec:theoremA} constructs a contracting retraction from multilinear maps to alternating maps
-by spherical completeness and extension of bounded linear maps. This positive result is not used in the Main Theorem or Corollary~\ref{cor:class}. A special case appears
+by spherical completeness and extension of bounded linear maps. This positive result is independent of the counterexample theorem and Corollary~\ref{cor:class}. A special case appears
 in~\cite[Remark~16]{M}. Over a discretely valued base, Theorem~A in fact rules out a Banach counterexample whenever
 $F$ has an equivalent ultrametric norm (Proposition~\ref{prop:discrete}).
 
@@ -234,10 +272,12 @@ blocks have norms growing linearly with the number of blocks. This growth persis
 equivalent ultrametric norm (Proposition~\ref{prop:nonultra}).
 
 \subsection*{Formal verification and organization}
-The Main Theorem, both directions of Corollary~\ref{cor:class}, and their supporting arguments are formalized in
-Lean~4 with Mathlib. The development also includes Theorem~A, the discrete-target result, and the sorted-basis lift of
+The operator counterexample, Theorem~\ref{thm:main}, both directions of Corollary~\ref{cor:class}, and their supporting
+arguments are formalized in Lean~4 with Mathlib. The development also includes the operator form of Theorem~A,
+the discrete-target result, and the sorted-basis lift of
 \S\ref{sec:complements}. The additional finite-dimensional arguments and their formalization status are identified
-in \S\ref{sec:lean}.
+in \S\ref{sec:lean}. The categorical main statements follow by the translation above; they are not separate
+Lean categorical declarations.
 \S\ref{sec:lean} records the principal declarations, verification scope, and provenance; the quoted smoothness
 result~\cite{PR}, whose argument we include, and earlier characteristic-$2$ construction~\cite{M} have separate provenance.
 
@@ -274,10 +314,20 @@ For a finite set $\iota$ of size $k$, choosing a bijection with $\{1,\dots,k\}$ 
 spaces isometrically and preserves precomposition. We therefore use the degree notation $\Alt^k$ in the proof.
 
 \begin{thmA}
-Let $K$ be an ultrametric nontrivially normed field, let $E,E'$ be normed $K$\nobreakdash-spaces, and let $F$ be a normed $K$\nobreakdash-space
-whose norm is ultrametric and which is spherically complete as a metric space. Then $Q^K_{E,E',F}$ is $C^n$ for every
-$n\in\N\cup\{\infty,\omega\}$; in particular it is analytic at every point.
+Let $K$ be an ultrametric nontrivially normed field. For every finite $\iota$, the bifunctor
+\[
+\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
+\longrightarrow\mathsf{Vec}_K^\circ
+\]
+is analytic.
 \end{thmA}
+
+We prove the following operator statement, which also records every smoothness order. For normed
+$K$\nobreakdash-spaces $E,E'$ and an ultrametric, spherically complete $F$,
+\[
+Q^K_{E,E',F}\text{ is }C^n\qquad(n\in\N\cup\{\infty,\omega\}).
+\]
+Together with spherical completeness of $\Alt^k(E;F)$ and~\eqref{eq:joint-action}, this proves Theorem~A.
 
 No completeness assumption on $K,E$ or $E'$ is needed, and the norms on $E,E'$ may be non-ultrametric.
 For $k\ge1$, put $A=\Alt^k(E;F)$ and $M=\Mult^k(E;F)$. The desired projection is a bounded linear map
@@ -358,7 +408,7 @@ subject to linear relations. The ultrametric seminorm on that free space is chos
 preserves the operator norm, even when $E$ itself is not ultrametric.
 
 \begin{proposition}\label{prop:alt-spherical}
-Under the hypotheses of Theorem~A, $\Alt^k(E;F)$ is an ultrametric, spherically complete normed space
+For an ultrametric nontrivially normed field $K$, a normed $K$\nobreakdash-space $E$ and an ultrametric, spherically complete $F$, the space $\Alt^k(E;F)$ is an ultrametric, spherically complete normed space
 for every $k\ge0$.
 \end{proposition}
 
@@ -401,7 +451,7 @@ We now apply the extension lemma a second time, using the alternating-map space 
 This produces the projection needed to turn ordinary precomposition into a polynomial with alternating values.
 
 \begin{proof}[Proof of Theorem~A]
-In degree zero, precomposition is constant. Assume $k\ge1$ and retain $A=\Alt^k(E;F)$ and
+In degree zero, $\Alt^0(-;F)$ is naturally $F$ and the bifunctor acts by the pushforward morphism, so the conclusion holds. Assume $k\ge1$ and retain $A=\Alt^k(E;F)$ and
 $M=\Mult^k(E;F)$. Their operator norms are ultrametric, and $A$ is spherically complete by
 Proposition~\ref{prop:alt-spherical}. The inclusion $j\colon A\to M$ is a linear isometry.
 Its inverse on $j(A)$ is therefore a contraction. Lemma~\ref{lem:compatible-extension} extends this inverse to
@@ -431,7 +481,9 @@ Q(f_0+h)=\sum_{r=0}^k q_r(h,\dots,h),
 The binomial coefficient in the bound is an ordinary nonnegative integer counting the summands.
 With $q_r=0$ for $r>k$, this is a power series of infinite radius at every $f_0$.
 Consequently $Q$ is continuously polynomial, hence $C^\omega$ and $C^n$ for all
-$n\in\N\cup\{\infty\}$, as asserted.
+$n\in\N\cup\{\infty\}$. Equation~\eqref{eq:joint-action} makes the full bifunctor analytic on hom spaces,
+and Proposition~\ref{prop:alt-spherical} shows that its values lie in $\mathsf{Vec}_K^\circ$.
+This proves the categorical statement.
 \end{proof}
 
 The retraction supplies the alternating values directly, with no division by $k!$.
@@ -2345,7 +2397,7 @@ Theorem~\ref{thm:FF}, with the support bound required only on the stated finitel
 The supporting development covers the $\kappa$\nobreakdash-linear coefficient map and support estimate
 (Proposition~\ref{prop:supp}), all four properties of the residue lift (Lemma~\ref{lem:Psi}), the Laurent
 counterexample, and ascent and descent to a prescribed field. It also includes the lift criterion, the
-sharp polarization distinctions, Theorem~A, Proposition~\ref{prop:discrete}, and the sorted lift of
+sharp polarization distinctions, the operator form of Theorem~A, Proposition~\ref{prop:discrete}, and the sorted lift of
 Remark~\ref{rem:sorted}. Spherical completeness uses the development's own class, with the definition in
 \S\ref{sec:theoremA}. The formalization used Codex with Autoform and incorporated previously formalized
 ingredients with their provenance retained.
@@ -2357,8 +2409,9 @@ Corollary~\ref{cor:finite-dimensional-positive}) and the finite-target reduction
 formalized declarations in this development. The weighted $c_0$ example of
 Remark~\ref{rem:nonspherical-analytic-target} is likewise an additional informal corollary; its sufficient
 analyticity criterion is formalized, but the example is not a separate Lean declaration.
-The categorical formulations in the introduction are mathematical corollaries of the formalized
-operator results, rather than separate Lean categorical declarations.
+The categorical Main Theorem and Theorem~A in the introduction are mathematical consequences of these
+operator results and bounded bilinear postcomposition. The functors and their joint maps on hom spaces are
+not separate Lean declarations.
 
 The characteristic-$2$ counterexample~\cite{M} has separate provenance. Its formalization proves nonanalyticity in
 degree $2$ at the origin, with a wedging extension under (K2) to every degree at least $2$ and every base point:
@@ -2368,12 +2421,13 @@ That construction is not re-proved or re-audited here.
 The proposed alternative route of Remark~\ref{rem:routeII}, the announced large-index construction of
 Remark~\ref{rem:R}, the open problems, and Serre's external classification cited in
 Remark~\ref{rem:sorted} are excluded from the proved results. The repository's comparator challenge contains
-two short contradiction corollaries of the main theorem and Theorem~A for every regularity order.
+two short contradiction corollaries of Theorem~\ref{thm:main} and the operator form of Theorem~A for every regularity order.
 Their solutions use the corresponding library theorems. The Banach and spherical-completeness hypotheses
 are given by transparent definitions in Mathlib terms. Intentional placeholders occur only in the challenge
 file, not in the proof library or solution. Current challenge checks use Kim Morrison's comparator, with the
 configuration recorded in the repository.
 
+\clearpage
 \begin{thebibliography}{99}
 \bibitem{G1} S.~Gou\"ezel, \emph{In characteristic $0$, precomposition by a linear map is analytic on the space of
 alternating maps}, pull request \#43338 to Mathlib,\\ {\small\url{https://github.com/leanprover-community/mathlib4/pull/43338}}.

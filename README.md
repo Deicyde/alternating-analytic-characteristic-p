@@ -6,17 +6,21 @@ Read the [paper](paper/charp.pdf), edit its [LaTeX source](paper/charp.tex), or 
 
 ## Main results
 
-For every nontrivially normed field K of prime characteristic p, including incomplete fields, and every k ≥ p, there are K-Banach spaces E and F such that degree-k alternating precomposition on E is analytic at no point. The same spaces work for every finite index type of cardinality k, and F has no equivalent ultrametric norm.
+The paper leads with two categorical results. For a nontrivially normed field K, let `Vec_K` be the category of normed K-spaces with bounded linear maps, allowing ordinary norms that need not be ultrametric. Let `Ban_K` be its full subcategory of complete spaces, and `Vec_K^∘` its full subcategory of ultrametric, spherically complete spaces. For every finite index set ι, the bifunctor `Alt^ι` is contravariant in its first variable and covariant in its second; its action is `(u, v) ↦ [m ↦ v ∘ m ∘ (u, …, u)]`. Regularity means joint regularity on each pair of morphism spaces with their operator norms.
+
+The **Main Theorem** states that `Alt^ι : Vec_K^op × Vec_K → Vec_K` is always C∞ and is analytic if and only if `|ι|! ≠ 0` in K. The same statements hold for `Alt^ι : Ban_K^op × Ban_K → Ban_K`. **Theorem A** states that, when K is ultrametric, `Alt^ι : Vec_K^op × Vec_K^∘ → Vec_K^∘` is analytic in every finite degree. Neither theorem assumes completeness of K.
+
+The underlying operator results are formalized in Lean. The categorical Main Theorem and Theorem A follow mathematically from these results, bounded bilinear postcomposition, and the closure properties of alternating-map spaces; the categorical functors and joint morphism actions are not separate Lean declarations.
+
+The numbered **Counterexample theorem** (`thm:main`) retains the stronger constructive statement: for every nontrivially normed field K of prime characteristic p, including incomplete fields, and every k ≥ p, there are K-Banach spaces E and F such that degree-k alternating precomposition on E is analytic at no point. The same spaces work for every finite index type of cardinality k, and F has no equivalent ultrametric norm.
 
 The complete statement, including the absence of a bounded multilinear lift and failure of `ContDiffAt K ω` at every point, is `AlternatingAnalytic.exists_banach_counterexample_full` in [MainTheorem.lean](AlternatingAnalytic/MainTheorem.lean).
 
-The exact factorial criterion is `AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic` in [FactorialClassification.lean](AlternatingAnalytic/Analysis/FactorialClassification.lean): precomposition is analytic for every Banach triple over K if and only if k! is nonzero in K.
+The exact operator factorial criterion in Corollary `cor:class` is `AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic` in [FactorialClassification.lean](AlternatingAnalytic/Analysis/FactorialClassification.lean): precomposition is analytic for every Banach triple over K if and only if k! is nonzero in K.
 
 The construction includes the finite-field Ramsey obstruction, the projective exterior completion and coefficient-support estimate, and scalar extension and descent. [THEOREM_MAP.md](THEOREM_MAP.md) also records the proved complements and the explicitly excluded announced or open results.
 
-Section 2, **Spherically complete targets: proof of Theorem A**, gives a standalone positive result: over an ultrametric field, a spherically complete ultrametric target makes precomposition analytic in every degree. Its extension, spherical-completeness, and retraction arguments follow the existing proofs in [SphericalCompleteness.lean](AlternatingAnalytic/Analysis/SphericalCompleteness.lean) and [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean).
-
-The introduction also states the categorical consequences. On normed spaces with bounded linear maps, `Alt^ι` is contravariant in its first variable and covariant in its second. It is analytic on morphism spaces exactly when `|ι|! ≠ 0`, with the same criterion for Banach spaces. With an ultrametric spherically complete second argument, it is analytic in every finite degree and takes values in that same subcategory. These categorical formulations follow from the operator results; they are not separate Lean category declarations.
+Section 2, **Spherically complete targets: proof of Theorem A**, first proves the operator form: over an ultrametric field, a spherically complete ultrametric target makes precomposition analytic in every degree. Its extension, spherical-completeness, and retraction arguments follow the existing proofs in [SphericalCompleteness.lean](AlternatingAnalytic/Analysis/SphericalCompleteness.lean) and [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean). Bounded bilinear postcomposition and spherical completeness of alternating-map spaces complete the categorical statement.
 
 The complements include a weighted `c₀` example whose given norm is not spherically complete, although alternating precomposition is analytic in every degree. The open problems ask for an intrinsic necessary and sufficient condition on the target. This new example is an informal corollary, not a separate Lean declaration.
 
@@ -31,7 +35,7 @@ lake exe cache get
 lake build AlternatingAnalytic
 ```
 
-The cache download is optional. Import `AlternatingAnalytic` for the full library, or `AlternatingAnalytic.MainTheorem` for the main result.
+The cache download is optional. Import `AlternatingAnalytic` for the full library, or `AlternatingAnalytic.MainTheorem` for the full operator counterexample.
 
 ## Challenge and solution
 
@@ -39,9 +43,9 @@ The cache download is optional. Import `AlternatingAnalytic` for the full librar
 
 - The global theorem refutes analyticity of precomposition for every nontrivially normed field, every triple of normed spaces, and every finite index type. These types lie in universe zero, as in the earlier challenge.
 - The fixed-field theorem takes a prescribed `K : Type u` of prime characteristic p and k ≥ p. Its hypothesis `h : BanachPrecompositionAnalytic K k` asserts analytic precomposition for every pair of K-Banach spaces `E, F : Type u`, with `E′ = E` and index `Fin k`. The field need not be complete.
-- Theorem A asserts `ContDiff K n` for every `n : WithTop ℕ∞`, including analytic regularity, when K is ultrametric and F is ultrametric and spherically complete. E and E′ are arbitrary normed K-spaces, and the finite index type is arbitrary. All five types have independent universes; no completeness of K, E, or E′ is assumed.
+- The operator form of Theorem A asserts `ContDiff K n` for every `n : WithTop ℕ∞`, including analytic regularity, when K is ultrametric and F is ultrametric and spherically complete. E and E′ are arbitrary normed K-spaces, and the finite index type is arbitrary. All five types have independent universes; no completeness of K, E, or E′ is assumed.
 
-The two transparent predicates `BanachPrecompositionAnalytic` and `SphericallyComplete` are defined identically in both files. The latter says that every nonempty family of pairwise-meeting closed balls has a common point, and appears as the explicit hypothesis `hF : SphericallyComplete F`. [`solution.lean`](solution.lean) proves all three statements using the library. The three deliberate challenge placeholders are separate from the proved solution. The two contradiction corollaries are consequences of the stronger constructive library theorems; Theorem A is the separate positive result.
+The two transparent predicates `BanachPrecompositionAnalytic` and `SphericallyComplete` are defined identically in both files. The latter says that every nonempty family of pairwise-meeting closed balls has a common point, and appears as the explicit hypothesis `hF : SphericallyComplete F`. [`solution.lean`](solution.lean) proves all three statements using the library. The three deliberate challenge placeholders are separate from the proved solution. The two contradiction corollaries are consequences of the stronger constructive library theorems; the operator form of Theorem A is the separate positive result.
 
 Challenge checks use only [Kim Morrison's comparator](https://github.com/leanprover/comparator), pinned to revision `19e111e2141cf333c7daff0f64c5f24acc91dd2e` for this Lean toolchain. [`comparator.json`](comparator.json) selects all three theorems and permits only `propext`, `Quot.sound`, and `Classical.choice`.
 
