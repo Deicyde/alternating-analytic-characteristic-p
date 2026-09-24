@@ -16,6 +16,8 @@ The construction includes the finite-field Ramsey obstruction, the projective ex
 
 Section 2, **Spherically complete targets: proof of Theorem A**, gives a standalone positive result: over an ultrametric field, a spherically complete ultrametric target makes precomposition analytic in every degree. Its extension, spherical-completeness, and retraction arguments follow the existing proofs in [SphericalCompleteness.lean](AlternatingAnalytic/Analysis/SphericalCompleteness.lean) and [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean).
 
+The introduction also states the categorical consequences. On normed spaces with bounded linear maps, `Alt^ι` is contravariant in its first variable and covariant in its second. It is analytic on morphism spaces exactly when `|ι|! ≠ 0`, with the same criterion for Banach spaces. With an ultrametric spherically complete second argument, it is analytic in every finite degree and takes values in that same subcategory. These categorical formulations follow from the operator results; they are not separate Lean category declarations.
+
 ## Using the library
 
 The project uses Lean **4.34.0-rc2** and pins Mathlib to [2b73d9821d297b80d92eecc54cc09bfc263e0098](https://github.com/Deicyde/mathlib4/tree/2b73d9821d297b80d92eecc54cc09bfc263e0098). All dependency revisions are recorded in `lake-manifest.json`.
@@ -31,14 +33,15 @@ The cache download is optional. Import `AlternatingAnalytic` for the full librar
 
 ## Challenge and solution
 
-[`challenge.lean`](challenge.lean) imports only Mathlib and presents two contradiction theorems in the style of the [characteristic-two challenge](https://github.com/Deicyde/alternating-analytic-counterexample/blob/main/Challenge.lean):
+[`challenge.lean`](challenge.lean) imports only Mathlib and presents three theorems. The first two follow the style of the [characteristic-two challenge](https://github.com/Deicyde/alternating-analytic-counterexample/blob/main/Challenge.lean):
 
 - The global theorem refutes analyticity of precomposition for every nontrivially normed field, every triple of normed spaces, and every finite index type. These types lie in universe zero, as in the earlier challenge.
 - The fixed-field theorem takes a prescribed `K : Type u` of prime characteristic p and k ≥ p. Its hypothesis `h : BanachPrecompositionAnalytic K k` asserts analytic precomposition for every pair of K-Banach spaces `E, F : Type u`, with `E′ = E` and index `Fin k`. The field need not be complete.
+- Theorem A asserts `ContDiff K n` for every `n : WithTop ℕ∞`, including analytic regularity, when K is ultrametric and F is ultrametric and spherically complete. E and E′ are arbitrary normed K-spaces, and the finite index type is arbitrary. All five types have independent universes; no completeness of K, E, or E′ is assumed.
 
-The named predicate is defined identically in both files. [`solution.lean`](solution.lean) proves the same statements using the library. The two deliberate challenge placeholders are separate from the proved solution. These contradiction corollaries are consequences of the stronger constructive library theorems, not replacements for them.
+The two transparent predicates `BanachPrecompositionAnalytic` and `SphericallyComplete` are defined identically in both files. The latter says that every nonempty family of pairwise-meeting closed balls has a common point, and appears as the explicit hypothesis `hF : SphericallyComplete F`. [`solution.lean`](solution.lean) proves all three statements using the library. The three deliberate challenge placeholders are separate from the proved solution. The two contradiction corollaries are consequences of the stronger constructive library theorems; Theorem A is the separate positive result.
 
-Challenge checks use only [Kim Morrison's comparator](https://github.com/leanprover/comparator), pinned to revision `19e111e2141cf333c7daff0f64c5f24acc91dd2e` for this Lean toolchain. [`comparator.json`](comparator.json) selects both theorems and permits only `propext`, `Quot.sound`, and `Classical.choice`.
+Challenge checks use only [Kim Morrison's comparator](https://github.com/leanprover/comparator), pinned to revision `19e111e2141cf333c7daff0f64c5f24acc91dd2e` for this Lean toolchain. [`comparator.json`](comparator.json) selects all three theorems and permits only `propext`, `Quot.sound`, and `Classical.choice`.
 
 Follow the comparator's installation instructions, then run it from this project directory:
 

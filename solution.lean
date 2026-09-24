@@ -1,16 +1,19 @@
 import AlternatingAnalytic.MainTheorem
+import AlternatingAnalytic.Analysis.SphericalAnalytic
 
 set_option backward.isDefEq.respectTransparency false
 
-/-! The two challenge statements are proved from the actual Banach counterexample.
+/-! The two contradiction challenges are proved from the actual Banach counterexample.
 The prescribed-field result is proved first, then specialized to a characteristic-two
-Laurent field for the global statement. Import this module separately from `challenge`. -/
+Laurent field for the global statement. The third challenge is Theorem A, proved from
+the existing spherical-completeness and retraction development.
+Import this module separately from `challenge`. -/
 
 open scoped ContDiff
 
 namespace AlternatingAnalyticChallenge
 
-universe u
+universe u uK uE uE' uF uι uS
 
 /-- Precomposition on degree-`k` continuous alternating maps is `C^ω` for every
 pair of Banach spaces over `K`, with `E' = E` and index `Fin k`.
@@ -59,5 +62,33 @@ theorem false_of_contDiff_omega_compContinuousLinearMapCLM
     (AlternatingAnalytic.LaurentField (ZMod 2) r) 2 2 Nat.prime_two le_rfl
   intro E F _ _ _ _ _ _
   exact h (AlternatingAnalytic.LaurentField (ZMod 2) r) E E F (Fin 2)
+
+/-- Every nonempty family of pairwise-intersecting closed balls has a common point.
+This is the spherical-completeness hypothesis in Theorem A. -/
+def SphericallyComplete (F : Type uS) [PseudoMetricSpace F] : Prop :=
+  ∀ S : Set (F × ℝ), S.Nonempty →
+    (∀ p ∈ S, ∀ q ∈ S,
+      (Metric.closedBall p.1 p.2 ∩ Metric.closedBall q.1 q.2).Nonempty) →
+    (⋂ p ∈ S, Metric.closedBall p.1 p.2).Nonempty
+
+/-- **Theorem A.** A spherically complete ultrametric target makes alternating
+precomposition `C^n` for every order `n`, including analytic regularity `ω`.
+There is no restriction on the characteristic or finite degree. Neither `K`, `E`
+nor `E'` is assumed complete, and the norms on `E` and `E'` need not be ultrametric. -/
+theorem contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
+    (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K]
+    (E : Type uE) (E' : Type uE') (F : Type uF)
+    [NormedAddCommGroup E] [NormedSpace K E]
+    [NormedAddCommGroup E'] [NormedSpace K E']
+    [NormedAddCommGroup F] [NormedSpace K F] [IsUltrametricDist F]
+    (ι : Type uι) [Fintype ι]
+    (hF : SphericallyComplete F) (n : WithTop ℕ∞) :
+    ContDiff K n
+      (fun f : E →L[K] E' =>
+        (ContinuousAlternatingMap.compContinuousLinearMapCLM f :
+          (E' [⋀^ι]→L[K] F) →L[K] (E [⋀^ι]→L[K] F))) := by
+  let : SphericallyCompleteSpace F := ⟨hF⟩
+  exact ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
+    (𝕜 := K) (ι := ι) (E := E) (E' := E') (F := F) (n := n)
 
 end AlternatingAnalyticChallenge

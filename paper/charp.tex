@@ -125,6 +125,44 @@ degree if either $E$ or $E'$ is finite-dimensional, with no restriction on $F$ (
 We give explicit determinant formulas for these lifts in \S\ref{sec:positive}. Finite-dimensional targets require a
 different analysis, given in Remark~\ref{rem:finite-target-reduction}.
 
+\subsection*{Categorical formulation}
+Let $\mathsf{Vec}_K$ be the category of normed $K$\nobreakdash-spaces, with ordinary, not necessarily
+ultrametric norms, and bounded linear maps. Write $\mathsf{Ban}_K$ for its full subcategory of complete
+spaces, and $\mathsf{Vec}_K^\circ$ for its full subcategory of ultrametric, spherically complete spaces.
+For a fixed finite set $\iota$, the bifunctor $\Alt^\iota$ acts on morphisms by
+\[
+(u,v)\longmapsto\bigl[m\longmapsto v\circ m\circ(u,\dots,u)\bigr].
+\]
+We call this bifunctor \emph{analytic} if, for every fixed choice of objects $E,E',F,F'$, this map
+\[
+\cL(E,E')\times\cL(F,F')\longrightarrow
+\cL\bigl(\Alt^\iota(E';F),\Alt^\iota(E;F')\bigr)
+\]
+is analytic for the operator norms. Corollary~\ref{cor:class} and Theorem~A give the following
+categorical statements, with $k=\abs\iota$.
+\begin{enumerate}
+\item The bifunctor
+\[
+\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K
+\]
+is analytic if and only if $k!\ne0$ in $K$. The same criterion holds for its restriction
+$\Alt^\iota\colon\mathsf{Ban}_K^{\mathrm{op}}\times\mathsf{Ban}_K\to\mathsf{Ban}_K$.
+In characteristic $p>0$, the criterion is exactly $k<p$.
+\item If $K$ is ultrametric, in any characteristic, then
+\[
+\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
+\longrightarrow\mathsf{Vec}_K^\circ
+\]
+is analytic for every finite $\iota$.
+\end{enumerate}
+Indeed, write $v_*a=v\circ a$. The map $(v,T)\mapsto v_*\circ T$ is bounded bilinear, with
+$\norm{v_*\circ T}\le\norm v\,\norm T$, and the displayed morphism map is
+$(u,v)\mapsto v_*\circ Q^K_{E,E',F}(u)$. Corollary~\ref{cor:class} and Theorem~A therefore give the
+positive assertions. Conversely, fixing $v=\id_F$ recovers $Q$, so Corollary~\ref{cor:class} gives
+the necessity in (1), even on Banach spaces. The target categories are correct because
+$\Alt^\iota(E;F)$ is complete whenever $F$ is complete, and Proposition~\ref{prop:alt-spherical}
+gives the stronger closure property in (2). Neither statement assumes completeness of $K$.
+
 \subsection*{Motivation and related results}
 The regularity of $Q$ arises in the construction of bundles of differential forms. Applying $\Alt^\iota$ to the
 transition maps of vector bundles requires control of the corresponding precomposition map; compare Lang's
@@ -2270,6 +2308,8 @@ pinned Mathlib dependency. The finite-coordinate proof (Proposition~\ref{prop:fi
 Corollary~\ref{cor:finite-dimensional-positive}) and the finite-target reduction
 (Remark~\ref{rem:finite-target-reduction}) are supplementary informal results; they are not claimed as separate
 formalized declarations in this development.
+The categorical formulations in the introduction are mathematical corollaries of the formalized
+operator results, rather than separate Lean categorical declarations.
 
 The characteristic-$2$ counterexample~\cite{M} has separate provenance. Its formalization proves nonanalyticity in
 degree $2$ at the origin, with a wedging extension under (K2) to every degree at least $2$ and every base point:
@@ -2278,11 +2318,12 @@ That construction is not re-proved or re-audited here.
 
 The proposed alternative route of Remark~\ref{rem:routeII}, the announced large-index construction of
 Remark~\ref{rem:R}, the open problems, and Serre's external classification cited in
-Remark~\ref{rem:sorted} are excluded from the proved results. The repository's comparator challenges ask
-for two short contradiction corollaries of the main theorem; their solutions use the stronger
-constructive library theorem above. Intentional placeholders occur only in the challenge file, not in
-the proof library or solution. Current challenge checks use Kim Morrison's comparator, with the configuration
-recorded in the repository.
+Remark~\ref{rem:sorted} are excluded from the proved results. The repository's comparator challenge contains
+two short contradiction corollaries of the main theorem and Theorem~A for every regularity order.
+Their solutions use the corresponding library theorems. The Banach and spherical-completeness hypotheses
+are given by transparent definitions in Mathlib terms. Intentional placeholders occur only in the challenge
+file, not in the proof library or solution. Current challenge checks use Kim Morrison's comparator, with the
+configuration recorded in the repository.
 
 \begin{thebibliography}{99}
 \bibitem{G1} S.~Gou\"ezel, \emph{In characteristic $0$, precomposition by a linear map is analytic on the space of

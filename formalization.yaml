@@ -43,6 +43,8 @@ sources:
       distinguished from the formalized scope in THEOREM_MAP.md.
       Standalone Section 2, Spherically complete targets: proof of Theorem A, follows the
       existing Lean extension, spherical-completeness and retraction arguments.
+      The introduction also records categorical corollaries using bounded bilinear postcomposition;
+      these are not claimed as separate Lean category or joint-action declarations.
       Announced and open items are not claimed as proved.
     license: ""
     author_endorsement: "participated"
@@ -78,20 +80,27 @@ status:
     Complete for the original proved-paper scope recorded in THEOREM_MAP.md. The later
     finite-dimensional source/codomain proposition and target-reduction argument are additional
     informal results and are not claimed as separate formalized declarations. The proof library has zero unresolved sorry,
-    admit, new axiom or native_decide uses. solution.lean contains the two proved comparator
-    theorems; challenge.lean contains exactly two deliberate theorem placeholders and is
-    excluded from these proof-development sorry counts. The comparator contains two simple
-    contradiction corollaries in a challenge importing only Mathlib. The single transparent
-    predicate AlternatingAnalyticChallenge.BanachPrecompositionAnalytic K k names the original
-    fixed-field universal hypothesis and is defined identically in challenge.lean and
-    solution.lean. The first theorem refutes the universal ContDiff omega assertion over all
+    admit, new axiom or native_decide uses. solution.lean contains the three proved comparator
+    theorems; challenge.lean contains exactly three deliberate theorem placeholders and is
+    excluded from these proof-development sorry counts. The Mathlib-only challenge contains
+    two contradiction corollaries and the positive Theorem A. Two transparent predicates,
+    AlternatingAnalyticChallenge.BanachPrecompositionAnalytic and
+    AlternatingAnalyticChallenge.SphericallyComplete, are defined identically in challenge.lean
+    and solution.lean. The first names the original fixed-field universal hypothesis; the
+    second is the closed-ball intersection property used by the library's spherical-completeness
+    class. The first theorem refutes the universal ContDiff omega assertion over all
     nontrivially normed fields, all normed-space triples and all finite index types in universe zero. The
     second fixes arbitrary K : Type u of prime characteristic p and k >= p, and refutes the
     universal ContDiff K omega assertion over Banach E,F : Type u with E' = E and index Fin k;
-    no completeness of K is assumed. These are consequences of the constructive development,
-    not claims of equivalence with the full main theorem or factorial classification. All
-    stronger results remain proved in the unchanged AlternatingAnalytic library. Challenge validation uses Kim Morrison's leanprover/comparator exclusively,
-    with the two selected theorems and permitted axioms specified in comparator.json. Excluded are the expressly unproved alternative infinite-field route,
+    no completeness of K is assumed. These two corollaries are consequences of the constructive
+    development, not claims of equivalence with the full main theorem or factorial classification.
+    The third theorem is Theorem A: for independent universes of K, E, E', F and the finite index
+    type, an ultrametric nontrivially normed K and an ultrametric normed F with explicit spherical
+    completeness hypothesis give ContDiff K n for every n : WithTop ℕ∞, including omega.
+    E and E' are arbitrary normed spaces; K, E and E' need not be complete. All stronger results
+    remain proved in the unchanged AlternatingAnalytic library. Challenge validation uses Kim
+    Morrison's leanprover/comparator exclusively, with the three selected theorems and permitted
+    axioms specified in comparator.json. Excluded are the expressly unproved alternative infinite-field route,
     announced large-index ultrametric-target construction, mathematical open problems, the
     external Serre c_0(I) classification, and the earlier characteristic-two proof. A broader
     generic isometric-field-transport abstraction in the initial plan is not claimed as a
@@ -107,6 +116,12 @@ status:
       comparator_config: "comparator.json"
       literature_dependencies: []
     - declaration: "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach"
+      file: "solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+      literature_dependencies: []
+    - declaration: "AlternatingAnalyticChallenge.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete"
       file: "solution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -193,17 +208,24 @@ fidelity:
     unconditional Schauder bases with the source's orthogonal coordinate bound for the sorted
     lift. The coefficient map is kappa-linear, not Laurent-field-linear; the projective norm
     uses ordinary sums. The formalization does not assert injectivity of the completed
-    determinant-array map. The comparator deliberately exposes only two contradiction
-    corollaries in the earlier characteristic-two challenge style. Its general assertion
+    determinant-array map. The comparator exposes two contradiction corollaries in the earlier
+    characteristic-two challenge style, together with the full positive Theorem A. Its general assertion
     quantifies over types in universe zero; its characteristic-p corollary fixes arbitrary
     K : Type u and ranges over Banach E,F : Type u with index Fin k. The global statement uses
     Mathlib constants directly. The fixed-field hypothesis uses the transparent predicate
     BanachPrecompositionAnalytic K k, defined identically in both comparator files using
     Mathlib's existing definitions; unfolding it recovers the original quantified hypothesis.
-    Neither is presented as equivalent to the full constructive main theorem or factorial
+    Neither contradiction corollary is presented as equivalent to the full constructive main theorem or factorial
     classification; those stronger theorems and their general universe
-    parameters remain in the library. The comparator checks the current challenge and solution
-    against comparator.json, including the fixed predicate and transitive dependencies.
+    parameters remain in the library. Theorem A uses independent universes for all five types,
+    arbitrary finite indices, all n : WithTop ℕ∞, an ultrametric nontrivially normed
+    field and an ultrametric target with explicit hF : SphericallyComplete F. This second
+    transparent predicate says that every nonempty family of pairwise-meeting closed balls
+    has a common point; it is definitionally the property of the existing library class.
+    The solution constructs that class instance from hF and invokes the existing theorem.
+    No characteristic or degree restriction, or completeness assumption on K, E or E', is introduced.
+    The comparator checks the current challenge and solution against comparator.json,
+    including both fixed predicates and their transitive dependencies.
     No announced or open paper claim is included as an axiom.
 
 review:
@@ -220,11 +242,15 @@ alignment:
   namespace: "AlternatingAnalytic"
   theorem_map: "THEOREM_MAP.md"
   comparator_scope: >
-    Two contradiction corollaries of the proved construction, with only Mathlib imports in
-    the challenge: the universal all-fields analytic-smoothness assertion, and the
-    fixed-prescribed-field Banach assertion in characteristic p and degree k >= p. The latter
-    names its original universal hypothesis BanachPrecompositionAnalytic K k. The source
-    alignment below records the stronger library theorems, not an asserted equivalence with these challenge corollaries.
+    Three theorems in a challenge importing only Mathlib. Two are contradiction corollaries
+    of the proved construction: the universal all-fields analytic-smoothness assertion, and
+    the fixed-prescribed-field Banach assertion in characteristic p and degree k >= p. The
+    latter names its original universal hypothesis BanachPrecompositionAnalytic K k. The third
+    is Theorem A for independent universes, arbitrary finite indices and all differentiability
+    orders n : WithTop ℕ∞, including omega, with explicit hF : SphericallyComplete F.
+    Both predicates are fixed transparent definitions identical in challenge and solution.
+    The source alignment below records the stronger library theorems, not an asserted
+    equivalence between the two contradiction corollaries and the full negative results.
   statements:
     - source: "Theorem main and adjacent C^omega sharpness statement"
       lean: "AlternatingAnalytic.exists_banach_counterexample_full"

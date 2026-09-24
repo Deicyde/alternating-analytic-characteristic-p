@@ -16,11 +16,15 @@ Here `Q(f)(m)(x) = m(f ∘ x)` is the actual continuous alternating-precompositi
 
 Paper labels refer to the [current manuscript](paper/charp.tex); the original snapshot remains in [sources/charp.tex](sources/charp.tex). Labels are retained through the editorial revision even where section and theorem numbers change. Names below belong to `AlternatingAnalytic` unless another namespace is written explicitly.
 
-Challenge validation uses only [Kim Morrison's comparator](https://github.com/leanprover/comparator), with the configuration in [comparator.json](comparator.json).
+Challenge validation uses only [Kim Morrison's comparator](https://github.com/leanprover/comparator), with the configuration in [comparator.json](comparator.json). It selects three statements: the two contradiction corollaries of the main construction and Theorem A. The Mathlib-only challenge uses two transparent predicates, `AlternatingAnalyticChallenge.BanachPrecompositionAnalytic` and `AlternatingAnalyticChallenge.SphericallyComplete`, defined identically in the solution; they are fixed definitions, not additional proof holes.
+
+The introduction’s categorical formulation is a mathematical corollary of the precomposition results and bounded bilinear postcomposition. The first variable is contravariant, and analyticity refers to the operator-norm maps on each pair of morphism spaces. The spherical-target restriction also uses the proved spherical completeness of alternating-map spaces below. No separate categorical functor or joint-action declaration is claimed in Lean.
 
 ## Spherically complete targets: proof of Theorem A
 
-The manuscript's standalone Section 2 (`sec:theoremA`) proves Theorem A through compatible extension, spherical completeness of alternating-map spaces, and a contracting retraction. These arguments follow the existing Lean proofs below; they require no new formalized declarations.
+The manuscript's standalone Section 2 (`sec:theoremA`) proves Theorem A through compatible extension, spherical completeness of alternating-map spaces, and a contracting retraction. These arguments follow the existing Lean proofs below.
+
+The selected comparator theorem is `AlternatingAnalyticChallenge.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete` in [solution.lean](solution.lean). It permits independent universes for K, E, E′, F, and the finite index type, with arbitrary `n : WithTop ℕ∞`. K is nontrivially normed and ultrametric; E and E′ are arbitrary normed K-spaces; F is normed and ultrametric. Its explicit hypothesis `hF : SphericallyComplete F` is exactly the closed-ball intersection property used by the library's spherical-completeness class. The solution installs that instance and invokes the existing theorem. No completeness of K, E, or E′ and no characteristic or degree restriction is added.
 
 | Paper claim | Actual declarations and assumptions |
 |---|---|

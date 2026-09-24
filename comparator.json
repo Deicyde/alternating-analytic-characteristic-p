@@ -3,7 +3,8 @@
     "solution_module": "solution",
     "theorem_names": [
         "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM",
-        "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach"
+        "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach",
+        "AlternatingAnalyticChallenge.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete"
     ],
     "permitted_axioms": [
         "propext",
