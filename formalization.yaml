@@ -72,8 +72,13 @@ sources:
       not necessary for analyticity; its sufficient discrete-target criterion is formalized,
       while the example itself is an additional informal corollary. The paper asks for an
       intrinsic necessary and sufficient condition on the target, in one degree or all finite
-      degrees, as an open problem left unresolved by the present results.
-      Announced and open items are not claimed as proved.
+      degrees, as an open problem left unresolved by the present results. A further open
+      question asks, in characteristic p and degree k >= p, whether there exists a largest full
+      subcategory of Vec_K^op times Vec_K on which Alt^k is analytic, and how to characterize
+      it or the inclusion-maximal such subcategories. The restriction must be jointly analytic
+      on every morphism space, including maps between distinct objects; for C^infinity
+      smoothness the whole product category already suffices. This analytic classification
+      question is excluded from the proved scope. Announced and open items are not claimed as proved.
     license: ""
     author_endorsement: "participated"
   - title: "Existing Lean ingredients supplied with the round-24 paper materials"
