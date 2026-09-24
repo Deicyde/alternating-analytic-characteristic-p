@@ -15,7 +15,7 @@ project:
     triples over K if and only if k! is nonzero in K. The development includes the finite-field
     Ramsey obstruction, ordinary-sum projective exterior completion, coefficient support
     estimate, scalar extension and descent, and the paper's proved complements.
-    These operator results underlie the paper's categorical Main Theorem and Theorem A;
+    These operator results underlie both parts of the paper's categorical Main Theorem;
     the categorical functors and joint morphism actions are mathematical consequences,
     not separate Lean declarations.
   authors: ["Jack McCarthy"]
@@ -33,7 +33,7 @@ sources:
         role: "credited by the paper for producing the informal result, proof, and write-up"
     id: "https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/main/paper/charp.pdf"
     type: "manuscript"
-    location: "Counterexample theorem (thm:main), operator Corollary cor:class, the operator form of Theorem A, their supporting development, and the proved complements"
+    location: "Counterexample theorem (thm:main), operator Corollary cor:class, the operator form of Main Theorem (2), their supporting development, and the proved complements"
     relationship: "formalizes"
     note: >
       The current manuscript is paper/charp.pdf, with editable source paper/charp.tex.
@@ -44,19 +44,19 @@ sources:
       improves the exposition without changing the operator counterexample or factorial criterion. It
       also supplies proofs of the positive cases, with the finite-dimensional additions
       distinguished from the formalized scope in THEOREM_MAP.md.
-      Standalone Section 2, Spherically complete targets: proof of Theorem A, follows the
+      Standalone Section 2, Spherically complete targets, proves part (2) of the Main Theorem. It follows the
       existing Lean extension, spherical-completeness and retraction arguments for the
       operator form, then completes the categorical statement by bounded bilinear
       postcomposition and closure of alternating-map spaces.
-      The introduction leads with a categorical Main Theorem: for every nontrivially normed
+      The introduction leads with a categorical Main Theorem in two parts. Part (1) states that for every nontrivially normed
       field K and every integer k >= 0,
       Alt^k from Vec_K^op times Vec_K to Vec_K is always C^infinity and is analytic exactly
       when k! is nonzero in K, with the same assertions for Ban_K. Vec_K uses ordinary,
       not necessarily ultrametric, norms and bounded linear maps; Ban_K is its full subcategory
-      of complete spaces. Theorem A says that, for ultrametric K, Alt^k from Vec_K^op times
+      of complete spaces. Part (2) says that, for ultrametric K, Alt^k from Vec_K^op times
       Vec_K^circ to Vec_K^circ is analytic in every finite degree, where Vec_K^circ consists of
       ultrametric, spherically complete spaces. Regularity refers to the joint maps on each
-      pair of morphism spaces with operator norms. Neither theorem requires completeness of K.
+      pair of morphism spaces with operator norms. Neither part requires completeness of K.
       The categorical statements follow mathematically from the formalized operator results;
       the Main Theorem's ordinary smoothness input is in the pinned Mathlib dependency.
       No separate Lean categorical functor or joint-action declaration is claimed.
@@ -76,7 +76,7 @@ sources:
     note: >
       Existing proofs of the lift criterion, factorial-invertible positive result, symmetric
       diagonal obstruction, positive-characteristic ultrametricity, spherical completeness
-      and extension, and the operator form of Theorem A were integrated into the development. These supplied
+      and extension, and the operator form of Main Theorem (2) were integrated into the development. These supplied
       ingredients are distinct from proofs newly authored in the formalization session;
       their exact original model authorship is not inferred here.
     license: ""
@@ -97,15 +97,15 @@ classification:
 
 status:
   scope: >
-    Complete for the original proved-paper scope recorded in THEOREM_MAP.md. The categorical
-    Main Theorem and Theorem A are mathematical consequences of the formalized operator
+    Complete for the original proved-paper scope recorded in THEOREM_MAP.md. Both parts of the
+    categorical Main Theorem are mathematical consequences of the formalized operator
     results, not separate Lean categorical functor or joint-action declarations. The later
     finite-dimensional source/codomain proposition, target-reduction argument and weighted c_0
     example are additional informal results and are not claimed as separate formalized declarations. The proof library has zero unresolved sorry,
     admit, new axiom or native_decide uses. solution.lean contains the three proved comparator
     theorems; challenge.lean contains exactly three deliberate theorem placeholders and is
     excluded from these proof-development sorry counts. The Mathlib-only challenge contains
-    two contradiction corollaries and the positive operator form of Theorem A. Two transparent predicates,
+    two contradiction corollaries and the positive operator form of Main Theorem (2). Two transparent predicates,
     AlternatingAnalyticChallenge.BanachPrecompositionAnalytic and
     AlternatingAnalyticChallenge.SphericallyComplete, are defined identically in challenge.lean
     and solution.lean. The first names the original fixed-field universal hypothesis; the
@@ -116,7 +116,7 @@ status:
     universal ContDiff K omega assertion over Banach E,F : Type u with E' = E and index Fin k;
     no completeness of K is assumed. These two corollaries are consequences of the constructive
     development, not claims of equivalence with the full operator counterexample or factorial classification.
-    The third theorem is the operator form of Theorem A: for independent universes of K, E, E', F and the finite index
+    The third theorem is the operator form of Main Theorem (2): for independent universes of K, E, E', F and the finite index
     type, an ultrametric nontrivially normed K and an ultrametric normed F with explicit spherical
     completeness hypothesis give ContDiff K n for every n : WithTop ℕ∞, including omega.
     E and E' are arbitrary normed spaces; K, E and E' need not be complete. All stronger results
@@ -231,7 +231,7 @@ fidelity:
     lift. The coefficient map is kappa-linear, not Laurent-field-linear; the projective norm
     uses ordinary sums. The formalization does not assert injectivity of the completed
     determinant-array map. The comparator exposes two contradiction corollaries in the earlier
-    characteristic-two challenge style, together with the full positive operator form of Theorem A. Its general assertion
+    characteristic-two challenge style, together with the full positive operator form of Main Theorem (2). Its general assertion
     quantifies over types in universe zero; its characteristic-p corollary fixes arbitrary
     K : Type u and ranges over Banach E,F : Type u with index Fin k. The global statement uses
     Mathlib constants directly. The fixed-field hypothesis uses the transparent predicate
@@ -239,7 +239,7 @@ fidelity:
     Mathlib's existing definitions; unfolding it recovers the original quantified hypothesis.
     Neither contradiction corollary is presented as equivalent to the full constructive operator counterexample or factorial
     classification; those stronger theorems and their general universe
-    parameters remain in the library. The operator form of Theorem A uses independent universes for all five types,
+    parameters remain in the library. The operator form of Main Theorem (2) uses independent universes for all five types,
     arbitrary finite indices, all n : WithTop ℕ∞, an ultrametric nontrivially normed
     field and an ultrametric target with explicit hF : SphericallyComplete F. This second
     transparent predicate says that every nonempty family of pairwise-meeting closed balls
@@ -268,7 +268,7 @@ alignment:
     of the proved construction: the universal all-fields analytic-smoothness assertion, and
     the fixed-prescribed-field Banach assertion in characteristic p and degree k >= p. The
     latter names its original universal hypothesis BanachPrecompositionAnalytic K k. The third
-    is the operator form of Theorem A for independent universes, arbitrary finite indices and all differentiability
+    is the operator form of Main Theorem (2) for independent universes, arbitrary finite indices and all differentiability
     orders n : WithTop ℕ∞, including omega, with explicit hF : SphericallyComplete F.
     Both predicates are fixed transparent definitions identical in challenge and solution.
     The source alignment below records the stronger library theorems, not an asserted
@@ -336,11 +336,11 @@ alignment:
       module: "AlternatingAnalytic.Analysis.SphericalAnalytic"
       status: "proved"
       note: "Existing global instance; an ultrametric field and a spherically complete ultrametric target, with arbitrary normed source."
-    - source: "Operator form of Theorem A in sec:theoremA: spherically complete ultrametric targets"
+    - source: "Operator form of Main Theorem (2) in sec:theoremA: spherically complete ultrametric targets"
       lean: "ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete"
       module: "AlternatingAnalytic.Analysis.SphericalAnalytic"
       status: "proved"
-      note: "The operator form is proved in standalone Section 2 following the existing Lean proofs, including ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap and the resulting bounded lift. Joint postcomposition and closure of alternating-map spaces give the categorical Theorem A, which is not a separate Lean declaration."
+      note: "The operator form is proved in standalone Section 2 following the existing Lean proofs, including ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap and the resulting bounded lift. Joint postcomposition and closure of alternating-map spaces give the categorical Main Theorem (2), which is not a separate Lean declaration."
     - source: "Proposition discrete: complete targets with an equivalent ultrametric norm"
       lean: "AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup"
       module: "AlternatingAnalytic.Analysis.DiscreteTargetAnalytic"

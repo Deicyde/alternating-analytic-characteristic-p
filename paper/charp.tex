@@ -14,7 +14,6 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem*{thmA}{Theorem A}
 \newtheorem*{thmMain}{Main Theorem}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
@@ -50,7 +49,7 @@
 \title[Alternating precomposition in positive characteristic]{Precomposition on continuous alternating maps\\ is not analytic in positive characteristic}
 \author{Jack McCarthy}
 \thanks{The result, its informal proof and the original write-up were produced with Anthropic's Claude (in Claude Code),
-and the informal proofs were audited by independent AI agents. The operator results underlying the categorical main theorems
+and the informal proofs were audited by independent AI agents. The operator results underlying the categorical Main Theorem
 have since been formalized in Lean with Mathlib using Codex and Autoform. Neither the paper nor the formalization has yet
 received a human expert review. See \S\ref{sec:lean} for the verification scope and provenance.}
 % Print the manuscript date beneath the author.
@@ -111,9 +110,12 @@ We call the bifunctor \emph{analytic}, or \emph{$C^\infty$}, when every induced 
 has that regularity. The product carries the maximum norm. This definition concerns the joint action on both
 variables, rather than separate regularity. It applies to the restrictions below as well.
 
-\subsection*{Main theorems}
+\subsection*{Main result}
 \begin{thmMain}
-Let $K$ be a nontrivially normed field and let $k\ge0$ be an integer. The bifunctor
+Let $K$ be a nontrivially normed field and let $k\ge0$ be an integer.
+\begin{enumerate}
+\renewcommand{\labelenumi}{\textup{(\arabic{enumi})}}
+\item\label{main:general} The bifunctor
 \[
 \Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K
 \]
@@ -121,25 +123,23 @@ is $C^\infty$. It is analytic if and only if $k!\ne0$ in $K$. Both assertions ho
 \[
 \Alt^k\colon\mathsf{Ban}_K^{\mathrm{op}}\times\mathsf{Ban}_K\longrightarrow\mathsf{Ban}_K.
 \]
-\end{thmMain}
-Thus in characteristic $p>0$ the exact analytic range is $k<p$; in characteristic zero every finite degree is
-analytic. Restricting the second variable gives a different answer.
-
-\begin{thmA}
-Let $K$ be an ultrametric nontrivially normed field. For every integer $k\ge0$, the bifunctor
+\item\label{main:spherical} If $K$ is ultrametric, the restriction
 \[
 \Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
 \longrightarrow\mathsf{Vec}_K^\circ
 \]
-is analytic.
-\end{thmA}
-The codomain in Theorem~A is part of the assertion: alternating maps into a spherically complete ultrametric
-space form a spherically complete ultrametric space. Neither theorem assumes completeness of $K$.
+is analytic in every degree.
+\end{enumerate}
+\end{thmMain}
+Part~(\ref{main:general}) gives the exact analytic range $k<p$ in characteristic $p>0$; in characteristic zero,
+every finite degree is analytic. Part~(\ref{main:spherical}) removes the restriction on the degree by restricting
+the target category. Its codomain is part of the assertion: alternating maps into a spherically complete
+ultrametric space form a spherically complete ultrametric space. No completeness assumption on $K$ is needed.
 In all the analytic cases just stated, the maps on hom spaces are in fact given by finite power series.
 
 \subsection*{Operator form and sharpness}
 The proofs work with the action of a fixed-target functor $\Alt^k(-;F)$ on hom spaces. We now write this
-action explicitly and record the stronger counterexample underlying the Main Theorem.
+action explicitly and record the stronger counterexample underlying part~(\ref{main:general}) of the Main Theorem.
 For normed $K$\nobreakdash-spaces $E,E',F$, the pullback action is
 \begin{equation}\label{eq:Q}
 \begin{aligned}
@@ -191,15 +191,15 @@ $\norm{v_*\circ T}\le\norm v\,\norm T$, and the bifunctor's joint action is
 \Alt^k(u,v)=v_*\circ Q^K_{E,E',F}(u).
 \end{equation}
 Consequently smoothness or analyticity of every $Q$ gives the corresponding regularity of the bifunctor.
-Conversely, restriction to $v=\id_F$ recovers $Q$. The Main Theorem therefore follows from
+Conversely, restriction to $v=\id_F$ recovers $Q$. Part~(\ref{main:general}) of the Main Theorem therefore follows from
 Corollary~\ref{cor:class} and the universal smoothness statement in Proposition~\ref{prop:smooth-positive}.
-Theorem~A is proved in \S\ref{sec:theoremA}. A bounded $k$\nobreakdash-linear lift of $Q$ gives a bounded
+Part~(\ref{main:spherical}) is proved in \S\ref{sec:theoremA}. A bounded $k$\nobreakdash-linear lift of $Q$ gives a bounded
 $(k+1)$\nobreakdash-linear lift of the joint action by placing the pushforward variable in the last slot.
 Thus the finite-power-series conclusion also passes from the operator statements to the bifunctor.
 
 For completeness of the target category, $\Alt^k(E;F)$ is complete whenever $F$ is complete: an operator-norm
 Cauchy sequence converges pointwise in $F$, and its boundedness, multilinearity and alternation pass to the limit.
-Proposition~\ref{prop:alt-spherical} gives the stronger closure property required in Theorem~A.
+Proposition~\ref{prop:alt-spherical} gives the stronger closure property required in Main Theorem~(\ref{main:spherical}).
 In degree zero, $\Alt^0(E;F)$ is naturally isometric to $F$; pullback is constant and the joint action
 is linear in the pushforward variable.
 
@@ -219,10 +219,10 @@ regularity range in~\cite{PR} is sharp over every field of characteristic $p>0$ 
 Mathlib's \texttt{ContDiffAt K $\omega$} fails at every point.
 
 The answer is different if the target norm is required to be ultrametric. If $K$ is ultrametric and $F$ is
-ultrametric and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Theorem~A).
+ultrametric and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Main Theorem~(\ref{main:spherical})).
 The proof in \S\ref{sec:theoremA} constructs a contracting retraction from multilinear maps to alternating maps
 by spherical completeness and extension of bounded linear maps. This positive result is independent of the counterexample theorem and Corollary~\ref{cor:class}. A special case appears
-in~\cite[Remark~16]{M}. Over a discretely valued base, Theorem~A in fact rules out a Banach counterexample whenever
+in~\cite[Remark~16]{M}. Over a discretely valued base, Main Theorem~(\ref{main:spherical}) in fact rules out a Banach counterexample whenever
 $F$ has an equivalent ultrametric norm (Proposition~\ref{prop:discrete}).
 
 The earlier characteristic-$2$ construction~\cite{M} uses an ultrametric target and gives nonanalyticity at $0$
@@ -274,22 +274,22 @@ equivalent ultrametric norm (Proposition~\ref{prop:nonultra}).
 
 \subsection*{Formal verification and organization}
 The operator counterexample, Theorem~\ref{thm:main}, both directions of Corollary~\ref{cor:class}, and their supporting
-arguments are formalized in Lean~4 with Mathlib. The development also includes the operator form of Theorem~A,
+arguments are formalized in Lean~4 with Mathlib. The development also includes the operator form of Main Theorem~(\ref{main:spherical}),
 the discrete-target result, and the sorted-basis lift of
 \S\ref{sec:complements}. The additional finite-dimensional arguments and their formalization status are identified
-in \S\ref{sec:lean}. The categorical main statements follow by the translation above; they are not separate
-Lean categorical declarations.
+in \S\ref{sec:lean}. The categorical Main Theorem follows by the translation above; it is not a separate
+Lean categorical declaration.
 \S\ref{sec:lean} records the principal declarations, verification scope, and provenance; the quoted smoothness
 result~\cite{PR}, whose argument we include, and earlier characteristic-$2$ construction~\cite{M} have separate provenance.
 
-\S\ref{sec:theoremA} proves Theorem~A independently, including the extension and spherical-completeness arguments.
+\S\ref{sec:theoremA} proves Main Theorem~(\ref{main:spherical}) independently, including the extension and spherical-completeness arguments.
 \S\ref{sec:prelim} gives the analytic and exterior-algebra preliminaries, and \S\ref{sec:positive} proves the positive cases. \S\ref{sec:FF} proves the finite-field
 obstruction, and \S\ref{sec:laurent} realizes it over a Laurent series field. \S\ref{sec:ascent} develops scalar
 extension and descent; \S\ref{sec:proofs} assembles the main results. \S\ref{sec:complements} treats ultrametric
 targets and open problems.
 
-\section{Spherically complete targets: proof of Theorem A}\label{sec:theoremA}
-We first prove a positive result that explains the role of the target norm. Spherical completeness allows us
+\section{Spherically complete targets}\label{sec:theoremA}
+This section proves part~(\ref{main:spherical}) of the Main Theorem. Spherical completeness allows us
 to project bounded multilinear maps onto alternating maps without increasing the norm. Applying this projection
 to the ordinary multilinear precomposition formula produces an analytic lift in every characteristic and degree.
 The argument is independent of the counterexample construction. The retraction strategy reflects the classical
@@ -312,21 +312,13 @@ $k$\nobreakdash-linear maps and $\Alt^k(X;Y)$ for their alternating subspace, wi
 \]
 When the target norm is ultrametric, both operator spaces are ultrametric, regardless of the norm on $X$.
 
-\begin{thmA}
-Let $K$ be an ultrametric nontrivially normed field. For every integer $k\ge0$, the bifunctor
-\[
-\Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
-\longrightarrow\mathsf{Vec}_K^\circ
-\]
-is analytic.
-\end{thmA}
-
+Throughout this section, $K$ is an ultrametric nontrivially normed field and $k\ge0$ is an integer.
 We prove the following operator statement, which also records every smoothness order. For normed
 $K$\nobreakdash-spaces $E,E'$ and an ultrametric, spherically complete $F$,
 \[
 Q^K_{E,E',F}\text{ is }C^n\qquad(n\in\N\cup\{\infty,\omega\}).
 \]
-Together with spherical completeness of $\Alt^k(E;F)$ and~\eqref{eq:joint-action}, this proves Theorem~A.
+Together with spherical completeness of $\Alt^k(E;F)$ and~\eqref{eq:joint-action}, this proves Main Theorem~(\ref{main:spherical}).
 
 No completeness assumption on $K,E$ or $E'$ is needed, and the norms on $E,E'$ may be non-ultrametric.
 For $k\ge1$, put $A=\Alt^k(E;F)$ and $M=\Mult^k(E;F)$. The desired projection is a bounded linear map
@@ -449,7 +441,7 @@ to every original ball. This proves spherical completeness; no closure assumptio
 We now apply the extension lemma a second time, using the alternating-map space itself as the target.
 This produces the projection needed to turn ordinary precomposition into a polynomial with alternating values.
 
-\begin{proof}[Proof of Theorem~A]
+\begin{proof}[Proof of Main Theorem~(\ref{main:spherical})]
 In degree zero, $\Alt^0(-;F)$ is naturally $F$ and the bifunctor acts by the pushforward morphism, so the conclusion holds. Assume $k\ge1$ and retain $A=\Alt^k(E;F)$ and
 $M=\Mult^k(E;F)$. Their operator norms are ultrametric, and $A$ is spherically complete by
 Proposition~\ref{prop:alt-spherical}. The inclusion $j\colon A\to M$ is a linear isometry.
@@ -500,7 +492,7 @@ argument.
 We write $\N=\{0,1,2,\dots\}$. Throughout, $K$ denotes the base field and $k$ the degree. A \emph{normed field} $K$ carries a multiplicative absolute value $\abs{\cdot}$ satisfying the triangle inequality. It is
 \emph{nontrivially normed} if some $c\in K$ has $0<\abs c<1$, and \emph{ultrametric} if $\abs{x+y}\le\max(\abs x,\abs y)$.
 A \emph{normed $K$\nobreakdash-space} $X$ satisfies $\norm{\lambda x}=\abs\lambda\norm x$; it is \emph{Banach} if it is complete. The norm of a space need not be ultrametric. In non-archimedean functional analysis, the term ``Banach''
-often includes the ultrametric condition; Theorem~A and \S\ref{sec:complements} address ultrametric targets.
+often includes the ultrametric condition; Main Theorem~(\ref{main:spherical}) and \S\ref{sec:complements} address ultrametric targets.
 
 We write $\cL(X,Y)$ for the bounded
 linear maps, $\Mult^k(X;Y)$ for the bounded $k$\nobreakdash-linear maps $X^k\to Y$, and $\Alt^k(X;Y)\subseteq\Mult^k(X;Y)$ for the
@@ -2126,7 +2118,7 @@ classification and both strengthened conclusions.
 \needspace{8\baselineskip}
 \section{Complements and open problems}\label{sec:complements}
 
-We apply Theorem~A to finite-dimensional targets and to targets over discretely valued fields, then give an
+We apply Main Theorem~(\ref{main:spherical}) to finite-dimensional targets and to targets over discretely valued fields, then give an
 explicit lift from an orthogonal basis. The section ends with comparisons and questions about ultrametric targets.
 
 \subsection*{Finite-dimensional targets}
@@ -2160,7 +2152,7 @@ If $K$ is ultrametric and spherically complete, there is a positive conclusion f
 finite-dimensional $F$, with any norm. The coordinate norm
 $\norm y_\infty:=\max_a\abs{\lambda_a(y)}$ is equivalent to the given norm. With this norm, $F$ is
 spherically complete: a closed ball in $K^d$ is a product of coordinate balls, and spherical completeness
-of $K$ gives a point in each coordinate intersection. Theorem~A therefore applies. Returning to the
+of $K$ gives a point in each coordinate intersection. Main Theorem~(\ref{main:spherical}) therefore applies. Returning to the
 original norm preserves analyticity, since it changes the norms on the alternating-map and operator
 spaces only by fixed comparison factors.
 \end{remark}
@@ -2186,7 +2178,7 @@ $\abs\lambda\in r^\Z$ for $\lambda\in K^\times$, it preserves scalar homogeneity
 inequality. Thus $\norm\cdot_u^\sharp$ is an equivalent ultrametric norm, and
 $F':=(F,\norm\cdot_u^\sharp)$ is complete with distances in $r^\Z\cup\{0\}$.
 
-\emph{Apply Theorem A.} Lemma~\ref{lem:discdist} makes $F'$ spherically complete. Theorem~A therefore
+\emph{Apply Main Theorem~(\ref{main:spherical}).} Lemma~\ref{lem:discdist} makes $F'$ spherically complete. Main Theorem~(\ref{main:spherical}) therefore
 gives analyticity of $Q':=Q^K_{E,E',F'}$ at every point.
 
 \emph{Return to the original norm.} Equivalent target norms give the same spaces of bounded alternating
@@ -2215,7 +2207,7 @@ This is an ultrametric norm, and
 $\norm{x}_\infty\le\norm{x}_w\le\frac32\norm{x}_\infty$.
 Thus $F$ is Banach in either norm. The usual supremum norm has nonzero values in $2^\Z$, since every
 nonzero null sequence attains its maximum absolute value. Lemma~\ref{lem:discdist} makes it spherically complete.
-Theorem~A therefore gives analytic precomposition in every finite degree with the supremum norm; the change of
+Main Theorem~(\ref{main:spherical}) therefore gives analytic precomposition in every finite degree with the supremum norm; the change of
 norm argument in Proposition~\ref{prop:discrete} gives the same conclusion for $\norm{\cdot}_w$, for all normed
 $E,E'$.
 
@@ -2293,7 +2285,7 @@ characteristic~$2$ the countable index set $\N$ suffices~\cite{M}.
 For $p=k=2$, Theorem~\ref{thm:main} gives a second counterexample over every nontrivially normed field of
 characteristic~$2$. Unlike the construction of~\cite{M}, it applies to spherically complete bases such as
 $\F_2((t))$. The distinction lies in the target: that of~\cite{M} is ultrametric, whereas ours admits no
-equivalent ultrametric norm. Proposition~\ref{prop:discrete}, using Theorem~A, shows that a complete
+equivalent ultrametric norm. Proposition~\ref{prop:discrete}, using Main Theorem~(\ref{main:spherical}), shows that a complete
 counterexample target over $\F_2((t))$ cannot carry an equivalent ultrametric norm.
 
 The proofs also use different mechanisms. The characteristic-$2$ argument combines a parity identity
@@ -2345,7 +2337,7 @@ family is the one in~(3), with $L=\kappa$.
 
 
 \subsection*{Open problems}
-The Main Theorem settles the universal assertion over all targets. The preceding results leave open an intrinsic
+Part~(\ref{main:general}) of the Main Theorem settles the universal assertion over all targets. The preceding results leave open an intrinsic
 characterization for a fixed target, as well as the following questions about ultrametric targets.
 \begin{enumerate}
 \item \emph{Characterizing analytic targets.} Fix a nontrivially normed field $K$ of characteristic $p>0$ and
@@ -2354,7 +2346,7 @@ $\Alt^k(-;F)$ to be analytic: that is, for $Q^K_{E,E',F}$ to be analytic for eve
 Seek a condition in terms of the topological linear structure of $F$, invariant under bounded linear
 isomorphisms, rather than a restatement of the multilinear lift criterion. Determine this class in particular
 among Banach targets, and characterize the targets for which analyticity holds simultaneously in every finite
-degree. Theorem~A and invariance under equivalent norms give a sufficient condition: $F$ admits an equivalent
+degree. Main Theorem~(\ref{main:spherical}) and invariance under equivalent norms give a sufficient condition: $F$ admits an equivalent
 ultrametric, spherically complete norm. Remark~\ref{rem:nonspherical-analytic-target} shows that spherical
 completeness of the given norm is not necessary; it does not settle whether the existence of such an equivalent
 norm is necessary. The restriction $k\ge p$ isolates the nontrivial degrees, since Corollary~\ref{cor:class}
@@ -2368,7 +2360,7 @@ of~\cite{M}. Remark~\ref{rem:R} announces a counterexample with a much larger in
 countable case open.
 \item \emph{Densely valued spherically complete bases.} Let $K$ be spherically complete, densely valued and of
 characteristic $p$, for example the Hahn series field $\F_p((t^{\mathbb Q}))$, and let $k\ge p$.
-Is $Q^K_{E,E',F}$ analytic for all Banach $E,E'$ and every complete ultrametric $F$? Theorem~A gives a
+Is $Q^K_{E,E',F}$ analytic for all Banach $E,E'$ and every complete ultrametric $F$? Main Theorem~(\ref{main:spherical}) gives a
 positive answer when $F$ is spherically complete. The counterexample of Theorem~\ref{thm:main} has a
 non-ultrametric target and does not answer this question.
 \end{enumerate}
@@ -2396,7 +2388,7 @@ Theorem~\ref{thm:FF}, with the support bound required only on the stated finitel
 The supporting development covers the $\kappa$\nobreakdash-linear coefficient map and support estimate
 (Proposition~\ref{prop:supp}), all four properties of the residue lift (Lemma~\ref{lem:Psi}), the Laurent
 counterexample, and ascent and descent to a prescribed field. It also includes the lift criterion, the
-sharp polarization distinctions, the operator form of Theorem~A, Proposition~\ref{prop:discrete}, and the sorted lift of
+sharp polarization distinctions, the operator form of Main Theorem~(\ref{main:spherical}), Proposition~\ref{prop:discrete}, and the sorted lift of
 Remark~\ref{rem:sorted}. Spherical completeness uses the development's own class, with the definition in
 \S\ref{sec:theoremA}. The formalization used Codex with Autoform and incorporated previously formalized
 ingredients with their provenance retained.
@@ -2408,7 +2400,7 @@ Corollary~\ref{cor:finite-dimensional-positive}) and the finite-target reduction
 formalized declarations in this development. The weighted $c_0$ example of
 Remark~\ref{rem:nonspherical-analytic-target} is likewise an additional informal corollary; its sufficient
 analyticity criterion is formalized, but the example is not a separate Lean declaration.
-The categorical Main Theorem and Theorem~A in the introduction are mathematical consequences of these
+The categorical Main Theorem in the introduction is a mathematical consequence of these
 operator results and bounded bilinear postcomposition. The functors and their joint maps on hom spaces are
 not separate Lean declarations.
 
@@ -2420,7 +2412,7 @@ That construction is not re-proved or re-audited here.
 The proposed alternative route of Remark~\ref{rem:routeII}, the announced large-index construction of
 Remark~\ref{rem:R}, the open problems, and Serre's external classification cited in
 Remark~\ref{rem:sorted} are excluded from the proved results. The repository's comparator challenge contains
-two short contradiction corollaries of Theorem~\ref{thm:main} and the operator form of Theorem~A for every regularity order.
+two short contradiction corollaries of Theorem~\ref{thm:main} and the operator form of Main Theorem~(\ref{main:spherical}) for every regularity order.
 Their solutions use the corresponding library theorems. The Banach and spherical-completeness hypotheses
 are given by transparent definitions in Mathlib terms. Intentional placeholders occur only in the challenge
 file, not in the proof library or solution. Current challenge checks use Kim Morrison's comparator, with the
