@@ -6,9 +6,9 @@ Read the [paper](paper/charp.pdf), edit its [LaTeX source](paper/charp.tex), or 
 
 ## Main results
 
-The paper leads with two categorical results. For a nontrivially normed field K, let `Vec_K` be the category of normed K-spaces with bounded linear maps, allowing ordinary norms that need not be ultrametric. Let `Ban_K` be its full subcategory of complete spaces, and `Vec_K^∘` its full subcategory of ultrametric, spherically complete spaces. For every finite index set ι, the bifunctor `Alt^ι` is contravariant in its first variable and covariant in its second; its action is `(u, v) ↦ [m ↦ v ∘ m ∘ (u, …, u)]`. Regularity means joint regularity on each pair of morphism spaces with their operator norms.
+The paper leads with two categorical results. For a nontrivially normed field K, let `Vec_K` be the category of normed K-spaces with bounded linear maps, allowing ordinary norms that need not be ultrametric. Let `Ban_K` be its full subcategory of complete spaces, and `Vec_K^∘` its full subcategory of ultrametric, spherically complete spaces. For every integer k ≥ 0, the bifunctor `Alt^k` is contravariant in its first variable and covariant in its second; its action is `(u, v) ↦ [m ↦ v ∘ m ∘ (u, …, u)]`. Regularity means joint regularity on each pair of morphism spaces with their operator norms.
 
-The **Main Theorem** states that `Alt^ι : Vec_K^op × Vec_K → Vec_K` is always C∞ and is analytic if and only if `|ι|! ≠ 0` in K. The same statements hold for `Alt^ι : Ban_K^op × Ban_K → Ban_K`. **Theorem A** states that, when K is ultrametric, `Alt^ι : Vec_K^op × Vec_K^∘ → Vec_K^∘` is analytic in every finite degree. Neither theorem assumes completeness of K.
+The **Main Theorem** states that `Alt^k : Vec_K^op × Vec_K → Vec_K` is always C∞ and is analytic if and only if `k! ≠ 0` in K. The same statements hold for `Alt^k : Ban_K^op × Ban_K → Ban_K`. **Theorem A** states that, when K is ultrametric, `Alt^k : Vec_K^op × Vec_K^∘ → Vec_K^∘` is analytic in every finite degree. Neither theorem assumes completeness of K.
 
 The underlying operator results are formalized in Lean. The categorical Main Theorem and Theorem A follow mathematically from these results, bounded bilinear postcomposition, and the closure properties of alternating-map spaces; the categorical functors and joint morphism actions are not separate Lean declarations.
 

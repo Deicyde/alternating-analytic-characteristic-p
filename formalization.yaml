@@ -49,11 +49,11 @@ sources:
       operator form, then completes the categorical statement by bounded bilinear
       postcomposition and closure of alternating-map spaces.
       The introduction leads with a categorical Main Theorem: for every nontrivially normed
-      field K and every finite index set iota,
-      Alt^iota from Vec_K^op times Vec_K to Vec_K is always C^infinity and is analytic exactly
-      when |iota|! is nonzero in K, with the same assertions for Ban_K. Vec_K uses ordinary,
+      field K and every integer k >= 0,
+      Alt^k from Vec_K^op times Vec_K to Vec_K is always C^infinity and is analytic exactly
+      when k! is nonzero in K, with the same assertions for Ban_K. Vec_K uses ordinary,
       not necessarily ultrametric, norms and bounded linear maps; Ban_K is its full subcategory
-      of complete spaces. Theorem A says that, for ultrametric K, Alt^iota from Vec_K^op times
+      of complete spaces. Theorem A says that, for ultrametric K, Alt^k from Vec_K^op times
       Vec_K^circ to Vec_K^circ is analytic in every finite degree, where Vec_K^circ consists of
       ultrametric, spherically complete spaces. Regularity refers to the joint maps on each
       pair of morphism spaces with operator norms. Neither theorem requires completeness of K.

@@ -90,45 +90,45 @@ to the counterexample; see Schikhof~\cite[\S2.1]{Schi} for the distinction from 
 When $K$ is ultrametric, write $\mathsf{Vec}_K^\circ$ for the full subcategory of ultrametric, spherically
 complete spaces. The field itself need not be complete.
 
-For a finite set $\iota$, let $\Alt^\iota(E;F)$ be the normed space of bounded alternating $\iota$\nobreakdash-linear maps $E^\iota\to F$.
+For an integer $k\ge0$, let $\Alt^k(E;F)$ be the normed space of bounded alternating $k$\nobreakdash-linear maps $E^k\to F$.
 Here \emph{alternating} means vanishing whenever two arguments coincide, including in characteristic $2$.
 Pullback in $E$ and pushforward in $F$ define the bifunctor
 \[
-\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K,
-\qquad (E,F)\longmapsto\Alt^\iota(E;F).
+\Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K,
+\qquad (E,F)\longmapsto\Alt^k(E;F).
 \]
 Its action on a pair of morphisms $u\colon E\to E'$ and $v\colon F\to F'$ is
 \[
-\Alt^\iota(u,v)\colon m\longmapsto v\circ m\circ(u,\dots,u).
+\Alt^k(u,v)\colon m\longmapsto v\circ m\circ(u,\dots,u).
 \]
 The opposite category in the first variable records pullback. Write $\cL(E,E')$ for the hom space of bounded
 linear maps, equipped with the operator norm.
 We call the bifunctor \emph{analytic}, or \emph{$C^\infty$}, when every induced map on hom spaces
 \[
 \cL(E,E')\times\cL(F,F')\longrightarrow
-\cL\bigl(\Alt^\iota(E';F),\Alt^\iota(E;F')\bigr)
+\cL\bigl(\Alt^k(E';F),\Alt^k(E;F')\bigr)
 \]
 has that regularity. The product carries the maximum norm. This definition concerns the joint action on both
 variables, rather than separate regularity. It applies to the restrictions below as well.
 
 \subsection*{Main theorems}
 \begin{thmMain}
-Let $K$ be a nontrivially normed field, let $\iota$ be finite, and put $k=\abs\iota$. The bifunctor
+Let $K$ be a nontrivially normed field and let $k\ge0$ be an integer. The bifunctor
 \[
-\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K
+\Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K
 \]
 is $C^\infty$. It is analytic if and only if $k!\ne0$ in $K$. Both assertions hold also for its restriction
 \[
-\Alt^\iota\colon\mathsf{Ban}_K^{\mathrm{op}}\times\mathsf{Ban}_K\longrightarrow\mathsf{Ban}_K.
+\Alt^k\colon\mathsf{Ban}_K^{\mathrm{op}}\times\mathsf{Ban}_K\longrightarrow\mathsf{Ban}_K.
 \]
 \end{thmMain}
 Thus in characteristic $p>0$ the exact analytic range is $k<p$; in characteristic zero every finite degree is
 analytic. Restricting the second variable gives a different answer.
 
 \begin{thmA}
-Let $K$ be an ultrametric nontrivially normed field. For every finite set $\iota$, the bifunctor
+Let $K$ be an ultrametric nontrivially normed field. For every integer $k\ge0$, the bifunctor
 \[
-\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
+\Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
 \longrightarrow\mathsf{Vec}_K^\circ
 \]
 is analytic.
@@ -138,37 +138,38 @@ space form a spherically complete ultrametric space. Neither theorem assumes com
 In all the analytic cases just stated, the maps on hom spaces are in fact given by finite power series.
 
 \subsection*{Operator form and sharpness}
-The proofs work with the action of a fixed-target functor $\Alt^\iota(-;F)$ on hom spaces. We now write this
+The proofs work with the action of a fixed-target functor $\Alt^k(-;F)$ on hom spaces. We now write this
 action explicitly and record the stronger counterexample underlying the Main Theorem.
 For normed $K$\nobreakdash-spaces $E,E',F$, the pullback action is
 \begin{equation}\label{eq:Q}
 \begin{aligned}
-Q=Q^K_{E,E',F}\colon\cL(E,E')&\longrightarrow\cL\bigl(\Alt^\iota(E';F),\Alt^\iota(E;F)\bigr),\\
+Q=Q^K_{E,E',F}\colon\cL(E,E')&\longrightarrow\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr),\\
 Q(f)(m)&=m\circ(f,\dots,f).
 \end{aligned}
 \end{equation}
 For multilinear maps without the alternation condition, precomposition is the diagonal of a bounded multilinear
 map and is therefore analytic. Requiring the values to remain alternating changes the problem. The usual
-polarization argument divides by $k!$, where $k=\abs\iota$, and does not apply when that scalar vanishes. We show that
+polarization argument divides by $k!$ and does not apply when that scalar vanishes. We show that
 this obstruction is unavoidable if analyticity is required for all Banach spaces over $K$.
 
 \begin{theorem}[Counterexample theorem]\label{thm:main}
 Let $K$ be a nontrivially normed field of characteristic $p>0$, and let $k\ge p$. There are Banach spaces $E$ and $F$
-over $K$ such that, for every finite set $\iota$ with $\abs\iota=k$, the map
+over $K$ such that the degree-$k$ map
 \[
-Q\colon\cL(E,E)\to\cL\bigl(\Alt^\iota(E;F),\Alt^\iota(E;F)\bigr),\qquad Q(f)(m)=m\circ(f,\dots,f),
+Q\colon\cL(E,E)\to\cL\bigl(\Alt^k(E;F),\Alt^k(E;F)\bigr),\qquad Q(f)(m)=m\circ(f,\dots,f),
 \]
 is analytic at no point of $\cL(E,E)$. Equivalently, there is no bounded $k$\nobreakdash-linear map $P$ on $\cL(E,E)$ with
 $P(f,\dots,f)=Q(f)$ for all $f$. The Banach space $F$ admits no equivalent ultrametric norm.
+The same $E,F$ work for any reindexing of the $k$ arguments.
 \end{theorem}
 
 \begin{corollary}\label{cor:class}
-Let $K$ be any nontrivially normed field and $\iota$ any finite set. Then $Q^K_{E,E',F}$ is analytic for all
-$K$\nobreakdash-Banach spaces $E,E',F$ if and only if $\abs\iota!\ne0$ in $K$. More precisely:
+Let $K$ be any nontrivially normed field and $k\ge0$ any integer. Then $Q^K_{E,E',F}$ is analytic for all
+$K$\nobreakdash-Banach spaces $E,E',F$ if and only if $k!\ne0$ in $K$. More precisely:
 \begin{enumerate}
-\item if $\abs\iota!\neq0$ in $K$, then $Q^K_{E,E',F}$ is analytic, indeed given at every point by a finite power
+\item if $k!\neq0$ in $K$, then $Q^K_{E,E',F}$ is analytic, indeed given at every point by a finite power
 series, for all normed spaces $E,E',F$, complete or not;
-\item if $\abs\iota!=0$ in $K$, then there are Banach spaces $E=E'$ and $F$, with $F$ admitting no equivalent
+\item if $k!=0$ in $K$, then there are Banach spaces $E=E'$ and $F$, with $F$ admitting no equivalent
 ultrametric norm, such that $Q^K_{E,E,F}$ is analytic at no point.
 \end{enumerate}
 \end{corollary}
@@ -187,7 +188,7 @@ The translation between the two formulations uses only bounded bilinear postcomp
 $v_*a=v\circ a$. The map $(v,T)\mapsto v_*\circ T$ is bounded bilinear, with
 $\norm{v_*\circ T}\le\norm v\,\norm T$, and the bifunctor's joint action is
 \begin{equation}\label{eq:joint-action}
-\Alt^\iota(u,v)=v_*\circ Q^K_{E,E',F}(u).
+\Alt^k(u,v)=v_*\circ Q^K_{E,E',F}(u).
 \end{equation}
 Consequently smoothness or analyticity of every $Q$ gives the corresponding regularity of the bifunctor.
 Conversely, restriction to $v=\id_F$ recovers $Q$. The Main Theorem therefore follows from
@@ -196,14 +197,14 @@ Theorem~A is proved in \S\ref{sec:theoremA}. A bounded $k$\nobreakdash-linear li
 $(k+1)$\nobreakdash-linear lift of the joint action by placing the pushforward variable in the last slot.
 Thus the finite-power-series conclusion also passes from the operator statements to the bifunctor.
 
-For completeness of the target category, $\Alt^\iota(E;F)$ is complete whenever $F$ is complete: an operator-norm
+For completeness of the target category, $\Alt^k(E;F)$ is complete whenever $F$ is complete: an operator-norm
 Cauchy sequence converges pointwise in $F$, and its boundedness, multilinearity and alternation pass to the limit.
 Proposition~\ref{prop:alt-spherical} gives the stronger closure property required in Theorem~A.
-In degree zero, $\Alt^\varnothing(E;F)$ is naturally isometric to $F$; pullback is constant and the joint action
+In degree zero, $\Alt^0(E;F)$ is naturally isometric to $F$; pullback is constant and the joint action
 is linear in the pushforward variable.
 
 \subsection*{Motivation and related results}
-The regularity of $Q$ arises in the construction of bundles of differential forms. Applying $\Alt^\iota$ to the
+The regularity of $Q$ arises in the construction of bundles of differential forms. Applying $\Alt^k$ to the
 transition maps of vector bundles requires control of the corresponding precomposition map; compare Lang's
 functors of class $C^p$~\cite[Ch.~III, \S4]{La}. Mathlib treats manifolds and vector bundles over arbitrary
 nontrivially normed fields, with regularity $n\in\N\cup\{\infty,\omega\}$, where $C^\omega$ denotes analytic
@@ -310,13 +311,11 @@ $k$\nobreakdash-linear maps and $\Alt^k(X;Y)$ for their alternating subspace, wi
 \norm{m(x_1,\dots,x_k)}\le\norm m\prod_{i=1}^k\norm{x_i}.
 \]
 When the target norm is ultrametric, both operator spaces are ultrametric, regardless of the norm on $X$.
-For a finite set $\iota$ of size $k$, choosing a bijection with $\{1,\dots,k\}$ identifies the corresponding
-spaces isometrically and preserves precomposition. We therefore use the degree notation $\Alt^k$ in the proof.
 
 \begin{thmA}
-Let $K$ be an ultrametric nontrivially normed field. For every finite $\iota$, the bifunctor
+Let $K$ be an ultrametric nontrivially normed field. For every integer $k\ge0$, the bifunctor
 \[
-\Alt^\iota\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
+\Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
 \longrightarrow\mathsf{Vec}_K^\circ
 \]
 is analytic.
@@ -511,9 +510,9 @@ $m(\dots,y,\dots,z,\dots)=-m(\dots,z,\dots,y,\dots)$, and hence
 $m(x_{\sigma(1)},\dots,x_{\sigma(k)})=\sgn(\sigma)\,m(x_1,\dots,x_k)$ for $\sigma\in S_k$. In characteristic $2$ the
 converse fails.
 
-For a finite set $\iota$ with $\abs\iota=k$, a bijection $\iota\cong\{1,\dots,k\}$ identifies $\Alt^\iota(E;F)$
-isometrically with $\Alt^k(E;F)$ and the map~\eqref{eq:Q} with the corresponding map for $\{1,\dots,k\}$; nothing below
-depends on the choice. So we work with
+We index the $k$ arguments by $\{1,\dots,k\}$ throughout. Reindexing by any finite set with $k$ elements is an
+isometric isomorphism of alternating-map spaces and intertwines precomposition. Thus the results also apply to
+the arbitrary finite index types used in Lean, with the same counterexample spaces. For each fixed degree we write
 \[
 Q=Q^K_{E,E',F}\colon\cL(E,E')\to\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr),
 \]
@@ -876,13 +875,13 @@ $C^n$. Induction proves every finite order, and hence $C^\infty$.
 \end{proof}
 
 \begin{proposition}[smoothness of precomposition]\label{prop:smooth-positive}
-For every nontrivially normed field $K$, all normed $K$\nobreakdash-spaces $E,E',F$, and every finite set $\iota$, the map
+For every nontrivially normed field $K$, all normed $K$\nobreakdash-spaces $E,E',F$, and every integer $k\ge0$, the map
 $Q^K_{E,E',F}$ is $C^n$ for every $n\in\N\cup\{\infty\}$. In particular, precomposition is always $C^\infty$,
 without completeness, finite-dimensionality, or characteristic assumptions.
 \end{proposition}
 
 \begin{proof}
-Put $k=\abs\iota$ and use the finite-index identification of \S\ref{sec:prelim}. The inclusion
+The inclusion
 $\Alt^k(E;F)\hookrightarrow\Mult^k(E;F)$ is isometric and has closed range: alternation is the intersection of the
 closed conditions $m(x_1,\dots,x_k)=0$ for tuples with two equal entries. Postcomposition therefore gives a linear
 isometry with closed range
@@ -2101,7 +2100,7 @@ Lemma~\ref{lem:descent}, a bounded lift of $Q^K_{E,E,F}$ would extend to a bound
 $Q^{\Kh}_{E,E,F}$, which is impossible. Proposition~\ref{prop:lift} applies over the possibly incomplete
 field $K$: $Q^K_{E,E,F}$ is analytic at no point, and \texttt{ContDiffAt K $\omega$} fails at every point.
 Reindexing as in \S\ref{sec:prelim} gives the same conclusions, with the same spaces $E,F$, for every finite
-$\iota$ with $\abs\iota=k$.
+index set with $k$ elements.
 \item \emph{Exclude an equivalent ultrametric target norm.} Since $k\ge p\ge2$, Proposition~\ref{prop:nonultra}
 applies to $B$ and $F$, after the scalar identification in step~(2). Its conclusion persists when $F$ is
 regarded over $K$.
@@ -2118,7 +2117,7 @@ The proof over a general base does not require, or assert, that $E$ is ultrametr
 
 \subsection{Proof of Corollary~\ref{cor:class}}
 \begin{proof}
-Put $k:=\abs\iota$. If $k!\ne0$ in $K$, Proposition~\ref{prop:factorial-positive} gives a finite power series at every
+If $k!\ne0$ in $K$, Proposition~\ref{prop:factorial-positive} gives a finite power series at every
 point for arbitrary normed $E,E',F$, including degree zero. If $k!=0$ in $K$, the field has positive prime
 characteristic $p\le k$. Theorem~\ref{thm:main} gives the required Banach counterexample. Together these prove the
 classification and both strengthened conclusions.
@@ -2351,7 +2350,7 @@ characterization for a fixed target, as well as the following questions about ul
 \begin{enumerate}
 \item \emph{Characterizing analytic targets.} Fix a nontrivially normed field $K$ of characteristic $p>0$ and
 an integer $k\ge p$. Find a necessary and sufficient condition on a normed $K$\nobreakdash-space $F$ for
-$\Alt^k(-,F)$ to be analytic: that is, for $Q^K_{E,E',F}$ to be analytic for every pair of normed spaces $E,E'$.
+$\Alt^k(-;F)$ to be analytic: that is, for $Q^K_{E,E',F}$ to be analytic for every pair of normed spaces $E,E'$.
 Seek a condition in terms of the topological linear structure of $F$, invariant under bounded linear
 isomorphisms, rather than a restatement of the multilinear lift criterion. Determine this class in particular
 among Banach targets, and characterize the targets for which analyticity holds simultaneously in every finite
