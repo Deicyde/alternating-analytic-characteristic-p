@@ -18,6 +18,8 @@ Section 2, **Spherically complete targets: proof of Theorem A**, gives a standal
 
 The introduction also states the categorical consequences. On normed spaces with bounded linear maps, `Alt^ι` is contravariant in its first variable and covariant in its second. It is analytic on morphism spaces exactly when `|ι|! ≠ 0`, with the same criterion for Banach spaces. With an ultrametric spherically complete second argument, it is analytic in every finite degree and takes values in that same subcategory. These categorical formulations follow from the operator results; they are not separate Lean category declarations.
 
+The complements include a weighted `c₀` example whose given norm is not spherically complete, although alternating precomposition is analytic in every degree. The open problems ask for an intrinsic necessary and sufficient condition on the target. This new example is an informal corollary, not a separate Lean declaration.
+
 ## Using the library
 
 The project uses Lean **4.34.0-rc2** and pins Mathlib to [2b73d9821d297b80d92eecc54cc09bfc263e0098](https://github.com/Deicyde/mathlib4/tree/2b73d9821d297b80d92eecc54cc09bfc263e0098). All dependency revisions are recorded in `lake-manifest.json`.

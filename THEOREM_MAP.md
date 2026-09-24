@@ -110,13 +110,15 @@ As Remark `infkappa` states, the norm, coefficient and residue constructions wor
 
 The heterogeneous dense extension (`ext(2)`), descending-ball equivalence (`K2`), normalized multiplier example (`FFunit`), and infinite sorted-basis formula (`sorted`) all have the explicit proof declarations listed above.
 
+The weighted `c₀` target in Remark `nonspherical-analytic-target` is a supplementary informal example, not a separate Lean declaration. Its ordinary sup norm is spherically complete, while the equivalent weighted norm is not; analyticity in every degree follows from the formalized discrete-target result above. The example does not show that admitting an equivalent spherically complete ultrametric norm is unnecessary.
+
 ## Deliberate exclusions
 
 These are not asserted as theorems of this package:
 
 - **Remark `routeII`:** the alternative infinite-field multiplier obstruction modulo finite rank, the proposed support-dimension/contraction-rank equality, and the route depending on these expressly unproved inputs.
 - **Remark `R`:** the announced large-cardinal-index ultrametric-target counterexample using Erdős–Rado. The paper supplies no proof.
-- **The mathematical open questions:** countable-index ultrametric targets in characteristic `p ≥ 3`, and complete ultrametric targets over densely valued spherically complete bases. The paper's separate request to formalize its main theorem is the objective addressed by this project, not a remaining mathematical open problem.
+- **The mathematical open questions:** an intrinsic necessary and sufficient condition on a fixed target for analyticity (in a prescribed degree and in every finite degree), countable-index ultrametric targets in characteristic `p ≥ 3`, and complete ultrametric targets over densely valued spherically complete bases. The paper's separate request to formalize its main theorem is the objective addressed by this project, not a remaining mathematical open problem.
 - **Serre's external classification cited in Remark `sorted`:** that every ultrametric Banach space over a complete discretely valued field is topologically isomorphic to `c₀(I)`. The sorted-lift theorem assumes the stated basis; this package does not prove that external classification.
 - **The earlier characteristic-two development and its Pfaffian/parity proof:** cited for comparison and preserved separately, not re-proved or re-audited by this formalization.
 

@@ -45,6 +45,11 @@ sources:
       existing Lean extension, spherical-completeness and retraction arguments.
       The introduction also records categorical corollaries using bounded bilinear postcomposition;
       these are not claimed as separate Lean category or joint-action declarations.
+      A weighted c_0 example shows that spherical completeness of the given target norm is
+      not necessary for analyticity; its sufficient discrete-target criterion is formalized,
+      while the example itself is an additional informal corollary. The paper asks for an
+      intrinsic necessary and sufficient condition on the target, in one degree or all finite
+      degrees, as an open problem left unresolved by the present results.
       Announced and open items are not claimed as proved.
     license: ""
     author_endorsement: "participated"
@@ -78,8 +83,8 @@ classification:
 status:
   scope: >
     Complete for the original proved-paper scope recorded in THEOREM_MAP.md. The later
-    finite-dimensional source/codomain proposition and target-reduction argument are additional
-    informal results and are not claimed as separate formalized declarations. The proof library has zero unresolved sorry,
+    finite-dimensional source/codomain proposition, target-reduction argument and weighted c_0
+    example are additional informal results and are not claimed as separate formalized declarations. The proof library has zero unresolved sorry,
     admit, new axiom or native_decide uses. solution.lean contains the three proved comparator
     theorems; challenge.lean contains exactly three deliberate theorem placeholders and is
     excluded from these proof-development sorry counts. The Mathlib-only challenge contains

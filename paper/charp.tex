@@ -2146,9 +2146,35 @@ convergence is unchanged.
 Thus, over a discretely valued base, every Banach counterexample must have a target admitting no equivalent
 ultrametric norm. Proposition~\ref{prop:nonultra} establishes this property for our target over every base.
 
+\begin{remark}[a nonspherical target with analytic precomposition]\label{rem:nonspherical-analytic-target}
+Spherical completeness of the given target norm is not necessary for analyticity, even in degrees at least the
+characteristic. Let $K=\F_p((t))$ with $\abs t=1/2$, and let $F=c_0(\N,K)$, the space of sequences tending to zero.
+Put
+\[
+w_j=1+\frac1{j+2},\qquad \norm{x}_w=\sup_{j\ge0}w_j\abs{x_j}.
+\]
+This is an ultrametric norm, and
+$\norm{x}_\infty\le\norm{x}_w\le\frac32\norm{x}_\infty$.
+Thus $F$ is Banach in either norm. The usual supremum norm has nonzero values in $2^\Z$, since every
+nonzero null sequence attains its maximum absolute value. Lemma~\ref{lem:discdist} makes it spherically complete.
+Theorem~A therefore gives analytic precomposition in every finite degree with the supremum norm; the change of
+norm argument in Proposition~\ref{prop:discrete} gives the same conclusion for $\norm{\cdot}_w$, for all normed
+$E,E'$.
+
+Nevertheless, the weighted norm is not spherically complete. Write $e_j$ for the coordinate vectors and
+$a_n=\sum_{j<n}e_j$. The closed balls $B_n=\overline B_w(a_n,w_n)$ are nested: $w_{n+1}<w_n$ and
+$\norm{a_{n+1}-a_n}_w=w_n$. If $x$ belonged to every $B_n$, then, for each $j$ and any $n>j$,
+\[
+\abs{x_j-1}\le\frac{w_n}{w_j}<1,
+\]
+so $\abs{x_j}=1$ for every $j$, contrary to $x_j\to0$. Hence $\bigcap_nB_n=\varnothing$.
+This example separates spherical completeness of a particular norm from analyticity, which is invariant under
+equivalent norms. It still admits an equivalent ultrametric, spherically complete norm.
+\end{remark}
+
 \begin{remark}[necessary, but not sufficient]\label{rem:notsuff}
-Completeness of the target is essential to this deduction: it is used through Lemma~\ref{lem:discdist} in
-Proposition~\ref{prop:discrete}. Even for complete targets, the absence of an equivalent ultrametric norm
+Completeness of the target is essential in Proposition~\ref{prop:discrete}: it is used through
+Lemma~\ref{lem:discdist}. Even for complete targets, the absence of an equivalent ultrametric norm
 is not sufficient for a counterexample. Take the degree-$3$ space $B$ of \S\ref{ssec:projnorm} over
 $K_1=\F_5((X))$. It admits no equivalent ultrametric norm by Proposition~\ref{prop:nonultra}, which requires
 only $k\ge2$, but $Q^{K_1}_{E_1,E_1,B}$ is analytic by Corollary~\ref{cor:class}(1), since $3!=1$ in $\F_5$.
@@ -2260,8 +2286,21 @@ family is the one in~(3), with $L=\kappa$.
 
 
 \subsection*{Open problems}
-The questions left open concern ultrametric targets.
+The Main Theorem settles the universal assertion over all targets. The preceding results leave open an intrinsic
+characterization for a fixed target, as well as the following questions about ultrametric targets.
 \begin{enumerate}
+\item \emph{Characterizing analytic targets.} Fix a nontrivially normed field $K$ of characteristic $p>0$ and
+an integer $k\ge p$. Find a necessary and sufficient condition on a normed $K$\nobreakdash-space $F$ for
+$\Alt^k(-,F)$ to be analytic: that is, for $Q^K_{E,E',F}$ to be analytic for every pair of normed spaces $E,E'$.
+Seek a condition in terms of the topological linear structure of $F$, invariant under bounded linear
+isomorphisms, rather than a restatement of the multilinear lift criterion. Determine this class in particular
+among Banach targets, and characterize the targets for which analyticity holds simultaneously in every finite
+degree. Theorem~A and invariance under equivalent norms give a sufficient condition: $F$ admits an equivalent
+ultrametric, spherically complete norm. Remark~\ref{rem:nonspherical-analytic-target} shows that spherical
+completeness of the given norm is not necessary; it does not settle whether the existence of such an equivalent
+norm is necessary. The restriction $k\ge p$ isolates the nontrivial degrees, since Corollary~\ref{cor:class}
+gives analyticity for every target when $k<p$, and in every degree in characteristic zero. For $C^\infty$
+smoothness, no target condition is needed (Proposition~\ref{prop:smooth-positive}).
 \item \emph{Countable index.} Let $K$ be complete, not spherically complete, of characteristic $p\ge3$, and $k\ge p$.
 Is there a complete ultrametric $F$ such that $Q^K_{E,E,F}$ is not analytic for $E=\linf(\N,K)$? For $p=2$ the answer
 is yes, by~\cite{M}: for $k=2$ this is the theorem of~\cite{M}, and for $k\ge3$ it follows by the wedging argument
@@ -2307,7 +2346,9 @@ Proposition~\ref{prop:smooth-positive} reproduces the argument of~\cite{PR}, who
 pinned Mathlib dependency. The finite-coordinate proof (Proposition~\ref{prop:finite-coordinate} and
 Corollary~\ref{cor:finite-dimensional-positive}) and the finite-target reduction
 (Remark~\ref{rem:finite-target-reduction}) are supplementary informal results; they are not claimed as separate
-formalized declarations in this development.
+formalized declarations in this development. The weighted $c_0$ example of
+Remark~\ref{rem:nonspherical-analytic-target} is likewise an additional informal corollary; its sufficient
+analyticity criterion is formalized, but the example is not a separate Lean declaration.
 The categorical formulations in the introduction are mathematical corollaries of the formalized
 operator results, rather than separate Lean categorical declarations.
 
