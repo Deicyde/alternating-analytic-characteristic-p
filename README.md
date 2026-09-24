@@ -6,12 +6,12 @@ Read the [paper](paper/charp.pdf), edit its [LaTeX source](paper/charp.tex), or 
 
 ## Main results
 
-The paper leads with one categorical **Main Theorem** in two parts. For a nontrivially normed field K, let `Vec_K` be the category of normed K-spaces with bounded linear maps, allowing ordinary norms that need not be ultrametric. Let `Ban_K` be its full subcategory of complete spaces, and `Vec_K^∘` its full subcategory of ultrametric, spherically complete spaces. For every integer k ≥ 0, the bifunctor `Alt^k` is contravariant in its first variable and covariant in its second; its action is `(u, v) ↦ [m ↦ v ∘ m ∘ (u, …, u)]`. Regularity means joint regularity on each pair of morphism spaces with their operator norms.
+The paper leads with one categorical **Main Theorem** in two parts. For a nontrivially normed field K, let `Vec_K` be the category of normed K-spaces with bounded linear maps, allowing ordinary norms that need not be ultrametric. Let `Ban_K` be its full subcategory of complete spaces. When K has positive characteristic, let `Vec_K^∘` be its full subcategory of ultrametric, spherically complete spaces. For every integer k ≥ 0, the bifunctor `Alt^k` is contravariant in its first variable and covariant in its second; its action is `(u, v) ↦ [m ↦ v ∘ m ∘ (u, …, u)]`. Regularity means joint regularity on each pair of morphism spaces with their operator norms.
 
 1. `Alt^k : Vec_K^op × Vec_K → Vec_K` is always C∞ and is analytic if and only if `k! ≠ 0` in K. The same statements hold for `Alt^k : Ban_K^op × Ban_K → Ban_K`.
-2. When K is ultrametric, `Alt^k : Vec_K^op × Vec_K^∘ → Vec_K^∘` is analytic in every finite degree. The target category records that alternating-map spaces inherit spherical completeness from the target.
+2. When K has positive characteristic, `Alt^k : Vec_K^op × Vec_K^∘ → Vec_K^∘` is analytic in every finite degree. The target category records that alternating-map spaces inherit spherical completeness from the target.
 
-Neither part assumes completeness of K. Part (2) was previously called Theorem A.
+Neither part assumes completeness of K. In characteristic zero, part (1) already gives analyticity in every finite degree for all normed spaces. Part (2) was previously called Theorem A.
 
 The underlying operator results are formalized in Lean. Both parts of the categorical Main Theorem follow mathematically from these results, bounded bilinear postcomposition, and the closure properties of alternating-map spaces; the categorical functors and joint morphism actions are not separate Lean declarations.
 
@@ -25,7 +25,7 @@ The exact operator factorial criterion in Corollary `cor:class` is `AlternatingA
 
 The construction includes the finite-field Ramsey obstruction, the projective exterior completion and coefficient-support estimate, and scalar extension and descent. [THEOREM_MAP.md](THEOREM_MAP.md) also records the proved complements and the explicitly excluded announced or open results.
 
-Section 2, **Spherically complete targets**, proves part (2) of the Main Theorem. It begins with the operator form: over an ultrametric field, a spherically complete ultrametric target makes precomposition analytic in every degree. Its extension, spherical-completeness, and retraction arguments follow the existing proofs in [SphericalCompleteness.lean](AlternatingAnalytic/Analysis/SphericalCompleteness.lean) and [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean). Bounded bilinear postcomposition and spherical completeness of alternating-map spaces complete the categorical statement.
+Section 2, **Spherically complete targets**, proves part (2) of the Main Theorem. It begins with the broader operator result: over any ultrametric field, a spherically complete ultrametric target makes precomposition analytic in every degree. The Lean result retains this scope without a characteristic assumption; the positive-characteristic hypothesis in Main Theorem (2) supplies ultrametricity of K. Its extension, spherical-completeness, and retraction arguments follow the existing proofs in [SphericalCompleteness.lean](AlternatingAnalytic/Analysis/SphericalCompleteness.lean) and [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean). Bounded bilinear postcomposition and spherical completeness of alternating-map spaces complete the categorical statement.
 
 The complements include a weighted `c₀` example whose given norm is not spherically complete, although alternating precomposition is analytic in every degree. The open problems ask for an intrinsic necessary and sufficient condition on the target. This new example is an informal corollary, not a separate Lean declaration.
 
@@ -48,7 +48,7 @@ The cache download is optional. Import `AlternatingAnalytic` for the full librar
 
 - The global theorem refutes analyticity of precomposition for every nontrivially normed field, every triple of normed spaces, and every finite index type. These types lie in universe zero, as in the earlier challenge.
 - The fixed-field theorem takes a prescribed `K : Type u` of prime characteristic p and k ≥ p. Its hypothesis `h : BanachPrecompositionAnalytic K k` asserts analytic precomposition for every pair of K-Banach spaces `E, F : Type u`, with `E′ = E` and index `Fin k`. The field need not be complete.
-- The operator form of Main Theorem (2) asserts `ContDiff K n` for every `n : WithTop ℕ∞`, including analytic regularity, when K is ultrametric and F is ultrametric and spherically complete. E and E′ are arbitrary normed K-spaces, and the finite index type is arbitrary. All five types have independent universes; no completeness of K, E, or E′ is assumed.
+- The operator result underlying Main Theorem (2) asserts `ContDiff K n` for every `n : WithTop ℕ∞`, including analytic regularity, when K is ultrametric and F is ultrametric and spherically complete. E and E′ are arbitrary normed K-spaces, and the finite index type is arbitrary. All five types have independent universes; no characteristic restriction or completeness of K, E, or E′ is assumed.
 
 The two transparent predicates `BanachPrecompositionAnalytic` and `SphericallyComplete` are defined identically in both files. The latter says that every nonempty family of pairwise-meeting closed balls has a common point, and appears as the explicit hypothesis `hF : SphericallyComplete F`. [`solution.lean`](solution.lean) proves all three statements using the library. The three deliberate challenge placeholders are separate from the proved solution. The two contradiction corollaries are consequences of the stronger constructive library theorems; the operator form of Main Theorem (2) is the separate positive result.
 

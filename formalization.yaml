@@ -53,10 +53,14 @@ sources:
       Alt^k from Vec_K^op times Vec_K to Vec_K is always C^infinity and is analytic exactly
       when k! is nonzero in K, with the same assertions for Ban_K. Vec_K uses ordinary,
       not necessarily ultrametric, norms and bounded linear maps; Ban_K is its full subcategory
-      of complete spaces. Part (2) says that, for ultrametric K, Alt^k from Vec_K^op times
+      of complete spaces. Part (2) says that, for K of positive characteristic, Alt^k from Vec_K^op times
       Vec_K^circ to Vec_K^circ is analytic in every finite degree, where Vec_K^circ consists of
       ultrametric, spherically complete spaces. Regularity refers to the joint maps on each
       pair of morphism spaces with operator norms. Neither part requires completeness of K.
+      In characteristic zero, part (1) already gives analyticity in every finite degree for all
+      normed spaces. The unchanged Lean operator result underlying part (2) applies to every
+      ultrametric nontrivially normed field, with no characteristic restriction; positive
+      characteristic supplies ultrametricity for the categorical statement.
       The categorical statements follow mathematically from the formalized operator results;
       the Main Theorem's ordinary smoothness input is in the pinned Mathlib dependency.
       No separate Lean categorical functor or joint-action declaration is claimed.

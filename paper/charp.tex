@@ -61,8 +61,8 @@ received a human expert review. See \S\ref{sec:lean} for the verification scope 
 \begin{abstract}
 Let $K$ be a nontrivially normed field. The alternating-map bifunctor on normed $K$\nobreakdash-spaces is always
 $C^\infty$, and is analytic in degree $k$ if and only if $k!\ne0$ in $K$. The same criterion holds on the category
-of Banach spaces. If $K$ is ultrametric, the restriction to ultrametric, spherically complete spaces in the
-second variable is analytic in every degree and takes values in that same subcategory. Here regularity of a functor means
+of Banach spaces. In positive characteristic, the restriction to ultrametric, spherically complete spaces in
+the second variable is analytic in every degree and takes values in that same subcategory. Here regularity of a functor means
 regularity of its maps on spaces of morphisms, and the field $K$ need not be complete.
 The negative result is sharp: in characteristic $p>0$ and degree $k\ge p$, there are Banach objects $E,F$ such that $\Alt^k(-;F)$ induces a nowhere-analytic map on the endomorphism
 space of $E$, and $F$ admits no equivalent ultrametric norm.
@@ -84,8 +84,8 @@ depends on the degree and on the category chosen for its second variable.
 \subsection*{Categories and regularity}
 Fix a nontrivially normed field $K$. Let $\mathsf{Vec}_K$ be the category of normed $K$\nobreakdash-spaces and
 bounded linear maps, and let $\mathsf{Ban}_K$ be its full subcategory of complete spaces.
-When $K$ is ultrametric, write $\mathsf{Vec}_K^\circ$ for the full subcategory of ultrametric, spherically
-complete spaces. The field itself need not be complete.
+When $K$ has positive characteristic, write $\mathsf{Vec}_K^\circ$ for the full subcategory of ultrametric,
+spherically complete spaces. The field itself need not be complete.
 
 For an integer $k\ge0$, let $\Alt^k(E;F)$ be the normed space of bounded alternating $k$\nobreakdash-linear maps $E^k\to F$.
 Here \emph{alternating} means vanishing whenever two arguments coincide, including in characteristic $2$.
@@ -121,7 +121,7 @@ is $C^\infty$. It is analytic if and only if $k!\ne0$ in $K$. Both assertions ho
 \[
 \Alt^k\colon\mathsf{Ban}_K^{\mathrm{op}}\times\mathsf{Ban}_K\longrightarrow\mathsf{Ban}_K.
 \]
-\item\label{main:spherical} If $K$ is ultrametric, the restriction
+\item\label{main:spherical} If $K$ has positive characteristic, the restriction
 \[
 \Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K^\circ
 \longrightarrow\mathsf{Vec}_K^\circ
@@ -270,10 +270,10 @@ regularity range in~\cite{PR} is sharp over every field of characteristic $p>0$ 
 Mathlib's \texttt{ContDiffAt K $\omega$} fails at every point.
 
 The answer is different if the target norm is required to be ultrametric. If $K$ is ultrametric and $F$ is
-ultrametric and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Main Theorem~(\ref{main:spherical})).
+ultrametric and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Main Theorem).
 The proof in \S\ref{sec:theoremA} constructs a contracting retraction from multilinear maps to alternating maps
 by spherical completeness and extension of bounded linear maps. This positive result is independent of the counterexample theorem and Corollary~\ref{cor:class}. A special case appears
-in~\cite[Remark~16]{M}. Over a discretely valued base, Main Theorem~(\ref{main:spherical}) in fact rules out a Banach counterexample whenever
+in~\cite[Remark~16]{M}. Over a discretely valued base, the Main Theorem in fact rules out a Banach counterexample whenever
 $F$ has an equivalent ultrametric norm (Proposition~\ref{prop:discrete}).
 
 The earlier characteristic-$2$ construction~\cite{M} uses an ultrametric target and gives nonanalyticity at $0$
@@ -364,6 +364,7 @@ $k$\nobreakdash-linear maps and $\Alt^k(X;Y)$ for their alternating subspace, wi
 When the target norm is ultrametric, both operator spaces are ultrametric, regardless of the norm on $X$.
 
 Throughout this section, $K$ is an ultrametric nontrivially normed field and $k\ge0$ is an integer.
+Positive characteristic implies the ultrametric hypothesis by Lemma~\ref{lem:ultra}.
 We prove the following operator statement, which also records every smoothness order. For normed
 $K$\nobreakdash-spaces $E,E'$ and an ultrametric, spherically complete $F$,
 \[
@@ -524,7 +525,7 @@ The binomial coefficient in the bound is an ordinary nonnegative integer countin
 With $q_r=0$ for $r>k$, this is a power series of infinite radius at every $f_0$.
 Consequently $Q$ is continuously polynomial, hence $C^\omega$ and $C^n$ for all
 $n\in\N\cup\{\infty\}$. Equation~\eqref{eq:joint-action} makes the full bifunctor analytic on hom spaces,
-and Proposition~\ref{prop:alt-spherical} shows that its values lie in $\mathsf{Vec}_K^\circ$.
+and Proposition~\ref{prop:alt-spherical} shows that its values are ultrametric and spherically complete.
 This proves the categorical statement.
 \end{proof}
 
@@ -2169,7 +2170,7 @@ classification and both strengthened conclusions.
 \needspace{8\baselineskip}
 \section{Complements and open problems}\label{sec:complements}
 
-We apply Main Theorem~(\ref{main:spherical}) to finite-dimensional targets and to targets over discretely valued fields, then give an
+We apply the Main Theorem to finite-dimensional targets and to targets over discretely valued fields, then give an
 explicit lift from an orthogonal basis. The section ends with comparisons and questions about ultrametric targets.
 
 \subsection*{Finite-dimensional targets}
@@ -2203,7 +2204,7 @@ If $K$ is ultrametric and spherically complete, there is a positive conclusion f
 finite-dimensional $F$, with any norm. The coordinate norm
 $\norm y_\infty:=\max_a\abs{\lambda_a(y)}$ is equivalent to the given norm. With this norm, $F$ is
 spherically complete: a closed ball in $K^d$ is a product of coordinate balls, and spherical completeness
-of $K$ gives a point in each coordinate intersection. Main Theorem~(\ref{main:spherical}) therefore applies. Returning to the
+of $K$ gives a point in each coordinate intersection. The Main Theorem therefore applies. Returning to the
 original norm preserves analyticity, since it changes the norms on the alternating-map and operator
 spaces only by fixed comparison factors.
 \end{remark}
@@ -2229,8 +2230,9 @@ $\abs\lambda\in r^\Z$ for $\lambda\in K^\times$, it preserves scalar homogeneity
 inequality. Thus $\norm\cdot_u^\sharp$ is an equivalent ultrametric norm, and
 $F':=(F,\norm\cdot_u^\sharp)$ is complete with distances in $r^\Z\cup\{0\}$.
 
-\emph{Apply Main Theorem~(\ref{main:spherical}).} Lemma~\ref{lem:discdist} makes $F'$ spherically complete. Main Theorem~(\ref{main:spherical}) therefore
-gives analyticity of $Q':=Q^K_{E,E',F'}$ at every point.
+\emph{Apply the Main Theorem.} Lemma~\ref{lem:discdist} makes $F'$ spherically complete.
+Part~(\ref{main:general}) in characteristic zero, and part~(\ref{main:spherical}) in positive characteristic,
+therefore give analyticity of $Q':=Q^K_{E,E',F'}$ at every point.
 
 \emph{Return to the original norm.} Equivalent target norms give the same spaces of bounded alternating
 maps, with equivalent operator norms. Consequently
