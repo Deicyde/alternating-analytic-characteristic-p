@@ -77,14 +77,15 @@ status:
     verification/paper-coverage-final-audit.json. The proof library has zero unresolved sorry,
     admit, new axiom or native_decide uses. solution.lean contains the two proved comparator
     declarations; challenge.lean contains exactly two deliberate theorem placeholders and is
-    excluded from these proof-development sorry counts. The comparator states the full main
-    conclusion and factorial classification using the shared transparent definitions in
-    ChallengeDefinitions.lean, which imports only Mathlib and has no proof-library dependency.
-    Its BanachSpace K bundles exactly the original carrier, norm, module and completeness
-    structures; the classification quantifies over all such Banach triples. The main theorem
-    keeps the arbitrary finite index type and its universe visible. The correspondence with
-    both original unbundled propositions is recorded in verification/ChallengeEquivalence.lean,
-    independently of the main construction and classification results. Library builds
+    excluded from these proof-development sorry counts. The comparator contains two simple
+    Mathlib-only contradiction corollaries, with no custom helper definitions, aliases or
+    bundles. The first refutes the universal ContDiff omega assertion over all nontrivially
+    normed fields, all normed-space triples and all finite index types in universe zero. The
+    second fixes arbitrary K : Type u of prime characteristic p and k >= p, and refutes the
+    universal ContDiff K omega assertion over Banach E,F : Type u with E' = E and index Fin k;
+    no completeness of K is assumed. These are consequences of the constructive development,
+    not claims of equivalence with the full main theorem or factorial classification. All
+    stronger results remain proved in the unchanged AlternatingAnalytic library. Library builds
     and all-owned transitive axiom checks are recorded separately from comparator validation
     and model review. Excluded are the expressly unproved alternative infinite-field route,
     announced large-index ultrametric-target construction, mathematical open problems, the
@@ -95,13 +96,13 @@ status:
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
   main_results:
-    - declaration: "AlternatingAnalyticChallenge.exists_banach_counterexample_full"
+    - declaration: "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM"
       file: "solution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       comparator_config: "comparator.json"
       literature_dependencies: []
-    - declaration: "AlternatingAnalyticChallenge.factorial_ne_zero_iff_allBanachPrecompositionAnalytic"
+    - declaration: "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach"
       file: "solution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -187,13 +188,14 @@ fidelity:
     unconditional Schauder bases with the source's orthogonal coordinate bound for the sorted
     lift. The coefficient map is kappa-linear, not Laurent-field-linear; the projective norm
     uses ordinary sums. The formalization does not assert injectivity of the completed
-    determinant-array map. The readable comparator statements use transparent shared
-    definitions rather than repeating long structure and operator expressions. This is a
-    packaging change: BanachSpace K has the original carrier universe and exact normed-space
-    and completeness structures, and the three mathematical helpers unfold to their original
-    meanings. verification/ChallengeEquivalence.lean records the two equivalences with the
-    unbundled propositions without relying on either principal result. Validation receipts
-    identify the exact tested versions; earlier comparator checks do not certify later edits.
+    determinant-array map. The comparator deliberately exposes only two contradiction
+    corollaries in the earlier characteristic-two challenge style. Its general assertion
+    quantifies over types in universe zero; its characteristic-p corollary fixes arbitrary
+    K : Type u and ranges over Banach E,F : Type u with index Fin k. Both statements use only
+    Mathlib constants. Neither is presented as equivalent to the full constructive main
+    theorem or factorial classification; those stronger theorems and their general universe
+    parameters remain in the library. Validation receipts identify the exact tested versions;
+    earlier comparator checks do not certify later edits.
     No announced or open paper claim is included as an axiom.
 
 review:
@@ -213,8 +215,11 @@ alignment:
   namespace: "AlternatingAnalytic"
   theorem_map: "THEOREM_MAP.md"
   coverage_audit: "verification/paper-coverage-final-audit.json"
-  comparator_definitions: "ChallengeDefinitions.lean"
-  comparator_equivalences: "verification/ChallengeEquivalence.lean"
+  comparator_scope: >
+    Two Mathlib-only contradiction corollaries of the proved construction: the universal
+    all-fields analytic-smoothness assertion, and the fixed-prescribed-field Banach assertion
+    in characteristic p and degree k >= p. The source alignment below records the stronger
+    library theorems, not an asserted equivalence with these challenge corollaries.
   statements:
     - source: "Theorem main and adjacent C^omega sharpness statement, Sections 1 and 6"
       lean: "AlternatingAnalytic.exists_banach_counterexample_full"

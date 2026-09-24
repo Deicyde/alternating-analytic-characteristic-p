@@ -1,21 +1,20 @@
 {
   "ok": true,
   "exit_code": 0,
-  "timestamp": "2026-09-23T23:52:32.604607+00:00",
-  "elapsed_seconds": 100.32,
-  "source_manifest_sha256": "00ca43227e943b937eaddab60d35589c9e09262f3229ffc8045168620a32c7b8",
+  "timestamp": "2026-09-24T01:49:44.972974+00:00",
+  "elapsed_seconds": 88.12,
+  "source_manifest_sha256": "26e61c5f50b0ca1133779ea47d464e43d44b4f53c5fada937b8caa781a6e425c",
   "source_unchanged": true,
   "comparator_revision": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
   "mode": "Actual comparator statement and axiom checks and Lean default kernel replay; upstream macOS development launcher without Linux sandbox. Real Linux sandbox configured separately in CI.",
   "lean_default_kernel_accepted": true,
   "theorems_checked": [
-    "AlternatingAnalyticChallenge.exists_banach_counterexample_full",
-    "AlternatingAnalyticChallenge.factorial_ne_zero_iff_allBanachPrecompositionAnalytic"
+    "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM",
+    "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach"
   ],
   "files_sha256": {
-    "challenge.lean": "92a8c0aa1ff8f57dac3c64efd5079a191006e8495cb703d5de5c7a51c382073f",
-    "solution.lean": "776fe1d339dd2debc545f0e90ce00cf14dbb142743ecfa86770179d77d0dc0c8",
-    "ChallengeDefinitions.lean": "2286e5253d1cca87067aed51bfe973932a3a79d69f08227e5ecbae5bef436d42",
-    "comparator.json": "c3a3d2a870d9cdc113ebf2a457d7a66e9ead48aae2007ab56bf72dc4639b94f3"
+    "challenge.lean": "3546c59032b0842583cd6479764d8b443765c04ab6e91613f235b5f2f1cb2c30",
+    "solution.lean": "b4cbe9d47ef6a86e572b444019e5ae8e2fc07c1a92a8a1e8f5503f8b82a7fa67",
+    "comparator.json": "81ce2a50f26086713761fd6901e811fd021c2adc0095bb64a1ca46e33113645c"
   }
 }

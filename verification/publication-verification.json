@@ -1,13 +1,13 @@
 {
   "ok": true,
   "exit_code": 0,
-  "timestamp": "2026-09-23T23:51:42.128332+00:00",
-  "elapsed_seconds": 48.71,
-  "source_manifest_sha256": "00ca43227e943b937eaddab60d35589c9e09262f3229ffc8045168620a32c7b8",
+  "timestamp": "2026-09-24T01:48:54.563895+00:00",
+  "elapsed_seconds": 36.6,
+  "source_manifest_sha256": "26e61c5f50b0ca1133779ea47d464e43d44b4f53c5fada937b8caa781a6e425c",
   "source_unchanged": true,
-  "audited_modules": 92,
-  "audited_declarations": 2056,
-  "scope": "Every library, shared-definition, solution and statement-equivalence declaration, including private and generated declarations. Challenge theorem placeholders excluded.",
+  "audited_modules": 90,
+  "audited_declarations": 2023,
+  "scope": "Every library and comparator-solution declaration, including private and generated declarations. The two deliberate challenge placeholders are excluded.",
   "command": "python3 scripts/verify.py",
-  "output": "Verified 92 modules and 2056 owned declarations; standard axioms only.\n"
+  "output": "Verified 90 modules and 2023 owned declarations; standard axioms only.\n"
 }

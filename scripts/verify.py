@@ -7,17 +7,15 @@ root = Path(__file__).resolve().parents[1]
 manifest = json.loads((root / "verification/source-manifest.json").read_text())
 mandatory = {"verification/AllAxioms.lean", "AlternatingAnalytic.lean", "lean-toolchain",
              "lakefile.toml", "lake-manifest.json", "scripts/verify.py",
-             "challenge.lean", "solution.lean", "ChallengeDefinitions.lean",
-             "verification/ChallengeEquivalence.lean", "comparator.json", "formalization.yaml"}
+             "challenge.lean", "solution.lean", "comparator.json", "formalization.yaml"}
 if not mandatory <= manifest.keys():
     raise SystemExit("Required proof, probe, or build files are missing from the authenticated inventory.")
 for name, expected in manifest.items():
     actual = hashlib.sha256((root / name).read_bytes()).hexdigest()
     if actual != expected:
         raise SystemExit(f"Source hash mismatch: {name}")
-auxiliary_sources = {"solution.lean", "ChallengeDefinitions.lean", "verification/ChallengeEquivalence.lean"}
-source_files = sorted((root / "AlternatingAnalytic").rglob("*.lean")) + [root / name for name in sorted(auxiliary_sources)]
-expected_sources = {name for name in manifest if name.startswith("AlternatingAnalytic/") and name.endswith(".lean")} | auxiliary_sources
+source_files = sorted((root / "AlternatingAnalytic").rglob("*.lean")) + [root / "solution.lean"]
+expected_sources = {name for name in manifest if name.startswith("AlternatingAnalytic/") and name.endswith(".lean")} | {"solution.lean"}
 actual_sources = {str(path.relative_to(root)) for path in source_files}
 if actual_sources != expected_sources:
     raise SystemExit("The delivered library source inventory has changed.")
@@ -29,7 +27,7 @@ if len(module_lists) != 1:
     raise SystemExit("The probe has no unique owned-module inventory.")
 probe_modules = [name.strip().removeprefix("`")
                  for name in module_lists[0].split(",") if name.strip()]
-probe_imports = set(re.findall(r"^import ([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)$", probe, re.M)) - {"Lean"}
+probe_imports = set(re.findall(r"^import ((?:AlternatingAnalytic(?:\.[A-Za-z0-9_]+)*)|solution)$", probe, re.M))
 if (set(probe_modules) != expected_modules or len(probe_modules) != len(expected_modules)
         or probe_imports != expected_modules):
     raise SystemExit("The axiom probe does not cover every delivered library module.")

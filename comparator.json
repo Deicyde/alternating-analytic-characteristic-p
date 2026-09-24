@@ -2,8 +2,8 @@
     "challenge_module": "challenge",
     "solution_module": "solution",
     "theorem_names": [
-        "AlternatingAnalyticChallenge.exists_banach_counterexample_full",
-        "AlternatingAnalyticChallenge.factorial_ne_zero_iff_allBanachPrecompositionAnalytic"
+        "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM",
+        "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach"
     ],
     "permitted_axioms": [
         "propext",

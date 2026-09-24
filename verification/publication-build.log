@@ -1,7 +1,5 @@
-✔ [3141/3148] Built ChallengeDefinitions (14s)
-⚠ [3143/3148] Built challenge (7.7s)
-warning: challenge.lean:24:8: declaration uses `sorry`
+⚠ [3141/3144] Built challenge (10s)
+warning: challenge.lean:25:8: declaration uses `sorry`
 warning: challenge.lean:38:8: declaration uses `sorry`
-✔ [3145/3148] Built verification.ChallengeEquivalence (9.0s)
-✔ [3147/3148] Built solution (9.4s)
-Build completed successfully (3148 jobs).
+✔ [3143/3144] Built solution (11s)
+Build completed successfully (3144 jobs).
