@@ -93,7 +93,8 @@ this obstruction is unavoidable if analyticity is required for all Banach spaces
 \needspace{15\baselineskip}
 \subsection*{Main results}
 We use \emph{Banach space} to mean a complete normed space; its norm need not satisfy the ultrametric inequality.
-This convention is essential to the result. The base field itself need not be complete.
+This convention is essential to the result. For the distinction from the usual ultrametric convention,
+see Schikhof~\cite[\S2.1]{Schi}. The base field itself need not be complete.
 
 \begin{theorem}[Main Theorem]\label{thm:main}
 Let $K$ be a nontrivially normed field of characteristic $p>0$, and let $k\ge p$. There are Banach spaces $E$ and $F$
@@ -250,8 +251,11 @@ targets and open problems.
 We first prove a positive result that explains the role of the target norm. Spherical completeness allows us
 to project bounded multilinear maps onto alternating maps without increasing the norm. Applying this projection
 to the ordinary multilinear precomposition formula produces an analytic lift in every characteristic and degree.
-The argument is independent of the counterexample construction. A special case is stated in~\cite[Remark~16]{M};
-the proof here follows the extension and retraction arguments in the Lean development.
+The argument is independent of the counterexample construction. The retraction strategy reflects the classical
+role of spherically complete spaces as injective objects in nonarchimedean Banach-space theory;
+see Schikhof~\cite[\S2.8]{Schi} for this background over complete fields.
+A special case is stated in~\cite[Remark~16]{M}; the proof here follows the extension and retraction arguments
+in the Lean development.
 
 \subsection{Statement and strategy}
 A norm is \emph{ultrametric} if $\norm{x+y}\le\max(\norm x,\norm y)$. A metric space is
@@ -2396,5 +2400,8 @@ private repository, verified commit \texttt{5e9c3cf},\\
 Springer, Berlin, 2002, \href{https://doi.org/10.1007/978-3-662-04728-6}{doi:10.1007/978-3-662-04728-6}.
 Online version of 25 October 2005,\\
 {\small\url{https://ivv5hpp.uni-muenster.de/u/pschnei/publ/lectnotes/nfa.pdf}}.
+\bibitem{Schi} W.~H.~Schikhof, \emph{Banach spaces over nonarchimedean valued fields}, Topology Proc.\
+\textbf{24} (1999), 547--581,\\
+{\small\url{https://topology.nipissingu.ca/tp/reprints/v24/tp24224.pdf}}.
 \end{thebibliography}
 \end{document}
