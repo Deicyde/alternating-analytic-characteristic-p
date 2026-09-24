@@ -4,6 +4,8 @@ The paper's leading **Main Theorem** has two categorical parts. For a nontrivial
 
 Both parts are mathematical consequences of the formalized operator results and bounded bilinear postcomposition. The first variable is contravariant, and regularity means joint regularity of `(u, v) ↦ [m ↦ v ∘ m ∘ (u, …, u)]` on each pair of morphism spaces with the operator norms. The C∞ assertion uses the pinned Mathlib precomposition theorem; the spherical-target statement also uses the proved spherical completeness of alternating-map spaces below. No separate categorical functor or joint-action declaration is claimed in Lean.
 
+The introduction's **Motivation: vector bundles** explains how jointly Cⁿ multifunctors act on transition cocycles, with inverse transitions in contravariant arguments. The resulting bundle construction and its alternating-map and differential-form examples are explanatory mathematics, not additional Lean bundle or functor declarations.
+
 The complete bundled operator entry point is [`AlternatingAnalytic.exists_banach_counterexample_full`](AlternatingAnalytic/MainTheorem.lean): the same Banach witnesses simultaneously have no bounded lift, nowhere analyticity, nowhere `ContDiffAt K ω`, and no equivalent ultrametric target norm. It follows from the unchanged construction and general lift criterion.
 
 ## Operator counterexample and classification

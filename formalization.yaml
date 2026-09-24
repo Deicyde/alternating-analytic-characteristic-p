@@ -60,6 +60,10 @@ sources:
       The categorical statements follow mathematically from the formalized operator results;
       the Main Theorem's ordinary smoothness input is in the pinned Mathlib dependency.
       No separate Lean categorical functor or joint-action declaration is claimed.
+      The introduction's vector-bundle motivation explains how jointly C^n multifunctors
+      transform transition cocycles, using inverse transitions in contravariant arguments,
+      and applies this to alternating-map bundles and differential forms. This general
+      construction is explanatory mathematics, not additional Lean bundle or functor declarations.
       A weighted c_0 example shows that spherical completeness of the given target norm is
       not necessary for analyticity; its sufficient discrete-target criterion is formalized,
       while the example itself is an additional informal corollary. The paper asks for an

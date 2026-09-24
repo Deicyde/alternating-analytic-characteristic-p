@@ -203,14 +203,67 @@ Proposition~\ref{prop:alt-spherical} gives the stronger closure property require
 In degree zero, $\Alt^0(E;F)$ is naturally isometric to $F$; pullback is constant and the joint action
 is linear in the pushforward variable.
 
-\subsection*{Motivation and related results}
-The regularity of $Q$ arises in the construction of bundles of differential forms. Applying $\Alt^k$ to the
-transition maps of vector bundles requires control of the corresponding precomposition map; compare Lang's
-functors of class $C^p$~\cite[Ch.~III, \S4]{La}. Mathlib treats manifolds and vector bundles over arbitrary
-nontrivially normed fields, with regularity $n\in\N\cup\{\infty,\omega\}$, where $C^\omega$ denotes analytic
-regularity. This makes the distinction between smoothness and analyticity in positive characteristic relevant to
-the general bundle construction.
+\subsection*{Motivation: vector bundles}
+The categorical formulation is motivated by the construction of vector bundles; compare Lang's functors
+of class $C^p$~\cite[Ch.~III, \S4]{La}. Let $M$ be a $C^n$ manifold over $K$, where
+$n\in\N\cup\{\infty,\omega\}$ and $C^\omega$ means analytic. A $C^n$ vector bundle
+$\mathcal V\to M$ with typical fiber $V$ can be described by an open cover $(U_i)$ of $M$ and $C^n$ transition maps
+\[
+g_{ij}\colon U_i\cap U_j\longrightarrow\operatorname{Aut}_K(V)\subseteq\End_K(V).
+\]
+Here $\operatorname{Aut}_K(V)$ consists of bounded linear isomorphisms with bounded inverse, and $C^n$
+regularity is measured in the operator-norm space $\End_K(V)=\cL(V,V)$. Our convention is that $g_{ij}$
+converts coordinates in chart $j$ to coordinates in chart $i$. The transition maps satisfy
+\[
+g_{ii}(x)=\id_V,\qquad g_{ij}(x)\circ g_{j\ell}(x)=g_{i\ell}(x)
+\]
+on the relevant overlaps. Conversely, such a cocycle glues the products $U_i\times V$ into a $C^n$ vector
+bundle: the coordinate changes $(x,v)\mapsto(x,g_{ij}(x)v)$ are $C^n$ because operator evaluation is bounded
+bilinear. In particular, $g_{ji}=g_{ij}^{-1}$, and both directions are $C^n$ by the cocycle data.
 
+\needspace{6\baselineskip}
+Now let
+\[
+\mathcal F\colon\underbrace{\mathsf{Vec}_K\times\cdots\times\mathsf{Vec}_K}_{r\text{ factors}}
+\longrightarrow\mathsf{Vec}_K
+\]
+be a $C^n$ multifunctor: its induced maps on products of hom spaces are jointly $C^n$.
+Given $C^n$ vector bundles $\mathcal V_1,\dots,\mathcal V_r$ over $M$, choose a common trivializing cover,
+write $V_a$ for their typical fibers, and let $g^a_{ij}$ be their transition maps. Set
+$\mathbf g_{ij}=(g^1_{ij},\dots,g^r_{ij})$ and $W=\mathcal F(V_1,\dots,V_r)$.
+The induced transition maps $h_{ij}(x)=\mathcal F(\mathbf g_{ij}(x))$ are $C^n$ as maps into $\End_K(W)$.
+Functoriality gives
+\[
+\begin{aligned}
+h_{ij}(x)\circ h_{j\ell}(x)
+&=\mathcal F\bigl(\mathbf g_{ij}(x)\circ\mathbf g_{j\ell}(x)\bigr)\\
+&=\mathcal F\bigl(\mathbf g_{i\ell}(x)\bigr)=h_{i\ell}(x),
+\qquad h_{ii}(x)=\id_W.
+\end{aligned}
+\]
+Thus the $h_{ij}$ form a $C^n$ cocycle and define a vector bundle $\mathcal F(\mathcal V_1,\dots,\mathcal V_r)$
+with fiber $\mathcal F((\mathcal V_1)_x,\dots,(\mathcal V_r)_x)$ over $x$.
+Applying $\mathcal F$ to changes of trivialization identifies the resulting bundles, so the construction is
+independent of the chosen cover and trivializations. In particular, one may apply a multifunctor repeatedly
+to the same bundle. Functoriality supplies the cocycle identity, while regularity on hom spaces supplies the
+regularity of the new bundle.
+
+The same construction works for mixed variance, using $g_{ji}$ in each contravariant argument.
+These inverse transitions are already $C^n$, so no separate regularity theorem for inversion is needed.
+For example, if $\mathcal E,\mathcal H\to M$ have typical fibers $E,F$ and transition maps $g_{ij},h_{ij}$,
+then the bundle with fibers $\Alt^k(\mathcal E_x;\mathcal H_x)$ has transition maps
+\[
+a\longmapsto h_{ij}(x)\circ a\circ\bigl(g_{ji}(x),\dots,g_{ji}(x)\bigr).
+\]
+The Main Theorem therefore constructs this as a $C^n$ vector bundle for every $n\le\infty$ whenever the input
+bundles are $C^n$. For analytic input bundles, it gives an analytic bundle when $k!\ne0$ in $K$, and in every
+degree when $K$ is ultrametric and the typical target fiber $F$ is ultrametric and spherically complete.
+Taking $\mathcal E=TM$ and $\mathcal H=M\times K$ gives the bundle of differential $k$\nobreakdash-forms
+on a smooth manifold, and on an analytic manifold in the corresponding analytic cases.
+
+\subsection*{Related results}
+Mathlib treats manifolds and vector bundles over arbitrary nontrivially normed fields, with the same regularity
+indices $n\in\N\cup\{\infty,\omega\}$.
 Over every such field, $Q$ is of class $C^n$ for every $n\in\N\cup\{\infty\}$, with no completeness or dimension
 assumptions; this is proved in the draft Mathlib contribution~\cite{PR}. In characteristic $0$, Gou\"ezel proves
 analyticity by polarization~\cite{G1} and uses it in the bundle construction~\cite{G2}. The same polarization

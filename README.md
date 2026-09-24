@@ -15,6 +15,8 @@ Neither part assumes completeness of K. Part (2) was previously called Theorem A
 
 The underlying operator results are formalized in Lean. Both parts of the categorical Main Theorem follow mathematically from these results, bounded bilinear postcomposition, and the closure properties of alternating-map spaces; the categorical functors and joint morphism actions are not separate Lean declarations.
 
+The introduction explains the vector-bundle motivation: a multifunctor that is jointly Cⁿ on morphism spaces carries transition maps to a new Cⁿ bundle cocycle. It treats contravariant arguments using inverse transitions and applies the construction to alternating-map bundles and differential forms. This is explanatory mathematical motivation, with no additional Lean bundle or functor declarations.
+
 The numbered **Counterexample theorem** (`thm:main`) retains the stronger constructive statement: for every nontrivially normed field K of prime characteristic p, including incomplete fields, and every k ≥ p, there are K-Banach spaces E and F such that degree-k alternating precomposition on E is analytic at no point. The same spaces work for every finite index type of cardinality k, and F has no equivalent ultrametric norm.
 
 The complete statement, including the absence of a bounded multilinear lift and failure of `ContDiffAt K ω` at every point, is `AlternatingAnalytic.exists_banach_counterexample_full` in [MainTheorem.lean](AlternatingAnalytic/MainTheorem.lean).
