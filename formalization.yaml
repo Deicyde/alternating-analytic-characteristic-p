@@ -76,11 +76,13 @@ status:
     Complete for the proved-paper scope recorded in THEOREM_MAP.md and
     verification/paper-coverage-final-audit.json. The proof library has zero unresolved sorry,
     admit, new axiom or native_decide uses. solution.lean contains the two proved comparator
-    declarations; challenge.lean contains exactly two deliberate theorem placeholders and is
+    theorems; challenge.lean contains exactly two deliberate theorem placeholders and is
     excluded from these proof-development sorry counts. The comparator contains two simple
-    Mathlib-only contradiction corollaries, with no custom helper definitions, aliases or
-    bundles. The first refutes the universal ContDiff omega assertion over all nontrivially
-    normed fields, all normed-space triples and all finite index types in universe zero. The
+    contradiction corollaries in a challenge importing only Mathlib. The single transparent
+    predicate AlternatingAnalyticChallenge.BanachPrecompositionAnalytic K k names the original
+    fixed-field universal hypothesis and is defined identically in challenge.lean and
+    solution.lean. The first theorem refutes the universal ContDiff omega assertion over all
+    nontrivially normed fields, all normed-space triples and all finite index types in universe zero. The
     second fixes arbitrary K : Type u of prime characteristic p and k >= p, and refutes the
     universal ContDiff K omega assertion over Banach E,F : Type u with E' = E and index Fin k;
     no completeness of K is assumed. These are consequences of the constructive development,
@@ -191,9 +193,12 @@ fidelity:
     determinant-array map. The comparator deliberately exposes only two contradiction
     corollaries in the earlier characteristic-two challenge style. Its general assertion
     quantifies over types in universe zero; its characteristic-p corollary fixes arbitrary
-    K : Type u and ranges over Banach E,F : Type u with index Fin k. Both statements use only
-    Mathlib constants. Neither is presented as equivalent to the full constructive main
-    theorem or factorial classification; those stronger theorems and their general universe
+    K : Type u and ranges over Banach E,F : Type u with index Fin k. The global statement uses
+    Mathlib constants directly. The fixed-field hypothesis uses the transparent predicate
+    BanachPrecompositionAnalytic K k, defined identically in both comparator files using
+    Mathlib's existing definitions; unfolding it recovers the original quantified hypothesis.
+    Neither is presented as equivalent to the full constructive main theorem or factorial
+    classification; those stronger theorems and their general universe
     parameters remain in the library. Validation receipts identify the exact tested versions;
     earlier comparator checks do not certify later edits.
     No announced or open paper claim is included as an axiom.
@@ -216,10 +221,11 @@ alignment:
   theorem_map: "THEOREM_MAP.md"
   coverage_audit: "verification/paper-coverage-final-audit.json"
   comparator_scope: >
-    Two Mathlib-only contradiction corollaries of the proved construction: the universal
-    all-fields analytic-smoothness assertion, and the fixed-prescribed-field Banach assertion
-    in characteristic p and degree k >= p. The source alignment below records the stronger
-    library theorems, not an asserted equivalence with these challenge corollaries.
+    Two contradiction corollaries of the proved construction, with only Mathlib imports in
+    the challenge: the universal all-fields analytic-smoothness assertion, and the
+    fixed-prescribed-field Banach assertion in characteristic p and degree k >= p. The latter
+    names its original universal hypothesis BanachPrecompositionAnalytic K k. The source
+    alignment below records the stronger library theorems, not an asserted equivalence with these challenge corollaries.
   statements:
     - source: "Theorem main and adjacent C^omega sharpness statement, Sections 1 and 6"
       lean: "AlternatingAnalytic.exists_banach_counterexample_full"

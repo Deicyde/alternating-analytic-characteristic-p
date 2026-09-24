@@ -1,9 +1,9 @@
 {
   "ok": true,
   "exit_code": 0,
-  "timestamp": "2026-09-24T01:49:44.972974+00:00",
-  "elapsed_seconds": 88.12,
-  "source_manifest_sha256": "26e61c5f50b0ca1133779ea47d464e43d44b4f53c5fada937b8caa781a6e425c",
+  "timestamp": "2026-09-24T18:20:22.255734+00:00",
+  "elapsed_seconds": 115.6,
+  "source_manifest_sha256": "dfa95e40d42999b65296c3a8e0ad6ebb42822216f7f4756d95cc989806786cc7",
   "source_unchanged": true,
   "comparator_revision": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
   "mode": "Actual comparator statement and axiom checks and Lean default kernel replay; upstream macOS development launcher without Linux sandbox. Real Linux sandbox configured separately in CI.",
@@ -13,8 +13,8 @@
     "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach"
   ],
   "files_sha256": {
-    "challenge.lean": "3546c59032b0842583cd6479764d8b443765c04ab6e91613f235b5f2f1cb2c30",
-    "solution.lean": "b4cbe9d47ef6a86e572b444019e5ae8e2fc07c1a92a8a1e8f5503f8b82a7fa67",
+    "challenge.lean": "85b9e6499d246ecd91d17e3bd709831b03dc3692e9ef7f9b1770513a94632dbe",
+    "solution.lean": "545385f8f7c2940c31622155dc9525be9ad8a0073e6cd67cef7ae669875e4520",
     "comparator.json": "81ce2a50f26086713761fd6901e811fd021c2adc0095bb64a1ca46e33113645c"
   }
 }

@@ -1,13 +1,13 @@
 {
   "ok": true,
   "exit_code": 0,
-  "timestamp": "2026-09-24T01:48:54.563895+00:00",
-  "elapsed_seconds": 36.6,
-  "source_manifest_sha256": "26e61c5f50b0ca1133779ea47d464e43d44b4f53c5fada937b8caa781a6e425c",
+  "timestamp": "2026-09-24T18:18:26.656470+00:00",
+  "elapsed_seconds": 40.7,
+  "source_manifest_sha256": "dfa95e40d42999b65296c3a8e0ad6ebb42822216f7f4756d95cc989806786cc7",
   "source_unchanged": true,
-  "audited_modules": 90,
-  "audited_declarations": 2023,
-  "scope": "Every library and comparator-solution declaration, including private and generated declarations. The two deliberate challenge placeholders are excluded.",
   "command": "python3 scripts/verify.py",
-  "output": "Verified 90 modules and 2023 owned declarations; standard axioms only.\n"
+  "output": "Verified 90 modules and 2032 owned declarations; standard axioms only.\n",
+  "scope": "Every library and comparator-solution declaration, including private and generated declarations and the named Banach predicate. The two deliberate challenge placeholders are excluded.",
+  "audited_modules": 90,
+  "audited_declarations": 2032
 }

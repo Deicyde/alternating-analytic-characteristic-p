@@ -12,18 +12,25 @@ namespace AlternatingAnalyticChallenge
 
 universe u
 
+/-- Precomposition on degree-`k` continuous alternating maps is `C^ω` for every
+pair of Banach spaces over `K`, with `E' = E` and index `Fin k`.
+The field `K` itself need not be complete. -/
+def BanachPrecompositionAnalytic
+    (K : Type u) [NontriviallyNormedField K] (k : ℕ) : Prop :=
+  ∀ (E F : Type u) [NormedAddCommGroup E] [NormedSpace K E] [CompleteSpace E]
+      [NormedAddCommGroup F] [NormedSpace K F] [CompleteSpace F],
+      ContDiff K ω
+        (fun f : E →L[K] E =>
+          (ContinuousAlternatingMap.compContinuousLinearMapCLM f :
+            (E [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F)))
+
 /-- For any prescribed nontrivially normed field of characteristic `p` and any
 `k ≥ p`, assume `C^ω` precomposition for all Banach spaces with `E' = E` and index
 `Fin k`. Then `False`. The field need not be complete. -/
 theorem false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach
     (K : Type u) [NontriviallyNormedField K] (p k : ℕ) (hp : p.Prime)
     [CharP K p] (hpk : p ≤ k)
-    (h : ∀ (E F : Type u) [NormedAddCommGroup E] [NormedSpace K E] [CompleteSpace E]
-      [NormedAddCommGroup F] [NormedSpace K F] [CompleteSpace F],
-      ContDiff K ω
-        (fun f : E →L[K] E =>
-          (ContinuousAlternatingMap.compContinuousLinearMapCLM f :
-            (E [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F)))) : False := by
+    (h : BanachPrecompositionAnalytic K k) : False := by
   obtain ⟨E, F, gE, gF, nE, nF, cE, cF, _, hno⟩ :=
     AlternatingAnalytic.exists_banach_counterexample_full.{u, 0} K p k hp hpk
   let : NormedAddCommGroup E := gE
