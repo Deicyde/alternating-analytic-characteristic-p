@@ -18,6 +18,17 @@ Paper labels refer to the [current manuscript](paper/charp.tex); the original sn
 
 Challenge validation uses only [Kim Morrison's comparator](https://github.com/leanprover/comparator), with the configuration in [comparator.json](comparator.json).
 
+## Spherically complete targets: proof of Theorem A
+
+The manuscript's standalone Section 2 (`sec:theoremA`) proves Theorem A through compatible extension, spherical completeness of alternating-map spaces, and a contracting retraction. These arguments follow the existing Lean proofs below; they require no new formalized declarations.
+
+| Paper claim | Actual declarations and assumptions |
+|---|---|
+| `lem:compatible-extension`: extend a linear map while preserving a compatible family of operator bounds | Global `exists_extension_of_sphericallyComplete` in [SphericalCompleteness.lean](AlternatingAnalytic/Analysis/SphericalCompleteness.lean). The source is an ultrametric seminormed space, and the target is ultrametric and spherically complete. The field and source need not be complete. |
+| `prop:alt-spherical`: alternating-map spaces inherit spherical completeness from the target | Global `sphericallyCompleteSpace_continuousAlternatingMap` in [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean). The field and target are ultrametric, the target is spherically complete, and the source is an arbitrary normed space. |
+| Theorem A, retraction step | `ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap` in [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean). The inclusion of alternating maps into multilinear maps has a continuous linear retraction of norm at most one. |
+| Theorem A, bounded lift and regularity | `ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete`, `ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete`, and `ContinuousAlternatingMap.analyticAt_compContinuousLinearMapCLM_of_sphericallyComplete` in [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean). The field is ultrametric, the target is ultrametric and spherically complete, and both input spaces are arbitrary normed spaces. All degrees, characteristics, and differentiability orders, including analytic regularity, are allowed. |
+
 ## Added positive-case exposition
 
 The current paper gives explicit proofs of the factorial-invertible case (in particular p > k) and of C∞ smoothness. The former is in [FactorialInvertible.lean](AlternatingAnalytic/Analysis/FactorialInvertible.lean). The latter, including smoothness reflection through a closed linear isometry, is in the pinned Mathlib modules `Analysis.Calculus.ContDiff.ContinuousAlternatingMap` and `Analysis.Calculus.ContDiff.LinearIsometry`.
@@ -88,7 +99,6 @@ As Remark `infkappa` states, the norm, coefficient and residue constructions wor
 
 | Paper claim | Actual declarations and assumptions |
 |---|---|
-| Theorem A: spherically complete ultrametric targets | `ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete`, `ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete`, `ContinuousAlternatingMap.analyticAt_compContinuousLinearMapCLM_of_sphericallyComplete` in [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean). The field is ultrametric, the target is ultrametric and spherically complete, and the input spaces are arbitrary normed spaces. All degrees and characteristics are allowed. The quoted source result has an integrated proof here. |
 | `discrete`: targets with an equivalent ultrametric norm | `cpolynomialAt_of_equivalentUltrametricNorm_discreteValueGroup` and `analyticAt_of_equivalentUltrametricNorm_discreteValueGroup` in [DiscreteTargetAnalytic.lean](AlternatingAnalytic/Analysis/DiscreteTargetAnalytic.lean), using [DiscreteNormRounding.lean](AlternatingAnalytic/Analysis/DiscreteNormRounding.lean). The target **must be complete**; the base need not be complete. Analyticity is proved for the original norm, with value group `r^ℤ`. |
 | Remark `notsuff`, `(p,k)=(5,3)`: lacking an ultrametric renorming is not sufficient for nonanalyticity | `degree_three_char_five_analytic_without_equivalentUltrametricNorm` in [NonUltrametricAnalyticExample.lean](AlternatingAnalytic/Analysis/NonUltrametricAnalyticExample.lean). It uses the actual Laurent exterior Banach target. |
 | Remark `sorted`: contracting sorted lift and analyticity | `sortedSchauderLift`, `norm_sortedSchauderLift_le`, `sortedSchauderLift_diag`, `analyticAt_of_orthogonalSchauderBasis_fintype` in [SortedBasisAnalytic.lean](AlternatingAnalytic/Analysis/SortedBasisAnalytic.lean). The input has an unconditional Schauder basis with the orthogonal coordinate bound; `K` is ultrametric and `F` is **complete and ultrametric**. Neither spherical completeness nor factorial division is required. |

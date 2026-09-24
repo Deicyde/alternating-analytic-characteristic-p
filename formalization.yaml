@@ -41,6 +41,8 @@ sources:
       improves the exposition without changing the main theorem or factorial criterion. It
       also supplies proofs of the positive cases, with the finite-dimensional additions
       distinguished from the formalized scope in THEOREM_MAP.md.
+      Standalone Section 2, Spherically complete targets: proof of Theorem A, follows the
+      existing Lean extension, spherical-completeness and retraction arguments.
       Announced and open items are not claimed as proved.
     license: ""
     author_endorsement: "participated"
@@ -276,11 +278,21 @@ alignment:
       lean: "AlternatingAnalytic.exists_sortedSchauderLift"
       module: "AlternatingAnalytic.Analysis.SortedBasisFormula"
       status: "proved"
-    - source: "Theorem A: spherically complete ultrametric targets"
+    - source: "Lemma compatible-extension in sec:theoremA: extension preserving compatible operator bounds"
+      lean: "exists_extension_of_sphericallyComplete"
+      module: "AlternatingAnalytic.Analysis.SphericalCompleteness"
+      status: "proved"
+      note: "Existing global declaration; an ultrametric seminormed source and an ultrametric, spherically complete target suffice, with no completeness assumption on the field or source."
+    - source: "Proposition alt-spherical in sec:theoremA: spherical completeness of alternating-map spaces"
+      lean: "sphericallyCompleteSpace_continuousAlternatingMap"
+      module: "AlternatingAnalytic.Analysis.SphericalAnalytic"
+      status: "proved"
+      note: "Existing global instance; an ultrametric field and a spherically complete ultrametric target, with arbitrary normed source."
+    - source: "Theorem A in sec:theoremA: spherically complete ultrametric targets"
       lean: "ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete"
       module: "AlternatingAnalytic.Analysis.SphericalAnalytic"
       status: "proved"
-      note: "Proved in the current paper following its existing Lean proof."
+      note: "Proved in standalone Section 2 following the existing Lean proofs, including ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap and the resulting bounded lift."
     - source: "Proposition discrete: complete targets with an equivalent ultrametric norm"
       lean: "AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup"
       module: "AlternatingAnalytic.Analysis.DiscreteTargetAnalytic"

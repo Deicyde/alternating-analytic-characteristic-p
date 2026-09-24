@@ -14,6 +14,8 @@ The exact factorial criterion is `AlternatingAnalytic.factorial_ne_zero_iff_allB
 
 The construction includes the finite-field Ramsey obstruction, the projective exterior completion and coefficient-support estimate, and scalar extension and descent. [THEOREM_MAP.md](THEOREM_MAP.md) also records the proved complements and the explicitly excluded announced or open results.
 
+Section 2, **Spherically complete targets: proof of Theorem A**, gives a standalone positive result: over an ultrametric field, a spherically complete ultrametric target makes precomposition analytic in every degree. Its extension, spherical-completeness, and retraction arguments follow the existing proofs in [SphericalCompleteness.lean](AlternatingAnalytic/Analysis/SphericalCompleteness.lean) and [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean).
+
 ## Using the library
 
 The project uses Lean **4.34.0-rc2** and pins Mathlib to [2b73d9821d297b80d92eecc54cc09bfc263e0098](https://github.com/Deicyde/mathlib4/tree/2b73d9821d297b80d92eecc54cc09bfc263e0098). All dependency revisions are recorded in `lake-manifest.json`.

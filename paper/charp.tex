@@ -64,7 +64,8 @@ map is analytic on spaces of continuous alternating $k$\nobreakdash-linear maps:
 $K$\nobreakdash-Banach spaces if and only if $k!\ne0$ in $K$. If $K$ has characteristic $p>0$ and $k\ge p$, we construct
 Banach spaces $E$ and $F$ for which precomposition on $\Alt^k(E;F)$ is analytic at no point, although it is of class
 $C^n$ for every $n\in\N\cup\{\infty\}$. The field $K$ need not be complete, and $F$ admits no equivalent ultrametric
-norm. The algebraic obstruction is a finite-field theorem: coordinatewise multiplication on sequences has no
+norm. For ultrametric spherically complete targets, we instead prove analyticity in every degree by constructing
+a contracting retraction onto alternating maps. The algebraic obstruction is a finite-field theorem: coordinatewise multiplication on sequences has no
 multilinear lift to the exterior power satisfying the polarized diagonal identity and a uniform bound on support
 dimension when $k!=0$. We prove this by Ramsey's theorem and a cancellation argument. A constant-coefficient map
 on a completed exterior power over a Laurent series field converts boundedness into the required support bound;
@@ -140,9 +141,9 @@ regularity range in~\cite{PR} is sharp over every field of characteristic $p>0$ 
 Mathlib's \texttt{ContDiffAt K $\omega$} fails at every point.
 
 The answer is different if the target norm is required to be ultrametric. If $K$ is ultrametric and $F$ is
-ultrametric and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Theorem~A,
-\S\ref{sec:complements}). We include a proof by spherical completeness and extension of bounded linear maps, following the Lean
-development. This positive result is not used in the Main Theorem or Corollary~\ref{cor:class}. A special case appears
+ultrametric and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Theorem~A).
+The proof in \S\ref{sec:theoremA} constructs a contracting retraction from multilinear maps to alternating maps
+by spherical completeness and extension of bounded linear maps. This positive result is not used in the Main Theorem or Corollary~\ref{cor:class}. A special case appears
 in~\cite[Remark~16]{M}. Over a discretely valued base, Theorem~A in fact rules out a Banach counterexample whenever
 $F$ has an equivalent ultrametric norm (Proposition~\ref{prop:discrete}).
 
@@ -154,7 +155,7 @@ works over every nontrivially normed field of positive characteristic, including
 by allowing targets with no equivalent ultrametric norm. The remaining questions for ultrametric targets are
 discussed in \S\ref{sec:complements}.
 
-\subsection*{Proof overview}
+\subsection*{Overview of the counterexample proof}
 The proof separates into an algebraic obstruction, its realization by a normed space, and passage to the prescribed
 field. The analytic input is a lift criterion valid in every characteristic: if $Q$ is analytic at any point, the
 degree-$k$ term of its power series has diagonal $Q$. One-variable uniqueness identifies this diagonal without
@@ -201,10 +202,201 @@ in \S\ref{sec:lean}.
 \S\ref{sec:lean} records the principal declarations, verification scope, and provenance; the quoted smoothness
 result~\cite{PR}, whose argument we include, and earlier characteristic-$2$ construction~\cite{M} have separate provenance.
 
+\S\ref{sec:theoremA} proves Theorem~A independently, including the extension and spherical-completeness arguments.
 \S\ref{sec:prelim} gives the analytic and exterior-algebra preliminaries, and \S\ref{sec:positive} proves the positive cases. \S\ref{sec:FF} proves the finite-field
 obstruction, and \S\ref{sec:laurent} realizes it over a Laurent series field. \S\ref{sec:ascent} develops scalar
 extension and descent; \S\ref{sec:proofs} assembles the main results. \S\ref{sec:complements} treats ultrametric
 targets and open problems.
+
+\section{Spherically complete targets: proof of Theorem A}\label{sec:theoremA}
+We first prove a positive result that explains the role of the target norm. Spherical completeness allows us
+to project bounded multilinear maps onto alternating maps without increasing the norm. Applying this projection
+to the ordinary multilinear precomposition formula produces an analytic lift in every characteristic and degree.
+The argument is independent of the counterexample construction. A special case is stated in~\cite[Remark~16]{M};
+the proof here follows the extension and retraction arguments in the Lean development.
+
+\subsection{Statement and strategy}
+A norm is \emph{ultrametric} if $\norm{x+y}\le\max(\norm x,\norm y)$. A metric space is
+\emph{spherically complete} if every nonempty family of closed balls that meet pairwise has a common point.
+We write $\overline B(a,r)=\{x:\norm{x-a}\le r\}$, with $r\ge0$.
+In an ultrametric space, two such balls meet if and only if the distance between their centres is at most the larger radius;
+in that case the ball of smaller radius is contained in the other.
+
+As in the introduction, $\cL(X,Y)$ denotes bounded linear maps. Write $\Mult^k(X;Y)$ for the bounded
+$k$\nobreakdash-linear maps and $\Alt^k(X;Y)$ for their alternating subspace, with the operator norms determined by
+\[
+\norm{m(x_1,\dots,x_k)}\le\norm m\prod_{i=1}^k\norm{x_i}.
+\]
+When the target norm is ultrametric, both operator spaces are ultrametric, regardless of the norm on $X$.
+For a finite set $\iota$ of size $k$, choosing a bijection with $\{1,\dots,k\}$ identifies the corresponding
+spaces isometrically and preserves precomposition. We therefore use the degree notation $\Alt^k$ in the proof.
+
+\begin{thmA}
+Let $K$ be an ultrametric nontrivially normed field, let $E,E'$ be normed $K$\nobreakdash-spaces, and let $F$ be a normed $K$\nobreakdash-space
+whose norm is ultrametric and which is spherically complete as a metric space. Then $Q^K_{E,E',F}$ is $C^n$ for every
+$n\in\N\cup\{\infty,\omega\}$; in particular it is analytic at every point.
+\end{thmA}
+
+No completeness assumption on $K,E$ or $E'$ is needed, and the norms on $E,E'$ may be non-ultrametric.
+For $k\ge1$, put $A=\Alt^k(E;F)$ and $M=\Mult^k(E;F)$. The desired projection is a bounded linear map
+$\rho\colon M\to A$ of norm at most one that fixes every alternating map. Once it is available, the formula
+\[
+P(f_1,\dots,f_k)(m)=\rho\bigl(m\circ(f_1,\dots,f_k)\bigr)
+\]
+is bounded and multilinear in the operators $f_i$, and has diagonal $Q$. This is the required analytic lift:
+expansion around any operator gives a finite power series. To construct $\rho$, we first prove an extension
+lemma that preserves a family of bounds, then use it to show that $A$ is spherically complete.
+
+\subsection{Extension with simultaneous bounds}
+The following form of the ultrametric extension argument keeps a prospective extension in several operator
+balls at once. We allow a seminorm on the domain, since the free space used in the next step may have
+nonzero vectors of seminorm zero.
+
+\begin{lemma}[compatible extension]\label{lem:compatible-extension}
+Let $U$ be an ultrametric seminormed $K$\nobreakdash-space and let $G$ be an ultrametric, spherically complete
+normed $K$\nobreakdash-space. Suppose a nonempty family $(T_\alpha,r_\alpha)$, with
+$T_\alpha\in\cL(U,G)$ and $r_\alpha\ge0$, satisfies
+\[
+\norm{T_\alpha-T_\beta}\le\max(r_\alpha,r_\beta)
+\qquad\text{for all }\alpha,\beta.
+\]
+Let $D\subseteq U$ be a linear subspace and let $T_0\colon D\to G$ be linear with
+\[
+\norm{T_0d-T_\alpha d}\le r_\alpha\norm d
+\qquad(d\in D,\ \text{all }\alpha).
+\]
+Then $T_0$ extends to a bounded linear map $T\colon U\to G$ such that
+$\norm{T-T_\alpha}\le r_\alpha$ for every $\alpha$. In particular, every contraction from a subspace of $U$
+to $G$ extends to a contraction on $U$.
+\end{lemma}
+
+\begin{proof}
+It suffices to extend across one vector $x\notin D$ while preserving every bound. The required value $Tx$
+must belong to the balls
+\begin{equation}\label{eq:extension-balls}
+\overline B\bigl(T_\alpha(d+x)-T_0d,\ r_\alpha\norm{d+x}\bigr)
+\qquad(\alpha,\ d\in D).
+\end{equation}
+We check that these balls meet pairwise. Write $c_{\alpha,d}=T_\alpha(d+x)-T_0d$, and suppose
+$r_\alpha\le r_\beta$. Then
+\[
+c_{\alpha,d}-c_{\beta,e}
+=T_\alpha(d-e)-T_0(d-e)+(T_\alpha-T_\beta)(e+x).
+\]
+Since $d-e\in D$ and $\norm{d-e}\le\max(\norm{d+x},\norm{e+x})$, the hypotheses give
+\[
+\begin{aligned}
+\norm{c_{\alpha,d}-c_{\beta,e}}
+&\le\max\bigl(r_\alpha\norm{d-e},r_\beta\norm{e+x}\bigr)\\
+&\le\max\bigl(r_\alpha\norm{d+x},r_\beta\norm{e+x}\bigr).
+\end{aligned}
+\]
+This is exactly the condition for the two balls to meet. The other ordering of the radii is symmetric.
+
+By spherical completeness, choose $c$ in all the balls~\eqref{eq:extension-balls}. Define
+\[
+T(d+\lambda x)=T_0d+\lambda c.
+\]
+The decomposition is unique because $x\notin D$. For $\lambda\ne0$, apply the ball condition with
+$\lambda^{-1}d$ in place of $d$ and multiply by $\abs\lambda$; this gives
+$\norm{T(d+\lambda x)-T_\alpha(d+\lambda x)}\le r_\alpha\norm{d+\lambda x}$.
+For $\lambda=0$ the original bound applies.
+
+Partially order the extensions satisfying all these inequalities by inclusion of their domains.
+Unions of chains remain linear and preserve the bounds, so Zorn's lemma gives a maximal extension.
+The one-vector argument forces its domain to be all of $U$. Fixing any one index $\alpha$ gives
+$\norm{Tu}\le\max(\norm{T_\alpha},r_\alpha)\norm u$, so the extension is bounded.
+For the last assertion, take the single pair $(T_\alpha,r_\alpha)=(0,1)$.
+\end{proof}
+
+\subsection{Spherical completeness of alternating-map spaces}
+Ordinary completeness alone would not let us apply the extension lemma with target $A$.
+We prove the required stronger property by presenting alternating maps as linear maps on a free space
+subject to linear relations. The ultrametric seminorm on that free space is chosen so that this presentation
+preserves the operator norm, even when $E$ itself is not ultrametric.
+
+\begin{proposition}\label{prop:alt-spherical}
+Under the hypotheses of Theorem~A, $\Alt^k(E;F)$ is an ultrametric, spherically complete normed space
+for every $k\ge0$.
+\end{proposition}
+
+\begin{proof}
+For $k=0$, the space identifies isometrically with $F$. Suppose $k\ge1$. Let $U$ be the free
+$K$\nobreakdash-vector space on the set $E^k$, with generators $[x]$ and seminorm
+\[
+\Bigl\lVert\sum_x c_x[x]\Bigr\rVert_U
+=\max_x\abs{c_x}\prod_{i=1}^k\norm{x_i}.
+\]
+The maximum is over the finite support, with empty maximum zero. This seminorm is ultrametric because
+the absolute value on $K$ is ultrametric. Let $R\subseteq U$ be the linear span of the relations expressing
+additivity and scalar homogeneity in each slot, together with $[x]$ whenever two coordinates of $x$ coincide.
+
+An alternating map $a\in A$ defines a linear map vanishing on $R$ by
+\[
+\widehat a\Bigl(\sum_xc_x[x]\Bigr)=\sum_xc_xa(x).
+\]
+The ultrametric inequality in $F$ gives
+\[
+\Bigl\lVert\widehat a\Bigl(\sum_xc_x[x]\Bigr)\Bigr\rVert
+\le\max_x\abs{c_x}\norm{a(x)}
+\le\norm a\Bigl\lVert\sum_xc_x[x]\Bigr\rVert_U.
+\]
+Conversely, a bounded linear map $T\colon U\to F$ vanishing on $R$ defines an alternating map
+$a(x)=T([x])$ with $\norm{a(x)}\le\norm T\prod_i\norm{x_i}$. Thus these two constructions are inverse
+linear isometries. In particular, the equal-input relations impose strong alternation in every characteristic.
+
+Take a nonempty family of pairwise-meeting closed balls in $A$, with centres $a_\alpha$ and radii $r_\alpha$.
+Their corresponding linear maps satisfy
+$\norm{\widehat a_\alpha-\widehat a_\beta}\le\max(r_\alpha,r_\beta)$ and vanish on $R$.
+Apply Lemma~\ref{lem:compatible-extension} with $D=R$, $T_0=0$ and $G=F$.
+It produces a bounded linear map $T\colon U\to F$ that vanishes on $R$ and satisfies
+$\norm{T-\widehat a_\alpha}\le r_\alpha$ for every $\alpha$. The associated alternating map belongs
+to every original ball. This proves spherical completeness; no closure assumption on $R$ is needed.
+\end{proof}
+
+\subsection{The retraction and the analytic lift}
+We now apply the extension lemma a second time, using the alternating-map space itself as the target.
+This produces the projection needed to turn ordinary precomposition into a polynomial with alternating values.
+
+\begin{proof}[Proof of Theorem~A]
+In degree zero, precomposition is constant. Assume $k\ge1$ and retain $A=\Alt^k(E;F)$ and
+$M=\Mult^k(E;F)$. Their operator norms are ultrametric, and $A$ is spherically complete by
+Proposition~\ref{prop:alt-spherical}. The inclusion $j\colon A\to M$ is a linear isometry.
+Its inverse on $j(A)$ is therefore a contraction. Lemma~\ref{lem:compatible-extension} extends this inverse to
+a contraction $\rho\colon M\to A$ with $\rho j=\id_A$.
+
+For $f_1,\dots,f_k\in\cL(E,E')$ and $m\in\Alt^k(E';F)$, define
+\[
+P(f_1,\dots,f_k)(m)=\rho\bigl(m\circ(f_1,\dots,f_k)\bigr).
+\]
+This is linear in $m$ and multilinear in the $f_i$. The estimate
+\[
+\norm{P(f_1,\dots,f_k)(m)}\le\norm m\prod_{i=1}^k\norm{f_i}
+\]
+shows that $P$ is a bounded $k$\nobreakdash-linear map into $\cL(\Alt^k(E';F),\Alt^k(E;F))$, with
+$\norm P\le1$. On the diagonal, $m\circ(f,\dots,f)$ is already alternating, so
+$P(f,\dots,f)=Q(f)$.
+
+For completeness, expand at an arbitrary $f_0\in\cL(E,E')$. For $0\le r\le k$, define a bounded
+$r$\nobreakdash-linear map $q_r$ by summing over the $r$-element subsets $S$ of $\{1,\dots,k\}$:
+insert its $r$ arguments in the slots of $S$, in increasing order, and put $f_0$ in all remaining slots of $P$.
+Multilinearity gives the finite identity
+\[
+Q(f_0+h)=\sum_{r=0}^k q_r(h,\dots,h),
+\qquad
+\norm{q_r}\le\binom{k}{r}\norm P\norm{f_0}^{k-r}.
+\]
+The binomial coefficient in the bound is an ordinary nonnegative integer counting the summands.
+With $q_r=0$ for $r>k$, this is a power series of infinite radius at every $f_0$.
+Consequently $Q$ is continuously polynomial, hence $C^\omega$ and $C^n$ for all
+$n\in\N\cup\{\infty\}$, as asserted.
+\end{proof}
+
+The retraction supplies the alternating values directly, with no division by $k!$.
+The source spaces need no ultrametric hypothesis because the extension argument takes place in
+the free presentation and in operator spaces with ultrametric targets. The following sections develop the
+other positive cases and then construct counterexamples whose targets admit no equivalent ultrametric norm.
+
 
 \section{Analytic and algebraic preliminaries}\label{sec:prelim}
 The lift criterion reduces the analytic question to a bounded multilinear identity. We then introduce support
@@ -215,7 +407,7 @@ argument.
 We write $\N=\{0,1,2,\dots\}$. Throughout, $K$ denotes the base field and $k$ the degree. A \emph{normed field} $K$ carries a multiplicative absolute value $\abs{\cdot}$ satisfying the triangle inequality. It is
 \emph{nontrivially normed} if some $c\in K$ has $0<\abs c<1$, and \emph{ultrametric} if $\abs{x+y}\le\max(\abs x,\abs y)$.
 A \emph{normed $K$\nobreakdash-space} $X$ satisfies $\norm{\lambda x}=\abs\lambda\norm x$; it is \emph{Banach} if it is complete. The norm of a space need not be ultrametric. In non-archimedean functional analysis, the term ``Banach''
-often includes the ultrametric condition; \S\ref{sec:complements} treats that narrower setting.
+often includes the ultrametric condition; Theorem~A and \S\ref{sec:complements} address ultrametric targets.
 
 We write $\cL(X,Y)$ for the bounded
 linear maps, $\Mult^k(X;Y)$ for the bounded $k$\nobreakdash-linear maps $X^k\to Y$, and $\Alt^k(X;Y)\subseteq\Mult^k(X;Y)$ for the
@@ -410,10 +602,10 @@ $c_\varphi(\Lambda^kW)\subseteq W$. If $\omega\in\Lambda^kW$ with $\dim W=\sdim(
 \end{proof}
 
 \section{Positive results}\label{sec:positive}
-There are two distinct reasons for positive results. A bounded multilinear lift gives analyticity, and such a lift
-can be constructed by dividing by $k!$ or, under suitable finite-dimensional hypotheses, by choosing coordinates.
-Smoothness requires neither construction: it descends from the space of all multilinear maps through a closed
-isometric inclusion. We give the arguments explicitly.
+Alongside the spherical-completeness argument of \S\ref{sec:theoremA}, two further constructions give analytic lifts:
+dividing by $k!$, when this scalar is nonzero, or choosing coordinates under suitable finite-dimensional
+hypotheses. We also prove smoothness in every characteristic. It descends from the space of all multilinear
+maps through a closed isometric inclusion and therefore requires neither hypothesis.
 
 \subsection{Invertible factorial: in particular, \texorpdfstring{$p>k$}{p > k}}
 \begin{proposition}\label{prop:factorial-positive}
@@ -1316,8 +1508,8 @@ result, any lift after scalar extension descends to the Laurent subfield, and no
 The final density argument removes the completeness assumption on the prescribed field.
 
 \subsection{The Laurent subfield}
-A metric space is \emph{spherically complete} if every nonempty family of closed balls, any two of which meet, has a
-common point.
+We use spherical completeness in the sense of \S\ref{sec:theoremA}: every nonempty family of pairwise-meeting
+closed balls has a common point.
 
 \begin{lemma}[discrete distances]\label{lem:discdist}
 Let $Y$ be a complete ultrametric space whose distances lie in $r^\Z\cup\{0\}$ for some $r\in(0,1)$. Then $Y$ is
@@ -1838,87 +2030,10 @@ classification and both strengthened conclusions.
 \needspace{8\baselineskip}
 \section{Complements and open problems}\label{sec:complements}
 
-\subsection*{Spherically complete targets}
-The following result explains the target hypotheses in the positive cases. A special case is stated
-in~\cite[Remark~16]{M}; the proof below follows the spherical extension and retraction arguments in the Lean
-development. It is independent of the main counterexample construction.
+We apply Theorem~A to finite-dimensional targets and to targets over discretely valued fields, then give an
+explicit lift from an orthogonal basis. The section ends with comparisons and questions about ultrametric targets.
 
-\begin{thmA}
-Let $K$ be an ultrametric nontrivially normed field, let $E,E'$ be normed $K$\nobreakdash-spaces, and let $F$ be a normed $K$\nobreakdash-space
-whose norm is ultrametric and which is spherically complete as a metric space. Then $Q^K_{E,E',F}$ is $C^n$ for every
-$n\in\N\cup\{\infty,\omega\}$; in particular it is analytic at every point.
-\end{thmA}
-
-% Optional proof of Theorem A. This follows the existing master extension theorem
-% in Analysis/SphericalCompleteness.lean and the alternating-map/retraction
-% construction in Analysis/SphericalAnalytic.lean. No source or build is changed.
-% If inserted, remove the statements elsewhere that Theorem A is not proved here.
-\begin{proof}[Proof of Theorem~A]
-The degree-zero case is constant, so suppose $k\ge1$. We first record the extension argument needed to preserve a family of norm bounds.
-Let $U$ be an ultrametric seminormed $K$\nobreakdash-space and let $G$ be an ultrametric, spherically
-complete normed $K$\nobreakdash-space. Suppose a nonempty family
-$(T_\alpha,r_\alpha)$, with $T_\alpha\in\cL(U,G)$ and $r_\alpha\ge0$, satisfies
-$\norm{T_\alpha-T_\beta}\le\max(r_\alpha,r_\beta)$. If a linear map $T_0\colon D\to G$ on a subspace
-$D\subseteq U$ satisfies
-\[
-\norm{T_0d-T_\alpha d}\le r_\alpha\norm d\qquad(d\in D),
-\]
-then it extends to a bounded linear $T\colon U\to G$ satisfying the same inequalities on $U$.
-
-To extend across $x\notin D$, choose the value $Tx$ in the balls
-\[
-\overline B\bigl(T_\alpha(d+x)-T_0d,\ r_\alpha\norm{d+x}\bigr)
-\qquad(\alpha,\ d\in D).
-\]
-These balls meet pairwise. For example, if $r_\alpha\le r_\beta$, the difference of the centres for
-$(\alpha,d)$ and $(\beta,e)$ is
-\[
-T_\alpha(d-e)-T_0(d-e)+(T_\alpha-T_\beta)(e+x),
-\]
-whose norm is at most
-$\max(r_\alpha\norm{d+x},r_\beta\norm{e+x})$ by the ultrametric inequalities.
-Spherical completeness gives a common value $c$; defining
-$T(d+\lambda x)=T_0d+\lambda c$ preserves the bounds, by rescaling the displayed ball condition when
-$\lambda\ne0$. Unions of chains preserve them as well, so Zorn's lemma gives an extension to all of
-$U$. It is bounded because it remains within $r_\alpha\norm{\cdot}$ of any one fixed bounded map
-$T_\alpha$. In particular, taking the single pair $(0,1)$ extends every contraction to a contraction.
-
-We next show that $A:=\Alt^k(E;F)$ is spherically complete. Let $U$ be the free $K$\nobreakdash-space
-on the set $E^k$, with generators $[x]$ and ultrametric seminorm
-\[
-\Bigl\lVert\sum_x c_x[x]\Bigr\rVert
-   :=\max_x\abs{c_x}\prod_{i=1}^k\norm{x_i}.
-\]
-Here the maximum is over the finite support, and the empty maximum is $0$.
-Let $R\subseteq U$ be generated by the additivity and scalar-homogeneity relations in each slot,
-and by $[x]$ whenever two coordinates of $x$ coincide. Evaluation identifies $A$ isometrically
-with the bounded linear maps $U\to F$ vanishing on $R$: extend $a\in A$ by
-$\widehat a(\sum_xc_x[x])=\sum_xc_xa(x)$, and recover $a(x)=\widehat a([x])$.
-The two norm inequalities follow from the ultrametric inequality in $F$ and evaluation on single
-generators.
-
-Now take a nonempty pairwise-meeting family of closed balls in $A$, with centres $a_\alpha$ and
-radii $r_\alpha$. Their corresponding maps satisfy
-$\norm{\widehat a_\alpha-\widehat a_\beta}\le\max(r_\alpha,r_\beta)$ and vanish on $R$.
-Apply the extension result with $D=R$ and $T_0=0$. It gives a bounded linear map $U\to F$ vanishing
-on $R$ and lying in all the prescribed operator balls. Its associated alternating map lies in
-the original balls, proving spherical completeness of $A$.
-
-Finally, put $M:=\Mult^k(E;F)$, the space of bounded $k$\nobreakdash-linear maps. Both $M$ and
-$A$ have ultrametric operator norms. The inverse of the isometric inclusion $j\colon A\to M$,
-defined on $j(A)$, is a contraction. The extension result with target $A$ extends it to a
-contraction $\rho\colon M\to A$ with $\rho j=\id_A$. Define
-\[
-P(f_1,\dots,f_k)(m):=\rho\bigl(m\circ(f_1,\dots,f_k)\bigr).
-\]
-This is a bounded $k$\nobreakdash-linear map into
-$\cL(\Alt^k(E';F),\Alt^k(E;F))$, with $\norm P\le1$, and its diagonal is $Q$.
-Proposition~\ref{prop:lift} gives a finite power series at every point, hence analyticity and all
-the asserted differentiability orders.
-\end{proof}
-
-% Optional complement. No new assertion is made for a nonspherically complete
-% scalar target. The proof is mathematical prose, not a new Lean theorem.
+\subsection*{Finite-dimensional targets}
 \begin{remark}[finite-dimensional targets]\label{rem:finite-target-reduction}
 Let $K$ be a complete nontrivially normed field, let $E,E'$ be normed $K$\nobreakdash-spaces, and let $F$ be finite-dimensional.
 If $F\ne0$, then, at every $f_0\in\cL(E,E')$,
@@ -2147,7 +2262,7 @@ The supporting development covers the $\kappa$\nobreakdash-linear coefficient ma
 counterexample, and ascent and descent to a prescribed field. It also includes the lift criterion, the
 sharp polarization distinctions, Theorem~A, Proposition~\ref{prop:discrete}, and the sorted lift of
 Remark~\ref{rem:sorted}. Spherical completeness uses the development's own class, with the definition in
-\S\ref{sec:ascent}. The formalization used Codex with Autoform and incorporated previously formalized
+\S\ref{sec:theoremA}. The formalization used Codex with Autoform and incorporated previously formalized
 ingredients with their provenance retained.
 
 Proposition~\ref{prop:smooth-positive} reproduces the argument of~\cite{PR}, whose formal proof is included in the
