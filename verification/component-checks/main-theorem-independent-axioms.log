@@ -1,5 +1,0 @@
-'AlternatingAnalytic.exists_completeField_counterexample' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample' depends on axioms: [propext,
- Quot.sound,
- Classical.choice]
-AUTOFORM_PROBE_OK decls=2

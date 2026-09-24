@@ -1,8 +1,0 @@
-{
-  "axis": "code_quality",
-  "prompt_sha256": "757749b97a6006eaa56ef28ffcdb98cb0e94b71a5cd785206e9c8d9dba1d3272",
-  "result": {
-    "score": 4,
-    "reasoning": "The declaration bundles the determinant formula, injectivity, coordinate alternation, and permutation rule into one theorem, satisfying the critical rule. Its proof cleanly assembles reusable helpers; surrounding proofs use Mathlib APIs, explicit simp only lists, extensionality, and consistent formatting. Minor improvements: the construction and non-injectivity helpers unnecessarily inherit Field rather than CommRing, and the local instance introduced by `let := hW` would be clearer as `letI := "
-  }
-}

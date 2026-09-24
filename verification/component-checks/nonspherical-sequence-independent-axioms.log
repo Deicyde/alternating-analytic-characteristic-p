@@ -1,9 +1,0 @@
-'AlternatingAnalytic.hasEmptyDescendingBallSequence_iff' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.HasEmptyDescendingBallSequence.not_sphericallyComplete' depends on axioms: [propext,
- Quot.sound,
- Classical.choice]
-'AlternatingAnalytic.HasEmptyDescendingBallSequence' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.hasEmptyDescendingBallSequence_of_not_sphericallyComplete' depends on axioms: [propext,
- Quot.sound,
- Classical.choice]
-AUTOFORM_PROBE_OK decls=4

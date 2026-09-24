@@ -1,9 +1,0 @@
-{
-  "axis": "faithfulness",
-  "prompt_sha256": "ba2dcb069a8c2b44f4d0bdd1d79bb6ae03a7b7381edb1891b6efafe0fa7d2d85",
-  "result": {
-    "score": null,
-    "reasoning": "faithfulness: judge timed out after 1800s",
-    "error": "timeout"
-  }
-}

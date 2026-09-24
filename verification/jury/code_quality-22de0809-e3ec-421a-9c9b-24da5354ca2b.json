@@ -1,8 +1,0 @@
-{
-  "axis": "code_quality",
-  "prompt_sha256": "b80479424d276b868219a4e6f648a6847ee0cb581e022d21ded91603b51ecb82",
-  "result": {
-    "score": 5,
-    "reasoning": "Inspected the actual file against the bundled style runbook. AlternatingAnalytic/Algebra/InfiniteRamsey.lean:87\u201393 provides one self-contained declaration bundling infinitude and homogeneity; the stronger subset theorem is an appropriate helper. Naming, namespace, layout, and documentation are idiomatic. The proof uses minimal [Finite C] assumptions, local classical reasoning, explicit non-terminal simp only, appropriate omega calls, and existing Finset, monotonicity, and pigeonhole APIs. The in"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "axis": "proof_integrity",
-  "prompt_sha256": "fd5bde2fe40b1f0150f9f889c13f4e18fadff9cd7056cedf0d08b20a2280c300",
-  "result": {
-    "score": null,
-    "reasoning": "Inspected the actual source, lemma S, and supporting definitions and proofs. The construction, cluster cancellation, flattening bound, and staircase rank contradiction constitute genuine mathematical work. No gaps, circular assumptions, orphan classes, or vacuous definitions were found. However, the required independent axiom verification could not complete; supplied verification logs were not treated as independently established evidence. \u2014 Lake stalled; direct Lean axiom checks timed out after",
-    "error": "abstain"
-  }
-}

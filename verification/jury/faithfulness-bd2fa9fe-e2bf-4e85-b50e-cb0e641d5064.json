@@ -1,8 +1,0 @@
-{
-  "axis": "faithfulness",
-  "prompt_sha256": "d3bb6b1e779e8db4bde7e34e94b4565cca3f4fc3971741cd7900db259047cb0b",
-  "result": {
-    "score": 5,
-    "reasoning": "The declaration faithfully captures the quoted source: every finite coloring yields an infinite H \u2286 \u2115 and one color shared by every n-element subset of H. Using Finset \u2115 with a cardinality condition is equivalent to coloring n-element subsets directly, since any such coloring extends to all finite subsets. Including n = 0 is a harmless generalization. The supporting theorem proves the stronger relative version inside any infinite subset, with no hidden assumptions or hollow definitions. Local fi"
-  }
-}

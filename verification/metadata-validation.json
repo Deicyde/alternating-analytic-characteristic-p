@@ -1,8 +1,0 @@
-{
-  "ok": true,
-  "format": "v0.4",
-  "schema_url": "https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/v0.4.schema.json",
-  "schema_sha256": "25ff6b25ca4511635aff4443cf20480c15e59dddf19591c730950b442ea54fce",
-  "formalization_yaml_sha256": "f8aa157d4089ff15b36d9158c8b8810f729e3f623deeb9dc7b91d7c541454ed2",
-  "validation": "Independent metadata worker validated the Mathlib-only contradiction-corollary metadata against the official v0.4 schema with zero errors."
-}

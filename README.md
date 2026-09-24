@@ -1,67 +1,53 @@
 # Alternating precomposition in positive characteristic
 
-Private repository: [Deicyde/alternating-analytic-characteristic-p](https://github.com/Deicyde/alternating-analytic-characteristic-p).
+Lean formalization of Jack McCarthy's **Precomposition on continuous alternating maps is not analytic in positive characteristic**.
 
-Lean formalization of **Precomposition on continuous alternating maps is not analytic in positive characteristic**, from the supplied `charp.pdf` (round 24).
+Read the [paper](paper/charp.pdf), edit its [LaTeX source](paper/charp.tex), or consult the [theorem map](THEOREM_MAP.md) for the corresponding Lean declarations.
 
-## Main result
+## Main results
 
-For every prescribed nontrivially normed field K of prime characteristic p, including incomplete fields, and every k ≥ p, there are K-Banach spaces E and F such that:
+For every nontrivially normed field K of prime characteristic p, including incomplete fields, and every k ≥ p, there are K-Banach spaces E and F such that degree-k alternating precomposition on E is analytic at no point. The same spaces work for every finite index type of cardinality k, and F has no equivalent ultrametric norm.
 
-- E′ = E;
-- F admits no equivalent ultrametric norm;
-- degree-k alternating precomposition is analytic at no point;
-- the same spaces work for every finite index type of cardinality k.
+The complete statement, including the absence of a bounded multilinear lift and failure of `ContDiffAt K ω` at every point, is `AlternatingAnalytic.exists_banach_counterexample_full` in [MainTheorem.lean](AlternatingAnalytic/MainTheorem.lean).
 
-The theorem is `AlternatingAnalytic.exists_banach_counterexample_full` in [MainTheorem.lean](AlternatingAnalytic/MainTheorem.lean). It also explicitly includes the equivalent absence of a bounded multilinear lift and failure of `ContDiffAt K ω` at every point. The underlying construction remains in [Main.lean](AlternatingAnalytic/Main.lean).
+The exact factorial criterion is `AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic` in [FactorialClassification.lean](AlternatingAnalytic/Analysis/FactorialClassification.lean): precomposition is analytic for every Banach triple over K if and only if k! is nonzero in K.
 
-The complete factorial classification is `AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic`: precomposition is analytic for all Banach spaces exactly when k! is nonzero in K. See [FactorialClassification.lean](AlternatingAnalytic/Analysis/FactorialClassification.lean).
+The construction includes the finite-field Ramsey obstruction, the projective exterior completion and coefficient-support estimate, and scalar extension and descent. [THEOREM_MAP.md](THEOREM_MAP.md) also records the proved complements and the explicitly excluded announced or open results.
 
-## Build and check
+## Using the library
 
-Install Lean through elan, then run in this directory:
+The project uses Lean **4.34.0-rc2** and pins Mathlib to [2b73d9821d297b80d92eecc54cc09bfc263e0098](https://github.com/Deicyde/mathlib4/tree/2b73d9821d297b80d92eecc54cc09bfc263e0098). All dependency revisions are recorded in `lake-manifest.json`.
+
+With Lean installed through elan:
 
 ```sh
 lake exe cache get
-lake build
-python3 scripts/verify.py
+lake build AlternatingAnalytic
 ```
 
-The cache step is an optional speedup; `lake build` is the source build. The locked toolchain is Lean **4.34.0-rc2**. Mathlib is pinned to `2b73d9821d297b80d92eecc54cc09bfc263e0098` in [Deicyde/mathlib4](https://github.com/Deicyde/mathlib4/tree/2b73d9821d297b80d92eecc54cc09bfc263e0098). This commit contains the alternating-map calculus and closed-range linear-isometry results used by the proof. All transitive revisions are locked in `lake-manifest.json`.
+The cache download is optional. Import `AlternatingAnalytic` for the full library, or `AlternatingAnalytic.MainTheorem` for the main result.
 
-The default target builds every module. Import `AlternatingAnalytic` for the whole library, or import `AlternatingAnalytic.MainTheorem` for the complete main theorem.
+## Challenge and solution
 
-`verify.py` checks source hashes, builds the entire library and audits the axioms of every owned declaration. Its inspection program lives outside the proof library. The proof library and comparator solution use no `sorry`, `admit`, new axiom, or `native_decide`; their only logical axioms are `propext`, `Classical.choice`, and `Quot.sound`.
+[`challenge.lean`](challenge.lean) imports only Mathlib and presents two contradiction theorems in the style of the [characteristic-two challenge](https://github.com/Deicyde/alternating-analytic-counterexample/blob/main/Challenge.lean):
 
-## Comparator challenge and solution
+- The global theorem refutes analyticity of precomposition for every nontrivially normed field, every triple of normed spaces, and every finite index type. These types lie in universe zero, as in the earlier challenge.
+- The fixed-field theorem takes a prescribed `K : Type u` of prime characteristic p and k ≥ p. Its hypothesis `h : BanachPrecompositionAnalytic K k` asserts analytic precomposition for every pair of K-Banach spaces `E, F : Type u`, with `E′ = E` and index `Fin k`. The field need not be complete.
 
-[`challenge.lean`](challenge.lean) follows the simple contradiction format of the [earlier characteristic-two challenge](https://github.com/Deicyde/alternating-analytic-counterexample/blob/main/Challenge.lean). It imports only Mathlib. The global statement uses Mathlib's definitions directly. The fixed-field statement names its universal hypothesis `AlternatingAnalyticChallenge.BanachPrecompositionAnalytic K k`, a single transparent predicate defined identically in both comparator files.
+The named predicate is defined identically in both files. [`solution.lean`](solution.lean) proves the same statements using the library. The two deliberate challenge placeholders are separate from the proved solution. These contradiction corollaries are consequences of the stronger constructive library theorems, not replacements for them.
 
-It contains exactly two challenge theorems:
+Challenge checks use only [Kim Morrison's comparator](https://github.com/leanprover/comparator), pinned to revision `19e111e2141cf333c7daff0f64c5f24acc91dd2e` for this Lean toolchain. [`comparator.json`](comparator.json) selects both theorems and permits only `propext`, `Quot.sound`, and `Classical.choice`.
 
-- `AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM`: assuming alternating precomposition is `ContDiff K ω` for every nontrivially normed field, every triple of normed spaces and every finite index type gives `False`. These universally quantified types are in universe zero, as in the original characteristic-two challenge.
-- `AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach`: fix any prescribed nontrivially normed `K : Type u` of prime characteristic `p` and any `k ≥ p`. Its hypothesis `h : BanachPrecompositionAnalytic K k` says that degree-`k` precomposition is `ContDiff K ω` for every pair of K-Banach spaces `E, F : Type u`, with `E′ = E` and index `Fin k`; this gives `False`. The field need not be complete. The predicate only names the original quantified hypothesis.
+Follow the comparator's installation instructions, then run it from this project directory:
 
-These are consequences of the full constructive results. The comparator checks these two contradiction corollaries; it does not claim that they are equivalent to the constructive main theorem or factorial classification. The unchanged library retains the actual Banach witnesses, the obstruction to an equivalent ultrametric target norm, nowhere analyticity and nowhere `ContDiffAt K ω` for all finite index types of the prescribed cardinality, and the full factorial classification.
+```sh
+lake env /path/to/comparator/.lake/build/bin/comparator comparator.json
+```
 
-[`solution.lean`](solution.lean) repeats the predicate definition and the two theorem statements verbatim, and proves the theorems from the library. [`comparator.json`](comparator.json) selects both theorems and permits only `propext`, `Quot.sound` and `Classical.choice`. The challenge has two deliberate theorem placeholders, as required for a comparator exercise. They are outside the proof library and never imported by the solution or axiom audit. The library and solution contain no admitted proofs.
+The comparator checks the statements, their dependencies, and permitted axioms, and replays the solution with Lean's kernel. The [GitHub Actions workflow](.github/workflows/comparator.yml) uses a fresh candidate checkout and the Linux Landrun sandbox. On macOS, upstream's development launcher allows local comparator checks without that Linux sandbox.
 
-The default build includes both comparator modules in separate environments. `scripts/verify.py` audits the library and solution. The independent GitHub Actions comparator job uses a fresh checkout, the comparator revision matching Lean 4.34.0-rc2 and the real Linux sandbox. [The comparator receipt](verification/comparator-local.json) identifies the exact file hashes and checks for its recorded run; earlier receipts certify only their recorded versions. Local macOS runs use upstream's development launcher, which does not provide the Linux sandbox. Current build and comparator results are reported in the verification records.
+## Manuscript and metadata
 
-Project metadata follows the version 0.4 [`formalization.yaml`](https://github.com/mathlib-initiative/formalization.yaml) format: see [`formalization.yaml`](formalization.yaml). The record distinguishes the proved scope, source provenance, integrated prior work, deliberate challenge placeholders, and separate model reviews.
+The current manuscript is in `paper/`; the original supplied PDF and LaTeX snapshots remain in `sources/`. The author disclosure credits the original Claude-assisted informal work and the later Codex/Autoform formalization. The [earlier characteristic-two development](https://github.com/Deicyde/alternating-analytic-counterexample) remains separate.
 
-## Coverage
-
-[THEOREM_MAP.md](THEOREM_MAP.md) links the paper's proved results and complements to their Lean declarations. The construction includes the actual finite-field Ramsey obstruction, ordinary-sum projective exterior completion, sharp coefficient/support map, Laurent subfield, completed scalar extension, descent, and dense scalar restriction.
-
-The proved complements include finite-field polarization distinctions and both sharp counterexamples, spherical and discretely valued positive results, the explicit sorted-basis lift and convergent determinant formula, norm-preserving heterogeneous dense extension, the descending-ball criterion, and the normalized multiplier example.
-
-The paper expressly announces or leaves open several further results. Those are listed separately in the coverage audit and are not claimed here. The cited external classification of all discretely valued ultrametric Banach spaces is also outside this paper's proved scope.
-
-## Provenance and verification
-
-The PDF and LaTeX snapshot captured at the start of this task are preserved in `sources/`, with SHA256 hashes. During the run, the original files received an editorial revision clarifying the provenance of Theorem A; a saved diff confirms that the mathematical statements are unchanged. The source audit records both versions. Integrated existing proofs are distinguished from new work in `verification/provenance/`. This extends the characteristic-two development's approach without modifying its original repository.
-
-`verification/` contains source hashes, exact build and exhaustive axiom logs, the semantic comparison with the main theorem, the paper coverage audit, and independent-review results. Review timeouts are retained as abstentions, never approvals. Kernel verification and model review are reported separately.
-
-The delivered archive excludes dependency caches, local machine links, and development probes. Its validation used the locked dependency sources and an existing verified Mathlib cache. The repository contains the verified source package and the additional comparator and metadata files. The original characteristic-two repository remains separate.
+[`formalization.yaml`](formalization.yaml) records the scope, provenance, automation, and reported total cost of **USD 200**, using the ChatGPT Pro subscription price specified by the maintainer.

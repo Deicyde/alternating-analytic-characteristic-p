@@ -1,8 +1,0 @@
-{
-  "axis": "faithfulness",
-  "prompt_sha256": "77a0e6c1bfac2d32c656c40dc04b2419e554303096fc0f351197d7667664040e",
-  "result": {
-    "score": 5,
-    "reasoning": "The supplied formalization matches the source: an exterior vector in a subspace of L^S, any chosen slot, and a finite flattening whose matrix rank is bounded by exterior support dimension. Arbitrary finite row and column indexing maps include the source\u2019s finite subsets as special cases. The proof establishes column containment in the restriction image of a minimal supporting subspace and applies dimension inequalities, without assuming the conclusion. Assessment is based on the supplied snapsho"
-  }
-}

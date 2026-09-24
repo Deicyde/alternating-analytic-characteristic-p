@@ -28,33 +28,33 @@ sources:
     contributors:
       - name: "Claude (Anthropic), working in Claude Code"
         role: "credited by the paper for producing the informal result, proof, and write-up"
-    id: "https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/main/sources/charp.pdf"
+    id: "https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/main/paper/charp.pdf"
     type: "manuscript"
-    location: "Theorem main, Corollary class, and the proved statements and complements of Sections 2–7"
+    location: "Theorem main, Corollary class, their supporting development, and the proved complements"
     relationship: "formalizes"
     note: >
-      The bibliographic author is taken from the preserved LaTeX author field. Its thanks
-      paragraph separately credits Anthropic's Claude and independent Claude proof audits.
-      sources/charp.pdf and sources/charp.tex are the exact snapshots captured at task start.
-      Statements in that historical snapshot saying that the new main theorem is not yet
-      machine-checked describe its earlier status, before this formalization. A later original
-      file revision changes only Theorem A's provenance wording; both versions' hashes and
-      the editorial diff are retained in verification/provenance/. The stated mathematical
-      claims are unchanged. The source's announced and open items are not claimed as proved.
+      The current manuscript is paper/charp.pdf, with editable source paper/charp.tex.
+      Its author disclosure distinguishes the original Claude-assisted informal work from
+      the later Codex/Autoform formalization and editorial revision. The original snapshots
+      remain in sources/; their earlier formalization-status statements are historical.
+      The polished manuscript incorporates the corrections from comparison with Lean and
+      improves the exposition without changing the main theorem or factorial criterion. It
+      also supplies proofs of the positive cases, with the finite-dimensional additions
+      distinguished from the formalized scope in THEOREM_MAP.md.
+      Announced and open items are not claimed as proved.
     license: ""
     author_endorsement: "participated"
   - title: "Existing Lean ingredients supplied with the round-24 paper materials"
     authors: []
-    id: "https://github.com/Deicyde/alternating-analytic-characteristic-p/tree/main/verification/provenance"
+    id: "https://github.com/Deicyde/alternating-analytic-characteristic-p/tree/main/AlternatingAnalytic/Analysis"
     type: "software"
     relationship: "adapts"
     note: >
       Existing proofs of the lift criterion, factorial-invertible positive result, symmetric
       diagonal obstruction, positive-characteristic ultrametricity, spherical completeness
-      and extension, and Theorem A were integrated and checked. Source paths, source hashes,
-      changes and checks are recorded by integration-manifest.json,
-      integration-positive-manifest.json and spherical-analytic-provenance.json. Their exact
-      original model authorship is not inferred from the current formalization session.
+      and extension, and Theorem A were integrated into the development. These supplied
+      ingredients are distinct from proofs newly authored in the formalization session;
+      their exact original model authorship is not inferred here.
     license: ""
     author_endorsement: "n/a"
 
@@ -73,8 +73,9 @@ classification:
 
 status:
   scope: >
-    Complete for the proved-paper scope recorded in THEOREM_MAP.md and
-    verification/paper-coverage-final-audit.json. The proof library has zero unresolved sorry,
+    Complete for the original proved-paper scope recorded in THEOREM_MAP.md. The later
+    finite-dimensional source/codomain proposition and target-reduction argument are additional
+    informal results and are not claimed as separate formalized declarations. The proof library has zero unresolved sorry,
     admit, new axiom or native_decide uses. solution.lean contains the two proved comparator
     theorems; challenge.lean contains exactly two deliberate theorem placeholders and is
     excluded from these proof-development sorry counts. The comparator contains two simple
@@ -87,9 +88,8 @@ status:
     universal ContDiff K omega assertion over Banach E,F : Type u with E' = E and index Fin k;
     no completeness of K is assumed. These are consequences of the constructive development,
     not claims of equivalence with the full main theorem or factorial classification. All
-    stronger results remain proved in the unchanged AlternatingAnalytic library. Library builds
-    and all-owned transitive axiom checks are recorded separately from comparator validation
-    and model review. Excluded are the expressly unproved alternative infinite-field route,
+    stronger results remain proved in the unchanged AlternatingAnalytic library. Challenge validation uses Kim Morrison's leanprover/comparator exclusively,
+    with the two selected theorems and permitted axioms specified in comparator.json. Excluded are the expressly unproved alternative infinite-field route,
     announced large-index ultrametric-target construction, mathematical open problems, the
     external Serre c_0(I) classification, and the earlier characteristic-two proof. A broader
     generic isometric-field-transport abstraction in the initial plan is not claimed as a
@@ -142,6 +142,7 @@ status:
       literature_dependencies: []
 
 automation:
+  spend_usd: 200
   methods:
     - method: "agent"
       models: ["gpt-6-astra"]
@@ -165,17 +166,17 @@ automation:
       models: []
       framework: "Integration of pre-existing Lean proof sources"
       tool_setup: >
-        The supplied existing ingredients were preserved or adapted as documented in
-        verification/provenance/. They are not represented as newly authored proofs from
+        The supplied existing ingredients were preserved or adapted in the library.
+        They are not represented as newly authored proofs from
         the current GPT-6 Astra run. The paper's informal Claude/Claude Code authorship is
         recorded under sources and is distinct from the current formalization automation.
   notes: >
-    No total cost, hardware specification or end-to-end runtime is asserted: these were not
-    measured reliably for the whole project. Native-worker proof production, model review and
-    Lean kernel verification are distinct activities. Existing proof integrations and newly
-    constructed proofs are distinguished in the provenance manifests. The preserved source
-    snapshot and earlier review records remain historical evidence rather than being rewritten
-    to suggest that the entire result existed before this run.
+    The reported total cost is USD 200, using the ChatGPT Pro subscription price specified
+    by the maintainer. Hardware specifications and end-to-end runtime were not measured
+    reliably for the whole project. Existing proof integrations and newly constructed proofs
+    remain distinct. From the repository cleanup onward, the challenge and solution are
+    checked only with Kim Morrison's leanprover/comparator; the earlier custom verification
+    scripts and audit records have been removed from the current repository.
 
 fidelity:
   divergences: >
@@ -199,27 +200,23 @@ fidelity:
     Mathlib's existing definitions; unfolding it recovers the original quantified hypothesis.
     Neither is presented as equivalent to the full constructive main theorem or factorial
     classification; those stronger theorems and their general universe
-    parameters remain in the library. Validation receipts identify the exact tested versions;
-    earlier comparator checks do not certify later edits.
+    parameters remain in the library. The comparator checks the current challenge and solution
+    against comparator.json, including the fixed predicate and transitive dependencies.
     No announced or open paper claim is included as an axiom.
 
 review:
   status: "agent-reviewed"
   reviewers: []
   notes: >
-    Native semantic audits and separate model jury passes reviewed selected declarations for
-    faithfulness, proof integrity and code quality. The retained jury evidence contains mixed
-    scores, abstentions and timeouts; timeouts are never counted as approvals, and no global
-    clean-jury result is claimed. Multi-part theorem packaging findings were addressed by
-    public combined declarations; the original findings remain in the record. Independent
-    Lean builds and the all-owned transitive axiom audit succeeded for the delivered proof
-    library, as recorded in verification/. They are distinct from model judgments. No human
-    expert review is recorded in this package.
+    Earlier semantic reviews and separate model jury passes examined selected declarations
+    for faithfulness, proof integrity and code quality. Some reviews returned mixed scores,
+    abstentions or timeouts; no global clean-jury result or human expert review is claimed.
+    The paper received a subsequent editorial pass with substantive explanations compared
+    against the Lean development. Current challenge validation uses the comparator.
 
 alignment:
   namespace: "AlternatingAnalytic"
   theorem_map: "THEOREM_MAP.md"
-  coverage_audit: "verification/paper-coverage-final-audit.json"
   comparator_scope: >
     Two contradiction corollaries of the proved construction, with only Mathlib imports in
     the challenge: the universal all-fields analytic-smoothness assertion, and the
@@ -227,12 +224,12 @@ alignment:
     names its original universal hypothesis BanachPrecompositionAnalytic K k. The source
     alignment below records the stronger library theorems, not an asserted equivalence with these challenge corollaries.
   statements:
-    - source: "Theorem main and adjacent C^omega sharpness statement, Sections 1 and 6"
+    - source: "Theorem main and adjacent C^omega sharpness statement"
       lean: "AlternatingAnalytic.exists_banach_counterexample_full"
       module: "AlternatingAnalytic.MainTheorem"
       status: "proved"
       note: "All prescribed fields, actual Banach E = E', no equivalent ultrametric target norm, all finite indices and all base points."
-    - source: "Explicit construction underlying Theorem main, Section 6"
+    - source: "Explicit construction underlying Theorem main"
       lean: "AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample"
       module: "AlternatingAnalytic.Main"
       status: "proved"
@@ -283,7 +280,7 @@ alignment:
       lean: "ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete"
       module: "AlternatingAnalytic.Analysis.SphericalAnalytic"
       status: "proved"
-      note: "Quoted by the paper; its existing Lean proof is integrated here."
+      note: "Proved in the current paper following its existing Lean proof."
     - source: "Proposition discrete: complete targets with an equivalent ultrametric norm"
       lean: "AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup"
       module: "AlternatingAnalytic.Analysis.DiscreteTargetAnalytic"

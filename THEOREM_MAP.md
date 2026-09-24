@@ -4,7 +4,7 @@ The complete bundled entry point is [`AlternatingAnalytic.exists_banach_countere
 
 ## Main theorem and classification
 
-The complete main declaration is **`AlternatingAnalytic.exists_banach_counterexample_full`** in [MainTheorem.lean](AlternatingAnalytic/MainTheorem.lean) (paper Theorem `main`, §§1 and 6). Its underlying construction is `AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample` in [Main.lean](AlternatingAnalytic/Main.lean).
+The complete main declaration is **`AlternatingAnalytic.exists_banach_counterexample_full`** in [MainTheorem.lean](AlternatingAnalytic/MainTheorem.lean) (paper Theorem `main`). Its underlying construction is `AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample` in [Main.lean](AlternatingAnalytic/Main.lean).
 
 For **every prescribed nontrivially normed field** `K` of prime characteristic `p`, including incomplete fields, and every `k ≥ p`, it produces actual complete normed `K`-spaces `E` and `F`. The target `F` admits **no equivalent ultrametric norm**, and alternating precomposition with `E′ = E` is analytic at no point. The same witnesses work for every finite index type, in any universe, of cardinality `k`.
 
@@ -14,11 +14,17 @@ Here `Q(f)(m)(x) = m(f ∘ x)` is the actual continuous alternating-precompositi
 
 ## Reading this map
 
-Paper labels refer to the [frozen LaTeX source](sources/charp.tex) captured at task start. The later original-file revision changes Theorem A's attribution wording only; the source audit preserves the exact diff and both hashes. Names below belong to `AlternatingAnalytic` unless another namespace is written explicitly. File links are relative to the standalone project root.
+Paper labels refer to the [current manuscript](paper/charp.tex); the original snapshot remains in [sources/charp.tex](sources/charp.tex). Labels are retained through the editorial revision even where section and theorem numbers change. Names below belong to `AlternatingAnalytic` unless another namespace is written explicitly.
 
-This is a declaration and scope index. Build, source-hash and axiom-check results belong to the delivery's verification records; this map does not substitute for those checks.
+Challenge validation uses only [Kim Morrison's comparator](https://github.com/leanprover/comparator), with the configuration in [comparator.json](comparator.json).
 
-## Preliminaries and diagonal identities — §§2–3
+## Added positive-case exposition
+
+The current paper gives explicit proofs of the factorial-invertible case (in particular p > k) and of C∞ smoothness. The former is in [FactorialInvertible.lean](AlternatingAnalytic/Analysis/FactorialInvertible.lean). The latter, including smoothness reflection through a closed linear isometry, is in the pinned Mathlib modules `Analysis.Calculus.ContDiff.ContinuousAlternatingMap` and `Analysis.Calculus.ContDiff.LinearIsometry`.
+
+The finite-dimensional source/codomain proof and the finite-dimensional target reduction are additional informal propositions. They are not claimed as separate formalized declarations. The finite-basis proof assumes continuous coordinates; complete K guarantees this for finite-dimensional E or E′. It imposes no finite-dimensionality or completeness on F. The target reduction does not assert that finite-dimensional F alone guarantees analyticity over an arbitrary base.
+
+## Preliminaries and diagonal identities
 
 | Paper claim | Actual declarations and source |
 |---|---|
@@ -33,7 +39,7 @@ This is a declaration and scope index. Build, source-hash and axiom-check result
 
 The pinned Mathlib supplies the continuous alternating-map spaces and `ContinuousAlternatingMap.compContinuousLinearMapCLM`, exterior powers and their basis/universal-property API, tensor products, finite sums, permutation signs and cardinalities, and the finite-color pigeonhole principle. These are dependencies, not additional assumed paper theorems. The ordinary `Cⁿ` smoothness result for finite `n` and `n = ∞` cited in the introduction is `ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM` in the pinned Mathlib.
 
-## Finite-field multiplier obstruction — §3
+## Finite-field multiplier obstruction
 
 | Paper claim | Actual declarations and source |
 |---|---|
@@ -46,7 +52,7 @@ The pinned Mathlib supplies the continuous alternating-map spaces and `Continuou
 | `FF`, both numbered parts and restriction forms | `finiteField_multiplier_theorem` in [FiniteFieldTheorem.lean](AlternatingAnalytic/Algebra/FiniteFieldTheorem.lean); `finiteField_multiplier_obstruction`, `finiteField_multiplier_obstruction_of_restriction`, `finiteField_multiplier_obstruction_full`, `finiteField_multiplier_obstruction_finsupp` in [FiniteFieldObstruction.lean](AlternatingAnalytic/Algebra/FiniteFieldObstruction.lean). For a finite field and `k! = 0`, antisymmetry, Pol1 and bounded exterior support are incompatible. The strongest test-input version needs the bound only on finitely supported `{0,1,−1}` inputs. Antisymmetry is not replaced by the stronger alternation assumption. |
 | Remark `FFunit`: normalized lift when `k! ≠ 0` | Actual `normalizedMultiplierLift`, `normalizedMultiplierLift_alternating`, `normalizedMultiplierLift_diagonal`, `normalizedMultiplierLift_pol1`, `exteriorSupportDim_normalizedMultiplierLift_le`, and `clusterValue_normalizedClusterLift` in [NormalizedMultiplierLift.lean](AlternatingAnalytic/Algebra/NormalizedMultiplierLift.lean). The explicit permutation sum has support at most `k²` and actual cluster value `1/k!`. |
 
-## Laurent exterior completion and residue lift — §4
+## Laurent exterior completion and residue lift
 
 All norm parameters `0 < r < 1` are allowed. The projective cost uses ordinary sums, and the completed target is a Banach space in Mathlib's ordinary normed-space sense.
 
@@ -61,7 +67,7 @@ All norm parameters `0 < r < 1` are allowed. The projective cost uses ordinary s
 
 As Remark `infkappa` states, the norm, coefficient and residue constructions work for arbitrary κ; finiteness is needed at the final invocation of `FF`. The project does not claim that this particular Laurent pair is a counterexample for every infinite κ. The main theorem still applies to those prescribed fields through the prime-field subfield construction.
 
-## Ascent, descent and the non-ultrametric target — §§5–6
+## Ascent, descent and the non-ultrametric target
 
 | Paper claim | Actual declarations and source |
 |---|---|
@@ -78,7 +84,7 @@ As Remark `infkappa` states, the norm, coefficient and residue constructions wor
 | `nonultra`: no equivalent ultrametric norm, retained under ascent | `laurentExterior_not_hasEquivalentUltrametricNorm` in [LaurentCompletedCoefficient.lean](AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean); `HasLinearUnitSumGrowth.map`, `HasLinearUnitSumGrowth.not_hasEquivalentUltrametricNorm` in [UnitSumGrowth.lean](AlternatingAnalytic/Analysis/UnitSumGrowth.lean); `not_hasEquivalentUltrametricNorm_of_linear_growth` in [EquivalentUltrametric.lean](AlternatingAnalytic/Analysis/EquivalentUltrametric.lean). |
 | Finite-index transport and final assembly | `Round24Transfer.hasBoundedLift_reindex_iff`, `Round24Transfer.not_analyticAt_of_equiv_index` in [LiftCriterion.lean](AlternatingAnalytic/Analysis/LiftCriterion.lean); `exists_completeField_counterexample` and `exists_nowhereAnalytic_banach_counterexample` in [Main.lean](AlternatingAnalytic/Main.lean), bundled as `exists_banach_counterexample_full` in [MainTheorem.lean](AlternatingAnalytic/MainTheorem.lean). |
 
-## Positive complements and explicit constructions — §7
+## Positive complements and explicit constructions
 
 | Paper claim | Actual declarations and assumptions |
 |---|---|
@@ -88,15 +94,15 @@ As Remark `infkappa` states, the norm, coefficient and residue constructions wor
 | Remark `sorted`: contracting sorted lift and analyticity | `sortedSchauderLift`, `norm_sortedSchauderLift_le`, `sortedSchauderLift_diag`, `analyticAt_of_orthogonalSchauderBasis_fintype` in [SortedBasisAnalytic.lean](AlternatingAnalytic/Analysis/SortedBasisAnalytic.lean). The input has an unconditional Schauder basis with the orthogonal coordinate bound; `K` is ultrametric and `F` is **complete and ultrametric**. Neither spherical completeness nor factorial division is required. |
 | Remark `sorted`: the actual convergent infinite determinant formula | `hasSum_sortedSchauderLift`, `sortedSchauderLift_eq_tsum`, `exists_sortedSchauderLift` in [SortedBasisFormula.lean](AlternatingAnalytic/Analysis/SortedBasisFormula.lean), supported by [SortedBasisSummability.lean](AlternatingAnalytic/Analysis/SortedBasisSummability.lean) and [SortedBasisExpansion.lean](AlternatingAnalytic/Analysis/SortedBasisExpansion.lean). The sum is indexed by increasing `k`-element subsets of the ordered basis index set. |
 
-The coverage pass separately identified four claims needing completion beyond the original proof chain: heterogeneous dense extension (`ext(2)`), the descending-ball equivalence (`K2`), the normalized multiplier example (`FFunit`), and the infinite sorted-basis formula (`sorted`). All four now have the explicit proof declarations listed above. Final package verification is reported separately.
+The heterogeneous dense extension (`ext(2)`), descending-ball equivalence (`K2`), normalized multiplier example (`FFunit`), and infinite sorted-basis formula (`sorted`) all have the explicit proof declarations listed above.
 
 ## Deliberate exclusions
 
 These are not asserted as theorems of this package:
 
-- **Remark `routeII` (§3):** the alternative infinite-field multiplier obstruction modulo finite rank, the proposed support-dimension/contraction-rank equality, and the route depending on these expressly unproved inputs.
-- **Remark `R` (§7):** the announced large-cardinal-index ultrametric-target counterexample using Erdős–Rado. The paper supplies no proof.
-- **The mathematical open questions (§7):** countable-index ultrametric targets in characteristic `p ≥ 3`, and complete ultrametric targets over densely valued spherically complete bases. The paper's separate request to formalize its main theorem is the objective addressed by this project, not a remaining mathematical open problem.
+- **Remark `routeII`:** the alternative infinite-field multiplier obstruction modulo finite rank, the proposed support-dimension/contraction-rank equality, and the route depending on these expressly unproved inputs.
+- **Remark `R`:** the announced large-cardinal-index ultrametric-target counterexample using Erdős–Rado. The paper supplies no proof.
+- **The mathematical open questions:** countable-index ultrametric targets in characteristic `p ≥ 3`, and complete ultrametric targets over densely valued spherically complete bases. The paper's separate request to formalize its main theorem is the objective addressed by this project, not a remaining mathematical open problem.
 - **Serre's external classification cited in Remark `sorted`:** that every ultrametric Banach space over a complete discretely valued field is topologically isomorphic to `c₀(I)`. The sorted-lift theorem assumes the stated basis; this package does not prove that external classification.
 - **The earlier characteristic-two development and its Pfaffian/parity proof:** cited for comparison and preserved separately, not re-proved or re-audited by this formalization.
 

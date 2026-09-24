@@ -1,8 +1,0 @@
-{
-  "axis": "faithfulness",
-  "prompt_sha256": "5f105c88196ef97e917aebe3c25334df71f4aa9dec0cddef65556c711c9021e1",
-  "result": {
-    "score": 5,
-    "reasoning": "The formalization faithfully matches theorem FF(1). ClusterMap uses genuine multilinear maps on finitely supported sequences with values in Mathlib\u2019s exterior power of all sequences. ClusterVectorAntisymmetric and ClusterPol1 encode exactly the source\u2019s permutation-sign condition and coordinatewise multiplier identity. The uniform bound applies precisely to inputs with coordinates in {0,1,-1}; exteriorSupportDim is the minimum dimension of a finite-dimensional supporting subspace, not a numerica"
-  }
-}

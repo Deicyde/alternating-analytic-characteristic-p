@@ -1,2 +1,0 @@
-'AlternatingAnalytic.laurentResidueLift_full_properties' depends on axioms: [propext, Quot.sound, Classical.choice]
-AUTOFORM_PROBE_OK decls=1

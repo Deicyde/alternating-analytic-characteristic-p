@@ -1,9 +1,0 @@
-{
-  "axis": "code_quality",
-  "prompt_sha256": "d9a15d90f7c4fbe419294a4eadd27eab193f737d384790906765d63efb9beff4",
-  "result": {
-    "score": null,
-    "reasoning": "code_quality: judge timed out after 1800s",
-    "error": "timeout"
-  }
-}

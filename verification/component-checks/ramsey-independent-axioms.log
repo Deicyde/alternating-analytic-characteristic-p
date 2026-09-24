@@ -1,3 +1,0 @@
-'InfiniteRamsey.exists_infinite_homogeneous' depends on axioms: [propext, Quot.sound, Classical.choice]
-'InfiniteRamsey.exists_infinite_homogeneous_subset' depends on axioms: [propext, Quot.sound, Classical.choice]
-AUTOFORM_PROBE_OK decls=2

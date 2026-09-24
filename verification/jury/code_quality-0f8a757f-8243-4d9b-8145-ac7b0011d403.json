@@ -1,8 +1,0 @@
-{
-  "axis": "code_quality",
-  "prompt_sha256": "91691c7bb43607a805785df3d503460afe8c312b82eca61c3c2bf5cf22b64c38",
-  "result": {
-    "score": 1,
-    "reasoning": "The mandatory single-declaration rule is violated. In LaurentCompletedCoefficient.lean, array characterization (line 71), support bound (84), uniqueness (90), and constant-wedge recovery (98) are separate theorems without a combined top-level declaration. exists_completedLaurentCoefficient (32) bundles existence, linearity, array compatibility, algebraic extension, and support, but omits uniqueness and constant-wedge recovery. Thus it does not satisfy the required complete bundle, capping the sc"
-  }
-}

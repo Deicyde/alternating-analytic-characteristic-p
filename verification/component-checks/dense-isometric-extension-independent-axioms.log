@@ -1,3 +1,0 @@
-'AlternatingAnalytic.closure_range_comp_eq_range' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.exists_isometric_ringHom_extension' depends on axioms: [propext, Quot.sound, Classical.choice]
-AUTOFORM_PROBE_OK decls=2

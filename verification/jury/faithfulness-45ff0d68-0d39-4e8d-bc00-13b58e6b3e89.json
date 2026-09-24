@@ -1,8 +1,0 @@
-{
-  "axis": "faithfulness",
-  "prompt_sha256": "302e25ba029be33ffef9018b6bdc44be2c822716c2c25aded7a3020254b4922c",
-  "result": {
-    "score": 5,
-    "reasoning": "The actual project file faithfully captures all six identities in source equation (W). Its definitions give exactly s=(1,0,-1,0) and w=(1,-1,1,-1); filtered double sums correctly express both strict-order conditions. Zero-based Fin 4 indexing preserves the distinguished first-position product. The sole assumption is Mathlib\u2019s CommRing R, so characteristic 2 is included without restrictions. All identities are proved and bundled into the named theorem, with no hidden hypotheses or hollow definiti"
-  }
-}

@@ -1,9 +1,0 @@
-'AlternatingAnalytic.sortedEnumeration_perm_injective' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.summable_sortedBasisTerm' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.norm_sortedBasisTerm_le' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.tendsto_schauder_weighted_coord' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.tendsto_fin_product_cofinite_zero' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.tendsto_sorted_weighted_product' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.sortedBasisTerm' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.tendsto_sortedBasisTerm' depends on axioms: [propext, Quot.sound, Classical.choice]
-AUTOFORM_PROBE_OK decls=8

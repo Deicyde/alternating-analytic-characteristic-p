@@ -1,5 +1,0 @@
-⚠ [3141/3144] Built challenge (10s)
-warning: challenge.lean:25:8: declaration uses `sorry`
-warning: challenge.lean:38:8: declaration uses `sorry`
-✔ [3143/3144] Built solution (11s)
-Build completed successfully (3144 jobs).

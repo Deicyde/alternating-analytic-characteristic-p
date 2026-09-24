@@ -1,0 +1,63 @@
+name: Comparator
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  comparator:
+    name: Comparator challenge and solution
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: project
+      - uses: actions/checkout@v4
+        with:
+          repository: leanprover/comparator
+          # v4.34.0-rc2, matching the project's Lean toolchain.
+          ref: 19e111e2141cf333c7daff0f64c5f24acc91dd2e
+          path: comparator
+      - uses: actions/checkout@v4
+        with:
+          repository: Zouuup/landrun
+          ref: 811cfff51ceaf3d9843708aa6d22e9b84ccac8b4
+          path: landrun
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: Build the Linux sandbox
+        working-directory: landrun
+        run: go build -o landrun cmd/landrun/main.go
+      # Comparator gets a fresh project: do not compile the candidate beforehand.
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: project
+          use-mathlib-cache: true
+          build: false
+      - name: Build comparator and its exporter
+        working-directory: comparator
+        run: lake build lean4export comparator
+      - name: Compare statements, audit axioms and replay the kernel
+        working-directory: project
+        env:
+          COMPARATOR_LANDRUN: ${{ github.workspace }}/landrun/landrun
+          COMPARATOR_LEAN4EXPORT: ${{ github.workspace }}/comparator/.lake/packages/lean4export/.lake/build/bin/lean4export
+        run: |
+          set -o pipefail
+          sudo systemd-run --wait --pipe --collect \
+            --uid="$(id -u)" --gid="$(id -g)" --working-directory="$PWD" \
+            --property='RestrictAddressFamilies=~AF_UNIX' \
+            --setenv="PATH=$PATH" --setenv="HOME=$HOME" \
+            --setenv="COMPARATOR_LANDRUN=$COMPARATOR_LANDRUN" \
+            --setenv="COMPARATOR_LEAN4EXPORT=$COMPARATOR_LEAN4EXPORT" \
+            /usr/bin/env lake env "$GITHUB_WORKSPACE/comparator/.lake/build/bin/comparator" comparator.json \
+            2>&1 | tee comparator.log
+          grep -q "Your solution is okay!" comparator.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: comparator-log
+          path: project/comparator.log

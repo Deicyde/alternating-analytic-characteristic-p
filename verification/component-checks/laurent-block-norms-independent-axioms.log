@@ -1,9 +1,0 @@
-'AlternatingAnalytic.completedExteriorArray_laurentBlockWedge' depends on axioms: [propext,
- Quot.sound,
- Classical.choice]
-'AlternatingAnalytic.le_norm_sum_laurentBlockWedge' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.norm_sum_laurentBlockWedge_eq' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.norm_sum_laurentBlockWedge_le' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.norm_laurentBlockWedge' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.geometricWeightMaximum_eq_one' depends on axioms: [propext, Quot.sound, Classical.choice]
-AUTOFORM_PROBE_OK decls=6

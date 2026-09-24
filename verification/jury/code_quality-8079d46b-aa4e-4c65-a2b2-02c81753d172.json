@@ -1,8 +1,0 @@
-{
-  "axis": "code_quality",
-  "prompt_sha256": "4d9a1affb86d4dd4ddd5bcd9a9011f756930b94be99ef8d2bcaf27c3adb0a6c3",
-  "result": {
-    "score": 4,
-    "reasoning": "The inspected declaration satisfies the bundling rule: one self-contained conjunction combines the obstruction and both restriction consequences. Its proof cleanly reuses three helper theorems. The surrounding code uses appropriate Mathlib APIs, local classical reasoning, Finite, explicit nonterminal simp lists, extensionality, omega, and a readable calc chain. Minor style issues remain: finiteField_multiplier_theorem and its obstruction helpers mix camelCase with snake_case despite no correspon"
-  }
-}

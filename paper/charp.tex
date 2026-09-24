@@ -1,0 +1,2195 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amssymb,amsmath,amsthm,mathtools}
+\usepackage{needspace}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\hypersetup{pdftitle={Precomposition on continuous alternating maps is not analytic in positive characteristic},
+  pdfauthor={Jack McCarthy},pdfsubject={Alternating maps over nontrivially normed fields},
+  pdfkeywords={positive characteristic, alternating maps, analyticity, Banach spaces, Lean}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{thmA}{Theorem A}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\linf}{\ell^\infty}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\Alt}{\operatorname{Alt}}
+\newcommand{\Mult}{\operatorname{Mult}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coeff}{\operatorname{coeff}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\spn}{\operatorname{span}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\sdim}{\operatorname{sdim}}
+\newcommand{\incl}{\mathrm{incl}}
+\newcommand{\Cop}{C^{\mathrm{op}}}
+\newcommand{\Cvec}{C^{\mathrm{vec}}}
+\newcommand{\Kh}{\widehat K}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\setlength{\emergencystretch}{1em}
+
+
+\title[Alternating precomposition in positive characteristic]{Precomposition on continuous alternating maps\\ is not analytic in positive characteristic}
+\author{Jack McCarthy}
+\thanks{The result, its informal proof and the original write-up were produced with Anthropic's Claude (in Claude Code),
+and the informal proofs were audited by independent AI agents. The Main Theorem and its supporting development have
+since been formalized in Lean with Mathlib using Codex and Autoform. Neither the paper nor the formalization has yet
+received a human expert review. See \S\ref{sec:lean} for the verification scope and provenance.}
+% Print the manuscript date beneath the author.
+\makeatletter
+\g@addto@macro\@setauthors{\vskip6pt{\centering\footnotesize September 2026\par}}
+\makeatother
+
+\begin{document}
+\begin{abstract}
+Let $K$ be a nontrivially normed field and let $k\ge0$. We characterize when precomposition by a continuous linear
+map is analytic on spaces of continuous alternating $k$\nobreakdash-linear maps: it is analytic for every triple of
+$K$\nobreakdash-Banach spaces if and only if $k!\ne0$ in $K$. If $K$ has characteristic $p>0$ and $k\ge p$, we construct
+Banach spaces $E$ and $F$ for which precomposition on $\Alt^k(E;F)$ is analytic at no point, although it is of class
+$C^n$ for every $n\in\N\cup\{\infty\}$. The field $K$ need not be complete, and $F$ admits no equivalent ultrametric
+norm. The algebraic obstruction is a finite-field theorem: coordinatewise multiplication on sequences has no
+multilinear lift to the exterior power satisfying the polarized diagonal identity and a uniform bound on support
+dimension when $k!=0$. We prove this by Ramsey's theorem and a cancellation argument. A constant-coefficient map
+on a completed exterior power over a Laurent series field converts boundedness into the required support bound;
+Ingleton's Hahn--Banach theorem then permits passage to an arbitrary base field. The main theorem and the factorial
+criterion are formalized in Lean with Mathlib.
+\end{abstract}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+Let $K$ be a nontrivially normed field. For normed $K$\nobreakdash-spaces $E,E',F$ and a finite set $\iota$, write
+$\cL(E,E')$ for the continuous linear maps with the operator norm and $\Alt^\iota(E;F)$ for the continuous alternating
+$\iota$\nobreakdash-linear maps $E^\iota\to F$. Here \emph{alternating} means that the map vanishes whenever two
+arguments coincide, including in characteristic $2$. We study
+\begin{equation}\label{eq:Q}
+\begin{aligned}
+Q=Q^K_{E,E',F}\colon\cL(E,E')&\longrightarrow\cL\bigl(\Alt^\iota(E';F),\Alt^\iota(E;F)\bigr),\\
+Q(f)(m)&=m\circ(f,\dots,f).
+\end{aligned}
+\end{equation}
+For multilinear maps without the alternation condition, precomposition is the diagonal of a bounded multilinear
+map and is therefore analytic. Requiring the values to remain alternating changes the problem. The usual
+polarization argument divides by $k!$, where $k=\abs\iota$, and does not apply when that scalar vanishes. We show that
+this obstruction is unavoidable if analyticity is required for all Banach spaces over $K$.
+
+\needspace{15\baselineskip}
+\subsection*{Main results}
+We use \emph{Banach space} to mean a complete normed space; its norm need not satisfy the ultrametric inequality.
+This convention is essential to the result. The base field itself need not be complete.
+
+\begin{theorem}[Main Theorem]\label{thm:main}
+Let $K$ be a nontrivially normed field of characteristic $p>0$, and let $k\ge p$. There are Banach spaces $E$ and $F$
+over $K$ such that, for every finite set $\iota$ with $\abs\iota=k$, the map
+\[
+Q\colon\cL(E,E)\to\cL\bigl(\Alt^\iota(E;F),\Alt^\iota(E;F)\bigr),\qquad Q(f)(m)=m\circ(f,\dots,f),
+\]
+is analytic at no point of $\cL(E,E)$. Equivalently, there is no bounded $k$\nobreakdash-linear map $P$ on $\cL(E,E)$ with
+$P(f,\dots,f)=Q(f)$ for all $f$. The Banach space $F$ admits no equivalent ultrametric norm.
+\end{theorem}
+
+\begin{corollary}\label{cor:class}
+Let $K$ be any nontrivially normed field and $\iota$ any finite set. Then $Q^K_{E,E',F}$ is analytic for all
+$K$\nobreakdash-Banach spaces $E,E',F$ if and only if $\abs\iota!\ne0$ in $K$. More precisely:
+\begin{enumerate}
+\item if $\abs\iota!\neq0$ in $K$, then $Q^K_{E,E',F}$ is analytic, indeed given at every point by a finite power
+series, for all normed spaces $E,E',F$, complete or not;
+\item if $\abs\iota!=0$ in $K$, then there are Banach spaces $E=E'$ and $F$, with $F$ admitting no equivalent
+ultrametric norm, such that $Q^K_{E,E,F}$ is analytic at no point.
+\end{enumerate}
+\end{corollary}
+
+Thus the factorial condition is exact, even when the source and target of the linear maps are required to coincide.
+The failure is also local in the strongest sense: in the examples, analyticity fails at every base point. By the
+lift criterion of Proposition~\ref{prop:lift}, it is enough to prove that no bounded multilinear lift exists.
+
+Finite-dimensional source spaces give a second positive case: over a complete field, $Q$ is analytic in every
+degree if either $E$ or $E'$ is finite-dimensional, with no restriction on $F$ (Corollary~\ref{cor:finite-dimensional-positive}).
+We give explicit determinant formulas for these lifts in \S\ref{sec:positive}. Finite-dimensional targets require a
+different analysis, given in Remark~\ref{rem:finite-target-reduction}.
+
+\subsection*{Motivation and related results}
+The regularity of $Q$ arises in the construction of bundles of differential forms. Applying $\Alt^\iota$ to the
+transition maps of vector bundles requires control of the corresponding precomposition map; compare Lang's
+functors of class $C^p$~\cite[Ch.~III, \S4]{La}. Mathlib treats manifolds and vector bundles over arbitrary
+nontrivially normed fields, with regularity $n\in\N\cup\{\infty,\omega\}$, where $C^\omega$ denotes analytic
+regularity. This makes the distinction between smoothness and analyticity in positive characteristic relevant to
+the general bundle construction.
+
+Over every such field, $Q$ is of class $C^n$ for every $n\in\N\cup\{\infty\}$, with no completeness or dimension
+assumptions; this is proved in the draft Mathlib contribution~\cite{PR}. In characteristic $0$, Gou\"ezel proves
+analyticity by polarization~\cite{G1} and uses it in the bundle construction~\cite{G2}. The same polarization
+argument works whenever $k!\ne0$ in $K$; we prove it in \S\ref{sec:positive}. Theorem~\ref{thm:main} shows that the
+regularity range in~\cite{PR} is sharp over every field of characteristic $p>0$ once $k\ge p$: in these examples,
+Mathlib's \texttt{ContDiffAt K $\omega$} fails at every point.
+
+The answer is different if the target norm is required to be ultrametric. If $K$ is ultrametric and $F$ is
+ultrametric and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Theorem~A,
+\S\ref{sec:complements}). We include a proof by spherical completeness and extension of bounded linear maps, following the Lean
+development. This positive result is not used in the Main Theorem or Corollary~\ref{cor:class}. A special case appears
+in~\cite[Remark~16]{M}. Over a discretely valued base, Theorem~A in fact rules out a Banach counterexample whenever
+$F$ has an equivalent ultrametric norm (Proposition~\ref{prop:discrete}).
+
+The earlier characteristic-$2$ construction~\cite{M} uses an ultrametric target and gives nonanalyticity at $0$
+for $E=E'=\linf$ and $k=2$ over every complete ultrametric field of characteristic $2$ that is not spherically complete. Its formal
+hypothesis is a descending sequence of closed balls with empty intersection, equivalent to failure of spherical
+completeness (Remark~\ref{rem:K2}). The higher-characteristic cases were left open there. The present construction
+works over every nontrivially normed field of positive characteristic, including spherically complete fields,
+by allowing targets with no equivalent ultrametric norm. The remaining questions for ultrametric targets are
+discussed in \S\ref{sec:complements}.
+
+\subsection*{Proof overview}
+The proof separates into an algebraic obstruction, its realization by a normed space, and passage to the prescribed
+field. The analytic input is a lift criterion valid in every characteristic: if $Q$ is analytic at any point, the
+degree-$k$ term of its power series has diagonal $Q$. One-variable uniqueness identifies this diagonal without
+dividing by $k!$ (Proposition~\ref{prop:lift}).
+
+\emph{The finite-field obstruction.}
+Let $\kappa$ be finite and put $E_0=\kappa^\N$. Theorem~\ref{thm:FF} rules out a multilinear lift of coordinatewise
+multiplication satisfying the polarized diagonal identity~\eqref{eq:Pol1}, with values in $\Lambda^k_\kappa E_0$ when $k!=0$ and every value of the lift lies in an exterior power of a
+subspace of uniformly bounded dimension. Ramsey's theorem first makes the coefficients depend only on the order
+and equality pattern of their indices. Signed sums over clusters of four indices cancel the terms not tied to the
+output. A staircase of clusters converts the support bound into invariance under adjacent transpositions; the
+polarized diagonal identity then forces $k!\,\chi=1$ for a common cluster value $\chi$, a contradiction.
+
+\emph{The Laurent series construction.}
+Over $K_1=\kappa((X))$, take $E_1=\linf(\N,K_1)$ and let $B$ be the completion of
+$\Lambda^k_{K_1}E_1$ under its projective norm, defined using ordinary sums rather than maxima. The essential
+estimate is that the constant-coefficient map
+\[
+\eta\colon B\longrightarrow\Lambda^k_\kappa E_0
+\]
+is well defined and has uniformly bounded support dimension on bounded sets
+(Proposition~\ref{prop:supp}). Evaluating a hypothetical lift on multiplication operators and on the universal
+wedge map, then applying $\eta$, produces exactly the finite-field lift excluded above. The coefficient map
+is $\kappa$\nobreakdash-linear; no $K_1$\nobreakdash-linearity is asserted or needed.
+
+\emph{Passage to the prescribed field.}
+Choose $t\in K$ with $0<\abs t<1$. The closure of $\F_p(t)$ in the completion $\Kh$ is a spherically complete
+Laurent series field $K_1\cong\F_p((X))$, with $\abs X=\abs t$. Ingleton's Hahn--Banach theorem~\cite{In} gives a
+contracting $K_1$\nobreakdash-linear projection $\Kh\to K_1$. It makes the completed projective tensor products
+\[
+E=E_1\widehat\otimes_{\pi,K_1}\Kh,\qquad
+F=B\widehat\otimes_{\pi,K_1}\Kh
+\]
+contain $E_1$ and $B$ isometrically, and allows a lift over $\Kh$ to descend to one over $K_1$. Density handles an
+incomplete $K$. These are the explicit witnesses in Theorem~\ref{thm:main}. Finally, sums of unit wedges on disjoint
+blocks have norms growing linearly with the number of blocks. This growth persists in $F$ and rules out every
+equivalent ultrametric norm (Proposition~\ref{prop:nonultra}).
+
+\subsection*{Formal verification and organization}
+The Main Theorem, both directions of Corollary~\ref{cor:class}, and their supporting arguments are formalized in
+Lean~4 with Mathlib. The development also includes Theorem~A, the discrete-target result, and the sorted-basis lift of
+\S\ref{sec:complements}. The additional finite-dimensional arguments and their formalization status are identified
+in \S\ref{sec:lean}.
+\S\ref{sec:lean} records the principal declarations, verification scope, and provenance; the quoted smoothness
+result~\cite{PR}, whose argument we include, and earlier characteristic-$2$ construction~\cite{M} have separate provenance.
+
+\S\ref{sec:prelim} gives the analytic and exterior-algebra preliminaries, and \S\ref{sec:positive} proves the positive cases. \S\ref{sec:FF} proves the finite-field
+obstruction, and \S\ref{sec:laurent} realizes it over a Laurent series field. \S\ref{sec:ascent} develops scalar
+extension and descent; \S\ref{sec:proofs} assembles the main results. \S\ref{sec:complements} treats ultrametric
+targets and open problems.
+
+\section{Analytic and algebraic preliminaries}\label{sec:prelim}
+The lift criterion reduces the analytic question to a bounded multilinear identity. We then introduce support
+dimension and the determinant arrays that detect it; these provide the rank estimates used in the finite-field
+argument.
+
+\subsection{Conventions}
+We write $\N=\{0,1,2,\dots\}$. Throughout, $K$ denotes the base field and $k$ the degree. A \emph{normed field} $K$ carries a multiplicative absolute value $\abs{\cdot}$ satisfying the triangle inequality. It is
+\emph{nontrivially normed} if some $c\in K$ has $0<\abs c<1$, and \emph{ultrametric} if $\abs{x+y}\le\max(\abs x,\abs y)$.
+A \emph{normed $K$\nobreakdash-space} $X$ satisfies $\norm{\lambda x}=\abs\lambda\norm x$; it is \emph{Banach} if it is complete. The norm of a space need not be ultrametric. In non-archimedean functional analysis, the term ``Banach''
+often includes the ultrametric condition; \S\ref{sec:complements} treats that narrower setting.
+
+We write $\cL(X,Y)$ for the bounded
+linear maps, $\Mult^k(X;Y)$ for the bounded $k$\nobreakdash-linear maps $X^k\to Y$, and $\Alt^k(X;Y)\subseteq\Mult^k(X;Y)$ for the
+closed subspace of alternating maps, all with the operator norm. A subscript $K$ records the field when needed.
+An alternating map $m$ is antisymmetric: expanding $0=m(\dots,y+z,\dots,y+z,\dots)$ gives
+$m(\dots,y,\dots,z,\dots)=-m(\dots,z,\dots,y,\dots)$, and hence
+$m(x_{\sigma(1)},\dots,x_{\sigma(k)})=\sgn(\sigma)\,m(x_1,\dots,x_k)$ for $\sigma\in S_k$. In characteristic $2$ the
+converse fails.
+
+For a finite set $\iota$ with $\abs\iota=k$, a bijection $\iota\cong\{1,\dots,k\}$ identifies $\Alt^\iota(E;F)$
+isometrically with $\Alt^k(E;F)$ and the map~\eqref{eq:Q} with the corresponding map for $\{1,\dots,k\}$; nothing below
+depends on the choice. So we work with
+\[
+Q=Q^K_{E,E',F}\colon\cL(E,E')\to\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr),
+\]
+where $Q(f)(m)(x_1,\dots,x_k)=m(fx_1,\dots,fx_k)$.
+
+\begin{definition}\label{def:lift}
+A \emph{bounded $k$\nobreakdash-linear lift} of $Q$ is a bounded $k$\nobreakdash-linear map
+$P\colon\cL(E,E')^k\to\cL(\Alt^k(E';F),\Alt^k(E;F))$ with $P(f,\dots,f)=Q(f)$ for all $f\in\cL(E,E')$.
+\end{definition}
+
+A map $g\colon X\to Z$ between normed spaces is \emph{analytic at} $x_0$ if there are bounded $n$\nobreakdash-linear maps
+$p_n\colon X^n\to Z$ ($n\ge0$) and a radius $R>0$ with $\sup_n\norm{p_n}R^n<\infty$ such that
+$g(x_0+h)=\sum_{n\ge0}p_n(h,\dots,h)$, a convergent series, whenever $\norm h<R$. Up to shrinking $R$ this is
+Mathlib's \texttt{AnalyticAt}~\cite{docs}, and in Mathlib \texttt{ContDiffAt K $\omega$} at a point implies
+\texttt{AnalyticAt} there (\texttt{ContDiffAt.analyticAt}).
+
+\begin{lemma}\label{lem:ultra}
+A normed field of characteristic $p>0$ is ultrametric.
+\end{lemma}
+
+\begin{proof}
+For $n\in\N$ the element $n\cdot1$ lies in the prime field $\F_p$, so $(n\cdot1)^p=n\cdot1$ and
+$\abs{n\cdot1}\in\{0,1\}$. Hence $\abs{(x+y)^N}\le\sum_{i=0}^N\abs{\tbinom Ni}\abs x^i\abs y^{N-i}\le(N+1)\max(\abs x,\abs
+y)^N$ for every $N$. Taking $N$\nobreakdash-th roots and letting $N\to\infty$ gives $\abs{x+y}\le\max(\abs x,\abs y)$.
+\end{proof}
+
+\subsection{The lift criterion}
+A power series for $Q$ at any base point determines a lift through its degree-$k$ term. The only uniqueness
+statement needed is one-dimensional, so the argument does not use a polarization formula or division by $k!$.
+
+\begin{lemma}[one-variable uniqueness]\label{lem:unique}
+Let $K$ be nontrivially normed and $Z$ a normed $K$\nobreakdash-space, not necessarily complete. Let $z_0,z_1,\dots\in Z$, $\rho>0$
+and $M\ge0$ with $\norm{z_n}\rho^n\le M$ for all $n$. If $\sum_nt^nz_n$ converges to $0$ for every $t\in K$ with
+$\abs t<\rho$, then $z_n=0$ for all $n$.
+\end{lemma}
+
+\begin{proof}
+Otherwise let $N$ be least with $z_N\neq0$. For $0<\abs t<\rho/2$ the series $\sum_{n>N}t^{n-N}z_n$ converges, being
+$t^{-N}$ times the convergent tail $\sum_{n>N}t^nz_n$, and $t^N\bigl(z_N+\sum_{n>N}t^{n-N}z_n\bigr)=0$. Hence
+\[
+\norm{z_N}=\Bigl\lVert\sum_{n>N}t^{n-N}z_n\Bigr\rVert\le\sum_{n>N}M\rho^{-n}\abs t^{n-N}
+=M\rho^{-N}\frac{\abs t/\rho}{1-\abs t/\rho},
+\]
+where the norm of a convergent series is bounded by the sum of the norms by continuity of the norm on partial sums.
+Since $K$ is nontrivially normed, there are $t\ne0$ with $\abs t$ arbitrarily small, so $\norm{z_N}=0$, a
+contradiction.
+\end{proof}
+
+\begin{proposition}[lift criterion]\label{prop:lift}
+Let $K$ be any nontrivially normed field, $E,E',F$ normed $K$\nobreakdash-spaces and $k\ge1$.
+\begin{enumerate}
+\item If $Q$ has a bounded $k$\nobreakdash-linear lift $P$, then at every $f_0\in\cL(E,E')$ the map $Q$ is given by a finite power
+series of infinite radius; in particular $Q$ is analytic at every point.
+\item If $Q$ is analytic at some point $f_0$, with power series $(p_n)_n$ there, then $p_k$ is a bounded $k$\nobreakdash-linear
+lift of $Q$.
+\item Hence the following are equivalent: $Q$ has a bounded $k$\nobreakdash-linear lift; $Q$ is analytic at every point; $Q$ is
+analytic at some point. If they fail, then Mathlib's \texttt{ContDiffAt K $\omega$ Q $f_0$} fails at every $f_0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) For $y\in\cL(E,E')$, multilinearity gives
+\[
+Q(f_0+y)=P(f_0+y,\dots,f_0+y)=\sum_{r=0}^kq_r(y,\dots,y),
+\]
+where $q_r(y_1,\dots,y_r)$ is the sum, over the $r$\nobreakdash-element subsets $S\subseteq\{1,\dots,k\}$, of $P$ evaluated with
+$y_1,\dots,y_r$ in the slots of $S$ in increasing order and $f_0$ in the other slots. Each $q_r$ is
+bounded $r$\nobreakdash-linear, with $\norm{q_r}\le\binom kr\norm P\norm{f_0}^{k-r}$, so $(q_r)_{r\le k}$ is a power series of
+infinite radius for $Q$ at $f_0$.
+
+(2) We compare the given power series along each line with the polynomial obtained by expanding precomposition.
+The expansion is taken in the larger space of all multilinear maps, where each coefficient is visibly defined.
+Let $\incl\colon\Alt^k(E;F)\hookrightarrow\Mult^k(E;F)$ be the isometric inclusion, and put
+\[
+Z:=\cL\bigl(\Alt^k(E';F),\Mult^k(E;F)\bigr),\qquad \mathcal I(T):=\incl\circ T .
+\]
+Then $\mathcal I$ is a linear isometry into $Z$, hence injective.
+Fix $h\in\cL(E,E')$, $h\neq0$. For $m\in\Alt^k(E';F)$, $x\in E^k$ and $t\in K$, multilinearity of $m$ gives the
+\emph{ambient polynomial identity}
+\begin{equation}\label{eq:ambient}
+\mathcal I\bigl(Q(f_0+th)\bigr)=\sum_{r=0}^kt^rA_r(h),\qquad A_r(h)(m)(x):=\sum_{\abs S=r}m(u^S_1,\dots,u^S_k),
+\end{equation}
+where $u^S_i=hx_i$ for $i\in S$ and $u^S_i=f_0x_i$ for $i\notin S$. Here $A_r(h)\in Z$ is bounded, with
+$\norm{A_r(h)}\le\binom kr\norm h^r\norm{f_0}^{k-r}$, and $A_k(h)=\mathcal I(Q(h))$. (For $r<k$ we do not need to know whether
+$A_r(h)(m)$ is alternating; this is why~\eqref{eq:ambient} is written in $Z$.) Let $R$ and $M':=\sup_n\norm{p_n}R^n$ be
+as in the definition of analyticity, and put $\rho:=R/\norm h$. For $\abs t<\rho$ we have $\norm{th}<R$, so
+$Q(f_0+th)=\sum_nt^np_n(h,\dots,h)$, and applying $\mathcal I$ and~\eqref{eq:ambient} gives $\sum_nt^nz_n=0$ in $Z$, with
+$z_n:=\mathcal I(p_n(h,\dots,h))-A_n(h)$ and $A_n(h):=0$ for $n>k$. Since
+$\norm{z_n}\rho^n\le M'+\max_{r\le k}\norm{A_r(h)}\rho^r$, Lemma~\ref{lem:unique} gives $z_k=0$, that is,
+$\mathcal I(p_k(h,\dots,h))=\mathcal I(Q(h))$, hence $p_k(h,\dots,h)=Q(h)$. For $h=0$ both sides vanish since $k\ge1$.
+
+(3) follows from (1) and (2), and from \texttt{ContDiffAt.analyticAt} for the last clause.
+\end{proof}
+
+\begin{remark}\label{rem:liftlean}
+The degree-$k$ term of \emph{every} power series representing $Q$ is a lift, regardless of the base point.
+This does not assert uniqueness of the multilinear lift: in positive characteristic, different multilinear maps
+can have the same diagonal.
+\end{remark}
+
+\subsection{Exterior powers, supports and determinant arrays}\label{ssec:ext}
+Let $L$ be a field, $V$ an $L$\nobreakdash-vector space and $k\ge1$. We write $\Lambda^kV=\Lambda^k_LV$ for the algebraic exterior
+power, in which $x_1\wedge\dots\wedge x_k=0$ whenever two $x_i$ coincide. We use the standard facts: for a subspace
+$W\subseteq V$ the map $\Lambda^kW\to\Lambda^kV$ is injective, and we regard $\Lambda^kW$ as a subspace of $\Lambda^kV$;
+if $u_1,\dots,u_d$ is a basis of a finite-dimensional space $U$, the wedges $u_I:=u_{i_1}\wedge\dots\wedge u_{i_k}$,
+$I=\{i_1<\dots<i_k\}$, form a basis of $\Lambda^kU$; and every $\omega\in\Lambda^kV$ lies in $\Lambda^kU$ for some
+finite-dimensional $U\subseteq V$.
+
+\begin{definition}\label{def:supp}
+The \emph{support dimension} of $\omega\in\Lambda^kV$ is
+\[
+\sdim(\omega):=\min\{\dim W:\ W\subseteq V\text{ finite-dimensional},\ \omega\in\Lambda^kW\}.
+\]
+\end{definition}
+
+The definition gives $\sdim(0)=0$, $\sdim(c\omega)=\sdim(\omega)$ for $c\neq0$, $\sdim(\omega+\omega')\le\sdim(\omega)+\sdim(\omega')$
+(use $W+W'$), and $\sdim(\omega)\le\dim\spn S$ if $\omega$ is a sum of wedges of vectors from a finite set $S$. If
+$V\subseteq V'$, then $\sdim$ computed in $V'$ is at most $\sdim$ computed in $V$.
+
+For spaces of functions, exterior vectors can be detected by determinants of coordinate evaluations. These arrays
+also turn bounds on support dimension into ordinary matrix-rank bounds.
+Let $S$ be a set and $V\subseteq L^S$ a space of functions on $S$. The \emph{determinant array} is the linear map
+\[
+\Omega\colon\Lambda^kV\to L^{S^k},\qquad \Omega_{y_1\wedge\dots\wedge y_k}(c_1,\dots,c_k):=\det\bigl(y_b(c_a)\bigr)_{a,b=1}^k .
+\]
+It is well defined because the right side is multilinear and alternating in $(y_1,\dots,y_k)$ (these are the
+columns). For each $\omega$, the function $\Omega_\omega$ is alternating in $(c_1,\dots,c_k)$ (the rows); in particular
+$\Omega_\omega(c_{\sigma(1)},\dots,c_{\sigma(k)})=\sgn(\sigma)\,\Omega_\omega(c_1,\dots,c_k)$.
+
+\begin{lemma}\label{lem:detinj}
+The determinant array $\Omega\colon\Lambda^kV\to L^{S^k}$ is injective.
+\end{lemma}
+
+\begin{proof}
+Let $\Omega_\omega=0$ and choose a finite-dimensional $U\subseteq V$ with $\omega\in\Lambda^kU$. The evaluations
+$\mathrm{ev}_s|_U$, $s\in S$, separate the points of $U$ (a function in $U$ vanishing at every $s$ is $0$), so they span
+the dual space $U^*$. Choose $s_1,\dots,s_d\in S$ such that the $\mathrm{ev}_{s_i}|_U$ form a basis of $U^*$, and let
+$u_1,\dots,u_d$ be the dual basis of $U$, so that $u_j(s_i)=\delta_{ij}$. For increasing $k$\nobreakdash-subsets $I,J$ of
+$\{1,\dots,d\}$ we get $\Omega_{u_I}(s_{j_1},\dots,s_{j_k})=\det(u_{i_b}(s_{j_a}))_{a,b}=\delta_{IJ}$. Writing
+$\omega=\sum_Ic_Iu_I$ therefore gives $0=\Omega_\omega(s_{j_1},\dots,s_{j_k})=c_J$ for every $J$, so $\omega=0$.
+\end{proof}
+
+\begin{lemma}[support bounds flattening rank]\label{lem:flat}
+Let $V\subseteq L^S$, $\omega\in\Lambda^kV$ and $\alpha\in\{1,\dots,k\}$. Let $R\subseteq S$ and
+$R'\subseteq S^{\{1,\dots,k\}\setminus\{\alpha\}}$ be finite. The $R\times R'$ matrix $M$ with entries
+$M(c_\alpha,c'):=\Omega_\omega(c)$, where $c$ has $c_\alpha$ in slot $\alpha$ and the entries of $c'$ in the other
+slots, has rank at most $\sdim(\omega)$.
+\end{lemma}
+
+\begin{proof}
+Write $\omega=\sum_jy_{j,1}\wedge\dots\wedge y_{j,k}$ with all $y_{j,b}$ in a subspace $W$ of dimension $\sdim(\omega)$.
+Expanding each determinant along row $\alpha$,
+$\det(y_{j,b}(c_a))_{a,b}=\sum_b\pm y_{j,b}(c_\alpha)\cdot\mu_{j,b}(c')$, where the minor $\mu_{j,b}(c')$ does not
+involve $c_\alpha$. So for fixed $c'$ the column $c_\alpha\mapsto M(c_\alpha,c')$ is a linear combination of the
+restrictions $y_{j,b}|_R$. All columns lie in the restriction of $W$ to $R$, a space of dimension at most
+$\sdim(\omega)$.
+\end{proof}
+
+A second way to obtain lower bounds on support is to contract all but one exterior factor. The resulting vectors
+must lie in every subspace supporting the original exterior vector.
+
+\begin{samepage}
+\begin{lemma}[contraction]\label{lem:contr}
+Let $k\ge2$ and $\varphi=(\varphi_1,\dots,\varphi_{k-1})\in(V^*)^{k-1}$. There is a linear map $c_\varphi\colon\Lambda^kV\to V$
+with
+\[
+c_\varphi(x_1\wedge\dots\wedge x_k)=\sum_{i=1}^k(-1)^{k+i}\det\bigl(\varphi_a(x_b)\bigr)_{1\le a\le k-1,\ b\ne i}\;x_i ,
+\]
+and $c_\varphi(\Lambda^kW)\subseteq W$ for every subspace $W$. Consequently
+$\sdim(\omega)\ge\dim\spn\{c_\varphi(\omega):\varphi\in(V^*)^{k-1}\}$.
+\end{lemma}
+\end{samepage}
+
+\begin{proof}
+The right side is multilinear in $(x_b)$. For $\psi\in V^*$, applying $\psi$ to it gives, by Laplace expansion along the
+last row, the determinant of the $k\times k$ matrix with entries $\varphi_a(x_b)$ in the rows $a<k$ and $\psi(x_b)$ in the last
+row; it vanishes when two columns coincide. Since $V^*$ separates the points of $V$, the right side
+vanishes whenever $x_a=x_b$ for some $a\ne b$, so it factors through $\Lambda^kV$. Each term is a multiple of some $x_i$, which gives
+$c_\varphi(\Lambda^kW)\subseteq W$. If $\omega\in\Lambda^kW$ with $\dim W=\sdim(\omega)$, all $c_\varphi(\omega)$ lie in $W$.
+\end{proof}
+
+\section{Positive results}\label{sec:positive}
+There are two distinct reasons for positive results. A bounded multilinear lift gives analyticity, and such a lift
+can be constructed by dividing by $k!$ or, under suitable finite-dimensional hypotheses, by choosing coordinates.
+Smoothness requires neither construction: it descends from the space of all multilinear maps through a closed
+isometric inclusion. We give the arguments explicitly.
+
+\subsection{Invertible factorial: in particular, \texorpdfstring{$p>k$}{p > k}}
+\begin{proposition}\label{prop:factorial-positive}
+Let $K$ be a nontrivially normed field and let $E,E',F$ be normed $K$\nobreakdash-spaces. If $k!\ne0$ in $K$, then $Q$
+is given at every point by a finite power series of infinite radius. In particular, it is analytic whenever
+$\operatorname{char}K=0$, or whenever $\operatorname{char}K=p>k$. No completeness or dimension hypothesis is needed.
+\end{proposition}
+
+\begin{proof}
+For $k=0$, precomposition is constant. Suppose $k\ge1$ and define
+\[
+P(f_1,\dots,f_k)(m)(x_1,\dots,x_k)
+:=\frac1{k!}\sum_{\sigma\in S_k}
+m\bigl(f_{\sigma(1)}x_1,\dots,f_{\sigma(k)}x_k\bigr).
+\]
+This is multilinear in the $f_i$ and in the $x_j$, linear in $m$, and satisfies
+\[
+\norm{P(f_1,\dots,f_k)(m)(x_1,\dots,x_k)}
+\le \abs{(k!)^{-1}}\,k!\,\norm m\prod_i\norm{f_i}\prod_j\norm{x_j},
+\]
+where the second $k!$ on the right is a real number counting the terms. To check alternation, suppose $x_a=x_b$ and
+let $\tau$ exchange $a$ and $b$. The summands indexed by $\sigma$ and $\sigma\circ\tau$ cancel by antisymmetry of $m$.
+This pairing is a fixed-point-free involution, so it proves vanishing also in characteristic $2$. Thus $P$ takes
+values in the required space of alternating maps and is a bounded $k$\nobreakdash-linear lift: on the diagonal,
+all $k!$ summands equal $Q(f)(m)(x)$. Proposition~\ref{prop:lift} gives the claimed power series.
+
+In a field of characteristic $p>0$, the scalar $k!$ is nonzero precisely when $k<p$. This gives the stated
+positive-characteristic case.
+\end{proof}
+
+% Proposed finite-coordinate positive cases. This is new manuscript prose,
+% not a claim that a corresponding new general theorem has been added to Lean.
+\subsection{Finite-dimensional domain or codomain}
+
+The finite-dimensional argument uses continuous coordinate functionals. We state this hypothesis explicitly so
+that the result also applies over incomplete fields whenever the chosen finite-dimensional space has its usual
+coordinate topology.
+
+\begin{proposition}[finite coordinate bases]\label{prop:finite-coordinate}
+Let $K$ be a nontrivially normed field and let $E,E',F$ be normed $K$\nobreakdash-spaces. If either $E$ or $E'$ has a
+finite algebraic basis whose coordinate functionals are continuous, then $Q^K_{E,E',F}$ has a bounded
+$k$\nobreakdash-linear lift in every degree $k\ge1$. In particular, it is continuously polynomial, and hence analytic,
+at every point. No completeness or ultrametric hypothesis on $F$ is required.
+\end{proposition}
+
+\begin{proof}
+Let $H$ denote the space with a finite coordinate basis, write that basis as $e_1,\dots,e_n$, and let
+$\varepsilon_1,\dots,\varepsilon_n\in\cL_K(H,K)$ be its coordinate functionals. For an increasing $k$\nobreakdash-tuple
+$s=(s_1<\dots<s_k)$ in $\{1,\dots,n\}$, put
+\[
+c_s:=\prod_{a=1}^k\norm{\varepsilon_{s_a}}\norm{e_{s_a}},
+\qquad C_H:=k!\sum_{s_1<\dots<s_k}c_s.
+\]
+Here the factor $k!$ in $C_H$ is the positive real integer counting the terms in a determinant, not its image in
+$K$. In particular, $C_H\ge0$ even when $k!=0$ in $K$.
+
+Suppose first that $H=E$. For $f_1,\dots,f_k\in\cL_K(E,E')$, $m\in\Alt^k_K(E';F)$ and $x\in E^k$, define
+\[
+P(f_1,\dots,f_k)(m)(x_1,\dots,x_k)
+:=\sum_{s_1<\dots<s_k}
+\det\bigl(\varepsilon_{s_a}(x_b)\bigr)_{a,b}\,
+ m(f_1e_{s_1},\dots,f_ke_{s_k}).
+\]
+The determinant makes this expression alternating and multilinear in $x$. It is linear in $m$ and multilinear in
+$f_1,\dots,f_k$. Expanding the determinant over permutations gives
+\[
+\left|\det\bigl(\varepsilon_{s_a}(x_b)\bigr)_{a,b}\right|
+\le k!\prod_a\norm{\varepsilon_{s_a}}\prod_b\norm{x_b}.
+\]
+Together with the operator bound for $m$, the ordinary triangle inequality therefore yields
+\[
+\norm{P(f_1,\dots,f_k)(m)(x)}
+\le C_E\,\norm m\prod_a\norm{f_a}\prod_b\norm{x_b}.
+\]
+Thus the displayed formula defines a bounded $k$\nobreakdash-linear map into
+$\cL_K(\Alt^k_K(E';F),\Alt^k_K(E;F))$, with $\norm P\le C_E$. On the diagonal, the finite exterior-basis expansion
+of $x_1\wedge\dots\wedge x_k$ gives
+\[
+m(fx_1,\dots,fx_k)
+=\sum_{s_1<\dots<s_k}
+\det\bigl(\varepsilon_{s_a}(x_b)\bigr)_{a,b}\,
+ m(fe_{s_1},\dots,fe_{s_k}),
+\]
+so $P(f,\dots,f)=Q(f)$.
+
+Now suppose that $H=E'$. Define instead
+\[
+P(f_1,\dots,f_k)(m)(x_1,\dots,x_k)
+:=\sum_{s_1<\dots<s_k}
+\det\bigl(\varepsilon_{s_a}(f_ax_b)\bigr)_{a,b}\,
+ m(e_{s_1},\dots,e_{s_k}).
+\]
+Each row of the determinant is linear in its corresponding operator $f_a$, and its columns make the result
+alternating and multilinear in $x$. The expression is again linear in $m$. The determinant estimate now reads
+\[
+\left|\det\bigl(\varepsilon_{s_a}(f_ax_b)\bigr)_{a,b}\right|
+\le k!\prod_a\bigl(\norm{\varepsilon_{s_a}}\norm{f_a}\bigr)\prod_b\norm{x_b}.
+\]
+It follows that the same operator bound holds with $C_{E'}$ in place of $C_E$. Expanding
+$fx_1\wedge\dots\wedge fx_k$ in the exterior basis of $E'$ proves the diagonal identity.
+
+Both formulas are finite sums. Strong alternation follows from equal columns in a determinant, so the proof works
+in every characteristic and involves no division by $k!$. Proposition~\ref{prop:lift} gives continuous
+polynomiality and analyticity. If $k>n$, the sums are empty and the relevant alternating-map space is zero; the
+same argument gives the zero lift. Degree zero, excluded from the lift criterion's statement, is immediate because
+$Q$ is constant.
+\end{proof}
+
+\begin{corollary}\label{cor:finite-dimensional-positive}
+Let $K$ be a complete nontrivially normed field, and let $E,E',F$ be normed $K$\nobreakdash-spaces. If either $E$ or $E'$
+is finite-dimensional over $K$, then $Q^K_{E,E',F}$ is analytic at every point in every degree. No completeness
+assumption on $E,E'$ or $F$ is needed in the statement.
+\end{corollary}
+
+\begin{proof}
+We recall why a finite-dimensional normed space $H$ over complete $K$ has continuous coordinates. Induct on its
+dimension, proving at the same time that $H$ is complete. The zero-dimensional case is immediate. For a basis
+$e_1,\dots,e_n$, the subspace $W:=\operatorname{span}(e_1,\dots,e_{n-1})$ is complete by induction, hence closed in
+$H$. Since $e_n\notin W$, the distance $\delta:=\inf_{w\in W}\norm{e_n-w}$ is positive. If $x=w+te_n$, then
+\[
+\norm x\ge\delta\abs t,\qquad
+\norm w\le\norm x+\abs t\norm{e_n}
+\le(1+\delta^{-1}\norm{e_n})\norm x.
+\]
+The first estimate bounds the last coordinate; the second, together with the inductive coordinate bounds on $W$,
+bounds all the preceding coordinates. Thus the coordinate map $H\to K^n$, with the maximum norm, is bounded. Its
+inverse is bounded by the ordinary triangle inequality. This gives a bi-Lipschitz linear identification with the
+complete space $K^n$, completing the induction. Proposition~\ref{prop:finite-coordinate} now applies to whichever
+of $E,E'$ is finite-dimensional.
+\end{proof}
+
+\begin{remark}[the coordinate hypothesis over an incomplete field]
+Finite algebraic dimension alone does not imply continuity of coordinate functionals over an incomplete field.
+For example, choose $a\in\widehat K\setminus K$ and give $H:=K+Ka\subseteq\widehat K$ the induced norm. The vectors
+$1,a$ form a $K$\nobreakdash-basis. If $a_j\in K$ tends to $a$, then $a-a_j\to0$ in $H$, whereas its $a$\nobreakdash-coordinate
+is always $1$. Thus that coordinate functional is discontinuous. This prevents dropping the coordinate hypothesis
+from the preceding proof; it does not by itself give a counterexample to analyticity of $Q$ for such spaces.
+Over an incomplete field the proposition still applies, for example, to finite-dimensional spaces whose norm is
+equivalent to a coordinate maximum norm.
+\end{remark}
+
+
+Finite-dimensionality of the target $F$ leads to a different question. Remark~\ref{rem:finite-target-reduction}
+reduces it to scalar-valued forms and gives a positive result over a spherically complete ultrametric base.
+
+\subsection{Smoothness in every characteristic}
+We first record why finite-order differentiability descends through a closed isometric inclusion. The argument
+also explains why smoothness survives when a multilinear analytic lift does not.
+
+\begin{lemma}[smoothness through a closed isometric inclusion]\label{lem:smooth-reflection}
+Let $U,V,W$ be normed spaces over a nontrivially normed field $K$, and let $j\colon V\to W$ be a linear isometry
+with closed range. For a map $g\colon U\to V$ and $n\in\N\cup\{\infty\}$, the map $g$ is $C^n$ if and only if $j\circ g$
+is $C^n$.
+\end{lemma}
+
+\begin{proof}
+One direction follows by composition with a continuous linear map. For the converse, continuity follows from the
+isometry. Suppose $j\circ g$ has Fr\'echet derivative $A\colon U\to W$ at $x$. For each $h\in U$,
+\[
+Ah=\lim_{t\to0,\ t\ne0}\frac{j(g(x+th))-j(g(x))}{t}.
+\]
+The quotients lie in $j(V)$, and nontriviality of the norm supplies nonzero scalars tending to zero. Since $j(V)$ is
+closed, $Ah\in j(V)$. Thus $A=j\circ B$ for a unique linear map $B\colon U\to V$. The identity
+$\norm{Bh}=\norm{Ah}$ makes $B$ bounded, and the isometry transfers the Fr\'echet remainder estimate from $A$ to
+$B$. Consequently $g$ is differentiable and
+\[
+D(j\circ g)=j_*\circ Dg,\qquad
+j_*\colon\cL(U,V)\longrightarrow\cL(U,W),\quad T\longmapsto j\circ T.
+\]
+The map $j_*$ is again a linear isometry with closed range. Indeed, an operator belongs to its range exactly when
+all its values lie in $j(V)$; this is a closed condition, being an intersection of inverse images under continuous
+evaluation maps. Applying the same argument to $j_*$ proves the assertion for $C^{n+1}$ from the assertion for
+$C^n$. Induction proves every finite order, and hence $C^\infty$.
+\end{proof}
+
+\begin{proposition}[smoothness of precomposition]\label{prop:smooth-positive}
+For every nontrivially normed field $K$, all normed $K$\nobreakdash-spaces $E,E',F$, and every finite set $\iota$, the map
+$Q^K_{E,E',F}$ is $C^n$ for every $n\in\N\cup\{\infty\}$. In particular, precomposition is always $C^\infty$,
+without completeness, finite-dimensionality, or characteristic assumptions.
+\end{proposition}
+
+\begin{proof}
+Put $k=\abs\iota$ and use the finite-index identification of \S\ref{sec:prelim}. The inclusion
+$\Alt^k(E;F)\hookrightarrow\Mult^k(E;F)$ is isometric and has closed range: alternation is the intersection of the
+closed conditions $m(x_1,\dots,x_k)=0$ for tuples with two equal entries. Postcomposition therefore gives a linear
+isometry with closed range
+\[
+\mathcal I\colon\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr)
+\longrightarrow\cL\bigl(\Alt^k(E';F),\Mult^k(E;F)\bigr).
+\]
+In the larger target, precomposition is the diagonal of the bounded $k$\nobreakdash-linear map
+\[
+A(f_1,\dots,f_k)(m)(x_1,\dots,x_k)
+=m(f_1x_1,\dots,f_kx_k),
+\]
+whose norm is at most $1$. Hence $\mathcal I\circ Q$ is a continuous polynomial and is $C^\infty$.
+Lemma~\ref{lem:smooth-reflection} gives the result. The degree-zero case is again constant.
+\end{proof}
+
+This is the argument formalized in~\cite{PR}. It uses closedness to recover derivatives, rather than a projection
+onto alternating maps. The induction proves all finite orders but does not recover analytic coefficients in
+positive characteristic. Theorem~\ref{thm:main} shows that the resulting $C^\infty$ conclusion cannot in general be
+strengthened to $C^\omega$.
+
+\section{The multiplier theorem over a finite field}\label{sec:FF}
+
+This section proves the algebraic obstruction used in the Laurent-series construction: over a finite field in which
+$k!=0$, coordinatewise multiplication admits no multilinear lift satisfying a polarized diagonal identity and a
+uniform bound on exterior support. We first distinguish the diagonal identities, since over a finite field equality
+at all scalar points need not be a polynomial identity.
+
+\subsection{Lifts and three diagonal identities}\label{ssec:diag}
+Fix a field $L$, an integer $k\ge1$, $L$\nobreakdash-vector spaces $A$ and $V$, and a linear map $D\colon A\to\End_L(V)$,
+$a\mapsto D_a$. A \emph{lift of $D$ in degree $k$} is a $2k$\nobreakdash-linear map $\Psi\colon A^k\times V^k\to\Lambda^kV$ over $L$ that is
+alternating in the $V$\nobreakdash-slots; its diagonal identity will be specified separately. For every $n\ge1$ write
+$[n]:=\{1,\dots,n\}$, and for $\alpha\in\N^m$ put $\abs\alpha:=\sum_i\alpha_i$. Given $m\ge1$, a map
+$f\colon[k]\to[m]$, a family $b=(b_1,\dots,b_m)\in A^m$ and $\lambda\in L^m$, put
+\[
+b_f:=(b_{f(1)},\dots,b_{f(k)}),\quad \type f:=\bigl(\abs{f^{-1}(1)},\dots,\abs{f^{-1}(m)}\bigr)\in\N^m,\quad
+\lambda_f:=\prod_{j=1}^k\lambda_{f(j)}=\lambda^{\type f}.
+\]
+The \emph{pointwise identity} is
+\begin{equation*}\tag{Pw}\label{eq:Pw}
+\Psi(a,\dots,a;x_1,\dots,x_k)=D_ax_1\wedge\dots\wedge D_ax_k\qquad\text{for all }a\in A,\ x\in V^k.
+\end{equation*}
+The \emph{polarized identity} is: for all $m\ge1$, $b\in A^m$, $\alpha\in\N^m$ with $\abs\alpha=k$, and $x\in V^k$,
+\begin{equation*}\tag{Pol}\label{eq:Pol}
+\sum_{\type f=\alpha}\Psi(b_f;x)=\sum_{\type f=\alpha}D_{b_{f(1)}}x_1\wedge\dots\wedge D_{b_{f(k)}}x_k .
+\end{equation*}
+Its \emph{multilinear instance} is: for all $b_1,\dots,b_k\in A$ and $x\in V^k$,
+\begin{equation*}\tag{Pol1}\label{eq:Pol1}
+\sum_{\sigma\in S_k}\Psi(b_{\sigma(1)},\dots,b_{\sigma(k)};x)
+=\sum_{\sigma\in S_k}D_{b_{\sigma(1)}}x_1\wedge\dots\wedge D_{b_{\sigma(k)}}x_k .
+\end{equation*}
+Here $\sum_{\type f=\alpha}$ runs over the maps $f\colon[k]\to[m]$ of type $\alpha$. \eqref{eq:Pol1} is the instance $m=k$,
+$\alpha=(1,\dots,1)$ of \eqref{eq:Pol}, since the maps of type $(1,\dots,1)$ are the permutations. For $b\in A^m$ and
+$x\in V^k$ put $a_\lambda:=\sum_i\lambda_ib_i$ and
+\begin{align*}
+\Delta_{b,x}(\lambda)&:=\Psi(a_\lambda,\dots,a_\lambda;x)-D_{a_\lambda}x_1\wedge\dots\wedge D_{a_\lambda}x_k
+=\sum_{\abs\alpha=k}\lambda^\alpha\,\delta_\alpha(b,x),\\
+\delta_\alpha(b,x)&:=\sum_{\type f=\alpha}\Bigl[\Psi(b_f;x)-D_{b_{f(1)}}x_1\wedge\dots\wedge D_{b_{f(k)}}x_k\Bigr].
+\end{align*}
+Multilinearity of $\Psi$ in the $A$\nobreakdash-slots, linearity of $D$ and multilinearity of the wedge give the displayed
+expansion. Thus $\Delta_{b,x}$ is a homogeneous polynomial of degree $k$ with coefficients in $\Lambda^kV$.
+Identity~\eqref{eq:Pol} says that every coefficient $\delta_\alpha(b,x)$ is zero. Identity~\eqref{eq:Pw} says instead that
+$\Delta_{b,x}$ vanishes at every point of $L^m$; conversely, this pointwise vanishing gives~\eqref{eq:Pw} by taking
+$m=1$ and $\lambda=1$. The following two identity principles identify the cases in which pointwise vanishing forces
+all coefficients to vanish.
+
+\begin{lemma}[identity principle]\label{lem:idprinc}
+Let $\mathbb K$ be an infinite field, $Y$ a $\mathbb K$\nobreakdash-vector space and $g(\lambda)=\sum_\alpha\lambda^\alpha y_\alpha$ a
+polynomial in $\lambda\in\mathbb K^m$ with finitely many nonzero coefficients $y_\alpha\in Y$. If $g(\lambda)=0$ for all
+$\lambda\in\mathbb K^m$, then every $y_\alpha=0$.
+\end{lemma}
+
+\begin{proof}
+The finitely many coefficients $y_\alpha$ span a finite-dimensional subspace of $Y$. Applying its coordinate
+functionals reduces the claim to scalar polynomials. For these, induction on $m$ reduces to the fact that a nonzero
+polynomial in one variable has only finitely many roots.
+\end{proof}
+
+\begin{lemma}[homogeneous forms over a finite field]\label{lem:forms}
+Let $q$ be a prime power, $L'\supseteq\F_q$ a field, $1\le e\le q$, and $g\in L'[\lambda_1,\dots,\lambda_m]$ homogeneous of
+degree $e$ with $g(\lambda)=0$ for every $\lambda\in\F_q^m$. Then $g=0$.
+\end{lemma}
+
+\begin{proof}
+Call a monomial $\lambda^\beta$ \emph{reduced} if every $\beta_i\le q-1$. The indicator function of a point
+$a\in\F_q^m$ is $\prod_i\bigl(1-(\lambda_i-a_i)^{q-1}\bigr)$, which expands into reduced monomials. So the $q^m$ reduced
+monomials span the $q^m$\nobreakdash-dimensional $L'$\nobreakdash-space of functions $\F_q^m\to L'$, and they are linearly independent as
+functions. A monomial of degree $e\le q$ that is not reduced is $\lambda_i^q$ (and then $e=q\ge2$); as a function on
+$\F_q^m$ it agrees with the reduced monomial $\lambda_i$, of degree $1<e$. If $e=q$, replace each $\lambda_i^q$ in $g$ by
+$\lambda_i$. These degree-one images are distinct, and homogeneity separates them from all the remaining monomials,
+which still have degree $q$. The replacement therefore sends the monomials of $g$ injectively to reduced monomials
+without changing the associated function. Linear independence of the reduced monomials forces every coefficient to
+vanish. If $e<q$, no replacement is needed.
+\end{proof}
+
+\begin{proposition}[pointwise versus polarized]\label{prop:diag}
+Let $\Psi$ be a lift of $D$ in degree $k$ over a field $L$.
+\begin{enumerate}
+\item \eqref{eq:Pol}$\Rightarrow$\eqref{eq:Pw}$\Rightarrow$\eqref{eq:Pol1}, over every field.
+\item If $L$ is infinite, or if $L=\F_q$ and $k\le q$, then \eqref{eq:Pw}$\Rightarrow$\eqref{eq:Pol}.
+\item If $L=\F_q$ and $k\ge q+1$, then \eqref{eq:Pw} does not imply \eqref{eq:Pol} in general.
+\item If $k!=0$ in $L$, then \eqref{eq:Pol1} does not imply \eqref{eq:Pw} in general.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{(1) Inclusion--exclusion.} The implication \eqref{eq:Pol}$\Rightarrow$\eqref{eq:Pw} is the case $m=1$ and
+$\alpha=(k)$. To prove \eqref{eq:Pw}$\Rightarrow$\eqref{eq:Pol1}, fix $b_1,\dots,b_k\in A$ and $x\in V^k$, and put
+$b_S:=\sum_{i\in S}b_i$ for $S\subseteq[k]$. Multilinearity gives
+\begin{align*}
+\sum_{S\subseteq[k]}(-1)^{k-\abs S}\Psi(b_S,\dots,b_S;x)&=\sum_S(-1)^{k-\abs S}\sum_{f\colon[k]\to S}\Psi(b_f;x)\\
+&=\sum_{f\colon[k]\to[k]}\Psi(b_f;x)\sum_{S\supseteq f([k])}(-1)^{k-\abs S}=\sum_{f\text{ bijective}}\Psi(b_f;x),
+\end{align*}
+because $\sum_{S\supseteq T}(-1)^{k-\abs S}=(1-1)^{k-\abs T}$ is $1$ if $T=[k]$ and $0$ otherwise. The same computation
+applies to the multilinear map $(a_1,\dots,a_k)\mapsto D_{a_1}x_1\wedge\dots\wedge D_{a_k}x_k$, whose diagonal is the right
+side of \eqref{eq:Pw}. Evaluating \eqref{eq:Pw} at the $2^k$ subset sums $b_S$ therefore gives \eqref{eq:Pol1}.
+The computation is valid in every characteristic and involves no division by $k!$.
+
+\emph{(2) The identity principles.} The coefficients of $\Delta_{b,x}$ span a finite-dimensional subspace of $\Lambda^kV$; in a basis of it each
+coordinate of $\Delta_{b,x}$ is a scalar form of degree $k$ vanishing on $L^m$. It is zero by Lemma~\ref{lem:idprinc}
+if $L$ is infinite, and by Lemma~\ref{lem:forms} if $L=\F_q$ and $k\le q$.
+
+\emph{(3) Pointwise vanishing without full polarization.} Let $\dim A\ge3$, with $b_1,b_2,b_3\in A$ and functionals $g_1,g_2,g_3$ on $A$ such that
+$g_i(b_j)=\delta_{ij}$, and let $y_1,\dots,y_k\in V$ be linearly independent. Put
+\[
+\theta(a_1,\dots,a_k):=\bigl[g_1(a_1)\cdots g_1(a_q)\,g_2(a_{q+1})-g_1(a_1)\,g_2(a_2)\cdots g_2(a_{q+1})\bigr]
+\cdot g_3(a_{q+2})\cdots g_3(a_k)
+\]
+(for $k=q+1$ the $g_3$\nobreakdash-factor is empty and $\dim A\ge2$ suffices), and $\Theta(a;x):=\theta(a)\,x_1\wedge\dots\wedge x_k$.
+Then $\Theta$ is a lift of $D=0$. It satisfies \eqref{eq:Pw}, because
+$\theta(a,\dots,a)=(g_1(a)^qg_2(a)-g_1(a)g_2(a)^q)\,g_3(a)^{k-q-1}=0$ since $c^q=c$ for $c\in\F_q$. It
+violates \eqref{eq:Pol} for $\alpha=(q,1,k-q-1)$ and $b=(b_1,b_2,b_3)$: the first product contributes to
+$\sum_{\type f=\alpha}\theta(b_f)$ exactly for $f=(1,\dots,1,2,3,\dots,3)$, with value $1$; the second product would need
+$f(2)=\dots=f(q+1)=2$, that is, at least $q\ge2$ values equal to $2$, which is impossible for type $\alpha$. So the
+coefficient $\delta_\alpha(b,y)$ of $\Theta$ is $y_1\wedge\dots\wedge y_k\neq0$. When $k=q+1$, the third label and its
+functional can be omitted throughout, with $\alpha=(q,1)$.
+
+\emph{(4) The multilinear identity without the pointwise identity.} Take $\bar a\in A$ and a functional $g_1$ with $g_1(\bar a)=1$, and $y_1,\dots,y_k$ linearly independent. The
+lift $\Theta'(a;x):=g_1(a_1)\cdots g_1(a_k)\,x_1\wedge\dots\wedge x_k$ of $D=0$ satisfies \eqref{eq:Pol1}, since
+$\sum_\sigma\Theta'(b_\sigma;x)=k!\,g_1(b_1)\cdots g_1(b_k)\,x_1\wedge\dots\wedge x_k=0$ for all
+$b_1,\dots,b_k\in A$ and $x\in V^k$, but $\Theta'(\bar a,\dots,\bar a;y)=y_1\wedge\dots\wedge y_k\neq0$.
+\end{proof}
+
+The finite-field obstruction below requires only~\eqref{eq:Pol1}, which follows from either~\eqref{eq:Pw}
+or~\eqref{eq:Pol}. The distinction between the latter two remains important: over $\F_q$ they need not agree when
+$k>q$. The lift constructed in \S\ref{sec:laurent} nevertheless satisfies the full identity~\eqref{eq:Pol} in every
+degree: the identity is polarized over an infinite Laurent-series field before constant coefficients are taken
+(Lemma~\ref{lem:Psi}).
+
+\subsection{Statement and proof strategy}
+For the proof of the theorem, assume that $L$ is a \emph{finite} field with $k!=0$ in $L$, that is, $\operatorname{char}L=p\le k$; in
+particular $k\ge2$. Put $V:=L^\N$ and let $V_{\mathrm{fin}}:=L^{(\N)}\subseteq V$ be the subspace of finitely supported
+sequences. For $u,x\in V$ we write $ux$ for the coordinatewise product; so $D_ux=ux$ is the multiplier family.
+
+\begin{samepage}
+\begin{theorem}[multipliers over a finite field]\label{thm:FF}
+Let $L$ be a finite field and $k\ge1$ with $k!=0$ in $L$.
+\begin{enumerate}
+\item There is no $2k$\nobreakdash-linear map $\Psi\colon V_{\mathrm{fin}}^k\times V_{\mathrm{fin}}^k\to\Lambda^k_LV$ over $L$ such that
+\begin{enumerate}
+\item $\Psi$ is antisymmetric in the last $k$ slots;
+\item $\Psi$ satisfies \eqref{eq:Pol1} for $D_ux=ux$: for all $u_1,\dots,u_k,x_1,\dots,x_k\in V_{\mathrm{fin}}$,
+\[
+\sum_{\sigma\in S_k}\Psi(u_{\sigma(1)},\dots,u_{\sigma(k)};x_1,\dots,x_k)=\sum_{\sigma\in S_k}(u_{\sigma(1)}x_1)\wedge\dots\wedge(u_{\sigma(k)}x_k);
+\]
+\item for some $d\in\N$, $\sdim(\Psi(u;x))\le d$ for all $u,x\in V_{\mathrm{fin}}^k$ with entries in $\{0,\pm1\}$.
+\end{enumerate}
+\item Let $E_0=V$ or $E_0=V_{\mathrm{fin}}$. There is no $2k$\nobreakdash-linear map $\Psi\colon E_0^k\times E_0^k\to\Lambda^k_LE_0$ over $L$
+that is antisymmetric in the last $k$ slots, satisfies \eqref{eq:Pol1} for all finitely supported $u,x$, and has
+$\sdim(\Psi(u;x))\le d$ for all $u,x\in E_0^k$, for some $d$.
+\end{enumerate}
+\end{theorem}
+\end{samepage}
+
+\emph{Reduction to (1).} Given a map as in (2), restrict its inputs to
+$V_{\mathrm{fin}}^k\times V_{\mathrm{fin}}^k$ and compose its output with the injective map
+$\Lambda^kE_0\to\Lambda^kV$. This preserves antisymmetry and~\eqref{eq:Pol1}. Support dimension can only decrease under
+the inclusion of the ambient space (\S\ref{ssec:ext}), so the resulting map satisfies (a)--(c).
+
+We therefore prove (1). Suppose that $\Psi$ satisfies its hypotheses, and fix the bound $d$ in (c). Write
+$e_i\in V_{\mathrm{fin}}$ for the unit vectors, $e_a:=(e_{a_1},\dots,e_{a_k})$ for $a\in\N^k$, and $\Omega$ for the
+determinant array of \S\ref{ssec:ext} with $S=\N$.
+
+The proof has three steps. Ramsey's theorem first makes the coefficients of $\Omega\Psi$ depend only on the relative
+order and equalities among their indices. Special weights on four-point clusters then cancel every contribution
+from an occupied cluster containing no output index. This cancellation produces a two-valued staircase matrix from
+one exterior vector. Its bounded support forces the two values to agree, and hence makes all cluster order patterns
+have a common value. Finally, antisymmetry and~\eqref{eq:Pol1} say that the sum of these $k!$ equal values is $1$,
+contradicting $k!=0$ in $L$.
+
+\subsection{Order-homogeneity from Ramsey's theorem}
+We use Ramsey's theorem~\cite{Ra} in its infinite form: \emph{for every $n\ge1$ and every coloring of the
+$n$\nobreakdash-element subsets of $\N$ with finitely many colors there is an infinite $H\subseteq\N$ all of whose $n$\nobreakdash-element
+subsets have the same color.}
+
+For a tuple $z\in\N^N$ with distinct values $y_1<\dots<y_r$, its \emph{pattern} is the map
+$i\mapsto j$ determined by $z_i=y_j$. In particular, repeated entries are retained in the pattern. Two tuples $z$
+and $z'$ have the same pattern if and only if $z_i<z_j\Leftrightarrow z'_i<z'_j$ and $z_i=z_j\Leftrightarrow z'_i=z'_j$ for
+all $i,j$.
+
+\begin{lemma}[pattern homogeneity]\label{lem:H}
+For every $N\ge1$ and every function $T\colon\N^N\to L$ there is an infinite $H\subseteq\N$ such that $T(z)=T(z')$
+whenever $z,z'\in H^N$ have the same pattern.
+\end{lemma}
+
+\begin{proof}
+Color an $N$\nobreakdash-element set $s=\{s_1<\dots<s_N\}\subseteq\N$ by the vector
+\[
+\bigl(T(s_{\beta(1)},\dots,s_{\beta(N)})\bigr)_{\beta\colon[N]\to[N]}\in L^{N^N}.
+\]
+The coloring records all maps $\beta$, including those that repeat indices. It has finitely many values because
+$L$ is finite; this is the only use of the finiteness of $L$ in the obstruction proof. Ramsey's theorem gives an
+infinite $H$ on which the color is constant, say equal to $(t_\beta)_\beta$. Let $z\in H^N$ have value set
+$\{y_1<\dots<y_r\}$. Since $H$ is unbounded, add $N-r$ elements of $H$ above $y_r$ to obtain an
+$N$\nobreakdash-element set $s\subseteq H$. Padding above the largest value leaves the ranks unchanged: $s_j=y_j$ for
+$j\le r$, and
+$z=(s_{\beta(1)},\dots,s_{\beta(N)})$, where $\beta(i)$ is the rank of $z_i$ in $\{y_1,\dots,y_r\}$. The map $\beta$
+depends only on the pattern of $z$, and $T(z)=t_\beta$.
+\end{proof}
+
+\emph{Coefficients.} For $(a;y;c)\in\N^k\times\N^k\times\N^k$ put
+\[
+T(a;y;c):=\Omega_{\Psi(e_a;e_y)}(c_1,\dots,c_k)\in L .
+\]
+Lemma~\ref{lem:H} with $N=3k$ gives an infinite set $H=\{h_0<h_1<h_2<\cdots\}$ on which $T$ depends only on the pattern.
+For $u_j,v_j\in V_{\mathrm{fin}}$ supported in $H$, multilinearity of $\Psi$ and linearity of $\Omega$ give
+\begin{equation}\label{eq:expand}
+\Omega_{\Psi(u;v)}(c)=\sum_{a,y\in H^k}\ \prod_{j=1}^ku_j(a_j)\prod_{j=1}^kv_j(y_j)\cdot T(a;y;c).
+\end{equation}
+Although the sum is indexed by $H^k\times H^k$, only finitely many summands are nonzero, because all the input
+vectors have finite support. Every output tuple $c$ used below also lies in $H^k$, so pattern homogeneity applies to
+all $3k$ indices in~\eqref{eq:expand}.
+
+\subsection{Clusters and the cluster value}
+A \emph{cluster} is a set $C=\{h_n,h_{n+1},h_{n+2},h_{n+3}\}$ of four
+\emph{consecutive} elements of $H$; we write $C(i):=h_{n+i-1}$ for $i=1,\dots,4$. Since a cluster is an interval of
+$H$, two disjoint clusters are \emph{comparable}: every element of one is smaller than every element of the other; we
+write $C<C'$. Distinct clusters need not be adjacent in $H$.
+
+We choose two weight vectors, one for each kind of input slot:
+\begin{align*}
+s&=(s_1,s_2,s_3,s_4):=(1,0,-1,0)&&\text{on the operator slots},\\
+w&=(w_1,w_2,w_3,w_4):=(1,-1,1,-1)&&\text{on the vector slots}.
+\end{align*}
+Over $\Z$, hence over every field,
+\begin{equation*}\tag{W}\label{eq:W}
+\sum_is_i=\sum_iw_i=\sum_is_iw_i=\sum_{i<i'}s_iw_{i'}=\sum_{i>i'}s_iw_{i'}=0,\qquad s_1w_1=1.
+\end{equation*}
+Indeed $\sum_is_i=1-1$, $\sum_iw_i=1-1+1-1$, $s_1w_1=1$, and
+\begin{align*}
+\sum_is_iw_i&=s_1w_1+s_3w_3=1-1=0,\\
+\sum_{i<i'}s_iw_{i'}&=s_1(w_2+w_3+w_4)+s_3w_4=-1+1=0,\\
+\sum_{i>i'}s_iw_{i'}&=s_3(w_1+w_2)=-(1-1)=0 .
+\end{align*}
+The first two zero sums will cancel a cluster occupied by only one input index. The other three will cancel a
+cluster occupied by an operator index and a vector index, according to their relative order. For a cluster $C$ put
+\[
+s_C:=\sum_{i=1}^4s_ie_{C(i)},\qquad w_C:=\sum_{i=1}^4w_ie_{C(i)} .
+\]
+These are vectors of $V_{\mathrm{fin}}$ with entries in $\{0,\pm1\}$, and $s_Cw_C=e_{C(1)}-e_{C(3)}$.
+
+\emph{The cluster value.} For pairwise disjoint clusters $C_1,\dots,C_k$, one for each slot, define
+\begin{align*}
+\chi(C_1,\dots,C_k)&:=\Omega_{\Psi(s_{C_1},\dots,s_{C_k};\,w_{C_1},\dots,w_{C_k})}\bigl(C_1(1),\dots,C_k(1)\bigr)\\
+&=\sum_{i,i'\in[4]^k}\ \prod_{j=1}^ks_{i_j}w_{i'_j}\cdot
+T\bigl(C_1(i_1),\dots,C_k(i_k);\,C_1(i'_1),\dots,C_k(i'_k);\,C_1(1),\dots,C_k(1)\bigr).
+\end{align*}
+Let $\tau\in S_k$ be the \emph{order pattern} of $(C_1,\dots,C_k)$: $\tau(j)$ is the position of $C_j$ among
+$C_1,\dots,C_k$. The pattern of every $3k$\nobreakdash-tuple in the sum is determined by $(i,i')$ and $\tau$: entries in different
+clusters compare as the clusters do, and the entries $C_j(i_j)$, $C_j(i'_j)$, $C_j(1)$ in the same cluster compare as
+their indices do, including equalities. Pattern homogeneity therefore shows that the displayed sum depends only
+on $\tau$. Every permutation occurs as the order pattern of some disjoint clusters in $H$; we denote the resulting
+scalar by $\chi(\tau)$.
+
+\begin{lemma}[cancellation of output-free clusters]\label{lem:C}
+Let $\cC_1,\dots,\cC_k$ be finite families of clusters that are pairwise disjoint as sets of clusters, such that all
+clusters in $\bigcup_j\cC_j$ are pairwise disjoint. Put $u_j:=\sum_{C\in\cC_j}s_C$ and $v_j:=\sum_{C\in\cC_j}w_C$. Let
+$C_l\in\cC_l$ for $l=1,\dots,k$ and $c:=(C_1(1),\dots,C_k(1))$. Then $\Omega_{\Psi(u;v)}(c)=\chi(C_1,\dots,C_k)$.
+\end{lemma}
+
+\begin{proof}
+We show that every cluster assignment except the one matching the output clusters has total contribution zero.
+Expand by~\eqref{eq:expand}. Since the clusters are disjoint, a nonzero term has, for each slot $j$, an operator index
+$a_j=\Cop_j(i_j)$ and a vector index $y_j=\Cvec_j(i'_j)$ with $\Cop_j,\Cvec_j\in\cC_j$, and weight
+$\prod_js_{i_j}w_{i'_j}$. Group the terms according to the \emph{cluster assignment} $(\Cop_j,\Cvec_j)_{j}$.
+
+Call an occupied cluster \emph{output-free} if it is none of $C_1,\dots,C_k$. Suppose a group has such a cluster
+$\Gamma$. Disjointness of the families assigns $\Gamma$ to exactly one slot $j$, so the only tuple entries it can
+contain are $a_j$ and $y_j$. Disjointness of the clusters excludes every output index from $\Gamma$.
+
+Fix the positions of all indices outside $\Gamma$ and sum over the positions inside it. Since $\Gamma$ consists of
+consecutive elements of $H$, every outside entry lies either below the whole cluster or above it. Moving an index
+within $\Gamma$ cannot change any comparison with an outside entry. By pattern homogeneity, the coefficient $T$
+therefore depends on the internal positions only as follows:
+\begin{enumerate}
+\item[(i)] if only $a_j\in\Gamma$, not at all, and the partial sum is $(\sum_is_i)\cdot T=0$;
+\item[(ii)] if only $y_j\in\Gamma$, not at all, and the partial sum is $(\sum_iw_i)\cdot T=0$;
+\item[(iii)] if both lie in $\Gamma$, only through whether $i_j<i'_j$, $i_j=i'_j$ or $i_j>i'_j$; with the corresponding
+values $T_<,T_=,T_>$ of $T$ the partial sum is
+\[
+T_<\sum_{i<i'}s_iw_{i'}+T_=\sum_is_iw_i+T_>\sum_{i>i'}s_iw_{i'}=0 .
+\]
+\end{enumerate}
+In each case the weights of the other slots are a common factor, and the displayed partial sum vanishes
+by~\eqref{eq:W}. Thus every assignment with an output-free cluster contributes zero. In any surviving assignment,
+every occupied cluster must be an output cluster. The only output cluster belonging to $\cC_j$ is $C_j$, which forces
+$\Cop_j=\Cvec_j=C_j$ for every $j$. The contribution of this one assignment is exactly
+$\chi(C_1,\dots,C_k)$.
+\end{proof}
+
+\subsection{The staircase and the diagonal}
+
+We now use the support bound to compare two order patterns that differ by an adjacent exchange. The key is to
+realize arbitrarily large staircase matrices as flattenings of a single value of $\Psi$.
+
+\begin{lemma}[staircase]\label{lem:S}
+Let $\tau\in S_k$, let $\alpha\neq\beta$ be slots with $\tau(\alpha)=\ell$ and $\tau(\beta)=\ell+1$, and let $\tau'$ be $\tau$
+with these two positions exchanged, so $\tau'(\alpha)=\ell+1$, $\tau'(\beta)=\ell$ and $\tau'(\gamma)=\tau(\gamma)$ otherwise.
+Then $\chi(\tau)=\chi(\tau')$.
+\end{lemma}
+
+\begin{proof}
+Let $m\ge1$. Choose pairwise disjoint clusters, in increasing order in $H$: first a cluster $C_\gamma$ for each slot
+$\gamma$ with $\tau(\gamma)<\ell$, ordered as $\tau$ prescribes; then $2m$ clusters $A_1<B_1<A_2<B_2<\dots<A_m<B_m$; then a
+cluster $C_\gamma$ for each slot $\gamma$ with $\tau(\gamma)>\ell+1$, ordered as $\tau$ prescribes. Put
+$\cC_\alpha:=\{A_1,\dots,A_m\}$, $\cC_\beta:=\{B_1,\dots,B_m\}$ and $\cC_\gamma:=\{C_\gamma\}$ for the other slots, and let
+$u,v$ be as in Lemma~\ref{lem:C} and $\omega:=\Psi(u;v)$. Disjointness of the clusters ensures that the entries of
+$u$ and $v$ still lie in $\{0,\pm1\}$, so $\sdim(\omega)\le d$ by hypothesis~(c) of Theorem~\ref{thm:FF}(1).
+For this fixed $m$, keep $u$, $v$ and hence $\omega$ fixed while varying only the output indices.
+
+Consider the $m\times m$ matrix $M$ with rows indexed by $c_\alpha=A_n(1)$ and columns by $c_\beta=B_{n'}(1)$
+($n,n'=1,\dots,m$), all other output indices being fixed at $c_\gamma=C_\gamma(1)$, and entries $M_{nn'}:=\Omega_\omega(c)$.
+By Lemma~\ref{lem:C}, applied with the output clusters $A_n\in\cC_\alpha$, $B_{n'}\in\cC_\beta$ and $C_\gamma\in\cC_\gamma$,
+$M_{nn'}$ is the cluster value of the tuple with $A_n$ in slot $\alpha$, $B_{n'}$ in slot $\beta$, and $C_\gamma$ in
+every other slot. The interlacing order gives $A_n<B_{n'}$ exactly when $n\le n'$. The tuple therefore has pattern
+$\tau$ on and above the matrix diagonal, and pattern $\tau'$ below it.
+
+Put $\delta:=\chi(\tau)-\chi(\tau')$, let $\mathbf 1\in L^m$ be the all-ones column, and let $U$ be the upper
+unitriangular matrix with $U_{nn'}=1$ for $n\le n'$ and $U_{nn'}=0$ otherwise. Then
+\[
+M=\begin{pmatrix}
+\chi(\tau)&\chi(\tau)&\cdots&\chi(\tau)\\
+\chi(\tau')&\chi(\tau)&\cdots&\chi(\tau)\\
+\vdots&\ddots&\ddots&\vdots\\
+\chi(\tau')&\cdots&\chi(\tau')&\chi(\tau)
+\end{pmatrix}
+=\chi(\tau')\,\mathbf 1\mathbf 1^{\mathsf T}+\delta\,U,
+\]
+The rows vary only slot $\alpha$; each column fixes all the other slots, including the chosen value in slot $\beta$.
+Thus $M$ is a submatrix of the flattening of this one array $\Omega_\omega$ along slot $\alpha$. Lemma~\ref{lem:flat}
+gives $\rank M\le\sdim(\omega)\le d$.
+
+If $\delta\ne0$, the matrix $\delta U$ is invertible, whereas the constant matrix
+$\chi(\tau')\mathbf 1\mathbf 1^{\mathsf T}$ has rank at most one. Applying rank subadditivity to
+$\delta U=M-\chi(\tau')\mathbf 1\mathbf 1^{\mathsf T}$ gives
+\[
+m=\rank(\delta U)\le\rank M+1\le d+1.
+\]
+The construction is available for every $m\ge1$; choosing $m=d+2$ is a contradiction. Hence $\delta=0$, as required.
+\end{proof}
+
+The support bound has now forced equality between adjacent order patterns. The remaining identity comes from
+\eqref{eq:Pol1}; it does not use the support bound.
+
+\begin{lemma}[the diagonal]\label{lem:D}
+$\sum_{\tau\in S_k}\chi(\tau)=1$.
+\end{lemma}
+
+\begin{proof}
+Take clusters $C_1<\dots<C_k$, and put $u_j:=s_{C_j}$, $v_j:=w_{C_j}$ and
+$c:=(C_1(1),\dots,C_k(1))$. Apply $\omega\mapsto\Omega_\omega(c)$ to both sides of~\eqref{eq:Pol1}, with the operator
+vectors $u_1,\dots,u_k$ and the vector arguments $v_1,\dots,v_k$.
+
+\emph{Right side.} If $\sigma\ne\id$, some slot $j$ has $\sigma(j)\ne j$. Disjoint supports then give
+$u_{\sigma(j)}v_j=0$, so the corresponding wedge vanishes. Only $\sigma=\id$ survives. It gives $\Omega_{(u_1v_1)\wedge\dots\wedge(u_kv_k)}(c)=\det\bigl((u_bv_b)(C_a(1))\bigr)_{a,b}$. Since
+$u_bv_b=e_{C_b(1)}-e_{C_b(3)}$ and $C_a(1)\ne C_b(3)$ for all $a,b$, this is the determinant of the identity matrix, so
+the right side is $1$.
+
+\emph{Left side.} Fix $\sigma\in S_k$ and write $u_\sigma:=(u_{\sigma(1)},\dots,u_{\sigma(k)})$ and
+$v_\sigma:=(v_{\sigma(1)},\dots,v_{\sigma(k)})$. To identify the summand with a cluster value, we must permute both the
+vector arguments and the output coordinates to match the operator arguments. Each permutation contributes the same
+sign. More precisely, antisymmetry of $\Psi$ in the vector slots gives
+$\Psi(u_\sigma;v)=\sgn(\sigma)\Psi(u_\sigma;v_\sigma)$. For every $\omega\in\Lambda^kV$ the function $\Omega_\omega$ is
+alternating in its arguments, so $\Omega_\omega(c)=\sgn(\sigma)\,\Omega_\omega(c_{\sigma(1)},\dots,c_{\sigma(k)})$; we
+apply this with $\omega=\Psi(u_\sigma;v_\sigma)$. Since $\sgn(\sigma)^2=1$,
+\begin{align*}
+\Omega_{\Psi(u_\sigma;\,v)}(c)&=\sgn(\sigma)\,\Omega_{\Psi(u_\sigma;\,v_\sigma)}(c)
+=\sgn(\sigma)^2\,\Omega_{\Psi(u_\sigma;\,v_\sigma)}(c_{\sigma(1)},\dots,c_{\sigma(k)})\\
+&=\Omega_{\Psi(u_\sigma;\,v_\sigma)}(c_{\sigma(1)},\dots,c_{\sigma(k)}).
+\end{align*}
+In the last expression slot $j$ has operator $s_{C_{\sigma(j)}}$, vector $w_{C_{\sigma(j)}}$ and output
+$C_{\sigma(j)}(1)$, so it equals $\chi(C_{\sigma(1)},\dots,C_{\sigma(k)})$ by definition. Its order pattern is $\sigma$,
+since $C_{\sigma(j)}$ is the $\sigma(j)$\nobreakdash-th cluster in increasing order. Thus the convention for patterns
+gives $\sigma$, not $\sigma^{-1}$. No cluster cancellation is needed in this calculation.
+
+As $\sigma$ runs over $S_k$, each order pattern occurs exactly once. Comparing the two sides gives
+\[
+\sum_{\sigma\in S_k}\Omega_{\Psi(u_\sigma;\,v)}(c)=\sum_{\tau\in S_k}\chi(\tau)=1 .\qedhere
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:FF}]
+Exchanging adjacent ranks acts on an order pattern by
+$\tau\mapsto(\ell\ \ell{+}1)\circ\tau$, $1\le\ell<k$. These transpositions generate $S_k$, and Lemma~\ref{lem:S}
+makes $\chi$ invariant under each exchange. Hence $\chi$ is constant; write its value as $\chi_0$.
+Lemma~\ref{lem:D} now gives $k!\,\chi_0=1$ in $L$, contradicting $k!=0$. This proves (1), and the preceding reduction
+gives (2).
+\end{proof}
+
+\begin{remark}[where the hypotheses enter]\label{rem:FFhyp}
+Ramsey homogeneity is the only step in the obstruction proof that uses the finiteness of $L$.
+Multilinearity then gives the cluster expansion and cancellation. The support bound is used in Lemma~\ref{lem:S}
+only at the finitely many test inputs obtained by taking $m=d+2$; all have entries in $\{0,\pm1\}$.
+Antisymmetry and~\eqref{eq:Pol1} enter in Lemma~\ref{lem:D}, which does not use that bound. Finally, $k!=0$ is used only
+to turn the diagonal identity into a contradiction.
+
+The inclusion--exclusion argument in Proposition~\ref{prop:diag}(1) uses only multilinearity in the
+operator slots. The theorem therefore remains true with the pointwise identity \eqref{eq:Pw} at $L$\nobreakdash-points in place of
+\eqref{eq:Pol1}, for this family of multipliers. In characteristic $2$ antisymmetry is the same as symmetry, and the two signs in
+Lemma~\ref{lem:D} are trivial.
+\end{remark}
+
+\begin{remark}[when $k!$ is invertible]\label{rem:FFunit}
+The vanishing of $k!$ is essential. If instead $k!\ne0$ in $L$, the \emph{normalized alternatization}
+\[
+\Psi_{\mathrm{alt}}(u;x):=\frac1{k!}\sum_{\sigma\in S_k}(u_{\sigma(1)}x_1)\wedge\dots\wedge(u_{\sigma(k)}x_k)
+\]
+is alternating in $x$ and satisfies~\eqref{eq:Pol1}. Every summand is supported in the span of the $k^2$ vectors
+$u_ix_j$, so $\sdim(\Psi_{\mathrm{alt}}(u;x))\le k^2$. The preceding homogeneity, cancellation, staircase and diagonal
+arguments apply, but now yield $\chi\equiv1/k!$: for pairwise disjoint clusters only $\sigma=\id$
+survives in $\Psi_{\mathrm{alt}}(s_{C_1},\dots,s_{C_k};w_{C_1},\dots,w_{C_k})$, and the determinant at
+$(C_1(1),\dots,C_k(1))$ is that of the identity. The final equation $k!\cdot(1/k!)=1$ is then consistent. So the
+obstruction is exactly the vanishing of $k!$, not positive characteristic as such. For example, at $(p,k)=(5,3)$ every
+step is consistent, since $3!=6=1$ in $\F_5$ and $\chi_0=1$.
+\end{remark}
+
+\section{The Banach exterior target over a Laurent series field}\label{sec:laurent}
+
+We now realize the finite-field obstruction in a Banach-space setting. The target is the completion of an exterior
+power with its ordinary projective norm. Its determinant arrays admit a constant-coefficient map into the
+\emph{algebraic} exterior power over the coefficient field, with support dimension controlled by the Banach norm.
+This estimate turns a hypothetical bounded lift into the uniformly bounded-support map ruled out by
+Theorem~\ref{thm:FF}. The passage to the completion is the key point: constant coefficients stabilize exactly once
+the approximation error is less than one.
+
+\subsection{Setting}\label{ssec:laurentsetting}
+Throughout this section $k\ge1$, $\kappa$ is a field, $r\in(0,1)$, and $K_1:=\kappa((X))$ is the Laurent series field with
+absolute value $\abs a:=r^{\ord a}$ ($\abs0=0$). This field is complete, nontrivially normed and ultrametric, and
+$\abs c=1$ for every $c\in\kappa^\times$. Write $\coeff_n(a)\in\kappa$ for the $X^n$\nobreakdash-coefficient of $a\in K_1$.
+For a set $S$ and $y\in\linf(S,K_1)$ we take the constant coefficient coordinatewise:
+\[
+\coeff_0(y):=\bigl(\coeff_0(y(s))\bigr)_{s\in S}\in\kappa^S.
+\]
+The resulting \emph{constant-coefficient map} $\coeff_0$ is $\kappa$\nobreakdash-linear but not $K_1$\nobreakdash-linear.
+A nonzero Laurent series of absolute value less than one has order at least one. Consequently,
+\begin{equation}\label{eq:small}
+\norm y_\infty<1\ \Longrightarrow\ \coeff_0(y)=0,\qquad\text{hence}\qquad \norm{y-y'}_\infty<1\ \Longrightarrow\ \coeff_0(y)=\coeff_0(y').
+\end{equation}
+Put $E_1:=\linf(\N,K_1)$ with the sup norm, an ultrametric $K_1$\nobreakdash-Banach space, and let $E_0:=\kappa^\N\subseteq E_1$ be
+the $\kappa$\nobreakdash-subspace of sequences with entries in $\kappa$. Every nonzero $z\in E_0$ has $\norm z_\infty=1$. For
+$x\in E_1$ and $n\in\Z$ let $x_{[n]}:=(\coeff_n(x(i)))_{i\in\N}\in E_0$ be the $n$\nobreakdash-th Laurent component. For $x\ne0$
+the set $\{\ord x(i):x(i)\ne0\}$ is bounded below, because $r^{\ord x(i)}\le\norm x_\infty$, so it has a minimum
+$\nu(x)$; then $\norm x_\infty=r^{\nu(x)}$ and $x_{[n]}=0$ for $n<\nu(x)$. Finally put
+\[
+M_r:=\max_{l\in\N}\,(l+1)r^l .
+\]
+The maximum exists because $(l+1)r^l\to0$. This constant will control the number of Laurent components that can
+contribute to a constant coefficient. For $r\le\frac12$ one has $(l+1)r^l\le(l+1)2^{-l}\le1$, so $M_r=1$.
+
+\subsection{The projective exterior norm}\label{ssec:projnorm}
+On $\Lambda:=\Lambda^k_{K_1}E_1$ put
+\[
+\norm\omega_\pi:=\inf\Bigl\{\sum_j\prod_{i=1}^k\norm{x_{j,i}}_\infty\ :\ \omega=\sum_jx_{j,1}\wedge\dots\wedge x_{j,k}\Bigr\},
+\]
+where the infimum is over finite decompositions and the cost is an ordinary sum. Let $\Omega^{K_1}\colon\Lambda\to\linf(\N^k,K_1)$ be the determinant
+array of \S\ref{ssec:ext} with $L=K_1$, $S=\N$ and $V=E_1$, so that
+$\Omega^{K_1}(x_1\wedge\dots\wedge x_k)(i_1,\dots,i_k)=\det(x_b(i_a))_{a,b}$; its values are bounded by the next lemma.
+
+\needspace{9\baselineskip}
+\begin{lemma}\label{lem:proj}
+$\norm\cdot_\pi$ is a $K_1$\nobreakdash-norm on $\Lambda$ with $\norm{x_1\wedge\dots\wedge x_k}_\pi\le\prod_i\norm{x_i}_\infty$, and
+$\Omega^{K_1}$ is $K_1$\nobreakdash-linear and injective with $\norm{\Omega^{K_1}(\omega)}_\infty\le\norm\omega_\pi$. Let $B$ be the completion of
+$(\Lambda,\norm\cdot_\pi)$, a $K_1$\nobreakdash-Banach space, $J\colon B\to\linf(\N^k,K_1)$ the continuous extension of $\Omega^{K_1}$ (so
+$\norm J\le1$), and $W_B\colon E_1^k\to B$, $W_B(x):=x_1\wedge\dots\wedge x_k$. Then $W_B\in\Alt^k_{K_1}(E_1;B)$,
+$\norm{W_B}\le1$, and $J(W_B(x))=\Omega^{K_1}(x_1\wedge\dots\wedge x_k)$.
+\end{lemma}
+
+\begin{proof}
+For a pure wedge, each entry of the determinant array is a signed sum of products
+$x_1(i_{\sigma(1)})\cdots x_k(i_{\sigma(k)})$. Each product has absolute value at most
+$\prod_b\norm{x_b}_\infty$, so the ultrametric inequality in $K_1$ gives the same bound for the determinant.
+For any finite decomposition of $\omega$, it follows that
+\[
+\norm{\Omega^{K_1}(\omega)}_\infty
+\le\max_j\prod_i\norm{x_{j,i}}_\infty
+\le\sum_j\prod_i\norm{x_{j,i}}_\infty.
+\]
+Thus the array is bounded, and taking the infimum gives
+$\norm{\Omega^{K_1}(\omega)}_\infty\le\norm\omega_\pi$.
+The map $\Omega^{K_1}$ is linear and injective by Lemma~\ref{lem:detinj}, with $L=K_1$, $S=\N$ and $V=E_1$.
+In particular, $\norm\omega_\pi>0$ whenever $\omega\ne0$.
+
+The remaining norm laws follow directly from decompositions. Concatenation gives the triangle inequality.
+Since $k\ge1$, a scalar can be absorbed into the first factor of each wedge; for $\lambda\ne0$ this gives
+$\norm{\lambda\omega}_\pi\le\abs\lambda\norm\omega_\pi$, and applying the same inequality to $\lambda^{-1}$ gives
+equality. The pure-wedge bound follows by using a single summand.
+
+The array space $\linf(\N^k,K_1)$ is complete, so $\Omega^{K_1}$ extends to the contraction $J$ on $B$.
+The wedge map into $B$ is $K_1$\nobreakdash-multilinear and vanishes whenever two arguments coincide. The pure-wedge
+bound makes it continuous with norm at most one, and the asserted identity with $J$ holds on its values by
+construction.
+\end{proof}
+
+For $k\ge2$, $B$ is not ultrametric (Proposition~\ref{prop:nonultra}).
+
+\subsection{The support estimate}\label{ssec:suppest}
+We next show that the constant coefficient of every completed determinant array is represented by a finite
+algebraic exterior vector. The quantitative bound comes from counting the Laurent components needed as wedge
+\emph{factors}; the number of wedge summands may be much larger.
+
+Let $\Omega^\kappa\colon\Lambda^k_\kappa E_0\to\kappa^{\N^k}$ be the determinant array over $\kappa$; it is injective by
+Lemma~\ref{lem:detinj} with $L=\kappa$ and $V=E_0$. For $y_1,\dots,y_k\in E_0$ we have
+$\Omega^{K_1}(y_1\wedge\dots\wedge y_k)=\Omega^\kappa(y_1\wedge\dots\wedge y_k)$: the determinants are the same, with entries in
+$\kappa\subseteq K_1$. Support dimensions of elements of $\Lambda^k_\kappa E_0$ are computed in $E_0$ over $\kappa$.
+
+\begin{proposition}[support estimate]\label{prop:supp}
+For every $b\in B$ there is a unique $\eta(b)\in\Lambda^k_\kappa E_0$ with $\Omega^\kappa(\eta(b))=\coeff_0(Jb)$. The map $\eta$ is
+$\kappa$\nobreakdash-linear, and
+\begin{equation}\label{eq:suppest}
+\sdim\bigl(\eta(b)\bigr)\le kM_r\,\norm b_B\qquad\text{for all }b\in B .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1: one decomposable.} Let $x_1,\dots,x_k\in E_1$. If some $x_b=0$, the wedge is zero and we take $\eta=0$.
+Otherwise put $\nu_b:=\nu(x_b)$ and $l:=-\sum_b\nu_b$, so that
+$\prod_b\norm{x_b}_\infty=r^{-l}$. The possible exponent tuples contributing to a constant coefficient form the set
+\[
+\mathcal N:=\Bigl\{n\in\Z^k:\ n_b\ge\nu_b\text{ for all }b,\ \sum_bn_b=0\Bigr\}.
+\]
+For such a tuple, the nonnegative integers $n_b-\nu_b$ sum to $l$. Hence $\mathcal N$ is empty if $l<0$;
+if $l\ge0$, every coordinate satisfies $\nu_b\le n_b\le\nu_b+l$, so $\mathcal N$ is finite.
+
+Fix $(i_1,\dots,i_k)\in\N^k$ and expand each entry as
+$x_b(i_a)=\sum_{n\ge\nu_b}\coeff_n(x_b(i_a))X^n$. In the determinant expansion
+\[
+\det(x_b(i_a))_{a,b}=\sum_\sigma\sgn(\sigma)\prod_bx_b(i_{\sigma(b)}),
+\]
+the constant coefficient of each product is its finite coefficient convolution over $\mathcal N$.
+Exchanging this finite sum with the permutation sum gives
+\[
+\coeff_0\det\bigl(x_b(i_a)\bigr)_{a,b}
+=\sum_{n\in\mathcal N}\det\bigl(x_{b,[n_b]}(i_a)\bigr)_{a,b}.
+\]
+The same finite set $\mathcal N$ works for every array coordinate. Thus
+$\coeff_0\bigl(\Omega^{K_1}(x_1\wedge\dots\wedge x_k)\bigr)=\Omega^\kappa(\eta)$, where
+\[
+\eta:=\sum_{n\in\mathcal N}x_{1,[n_1]}\wedge\dots\wedge x_{k,[n_k]}\in\Lambda^k_\kappa E_0.
+\]
+This is a finite sum in the algebraic exterior power. When $l<0$ it is zero. When $l\ge0$, all its wedge factors
+belong to the set
+$\{x_{b,[n]}:1\le b\le k,\ \nu_b\le n\le\nu_b+l\}$, which has at most $k(l+1)$ elements. Taking their span gives
+\[
+\sdim(\eta)\le k(l+1)=k\,(l+1)r^l\cdot r^{-l}\le kM_r\prod_b\norm{x_b}_\infty.
+\]
+The final bound therefore holds in both cases.
+
+\emph{Step 2: an element of $\Lambda$.} Write $\omega=\sum_jw_j$, where
+$w_j=x_{j,1}\wedge\dots\wedge x_{j,k}$, and take $\eta_j$ from Step~1. Additivity gives
+\[
+\coeff_0(\Omega^{K_1}(\omega))
+=\sum_j\coeff_0(\Omega^{K_1}(w_j))
+=\Omega^\kappa\Bigl(\sum_j\eta_j\Bigr).
+\]
+Injectivity of $\Omega^\kappa$ shows that $\eta(\omega):=\sum_j\eta_j$ is independent of the chosen decomposition.
+Subadditivity of support dimension now yields
+\[
+\sdim(\eta(\omega))\le\sum_j\sdim(\eta_j)
+\le kM_r\sum_j\prod_i\norm{x_{j,i}}_\infty.
+\]
+The left side is fixed while the decomposition varies. Taking the infimum therefore gives
+$\sdim(\eta(\omega))\le kM_r\norm\omega_\pi$, without requiring a minimizing decomposition.
+
+\emph{Step 3: completion.} Choose $\omega_n\in\Lambda$ with $\norm{b-\omega_n}_B\to0$. Since $J$ is a contraction,
+\[
+\norm{Jb-\Omega^{K_1}(\omega_n)}_\infty\le\norm{b-\omega_n}_B<1
+\qquad(n\ge n_0).
+\]
+Equation~\eqref{eq:small} therefore gives the \emph{exact} identities
+\[
+\coeff_0(Jb)=\coeff_0(\Omega^{K_1}(\omega_n))=\Omega^\kappa(\eta(\omega_n))
+\qquad(n\ge n_0).
+\]
+By injectivity of $\Omega^\kappa$, the algebraic vectors $\eta(\omega_n)$ are eventually equal. Define $\eta(b)$
+to be this common value. Its array is $\coeff_0(Jb)$, so the same injectivity also proves independence of the
+approximating sequence and uniqueness. In particular, no limit in $\Lambda^k_\kappa E_0$ is involved.
+
+For every $n\ge n_0$ the fixed vector $\eta(b)$ satisfies
+$\sdim(\eta(b))\le kM_r\norm{\omega_n}_\pi$. Since $\norm{\omega_n}_\pi\to\norm b_B$, this gives~\eqref{eq:suppest}.
+Finally, the array characterization proves $\kappa$\nobreakdash-linearity: $J$ is $K_1$\nobreakdash-linear, $\coeff_0$ is
+$\kappa$\nobreakdash-linear, and $\Omega^\kappa$ is linear and injective.
+\end{proof}
+
+\subsection{The coefficient lift}\label{ssec:Psi}
+The support estimate converts norm control into an algebraic obstruction. We apply it to a hypothetical lift,
+evaluated on coordinatewise multiplication operators and on the universal wedge map $W_B$.
+
+Suppose that $P$ is a bounded $k$\nobreakdash-linear lift of $Q^{K_1}_{E_1,E_1,B}$ over $K_1$. For $a\in E_1$ let
+$D_a\in\cL(E_1,E_1)$ be coordinatewise multiplication, $D_ax=ax$. The map $a\mapsto D_a$ is $K_1$\nobreakdash-linear and
+$\norm{D_a}\le\norm a_\infty$. Define
+\begin{align*}
+\Phi(a_1,\dots,a_k;x_1,\dots,x_k)&:=P(D_{a_1},\dots,D_{a_k})(W_B)(x_1,\dots,x_k)\in B,\\
+\Psi&:=\eta\circ\Phi|_{E_0^{2k}}\colon E_0^k\times E_0^k\to\Lambda^k_\kappa E_0 .
+\end{align*}
+Since $\Omega^\kappa\circ\eta=\coeff_0\circ J$, the map $\Psi$ is $\coeff_0\circ J\circ\Phi|_{E_0^{2k}}$, read in $\Lambda^k_\kappa E_0$
+through the injective map $\Omega^\kappa$.
+
+\begin{lemma}\label{lem:Psi}
+The map $\Psi$ has the following properties.
+\begin{enumerate}
+\item[($\Psi$1)] $\Psi$ is $2k$\nobreakdash-linear over $\kappa$.
+\item[($\Psi$2)] $\Psi$ is alternating in the last $k$ slots.
+\item[($\Psi$3)] $\sdim(\Psi(z))\le d:=\lfloor kM_r\norm P\rfloor$ for \emph{all} $z\in E_0^{2k}$.
+\item[($\Psi$4)] $\Psi$ satisfies \eqref{eq:Pol} for the multiplier family $D^\kappa\colon E_0\to\End_\kappa(E_0)$,
+$D^\kappa_ax=ax$: for all $m\ge1$, $b_1,\dots,b_m\in E_0$, $\alpha\in\N^m$ with $\abs\alpha=k$, and $x\in E_0^k$,
+\[
+\sum_{\type f=\alpha}\Psi(b_f;x)=\sum_{\type f=\alpha}(b_{f(1)}x_1)\wedge\dots\wedge(b_{f(k)}x_k)\qquad\text{in }\Lambda^k_\kappa E_0 .
+\]
+In particular $\Psi$ satisfies \eqref{eq:Pol1}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The map $\Phi$ is $K_1$\nobreakdash-multilinear, so its restriction to $E_0^{2k}$ is $\kappa$\nobreakdash-multilinear.
+Composing with the $\kappa$\nobreakdash-linear map $\eta$ proves ($\Psi$1). Since
+$P(D_{a_1},\dots,D_{a_k})(W_B)$ belongs to $\Alt^k_{K_1}(E_1;B)$, it vanishes when two of the last $k$ arguments
+coincide; the same holds after applying $\eta$, proving ($\Psi$2).
+
+For ($\Psi$3), all inputs from $E_0$ have norm at most one. Thus
+\[
+\norm{\Phi(a;x)}\le\norm P\prod_i\norm{D_{a_i}}\,\norm{W_B}\prod_i\norm{x_i}_\infty\le\norm P.
+\]
+Apply~\eqref{eq:suppest} and use that support dimension is an integer to obtain the stated bound by $d$.
+
+To prove ($\Psi$4), we first compare coefficients over the infinite field $K_1$, while the values still lie in
+$B$. Fix $b_1,\dots,b_m\in E_0$ and $x\in E_0^k$. For $\lambda\in K_1^m$ put
+$a_\lambda:=\sum_i\lambda_ib_i\in E_1$. The diagonal identity for the lift gives
+\[
+\Phi(a_\lambda,\dots,a_\lambda;x)
+=P(D_{a_\lambda},\dots,D_{a_\lambda})(W_B)(x)
+=Q(D_{a_\lambda})(W_B)(x)
+=W_B(a_\lambda x_1,\dots,a_\lambda x_k).
+\]
+Expanding both sides by multilinearity gives
+$\sum_\alpha\lambda^\alpha(L_\alpha-R_\alpha)=0$ for all $\lambda\in K_1^m$, where
+\[
+L_\alpha:=\sum_{\type f=\alpha}\Phi(b_f;x)\in B,\qquad
+R_\alpha:=\sum_{\type f=\alpha}W_B(b_{f(1)}x_1,\dots,b_{f(k)}x_k)\in B.
+\]
+The field $K_1$ is infinite even when $\kappa$ is finite. Lemma~\ref{lem:idprinc}, applied in the
+$K_1$\nobreakdash-vector space $B$, therefore yields $L_\alpha=R_\alpha$ for every $\alpha$.
+
+We can now apply $\eta$. Additivity gives
+$\eta(L_\alpha)=\sum_{\type f=\alpha}\Psi(b_f;x)$. To identify the other side, take $y_1,\dots,y_k\in E_0$.
+By Lemma~\ref{lem:proj} and the determinant-array agreement preceding Proposition~\ref{prop:supp},
+\[
+J(W_B(y))=\Omega^{K_1}(y_1\wedge\dots\wedge y_k)
+=\Omega^\kappa(y_1\wedge\dots\wedge y_k).
+\]
+This array has entries in $\kappa$, so taking its constant coefficient leaves it unchanged. Uniqueness in
+Proposition~\ref{prop:supp} then gives
+$\eta(W_B(y))=y_1\wedge\dots\wedge y_k\in\Lambda^k_\kappa E_0$.
+Using $y_j=b_{f(j)}x_j$ in each summand of $R_\alpha$ proves
+\[
+\eta(R_\alpha)=\sum_{\type f=\alpha}(b_{f(1)}x_1)\wedge\dots\wedge(b_{f(k)}x_k),
+\]
+which is the required identity.
+\end{proof}
+
+The order of these operations is essential for the full identity ($\Psi$4). Evaluating the diagonal only at
+$\kappa$\nobreakdash-points would give \eqref{eq:Pw} there, which for $\kappa=\F_q$ and $k>q$ is strictly weaker than
+\eqref{eq:Pol} (Proposition~\ref{prop:diag}(3)). The proof below uses only the consequence~\eqref{eq:Pol1}.
+
+\subsection{No bounded lift over a Laurent series field}
+
+\begin{theorem}\label{thm:laurent}
+Let $\kappa$ be a finite field of characteristic $p$, let $k\ge p$ and $r\in(0,1)$, and let $K_1=\kappa((X))$ with
+$\abs X=r$. Let $E_1=\linf(\N,K_1)$, and let $B$ be the completion of $\Lambda^k_{K_1}E_1$ under the projective exterior
+norm. Then $Q^{K_1}_{E_1,E_1,B}$ admits no bounded $k$\nobreakdash-linear lift over $K_1$. Consequently it is analytic at no point of
+$\cL(E_1,E_1)$.
+\end{theorem}
+
+\begin{proof}
+Suppose $P$ exists, and form $\Psi$ as in \S\ref{ssec:Psi}. By Lemma~\ref{lem:Psi},
+$\Psi\colon E_0^k\times E_0^k\to\Lambda^k_\kappa E_0$ with $E_0=\kappa^\N$ is $2k$\nobreakdash-linear over $\kappa$, alternating and hence
+antisymmetric in the last $k$ slots, satisfies \eqref{eq:Pol1}, and has $\sdim(\Psi(z))\le d$ for all inputs $z$. Moreover
+$k!=0$ in $\kappa$, since $k\ge p=\operatorname{char}\kappa$. This contradicts Theorem~\ref{thm:FF}(2) with $L=\kappa$
+and $E_0=\kappa^\N$. The last sentence follows from Proposition~\ref{prop:lift}.
+\end{proof}
+
+\begin{remark}\label{rem:infkappa}
+Lemmas~\ref{lem:proj} and~\ref{lem:Psi} and Proposition~\ref{prop:supp} hold for every field $\kappa$, and nothing in them
+uses a normalization of $r$: the constant $M_r$ makes the argument uniform in $r\in(0,1)$. Only the final appeal to
+Theorem~\ref{thm:FF} needs $\kappa$ finite. We do not need, and do not discuss, the analogue of
+Theorem~\ref{thm:laurent} for infinite $\kappa$ with this particular pair $(E_1,B)$. For an infinite $\kappa$ of
+characteristic $p$ the field $\kappa((X))$ is covered by Theorem~\ref{thm:main}, with the pair obtained by ascent from its
+subfield $\F_p((X))$.
+\end{remark}
+
+\section{Ascent to an arbitrary base field}\label{sec:ascent}
+
+To pass from a Laurent series field to a prescribed field, we work first inside its completion. A suitable Laurent
+subfield is spherically complete, so Ingleton's theorem supplies a contractive scalar retraction. The ordinary
+projective tensor norm then gives isometric scalar extensions of the source and target, together with a retraction
+onto the original Banach target. Operators and alternating forms extend compatibly with these embeddings. As a
+result, any lift after scalar extension descends to the Laurent subfield, and nonexistence of a lift ascends.
+The final density argument removes the completeness assumption on the prescribed field.
+
+\subsection{The Laurent subfield}
+A metric space is \emph{spherically complete} if every nonempty family of closed balls, any two of which meet, has a
+common point.
+
+\begin{lemma}[discrete distances]\label{lem:discdist}
+Let $Y$ be a complete ultrametric space whose distances lie in $r^\Z\cup\{0\}$ for some $r\in(0,1)$. Then $Y$ is
+spherically complete.
+\end{lemma}
+
+\begin{proof}
+Write $\cD(a,\rho)=\{y\in Y:\mathrm d(y,a)\le\rho\}$. In an ultrametric space, every point of a ball is a center.
+Consequently, whenever two closed balls meet, the one with the smaller radius lies in the other.
+The discrete distance assumption also gives
+\[
+\cD(a,\rho)=\cD(a,\rho^\flat),\qquad
+\rho^\flat:=\max\{s\in r^\Z\cup\{0\}:s\le\rho\}.
+\]
+We may therefore replace every radius by a value in $r^\Z\cup\{0\}$.
+
+Let $(\cD(a_i,\rho_i))_{i\in I}$ be a nonempty family of pairwise meeting closed balls. If its radii have a least
+element $\rho_{i_0}$, then $\cD(a_{i_0},\rho_{i_0})$ lies in every ball of the family, so $a_{i_0}$ is a common point.
+Otherwise, discreteness implies that all the radii are positive and that their infimum is zero. Choose
+$i_1,i_2,\dots$ so that $\rho_{i_n}$ decreases strictly to zero. The corresponding balls are nested, and
+\[
+\mathrm d(a_{i_{n'}},a_{i_n})\le\rho_{i_n}\qquad(n'\ge n).
+\]
+Their centers form a Cauchy sequence. By completeness it has a limit $a$, and closedness puts $a$ in every ball
+of the sequence. For any $i\in I$, choose $n$ with $\rho_{i_n}\le\rho_i$. The $n$\nobreakdash-th ball then lies in
+$\cD(a_i,\rho_i)$, so $a$ belongs to every ball of the original family.
+\end{proof}
+
+\begin{remark}[the hypothesis (K2) of~\cite{M}]\label{rem:K2}
+The construction of~\cite{M} assumes that the base field satisfies the hypothesis (K2) there: there are closed balls
+$\cD(c_n,r_n)$ with $\abs{c_{n+1}-c_n}\le r_n$, $r_0>r_1>\cdots$ and $\bigcap_n\cD(c_n,r_n)=\emptyset$. An ultrametric
+field (indeed any ultrametric space) satisfies (K2) if and only if it is not spherically complete. Indeed, the balls
+in (K2) pairwise meet, since $\abs{c_n-c_m}\le\max_{m\le j<n}\abs{c_{j+1}-c_j}\le r_m$ for $m\le n$. Conversely, let a
+family of pairwise meeting closed balls have no common point. A ball of least radius in the family would lie in all
+the others (as in the proof of Lemma~\ref{lem:discdist}), and its center would be a common point; so the radii have
+no least element, and every radius in the
+family exceeds their infimum. A sequence of balls from the family whose radii decrease strictly to that infimum is
+then nested, so it satisfies $\abs{c_{n+1}-c_n}\le r_n$, and it has empty intersection: a common point of the sequence
+would lie in every ball of the family, because every ball of the family contains a ball of the sequence. This remark
+is used only in \S\ref{sec:intro} and \S\ref{sec:lean}.
+\end{remark}
+
+\begin{lemma}[Laurent subfield]\label{lem:laurentsub}
+Let $K'$ be a complete nontrivially normed field of characteristic $p$, and let $t\in K'$ with $0<\abs t=r<1$.
+\begin{enumerate}
+\item $K'$ is ultrametric, and $\abs c=1$ for every $c\in\F_p^\times$.
+\item For $a_m,\dots,a_M\in\F_p$, not all zero, $\bigl\lvert\sum_{i=m}^Ma_it^i\bigr\rvert=r^{\min\{i:a_i\ne0\}}$.
+\item Give $\F_p((X))$ the absolute value with $\abs X=r$. There is a continuous isometric ring homomorphism
+$\mathrm{ev}_t\colon\F_p((X))\to K'$ such that
+$\mathrm{ev}_t\bigl(\sum_{i\ge m}a_iX^i\bigr)=\sum_{i\ge m}a_it^i$. Its image
+$K_1$ is a closed subfield of $K'$; it is the closure of $\F_p(t)$, and it is isometrically isomorphic to $\F_p((X))$.
+\item $K_1$ is spherically complete.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Lemma~\ref{lem:ultra} makes $K'$ ultrametric. For $c\in\F_p^\times$, the identity $c^{p-1}=1$ gives $\abs c=1$.
+
+(2) The nonzero terms $a_it^i$ have pairwise distinct absolute values $r^i$. In an ultrametric field,
+$\abs{x+y}=\abs x$ whenever $\abs y<\abs x$. Repeatedly applying this identity shows that the sum has the absolute
+value of its largest term, namely $r^{\min\{i:a_i\ne0\}}$.
+
+(3) Evaluation on Laurent polynomials defines a ring homomorphism
+$\mathrm{ev}_t\colon\F_p[X,X^{-1}]\to K'$, and (2) shows that
+$\abs{\mathrm{ev}_t(g)}=r^{\ord g}=\abs g$. Laurent polynomials are dense in $\F_p((X))$, since truncations converge.
+Completeness of $K'$ therefore gives a unique continuous extension to $\F_p((X))$. Passing to limits preserves the
+isometry and the ring operations. It also gives the stated evaluation formula, because the partial sums of
+$\sum_{i\ge m}a_iX^i$ map to the partial sums of $\sum_{i\ge m}a_it^i$.
+
+The image is complete as the isometric image of a complete space, hence closed in $K'$. It is a subfield: for
+$g\ne0$, the identity $\mathrm{ev}_t(g)\mathrm{ev}_t(g^{-1})=1$ provides the inverse. This subfield contains
+$\F_p(t)$, while the Laurent polynomials $\F_p[t,t^{-1}]\subseteq\F_p(t)$ are dense in it. The image is consequently
+exactly the closure of $\F_p(t)$.
+
+(4) By (3), $K_1$ is complete and has value group $\abs{K_1^\times}=r^\Z$. It is ultrametric by (1), so its distances
+lie in $r^\Z\cup\{0\}$. Lemma~\ref{lem:discdist} gives spherical completeness.
+\end{proof}
+
+\subsection{Ingleton's theorem and its consequences}
+Throughout the rest of this section we fix fields $K_1\subseteq K'$ with the following properties.
+\begin{enumerate}
+\item[(H1)] $K_1$, with the restricted absolute value, is nontrivially normed, complete and spherically complete.
+\item[(H2)] $K'$ is ultrametric.
+\end{enumerate}
+By multiplication, $K'$ is an ultrametric normed $K_1$\nobreakdash-space. In our application $K'=\Kh$ and $K_1$ is the field of
+Lemma~\ref{lem:laurentsub}.
+
+\begin{lemma}\label{lem:findim}
+Let $\mathbb K$ be a complete nontrivially normed field and $U$ a finite-dimensional normed $\mathbb K$\nobreakdash-space. Then every
+linear functional on $U$ is bounded, and $U$ is complete.
+\end{lemma}
+
+\begin{proof}
+We prove both assertions by induction on $n=\dim U$, the case $n=0$ being immediate. Suppose $n\ge1$ and let $g\ne0$
+be a linear functional on $U$. Its kernel $H$ has dimension $n-1$, so the induction hypothesis makes $H$ complete
+and therefore closed in $U$. Choose $v$ with $g(v)=1$. Since $v\notin H$,
+$\delta:=\inf_{h\in H}\norm{v-h}>0$. Write $x=g(x)v+h$ with $h\in H$. If $g(x)\ne0$, then
+\[
+\norm x=\abs{g(x)}\,\norm{v+g(x)^{-1}h}\ge\abs{g(x)}\delta.
+\]
+Thus $\abs{g(x)}\le\delta^{-1}\norm x$ for every $x$, proving boundedness.
+
+Choose a basis of $U$. Its coordinate functionals are now bounded, so the coordinate map
+$U\to\mathbb K^n$, with the max norm on $\mathbb K^n$, is bounded. The inverse map
+$(c_i)\mapsto\sum_ic_ie_i$ is bounded by $\sum_i\norm{e_i}$. Hence $U$ is bi-Lipschitz equivalent to the complete
+space $\mathbb K^n$, and is itself complete.
+\end{proof}
+
+\begin{theorem}[Ingleton~\cite{In}; see also~\cite{vR}]\label{thm:ingleton}
+Let $K_1$ be a spherically complete ultrametric normed field, $V$ a $K_1$\nobreakdash-vector space with an ultrametric norm,
+$V_0\subseteq V$ a subspace, $C\ge0$, and $T_0\colon V_0\to K_1$ linear with $\abs{T_0v}\le C\norm v$ for $v\in V_0$. Then
+$T_0$ extends to a linear map $T\colon V\to K_1$ with $\abs{Tx}\le C\norm x$ for all $x\in V$.
+\end{theorem}
+
+We will use Theorem~\ref{thm:ingleton} on the ultrametric $K_1$\nobreakdash-space $K'$ in two ways: to obtain the scalar
+retraction below, and to extend finite-dimensional coordinate functionals in the proof of positivity of the
+projective tensor norm. Both applications have codomain $K_1$. The spaces $E_1$ and $F_1$ introduced later need not
+be ultrametric.
+
+\begin{corollary}[Ingleton projection]\label{cor:proj}
+There is a $K_1$\nobreakdash-linear map $\varpi\colon K'\to K_1$ with $\varpi|_{K_1}=\id$ and $\abs{\varpi(\lambda)}\le\abs\lambda$ for all
+$\lambda\in K'$.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:ingleton} with $V=K'$, $V_0=K_1$, $T_0=\id$ and $C=1$; its hypotheses hold by (H1) and (H2).
+\end{proof}
+
+\begin{samepage}
+\begin{lemma}[extension]\label{lem:ext}
+Let $\mathbb K\in\{K_1,K'\}$ and let $C\ge0$.
+\begin{enumerate}
+\item Let $V_0$ be a dense $\mathbb K$\nobreakdash-subspace of a normed $\mathbb K$\nobreakdash-space $V$, let $Y$ be a
+$\mathbb K$\nobreakdash-Banach space and $T_0\colon V_0\to Y$ a $\mathbb K$\nobreakdash-linear map with $\norm{T_0x}\le C\norm x$. Then $T_0$ extends
+uniquely to a continuous map $T\colon V\to Y$, which is $\mathbb K$\nobreakdash-linear with $\norm{Tx}\le C\norm x$.
+\item Let $V_1,\dots,V_k$ be normed $K'$\nobreakdash-spaces with dense subspaces $V_i^0$, $Y$ a $K'$\nobreakdash-Banach space, and
+$M\colon\prod_iV_i^0\to Y$ a $K'$\nobreakdash-multilinear map with $\norm{M(d)}\le C\prod_i\norm{d_i}$. Then $M$ extends uniquely to a
+continuous $K'$\nobreakdash-multilinear map $\overline M\colon\prod_iV_i\to Y$ with $\norm{\overline M}\le C$.
+\end{enumerate}
+\end{lemma}
+\end{samepage}
+
+\begin{proof}
+(1) The bound makes $T_0$ Lipschitz, hence uniformly continuous. Density of $V_0$ and completeness of $Y$ give a
+unique continuous extension. Linearity and the norm bound pass to limits by continuity of addition, scalar
+multiplication and the norm.
+
+(2) The case $k=0$ is immediate. For $k\ge1$, multilinearity gives the telescoping estimate
+\[
+\norm{M(d)-M(d')}\le C\rho^{k-1}\sum_i\norm{d_i-d'_i}
+\]
+whenever $\norm{d_i},\norm{d'_i}\le\rho$ for every $i$, with $\rho>0$. For any $v\in\prod_iV_i$, choose tuples
+$d^{(n)}\in\prod_iV_i^0$ converging to $v$. Their coordinates are uniformly bounded, so the estimate makes
+$M(d^{(n)})$ Cauchy in $Y$. Define $\overline M(v)$ to be its limit. The same estimate, applied to two approximating
+sequences, proves that this definition is independent of the choices and is continuous on bounded sets.
+Multilinearity and the product norm bound pass to limits. Finally, density of $\prod_iV_i^0$ proves uniqueness.
+\end{proof}
+
+\subsection{Projective base change}
+The next construction extends scalars while retaining the original norm and a contractive retraction whenever
+the original space is complete. The scalar retraction from Corollary~\ref{cor:proj} is the essential ingredient;
+the normed spaces themselves may have ordinary, non-ultrametric norms.
+
+For a normed $K_1$\nobreakdash-space $V$ let $V_{K'}:=V\otimes_{K_1}K'$, a $K'$\nobreakdash-vector space through the second factor, and put
+\[
+\norm u_\pi:=\inf\Bigl\{\sum_j\norm{x_j}\,\abs{\lambda_j}\ :\ u=\sum_jx_j\otimes\lambda_j\Bigr\},
+\]
+the infimum over finite decompositions, with an ordinary sum. For a bounded $K_1$\nobreakdash-linear $\psi\colon K'\to K_1$ let
+$T_\psi\colon V_{K'}\to V$ be the $K_1$\nobreakdash-linear map with $T_\psi(x\otimes\lambda)=\psi(\lambda)x$; it exists because
+$(x,\lambda)\mapsto\psi(\lambda)x$ is $K_1$\nobreakdash-bilinear. Let $\iota_V\colon V\to V_{K'}$, $x\mapsto x\otimes1$; it is
+$K_1$\nobreakdash-linear, since $cx\otimes1=x\otimes c=c\cdot(x\otimes1)$ for $c\in K_1$.
+
+\begin{lemma}[projective base change]\label{lem:bc}
+Let $V$ be a normed $K_1$\nobreakdash-space; no ultrametric hypothesis is made on $V$.
+\begin{enumerate}
+\item $\norm{T_\psi u}\le\norm\psi\,\norm u_\pi$ for every bounded $K_1$\nobreakdash-linear $\psi\colon K'\to K_1$.
+\item $\norm\cdot_\pi$ is a $K'$\nobreakdash-norm on $V_{K'}$.
+\item $\iota_V$ is isometric.
+\item Let $V\widehat\otimes_\pi K'$ be the completion of $(V_{K'},\norm\cdot_\pi)$. If $V$ is complete, then $T_\varpi$, with
+$\varpi$ as in Corollary~\ref{cor:proj}, extends to a $K_1$\nobreakdash-linear map $\Pi_V\colon V\widehat\otimes_\pi K'\to V$ with
+$\norm{\Pi_V}\le1$ and $\Pi_V\circ\iota_V=\id_V$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) For every decomposition $u=\sum_jx_j\otimes\lambda_j$,
+\[
+\norm{T_\psi u}=\Bigl\lVert\sum_j\psi(\lambda_j)x_j\Bigr\rVert
+\le\sum_j\norm\psi\abs{\lambda_j}\norm{x_j}.
+\]
+Taking the infimum over decompositions proves the contraction estimate.
+
+(2) Concatenating decompositions gives the triangle inequality. Multiplying their second factors by
+$\mu\in K'$ gives $\norm{\mu u}_\pi\le\abs\mu\norm u_\pi$; for $\mu\ne0$, applying the same inequality with
+$\mu^{-1}$ gives equality. The zero-scalar case is immediate.
+
+It remains to prove positivity. Let $u\ne0$. Choose a finite tensor representation and rewrite its second
+factors in a basis of their $K_1$\nobreakdash-span. This gives
+\[
+u=\sum_{j=1}^nx_j\otimes\lambda_j
+\]
+with $\lambda_1,\dots,\lambda_n$ linearly independent over $K_1$. Some $x_{j_0}$ is nonzero, since otherwise
+$u=0$. On the finite-dimensional subspace $U:=\operatorname{span}_{K_1}\{\lambda_1,\dots,\lambda_n\}\subseteq K'$,
+take the coordinate functional $\psi_0(\lambda_j)=\delta_{jj_0}$. It is bounded by some $C\ge0$ by
+Lemma~\ref{lem:findim}, using completeness of $K_1$ in (H1). Apply Theorem~\ref{thm:ingleton} to the ultrametric
+$K_1$\nobreakdash-space $K'$ to extend it to $\psi\colon K'\to K_1$ with $\norm\psi\le C$. Then
+$T_\psi u=x_{j_0}$, so (1) gives
+\[
+0<\norm{x_{j_0}}\le C\norm u_\pi.
+\]
+Thus $\norm u_\pi>0$. This argument detects a nonzero vector coefficient by a functional on the \emph{scalar}
+factor $K'$; it requires no separating continuous dual on $V$.
+
+(3) The elementary tensor representation gives $\norm{x\otimes1}_\pi\le\norm x$. For the reverse inequality,
+use $\varpi(1)=1$ and $\norm\varpi\le1$ in (1):
+\[
+\norm x=\norm{T_\varpi(x\otimes1)}\le\norm{x\otimes1}_\pi.
+\]
+
+(4) When $V$ is complete, the contraction $T_\varpi$ on the dense tensor subspace extends by
+Lemma~\ref{lem:ext}(1), with $\mathbb K=K_1$, to a $K_1$\nobreakdash-linear contraction $\Pi_V$ with values in $V$.
+On the embedded copy of $V$ it satisfies
+$\Pi_V\iota_Vx=T_\varpi(x\otimes1)=\varpi(1)x=x$.
+\end{proof}
+
+We now fix the spaces to which the descent argument will be applied. Let $E_1$ be a normed $K_1$\nobreakdash-space
+and $F_1$ a $K_1$\nobreakdash-Banach space, and put
+\[
+E:=E_1\widehat\otimes_\pi K',\qquad F:=F_1\widehat\otimes_\pi K',
+\]
+the completions of $((E_1)_{K'},\norm\cdot_\pi)$ and $((F_1)_{K'},\norm\cdot_\pi)$. They are $K'$\nobreakdash-Banach spaces;
+$\iota_E\colon E_1\to E$ and $\iota_F\colon F_1\to F$ are $K_1$\nobreakdash-linear isometries, and $\Pi_F\colon F\to F_1$ is $K_1$\nobreakdash-linear
+with $\norm{\Pi_F}\le1$ and $\Pi_F\circ\iota_F=\id_{F_1}$ (Lemma~\ref{lem:bc}).
+
+\begin{lemma}[operators]\label{lem:ops}
+For $f\in\cL_{K_1}(E_1,E_1)$ the map $f\otimes\id$ on $(E_1)_{K'}$ is $K'$\nobreakdash-linear with
+$\norm{(f\otimes\id)u}_\pi\le\norm f\norm u_\pi$. Its extension $f_{K'}\in\cL_{K'}(E,E)$ satisfies $\norm{f_{K'}}\le\norm f$
+and $f_{K'}\circ\iota_E=\iota_E\circ f$, and $f\mapsto f_{K'}$ is $K_1$\nobreakdash-linear.
+\end{lemma}
+
+\begin{proof}
+For any decomposition $u=\sum_jx_j\otimes\lambda_j$, the image under $f\otimes\id$ has the decomposition
+$\sum_jf(x_j)\otimes\lambda_j$, whose cost is at most
+$\norm f\sum_j\norm{x_j}\abs{\lambda_j}$. Taking the infimum proves the norm bound on the algebraic tensor product.
+Since $E$ is complete, Lemma~\ref{lem:ext}(1), with $\mathbb K=K'$, gives the continuous extension $f_{K'}$ with the
+same bound. Its action on $x\otimes1$ proves the embedding identity. Additivity and $K_1$\nobreakdash-homogeneity in
+$f$ hold on elementary tensors, hence on their span, and then on $E$ by continuity.
+\end{proof}
+
+\begin{lemma}[forms]\label{lem:forms-bc}
+For $m\in\Alt^k_{K_1}(E_1;F_1)$ there is $m_{K'}\in\Alt^k_{K'}(E;F)$ with $\norm{m_{K'}}\le\norm m$ and
+\[
+m_{K'}(\iota_Ex_1,\dots,\iota_Ex_k)=\iota_F\bigl(m(x_1,\dots,x_k)\bigr)\qquad(x_i\in E_1),
+\]
+and $m\mapsto m_{K'}$ is $K_1$\nobreakdash-linear.
+\end{lemma}
+
+\begin{proof}
+We first define the form on algebraic tensors, then establish a bound independent of their decompositions, and
+finally pass to the completions. Fix a $K_1$\nobreakdash-basis $(\lambda_\beta)_{\beta\in\mathfrak B}$ of $K'$.
+Every $u\in(E_1)_{K'}$ has a unique finite expansion
+$u=\sum_\beta u^\beta\otimes\lambda_\beta$, with $u^\beta\in E_1$, and each coordinate map $u\mapsto u^\beta$ is
+$K_1$\nobreakdash-linear. Define
+\[
+m^{\mathrm{alg}}(u_1,\dots,u_k):=
+\sum_{\beta_1,\dots,\beta_k}
+m\bigl(u_1^{\beta_1},\dots,u_k^{\beta_k}\bigr)\otimes
+\lambda_{\beta_1}\cdots\lambda_{\beta_k}\in(F_1)_{K'}.
+\]
+The sum is finite, since each input has finitely many nonzero coordinates.
+
+\textup{(i)} Linearity of the coordinate maps and multilinearity of $m$ make $m^{\mathrm{alg}}$
+$K_1$\nobreakdash-multilinear.
+
+\textup{(ii)} On elementary tensors, the definition gives
+\[
+m^{\mathrm{alg}}(x_1\otimes\mu_1,\dots,x_k\otimes\mu_k)
+=m(x_1,\dots,x_k)\otimes\mu_1\cdots\mu_k
+\qquad(x_i\in E_1,\ \mu_i\in K').
+\]
+Indeed, writing $\mu_i=\sum_\beta c_{i\beta}\lambda_\beta$ with $c_{i\beta}\in K_1$ gives
+$x_i\otimes\mu_i=\sum_\beta(c_{i\beta}x_i)\otimes\lambda_\beta$. Substitution in the defining sum yields
+\[
+\sum_{\beta_1,\dots,\beta_k}
+\Bigl(\prod_ic_{i\beta_i}\Bigr)m(x)\otimes\prod_i\lambda_{\beta_i}
+=m(x)\otimes\prod_i\Bigl(\sum_\beta c_{i\beta}\lambda_\beta\Bigr),
+\]
+which is the asserted formula.
+
+\textup{(iii)} The map $m^{\mathrm{alg}}$ is $K'$\nobreakdash-multilinear. By additivity in each slot, it suffices
+to check $K'$\nobreakdash-homogeneity when every argument is an elementary tensor; there it follows from
+\textup{(ii)}. The same formula determines the map on all tuples of algebraic tensors, so the initial basis
+choice does not affect it.
+
+\textup{(iv)} For arbitrary decompositions $u_i=\sum_jx_{ij}\otimes\mu_{ij}$, multilinearity and \textup{(ii)} give
+\[
+m^{\mathrm{alg}}(u)=
+\sum_{j_1,\dots,j_k}m(x_{1j_1},\dots,x_{kj_k})\otimes\prod_i\mu_{ij_i}.
+\]
+The cost of this tensor decomposition is at most
+$\norm m\prod_i\bigl(\sum_j\norm{x_{ij}}\abs{\mu_{ij}}\bigr)$.
+Taking the infimum separately over the decompositions in each slot proves
+\[
+\norm{m^{\mathrm{alg}}(u_1,\dots,u_k)}_\pi\le\norm m\prod_i\norm{u_i}_\pi.
+\]
+
+\textup{(v)} To prove strong alternation, suppose two distinct slots $a,b$ both contain
+$u=\sum_jx_j\otimes\mu_j$. Use this \emph{same} decomposition in both slots and expand all arguments into
+elementary tensors. Terms using the same index $j$ in slots $a$ and $b$ vanish because $m$ has a repeated
+argument. For $j\ne j'$, the term using indices $(j,j')$ in these slots pairs with the term using $(j',j)$.
+Their scalar factors agree, while the values of $m$ are negatives of one another, so the pair sums to zero.
+Thus $m^{\mathrm{alg}}$ vanishes whenever any two arguments coincide. Pair cancellation remains valid in
+characteristic $2$; merely checking $m^{\mathrm{alg}}(u,\dots,u)=0$ would not establish strong alternation for
+$k\ge3$.
+
+\textup{(vi)} Regard $m^{\mathrm{alg}}$ as taking values in the completion $F$.
+By \textup{(iii)}, \textup{(iv)} and Lemma~\ref{lem:ext}(2), it extends to a continuous
+$K'$\nobreakdash-multilinear map $m_{K'}\colon E^k\to F$ with $\norm{m_{K'}}\le\norm m$.
+Strong alternation also passes to the limit: if $v_a=v_b$, approximate this common vector by one sequence in
+$(E_1)_{K'}$, and approximate the other entries separately. Every approximating tuple has equal entries in
+slots $a,b$, so \textup{(v)} and continuity give $m_{K'}(v)=0$.
+
+\textup{(vii)} Taking every scalar factor equal to one in \textup{(ii)} gives
+\[
+m_{K'}(\iota_Ex_1,\dots,\iota_Ex_k)
+=m^{\mathrm{alg}}(x_1\otimes1,\dots,x_k\otimes1)
+=m(x)\otimes1=\iota_F(m(x)).
+\]
+The defining formula is $K_1$\nobreakdash-linear in $m$. These linear identities pass to the continuous
+extensions by uniqueness, proving $K_1$\nobreakdash-linearity of $m\mapsto m_{K'}$.
+\end{proof}
+
+\begin{proposition}[descent of a lift]\label{prop:ascent}
+Assume \textup{(H1)} and \textup{(H2)}. Let $E_1$ be a normed $K_1$\nobreakdash-space, $F_1$ a $K_1$\nobreakdash-Banach space, and $E,F$ as
+above. If $Q^{K'}_{E,E,F}$ admits a bounded $k$\nobreakdash-linear lift $P$ over $K'$, then $Q^{K_1}_{E_1,E_1,F_1}$ admits a
+bounded $k$\nobreakdash-linear lift $P_1$ over $K_1$ with $\norm{P_1}\le\norm P$. Equivalently, by Proposition~\ref{prop:lift} over $K_1$ and over
+$K'$: if $Q^{K_1}_{E_1,E_1,F_1}$ is analytic at no point, then $Q^{K'}_{E,E,F}$ is analytic at no point either.
+\end{proposition}
+
+\begin{proof}
+Extend the operator and form inputs to $K'$, apply the given lift, and retract the value to $F_1$. Explicitly,
+for $f_1,\dots,f_k\in\cL_{K_1}(E_1,E_1)$, $m\in\Alt^k_{K_1}(E_1;F_1)$ and $x\in E_1^k$, set
+\[
+P_1(f_1,\dots,f_k)(m)(x_1,\dots,x_k):=
+\Pi_F\Bigl(P\bigl((f_1)_{K'},\dots,(f_k)_{K'}\bigr)(m_{K'})(\iota_Ex_1,\dots,\iota_Ex_k)\Bigr).
+\]
+We check the norm bound and then the diagonal identity.
+
+For fixed $f$ and $m$, the map $P((f_i)_{K'})(m_{K'})$ is a continuous alternating $K'$\nobreakdash-multilinear form
+on $E$. Precomposing each slot with the $K_1$\nobreakdash-linear isometry $\iota_E$ and postcomposing with
+$\Pi_F$ gives a $K_1$\nobreakdash-multilinear map on $E_1$, still vanishing whenever two arguments coincide.
+Lemmas~\ref{lem:bc}--\ref{lem:forms-bc} give
+\[
+\norm{P_1(f)(m)}
+\le\norm{\Pi_F}\norm P\prod_i\norm{(f_i)_{K'}}\norm{m_{K'}}
+\le\norm P\prod_i\norm{f_i}\norm m.
+\]
+In particular, $P_1(f)(m)\in\Alt^k_{K_1}(E_1;F_1)$.
+The form extension is $K_1$\nobreakdash-linear in $m$, the operator extension is $K_1$\nobreakdash-linear in each
+$f_i$, and $P$ is $K'$\nobreakdash-multilinear with values in $K'$\nobreakdash-linear operators.
+Consequently $P_1$ is $K_1$\nobreakdash-linear in $m$ and $K_1$\nobreakdash-multilinear in $(f_1,\dots,f_k)$.
+The displayed estimate proves boundedness at both levels and yields $\norm{P_1}\le\norm P$.
+
+On the diagonal, use $P(g,\dots,g)=Q^{K'}(g)$ with $g=f_{K'}$, followed by the embedding identities in
+Lemmas~\ref{lem:ops} and~\ref{lem:forms-bc} and the retraction identity $\Pi_F\iota_F=\id$:
+\begin{align*}
+P_1(f,\dots,f)(m)(x)
+&=\Pi_F\bigl(m_{K'}(f_{K'}\iota_Ex_1,\dots,f_{K'}\iota_Ex_k)\bigr)\\
+&=\Pi_F\bigl(m_{K'}(\iota_Efx_1,\dots,\iota_Efx_k)\bigr)\\
+&=\Pi_F\bigl(\iota_F(m(fx_1,\dots,fx_k))\bigr)\\
+&=m(fx_1,\dots,fx_k)=Q^{K_1}(f)(m)(x).\qedhere
+\end{align*}
+\end{proof}
+
+\begin{remark}\label{rem:ascent}
+Proposition~\ref{prop:ascent} is characteristic-free and uses no hypothesis on $k$. It transports negative results
+upward only, from $K_1$ to $K'$. Ingleton's theorem is used only on $K'$, so $F_1$ may be, and in our application is,
+non-ultrametric. The completeness of $F_1$ is used essentially: it is what makes the retraction $\Pi_F$ land in $F_1$.
+\end{remark}
+
+\subsection{Incomplete base fields}
+The preceding construction takes place over the completion $\Kh$ of the prescribed field. To return to $K$,
+we restrict scalars on the resulting Banach spaces. Density of $K$ in $\Kh$ forces every continuous
+$K$\nobreakdash-multilinear map between these spaces to be $\Kh$\nobreakdash-multilinear, so a lift cannot appear under
+this restriction.
+
+\begin{lemma}\label{lem:descent}
+Let $K$ be a nontrivially normed field with completion $\Kh$, and let $E,E',F$ be $\Kh$\nobreakdash-Banach spaces, regarded as
+$K$\nobreakdash-Banach spaces by restriction of scalars (with the same norms). Then $\cL_K(E,E')=\cL_{\Kh}(E,E')$,
+$\Alt^k_K(E;F)=\Alt^k_{\Kh}(E;F)$ and $\Alt^k_K(E';F)=\Alt^k_{\Kh}(E';F)$ with the same norms, $Q^K_{E,E',F}=Q^{\Kh}_{E,E',F}$,
+and every bounded $k$\nobreakdash-linear lift of $Q^K_{E,E',F}$ over $K$ is a bounded $k$\nobreakdash-linear lift of $Q^{\Kh}_{E,E',F}$ over
+$\Kh$.
+\end{lemma}
+
+\begin{proof}
+Let $g$ be a continuous $K$\nobreakdash-linear map between normed spaces that already carry compatible
+$\Kh$\nobreakdash-scalar actions. For $\lambda\in\Kh$, choose $\lambda_n\in K$ with $\lambda_n\to\lambda$.
+Since $\norm{\lambda_nx-\lambda x}=\abs{\lambda_n-\lambda}\norm x$, continuity gives
+\[
+g(\lambda x)=\lim_n g(\lambda_nx)=\lim_n\lambda_ng(x)=\lambda g(x).
+\]
+Thus $g$ is $\Kh$\nobreakdash-linear. Applying the same argument with all but one slot fixed shows that every
+continuous $K$\nobreakdash-multilinear map is $\Kh$\nobreakdash-multilinear. Alternation is the same equal-input
+vanishing condition over either field.
+
+The spaces of bounded maps therefore coincide as sets. Their operator norms agree as well, since the norms are
+defined by the same pointwise bounds on the same vectors. They are $\Kh$\nobreakdash-Banach spaces, and
+$Q^K_{E,E',F}$ and $Q^{\Kh}_{E,E',F}$ agree by their defining precomposition formula.
+Finally, apply the slotwise density argument once more to a bounded $k$\nobreakdash-linear lift $P$ between these
+map spaces. It becomes $\Kh$\nobreakdash-multilinear with the same norm and the same diagonal identity, and hence
+is a lift over $\Kh$.
+\end{proof}
+
+\needspace{8\baselineskip}
+\section{Proofs of the main results}\label{sec:proofs}
+The preceding sections give the obstruction to a bounded lift. We first establish the remaining property of the
+target, then assemble the proof of Theorem~\ref{thm:main} and deduce Corollary~\ref{cor:class}.
+
+\subsection{The target has no equivalent ultrametric norm}
+
+\begin{proposition}\label{prop:nonultra}
+Let $\kappa$ be any field, $k\ge2$, $r\in(0,1)$, and let $K_1=\kappa((X))$, $E_1$, $E_0$ and $B$ be as in
+\S\ref{sec:laurent}. Let $e_i\in E_0$ be the unit vectors and $\omega_j:=e_{kj+1}\wedge\dots\wedge e_{kj+k}\in B$
+($j\ge0$), wedges on pairwise disjoint blocks of indices. Then $\norm{\omega_j}_B=1$ and
+\[
+\frac N{M_r}\ \le\ \Bigl\lVert\sum_{j<N}\omega_j\Bigr\rVert_B\ \le\ N\qquad(N\ge1).
+\]
+Hence the norm of $B$ is not ultrametric, and $B$ admits no equivalent ultrametric norm. The same holds for
+$F=B\widehat\otimes_\pi K'$ as in \S\ref{sec:ascent}, for any $K'\supseteq K_1$ satisfying \textup{(H1)} and \textup{(H2)},
+regarded as a normed space over $K'$ or over any subfield of $K'$.
+\end{proposition}
+
+\begin{proof}
+Each $\omega_j$ is a wedge of unit vectors, so $\norm{\omega_j}_B\le1$ by the defining projective norm. Evaluation
+of its determinant array at the block indices gives $\det I=1$, hence
+$\norm{\omega_j}_B\ge\norm{J\omega_j}_\infty\ge1$. The triangle inequality now gives the upper bound $N$.
+
+For the lower bound, write $\xi_N$ for the sum of the same block wedges in $\Lambda^k_\kappa E_0$, and put
+$\omega:=\sum_{j<N}\omega_j\in B$. Its array $J\omega$ is the constant Laurent array $\Omega^\kappa(\xi_N)$.
+Thus $\coeff_0(J\omega)=\Omega^\kappa(\xi_N)$, and uniqueness in Proposition~\ref{prop:supp} gives
+$\eta(\omega)=\xi_N$.
+
+We apply Lemma~\ref{lem:contr} to $\xi_N$. Fix one of the first $N$ blocks and an index $i_0$ in it. Take for
+$\varphi$ the $k-1$ coordinate functionals corresponding to the other indices of that block. On every other
+block all these functionals vanish, so its contraction is zero; here $k\ge2$ ensures that the minors have
+positive size. On the chosen block, the coefficient of $e_{i_0}$ is $\pm1$, while every other cofactor contains
+the zero column obtained by evaluating the functionals at $e_{i_0}$. Consequently
+$c_\varphi(\xi_N)=\pm e_{i_0}$. These contractions span all $kN$ unit vectors in the first $N$ blocks, so
+\[
+kN\le\sdim(\xi_N)=\sdim(\eta(\omega))\le kM_r\norm\omega_B
+\]
+by~\eqref{eq:suppest}. This proves the lower bound.
+
+If $\norm\cdot_u$ were an equivalent ultrametric norm, choose positive constants $c,c'$ with
+$\norm\cdot_B\le c\norm\cdot_u\le c'\norm\cdot_B$. Then
+\[
+\frac{N}{M_r}\le\Bigl\lVert\sum_{j<N}\omega_j\Bigr\rVert_B
+\le c\max_{j<N}\norm{\omega_j}_u\le c'
+\]
+for every $N\ge1$, a contradiction. In particular, the original norm is not ultrametric. This argument uses
+only the ultrametric inequality for $\norm\cdot_u$, not its scalar homogeneity.
+
+Finally, $\iota_F\colon B\to F$ is a $K_1$\nobreakdash-linear isometry by Lemma~\ref{lem:bc}(3). The images
+$\iota_F\omega_j$ satisfy the same unit-norm and sum-growth estimates, so the argument applies to $F$ as well.
+Restriction to a subfield leaves these estimates unchanged.
+\end{proof}
+
+If $r\le\frac12$, then $M_r=1$ and $\norm{\sum_{j<N}\omega_j}_B=N$ exactly.
+
+\subsection{Proof of Theorem~\ref{thm:main}}
+\begin{proof}
+Let $K$ be a nontrivially normed field of characteristic $p>0$, and let $k\ge p$.
+\begin{enumerate}
+\item \emph{Choose a Laurent subfield.} By Lemma~\ref{lem:ultra}, $K$ is ultrametric. Its completion $\Kh$ is
+a complete, nontrivially normed, ultrametric field of characteristic $p$. Choose $t\in K$ with
+$0<\abs t=r<1$, and let $K_1$ be the closure of $\F_p(t)$ in $\Kh$. Lemma~\ref{lem:laurentsub} identifies $K_1$
+isometrically with $\F_p((X))$, with $\abs X=r$, by $\mathrm{ev}_t$. In particular, $K_1$ is complete and
+spherically complete.
+\item \emph{Obtain the obstruction over $K_1$.} Put $E_1:=\linf(\N,K_1)$, and let $B$ be the completion of
+$\Lambda^k_{K_1}E_1$ under the projective exterior norm. Transport of scalars along $\mathrm{ev}_t$ preserves
+the norms, exterior powers and completions in this construction. It also identifies the operator and
+alternating-map spaces, their precomposition maps, and bounded lifts. Theorem~\ref{thm:laurent}, with
+$\kappa=\F_p$, therefore shows that $Q^{K_1}_{E_1,E_1,B}$ has no bounded $k$\nobreakdash-linear lift.
+\item \emph{Ascend to $\Kh$.} The inclusion $K_1\subseteq\Kh$ satisfies (H1) and (H2), and $B$ is complete.
+Proposition~\ref{prop:ascent}, with $K'=\Kh$, gives Banach spaces
+\[
+E:=E_1\widehat\otimes_\pi\Kh,\qquad F:=B\widehat\otimes_\pi\Kh
+\]
+for which $Q^{\Kh}_{E,E,F}$ has no bounded $k$\nobreakdash-linear lift.
+\item \emph{Descend to $K$.} Regard the same $E$ and $F$ as $K$\nobreakdash-Banach spaces. By
+Lemma~\ref{lem:descent}, a bounded lift of $Q^K_{E,E,F}$ would extend to a bounded lift of
+$Q^{\Kh}_{E,E,F}$, which is impossible. Proposition~\ref{prop:lift} applies over the possibly incomplete
+field $K$: $Q^K_{E,E,F}$ is analytic at no point, and \texttt{ContDiffAt K $\omega$} fails at every point.
+Reindexing as in \S\ref{sec:prelim} gives the same conclusions, with the same spaces $E,F$, for every finite
+$\iota$ with $\abs\iota=k$.
+\item \emph{Exclude an equivalent ultrametric target norm.} Since $k\ge p\ge2$, Proposition~\ref{prop:nonultra}
+applies to $B$ and $F$, after the scalar identification in step~(2). Its conclusion persists when $F$ is
+regarded over $K$.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}\label{rem:spaces}
+If $K_1=\Kh$, as when $K=\F_p((u))$ and $t=u$, the completed tensor products identify isometrically with
+$E_1$ and $B$: use Lemma~\ref{lem:bc}(3) and $x\otimes\lambda=\lambda x\otimes1$. Thus $E$ is ultrametric in
+this case. For $K=\F_q((u))$, $q=p^n$, with its $u$\nobreakdash-adic absolute value, one can instead apply
+Theorem~\ref{thm:laurent} directly with $\kappa=\F_q$ and $X=u$, obtaining $E=\linf(\N,K)$ and $F=B$.
+The proof over a general base does not require, or assert, that $E$ is ultrametric.
+\end{remark}
+
+\subsection{Proof of Corollary~\ref{cor:class}}
+\begin{proof}
+Put $k:=\abs\iota$. If $k!\ne0$ in $K$, Proposition~\ref{prop:factorial-positive} gives a finite power series at every
+point for arbitrary normed $E,E',F$, including degree zero. If $k!=0$ in $K$, the field has positive prime
+characteristic $p\le k$. Theorem~\ref{thm:main} gives the required Banach counterexample. Together these prove the
+classification and both strengthened conclusions.
+\end{proof}
+
+\needspace{8\baselineskip}
+\section{Complements and open problems}\label{sec:complements}
+
+\subsection*{Spherically complete targets}
+The following result explains the target hypotheses in the positive cases. A special case is stated
+in~\cite[Remark~16]{M}; the proof below follows the spherical extension and retraction arguments in the Lean
+development. It is independent of the main counterexample construction.
+
+\begin{thmA}
+Let $K$ be an ultrametric nontrivially normed field, let $E,E'$ be normed $K$\nobreakdash-spaces, and let $F$ be a normed $K$\nobreakdash-space
+whose norm is ultrametric and which is spherically complete as a metric space. Then $Q^K_{E,E',F}$ is $C^n$ for every
+$n\in\N\cup\{\infty,\omega\}$; in particular it is analytic at every point.
+\end{thmA}
+
+% Optional proof of Theorem A. This follows the existing master extension theorem
+% in Analysis/SphericalCompleteness.lean and the alternating-map/retraction
+% construction in Analysis/SphericalAnalytic.lean. No source or build is changed.
+% If inserted, remove the statements elsewhere that Theorem A is not proved here.
+\begin{proof}[Proof of Theorem~A]
+The degree-zero case is constant, so suppose $k\ge1$. We first record the extension argument needed to preserve a family of norm bounds.
+Let $U$ be an ultrametric seminormed $K$\nobreakdash-space and let $G$ be an ultrametric, spherically
+complete normed $K$\nobreakdash-space. Suppose a nonempty family
+$(T_\alpha,r_\alpha)$, with $T_\alpha\in\cL(U,G)$ and $r_\alpha\ge0$, satisfies
+$\norm{T_\alpha-T_\beta}\le\max(r_\alpha,r_\beta)$. If a linear map $T_0\colon D\to G$ on a subspace
+$D\subseteq U$ satisfies
+\[
+\norm{T_0d-T_\alpha d}\le r_\alpha\norm d\qquad(d\in D),
+\]
+then it extends to a bounded linear $T\colon U\to G$ satisfying the same inequalities on $U$.
+
+To extend across $x\notin D$, choose the value $Tx$ in the balls
+\[
+\overline B\bigl(T_\alpha(d+x)-T_0d,\ r_\alpha\norm{d+x}\bigr)
+\qquad(\alpha,\ d\in D).
+\]
+These balls meet pairwise. For example, if $r_\alpha\le r_\beta$, the difference of the centres for
+$(\alpha,d)$ and $(\beta,e)$ is
+\[
+T_\alpha(d-e)-T_0(d-e)+(T_\alpha-T_\beta)(e+x),
+\]
+whose norm is at most
+$\max(r_\alpha\norm{d+x},r_\beta\norm{e+x})$ by the ultrametric inequalities.
+Spherical completeness gives a common value $c$; defining
+$T(d+\lambda x)=T_0d+\lambda c$ preserves the bounds, by rescaling the displayed ball condition when
+$\lambda\ne0$. Unions of chains preserve them as well, so Zorn's lemma gives an extension to all of
+$U$. It is bounded because it remains within $r_\alpha\norm{\cdot}$ of any one fixed bounded map
+$T_\alpha$. In particular, taking the single pair $(0,1)$ extends every contraction to a contraction.
+
+We next show that $A:=\Alt^k(E;F)$ is spherically complete. Let $U$ be the free $K$\nobreakdash-space
+on the set $E^k$, with generators $[x]$ and ultrametric seminorm
+\[
+\Bigl\lVert\sum_x c_x[x]\Bigr\rVert
+   :=\max_x\abs{c_x}\prod_{i=1}^k\norm{x_i}.
+\]
+Here the maximum is over the finite support, and the empty maximum is $0$.
+Let $R\subseteq U$ be generated by the additivity and scalar-homogeneity relations in each slot,
+and by $[x]$ whenever two coordinates of $x$ coincide. Evaluation identifies $A$ isometrically
+with the bounded linear maps $U\to F$ vanishing on $R$: extend $a\in A$ by
+$\widehat a(\sum_xc_x[x])=\sum_xc_xa(x)$, and recover $a(x)=\widehat a([x])$.
+The two norm inequalities follow from the ultrametric inequality in $F$ and evaluation on single
+generators.
+
+Now take a nonempty pairwise-meeting family of closed balls in $A$, with centres $a_\alpha$ and
+radii $r_\alpha$. Their corresponding maps satisfy
+$\norm{\widehat a_\alpha-\widehat a_\beta}\le\max(r_\alpha,r_\beta)$ and vanish on $R$.
+Apply the extension result with $D=R$ and $T_0=0$. It gives a bounded linear map $U\to F$ vanishing
+on $R$ and lying in all the prescribed operator balls. Its associated alternating map lies in
+the original balls, proving spherical completeness of $A$.
+
+Finally, put $M:=\Mult^k(E;F)$, the space of bounded $k$\nobreakdash-linear maps. Both $M$ and
+$A$ have ultrametric operator norms. The inverse of the isometric inclusion $j\colon A\to M$,
+defined on $j(A)$, is a contraction. The extension result with target $A$ extends it to a
+contraction $\rho\colon M\to A$ with $\rho j=\id_A$. Define
+\[
+P(f_1,\dots,f_k)(m):=\rho\bigl(m\circ(f_1,\dots,f_k)\bigr).
+\]
+This is a bounded $k$\nobreakdash-linear map into
+$\cL(\Alt^k(E';F),\Alt^k(E;F))$, with $\norm P\le1$, and its diagonal is $Q$.
+Proposition~\ref{prop:lift} gives a finite power series at every point, hence analyticity and all
+the asserted differentiability orders.
+\end{proof}
+
+% Optional complement. No new assertion is made for a nonspherically complete
+% scalar target. The proof is mathematical prose, not a new Lean theorem.
+\begin{remark}[finite-dimensional targets]\label{rem:finite-target-reduction}
+Let $K$ be a complete nontrivially normed field, let $E,E'$ be normed $K$\nobreakdash-spaces, and let $F$ be finite-dimensional.
+If $F\ne0$, then, at every $f_0\in\cL(E,E')$,
+\[
+Q^K_{E,E',F}\text{ is analytic at }f_0
+\quad\Longleftrightarrow\quad
+Q^K_{E,E',K}\text{ is analytic at }f_0.
+\]
+If $F=0$, precomposition is constant and hence analytic.
+
+Indeed, choose a basis $v_1,\dots,v_d$ of $F$ with coordinate functionals
+$\lambda_1,\dots,\lambda_d$. These functionals are continuous because $K$ is complete. For a vector $v$ and a scalar-valued form $a$, write $va$ for the form $x\mapsto a(x)v$. Writing
+$Q_F:=Q^K_{E,E',F}$ and $Q_K:=Q^K_{E,E',K}$, we have
+\[
+Q_F(f)(m)=\sum_{a=1}^d v_a\,Q_K(f)(\lambda_a\circ m).
+\]
+The right-hand side is a fixed continuous linear function of the operator $Q_K(f)$, so analyticity
+of $Q_K$ implies that of $Q_F$. Conversely, choose $v\in F$ and $\lambda\in\cL(F,K)$ with
+$\lambda(v)=1$. For $a\in\Alt^k(E';K)$,
+\[
+Q_K(f)(a)=\lambda\circ Q_F(f)(v a).
+\]
+This expresses $Q_K$ as a fixed continuous linear function of $Q_F$ and proves the converse.
+Thus finite-dimensionality of the target reduces the question to a scalar target. This reduction
+gives no assertion of analyticity over a nonspherically complete base.
+
+If $K$ is ultrametric and spherically complete, there is a positive conclusion for every
+finite-dimensional $F$, with any norm. The coordinate norm
+$\norm y_\infty:=\max_a\abs{\lambda_a(y)}$ is equivalent to the given norm. With this norm, $F$ is
+spherically complete: a closed ball in $K^d$ is a product of coordinate balls, and spherical completeness
+of $K$ gives a point in each coordinate intersection. Theorem~A therefore applies. Returning to the
+original norm preserves analyticity, since it changes the norms on the alternating-map and operator
+spaces only by fixed comparison factors.
+\end{remark}
+
+\subsection*{Targets over discretely valued bases}
+
+
+\begin{proposition}[targets over discretely valued bases]\label{prop:discrete}
+Let $K$ be an ultrametric normed field with $\abs{K^\times}=r^\Z$ for some $r\in(0,1)$, complete or
+not; for instance $K=\F_q((t))$ or $K=\kappa((t))$. Let $E,E'$ be normed $K$\nobreakdash-spaces and $F$ a $K$\nobreakdash-Banach space that
+admits an equivalent ultrametric norm. Then $Q^K_{E,E',F}$ is analytic at every point.
+\end{proposition}
+
+\begin{proof}
+\emph{Round the norm.} Let $\norm\cdot_u$ be an equivalent ultrametric norm on $F$. For $y\ne0$, round
+$\norm y_u$ up to the least element $\norm y_u^\sharp$ of $r^\Z$ above it, and put $\norm0_u^\sharp:=0$.
+Then
+\[
+\norm y_u\le\norm y_u^\sharp\le r^{-1}\norm y_u.
+\]
+Rounding is monotone and commutes with multiplication by elements of $r^\Z$. Since
+$\abs\lambda\in r^\Z$ for $\lambda\in K^\times$, it preserves scalar homogeneity and the ultrametric
+inequality. Thus $\norm\cdot_u^\sharp$ is an equivalent ultrametric norm, and
+$F':=(F,\norm\cdot_u^\sharp)$ is complete with distances in $r^\Z\cup\{0\}$.
+
+\emph{Apply Theorem A.} Lemma~\ref{lem:discdist} makes $F'$ spherically complete. Theorem~A therefore
+gives analyticity of $Q':=Q^K_{E,E',F'}$ at every point.
+
+\emph{Return to the original norm.} Equivalent target norms give the same spaces of bounded alternating
+maps, with equivalent operator norms. Consequently
+\[
+\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr)
+\quad\text{and}\quad
+\cL\bigl(\Alt^k(E';F'),\Alt^k(E;F')\bigr)
+\]
+are the same vector space with equivalent norms, and $Q=Q'$ under this identification. A power series
+for $Q'$ is therefore a power series for $Q$: coefficient norms change by at most a fixed factor, and
+convergence is unchanged.
+\end{proof}
+
+Thus, over a discretely valued base, every Banach counterexample must have a target admitting no equivalent
+ultrametric norm. Proposition~\ref{prop:nonultra} establishes this property for our target over every base.
+
+\begin{remark}[necessary, but not sufficient]\label{rem:notsuff}
+Completeness of the target is essential to this deduction: it is used through Lemma~\ref{lem:discdist} in
+Proposition~\ref{prop:discrete}. Even for complete targets, the absence of an equivalent ultrametric norm
+is not sufficient for a counterexample. Take the degree-$3$ space $B$ of \S\ref{ssec:projnorm} over
+$K_1=\F_5((X))$. It admits no equivalent ultrametric norm by Proposition~\ref{prop:nonultra}, which requires
+only $k\ge2$, but $Q^{K_1}_{E_1,E_1,B}$ is analytic by Corollary~\ref{cor:class}(1), since $3!=1$ in $\F_5$.
+
+The factorial hypothesis is also essential to the finite-field obstruction. Applying the construction of
+\S\ref{ssec:Psi} to this bounded lift gives a map $\Psi$ with all the properties of Lemma~\ref{lem:Psi},
+which is valid in every degree. Thus $\Psi$ satisfies every hypothesis of Theorem~\ref{thm:FF}(2), with
+$L=\F_5$, except $k!=0$; compare Remark~\ref{rem:FFunit}.
+\end{remark}
+
+\subsection*{An explicit lift from an orthogonal basis}
+\begin{remark}[an explicit lift]\label{rem:sorted}
+Let $K$ be ultrametric, let $E$ have an orthogonal basis $(e_i)_{i\in I}$, and let $F$ be complete and
+ultrametric. Here a basis means that every $x\in E$ has an unconditional expansion
+$x=\sum_i e_i^*(x)e_i$, with $\norm{\sum_i c_i e_i}=\sup_i\abs{c_i}\norm{e_i}$. Fix a total order on $I$ and put
+\[
+P(f_1,\dots,f_k)(m)(x^1,\dots,x^k):=\sum_{s_1<\dots<s_k}\det\bigl(e^*_{s_a}(x^b)\bigr)_{a,b}\;m\bigl(f_1e_{s_1},\dots,f_ke_{s_k}\bigr).
+\]
+For each $x$, the weighted coordinates $\abs{e_i^*(x)}\norm{e_i}$ tend to zero off finite subsets of $I$.
+Expanding the determinant bounds a summand by a fixed constant times a finite sum of products of these
+null families, one coordinate from each input. Such products tend to zero off finite subsets of the
+tuple space. Hence, for every $\varepsilon>0$, only finitely many summands have norm at least
+$\varepsilon$, and the family is summable in the complete ultrametric space $F$.
+
+Orthogonality gives $\abs{e_s^*(x)}\norm{e_s}\le\norm x$. The ultrametric determinant estimate therefore
+bounds every summand by $\norm m\prod_a\norm{f_a}\prod_b\norm{x^b}$; the ultrametric inequality in $F$
+then gives $\norm P\le1$. The formula is multilinear in $f$ and linear in $m$, and its output is
+alternating in $x$ because the determinant is alternating in its columns. Finally, finite coordinate
+expansions give
+\[
+m(fx^1,\dots,fx^k)=\sum_{s_1<\dots<s_k}\det\bigl(e^*_{s_a}(x^b)\bigr)_{a,b}\,
+m(fe_{s_1},\dots,fe_{s_k});
+\]
+the general identity follows by continuity along finite coordinate projections. Thus
+$P(f,\dots,f)=Q(f)$. For $k=0$, the formula has one empty-index term, with determinant $1$.
+
+This \emph{sorted lift} works in every characteristic and degree, without division by $k!$ or spherical
+completeness. It is not used in the main proof. Over a complete discretely valued field, every
+ultrametric Banach space is topologically isomorphic to a space $c_0(I)$ of null
+families~\cite[\S1, Prop.~1 and its Corollaire]{Se}, and hence has such a basis for an equivalent norm.
+\end{remark}
+
+\subsection*{Ultrametric counterexamples}
+\begin{remark}[ultrametric targets over bases that are not spherically complete; announced]\label{rem:R}
+The following statement is announced without proof and is not used elsewhere in this paper. Let $k\ge2$,
+and let $K$ be a complete nontrivially normed field, not spherically complete, with $k!=0$ in $K$.
+Then $K$ is ultrametric by Lemma~\ref{lem:ultra}. For a cardinal $\mu$ put $\beth_0(\mu):=\mu$ and
+$\beth_{n+1}(\mu):=2^{\beth_n(\mu)}$, and let $\mu^+$ be the successor cardinal of $\mu$. Let $I$ be a set of
+cardinality at least $\beth_{3k-1}(\abs K)^+$, put $E:=\linf(I,K)$, and let $F_I$ be the closure in $\linf(I^k,K)$ of
+the span of the determinant arrays $(i_1,\dots,i_k)\mapsto\det(x_b(i_a))_{a,b}$, $x\in E^k$. Then $E$ and $F_I$ are
+ultrametric $K$\nobreakdash-Banach spaces, and $Q^K_{E,E,F_I}$ is analytic at no point. The proposed proof uses
+a partition argument with the Erd\H{o}s--Rado theorem in place of Ramsey's theorem. For $k=2$ in
+characteristic~$2$ the countable index set $\N$ suffices~\cite{M}.
+\end{remark}
+
+\paragraph{Comparison with characteristic $2$.}
+For $p=k=2$, Theorem~\ref{thm:main} gives a second counterexample over every nontrivially normed field of
+characteristic~$2$. Unlike the construction of~\cite{M}, it applies to spherically complete bases such as
+$\F_2((t))$. The distinction lies in the target: that of~\cite{M} is ultrametric, whereas ours admits no
+equivalent ultrametric norm. Proposition~\ref{prop:discrete}, using Theorem~A, shows that a complete
+counterexample target over $\F_2((t))$ cannot carry an equivalent ultrametric norm.
+
+The proofs also use different mechanisms. The characteristic-$2$ argument combines a parity identity
+for determinants---the determinant of an alternating matrix is the square of its Pfaffian---with the
+failure of Hahn--Banach over a base that is not spherically complete, using $\linf$ to assemble the
+construction. Here the finite-field theorem is combined with the constant-coefficient map of a Laurent
+series field, and Ingleton's theorem is applied over a spherically complete subfield. In characteristic~$2$,
+Theorem~\ref{thm:FF} needs no signs (Remark~\ref{rem:FFhyp}).
+
+\subsection*{An alternative algebraic approach}
+\begin{remark}[another possible approach]\label{rem:routeII}
+The following optional sketch suggests an alternative route to the input needed in \S\ref{sec:laurent}. It requires
+two additional results: an infinite-field obstruction and an equality between support dimension and contraction
+rank. Neither is proved here, and no argument in this paper depends on this route.
+
+\emph{The infinite-field input.} The first required statement is the analogue of
+Theorem~\ref{thm:FF} over infinite fields $L$ with $k!=0$ in $L$, for lifts that satisfy~\eqref{eq:Pw} and have
+uniformly bounded support, of an arbitrary linear family $D\colon A\to\End_L(V)$ whose image modulo the finite-rank
+operators is infinite-dimensional.
+
+\emph{Base change and minors.} Let $\Psi$ be a lift over $\F_q$ whose values have support dimension at most $d$.
+After the finite base change $\F_q\subseteq\F_{q^N}$, the values of the base change of $\Psi$ at $\F_{q^N}$\nobreakdash-points
+have support dimension at most $d_N:=N^{2k}d$, since each input has only $N$ pieces over $\F_q$; choose $N$ with
+$q^N>d_N+1$. One would then use that the support dimension of $\omega\in\Lambda^kV$ \emph{equals} the rank of its
+contraction matrix, the matrix of coordinates of the vectors $c_\varphi(\omega)$ of Lemma~\ref{lem:contr}, with
+$\varphi$ running over tuples of dual basis vectors. Lemma~\ref{lem:contr} gives only the inequality $\ge$, and
+\emph{we do not prove the equality}. Granting it, consider any finite set of independent scalar parameters in each
+of the $2k$ input slots. By multilinearity, every contraction-matrix entry has degree at most one in each scalar
+parameter. Its $(d_N+1)$\nobreakdash-minors therefore have degree at most $d_N+1<q^N$ in each variable. They vanish at every
+$\F_{q^N}$\nobreakdash-point, so they are zero polynomials and remain zero over the algebraic closure
+$\overline{\F}_q$. The resulting support bound would allow the proposed obstruction to be applied over this infinite
+field.
+
+\needspace{4\baselineskip}
+\emph{Compatibility requirements.} In addition to those two unproved inputs, the route requires the following
+properties of $\Psi$.
+\begin{enumerate}
+\item The full identity~\eqref{eq:Pol}, not only~\eqref{eq:Pol1}: for $k>q$ the identity~\eqref{eq:Pw} at
+$\F_q$\nobreakdash-points does not survive base change (Proposition~\ref{prop:diag}(3)), whereas~\eqref{eq:Pol}
+gives~\eqref{eq:Pw} at every point after base change.
+\item Alternation, as required by the unproved input above. Both alternation and antisymmetry survive scalar
+extension, but in characteristic~$2$ antisymmetry does not imply alternation.
+\item An infinite-dimensional image modulo finite rank. For the multipliers $D_ax=ax$ on $L^\N$ this holds because
+the multipliers by the indicators of pairwise disjoint infinite sets are linearly independent modulo finite rank.
+\end{enumerate}
+The lift of \S\ref{sec:laurent} satisfies~\eqref{eq:Pol} and is alternating (Lemma~\ref{lem:Psi}), and its multiplier
+family is the one in~(3), with $L=\kappa$.
+\end{remark}
+
+
+\subsection*{Open problems}
+The questions left open concern ultrametric targets.
+\begin{enumerate}
+\item \emph{Countable index.} Let $K$ be complete, not spherically complete, of characteristic $p\ge3$, and $k\ge p$.
+Is there a complete ultrametric $F$ such that $Q^K_{E,E,F}$ is not analytic for $E=\linf(\N,K)$? For $p=2$ the answer
+is yes, by~\cite{M}: for $k=2$ this is the theorem of~\cite{M}, and for $k\ge3$ it follows by the wedging argument
+of~\cite[Remark~18]{M}, which is formalized in the Lean theorem of \S\ref{sec:lean} under the hypothesis (K2)
+of~\cite{M}. Remark~\ref{rem:R} announces a counterexample with a much larger index set, leaving the
+countable case open.
+\item \emph{Densely valued spherically complete bases.} Let $K$ be spherically complete, densely valued and of
+characteristic $p$, for example the Hahn series field $\F_p((t^{\mathbb Q}))$, and let $k\ge p$.
+Is $Q^K_{E,E',F}$ analytic for all Banach $E,E'$ and every complete ultrametric $F$? Theorem~A gives a
+positive answer when $F$ is spherically complete. The counterexample of Theorem~\ref{thm:main} has a
+non-ultrametric target and does not answer this question.
+\end{enumerate}
+
+\section{Formalization}\label{sec:lean}
+The proof snapshot of this paper is recorded in the private repository~\cite{LeanP}, at commit
+\href{https://github.com/Deicyde/alternating-analytic-characteristic-p/tree/5e9c3cf81bb648d9f64203333a51beb2784aaf46}{\texttt{5e9c3cf}},
+using Lean~\texttt{4.34.0-rc2} and Mathlib revision
+\href{https://github.com/Deicyde/mathlib4/tree/2b73d9821d297b80d92eecc54cc09bfc263e0098}{\texttt{2b73d9821d29}}.
+At that revision, the proof library was built without admitted proofs, and its transitive axiom check reported only
+\texttt{propext}, \texttt{Classical.\allowbreak{}choice} and \texttt{Quot.\allowbreak{}sound}.
+The repository's \texttt{THEOREM\_MAP.md} maps the paper's statements to the Lean declarations.
+
+The principal declarations, in the namespace \texttt{AlternatingAnalytic}, are
+\begin{itemize}\raggedright
+\item \texttt{exists\_\allowbreak{}banach\_\allowbreak{}counterexample\_\allowbreak{}full}, for
+Theorem~\ref{thm:main}, including incomplete base fields, the same Banach witnesses for every finite index
+type of cardinality $k$, no bounded lift, nowhere analyticity, nowhere $C^\omega$, and no equivalent
+ultrametric norm on the target;
+\item \texttt{factorial\_\allowbreak{}ne\_\allowbreak{}zero\_\allowbreak{}iff\_\allowbreak{}allBanachPrecompositionAnalytic},
+for both directions of Corollary~\ref{cor:class};
+\item \texttt{finiteField\_\allowbreak{}multiplier\_\allowbreak{}theorem}, for both parts of
+Theorem~\ref{thm:FF}, with the support bound required only on the stated finitely supported test inputs in its first part.
+\end{itemize}
+The supporting development covers the $\kappa$\nobreakdash-linear coefficient map and support estimate
+(Proposition~\ref{prop:supp}), all four properties of the residue lift (Lemma~\ref{lem:Psi}), the Laurent
+counterexample, and ascent and descent to a prescribed field. It also includes the lift criterion, the
+sharp polarization distinctions, Theorem~A, Proposition~\ref{prop:discrete}, and the sorted lift of
+Remark~\ref{rem:sorted}. Spherical completeness uses the development's own class, with the definition in
+\S\ref{sec:ascent}. The formalization used Codex with Autoform and incorporated previously formalized
+ingredients with their provenance retained.
+
+Proposition~\ref{prop:smooth-positive} reproduces the argument of~\cite{PR}, whose formal proof is included in the
+pinned Mathlib dependency. The finite-coordinate proof (Proposition~\ref{prop:finite-coordinate} and
+Corollary~\ref{cor:finite-dimensional-positive}) and the finite-target reduction
+(Remark~\ref{rem:finite-target-reduction}) are supplementary informal results; they are not claimed as separate
+formalized declarations in this development.
+
+The characteristic-$2$ counterexample~\cite{M} has separate provenance. Its formalization proves nonanalyticity in
+degree $2$ at the origin, with a wedging extension under (K2) to every degree at least $2$ and every base point:
+\texttt{Round24Transfer.\allowbreak{}char2\_\allowbreak{}not\_\allowbreak{}analyticAt\_\allowbreak{}of\_\allowbreak{}hasEmptyNestedBalls}.
+That construction is not re-proved or re-audited here.
+
+The proposed alternative route of Remark~\ref{rem:routeII}, the announced large-index construction of
+Remark~\ref{rem:R}, the open problems, and Serre's external classification cited in
+Remark~\ref{rem:sorted} are excluded from the proved results. The repository's comparator challenges ask
+for two short contradiction corollaries of the main theorem; their solutions use the stronger
+constructive library theorem above. Intentional placeholders occur only in the challenge file, not in
+the proof library or solution. Current challenge checks use Kim Morrison's comparator, with the configuration
+recorded in the repository.
+
+\begin{thebibliography}{99}
+\bibitem{G1} S.~Gou\"ezel, \emph{In characteristic $0$, precomposition by a linear map is analytic on the space of
+alternating maps}, pull request \#43338 to Mathlib,\\ {\small\url{https://github.com/leanprover-community/mathlib4/pull/43338}}.
+\bibitem{G2} S.~Gou\"ezel, \emph{The bundle of continuous alternating maps is $C^n$}, draft pull request \#43234 to Mathlib,\\
+{\small\url{https://github.com/leanprover-community/mathlib4/pull/43234}}.
+\bibitem{In} A.~W.~Ingleton, \emph{The Hahn--Banach theorem for non-Archimedean-valued fields}, Proc.\ Cambridge Philos.\
+Soc.\ \textbf{48} (1952), 41--45.
+\bibitem{La} S.~Lang, \emph{Fundamentals of Differential Geometry}, Graduate Texts in Mathematics 191, Springer, 1999.
+\bibitem{docs} The mathlib Community, \emph{Mathlib documentation}, \texttt{docs\#AnalyticAt},\\
+{\small\url{https://leanprover-community.github.io/mathlib4_docs/find/?pattern=AnalyticAt#doc}}.
+\bibitem{M} J.~McCarthy, \emph{Precomposition on continuous alternating maps is not analytic in characteristic $2$},
+note, version of 21 September 2026; Lean formalization in the repository (private)\\
+{\small\url{https://github.com/Deicyde/alternating-analytic-counterexample}}.
+\bibitem{PR} J.~McCarthy, \emph{Smoothness reflects along a linear isometry with closed range}, draft pull request \#43548
+to Mathlib,\\ {\small\url{https://github.com/leanprover-community/mathlib4/pull/43548}}.
+\bibitem{Ra} F.~P.~Ramsey, \emph{On a problem of formal logic}, Proc.\ London Math.\ Soc.\ (2) \textbf{30} (1930), 264--286.
+\bibitem{Se} J.-P.~Serre, \emph{Endomorphismes compl\`etement continus des espaces de Banach $p$\nobreakdash-adiques}, Publ.\ Math.\
+IH\'ES \textbf{12} (1962), 69--85.
+\bibitem{vR} A.~C.~M.~van Rooij, \emph{Non-Archimedean Functional Analysis}, Marcel Dekker, 1978.
+\bibitem{LeanP} J.~McCarthy, \emph{Lean formalization of alternating precomposition in positive characteristic},
+private repository, verified commit \texttt{5e9c3cf},\\
+{\small\url{https://github.com/Deicyde/alternating-analytic-characteristic-p}}.
+\end{thebibliography}
+\end{document}

@@ -1,5 +1,5 @@
-# Paper snapshot
+# Original manuscript snapshot
 
-These are the exact PDF and LaTeX files captured at the start of the formalization task on 2026-09-23. During the task, the original files received an editorial revision concerning the provenance of Theorem A. The mathematical statements are unchanged. Both version hashes and the complete textual diff are recorded in `../verification/provenance/source-revision-provenance.json`.
+These are the exact PDF and LaTeX files captured at the start of formalization on 2026-09-23. Their statements about unfinished formalization describe that earlier stage.
 
-The entire proved-paper scope is covered by this delivery; this includes the factorial classification and positive results. External classifications, explicitly unproved announcements, and open questions are listed separately in the coverage audit.
+The current corrected and edited manuscript is [paper/charp.pdf](../paper/charp.pdf), with [LaTeX source](../paper/charp.tex). See [THEOREM_MAP.md](../THEOREM_MAP.md) for the formalized scope and the status of later expository additions.

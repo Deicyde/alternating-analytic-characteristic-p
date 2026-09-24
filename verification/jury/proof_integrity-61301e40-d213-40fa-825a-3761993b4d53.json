@@ -1,9 +1,0 @@
-{
-  "axis": "proof_integrity",
-  "prompt_sha256": "7947933c3ff6a251bb853d8a1d9841c6422b792d89afb0dbc5d0217b405826be",
-  "result": {
-    "score": null,
-    "reasoning": "Source inspection found genuine mathematical work: dense approximation and coefficient stabilization establish the extension; determinant injectivity proves linearity and uniqueness; an epsilon argument preserves the support bound; algebraic coefficient recovery proves the constant-wedge identity. These match the source\u2019s explicit proofs. Project-wide scanning found no sorry, admit, raw axiom, or native_decide in AlternatingAnalytic, and no structural integrity issue was identified. However, ind",
-    "error": "abstain"
-  }
-}

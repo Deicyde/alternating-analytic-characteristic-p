@@ -1,6 +1,0 @@
-'AlternatingAnalytic.hasSum_sortedSchauderLift' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.exists_sortedSchauderLift' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.sortedSchauderLift_eq_tsum' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.sortedFormulaLiftNorm' depends on axioms: [propext, Quot.sound, Classical.choice]
-'AlternatingAnalytic.sortedSchauderLift.congr_simp' depends on axioms: [propext, Quot.sound, Classical.choice]
-AUTOFORM_PROBE_OK decls=5

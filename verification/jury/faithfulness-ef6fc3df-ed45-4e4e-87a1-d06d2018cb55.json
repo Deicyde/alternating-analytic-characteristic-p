@@ -1,8 +1,0 @@
-{
-  "axis": "faithfulness",
-  "prompt_sha256": "250e4c391beeac1c8049b50a74d2825d0752856f25800dc5aedd8b4271479496",
-  "result": {
-    "score": 5,
-    "reasoning": "The actual source and Lean declarations agree: for every field L, set S, degree k, and subspace W of S \u2192 L, a genuine linear map on the exterior power satisfies the exact determinant formula, injectivity, repeated-coordinate vanishing, and permutation sign rule. Supporting proofs establish finite-dimensional support and spanning coordinate evaluations; these are not extra hypotheses on the final theorem. No content is hidden in custom classes or hollow definitions. Fresh Lean verification timed "
-  }
-}

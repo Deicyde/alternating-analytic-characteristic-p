@@ -1,8 +1,0 @@
-{
-  "axis": "proof_integrity",
-  "prompt_sha256": "a8712a16e15afe883646eacd042aa15bc9c0f914a395e8fb62b52c413c054ba2",
-  "result": {
-    "score": 5,
-    "reasoning": "Inspected the real Lean file, source Section 2, and supporting dependencies. An independent Lean #print axioms check returned only propext, Classical.choice, and Quot.sound. The proof genuinely constructs finite support by span induction, defines the minimum using Nat.find with explicit finiteness, and proves the properties using supporting subspaces, scalar inverses, sums, and linear images. The final conjunction packages these proved lemmas; it does not assume its conclusion. No sorry dependen"
-  }
-}

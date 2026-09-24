@@ -1,8 +1,0 @@
-{
-  "axis": "faithfulness",
-  "prompt_sha256": "023b8a0bab3e86df0d0d11b65979fcf0bf5238edefeba779dc9862a721bed319",
-  "result": {
-    "score": 5,
-    "reasoning": "The formalization matches the source definition and every stated property. exteriorPowerSubmodule is the actual image of the subspace\u2019s exterior power; exteriorSupportDim minimizes finrank over explicitly finite-dimensional supporting subspaces. Supporting lemmas prove existence, attainment, minimality, zero, nonzero-scalar invariance, subadditivity, and the finite-set wedge bound. The map inequality covers ambient embeddings, proving the stronger result for arbitrary linear maps. Allowing degre"
-  }
-}

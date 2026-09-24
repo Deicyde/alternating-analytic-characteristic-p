@@ -1,8 +1,0 @@
-{
-  "queue_drained": true,
-  "service": "com.autoform.0f29d312eb52.dispatch",
-  "action": "Stopped the task-owned model-dispatch watch after every scheduled review completed. Static review and blueprint pages are preserved.",
-  "exit_code": 0,
-  "timestamp": "2026-09-23T23:07:48.152118+00:00",
-  "output": ""
-}

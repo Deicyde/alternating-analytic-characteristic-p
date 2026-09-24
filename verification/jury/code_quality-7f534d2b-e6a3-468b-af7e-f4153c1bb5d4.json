@@ -1,8 +1,0 @@
-{
-  "axis": "code_quality",
-  "prompt_sha256": "fb390b775c6a25d7446792c7011f2446480d6dc21d3c6c8c2373b6180d4984ac",
-  "result": {
-    "score": 4,
-    "reasoning": "The inspected declaration bundles all six identities into one theorem, satisfying the one-declaration rule. Its proof cleanly assembles documented helper lemmas; finite-sum APIs, norm_num, explicit non-terminal simp only, named arguments, and formatting are idiomatic. The minor issue is the file-wide CommRing assumption: Ring suffices for these identities, and the weight definitions require still weaker structure."
-  }
-}

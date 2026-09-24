@@ -1,9 +1,0 @@
-{
-  "axis": "proof_integrity",
-  "prompt_sha256": "da85d72d8ffa6e11165e629997c320fd9b36453cc1c7a6cd5cc83b5b57e99daf",
-  "result": {
-    "score": null,
-    "reasoning": "The supplied proof appears substantive: contractions place columns in a supporting subspace\u2019s restriction image, yielding the rank bound. However, I could not inspect actual dependencies or independently run #print axioms, so the supplied verification logs cannot establish a verified score. \u2014 Three tool calls failed with 'timed out negotiating with the code-mode host'; filesystem inspection and Lean verification were unavailable.",
-    "error": "abstain"
-  }
-}

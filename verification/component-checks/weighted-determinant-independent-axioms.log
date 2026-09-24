@@ -1,2 +1,0 @@
-'AlternatingAnalytic.norm_det_mul_prod_le' depends on axioms: [propext, Quot.sound, Classical.choice]
-AUTOFORM_PROBE_OK decls=1

@@ -1,9 +1,0 @@
-{
-  "axis": "proof_integrity",
-  "prompt_sha256": "e3290b05bcc6ced61dde9c73c09eecbd7933edcb1110659ff7b7b1315b4d8179",
-  "result": {
-    "score": null,
-    "reasoning": "Read the actual declaration, Sections 1 and 6, and substantive dependencies. Found genuine constructions and arguments, no project sorry/axiom/native_decide markers, and no hollow classes or vacuous instances. However, independent axiom verification did not complete; saved repository logs alone cannot establish the required verdict. \u2014 lake env lean probes stalled without output. Direct pinned-Lean probes timed out after 120 seconds and 60 seconds. Cannot independently certify the declaration\u2019s a",
-    "error": "abstain"
-  }
-}
