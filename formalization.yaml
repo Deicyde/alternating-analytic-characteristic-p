@@ -454,12 +454,16 @@ review:
     results do not certify the remaining manuscript or constitute human expert review. Two further modules,
     FiniteCoordinateFamilies and FiniteCoordinateRadius, passed the shared proof-verification gate on
     25 September 2026. The full library and solution build then passed with both modules and the new category
-    foundation included (3154 jobs). Fresh independent jury review of these three nodes is pending; acceptance
-    of the category definitions does not establish the categorical alternating functors or their classification.
-    The subsequent scope repairs also passed the shared gate: explicit ambient CPolynomialAt and combined
-    public theorem, functor regularity definitions and coordinate equivalences, and the full grouped-coefficient/radius
-    theorem. The full library and solution build passed again (3154 jobs). Fresh independent review is
-    running for these exact revised statements.'
+    foundation included (3154 jobs). Fresh independent jury review of these three nodes is now clean;
+    acceptance of the category definitions does not establish the categorical alternating functors or
+    their classification. The subsequent scope repairs also passed the shared gate: explicit ambient CPolynomialAt
+    and combined public theorem, functor regularity definitions and coordinate equivalences, and the full
+    grouped-coefficient/radius theorem. The full library and solution build passed again (3154 jobs).
+    Fresh independent review passed all three exact revised statements: faithfulness5 and proof integrity5
+    for each; code quality5 for finite-coordinate families and4 for the radius refinement and category
+    foundations. The25September GitHub comparator workflow did not start because of an account billing/spending-limit
+    restriction; no workflow step ran. Local comparator and exact-source integration checks passed. No
+    billing configuration was changed.'
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -556,8 +560,10 @@ alignment:
     module: AlternatingAnalytic.Category.NormedSpace
     status: proved
     note: Actual categories and operator-norm hom spaces, canonical coordinates, and coordinate-invariance
-      lemmas. No completeness of K. Shared verification gate passed; fresh independent jury pending. This
-      does not establish the alternating bifunctors.
+      lemmas. No completeness of K. Shared verification gate passed; independent jury clean. This does
+      not establish the alternating bifunctors. Fresh Codex jury on25September2026 gave faithfulness5
+      and proof integrity5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
+      No human expert review is claimed.
   - source: 'Main Theorem (1) and (2): full categorical statements and joint regularity'
     lean: ''
     module: ''
@@ -630,8 +636,10 @@ alignment:
       subsets of finite-coordinate parameter spaces. Also includes the pointwise and supplied continuous
       coordinate equivalence versions, actual closed operator embedding, ambient degree-(k+1) multilinear
       representative, its norm bound at most one and exact diagonal identity. Shared proof-verification
-      gate passed; independent jury pending. The actual bundle theorem remains pending. The explicit CPolynomialAt
+      gate passed; independent jury clean. The actual bundle theorem remains pending. The explicit CPolynomialAt
       conclusion and combined ambient_alternating_map_action_full statement also passed the repair gate.
+      Fresh Codex jury on25September2026 gave faithfulness5 and proof integrity5; code quality was5 for
+      finite-coordinate families and4 for category foundations/radius. No human expert review is claimed.
   - source: 'fam:rem:radius: preservation of nonarchimedean coefficient bounds and radius'
     lean: AlternatingAnalytic.exists_hasFPowerSeriesOnBall_of_closed_linearIsometry_of_isUltrametricDist
     module: AlternatingAnalytic.Analysis.FiniteCoordinateRadius
@@ -640,9 +648,11 @@ alignment:
       produces one reflected series with norm(q_n) <= norm(p_n), identical diagonals, at least the ambient
       convergence radius, and the same represented ball, including infinite radius. No completeness of
       the field or either target is assumed. Includes the closed-submodule version and a generic same-ball
-      subspace-series lemma. Shared proof-verification gate passed; independent jury pending. The public
+      subspace-series lemma. Shared proof-verification gate passed; independent jury clean. The public
       finite_coordinate_radius_preservation_full now also includes the grouped coefficient bound, with
-      all lifted-series conclusions for the same series.
+      all lifted-series conclusions for the same series. Fresh Codex jury on25September2026 gave faithfulness5
+      and proof integrity5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
+      No human expert review is claimed.
   - source: 'Main Theorem (3), fam:thm:finite-bundles: the analytic alternating-map bundle bifunctor'
     lean: ''
     module: ''
@@ -720,8 +730,8 @@ alignment:
     note: Include finite-coordinate projections with exponential norm bounds, the ordinary l1 tensor identification
       and orbit-constant diagonal spans with actual sorted projections, and the resulting strict separation
       between alternating-family admissibility and universal reflection. Separately establish the nonarchimedean
-      projective tensor identification for c_0 and its projection of norm at most one; an ordinary tensor theorem
-      does not supply this distinct normed construction.
+      projective tensor identification for c_0 and its projection of norm at most one; an ordinary tensor
+      theorem does not supply this distinct normed construction.
   - source: 'dom:core and dom:split-incoming: universal-target core and split destinations'
     lean: ''
     module: ''
