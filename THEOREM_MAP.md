@@ -52,7 +52,7 @@ The finite-coordinate operator proof and the finite-dimensional target reduction
 
 ## Checked extensions
 
-The new modules and their combined public statements passed Autoform's shared proof-verification gate. The full library and solution build also passes in the pinned Lean environment. The requested statement-clarity repairs are complete: each multipart result now has one public theorem, alongside its component lemmas. Independent jury review is in progress; no human expert review is claimed.
+The new modules and their combined public statements passed Autoform's shared proof-verification gate. The full library and solution build also passes in the pinned Lean environment. The requested statement-clarity repairs are complete: each multipart result now has one public theorem, alongside its component lemmas. All four extension nodes now pass the independent AI jury: each received 5/5 for statement faithfulness and proof integrity, and at least 4/5 for code quality. These reviews cover the listed nodes; no human expert review or completed formalization of the remaining manuscript is claimed.
 
 | Paper claim | Checked declarations |
 |---|---|

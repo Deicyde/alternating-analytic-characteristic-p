@@ -171,8 +171,8 @@ status:
     of Main Theorem (2): for independent universes of K, E, E', F and the finite index type, an ultrametric
     nontrivially normed K and an ultrametric normed F with explicit spherical completeness hypothesis
     give ContDiff K n for every n : WithTop ℕ∞, including omega. E and E' are arbitrary normed spaces;
-    K, E and E' need not be complete. All stronger results remain proved in the AlternatingAnalytic
-    library. Challenge validation uses Kim Morrison's leanprover/comparator exclusively, with the
+    K, E and E' need not be complete. The stronger original operator results are proved in the
+    AlternatingAnalytic library. Challenge validation uses Kim Morrison's leanprover/comparator exclusively, with the
     three selected theorems and permitted axioms specified in comparator.json. Excluded are the expressly
     unproved alternative infinite-field route, proposed unproved large-index nonarchimedean-target
     construction, mathematical open problems, the external Serre c_0(I) classification, and the earlier
@@ -422,14 +422,17 @@ review:
     or human expert review. The unchanged three-statement challenge was rechecked on 25 September
     2026 with Kim Morrison's comparator; the solution was accepted by Lean's default kernel. This
     check does not cover the new manuscript extensions. The new finite-coordinate reflection, core-family
-    and shear nodes passed the shared proof-verification gate; their independent source-statement,
-    integrity and style jury reviews are pending. These results do not establish completion of the
+    and shear nodes passed the shared proof-verification gate. These results do not establish completion of the
     expanded manuscript. The canonical exterior-support module also passed the shared kernel/axiom
     gate. The full proof library and solution build passed with all four new branches included (3149
     build jobs). The requested statement-clarity repairs are now complete: the family, shear and
     canonical-support propositions each have a combined public theorem alongside their component
     lemmas. All three combined statements passed the shared proof-verification gate, and the full
-    library and solution build passed again on 25 September 2026. Fresh jury review is in progress.
+    library and solution build passed again on 25 September 2026. The fresh independent Codex jury
+    passed all four extension nodes: statement faithfulness and proof integrity were each 5/5 for
+    every node; code quality was 5/5 for families and shear, and 4/5 for reflection and canonical
+    support. These node-level results do not certify the remaining manuscript or constitute human
+    expert review.
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -751,7 +754,7 @@ alignment:
       with arbitrary ambient dimension. Degree zero and one are formalized separately. The contraction-matrix
       rank theorem is proved for a finite basis of the ambient space; transport from a finite supporting
       subspace into arbitrary V remains pending. Shared proof-verification gate and full proof-library
-      integration build passed; independent jury pending.
+      integration build passed; independent jury clean (faithfulness 5/5, integrity 5/5, style 4/5).
   - source: Remark routeII, proposed Remark R, explicit mathematical open problems, and externally
       cited Serre classification
     lean: ''
