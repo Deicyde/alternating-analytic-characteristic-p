@@ -105,3 +105,7 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateReflection
 
 import AlternatingAnalytic.Analysis.AnalyticFamilies
 import AlternatingAnalytic.Analysis.ShearCounterexample
+import AlternatingAnalytic.Analysis.FiniteCoordinateFamilies
+import AlternatingAnalytic.Category.NormedSpace
+
+import AlternatingAnalytic.Analysis.FiniteCoordinateRadius

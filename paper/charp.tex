@@ -1856,7 +1856,7 @@ $\norm{R_n}\le d^n$ for $d\ge1$. A bounded linear change of coordinates introduc
 distortion factor to the $n$\nobreakdash-th power, so it does not change the exponential-growth condition.
 
 For the ordinary sum-norm space $P=\ell^1(I,K)$, the projective tensor power is isometrically
-$\ell^1(I^n,K)$. Indeed, the coordinate tensor map is bounded with norm one, while expansion in coordinate
+$\ell^1(I^n,K)$. Indeed, the coordinate tensor map has norm at most one, while expansion in coordinate
 tensors gives the reverse projective-norm estimate; completion then gives the identification.
 In these coordinates, $\Delta_n(P)$ consists exactly of arrays constant on each permutation orbit in $I^n$.
 One inclusion follows because every pure power is constant on such orbits. For the other, finite-coordinate
@@ -1892,7 +1892,7 @@ Thus $\norm R\ge n!$. Finally, $(n!)^{1/n}$ is unbounded, so
 Theorem~\ref{fam:thm:tensor-analytic} excludes universal analytic reflection.
 \end{proof}
 
-\begin{corollary}[Polynomial approximations without a common analytic radius]
+\begin{corollary}[Entire polynomial approximation of a nonanalytic smooth map]
 \label{fam:cor:no-common-radius}
 Let $K$ be a complete nonarchimedean nontrivially normed field and put
 $P=\ell^1(\N,K)$, with the ordinary sum norm. There are Banach spaces
@@ -1925,7 +1925,7 @@ Linearizing $\pi_nq_n$ gives a projection
 $T_n(P)\to\Delta_n(P)$ of norm at most $\norm{q_n}$.
 Proposition~\ref{fam:prop:l1-optimal} therefore gives
 $\norm{q_n}\ge n!$. Since $(n!)^{1/n}$ is unbounded, these coefficients
-cannot have a common positive radius.
+give a formal multilinear series of radius zero, contradicting the assumed analytic expansion.
 
 For each $n$, choose the sorted-orbit projection
 $R_n\colon T_n(P)\to\Delta_n(P)$. Its composition with the canonical
@@ -3654,27 +3654,31 @@ Parts~(\ref{main:general}) and~(\ref{main:spherical}) of the categorical Main Th
 from these operator results and bounded bilinear postcomposition. The categorical packaging itself is not a
 separate Lean declaration.
 
-The new formal development proves Lemma~\ref{fam:lem:diagonal} and
-Theorem~\ref{fam:thm:finite-reflection}, including open-domain and continuous-coordinate versions,
-without completeness or characteristic restrictions. It also defines the joint alternating action and
-proves its identity and composition laws, together with the core admissible-family results of
-Proposition~\ref{fam:prop:category}: constants, reparameterization, local gluing, composition, and the
-ambient graph characterization. Proposition~\ref{fam:prop:shear} is also formalized, including the
-Banach counterexample at the identity. The canonical-support identity of
-Proposition~\ref{prop:canonical-support}, its degree-zero and degree-one cases, and the contraction-matrix
-rank formula for a finite-dimensional ambient space are also formalized. These proofs have passed
-Lean verification without admitted proofs.
+The extension formalization covers Lemma~\ref{fam:lem:diagonal},
+Theorem~\ref{fam:thm:finite-reflection} and Corollary~\ref{fam:cor:finite-families}, including
+pointwise, open-domain and supplied continuous-coordinate versions. The family proof constructs
+the ambient $(k+1)$-linear representative with norm at most one; it retains every characteristic
+and degree and arbitrary normed fibers, without completeness assumptions.
+Remark~\ref{fam:rem:radius} is also formalized: in maximum-norm coordinates, a nonarchimedean
+ambient norm permits reflection with equal diagonals, no increase in coefficient norms and
+no loss of the represented ball, including infinite radius.
 
-The further results in \S\S\ref{fam:sec:families}--\ref{fam:sec:tensors} still require formalization.
-In particular, the preceding ingredients do not yet constitute Lean proofs of
-Main Theorem~(\ref{main:families})--(\ref{main:domains}). The pending work includes the alternating-family
-and bundle consequences, the $c_0$ and ordinary $\ell^1$ parameter theorems, the bundle interpretation of the shear,
-the tensor criterion, the universal-target core, and the no-largest-domain theorem. The sharper
-nonarchimedean radius bound, quotient-parameter and polynomial-approximation consequences, maximal
-analytic domains, and transport of the contraction-matrix formula to a finite supporting subspace
-of an arbitrary ambient space also remain pending. The repository theorem map records the exact boundary between checked
-declarations and the remaining implementation work.
-These additions do not alter the three existing comparator challenge statements.
+The checked development further includes the joint action and its functorial laws, the core
+admissible-family laws and graph characterization of Proposition~\ref{fam:prop:category},
+Proposition~\ref{fam:prop:shear} with its Banach counterexample at the identity, and the
+canonical-support identity of Proposition~\ref{prop:canonical-support}. The degree-zero and
+degree-one support cases and finite-ambient contraction-matrix formula are included.
+These proofs have passed Lean verification without admitted proofs. Statement-review results
+and declaration-level scope are recorded in the repository theorem map.
+
+The family assertion of Main Theorem~(\ref{main:families}) is thus formalized; its vector-bundle
+construction and operator-valued bundle morphisms remain pending, as does
+Main Theorem~(\ref{main:domains}). Other pending results include the $c_0$ and ordinary $\ell^1$
+parameter theorems, the tensor criterion and approximation example, quotient parameters,
+universal targets and maximal domains, the shear's bundle interpretation, and contraction-matrix
+transport from a finite supporting subspace into an arbitrary ambient space.
+The theorem map retains the complete inventory. These additions do not alter the three
+existing comparator challenge statements.
 
 The characteristic-$2$ counterexample~\cite{M} has separate provenance. Its formalization proves nonanalyticity in
 degree $2$ at the origin, with a wedging extension under (K2) to every degree at least $2$ and every base point:
