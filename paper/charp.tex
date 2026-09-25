@@ -286,7 +286,7 @@ chosen analytic atlas (Theorem~\ref{fam:thm:finite-bundles}). Taking $\mathcal E
 $\mathcal H=M\times K$ recovers analytic differential $k$\nobreakdash-forms in this setting. The additional
 content is that the input bundles may have infinite-dimensional fibers.
 
-The dimension of the base matters. An affine analytic family of invertible operators on a Banach fiber can
+The parameter-space hypothesis matters. An affine analytic family of invertible operators on a Banach fiber can
 induce a nonanalytic pullback family on alternating maps (Proposition~\ref{fam:prop:shear}). Thus an arbitrary
 analytic change of frame over a general Banach base need not be preserved. This is a failure of the natural
 construction under changes of trivialization, not a claim that the underlying pointwise bundle admits no
@@ -345,6 +345,8 @@ role of spherically complete spaces as injective objects in nonarchimedean Banac
 see Schikhof~\cite[\S2.8]{Schi} for this background over complete fields.
 A special case is stated in~\cite[Remark~16]{M}; the proof here follows the extension and retraction arguments
 in the Lean development.
+Related Lean formalizations of compatible extension and spherical completion in the nonarchimedean setting
+appear in Yuan~\cite[Prop.~6.6 and Thm.~7.3]{Yuan}.
 
 \subsection{Statement and strategy}
 A norm is \emph{nonarchimedean} if $\norm{x+y}\le\max(\norm x,\norm y)$. A metric space is
@@ -1137,7 +1139,7 @@ are infinite-dimensional. For certain infinite-dimensional bases, summability gi
 These are conditions on the parameter space of a family, and should be distinguished from the conditions
 on source or target fibers in the earlier positive theorems.
 
-\subsection{Bundles over finite-dimensional bases}
+\subsection{Bundles over finite-coordinate bases}
 Here an analytic normed vector bundle has operator-valued analytic transition maps in its local
 trivializations. Bundle morphisms are required to have operator-valued analytic expressions as well.
 For bundles $\mathcal E,\mathcal F$ over the same analytic manifold $M$, take common trivializing
@@ -3726,5 +3728,8 @@ Online version of 25 October 2005,\\
 \bibitem{Schi} W.~H.~Schikhof, \emph{Banach spaces over nonarchimedean valued fields}, Topology Proc.\
 \textbf{24} (1999), 547--581,\\
 {\small\url{https://topology.nipissingu.ca/tp/reprints/v24/tp24224.pdf}}.
+\bibitem{Yuan} Y.~Yuan, \emph{Formalization of non-Archimedean functional analysis 1: spherically complete spaces},
+arXiv:2601.21734v3 (2026), accepted for publication in the Journal of Symbolic Logic,\\
+{\small\url{https://arxiv.org/abs/2601.21734v3}}.
 \end{thebibliography}
 \end{document}
