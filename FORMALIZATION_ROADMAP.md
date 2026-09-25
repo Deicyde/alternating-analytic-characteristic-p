@@ -12,7 +12,33 @@ Three Autoform proof-worker launches using the saved Claude backend failed authe
 2. Define the product-space shear `g(u)(d,e) = (d + u e, e)`, with inverse `g(-u)`, and prove the exact operator identity `R ∘ g(u)^* ∘ J = Q(u)` (`fam:prop:shear`). Compose with the existing nonanalytic counterexample to obtain the invertible-family obstruction.
 3. Prove diagonal coefficient membership for a power series whose represented function lands in a closed subspace. This is independently useful and has a short route through existing quotient and uniqueness APIs.
 
-These milestones can proceed independently. They do not replace the full finite-coordinate reflection theorem.
+These milestones can proceed independently. They are a first implementation wave, not the completion criterion for the full manuscript.
+
+## Full remaining acceptance scope
+
+The objective includes all proved statements in the manuscript, including proved remarks and consequences in the introduction. The pending table in [THEOREM_MAP.md](THEOREM_MAP.md) is the statement inventory. In particular, the following requirements must not disappear behind an already formalized ingredient or the three initial worker targets:
+
+| Requirement | Required conclusion and scope |
+|---|---|
+| Categorical Main Theorem (1) and (2) | Define the actual alternating-map bifunctor and prove joint regularity on hom spaces, identity/composition, unconditional C∞, the factorial iff classification on Vec and Ban, and the spherical-target restriction with its stated codomain. Preserve degree zero and joint finite power series in the positive cases. The existing operator theorems are ingredients. |
+| Finite-coordinate operator positive cases | Prove both determinant constructions in `prop:finite-coordinate`: continuous finite coordinates on E or on E′ give the bounded lift, with the stated bounds and arbitrary normed F. Deduce `cor:finite-dimensional-positive` over complete K and include degree zero and degrees above the coordinate dimension. This differs from finite-coordinate parameter reflection. |
+| Incomplete-field coordinate example | Construct the induced norm on K + Ka for a in the completion but outside K, its stated basis, and its discontinuous a-coordinate. Do not turn this observation alone into a claim of nonanalyticity of Q. |
+| Finite-dimensional value targets | Prove the pointwise equivalence with scalar-valued forms for nonzero finite-dimensional F over complete K, the zero-target case, and analyticity over a spherically complete nonarchimedean base with any given norm on F. |
+| Weighted nonspherical target | Construct the paper's weighted c₀ norm over F_p((t)), prove its norm comparison, completeness, nonarchimedean inequality and explicit nested empty-ball family, and derive analytic pullback for every degree and all normed E,E′. The discrete-target criterion alone does not construct this witness. |
+| General Cⁿ multifunctor bundle construction | Formalize the cocycle calculation, bundle construction, independence of trivializations and operator-valued morphisms, with repeated arguments and mixed variance. Inverse transition maps come from the cocycle data. |
+| All stated alternating-bundle positive cases | Include every n≤∞ on the stated general bases; analyticity for invertible factorial or spherical target fibers; finite-coordinate analytic bases with arbitrary normed fibers; c₀ bases with complete nonarchimedean output fibers; and ordinary ℓ¹/retract bases with complete output fibers. Family regularity alone does not constitute a Lean bundle theorem. |
+| Admissible-family structure and inverses | Include constants, local gluing, common and independent parameter composition, analytic reparameterization, analytic scalar multiplication, graph characterization and the actual addition counterexample. The graph characterization uses analytic maps into the ambient product whose values lie on the graph, without assuming a normed vector-space or manifold structure on the graph. Include admissible atlas changes and morphisms, and inverse admissibility under the stated Banach and analytic-inverse hypotheses. |
+
+The further branches below also include their proved explanatory consequences:
+
+- The shear gives an analytic change of trivialization whose induced alternating change is nonanalytic. It does not rule out every analytic structure on the pointwise bundle.
+- Transport the c₀ family conclusion along bounded linear isomorphisms. The bad quotient parameter space is not a bounded linear retract of **any** ordinary ℓ¹ space, beyond the absence of a section for the particular constructed quotient.
+- Construct the tensor identifications and projections used by optimality: finite-coordinate exponential bounds and their coordinate transport; ordinary ℓ¹ tensor powers, orbit-constant diagonal spans and sorted projections over complete K. Separately prove the nonarchimedean projective tensor identification for c₀ and its norm-one projection over complete nonarchimedean K. Combine the ℓ¹ results into the explicit strict separation of alternating-family admissibility from universal analytic reflection.
+- Prove `dom:limits`: the constructed Xₖ cannot be adjoined to the full split-pair domain, while completing these particular witnesses removes the obstruction. This does not assert that the split-pair domain has no strict extension.
+
+The concrete degree-three, characteristic-five example in `rem:notsuff` is already proved by `degree_three_char_five_analytic_without_equivalentUltrametricNorm`; retain that evidence instead of treating it as new work. Existing pinned Mathlib results may likewise discharge a requirement when an exact theorem with the needed hypotheses is identified and applied.
+
+Completion requires an exact declaration correspondence for every proved inventory row, preserved hypotheses and boundary cases, and kernel/axiom verification in the pinned environment. No row may remain merely planned or supported only by an ingredient. All new proof modules must be included in the library build. Challenge and solution changes, if needed to expose completed results, must use only Kim Morrison's comparator. The explicitly unproved proposals, open questions and separately cited external results retain their stated status; they must not be introduced as axioms or silently counted as local proofs.
 
 ## Finite-coordinate analytic reflection
 
@@ -55,7 +81,7 @@ The proof initially gives analyticity **at the chosen point**. For an analytic m
 
 After finite-coordinate reflection, construct the degree-`k+1` ambient multilinear representative of the joint action into operators valued in all multilinear maps. The alternating-valued operator space embeds isometrically with closed range, since alternation is expressed by closed evaluation conditions. Reflection then yields `fam:cor:finite-families`.
 
-Apply that theorem on open base-chart overlaps to the pair of transition families `(g⁻¹,h)`. Functoriality preserves the cocycle identity, giving `fam:thm:finite-bundles`. Preserve arbitrary normed fibers and the explicit continuous-coordinate hypothesis on the base. The paper proves an open-chart result; it does not supply a generic analytic `WithinAt` reflection theorem on arbitrary subsets or an unrestricted infinite-dimensional-base theorem. The unconditional C∞ theorem is already in the pinned Mathlib.
+Apply that theorem on open base-chart overlaps to the pair of transition families `(g⁻¹,h)`. Functoriality preserves the cocycle identity, giving `fam:thm:finite-bundles`. Preserve arbitrary normed fibers and the explicit continuous-coordinate hypothesis on the base. The paper proves an open-chart result; it does not supply a generic analytic `WithinAt` reflection theorem on arbitrary subsets or an unrestricted infinite-dimensional-base theorem. The unconditional operator C∞ theorem is already in the pinned Mathlib; the full bundle consequences remain requirements above.
 
 ## Further branches
 

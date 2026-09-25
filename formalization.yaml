@@ -188,7 +188,12 @@ status:
     expansion. Three Autoform proof-worker launches using the saved Claude backend failed
     with authentication HTTP 401 before generating proofs and reported zero input/output
     tokens. The new proof plan and Mathlib API search are preparation, not completed proofs;
-    FORMALIZATION_ROADMAP.md records the next milestones.
+    FORMALIZATION_ROADMAP.md records the full remaining scope and next milestones.
+    This includes the joint categorical classification and spherical-target packaging,
+    both finite-coordinate operator cases, finite-target reduction, the weighted
+    nonspherical-target example, the general C^n multifunctor bundle construction,
+    the additional parameter-space bundle cases, and admissible inverse families.
+    These tasks are not discharged merely by proving the first three worker targets.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -430,6 +435,41 @@ alignment:
       lean: "AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup"
       module: "AlternatingAnalytic.Analysis.DiscreteTargetAnalytic"
       status: "proved"
+    - source: "Main Theorem (1) and (2): full categorical statements and joint regularity"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "The operator inputs are proved, but the joint action on both hom variables, functor laws, categorical smoothness and exact factorial classification on Vec and Ban, and closure of the spherical-target category must still be packaged in Lean. Preserve all degrees, actual normed-space categories and stated completeness hypotheses."
+    - source: "prop:finite-coordinate and cor:finite-dimensional-positive: positive operator cases"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Formalize both cases, continuous finite coordinates on the operator domain E or on its codomain E', over arbitrary nontrivially normed K. Derive the finite-dimensional corollary over complete K, with arbitrary normed value target F. Retain degree zero and degrees above the coordinate dimension. This is distinct from finite-coordinate parameter reflection."
+    - source: "rem:finite-target-reduction: finite-dimensional value targets"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Over complete K and nonzero finite-dimensional F, analyticity at each specified operator is equivalent to analyticity for scalar-valued forms. Treat F = 0 separately and derive analyticity over spherically complete nonarchimedean K for any norm on F. Do not assert that finite-dimensional F suffices over every field."
+    - source: "Remark after cor:finite-dimensional-positive: discontinuous coordinates over an incomplete field"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "For a in the completion of K but outside K, give K + Ka the induced norm and prove that the coordinate of a in the basis (1,a) is discontinuous. This example explains the continuous-coordinate hypothesis; it alone does not prove nonanalyticity of alternating precomposition."
+    - source: "rem:nonspherical-analytic-target: weighted c_0 example"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Construct the stated weighted norm on c_0(N,F_p((t))), its comparison with the supremum norm and completeness, and the nested closed balls with empty intersection. Prove analytic precomposition for all normed source spaces and all finite degrees using the existing positive theorem and norm transport. A general sufficient theorem does not by itself formalize this example."
+    - source: "Introduction vector-bundle motivation: the C^n multifunctor construction"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Formalize the cocycle construction for jointly C^n maps on morphism spaces, including mixed variance, operator-valued bundle morphisms and independence of trivializations. Inverse transition maps are part of the cocycle data. This tracks the construction proved in the manuscript without assuming an unrestricted analytic alternating functor."
+    - source: "Bundle consequences after fam:cor:quotient-parameters and admissible inverse families"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Include bundles on nonarchimedean c_0 bases with complete nonarchimedean output fibers, and ordinary l1 bases or bounded linear retracts with complete output fibers. For arbitrary bases retain admissible transitions, changes of atlas and morphisms. Prove inverse admissibility when both alternating-map spaces are Banach and the underlying inverse family is analytic."
     - source: "Main Theorem (3), fam:thm:finite-reflection and fam:cor:finite-families: finite-coordinate analytic reflection and families"
       lean: ""
       module: ""
@@ -449,7 +489,7 @@ alignment:
       lean: ""
       module: ""
       status: "not-formalized"
-      note: "Paper proofs give the largest collection of ordinarily analytic families making the action analytic, with composition, reparameterization and gluing; hom-space addition can fail. At each fixed point the coefficient criterion requires only diagonal equality and a common positive radius; admissibility on an open domain requires it at every point."
+      note: "Paper proofs give the largest collection of ordinarily analytic families making the action analytic, with constants, same- and independent-parameter composition, reparameterization and local gluing. Include the graph characterization, analytic scalar-family closure and actual failure of hom-space addition. At each fixed point the coefficient criterion requires only diagonal equality and a common positive radius; admissibility on an open domain requires it at every point."
     - source: "fam:prop:shear: invertible shear transfer of a nonanalytic pullback action"
       lean: ""
       module: ""
@@ -469,7 +509,7 @@ alignment:
       lean: ""
       module: ""
       status: "not-formalized"
-      note: "Paper proof over complete K of characteristic p and k >= p constructs a bounded open linear surjection q from ordinary l1 onto the Banach counterexample operator space. Q composed with q is analytic although Q is nowhere analytic. No local right inverse is differentiable even at one point; openness follows from a direct uniform one-term lifting estimate."
+      note: "Paper proof over complete K of characteristic p and k >= p constructs a bounded open linear surjection q from ordinary l1 onto the Banach counterexample operator space. Q composed with q is analytic although Q is nowhere analytic. No local right inverse on a nonempty open subset is differentiable even at one point; openness follows from a direct uniform one-term lifting estimate. Also prove that the bad operator space is not a bounded linear retract of any ordinary l1 space."
     - source: "fam:prop:tensor-homogeneous, fam:thm:tensor-analytic and fam:prop:l1-optimal: diagonal tensor projection criteria"
       lean: ""
       module: ""
@@ -480,6 +520,11 @@ alignment:
       module: ""
       status: "not-formalized"
       note: "Paper proof over every complete nonarchimedean K, including characteristic zero, gives x mapped to its tensor powers on the unit ball of ordinary l1. It is analytic into the ambient Banach c0-sum and C^infinity into its closed diagonal-span subspace, but nonanalytic there at zero. Necessary coefficient norms are at least the real numbers n!, while entire polynomial truncations converge uniformly on each smaller ball."
+    - source: "Tensor-section structural consequences and the nonarchimedean c_0 tensor comparison"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Include finite-coordinate projections with exponential norm bounds, the ordinary l1 tensor identification and orbit-constant diagonal spans with actual sorted projections, and the resulting strict separation between alternating-family admissibility and universal reflection. Separately establish the nonarchimedean projective tensor identification for c_0 and its norm-one projection; an ordinary tensor theorem does not supply this distinct normed construction."
     - source: "dom:core and dom:split-incoming: universal-target core and split destinations"
       lean: ""
       module: ""
