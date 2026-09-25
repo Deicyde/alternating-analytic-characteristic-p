@@ -8,6 +8,8 @@ This file proves the family structure of `paper/charp.tex`, Proposition
 `fam:prop:category`: constants, analytic reparameterization, local gluing,
 composition with common or independent parameters, and the largest-collection
 property. It also gives the equivalent analytic graph-lift characterization.
+The theorem `admissible_family_structure` collects these laws and functoriality
+in a single statement.
 
 A morphism from `(E, F)` to `(E', F')` is a pair in
 `(E' →L[K] E) × (F →L[K] F')`, with the usual maximum product norm.
@@ -163,5 +165,51 @@ theorem isAdmissibleOn_largest (k : ℕ) (s : Set P)
     (hA : ∀ γ ∈ C, AnalyticOnNhd K (alternatingMapAction k ∘ γ) s) :
     C ⊆ {γ | IsAdmissibleOn k γ s} :=
   fun γ hγ => ⟨hC γ hγ, hA γ hγ⟩
+
+/-- The analytic family structure of the alternating-map action: functoriality,
+constants, analytic reparameterization, local gluing, composition with common or
+independent parameters, the ambient graph characterization, and maximality among
+ordinary analytic families with analytic action. -/
+theorem admissible_family_structure (k : ℕ) (s : Set P) (t : Set Q) :
+    (∀ (g : (E'' →L[K] E') × (F' →L[K] F''))
+        (h : (E' →L[K] E) × (F →L[K] F')),
+      alternatingMapAction k (alternatingMorphismComp g h) =
+        (alternatingMapAction k g).comp (alternatingMapAction k h)) ∧
+    alternatingMapAction k (ContinuousLinearMap.id K E, ContinuousLinearMap.id K F) =
+      ContinuousLinearMap.id K (E [⋀^Fin k]→L[K] F) ∧
+    (∀ h : (E' →L[K] E) × (F →L[K] F'),
+      IsAdmissibleOn k (fun _ : P => h) s) ∧
+    (∀ (γ : P → (E' →L[K] E) × (F →L[K] F')) (f : Q → P),
+      IsAdmissibleOn k γ s → AnalyticOnNhd K f t → Set.MapsTo f t s →
+        IsAdmissibleOn k (γ ∘ f) t) ∧
+    (∀ γ : P → (E' →L[K] E) × (F →L[K] F'),
+      (∀ x ∈ s, ∃ u : Set P, IsOpen u ∧ x ∈ u ∧
+        ∃ δ : P → (E' →L[K] E) × (F →L[K] F'),
+          IsAdmissibleOn k δ u ∧ u.EqOn δ γ) →
+        IsAdmissibleOn k γ s) ∧
+    (∀ (η : P → (E'' →L[K] E') × (F' →L[K] F''))
+        (γ : P → (E' →L[K] E) × (F →L[K] F')),
+      IsAdmissibleOn k η s → IsAdmissibleOn k γ s →
+        IsAdmissibleOn k (fun x => alternatingMorphismComp (η x) (γ x)) s) ∧
+    (∀ (η : Q → (E'' →L[K] E') × (F' →L[K] F''))
+        (γ : P → (E' →L[K] E) × (F →L[K] F')),
+      IsAdmissibleOn k η t → IsAdmissibleOn k γ s →
+        IsAdmissibleOn k
+          (fun x : P × Q => alternatingMorphismComp (η x.2) (γ x.1)) (s ×ˢ t)) ∧
+    (∀ γ : P → (E' →L[K] E) × (F →L[K] F'),
+      IsAdmissibleOn k γ s ↔
+        AnalyticOnNhd K (fun x => (γ x, alternatingMapAction k (γ x))) s) ∧
+    (∀ C : Set (P → (E' →L[K] E) × (F →L[K] F')),
+      (∀ γ ∈ C, AnalyticOnNhd K γ s) →
+      (∀ γ ∈ C, AnalyticOnNhd K (alternatingMapAction k ∘ γ) s) →
+        C ⊆ {γ | IsAdmissibleOn k γ s}) := by
+  refine ⟨alternatingMapAction_comp k, alternatingMapAction_id k, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · exact fun h => IsAdmissibleOn.const h
+  · exact fun γ f hγ hf hfs => hγ.reparam hf hfs
+  · exact fun γ hγ => IsAdmissibleOn.of_locally hγ
+  · exact fun η γ hη hγ => hη.comp hγ
+  · exact fun η γ hη hγ => hη.comp_prod hγ
+  · exact fun γ => isAdmissibleOn_iff_graph k γ s
+  · exact fun C hC hA => isAdmissibleOn_largest k s C hC hA
 
 end AlternatingAnalytic

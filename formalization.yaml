@@ -179,7 +179,7 @@ status:
     characteristic-two proof. A broader generic isometric-field-transport abstraction in the initial
     plan is not claimed as a separate theorem; every concrete field and finite-index passage used
     in the original formalized counterexample is proved. The new Codex proof run added the checked
-    reflection, core-family and shear modules through Autoform's shared verification gate. The remaining
+    reflection, core-family, shear and canonical-support modules through Autoform's shared verification gate. The remaining
     proof plan and Mathlib API searches are preparation, not completed proofs; FORMALIZATION_ROADMAP.md
     retains the full outstanding scope. This includes the joint categorical classification and spherical-target
     packaging, both finite-coordinate operator cases, finite-target reduction, the weighted nonspherical-target
@@ -301,6 +301,33 @@ status:
     - Quot.sound
     comparator_config: ''
     literature_dependencies: []
+  - declaration: AlternatingAnalytic.admissible_family_structure
+    file: AlternatingAnalytic/Analysis/AnalyticFamilies.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.invertible_shear_transfer_full
+    file: AlternatingAnalytic/Analysis/ShearCounterexample.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.canonical_exterior_support_full
+    file: AlternatingAnalytic/Algebra/CanonicalExteriorSupport.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
 automation:
   spend_usd: 200
   methods:
@@ -392,16 +419,17 @@ review:
     the rigid-source construction, preserves the spherical-target proof as Section 2, moves the domain
     argument before the tensor criterion and exterior preliminaries next to their use, and consolidates
     the finite-dimensional completeness proof. These informal reviews do not constitute kernel verification
-    or human expert review. The unchanged three-statement challenge was rechecked on 24 September
+    or human expert review. The unchanged three-statement challenge was rechecked on 25 September
     2026 with Kim Morrison's comparator; the solution was accepted by Lean's default kernel. This
     check does not cover the new manuscript extensions. The new finite-coordinate reflection, core-family
     and shear nodes passed the shared proof-verification gate; their independent source-statement,
     integrity and style jury reviews are pending. These results do not establish completion of the
     expanded manuscript. The canonical exterior-support module also passed the shared kernel/axiom
     gate. The full proof library and solution build passed with all four new branches included (3149
-    build jobs). The shear jury accepted faithfulness and proof integrity, scoring both 5/5, but requested
-    a single public theorem collecting all source-proposition conclusions; this clarity repair and
-    its fresh review remain in progress.
+    build jobs). The requested statement-clarity repairs are now complete: the family, shear and
+    canonical-support propositions each have a combined public theorem alongside their component
+    lemmas. All three combined statements passed the shared proof-verification gate, and the full
+    library and solution build passed again on 25 September 2026. Fresh jury review is in progress.
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -596,7 +624,7 @@ alignment:
       and degree, for arbitrary normed fibers and operator-valued analytic bundle morphisms. No general
       infinite-dimensional-base or boundary/WithinAt claim is made.
   - source: 'fam:prop:category: core admissible analytic-family structure'
-    lean: AlternatingAnalytic.IsAdmissibleOn.comp_prod
+    lean: AlternatingAnalytic.admissible_family_structure
     module: AlternatingAnalytic.Analysis.AnalyticFamilies
     status: partial
     note: >-
@@ -613,7 +641,7 @@ alignment:
       common positive radius. The finite-coordinate sufficiency theorem alone does not discharge this
       general iff criterion.
   - source: 'fam:prop:shear: invertible shear transfer of a nonanalytic pullback action'
-    lean: AlternatingAnalytic.exists_banach_shear_counterexample
+    lean: AlternatingAnalytic.invertible_shear_transfer_full; AlternatingAnalytic.exists_banach_shear_counterexample
     module: AlternatingAnalytic.Analysis.ShearCounterexample
     status: proved
     note: >-
@@ -714,9 +742,9 @@ alignment:
       density of scalars. The extended values need not lie in the smaller incomplete coefficient space.
   - source: 'prop:canonical-support: smallest exterior support and contraction-rank equality'
     lean: >-
-      AlternatingAnalytic.mem_exteriorPowerSubmodule_contractionSpan; AlternatingAnalytic.mem_exteriorPowerSubmodule_iff_contractionSpan_le;
+      AlternatingAnalytic.canonical_exterior_support_full; AlternatingAnalytic.mem_exteriorPowerSubmodule_contractionSpan; AlternatingAnalytic.mem_exteriorPowerSubmodule_iff_contractionSpan_le;
       AlternatingAnalytic.exteriorSupportDim_eq_finrank_contractionSpan; AlternatingAnalytic.rank_exteriorContractionMatrix
-    module: AlternatingAnalytic/Algebra/CanonicalExteriorSupport.lean
+    module: AlternatingAnalytic.Algebra.CanonicalExteriorSupport
     status: partial
     note: >-
       The smallest-support and dimension equalities hold over every field in every positive degree,

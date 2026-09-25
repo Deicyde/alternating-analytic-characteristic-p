@@ -155,6 +155,17 @@ theorem exteriorSupportDim_eq_finrank_contractionSpan
     (exteriorSupportDim_le_finrank _ (mem_exteriorPowerSubmodule_contractionSpan ω))
     (exteriorContractionSpan_finrank_le ω)
 
+/-- The contraction span is the smallest supporting subspace, and its dimension
+is the exterior support dimension, over any field and in every positive degree. -/
+theorem canonical_exterior_support_full (ω : ⋀[L]^(n + 1) V) :
+    ω ∈ exteriorPowerSubmodule (n + 1) (exteriorContractionSpan ω) ∧
+      (∀ W : Submodule L V,
+        ω ∈ exteriorPowerSubmodule (n + 1) W ↔ exteriorContractionSpan ω ≤ W) ∧
+      exteriorSupportDim ω = finrank L (exteriorContractionSpan ω) := by
+  exact ⟨mem_exteriorPowerSubmodule_contractionSpan ω,
+    fun W ↦ mem_exteriorPowerSubmodule_iff_contractionSpan_le W ω,
+    exteriorSupportDim_eq_finrank_contractionSpan ω⟩
+
 /-- Expand a contraction into contractions against tuples of coordinate covectors. -/
 theorem exteriorLastContraction_eq_sum_basis {d : ℕ} (b : Basis (Fin d) L V)
     (φ : Fin n → Dual L V) (ω : ⋀[L]^(n + 1) V) :

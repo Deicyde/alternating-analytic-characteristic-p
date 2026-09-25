@@ -16,7 +16,9 @@ noncomputable section
 
 namespace AlternatingAnalytic
 
-variable {K : Type*} [NontriviallyNormedField K]
+universe u
+
+variable {K : Type u} [NontriviallyNormedField K]
   {D E F : Type*}
   [NormedAddCommGroup D] [NormedSpace K D]
   [NormedAddCommGroup E] [NormedSpace K E]
@@ -148,8 +150,6 @@ theorem invertible_shear_counterexample (u₀ : E →L[K] D)
   ⟨fun u _ => analyticAt_shear u, fun u _ => analyticAt_shear_inverse u,
     not_analyticAt_shear_pullback u₀ h⟩
 
-universe u
-
 /-- Over each positive-characteristic normed field, the main Banach counterexample
 gives an analytic shear family through the identity, with analytic inverse, whose
 action on alternating forms is not analytic at the zero parameter. -/
@@ -185,5 +185,67 @@ theorem exists_banach_shear_counterexample
   refine ⟨E, F, gE, gF, nE, nF, cE, cF, shear_zero, ?_⟩
   exact invertible_shear_counterexample (F := F) (ι := Fin k)
     (0 : E →L[K] E) (hbad (Fin k) (by simp) 0)
+
+/-- The full invertible-shear proposition `fam:prop:shear`: the shear and its inverse
+are affine analytic, compression recovers the original pullback, and nonanalyticity
+transfers at every parameter. In prime characteristic and degree at least that
+characteristic, Banach witnesses give a counterexample at zero, through the identity.
+The general transfer requires neither completeness nor a characteristic assumption. -/
+theorem invertible_shear_transfer_full :
+    (∀ (u : E →L[K] D) (z : D × E), shearEquiv u z = (z.1 + u z.2, z.2)) ∧
+    (∀ u : E →L[K] D,
+      (shearEquiv u).toContinuousLinearMap =
+        ContinuousLinearMap.id K (D × E) + shearLinear u) ∧
+    (∀ u : E →L[K] D, (shearEquiv u).symm.toContinuousLinearMap = shear (-u)) ∧
+    (∀ u : E →L[K] D,
+      (shearEquiv u).symm.toContinuousLinearMap =
+        ContinuousLinearMap.id K (D × E) - shearLinear u) ∧
+    (shearEquiv (0 : E →L[K] D)).toContinuousLinearMap =
+      ContinuousLinearMap.id K (D × E) ∧
+    AnalyticOnNhd K (fun u : E →L[K] D => (shearEquiv u).toContinuousLinearMap)
+      Set.univ ∧
+    AnalyticOnNhd K (fun u : E →L[K] D => (shearEquiv u).symm.toContinuousLinearMap)
+      Set.univ ∧
+    (∀ u : E →L[K] D,
+      shearCompression (F := F) (ι := ι)
+        (ContinuousAlternatingMap.compContinuousLinearMapCLM
+          (shearEquiv u).toContinuousLinearMap) =
+        ContinuousAlternatingMap.compContinuousLinearMapCLM u) ∧
+    (∀ u₀ : E →L[K] D,
+      (¬ AnalyticAt K
+        (fun u : E →L[K] D =>
+          (ContinuousAlternatingMap.compContinuousLinearMapCLM u :
+            (D [⋀^ι]→L[K] F) →L[K] (E [⋀^ι]→L[K] F))) u₀) →
+      ¬ AnalyticAt K
+        (fun u : E →L[K] D =>
+          ContinuousAlternatingMap.compContinuousLinearMapCLM (F := F) (ι := ι)
+            (shearEquiv u).toContinuousLinearMap) u₀) ∧
+    (∀ (p k : ℕ), p.Prime → ∀ [CharP K p], p ≤ k →
+      ∃ (E₀ F₀ : Type u) (normedGroupE : NormedAddCommGroup E₀)
+        (normedGroupF : NormedAddCommGroup F₀),
+        let : NormedAddCommGroup E₀ := normedGroupE
+        let : NormedAddCommGroup F₀ := normedGroupF
+        ∃ (normedSpaceE : NormedSpace K E₀) (normedSpaceF : NormedSpace K F₀),
+          let : NormedSpace K E₀ := normedSpaceE
+          let : NormedSpace K F₀ := normedSpaceF
+          ∃ (_ : CompleteSpace E₀) (_ : CompleteSpace F₀),
+            shear (0 : E₀ →L[K] E₀) = ContinuousLinearMap.id K (E₀ × E₀) ∧
+            AnalyticOnNhd K
+              (fun v : E₀ →L[K] E₀ => (shearEquiv v).toContinuousLinearMap) Set.univ ∧
+            AnalyticOnNhd K
+              (fun v : E₀ →L[K] E₀ => (shearEquiv v).symm.toContinuousLinearMap)
+              Set.univ ∧
+            ¬ AnalyticAt K
+              (fun v : E₀ →L[K] E₀ =>
+                ContinuousAlternatingMap.compContinuousLinearMapCLM
+                  (F := F₀) (ι := Fin k) (shearEquiv v).toContinuousLinearMap)
+              (0 : E₀ →L[K] E₀)) := by
+  refine ⟨?_, ?_, shearEquiv_symm_toContinuousLinearMap, shearEquiv_symm_eq_id_sub,
+    shear_zero, fun u _ => analyticAt_shear u, fun u _ => analyticAt_shear_inverse u,
+    shearCompression_pullback, not_analyticAt_shear_pullback, ?_⟩
+  · exact fun u z => shear_apply u z
+  · exact fun _ => rfl
+  · intro p k hp _ hpk
+    exact exists_banach_shear_counterexample K p k hp hpk
 
 end AlternatingAnalytic
