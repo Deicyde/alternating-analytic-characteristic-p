@@ -22,6 +22,7 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Analysis.ScalarProjection
 import AlternatingAnalytic.Analysis.EquivalentUltrametric
 import AlternatingAnalytic.Algebra.ExteriorContraction
+import AlternatingAnalytic.Algebra.CanonicalExteriorSupport
 import AlternatingAnalytic.Algebra.ExteriorBlocks
 import AlternatingAnalytic.Algebra.ClusterCancellation
 import AlternatingAnalytic.Analysis.ProjectiveBaseChange
@@ -103,3 +104,4 @@ import AlternatingAnalytic.Analysis.LaurentCoefficientTheorem
 import AlternatingAnalytic.Analysis.FiniteCoordinateReflection
 
 import AlternatingAnalytic.Analysis.AnalyticFamilies
+import AlternatingAnalytic.Analysis.ShearCounterexample
