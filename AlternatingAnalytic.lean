@@ -99,3 +99,5 @@ import AlternatingAnalytic.Analysis.SortedBasisFormula
 import AlternatingAnalytic.MainTheorem
 
 import AlternatingAnalytic.Analysis.LaurentCoefficientTheorem
+
+import AlternatingAnalytic.Analysis.FiniteCoordinateReflection
