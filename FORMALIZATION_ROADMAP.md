@@ -1,18 +1,18 @@
 # Formalization roadmap for the manuscript extensions
 
-The original operator counterexample, factorial classification, spherical-target operator theorem, and supporting results remain proved in the existing Lean library. The later manuscript results about analytic families, bundles, parameter spaces, tensors, and analytic domains have mathematical proofs but **no new Lean declarations yet**. See [THEOREM_MAP.md](THEOREM_MAP.md) for the complete scope distinction.
+The original operator counterexample, factorial classification, spherical-target operator theorem, and supporting results remain proved. New modules now prove finite-coordinate analytic reflection, the core admissible-family API, and the general invertible-shear transfer without completeness or characteristic restrictions. The shear module also gives the actual positive-characteristic Banach counterexample at the identity. Canonical exterior support, its degree-zero/one cases and the finite-ambient contraction-matrix formula are also proved. The further bundle, parameter, tensor and analytic-domain results remain implementation requirements. See [THEOREM_MAP.md](THEOREM_MAP.md) for exact checked and pending statements.
 
-An independent agent audit on **25 September 2026** reviewed the paper's mathematical scope, arguments and organization. It led to the coefficient-bound refinement, quotient and polynomial-approximation corollaries, the set-sized compatibility-graph proposition, and the canonical exterior-support equality now mapped below. These are informal mathematical proofs, not new Lean results. Section 2 still proves the spherical-target theorem; the domain argument precedes the tensor criterion, exterior preliminaries sit next to the multiplier argument, and the completion step in the rigid-source construction is explicit.
+An independent agent audit on **25 September 2026** reviewed the paper's mathematical scope, arguments and organization. It led to the coefficient-bound refinement, quotient and polynomial-approximation corollaries, the set-sized compatibility-graph proposition, and the canonical exterior-support equality now mapped below. The canonical-support identity now has a checked Lean proof; the other audit additions in this list remain informal mathematical proofs. Section 2 still proves the spherical-target theorem; the domain argument precedes the tensor criterion, exterior preliminaries sit next to the multiplier argument, and the completion step in the rigid-source construction is explicit.
 
-Three Autoform proof-worker launches using the saved Claude backend failed authentication with HTTP 401 before proof generation and reported zero input/output tokens. No proof was generated or added by those attempts. The preparation below is a concrete implementation plan based on the pinned Mathlib API; it is not a claim of partial theorem verification.
+Proof work runs through Codex and Autoform. The completed modules have passed the shared proof-verification gate and targeted builds; independent jury reviews are tracked separately. The remaining preparation below is an implementation plan based on the pinned Mathlib API, not a claim that every prepared node has been proved.
 
-## First independent milestones
+## Initial implementation milestones
 
-1. Define the joint action `A(u,v)m = v ∘ m ∘ u^k` and prove its identity/composition laws. Define admissibility for ordinary analytic families and prove closure under analytic reparameterization and composition using bounded bilinear operator composition (`fam:prop:category`).
-2. Define the product-space shear `g(u)(d,e) = (d + u e, e)`, with inverse `g(-u)`, and prove the exact operator identity `R ∘ g(u)^* ∘ J = Q(u)` (`fam:prop:shear`). Compose with the existing nonanalytic counterexample to obtain the invertible-family obstruction.
-3. Prove diagonal coefficient membership for a power series whose represented function lands in a closed subspace. This is independently useful and has a short route through existing quotient and uniqueness APIs.
+1. **Implemented:** define the joint action `A(u,v)m = v ∘ m ∘ u^k` and prove its identity/composition laws. Define admissibility for ordinary analytic families and prove closure under analytic reparameterization and composition using bounded bilinear operator composition (`fam:prop:category`).
+2. **Implemented, including the Banach example at zero:** define the product-space shear `g(u)(d,e) = (d + u e, e)`, with inverse `g(-u)`, and prove the exact operator identity `R ∘ g(u)^* ∘ J = Q(u)` (`fam:prop:shear`). Compose with the existing nonanalytic counterexample to obtain the invertible-family obstruction.
+3. **Implemented, including full finite-coordinate reflection:** prove diagonal coefficient membership for a power series whose represented function lands in a closed subspace. This is independently useful and has a short route through existing quotient and uniqueness APIs.
 
-These milestones can proceed independently. They are a first implementation wave, not the completion criterion for the full manuscript.
+These are initial milestones, not the completion criterion for the full manuscript. The completed reflection API includes open-domain and continuous-coordinate-equivalence versions; the core family API also includes local gluing and the ambient graph characterization.
 
 ## Full remaining acceptance scope
 
@@ -42,7 +42,7 @@ Completion requires an exact declaration correspondence for every proved invento
 
 ## Finite-coordinate analytic reflection
 
-Target `fam:thm:finite-reflection` first for a closed submodule `S ≤ Z` and parameters `Fin d → K`, then transport along a supplied continuous linear equivalence. No completeness, characteristic-zero, factorial-invertibility, or finite-dimensional target hypothesis belongs in the theorem. Over incomplete K, `FiniteDimensional K E` alone is insufficient.
+The checked `fam:thm:finite-reflection` implementation starts with a closed submodule `S ≤ Z` and parameters `Fin d → K`, then transports along a supplied continuous linear equivalence. No completeness, characteristic-zero, factorial-invertibility, or finite-dimensional target hypothesis belongs in the theorem. Over incomplete K, `FiniteDimensional K E` alone is insufficient.
 
 ### 1. Diagonal terms belong to the closed subspace
 
@@ -59,7 +59,7 @@ This step works for arbitrary normed parameter spaces. It requires only diagonal
 
 ### 2. Build a bounded representative in finite coordinates
 
-The principal missing lemma takes a bounded n-linear map B on `Fin d → K` whose diagonal lies in S and constructs an S-valued bounded n-linear C with the same diagonal and
+The implemented `FiniteCoordinateReflection.exists_lift` takes a bounded n-linear map B on `Fin d → K` whose diagonal lies in S and constructs an S-valued bounded n-linear C with the same diagonal and
 
 `‖C‖ ≤ (d : ℝ)^n * ‖B‖`.
 
@@ -95,12 +95,12 @@ Apply that theorem on open base-chart overlaps to the pair of transition familie
 | Universal-target core | Two factorizations of the joint action and retract/product transport | Core objects can be adjoined to every analytic domain; the statement does not classify all targets intrinsically. |
 | Maximal-domain graph (`dom:maximal`) | Define the two-direction compatibility graph on objects with analytic self-action and apply Zorn to its cliques | Work within a fixed set of objects. Every domain has a maximal extension containing the available core; this is not a largest-domain theorem. |
 | No largest analytic domain | Algebraically independent Laurent scalars, completion rigidity, the all-prime degree-gap functional, and the padded split retraction | `K = F_p(t)`, all primes p and `k ≥ p`, incomplete finite algebraic dimensional witnesses. Complete-field and Banach versions remain open. |
-| Canonical exterior support (`prop:canonical-support`) | Adapt a finite supporting basis to the contraction span, then eliminate every exterior coefficient involving a complementary basis vector | Arbitrary fields, `k ≥ 2`, with the separately stated degree-one/zero conventions. Proves minimal supporting subspace and equality with finite contraction-matrix rank; existing Lean contraction bounds alone do not prove this equality. |
+| Canonical exterior-support matrix transport | Transport the proved finite-ambient matrix formula along a finite supporting subspace inclusion into arbitrary V | Canonical support itself, the degree-one/zero cases, and the finite-ambient matrix-rank formula are already proved. Preserve arbitrary fields and explicit identification with support dimension in V. |
 
 The no-largest-domain construction is a separate proof project from the existing Banach counterexample. Completing its witnesses removes its obstruction, so scalar-completion transport from the old development must not be used to claim a Banach version.
 
 For that construction, first formalize the explicit completion principle preceding `dom:rigid`: extend a bounded K-multilinear map on a finite family of dense K-subspaces into a complete L-target by Cauchy approximation, then use density of K in L for L-linearity. The same-norm extension lands in the completed target, not necessarily the smaller incomplete coefficient space.
 
-The alternative infinite-field obstruction in `rem:routeII` remains unproved. Its support/contraction-rank identity is no longer a missing mathematical input: `prop:canonical-support` now proves it, although the Lean equality is still a task above. The large-index nonarchimedean counterexample in `rem:R` is a proposed, unproved extension, not a completed or announced theorem.
+The alternative infinite-field obstruction in `rem:routeII` remains unproved. Its support/contraction-rank identity is no longer a missing mathematical input: `prop:canonical-support` now proves it, and the canonical-support equality is now formalized; the independent obstruction remains unproved. The large-index nonarchimedean counterexample in `rem:R` is a proposed, unproved extension, not a completed or announced theorem.
 
 Only completed, kernel-checked results should be added to the theorem map as Lean proofs or exposed as new challenge entries. The existing three-statement challenge remains unchanged and is checked only with Kim Morrison's comparator.

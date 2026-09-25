@@ -3654,15 +3654,26 @@ Parts~(\ref{main:general}) and~(\ref{main:spherical}) of the categorical Main Th
 from these operator results and bounded bilinear postcomposition. The categorical packaging itself is not a
 separate Lean declaration.
 
-The later results in \S\S\ref{fam:sec:families}--\ref{fam:sec:tensors}, including
-Main Theorem~(\ref{main:families})--(\ref{main:domains}), have complete mathematical proofs in this manuscript
-but are not yet asserted as Lean-checked theorems. They comprise finite-coordinate analytic reflection,
-admissible-family and bundle constructions, the $c_0$ and ordinary $\ell^1$ parameter theorems,
-the invertible shear argument, the tensor criterion, the universal-target core and the no-largest-domain theorem.
-The further consequences on quotient parameters, polynomial approximation without a common analytic
-radius, and maximal domains are also informal results, as is the canonical-support identity of
-Proposition~\ref{prop:canonical-support}. The repository theorem map and formalization roadmap record
-the remaining implementation work.
+The new formal development proves Lemma~\ref{fam:lem:diagonal} and
+Theorem~\ref{fam:thm:finite-reflection}, including open-domain and continuous-coordinate versions,
+without completeness or characteristic restrictions. It also defines the joint alternating action and
+proves its identity and composition laws, together with the core admissible-family results of
+Proposition~\ref{fam:prop:category}: constants, reparameterization, local gluing, composition, and the
+ambient graph characterization. Proposition~\ref{fam:prop:shear} is also formalized, including the
+Banach counterexample at the identity. The canonical-support identity of
+Proposition~\ref{prop:canonical-support}, its degree-zero and degree-one cases, and the contraction-matrix
+rank formula for a finite-dimensional ambient space are also formalized. These proofs have passed
+Lean verification without admitted proofs.
+
+The further results in \S\S\ref{fam:sec:families}--\ref{fam:sec:tensors} still require formalization.
+In particular, the preceding ingredients do not yet constitute Lean proofs of
+Main Theorem~(\ref{main:families})--(\ref{main:domains}). The pending work includes the alternating-family
+and bundle consequences, the $c_0$ and ordinary $\ell^1$ parameter theorems, the bundle interpretation of the shear,
+the tensor criterion, the universal-target core, and the no-largest-domain theorem. The sharper
+nonarchimedean radius bound, quotient-parameter and polynomial-approximation consequences, maximal
+analytic domains, and transport of the contraction-matrix formula to a finite supporting subspace
+of an arbitrary ambient space also remain pending. The repository theorem map records the exact boundary between checked
+declarations and the remaining implementation work.
 These additions do not alter the three existing comparator challenge statements.
 
 The characteristic-$2$ counterexample~\cite{M} has separate provenance. Its formalization proves nonanalyticity in
