@@ -43,10 +43,52 @@ theorem alternatingPostcompBilinear_apply (k : ℕ) (v : F →L[K] F')
 theorem norm_alternatingPostcompBilinear_apply_le (k : ℕ) (v : F →L[K] F')
     (T : (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)) :
     ‖alternatingPostcompBilinear k v T‖ ≤ ‖v‖ * ‖T‖ := by
-  apply (alternatingPostcompBilinear k v T).opNorm_le_bound (M := ‖v‖ * ‖T‖) (mul_nonneg (norm_nonneg v) (norm_nonneg T))
+  apply (alternatingPostcompBilinear k v T).opNorm_le_bound (M := ‖v‖ * ‖T‖)
+    (mul_nonneg (norm_nonneg v) (norm_nonneg T))
   intro m
   exact (v.norm_compContinuousAlternatingMap_le (T m)).trans
     (by simpa only [mul_assoc] using mul_le_mul_of_nonneg_left (T.le_opNorm m) (norm_nonneg v))
+
+-- Select the canonical operator norm explicitly for the nested bilinear space.
+local instance alternatingPostcompOperatorSeminormedAddCommGroup (k : ℕ) :
+    SeminormedAddCommGroup
+      (((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)) →L[K]
+        ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))) :=
+  ContinuousLinearMap.toSeminormedAddCommGroup (𝕜 := K) (𝕜₂ := K)
+    (E := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F))
+    (F := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))
+
+local instance alternatingPostcompOperatorNormedSpace (k : ℕ) :
+    NormedSpace K
+      (((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)) →L[K]
+        ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))) :=
+  ContinuousLinearMap.toNormedSpace (𝕜 := K) (𝕜₂ := K)
+    (E := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F))
+    (F := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))
+
+local instance alternatingPostcompBilinearNorm (k : ℕ) :
+    Norm ((F →L[K] F') →L[K]
+      ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)) →L[K]
+      ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))) :=
+  ContinuousLinearMap.hasOpNorm (𝕜 := K) (𝕜₂ := K)
+    (E := F →L[K] F')
+    (F := ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)) →L[K]
+      ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F')))
+
+/-- Postcomposition is a bilinear contraction, including when a space is zero. -/
+theorem norm_alternatingPostcompBilinear_le (k : ℕ) :
+    ‖alternatingPostcompBilinear (K := K) (E := E) (E' := E') (F := F) (F' := F') k‖ ≤
+      1 := by
+  apply (alternatingPostcompBilinear
+    (K := K) (E := E) (E' := E') (F := F) (F' := F') k).opNorm_le_bound zero_le_one
+  intro v
+  simp only [one_mul]
+  apply ContinuousLinearMap.opNorm_le_bound (𝕜 := K) (𝕜₂ := K)
+    (E := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F))
+    (F := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))
+    (alternatingPostcompBilinear (E := E) (E' := E') k v) (norm_nonneg v)
+  intro T
+  exact norm_alternatingPostcompBilinear_apply_le k v T
 
 /-- The exact bounded-bilinear factorization of the joint action. -/
 theorem alternatingMapAction_eq_bilinear (k : ℕ)
@@ -57,7 +99,8 @@ theorem alternatingMapAction_eq_bilinear (k : ℕ)
 theorem norm_alternatingMapAction_le (k : ℕ)
     (z : (E' →L[K] E) × (F →L[K] F')) :
     ‖alternatingMapAction k z‖ ≤ ‖z.2‖ * ‖z.1‖ ^ k := by
-  apply (alternatingMapAction k z).opNorm_le_bound (mul_nonneg (norm_nonneg _) (pow_nonneg (norm_nonneg _) _))
+  apply (alternatingMapAction k z).opNorm_le_bound
+    (mul_nonneg (norm_nonneg _) (pow_nonneg (norm_nonneg _) _))
   intro m
   calc
     ‖alternatingMapAction k z m‖ ≤ ‖z.2‖ * ‖m.compContinuousLinearMap z.1‖ :=
@@ -113,8 +156,7 @@ def alternatingMapActionLift (k : ℕ)
       ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F))) :
     ContinuousMultilinearMap K
       (fun _ : Fin (k + 1) => (E' →L[K] E) × (F →L[K] F'))
-      ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F')) :=
-by
+      ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F')) := by
   let B : ((E' →L[K] E) × (F →L[K] F')) →L[K]
       ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)) →L[K]
       ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F')) :=
@@ -169,6 +211,27 @@ theorem norm_alternatingMapActionLift_apply_le (k : ℕ)
         (norm_nonneg (P fun i => (z i.castSucc).1)) (norm_nonneg (z (Fin.last k)))
     _ = ‖P‖ * ∏ i, ‖z i‖ := by rw [Fin.prod_univ_castSucc]; ring
 
+-- Select the canonical operator norm explicitly for the joint multilinear lift.
+local instance alternatingJointLiftNorm (k : ℕ) :
+    Norm (ContinuousMultilinearMap K
+      (fun _ : Fin (k + 1) => (E' →L[K] E) × (F →L[K] F'))
+      ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))) :=
+  ContinuousMultilinearMap.hasOpNorm (𝕜 := K)
+    (E := fun _ : Fin (k + 1) => (E' →L[K] E) × (F →L[K] F'))
+    (G := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))
+
+/-- Adding the pushforward slot does not increase the norm of the lift. -/
+theorem norm_alternatingMapActionLift_le (k : ℕ)
+    (P : ContinuousMultilinearMap K (fun _ : Fin k => E' →L[K] E)
+      ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F))) :
+    ‖alternatingMapActionLift (F' := F') k P‖ ≤ ‖P‖ := by
+  apply ContinuousMultilinearMap.opNorm_le_bound
+    (𝕜 := K) (E := fun _ : Fin (k + 1) => (E' →L[K] E) × (F →L[K] F'))
+    (G := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))
+    (ContinuousMultilinearMap.opNorm_nonneg (𝕜 := K) (E := fun _ : Fin k => E' →L[K] E)
+      (G := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)) P)
+  exact norm_alternatingMapActionLift_apply_le k P
+
 theorem alternatingMapActionLift_diag (k : ℕ)
     (P : ContinuousMultilinearMap K (fun _ : Fin k => E' →L[K] E)
       ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)))
@@ -185,6 +248,7 @@ theorem boundedLift_to_fin (k : ℕ)
       ∀ u, P (fun _ => u) = ContinuousAlternatingMap.compContinuousLinearMapCLM u := by
   obtain ⟨P, hP⟩ := h
   exact ⟨P.domDomCongr (Fintype.equivFin (Fin k)).symm, hP⟩
+
 theorem boundedLift_of_fin (k : ℕ)
     (P : ContinuousMultilinearMap K (fun _ : Fin k => E' →L[K] E)
       ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)))
@@ -250,10 +314,11 @@ theorem cpolynomialAt_alternatingMapAction_of_sphericallyComplete
   cpolynomialAt_alternatingMapAction_of_boundedLift k
     ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete z₀
 
-/-- The operator-to-functor bridge in one concrete statement: the bilinear
-factorization and its bounds, identity slice, unconditional joint smoothness,
-and the formula, quantitative bound, diagonal identity and finite polynomial
-consequence of every bounded pullback lift. -/
+/-- The operator-to-functor bridge in one concrete statement: bilinear factorization
+and bounds, the identity slice, unconditional joint smoothness, quantitative lifts,
+and finite polynomial regularity from bounded lifts, a nonzero factorial, or a
+spherically complete ultrametric input coefficient target. The output coefficient
+target remains arbitrary. -/
 theorem alternatingMapAction_operator_bridge (k : ℕ) :
     (∀ z : (E' →L[K] E) × (F →L[K] F'),
       alternatingMapAction k z = alternatingPostcompBilinear k z.2
@@ -261,6 +326,8 @@ theorem alternatingMapAction_operator_bridge (k : ℕ) :
     (∀ (v : F →L[K] F')
         (T : (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)),
       ‖alternatingPostcompBilinear k v T‖ ≤ ‖v‖ * ‖T‖) ∧
+    (‖alternatingPostcompBilinear (K := K) (E := E) (E' := E') (F := F) (F' := F') k‖ ≤
+      1) ∧
     (∀ z : (E' →L[K] E) × (F →L[K] F'),
       ‖alternatingMapAction k z‖ ≤ ‖z.2‖ * ‖z.1‖ ^ k) ∧
     (∀ u : E' →L[K] E,
@@ -283,19 +350,35 @@ theorem alternatingMapAction_operator_bridge (k : ℕ) :
           (P fun i => (z i.castSucc).1)) ∧
       (∀ z : Fin (k + 1) → (E' →L[K] E) × (F →L[K] F'),
         ‖alternatingMapActionLift k P z‖ ≤ ‖P‖ * ∏ i, ‖z i‖) ∧
+      (‖alternatingMapActionLift (F' := F') k P‖ ≤ ‖P‖) ∧
       (∀ z : (E' →L[K] E) × (F →L[K] F'),
         alternatingMapActionLift k P (fun _ => z) = alternatingMapAction k z) ∧
       (∀ z₀ : (E' →L[K] E) × (F →L[K] F'),
-        CPolynomialAt K (alternatingMapAction k) z₀)) := by
+        CPolynomialAt K (alternatingMapAction k) z₀)) ∧
+    (Round24Transfer.HasBoundedLift K (Fin k) E' E F →
+      ∀ z₀ : (E' →L[K] E) × (F →L[K] F'),
+        CPolynomialAt K (alternatingMapAction k) z₀) ∧
+    ((k.factorial : K) ≠ 0 →
+      ∀ z₀ : (E' →L[K] E) × (F →L[K] F'),
+        CPolynomialAt K (alternatingMapAction k) z₀) ∧
+    (∀ (_ : IsUltrametricDist K) (_ : IsUltrametricDist F)
+        (_ : SphericallyCompleteSpace F)
+        (z₀ : (E' →L[K] E) × (F →L[K] F')),
+      CPolynomialAt K (alternatingMapAction k) z₀) := by
   refine ⟨alternatingMapAction_eq_bilinear k, norm_alternatingPostcompBilinear_apply_le k,
+    norm_alternatingPostcompBilinear_le k,
     norm_alternatingMapAction_le k, alternatingMapAction_id_right k,
     contDiff_alternatingMapAction k,
     analyticAt_precomposition_of_analyticAt_alternatingMapAction k,
-    analyticAt_alternatingMapAction_of_precomposition k, ?_⟩
-  intro P hP
-  exact ⟨alternatingMapActionLift_apply k P, norm_alternatingMapActionLift_apply_le k P,
-    alternatingMapActionLift_diag k P hP,
-    cpolynomialAt_alternatingMapAction_of_boundedLift k
-      (boundedLift_of_fin k P hP)⟩
+    analyticAt_alternatingMapAction_of_precomposition k, ?_,
+    cpolynomialAt_alternatingMapAction_of_boundedLift k,
+    cpolynomialAt_alternatingMapAction_of_factorial_ne_zero k, ?_⟩
+  · intro P hP
+    exact ⟨alternatingMapActionLift_apply k P, norm_alternatingMapActionLift_apply_le k P,
+      norm_alternatingMapActionLift_le k P, alternatingMapActionLift_diag k P hP,
+      cpolynomialAt_alternatingMapAction_of_boundedLift k
+        (boundedLift_of_fin k P hP)⟩
+  · intro hK hF hFcomplete z₀
+    exact cpolynomialAt_alternatingMapAction_of_sphericallyComplete k z₀
 
 end AlternatingAnalytic
