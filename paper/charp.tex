@@ -3652,9 +3652,9 @@ Corollary~\ref{cor:finite-dimensional-positive}) and the finite-target reduction
 formalized declarations in this development. The weighted $c_0$ example of
 Remark~\ref{rem:nonspherical-analytic-target} is likewise an additional informal corollary; its sufficient
 analyticity criterion is formalized, but the example is not a separate Lean declaration.
-Parts~(\ref{main:general}) and~(\ref{main:spherical}) of the categorical Main Theorem follow mathematically
-from these operator results and bounded bilinear postcomposition. The categorical packaging itself is not a
-separate Lean declaration.
+Parts~(\ref{main:general}) and~(\ref{main:spherical}) now have Lean formalizations for the actual
+normed-space, Banach-space and spherical-target functors. The theorem map records the collected
+declarations and their statement-review status.
 
 The extension formalization covers Lemma~\ref{fam:lem:diagonal},
 Theorem~\ref{fam:thm:finite-reflection} and Corollary~\ref{fam:cor:finite-families}, including
@@ -3673,19 +3673,14 @@ degree-one support cases and finite-ambient contraction-matrix formula are inclu
 These proofs have passed Lean verification without admitted proofs. Statement-review results
 and declaration-level scope are recorded in the repository theorem map.
 
-The family assertion of Main Theorem~(\ref{main:families}) is thus formalized; its vector-bundle
-construction and operator-valued bundle morphisms remain pending, as does
-Main Theorem~(\ref{main:domains}). Other pending results include the $c_0$ and ordinary $\ell^1$
-parameter theorems, the tensor criterion and approximation example, quotient parameters,
-universal targets and maximal domains, the shear's bundle interpretation, and contraction-matrix
-transport from a finite supporting subspace into an arbitrary ambient space.
-The theorem map retains the complete inventory. These additions do not alter the three
-existing comparator challenge statements.
+The family assertion of Main Theorem~(\ref{main:families}), including its open-manifold version and
+global corollary, is formalized. Bundle constructions and morphisms, Main Theorem~(\ref{main:domains}),
+the remaining parameter-space, tensor and analytic-domain results, and finite-support matrix transport
+remain pending. The theorem map retains the complete inventory. These additions do not alter the
+three existing comparator challenge statements.
 
-The characteristic-$2$ counterexample~\cite{M} has separate provenance. Its formalization proves nonanalyticity in
-degree $2$ at the origin, with a wedging extension under (K2) to every degree at least $2$ and every base point:
-\texttt{Round24Transfer.\allowbreak{}char2\_\allowbreak{}not\_\allowbreak{}analyticAt\_\allowbreak{}of\_\allowbreak{}hasEmptyNestedBalls}.
-That construction is not re-proved or re-audited here.
+The earlier characteristic-$2$ development~\cite{M} is cited for comparison, not re-proved or re-audited here.
+The repository theorem map records its separate scope and provenance.
 
 The proposed alternative route of Remark~\ref{rem:routeII}, the proposed large-index construction of
 Remark~\ref{rem:R}, the open problems, and Serre's external classification cited in

@@ -451,14 +451,14 @@ review:
     are not Lean kernel checks or human expert review. Seven extension branches have clean independent
     Codex jury results: finite-coordinate reflection, core family laws, shear transfer, canonical exterior
     support, finite-coordinate alternating families, coefficient/radius refinement and category foundations.
-    Every branch received5/5 for faithfulness and proof integrity; code quality was5/5 for the family
-    and shear branches and4/5 for reflection, canonical support, radius and category foundations. Earlier
+    Every branch received 5/5 for faithfulness and proof integrity; code quality was 5/5 for the family
+    and shear branches and 4/5 for reflection, canonical support, radius and category foundations. Earlier
     missing or failed review reports are preserved in the working evidence and are not counted as accepted
-    reviews. The exact-source library and solution build passed3154jobs before the categorical additions.
-    The bifunctor worker subsequently passed the shared kernel/axiom gate on25September2026 with four
-    new modules; it reported a3160-job library build and63 new declarations. Independent full-scope jury
+    reviews. The exact-source library and solution build passed 3,154 jobs before the categorical additions.
+    The bifunctor worker subsequently passed the shared kernel/axiom gate on 25 September 2026 with four
+    new modules; it reported a 3,160-job library build and 63 new declarations. Independent full-scope jury
     review of these categorical/joint results remains pending. The unchanged three-statement challenge
-    passed Kim Morrison''s comparator locally on25September2026, including Lean default-kernel replay;
+    passed Kim Morrison''s comparator locally on 25 September 2026, including Lean default-kernel replay;
     that check does not certify the additional library results. GitHub CI did not start because of an
     account billing/spending-limit restriction; no workflow step ran and no billing configuration was
     changed. The latest manuscript audit verified Schneider and Schikhof references, added the missing
@@ -467,7 +467,14 @@ review:
     expert review or completion of the expanded manuscript is claimed. The four manifold-family declarations
     subsequently passed the shared gate. All six new categorical/joint/manifold result groups are now
     undergoing independent full-scope jury review. The combined library-and-solution integration build
-    then passed3176jobs with all five new modules; exact source hashes are recorded in the working evidence.'
+    then passed 3,176 jobs with all five new modules; exact source hashes are recorded in the working evidence.
+    Current results: actual bifunctors clean (5/5/4), categorical factorial classification clean (5/5/5), manifold-family
+    theorem clean (5/5/4). Joint-action proof integrity is5; its public summary must also collect the separately
+    proved factorial and spherical specializations. This API repair is queued, along with the actual analytic
+    bundle instance. The remaining faithfulness reports have not yet returned. The PDF now records the
+    new categorical and manifold declarations, retains the outstanding scope, and remains 58 pages after
+    shortening the status discussion and moving a prior-proof identifier to the theorem map; pages 57–58
+    were visually checked without layout defects.'
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -550,7 +557,7 @@ alignment:
     lean: ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
     module: AlternatingAnalytic.Analysis.SphericalAnalytic
     status: proved
-    note: The operator form is proved in standalone Section2 following the existing Lean extension, spherical-completeness
+    note: The operator form is proved in standalone Section 2 following the existing Lean extension, spherical-completeness
       and retraction proofs. The actual categorical counterpart is now implemented in AlternatingAnalytic.Category.AlternatingRegularity
       and passed the shared proof gate; its independent jury review remains pending.
   - source: 'Proposition discrete: complete targets with an equivalent ultrametric norm'
@@ -564,8 +571,8 @@ alignment:
     status: proved
     note: Actual categories and operator-norm hom spaces, canonical coordinates, and coordinate-invariance
       lemmas. No completeness of K. Shared verification gate passed; independent jury clean. This does
-      not establish the alternating bifunctors. Fresh Codex jury on25September2026 gave faithfulness5
-      and proof integrity5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
+      not establish the alternating bifunctors. Fresh Codex jury on 25 September 2026 gave faithfulness 5/5
+      and proof integrity 5/5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
       No human expert review is claimed.
   - source: 'Main Theorem (1) and (2): full categorical statements and joint regularity'
     lean: AlternatingAnalytic.alternatingFunctor_main; AlternatingAnalytic.alternatingSphericalFunctor_main;
@@ -576,8 +583,10 @@ alignment:
       both exact factorial analytic equivalences, finite-polynomial positive cases, and the positive-characteristic
       spherical corollary. Joint action includes an explicit degree-(k+1) lift, bounds and identity slice;
       degree zero is handled explicitly. Shared proof-verification gate accepted the four-module development
-      on25September2026. Independent full-scope review of each categorical/joint node remains pending;
-      no human review is claimed.
+      on 25 September 2026. Independent full-scope review of each categorical/joint node remains pending;
+      no human review is claimed. The actual bifunctor node now has clean independent jury5/5/4, and the
+      categorical factorial-classification node has5/5/5. The joint summary needs a bundling repair; the
+      spherical and combined-main faithfulness reviews are still running.
   - source: 'prop:finite-coordinate and cor:finite-dimensional-positive: positive operator cases'
     lean: ''
     module: ''
@@ -644,7 +653,7 @@ alignment:
       representative, its norm bound at most one and exact diagonal identity. Shared proof-verification
       gate passed; independent jury clean. The actual bundle theorem remains pending. The explicit CPolynomialAt
       conclusion and combined ambient_alternating_map_action_full statement also passed the repair gate.
-      Fresh Codex jury on25September2026 gave faithfulness5 and proof integrity5; code quality was5 for
+      Fresh Codex jury on 25 September 2026 gave faithfulness 5/5 and proof integrity 5/5; code quality was5 for
       finite-coordinate families and4 for category foundations/radius. No human expert review is claimed.
   - source: 'fam:rem:radius: preservation of nonarchimedean coefficient bounds and radius'
     lean: AlternatingAnalytic.exists_hasFPowerSeriesOnBall_of_closed_linearIsometry_of_isUltrametricDist
@@ -656,8 +665,8 @@ alignment:
       the field or either target is assumed. Includes the closed-submodule version and a generic same-ball
       subspace-series lemma. Shared proof-verification gate passed; independent jury clean. The public
       finite_coordinate_radius_preservation_full now also includes the grouped coefficient bound, with
-      all lifted-series conclusions for the same series. Fresh Codex jury on25September2026 gave faithfulness5
-      and proof integrity5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
+      all lifted-series conclusions for the same series. Fresh Codex jury on 25 September 2026 gave faithfulness 5/5
+      and proof integrity 5/5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
       No human expert review is claimed.
   - source: 'Main Theorem (3), fam:thm:finite-bundles: the analytic alternating-map bundle bifunctor'
     lean: ''
@@ -792,11 +801,11 @@ alignment:
     lean: AlternatingAnalytic.contMDiffOn_alternatingMapAction_of_finiteCoordinates; AlternatingAnalytic.contMDiff_alternatingMapAction_of_finiteCoordinates
     module: AlternatingAnalytic.Geometry.FiniteCoordinateManifoldFamilies
     status: proved
-    note: For an analytic manifold modeled on P with explicit continuous linear coordinates P equiv Fin
+    note: 'For an analytic manifold modeled on P with explicit continuous linear coordinates P equiv Fin
       d to K, the alternating action preserves analytic operator families on open sets, with a global
       corollary. All k and d including zero, arbitrary normed fibers and nontrivially normed K; no completeness.
-      Shared gate passed; independent jury review pending. Actual alternating ContMDiffVectorBundle instances,
-      bundle morphisms and bundle functor remain unfinished.
+      Shared gate passed; independent jury clean: faithfulness 5/5, proof integrity 5/5, code quality 4/5. Actual
+      alternating ContMDiffVectorBundle instances, bundle morphisms and bundle functor remain unfinished.'
 acknowledgements: Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform; leanprover/comparator;
   and mathlib-initiative/formalization.yaml. The source paper's attribution to Claude and its bibliographic
   author are preserved separately above.
