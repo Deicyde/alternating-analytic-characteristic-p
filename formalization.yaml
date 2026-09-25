@@ -1,4 +1,4 @@
-version: v0.4
+version: '0.4'
 project:
   name: alternating-analytic-characteristic-p
   description: Lean 4 / Mathlib formalization of alternating precomposition in positive characteristic.
@@ -134,51 +134,26 @@ classification:
   - 58B99
   - 68V20
 status:
-  scope: 'Complete for the original proved-paper scope recorded in THEOREM_MAP.md, but not for the expanded
-    manuscript as a whole. The operator inputs to parts (1) and (2), and the joint action with its functorial
-    laws, are formalized; bundled categorical functors and their joint regularity classification remain
-    pending. Finite-coordinate analytic reflection, its nonarchimedean coefficient-radius refinement,
-    finite-coordinate alternating morphism families, core admissible-family laws, the invertible-shear
-    counterexample and canonical exterior support now have checked declarations. The bundle conclusion
-    of Main Theorem (3), Main Theorem (4), additional parameter, tensor, universal-target-core and no-largest-domain
-    results still require formalization. The quotient-parameter obstruction, polynomial-approximation
-    example without a common analytic radius, set-sized maximal-domain graph proposition and explicit
-    completion principle remain proved informal mathematics, not new Lean declarations. Canonical exterior
-    support, its degree-zero/one cases and the finite-ambient matrix formula are formalized; transport
-    of the matrix formula from a finite supporting subspace into arbitrary ambient V remains pending.
-    The earlier finite-dimensional source/codomain proposition, target-reduction argument and weighted
-    c_0 example are likewise additional informal results, not separate formalized declarations. The proof
-    library has zero unresolved sorry, admit, new axiom or native_decide uses. solution.lean contains
-    the three proved comparator theorems; challenge.lean contains exactly three deliberate theorem placeholders
-    and is excluded from these proof-development sorry counts. The Mathlib-only challenge contains two
-    contradiction corollaries and the positive operator form of Main Theorem (2). Two transparent predicates,
-    AlternatingAnalyticChallenge.BanachPrecompositionAnalytic and AlternatingAnalyticChallenge.SphericallyComplete,
-    are defined identically in challenge.lean and solution.lean. The first names the original fixed-field
-    universal hypothesis; the second is the closed-ball intersection property used by the library''s spherical-completeness
-    class. The first theorem refutes the universal ContDiff omega assertion over all nontrivially normed
-    fields, all normed-space triples and all finite index types in universe zero. The second fixes arbitrary
-    K : Type u of prime characteristic p and k >= p, and refutes the universal ContDiff K omega assertion
-    over Banach E,F : Type u with E'' = E and index Fin k; no completeness of K is assumed. These two
-    corollaries are consequences of the constructive development, not claims of equivalence with the full
-    operator counterexample or factorial classification. The third theorem is the operator form of Main
-    Theorem (2): for independent universes of K, E, E'', F and the finite index type, an ultrametric nontrivially
-    normed K and an ultrametric normed F with explicit spherical completeness hypothesis give ContDiff
-    K n for every n : WithTop ℕ∞, including omega. E and E'' are arbitrary normed spaces; K, E and E''
-    need not be complete. The stronger original operator results are proved in the AlternatingAnalytic
-    library. Challenge validation uses Kim Morrison''s leanprover/comparator exclusively, with the three
-    selected theorems and permitted axioms specified in comparator.json. Excluded are the expressly unproved
-    alternative infinite-field route, proposed unproved large-index nonarchimedean-target construction,
-    mathematical open problems, the external Serre c_0(I) classification, and the earlier characteristic-two
-    proof. A broader generic isometric-field-transport abstraction in the initial plan is not claimed
-    as a separate theorem; every concrete field and finite-index passage used in the original formalized
-    counterexample is proved. The new Codex proof run added the checked reflection, core-family, shear,
-    canonical-support, finite-coordinate family and sharp-radius modules through Autoform''s shared verification
-    gate. The remaining proof plan and Mathlib API searches are preparation, not completed proofs; FORMALIZATION_ROADMAP.md
-    retains the full outstanding scope. This includes the joint categorical classification and spherical-target
-    packaging, both finite-coordinate operator cases, finite-target reduction, the weighted nonspherical-target
-    example, the general C^n multifunctor bundle construction, the additional parameter-space bundle cases,
-    and admissible inverse families. These tasks are not discharged merely by proving the first three
-    worker targets.'
+  scope: The original operator proof library is complete for its proved-paper scope, but the expanded
+    manuscript is not fully formalized. Checked extensions include finite-coordinate analytic reflection
+    and alternating families, the nonarchimedean coefficient/radius refinement, core admissible-family
+    laws, the invertible shear obstruction, canonical exterior support, and normed-space category foundations.
+    The actual normed, Banach and spherical alternating bifunctors, quantitative joint action and categorical
+    Main Theorem parts (1) and (2) have now passed the shared proof-verification gate; their independent
+    full-scope jury review is pending. The finite-coordinate manifold-family theorem on open sets and
+    its global corollary have also passed the shared gate and await independent review. This is a prerequisite
+    for the bundle instance, not the instance itself. The actual vector-bundle construction and operator-valued
+    bundle morphisms, additional parameter-space and tensor results, universal-target domains and the
+    no-largest-domain theorem remain unfinished. The full outstanding inventory is in THEOREM_MAP.md and
+    FORMALIZATION_ROADMAP.md, including the positive finite-coordinate operator cases, finite-target reduction,
+    weighted nonspherical example, dense scalar extension and matrix transport. The solution and proof
+    library contain no admitted proofs. Exactly three intentional challenge placeholders are excluded
+    from proof-development sorry counts. The Mathlib-only challenge contains two contradiction corollaries
+    of the Banach counterexample and the spherical-target operator theorem for every regularity order,
+    with transparent BanachPrecompositionAnalytic and SphericallyComplete predicates. Challenge validation
+    uses only Kim Morrison's leanprover/comparator. The expressly unproved alternative infinite-field
+    route, proposed large-index construction, open problems, external Serre classification and earlier
+    characteristic-two proof are not claimed as new formalized results.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -357,6 +332,51 @@ status:
     - Quot.sound
     comparator_config: ''
     literature_dependencies: []
+  - declaration: AlternatingAnalytic.alternatingFunctor_main
+    file: AlternatingAnalytic/Category/AlternatingRegularity.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.alternatingSphericalFunctor_main
+    file: AlternatingAnalytic/Category/AlternatingRegularity.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.alternatingSphericalFunctor_main_of_charP
+    file: AlternatingAnalytic/Category/AlternatingRegularity.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.alternatingMapAction_operator_bridge
+    file: AlternatingAnalytic/Analysis/AlternatingActionRegularity.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.contMDiffOn_alternatingMapAction_of_finiteCoordinates
+    file: AlternatingAnalytic/Geometry/FiniteCoordinateManifoldFamilies.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
 automation:
   spend_usd: 200
   methods:
@@ -427,43 +447,27 @@ fidelity:
 review:
   status: agent-reviewed
   reviewers: []
-  notes: 'Earlier semantic reviews and separate model jury passes examined selected declarations for faithfulness,
-    proof integrity and code quality. Some reviews returned mixed scores, abstentions or timeouts; no
-    global clean-jury result or human expert review is claimed. The paper received a subsequent editorial
-    pass with substantive explanations compared against the Lean development. The new family and no-largest-domain
-    sections received independent informal mathematical reviews, including the incomplete-field scope,
-    all-prime degree-gap argument, padding retraction, finite-coordinate reflection and fixed-degree l1
-    factorization. A further independent agent paper audit dated 25 September 2026 reviewed scope, arguments,
-    organization and terminology. The resulting revision records the nonarchimedean coefficient bound,
-    quotient-parameter and polynomial-approximation consequences, set-sized maximal-domain argument, and
-    canonical exterior support. It clarifies completion in the rigid-source construction, preserves the
-    spherical-target proof as Section 2, moves the domain argument before the tensor criterion and exterior
-    preliminaries next to their use, and consolidates the finite-dimensional completeness proof. These
-    informal reviews do not constitute kernel verification or human expert review. The unchanged three-statement
-    challenge was rechecked on 25 September 2026 with Kim Morrison''s comparator; the solution was accepted
-    by Lean''s default kernel. This check does not cover the new manuscript extensions. The new finite-coordinate
-    reflection, core-family and shear nodes passed the shared proof-verification gate. These results do
-    not establish completion of the expanded manuscript. The canonical exterior-support module also passed
-    the shared kernel/axiom gate. The full proof library and solution build passed with all four new branches
-    included (3149 build jobs). The requested statement-clarity repairs are now complete: the family,
-    shear and canonical-support propositions each have a combined public theorem alongside their component
-    lemmas. All three combined statements passed the shared proof-verification gate, and the full library
-    and solution build passed again on 25 September 2026. The fresh independent Codex jury passed all
-    four extension nodes: statement faithfulness and proof integrity were each 5/5 for every node; code
-    quality was 5/5 for families and shear, and 4/5 for reflection and canonical support. These node-level
-    results do not certify the remaining manuscript or constitute human expert review. Two further modules,
-    FiniteCoordinateFamilies and FiniteCoordinateRadius, passed the shared proof-verification gate on
-    25 September 2026. The full library and solution build then passed with both modules and the new category
-    foundation included (3154 jobs). Fresh independent jury review of these three nodes is now clean;
-    acceptance of the category definitions does not establish the categorical alternating functors or
-    their classification. The subsequent scope repairs also passed the shared gate: explicit ambient CPolynomialAt
-    and combined public theorem, functor regularity definitions and coordinate equivalences, and the full
-    grouped-coefficient/radius theorem. The full library and solution build passed again (3154 jobs).
-    Fresh independent review passed all three exact revised statements: faithfulness5 and proof integrity5
-    for each; code quality5 for finite-coordinate families and4 for the radius refinement and category
-    foundations. The25September GitHub comparator workflow did not start because of an account billing/spending-limit
-    restriction; no workflow step ran. Local comparator and exact-source integration checks passed. No
-    billing configuration was changed.'
+  notes: 'The expanded manuscript received independent informal mathematical and editorial audits; those
+    are not Lean kernel checks or human expert review. Seven extension branches have clean independent
+    Codex jury results: finite-coordinate reflection, core family laws, shear transfer, canonical exterior
+    support, finite-coordinate alternating families, coefficient/radius refinement and category foundations.
+    Every branch received5/5 for faithfulness and proof integrity; code quality was5/5 for the family
+    and shear branches and4/5 for reflection, canonical support, radius and category foundations. Earlier
+    missing or failed review reports are preserved in the working evidence and are not counted as accepted
+    reviews. The exact-source library and solution build passed3154jobs before the categorical additions.
+    The bifunctor worker subsequently passed the shared kernel/axiom gate on25September2026 with four
+    new modules; it reported a3160-job library build and63 new declarations. Independent full-scope jury
+    review of these categorical/joint results remains pending. The unchanged three-statement challenge
+    passed Kim Morrison''s comparator locally on25September2026, including Lean default-kernel replay;
+    that check does not certify the additional library results. GitHub CI did not start because of an
+    account billing/spending-limit restriction; no workflow step ran and no billing configuration was
+    changed. The latest manuscript audit verified Schneider and Schikhof references, added the missing
+    scoped Yuan v3 citation, and clarified continuous-coordinate language in the bundle heading and motivation.
+    All four affected PDF pages were visually checked and the final LaTeX build had no warnings. No human
+    expert review or completion of the expanded manuscript is claimed. The four manifold-family declarations
+    subsequently passed the shared gate. All six new categorical/joint/manifold result groups are now
+    undergoing independent full-scope jury review. The combined library-and-solution integration build
+    then passed3176jobs with all five new modules; exact source hashes are recorded in the working evidence.'
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -546,10 +550,9 @@ alignment:
     lean: ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
     module: AlternatingAnalytic.Analysis.SphericalAnalytic
     status: proved
-    note: The operator form is proved in standalone Section 2 following the existing Lean proofs, including
-      ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap and the resulting
-      bounded lift. Joint postcomposition and closure of alternating-map spaces give the categorical Main
-      Theorem (2), which is not a separate Lean declaration.
+    note: The operator form is proved in standalone Section2 following the existing Lean extension, spherical-completeness
+      and retraction proofs. The actual categorical counterpart is now implemented in AlternatingAnalytic.Category.AlternatingRegularity
+      and passed the shared proof gate; its independent jury review remains pending.
   - source: 'Proposition discrete: complete targets with an equivalent ultrametric norm'
     lean: AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup
     module: AlternatingAnalytic.Analysis.DiscreteTargetAnalytic
@@ -565,13 +568,16 @@ alignment:
       and proof integrity5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
       No human expert review is claimed.
   - source: 'Main Theorem (1) and (2): full categorical statements and joint regularity'
-    lean: ''
-    module: ''
-    status: not-formalized
-    note: The operator inputs and joint action with functor laws are proved. Normed-space categories,
-      opposite/product/full-subcategory hom coordinates, and transparent regularity predicates on actual
-      functor maps are now implemented and passed the shared gate. The actual alternating bifunctors,
-      joint regularity classification on Vec and Ban, and spherical target restrictions remain pending.
+    lean: AlternatingAnalytic.alternatingFunctor_main; AlternatingAnalytic.alternatingSphericalFunctor_main;
+      AlternatingAnalytic.alternatingSphericalFunctor_main_of_charP
+    module: AlternatingAnalytic.Category.AlternatingRegularity
+    status: proved
+    note: Actual functors on normed spaces, Banach spaces and spherical targets; unconditional smoothness,
+      both exact factorial analytic equivalences, finite-polynomial positive cases, and the positive-characteristic
+      spherical corollary. Joint action includes an explicit degree-(k+1) lift, bounds and identity slice;
+      degree zero is handled explicitly. Shared proof-verification gate accepted the four-module development
+      on25September2026. Independent full-scope review of each categorical/joint node remains pending;
+      no human review is claimed.
   - source: 'prop:finite-coordinate and cor:finite-dimensional-positive: positive operator cases'
     lean: ''
     module: ''
@@ -714,7 +720,7 @@ alignment:
       with exponentially bounded norms. For infinite ordinary l1 over a nonarchimedean field, the optimal
       degree-n projection norm is the real number n!, so universal reflection fails despite the alternating-family
       theorem. The ordinary and nonarchimedean tensor norms are distinguished.
-  - source: 'fam:cor:no-common-radius: polynomial approximations without a common analytic radius'
+  - source: 'fam:cor:no-common-radius: entire polynomial approximation of a nonanalytic smooth map'
     lean: ''
     module: ''
     status: not-formalized
@@ -782,6 +788,15 @@ alignment:
       and large-index extension remain unproved. The support/contraction-rank equality formerly proposed
       in routeII is now formalized as prop:canonical-support; finite-support transport of the matrix consequence
       is separately pending.
+  - source: Open-manifold family prerequisite for fam:thm:finite-bundles
+    lean: AlternatingAnalytic.contMDiffOn_alternatingMapAction_of_finiteCoordinates; AlternatingAnalytic.contMDiff_alternatingMapAction_of_finiteCoordinates
+    module: AlternatingAnalytic.Geometry.FiniteCoordinateManifoldFamilies
+    status: proved
+    note: For an analytic manifold modeled on P with explicit continuous linear coordinates P equiv Fin
+      d to K, the alternating action preserves analytic operator families on open sets, with a global
+      corollary. All k and d including zero, arbitrary normed fibers and nontrivially normed K; no completeness.
+      Shared gate passed; independent jury review pending. Actual alternating ContMDiffVectorBundle instances,
+      bundle morphisms and bundle functor remain unfinished.
 acknowledgements: Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform; leanprover/comparator;
   and mathlib-initiative/formalization.yaml. The source paper's attribution to Claude and its bibliographic
   author are preserved separately above.
