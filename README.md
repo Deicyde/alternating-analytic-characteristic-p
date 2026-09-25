@@ -19,6 +19,14 @@ The operator inputs to parts (1) and (2) are formalized. Their categorical packa
 
 The expanded paper also constructs the canonical admissible-family structure, proves positive parameter results for nonarchimedean `c₀` and ordinary `ℓ¹` spaces, transfers the obstruction to invertible shear families, and characterizes universal analytic reflection through closed Banach subspaces using projections onto diagonal tensor powers with exponential norm bounds. Ordinary infinite `ℓ¹` spaces over complete nonarchimedean fields show that this general reflection property is strictly stronger than the alternating-family property. A universal-target core is compatible with every analytic domain. These results are likewise presently mathematical, not Lean-checked.
 
+The 25 September revision draws out further consequences, all **not yet formalized**:
+
+- Finite-coordinate reflection preserves the ambient coefficient bounds and radius when the ambient norm is nonarchimedean.
+- An explicit Banach-valued map is C∞ and a uniform limit of entire polynomials on every smaller ball, yet is nonanalytic into the closed diagonal tensor subspace at zero: every degree-n multilinear coefficient has norm at least `n!`. This example works also in characteristic zero over complete nonarchimedean fields.
+- A nowhere analytic alternating pullback action becomes analytic after a bounded open quotient reparameterization by ordinary `ℓ¹`. The quotient has no local section differentiable at even one point.
+- Within a fixed set of objects, full analytic domains are cliques in a compatibility graph. Every domain extends to one maximal under inclusion, and every maximal domain contains the available universal-target core objects; this does not supply a largest domain.
+- Contractions determine the unique smallest subspace supporting an exterior vector, so support dimension equals contraction-matrix rank. This equality is now proved in the paper; the alternative infinite-field obstruction and proposed large-index nonarchimedean counterexample remain unproved.
+
 ## Existing Lean results and current scope
 
 The numbered **Counterexample theorem** (`thm:main`) retains the stronger constructive statement: for every prescribed nontrivially normed field K of prime characteristic p, including incomplete fields, and every `k ≥ p`, there are K-Banach spaces E and F such that degree-k alternating precomposition on E is analytic at no point. The same spaces work for every finite index type of cardinality k, and F has no equivalent ultrametric norm.
@@ -68,6 +76,6 @@ The comparator checks the statements, their dependencies, and permitted axioms, 
 
 ## Manuscript and metadata
 
-The current manuscript is in `paper/`; the original supplied PDF and LaTeX snapshots remain in `sources/`. The author disclosure credits the original Claude-assisted informal work and the later Codex/Autoform formalization. The [earlier characteristic-two development](https://github.com/Deicyde/alternating-analytic-counterexample) remains separate.
+The current manuscript is in `paper/`; the original supplied PDF and LaTeX snapshots remain in `sources/`. An independent agent audit on **25 September 2026** reviewed mathematical scope, arguments, organization and terminology. The revision keeps the spherical-target proof in Section 2, puts the categorical-domain argument before the tensor criterion, moves exterior preliminaries next to their use, consolidates the finite-dimensional completeness argument, and explains the completion step in the rigid-source construction. This audit is informal review, not kernel verification or human expert review. The author disclosure credits the original Claude-assisted informal work and the later Codex/Autoform formalization. The [earlier characteristic-two development](https://github.com/Deicyde/alternating-analytic-counterexample) remains separate.
 
 [`formalization.yaml`](formalization.yaml) records the scope, provenance, automation, and reported total cost of **USD 200**, using the ChatGPT Pro subscription price specified by the maintainer.

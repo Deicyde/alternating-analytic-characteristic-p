@@ -84,8 +84,8 @@ The passage from vector spaces to alternating maps is contravariant in the sourc
 We study both its regularity on whole spaces of morphisms and its behavior on analytic families of morphisms.
 These are different questions in positive characteristic. Analyticity on all morphism spaces has a sharp degree
 restriction, whereas every analytic family with standard finite-dimensional parameters is preserved. This
-distinction gives an unrestricted construction of alternating-map bundles over finite-dimensional analytic
-bases, despite the failure of an analytic bifunctor on the entire category.
+distinction gives a construction of alternating-map bundles over bases with open coordinate charts in $K^d$,
+despite the failure of an analytic bifunctor on the entire category.
 
 \subsection*{Categories and regularity}
 Fix a nontrivially normed field $K$. Let $\mathsf{Vec}_K$ be the category of normed $K$\nobreakdash-spaces and
@@ -149,8 +149,8 @@ every finite degree is analytic. Part~(\ref{main:spherical}) removes the restric
 the target category. Its codomain is part of the assertion: alternating maps into a spherically complete
 nonarchimedean space form a spherically complete nonarchimedean space. No completeness assumption on $K$ is needed.
 In the analytic cases in parts~(\ref{main:general}) and~(\ref{main:spherical}), the maps on hom spaces are
-in fact given by finite power series. Part~(\ref{main:families}) concerns a weaker requirement on the
-functor, but a stronger bundle conclusion: only the parameter space is finite-dimensional. Its proof is
+in fact given by finite power series. Part~(\ref{main:families}) permits arbitrary normed fibers over bases
+with open $K^d$ charts, without requiring analyticity on the entire operator space. Its proof is
 analytic reflection through a closed linear isometry for finite-coordinate parameters
 (Theorem~\ref{fam:thm:finite-reflection}). Over incomplete fields, finite algebraic dimension alone does
 not supply continuous coordinates; this is precisely what permits the examples in part~(\ref{main:domains}).
@@ -317,45 +317,6 @@ works over every nontrivially normed field of positive characteristic, including
 by allowing targets with no equivalent nonarchimedean norm. The remaining questions for nonarchimedean targets are
 discussed in \S\ref{sec:complements}.
 
-\subsection*{Overview of the counterexample proof}
-The proof separates into an algebraic obstruction, its realization by a normed space, and passage to the prescribed
-field. The analytic input is a lift criterion valid in every characteristic: if $Q$ is analytic at any point, the
-degree-$k$ term of its power series has diagonal $Q$. One-variable uniqueness identifies this diagonal without
-dividing by $k!$ (Proposition~\ref{prop:lift}).
-
-\emph{The finite-field obstruction.}
-Let $\kappa$ be finite and put $E_0=\kappa^\N$. Theorem~\ref{thm:FF} rules out a multilinear lift of coordinatewise
-multiplication satisfying the polarized diagonal identity~\eqref{eq:Pol1}, with values in $\Lambda^k_\kappa E_0$ when $k!=0$ and every value of the lift lies in an exterior power of a
-subspace of uniformly bounded dimension. Ramsey's theorem first makes the coefficients depend only on the order
-and equality pattern of their indices. Signed sums over clusters of four indices cancel the terms not tied to the
-output. A staircase of clusters converts the support bound into invariance under adjacent transpositions; the
-polarized diagonal identity then forces $k!\,\chi=1$ for a common cluster value $\chi$, a contradiction.
-
-\emph{The Laurent series construction.}
-Over $K_1=\kappa((X))$, take $E_1=\linf(\N,K_1)$ and let $B$ be the completion of
-$\Lambda^k_{K_1}E_1$ under its projective norm, defined using ordinary sums rather than maxima. The essential
-estimate is that the constant-coefficient map
-\[
-\eta\colon B\longrightarrow\Lambda^k_\kappa E_0
-\]
-is well defined and has uniformly bounded support dimension on bounded sets
-(Proposition~\ref{prop:supp}). Evaluating a hypothetical lift on multiplication operators and on the universal
-wedge map, then applying $\eta$, produces exactly the finite-field lift excluded above. The coefficient map
-is $\kappa$\nobreakdash-linear; no $K_1$\nobreakdash-linearity is asserted or needed.
-
-\emph{Passage to the prescribed field.}
-Choose $t\in K$ with $0<\abs t<1$. The closure of $\F_p(t)$ in the completion $\Kh$ is a spherically complete
-Laurent series field $K_1\cong\F_p((X))$, with $\abs X=\abs t$. Ingleton's Hahn--Banach theorem~\cite{In} gives a
-contracting $K_1$\nobreakdash-linear projection $\Kh\to K_1$. It makes the completed projective tensor products
-\[
-E=E_1\widehat\otimes_{\pi,K_1}\Kh,\qquad
-F=B\widehat\otimes_{\pi,K_1}\Kh
-\]
-contain $E_1$ and $B$ isometrically, and allows a lift over $\Kh$ to descend to one over $K_1$. Density handles an
-incomplete $K$. These are the explicit witnesses in Theorem~\ref{thm:main}. Finally, sums of unit wedges on disjoint
-blocks have norms growing linearly with the number of blocks. This growth persists in $F$ and rules out every
-equivalent nonarchimedean norm (Proposition~\ref{prop:nonultra}).
-
 \subsection*{Proofs and verification scope}
 The counterexample theorem and factorial classification, including their supporting finite-field and
 functional-analytic arguments, are formalized in Lean~4 with Mathlib. The checked development also contains
@@ -365,12 +326,12 @@ here; \S\ref{sec:lean} and the repository's theorem map give their separate form
 
 The paper is organized to separate the positive theory from the two distinct obstructions.
 \S\ref{sec:theoremA} proves the spherically complete theorem independently.
-\S\ref{sec:prelim} supplies analytic and exterior-algebra preliminaries, and \S\ref{sec:positive} gives
+\S\ref{sec:prelim} supplies the analytic lift criterion, and \S\ref{sec:positive} gives
 factorial, finite-coordinate fiber and smoothness results.
 \S\ref{fam:sec:families} introduces admissible families and proves finite-coordinate analytic reflection;
 \S\ref{fam:sec:bundles} treats bundles and infinite-dimensional parameter classes.
-\S\ref{fam:sec:tensors} gives the tensor criterion for the stronger universal reflection problem.
 \S\ref{dom:section} proves that no largest full analytic domain exists in the stated generality.
+\S\ref{fam:sec:tensors} then gives the tensor criterion for the stronger universal reflection problem.
 The original sharp Banach counterexample occupies \S\S\ref{sec:FF}--\ref{sec:proofs}: the finite-field
 obstruction, its Laurent series realization, scalar extension and the final assembly.
 \S\ref{sec:complements} concludes with further target classes and the remaining classification problems.
@@ -571,16 +532,14 @@ the free presentation and in operator spaces with nonarchimedean targets. The fo
 other positive cases and then construct counterexamples whose targets admit no equivalent nonarchimedean norm.
 
 
-\section{Analytic and algebraic preliminaries}\label{sec:prelim}
-The lift criterion reduces the analytic question to a bounded multilinear identity. We then introduce support
-dimension and the determinant arrays that detect it; these provide the rank estimates used in the finite-field
-argument.
+\section{Analytic preliminaries}\label{sec:prelim}
+The lift criterion reduces the analytic question to a bounded multilinear identity. Its proof uses uniqueness
+on scalar lines and applies in every characteristic, without completeness assumptions.
 
 \subsection{Conventions}
 We write $\N=\{0,1,2,\dots\}$. Throughout, $K$ denotes the base field and $k$ the degree. A \emph{normed field} $K$ carries a multiplicative absolute value $\abs{\cdot}$ satisfying the triangle inequality. It is
 \emph{nontrivially normed} if some $c\in K$ has $0<\abs c<1$, and \emph{nonarchimedean} if $\abs{x+y}\le\max(\abs x,\abs y)$.
-A \emph{normed $K$\nobreakdash-space} $X$ satisfies $\norm{\lambda x}=\abs\lambda\norm x$; it is \emph{Banach} if it is complete. The norm of a space need not be nonarchimedean. In non-archimedean functional analysis, the term ``Banach''
-often includes the nonarchimedean condition; Main Theorem~(\ref{main:spherical}) and \S\ref{sec:complements} address nonarchimedean targets.
+A \emph{normed $K$\nobreakdash-space} $X$ satisfies $\norm{\lambda x}=\abs\lambda\norm x$; it is \emph{Banach} if it is complete.
 
 We write $\cL(X,Y)$ for the bounded
 linear maps, $\Mult^k(X;Y)$ for the bounded $k$\nobreakdash-linear maps $X^k\to Y$, and $\Alt^k(X;Y)\subseteq\Mult^k(X;Y)$ for the
@@ -614,9 +573,12 @@ A normed field of characteristic $p>0$ is nonarchimedean.
 \end{lemma}
 
 \begin{proof}
-For $n\in\N$ the element $n\cdot1$ lies in the prime field $\F_p$, so $(n\cdot1)^p=n\cdot1$ and
-$\abs{n\cdot1}\in\{0,1\}$. Hence $\abs{(x+y)^N}\le\sum_{i=0}^N\abs{\tbinom Ni}\abs x^i\abs y^{N-i}\le(N+1)\max(\abs x,\abs
-y)^N$ for every $N$. Taking $N$\nobreakdash-th roots and letting $N\to\infty$ gives $\abs{x+y}\le\max(\abs x,\abs y)$.
+Frobenius and the triangle inequality give, for every $m\ge0$,
+\[
+ \abs{x+y}^{p^m}=\abs{x^{p^m}+y^{p^m}}
+ \le2\max(\abs x,\abs y)^{p^m}.
+\]
+Taking $p^m$\nobreakdash-th roots and letting $m\to\infty$ proves the assertion.
 \end{proof}
 
 \subsection{The lift criterion}
@@ -693,87 +655,6 @@ This does not assert uniqueness of the multilinear lift: in positive characteris
 can have the same diagonal.
 \end{remark}
 
-\subsection{Exterior powers, supports and determinant arrays}\label{ssec:ext}
-Let $L$ be a field, $V$ an $L$\nobreakdash-vector space and $k\ge1$. We write $\Lambda^kV=\Lambda^k_LV$ for the algebraic exterior
-power, in which $x_1\wedge\dots\wedge x_k=0$ whenever two $x_i$ coincide. We use the standard facts: for a subspace
-$W\subseteq V$ the map $\Lambda^kW\to\Lambda^kV$ is injective, and we regard $\Lambda^kW$ as a subspace of $\Lambda^kV$;
-if $u_1,\dots,u_d$ is a basis of a finite-dimensional space $U$, the wedges $u_I:=u_{i_1}\wedge\dots\wedge u_{i_k}$,
-$I=\{i_1<\dots<i_k\}$, form a basis of $\Lambda^kU$; and every $\omega\in\Lambda^kV$ lies in $\Lambda^kU$ for some
-finite-dimensional $U\subseteq V$.
-
-\begin{definition}\label{def:supp}
-The \emph{support dimension} of $\omega\in\Lambda^kV$ is
-\[
-\sdim(\omega):=\min\{\dim W:\ W\subseteq V\text{ finite-dimensional},\ \omega\in\Lambda^kW\}.
-\]
-\end{definition}
-
-The definition gives $\sdim(0)=0$, $\sdim(c\omega)=\sdim(\omega)$ for $c\neq0$, $\sdim(\omega+\omega')\le\sdim(\omega)+\sdim(\omega')$
-(use $W+W'$), and $\sdim(\omega)\le\dim\spn S$ if $\omega$ is a sum of wedges of vectors from a finite set $S$. If
-$V\subseteq V'$, then $\sdim$ computed in $V'$ is at most $\sdim$ computed in $V$.
-
-For spaces of functions, exterior vectors can be detected by determinants of coordinate evaluations. These arrays
-also turn bounds on support dimension into ordinary matrix-rank bounds.
-Let $S$ be a set and $V\subseteq L^S$ a space of functions on $S$. The \emph{determinant array} is the linear map
-\[
-\Omega\colon\Lambda^kV\to L^{S^k},\qquad \Omega_{y_1\wedge\dots\wedge y_k}(c_1,\dots,c_k):=\det\bigl(y_b(c_a)\bigr)_{a,b=1}^k .
-\]
-It is well defined because the right side is multilinear and alternating in $(y_1,\dots,y_k)$ (these are the
-columns). For each $\omega$, the function $\Omega_\omega$ is alternating in $(c_1,\dots,c_k)$ (the rows); in particular
-$\Omega_\omega(c_{\sigma(1)},\dots,c_{\sigma(k)})=\sgn(\sigma)\,\Omega_\omega(c_1,\dots,c_k)$.
-
-\begin{lemma}\label{lem:detinj}
-The determinant array $\Omega\colon\Lambda^kV\to L^{S^k}$ is injective.
-\end{lemma}
-
-\begin{proof}
-Let $\Omega_\omega=0$ and choose a finite-dimensional $U\subseteq V$ with $\omega\in\Lambda^kU$. The evaluations
-$\mathrm{ev}_s|_U$, $s\in S$, separate the points of $U$ (a function in $U$ vanishing at every $s$ is $0$), so they span
-the dual space $U^*$. Choose $s_1,\dots,s_d\in S$ such that the $\mathrm{ev}_{s_i}|_U$ form a basis of $U^*$, and let
-$u_1,\dots,u_d$ be the dual basis of $U$, so that $u_j(s_i)=\delta_{ij}$. For increasing $k$\nobreakdash-subsets $I,J$ of
-$\{1,\dots,d\}$ we get $\Omega_{u_I}(s_{j_1},\dots,s_{j_k})=\det(u_{i_b}(s_{j_a}))_{a,b}=\delta_{IJ}$. Writing
-$\omega=\sum_Ic_Iu_I$ therefore gives $0=\Omega_\omega(s_{j_1},\dots,s_{j_k})=c_J$ for every $J$, so $\omega=0$.
-\end{proof}
-
-\begin{lemma}[support bounds flattening rank]\label{lem:flat}
-Let $V\subseteq L^S$, $\omega\in\Lambda^kV$ and $\alpha\in\{1,\dots,k\}$. Let $R\subseteq S$ and
-$R'\subseteq S^{\{1,\dots,k\}\setminus\{\alpha\}}$ be finite. The $R\times R'$ matrix $M$ with entries
-$M(c_\alpha,c'):=\Omega_\omega(c)$, where $c$ has $c_\alpha$ in slot $\alpha$ and the entries of $c'$ in the other
-slots, has rank at most $\sdim(\omega)$.
-\end{lemma}
-
-\begin{proof}
-Write $\omega=\sum_jy_{j,1}\wedge\dots\wedge y_{j,k}$ with all $y_{j,b}$ in a subspace $W$ of dimension $\sdim(\omega)$.
-Expanding each determinant along row $\alpha$,
-$\det(y_{j,b}(c_a))_{a,b}=\sum_b\pm y_{j,b}(c_\alpha)\cdot\mu_{j,b}(c')$, where the minor $\mu_{j,b}(c')$ does not
-involve $c_\alpha$. So for fixed $c'$ the column $c_\alpha\mapsto M(c_\alpha,c')$ is a linear combination of the
-restrictions $y_{j,b}|_R$. All columns lie in the restriction of $W$ to $R$, a space of dimension at most
-$\sdim(\omega)$.
-\end{proof}
-
-A second way to obtain lower bounds on support is to contract all but one exterior factor. The resulting vectors
-must lie in every subspace supporting the original exterior vector.
-
-\begin{samepage}
-\begin{lemma}[contraction]\label{lem:contr}
-Let $k\ge2$ and $\varphi=(\varphi_1,\dots,\varphi_{k-1})\in(V^*)^{k-1}$. There is a linear map $c_\varphi\colon\Lambda^kV\to V$
-with
-\[
-c_\varphi(x_1\wedge\dots\wedge x_k)=\sum_{i=1}^k(-1)^{k+i}\det\bigl(\varphi_a(x_b)\bigr)_{1\le a\le k-1,\ b\ne i}\;x_i ,
-\]
-and $c_\varphi(\Lambda^kW)\subseteq W$ for every subspace $W$. Consequently
-$\sdim(\omega)\ge\dim\spn\{c_\varphi(\omega):\varphi\in(V^*)^{k-1}\}$.
-\end{lemma}
-\end{samepage}
-
-\begin{proof}
-The right side is multilinear in $(x_b)$. For $\psi\in V^*$, applying $\psi$ to it gives, by Laplace expansion along the
-last row, the determinant of the $k\times k$ matrix with entries $\varphi_a(x_b)$ in the rows $a<k$ and $\psi(x_b)$ in the last
-row; it vanishes when two columns coincide. Since $V^*$ separates the points of $V$, the right side
-vanishes whenever $x_a=x_b$ for some $a\ne b$, so it factors through $\Lambda^kV$. Each term is a multiple of some $x_i$, which gives
-$c_\varphi(\Lambda^kW)\subseteq W$. If $\omega\in\Lambda^kW$ with $\dim W=\sdim(\omega)$, all $c_\varphi(\omega)$ lie in $W$.
-\end{proof}
-
 \section{Positive results}\label{sec:positive}
 Alongside the spherical-completeness argument of \S\ref{sec:theoremA}, two further constructions give analytic lifts:
 dividing by $k!$, when this scalar is nonzero, or choosing coordinates under suitable finite-dimensional
@@ -811,7 +692,7 @@ positive-characteristic case.
 
 % Proposed finite-coordinate positive cases. This is new manuscript prose,
 % not a claim that a corresponding new general theorem has been added to Lean.
-\subsection{Finite-dimensional domain or codomain}
+\subsection{Finite-coordinate operator domains and codomains}
 
 The finite-dimensional argument uses continuous coordinate functionals. We state this hypothesis explicitly so
 that the result also applies over incomplete fields whenever the chosen finite-dimensional space has its usual
@@ -887,6 +768,27 @@ same argument gives the zero lift. Degree zero, excluded from the lift criterion
 $Q$ is constant.
 \end{proof}
 
+\begin{lemma}\label{lem:findim}
+Let $\mathbb K$ be a complete nontrivially normed field and $U$ a finite-dimensional normed $\mathbb K$\nobreakdash-space. Then every
+linear functional on $U$ is bounded, and $U$ is complete.
+\end{lemma}
+
+\begin{proof}
+We prove both assertions by induction on $n=\dim U$, the case $n=0$ being immediate. Suppose $n\ge1$ and let $g\ne0$
+be a linear functional on $U$. Its kernel $H$ has dimension $n-1$, so the induction hypothesis makes $H$ complete
+and therefore closed in $U$. Choose $v$ with $g(v)=1$. Since $v\notin H$,
+$\delta:=\inf_{h\in H}\norm{v-h}>0$. Write $x=g(x)v+h$ with $h\in H$. If $g(x)\ne0$, then
+\[
+\norm x=\abs{g(x)}\,\norm{v+g(x)^{-1}h}\ge\abs{g(x)}\delta.
+\]
+Thus $\abs{g(x)}\le\delta^{-1}\norm x$ for every $x$, proving boundedness.
+
+Choose a basis of $U$. Its coordinate functionals are now bounded, so the coordinate map
+$U\to\mathbb K^n$, with the max norm on $\mathbb K^n$, is bounded. The inverse map
+$(c_i)\mapsto\sum_ic_ie_i$ is bounded by $\sum_i\norm{e_i}$. Hence $U$ is bi-Lipschitz equivalent to the complete
+space $\mathbb K^n$, and is itself complete.
+\end{proof}
+
 \begin{corollary}\label{cor:finite-dimensional-positive}
 Let $K$ be a complete nontrivially normed field, and let $E,E',F$ be normed $K$\nobreakdash-spaces. If either $E$ or $E'$
 is finite-dimensional over $K$, then $Q^K_{E,E',F}$ is analytic at every point in every degree. No completeness
@@ -894,20 +796,8 @@ assumption on $E,E'$ or $F$ is needed in the statement.
 \end{corollary}
 
 \begin{proof}
-We recall why a finite-dimensional normed space $H$ over complete $K$ has continuous coordinates. Induct on its
-dimension, proving at the same time that $H$ is complete. The zero-dimensional case is immediate. For a basis
-$e_1,\dots,e_n$, the subspace $W:=\operatorname{span}(e_1,\dots,e_{n-1})$ is complete by induction, hence closed in
-$H$. Since $e_n\notin W$, the distance $\delta:=\inf_{w\in W}\norm{e_n-w}$ is positive. If $x=w+te_n$, then
-\[
-\norm x\ge\delta\abs t,\qquad
-\norm w\le\norm x+\abs t\norm{e_n}
-\le(1+\delta^{-1}\norm{e_n})\norm x.
-\]
-The first estimate bounds the last coordinate; the second, together with the inductive coordinate bounds on $W$,
-bounds all the preceding coordinates. Thus the coordinate map $H\to K^n$, with the maximum norm, is bounded. Its
-inverse is bounded by the ordinary triangle inequality. This gives a bi-Lipschitz linear identification with the
-complete space $K^n$, completing the induction. Proposition~\ref{prop:finite-coordinate} now applies to whichever
-of $E,E'$ is finite-dimensional.
+Lemma~\ref{lem:findim} gives continuous coordinates on whichever of $E,E'$ is finite-dimensional.
+Proposition~\ref{prop:finite-coordinate} then applies.
 \end{proof}
 
 \begin{remark}[the coordinate hypothesis over an incomplete field]
@@ -1114,7 +1004,7 @@ is continuously linearly isomorphic to $K^d$.
 Identify $W$ with its image, use maximum-norm coordinates on $K^d$, and expand $jf$ at a parameter point.
 Lemma~\ref{fam:lem:diagonal} shows that every homogeneous polynomial
 $x\mapsto p_n(x,\ldots,x)$ has its values in $W$.
-For $d\ge1$, let $e_1,\ldots,e_d$ be the coordinate vectors. For each multi-index
+For $d\ge1$ and $n\ge1$, let $e_1,\ldots,e_d$ be the coordinate vectors. For each multi-index
 $\alpha=(\alpha_1,\ldots,\alpha_d)$ of total degree $n$, put
 \[
  c_\alpha=
@@ -1144,6 +1034,14 @@ Their partial sums have images under $j$ converging to $jf(x)$, so the isometry 
 to the already given vector $f(x)$ inside $W$. Completeness is therefore unnecessary.
 The case $d=0$ is immediate, and continuous linear coordinates give the last assertion.
 \end{proof}
+
+\begin{remark}[Preservation of the coefficient bound]\label{fam:rem:radius}
+If $Z$ has a nonarchimedean norm, both finite sums in the construction satisfy maximum estimates.
+Thus $\norm{c_\alpha}\le\norm{p_n}$ and $\norm{q_n}\le\norm{p_n}$ for maximum-norm
+coordinates on $K^d$. The reflected expansion has at least the radius of the ambient expansion,
+without completeness of $W$ or $Z$. The $c_0$ theorem below extends this same estimate to infinitely
+many coordinates; there completeness supplies the infinite coefficient sums.
+\end{remark}
 
 \begin{corollary}\label{fam:cor:finite-families}
 Every analytic morphism family parametrized by an open subset of $K^d$ is admissible for $\Alt^k$,
@@ -1302,7 +1200,7 @@ $jf\colon U\to Z$ is analytic for a map $f\colon U\to W$, then $f$ is analytic.
 The image of $j$ is closed. Identify it with $W$ and expand $jf$ at a point of $U$.
 Lemma~\ref{fam:lem:diagonal}, followed by finite-coordinate polynomial uniqueness, puts every grouped
 coordinate coefficient of $p_n(x,\ldots,x)$ in $W$.
-Choose a total order on $I$. For a nondecreasing word $i_1\le\cdots\le i_n$, denote its grouped
+For $n\ge1$, choose a total order on $I$. For a nondecreasing word $i_1\le\cdots\le i_n$, denote its grouped
 coefficient by $c_{i_1,\ldots,i_n}$. It is a sum of values of $p_n$ on coordinate vectors.
 The nonarchimedean inequality gives
 \[
@@ -1439,6 +1337,59 @@ If $i\colon P\to\ell^1(I,K)$ and $r\colon\ell^1(I,K)\to P$ are bounded linear wi
 apply the result to $\gamma r$ on the open set $r^{-1}(U)$, and then restrict along $i$.
 \end{proof}
 
+\begin{corollary}[Failure of descent through quotient parameters]
+\label{fam:cor:quotient-parameters}
+Let $K$ be a complete nontrivially normed field of characteristic $p>0$,
+and let $k\ge p$. There are Banach spaces $E,F$, an index set $J$, and a
+bounded open linear surjection
+\[
+ q\colon\ell^1(J,K)\longrightarrow H:=\cL(E,E)
+\]
+such that $Q^K_{E,E,F}\circ q$ is analytic, whereas $Q^K_{E,E,F}$ is
+analytic at no point. The map $q$ has no local right inverse on a nonempty open subset of $H$ that is
+Fr\'echet differentiable at even one point of that subset.
+\end{corollary}
+
+\begin{proof}
+Choose the Banach counterexample $E,F$ from Theorem~\ref{thm:main}.
+Let $J=\{h\in H:\norm h\le1\}$ and define
+\[
+ q((a_h)_{h\in J})=\sum_{h\in J}a_hh.
+\]
+Absolute summability and completeness of $H$ make this a bounded linear
+map of norm at most one. Fix $t\in K$ with $0<\abs t=\theta<1$.
+For every nonzero $h\in H$, choose an integer $m$ such that
+\[
+ \norm h\le\abs{t^m}<\theta^{-1}\norm h.
+\]
+Then $v=t^{-m}h$ belongs to $J$, and the vector having the single nonzero
+coordinate $t^m$ at $v$ maps to $h$ and has norm less than
+$\theta^{-1}\norm h$. Hence $q$ is surjective, and this uniform bound
+also proves that it is open. Both its domain and codomain are Banach.
+
+Corollary~\ref{fam:cor:l1-families}, applied to the analytic family
+$a\mapsto(q(a),\id_F)$, makes $Q^K_{E,E,F}\circ q$ analytic.
+The original map is nowhere analytic by construction.
+
+If a local section $s\colon U\to\ell^1(J,K)$ were differentiable at
+$h_0\in U$, differentiating $q\circ s=\id_U$ would give
+\[
+ q\circ Ds(h_0)=\id_H.
+\]
+The bounded linear map $Ds(h_0)$ would therefore be a global right inverse
+of $q$. But then
+\[
+ Q^K_{E,E,F}=(Q^K_{E,E,F}\circ q)\circ Ds(h_0)
+\]
+would be analytic, a contradiction.
+\end{proof}
+
+Thus an analytic family can become admissible after a bounded linear
+quotient reparameterization even though it was not admissible originally.
+The open-cover locality of admissible families does not imply descent
+through such quotient maps. In particular, the bad parameter space $H$
+cannot be a bounded linear retract of an ordinary $\ell^1$ space.
+
 The bundle argument of Theorem~\ref{fam:thm:finite-bundles} now gives two further forms of the construction:
 over bases modeled on $c_0(I,K)$ when the output fibers are complete and nonarchimedean, and over bases
 modeled on $\ell^1(I,K)$ or its bounded linear retracts when the output fibers are complete.
@@ -1447,158 +1398,13 @@ nonarchimedean Banach spaces or to Banach spaces; alternating-map fibers remain 
 
 On arbitrary analytic bases one can instead specify admissible transition families and require admissibility
 of changes of atlas and bundle morphisms. Proposition~\ref{fam:prop:category} ensures compatibility with
-composition. In the Banach setting, if an admissible family consists of isomorphisms and its underlying
-inverse family is analytic, then the inverse family is admissible as well: its alternating action is
-the inverse of the original action, and inversion is analytic on the group of bounded automorphisms
-of a Banach space. This follows locally from the convergent Neumann series.
+composition. When the alternating-map spaces at both endpoints are Banach (in particular, when the
+value fibers are complete), an admissible family of isomorphisms with analytic underlying inverse family
+has an admissible inverse family. Its alternating action is the inverse of the original action. Locally
+identify the two endpoint spaces by one fixed isomorphism; inversion is then analytic by the convergent
+Neumann series in the Banach endomorphism algebra.
 The shear example shows why arbitrary analytic changes of atlas cannot simply be substituted for
 admissible ones in this formulation.
-
-\section{A tensor criterion for analytic reflection}\label{fam:sec:tensors}
-The preceding parameter theorems suggest an intrinsic question about normed spaces: when does every
-analytic map into an ambient Banach space remain analytic into a closed subspace containing its values?
-This is stronger than the question for alternating-map families. A tensor criterion characterizes
-the stronger property and clarifies why the fixed-degree argument for $\ell^1$ goes further.
-
-In this section $K$ is complete and nontrivially normed, and $P$ is Banach.
-For $n\ge1$, let $T_n(P)$ be the separated completed projective tensor power representing bounded
-$n$\nobreakdash-linear maps from $P^n$ to Banach spaces. We use the ordinary projective seminorm,
-defined by infima of sums of products of norms, and take its separated completion before invoking
-the universal property. Its canonical multilinear map has norm at most one.
-Define the closed subspace
-\[
- \Delta_n(P)=\overline{\spn\{x^{\otimes n}:x\in P\}}\subseteq T_n(P).
-\]
-A projection onto $\Delta_n(P)$ will mean a bounded linear map
-$R_n\colon T_n(P)\to\Delta_n(P)$ whose restriction to $\Delta_n(P)$ is the identity.
-
-\begin{proposition}[homogeneous reflection]\label{fam:prop:tensor-homogeneous}
-For a fixed $n\ge1$, the following conditions are equivalent.
-\begin{enumerate}
-\item For every Banach space $Z$, closed subspace $W\subseteq Z$, and bounded $n$\nobreakdash-linear map
-$B\colon P^n\to Z$ with diagonal values in $W$, there is a bounded $W$\nobreakdash-valued
-$n$\nobreakdash-linear map with the same diagonal.
-\item The subspace $\Delta_n(P)$ is the range of a bounded projection in $T_n(P)$.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-Suppose first that a projection $R_n$ exists. Linearize $B$ to a bounded map
-$\widetilde B\colon T_n(P)\to Z$. The diagonal hypothesis and closedness of $W$ imply
-$\widetilde B(\Delta_n(P))\subseteq W$.
-Composing $\widetilde B|_{\Delta_n(P)}$ with $R_n$ and the canonical tensor map gives the required
-multilinear representative, of norm at most $\norm B\norm{R_n}$.
-Conversely, take $Z=T_n(P)$, $W=\Delta_n(P)$, and $B$ equal to the canonical tensor map.
-Linearizing the representative supplied by the first condition gives a bounded map into $\Delta_n(P)$
-fixing every pure power. It fixes their linear span and, by continuity, their closed span, so it is a projection.
-\end{proof}
-
-\begin{definition}\label{fam:def:universal-reflection}
-The Banach parameter space $P$ has \emph{universal analytic reflection} if, for every Banach space $Z$, closed
-subspace $W\subseteq Z$, every open $U\subseteq P$, and every map $f\colon U\to W$, analyticity of
-the composite $U\to W\hookrightarrow Z$ implies analyticity of $f$.
-\end{definition}
-
-\begin{theorem}[analytic tensor criterion]\label{fam:thm:tensor-analytic}
-A Banach space $P$ has universal analytic reflection if and only if there are projections
-$R_n\colon T_n(P)\to\Delta_n(P)$ for all $n\ge1$ such that
-\begin{equation}\label{fam:eq:exponential-projections}
- \limsup_{n\to\infty}\norm{R_n}^{1/n}<\infty.
-\end{equation}
-\end{theorem}
-
-\begin{proof}
-Assume first that the projections exist. Expand an ambient analytic map with values in $W$ at a point.
-Lemma~\ref{fam:lem:diagonal} puts every homogeneous diagonal in $W$.
-The construction in Proposition~\ref{fam:prop:tensor-homogeneous} replaces its coefficient $p_n$ by a
-$W$\nobreakdash-valued coefficient of norm at most $\norm{p_n}\norm{R_n}$ and with the same diagonal.
-The exponential bound preserves a positive radius of convergence. The degree-zero coefficient is
-already in $W$, and the resulting expansion represents the given map.
-
-Conversely, form the Banach spaces with supremum norms
-\[
- Z=c_0\bigl(\{T_n(P)\}_{n\ge1}\bigr),\qquad
- W=c_0\bigl(\{\Delta_n(P)\}_{n\ge1}\bigr)\subseteq Z.
-\]
-Here $c_0$ denotes families tending to zero in their respective Banach coordinate spaces; $W$ is closed.
-On the open unit ball of $P$, define
-\[
- f(x)=(x^{\otimes n})_{n\ge1}.
-\]
-Since $\norm{x^{\otimes n}}\le\norm x^n$, this vector lies in $W$.
-As a $Z$\nobreakdash-valued map it is analytic: its degree-$n$ coefficient is the canonical tensor map
-placed in coordinate $n$, and has norm at most one. Universal reflection gives a $W$\nobreakdash-valued
-expansion $\sum_mq_m(x,\ldots,x)$ near zero with $\norm{q_m}\le C\rho^{-m}$ for some $C,\rho>0$.
-Compose this expansion with the projection $\pi_n\colon W\to\Delta_n(P)$ and compare on scalar lines
-with $x\mapsto x^{\otimes n}$. Lemma~\ref{lem:unique} gives
-\[
- \pi_nq_n(x,\ldots,x)=x^{\otimes n}\qquad(x\in P).
-\]
-Linearizing $\pi_nq_n$ therefore gives a projection $R_n$ onto $\Delta_n(P)$ with
-$\norm{R_n}\le\norm{q_n}\le C\rho^{-n}$, proving~\eqref{fam:eq:exponential-projections}.
-\end{proof}
-
-\subsection{Projection bounds and the special role of fixed degree}
-For $P=K^d$ with the maximum norm, the coordinate construction in
-Theorem~\ref{fam:thm:finite-reflection}, applied to the canonical tensor map, gives
-$\norm{R_n}\le d^n$ for $d\ge1$. A bounded linear change of coordinates introduces only a fixed
-distortion factor to the $n$\nobreakdash-th power, so it does not change the exponential-growth condition.
-
-For the ordinary sum-norm space $P=\ell^1(I,K)$, the projective tensor power is isometrically
-$\ell^1(I^n,K)$. Indeed, the coordinate tensor map is bounded with norm one, while expansion in coordinate
-tensors gives the reverse projective-norm estimate; completion then gives the identification.
-In these coordinates, $\Delta_n(P)$ consists exactly of arrays constant on each permutation orbit in $I^n$.
-One inclusion follows because every pure power is constant on such orbits. For the other, finite-coordinate
-polynomial interpolation puts each finite orbit sum in the span of pure powers, and finite sums of orbit
-sums are dense in the space of orbit-constant $\ell^1$ arrays.
-
-Choose one representative of each orbit, send its basis vector to the sum of all basis vectors in that
-orbit, and send the other basis vectors in the orbit to zero. This gives a projection with norm at most $n!$.
-Over a nonarchimedean field and for infinite $I$, this estimate is optimal even among projections that
-do not preserve the individual orbit blocks.
-
-\begin{proposition}\label{fam:prop:l1-optimal}
-If $K$ is nonarchimedean and complete, and $I$ is infinite, then
-\[
- \inf\{\norm R:R\colon T_n(\ell^1(I,K))\to\Delta_n(\ell^1(I,K))
-                  \text{ is a bounded projection}\}=n!.
-\]
-Consequently $\ell^1(I,K)$ does not have universal analytic reflection.
-\end{proposition}
-
-\begin{proof}
-The preceding construction gives the upper bound. For the lower bound, take an orbit $\mathcal O$
-of a tuple with $n$ distinct indices; it has $n!$ elements. For each $w\in\mathcal O$, let $\lambda_w$
-be the common coefficient on $\mathcal O$ of $R(e_w)$.
-The orbit sum $\sum_{w\in\mathcal O}e_w$ belongs to $\Delta_n(P)$ and is fixed by $R$, hence
-\[
- \sum_{w\in\mathcal O}\lambda_w=1.
-\]
-The nonarchimedean inequality implies that some $\abs{\lambda_w}\ge1$.
-For this $w$, the ordinary sum norm satisfies
-$\norm{R(e_w)}_1\ge n!\abs{\lambda_w}\ge n!$.
-Thus $\norm R\ge n!$. Finally, $(n!)^{1/n}$ is unbounded, so
-Theorem~\ref{fam:thm:tensor-analytic} excludes universal analytic reflection.
-\end{proof}
-
-There is no conflict with Corollary~\ref{fam:cor:l1-families}: every alternating-map family on these
-parameter spaces is still admissible when its final output fiber is complete. The ambient alternating action
-has a fixed polynomial degree. Factoring a general analytic parameter map through a free $\ell^1$ space
-therefore incurs a single factorial bound, rather than a sequence of factorial bounds across Taylor degrees.
-The special alternating-family property is consequently strictly weaker than universal analytic reflection.
-
-For comparison, in the category of nonarchimedean normed spaces with the \emph{nonarchimedean} projective
-tensor norm, the corresponding tensor power of $c_0(I,K)$ is $c_0(I^n,K)$ and the same sorted-orbit
-projection has norm at most one. This uses the infimum of maxima in the tensor seminorm, rather than the
-ordinary projective seminorm used in Theorem~\ref{fam:thm:tensor-analytic}.
-It is the tensor counterpart of the norm-preserving coefficient construction in
-Theorem~\ref{fam:thm:c0-reflection}; the two tensor norms must not be interchanged.
-
-Theorem~\ref{fam:thm:tensor-analytic} thus gives a complete answer for universal Banach-valued analytic
-reflection. It supplies a sufficient parameter criterion for alternating families, while
-Proposition~\ref{fam:prop:l1-optimal} shows that it is not a necessary one.
-An intrinsic characterization of the parameter spaces for which every alternating-map family is admissible
-remains a separate question.
 
 \section{Analytic domains and the failure of a largest full subcategory}
 \label{dom:section}
@@ -1651,6 +1457,27 @@ of the corresponding alternating-map spaces; under this identification, pullback
 This proves closure under finite products.
 \end{proof}
 
+\begin{proposition}[Compatibility and maximal domains]\label{dom:maximal}
+Fix a set of objects in the ambient product category. Form a graph whose vertices are those objects
+with analytic endomorphism action, joining two distinct vertices when both directed morphism-space
+actions are analytic. Full analytic domains are exactly the cliques in this graph. Every analytic
+domain extends to one maximal under inclusion, and every maximal domain contains every object of the
+universal-target core that belongs to the chosen set.
+\end{proposition}
+
+\begin{proof}
+The clique condition states exactly that every hom-space action in the full subcategory is analytic.
+The union of a chain of cliques is again a clique: any two of its vertices occur together in one member
+of the chain. Zorn's lemma gives a maximal extension. Proposition~\ref{dom:core} permits adjoining every
+core object, so maximality forces each such object to be present.
+\end{proof}
+
+This description distinguishes existence of maximal restrictions from existence of a largest one.
+The counterexample below exhibits two vertices that are not joined. Thus no largest clique exists in any
+chosen ambient set containing both constructed objects.
+The set-of-objects qualification makes the use of Zorn's lemma explicit; no choice principle for a proper
+class of objects is being asserted.
+
 The core is canonical, but its definition is a regularity condition rather than an intrinsic classification
 of targets. Main Theorem~(\ref{main:spherical}) supplies many of its objects. A different sufficient condition
 depends on the source and target together.
@@ -1701,6 +1528,16 @@ need not admit continuous coordinates over $K$. The theorem does not give a coun
 field, or a counterexample with Banach objects.
 
 \subsection{The rigid source and the split pair}
+
+We use the following elementary completion principle. Let $K$ be dense in a complete valued extension $L$,
+let $(E_i)$ be a finite family of dense $K$\nobreakdash-subspaces of Banach $L$\nobreakdash-spaces $H_i$,
+and let $Z$ be Banach over $L$.
+A bounded $K$\nobreakdash-multilinear map $\prod_iE_i\to Z$ extends uniquely to a bounded
+$L$\nobreakdash-multilinear map $\prod_iH_i\to Z$, with the same norm. Indeed, approximate each input by
+vectors in $E_i$. A telescoping expansion and the multilinear bound make the resulting values Cauchy,
+independently of the approximations. The bound persists in the limit, and density of $K$ in $L$ gives
+$L$\nobreakdash-linearity in each slot. In the applications below the extended codomain is the complete
+space $L$ or $A$, while membership of values on the original inputs in the smaller spaces is retained.
 
 Put $L=\F_p((t))$, the completion of $K$, and consider the normed $L$\nobreakdash-algebra
 \[
@@ -1924,12 +1761,383 @@ particular construction removes the obstruction: the sources become finite-dimen
 the target becomes $L$, and the coordinate polynomial acquires a bounded multilinear lift.
 \end{remark}
 
+\section{A tensor criterion for analytic reflection}\label{fam:sec:tensors}
+The preceding parameter theorems suggest an intrinsic question about normed spaces: when does every
+analytic map into an ambient Banach space remain analytic into a closed subspace containing its values?
+This is stronger than the question for alternating-map families. A tensor criterion characterizes
+the stronger property and clarifies why the fixed-degree argument for $\ell^1$ goes further.
+
+In this section $K$ is complete and nontrivially normed, and $P$ is Banach.
+For $n\ge1$, let $T_n(P)$ be the separated completed projective tensor power representing bounded
+$n$\nobreakdash-linear maps from $P^n$ to Banach spaces. We use the ordinary projective seminorm,
+defined by infima of sums of products of norms, and take its separated completion before invoking
+the universal property. Its canonical multilinear map has norm at most one.
+Define the closed subspace
+\[
+ \Delta_n(P)=\overline{\spn\{x^{\otimes n}:x\in P\}}\subseteq T_n(P).
+\]
+A projection onto $\Delta_n(P)$ will mean a bounded linear map
+$R_n\colon T_n(P)\to\Delta_n(P)$ whose restriction to $\Delta_n(P)$ is the identity.
+
+\begin{proposition}[homogeneous reflection]\label{fam:prop:tensor-homogeneous}
+For a fixed $n\ge1$, the following conditions are equivalent.
+\begin{enumerate}
+\item For every Banach space $Z$, closed subspace $W\subseteq Z$, and bounded $n$\nobreakdash-linear map
+$B\colon P^n\to Z$ with diagonal values in $W$, there is a bounded $W$\nobreakdash-valued
+$n$\nobreakdash-linear map with the same diagonal.
+\item The subspace $\Delta_n(P)$ is the range of a bounded projection in $T_n(P)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Suppose first that a projection $R_n$ exists. Linearize $B$ to a bounded map
+$\widetilde B\colon T_n(P)\to Z$. The diagonal hypothesis and closedness of $W$ imply
+$\widetilde B(\Delta_n(P))\subseteq W$.
+Composing $\widetilde B|_{\Delta_n(P)}$ with $R_n$ and the canonical tensor map gives the required
+multilinear representative, of norm at most $\norm B\norm{R_n}$.
+Conversely, take $Z=T_n(P)$, $W=\Delta_n(P)$, and $B$ equal to the canonical tensor map.
+Linearizing the representative supplied by the first condition gives a bounded map into $\Delta_n(P)$
+fixing every pure power. It fixes their linear span and, by continuity, their closed span, so it is a projection.
+\end{proof}
+
+\begin{definition}\label{fam:def:universal-reflection}
+The Banach parameter space $P$ has \emph{universal analytic reflection} if, for every Banach space $Z$, closed
+subspace $W\subseteq Z$, every open $U\subseteq P$, and every map $f\colon U\to W$, analyticity of
+the composite $U\to W\hookrightarrow Z$ implies analyticity of $f$.
+\end{definition}
+
+\begin{theorem}[analytic tensor criterion]\label{fam:thm:tensor-analytic}
+A Banach space $P$ has universal analytic reflection if and only if there are projections
+$R_n\colon T_n(P)\to\Delta_n(P)$ for all $n\ge1$ such that
+\begin{equation}\label{fam:eq:exponential-projections}
+ \limsup_{n\to\infty}\norm{R_n}^{1/n}<\infty.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Assume first that the projections exist. Expand an ambient analytic map with values in $W$ at a point.
+Lemma~\ref{fam:lem:diagonal} puts every homogeneous diagonal in $W$.
+The construction in Proposition~\ref{fam:prop:tensor-homogeneous} replaces its coefficient $p_n$ by a
+$W$\nobreakdash-valued coefficient of norm at most $\norm{p_n}\norm{R_n}$ and with the same diagonal.
+The exponential bound preserves a positive radius of convergence. The degree-zero coefficient is
+already in $W$, and the resulting expansion represents the given map.
+
+Conversely, form the Banach spaces with supremum norms
+\[
+ Z=c_0\bigl(\{T_n(P)\}_{n\ge1}\bigr),\qquad
+ W=c_0\bigl(\{\Delta_n(P)\}_{n\ge1}\bigr)\subseteq Z.
+\]
+Here $c_0$ denotes families tending to zero in their respective Banach coordinate spaces; $W$ is closed.
+On the open unit ball of $P$, define
+\[
+ f(x)=(x^{\otimes n})_{n\ge1}.
+\]
+Since $\norm{x^{\otimes n}}\le\norm x^n$, this vector lies in $W$.
+As a $Z$\nobreakdash-valued map it is analytic: its degree-$n$ coefficient is the canonical tensor map
+placed in coordinate $n$, and has norm at most one. This gives an expansion at zero. To re-expand
+at $a$ with $\norm a<1$, choose $r>0$ with $\norm a+r<1$. Expanding each tensor power in $a+h$
+gives translated coefficients, and the sum of all term bounds is at most
+$\sum_{n\ge1}(\norm a+r)^n<\infty$. Completeness of $Z$ supplies the coefficients and the
+rearranged sum, proving analyticity throughout the unit ball. Universal reflection gives a $W$\nobreakdash-valued
+expansion $\sum_mq_m(x,\ldots,x)$ near zero with $\norm{q_m}\le C\rho^{-m}$ for some $C,\rho>0$.
+Compose this expansion with the projection $\pi_n\colon W\to\Delta_n(P)$ and compare on scalar lines
+with $x\mapsto x^{\otimes n}$. Lemma~\ref{lem:unique} gives
+\[
+ \pi_nq_n(x,\ldots,x)=x^{\otimes n}\qquad(x\in P).
+\]
+Linearizing $\pi_nq_n$ therefore gives a projection $R_n$ onto $\Delta_n(P)$ with
+$\norm{R_n}\le\norm{q_n}\le C\rho^{-n}$, proving~\eqref{fam:eq:exponential-projections}.
+\end{proof}
+
+\subsection{Projection bounds and the special role of fixed degree}
+For $P=K^d$ with the maximum norm, the coordinate construction in
+Theorem~\ref{fam:thm:finite-reflection}, applied to the canonical tensor map, gives
+$\norm{R_n}\le d^n$ for $d\ge1$. A bounded linear change of coordinates introduces only a fixed
+distortion factor to the $n$\nobreakdash-th power, so it does not change the exponential-growth condition.
+
+For the ordinary sum-norm space $P=\ell^1(I,K)$, the projective tensor power is isometrically
+$\ell^1(I^n,K)$. Indeed, the coordinate tensor map is bounded with norm one, while expansion in coordinate
+tensors gives the reverse projective-norm estimate; completion then gives the identification.
+In these coordinates, $\Delta_n(P)$ consists exactly of arrays constant on each permutation orbit in $I^n$.
+One inclusion follows because every pure power is constant on such orbits. For the other, finite-coordinate
+polynomial interpolation puts each finite orbit sum in the span of pure powers, and finite sums of orbit
+sums are dense in the space of orbit-constant $\ell^1$ arrays.
+
+Choose one representative of each orbit, send its basis vector to the sum of all basis vectors in that
+orbit, and send the other basis vectors in the orbit to zero. This gives a projection with norm at most $n!$.
+Over a nonarchimedean field and for infinite $I$, this estimate is optimal even among projections that
+do not preserve the individual orbit blocks.
+
+\begin{proposition}\label{fam:prop:l1-optimal}
+If $K$ is nonarchimedean and complete, and $I$ is infinite, then
+\[
+ \inf\{\norm R:R\colon T_n(\ell^1(I,K))\to\Delta_n(\ell^1(I,K))
+                  \text{ is a bounded projection}\}=n!.
+\]
+Consequently $\ell^1(I,K)$ does not have universal analytic reflection.
+\end{proposition}
+
+\begin{proof}
+The preceding construction gives the upper bound. For the lower bound, take an orbit $\mathcal O$
+of a tuple with $n$ distinct indices; it has $n!$ elements. For each $w\in\mathcal O$, let $\lambda_w$
+be the common coefficient on $\mathcal O$ of $R(e_w)$.
+The orbit sum $\sum_{w\in\mathcal O}e_w$ belongs to $\Delta_n(P)$ and is fixed by $R$, hence
+\[
+ \sum_{w\in\mathcal O}\lambda_w=1.
+\]
+The nonarchimedean inequality implies that some $\abs{\lambda_w}\ge1$.
+For this $w$, the ordinary sum norm satisfies
+$\norm{R(e_w)}_1\ge n!\abs{\lambda_w}\ge n!$.
+Thus $\norm R\ge n!$. Finally, $(n!)^{1/n}$ is unbounded, so
+Theorem~\ref{fam:thm:tensor-analytic} excludes universal analytic reflection.
+\end{proof}
+
+\begin{corollary}[Polynomial approximations without a common analytic radius]
+\label{fam:cor:no-common-radius}
+Let $K$ be a complete nonarchimedean nontrivially normed field and put
+$P=\ell^1(\N,K)$, with the ordinary sum norm. There are Banach spaces
+$W\subseteq Z$, with $W$ closed, and a map $f$ on the open unit ball of $P$
+such that $f$ is analytic into $Z$ and $C^\infty$ into $W$, but is not analytic
+into $W$ at zero. Moreover, $f$ is a uniform limit on every smaller ball of
+entire $W$\nobreakdash-valued polynomials.
+\end{corollary}
+
+\begin{proof}
+Take
+\[
+ Z=c_0\bigl(\{T_n(P)\}_{n\ge1}\bigr),\qquad
+ W=c_0\bigl(\{\Delta_n(P)\}_{n\ge1}\bigr),\qquad
+ f(x)=(x^{\otimes n})_{n\ge1}.
+\]
+The spaces are Banach and $W$ is closed in $Z$. As in the proof of
+Theorem~\ref{fam:thm:tensor-analytic}, the ambient expansion has coefficient
+norms at most one and defines an analytic map on the open unit ball.
+Smooth reflection through the closed isometric inclusion makes $f$
+$C^\infty$ as a map into $W$.
+
+Suppose a $W$\nobreakdash-valued expansion at zero has coefficients $q_n$.
+Uniqueness on scalar lines gives
+\[
+ \pi_nq_n(x,\ldots,x)=x^{\otimes n},
+\]
+where $\pi_n\colon W\to\Delta_n(P)$ is the coordinate projection.
+Linearizing $\pi_nq_n$ gives a projection
+$T_n(P)\to\Delta_n(P)$ of norm at most $\norm{q_n}$.
+Proposition~\ref{fam:prop:l1-optimal} therefore gives
+$\norm{q_n}\ge n!$. Since $(n!)^{1/n}$ is unbounded, these coefficients
+cannot have a common positive radius.
+
+For each $n$, choose the sorted-orbit projection
+$R_n\colon T_n(P)\to\Delta_n(P)$. Its composition with the canonical
+tensor map is a bounded multilinear representative of $x\mapsto x^{\otimes n}$
+with values in $\Delta_n(P)$. Consequently the truncation
+\[
+ f_N(x)=(x,x^{\otimes2},\ldots,x^{\otimes N},0,\ldots)
+\]
+is an entire $W$\nobreakdash-valued polynomial. For $0<r<1$ and $\norm x\le r$,
+\[
+ \norm{f(x)-f_N(x)}_W\le r^{N+1},
+\]
+which proves the asserted uniform convergence.
+\end{proof}
+
+This example is characteristic-free within the nonarchimedean setting.
+Every individual homogeneous term has an analytic lift, but their best
+multilinear bounds grow factorially. The fixed-degree argument for alternating
+families avoids this obstruction by using one outer degree throughout.
+
+There is no conflict with Corollary~\ref{fam:cor:l1-families}: every alternating-map family on these
+parameter spaces is still admissible when its final output fiber is complete. The ambient alternating action
+has a fixed polynomial degree. Factoring a general analytic parameter map through a free $\ell^1$ space
+therefore incurs a single factorial bound, rather than a sequence of factorial bounds across Taylor degrees.
+The special alternating-family property is consequently strictly weaker than universal analytic reflection.
+
+For comparison, in the category of nonarchimedean normed spaces with the \emph{nonarchimedean} projective
+tensor norm, the corresponding tensor power of $c_0(I,K)$ is $c_0(I^n,K)$ and the same sorted-orbit
+projection has norm at most one. This uses the infimum of maxima in the tensor seminorm, rather than the
+ordinary projective seminorm used in Theorem~\ref{fam:thm:tensor-analytic}.
+It is the tensor counterpart of the norm-preserving coefficient construction in
+Theorem~\ref{fam:thm:c0-reflection}; the two tensor norms must not be interchanged.
+
+Theorem~\ref{fam:thm:tensor-analytic} thus gives a complete answer for universal Banach-valued analytic
+reflection. It supplies a sufficient parameter criterion for alternating families, while
+Proposition~\ref{fam:prop:l1-optimal} shows that it is not a necessary one.
+An intrinsic characterization of the parameter spaces for which every alternating-map family is admissible
+remains a separate question.
+
 \section{The multiplier theorem over a finite field}\label{sec:FF}
 
 This section proves the algebraic obstruction used in the Laurent-series construction: over a finite field in which
 $k!=0$, coordinatewise multiplication admits no multilinear lift satisfying a polarized diagonal identity and a
-uniform bound on exterior support. We first distinguish the diagonal identities, since over a finite field equality
-at all scalar points need not be a polynomial identity.
+uniform bound on exterior support. We give a roadmap of the complete construction, introduce the exterior
+support estimates, and then distinguish the diagonal identities: over a finite field equality at all scalar
+points need not be a polynomial identity.
+
+\subsection*{Roadmap of the Banach counterexample}
+The proof separates into an algebraic obstruction, its realization by a normed space, and passage to the prescribed
+field. The analytic input is a lift criterion valid in every characteristic: if $Q$ is analytic at any point, the
+degree-$k$ term of its power series has diagonal $Q$. One-variable uniqueness identifies this diagonal without
+dividing by $k!$ (Proposition~\ref{prop:lift}).
+
+\emph{The finite-field obstruction.}
+Let $\kappa$ be finite and put $E_0=\kappa^\N$. Theorem~\ref{thm:FF} rules out a multilinear lift of coordinatewise
+multiplication satisfying the polarized diagonal identity~\eqref{eq:Pol1}, with values in $\Lambda^k_\kappa E_0$ when $k!=0$ and every value of the lift lies in an exterior power of a
+subspace of uniformly bounded dimension. Ramsey's theorem first makes the coefficients depend only on the order
+and equality pattern of their indices. Signed sums over clusters of four indices cancel the terms not tied to the
+output. A staircase of clusters converts the support bound into invariance under adjacent transpositions; the
+polarized diagonal identity then forces $k!\,\chi=1$ for a common cluster value $\chi$, a contradiction.
+
+\emph{The Laurent series construction.}
+Over $K_1=\kappa((X))$, take $E_1=\linf(\N,K_1)$ and let $B$ be the completion of
+$\Lambda^k_{K_1}E_1$ under its projective norm, defined using ordinary sums rather than maxima. The essential
+estimate is that the constant-coefficient map
+\[
+\eta\colon B\longrightarrow\Lambda^k_\kappa E_0
+\]
+is well defined and has uniformly bounded support dimension on bounded sets
+(Proposition~\ref{prop:supp}). Evaluating a hypothetical lift on multiplication operators and on the universal
+wedge map, then applying $\eta$, produces exactly the finite-field lift excluded above. The coefficient map
+is $\kappa$\nobreakdash-linear; no $K_1$\nobreakdash-linearity is asserted or needed.
+
+\emph{Passage to the prescribed field.}
+Choose $t\in K$ with $0<\abs t<1$. The closure of $\F_p(t)$ in the completion $\Kh$ is a spherically complete
+Laurent series field $K_1\cong\F_p((X))$, with $\abs X=\abs t$. Ingleton's Hahn--Banach theorem~\cite{In} gives a
+contracting $K_1$\nobreakdash-linear projection $\Kh\to K_1$. It makes the completed projective tensor products
+\[
+E=E_1\widehat\otimes_{\pi,K_1}\Kh,\qquad
+F=B\widehat\otimes_{\pi,K_1}\Kh
+\]
+contain $E_1$ and $B$ isometrically, and allows a lift over $\Kh$ to descend to one over $K_1$. Density handles an
+incomplete $K$. These are the explicit witnesses in Theorem~\ref{thm:main}. Finally, sums of unit wedges on disjoint
+blocks have norms growing linearly with the number of blocks. This growth persists in $F$ and rules out every
+equivalent nonarchimedean norm (Proposition~\ref{prop:nonultra}).
+
+\subsection{Exterior powers, supports and determinant arrays}\label{ssec:ext}
+Let $L$ be a field, $V$ an $L$\nobreakdash-vector space and $k\ge1$. We write $\Lambda^kV=\Lambda^k_LV$ for the algebraic exterior
+power, in which $x_1\wedge\dots\wedge x_k=0$ whenever two $x_i$ coincide. We use the standard facts: for a subspace
+$W\subseteq V$ the map $\Lambda^kW\to\Lambda^kV$ is injective, and we regard $\Lambda^kW$ as a subspace of $\Lambda^kV$;
+if $u_1,\dots,u_d$ is a basis of a finite-dimensional space $U$, the wedges $u_I:=u_{i_1}\wedge\dots\wedge u_{i_k}$,
+$I=\{i_1<\dots<i_k\}$, form a basis of $\Lambda^kU$; and every $\omega\in\Lambda^kV$ lies in $\Lambda^kU$ for some
+finite-dimensional $U\subseteq V$.
+
+\begin{definition}\label{def:supp}
+The \emph{support dimension} of $\omega\in\Lambda^kV$ is
+\[
+\sdim(\omega):=\min\{\dim W:\ W\subseteq V\text{ finite-dimensional},\ \omega\in\Lambda^kW\}.
+\]
+\end{definition}
+
+The definition gives $\sdim(0)=0$, $\sdim(c\omega)=\sdim(\omega)$ for $c\neq0$, $\sdim(\omega+\omega')\le\sdim(\omega)+\sdim(\omega')$
+(use $W+W'$), and $\sdim(\omega)\le\dim\spn S$ if $\omega$ is a sum of wedges of vectors from a finite set $S$. If
+$V\subseteq V'$, then $\sdim$ computed in $V'$ is at most $\sdim$ computed in $V$.
+
+For spaces of functions, exterior vectors can be detected by determinants of coordinate evaluations. These arrays
+also turn bounds on support dimension into ordinary matrix-rank bounds.
+Let $S$ be a set and $V\subseteq L^S$ a space of functions on $S$. The \emph{determinant array} is the linear map
+\[
+\Omega\colon\Lambda^kV\to L^{S^k},\qquad \Omega_{y_1\wedge\dots\wedge y_k}(c_1,\dots,c_k):=\det\bigl(y_b(c_a)\bigr)_{a,b=1}^k .
+\]
+It is well defined because the right side is multilinear and alternating in $(y_1,\dots,y_k)$ (these are the
+columns). For each $\omega$, the function $\Omega_\omega$ is alternating in $(c_1,\dots,c_k)$ (the rows); in particular
+$\Omega_\omega(c_{\sigma(1)},\dots,c_{\sigma(k)})=\sgn(\sigma)\,\Omega_\omega(c_1,\dots,c_k)$.
+
+\begin{lemma}\label{lem:detinj}
+The determinant array $\Omega\colon\Lambda^kV\to L^{S^k}$ is injective.
+\end{lemma}
+
+\begin{proof}
+Let $\Omega_\omega=0$ and choose a finite-dimensional $U\subseteq V$ with $\omega\in\Lambda^kU$. The evaluations
+$\mathrm{ev}_s|_U$, $s\in S$, separate the points of $U$ (a function in $U$ vanishing at every $s$ is $0$), so they span
+the dual space $U^*$. Choose $s_1,\dots,s_d\in S$ such that the $\mathrm{ev}_{s_i}|_U$ form a basis of $U^*$, and let
+$u_1,\dots,u_d$ be the dual basis of $U$, so that $u_j(s_i)=\delta_{ij}$. For increasing $k$\nobreakdash-subsets $I,J$ of
+$\{1,\dots,d\}$ we get $\Omega_{u_I}(s_{j_1},\dots,s_{j_k})=\det(u_{i_b}(s_{j_a}))_{a,b}=\delta_{IJ}$. Writing
+$\omega=\sum_Ic_Iu_I$ therefore gives $0=\Omega_\omega(s_{j_1},\dots,s_{j_k})=c_J$ for every $J$, so $\omega=0$.
+\end{proof}
+
+\begin{lemma}[support bounds flattening rank]\label{lem:flat}
+Let $V\subseteq L^S$, $\omega\in\Lambda^kV$ and $\alpha\in\{1,\dots,k\}$. Let $R\subseteq S$ and
+$R'\subseteq S^{\{1,\dots,k\}\setminus\{\alpha\}}$ be finite. The $R\times R'$ matrix $M$ with entries
+$M(c_\alpha,c'):=\Omega_\omega(c)$, where $c$ has $c_\alpha$ in slot $\alpha$ and the entries of $c'$ in the other
+slots, has rank at most $\sdim(\omega)$.
+\end{lemma}
+
+\begin{proof}
+Write $\omega=\sum_jy_{j,1}\wedge\dots\wedge y_{j,k}$ with all $y_{j,b}$ in a subspace $W$ of dimension $\sdim(\omega)$.
+Expanding each determinant along row $\alpha$,
+$\det(y_{j,b}(c_a))_{a,b}=\sum_b\pm y_{j,b}(c_\alpha)\cdot\mu_{j,b}(c')$, where the minor $\mu_{j,b}(c')$ does not
+involve $c_\alpha$. So for fixed $c'$ the column $c_\alpha\mapsto M(c_\alpha,c')$ is a linear combination of the
+restrictions $y_{j,b}|_R$. All columns lie in the restriction of $W$ to $R$, a space of dimension at most
+$\sdim(\omega)$.
+\end{proof}
+
+A second way to obtain lower bounds on support is to contract all but one exterior factor. The resulting vectors
+must lie in every subspace supporting the original exterior vector.
+
+\begin{samepage}
+\begin{lemma}[contraction]\label{lem:contr}
+Let $k\ge2$ and $\varphi=(\varphi_1,\dots,\varphi_{k-1})\in(V^*)^{k-1}$. There is a linear map $c_\varphi\colon\Lambda^kV\to V$
+with
+\[
+c_\varphi(x_1\wedge\dots\wedge x_k)=\sum_{i=1}^k(-1)^{k+i}\det\bigl(\varphi_a(x_b)\bigr)_{1\le a\le k-1,\ b\ne i}\;x_i ,
+\]
+and $c_\varphi(\Lambda^kW)\subseteq W$ for every subspace $W$. Consequently
+$\sdim(\omega)\ge\dim\spn\{c_\varphi(\omega):\varphi\in(V^*)^{k-1}\}$.
+\end{lemma}
+\end{samepage}
+
+\begin{proof}
+The right side is multilinear in $(x_b)$. For $\psi\in V^*$, applying $\psi$ to it gives, by Laplace expansion along the
+last row, the determinant of the $k\times k$ matrix with entries $\varphi_a(x_b)$ in the rows $a<k$ and $\psi(x_b)$ in the last
+row; it vanishes when two columns coincide. Since $V^*$ separates the points of $V$, the right side
+vanishes whenever $x_a=x_b$ for some $a\ne b$, so it factors through $\Lambda^kV$. Each term is a multiple of some $x_i$, which gives
+$c_\varphi(\Lambda^kW)\subseteq W$. If $\omega\in\Lambda^kW$ with $\dim W=\sdim(\omega)$, all $c_\varphi(\omega)$ lie in $W$.
+\end{proof}
+
+\begin{proposition}[canonical exterior support]\label{prop:canonical-support}
+Let $L$ be any field, $V$ an $L$\nobreakdash-vector space, $k\ge2$, and
+$\omega\in\Lambda^kV$. Then
+\[
+S(\omega):=\spn\{c_\varphi(\omega):\varphi\in(V^*)^{k-1}\}
+\]
+is the unique smallest subspace supporting $\omega$. In particular,
+$\omega\in\Lambda^k S(\omega)$ and
+$\sdim(\omega)=\dim S(\omega)$.
+\end{proposition}
+
+\begin{proof}
+Choose a finite-dimensional supporting subspace $U\subseteq V$.
+Lemma~\ref{lem:contr} gives $S(\omega)\subseteq U$, so $S(\omega)$ is
+finite-dimensional. Choose a basis $e_1,\dots,e_d$ of $U$ whose first
+$r$ vectors form a basis of $S(\omega)$, and extend its coordinate
+functionals algebraically to $V$. Write
+$\omega=\sum_{|I|=k}a_Ie_I$ in the exterior basis of $U$.
+If $j\in I$ and $j>r$, contract against the $k-1$ coordinate functionals
+indexed by $I\setminus\{j\}$. The $e_j$\nobreakdash-coordinate of this
+contraction is $\pm a_I$: no other basis wedge contributes to that
+coordinate. The contraction belongs to $S(\omega)$, so this coordinate
+is zero. Hence $a_I=0$ whenever $I$ meets $\{r+1,\dots,d\}$, proving
+$\omega\in\Lambda^k S(\omega)$.
+Every supporting subspace contains all the contractions by
+Lemma~\ref{lem:contr}, and therefore contains $S(\omega)$. This proves
+minimality and the dimension formula. Only unit signs occur, so the
+argument is valid in every characteristic.
+\end{proof}
+
+The same conclusion holds in degree one: under $\Lambda^1V\simeq V$,
+the empty-tuple contraction is the identity and $S(\omega)=L\omega$.
+In degree zero, every element of $\Lambda^0V=L$ is supported by the
+zero subspace, so its support dimension is zero; no contraction to
+$V$ is needed.
+
+For matrix calculations, choose any finite-dimensional supporting
+subspace $U$ and a basis of it. Form the finite matrix whose columns
+are the coordinates of the contractions against $(k-1)$\nobreakdash-tuples
+of coordinate functionals, extended to $V$. Arbitrary functionals
+restrict to linear combinations of these coordinates on $U$;
+multilinearity in the covectors therefore shows that the column span
+is exactly $S(\omega)$. The matrix consequently has rank
+$\sdim(\omega)$. This uses ordinary matrix rank, and entails no
+choice of a rank convention for an infinite matrix.
 
 \subsection{Lifts and three diagonal identities}\label{ssec:diag}
 Fix a field $L$, an integer $k\ge1$, $L$\nobreakdash-vector spaces $A$ and $V$, and a linear map $D\colon A\to\End_L(V)$,
@@ -2655,7 +2863,7 @@ $\cD(a_i,\rho_i)$, so $a$ belongs to every ball of the original family.
 
 \begin{remark}[the hypothesis (K2) of~\cite{M}]\label{rem:K2}
 The construction of~\cite{M} assumes that the base field satisfies the hypothesis (K2) there: there are closed balls
-$\cD(c_n,r_n)$ with $\abs{c_{n+1}-c_n}\le r_n$, $r_0>r_1>\cdots$ and $\bigcap_n\cD(c_n,r_n)=\emptyset$. An nonarchimedean
+$\cD(c_n,r_n)$ with $\abs{c_{n+1}-c_n}\le r_n$, $r_0>r_1>\cdots$ and $\bigcap_n\cD(c_n,r_n)=\emptyset$. A nonarchimedean
 field (indeed any nonarchimedean space) satisfies (K2) if and only if it is not spherically complete. Indeed, the balls
 in (K2) pairwise meet, since $\abs{c_n-c_m}\le\max_{m\le j<n}\abs{c_{j+1}-c_j}\le r_m$ for $m\le n$. Conversely, let a
 family of pairwise meeting closed balls have no common point. A ball of least radius in the family would lie in all
@@ -2712,26 +2920,7 @@ Throughout the rest of this section we fix fields $K_1\subseteq K'$ with the fol
 By multiplication, $K'$ is a nonarchimedean normed $K_1$\nobreakdash-space. In our application $K'=\Kh$ and $K_1$ is the field of
 Lemma~\ref{lem:laurentsub}.
 
-\begin{lemma}\label{lem:findim}
-Let $\mathbb K$ be a complete nontrivially normed field and $U$ a finite-dimensional normed $\mathbb K$\nobreakdash-space. Then every
-linear functional on $U$ is bounded, and $U$ is complete.
-\end{lemma}
 
-\begin{proof}
-We prove both assertions by induction on $n=\dim U$, the case $n=0$ being immediate. Suppose $n\ge1$ and let $g\ne0$
-be a linear functional on $U$. Its kernel $H$ has dimension $n-1$, so the induction hypothesis makes $H$ complete
-and therefore closed in $U$. Choose $v$ with $g(v)=1$. Since $v\notin H$,
-$\delta:=\inf_{h\in H}\norm{v-h}>0$. Write $x=g(x)v+h$ with $h\in H$. If $g(x)\ne0$, then
-\[
-\norm x=\abs{g(x)}\,\norm{v+g(x)^{-1}h}\ge\abs{g(x)}\delta.
-\]
-Thus $\abs{g(x)}\le\delta^{-1}\norm x$ for every $x$, proving boundedness.
-
-Choose a basis of $U$. Its coordinate functionals are now bounded, so the coordinate map
-$U\to\mathbb K^n$, with the max norm on $\mathbb K^n$, is bounded. The inverse map
-$(c_i)\mapsto\sum_ic_ie_i$ is bounded by $\sum_i\norm{e_i}$. Hence $U$ is bi-Lipschitz equivalent to the complete
-space $\mathbb K^n$, and is itself complete.
-\end{proof}
 
 \begin{theorem}[Ingleton~\cite{In}; see also~\cite{vR}]\label{thm:ingleton}
 Let $K_1$ be a spherically complete nonarchimedean normed field, $V$ a $K_1$\nobreakdash-vector space with a nonarchimedean norm,
@@ -3040,7 +3229,7 @@ is a lift over $\Kh$.
 \end{proof}
 
 \needspace{8\baselineskip}
-\section{Proofs of the main results}\label{sec:proofs}
+\section{The sharp Banach counterexample and classification}\label{sec:proofs}
 The preceding sections give the obstruction to a bounded lift. We first establish the remaining property of the
 target, then assemble the proof of Theorem~\ref{thm:main} and deduce Corollary~\ref{cor:class}.
 
@@ -3297,18 +3486,8 @@ families~\cite[\S1, Prop.~1 and its Corollaire]{Se} (see also~\cite[Prop.~10.1]{
 and hence has such a basis for an equivalent norm.
 \end{remark}
 
-\subsection*{Ultrametric counterexamples}
-\begin{remark}[nonarchimedean targets over bases that are not spherically complete; announced]\label{rem:R}
-The following statement is announced without proof and is not used elsewhere in this paper. Let $k\ge2$,
-and let $K$ be a complete nontrivially normed field, not spherically complete, with $k!=0$ in $K$.
-Then $K$ is nonarchimedean by Lemma~\ref{lem:ultra}. For a cardinal $\mu$ put $\beth_0(\mu):=\mu$ and
-$\beth_{n+1}(\mu):=2^{\beth_n(\mu)}$, and let $\mu^+$ be the successor cardinal of $\mu$. Let $I$ be a set of
-cardinality at least $\beth_{3k-1}(\abs K)^+$, put $E:=\linf(I,K)$, and let $F_I$ be the closure in $\linf(I^k,K)$ of
-the span of the determinant arrays $(i_1,\dots,i_k)\mapsto\det(x_b(i_a))_{a,b}$, $x\in E^k$. Then $E$ and $F_I$ are
-nonarchimedean $K$\nobreakdash-Banach spaces, and $Q^K_{E,E,F_I}$ is analytic at no point. The proposed proof uses
-a partition argument with the Erd\H{o}s--Rado theorem in place of Ramsey's theorem. For $k=2$ in
-characteristic~$2$ the countable index set $\N$ suffices~\cite{M}.
-\end{remark}
+\subsection*{Nonarchimedean counterexamples}
+
 
 \paragraph{Comparison with characteristic $2$.}
 For $p=k=2$, Theorem~\ref{thm:main} gives a second counterexample over every nontrivially normed field of
@@ -3323,47 +3502,6 @@ failure of Hahn--Banach over a base that is not spherically complete, using $\li
 construction. Here the finite-field theorem is combined with the constant-coefficient map of a Laurent
 series field, and Ingleton's theorem is applied over a spherically complete subfield. In characteristic~$2$,
 Theorem~\ref{thm:FF} needs no signs (Remark~\ref{rem:FFhyp}).
-
-\subsection*{An alternative algebraic approach}
-\begin{remark}[another possible approach]\label{rem:routeII}
-The following optional sketch suggests an alternative route to the input needed in \S\ref{sec:laurent}. It requires
-two additional results: an infinite-field obstruction and an equality between support dimension and contraction
-rank. Neither is proved here, and no argument in this paper depends on this route.
-
-\emph{The infinite-field input.} The first required statement is the analogue of
-Theorem~\ref{thm:FF} over infinite fields $L$ with $k!=0$ in $L$, for lifts that satisfy~\eqref{eq:Pw} and have
-uniformly bounded support, of an arbitrary linear family $D\colon A\to\End_L(V)$ whose image modulo the finite-rank
-operators is infinite-dimensional.
-
-\emph{Base change and minors.} Let $\Psi$ be a lift over $\F_q$ whose values have support dimension at most $d$.
-After the finite base change $\F_q\subseteq\F_{q^N}$, the values of the base change of $\Psi$ at $\F_{q^N}$\nobreakdash-points
-have support dimension at most $d_N:=N^{2k}d$, since each input has only $N$ pieces over $\F_q$; choose $N$ with
-$q^N>d_N+1$. One would then use that the support dimension of $\omega\in\Lambda^kV$ \emph{equals} the rank of its
-contraction matrix, the matrix of coordinates of the vectors $c_\varphi(\omega)$ of Lemma~\ref{lem:contr}, with
-$\varphi$ running over tuples of dual basis vectors. Lemma~\ref{lem:contr} gives only the inequality $\ge$, and
-\emph{we do not prove the equality}. Granting it, consider any finite set of independent scalar parameters in each
-of the $2k$ input slots. By multilinearity, every contraction-matrix entry has degree at most one in each scalar
-parameter. Its $(d_N+1)$\nobreakdash-minors therefore have degree at most $d_N+1<q^N$ in each variable. They vanish at every
-$\F_{q^N}$\nobreakdash-point, so they are zero polynomials and remain zero over the algebraic closure
-$\overline{\F}_q$. The resulting support bound would allow the proposed obstruction to be applied over this infinite
-field.
-
-\needspace{4\baselineskip}
-\emph{Compatibility requirements.} In addition to those two unproved inputs, the route requires the following
-properties of $\Psi$.
-\begin{enumerate}
-\item The full identity~\eqref{eq:Pol}, not only~\eqref{eq:Pol1}: for $k>q$ the identity~\eqref{eq:Pw} at
-$\F_q$\nobreakdash-points does not survive base change (Proposition~\ref{prop:diag}(3)), whereas~\eqref{eq:Pol}
-gives~\eqref{eq:Pw} at every point after base change.
-\item Alternation, as required by the unproved input above. Both alternation and antisymmetry survive scalar
-extension, but in characteristic~$2$ antisymmetry does not imply alternation.
-\item An infinite-dimensional image modulo finite rank. For the multipliers $D_ax=ax$ on $L^\N$ this holds because
-the multipliers by the indicators of pairwise disjoint infinite sets are linearly independent modulo finite rank.
-\end{enumerate}
-The lift of \S\ref{sec:laurent} satisfies~\eqref{eq:Pol} and is alternating (Lemma~\ref{lem:Psi}), and its multiplier
-family is the one in~(3), with $L=\kappa$.
-\end{remark}
-
 
 \subsection*{Open problems}
 The distinction between restrictions on objects and restrictions on analytic families leaves several
@@ -3412,7 +3550,7 @@ Let $K$ be complete, not spherically complete, of characteristic $p\ge3$, and le
 Is there a complete nonarchimedean $F$ such that $Q^K_{E,E,F}$ is not analytic for
 $E=\linf(\N,K)$? For $p=2$, the answer is yes: degree two is the theorem of~\cite{M}, and the higher
 degrees follow by the wedging argument of~\cite[Remark~18]{M}, formalized under hypothesis (K2) of that
-paper. Remark~\ref{rem:R} announces a counterexample with a larger index set, leaving the countable case open.
+paper. Remark~\ref{rem:R} proposes a counterexample with a larger index set; that extension and the countable case remain open.
 
 \item \emph{Densely valued spherically complete bases.}
 Let $K$ be spherically complete, densely valued and of characteristic $p$, for example
@@ -3422,8 +3560,63 @@ complete $F$. The counterexample of Theorem~\ref{thm:main} has a target with no 
 norm and therefore does not answer this question.
 \end{enumerate}
 
+\subsection*{Further approaches}
+\begin{remark}[nonarchimedean targets over bases that are not spherically complete; proposed extension]\label{rem:R}
+The following statement is a proposed extension; it has not been proved here and is not used elsewhere in this paper. Let $k\ge2$,
+and let $K$ be a complete nontrivially normed field, not spherically complete, with $k!=0$ in $K$.
+Then $K$ is nonarchimedean by Lemma~\ref{lem:ultra}. For a cardinal $\mu$ put $\beth_0(\mu):=\mu$ and
+$\beth_{n+1}(\mu):=2^{\beth_n(\mu)}$, and let $\mu^+$ be the successor cardinal of $\mu$. Let $I$ be a set of
+cardinality at least $\beth_{3k-1}(\abs K)^+$, put $E:=\linf(I,K)$, and let $F_I$ be the closure in $\linf(I^k,K)$ of
+the span of the determinant arrays $(i_1,\dots,i_k)\mapsto\det(x_b(i_a))_{a,b}$, $x\in E^k$. Then $E$ and $F_I$ are
+nonarchimedean $K$\nobreakdash-Banach spaces, and $Q^K_{E,E,F_I}$ is analytic at no point. The proposed proof uses
+a partition argument with the Erd\H{o}s--Rado theorem in place of Ramsey's theorem. For $k=2$ in
+characteristic~$2$ the countable index set $\N$ suffices~\cite{M}.
+\end{remark}
+
+\paragraph{An alternative algebraic approach.}
+\begin{remark}[another possible approach]\label{rem:routeII}
+The following optional sketch suggests an alternative route to the input needed in \S\ref{sec:laurent}. It requires
+an additional infinite-field obstruction, which is not proved here. The contraction-rank identity needed
+for the base-change step is Proposition~\ref{prop:canonical-support}. No other argument in this paper
+depends on the proposed route.
+
+\emph{The infinite-field input.} The first required statement is the analogue of
+Theorem~\ref{thm:FF} over infinite fields $L$ with $k!=0$ in $L$, for lifts that satisfy~\eqref{eq:Pw} and have
+uniformly bounded support, of an arbitrary linear family $D\colon A\to\End_L(V)$ whose image modulo the finite-rank
+operators is infinite-dimensional.
+
+\emph{Base change and minors.} Let $\Psi$ be a lift over $\F_q$ whose values have support dimension at most $d$.
+After the finite base change $\F_q\subseteq\F_{q^N}$, the values of the base change of $\Psi$ at $\F_{q^N}$\nobreakdash-points
+have support dimension at most $d_N:=N^{2k}d$, since each input has only $N$ pieces over $\F_q$; choose $N$ with
+$q^N>d_N+1$. By Proposition~\ref{prop:canonical-support}, support dimension equals the rank of a finite
+contraction matrix. Now consider any finite set of independent scalar parameters in each
+of the $2k$ input slots. The resulting polynomial family has finitely many exterior-vector coefficients;
+the sum of their supports is one finite-dimensional space supporting every value, over every scalar extension.
+Choose a basis of that space to form the contraction matrix. By multilinearity, each matrix entry has degree at most one in each scalar
+parameter. Its $(d_N+1)$\nobreakdash-minors therefore have degree at most $d_N+1<q^N$ in each variable. They vanish at every
+$\F_{q^N}$\nobreakdash-point, so they are zero polynomials and remain zero over the algebraic closure
+$\overline{\F}_q$. The resulting support bound would allow the proposed obstruction to be applied over this infinite
+field.
+
+\needspace{4\baselineskip}
+\emph{Compatibility requirements.} In addition to the proposed infinite-field obstruction, the route requires the following
+properties of $\Psi$.
+\begin{enumerate}
+\item The full identity~\eqref{eq:Pol}, not only~\eqref{eq:Pol1}: for $k>q$ the identity~\eqref{eq:Pw} at
+$\F_q$\nobreakdash-points does not survive base change (Proposition~\ref{prop:diag}(3)), whereas~\eqref{eq:Pol}
+gives~\eqref{eq:Pw} at every point after base change.
+\item Alternation, as required by the unproved input above. Both alternation and antisymmetry survive scalar
+extension, but in characteristic~$2$ antisymmetry does not imply alternation.
+\item An infinite-dimensional image modulo finite rank. For the multipliers $D_ax=ax$ on $L^\N$ this holds because
+the multipliers by the indicators of pairwise disjoint infinite sets are linearly independent modulo finite rank.
+\end{enumerate}
+The lift of \S\ref{sec:laurent} satisfies~\eqref{eq:Pol} and is alternating (Lemma~\ref{lem:Psi}), and its multiplier
+family is the one in~(3), with $L=\kappa$.
+\end{remark}
+
+
 \section{Formalization}\label{sec:lean}
-The proof snapshot of this paper is recorded in the private repository~\cite{LeanP}, at commit
+The original operator proof snapshot is recorded in the private repository~\cite{LeanP}, at commit
 \href{https://github.com/Deicyde/alternating-analytic-characteristic-p/tree/5e9c3cf81bb648d9f64203333a51beb2784aaf46}{\texttt{5e9c3cf}},
 using Lean~\texttt{4.34.0-rc2} and Mathlib revision
 \href{https://github.com/Deicyde/mathlib4/tree/2b73d9821d297b80d92eecc54cc09bfc263e0098}{\texttt{2b73d9821d29}}.
@@ -3461,16 +3654,15 @@ Parts~(\ref{main:general}) and~(\ref{main:spherical}) of the categorical Main Th
 from these operator results and bounded bilinear postcomposition. The categorical packaging itself is not a
 separate Lean declaration.
 
-The later results in \S\S\ref{fam:sec:families}--\ref{dom:section}, including
+The later results in \S\S\ref{fam:sec:families}--\ref{fam:sec:tensors}, including
 Main Theorem~(\ref{main:families})--(\ref{main:domains}), have complete mathematical proofs in this manuscript
 but are not yet asserted as Lean-checked theorems. They comprise finite-coordinate analytic reflection,
 admissible-family and bundle constructions, the $c_0$ and ordinary $\ell^1$ parameter theorems,
 the invertible shear argument, the tensor criterion, the universal-target core and the no-largest-domain theorem.
-The next formalization steps are the family composition laws, the shear transfer identity, and the
-finite-coordinate reflection theorem. For the last result, the existing Mathlib uniqueness theorem applied
-after quotienting by the closed subspace gives membership of the homogeneous diagonal coefficients.
-The remaining principal construction is a subspace-valued multilinear representative in finite coordinates
-with the exponential norm bound~\eqref{fam:eq:finite-bound}.
+The further consequences on quotient parameters, polynomial approximation without a common analytic
+radius, and maximal domains are also informal results, as is the canonical-support identity of
+Proposition~\ref{prop:canonical-support}. The repository theorem map and formalization roadmap record
+the remaining implementation work.
 These additions do not alter the three existing comparator challenge statements.
 
 The characteristic-$2$ counterexample~\cite{M} has separate provenance. Its formalization proves nonanalyticity in
@@ -3478,7 +3670,7 @@ degree $2$ at the origin, with a wedging extension under (K2) to every degree at
 \texttt{Round24Transfer.\allowbreak{}char2\_\allowbreak{}not\_\allowbreak{}analyticAt\_\allowbreak{}of\_\allowbreak{}hasEmptyNestedBalls}.
 That construction is not re-proved or re-audited here.
 
-The proposed alternative route of Remark~\ref{rem:routeII}, the announced large-index construction of
+The proposed alternative route of Remark~\ref{rem:routeII}, the proposed large-index construction of
 Remark~\ref{rem:R}, the open problems, and Serre's external classification cited in
 Remark~\ref{rem:sorted} are excluded from the proved results. The repository's comparator challenge contains
 two short contradiction corollaries of Theorem~\ref{thm:main} and the operator form of Main Theorem~(\ref{main:spherical}) for every regularity order.
@@ -3487,7 +3679,6 @@ are given by transparent definitions in Mathlib terms. Intentional placeholders 
 file, not in the proof library or solution. Current challenge checks use Kim Morrison's comparator, with the
 configuration recorded in the repository.
 
-\clearpage
 \begin{thebibliography}{99}
 \bibitem{BH} J.~C.~Baez and A.~E.~Hoffnung, \emph{Convenient categories of smooth spaces},
 Trans.\ Amer.\ Math.\ Soc.\ \textbf{363} (2011), no.~11, 5789--5825,\\

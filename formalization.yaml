@@ -22,8 +22,12 @@ project:
     analytic reflection and bundle preservation, positive c_0 and ordinary l1 parameter
     results, an invertible-family obstruction, a tensor criterion for universal analytic
     reflection, and nonexistence of a largest full analytic domain over F_p(t) in every
-    degree k >= p. These later results, including Main Theorem (3) and (4), are not yet
-    formalized. The existing Lean proof library is unchanged.
+    degree k >= p. Further paper proofs preserve the coefficient radius in the nonarchimedean
+    finite-coordinate case, exhibit failure of descent through quotient parameters and
+    polynomial approximation without a common analytic radius, describe set-sized maximal
+    analytic domains, and identify canonical exterior support with the contraction span.
+    These later results, including Main Theorem (3) and (4), are not yet formalized.
+    The existing Lean proof library is unchanged.
   authors: ["Jack McCarthy"]
   responsible_maintainers: ["Jack McCarthy"]
   license: "No license chosen yet (all rights reserved pending the maintainer's decision)"
@@ -95,12 +99,22 @@ sources:
       characterize universal Banach-valued analytic reflection by exponentially bounded
       projections onto diagonal tensor powers. Infinite ordinary l1 spaces over a complete
       nonarchimedean field separate the tensor reflection property from the weaker
-      alternating-family property. All these later results have paper proofs but no new
-      Lean declarations in this revision. The intrinsic universal-target and admissible-
+      alternating-family property. The 25 September 2026 revision adds the nonarchimedean
+      coefficient-bound refinement fam:rem:radius, the quotient-parameter obstruction
+      fam:cor:quotient-parameters, and the smooth but nonanalytic polynomial-approximation
+      example fam:cor:no-common-radius. Proposition dom:maximal describes analytic domains
+      as cliques on a fixed set of objects and obtains maximal extensions containing the
+      available universal-target core. Proposition prop:canonical-support proves the
+      smallest supporting subspace and its equality with the contraction span, including
+      the finite contraction-matrix rank consequence. The completion principle preceding
+      dom:rigid is now explained explicitly. All these later results have paper proofs but
+      no new Lean declarations in this revision. The intrinsic universal-target and admissible-
       parameter classifications, possible extensions of the split-pair category, and the
       remaining complete-field/Banach domain questions remain mathematical open problems.
-      For C^infinity smoothness the whole product category already suffices. Announced and
-      open items are not claimed as proved.
+      For C^infinity smoothness the whole product category already suffices. The alternative
+      infinite-field obstruction remains unproved; its support/contraction-rank identity
+      is now a proved informal proposition. The large-index nonarchimedean counterexample
+      is a proposed, unproved extension. Proposed and open items are not claimed as proved.
     license: ""
     author_endorsement: "participated"
   - title: "Existing Lean ingredients supplied with the round-24 paper materials"
@@ -138,6 +152,10 @@ status:
     Lean categorical functor or joint-action declarations. Main Theorem (3) and (4), and
     the new family, bundle, shear, parameter, tensor, universal-target-core and
     no-largest-domain results, have mathematical proofs in the paper but are not yet formalized.
+    The coefficient-radius refinement, quotient-parameter obstruction, polynomial-approximation
+    example without a common analytic radius, set-sized maximal-domain graph proposition,
+    explicit completion principle, and canonical exterior-support equality are likewise
+    proved informal mathematics, not new Lean declarations.
     The earlier finite-dimensional source/codomain proposition, target-reduction argument
     and weighted c_0 example are likewise additional informal results, not separate
     formalized declarations. The proof library has zero unresolved sorry,
@@ -162,7 +180,7 @@ status:
     remain proved in the unchanged AlternatingAnalytic library. Challenge validation uses Kim
     Morrison's leanprover/comparator exclusively, with the three selected theorems and permitted
     axioms specified in comparator.json. Excluded are the expressly unproved alternative infinite-field route,
-    announced large-index ultrametric-target construction, mathematical open problems, the
+    proposed unproved large-index nonarchimedean-target construction, mathematical open problems, the
     external Serre c_0(I) classification, and the earlier characteristic-two proof. A broader
     generic isometric-field-transport abstraction in the initial plan is not claimed as a
     separate theorem; every concrete field and finite-index passage used in the original
@@ -298,7 +316,7 @@ fidelity:
     No characteristic or degree restriction, or completeness assumption on K, E or E', is introduced.
     The comparator checks the current challenge and solution against comparator.json,
     including both fixed predicates and their transitive dependencies.
-    No announced or open paper claim is included as an axiom. The current challenge still
+    No proposed or open paper claim is included as an axiom. The current challenge still
     selects only the original three proved statements; it does not claim to check the new
     finite-coordinate, bundle, parameter, shear, tensor or no-largest-domain results.
     Paper proofs of these extensions are distinguished from the Lean-checked scope.
@@ -314,7 +332,15 @@ review:
     against the Lean development. The new family and no-largest-domain sections received
     independent informal mathematical reviews, including the incomplete-field scope,
     all-prime degree-gap argument, padding retraction, finite-coordinate reflection and
-    fixed-degree l1 factorization. These reviews do not constitute kernel verification.
+    fixed-degree l1 factorization. A further independent agent paper audit dated
+    25 September 2026 reviewed scope, arguments, organization and terminology. The resulting
+    revision records the nonarchimedean coefficient bound, quotient-parameter and
+    polynomial-approximation consequences, set-sized maximal-domain argument, and canonical
+    exterior support. It clarifies completion in the rigid-source construction, preserves
+    the spherical-target proof as Section 2, moves the domain argument before the tensor
+    criterion and exterior preliminaries next to their use, and consolidates the
+    finite-dimensional completeness proof. These reviews do not constitute kernel
+    verification or human expert review and add no checked Lean theorem.
     The unchanged three-statement challenge was rechecked on 24 September 2026 with Kim
     Morrison's comparator; the solution was accepted by Lean's default kernel. This check
     does not cover the new manuscript extensions.
@@ -409,6 +435,11 @@ alignment:
       module: ""
       status: "not-formalized"
       note: "Proved mathematically for open K^d parameter domains, or explicit continuous linear coordinates, without completeness of the field or fibers. The central new Lean task is a grouped-coordinate multilinear representative with norm bound d^n; see FORMALIZATION_ROADMAP.md."
+    - source: "fam:rem:radius: preservation of nonarchimedean coefficient bounds and radius"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proof refines the finite-coordinate construction to norm(q_n) <= norm(p_n) for maximum-norm parameter coordinates and a nonarchimedean ambient norm. The reflected expansion preserves the ambient radius without completeness of either target."
     - source: "Main Theorem (3), fam:thm:finite-bundles: the analytic alternating-map bundle bifunctor"
       lean: ""
       module: ""
@@ -434,26 +465,51 @@ alignment:
       module: ""
       status: "not-formalized"
       note: "Paper proof treats analytic families composed with a fixed-degree ambient polynomial into a closed Banach subspace, over possibly incomplete K. It passes to bounded linear retracts of ordinary l1; for alternating families only the final value-space target must be complete."
+    - source: "fam:cor:quotient-parameters: failure of descent through quotient parameters"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proof over complete K of characteristic p and k >= p constructs a bounded open linear surjection q from ordinary l1 onto the Banach counterexample operator space. Q composed with q is analytic although Q is nowhere analytic. No local right inverse is differentiable even at one point; openness follows from a direct uniform one-term lifting estimate."
     - source: "fam:prop:tensor-homogeneous, fam:thm:tensor-analytic and fam:prop:l1-optimal: diagonal tensor projection criteria"
       lean: ""
       module: ""
       status: "not-formalized"
       note: "Paper proofs over complete K characterize universal Banach-valued analytic reflection by projections with exponentially bounded norms. For infinite ordinary l1 over a nonarchimedean field, the optimal degree-n projection norm is the real number n!, so universal reflection fails despite the alternating-family theorem. The ordinary and nonarchimedean tensor norms are distinguished."
+    - source: "fam:cor:no-common-radius: polynomial approximations without a common analytic radius"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proof over every complete nonarchimedean K, including characteristic zero, gives x mapped to its tensor powers on the unit ball of ordinary l1. It is analytic into the ambient Banach c0-sum and C^infinity into its closed diagonal-span subspace, but nonanalytic there at zero. Necessary coefficient norms are at least the real numbers n!, while entire polynomial truncations converge uniformly on each smaller ball."
     - source: "dom:core and dom:split-incoming: universal-target core and split destinations"
       lean: ""
       module: ""
       status: "not-formalized"
       note: "Paper proofs show the core can be adjoined to every analytic domain, is the largest rectangle with unrestricted first variable, and is closed under bounded isomorphisms, retracts and finite products. A split destination suffices for analytic joint action."
+    - source: "dom:maximal: compatibility graph and maximal analytic domains"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proof fixes a set of objects, identifies full analytic domains with cliques among objects with analytic self-action and two analytic cross-actions, and uses Zorn to obtain maximal extensions containing all available core objects. It makes no proper-class choice assertion and does not produce a largest domain."
     - source: "Main Theorem (4) and dom:no-largest: no largest full analytic domain"
       lean: ""
       module: ""
       status: "not-formalized"
       note: "Proved mathematically for K = F_p(t), all primes p and k >= p, including finite algebraic dimensional nonarchimedean objects and isomorphism-closed domains in the chosen ambient category. The proof uses incomplete spaces, a rigid source, an all-prime degree-gap argument and padding. It does not settle complete fields or Banach pairs."
-    - source: "Remark routeII, announced Remark R, explicit mathematical open problems, and externally cited Serre classification"
+    - source: "Completion principle preceding dom:rigid"
       lean: ""
       module: ""
       status: "not-formalized"
-      note: "Explicit exclusions from the proved-paper scope; see THEOREM_MAP.md."
+      note: "The paper explicitly proves same-norm extension on a finite family of dense K-subspaces of Banach L-spaces into a Banach L-target, for K dense in complete L, then obtains L-multilinearity by density of scalars. The extended values need not lie in the smaller incomplete coefficient space."
+    - source: "prop:canonical-support: smallest exterior support and contraction-rank equality"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proof over arbitrary fields identifies the span of all (k-1)-fold contractions as the unique smallest supporting subspace for k >= 2, and proves support dimension equals its dimension and the rank of a finite contraction matrix. Degree-one and degree-zero conventions are stated separately. Existing formalized contraction bounds alone do not establish this new equality."
+    - source: "Remark routeII, proposed Remark R, explicit mathematical open problems, and externally cited Serre classification"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Explicit exclusions from the proved-paper scope; see THEOREM_MAP.md. The infinite-field obstruction and large-index extension remain unproved. The support/contraction-rank equality formerly proposed in routeII is now proved informally as prop:canonical-support and is listed separately above."
 
 acknowledgements: >
   Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform;
