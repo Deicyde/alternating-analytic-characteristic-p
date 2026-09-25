@@ -1,33 +1,37 @@
-# Alternating precomposition in positive characteristic
+# Analyticity of alternating-map functors and vector bundles
 
-Lean formalization of Jack McCarthy's **Precomposition on continuous alternating maps is not analytic in positive characteristic**.
+Research manuscript by Jack McCarthy, with a Lean 4 / Mathlib proof library for its original operator results. The expanded paper also contains new mathematical proofs about analytic families, vector bundles, and analytic domains; those extensions are **not yet formalized**.
 
-Read the [paper](paper/charp.pdf), edit its [LaTeX source](paper/charp.tex), or consult the [theorem map](THEOREM_MAP.md) for the corresponding Lean declarations.
+Read the [paper](paper/charp.pdf), edit its [LaTeX source](paper/charp.tex), or consult the [theorem map](THEOREM_MAP.md) and [formalization roadmap](FORMALIZATION_ROADMAP.md) for the precise verification scope and next proof steps.
 
 ## Main results
 
-The paper leads with one categorical **Main Theorem** in two parts. For a nontrivially normed field K, let `Vec_K` be the category of normed K-spaces with bounded linear maps, allowing ordinary norms that need not be ultrametric. Let `Ban_K` be its full subcategory of complete spaces. When K has positive characteristic, let `Vec_K^∘` be its full subcategory of ultrametric, spherically complete spaces. For every integer k ≥ 0, the bifunctor `Alt^k` is contravariant in its first variable and covariant in its second; its action is `(u, v) ↦ [m ↦ v ∘ m ∘ (u, …, u)]`. Regularity means joint regularity on each pair of morphism spaces with their operator norms.
+For a nontrivially normed field K, let `Vec_K` be the category of normed K-spaces with bounded linear maps, and `Ban_K` its full subcategory of complete spaces. In positive characteristic, `Vec_K^∘` denotes nonarchimedean, spherically complete spaces. The alternating-map bifunctor `Alt^k` is contravariant in the first variable and covariant in the second. Analyticity of a functor means joint analyticity of its maps on morphism spaces with their operator norms.
 
-1. `Alt^k : Vec_K^op × Vec_K → Vec_K` is always C∞ and is analytic if and only if `k! ≠ 0` in K. The same statements hold for `Alt^k : Ban_K^op × Ban_K → Ban_K`.
-2. When K has positive characteristic, `Alt^k : Vec_K^op × Vec_K^∘ → Vec_K^∘` is analytic in every finite degree. The target category records that alternating-map spaces inherit spherical completeness from the target.
+The paper's categorical **Main Theorem** has four parts:
 
-Neither part assumes completeness of K. In characteristic zero, part (1) already gives analyticity in every finite degree for all normed spaces. Part (2) was previously called Theorem A.
+1. `Alt^k : Vec_K^op × Vec_K → Vec_K` is always C∞ and is analytic exactly when `k! ≠ 0` in K. The same statements hold for `Ban_K`. In characteristic p this is exactly `k < p`; in characteristic zero every finite degree works.
+2. In positive characteristic, `Alt^k : Vec_K^op × Vec_K^∘ → Vec_K^∘` is analytic in every finite degree. Alternating-map spaces inherit spherical completeness from their targets. Section 2 proves this result, previously called Theorem A.
+3. In every characteristic and degree, `Alt^k` preserves every analytic morphism family parametrized by an open subset of `K^d`. It therefore induces a bifunctor on analytic normed vector bundles over manifolds with open `K^d` charts, preserving operator-valued analytic bundle morphisms. Fibers may be arbitrary normed spaces. Over an incomplete field, finite algebraic dimension alone is not a substitute for these continuous coordinates.
+4. For the t-adic field `K = F_p(t)`, every prime p and every `k ≥ p`, there is **no largest full analytic domain** in `Vec_K^op × Vec_K`. Two objects with analytic self-actions have a nonanalytic cross-action. The conclusion persists for finite algebraic dimensional nonarchimedean objects and for domains closed under isomorphisms in the chosen ambient category. This construction uses incomplete spaces; the complete-field and Banach versions remain open.
 
-The underlying operator results are formalized in Lean. Both parts of the categorical Main Theorem follow mathematically from these results, bounded bilinear postcomposition, and the closure properties of alternating-map spaces; the categorical functors and joint morphism actions are not separate Lean declarations.
+The operator inputs to parts (1) and (2) are formalized. Their categorical packaging is a mathematical consequence, not a separate Lean functor or joint-action declaration. Parts (3) and (4) have proofs in the manuscript but no Lean declarations yet.
 
-The introduction explains the vector-bundle motivation: a multifunctor that is jointly Cⁿ on morphism spaces carries transition maps to a new Cⁿ bundle cocycle. It treats contravariant arguments using inverse transitions and applies the construction to alternating-map bundles and differential forms. This is explanatory mathematical motivation, with no additional Lean bundle or functor declarations.
+The expanded paper also constructs the canonical admissible-family structure, proves positive parameter results for nonarchimedean `c₀` and ordinary `ℓ¹` spaces, transfers the obstruction to invertible shear families, and characterizes universal analytic reflection through closed Banach subspaces using projections onto diagonal tensor powers with exponential norm bounds. Ordinary infinite `ℓ¹` spaces over complete nonarchimedean fields show that this general reflection property is strictly stronger than the alternating-family property. A universal-target core is compatible with every analytic domain. These results are likewise presently mathematical, not Lean-checked.
 
-The numbered **Counterexample theorem** (`thm:main`) retains the stronger constructive statement: for every nontrivially normed field K of prime characteristic p, including incomplete fields, and every k ≥ p, there are K-Banach spaces E and F such that degree-k alternating precomposition on E is analytic at no point. The same spaces work for every finite index type of cardinality k, and F has no equivalent ultrametric norm.
+## Existing Lean results and current scope
+
+The numbered **Counterexample theorem** (`thm:main`) retains the stronger constructive statement: for every prescribed nontrivially normed field K of prime characteristic p, including incomplete fields, and every `k ≥ p`, there are K-Banach spaces E and F such that degree-k alternating precomposition on E is analytic at no point. The same spaces work for every finite index type of cardinality k, and F has no equivalent ultrametric norm.
 
 The complete statement, including the absence of a bounded multilinear lift and failure of `ContDiffAt K ω` at every point, is `AlternatingAnalytic.exists_banach_counterexample_full` in [MainTheorem.lean](AlternatingAnalytic/MainTheorem.lean).
 
-The exact operator factorial criterion in Corollary `cor:class` is `AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic` in [FactorialClassification.lean](AlternatingAnalytic/Analysis/FactorialClassification.lean): precomposition is analytic for every Banach triple over K if and only if k! is nonzero in K.
+The exact operator factorial criterion in Corollary `cor:class` is `AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic` in [FactorialClassification.lean](AlternatingAnalytic/Analysis/FactorialClassification.lean). The construction includes the finite-field Ramsey obstruction, projective exterior completion and coefficient-support estimate, and scalar extension and descent.
 
-The construction includes the finite-field Ramsey obstruction, the projective exterior completion and coefficient-support estimate, and scalar extension and descent. [THEOREM_MAP.md](THEOREM_MAP.md) also records the proved complements and the explicitly excluded announced or open results.
+The operator proof for spherical targets follows [SphericalCompleteness.lean](AlternatingAnalytic/Analysis/SphericalCompleteness.lean) and [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean), including extension, spherical completeness of alternating-map spaces, and a contracting retraction. The Lean operator theorem has no characteristic assumption: it applies over any ultrametric nontrivially normed field. The base and source spaces need not be complete.
 
-Section 2, **Spherically complete targets**, proves part (2) of the Main Theorem. It begins with the broader operator result: over any ultrametric field, a spherically complete ultrametric target makes precomposition analytic in every degree. The Lean result retains this scope without a characteristic assumption; the positive-characteristic hypothesis in Main Theorem (2) supplies ultrametricity of K. Its extension, spherical-completeness, and retraction arguments follow the existing proofs in [SphericalCompleteness.lean](AlternatingAnalytic/Analysis/SphericalCompleteness.lean) and [SphericalAnalytic.lean](AlternatingAnalytic/Analysis/SphericalAnalytic.lean). Bounded bilinear postcomposition and spherical completeness of alternating-map spaces complete the categorical statement.
+The original proof-library scope is complete without admitted proofs. The current manuscript is broader than that checked scope. The new formalization work has a dependency plan and a concrete Mathlib API search, but three Autoform proof-worker launches using the saved Claude backend failed authentication with HTTP 401 before proof generation. They added no Lean results. The [roadmap](FORMALIZATION_ROADMAP.md) records the next milestones; no placeholders for the new results have been added to the proof library or challenge.
 
-The complements include a weighted `c₀` example whose given norm is not spherically complete, although alternating precomposition is analytic in every degree. This example is an informal corollary, not a separate Lean declaration. The open problems ask for an intrinsic criterion on the target and, in characteristic p with k ≥ p, whether there is a largest full subcategory of `Vec_K^op × Vec_K` on which `Alt^k` is analytic, or how to describe inclusion-maximal such subcategories. Analyticity here is joint on every morphism space, including maps between distinct objects. For C∞ smoothness the full product category already suffices. These questions are excluded from the proved scope.
+The weighted `c₀` target example remains a supplementary informal corollary: its given norm is not spherically complete, although alternating precomposition is analytic in every degree. Open problems now concern intrinsic criteria for universal targets and admissible parameter spaces, extensions of the split-pair category, and analytic domains over complete fields or among Banach pairs. The general largest-domain question has been answered negatively by part (4); it is no longer listed as wholly unresolved.
 
 ## Using the library
 
@@ -60,7 +64,7 @@ Follow the comparator's installation instructions, then run it from this project
 lake env /path/to/comparator/.lake/build/bin/comparator comparator.json
 ```
 
-The comparator checks the statements, their dependencies, and permitted axioms, and replays the solution with Lean's kernel. The [GitHub Actions workflow](.github/workflows/comparator.yml) uses a fresh candidate checkout and the Linux Landrun sandbox. On macOS, upstream's development launcher allows local comparator checks without that Linux sandbox.
+The comparator checks the statements, their dependencies, and permitted axioms, and replays the solution with Lean's kernel. The unchanged three-statement challenge passed a refreshed check on 24 September 2026, including acceptance of the solution by Lean's default kernel. This check does not cover the new manuscript extensions. The [GitHub Actions workflow](.github/workflows/comparator.yml) uses a fresh candidate checkout and the Linux Landrun sandbox. On macOS, upstream's development launcher allows local comparator checks without that Linux sandbox.
 
 ## Manuscript and metadata
 

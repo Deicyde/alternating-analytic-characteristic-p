@@ -15,9 +15,15 @@ project:
     triples over K if and only if k! is nonzero in K. The development includes the finite-field
     Ramsey obstruction, ordinary-sum projective exterior completion, coefficient support
     estimate, scalar extension and descent, and the paper's proved complements.
-    These operator results underlie both parts of the paper's categorical Main Theorem;
-    the categorical functors and joint morphism actions are mathematical consequences,
-    not separate Lean declarations.
+    These operator results underlie parts (1) and (2) of the expanded paper's four-part
+    categorical Main Theorem; categorical functors and joint morphism actions are
+    mathematical consequences, not separate Lean declarations. The revised manuscript,
+    Analyticity of alternating-map functors and vector bundles, also proves finite-coordinate
+    analytic reflection and bundle preservation, positive c_0 and ordinary l1 parameter
+    results, an invertible-family obstruction, a tensor criterion for universal analytic
+    reflection, and nonexistence of a largest full analytic domain over F_p(t) in every
+    degree k >= p. These later results, including Main Theorem (3) and (4), are not yet
+    formalized. The existing Lean proof library is unchanged.
   authors: ["Jack McCarthy"]
   responsible_maintainers: ["Jack McCarthy"]
   license: "No license chosen yet (all rights reserved pending the maintainer's decision)"
@@ -26,7 +32,7 @@ repository:
   role: "substantive-development"
 
 sources:
-  - title: "Precomposition on continuous alternating maps is not analytic in positive characteristic"
+  - title: "Analyticity of alternating-map functors and vector bundles"
     authors: ["Jack McCarthy"]
     contributors:
       - name: "Claude (Anthropic), working in Claude Code"
@@ -48,7 +54,7 @@ sources:
       existing Lean extension, spherical-completeness and retraction arguments for the
       operator form, then completes the categorical statement by bounded bilinear
       postcomposition and closure of alternating-map spaces.
-      The introduction leads with a categorical Main Theorem in two parts. Part (1) states that for every nontrivially normed
+      The introduction leads with a categorical Main Theorem in four parts. Part (1) states that for every nontrivially normed
       field K and every integer k >= 0,
       Alt^k from Vec_K^op times Vec_K to Vec_K is always C^infinity and is analytic exactly
       when k! is nonzero in K, with the same assertions for Ban_K. Vec_K uses ordinary,
@@ -61,7 +67,7 @@ sources:
       normed spaces. The unchanged Lean operator result underlying part (2) applies to every
       ultrametric nontrivially normed field, with no characteristic restriction; positive
       characteristic supplies ultrametricity for the categorical statement.
-      The categorical statements follow mathematically from the formalized operator results;
+      Parts (1) and (2) follow mathematically from the formalized operator results;
       the Main Theorem's ordinary smoothness input is in the pinned Mathlib dependency.
       No separate Lean categorical functor or joint-action declaration is claimed.
       The introduction's vector-bundle motivation explains how jointly C^n multifunctors
@@ -72,13 +78,29 @@ sources:
       not necessary for analyticity; its sufficient discrete-target criterion is formalized,
       while the example itself is an additional informal corollary. The paper asks for an
       intrinsic necessary and sufficient condition on the target, in one degree or all finite
-      degrees, as an open problem left unresolved by the present results. A further open
-      question asks, in characteristic p and degree k >= p, whether there exists a largest full
-      subcategory of Vec_K^op times Vec_K on which Alt^k is analytic, and how to characterize
-      it or the inclusion-maximal such subcategories. The restriction must be jointly analytic
-      on every morphism space, including maps between distinct objects; for C^infinity
-      smoothness the whole product category already suffices. This analytic classification
-      question is excluded from the proved scope. Announced and open items are not claimed as proved.
+      degrees, as an open problem left unresolved by the present results.
+      Part (3) proves that Alt^k preserves every analytic morphism family parametrized by an
+      open subset of K^d and hence analytic normed vector bundles, with operator-valued
+      analytic morphisms, over manifolds with such charts. The fibers may be arbitrary
+      normed spaces. Over incomplete K, finite algebraic dimension is not substituted for
+      continuous coordinates. Part (4) proves that for K = F_p(t), every prime p and k >= p,
+      no largest full analytic domain exists, even in the category of pairs of finite
+      algebraic dimensional nonarchimedean normed spaces and with isomorphism closure
+      taken in the chosen ambient category. Two individually analytic objects have a
+      nonanalytic cross-action. This construction uses incomplete objects; the analogous
+      existence questions over complete fields or for Banach pairs remain open.
+      Further proved manuscript results define admissible morphism families, establish the
+      universal-target core and split-destination criterion, give positive c_0 and ordinary
+      l1 parameter theorems, transfer the obstruction to an invertible shear family, and
+      characterize universal Banach-valued analytic reflection by exponentially bounded
+      projections onto diagonal tensor powers. Infinite ordinary l1 spaces over a complete
+      nonarchimedean field separate the tensor reflection property from the weaker
+      alternating-family property. All these later results have paper proofs but no new
+      Lean declarations in this revision. The intrinsic universal-target and admissible-
+      parameter classifications, possible extensions of the split-pair category, and the
+      remaining complete-field/Banach domain questions remain mathematical open problems.
+      For C^infinity smoothness the whole product category already suffices. Announced and
+      open items are not claimed as proved.
     license: ""
     author_endorsement: "participated"
   - title: "Existing Lean ingredients supplied with the round-24 paper materials"
@@ -110,11 +132,15 @@ classification:
 
 status:
   scope: >
-    Complete for the original proved-paper scope recorded in THEOREM_MAP.md. Both parts of the
-    categorical Main Theorem are mathematical consequences of the formalized operator
-    results, not separate Lean categorical functor or joint-action declarations. The later
-    finite-dimensional source/codomain proposition, target-reduction argument and weighted c_0
-    example are additional informal results and are not claimed as separate formalized declarations. The proof library has zero unresolved sorry,
+    Complete for the original proved-paper scope recorded in THEOREM_MAP.md, but not for
+    the expanded manuscript as a whole. Parts (1) and (2) of the four-part categorical Main
+    Theorem are mathematical consequences of the formalized operator results, not separate
+    Lean categorical functor or joint-action declarations. Main Theorem (3) and (4), and
+    the new family, bundle, shear, parameter, tensor, universal-target-core and
+    no-largest-domain results, have mathematical proofs in the paper but are not yet formalized.
+    The earlier finite-dimensional source/codomain proposition, target-reduction argument
+    and weighted c_0 example are likewise additional informal results, not separate
+    formalized declarations. The proof library has zero unresolved sorry,
     admit, new axiom or native_decide uses. solution.lean contains the three proved comparator
     theorems; challenge.lean contains exactly three deliberate theorem placeholders and is
     excluded from these proof-development sorry counts. The Mathlib-only challenge contains
@@ -139,7 +165,12 @@ status:
     announced large-index ultrametric-target construction, mathematical open problems, the
     external Serre c_0(I) classification, and the earlier characteristic-two proof. A broader
     generic isometric-field-transport abstraction in the initial plan is not claimed as a
-    separate theorem; every concrete field and finite-index passage used by the paper is proved.
+    separate theorem; every concrete field and finite-index passage used in the original
+    formalized counterexample is proved. No new Lean proof was added in the manuscript
+    expansion. Three Autoform proof-worker launches using the saved Claude backend failed
+    with authentication HTTP 401 before generating proofs and reported zero input/output
+    tokens. The new proof plan and Mathlib API search are preparation, not completed proofs;
+    FORMALIZATION_ROADMAP.md records the next milestones.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -228,7 +259,13 @@ automation:
     reliably for the whole project. Existing proof integrations and newly constructed proofs
     remain distinct. From the repository cleanup onward, the challenge and solution are
     checked only with Kim Morrison's leanprover/comparator; the earlier custom verification
-    scripts and audit records have been removed from the current repository.
+    scripts and audit records have been removed from the current repository. During the
+    later manuscript-expansion attempt, three Autoform launches on the saved Claude
+    backend failed authentication with HTTP 401 before proof generation and reported zero
+    input/output tokens. These failed launches added no Lean declaration and are not
+    counted as successful proof work. Their automatically rewritten metadata was archived
+    outside the repository; this file retains the original v0.4 structure and the
+    maintainer-specified total cost of USD 200.
 
 fidelity:
   divergences: >
@@ -261,7 +298,10 @@ fidelity:
     No characteristic or degree restriction, or completeness assumption on K, E or E', is introduced.
     The comparator checks the current challenge and solution against comparator.json,
     including both fixed predicates and their transitive dependencies.
-    No announced or open paper claim is included as an axiom.
+    No announced or open paper claim is included as an axiom. The current challenge still
+    selects only the original three proved statements; it does not claim to check the new
+    finite-coordinate, bundle, parameter, shear, tensor or no-largest-domain results.
+    Paper proofs of these extensions are distinguished from the Lean-checked scope.
 
 review:
   status: "agent-reviewed"
@@ -271,7 +311,13 @@ review:
     for faithfulness, proof integrity and code quality. Some reviews returned mixed scores,
     abstentions or timeouts; no global clean-jury result or human expert review is claimed.
     The paper received a subsequent editorial pass with substantive explanations compared
-    against the Lean development. Current challenge validation uses the comparator.
+    against the Lean development. The new family and no-largest-domain sections received
+    independent informal mathematical reviews, including the incomplete-field scope,
+    all-prime degree-gap argument, padding retraction, finite-coordinate reflection and
+    fixed-degree l1 factorization. These reviews do not constitute kernel verification.
+    The unchanged three-statement challenge was rechecked on 24 September 2026 with Kim
+    Morrison's comparator; the solution was accepted by Lean's default kernel. This check
+    does not cover the new manuscript extensions.
 
 alignment:
   namespace: "AlternatingAnalytic"
@@ -358,6 +404,51 @@ alignment:
       lean: "AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup"
       module: "AlternatingAnalytic.Analysis.DiscreteTargetAnalytic"
       status: "proved"
+    - source: "Main Theorem (3), fam:thm:finite-reflection and fam:cor:finite-families: finite-coordinate analytic reflection and families"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Proved mathematically for open K^d parameter domains, or explicit continuous linear coordinates, without completeness of the field or fibers. The central new Lean task is a grouped-coordinate multilinear representative with norm bound d^n; see FORMALIZATION_ROADMAP.md."
+    - source: "Main Theorem (3), fam:thm:finite-bundles: the analytic alternating-map bundle bifunctor"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Proved mathematically over analytic manifolds with open K^d charts, in every characteristic and degree, for arbitrary normed fibers and operator-valued analytic bundle morphisms. No general infinite-dimensional-base or boundary/WithinAt claim is made."
+    - source: "fam:prop:category and fam:prop:coefficient-criterion: admissible morphism families and their local lifting criterion"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proofs give the largest collection of ordinarily analytic families making the action analytic, with composition, reparameterization and gluing; hom-space addition can fail. At each fixed point the coefficient criterion requires only diagonal equality and a common positive radius; admissibility on an open domain requires it at every point."
+    - source: "fam:prop:shear: invertible shear transfer of a nonanalytic pullback action"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proof uses H = D direct-sum E, g(u) = [[I,u],[0,I]], and R composed with g(u)^* composed with J = Q(u). Both g and its inverse are affine analytic; the induced action can fail analyticity even at identity."
+    - source: "fam:thm:c0-reflection and fam:cor:c0-families: nonarchimedean c_0 parameters"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proof assumes a complete reflection target and nonarchimedean ambient norm. Alternating families are admissible when the final value-space target is complete and nonarchimedean. The index set is arbitrary; these are parameter-space conditions."
+    - source: "fam:thm:l1-families and fam:cor:l1-families: fixed-degree ordinary l1 parameter theorem"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proof treats analytic families composed with a fixed-degree ambient polynomial into a closed Banach subspace, over possibly incomplete K. It passes to bounded linear retracts of ordinary l1; for alternating families only the final value-space target must be complete."
+    - source: "fam:prop:tensor-homogeneous, fam:thm:tensor-analytic and fam:prop:l1-optimal: diagonal tensor projection criteria"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proofs over complete K characterize universal Banach-valued analytic reflection by projections with exponentially bounded norms. For infinite ordinary l1 over a nonarchimedean field, the optimal degree-n projection norm is the real number n!, so universal reflection fails despite the alternating-family theorem. The ordinary and nonarchimedean tensor norms are distinguished."
+    - source: "dom:core and dom:split-incoming: universal-target core and split destinations"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Paper proofs show the core can be adjoined to every analytic domain, is the largest rectangle with unrestricted first variable, and is closed under bounded isomorphisms, retracts and finite products. A split destination suffices for analytic joint action."
+    - source: "Main Theorem (4) and dom:no-largest: no largest full analytic domain"
+      lean: ""
+      module: ""
+      status: "not-formalized"
+      note: "Proved mathematically for K = F_p(t), all primes p and k >= p, including finite algebraic dimensional nonarchimedean objects and isomorphism-closed domains in the chosen ambient category. The proof uses incomplete spaces, a rigid source, an all-prime degree-gap argument and padding. It does not settle complete fields or Banach pairs."
     - source: "Remark routeII, announced Remark R, explicit mathematical open problems, and externally cited Serre classification"
       lean: ""
       module: ""

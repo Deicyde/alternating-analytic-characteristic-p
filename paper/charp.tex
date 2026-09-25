@@ -4,7 +4,7 @@
 \usepackage{needspace}
 \usepackage{microtype}
 \usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
-\hypersetup{pdftitle={Precomposition on continuous alternating maps is not analytic in positive characteristic},
+\hypersetup{pdftitle={Analyticity of alternating-map functors and vector bundles},
   pdfauthor={Jack McCarthy},pdfsubject={Alternating maps over nontrivially normed fields},
   pdfkeywords={positive characteristic, alternating maps, analyticity, Banach spaces, Lean}}
 
@@ -46,12 +46,14 @@
 \setlength{\emergencystretch}{1em}
 
 
-\title[Alternating precomposition in positive characteristic]{Precomposition on continuous alternating maps\\ is not analytic in positive characteristic}
+\title[Alternating-map functors and vector bundles]{Analyticity of alternating-map functors\\ and vector bundles}
 \author{Jack McCarthy}
-\thanks{The result, its informal proof and the original write-up were produced with Anthropic's Claude (in Claude Code),
-and the informal proofs were audited by independent AI agents. The operator results underlying the categorical Main Theorem
-have since been formalized in Lean with Mathlib using Codex and Autoform. Neither the paper nor the formalization has yet
-received a human expert review. See \S\ref{sec:lean} for the verification scope and provenance.}
+\thanks{The original counterexample, its informal proof and the original write-up were produced with
+Anthropic's Claude (in Claude Code). The subsequent categorical and analytic-family results, and the present
+revision, were developed with OpenAI's Codex. Informal proofs were audited by independent AI agents.
+The original operator results were formalized in Lean with Mathlib using Codex and Autoform;
+\S\ref{sec:lean} distinguishes that checked development from the later extensions.
+Neither the manuscript nor its formalization has yet received a human expert review.}
 % Print the manuscript date beneath the author.
 \makeatletter
 \g@addto@macro\@setauthors{\vskip6pt{\centering\footnotesize September 2026\par}}
@@ -59,32 +61,36 @@ received a human expert review. See \S\ref{sec:lean} for the verification scope 
 
 \begin{document}
 \begin{abstract}
-Let $K$ be a nontrivially normed field. The alternating-map bifunctor on normed $K$\nobreakdash-spaces is always
-$C^\infty$, and is analytic in degree $k$ if and only if $k!\ne0$ in $K$. The same criterion holds on the category
-of Banach spaces. In positive characteristic, the restriction to ultrametric, spherically complete spaces in
-the second variable is analytic in every degree and takes values in that same subcategory. Here regularity of a functor means
-regularity of its maps on spaces of morphisms, and the field $K$ need not be complete.
-The negative result is sharp: in characteristic $p>0$ and degree $k\ge p$, there are Banach objects $E,F$ such that $\Alt^k(-;F)$ induces a nowhere-analytic map on the endomorphism
-space of $E$, and $F$ admits no equivalent ultrametric norm.
-The obstruction comes from a finite-field theorem: coordinatewise multiplication on sequences has no multilinear
-lift to an exterior power satisfying a polarized diagonal identity and a uniform support bound when $k!=0$.
-Ramsey's theorem and cancellation prove this algebraic statement. A constant-coefficient map on a completed
-exterior power over a Laurent series field converts boundedness into the support bound; Ingleton's Hahn--Banach
-theorem then permits passage to the prescribed field. The operator theorems underlying the categorical results
-are formalized in Lean with Mathlib.
+The alternating-map bifunctor on normed spaces over a nontrivially normed field $K$ is always
+$C^\infty$, and its maps on morphism spaces are analytic in degree $k$ exactly when $k!\ne0$ in $K$.
+This criterion remains sharp for Banach spaces. In positive characteristic, spherical completeness
+of the target gives an analytic restriction in every degree. Nevertheless, for $K=\F_p(t)$ and $k\ge p$
+there is no largest full analytic subcategory: two individually analytic objects can have a nonanalytic
+cross-action, even when all spaces have finite algebraic dimension and nonarchimedean norms.
+
+A different picture emerges when regularity is tested on families of morphisms. Every analytic family
+parametrized by an open subset of $K^d$ induces an analytic alternating-map family, in every characteristic
+and degree, without completeness assumptions on the fibers. Consequently alternating maps preserve analytic
+normed vector bundles and their operator-valued analytic morphisms over analytic manifolds with open $K^d$ charts. We also prove positive results for $c_0$ and ordinary $\ell^1$ parameter spaces, explain the obstruction
+for invertible families over general Banach bases, and characterize universal analytic reflection through closed
+Banach subspaces by projections onto diagonal tensor powers with exponential norm bounds.
+The sharp Banach counterexample and the principal operator positive results are formalized in Lean with Mathlib;
+the verification scope of the subsequent extensions is stated separately.
 \end{abstract}
 \maketitle
 
 \section{Introduction}\label{sec:intro}
 The passage from vector spaces to alternating maps is contravariant in the source and covariant in the target.
-We study the regularity of this bifunctor on categories of normed spaces. The distinction between smoothness
-and analyticity is decisive in positive characteristic: the bifunctor is always smooth, but its analyticity
-depends on the degree and on the category chosen for its second variable.
+We study both its regularity on whole spaces of morphisms and its behavior on analytic families of morphisms.
+These are different questions in positive characteristic. Analyticity on all morphism spaces has a sharp degree
+restriction, whereas every analytic family with standard finite-dimensional parameters is preserved. This
+distinction gives an unrestricted construction of alternating-map bundles over finite-dimensional analytic
+bases, despite the failure of an analytic bifunctor on the entire category.
 
 \subsection*{Categories and regularity}
 Fix a nontrivially normed field $K$. Let $\mathsf{Vec}_K$ be the category of normed $K$\nobreakdash-spaces and
 bounded linear maps, and let $\mathsf{Ban}_K$ be its full subcategory of complete spaces.
-When $K$ has positive characteristic, write $\mathsf{Vec}_K^\circ$ for the full subcategory of ultrametric,
+When $K$ has positive characteristic, write $\mathsf{Vec}_K^\circ$ for the full subcategory of nonarchimedean,
 spherically complete spaces. The field itself need not be complete.
 
 For an integer $k\ge0$, let $\Alt^k(E;F)$ be the normed space of bounded alternating $k$\nobreakdash-linear maps $E^k\to F$.
@@ -108,7 +114,7 @@ We call the bifunctor \emph{analytic}, or \emph{$C^\infty$}, when every induced 
 has that regularity. The product carries the maximum norm. This definition concerns the joint action on both
 variables, rather than separate regularity. It applies to the restrictions below as well.
 
-\subsection*{Main result}
+\subsection*{Main results}
 \begin{thmMain}
 Let $K$ be a nontrivially normed field and let $k\ge0$ be an integer.
 \begin{enumerate}
@@ -127,13 +133,29 @@ is $C^\infty$. It is analytic if and only if $k!\ne0$ in $K$. Both assertions ho
 \longrightarrow\mathsf{Vec}_K^\circ
 \]
 is analytic in every degree.
+\item\label{main:families} With no restriction on $K$ or $k$, the bifunctor $\Alt^k$ preserves every analytic
+family of morphisms parametrized by an open subset of $K^d$. Consequently it induces a bifunctor on
+analytic normed vector bundles over any analytic manifold with open $K^d$ charts, preserving
+operator-valued analytic bundle morphisms. No completeness or dimension hypothesis on the fibers is required.
+\item\label{main:domains} For every prime $p$ and every $k\ge p$, over the $t$\nobreakdash-adically normed
+field $K=\F_p(t)$ there is no largest full subcategory of
+$\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K$ on which $\Alt^k$ is analytic.
+This remains true for subcategories closed under isomorphisms and, within the corresponding ambient category,
+when all objects have finite algebraic dimension and nonarchimedean norms.
 \end{enumerate}
 \end{thmMain}
 Part~(\ref{main:general}) gives the exact analytic range $k<p$ in characteristic $p>0$; in characteristic zero,
 every finite degree is analytic. Part~(\ref{main:spherical}) removes the restriction on the degree by restricting
 the target category. Its codomain is part of the assertion: alternating maps into a spherically complete
-ultrametric space form a spherically complete ultrametric space. No completeness assumption on $K$ is needed.
-In all the analytic cases just stated, the maps on hom spaces are in fact given by finite power series.
+nonarchimedean space form a spherically complete nonarchimedean space. No completeness assumption on $K$ is needed.
+In the analytic cases in parts~(\ref{main:general}) and~(\ref{main:spherical}), the maps on hom spaces are
+in fact given by finite power series. Part~(\ref{main:families}) concerns a weaker requirement on the
+functor, but a stronger bundle conclusion: only the parameter space is finite-dimensional. Its proof is
+analytic reflection through a closed linear isometry for finite-coordinate parameters
+(Theorem~\ref{fam:thm:finite-reflection}). Over incomplete fields, finite algebraic dimension alone does
+not supply continuous coordinates; this is precisely what permits the examples in part~(\ref{main:domains}).
+The latter assertion does not decide the corresponding existence question over complete fields or among
+Banach pairs.
 
 \subsection*{Operator form and sharpness}
 The proofs work with the action of a fixed-target functor $\Alt^k(-;F)$ on hom spaces. We now write this
@@ -157,7 +179,7 @@ over $K$ such that the degree-$k$ map
 Q\colon\cL(E,E)\to\cL\bigl(\Alt^k(E;F),\Alt^k(E;F)\bigr),\qquad Q(f)(m)=m\circ(f,\dots,f),
 \]
 is analytic at no point of $\cL(E,E)$. Equivalently, there is no bounded $k$\nobreakdash-linear map $P$ on $\cL(E,E)$ with
-$P(f,\dots,f)=Q(f)$ for all $f$. The Banach space $F$ admits no equivalent ultrametric norm.
+$P(f,\dots,f)=Q(f)$ for all $f$. The Banach space $F$ admits no equivalent nonarchimedean norm.
 The same $E,F$ work for any reindexing of the $k$ arguments.
 \end{theorem}
 
@@ -168,7 +190,7 @@ $K$\nobreakdash-Banach spaces $E,E',F$ if and only if $k!\ne0$ in $K$. More prec
 \item if $k!\neq0$ in $K$, then $Q^K_{E,E',F}$ is analytic, indeed given at every point by a finite power
 series, for all normed spaces $E,E',F$, complete or not;
 \item if $k!=0$ in $K$, then there are Banach spaces $E=E'$ and $F$, with $F$ admitting no equivalent
-ultrametric norm, such that $Q^K_{E,E,F}$ is analytic at no point.
+nonarchimedean norm, such that $Q^K_{E,E,F}$ is analytic at no point.
 \end{enumerate}
 \end{corollary}
 
@@ -255,9 +277,20 @@ a\longmapsto h_{ij}(x)\circ a\circ\bigl(g_{ji}(x),\dots,g_{ji}(x)\bigr).
 \]
 The Main Theorem therefore constructs this as a $C^n$ vector bundle for every $n\le\infty$ whenever the input
 bundles are $C^n$. For analytic input bundles, it gives an analytic bundle when $k!\ne0$ in $K$, and in every
-degree when $K$ is ultrametric and the typical target fiber $F$ is ultrametric and spherically complete.
-Taking $\mathcal E=TM$ and $\mathcal H=M\times K$ gives the bundle of differential $k$\nobreakdash-forms
-on a smooth manifold, and on an analytic manifold in the corresponding analytic cases.
+degree when $K$ is nonarchimedean and the typical target fiber $F$ is nonarchimedean and spherically complete.
+Part~(\ref{main:families}) supplies a further conclusion independent of these degree and fiber conditions:
+if $M$ has open $K^d$ charts, the alternating-map bundle is analytic for all analytic input bundles, in every
+characteristic and degree. The proof applies to transition families themselves rather than to the entire
+operator space. It also applies to bundle morphisms, so this is a functorial construction independent of the
+chosen analytic atlas (Theorem~\ref{fam:thm:finite-bundles}). Taking $\mathcal E=TM$ and
+$\mathcal H=M\times K$ recovers analytic differential $k$\nobreakdash-forms in this setting. The additional
+content is that the input bundles may have infinite-dimensional fibers.
+
+The dimension of the base matters. An affine analytic family of invertible operators on a Banach fiber can
+induce a nonanalytic pullback family on alternating maps (Proposition~\ref{fam:prop:shear}). Thus an arbitrary
+analytic change of frame over a general Banach base need not be preserved. This is a failure of the natural
+construction under changes of trivialization, not a claim that the underlying pointwise bundle admits no
+analytic structure.
 
 \subsection*{Related results}
 Mathlib treats manifolds and vector bundles over arbitrary nontrivially normed fields, with the same regularity
@@ -269,19 +302,19 @@ argument works whenever $k!\ne0$ in $K$; we prove it in \S\ref{sec:positive}. Th
 regularity range in~\cite{PR} is sharp over every field of characteristic $p>0$ once $k\ge p$: in these examples,
 Mathlib's \texttt{ContDiffAt K $\omega$} fails at every point.
 
-The answer is different if the target norm is required to be ultrametric. If $K$ is ultrametric and $F$ is
-ultrametric and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Main Theorem).
+The answer is different if the target norm is required to be nonarchimedean. If $K$ is nonarchimedean and $F$ is
+nonarchimedean and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Main Theorem).
 The proof in \S\ref{sec:theoremA} constructs a contracting retraction from multilinear maps to alternating maps
 by spherical completeness and extension of bounded linear maps. This positive result is independent of the counterexample theorem and Corollary~\ref{cor:class}. A special case appears
 in~\cite[Remark~16]{M}. Over a discretely valued base, the Main Theorem in fact rules out a Banach counterexample whenever
-$F$ has an equivalent ultrametric norm (Proposition~\ref{prop:discrete}).
+$F$ has an equivalent nonarchimedean norm (Proposition~\ref{prop:discrete}).
 
-The earlier characteristic-$2$ construction~\cite{M} uses an ultrametric target and gives nonanalyticity at $0$
-for $E=E'=\linf$ and $k=2$ over every complete ultrametric field of characteristic $2$ that is not spherically complete. Its formal
+The earlier characteristic-$2$ construction~\cite{M} uses a nonarchimedean target and gives nonanalyticity at $0$
+for $E=E'=\linf$ and $k=2$ over every complete nonarchimedean field of characteristic $2$ that is not spherically complete. Its formal
 hypothesis is a descending sequence of closed balls with empty intersection, equivalent to failure of spherical
 completeness (Remark~\ref{rem:K2}). The higher-characteristic cases were left open there. The present construction
 works over every nontrivially normed field of positive characteristic, including spherically complete fields,
-by allowing targets with no equivalent ultrametric norm. The remaining questions for ultrametric targets are
+by allowing targets with no equivalent nonarchimedean norm. The remaining questions for nonarchimedean targets are
 discussed in \S\ref{sec:complements}.
 
 \subsection*{Overview of the counterexample proof}
@@ -321,23 +354,26 @@ F=B\widehat\otimes_{\pi,K_1}\Kh
 contain $E_1$ and $B$ isometrically, and allows a lift over $\Kh$ to descend to one over $K_1$. Density handles an
 incomplete $K$. These are the explicit witnesses in Theorem~\ref{thm:main}. Finally, sums of unit wedges on disjoint
 blocks have norms growing linearly with the number of blocks. This growth persists in $F$ and rules out every
-equivalent ultrametric norm (Proposition~\ref{prop:nonultra}).
+equivalent nonarchimedean norm (Proposition~\ref{prop:nonultra}).
 
-\subsection*{Formal verification and organization}
-The operator counterexample, Theorem~\ref{thm:main}, both directions of Corollary~\ref{cor:class}, and their supporting
-arguments are formalized in Lean~4 with Mathlib. The development also includes the operator form of Main Theorem~(\ref{main:spherical}),
-the discrete-target result, and the sorted-basis lift of
-\S\ref{sec:complements}. The additional finite-dimensional arguments and their formalization status are identified
-in \S\ref{sec:lean}. The categorical Main Theorem follows by the translation above; it is not a separate
-Lean categorical declaration.
-\S\ref{sec:lean} records the principal declarations, verification scope, and provenance; the quoted smoothness
-result~\cite{PR}, whose argument we include, and earlier characteristic-$2$ construction~\cite{M} have separate provenance.
+\subsection*{Proofs and verification scope}
+The counterexample theorem and factorial classification, including their supporting finite-field and
+functional-analytic arguments, are formalized in Lean~4 with Mathlib. The checked development also contains
+the operator form of Main Theorem~(\ref{main:spherical}), the discrete-target result and the sorted-basis lift.
+The analytic-family and no-largest-domain results are later extensions. Their mathematical proofs are included
+here; \S\ref{sec:lean} and the repository's theorem map give their separate formalization status.
 
-\S\ref{sec:theoremA} proves Main Theorem~(\ref{main:spherical}) independently, including the extension and spherical-completeness arguments.
-\S\ref{sec:prelim} gives the analytic and exterior-algebra preliminaries, and \S\ref{sec:positive} proves the positive cases. \S\ref{sec:FF} proves the finite-field
-obstruction, and \S\ref{sec:laurent} realizes it over a Laurent series field. \S\ref{sec:ascent} develops scalar
-extension and descent; \S\ref{sec:proofs} assembles the main results. \S\ref{sec:complements} treats ultrametric
-targets and open problems.
+The paper is organized to separate the positive theory from the two distinct obstructions.
+\S\ref{sec:theoremA} proves the spherically complete theorem independently.
+\S\ref{sec:prelim} supplies analytic and exterior-algebra preliminaries, and \S\ref{sec:positive} gives
+factorial, finite-coordinate fiber and smoothness results.
+\S\ref{fam:sec:families} introduces admissible families and proves finite-coordinate analytic reflection;
+\S\ref{fam:sec:bundles} treats bundles and infinite-dimensional parameter classes.
+\S\ref{fam:sec:tensors} gives the tensor criterion for the stronger universal reflection problem.
+\S\ref{dom:section} proves that no largest full analytic domain exists in the stated generality.
+The original sharp Banach counterexample occupies \S\S\ref{sec:FF}--\ref{sec:proofs}: the finite-field
+obstruction, its Laurent series realization, scalar extension and the final assembly.
+\S\ref{sec:complements} concludes with further target classes and the remaining classification problems.
 
 \section{Spherically complete targets}\label{sec:theoremA}
 This section proves part~(\ref{main:spherical}) of the Main Theorem. Spherical completeness allows us
@@ -350,10 +386,10 @@ A special case is stated in~\cite[Remark~16]{M}; the proof here follows the exte
 in the Lean development.
 
 \subsection{Statement and strategy}
-A norm is \emph{ultrametric} if $\norm{x+y}\le\max(\norm x,\norm y)$. A metric space is
+A norm is \emph{nonarchimedean} if $\norm{x+y}\le\max(\norm x,\norm y)$. A metric space is
 \emph{spherically complete} if every nonempty family of closed balls that meet pairwise has a common point.
 We write $\overline B(a,r)=\{x:\norm{x-a}\le r\}$, with $r\ge0$.
-In an ultrametric space, two such balls meet if and only if the distance between their centres is at most the larger radius;
+In a nonarchimedean space, two such balls meet if and only if the distance between their centres is at most the larger radius;
 in that case the ball of smaller radius is contained in the other.
 
 As in the introduction, $\cL(X,Y)$ denotes bounded linear maps. Write $\Mult^k(X;Y)$ for the bounded
@@ -361,18 +397,18 @@ $k$\nobreakdash-linear maps and $\Alt^k(X;Y)$ for their alternating subspace, wi
 \[
 \norm{m(x_1,\dots,x_k)}\le\norm m\prod_{i=1}^k\norm{x_i}.
 \]
-When the target norm is ultrametric, both operator spaces are ultrametric, regardless of the norm on $X$.
+When the target norm is nonarchimedean, both operator spaces are nonarchimedean, regardless of the norm on $X$.
 
-Throughout this section, $K$ is an ultrametric nontrivially normed field and $k\ge0$ is an integer.
-Positive characteristic implies the ultrametric hypothesis by Lemma~\ref{lem:ultra}.
+Throughout this section, $K$ is a nonarchimedean nontrivially normed field and $k\ge0$ is an integer.
+Positive characteristic implies the nonarchimedean hypothesis by Lemma~\ref{lem:ultra}.
 We prove the following operator statement, which also records every smoothness order. For normed
-$K$\nobreakdash-spaces $E,E'$ and an ultrametric, spherically complete $F$,
+$K$\nobreakdash-spaces $E,E'$ and a nonarchimedean, spherically complete $F$,
 \[
 Q^K_{E,E',F}\text{ is }C^n\qquad(n\in\N\cup\{\infty,\omega\}).
 \]
 Together with spherical completeness of $\Alt^k(E;F)$ and~\eqref{eq:joint-action}, this proves Main Theorem~(\ref{main:spherical}).
 
-No completeness assumption on $K,E$ or $E'$ is needed, and the norms on $E,E'$ may be non-ultrametric.
+No completeness assumption on $K,E$ or $E'$ is needed, and no nonarchimedean hypothesis is imposed on $E$ or $E'$.
 For $k\ge1$, put $A=\Alt^k(E;F)$ and $M=\Mult^k(E;F)$. The desired projection is a bounded linear map
 $\rho\colon M\to A$ of norm at most one that fixes every alternating map. Once it is available, the formula
 \[
@@ -383,12 +419,12 @@ expansion around any operator gives a finite power series. To construct $\rho$, 
 lemma that preserves a family of bounds, then use it to show that $A$ is spherically complete.
 
 \subsection{Extension with simultaneous bounds}
-The following form of the ultrametric extension argument keeps a prospective extension in several operator
+The following form of the nonarchimedean extension argument keeps a prospective extension in several operator
 balls at once. We allow a seminorm on the domain, since the free space used in the next step may have
 nonzero vectors of seminorm zero.
 
 \begin{lemma}[compatible extension]\label{lem:compatible-extension}
-Let $U$ be an ultrametric seminormed $K$\nobreakdash-space and let $G$ be an ultrametric, spherically complete
+Let $U$ be a nonarchimedean seminormed $K$\nobreakdash-space and let $G$ be a nonarchimedean, spherically complete
 normed $K$\nobreakdash-space. Suppose a nonempty family $(T_\alpha,r_\alpha)$, with
 $T_\alpha\in\cL(U,G)$ and $r_\alpha\ge0$, satisfies
 \[
@@ -447,11 +483,11 @@ For the last assertion, take the single pair $(T_\alpha,r_\alpha)=(0,1)$.
 \subsection{Spherical completeness of alternating-map spaces}
 Ordinary completeness alone would not let us apply the extension lemma with target $A$.
 We prove the required stronger property by presenting alternating maps as linear maps on a free space
-subject to linear relations. The ultrametric seminorm on that free space is chosen so that this presentation
-preserves the operator norm, even when $E$ itself is not ultrametric.
+subject to linear relations. The nonarchimedean seminorm on that free space is chosen so that this presentation
+preserves the operator norm, even when $E$ itself is not nonarchimedean.
 
 \begin{proposition}\label{prop:alt-spherical}
-For an ultrametric nontrivially normed field $K$, a normed $K$\nobreakdash-space $E$ and an ultrametric, spherically complete $F$, the space $\Alt^k(E;F)$ is an ultrametric, spherically complete normed space
+For a nonarchimedean nontrivially normed field $K$, a normed $K$\nobreakdash-space $E$ and a nonarchimedean, spherically complete $F$, the space $\Alt^k(E;F)$ is a nonarchimedean, spherically complete normed space
 for every $k\ge0$.
 \end{proposition}
 
@@ -462,15 +498,15 @@ $K$\nobreakdash-vector space on the set $E^k$, with generators $[x]$ and seminor
 \Bigl\lVert\sum_x c_x[x]\Bigr\rVert_U
 =\max_x\abs{c_x}\prod_{i=1}^k\norm{x_i}.
 \]
-The maximum is over the finite support, with empty maximum zero. This seminorm is ultrametric because
-the absolute value on $K$ is ultrametric. Let $R\subseteq U$ be the linear span of the relations expressing
+The maximum is over the finite support, with empty maximum zero. This seminorm is nonarchimedean because
+the absolute value on $K$ is nonarchimedean. Let $R\subseteq U$ be the linear span of the relations expressing
 additivity and scalar homogeneity in each slot, together with $[x]$ whenever two coordinates of $x$ coincide.
 
 An alternating map $a\in A$ defines a linear map vanishing on $R$ by
 \[
 \widehat a\Bigl(\sum_xc_x[x]\Bigr)=\sum_xc_xa(x).
 \]
-The ultrametric inequality in $F$ gives
+The nonarchimedean inequality in $F$ gives
 \[
 \Bigl\lVert\widehat a\Bigl(\sum_xc_x[x]\Bigr)\Bigr\rVert
 \le\max_x\abs{c_x}\norm{a(x)}
@@ -495,7 +531,7 @@ This produces the projection needed to turn ordinary precomposition into a polyn
 
 \begin{proof}[Proof of Main Theorem~(\ref{main:spherical})]
 In degree zero, $\Alt^0(-;F)$ is naturally $F$ and the bifunctor acts by the pushforward morphism, so the conclusion holds. Assume $k\ge1$ and retain $A=\Alt^k(E;F)$ and
-$M=\Mult^k(E;F)$. Their operator norms are ultrametric, and $A$ is spherically complete by
+$M=\Mult^k(E;F)$. Their operator norms are nonarchimedean, and $A$ is spherically complete by
 Proposition~\ref{prop:alt-spherical}. The inclusion $j\colon A\to M$ is a linear isometry.
 Its inverse on $j(A)$ is therefore a contraction. Lemma~\ref{lem:compatible-extension} extends this inverse to
 a contraction $\rho\colon M\to A$ with $\rho j=\id_A$.
@@ -525,14 +561,14 @@ The binomial coefficient in the bound is an ordinary nonnegative integer countin
 With $q_r=0$ for $r>k$, this is a power series of infinite radius at every $f_0$.
 Consequently $Q$ is continuously polynomial, hence $C^\omega$ and $C^n$ for all
 $n\in\N\cup\{\infty\}$. Equation~\eqref{eq:joint-action} makes the full bifunctor analytic on hom spaces,
-and Proposition~\ref{prop:alt-spherical} shows that its values are ultrametric and spherically complete.
+and Proposition~\ref{prop:alt-spherical} shows that its values are nonarchimedean and spherically complete.
 This proves the categorical statement.
 \end{proof}
 
 The retraction supplies the alternating values directly, with no division by $k!$.
-The source spaces need no ultrametric hypothesis because the extension argument takes place in
-the free presentation and in operator spaces with ultrametric targets. The following sections develop the
-other positive cases and then construct counterexamples whose targets admit no equivalent ultrametric norm.
+The source spaces need no nonarchimedean hypothesis because the extension argument takes place in
+the free presentation and in operator spaces with nonarchimedean targets. The following sections develop the
+other positive cases and then construct counterexamples whose targets admit no equivalent nonarchimedean norm.
 
 
 \section{Analytic and algebraic preliminaries}\label{sec:prelim}
@@ -542,9 +578,9 @@ argument.
 
 \subsection{Conventions}
 We write $\N=\{0,1,2,\dots\}$. Throughout, $K$ denotes the base field and $k$ the degree. A \emph{normed field} $K$ carries a multiplicative absolute value $\abs{\cdot}$ satisfying the triangle inequality. It is
-\emph{nontrivially normed} if some $c\in K$ has $0<\abs c<1$, and \emph{ultrametric} if $\abs{x+y}\le\max(\abs x,\abs y)$.
-A \emph{normed $K$\nobreakdash-space} $X$ satisfies $\norm{\lambda x}=\abs\lambda\norm x$; it is \emph{Banach} if it is complete. The norm of a space need not be ultrametric. In non-archimedean functional analysis, the term ``Banach''
-often includes the ultrametric condition; Main Theorem~(\ref{main:spherical}) and \S\ref{sec:complements} address ultrametric targets.
+\emph{nontrivially normed} if some $c\in K$ has $0<\abs c<1$, and \emph{nonarchimedean} if $\abs{x+y}\le\max(\abs x,\abs y)$.
+A \emph{normed $K$\nobreakdash-space} $X$ satisfies $\norm{\lambda x}=\abs\lambda\norm x$; it is \emph{Banach} if it is complete. The norm of a space need not be nonarchimedean. In non-archimedean functional analysis, the term ``Banach''
+often includes the nonarchimedean condition; Main Theorem~(\ref{main:spherical}) and \S\ref{sec:complements} address nonarchimedean targets.
 
 We write $\cL(X,Y)$ for the bounded
 linear maps, $\Mult^k(X;Y)$ for the bounded $k$\nobreakdash-linear maps $X^k\to Y$, and $\Alt^k(X;Y)\subseteq\Mult^k(X;Y)$ for the
@@ -574,7 +610,7 @@ Mathlib's \texttt{AnalyticAt}~\cite{docs}, and in Mathlib \texttt{ContDiffAt K $
 \texttt{AnalyticAt} there (\texttt{ContDiffAt.analyticAt}).
 
 \begin{lemma}\label{lem:ultra}
-A normed field of characteristic $p>0$ is ultrametric.
+A normed field of characteristic $p>0$ is nonarchimedean.
 \end{lemma}
 
 \begin{proof}
@@ -785,7 +821,7 @@ coordinate topology.
 Let $K$ be a nontrivially normed field and let $E,E',F$ be normed $K$\nobreakdash-spaces. If either $E$ or $E'$ has a
 finite algebraic basis whose coordinate functionals are continuous, then $Q^K_{E,E',F}$ has a bounded
 $k$\nobreakdash-linear lift in every degree $k\ge1$. In particular, it is continuously polynomial, and hence analytic,
-at every point. No completeness or ultrametric hypothesis on $F$ is required.
+at every point. No completeness or nonarchimedean hypothesis on $F$ is required.
 \end{proposition}
 
 \begin{proof}
@@ -886,7 +922,7 @@ equivalent to a coordinate maximum norm.
 
 
 Finite-dimensionality of the target $F$ leads to a different question. Remark~\ref{rem:finite-target-reduction}
-reduces it to scalar-valued forms and gives a positive result over a spherically complete ultrametric base.
+reduces it to scalar-valued forms and gives a positive result over a spherically complete nonarchimedean base.
 
 \subsection{Smoothness in every characteristic}
 We first record why finite-order differentiability descends through a closed isometric inclusion. The argument
@@ -946,6 +982,947 @@ This is the argument formalized in~\cite{PR}. It uses closedness to recover deri
 onto alternating maps. The induction proves all finite orders but does not recover analytic coefficients in
 positive characteristic. Theorem~\ref{thm:main} shows that the resulting $C^\infty$ conclusion cannot in general be
 strengthened to $C^\omega$.
+
+\section{Analytic families of morphisms}\label{fam:sec:families}
+Regularity on an entire operator space is stronger than regularity along a prescribed family of operators.
+This distinction gives a useful replacement for restricting the objects of the alternating-map bifunctor.
+We retain every object and every individual morphism, and ask which analytic families the bifunctor preserves.
+The resulting family structure is canonical. Its usefulness comes from the concrete parameter classes
+for which the additional condition is automatic.
+
+\subsection{The canonical family structure}
+For objects $X=(E,F)$ and $Y=(E',F')$ of
+$\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K$, write
+\[
+ V_X=\Alt^k(E;F),\qquad
+ H_{XY}=\cL(E',E)\times\cL(F,F'),
+\]
+and denote the action on morphisms by
+\[
+ A_{XY}\colon H_{XY}\longrightarrow\cL(V_X,V_Y),\qquad
+ A_{XY}(u,v)m=v\circ m\circ(u,\ldots,u).
+\]
+The product defining $H_{XY}$ has the maximum norm. These conventions make the contravariance in $E$
+explicit: the first component of a morphism $X\to Y$ is a map $E'\to E$.
+
+\begin{definition}\label{fam:def:admissible}
+Let $U$ be open in a normed $K$\nobreakdash-space. A map $\gamma\colon U\to H_{XY}$ is
+\emph{admissible} if both $\gamma$ and $A_{XY}\circ\gamma$ are analytic.
+Families on analytic manifolds are admissible when their expressions in parameter charts are admissible.
+\end{definition}
+
+\begin{proposition}\label{fam:prop:category}
+Admissible families contain constants and are closed under analytic reparameterization, local gluing,
+and categorical composition. Composition is allowed to depend on either a common parameter or independent parameters.
+They form the largest collection of ordinary analytic families for which the action of $\Alt^k$ is analytic.
+\end{proposition}
+
+\begin{proof}
+Constants, reparameterization, and gluing follow from the corresponding properties of analytic maps.
+For composable families $\gamma\colon U\to H_{XY}$ and $\eta\colon U\to H_{YZ}$, composition in
+$H$ is bounded bilinear, and functoriality gives
+\[
+ A_{XZ}(\eta\circ\gamma)
+ =A_{YZ}(\eta)\circ A_{XY}(\gamma).
+\]
+Composition of bounded operators is bounded bilinear as well, so both required maps are analytic.
+For independent parameter spaces, pull the two families back to their product and apply the same argument.
+Finally, any ordinary analytic family preserved analytically by $\Alt^k$ satisfies exactly the two
+conditions of Definition~\ref{fam:def:admissible}, and hence belongs to this collection.
+\end{proof}
+
+Equivalently, identify the set $H_{XY}$ with the graph
+\[
+ \Gamma_{A_{XY}}=
+ \{(h,A_{XY}(h)):h\in H_{XY}\}
+ \subseteq H_{XY}\times\cL(V_X,V_Y)
+\]
+and declare a family analytic when its map to the ambient product is analytic.
+No assertion that this graph is an analytic submanifold is involved. In the language of plots, this is a category
+whose hom sets are analytic plot spaces: the parameter domains are open subsets of normed $K$\nobreakdash-spaces,
+the reparameterizations are analytic maps, and covers are open covers. The smooth concrete-sheaf framework
+of Baez and Hoffnung~\cite{BH} motivates this formulation; the analytic family structure used here is
+specified directly by Definition~\ref{fam:def:admissible} and Proposition~\ref{fam:prop:category}.
+
+This structure need not preserve the vector-space operations on hom sets. Suppose $k>0$ and
+$u\colon U\to\cL(E',E)$ is analytic but its pullback action is not. With $F'=F$, both
+$(u,0)$ and $(0,\id_F)$ are admissible because their induced actions vanish. Their sum
+$(u,\id_F)$ is not admissible. Thus addition of admissible families can fail.
+Multiplication by an analytic scalar family does preserve admissibility, since
+$A_{XY}(\lambda u,\lambda v)=\lambda^{k+1}A_{XY}(u,v)$.
+
+\subsection{Reflection through a closed subspace}
+The range condition behind admissibility can be separated from the operator construction.
+Set
+\[
+ W=\cL(V_X,\Alt^k(E';F')),\qquad
+ Z=\cL(V_X,\Mult^k(E';F')),
+\]
+and let $j\colon W\hookrightarrow Z$ be the map induced by forgetting alternation.
+It is a linear isometry with closed image. Indeed, an element of $Z$ belongs to its image precisely when
+every value vanishes on every tuple with two equal entries. These are closed linear evaluation conditions;
+the operator norms before and after forgetting alternation agree. This argument does not require completeness.
+
+Although $A_{XY}$ can fail to be analytic, its composite with $j$ is always a bounded homogeneous polynomial
+of degree $k+1$. A multilinear representative is obtained by using $k$ independent input operators
+and one independent output operator:
+\begin{equation}\label{fam:eq:ambient-polynomial}
+ B\bigl((u_1,v_1),\ldots,(u_{k+1},v_{k+1})\bigr)(m)(x_1,\ldots,x_k)
+ =v_{k+1}\bigl(m(u_1x_1,\ldots,u_kx_k)\bigr).
+\end{equation}
+Its norm is at most one, and its diagonal is $jA_{XY}$. For pullback alone, the corresponding degree is $k$.
+Thus an analytic family always gives an analytic ambient map $jA_{XY}\gamma$.
+The remaining question is whether this map is analytic into $W$.
+
+We first record how closedness detects homogeneous coefficients. The conclusion concerns their diagonals,
+not the values of a chosen multilinear representative on arbitrary tuples.
+
+\begin{lemma}[closedness of homogeneous terms]\label{fam:lem:diagonal}
+Let $W$ be a closed linear subspace of a normed space $Z$, and suppose
+\[
+ f(x_0+h)=\sum_{n\ge0}p_n(h,\ldots,h)
+\]
+is an analytic expansion with values in $Z$. If $f$ takes values in $W$ near $x_0$, then
+$p_n(x,\ldots,x)\in W$ for every $n$ and every parameter vector $x$.
+\end{lemma}
+
+\begin{proof}
+For $n=0$ this follows by evaluating at $x_0$. Inductively, for each fixed $x$ and sufficiently small
+nonzero $t\in K$, the vector
+\[
+ t^{-n}\left(f(x_0+tx)-\sum_{r<n}t^rp_r(x,\ldots,x)\right)
+\]
+belongs to $W$. It tends to $p_n(x,\ldots,x)$ as $t\to0$.
+To see the convergence directly, choose $\rho>0$ and $M$ such that $\norm{p_r}\rho^r\le M$ for all $r$.
+The norm of the remaining tail is at most
+\[
+ M\left(\frac{\norm{x}}{\rho}\right)^n
+ \frac{\abs t\norm{x}/\rho}{1-\abs t\norm{x}/\rho}
+\]
+when $\abs t\norm{x}<\rho$. Nontriviality of the norm provides arbitrarily small nonzero $t$.
+Closedness now proves the induction step.
+\end{proof}
+
+\begin{theorem}[finite-coordinate analytic reflection]\label{fam:thm:finite-reflection}
+Let $j\colon W\hookrightarrow Z$ be a linear isometry with closed image, let $U\subseteq K^d$ be open,
+and let $f\colon U\to W$. If $jf$ is analytic, then $f$ is analytic.
+The spaces $W,Z$ and the field $K$ need not be complete. The same statement holds when the parameter space
+is continuously linearly isomorphic to $K^d$.
+\end{theorem}
+
+\begin{proof}
+Identify $W$ with its image, use maximum-norm coordinates on $K^d$, and expand $jf$ at a parameter point.
+Lemma~\ref{fam:lem:diagonal} shows that every homogeneous polynomial
+$x\mapsto p_n(x,\ldots,x)$ has its values in $W$.
+For $d\ge1$, let $e_1,\ldots,e_d$ be the coordinate vectors. For each multi-index
+$\alpha=(\alpha_1,\ldots,\alpha_d)$ of total degree $n$, put
+\[
+ c_\alpha=
+ \sum_{\substack{(i_1,\ldots,i_n)\in\{1,\ldots,d\}^n\\
+                 \#\{r:i_r=j\}=\alpha_j\ (1\le j\le d)}}
+ p_n(e_{i_1},\ldots,e_{i_n}).
+\]
+Then $p_n(x,\ldots,x)=\sum_{|\alpha|=n}c_\alpha x^\alpha$.
+All $c_\alpha$ belong to $W$: pass to the algebraic quotient $Z/W$ and use polynomial uniqueness
+over the infinite field $K$. This vector-valued uniqueness follows by applying scalar coordinate
+functionals on the finite-dimensional span of the coefficients; no topology on the quotient is needed.
+
+Choose, for each $\alpha$, the nondecreasing word $(i_1(\alpha),\ldots,i_n(\alpha))$ with those multiplicities,
+and define the $W$\nobreakdash-valued multilinear map
+\[
+ q_n(x_1,\ldots,x_n)=
+ \sum_{|\alpha|=n}c_\alpha\prod_{r=1}^n(x_r)_{i_r(\alpha)}.
+\]
+Its diagonal agrees with that of $p_n$. Moreover,
+\begin{equation}\label{fam:eq:finite-bound}
+ \norm{q_n}\le\sum_{|\alpha|=n}\norm{c_\alpha}
+ \le d^n\norm{p_n},
+\end{equation}
+because the original expansion has exactly $d^n$ ordered words.
+The degree-zero coefficient is $f(x_0)$. The bounds give a common positive radius for the $q_n$.
+Their partial sums have images under $j$ converging to $jf(x)$, so the isometry shows that they converge
+to the already given vector $f(x)$ inside $W$. Completeness is therefore unnecessary.
+The case $d=0$ is immediate, and continuous linear coordinates give the last assertion.
+\end{proof}
+
+\begin{corollary}\label{fam:cor:finite-families}
+Every analytic morphism family parametrized by an open subset of $K^d$ is admissible for $\Alt^k$,
+in every characteristic and every degree, with arbitrary normed fibers.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{fam:thm:finite-reflection} to the closed isometric inclusion $j$ above and the analytic map
+$jA_{XY}\gamma$, using~\eqref{fam:eq:ambient-polynomial}.
+\end{proof}
+
+Over an incomplete field, finite algebraic dimension alone does not imply the existence of continuous
+coordinates. The coordinate hypothesis in Theorem~\ref{fam:thm:finite-reflection} is consequently essential
+to its stated scope. When $K$ is complete, every finite-dimensional normed parameter space has such coordinates.
+In particular, standard finite-dimensional analytic probes cannot detect the failure of analyticity of
+the full operator action. Arbitrary normed parameter spaces, including the operator spaces themselves,
+are needed to recover the regularity notion used in the Main Theorem.
+
+\subsection{The exact local coefficient problem}
+The same argument identifies what remains to be proved for a general parameter space.
+
+\begin{proposition}\label{fam:prop:coefficient-criterion}
+Let $\gamma$ be analytic near $x_0$ and choose an ambient expansion
+\[
+ jA_{XY}\gamma(x_0+h)=\sum_{n\ge0}p_n(h,\ldots,h).
+\]
+The induced map $A_{XY}\gamma$ is analytic at $x_0$ if and only if there are bounded $n$\nobreakdash-linear maps $q_n$
+into $W$ and $r>0$ such that
+\[
+ jq_n(h,\ldots,h)=p_n(h,\ldots,h)\quad\text{for all }n,h,
+ \qquad \sup_n\norm{q_n}r^n<\infty.
+\]
+\end{proposition}
+
+\begin{proof}
+If the induced map is analytic at $x_0$, take an expansion there in $W$, apply $j$, and compare the two
+expansions on every scalar line. Lemma~\ref{lem:unique} identifies their homogeneous diagonals.
+Conversely, shrink $r$ to lie within the radius of the ambient expansion. The image under $j$ of the
+partial sums of the proposed series converges to $jA_{XY}\gamma(x_0+h)$, because its homogeneous
+diagonals agree term by term with the ambient series. Since $j$ is an isometry, the partial sums converge
+inside $W$ to $A_{XY}\gamma(x_0+h)$.
+\end{proof}
+
+Admissibility on an open parameter domain means that this criterion holds at every point. For an incomplete
+target, the existence of an expansion at a single point need not give analyticity on a neighborhood.
+It is therefore not necessary that the chosen maps $p_n$ themselves take values in $W$ away from their
+diagonals. Nor can the condition be replaced by ordinary derivative jets in positive characteristic:
+Frobenius terms have vanishing derivatives but need not vanish as homogeneous power-series terms.
+The relevant issue is a bounded multilinear representative for each homogeneous diagonal, with compatible
+growth across the degrees.
+
+\subsection{The obstruction persists for invertible families}
+Restricting to changes of frame does not remove the obstruction on unrestricted parameter spaces.
+The following elementary construction transfers any bad pullback map to a family of automorphisms.
+
+\begin{proposition}[invertible shear family]\label{fam:prop:shear}
+Let $E,D,F$ be normed $K$\nobreakdash-spaces, and suppose
+\[
+ Q\colon\cL(E,D)\longrightarrow
+ \cL\bigl(\Alt^k(D;F),\Alt^k(E;F)\bigr)
+\]
+is not analytic at $u_0$. Put $H=D\oplus E$, with the maximum norm, and define
+\[
+ g(u)=\begin{pmatrix}\id_D&u\\0&\id_E\end{pmatrix}.
+\]
+Then $g$ and $g^{-1}$ are affine analytic operator families, but
+$u\mapsto g(u)^*$ on $\Alt^k(H;F)$ is not analytic at $u_0$.
+In particular, the counterexample can occur at $u_0=0$, where $g(0)=\id_H$.
+\end{proposition}
+
+\begin{proof}
+The inverse is $g(-u)$. Let
+\[
+ J\colon\Alt^k(D;F)\to\Alt^k(H;F),\qquad Jm=m\circ\pi_D^{\times k},
+\]
+and let $R\colon\Alt^k(H;F)\to\Alt^k(E;F)$ be restriction along $i_E\colon E\to H$.
+Both maps are bounded linear, and $\pi_Dg(u)i_E=u$, so
+\begin{equation}\label{fam:eq:shear-retract}
+ R\circ g(u)^*\circ J=Q(u).
+\end{equation}
+If $g(u)^*$ were analytic at $u_0$, bounded linear composition with $R$ and $J$ would make $Q$ analytic there.
+For the last assertion, take the counterexample of Theorem~\ref{thm:main}, which is nonanalytic at zero.
+\end{proof}
+
+Theorem~\ref{thm:main} makes $E,D,F$, and hence the parameter space $\cL(E,D)$, Banach.
+Thus even an analytic family of invertible operators, with analytic inverse, can induce a nonanalytic
+family on alternating maps over a Banach base. Equation~\eqref{fam:eq:shear-retract} also makes the
+obstruction precise: it is already visible after bounded linear extension and restriction of forms.
+
+\section{Analytic vector bundles and positive parameter classes}\label{fam:sec:bundles}
+The finite-coordinate theorem gives a bundle construction in every characteristic, even when the fibers
+are infinite-dimensional. For certain infinite-dimensional bases, summability gives further positive results.
+These are conditions on the parameter space of a family, and should be distinguished from the conditions
+on source or target fibers in the earlier positive theorems.
+
+\subsection{Bundles over finite-dimensional bases}
+Here an analytic normed vector bundle has operator-valued analytic transition maps in its local
+trivializations. Bundle morphisms are required to have operator-valued analytic expressions as well.
+For bundles $\mathcal E,\mathcal F$ over the same analytic manifold $M$, take common trivializing
+neighborhoods with fiber transitions $g_{\alpha\beta}$ and $h_{\alpha\beta}$.
+The candidate transition maps on alternating forms are
+\begin{equation}\label{fam:eq:bundle-transitions}
+ m\longmapsto h_{\alpha\beta}(x)\circ m\circ
+ \bigl(g_{\alpha\beta}(x)^{-1},\ldots,g_{\alpha\beta}(x)^{-1}\bigr).
+\end{equation}
+The inverse $g_{\alpha\beta}^{-1}=g_{\beta\alpha}$ is an analytic operator family by the bundle atlas.
+Functoriality gives the cocycle identity for~\eqref{fam:eq:bundle-transitions}.
+
+\begin{theorem}[alternating-map bundles]\label{fam:thm:finite-bundles}
+Let $M$ be an analytic $K$\nobreakdash-manifold modeled on $K^d$, or on a normed space with continuous
+linear coordinates in $K^d$. For every $k\ge0$, fiberwise alternating maps define a bifunctor
+\[
+ \Alt^k\colon
+ \mathsf{VB}^{\omega}_K(M)^{\mathrm{op}}\times\mathsf{VB}^{\omega}_K(M)
+ \longrightarrow\mathsf{VB}^{\omega}_K(M),
+\]
+where $\mathsf{VB}^{\omega}_K(M)$ denotes analytic normed vector bundles over $M$ with the
+operator-valued analytic bundle morphisms just specified.
+There is no restriction on the characteristic, the degree, or the dimensions and completeness of the fibers.
+\end{theorem}
+
+\begin{proof}
+In each base chart, the pair
+$(g_{\alpha\beta}^{-1},h_{\alpha\beta})$ is an analytic family with a finite-coordinate parameter space.
+Corollary~\ref{fam:cor:finite-families} makes~\eqref{fam:eq:bundle-transitions} analytic.
+The cocycle identity therefore glues the local products with fiber $\Alt^k(E;F)$ to an analytic normed
+vector bundle. The same argument applies to a change of trivialization and to the local expressions
+of a pair of bundle morphisms, with the first morphism directed contravariantly. The identities and
+composition laws hold fiberwise by functoriality of alternating maps, giving the stated bifunctor.
+\end{proof}
+
+Together with the unconditional $C^\infty$ result, this supplies the alternating-map bundle construction
+for every smoothness order over such finite-coordinate bases. The analytic conclusion does not assert
+that the action on arbitrary operator spaces is analytic; it uses the base charts as parameter spaces.
+Over a complete field, the hypothesis includes every finite-dimensional normed model space.
+
+The shear of Proposition~\ref{fam:prop:shear} explains the limit of this conclusion. On the trivial bundle
+with base $\cL(E,D)$ and fiber $H$, the map $(u,z)\mapsto(u,g(u)z)$ is an analytic change of trivialization
+with analytic inverse. Its induced change of trivialization on the alternating-map bundle is not
+operator-valued analytic. Thus the construction is not preserved by every analytic change of frame over
+arbitrary Banach bases. This does not assert that the underlying pointwise alternating-map bundle has
+no analytic structure: the counterexample concerns compatibility with the original analytic bundle atlas.
+
+\subsection{Nonarchimedean \texorpdfstring{$c_0$}{c0} parameters}
+For an arbitrary index set $I$, write $c_0(I,K)$ for the space of scalar families tending to zero outside
+finite sets, with its supremum norm. Completeness is imposed on the output of the coefficient construction,
+not on the field or the parameter space.
+
+\begin{theorem}\label{fam:thm:c0-reflection}
+Let $K$ be nonarchimedean, let $j\colon W\hookrightarrow Z$ be a linear isometry, and assume that
+$W$ is complete and $Z$ has a nonarchimedean norm. If $U\subseteq c_0(I,K)$ is open and
+$jf\colon U\to Z$ is analytic for a map $f\colon U\to W$, then $f$ is analytic.
+\end{theorem}
+
+\begin{proof}
+The image of $j$ is closed. Identify it with $W$ and expand $jf$ at a point of $U$.
+Lemma~\ref{fam:lem:diagonal}, followed by finite-coordinate polynomial uniqueness, puts every grouped
+coordinate coefficient of $p_n(x,\ldots,x)$ in $W$.
+Choose a total order on $I$. For a nondecreasing word $i_1\le\cdots\le i_n$, denote its grouped
+coefficient by $c_{i_1,\ldots,i_n}$. It is a sum of values of $p_n$ on coordinate vectors.
+The nonarchimedean inequality gives
+\[
+ \norm{c_{i_1,\ldots,i_n}}\le\norm{p_n}.
+\]
+For $n\ge1$, define
+\[
+ q_n(x_1,\ldots,x_n)=
+ \sum_{i_1\le\cdots\le i_n}
+ c_{i_1,\ldots,i_n}(x_1)_{i_1}\cdots(x_n)_{i_n}.
+\]
+This sum converges in $W$. Indeed, outside a sufficiently large finite set of words at least one
+coordinate lies outside a chosen finite support approximation for the corresponding $x_r$.
+That factor is arbitrarily small, while all other factors are bounded. Thus the summands tend to zero
+outside finite sets, which is the summability condition in a complete nonarchimedean normed space.
+The same estimate gives
+\[
+ \norm{q_n(x_1,\ldots,x_n)}\le\norm{p_n}\prod_{r=1}^n\norm{x_r},
+ \qquad \norm{q_n}\le\norm{p_n}.
+\]
+Summation preserves multilinearity. On finitely supported vectors the diagonal is the original grouped
+polynomial, and continuity and density extend this equality to every vector in $c_0(I,K)$.
+Use $q_0=f(x_0)$. The coefficient bounds preserve the ambient radius, and the isometry identifies
+the sum with $f$ as in Theorem~\ref{fam:thm:finite-reflection}.
+\end{proof}
+
+\begin{corollary}\label{fam:cor:c0-families}
+Over a nonarchimedean field, every analytic morphism family parametrized by an open subset of
+$c_0(I,K)$ is admissible for $\Alt^k$ when its final value-space target $F'$ is complete and nonarchimedean.
+The same holds after a bounded linear isomorphism of parameter spaces.
+\end{corollary}
+
+\begin{proof}
+When $F'$ is complete and nonarchimedean, so are $\Alt^k(E';F')$ and the operator space $W$;
+the ambient operator space $Z$ is nonarchimedean as well.
+Apply Theorem~\ref{fam:thm:c0-reflection} to $A_{XY}\gamma$.
+\end{proof}
+
+\subsection{Ordinary \texorpdfstring{$\ell^1$}{l1} parameters}
+For this subsection, $\ell^1(I,K)$ has the ordinary sum norm
+$\norm{x}_1=\sum_{i\in I}\abs{x_i}$, even when $K$ is nonarchimedean.
+The proof uses the fixed degree of the outer polynomial. It does not require a uniform lifting bound
+for all Taylor degrees of an arbitrary ambient analytic map.
+
+\begin{lemma}\label{fam:lem:l1-polynomial}
+Let $W$ be a closed subspace of a Banach space $Z$, and let
+$B\colon\ell^1(J,K)^d\to Z$ be bounded multilinear with diagonal values in $W$.
+Then its diagonal has a bounded $W$\nobreakdash-valued $d$\nobreakdash-linear representative $C$ with
+\[
+ \norm C\le d!\,\norm B.
+\]
+Here $d!$ denotes a real bound for a number of terms, not a scalar to be inverted in $K$.
+\end{lemma}
+
+\begin{proof}
+For $d=0$ the assertion is immediate. Otherwise, choose a total order on $J$ and group the coordinate
+coefficients of the diagonal polynomial by nondecreasing words. Finite-coordinate polynomial uniqueness
+puts each grouped coefficient in $W$. Each group contains at most $d!$ ordered words, so its norm is
+at most $d!\norm B$. Define $C$ by the sorted-word formula used above. Its summands are absolutely
+summable, since
+\[
+ \sum_{j_1\le\cdots\le j_d}
+ \abs{(x_1)_{j_1}\cdots(x_d)_{j_d}}
+ \le\prod_{r=1}^d\norm{x_r}_1.
+\]
+The sum exists in the complete space $W$, is multilinear, and has the asserted bound.
+Diagonal equality follows first on finite supports and then by density.
+\end{proof}
+
+\begin{theorem}[fixed-degree reflection along \texorpdfstring{$\ell^1$}{l1} families]
+\label{fam:thm:l1-families}
+Let $W$ be a closed subspace of a Banach space $Z$, let $H$ be normed, and suppose that
+$P\colon H\to W$ is the diagonal, in $Z$, of a bounded $d$\nobreakdash-linear map $B\colon H^d\to Z$.
+For every analytic map $\gamma\colon U\to H$, where $U$ is open in $\ell^1(I,K)$,
+the map $P\gamma\colon U\to W$ is analytic. The field $K$ need not be complete.
+\end{theorem}
+
+\begin{proof}
+The case $d=0$ is immediate. Extend $B$ continuously to $\widehat H^d$, using completeness of $Z$.
+Since $H$ is dense in its completion and $W$ is closed, the diagonal of this extension takes values
+in $W$; call it $\widehat P$.
+For every bounded linear $T\colon\ell^1(J,K)\to\widehat H$,
+Lemma~\ref{fam:lem:l1-polynomial}, applied to $B(T\cdot,\ldots,T\cdot)$, gives a bounded multilinear
+representative for $\widehat PT$ of norm at most $d!\norm B\norm T^d$.
+In particular, $\widehat PT$ is analytic.
+
+It remains to factor $\gamma$ locally through one such $T$.
+Translate the parameter point to zero and write
+\[
+ \gamma(x)=\sum_{n\ge0}a_n(x,\ldots,x).
+\]
+Choose $s\in K$ with $0<\abs s$ smaller than a radius of this expansion, so that
+$M=\sup_n\abs s^n\norm{a_n}<\infty$.
+Let $J=\coprod_{n\ge0}I^n$, including the single empty word when $n=0$.
+On the coordinate vectors of $\ell^1(J,K)$ set
+\[
+ T(e_{n,i_1,\ldots,i_n})
+ =s^na_n(e_{i_1},\ldots,e_{i_n}).
+\]
+These vectors have norm at most $M$, so absolute summation in $\widehat H$ gives a bounded linear
+map $T\colon\ell^1(J,K)\to\widehat H$ with norm at most $M$.
+
+For $\norm{x}_1<\abs s$, define a vector in $\ell^1(J,K)$ by
+\[
+ g(x)_{n,i_1,\ldots,i_n}=s^{-n}x_{i_1}\cdots x_{i_n}.
+\]
+The sum of the absolute values of its degree-$n$ coordinates is
+$\abs s^{-n}\norm{x}_1^n$. The geometric tail estimate proves that $g(x)$ belongs to $\ell^1(J,K)$
+and that its series of homogeneous coordinate blocks converges there.
+Each block is the diagonal of a bounded $n$\nobreakdash-linear map of norm at most $\abs s^{-n}$,
+so $g$ is analytic at zero. These are explicitly $K$\nobreakdash-valued coordinates, and convergence is verified
+against the explicit vector $g(x)$; completeness of $K$ is not being used.
+
+Expanding each $a_n$ in $\ell^1$ coordinates gives
+\[
+ Tg(x)=\sum_{n\ge0}a_n(x,\ldots,x)=\gamma(x)
+\]
+inside $\widehat H$. Consequently $P\gamma=(\widehat PT)g$ is analytic at the chosen point. Repeating the construction
+at every parameter point proves the theorem.
+The factorial estimate used the fixed outer degree $d$ throughout, rather than the varying Taylor degree $n$.
+\end{proof}
+
+\begin{corollary}\label{fam:cor:l1-families}
+Every analytic morphism family parametrized by an open subset of $\ell^1(I,K)$ is admissible for
+$\Alt^k$ when the final value-space target $F'$ is complete. The same holds when the parameter space
+is a bounded linear retract of an $\ell^1(I,K)$ space. No completeness is required of the other fibers.
+\end{corollary}
+
+\begin{proof}
+The ambient space $Z=\cL(V_X,\Mult^k(E';F'))$ is Banach, and $W$ is closed in $Z$.
+Apply Theorem~\ref{fam:thm:l1-families} to the degree-$(k+1)$ polynomial~\eqref{fam:eq:ambient-polynomial}.
+For pullback alone one may instead use degree $k$.
+If $i\colon P\to\ell^1(I,K)$ and $r\colon\ell^1(I,K)\to P$ are bounded linear with $ri=\id_P$,
+apply the result to $\gamma r$ on the open set $r^{-1}(U)$, and then restrict along $i$.
+\end{proof}
+
+The bundle argument of Theorem~\ref{fam:thm:finite-bundles} now gives two further forms of the construction:
+over bases modeled on $c_0(I,K)$ when the output fibers are complete and nonarchimedean, and over bases
+modeled on $\ell^1(I,K)$ or its bounded linear retracts when the output fibers are complete.
+For a statement about an entire category of bundles, one can restrict all fibers respectively to
+nonarchimedean Banach spaces or to Banach spaces; alternating-map fibers remain in the same category.
+
+On arbitrary analytic bases one can instead specify admissible transition families and require admissibility
+of changes of atlas and bundle morphisms. Proposition~\ref{fam:prop:category} ensures compatibility with
+composition. In the Banach setting, if an admissible family consists of isomorphisms and its underlying
+inverse family is analytic, then the inverse family is admissible as well: its alternating action is
+the inverse of the original action, and inversion is analytic on the group of bounded automorphisms
+of a Banach space. This follows locally from the convergent Neumann series.
+The shear example shows why arbitrary analytic changes of atlas cannot simply be substituted for
+admissible ones in this formulation.
+
+\section{A tensor criterion for analytic reflection}\label{fam:sec:tensors}
+The preceding parameter theorems suggest an intrinsic question about normed spaces: when does every
+analytic map into an ambient Banach space remain analytic into a closed subspace containing its values?
+This is stronger than the question for alternating-map families. A tensor criterion characterizes
+the stronger property and clarifies why the fixed-degree argument for $\ell^1$ goes further.
+
+In this section $K$ is complete and nontrivially normed, and $P$ is Banach.
+For $n\ge1$, let $T_n(P)$ be the separated completed projective tensor power representing bounded
+$n$\nobreakdash-linear maps from $P^n$ to Banach spaces. We use the ordinary projective seminorm,
+defined by infima of sums of products of norms, and take its separated completion before invoking
+the universal property. Its canonical multilinear map has norm at most one.
+Define the closed subspace
+\[
+ \Delta_n(P)=\overline{\spn\{x^{\otimes n}:x\in P\}}\subseteq T_n(P).
+\]
+A projection onto $\Delta_n(P)$ will mean a bounded linear map
+$R_n\colon T_n(P)\to\Delta_n(P)$ whose restriction to $\Delta_n(P)$ is the identity.
+
+\begin{proposition}[homogeneous reflection]\label{fam:prop:tensor-homogeneous}
+For a fixed $n\ge1$, the following conditions are equivalent.
+\begin{enumerate}
+\item For every Banach space $Z$, closed subspace $W\subseteq Z$, and bounded $n$\nobreakdash-linear map
+$B\colon P^n\to Z$ with diagonal values in $W$, there is a bounded $W$\nobreakdash-valued
+$n$\nobreakdash-linear map with the same diagonal.
+\item The subspace $\Delta_n(P)$ is the range of a bounded projection in $T_n(P)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Suppose first that a projection $R_n$ exists. Linearize $B$ to a bounded map
+$\widetilde B\colon T_n(P)\to Z$. The diagonal hypothesis and closedness of $W$ imply
+$\widetilde B(\Delta_n(P))\subseteq W$.
+Composing $\widetilde B|_{\Delta_n(P)}$ with $R_n$ and the canonical tensor map gives the required
+multilinear representative, of norm at most $\norm B\norm{R_n}$.
+Conversely, take $Z=T_n(P)$, $W=\Delta_n(P)$, and $B$ equal to the canonical tensor map.
+Linearizing the representative supplied by the first condition gives a bounded map into $\Delta_n(P)$
+fixing every pure power. It fixes their linear span and, by continuity, their closed span, so it is a projection.
+\end{proof}
+
+\begin{definition}\label{fam:def:universal-reflection}
+The Banach parameter space $P$ has \emph{universal analytic reflection} if, for every Banach space $Z$, closed
+subspace $W\subseteq Z$, every open $U\subseteq P$, and every map $f\colon U\to W$, analyticity of
+the composite $U\to W\hookrightarrow Z$ implies analyticity of $f$.
+\end{definition}
+
+\begin{theorem}[analytic tensor criterion]\label{fam:thm:tensor-analytic}
+A Banach space $P$ has universal analytic reflection if and only if there are projections
+$R_n\colon T_n(P)\to\Delta_n(P)$ for all $n\ge1$ such that
+\begin{equation}\label{fam:eq:exponential-projections}
+ \limsup_{n\to\infty}\norm{R_n}^{1/n}<\infty.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Assume first that the projections exist. Expand an ambient analytic map with values in $W$ at a point.
+Lemma~\ref{fam:lem:diagonal} puts every homogeneous diagonal in $W$.
+The construction in Proposition~\ref{fam:prop:tensor-homogeneous} replaces its coefficient $p_n$ by a
+$W$\nobreakdash-valued coefficient of norm at most $\norm{p_n}\norm{R_n}$ and with the same diagonal.
+The exponential bound preserves a positive radius of convergence. The degree-zero coefficient is
+already in $W$, and the resulting expansion represents the given map.
+
+Conversely, form the Banach spaces with supremum norms
+\[
+ Z=c_0\bigl(\{T_n(P)\}_{n\ge1}\bigr),\qquad
+ W=c_0\bigl(\{\Delta_n(P)\}_{n\ge1}\bigr)\subseteq Z.
+\]
+Here $c_0$ denotes families tending to zero in their respective Banach coordinate spaces; $W$ is closed.
+On the open unit ball of $P$, define
+\[
+ f(x)=(x^{\otimes n})_{n\ge1}.
+\]
+Since $\norm{x^{\otimes n}}\le\norm x^n$, this vector lies in $W$.
+As a $Z$\nobreakdash-valued map it is analytic: its degree-$n$ coefficient is the canonical tensor map
+placed in coordinate $n$, and has norm at most one. Universal reflection gives a $W$\nobreakdash-valued
+expansion $\sum_mq_m(x,\ldots,x)$ near zero with $\norm{q_m}\le C\rho^{-m}$ for some $C,\rho>0$.
+Compose this expansion with the projection $\pi_n\colon W\to\Delta_n(P)$ and compare on scalar lines
+with $x\mapsto x^{\otimes n}$. Lemma~\ref{lem:unique} gives
+\[
+ \pi_nq_n(x,\ldots,x)=x^{\otimes n}\qquad(x\in P).
+\]
+Linearizing $\pi_nq_n$ therefore gives a projection $R_n$ onto $\Delta_n(P)$ with
+$\norm{R_n}\le\norm{q_n}\le C\rho^{-n}$, proving~\eqref{fam:eq:exponential-projections}.
+\end{proof}
+
+\subsection{Projection bounds and the special role of fixed degree}
+For $P=K^d$ with the maximum norm, the coordinate construction in
+Theorem~\ref{fam:thm:finite-reflection}, applied to the canonical tensor map, gives
+$\norm{R_n}\le d^n$ for $d\ge1$. A bounded linear change of coordinates introduces only a fixed
+distortion factor to the $n$\nobreakdash-th power, so it does not change the exponential-growth condition.
+
+For the ordinary sum-norm space $P=\ell^1(I,K)$, the projective tensor power is isometrically
+$\ell^1(I^n,K)$. Indeed, the coordinate tensor map is bounded with norm one, while expansion in coordinate
+tensors gives the reverse projective-norm estimate; completion then gives the identification.
+In these coordinates, $\Delta_n(P)$ consists exactly of arrays constant on each permutation orbit in $I^n$.
+One inclusion follows because every pure power is constant on such orbits. For the other, finite-coordinate
+polynomial interpolation puts each finite orbit sum in the span of pure powers, and finite sums of orbit
+sums are dense in the space of orbit-constant $\ell^1$ arrays.
+
+Choose one representative of each orbit, send its basis vector to the sum of all basis vectors in that
+orbit, and send the other basis vectors in the orbit to zero. This gives a projection with norm at most $n!$.
+Over a nonarchimedean field and for infinite $I$, this estimate is optimal even among projections that
+do not preserve the individual orbit blocks.
+
+\begin{proposition}\label{fam:prop:l1-optimal}
+If $K$ is nonarchimedean and complete, and $I$ is infinite, then
+\[
+ \inf\{\norm R:R\colon T_n(\ell^1(I,K))\to\Delta_n(\ell^1(I,K))
+                  \text{ is a bounded projection}\}=n!.
+\]
+Consequently $\ell^1(I,K)$ does not have universal analytic reflection.
+\end{proposition}
+
+\begin{proof}
+The preceding construction gives the upper bound. For the lower bound, take an orbit $\mathcal O$
+of a tuple with $n$ distinct indices; it has $n!$ elements. For each $w\in\mathcal O$, let $\lambda_w$
+be the common coefficient on $\mathcal O$ of $R(e_w)$.
+The orbit sum $\sum_{w\in\mathcal O}e_w$ belongs to $\Delta_n(P)$ and is fixed by $R$, hence
+\[
+ \sum_{w\in\mathcal O}\lambda_w=1.
+\]
+The nonarchimedean inequality implies that some $\abs{\lambda_w}\ge1$.
+For this $w$, the ordinary sum norm satisfies
+$\norm{R(e_w)}_1\ge n!\abs{\lambda_w}\ge n!$.
+Thus $\norm R\ge n!$. Finally, $(n!)^{1/n}$ is unbounded, so
+Theorem~\ref{fam:thm:tensor-analytic} excludes universal analytic reflection.
+\end{proof}
+
+There is no conflict with Corollary~\ref{fam:cor:l1-families}: every alternating-map family on these
+parameter spaces is still admissible when its final output fiber is complete. The ambient alternating action
+has a fixed polynomial degree. Factoring a general analytic parameter map through a free $\ell^1$ space
+therefore incurs a single factorial bound, rather than a sequence of factorial bounds across Taylor degrees.
+The special alternating-family property is consequently strictly weaker than universal analytic reflection.
+
+For comparison, in the category of nonarchimedean normed spaces with the \emph{nonarchimedean} projective
+tensor norm, the corresponding tensor power of $c_0(I,K)$ is $c_0(I^n,K)$ and the same sorted-orbit
+projection has norm at most one. This uses the infimum of maxima in the tensor seminorm, rather than the
+ordinary projective seminorm used in Theorem~\ref{fam:thm:tensor-analytic}.
+It is the tensor counterpart of the norm-preserving coefficient construction in
+Theorem~\ref{fam:thm:c0-reflection}; the two tensor norms must not be interchanged.
+
+Theorem~\ref{fam:thm:tensor-analytic} thus gives a complete answer for universal Banach-valued analytic
+reflection. It supplies a sufficient parameter criterion for alternating families, while
+Proposition~\ref{fam:prop:l1-optimal} shows that it is not a necessary one.
+An intrinsic characterization of the parameter spaces for which every alternating-map family is admissible
+remains a separate question.
+
+\section{Analytic domains and the failure of a largest full subcategory}
+\label{dom:section}
+
+The positive cases suggest restricting the objects on which the alternating-map bifunctor acts. There is,
+however, an obstruction to obtaining a single best restriction: two objects can each have analytic
+endomorphism action while the action on morphisms between them is not analytic. We first identify a canonical
+class of objects that is compatible with every analytic restriction, and then construct incompatible objects.
+
+\subsection{A core compatible with every analytic domain}
+
+\begin{definition}\label{dom:definition}
+A full subcategory $\mathcal D\subseteq\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K$ is an
+\emph{analytic domain} for $\Alt^k$ if the restriction of $\Alt^k$ to $\mathcal D$ is analytic on every
+hom space. Let $\mathsf T_k(K)$ be the full subcategory of normed spaces $F$ such that
+$Q^K_{E,D,F}$ is analytic for every pair of normed spaces $E,D$.
+\end{definition}
+
+The definition of an analytic domain includes morphisms between distinct objects. Requiring only that each
+endomorphism action be analytic is strictly weaker, as Theorem~\ref{dom:no-largest} will show.
+
+\begin{proposition}[The universal-target core]\label{dom:core}
+The full subcategory $\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf T_k(K)$ is an analytic domain. It is the
+largest analytic domain of the form $\mathsf{Vec}_K^{\mathrm{op}}\times\mathcal T$. Moreover, adjoining all
+its objects to any analytic domain again gives an analytic domain. The category $\mathsf T_k(K)$ is closed
+under bounded linear isomorphisms, bounded linear retracts, and finite products.
+\end{proposition}
+
+\begin{proof}
+Consider a morphism from $(E,F)$ to $(D,G)$, represented by $u\colon D\to E$ and $v\colon F\to G$.
+Writing $v_*$ for postcomposition, its action has the two factorizations
+\begin{equation}\label{dom:two-factorizations}
+\Alt^k(u,v)
+ =v_*\circ Q^K_{D,E,F}(u)
+ =Q^K_{D,E,G}(u)\circ v_*.
+\end{equation}
+Operator composition is bounded bilinear. The first expression is therefore jointly analytic if
+$F\in\mathsf T_k(K)$, and the second is jointly analytic if $G\in\mathsf T_k(K)$. Thus a universally
+analytic target at either endpoint suffices. This proves both analyticity of the core and its compatibility
+with every analytic domain. Conversely, analyticity on a product with unrestricted first variable, restricted
+to $v=\id_F$, is exactly the defining property of $\mathsf T_k(K)$.
+
+Suppose $i\colon F\to G$ and $r\colon G\to F$ are bounded linear maps with $r i=\id_F$. Then
+\[
+Q^K_{E,D,F}(u)=r_*\circ Q^K_{E,D,G}(u)\circ i_*.
+\]
+Consequently the property passes from $G$ to its retract $F$, and in particular is invariant under bounded
+linear isomorphism. For a finite product of targets, alternating maps identify boundedly with the product
+of the corresponding alternating-map spaces; under this identification, pullback acts componentwise.
+This proves closure under finite products.
+\end{proof}
+
+The core is canonical, but its definition is a regularity condition rather than an intrinsic classification
+of targets. Main Theorem~(\ref{main:spherical}) supplies many of its objects. A different sufficient condition
+depends on the source and target together.
+
+\begin{definition}\label{dom:split-pair}
+A pair $(E,F)$ is \emph{split in degree $k$} if the isometric inclusion
+\[
+j_{E,F}\colon\Alt^k(E;F)\longrightarrow\Mult^k(E;F)
+\]
+has a bounded linear retraction.
+\end{definition}
+
+\begin{lemma}\label{dom:split-incoming}
+Every morphism-space action whose destination is a split pair is analytic. In particular, the full
+subcategory of split pairs is an analytic domain.
+\end{lemma}
+
+\begin{proof}
+Let $(E,F)$ be split, with retraction $R$, and let the other object be $(D,G)$. For $u\colon E\to D$
+and $v\colon G\to F$, the action is
+\[
+m\longmapsto R\bigl(v\circ m\circ(u,\ldots,u)\bigr).
+\]
+Before applying $R$, replace the $k$ copies of $u$ by independent variables. This gives a bounded
+$(k+1)$\nobreakdash-linear lift of the joint action, with values in
+$\cL(\Alt^k(D;G),\Mult^k(E;F))$. Postcomposition with $R$ gives a lift with the required alternating
+codomain. No compatibility between the retractions chosen for different objects is needed.
+\end{proof}
+
+\subsection{Two individually analytic objects with nonanalytic cross-action}
+
+\begin{theorem}[No largest full analytic domain]\label{dom:no-largest}
+Let $p$ be prime, let $k\ge p$, and equip $K=\F_p(t)$ with its $t$\nobreakdash-adic absolute value.
+There is no largest full analytic domain for
+\[
+\Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K.
+\]
+The assertion remains true if the domains must be closed under isomorphisms, and if their objects are
+restricted to pairs of finite-dimensional, nonarchimedean normed $K$\nobreakdash-spaces. In the latter case,
+isomorphism closure is understood inside that restricted ambient category.
+
+More precisely, there are objects $X_k=(E_k,G)$ and $Y_k=(D_k,G)$ whose singleton full subcategories
+are analytic, such that $Y_k$ is split and the action on morphisms from $Y_k$ to $X_k$ is not analytic.
+\end{theorem}
+
+Here finite-dimensional means finite \emph{algebraic} dimension over the incomplete field $K$. These spaces
+need not admit continuous coordinates over $K$. The theorem does not give a counterexample over a complete
+field, or a counterexample with Banach objects.
+
+\subsection{The rigid source and the split pair}
+
+Put $L=\F_p((t))$, the completion of $K$, and consider the normed $L$\nobreakdash-algebra
+\[
+A=L[\epsilon]/(\epsilon^p),\qquad e_i=\epsilon^i\quad(0\le i<p),
+\]
+with the maximum norm in this basis. Multiplication satisfies $\norm{xy}\le\norm x\,\norm y$.
+Choose elements $a_0,\ldots,a_{p-1}\in L$, together with the finitely many auxiliary scalars
+$\tau_w$ introduced below, algebraically independent over $K$. Such a choice is possible because $K$ is
+countable and $L$ is uncountable: the elements of $L$ algebraic over any finitely generated extension of
+$K$ form a countable set. Set
+\[
+a=\sum_{i=0}^{p-1}a_i e_i,\qquad E=K^p+Ka\subseteq A.
+\]
+Every subspace used below carries the norm induced by $A$ or $L$. In particular, $E$ has $K$\nobreakdash-dimension
+$p+1$ and completion $A$.
+
+\begin{lemma}\label{dom:rigid}
+Every bounded endomorphism of $E$ is multiplication by a scalar in $K$, and every bounded linear map
+$E\to K$ is zero.
+\end{lemma}
+
+\begin{proof}
+A bounded $K$\nobreakdash-linear map extends to completions, and the extension is $L$\nobreakdash-linear
+by density of $K$ in $L$. If it preserves $E$, its columns, the images of the $e_i$, give a matrix
+$M+ac^{\mathsf T}$, with $M\in M_p(K)$ and $c\in K^p$. Its value at $a$ lies in $K^p+Ka$.
+Comparison of homogeneous degrees in the algebraically independent $a_i$ shows first that
+$a(c^{\mathsf T}a)=0$, hence $c=0$, and then that $M=sI$ for some $s\in K$.
+
+Similarly, the extension of a bounded map $E\to K$ is an $L$\nobreakdash-linear functional on $A$.
+Its coefficients belong to $K$, since its values on the $e_i$ do. Its value on $a$ also lies in $K$,
+so algebraic independence makes all its coefficients zero.
+\end{proof}
+
+Multiplication by $a$ has lower triangular Toeplitz matrix
+\[
+(M_a)_{ij}=\begin{cases}a_{i-j},&i\ge j,\\0,&i<j.\end{cases}
+\]
+Define
+\[
+D_0=\spn_K\{e_i,\epsilon^i a:0\le i<p\}+Ka^2,
+\qquad
+\mathcal W=\{e_i:0\le i<p\}\cup\{e_i+e_j:0\le i<j<p\},
+\]
+and put
+\[
+D=D_0+\sum_{w\in\mathcal W}K\tau_w w,\qquad
+G=\spn_K\{\det(d_1,\ldots,d_p):d_i\in D\}\subseteq L.
+\]
+The determinant is taken in the basis $(e_0,\ldots,e_{p-1})$. These are finite-dimensional
+$K$\nobreakdash-spaces, with completions $A$ and $L$: $D$ contains $K^p$, and $G$ contains $1$.
+By multilinearity, $G$ is spanned by determinants of the displayed finite generating set for $D$.
+We may therefore identify $G$ with a finite-dimensional subspace of
+$K[a_0,\ldots,a_{p-1},(\tau_w)_w]$. Every element has degree at most one in each individual $\tau_w$,
+since a nonzero determinant cannot repeat the generator $\tau_w w$. Algebraic independence gives
+\begin{equation}\label{dom:tau-gap}
+\tau_w^2G\cap G=\{0\}\qquad(w\in\mathcal W).
+\end{equation}
+
+\begin{lemma}\label{dom:all-alt}
+Every bounded $p$\nobreakdash-linear map $D^p\to G$ is alternating. Thus $(D,G)$ is split in degree $p$.
+\end{lemma}
+
+\begin{proof}
+Compose such a map $m$ with $G\hookrightarrow L$ and extend to a bounded $L$\nobreakdash-multilinear map
+on $A^p$. Fix two argument positions. Put the same $w\in\mathcal W$ in those positions and arbitrary
+standard basis vectors in the others, and call the value $c\in G$. Replacing both copies of $w$ by
+$\tau_w w\in D$ shows that $\tau_w^2c\in G$, so~\eqref{dom:tau-gap} gives $c=0$.
+Taking $w=e_i$ gives vanishing on repeated basis vectors. Taking $w=e_i+e_j$ then gives the signed
+interchange identity in the two positions. Expanding two equal arbitrary arguments in the basis proves
+that the completed map, and hence $m$, is alternating, including when $p=2$. The inclusion of alternating
+maps into multilinear maps is therefore an isometric bijection, whose inverse is the desired retraction.
+\end{proof}
+
+\subsection{A missing coefficient}
+
+The coefficient space of alternating maps on $E$ is
+\[
+C=\{\lambda\in G:a_i\lambda\in G\text{ for every }i\}.
+\]
+Indeed, an alternating map extends to $\lambda\det$ on the $p$\nobreakdash-dimensional completion $A$.
+Determinants of tuples from $E$ span $\spn_K\{1,a_0,\ldots,a_{p-1}\}$: a determinant can contain at
+most one copy of $a$, and replacing one basis vector by $a$ realizes each $a_i$ up to sign. Consequently
+\begin{equation}\label{dom:coefficient-space}
+\Alt^p(E;G)=C\det.
+\end{equation}
+This identification is isometric, since the determinant bound gives one inequality and evaluation on the
+standard basis gives the reverse inequality.
+
+Algebraically set every $\tau_w$ to zero. The image of $G$ is
+\[
+G_0=\spn_K\{\det(d_1,\ldots,d_p):d_i\in D_0\}.
+\]
+Put $C_0=\{\lambda\in G_0:a_i\lambda\in G_0\text{ for every }i\}$. Specialization sends $C$ into $C_0$;
+no continuity of specialization is asserted. The displayed generators of $D_0$ are homogeneous polynomial
+vectors of degrees zero, one, and two. Their determinants are homogeneous, so $G_0$ is graded, and the
+defining conditions show that $C_0$ is graded as well.
+
+\begin{lemma}\label{dom:degree-gap}
+The homogeneous degree-one part of $C_0$ is zero.
+\end{lemma}
+
+\begin{proof}
+The degree-two part of $G_0$ is spanned by the $2\times2$ minors of $M_a$ and the coordinates of $a^2$.
+These correspond respectively to choosing two degree-one columns, or one degree-two column, in a
+determinant of generators. On homogeneous quadratic polynomials define the $K$\nobreakdash-linear map
+\[
+\Phi(a_i a_j)=
+\begin{cases}
+T^{i+j},&i+j\ge p-1,\\
+0,&i+j<p-1.
+\end{cases}
+\]
+Every $2\times2$ minor of $M_a$ is killed by $\Phi$. When both product terms are nonzero, their index
+sums coincide. If only one is nonzero, write the rows as $r<s$ and columns as $i<j$. The surviving term
+has index sum $r+s-i-j$, and the missing term implies $r<j$. Hence
+$r+s-i-j\le s-i-1\le p-2$, so its image is again zero.
+
+The coefficient of $\epsilon^r$ in $a^2$ is $\sum_{i+j=r}a_i a_j$. Its image is zero for $r<p-1$;
+for $r=p-1$ there are exactly $p$ summands and its image is $pT^{p-1}=0$. Thus $\Phi$ kills the entire
+degree-two part of $G_0$. If $\ell=\sum_jc_j a_j$ lies in the degree-one part of $C_0$, then
+$a_{p-1}\ell\in G_0$, whereas
+\[
+\Phi(a_{p-1}\ell)=\sum_jc_jT^{p-1+j}.
+\]
+The powers are distinct, so all $c_j$ vanish.
+\end{proof}
+
+\subsection{The nonanalytic cross-action}
+
+Set $X=(E,G)$ and $Y=(D,G)$. Lemma~\ref{dom:rigid} identifies $\End_K(E)$ isometrically with $K$,
+and the self-action of $X$ is
+\[
+(s,v)\longmapsto s^p v_*.
+\]
+This is a bounded polynomial, so the singleton full subcategory on $X$ is analytic. The singleton on $Y$
+is analytic by Lemmas~\ref{dom:all-alt} and~\ref{dom:split-incoming}.
+
+For $x\in E$, multiplication by $x$ in $A$ restricts to a bounded map $M_x\colon E\to D$.
+Indeed, writing $x=b+ha$ with $b\in K^p$ and $h\in K$, its values on the generators $e_j,a$ lie in
+\[
+K^p+\sum_iK\epsilon^ia+Ka^2\subseteq D.
+\]
+Submultiplicativity gives a bounded linear family $x\mapsto M_x$ from $E$ to $\cL(E,D)$.
+Its matrix is lower triangular with diagonal entry $x_0$, so $\det M_x=x_0^p$. In the cross-action from
+$Y$ to $X$, fix the target morphism to $\id_G$, evaluate at $\det\in\Alt^p(D;G)$, and use
+\eqref{dom:coefficient-space}. The resulting map is
+\begin{equation}\label{dom:bad-coordinate}
+f\colon E\longrightarrow C,\qquad f(x)=x_0^p.
+\end{equation}
+Its values lie in $C$ because it was obtained by pulling back an alternating $G$\nobreakdash-valued map.
+
+Suppose that $f$ were analytic at zero. Since $f(sx)=s^pf(x)$, uniqueness of power-series coefficients
+on scalar lines gives a bounded $p$\nobreakdash-linear map $B\colon E^p\to C$ with diagonal $f$.
+This is the homogeneous coefficient argument used in Proposition~\ref{prop:lift}; it requires no factorial
+division or completeness. Compose $B$ with $C\hookrightarrow L$ and extend to an $L$\nobreakdash-multilinear
+map on $A^p$. Put
+\[
+b_i=B(e_0,\ldots,e_0,e_i)\in C.
+\]
+There are $p-1$ initial copies of $e_0$, and $b_0=f(e_0)=1$. Evaluation at $a$ in the last position gives
+$\sum_i a_i b_i\in C$. Specializing all $\tau_w$ to zero yields elements $d_i\in C_0$ with
+\[
+d_0=1,\qquad \sum_i a_i d_i\in C_0.
+\]
+The degree-one part of this last expression is $\sum_i a_i(d_i)_0$, where $(d_i)_0\in K$ is the
+constant term. Its $a_0$\nobreakdash-coefficient equals one. This contradicts Lemma~\ref{dom:degree-gap}.
+Thus~\eqref{dom:bad-coordinate}, and therefore the cross-action from $Y$ to $X$, is not analytic.
+
+\subsection{Higher degrees and the categorical conclusion}
+
+For $k=p+r$, let
+\[
+E_k=E\oplus K^r,\qquad D_k=D\oplus K^r
+\]
+with maximum norms. Their completions have dimension $k$ over $L$. Determinants of tuples from $E_k$
+still span $\spn_K\{1,a_0,\ldots,a_{p-1}\}$, so extraction of the top-degree coefficient identifies
+\begin{equation}\label{dom:padded-coefficients}
+\Alt^k(E_k;G)=C\det_k
+\end{equation}
+isometrically. In particular, the coefficient takes values in $C$, a fact needed to retain the preceding
+obstruction after increasing the degree.
+
+By Lemma~\ref{dom:rigid}, the extension of every bounded endomorphism of $E_k$ to its
+$L$\nobreakdash-completion $A\oplus L^r$ has block form
+\[
+\begin{pmatrix}sI_p&B\\0&T\end{pmatrix},\qquad s\in K,\quad T\in M_r(K).
+\]
+The scalar $s$ and entries of $T$ are bounded linear functions of the endomorphism, as is seen by
+evaluation on the standard basis. Its determinant is $s^p\det T$, so its action on
+\eqref{dom:padded-coefficients} is multiplication by this bounded polynomial. Including postcomposition
+shows that the singleton full subcategory on $X_k=(E_k,G)$ is analytic.
+
+The pair $Y_k=(D_k,G)$ is split. Given $m\in\Mult^k(D_k;G)$, restrict the first $p$ arguments to
+$D$ and fix the last $r$ arguments at the standard auxiliary basis. The resulting $p$\nobreakdash-linear
+map is alternating by Lemma~\ref{dom:all-alt}. Pull it back along $D_k\to D$ and take its exterior
+product with the standard volume form on $K^r$. The shuffle formula defines this exterior product without
+factorial division and gives a bounded linear map from $\Mult^k(D_k;G)$ to $\Alt^k(D_k;G)$.
+It fixes every alternating map: after extension to the $k$\nobreakdash-dimensional completion, both maps
+are determined by their value on the standard basis, where the shuffle formula has exactly one nonzero
+term. This is the required retraction. For $r>0$, we do not need or assert that every $k$\nobreakdash-linear
+map on $D_k$ is alternating.
+
+Finally, restrict the cross-action along the bounded affine family
+\[
+E\longrightarrow\cL(E_k,D_k),\qquad x\longmapsto M_x\oplus I_r.
+\]
+Evaluation at $\det_k$ and coefficient extraction through~\eqref{dom:padded-coefficients} give exactly
+the nonanalytic map~\eqref{dom:bad-coordinate}. Thus the cross-action from $Y_k$ to $X_k$ is not analytic.
+
+A largest analytic full subcategory would have to contain both individually analytic singleton
+subcategories, and fullness would then require this cross-action to be analytic. This is impossible.
+If closure under isomorphisms is required, replace each singleton by its full isomorphism closure.
+Every action between two copies is transported from the self-action by bounded linear changes of
+coordinates, so both closures remain analytic. The same contradiction proves Theorem~\ref{dom:no-largest}.
+
+\begin{remark}\label{dom:limits}
+The theorem also shows that $X_k$ cannot be adjoined to the entire split-pair category, since that category
+contains $Y_k$. It does not establish that the split-pair category has no other strict analytic extension.
+Nor does it resolve the largest-domain question for complete fields or Banach pairs. Completing this
+particular construction removes the obstruction: the sources become finite-dimensional $L$\nobreakdash-spaces,
+the target becomes $L$, and the coordinate polynomial acquires a bounded multilinear lift.
+\end{remark}
 
 \section{The multiplier theorem over a finite field}\label{sec:FF}
 
@@ -1373,7 +2350,7 @@ the approximation error is less than one.
 
 \subsection{Setting}\label{ssec:laurentsetting}
 Throughout this section $k\ge1$, $\kappa$ is a field, $r\in(0,1)$, and $K_1:=\kappa((X))$ is the Laurent series field with
-absolute value $\abs a:=r^{\ord a}$ ($\abs0=0$). This field is complete, nontrivially normed and ultrametric, and
+absolute value $\abs a:=r^{\ord a}$ ($\abs0=0$). This field is complete, nontrivially normed and nonarchimedean, and
 $\abs c=1$ for every $c\in\kappa^\times$. Write $\coeff_n(a)\in\kappa$ for the $X^n$\nobreakdash-coefficient of $a\in K_1$.
 For a set $S$ and $y\in\linf(S,K_1)$ we take the constant coefficient coordinatewise:
 \[
@@ -1384,7 +2361,7 @@ A nonzero Laurent series of absolute value less than one has order at least one.
 \begin{equation}\label{eq:small}
 \norm y_\infty<1\ \Longrightarrow\ \coeff_0(y)=0,\qquad\text{hence}\qquad \norm{y-y'}_\infty<1\ \Longrightarrow\ \coeff_0(y)=\coeff_0(y').
 \end{equation}
-Put $E_1:=\linf(\N,K_1)$ with the sup norm, an ultrametric $K_1$\nobreakdash-Banach space, and let $E_0:=\kappa^\N\subseteq E_1$ be
+Put $E_1:=\linf(\N,K_1)$ with the sup norm, a nonarchimedean $K_1$\nobreakdash-Banach space, and let $E_0:=\kappa^\N\subseteq E_1$ be
 the $\kappa$\nobreakdash-subspace of sequences with entries in $\kappa$. Every nonzero $z\in E_0$ has $\norm z_\infty=1$. For
 $x\in E_1$ and $n\in\Z$ let $x_{[n]}:=(\coeff_n(x(i)))_{i\in\N}\in E_0$ be the $n$\nobreakdash-th Laurent component. For $x\ne0$
 the set $\{\ord x(i):x(i)\ne0\}$ is bounded below, because $r^{\ord x(i)}\le\norm x_\infty$, so it has a minimum
@@ -1416,7 +2393,7 @@ $\norm{W_B}\le1$, and $J(W_B(x))=\Omega^{K_1}(x_1\wedge\dots\wedge x_k)$.
 \begin{proof}
 For a pure wedge, each entry of the determinant array is a signed sum of products
 $x_1(i_{\sigma(1)})\cdots x_k(i_{\sigma(k)})$. Each product has absolute value at most
-$\prod_b\norm{x_b}_\infty$, so the ultrametric inequality in $K_1$ gives the same bound for the determinant.
+$\prod_b\norm{x_b}_\infty$, so the nonarchimedean inequality in $K_1$ gives the same bound for the determinant.
 For any finite decomposition of $\omega$, it follows that
 \[
 \norm{\Omega^{K_1}(\omega)}_\infty
@@ -1439,7 +2416,7 @@ bound makes it continuous with norm at most one, and the asserted identity with 
 construction.
 \end{proof}
 
-For $k\ge2$, $B$ is not ultrametric (Proposition~\ref{prop:nonultra}).
+For $k\ge2$, $B$ is not nonarchimedean (Proposition~\ref{prop:nonultra}).
 
 \subsection{The support estimate}\label{ssec:suppest}
 We next show that the constant coefficient of every completed determinant array is represented by a finite
@@ -1650,12 +2627,12 @@ closed balls has a common point. For the field case of the following lemma, see
 Schneider~\cite[Lemmas~1.3 and~1.6]{Sch}.
 
 \begin{lemma}[discrete distances]\label{lem:discdist}
-Let $Y$ be a complete ultrametric space whose distances lie in $r^\Z\cup\{0\}$ for some $r\in(0,1)$. Then $Y$ is
+Let $Y$ be a complete nonarchimedean space whose distances lie in $r^\Z\cup\{0\}$ for some $r\in(0,1)$. Then $Y$ is
 spherically complete.
 \end{lemma}
 
 \begin{proof}
-Write $\cD(a,\rho)=\{y\in Y:\mathrm d(y,a)\le\rho\}$. In an ultrametric space, every point of a ball is a center.
+Write $\cD(a,\rho)=\{y\in Y:\mathrm d(y,a)\le\rho\}$. In a nonarchimedean space, every point of a ball is a center.
 Consequently, whenever two closed balls meet, the one with the smaller radius lies in the other.
 The discrete distance assumption also gives
 \[
@@ -1678,8 +2655,8 @@ $\cD(a_i,\rho_i)$, so $a$ belongs to every ball of the original family.
 
 \begin{remark}[the hypothesis (K2) of~\cite{M}]\label{rem:K2}
 The construction of~\cite{M} assumes that the base field satisfies the hypothesis (K2) there: there are closed balls
-$\cD(c_n,r_n)$ with $\abs{c_{n+1}-c_n}\le r_n$, $r_0>r_1>\cdots$ and $\bigcap_n\cD(c_n,r_n)=\emptyset$. An ultrametric
-field (indeed any ultrametric space) satisfies (K2) if and only if it is not spherically complete. Indeed, the balls
+$\cD(c_n,r_n)$ with $\abs{c_{n+1}-c_n}\le r_n$, $r_0>r_1>\cdots$ and $\bigcap_n\cD(c_n,r_n)=\emptyset$. An nonarchimedean
+field (indeed any nonarchimedean space) satisfies (K2) if and only if it is not spherically complete. Indeed, the balls
 in (K2) pairwise meet, since $\abs{c_n-c_m}\le\max_{m\le j<n}\abs{c_{j+1}-c_j}\le r_m$ for $m\le n$. Conversely, let a
 family of pairwise meeting closed balls have no common point. A ball of least radius in the family would lie in all
 the others (as in the proof of Lemma~\ref{lem:discdist}), and its center would be a common point; so the radii have
@@ -1693,7 +2670,7 @@ is used only in \S\ref{sec:intro} and \S\ref{sec:lean}.
 \begin{lemma}[Laurent subfield]\label{lem:laurentsub}
 Let $K'$ be a complete nontrivially normed field of characteristic $p$, and let $t\in K'$ with $0<\abs t=r<1$.
 \begin{enumerate}
-\item $K'$ is ultrametric, and $\abs c=1$ for every $c\in\F_p^\times$.
+\item $K'$ is nonarchimedean, and $\abs c=1$ for every $c\in\F_p^\times$.
 \item For $a_m,\dots,a_M\in\F_p$, not all zero, $\bigl\lvert\sum_{i=m}^Ma_it^i\bigr\rvert=r^{\min\{i:a_i\ne0\}}$.
 \item Give $\F_p((X))$ the absolute value with $\abs X=r$. There is a continuous isometric ring homomorphism
 $\mathrm{ev}_t\colon\F_p((X))\to K'$ such that
@@ -1704,9 +2681,9 @@ $K_1$ is a closed subfield of $K'$; it is the closure of $\F_p(t)$, and it is is
 \end{lemma}
 
 \begin{proof}
-(1) Lemma~\ref{lem:ultra} makes $K'$ ultrametric. For $c\in\F_p^\times$, the identity $c^{p-1}=1$ gives $\abs c=1$.
+(1) Lemma~\ref{lem:ultra} makes $K'$ nonarchimedean. For $c\in\F_p^\times$, the identity $c^{p-1}=1$ gives $\abs c=1$.
 
-(2) The nonzero terms $a_it^i$ have pairwise distinct absolute values $r^i$. In an ultrametric field,
+(2) The nonzero terms $a_it^i$ have pairwise distinct absolute values $r^i$. In a nonarchimedean field,
 $\abs{x+y}=\abs x$ whenever $\abs y<\abs x$. Repeatedly applying this identity shows that the sum has the absolute
 value of its largest term, namely $r^{\min\{i:a_i\ne0\}}$.
 
@@ -1722,7 +2699,7 @@ $g\ne0$, the identity $\mathrm{ev}_t(g)\mathrm{ev}_t(g^{-1})=1$ provides the inv
 $\F_p(t)$, while the Laurent polynomials $\F_p[t,t^{-1}]\subseteq\F_p(t)$ are dense in it. The image is consequently
 exactly the closure of $\F_p(t)$.
 
-(4) By (3), $K_1$ is complete and has value group $\abs{K_1^\times}=r^\Z$. It is ultrametric by (1), so its distances
+(4) By (3), $K_1$ is complete and has value group $\abs{K_1^\times}=r^\Z$. It is nonarchimedean by (1), so its distances
 lie in $r^\Z\cup\{0\}$. Lemma~\ref{lem:discdist} gives spherical completeness.
 \end{proof}
 
@@ -1730,9 +2707,9 @@ lie in $r^\Z\cup\{0\}$. Lemma~\ref{lem:discdist} gives spherical completeness.
 Throughout the rest of this section we fix fields $K_1\subseteq K'$ with the following properties.
 \begin{enumerate}
 \item[(H1)] $K_1$, with the restricted absolute value, is nontrivially normed, complete and spherically complete.
-\item[(H2)] $K'$ is ultrametric.
+\item[(H2)] $K'$ is nonarchimedean.
 \end{enumerate}
-By multiplication, $K'$ is an ultrametric normed $K_1$\nobreakdash-space. In our application $K'=\Kh$ and $K_1$ is the field of
+By multiplication, $K'$ is a nonarchimedean normed $K_1$\nobreakdash-space. In our application $K'=\Kh$ and $K_1$ is the field of
 Lemma~\ref{lem:laurentsub}.
 
 \begin{lemma}\label{lem:findim}
@@ -1757,17 +2734,17 @@ space $\mathbb K^n$, and is itself complete.
 \end{proof}
 
 \begin{theorem}[Ingleton~\cite{In}; see also~\cite{vR}]\label{thm:ingleton}
-Let $K_1$ be a spherically complete ultrametric normed field, $V$ a $K_1$\nobreakdash-vector space with an ultrametric norm,
+Let $K_1$ be a spherically complete nonarchimedean normed field, $V$ a $K_1$\nobreakdash-vector space with a nonarchimedean norm,
 $V_0\subseteq V$ a subspace, $C\ge0$, and $T_0\colon V_0\to K_1$ linear with $\abs{T_0v}\le C\norm v$ for $v\in V_0$. Then
 $T_0$ extends to a linear map $T\colon V\to K_1$ with $\abs{Tx}\le C\norm x$ for all $x\in V$.
 \end{theorem}
 
-Schneider~\cite[Prop.~9.2]{Sch} gives the more general formulation with a dominating ultrametric seminorm.
+Schneider~\cite[Prop.~9.2]{Sch} gives the more general formulation with a dominating nonarchimedean seminorm.
 
-We will use Theorem~\ref{thm:ingleton} on the ultrametric $K_1$\nobreakdash-space $K'$ in two ways: to obtain the scalar
+We will use Theorem~\ref{thm:ingleton} on the nonarchimedean $K_1$\nobreakdash-space $K'$ in two ways: to obtain the scalar
 retraction below, and to extend finite-dimensional coordinate functionals in the proof of positivity of the
 projective tensor norm. Both applications have codomain $K_1$. The spaces $E_1$ and $F_1$ introduced later need not
-be ultrametric.
+be nonarchimedean.
 
 \begin{corollary}[Ingleton projection]\label{cor:proj}
 There is a $K_1$\nobreakdash-linear map $\varpi\colon K'\to K_1$ with $\varpi|_{K_1}=\id$ and $\abs{\varpi(\lambda)}\le\abs\lambda$ for all
@@ -1811,7 +2788,7 @@ Multilinearity and the product norm bound pass to limits. Finally, density of $\
 \subsection{Projective base change}
 The next construction extends scalars while retaining the original norm and a contractive retraction whenever
 the original space is complete. The scalar retraction from Corollary~\ref{cor:proj} is the essential ingredient;
-the normed spaces themselves may have ordinary, non-ultrametric norms.
+the construction applies to arbitrary normed spaces.
 
 For a normed $K_1$\nobreakdash-space $V$ let $V_{K'}:=V\otimes_{K_1}K'$, a $K'$\nobreakdash-vector space through the second factor, and put
 \[
@@ -1823,7 +2800,7 @@ $(x,\lambda)\mapsto\psi(\lambda)x$ is $K_1$\nobreakdash-bilinear. Let $\iota_V\c
 $K_1$\nobreakdash-linear, since $cx\otimes1=x\otimes c=c\cdot(x\otimes1)$ for $c\in K_1$.
 
 \begin{lemma}[projective base change]\label{lem:bc}
-Let $V$ be a normed $K_1$\nobreakdash-space; no ultrametric hypothesis is made on $V$.
+Let $V$ be a normed $K_1$\nobreakdash-space; no nonarchimedean hypothesis is made on $V$.
 \begin{enumerate}
 \item $\norm{T_\psi u}\le\norm\psi\,\norm u_\pi$ for every bounded $K_1$\nobreakdash-linear $\psi\colon K'\to K_1$.
 \item $\norm\cdot_\pi$ is a $K'$\nobreakdash-norm on $V_{K'}$.
@@ -1854,7 +2831,7 @@ u=\sum_{j=1}^nx_j\otimes\lambda_j
 with $\lambda_1,\dots,\lambda_n$ linearly independent over $K_1$. Some $x_{j_0}$ is nonzero, since otherwise
 $u=0$. On the finite-dimensional subspace $U:=\operatorname{span}_{K_1}\{\lambda_1,\dots,\lambda_n\}\subseteq K'$,
 take the coordinate functional $\psi_0(\lambda_j)=\delta_{jj_0}$. It is bounded by some $C\ge0$ by
-Lemma~\ref{lem:findim}, using completeness of $K_1$ in (H1). Apply Theorem~\ref{thm:ingleton} to the ultrametric
+Lemma~\ref{lem:findim}, using completeness of $K_1$ in (H1). Apply Theorem~\ref{thm:ingleton} to the nonarchimedean
 $K_1$\nobreakdash-space $K'$ to extend it to $\psi\colon K'\to K_1$ with $\norm\psi\le C$. Then
 $T_\psi u=x_{j_0}$, so (1) gives
 \[
@@ -2026,8 +3003,7 @@ P_1(f,\dots,f)(m)(x)
 
 \begin{remark}\label{rem:ascent}
 Proposition~\ref{prop:ascent} is characteristic-free and uses no hypothesis on $k$. It transports negative results
-upward only, from $K_1$ to $K'$. Ingleton's theorem is used only on $K'$, so $F_1$ may be, and in our application is,
-non-ultrametric. The completeness of $F_1$ is used essentially: it is what makes the retraction $\Pi_F$ land in $F_1$.
+upward only, from $K_1$ to $K'$. Ingleton's theorem is used only on $K'$, with no nonarchimedean norm hypothesis on $F_1$. The completeness of $F_1$ is used essentially: it is what makes the retraction $\Pi_F$ land in $F_1$.
 \end{remark}
 
 \subsection{Incomplete base fields}
@@ -2068,7 +3044,7 @@ is a lift over $\Kh$.
 The preceding sections give the obstruction to a bounded lift. We first establish the remaining property of the
 target, then assemble the proof of Theorem~\ref{thm:main} and deduce Corollary~\ref{cor:class}.
 
-\subsection{The target has no equivalent ultrametric norm}
+\subsection{The target has no equivalent nonarchimedean norm}
 
 \begin{proposition}\label{prop:nonultra}
 Let $\kappa$ be any field, $k\ge2$, $r\in(0,1)$, and let $K_1=\kappa((X))$, $E_1$, $E_0$ and $B$ be as in
@@ -2077,7 +3053,7 @@ Let $\kappa$ be any field, $k\ge2$, $r\in(0,1)$, and let $K_1=\kappa((X))$, $E_1
 \[
 \frac N{M_r}\ \le\ \Bigl\lVert\sum_{j<N}\omega_j\Bigr\rVert_B\ \le\ N\qquad(N\ge1).
 \]
-Hence the norm of $B$ is not ultrametric, and $B$ admits no equivalent ultrametric norm. The same holds for
+Hence the norm of $B$ is not nonarchimedean, and $B$ admits no equivalent nonarchimedean norm. The same holds for
 $F=B\widehat\otimes_\pi K'$ as in \S\ref{sec:ascent}, for any $K'\supseteq K_1$ satisfying \textup{(H1)} and \textup{(H2)},
 regarded as a normed space over $K'$ or over any subfield of $K'$.
 \end{proposition}
@@ -2103,14 +3079,14 @@ kN\le\sdim(\xi_N)=\sdim(\eta(\omega))\le kM_r\norm\omega_B
 \]
 by~\eqref{eq:suppest}. This proves the lower bound.
 
-If $\norm\cdot_u$ were an equivalent ultrametric norm, choose positive constants $c,c'$ with
+If $\norm\cdot_u$ were an equivalent nonarchimedean norm, choose positive constants $c,c'$ with
 $\norm\cdot_B\le c\norm\cdot_u\le c'\norm\cdot_B$. Then
 \[
 \frac{N}{M_r}\le\Bigl\lVert\sum_{j<N}\omega_j\Bigr\rVert_B
 \le c\max_{j<N}\norm{\omega_j}_u\le c'
 \]
-for every $N\ge1$, a contradiction. In particular, the original norm is not ultrametric. This argument uses
-only the ultrametric inequality for $\norm\cdot_u$, not its scalar homogeneity.
+for every $N\ge1$, a contradiction. In particular, the original norm is not nonarchimedean. This argument uses
+only the nonarchimedean inequality for $\norm\cdot_u$, not its scalar homogeneity.
 
 Finally, $\iota_F\colon B\to F$ is a $K_1$\nobreakdash-linear isometry by Lemma~\ref{lem:bc}(3). The images
 $\iota_F\omega_j$ satisfy the same unit-norm and sum-growth estimates, so the argument applies to $F$ as well.
@@ -2123,8 +3099,8 @@ If $r\le\frac12$, then $M_r=1$ and $\norm{\sum_{j<N}\omega_j}_B=N$ exactly.
 \begin{proof}
 Let $K$ be a nontrivially normed field of characteristic $p>0$, and let $k\ge p$.
 \begin{enumerate}
-\item \emph{Choose a Laurent subfield.} By Lemma~\ref{lem:ultra}, $K$ is ultrametric. Its completion $\Kh$ is
-a complete, nontrivially normed, ultrametric field of characteristic $p$. Choose $t\in K$ with
+\item \emph{Choose a Laurent subfield.} By Lemma~\ref{lem:ultra}, $K$ is nonarchimedean. Its completion $\Kh$ is
+a complete, nontrivially normed, nonarchimedean field of characteristic $p$. Choose $t\in K$ with
 $0<\abs t=r<1$, and let $K_1$ be the closure of $\F_p(t)$ in $\Kh$. Lemma~\ref{lem:laurentsub} identifies $K_1$
 isometrically with $\F_p((X))$, with $\abs X=r$, by $\mathrm{ev}_t$. In particular, $K_1$ is complete and
 spherically complete.
@@ -2145,7 +3121,7 @@ $Q^{\Kh}_{E,E,F}$, which is impossible. Proposition~\ref{prop:lift} applies over
 field $K$: $Q^K_{E,E,F}$ is analytic at no point, and \texttt{ContDiffAt K $\omega$} fails at every point.
 Reindexing as in \S\ref{sec:prelim} gives the same conclusions, with the same spaces $E,F$, for every finite
 index set with $k$ elements.
-\item \emph{Exclude an equivalent ultrametric target norm.} Since $k\ge p\ge2$, Proposition~\ref{prop:nonultra}
+\item \emph{Exclude an equivalent nonarchimedean target norm.} Since $k\ge p\ge2$, Proposition~\ref{prop:nonultra}
 applies to $B$ and $F$, after the scalar identification in step~(2). Its conclusion persists when $F$ is
 regarded over $K$.
 \end{enumerate}
@@ -2153,10 +3129,10 @@ regarded over $K$.
 
 \begin{remark}\label{rem:spaces}
 If $K_1=\Kh$, as when $K=\F_p((u))$ and $t=u$, the completed tensor products identify isometrically with
-$E_1$ and $B$: use Lemma~\ref{lem:bc}(3) and $x\otimes\lambda=\lambda x\otimes1$. Thus $E$ is ultrametric in
+$E_1$ and $B$: use Lemma~\ref{lem:bc}(3) and $x\otimes\lambda=\lambda x\otimes1$. Thus $E$ is nonarchimedean in
 this case. For $K=\F_q((u))$, $q=p^n$, with its $u$\nobreakdash-adic absolute value, one can instead apply
 Theorem~\ref{thm:laurent} directly with $\kappa=\F_q$ and $X=u$, obtaining $E=\linf(\N,K)$ and $F=B$.
-The proof over a general base does not require, or assert, that $E$ is ultrametric.
+The proof over a general base does not require, or assert, that $E$ is nonarchimedean.
 \end{remark}
 
 \subsection{Proof of Corollary~\ref{cor:class}}
@@ -2171,7 +3147,7 @@ classification and both strengthened conclusions.
 \section{Complements and open problems}\label{sec:complements}
 
 We apply the Main Theorem to finite-dimensional targets and to targets over discretely valued fields, then give an
-explicit lift from an orthogonal basis. The section ends with comparisons and questions about ultrametric targets.
+explicit lift from an orthogonal basis. The section ends with comparisons and questions about nonarchimedean targets.
 
 \subsection*{Finite-dimensional targets}
 \begin{remark}[finite-dimensional targets]\label{rem:finite-target-reduction}
@@ -2200,7 +3176,7 @@ This expresses $Q_K$ as a fixed continuous linear function of $Q_F$ and proves t
 Thus finite-dimensionality of the target reduces the question to a scalar target. This reduction
 gives no assertion of analyticity over a nonspherically complete base.
 
-If $K$ is ultrametric and spherically complete, there is a positive conclusion for every
+If $K$ is nonarchimedean and spherically complete, there is a positive conclusion for every
 finite-dimensional $F$, with any norm. The coordinate norm
 $\norm y_\infty:=\max_a\abs{\lambda_a(y)}$ is equivalent to the given norm. With this norm, $F$ is
 spherically complete: a closed ball in $K^d$ is a product of coordinate balls, and spherical completeness
@@ -2213,21 +3189,21 @@ spaces only by fixed comparison factors.
 
 
 \begin{proposition}[targets over discretely valued bases]\label{prop:discrete}
-Let $K$ be an ultrametric normed field with $\abs{K^\times}=r^\Z$ for some $r\in(0,1)$, complete or
+Let $K$ be a nonarchimedean normed field with $\abs{K^\times}=r^\Z$ for some $r\in(0,1)$, complete or
 not; for instance $K=\F_q((t))$ or $K=\kappa((t))$. Let $E,E'$ be normed $K$\nobreakdash-spaces and $F$ a $K$\nobreakdash-Banach space that
-admits an equivalent ultrametric norm. Then $Q^K_{E,E',F}$ is analytic at every point.
+admits an equivalent nonarchimedean norm. Then $Q^K_{E,E',F}$ is analytic at every point.
 \end{proposition}
 
 \begin{proof}
-\emph{Round the norm.} Let $\norm\cdot_u$ be an equivalent ultrametric norm on $F$. For $y\ne0$, round
+\emph{Round the norm.} Let $\norm\cdot_u$ be an equivalent nonarchimedean norm on $F$. For $y\ne0$, round
 $\norm y_u$ up to the least element $\norm y_u^\sharp$ of $r^\Z$ above it, and put $\norm0_u^\sharp:=0$.
 Then
 \[
 \norm y_u\le\norm y_u^\sharp\le r^{-1}\norm y_u.
 \]
 Rounding is monotone and commutes with multiplication by elements of $r^\Z$. Since
-$\abs\lambda\in r^\Z$ for $\lambda\in K^\times$, it preserves scalar homogeneity and the ultrametric
-inequality. Thus $\norm\cdot_u^\sharp$ is an equivalent ultrametric norm, and
+$\abs\lambda\in r^\Z$ for $\lambda\in K^\times$, it preserves scalar homogeneity and the nonarchimedean
+inequality. Thus $\norm\cdot_u^\sharp$ is an equivalent nonarchimedean norm, and
 $F':=(F,\norm\cdot_u^\sharp)$ is complete with distances in $r^\Z\cup\{0\}$.
 
 \emph{Apply the Main Theorem.} Lemma~\ref{lem:discdist} makes $F'$ spherically complete.
@@ -2247,7 +3223,7 @@ convergence is unchanged.
 \end{proof}
 
 Thus, over a discretely valued base, every Banach counterexample must have a target admitting no equivalent
-ultrametric norm. Proposition~\ref{prop:nonultra} establishes this property for our target over every base.
+nonarchimedean norm. Proposition~\ref{prop:nonultra} establishes this property for our target over every base.
 
 \begin{remark}[a nonspherical target with analytic precomposition]\label{rem:nonspherical-analytic-target}
 Spherical completeness of the given target norm is not necessary for analyticity, even in degrees at least the
@@ -2256,7 +3232,7 @@ Put
 \[
 w_j=1+\frac1{j+2},\qquad \norm{x}_w=\sup_{j\ge0}w_j\abs{x_j}.
 \]
-This is an ultrametric norm, and
+This is a nonarchimedean norm, and
 $\norm{x}_\infty\le\norm{x}_w\le\frac32\norm{x}_\infty$.
 Thus $F$ is Banach in either norm. The usual supremum norm has nonzero values in $2^\Z$, since every
 nonzero null sequence attains its maximum absolute value. Lemma~\ref{lem:discdist} makes it spherically complete.
@@ -2272,14 +3248,14 @@ $\norm{a_{n+1}-a_n}_w=w_n$. If $x$ belonged to every $B_n$, then, for each $j$ a
 \]
 so $\abs{x_j}=1$ for every $j$, contrary to $x_j\to0$. Hence $\bigcap_nB_n=\varnothing$.
 This example separates spherical completeness of a particular norm from analyticity, which is invariant under
-equivalent norms. It still admits an equivalent ultrametric, spherically complete norm.
+equivalent norms. It still admits an equivalent nonarchimedean, spherically complete norm.
 \end{remark}
 
 \begin{remark}[necessary, but not sufficient]\label{rem:notsuff}
 Completeness of the target is essential in Proposition~\ref{prop:discrete}: it is used through
-Lemma~\ref{lem:discdist}. Even for complete targets, the absence of an equivalent ultrametric norm
+Lemma~\ref{lem:discdist}. Even for complete targets, the absence of an equivalent nonarchimedean norm
 is not sufficient for a counterexample. Take the degree-$3$ space $B$ of \S\ref{ssec:projnorm} over
-$K_1=\F_5((X))$. It admits no equivalent ultrametric norm by Proposition~\ref{prop:nonultra}, which requires
+$K_1=\F_5((X))$. It admits no equivalent nonarchimedean norm by Proposition~\ref{prop:nonultra}, which requires
 only $k\ge2$, but $Q^{K_1}_{E_1,E_1,B}$ is analytic by Corollary~\ref{cor:class}(1), since $3!=1$ in $\F_5$.
 
 The factorial hypothesis is also essential to the finite-field obstruction. Applying the construction of
@@ -2290,8 +3266,8 @@ $L=\F_5$, except $k!=0$; compare Remark~\ref{rem:FFunit}.
 
 \subsection*{An explicit lift from an orthogonal basis}
 \begin{remark}[an explicit lift]\label{rem:sorted}
-Let $K$ be ultrametric, let $E$ have an orthogonal basis $(e_i)_{i\in I}$, and let $F$ be complete and
-ultrametric. Here a basis means that every $x\in E$ has an unconditional expansion
+Let $K$ be nonarchimedean, let $E$ have an orthogonal basis $(e_i)_{i\in I}$, and let $F$ be complete and
+nonarchimedean. Here a basis means that every $x\in E$ has an unconditional expansion
 $x=\sum_i e_i^*(x)e_i$, with $\norm{\sum_i c_i e_i}=\sup_i\abs{c_i}\norm{e_i}$. Fix a total order on $I$ and put
 \[
 P(f_1,\dots,f_k)(m)(x^1,\dots,x^k):=\sum_{s_1<\dots<s_k}\det\bigl(e^*_{s_a}(x^b)\bigr)_{a,b}\;m\bigl(f_1e_{s_1},\dots,f_ke_{s_k}\bigr).
@@ -2300,10 +3276,10 @@ For each $x$, the weighted coordinates $\abs{e_i^*(x)}\norm{e_i}$ tend to zero o
 Expanding the determinant bounds a summand by a fixed constant times a finite sum of products of these
 null families, one coordinate from each input. Such products tend to zero off finite subsets of the
 tuple space. Hence, for every $\varepsilon>0$, only finitely many summands have norm at least
-$\varepsilon$, and the family is summable in the complete ultrametric space $F$.
+$\varepsilon$, and the family is summable in the complete nonarchimedean space $F$.
 
-Orthogonality gives $\abs{e_s^*(x)}\norm{e_s}\le\norm x$. The ultrametric determinant estimate therefore
-bounds every summand by $\norm m\prod_a\norm{f_a}\prod_b\norm{x^b}$; the ultrametric inequality in $F$
+Orthogonality gives $\abs{e_s^*(x)}\norm{e_s}\le\norm x$. The nonarchimedean determinant estimate therefore
+bounds every summand by $\norm m\prod_a\norm{f_a}\prod_b\norm{x^b}$; the nonarchimedean inequality in $F$
 then gives $\norm P\le1$. The formula is multilinear in $f$ and linear in $m$, and its output is
 alternating in $x$ because the determinant is alternating in its columns. Finally, finite coordinate
 expansions give
@@ -2316,20 +3292,20 @@ $P(f,\dots,f)=Q(f)$. For $k=0$, the formula has one empty-index term, with deter
 
 This \emph{sorted lift} works in every characteristic and degree, without division by $k!$ or spherical
 completeness. It is not used in the main proof. Over a complete discretely valued field, every
-ultrametric Banach space is topologically isomorphic to a space $c_0(I)$ of null
+nonarchimedean Banach space is topologically isomorphic to a space $c_0(I)$ of null
 families~\cite[\S1, Prop.~1 and its Corollaire]{Se} (see also~\cite[Prop.~10.1]{Sch}),
 and hence has such a basis for an equivalent norm.
 \end{remark}
 
 \subsection*{Ultrametric counterexamples}
-\begin{remark}[ultrametric targets over bases that are not spherically complete; announced]\label{rem:R}
+\begin{remark}[nonarchimedean targets over bases that are not spherically complete; announced]\label{rem:R}
 The following statement is announced without proof and is not used elsewhere in this paper. Let $k\ge2$,
 and let $K$ be a complete nontrivially normed field, not spherically complete, with $k!=0$ in $K$.
-Then $K$ is ultrametric by Lemma~\ref{lem:ultra}. For a cardinal $\mu$ put $\beth_0(\mu):=\mu$ and
+Then $K$ is nonarchimedean by Lemma~\ref{lem:ultra}. For a cardinal $\mu$ put $\beth_0(\mu):=\mu$ and
 $\beth_{n+1}(\mu):=2^{\beth_n(\mu)}$, and let $\mu^+$ be the successor cardinal of $\mu$. Let $I$ be a set of
 cardinality at least $\beth_{3k-1}(\abs K)^+$, put $E:=\linf(I,K)$, and let $F_I$ be the closure in $\linf(I^k,K)$ of
 the span of the determinant arrays $(i_1,\dots,i_k)\mapsto\det(x_b(i_a))_{a,b}$, $x\in E^k$. Then $E$ and $F_I$ are
-ultrametric $K$\nobreakdash-Banach spaces, and $Q^K_{E,E,F_I}$ is analytic at no point. The proposed proof uses
+nonarchimedean $K$\nobreakdash-Banach spaces, and $Q^K_{E,E,F_I}$ is analytic at no point. The proposed proof uses
 a partition argument with the Erd\H{o}s--Rado theorem in place of Ramsey's theorem. For $k=2$ in
 characteristic~$2$ the countable index set $\N$ suffices~\cite{M}.
 \end{remark}
@@ -2337,9 +3313,9 @@ characteristic~$2$ the countable index set $\N$ suffices~\cite{M}.
 \paragraph{Comparison with characteristic $2$.}
 For $p=k=2$, Theorem~\ref{thm:main} gives a second counterexample over every nontrivially normed field of
 characteristic~$2$. Unlike the construction of~\cite{M}, it applies to spherically complete bases such as
-$\F_2((t))$. The distinction lies in the target: that of~\cite{M} is ultrametric, whereas ours admits no
-equivalent ultrametric norm. Proposition~\ref{prop:discrete}, using Main Theorem~(\ref{main:spherical}), shows that a complete
-counterexample target over $\F_2((t))$ cannot carry an equivalent ultrametric norm.
+$\F_2((t))$. The distinction lies in the target: that of~\cite{M} is nonarchimedean, whereas ours admits no
+equivalent nonarchimedean norm. Proposition~\ref{prop:discrete}, using Main Theorem~(\ref{main:spherical}), shows that a complete
+counterexample target over $\F_2((t))$ cannot carry an equivalent nonarchimedean norm.
 
 The proofs also use different mechanisms. The characteristic-$2$ argument combines a parity identity
 for determinants---the determinant of an alternating matrix is the square of its Pfaffian---with the
@@ -2390,46 +3366,60 @@ family is the one in~(3), with $L=\kappa$.
 
 
 \subsection*{Open problems}
-For $C^\infty$ smoothness, the largest full subcategory of
-$\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K$ on which $\Alt^k$ is smooth is already the whole product,
-by part~(\ref{main:general}) of the Main Theorem. The following questions concern analytic regularity.
+The distinction between restrictions on objects and restrictions on analytic families leaves several
+different classification problems. They are substantive only in characteristic $p>0$ and degree $k\ge p$;
+when $k!\ne0$, the alternating-map bifunctor is already analytic on the whole product category. For
+$C^\infty$ smoothness, no restriction is needed in any characteristic.
 \begin{enumerate}
-\item \emph{Largest analytic full subcategory.} Given a nontrivially normed field $K$ and an integer $k\ge0$,
-does there exist a largest full subcategory
-\[
-\mathcal C\subseteq\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K
-\]
-closed under isomorphisms, on which the restriction
-$\Alt^k|_{\mathcal C}\colon\mathcal C\to\mathsf{Vec}_K$ is analytic? Here analyticity requires joint
-analyticity on every hom space between objects of $\mathcal C$, including distinct objects.
-A largest such subcategory would contain every other full subcategory with these properties; its existence
-is part of the question. If it exists, characterize it intrinsically. If there is no largest one, describe
-the full subcategories that are maximal under inclusion. When $k!\ne0$ in $K$, the whole product is the
-answer by the Main Theorem. The unresolved case is therefore positive characteristic $p$ and $k\ge p$.
-The next question focuses on restrictions in the target variable alone.
-\item \emph{Characterizing analytic targets.} Fix a nontrivially normed field $K$ of characteristic $p>0$ and
-an integer $k\ge p$. Find a necessary and sufficient condition on a normed $K$\nobreakdash-space $F$ for
-$\Alt^k(-;F)$ to be analytic: that is, for $Q^K_{E,E',F}$ to be analytic for every pair of normed spaces $E,E'$.
-Seek a condition in terms of the topological linear structure of $F$, invariant under bounded linear
-isomorphisms, rather than a restatement of the multilinear lift criterion. Determine this class in particular
-among Banach targets, and characterize the targets for which analyticity holds simultaneously in every finite
-degree. Main Theorem~(\ref{main:spherical}) and invariance under equivalent norms give a sufficient condition: $F$ admits an equivalent
-ultrametric, spherically complete norm. Remark~\ref{rem:nonspherical-analytic-target} shows that spherical
-completeness of the given norm is not necessary; it does not settle whether the existence of such an equivalent
-norm is necessary. The restriction $k\ge p$ isolates the nontrivial degrees, since Corollary~\ref{cor:class}
-gives analyticity for every target when $k<p$, and in every degree in characteristic zero. For $C^\infty$
-smoothness, no target condition is needed (Proposition~\ref{prop:smooth-positive}).
-\item \emph{Countable index.} Let $K$ be complete, not spherically complete, of characteristic $p\ge3$, and $k\ge p$.
-Is there a complete ultrametric $F$ such that $Q^K_{E,E,F}$ is not analytic for $E=\linf(\N,K)$? For $p=2$ the answer
-is yes, by~\cite{M}: for $k=2$ this is the theorem of~\cite{M}, and for $k\ge3$ it follows by the wedging argument
-of~\cite[Remark~18]{M}, which is formalized in the Lean theorem of \S\ref{sec:lean} under the hypothesis (K2)
-of~\cite{M}. Remark~\ref{rem:R} announces a counterexample with a much larger index set, leaving the
-countable case open.
-\item \emph{Densely valued spherically complete bases.} Let $K$ be spherically complete, densely valued and of
-characteristic $p$, for example the Hahn series field $\F_p((t^{\mathbb Q}))$, and let $k\ge p$.
-Is $Q^K_{E,E',F}$ analytic for all Banach $E,E'$ and every complete ultrametric $F$? Main Theorem~(\ref{main:spherical}) gives a
-positive answer when $F$ is spherically complete. The counterexample of Theorem~\ref{thm:main} has a
-non-ultrametric target and does not answer this question.
+\item \emph{Intrinsic characterization of universal targets.}
+Determine $\mathsf T_k(K)$ in terms of the topological linear structure of its objects, rather than by
+restating analyticity or the multilinear lift criterion. In particular, characterize its Banach objects
+and the targets that belong to $\mathsf T_k(K)$ in every finite degree.
+An equivalent nonarchimedean, spherically complete norm is sufficient, by
+Main Theorem~(\ref{main:spherical}) and bounded-isomorphism invariance.
+Remark~\ref{rem:nonspherical-analytic-target} shows that spherical completeness of the given norm is not
+necessary; it does not decide whether such an equivalent norm is necessary. Proposition~\ref{dom:core}
+shows that this target classification determines a canonical analytic domain compatible with every other
+analytic domain.
+
+\item \emph{Analytic domains over complete fields and among Banach pairs.}
+For a prescribed complete field $K$, does there exist a largest full analytic domain, closed under
+isomorphisms, in $\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K$? Ask the same question in
+$\mathsf{Ban}_K^{\mathrm{op}}\times\mathsf{Ban}_K$, also when $K$ itself is incomplete.
+Theorem~\ref{dom:no-largest} answers the unrestricted existence question negatively over $\F_p(t)$,
+using finite-dimensional but incomplete spaces. Its construction does not decide either of these
+restricted questions. Where no largest domain exists, seek structural criteria for compatibility between
+objects and descriptions of full domains maximal under inclusion.
+
+\item \emph{Extensions of the split-pair category.}
+Which objects can be adjoined to the full category of pairs for which
+$\Alt^k(E;F)\hookrightarrow\Mult^k(E;F)$ has a bounded linear retraction?
+The universal-target core can always be adjoined, by Proposition~\ref{dom:core}.
+The objects $X_k$ of Theorem~\ref{dom:no-largest}, despite having analytic self-action, cannot be adjoined.
+A useful answer should give sufficient and necessary conditions on the spaces themselves, rather than
+merely requiring analyticity of all the cross-actions.
+
+\item \emph{Parameter spaces for analytic families.}
+Characterize normed parameter spaces $P$ for which every operator-valued analytic family with parameters
+in an open subset of $P$ induces an analytic family on alternating-map spaces. The hypotheses on the
+target fibers should be recorded explicitly: completeness and nonarchimedean norms enter some of the
+positive results. General reflection of analyticity through closed linear embeddings is a sufficient
+condition, but it is stronger than the property needed for this particular finite-degree construction.
+The ordinary $\ell^1$ parameter theorem makes this distinction concrete.
+
+\item \emph{Countable index.}
+Let $K$ be complete, not spherically complete, of characteristic $p\ge3$, and let $k\ge p$.
+Is there a complete nonarchimedean $F$ such that $Q^K_{E,E,F}$ is not analytic for
+$E=\linf(\N,K)$? For $p=2$, the answer is yes: degree two is the theorem of~\cite{M}, and the higher
+degrees follow by the wedging argument of~\cite[Remark~18]{M}, formalized under hypothesis (K2) of that
+paper. Remark~\ref{rem:R} announces a counterexample with a larger index set, leaving the countable case open.
+
+\item \emph{Densely valued spherically complete bases.}
+Let $K$ be spherically complete, densely valued and of characteristic $p$, for example
+$\F_p((t^{\mathbb Q}))$, and let $k\ge p$. Is $Q^K_{E,E',F}$ analytic for all Banach $E,E'$ and every
+complete nonarchimedean $F$? Main Theorem~(\ref{main:spherical}) gives a positive answer for spherically
+complete $F$. The counterexample of Theorem~\ref{thm:main} has a target with no equivalent nonarchimedean
+norm and therefore does not answer this question.
 \end{enumerate}
 
 \section{Formalization}\label{sec:lean}
@@ -2446,7 +3436,7 @@ The principal declarations, in the namespace \texttt{AlternatingAnalytic}, are
 \item \texttt{exists\_\allowbreak{}banach\_\allowbreak{}counterexample\_\allowbreak{}full}, for
 Theorem~\ref{thm:main}, including incomplete base fields, the same Banach witnesses for every finite index
 type of cardinality $k$, no bounded lift, nowhere analyticity, nowhere $C^\omega$, and no equivalent
-ultrametric norm on the target;
+nonarchimedean norm on the target;
 \item \texttt{factorial\_\allowbreak{}ne\_\allowbreak{}zero\_\allowbreak{}iff\_\allowbreak{}allBanachPrecompositionAnalytic},
 for both directions of Corollary~\ref{cor:class};
 \item \texttt{finiteField\_\allowbreak{}multiplier\_\allowbreak{}theorem}, for both parts of
@@ -2467,9 +3457,21 @@ Corollary~\ref{cor:finite-dimensional-positive}) and the finite-target reduction
 formalized declarations in this development. The weighted $c_0$ example of
 Remark~\ref{rem:nonspherical-analytic-target} is likewise an additional informal corollary; its sufficient
 analyticity criterion is formalized, but the example is not a separate Lean declaration.
-The categorical Main Theorem in the introduction is a mathematical consequence of these
-operator results and bounded bilinear postcomposition. The functors and their joint maps on hom spaces are
-not separate Lean declarations.
+Parts~(\ref{main:general}) and~(\ref{main:spherical}) of the categorical Main Theorem follow mathematically
+from these operator results and bounded bilinear postcomposition. The categorical packaging itself is not a
+separate Lean declaration.
+
+The later results in \S\S\ref{fam:sec:families}--\ref{dom:section}, including
+Main Theorem~(\ref{main:families})--(\ref{main:domains}), have complete mathematical proofs in this manuscript
+but are not yet asserted as Lean-checked theorems. They comprise finite-coordinate analytic reflection,
+admissible-family and bundle constructions, the $c_0$ and ordinary $\ell^1$ parameter theorems,
+the invertible shear argument, the tensor criterion, the universal-target core and the no-largest-domain theorem.
+The next formalization steps are the family composition laws, the shear transfer identity, and the
+finite-coordinate reflection theorem. For the last result, the existing Mathlib uniqueness theorem applied
+after quotienting by the closed subspace gives membership of the homogeneous diagonal coefficients.
+The remaining principal construction is a subspace-valued multilinear representative in finite coordinates
+with the exponential norm bound~\eqref{fam:eq:finite-bound}.
+These additions do not alter the three existing comparator challenge statements.
 
 The characteristic-$2$ counterexample~\cite{M} has separate provenance. Its formalization proves nonanalyticity in
 degree $2$ at the origin, with a wedging extension under (K2) to every degree at least $2$ and every base point:
@@ -2487,6 +3489,9 @@ configuration recorded in the repository.
 
 \clearpage
 \begin{thebibliography}{99}
+\bibitem{BH} J.~C.~Baez and A.~E.~Hoffnung, \emph{Convenient categories of smooth spaces},
+Trans.\ Amer.\ Math.\ Soc.\ \textbf{363} (2011), no.~11, 5789--5825,\\
+{\small\url{https://arxiv.org/abs/0807.1704}}.
 \bibitem{G1} S.~Gou\"ezel, \emph{In characteristic $0$, precomposition by a linear map is analytic on the space of
 alternating maps}, pull request \#43338 to Mathlib,\\ {\small\url{https://github.com/leanprover-community/mathlib4/pull/43338}}.
 \bibitem{G2} S.~Gou\"ezel, \emph{The bundle of continuous alternating maps is $C^n$}, draft pull request \#43234 to Mathlib,\\
