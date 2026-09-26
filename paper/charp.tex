@@ -3618,13 +3618,13 @@ family is the one in~(3), with $L=\kappa$.
 
 
 \section{Formalization}\label{sec:lean}
-The original operator proof snapshot is recorded in the private repository~\cite{LeanP}, at commit
+The original operator proofs in the private repository~\cite{LeanP} were verified at commit
 \href{https://github.com/Deicyde/alternating-analytic-characteristic-p/tree/5e9c3cf81bb648d9f64203333a51beb2784aaf46}{\texttt{5e9c3cf}},
-using Lean~\texttt{4.34.0-rc2} and Mathlib revision
+with Lean~\texttt{4.34.0-rc2} and Mathlib
 \href{https://github.com/Deicyde/mathlib4/tree/2b73d9821d297b80d92eecc54cc09bfc263e0098}{\texttt{2b73d9821d29}}.
-At that revision, the proof library was built without admitted proofs, and its transitive axiom check reported only
+The library had no admitted proofs and used only the axioms
 \texttt{propext}, \texttt{Classical.\allowbreak{}choice} and \texttt{Quot.\allowbreak{}sound}.
-The repository's \texttt{THEOREM\_MAP.md} maps the paper's statements to the Lean declarations.
+The repository's \texttt{THEOREM\_MAP.md} records the current declaration-level scope.
 
 The principal declarations, in the namespace \texttt{AlternatingAnalytic}, are
 \begin{itemize}\raggedright
@@ -3678,10 +3678,12 @@ are formalized. The declaration
 \texttt{contMDiffVectorBundle\_\allowbreak{}alternating\_\allowbreak{}of\_\allowbreak{}finiteCoordinates}
 uses Mathlib's existing alternating-bundle topology, for arbitrary $K$, degree and normed model fibers,
 and supplied continuous coordinates $P\simeq K^d$, without completeness assumptions.
-The category of analytic normable bundles with operator-valued analytic Hom sections is also formalized.
-Alternating bundle morphisms and the bundle bifunctor, Main Theorem~(\ref{main:domains}),
-the remaining parameter-space, tensor and analytic-domain results, and finite-support matrix transport
-remain pending; the theorem map records their scope and status.
+The declaration \texttt{alternatingBundleFunctor} completes Main Theorem~(\ref{main:families})
+as an actual bifunctor on analytic normable bundles. Its object and morphism formulas use the existing
+bundle topologies and operator-valued analytic Hom sections; identity, composition and transport
+between analytically compatible presentations are formalized.
+Main Theorem~(\ref{main:domains}), the remaining parameter-space, tensor and analytic-domain results,
+and finite-support matrix transport remain pending; the theorem map records their scope and status.
 
 The earlier characteristic-$2$ development~\cite{M} is cited for comparison; it is not re-audited here.
 
