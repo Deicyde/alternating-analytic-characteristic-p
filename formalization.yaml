@@ -7,11 +7,11 @@ project:
     target norm. The library proves the sharp factorial classification and categorical Main Theorem (1)
     and (2), including unconditional joint smoothness and the spherical-target positive case. Checked
     extensions include finite-coordinate analytic reflection, radius preservation, alternating morphism
-    families on open coordinate domains and manifolds, actual finite-coordinate analytic alternating bundles,
-    core admissible-family laws, the invertible-shear obstruction and canonical exterior support. The
-    expanded manuscript remains only partly formalized: bundle morphisms and the bundle-category functor,
-    further parameter and tensor results, and analytic-domain results remain unfinished. THEOREM_MAP.md
-    records the exact scope and review status.'
+    families on open coordinate domains and manifolds, actual finite-coordinate analytic alternating bundles
+    and the category of operator-analytic normable vector bundles, core admissible-family laws, the invertible-shear
+    obstruction and canonical exterior support. The expanded manuscript remains only partly formalized:
+    bundle morphisms and the bundle-category functor, further parameter and tensor results, and analytic-domain
+    results remain unfinished. THEOREM_MAP.md records the exact scope and review status.'
   authors:
   - Jack McCarthy
   responsible_maintainers:
@@ -29,8 +29,8 @@ sources:
   id: https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/main/paper/charp.pdf
   type: manuscript
   location: Counterexample theorem (thm:main), operator Corollary cor:class, categorical Main Theorem
-    (1) and (2), finite-coordinate family and open-manifold prerequisites for Main Theorem (3), and supporting
-    proved complements
+    (1) and (2), finite-coordinate families and actual analytic alternating bundles in Main Theorem (3),
+    the analytic bundle category, and supporting proved complements
   relationship: formalizes
   note: The current manuscript is paper/charp.pdf, with editable source paper/charp.tex; sources/ contains
     historical snapshots. Its disclosure credits the original Claude-assisted informal work separately
@@ -38,10 +38,11 @@ sources:
     Main Theorem (1) and (2), and finite-coordinate family and open-manifold prerequisites for part (3)
     have Lean proofs. The manifold results allow arbitrary normed fibers, every characteristic and degree,
     and explicit continuous finite coordinates without completeness assumptions. The actual finite-coordinate
-    analytic alternating bundle is also proved. Its operator-valued morphisms and categorical bundle functor,
-    part (4)'s no-largest-domain theorem, and the remaining proved extensions are not yet formalized.
-    Theorem-level boundaries are in THEOREM_MAP.md. Open problems, the alternative infinite-field obstruction
-    and the proposed large-index construction are not claimed as proved results.
+    analytic alternating bundle and analytic bundle category are also proved and clean-reviewed; the actual
+    ContMDiffVectorBundle omega witness is the fourth comparator statement. Its operator-valued morphisms
+    and categorical bundle functor, part (4)'s no-largest-domain theorem, and the remaining proved extensions
+    are not yet formalized. Theorem-level boundaries are in THEOREM_MAP.md. Open problems, the alternative
+    infinite-field obstruction and the proposed large-index construction are not claimed as proved results.
   license: ''
   author_endorsement: participated
 - title: Existing Lean ingredients supplied with the round-24 paper materials
@@ -75,17 +76,20 @@ classification:
   - 68V20
 status:
   scope: The original operator proof library is complete for its stated scope; the expanded manuscript
-    is not fully formalized. The actual normed, Banach and spherical alternating functors, categorical
-    Main Theorem (1) and (2), and finite-coordinate manifold-family theorems on open sets with a global
-    corollary have passed the shared proof-verification gate. The repaired joint-action summary has also
-    passed that gate and awaits fresh independent review. The actual finite-coordinate analytic alternating
-    bundle and its exact transition identities have also passed the shared gate. Operator-valued bundle
-    morphisms and the bundle bifunctor remain unfinished, as do the additional operator-positive, parameter-space,
-    tensor, universal-target and analytic-domain results listed in THEOREM_MAP.md and FORMALIZATION_ROADMAP.md.
-    Accepted proof-library and solution declarations contain no admitted proofs; the three intentional
-    challenge placeholders are excluded. Only the unchanged three-statement challenge is checked by Kim
-    Morrison's comparator, not the additional library results. Proposed and open claims, the external
-    Serre classification and the separate characteristic-two proof are excluded from local completion
+    is not fully formalized. Fifteen extension nodes have passed the shared proof-verification gate and
+    clean independent AI jury reviews, including categorical Main Theorem (1) and (2), the repaired joint-action
+    summary, finite-coordinate reflection and families, the actual analytic alternating bundle and analytic
+    bundle category. The central bundle theorem supplies an actual ContMDiffVectorBundle omega witness
+    on Mathlib’s existing topology for analytic bases with explicit continuous finite coordinates, over
+    every nontrivially normed field and all finite degrees/dimensions including zero. Model fibers are
+    arbitrary normed spaces; actual fibers retain their topological/normable structures. No completeness,
+    characteristic or factorial assumption is added. The alternating action on operator-valued bundle
+    morphisms and final bundle bifunctor remain unfinished, as do the additional operator-positive, parameter-space,
+    tensor, universal-target and analytic-domain results in THEOREM_MAP.md and FORMALIZATION_ROADMAP.md.
+    Accepted proof-library and solution declarations contain no admitted proofs; four intentional challenge
+    placeholders are excluded. Kim Morrison’s comparator checks four selected statements, including the
+    actual finite-coordinate bundle witness, not the full extension library. Proposed/open claims, the
+    external Serre classification and the separate characteristic-two proof are excluded from local completion
     claims.
   sorry_count: 0
   sorry_in_definitions: 0
@@ -319,6 +323,42 @@ status:
     - Quot.sound
     comparator_config: ''
     literature_dependencies: []
+  - declaration: AlternatingAnalyticChallenge.contMDiffVectorBundle_alternating_of_finiteCoordinates
+    file: solution.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: comparator.json
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.contMDiffVectorBundle_alternating_of_finiteCoordinates
+    file: AlternatingAnalytic/Geometry/AnalyticAlternatingBundle.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.AnalyticBundleCat.exists_hom_iff_operatorAnalytic
+    file: AlternatingAnalytic/Geometry/AnalyticBundleCategory.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.AnalyticBundleCat.isoOfOperatorAnalytic
+    file: AlternatingAnalytic/Geometry/AnalyticBundleCategory.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
 automation:
   spend_usd: 200
   methods:
@@ -378,34 +418,47 @@ fidelity:
     invokes the existing theorem. No characteristic or degree restriction, or completeness assumption
     on K, E or E'', is introduced. The comparator checks the current challenge and solution against comparator.json,
     including both fixed predicates and their transitive dependencies. No proposed or open paper claim
-    is included as an axiom. The current challenge still selects only the original three proved statements;
-    it does not claim to check the new finite-coordinate, bundle, parameter, shear, tensor or no-largest-domain
-    results. Paper proofs of these extensions are distinguished from the Lean-checked scope.'
+    is included as an axiom. The fourth comparator statement is the actual finite-coordinate ContMDiffVectorBundle
+    omega witness, using Mathlib’s existing alternating-bundle topology and actual fibers. It assumes
+    supplied continuous finite coordinates on a self-model analytic base and retains arbitrary normed
+    models and the exact topological-module fiber hypotheses; no completeness, characteristic, degree
+    or factorial restriction is added. The original three statements and both transparent definitions
+    are unchanged. This comparator scope does not include the separate analytic bundle category, alternating
+    bundle morphisms, final bifunctor, parameter, shear, tensor or no-largest-domain extensions. Paper
+    proofs of these extensions are distinguished from the Lean-checked scope.'
 review:
   status: agent-reviewed
   reviewers: []
-  notes: Twelve extension nodes have complete clean independent Codex jury reviews, each with 5/5 for
-    statement faithfulness and proof integrity and at least 4/5 for code quality. These now include the
-    spherical-target categorical result and the combined categorical Main Theorem, whose earlier incomplete
-    faithfulness reports were timeouts. The repaired joint-action summary and the nine-declaration analytic
-    bundle module have passed the shared build, kernel and axiom gate; fresh independent reviews of those
-    two nodes remain pending. The full library-and-solution integration build passed 3,186 jobs on the
-    recorded source snapshot. The unchanged three-statement challenge passed Kim Morrison’s comparator
-    locally, including default-kernel replay; this does not certify the additional library results. GitHub
-    CI did not run because of an account billing/spending restriction. Informal manuscript audits are
-    distinct from kernel verification and jury review. No human expert review or complete formalization
-    of the expanded manuscript is claimed. Bundle morphisms and the literal bundle bifunctor remain unfinished.
+  notes: Fifteen extension nodes have complete clean independent Codex jury reviews as of 26 September
+    2026, each with 5/5 for statement faithfulness and proof integrity and at least 4/5 for code quality.
+    The repaired joint-action summary is clean (5/5/5), the actual finite-coordinate analytic bundle is
+    clean (5/5/4), and the analytic bundle category is clean (5/5/5). Earlier timeout/authentication failures
+    were resolved by fresh completed reviews and are not presented as mathematical rejections. The recorded
+    library-and-solution integration build passed 3,186 jobs; the category subsequently passed its shared
+    build/kernel/axiom gate. The four-statement challenge passed Kim Morrison’s comparator locally on
+    26 September 2026, including default-kernel replay, using the upstream macOS development launcher
+    without Linux Landrun sandbox isolation. Its fourth statement checks the actual analytic alternating
+    bundle witness; the original three statements and transparent definitions are unchanged. GitHub CI
+    previously did not run because of an account billing/spending restriction; no new CI success is claimed.
+    Informal manuscript audits are distinct from kernel verification and jury review. No human expert
+    review or complete formalization of the expanded manuscript is claimed. Alternating bundle morphisms
+    and the final bifunctor remain pending.
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
-  comparator_scope: 'Three theorems in a challenge importing only Mathlib. Two are contradiction corollaries
+  comparator_scope: 'Four theorems in a challenge importing only Mathlib. Two are contradiction corollaries
     of the proved construction: the universal all-fields analytic-smoothness assertion, and the fixed-prescribed-field
     Banach assertion in characteristic p and degree k >= p. The latter names its original universal hypothesis
     BanachPrecompositionAnalytic K k. The third is the operator form of Main Theorem (2) for independent
     universes, arbitrary finite indices and all differentiability orders n : WithTop ℕ∞, including omega,
     with explicit hF : SphericallyComplete F. Both predicates are fixed transparent definitions identical
     in challenge and solution. The source alignment below records the stronger library theorems, not an
-    asserted equivalence between the two contradiction corollaries and the full negative results.'
+    asserted equivalence between the two contradiction corollaries and the full negative results. The
+    fourth is the actual ContMDiffVectorBundle omega theorem for alternating fibers over a self-model
+    analytic base with supplied continuous finite coordinates, arbitrary normed model fibers and the existing
+    topological actual fibers. All dimensions and degrees including zero are allowed; there is no completeness,
+    characteristic or factorial assumption. All four passed local comparator and default-kernel checks.
+    This does not certify the separate analytic bundle category or pending alternating bundle morphisms/functor.'
   statements:
   - source: Counterexample theorem (thm:main) and adjacent C^omega sharpness statement
     lean: AlternatingAnalytic.exists_banach_counterexample_full
@@ -479,7 +532,7 @@ alignment:
     status: proved
     note: The operator form is proved in standalone Section 2 following the existing Lean extension, spherical-completeness
       and retraction proofs. The actual categorical counterpart is now implemented in AlternatingAnalytic.Category.AlternatingRegularity
-      and passed the shared proof gate; its independent jury review remains pending.
+      and passed the shared proof gate; its independent jury review is clean (5/5/5).
   - source: 'Proposition discrete: complete targets with an equivalent ultrametric norm'
     lean: AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup
     module: AlternatingAnalytic.Analysis.DiscreteTargetAnalytic
@@ -504,8 +557,8 @@ alignment:
       spherical corollary. Joint action includes an explicit degree-(k+1) lift, bounds and identity slice;
       degree zero is handled explicitly. Shared proof-verification gate passed. Independent jury is clean
       for the actual functors (5/5/4), factorial classification (5/5/5), spherical result (5/5/5), and
-      combined Main Theorem (5/5/4). The joint-action summary repair passed the shared gate and awaits
-      its fresh full review. Earlier incomplete reviews are retained as historical evidence; no human
+      combined Main Theorem (5/5/4). The joint-action summary repair passed the shared gate and a fresh
+      clean full review (5/5/5). Earlier incomplete reviews are retained as historical evidence; no human
       review is claimed.
   - source: 'prop:finite-coordinate and cor:finite-dimensional-positive: positive operator cases'
     lean: ''
@@ -571,11 +624,12 @@ alignment:
       subsets of finite-coordinate parameter spaces. Also includes the pointwise and supplied continuous
       coordinate equivalence versions, actual closed operator embedding, ambient degree-(k+1) multilinear
       representative, its norm bound at most one and exact diagonal identity. Shared proof-verification
-      gate passed; independent jury clean. The actual bundle theorem remains pending. The explicit CPolynomialAt
-      conclusion and combined ambient_alternating_map_action_full statement also passed the repair gate.
-      Fresh Codex jury on 25 September 2026 gave faithfulness 5/5 and proof integrity 5/5; code quality
-      was5 for finite-coordinate families and4 for category foundations/radius. No human expert review
-      is claimed.
+      gate passed; independent jury clean. The actual finite-coordinate analytic bundle theorem is separately
+      proved and clean-reviewed; its operator-valued alternating morphisms and final bifunctor remain
+      pending. The explicit CPolynomialAt conclusion and combined ambient_alternating_map_action_full
+      statement also passed the repair gate. Fresh Codex jury on 25 September 2026 gave faithfulness 5/5
+      and proof integrity 5/5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
+      No human expert review is claimed.
   - source: 'fam:rem:radius: preservation of nonarchimedean coefficient bounds and radius'
     lean: AlternatingAnalytic.exists_hasFPowerSeriesOnBall_of_closed_linearIsometry_of_isUltrametricDist
     module: AlternatingAnalytic.Analysis.FiniteCoordinateRadius
@@ -595,9 +649,10 @@ alignment:
     status: not-formalized
     note: Proved mathematically over analytic manifolds with open K^d charts, in every characteristic
       and degree, for arbitrary normed fibers and operator-valued analytic bundle morphisms. No general
-      infinite-dimensional-base or boundary/WithinAt claim is made. The actual analytic bundle and exact
-      transition identities have Lean proofs; the operator-valued morphism construction and literal categorical
-      functor still remain to be implemented, so this full result is unfinished.
+      infinite-dimensional-base or boundary/WithinAt claim is made. The actual analytic bundle, exact
+      transition identities and analytic bundle category have clean-reviewed Lean proofs; the operator-valued
+      morphism construction and literal categorical functor still remain to be implemented, so this full
+      result is unfinished.
   - source: 'fam:prop:category: core admissible analytic-family structure'
     lean: AlternatingAnalytic.admissible_family_structure
     module: AlternatingAnalytic.Analysis.AnalyticFamilies
@@ -739,8 +794,20 @@ alignment:
       all k/d including zero, arbitrary normed models and topological/normable actual fibers; no completeness.
       Generic assembly works at every regularity order and model with corners under local family preservation,
       which is discharged in the finite-coordinate analytic specialization. Shared gate and library/solution
-      integration passed; independent review pending. Does not claim bundle morphisms or a literal bundle
-      bifunctor.
+      integration passed; independent review clean (5/5/4). The actual bundle witness also passed the
+      fourth comparator statement and default-kernel replay. Does not claim bundle morphisms or a literal
+      bundle bifunctor.
+  - source: Analytic bundle category underlying fam:thm:finite-bundles
+    lean: AlternatingAnalytic.AnalyticBundleCat; AlternatingAnalytic.AnalyticBundleCat.category; AlternatingAnalytic.AnalyticBundleCat.exists_hom_iff_operatorAnalytic;
+      AlternatingAnalytic.AnalyticBundleCat.isoOfOperatorAnalytic
+    module: AlternatingAnalytic.Geometry.AnalyticBundleCategory
+    status: proved
+    note: Actual category of analytic normable vector bundles over a fixed analytic base, with analytic
+      Hom sections, identity/composition and category laws, operator-local analytic characterization,
+      and compatible analytic fiberwise isomorphisms. Arbitrary normed models and topological/normable
+      actual fibers; no completeness or fiber-dimension hypothesis. Shared verification gate and independent
+      jury clean (5/5/5). This supplies the category; the alternating action on its morphisms and final
+      bifunctor remain pending.
 acknowledgements: Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform; leanprover/comparator;
   and mathlib-initiative/formalization.yaml. The source paper's attribution to Claude and its bibliographic
   author are preserved separately above.

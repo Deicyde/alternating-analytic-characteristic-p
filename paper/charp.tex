@@ -3673,19 +3673,23 @@ degree-one support cases and finite-ambient contraction-matrix formula are inclu
 These proofs have passed Lean verification without admitted proofs. Statement-review results
 and declaration-level scope are recorded in the repository theorem map.
 
-The finite-coordinate family and open-manifold assertions of Main Theorem~(\ref{main:families})
-are formalized, as is the analytic structure on Mathlib's alternating-map bundle.
-Operator-valued bundle morphisms and the bundle bifunctor, Main Theorem~(\ref{main:domains}),
+The open-manifold family theorem and analytic bundle instance in Main Theorem~(\ref{main:families})
+are formalized. The declaration
+\texttt{contMDiffVectorBundle\_\allowbreak{}alternating\_\allowbreak{}of\_\allowbreak{}finiteCoordinates}
+uses Mathlib's existing alternating-bundle topology, for arbitrary $K$, degree and normed model fibers,
+and supplied continuous coordinates $P\simeq K^d$, without completeness assumptions.
+The category of analytic normable bundles with operator-valued analytic Hom sections is also formalized.
+Alternating bundle morphisms and the bundle bifunctor, Main Theorem~(\ref{main:domains}),
 the remaining parameter-space, tensor and analytic-domain results, and finite-support matrix transport
-remain pending. The theorem map retains the full inventory; the three comparator statements are unchanged.
+remain pending; the theorem map records their scope and status.
 
-The earlier characteristic-$2$ development~\cite{M} is cited for comparison, not re-proved or re-audited here.
-The repository theorem map records its separate scope and provenance.
+The earlier characteristic-$2$ development~\cite{M} is cited for comparison; it is not re-audited here.
 
 The proposed alternative route of Remark~\ref{rem:routeII}, the proposed large-index construction of
 Remark~\ref{rem:R}, the open problems, and Serre's external classification cited in
 Remark~\ref{rem:sorted} are excluded from the proved results. The repository's comparator challenge contains
-two short contradiction corollaries of Theorem~\ref{thm:main} and the operator form of Main Theorem~(\ref{main:spherical}) for every regularity order.
+two short contradiction corollaries of Theorem~\ref{thm:main}, the operator form of Main Theorem~(\ref{main:spherical}) for every regularity order,
+and the finite-coordinate analytic alternating-bundle theorem.
 Their solutions use the corresponding library theorems. The Banach and spherical-completeness hypotheses
 are given by transparent definitions in Mathlib terms. Intentional placeholders occur only in the challenge
 file, not in the proof library or solution. Current challenge checks use Kim Morrison's comparator, with the

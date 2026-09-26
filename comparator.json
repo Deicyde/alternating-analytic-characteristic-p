@@ -4,7 +4,8 @@
     "theorem_names": [
         "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM",
         "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach",
-        "AlternatingAnalyticChallenge.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete"
+        "AlternatingAnalyticChallenge.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete",
+        "AlternatingAnalyticChallenge.contMDiffVectorBundle_alternating_of_finiteCoordinates"
     ],
     "permitted_axioms": [
         "propext",

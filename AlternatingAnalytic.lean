@@ -108,6 +108,7 @@ import AlternatingAnalytic.Analysis.ShearCounterexample
 import AlternatingAnalytic.Analysis.FiniteCoordinateFamilies
 import AlternatingAnalytic.Geometry.FiniteCoordinateManifoldFamilies
 import AlternatingAnalytic.Geometry.AnalyticAlternatingBundle
+import AlternatingAnalytic.Geometry.AnalyticBundleCategory
 import AlternatingAnalytic.Category.NormedSpace
 
 import AlternatingAnalytic.Analysis.FiniteCoordinateRadius

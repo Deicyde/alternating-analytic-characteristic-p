@@ -1,12 +1,14 @@
 import AlternatingAnalytic.MainTheorem
 import AlternatingAnalytic.Analysis.SphericalAnalytic
+import AlternatingAnalytic.Geometry.AnalyticAlternatingBundle
 
 set_option backward.isDefEq.respectTransparency false
 
 /-! The two contradiction challenges are proved from the actual Banach counterexample.
 The prescribed-field result is proved first, then specialized to a characteristic-two
 Laurent field for the global statement. The third challenge is Theorem A, proved from
-the existing spherical-completeness and retraction development.
+the existing spherical-completeness and retraction development. The fourth challenge
+exports the actual analytic alternating-bundle instance over finite-coordinate bases.
 Import this module separately from `challenge`. -/
 
 open scoped ContDiff
@@ -90,5 +92,39 @@ theorem contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
   let : SphericallyCompleteSpace F := ⟨hF⟩
   exact ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
     (𝕜 := K) (ι := ι) (E := E) (E' := E') (F := F) (n := n)
+
+section AnalyticAlternatingBundle
+
+open Bundle
+open scoped Bundle Manifold
+
+/-- The alternating-map bundle of two analytic normed vector bundles is itself
+analytic when the base has supplied finite continuous linear coordinates.
+This uses Mathlib's existing topology on the actual alternating-map fibers.
+The field and model fibers need not be complete; every characteristic and every
+base dimension `d` and alternating degree `k`, including zero, are allowed. -/
+theorem contMDiffVectorBundle_alternating_of_finiteCoordinates
+    {K M F₁ F₂ : Type*} [NontriviallyNormedField K] [TopologicalSpace M]
+    [NormedAddCommGroup F₁] [NormedSpace K F₁]
+    [NormedAddCommGroup F₂] [NormedSpace K F₂]
+    {E₁ E₂ : M → Type*}
+    [∀ x, AddCommGroup (E₁ x)] [∀ x, Module K (E₁ x)]
+    [∀ x, AddCommGroup (E₂ x)] [∀ x, Module K (E₂ x)]
+    [TopologicalSpace (TotalSpace F₁ E₁)] [TopologicalSpace (TotalSpace F₂ E₂)]
+    [∀ x, TopologicalSpace (E₁ x)] [∀ x, TopologicalSpace (E₂ x)]
+    [FiberBundle F₁ E₁] [VectorBundle K F₁ E₁]
+    [FiberBundle F₂ E₂] [VectorBundle K F₂ E₂]
+    [∀ x, IsTopologicalAddGroup (E₂ x)] [∀ x, ContinuousSMul K (E₂ x)]
+    {P : Type*} [NormedAddCommGroup P] [NormedSpace K P]
+    [ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]
+    [ContMDiffVectorBundle ω F₁ E₁ 𝓘(K, P)]
+    [ContMDiffVectorBundle ω F₂ E₂ 𝓘(K, P)]
+    {d : ℕ} (c : P ≃L[K] (Fin d → K)) (k : ℕ) :
+    ContMDiffVectorBundle ω (F₁ [⋀^Fin k]→L[K] F₂)
+      (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
+  exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_finiteCoordinates
+    (K := K) (M := M) (F₁ := F₁) (F₂ := F₂) (E₁ := E₁) (E₂ := E₂) c k
+
+end AnalyticAlternatingBundle
 
 end AlternatingAnalyticChallenge
