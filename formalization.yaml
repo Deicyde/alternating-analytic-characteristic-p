@@ -1,8 +1,26 @@
 version: '0.4'
 project:
   name: alternating-analytic-characteristic-p
-  description: 'Lean 4 / Mathlib formalization of alternating-map functors. For every prescribed nontrivially normed field K of prime characteristic p, including incomplete K, and every k >= p, the construction gives Banach witnesses with nowhere-analytic alternating precomposition and no equivalent nonarchimedean target norm. The library proves the sharp factorial classification and categorical Main Theorem (1) and (2), including unconditional joint smoothness and the spherical-target positive case. Checked extensions include finite-coordinate analytic reflection, radius preservation, alternating morphism families on open coordinate domains and manifolds, actual finite-coordinate analytic alternating bundles, the category of operator-analytic normable vector bundles and its actual alternating bifunctor with analytic operator-valued morphisms and compatible-presentation transport, core admissible-family laws, the invertible-shear obstruction, canonical exterior support, exact-norm dense
-    scalar-family extension, concrete t-adic rational/Laurent fields with jointly independent scalars, the max-norm truncated polynomial algebra, the generic and concrete rigid dense source with its isometric scalar endomorphism coordinates, the determinant-generated finite spaces with their auxiliary scalar gap, the determinant coefficient spaces with auxiliary specialization and algebraic padding, the all-prime quadratic coefficient gap, and the concrete degree-p nonanalytic determinant coordinate and cross-action. The expanded manuscript remains only partly formalized: further operator-positive, parameter and tensor results, and analytic-domain results remain unfinished. Geometric Main Theorem (3) is complete over fixed bases with the stated continuous finite coordinates. THEOREM_MAP.md records the exact scope and review status.'
+  description: 'Lean 4 / Mathlib formalization of alternating-map functors. For every prescribed nontrivially
+    normed field K of prime characteristic p, including incomplete K, and every k >= p, the construction
+    gives Banach witnesses with nowhere-analytic alternating precomposition and no equivalent nonarchimedean
+    target norm. The library proves the sharp factorial classification and categorical Main Theorem (1)
+    and (2), including unconditional joint smoothness and the spherical-target positive case. Checked extensions
+    include finite-coordinate analytic reflection, radius preservation, alternating morphism families on
+    open coordinate domains and manifolds, actual finite-coordinate analytic alternating bundles, the category
+    of operator-analytic normable vector bundles and its actual alternating bifunctor with analytic operator-valued
+    morphisms and compatible-presentation transport, core admissible-family laws, the invertible-shear obstruction,
+    canonical exterior support, exact-norm dense scalar-family extension, concrete t-adic rational/Laurent
+    fields with jointly independent scalars, the max-norm truncated polynomial algebra, the generic and
+    concrete rigid dense source with its isometric scalar endomorphism coordinates, the determinant-generated
+    finite spaces with their auxiliary scalar gap, the determinant coefficient spaces with auxiliary specialization
+    and algebraic padding, the all-prime quadratic coefficient gap, the concrete degree-p nonanalytic determinant
+    coordinate and cross-action, all-multilinear alternation with an exact-norm inverse retraction for the
+    concrete determinant pair, universal-target operator laws, and polynomial incoming action for split
+    destinations. The expanded manuscript remains only partly formalized: further operator-positive, parameter
+    and tensor results, and analytic-domain results remain unfinished. Geometric Main Theorem (3) is complete
+    over fixed bases with the stated continuous finite coordinates. THEOREM_MAP.md records the exact scope
+    and review status.'
   authors:
   - Jack McCarthy
   responsible_maintainers:
@@ -48,11 +66,66 @@ classification:
   - 58B99
   - 68V20
 status:
-  scope: 'The original operator proof library is complete for its stated scope; the expanded manuscript is not fully formalized. Twenty-five extension nodes have passed the shared proof-verification gate and clean independent AI jury reviews, including categorical Main Theorem (1) and (2), the repaired joint-action summary, finite-coordinate reflection and families, the actual analytic alternating bundle, analytic bundle category, alternating bundle morphisms, literal alternating bundle bifunctor, dense scalar-family extension, concrete t-adic rational/Laurent scalars, the max-norm truncated polynomial algebra, the generic/concrete rigid-source theorem, the determinant/scalar-gap construction, the coefficient-space/specialization construction with algebraic padding, the quadratic coefficient gap, and the nonanalytic determinant coordinate and degree-p cross-action. The central bundle theorem supplies an actual ContMDiffVectorBundle omega witness on Mathlib’s existing topology for analytic
-    bases with explicit continuous finite coordinates, over every nontrivially normed field and all finite degrees/dimensions including zero. Model fibers are arbitrary normed spaces; actual fibers retain their topological/normable structures. No completeness, characteristic or factorial assumption is added. The operator-valued analytic alternating Hom section, exact fiber and local operator-coordinate formulas, and identity/composition laws are proved, with no extra family-preservation premise in the finite-coordinate specialization. The literal VB opposite times VB to VB functor, canonical model/fiber/topology and bundle-structure formulas, functor laws and compatible-presentation transport complete geometric Main Theorem (3) over each fixed finite-coordinate analytic base. The source completion principle preceding dom:rigid is also proved: unique exact-norm scalar/input extension on arbitrary finite heterogeneous families including the empty family, with bounded-map and dense-submodule
-    forms, requiring completeness only of the target. The exact max-norm truncated quotient algebra is also proved and clean-reviewed; the concrete t-adic rational/Laurent fields and jointly independent coordinate/auxiliary scalars are also proved and clean-reviewed. The generic rigid-source theorem and its actual t-adic truncated-algebra realization are now proved and clean-reviewed, including exact norms, density, algebraic dimension, scalar endomorphisms, zero continuous dual and the isometric End-to-scalar coordinate laws. The determinant-generated finite spaces D and G, their exact norms and density, actual K-linear isometric completion equivalences, unique polynomial representatives with auxiliary degree at most one, and the scalar gap tau-squared G intersect G equals zero are now proved and clean-reviewed. The concrete coefficient isometry, injective polynomial models and auxiliary specialization, and their algebraically padded counterparts in every degree p+n are now proved and clean-reviewed.
-    The generic and concrete quadratic coefficient-gap summaries and nonexistence of the normalized coefficient family are now proved and clean-reviewed for every prime, including two. The actual C-valued determinant coordinate is now proved nonanalytic at zero, and the joint alternating action from Alt^p(D,G) to Alt^p(E,G) is nonanalytic at (0,id_G), via an analytic bounded-multiplication slice and bounded coefficient evaluation. This retains every prime p, the incomplete t-adic rational field and the actual small targets C/G. All-alternating/split retraction, analytic self-actions, higher-degree analytic padding, completed-action consequences and no-largest domains remain pending. The current twenty-five-node checkpoint has an accepted original whole-project build gate at 2026-09-26T07:37:00Z and paused-idle root/source hash confirmation at 2026-09-26T08:03:28Z. At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed at 2026-09-26T06:34:09Z
-    and the idle checkpoint confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z. The additional operator-positive, parameter-space, tensor, universal-target and analytic-domain results remain unfinished in THEOREM_MAP.md and FORMALIZATION_ROADMAP.md. Accepted proof-library and solution declarations contain no admitted proofs; four intentional challenge placeholders are excluded. Kim Morrison’s comparator checks four selected statements, including the actual finite-coordinate bundle witness, not the full extension library. Proposed/open claims, the external Serre classification and the separate characteristic-two proof are excluded from local completion claims.'
+  scope: 'The original operator proof library is complete for its stated scope; the expanded manuscript
+    is not fully formalized. Twenty-eight extension nodes have passed the shared proof-verification gate
+    and clean independent AI jury reviews, including categorical Main Theorem (1) and (2), the repaired
+    joint-action summary, finite-coordinate reflection and families, the actual analytic alternating bundle,
+    analytic bundle category, alternating bundle morphisms, literal alternating bundle bifunctor, dense
+    scalar-family extension, concrete t-adic rational/Laurent scalars, the max-norm truncated polynomial
+    algebra, the generic/concrete rigid-source theorem, the determinant/scalar-gap construction, the coefficient-space/specialization
+    construction with algebraic padding, the quadratic coefficient gap, and the nonanalytic determinant
+    coordinate and degree-p cross-action. The central bundle theorem supplies an actual ContMDiffVectorBundle
+    omega witness on Mathlib’s existing topology for analytic bases with explicit continuous finite coordinates,
+    over every nontrivially normed field and all finite degrees/dimensions including zero. Model fibers
+    are arbitrary normed spaces; actual fibers retain their topological/normable structures. No completeness,
+    characteristic or factorial assumption is added. The operator-valued analytic alternating Hom section,
+    exact fiber and local operator-coordinate formulas, and identity/composition laws are proved, with no
+    extra family-preservation premise in the finite-coordinate specialization. The literal VB opposite times
+    VB to VB functor, canonical model/fiber/topology and bundle-structure formulas, functor laws and compatible-presentation
+    transport complete geometric Main Theorem (3) over each fixed finite-coordinate analytic base. The source
+    completion principle preceding dom:rigid is also proved: unique exact-norm scalar/input extension on
+    arbitrary finite heterogeneous families including the empty family, with bounded-map and dense-submodule
+    forms, requiring completeness only of the target. The exact max-norm truncated quotient algebra is also
+    proved and clean-reviewed; the concrete t-adic rational/Laurent fields and jointly independent coordinate/auxiliary
+    scalars are also proved and clean-reviewed. The generic rigid-source theorem and its actual t-adic truncated-algebra
+    realization are now proved and clean-reviewed, including exact norms, density, algebraic dimension,
+    scalar endomorphisms, zero continuous dual and the isometric End-to-scalar coordinate laws. The determinant-generated
+    finite spaces D and G, their exact norms and density, actual K-linear isometric completion equivalences,
+    unique polynomial representatives with auxiliary degree at most one, and the scalar gap tau-squared
+    G intersect G equals zero are now proved and clean-reviewed. The concrete coefficient isometry, injective
+    polynomial models and auxiliary specialization, and their algebraically padded counterparts in every
+    degree p+n are now proved and clean-reviewed. The generic and concrete quadratic coefficient-gap summaries
+    and nonexistence of the normalized coefficient family are now proved and clean-reviewed for every prime,
+    including two. The actual C-valued determinant coordinate is now proved nonanalytic at zero, and the
+    joint alternating action from Alt^p(D,G) to Alt^p(E,G) is nonanalytic at (0,id_G), via an analytic bounded-multiplication
+    slice and bounded coefficient evaluation. This retains every prime p, the incomplete t-adic rational
+    field and the actual small targets C/G. Every continuous p-multilinear map on the actual determinant
+    pair is now proved alternating, with the actual linear isometric inclusion equivalence and continuous
+    linear inverse R satisfying both inverse laws, pointwise identity, exact norm preservation and operator
+    norm at most one. All primes including two and the original incomplete K/small G are retained. The universal-target
+    property and operator laws are also proved, including both joint-action factorizations, analyticity
+    when either output target has the property, continuous linear retract and equivalence transport, and
+    finite indexed products, over arbitrary nontrivially normed fields and degrees without completeness
+    assumptions. Categorical split-pair/universal-target core results, analytic self-actions, higher-degree
+    analytic padding, completed-action consequences and no-largest domains remain pending. The preceding
+    published twenty-five-node checkpoint has an accepted original whole-project build gate at 2026-09-26T07:37:00Z
+    and paused-idle root/source hash confirmation at 2026-09-26T08:03:28Z. At the preceding published twenty-three-node
+    checkpoint, the original whole-project build gate passed at 2026-09-26T06:34:09Z and the idle checkpoint
+    confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z.
+    The additional operator-positive, parameter-space, tensor, universal-target and analytic-domain results
+    remain unfinished in THEOREM_MAP.md and FORMALIZATION_ROADMAP.md. Accepted proof-library and solution
+    declarations contain no admitted proofs; four intentional challenge placeholders are excluded. Kim Morrison’s
+    comparator checks four selected statements, including the actual finite-coordinate bundle witness, not
+    the full extension library. Proposed/open claims, the external Serre classification and the separate
+    characteristic-two proof are excluded from local completion claims. The all-alternating node passed
+    its original shared gate at 2026-09-26T08:21:32Z and clean independent jury 5/5/4 at 2026-09-26T08:24:53Z;
+    The twenty-eight-node checkpoint has the original whole-project build gate at 2026-09-26T09:06:06Z and
+    paused-idle confirmation of the root plus four new implementation hashes at 2026-09-26T09:09:13Z. The
+    split-destination operator theorem is also proved: an explicit (k+1)-multilinear diagonal witness gives
+    polynomiality and analyticity of every incoming action when the destination alternating inclusion has
+    a continuous linear left inverse. It applies in all degrees including zero with no completeness hypothesis
+    or contractive bound on the retraction. Full split/core domain categories, concrete self-action assembly,
+    higher-degree analytic padding and Main Theorem (4) remain pending.'
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -780,6 +853,114 @@ status:
     - Quot.sound
     comparator_config: ''
     literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.all_multilinear_maps_alternating
+    file: AlternatingAnalytic/Analysis/DeterminantPairAllAlternating.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.allAlternatingEquiv
+    file: AlternatingAnalytic/Analysis/DeterminantPairAllAlternating.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.retractionR
+    file: AlternatingAnalytic/Analysis/DeterminantPairAllAlternating.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.multilinear_alternating_of_basis_repeated
+    file: AlternatingAnalytic/Analysis/BasisAlternatingCriterion.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.UniversalAlternatingTarget
+    file: AlternatingAnalytic/Analysis/UniversalAlternatingTargets.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.universalAlternatingTarget_operator_laws
+    file: AlternatingAnalytic/Analysis/UniversalAlternatingTargets.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.analyticOnNhd_alternatingMapAction_of_universal_target
+    file: AlternatingAnalytic/Analysis/UniversalAlternatingTargets.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.universalAlternatingTarget_iff_of_continuousLinearEquiv
+    file: AlternatingAnalytic/Analysis/UniversalAlternatingTargets.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.IsSplitAlternatingPair
+    file: AlternatingAnalytic/Analysis/SplitAlternatingPairs.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.split_destination_polynomial_action
+    file: AlternatingAnalytic/Analysis/SplitAlternatingPairs.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.splitDestinationLift
+    file: AlternatingAnalytic/Analysis/SplitAlternatingPairs.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.cpolynomialAt_precomposition_of_split_destination
+    file: AlternatingAnalytic/Analysis/SplitAlternatingPairs.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
 automation:
   spend_usd: 200
   methods:
@@ -802,17 +983,138 @@ fidelity:
 review:
   status: agent-reviewed
   reviewers: []
-  notes: 'Twenty-five extension nodes have complete clean independent Codex jury reviews as of 26 September 2026. The twenty nodes in the previous published checkpoint received 5/5 for statement faithfulness and proof integrity and at least 4/5 for code quality. The repaired joint-action summary is clean (5/5/5), the actual finite-coordinate analytic bundle is clean (5/5/4), the analytic bundle category is clean (5/5/5), and the operator-valued alternating bundle morphisms are clean (5/5/4). Earlier timeout/authentication failures were resolved by fresh completed reviews and are not presented as mathematical rejections. The recorded library-and-solution integration build passed 3,186 jobs; the category subsequently passed its shared build/kernel/axiom gate. The morphism node passed the current-source shared build/kernel/axiom gate at 2026-09-26T02:01:11Z and its independent jury at 2026-09-26T02:07:41Z; 22 public names are routed across three imported modules. This current acceptance supersedes
-    the earlier technical timeout and older diagnostic snapshot. The four-statement challenge passed Kim Morrison’s comparator locally on 26 September 2026, including default-kernel replay, using the upstream macOS development launcher without Linux Landrun sandbox isolation. Its fourth statement checks the actual analytic alternating bundle witness; the original three statements and transparent definitions are unchanged. GitHub CI previously did not run because of an account billing/spending restriction; no new CI success is claimed. Informal manuscript audits are distinct from kernel verification and jury review. No human expert review or complete formalization of the expanded manuscript is claimed. The literal bundle bifunctor passed its current-source shared build/kernel/axiom gate at 2026-09-26T02:27:03Z and received a clean independent jury (5/5/5) at 2026-09-26T03:34:35Z. Its 17 routed public declarations include the actual functor, canonical object/fiber/topology identifications,
-    map formulas and compatible-presentation transport. This completes geometric Main Theorem (3), not the remaining manuscript branches. The root-module integration including both the functor and dense scalar-family extension passed lake build AlternatingAnalytic with 3,210 jobs at 2026-09-26T03:35:28Z. This is a library build, distinct from the earlier library-and-solution integration check. No additional comparator statement is claimed. Dense scalar-family extension passed the shared gate at 2026-09-26T03:17:08Z and a clean independent jury (5/5/5) at 2026-09-26T03:31:13Z. Its unchanged source has 16 routed public declarations; this accepts the completion prerequisite, not Main Theorem (4). The max-norm truncated polynomial algebra passed its repaired-source shared gate at 2026-09-26T04:54:53Z and a clean independent jury (5/5/4) at 2026-09-26T04:59:09Z. The accepted generic collected theorem is AlternatingAnalytic.TruncatedPolynomial.max_norm_properties at line 191, with prime_max_norm_properties
-    at line 216; 30 explicit public declarations account for 31 gate-owned names including the generated helper AdjoinRoot.powerBasis''.congr_simp. The accepted source SHA256 is 1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The rational/Laurent scalar construction passed its current-source shared gate at 2026-09-26T05:12:02Z and a clean independent jury (5/5/4) at 2026-09-26T05:15:38Z. The collected theorem AlternatingAnalytic.RationalLaurentScalars.concrete_setup is at line 221. The accepted field source SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a (13,028 bytes), with 27 explicit public declarations and 37 gate-owned names including 10 generated anonymous instances. At the preceding twenty-node checkpoint, root-module integration including both algebra foundations passed lake build AlternatingAnalytic with 3,235 jobs at 2026-09-26T05:14:35Z; the accepted source hashes were unchanged. This is a library integration build, distinct from the
-    earlier library-and-solution check. No additional comparator run is claimed. The rigid-source node passed the original shared build/kernel/axiom gate at 2026-09-26T05:43:12Z and a fresh complete independent jury at 2026-09-26T05:46:00Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). Its 88 explicit non-private declarations across six rigid-source modules, including three named local instances, account for 91 gate-owned names after including three generated helpers. The receipt covers the root aggregator and all six modules; their accepted source hashes are recorded in the public inventory and release status. The collected generic and concrete statements are AlternatingAnalytic.RigidDenseSource.rigid_source_properties and AlternatingAnalytic.RigidDenseSource.Concrete.rigid_source_properties at lines 18 and 61 of RigidDenseSource.lean, whose accepted SHA256 is a00220d583b4b29d9b0b5bbc0ea052838b003348077bae63d5157dd334b119c9. The determinant spaces and auxiliary scalar gap are
-    also accepted below; Main Theorem (4) and the subsequent no-largest construction remain pending. No new comparator run, whole-paper completion or human expert review is claimed. The determinant/scalar-gap node passed the original shared build/kernel/axiom gate at 2026-09-26T06:01:20Z and a fresh complete independent jury at 2026-09-26T06:03:14Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). Its accepted receipt owns 83 names across DeterminantDensity, DeterminantSpan, DeterminantPolynomialDegree and DeterminantPairScalars. The collected construction is AlternatingAnalytic.DeterminantPair.determinant_spaces_properties at line 343 and the scalar-gap summary is AlternatingAnalytic.DeterminantPair.tau_gap at line 405 of DeterminantPairScalars.lean, whose accepted SHA256 is c4053c7b07306e486fbec9fbda5a3c3ed72e05e71513f0a7b836b184762bfdce. At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed at 2026-09-26T06:34:09Z and the idle checkpoint
-    confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z. The concrete completion equivalences do not by themselves establish analytic completed-action or coordinate-polynomial lifting consequences. No additional comparator statement or run is claimed. The determinant coefficient-space and auxiliary-specialization node is now accepted. Its original shared build/kernel/axiom gate accepted at 2026-09-26T06:34:09Z; a fresh complete independent jury returned clean 5/5/4 at 2026-09-26T07:03:11Z. The five implementation modules have 162 explicitly named non-private declarations, including six named local instances, and four generated helpers, for 166 gate-owned names. The collected coefficient_spaces and padded_coefficient_spaces statements are at lines 251 and 307 of DeterminantCoefficientSpaces.lean, whose accepted SHA256 is 0d2776a1d05f6425e8b473347175644a173dd4925a37c3b9b3ba3f350bb13dab. The specialization summary coefficient_polynomial_specialization
-    is at line 263 of DeterminantCoefficientSpecialization.lean. That coefficient-space acceptance did not establish the later degree-gap obstruction, all-multilinear alternation or analytic padded retraction. At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z. No redundant build or new comparator run was performed. The first coefficient jury ended flagged at 2026-09-26T07:00:41Z with a missing faithfulness score after a stalled review process; the fresh full three-axis jury supersedes that incomplete review without any source change. No negative mathematical verdict was inferred from the missing score. The quadratic coefficient-gap node passed its original shared build/kernel/axiom gate at 2026-09-26T07:23:07Z and a complete clean independent jury at 2026-09-26T07:25:24Z (faithfulness
-    5/5, proof integrity 5/5, code quality 4/5). Its 46 explicitly named public declarations across five new algebra modules exactly match the gate-owned inventory, with no anonymous or extra generated declarations. The generic and concrete quadratic_coefficient_gap statements are at lines 86 and 154 of DeterminantQuadraticGap.lean, with no_coefficient_family at lines 107 and 173; that module has accepted SHA256 48636a4ac93a4569e967515cff64f357e1a9e2b090be0689c403d85ccce19b40. The quadratic result is included in the twenty-five-node checkpoint accepted below. No additional build, comparator run or human review is claimed. The determinant coordinate/cross-action node passed the original shared build/kernel/axiom gate at 2026-09-26T07:37:00Z; fresh complete independent jury clean 5/5/4 at 2026-09-26T07:57:29Z. Its 39 explicitly named public declarations span four new Analysis modules: DeterminantCoefficientObstruction (2), DeterminantCrossActionObstruction (17), DeterminantMultilinearObstruction
-    (4) and DeterminantMultiplication (16). There are no anonymous or additional generated declarations; two private helpers are excluded. The collected theorem is AlternatingAnalytic.DeterminantPair.nonanalytic_determinant_coordinate_and_cross_action at lines 146–175 of DeterminantCrossActionObstruction.lean, whose accepted SHA256 is 3e225160766fccd3ebdfabc649b6bd19411a2ae4ac4eb98cad91cad4587d6a76. At the twenty-five-node checkpoint, the original whole-project build gate passed at 2026-09-26T07:37:00Z. At the paused idle boundary on 2026-09-26T08:03:28Z, the root and all nine new implementation modules matched the merged original accepted gate hashes; both new nodes had complete clean 5/5/4 juries, all engine tasks were terminal, and the three comparator-file hashes were unchanged. This supplies current integration evidence without a redundant build; no current job count is claimed. No new build, comparator run or human review is claimed. The first full jury ended flagged at 2026-09-26T07:53:54Z
-    with faithfulness 5, proof integrity 5 and code quality missing. The parent reports a controlled stop of the stalled read-only style group; no negative mathematical feedback was supplied. Fresh full jury :2 started at 2026-09-26T07:54:44Z and completed clean 5/5/4 at 2026-09-26T07:57:29Z, superseding the incomplete first review without source changes.'
+  notes: 'Twenty-eight extension nodes have complete clean independent Codex jury reviews as of 26 September
+    2026. The twenty nodes in the previous published checkpoint received 5/5 for statement faithfulness
+    and proof integrity and at least 4/5 for code quality. The repaired joint-action summary is clean (5/5/5),
+    the actual finite-coordinate analytic bundle is clean (5/5/4), the analytic bundle category is clean
+    (5/5/5), and the operator-valued alternating bundle morphisms are clean (5/5/4). Earlier timeout/authentication
+    failures were resolved by fresh completed reviews and are not presented as mathematical rejections.
+    The recorded library-and-solution integration build passed 3,186 jobs; the category subsequently passed
+    its shared build/kernel/axiom gate. The morphism node passed the current-source shared build/kernel/axiom
+    gate at 2026-09-26T02:01:11Z and its independent jury at 2026-09-26T02:07:41Z; 22 public names are routed
+    across three imported modules. This current acceptance supersedes the earlier technical timeout and
+    older diagnostic snapshot. The four-statement challenge passed Kim Morrison’s comparator locally on
+    26 September 2026, including default-kernel replay, using the upstream macOS development launcher without
+    Linux Landrun sandbox isolation. Its fourth statement checks the actual analytic alternating bundle
+    witness; the original three statements and transparent definitions are unchanged. GitHub CI previously
+    did not run because of an account billing/spending restriction; no new CI success is claimed. Informal
+    manuscript audits are distinct from kernel verification and jury review. No human expert review or complete
+    formalization of the expanded manuscript is claimed. The literal bundle bifunctor passed its current-source
+    shared build/kernel/axiom gate at 2026-09-26T02:27:03Z and received a clean independent jury (5/5/5)
+    at 2026-09-26T03:34:35Z. Its 17 routed public declarations include the actual functor, canonical object/fiber/topology
+    identifications, map formulas and compatible-presentation transport. This completes geometric Main Theorem
+    (3), not the remaining manuscript branches. The root-module integration including both the functor and
+    dense scalar-family extension passed lake build AlternatingAnalytic with 3,210 jobs at 2026-09-26T03:35:28Z.
+    This is a library build, distinct from the earlier library-and-solution integration check. No additional
+    comparator statement is claimed. Dense scalar-family extension passed the shared gate at 2026-09-26T03:17:08Z
+    and a clean independent jury (5/5/5) at 2026-09-26T03:31:13Z. Its unchanged source has 16 routed public
+    declarations; this accepts the completion prerequisite, not Main Theorem (4). The max-norm truncated
+    polynomial algebra passed its repaired-source shared gate at 2026-09-26T04:54:53Z and a clean independent
+    jury (5/5/4) at 2026-09-26T04:59:09Z. The accepted generic collected theorem is AlternatingAnalytic.TruncatedPolynomial.max_norm_properties
+    at line 191, with prime_max_norm_properties at line 216; 30 explicit public declarations account for
+    31 gate-owned names including the generated helper AdjoinRoot.powerBasis''.congr_simp. The accepted
+    source SHA256 is 1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The rational/Laurent
+    scalar construction passed its current-source shared gate at 2026-09-26T05:12:02Z and a clean independent
+    jury (5/5/4) at 2026-09-26T05:15:38Z. The collected theorem AlternatingAnalytic.RationalLaurentScalars.concrete_setup
+    is at line 221. The accepted field source SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a
+    (13,028 bytes), with 27 explicit public declarations and 37 gate-owned names including 10 generated
+    anonymous instances. At the preceding twenty-node checkpoint, root-module integration including both
+    algebra foundations passed lake build AlternatingAnalytic with 3,235 jobs at 2026-09-26T05:14:35Z; the
+    accepted source hashes were unchanged. This is a library integration build, distinct from the earlier
+    library-and-solution check. No additional comparator run is claimed. The rigid-source node passed the
+    original shared build/kernel/axiom gate at 2026-09-26T05:43:12Z and a fresh complete independent jury
+    at 2026-09-26T05:46:00Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). Its 88 explicit non-private
+    declarations across six rigid-source modules, including three named local instances, account for 91
+    gate-owned names after including three generated helpers. The receipt covers the root aggregator and
+    all six modules; their accepted source hashes are recorded in the public inventory and release status.
+    The collected generic and concrete statements are AlternatingAnalytic.RigidDenseSource.rigid_source_properties
+    and AlternatingAnalytic.RigidDenseSource.Concrete.rigid_source_properties at lines 18 and 61 of RigidDenseSource.lean,
+    whose accepted SHA256 is a00220d583b4b29d9b0b5bbc0ea052838b003348077bae63d5157dd334b119c9. The determinant
+    spaces and auxiliary scalar gap are also accepted below; Main Theorem (4) and the subsequent no-largest
+    construction remain pending. No new comparator run, whole-paper completion or human expert review is
+    claimed. The determinant/scalar-gap node passed the original shared build/kernel/axiom gate at 2026-09-26T06:01:20Z
+    and a fresh complete independent jury at 2026-09-26T06:03:14Z (faithfulness 5/5, proof integrity 5/5,
+    code quality 4/5). Its accepted receipt owns 83 names across DeterminantDensity, DeterminantSpan, DeterminantPolynomialDegree
+    and DeterminantPairScalars. The collected construction is AlternatingAnalytic.DeterminantPair.determinant_spaces_properties
+    at line 343 and the scalar-gap summary is AlternatingAnalytic.DeterminantPair.tau_gap at line 405 of
+    DeterminantPairScalars.lean, whose accepted SHA256 is c4053c7b07306e486fbec9fbda5a3c3ed72e05e71513f0a7b836b184762bfdce.
+    At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed
+    at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation modules
+    against their accepted hashes at 2026-09-26T07:04:27Z. The concrete completion equivalences do not by
+    themselves establish analytic completed-action or coordinate-polynomial lifting consequences. No additional
+    comparator statement or run is claimed. The determinant coefficient-space and auxiliary-specialization
+    node is now accepted. Its original shared build/kernel/axiom gate accepted at 2026-09-26T06:34:09Z;
+    a fresh complete independent jury returned clean 5/5/4 at 2026-09-26T07:03:11Z. The five implementation
+    modules have 162 explicitly named non-private declarations, including six named local instances, and
+    four generated helpers, for 166 gate-owned names. The collected coefficient_spaces and padded_coefficient_spaces
+    statements are at lines 251 and 307 of DeterminantCoefficientSpaces.lean, whose accepted SHA256 is 0d2776a1d05f6425e8b473347175644a173dd4925a37c3b9b3ba3f350bb13dab.
+    The specialization summary coefficient_polynomial_specialization is at line 263 of DeterminantCoefficientSpecialization.lean.
+    That coefficient-space acceptance did not establish the later degree-gap obstruction, all-multilinear
+    alternation or analytic padded retraction. At the preceding published twenty-three-node checkpoint,
+    the original whole-project build gate passed at 2026-09-26T06:34:09Z and the idle checkpoint confirmed
+    the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z.
+    No redundant build or new comparator run was performed. The first coefficient jury ended flagged at
+    2026-09-26T07:00:41Z with a missing faithfulness score after a stalled review process; the fresh full
+    three-axis jury supersedes that incomplete review without any source change. No negative mathematical
+    verdict was inferred from the missing score. The quadratic coefficient-gap node passed its original
+    shared build/kernel/axiom gate at 2026-09-26T07:23:07Z and a complete clean independent jury at 2026-09-26T07:25:24Z
+    (faithfulness 5/5, proof integrity 5/5, code quality 4/5). Its 46 explicitly named public declarations
+    across five new algebra modules exactly match the gate-owned inventory, with no anonymous or extra generated
+    declarations. The generic and concrete quadratic_coefficient_gap statements are at lines 86 and 154
+    of DeterminantQuadraticGap.lean, with no_coefficient_family at lines 107 and 173; that module has accepted
+    SHA256 48636a4ac93a4569e967515cff64f357e1a9e2b090be0689c403d85ccce19b40. The quadratic result is included
+    in the twenty-five-node checkpoint accepted below. No additional build, comparator run or human review
+    is claimed. The determinant coordinate/cross-action node passed the original shared build/kernel/axiom
+    gate at 2026-09-26T07:37:00Z; fresh complete independent jury clean 5/5/4 at 2026-09-26T07:57:29Z. Its
+    39 explicitly named public declarations span four new Analysis modules: DeterminantCoefficientObstruction
+    (2), DeterminantCrossActionObstruction (17), DeterminantMultilinearObstruction (4) and DeterminantMultiplication
+    (16). There are no anonymous or additional generated declarations; two private helpers are excluded.
+    The collected theorem is AlternatingAnalytic.DeterminantPair.nonanalytic_determinant_coordinate_and_cross_action
+    at lines 146–175 of DeterminantCrossActionObstruction.lean, whose accepted SHA256 is 3e225160766fccd3ebdfabc649b6bd19411a2ae4ac4eb98cad91cad4587d6a76.
+    At the twenty-five-node checkpoint, the original whole-project build gate passed at 2026-09-26T07:37:00Z.
+    At the paused idle boundary on 2026-09-26T08:03:28Z, the root and all nine new implementation modules
+    matched the merged original accepted gate hashes; both new nodes had complete clean 5/5/4 juries, all
+    engine tasks were terminal, and the three comparator-file hashes were unchanged. This supplies current
+    integration evidence without a redundant build; no current job count is claimed. No new build, comparator
+    run or human review is claimed. The first full jury ended flagged at 2026-09-26T07:53:54Z with faithfulness
+    5, proof integrity 5 and code quality missing. The parent reports a controlled stop of the stalled read-only
+    style group; no negative mathematical feedback was supplied. Fresh full jury :2 started at 2026-09-26T07:54:44Z
+    and completed clean 5/5/4 at 2026-09-26T07:57:29Z, superseding the incomplete first review without source
+    changes. The all-multilinear-alternation node passed the original shared build/kernel/axiom gate at
+    2026-09-26T08:21:32Z and a complete independent jury clean 5/5/4 at 2026-09-26T08:24:53Z. BasisAlternatingCriterion
+    and DeterminantPairAllAlternating contain 26 explicitly named public declarations, three anonymous local
+    instances and one generated helper (tau.congr_simp), for 30 gate-owned names. The primary source SHA256
+    is 4826b2d270a2866596a073e11a690dbf1b9ab8fe434ea560d9f06a11c1e8b980; the collected all_multilinear_maps_alternating
+    theorem is at lines 218–234. It packages the exact-norm L-valued extension and agreement, strong equal-input
+    vanishing, surjectivity of the alternating inclusion, its linear isometric equivalence and inverse continuous
+    linear retraction, both inverse laws, pointwise identity, norm preservation and norm at most one. The
+    target G is the actual small subspace, and no CompleteSpace K or CompleteSpace G assumption is added.
+    The twenty-eight-node checkpoint has the original whole-project build gate at 2026-09-26T09:06:06Z and
+    paused-idle confirmation of the root plus four new implementation hashes at 2026-09-26T09:09:13Z. No
+    additional build, comparator run or human expert review is claimed. The universal-target operator-law
+    node passed its original shared build/kernel/axiom gate at 2026-09-26T08:35:58Z and a fresh complete
+    independent jury clean 5/5/4 at 2026-09-26T08:49:34Z. The original jury ended flagged at 2026-09-26T08:47:38Z
+    with a missing code-quality score after controlled termination of a stalled read-only review group;
+    no negative mathematical feedback was inferred. The unchanged UniversalAlternatingTargets.lean source
+    has SHA256 b372df79d5e04acf6f50daf5a726264cc634edd31b4f4bce9eb1c23d921902fd, with 14 explicitly named
+    public declarations (12 theorems, two definitions), no anonymous or additional generated names, and
+    two excluded private helpers. UniversalAlternatingTarget is defined at lines 169–175; universalAlternatingTarget_operator_laws
+    is at lines 285–311. This is the property and its operator laws, not yet the core category/domain construction.
+    The twenty-eight-node checkpoint has the original whole-project build gate at 2026-09-26T09:06:06Z and
+    paused-idle confirmation of the root plus four new implementation hashes at 2026-09-26T09:09:13Z. No
+    redundant build, new comparator run or human review is claimed. The split-destination node passed the
+    original shared build/kernel/axiom gate at 2026-09-26T09:06:06Z and full independent jury clean 5/5/4
+    at 2026-09-26T09:08:06Z. SplitAlternatingPairs.lean has SHA256 08b46662ed6863331c9fa9e91b7a477c47900ffda347bc400904e74e0f68a283,
+    with 10 explicitly named public declarations and no anonymous, generated or private extras. IsSplitAlternatingPair
+    at lines 23–27 requires a continuous linear retraction, not a contractive one. The collected split_destination_polynomial_action
+    at lines 125–143 gives the exact Option(Fin k)-multilinear lift, its mixed-slot and diagonal formulas,
+    CPolynomialAt at every parameter and AnalyticOnNhd on Set.univ. No separate numeric degree inequality
+    or norm-estimate theorem is claimed. The twenty-eight-node checkpoint has the original whole-project
+    build gate at 2026-09-26T09:06:06Z and paused-idle confirmation of the root plus four new implementation
+    hashes at 2026-09-26T09:09:13Z. All tasks were terminal and the feeder was paused; the three comparator-file
+    hashes were unchanged. The merged original receipts own 54 new declarations across BasisAlternatingCriterion,
+    DeterminantPairAllAlternating, UniversalAlternatingTargets and SplitAlternatingPairs. No redundant build
+    or current job-count claim is made. The previous 3,235-job build remains historical.'
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -1059,38 +1361,94 @@ alignment:
     module: AlternatingAnalytic.Analysis.TruncatedPolynomialMaxNorm
     status: proved
     note: The accepted generic collected theorem max_norm_properties (line 191) gives the actual AdjoinRoot (X^n) quotient its exact maximum coefficient norm, the coefficient isometry with forward and inverse formulas, the basis-to-power identity, norm-one basis powers and identity, nilpotence, truncated convolution and submultiplicativity. For positive n over a nontrivially normed nonarchimedean field L, completeness follows when L is complete. The prime-degree wrapper is prime_max_norm_properties (line 216). The truncated algebra's repaired source passed the shared gate at 2026-09-26T04:54:53Z and a clean independent jury at 2026-09-26T04:59:09Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). Its SHA256 is 1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The module has 30 explicit public declarations; the gate owns 31 names including the generated helper AdjoinRoot.powerBasis'.congr_simp. The rigid-source result and determinant spaces with auxiliary scalar gap
-      are separately proved below; all-alternating, analytic self-actions and no-largest conclusions remain pending. Outside the unchanged four-statement comparator scope.
+      are separately proved below; analytic self-actions and no-largest conclusions remain pending. Outside the unchanged four-statement comparator scope.
   - source: 'dom:rigid: generic dense rigid source and concrete t-adic truncated-algebra realization'
     lean: AlternatingAnalytic.RigidDenseSource.rigid_source_properties; AlternatingAnalytic.RigidDenseSource.Concrete.rigid_source_properties; AlternatingAnalytic.RigidDenseSource.endScalarEquiv; AlternatingAnalytic.RigidDenseSource.Concrete.endScalarEquiv; AlternatingAnalytic.RigidDenseSource.Concrete.sourceEquiv
     module: AlternatingAnalytic.Analysis.RigidDenseSource
     status: proved
     note: The generic collected theorem (line 18) takes nontrivially normed K/L with NormedAlgebra K L, complete L, dense algebraMap, a finite nonempty index type I and an algebraically independent tuple a. It constructs the literal K-subspace K^I + K a in the exact maximum-norm Pi space, with dense isometric inclusion, complete ambient space, norm-one standard vectors and K-dimension card I + 1. Every continuous K-linear endomorphism is uniquely scalar and every continuous K-linear functional to K is zero. The actual linear isometric equivalence endScalarEquiv identifies the endomorphism space with K, with evaluation, inverse scalar identity, exact norm, identity and composition formulas. The generic theorem adds no characteristic, nonarchimedean or complete-K hypothesis; the source is not assumed complete and I is nonempty. The concrete collected theorem (line 61) specializes to every prime p and 0<r<1 using the actual RationalField/LaurentField pair, the same jointly independent a/tau
-      family and A=AdjoinRoot(X^p) with its accepted maximum coefficient norm. It constructs the literal span of the standard epsilon powers and the vector with coefficients a, uses the actual coefficient isometry for sourceEquiv, retains incomplete K, and proves dense inclusion, complete A, dimension p+1, scalar endomorphisms, zero dual and the same End-coordinate laws. Implementation modules are RigidDenseSourceBasic, RigidDenseSourceAlgebra, RigidDenseSourceCoordinates, RigidDenseSourceGeneric, RigidDenseSourceConcrete and the RigidDenseSource aggregate. Shared gate accepted at 2026-09-26T05:43:12Z; fresh independent jury clean 5/5/4 at 2026-09-26T05:46:00Z. There are 88 explicit non-private names and 91 gate-owned names, including three generated helpers. The determinant spaces and auxiliary scalar gap are separately proved below; all-alternating, analytic padded-retraction consequences, dom:limits analytic/lifting consequences and final no-largest conclusions remain pending. Outside
+      family and A=AdjoinRoot(X^p) with its accepted maximum coefficient norm. It constructs the literal span of the standard epsilon powers and the vector with coefficients a, uses the actual coefficient isometry for sourceEquiv, retains incomplete K, and proves dense inclusion, complete A, dimension p+1, scalar endomorphisms, zero dual and the same End-coordinate laws. Implementation modules are RigidDenseSourceBasic, RigidDenseSourceAlgebra, RigidDenseSourceCoordinates, RigidDenseSourceGeneric, RigidDenseSourceConcrete and the RigidDenseSource aggregate. Shared gate accepted at 2026-09-26T05:43:12Z; fresh independent jury clean 5/5/4 at 2026-09-26T05:46:00Z. There are 88 explicit non-private names and 91 gate-owned names, including three generated helpers. The determinant spaces and auxiliary scalar gap are separately proved below; analytic padded-retraction consequences, dom:limits analytic/lifting consequences and final no-largest conclusions remain pending. Outside
       the unchanged four-statement comparator scope.
   - source: Determinant-generated finite spaces and dom:tau-gap
     lean: AlternatingAnalytic.DeterminantPair.determinant_spaces_properties; AlternatingAnalytic.DeterminantPair.tau_gap; AlternatingAnalytic.DeterminantPair.completionD; AlternatingAnalytic.DeterminantPair.completionG; AlternatingAnalytic.denseSubmoduleCompletionEquiv; AlternatingAnalytic.determinant_span_generator_tuples; AlternatingAnalytic.aeval_square_scalar_gap
     module: AlternatingAnalytic.Analysis.DeterminantPairScalars; AlternatingAnalytic.Analysis.DeterminantDensity; AlternatingAnalytic.Analysis.DeterminantSpan; AlternatingAnalytic.Analysis.DeterminantPolynomialDegree
     status: proved
     note: For every prime p and radius 0<r<1, the actual rational/Laurent field pair, max-norm truncated algebra A and common jointly algebraically independent coordinate/auxiliary family define the literal spaces D0, D and G. The collected determinant_spaces_properties (line 343) gives their prescribed generator and determinant-span identities, finite algebraic dimension of D/G, determinant of the standard basis equal to one, exact inherited norms and dense isometric inclusions. The actual K-linear isometric equivalences completionD and completionG identify their completions with A and L and agree with the original inclusions. K remains incomplete; A and L are complete. The determinant polynomial span maps injectively to G and gives unique representatives of degree at most one in every auxiliary variable. The collected tau_gap (line 405) states both that c in G and tau^2*c in G force c=0 and that the literal image-intersection is {0}. The four implementation modules are DeterminantDensity,
-      DeterminantSpan, DeterminantPolynomialDegree and DeterminantPairScalars, with 83 gate-owned names. Shared gate accepted at 2026-09-26T06:01:20Z; fresh independent jury clean 5/5/4 at 2026-09-26T06:03:14Z. The primary source SHA256 is c4053c7b07306e486fbec9fbda5a3c3ed72e05e71513f0a7b836b184762bfdce. All-alternating and its norm-at-most-one retraction, analytic self-actions, higher-degree analytic padded retraction, dom:limits analytic/lifting consequences and categorical Main Theorem (4) remain pending. At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z. Outside the unchanged four-statement comparator scope.
+      DeterminantSpan, DeterminantPolynomialDegree and DeterminantPairScalars, with 83 gate-owned names. Shared gate accepted at 2026-09-26T06:01:20Z; fresh independent jury clean 5/5/4 at 2026-09-26T06:03:14Z. The primary source SHA256 is c4053c7b07306e486fbec9fbda5a3c3ed72e05e71513f0a7b836b184762bfdce. Analytic self-actions, higher-degree analytic padded retraction, dom:limits analytic/lifting consequences and categorical Main Theorem (4) remain pending. At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z. Outside the unchanged four-statement comparator scope.
   - source: Determinant coefficient spaces, auxiliary specialization and algebraic padding before dom:degree-gap
     lean: AlternatingAnalytic.determinantCoefficientEquiv; AlternatingAnalytic.DeterminantPair.coefficient_spaces; AlternatingAnalytic.DeterminantPair.padded_coefficient_spaces; AlternatingAnalytic.DeterminantPair.coefficient_polynomial_specialization; AlternatingAnalytic.DeterminantPair.coefficientEquiv; AlternatingAnalytic.DeterminantPair.paddedCoefficientEquiv; AlternatingAnalytic.DeterminantPair.delta_span_E; AlternatingAnalytic.DeterminantPair.Padding.span_delta_eq_unpadded
     module: AlternatingAnalytic.Analysis.DeterminantCoefficientSpaces; AlternatingAnalytic.Analysis.DeterminantCoefficientEquiv; AlternatingAnalytic.Analysis.DeterminantCoefficientPadding; AlternatingAnalytic.Analysis.DeterminantCoefficientSpan; AlternatingAnalytic.Analysis.DeterminantCoefficientSpecialization
     status: proved
     note: 'For every prime p and 0<r<1, C consists exactly of c in G such that every primary coordinate a_i times c lies in G, with its inherited L-norm and 1 in C. The collected coefficient_spaces (line 251) supplies the actual K-linear isometric equivalence from continuous alternating p-forms E to G onto C, via evaluation on the standard tuple, with pointwise determinant and inverse formulas and exact norms. Scalar extension lands in complete L, agrees on original inputs and preserves the norm; no completeness of K or G is imposed. The generic determinantCoefficientEquiv (Equiv line 124) requires dense scalar/input inclusions, complete L, a norm-one standard tuple and an explicit determinant product norm bound, without an explicit nonarchimedean assumption. Polynomial evaluation identifies Gpoly with G and Cpoly with C, with unique coefficient representatives. The algebraic specialization fixes primary variables/constants, sends auxiliary variables to zero and preserves products; Gpoly
       maps onto G0poly while Cpoly maps into C0poly, without a surjectivity or continuity assertion for the latter map. The collected coefficient_polynomial_specialization is at Specialization line 263. The padded_coefficient_spaces theorem (Spaces line 307) covers every n including zero: the actual E times K^n and D times K^n with max norms are densely isometrically included in complete A times L^n of L-dimension p+n, and the determinant is normalized with product norm bound. The primary determinant span and coefficient space remain the same; paddedCoefficientEquiv gives the actual degree-p+n isometry onto C and paddedScalarExtension gives the L-valued pointwise formula and exact norm. The five implementation modules are DeterminantCoefficientEquiv, DeterminantCoefficientPadding, DeterminantCoefficientSpaces, DeterminantCoefficientSpan and DeterminantCoefficientSpecialization, with 162 explicit names and four generated helpers, for 166 gate-owned names. Shared gate accepted at 2026-09-26T06:34:09Z;
-      a fresh complete independent jury returned clean 5/5/4 at 2026-09-26T07:03:11Z. All-multilinear alternation, analytic self-actions, higher-degree analytic padded retraction, dom:limits analytic/lifting conclusions and categorical Main Theorem (4) remain pending. At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z. Outside the unchanged four-statement comparator scope.'
+      a fresh complete independent jury returned clean 5/5/4 at 2026-09-26T07:03:11Z. Analytic self-actions, higher-degree analytic padded retraction, dom:limits analytic/lifting conclusions and categorical Main Theorem (4) remain pending. At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z. Outside the unchanged four-statement comparator scope.'
   - source: Algebraic quadratic coefficient gap and normalized-family obstruction for the determinant source
     lean: AlternatingAnalytic.DeterminantQuadratic.quadratic_coefficient_gap; AlternatingAnalytic.DeterminantQuadratic.no_coefficient_family; AlternatingAnalytic.DeterminantPair.quadratic_coefficient_gap; AlternatingAnalytic.DeterminantPair.no_coefficient_family; AlternatingAnalytic.DeterminantQuadratic.phi
     module: AlternatingAnalytic.Algebra.DeterminantQuadraticBasic; AlternatingAnalytic.Algebra.DeterminantQuadraticGrading; AlternatingAnalytic.Algebra.DeterminantQuadraticPhi; AlternatingAnalytic.Algebra.DeterminantQuadraticReduction; AlternatingAnalytic.Algebra.DeterminantQuadraticGap
     status: proved
     note: The generic collected theorem quadratic_coefficient_gap (Gap line 86) assumes Field K, CharP K p and Fact p.Prime, retaining every prime including p=2. G0poly and C0poly are closed under homogeneous components, and the degree-two component of every element of G0poly lies in the declared quadraticSpan. The actual polynomial-valued K-linear map phi (Phi line 11) sends X_i*X_j to the univariate monomial X^(i+j) when p-1<=i+j and to zero otherwise; it annihilates the declared minors and square-coordinate quadratics, hence the degree-two component of every element of G0poly. Every degree-one homogeneous member of C0poly is zero, and every member has zero first homogeneous component. The generic no_coefficient_family theorem (Gap line 107) rules out d:Fin p to C0poly with d_0=1 and sum_i X_i*d_i in C0poly. The actual concrete DeterminantPair wrappers at Gap lines 154 and 173 identify the specialized polynomial spaces of the t-adic construction and retain prime p and 0<r<1. These are
-      algebraic conclusions; no continuity or operator-norm bound is asserted for phi. The five implementation modules are DeterminantQuadraticBasic, DeterminantQuadraticGrading, DeterminantQuadraticPhi, DeterminantQuadraticReduction and DeterminantQuadraticGap; all 46 receipt-owned names are explicitly named public declarations, with no anonymous or extra generated names. Shared gate passed at 2026-09-26T07:23:07Z; independent jury clean 5/5/4 at 2026-09-26T07:25:24Z. The primary source SHA256 is 48636a4ac93a4569e967515cff64f357e1a9e2b090be0689c403d85ccce19b40. All-multilinear alternation, the analytic self-actions, higher-degree analytic padded retractions, dom:limits analytic/lifting consequences and categorical Main Theorem (4) remain pending. The current twenty-five-node checkpoint has an accepted original whole-project build gate at 2026-09-26T07:37:00Z and paused-idle root/source hash confirmation at 2026-09-26T08:03:28Z. Outside the unchanged four-statement comparator scope.
+      algebraic conclusions; no continuity or operator-norm bound is asserted for phi. The five implementation modules are DeterminantQuadraticBasic, DeterminantQuadraticGrading, DeterminantQuadraticPhi, DeterminantQuadraticReduction and DeterminantQuadraticGap; all 46 receipt-owned names are explicitly named public declarations, with no anonymous or extra generated names. Shared gate passed at 2026-09-26T07:23:07Z; independent jury clean 5/5/4 at 2026-09-26T07:25:24Z. The primary source SHA256 is 48636a4ac93a4569e967515cff64f357e1a9e2b090be0689c403d85ccce19b40. The analytic self-actions, higher-degree analytic padded retractions, dom:limits analytic/lifting consequences and categorical Main Theorem (4) remain pending. The current twenty-five-node checkpoint has an accepted original whole-project build gate at 2026-09-26T07:37:00Z and paused-idle root/source hash confirmation at 2026-09-26T08:03:28Z. Outside the unchanged four-statement comparator scope.
   - source: Nonanalytic determinant coordinate and degree-p cross-action in the no-largest construction
     lean: AlternatingAnalytic.DeterminantPair.nonanalytic_determinant_coordinate_and_cross_action; AlternatingAnalytic.DeterminantPair.not_analyticAt_determinantCoordinate; AlternatingAnalytic.DeterminantPair.not_analyticAt_crossAction; AlternatingAnalytic.DeterminantPair.no_multilinear_coordinate; AlternatingAnalytic.DeterminantPair.no_scalar_coefficient_family; AlternatingAnalytic.DeterminantPair.multiplication; AlternatingAnalytic.DeterminantPair.determinantCoordinate_eq_action
     module: AlternatingAnalytic.Analysis.DeterminantCoefficientObstruction; AlternatingAnalytic.Analysis.DeterminantCrossActionObstruction; AlternatingAnalytic.Analysis.DeterminantMultilinearObstruction; AlternatingAnalytic.Analysis.DeterminantMultiplication
     status: proved
     note: For every prime p and 0<r<1, the actual incomplete t-adic rational field K, rigid source E, determinant space D and inherited small targets C/G are retained. The scalar coefficient-family obstruction transfers the algebraic gap to C. The exact no_multilinear_coordinate theorem (Multilinear line 69) excludes a continuous p-multilinear B:E^p to C whose value on the repeated standard-zero vector, after inclusion into L, is 1; it does not assert that all such maps vanish. Multiplication E times E to D is an actual bounded bilinear map with norm of multiplication x at most norm x. Completed multiplication agrees on original inputs; the multiplication matrix is lower triangular with diagonal coeff(x,0) and determinant coeff(x,0)^p. The G-valued determinant on D is normalized to one on the standard tuple. The actual C-valued determinantCoordinate (CrossAction line 54) is coefficientEquiv of determinant pullback, has scalar formula coeff(x,0)^p and p-homogeneity, and is not analytic at
-      zero. The actual bounded linear determinantCoordinateEvaluation recovers it from alternatingMapAction along multiplicationSlice x=(multiplication x,id_G), which is analytic at every x. The joint action has parameter domain (E to D continuous linear maps) times End(G), output continuous linear operators from Alt^p(D,G) to Alt^p(E,G), and is not analytic at (0,id_G). No nowhere-analytic statement, failure at (0,0), higher-degree cross-action result or complete-field/Banach version is asserted. The collected nonanalytic_determinant_coordinate_and_cross_action is at CrossAction lines 146–175. All 39 gate-owned names are explicit public declarations across the four modules, with no anonymous or extra generated declarations and two private helpers excluded. Shared gate accepted at 2026-09-26T07:37:00Z; fresh complete independent jury clean 5/5/4 at 2026-09-26T07:57:29Z. All-alternating and its split retraction, analytic self-actions, higher-degree analytic padding, dom:limits analytic/lifting
+      zero. The actual bounded linear determinantCoordinateEvaluation recovers it from alternatingMapAction along multiplicationSlice x=(multiplication x,id_G), which is analytic at every x. The joint action has parameter domain (E to D continuous linear maps) times End(G), output continuous linear operators from Alt^p(D,G) to Alt^p(E,G), and is not analytic at (0,id_G). No nowhere-analytic statement, failure at (0,0), higher-degree cross-action result or complete-field/Banach version is asserted. The collected nonanalytic_determinant_coordinate_and_cross_action is at CrossAction lines 146–175. All 39 gate-owned names are explicit public declarations across the four modules, with no anonymous or extra generated declarations and two private helpers excluded. Shared gate accepted at 2026-09-26T07:37:00Z; fresh complete independent jury clean 5/5/4 at 2026-09-26T07:57:29Z. Categorical split-pair results and analytic self-actions, higher-degree analytic padding, dom:limits analytic/lifting
       consequences and categorical Main Theorem (4) remain pending. The current twenty-five-node checkpoint has an accepted original whole-project build gate at 2026-09-26T07:37:00Z and paused-idle root/source hash confirmation at 2026-09-26T08:03:28Z. Outside the unchanged four-statement comparator scope.
+  - source: 'dom:all-alt: all multilinear maps on the concrete determinant pair are alternating'
+    lean: AlternatingAnalytic.DeterminantPair.all_multilinear_maps_alternating; AlternatingAnalytic.DeterminantPair.allAlternatingEquiv;
+      AlternatingAnalytic.DeterminantPair.retractionR; AlternatingAnalytic.multilinear_alternating_of_basis_repeated;
+      AlternatingAnalytic.DeterminantPair.inclusionJ; AlternatingAnalytic.DeterminantPair.norm_retractionR_le
+    module: AlternatingAnalytic.Analysis.BasisAlternatingCriterion; AlternatingAnalytic.Analysis.DeterminantPairAllAlternating
+    status: proved
+    note: For every prime p (including two) and 0<r<1, every continuous p-multilinear map on the actual
+      D^p into the small target G is alternating. The exact-norm extension is L-valued, agrees with original
+      G-valued inputs and vanishes whenever two inputs coincide; it does not assert arbitrary extended values
+      belong to G. inclusionJ (lines 162–164) is the actual alternating-to-multilinear linear isometry;
+      allAlternatingEquiv (177–179) is its linear isometric equivalence; retractionR (184–186) is the continuous
+      linear inverse. Both inverse laws, pointwise identity, norm preservation and operator norm at most
+      one are collected by all_multilinear_maps_alternating at lines 218–234. No completeness of K or G
+      is assumed; the concrete K is incomplete by the accepted scalar foundation. Two modules contain 26
+      explicit public declarations plus three anonymous local instances and generated tau.congr_simp, for
+      30 gate-owned names. Shared gate 2026-09-26T08:21:32Z; full independent jury clean 5/5/4 at 2026-09-26T08:24:53Z.
+      The categorical split-pair/universal-target results, analytic self-actions, higher-degree analytic
+      padding, completed-action consequences and Main Theorem (4) remain pending. The twenty-eight-node checkpoint has the original whole-project build gate at 2026-09-26T09:06:06Z and paused-idle confirmation of the root plus four new implementation hashes at 2026-09-26T09:09:13Z. Outside the unchanged four-statement comparator scope.
+  - source: 'Universal alternating targets: operator laws and transport'
+    lean: AlternatingAnalytic.UniversalAlternatingTarget; AlternatingAnalytic.universalAlternatingTarget_operator_laws;
+      AlternatingAnalytic.analyticOnNhd_alternatingMapAction_of_universal_target; AlternatingAnalytic.universalAlternatingTarget_iff_of_continuousLinearEquiv
+    module: AlternatingAnalytic.Analysis.UniversalAlternatingTargets
+    status: proved
+    note: Over any nontrivially normed field K, for every degree k and normed spaces, UniversalAlternatingTarget
+      K k F requires source-precomposition to be analytic everywhere for every pair of normed source spaces
+      in the stated universe. The collected universalAlternatingTarget_operator_laws at lines 285–311 gives
+      both literal alternatingMapAction factorizations and AnalyticAt at every operator parameter if UniversalAlternatingTarget
+      K k F or UniversalAlternatingTarget K k F′. It also gives closure under a continuous linear retraction
+      r.comp i=id, invariance under continuous linear equivalence, and finite indexed products. No completeness
+      hypothesis is imposed. The 14 public declarations comprise 12 theorems and two definitions; no anonymous/generated
+      extras, two private helpers excluded. Source SHA256 b372df79d5e04acf6f50daf5a726264cc634edd31b4f4bce9eb1c23d921902fd.
+      Shared gate accepted 2026-09-26T08:35:58Z; fresh full jury clean 5/5/4 at 2026-09-26T08:49:34Z. This
+      does not yet construct the universal-target core category/domain or settle Main Theorem (4). The twenty-eight-node checkpoint has the original whole-project build gate at 2026-09-26T09:06:06Z and paused-idle confirmation of the root plus four new implementation hashes at 2026-09-26T09:09:13Z. Outside the unchanged four-statement
+      comparator scope.
+  - source: Split destinations have polynomial incoming alternating action
+    lean: AlternatingAnalytic.IsSplitAlternatingPair; AlternatingAnalytic.split_destination_polynomial_action;
+      AlternatingAnalytic.splitDestinationLift; AlternatingAnalytic.cpolynomialAt_precomposition_of_split_destination;
+      AlternatingAnalytic.analyticOnNhd_alternatingMapAction_of_split_destination
+    module: AlternatingAnalytic.Analysis.SplitAlternatingPairs
+    status: proved
+    note: IsSplitAlternatingPair K k E′ F′ means the alternating-to-multilinear inclusion has a continuous
+      linear left inverse; no contractive or numeric norm condition is part of the predicate. For arbitrary
+      source pair (E,F), the incoming parameter is (u:E′→L[K]E,v:F→L[K]F′), and the split hypothesis is
+      on the destination (E′,F′). The collected split_destination_polynomial_action at lines 125–143 supplies
+      an actual Option(Fin k)-indexed continuous multilinear lift; the mixed-slot formula uses the output
+      map in slot none and source maps in slots some i followed by the retraction, and the diagonal is alternatingMapAction.
+      It proves CPolynomialAt at every parameter and AnalyticOnNhd on Set.univ. All nontrivially normed
+      K, degrees k including zero and arbitrary normed spaces are allowed, with no completeness assumptions.
+      The explicit (k+1)-multilinear witness is recorded without a separate numeric degree or norm-bound
+      claim. All 10 gate-owned declarations are explicit public names, with no anonymous/generated/private
+      extras. Shared gate 2026-09-26T09:06:06Z; independent jury clean 5/5/4 at 2026-09-26T09:08:06Z. The
+      twenty-eight-node checkpoint has the original whole-project build gate at 2026-09-26T09:06:06Z and
+      paused-idle confirmation of the root plus four new implementation hashes at 2026-09-26T09:09:13Z.
+      This is the generic incoming-action result; categorical core/full split domains, concrete self-action
+      assembly, higher-degree analytic padding and Main Theorem (4) remain pending. Outside the unchanged
+      four-statement comparator scope.
 acknowledgements: Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform; leanprover/comparator; and mathlib-initiative/formalization.yaml. The source paper's attribution to Claude and its bibliographic author are preserved separately above.
