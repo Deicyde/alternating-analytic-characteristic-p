@@ -10,11 +10,12 @@ project:
     families on open coordinate domains and manifolds, actual finite-coordinate analytic alternating bundles,
     the category of operator-analytic normable vector bundles and its actual alternating bifunctor with
     analytic operator-valued morphisms and compatible-presentation transport, core admissible-family laws,
-    the invertible-shear obstruction, canonical exterior support and exact-norm dense scalar-family extension.
-    The expanded manuscript remains only partly formalized: further operator-positive, parameter and tensor
-    results, and analytic-domain results remain unfinished. Geometric Main Theorem (3) is complete over
-    fixed bases with the stated continuous finite coordinates. THEOREM_MAP.md records the exact scope
-    and review status.'
+    the invertible-shear obstruction, canonical exterior support, exact-norm dense scalar-family extension,
+    concrete t-adic rational/Laurent fields with jointly independent scalars, and the max-norm truncated
+    polynomial algebra. The expanded manuscript remains only partly formalized: further operator-positive,
+    parameter and tensor results, and analytic-domain results remain unfinished. Geometric Main Theorem
+    (3) is complete over fixed bases with the stated continuous finite coordinates. THEOREM_MAP.md records
+    the exact scope and review status.'
   authors:
   - Jack McCarthy
   responsible_maintainers:
@@ -48,9 +49,12 @@ sources:
     transport are also proved and clean-reviewed, completing geometric Main Theorem (3) over each fixed
     base with the stated continuous finite coordinates. The completion principle preceding dom:rigid is
     now proved and clean-reviewed, including finite heterogeneous and empty families with exact norm and
-    uniqueness. Part (4)'s no-largest-domain theorem and the remaining proved extensions are not yet formalized.
-    Theorem-level boundaries are in THEOREM_MAP.md. Open problems, the alternative infinite-field obstruction
-    and the proposed large-index construction are not claimed as proved results.
+    uniqueness. The max-norm truncated quotient algebra is also proved and clean-reviewed as setup for
+    dom:rigid. The concrete t-adic scalar fields and their jointly independent families are also proved
+    and clean-reviewed. Part (4)'s no-largest-domain
+    theorem and the remaining proved extensions are not yet formalized. Theorem-level boundaries are in
+    THEOREM_MAP.md. Open problems, the alternative infinite-field obstruction and the proposed large-index
+    construction are not claimed as proved results.
   license: ''
   author_endorsement: participated
 - title: Existing Lean ingredients supplied with the round-24 paper materials
@@ -84,13 +88,14 @@ classification:
   - 68V20
 status:
   scope: 'The original operator proof library is complete for its stated scope; the expanded manuscript
-    is not fully formalized. Eighteen extension nodes have passed the shared proof-verification gate and
+    is not fully formalized. Twenty extension nodes have passed the shared proof-verification gate and
     clean independent AI jury reviews, including categorical Main Theorem (1) and (2), the repaired joint-action
     summary, finite-coordinate reflection and families, the actual analytic alternating bundle, analytic
-    bundle category, alternating bundle morphisms, literal alternating bundle bifunctor and dense scalar-family
-    extension. The central bundle theorem supplies an actual ContMDiffVectorBundle omega witness on Mathlib’s
-    existing topology for analytic bases with explicit continuous finite coordinates, over every nontrivially
-    normed field and all finite degrees/dimensions including zero. Model fibers are arbitrary normed spaces;
+    bundle category, alternating bundle morphisms, literal alternating bundle bifunctor, dense scalar-family
+    extension, concrete t-adic rational/Laurent scalars and the max-norm truncated polynomial algebra.
+    The central bundle theorem supplies an actual ContMDiffVectorBundle omega witness on Mathlib’s existing
+    topology for analytic bases with explicit continuous finite coordinates, over every nontrivially normed
+    field and all finite degrees/dimensions including zero. Model fibers are arbitrary normed spaces;
     actual fibers retain their topological/normable structures. No completeness, characteristic or factorial
     assumption is added. The operator-valued analytic alternating Hom section, exact fiber and local operator-coordinate
     formulas, and identity/composition laws are proved, with no extra family-preservation premise in the
@@ -99,12 +104,15 @@ status:
     Main Theorem (3) over each fixed finite-coordinate analytic base. The source completion principle
     preceding dom:rigid is also proved: unique exact-norm scalar/input extension on arbitrary finite heterogeneous
     families including the empty family, with bounded-map and dense-submodule forms, requiring completeness
-    only of the target. This does not establish rigidity or no-largest domains. The additional operator-positive,
-    parameter-space, tensor, universal-target and analytic-domain results remain unfinished in THEOREM_MAP.md
-    and FORMALIZATION_ROADMAP.md. Accepted proof-library and solution declarations contain no admitted
-    proofs; four intentional challenge placeholders are excluded. Kim Morrison’s comparator checks four
-    selected statements, including the actual finite-coordinate bundle witness, not the full extension
-    library. Proposed/open claims, the external Serre classification and the separate characteristic-two
+    only of the target. The exact max-norm truncated quotient algebra is also proved and clean-reviewed;
+    the concrete t-adic rational/Laurent fields and jointly independent coordinate/auxiliary scalars
+    are also proved and clean-reviewed. These prerequisites do
+    not establish rigidity, the determinant pair, the degree gap or no-largest domains. The additional
+    operator-positive, parameter-space, tensor, universal-target and analytic-domain results remain unfinished
+    in THEOREM_MAP.md and FORMALIZATION_ROADMAP.md. Accepted proof-library and solution declarations contain
+    no admitted proofs; four intentional challenge placeholders are excluded. Kim Morrison’s comparator
+    checks four selected statements, including the actual finite-coordinate bundle witness, not the full
+    extension library. Proposed/open claims, the external Serre classification and the separate characteristic-two
     proof are excluded from local completion claims.'
   sorry_count: 0
   sorry_in_definitions: 0
@@ -455,6 +463,87 @@ status:
     - Quot.sound
     comparator_config: ''
     literature_dependencies: []
+  - declaration: AlternatingAnalytic.RationalField.norm_X
+    file: AlternatingAnalytic/Analysis/RationalLaurentScalars.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.RationalField.denseRange_algebraMap
+    file: AlternatingAnalytic/Analysis/RationalLaurentScalars.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.RationalLaurentScalars.concrete_setup
+    file: AlternatingAnalytic/Analysis/RationalLaurentScalars.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.RationalLaurentScalars.exists_jointly_algebraicIndependent
+    file: AlternatingAnalytic/Analysis/RationalLaurentScalars.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.RationalLaurentScalars.algebraicIndependent_auxiliaryScalars
+    file: AlternatingAnalytic/Analysis/RationalLaurentScalars.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.TruncatedPolynomial.coefficientIsometry
+    file: AlternatingAnalytic/Analysis/TruncatedPolynomialMaxNorm.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.TruncatedPolynomial.coeff_mul
+    file: AlternatingAnalytic/Analysis/TruncatedPolynomialMaxNorm.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.TruncatedPolynomial.max_norm_properties
+    file: AlternatingAnalytic/Analysis/TruncatedPolynomialMaxNorm.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.TruncatedPolynomial.prime_max_norm_properties
+    file: AlternatingAnalytic/Analysis/TruncatedPolynomialMaxNorm.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
 automation:
   spend_usd: 200
   methods:
@@ -525,32 +614,46 @@ fidelity:
 review:
   status: agent-reviewed
   reviewers: []
-  notes: Eighteen extension nodes have complete clean independent Codex jury reviews as of 26 September
-    2026, each with 5/5 for statement faithfulness and proof integrity and at least 4/5 for code quality.
-    The repaired joint-action summary is clean (5/5/5), the actual finite-coordinate analytic bundle is
-    clean (5/5/4), the analytic bundle category is clean (5/5/5), and the operator-valued alternating
-    bundle morphisms are clean (5/5/4). Earlier timeout/authentication failures were resolved by fresh
-    completed reviews and are not presented as mathematical rejections. The recorded library-and-solution
-    integration build passed 3,186 jobs; the category subsequently passed its shared build/kernel/axiom
-    gate. The morphism node passed the current-source shared build/kernel/axiom gate at 2026-09-26T02:01:11Z
-    and its independent jury at 2026-09-26T02:07:41Z; 22 public names are routed across three imported
-    modules. This current acceptance supersedes the earlier technical timeout and older diagnostic snapshot.
-    The four-statement challenge passed Kim Morrison’s comparator locally on 26 September 2026, including
-    default-kernel replay, using the upstream macOS development launcher without Linux Landrun sandbox
-    isolation. Its fourth statement checks the actual analytic alternating bundle witness; the original
-    three statements and transparent definitions are unchanged. GitHub CI previously did not run because
-    of an account billing/spending restriction; no new CI success is claimed. Informal manuscript audits
-    are distinct from kernel verification and jury review. No human expert review or complete formalization
-    of the expanded manuscript is claimed. The literal bundle bifunctor passed its current-source shared
-    build/kernel/axiom gate at 2026-09-26T02:27:03Z and received a clean independent jury (5/5/5) at 2026-09-26T03:34:35Z.
-    Its 17 routed public declarations include the actual functor, canonical object/fiber/topology identifications,
-    map formulas and compatible-presentation transport. This completes geometric Main Theorem (3), not
-    the remaining manuscript branches. The root-module integration including both the functor and dense
-    scalar-family extension passed lake build AlternatingAnalytic with 3,210 jobs at 2026-09-26T03:35:28Z.
-    This is a library build, distinct from the earlier library-and-solution integration check. No additional
-    comparator statement is claimed. Dense scalar-family extension passed the shared gate at 2026-09-26T03:17:08Z
-    and a clean independent jury (5/5/5) at 2026-09-26T03:31:13Z. Its unchanged source has 16 routed public
-    declarations; this accepts the completion prerequisite, not Main Theorem (4).
+  notes: Twenty extension nodes have complete clean independent Codex jury reviews as of 26 September
+    2026. The eighteen nodes in the previous published checkpoint received 5/5 for statement faithfulness
+    and proof integrity and at least 4/5 for code quality. The repaired joint-action summary is clean
+    (5/5/5), the actual finite-coordinate analytic bundle is clean (5/5/4), the analytic bundle category
+    is clean (5/5/5), and the operator-valued alternating bundle morphisms are clean (5/5/4). Earlier
+    timeout/authentication failures were resolved by fresh completed reviews and are not presented as
+    mathematical rejections. The recorded library-and-solution integration build passed 3,186 jobs; the
+    category subsequently passed its shared build/kernel/axiom gate. The morphism node passed the current-source
+    shared build/kernel/axiom gate at 2026-09-26T02:01:11Z and its independent jury at 2026-09-26T02:07:41Z;
+    22 public names are routed across three imported modules. This current acceptance supersedes the earlier
+    technical timeout and older diagnostic snapshot. The four-statement challenge passed Kim Morrison’s
+    comparator locally on 26 September 2026, including default-kernel replay, using the upstream macOS
+    development launcher without Linux Landrun sandbox isolation. Its fourth statement checks the actual
+    analytic alternating bundle witness; the original three statements and transparent definitions are
+    unchanged. GitHub CI previously did not run because of an account billing/spending restriction; no
+    new CI success is claimed. Informal manuscript audits are distinct from kernel verification and jury
+    review. No human expert review or complete formalization of the expanded manuscript is claimed. The
+    literal bundle bifunctor passed its current-source shared build/kernel/axiom gate at 2026-09-26T02:27:03Z
+    and received a clean independent jury (5/5/5) at 2026-09-26T03:34:35Z. Its 17 routed public declarations
+    include the actual functor, canonical object/fiber/topology identifications, map formulas and compatible-presentation
+    transport. This completes geometric Main Theorem (3), not the remaining manuscript branches. The root-module
+    integration including both the functor and dense scalar-family extension passed lake build AlternatingAnalytic
+    with 3,210 jobs at 2026-09-26T03:35:28Z. This is a library build, distinct from the earlier library-and-solution
+    integration check. No additional comparator statement is claimed. Dense scalar-family extension passed
+    the shared gate at 2026-09-26T03:17:08Z and a clean independent jury (5/5/5) at 2026-09-26T03:31:13Z.
+    Its unchanged source has 16 routed public declarations; this accepts the completion prerequisite,
+    not Main Theorem (4). The max-norm truncated polynomial algebra passed its repaired-source shared
+    gate at 2026-09-26T04:54:53Z and a clean independent jury (5/5/4) at 2026-09-26T04:59:09Z. The accepted
+    generic collected theorem is AlternatingAnalytic.TruncatedPolynomial.max_norm_properties at line 191,
+    with prime_max_norm_properties at line 216; 30 explicit public declarations account for 31 gate-owned
+    names including the generated helper AdjoinRoot.powerBasis'.congr_simp. The accepted source SHA256 is
+    1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The rational/Laurent scalar construction
+    passed its current-source shared gate at 2026-09-26T05:12:02Z and a clean independent jury (5/5/4) at
+    2026-09-26T05:15:38Z. The collected theorem
+    AlternatingAnalytic.RationalLaurentScalars.concrete_setup is at line 221. The accepted field source
+    SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a (13,028 bytes), with 27 explicit
+    public declarations and 37 gate-owned names including 10 generated anonymous instances. Root-module
+    integration including both algebra foundations passed lake build AlternatingAnalytic with 3,235 jobs
+    at 2026-09-26T05:14:35Z; the accepted source hashes were unchanged. This is a library integration build,
+    distinct from the earlier library-and-solution check. No additional comparator run is claimed.
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -951,6 +1054,45 @@ alignment:
       Shared build/kernel/axiom gate passed at 2026-09-26T02:01:11Z; independent jury clean at 2026-09-26T02:07:41Z
       (5/5/4). The final literal categorical bifunctor is also proved and clean-reviewed. This node is
       outside the unchanged four-statement comparator scope.
+  - source: Concrete t-adic rational/Laurent fields and jointly independent scalars preceding dom:rigid
+    lean: AlternatingAnalytic.RationalLaurentScalars.concrete_setup; AlternatingAnalytic.RationalField.norm_X;
+      AlternatingAnalytic.RationalField.isometry_algebraMap;
+      AlternatingAnalytic.RationalField.denseRange_algebraMap; AlternatingAnalytic.RationalField.not_completeSpace;
+      AlternatingAnalytic.RationalLaurentScalars.exists_jointly_algebraicIndependent; AlternatingAnalytic.RationalLaurentScalars.algebraicIndependent_auxiliaryScalars
+    module: AlternatingAnalytic.Analysis.RationalLaurentScalars
+    status: proved
+    note: For every prime p and radius 0<r<1, the radius-tagged rational field has the exact norm induced
+      by its inclusion into LaurentField (ZMod p) r, with norm X=r, an actual normed algebra and an isometric
+      dense inclusion. The rational field is countable and incomplete; the complete Laurent field is uncountable.
+      Actual finite jointly algebraically independent families supply coordinates a and auxiliary tau
+      from the same family, including the tagged auxiliary index. No CompleteSpace K assumption or rigidity,
+      determinant, tau-gap, all-alt or degree-gap conclusion. The collected theorem concrete_setup (line 221)
+      packages the actual field norms and algebra structures, norm-greater-than-one witnesses, characteristic-p
+      and nonarchimedean properties, countability and completeness/incompleteness, isometric dense inclusion
+      and valuation norm formulas, and the finite common independent family with its coordinate/auxiliary identities.
+      The current source passed the shared gate at 2026-09-26T05:12:02Z and a clean independent jury at
+      2026-09-26T05:15:38Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). The accepted source SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a,
+      with 27 explicit public declarations and 37 gate-owned names including 10 generated anonymous instances.
+      Outside the unchanged four-statement comparator scope.
+  - source: Max-norm truncated polynomial algebra in the setup preceding dom:rigid
+    lean: AlternatingAnalytic.TruncatedPolynomial.max_norm_properties; AlternatingAnalytic.TruncatedPolynomial.coefficientIsometry;
+      AlternatingAnalytic.TruncatedPolynomial.norm_eq_max;
+      AlternatingAnalytic.TruncatedPolynomial.epsilon_pow; AlternatingAnalytic.TruncatedPolynomial.coeff_mul;
+      AlternatingAnalytic.TruncatedPolynomial.norm_mul_le; AlternatingAnalytic.TruncatedPolynomial.instCompleteSpace;
+      AlternatingAnalytic.TruncatedPolynomial.instNormedAlgebra; AlternatingAnalytic.TruncatedPolynomial.prime_max_norm_properties
+    module: AlternatingAnalytic.Analysis.TruncatedPolynomialMaxNorm
+    status: proved
+    note: The accepted generic collected theorem max_norm_properties (line 191) gives the actual
+      AdjoinRoot (X^n) quotient its exact maximum coefficient norm, the coefficient isometry with forward
+      and inverse formulas, the basis-to-power identity, norm-one basis powers and identity, nilpotence,
+      truncated convolution and submultiplicativity. For positive n over a nontrivially normed nonarchimedean
+      field L, completeness follows when L is complete. The prime-degree wrapper is prime_max_norm_properties
+      (line 216). The truncated algebra's repaired source passed the shared gate at 2026-09-26T04:54:53Z and a clean independent
+      jury at 2026-09-26T04:59:09Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). Its SHA256 is
+      1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The module has 30 explicit public
+      declarations; the gate owns 31 names including the generated helper AdjoinRoot.powerBasis'.congr_simp.
+      Rigidity, determinant, scalar-gap, degree-gap and no-largest conclusions remain pending. Outside the
+      unchanged four-statement comparator scope.
 acknowledgements: Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform; leanprover/comparator;
   and mathlib-initiative/formalization.yaml. The source paper's attribution to Claude and its bibliographic
   author are preserved separately above.

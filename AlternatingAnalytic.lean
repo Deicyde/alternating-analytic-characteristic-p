@@ -45,6 +45,7 @@ import AlternatingAnalytic.Analysis.DenseIsometricExtension
 import AlternatingAnalytic.Analysis.BaseChangeAlternatingCriterion
 import AlternatingAnalytic.Analysis.BaseChangeAlternatingForms
 import AlternatingAnalytic.Analysis.LaurentEvaluation
+import AlternatingAnalytic.Analysis.RationalLaurentScalars
 import AlternatingAnalytic.Analysis.LaurentSubfield
 import AlternatingAnalytic.Analysis.LaurentMultilinearStability
 import AlternatingAnalytic.Analysis.PrescribedLaurentBase
@@ -117,3 +118,4 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateRadius
 import AlternatingAnalytic.Category.AlternatingRegularity
 import AlternatingAnalytic.Geometry.AnalyticAlternatingBundleFunctor
 import AlternatingAnalytic.Analysis.DenseScalarFamilyExtension
+import AlternatingAnalytic.Analysis.TruncatedPolynomialMaxNorm
