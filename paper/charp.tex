@@ -74,8 +74,8 @@ and degree, without completeness assumptions on the fibers. Consequently alterna
 normed vector bundles and their operator-valued analytic morphisms over analytic manifolds with open $K^d$ charts. We also prove positive results for $c_0$ and ordinary $\ell^1$ parameter spaces, explain the obstruction
 for invertible families over general Banach bases, and characterize universal analytic reflection through closed
 Banach subspaces by projections onto diagonal tensor powers with exponential norm bounds.
-The sharp Banach counterexample and the principal operator positive results are formalized in Lean with Mathlib;
-the verification scope of the subsequent extensions is stated separately.
+The main operator, analytic-bundle and no-largest-domain results are formalized in Lean with Mathlib;
+the verification scope of the remaining extensions is stated separately.
 \end{abstract}
 \maketitle
 
@@ -3646,10 +3646,11 @@ Remark~\ref{rem:sorted}. Spherical completeness uses the development's own class
 ingredients with their provenance retained.
 
 Proposition~\ref{prop:smooth-positive} reproduces the argument of~\cite{PR}, whose formal proof is included in the
-pinned Mathlib dependency. The finite-coordinate proof (Proposition~\ref{prop:finite-coordinate} and
-Corollary~\ref{cor:finite-dimensional-positive}) and the finite-target reduction
-(Remark~\ref{rem:finite-target-reduction}) are supplementary informal results; they are not claimed as separate
-formalized declarations in this development. The weighted $c_0$ example of
+pinned Mathlib dependency. Proposition~\ref{prop:finite-coordinate} is formalized for continuous finite
+coordinates on either the domain or codomain of the precomposed operator, in every characteristic and degree.
+Over a complete field, Corollary~\ref{cor:finite-dimensional-positive} follows when either of those two spaces
+is finite-dimensional; the value space is arbitrary. The finite-dimensional value-target reduction
+(Remark~\ref{rem:finite-target-reduction}) remains a supplementary informal result. The weighted $c_0$ example of
 Remark~\ref{rem:nonspherical-analytic-target} is likewise an additional informal corollary; its sufficient
 analyticity criterion is formalized, but the example is not a separate Lean declaration.
 Parts~(\ref{main:general}) and~(\ref{main:spherical}) now have Lean formalizations for the actual
@@ -3682,7 +3683,13 @@ The declaration \texttt{alternatingBundleFunctor} completes Main Theorem~(\ref{m
 as an actual bifunctor on analytic normable bundles. Its object and morphism formulas use the existing
 bundle topologies and operator-valued analytic Hom sections; identity, composition and transport
 between analytically compatible presentations are formalized.
-Main Theorem~(\ref{main:domains}), the remaining parameter-space, tensor and analytic-domain results,
+Main Theorem~(\ref{main:domains}) is also formalized over the $t$\nobreakdash-adic field $K=\F_p(t)$,
+for every prime $p$ and every $k\ge p$. The checked statement rules out a largest full analytic domain,
+also with isomorphism closure and within the finite-dimensional nonarchimedean ambient category
+(with isomorphism closure relative to that ambient category). It includes the incompatible analytic
+objects, the split-destination obstruction and the analytic completed models of Remark~\ref{dom:limits}.
+The witnesses are incomplete; this result does not settle the corresponding questions over complete
+fields or among Banach pairs. The remaining parameter-space, tensor and analytic-domain results,
 and finite-support matrix transport remain pending; the theorem map records their scope and status.
 
 The earlier characteristic-$2$ development~\cite{M} is cited for comparison; it is not re-audited here.
@@ -3691,9 +3698,11 @@ The proposed alternative route of Remark~\ref{rem:routeII}, the proposed large-i
 Remark~\ref{rem:R}, the open problems, and Serre's external classification cited in
 Remark~\ref{rem:sorted} are excluded from the proved results. The repository's comparator challenge contains
 two short contradiction corollaries of Theorem~\ref{thm:main}, the operator form of Main Theorem~(\ref{main:spherical}) for every regularity order,
-and the finite-coordinate analytic alternating-bundle theorem.
+the finite-coordinate analytic alternating-bundle theorem, and the nonexistence of a largest full analytic
+domain over $\F_p(t)$ in degrees $k\ge p$.
 Their solutions use the corresponding library theorems. The Banach and spherical-completeness hypotheses
-are given by transparent definitions in Mathlib terms. Intentional placeholders occur only in the challenge
+are given by transparent definitions in Mathlib terms. The largest-domain predicate uses the development's
+actual categorical definition of joint analyticity on every full hom space. Intentional placeholders occur only in the challenge
 file, not in the proof library or solution. Current challenge checks use Kim Morrison's comparator, with the
 configuration recorded in the repository.
 

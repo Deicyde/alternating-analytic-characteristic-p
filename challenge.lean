@@ -1,3 +1,5 @@
+import AlternatingAnalytic.Analysis.RationalLaurentScalars
+import AlternatingAnalytic.Category.AnalyticDomains
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Calculus.ContDiff.Defs
 import Mathlib.Algebra.CharP.Defs
@@ -7,7 +9,7 @@ import Mathlib.Geometry.Manifold.VectorBundle.Basic
 import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 
 /-!
-Four challenges about continuous alternating maps and their vector bundles.
+Five challenges about continuous alternating maps and their vector bundles.
 The first three concern precomposition `f ↦ (m ↦ m ∘ (f, …, f))`.
 The first two refute universal `C^ω` regularity: first over all fields and normed
 spaces, then over any prescribed positive-characteristic field in degree at least
@@ -16,9 +18,11 @@ The third is Theorem A: a spherically complete ultrametric target gives `C^n`
 precomposition for every regularity order, including `ω`.
 The fourth gives the actual analytic alternating-map bundle over an analytic base
 with supplied finite continuous linear coordinates, in every characteristic and degree.
+The fifth states that no largest full analytic domain exists over the `t`-adic
+rational field in degrees at least its characteristic.
 
 The named Banach and spherical-completeness assumptions below are defined directly
-in Mathlib terms. All four proofs are intentional challenge placeholders.
+in Mathlib terms. All five proofs are intentional challenge placeholders.
 -/
 
 open scoped ContDiff
@@ -118,5 +122,25 @@ theorem contMDiffVectorBundle_alternating_of_finiteCoordinates
   sorry
 
 end AnalyticAlternatingBundle
+
+open scoped NNReal
+
+/-- The degree-`k` alternating-map functor has a largest full analytic domain:
+one full subcategory contains every full subcategory on which the functor is
+analytic on all morphism spaces, with their canonical operator norms. -/
+def HasLargestFullAnalyticDomain
+    (K : Type u) [NontriviallyNormedField K] (k : ℕ) : Prop :=
+  ∃ S, IsGreatest
+    {P | AlternatingAnalytic.IsAlternatingAnalyticDomain K k P} S
+
+/-- **Main Theorem (4).** Over the `t`-adic rational field `𝔽_p(t)`, the degree-`k`
+alternating-map functor has no largest full analytic domain when `k ≥ p`.
+Here `0 < r < 1` is the norm of `t`; this scalar field is incomplete. -/
+theorem no_largest_full_analytic_domain_charP
+    (p k : ℕ) [Fact p.Prime] (hpk : p ≤ k)
+    (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
+    ¬ HasLargestFullAnalyticDomain
+      (AlternatingAnalytic.RationalField (ZMod p) r) k := by
+  sorry
 
 end AlternatingAnalyticChallenge

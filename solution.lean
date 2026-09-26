@@ -1,3 +1,4 @@
+import AlternatingAnalytic.Category.NoLargestAnalyticDomain
 import AlternatingAnalytic.MainTheorem
 import AlternatingAnalytic.Analysis.SphericalAnalytic
 import AlternatingAnalytic.Geometry.AnalyticAlternatingBundle
@@ -9,6 +10,8 @@ The prescribed-field result is proved first, then specialized to a characteristi
 Laurent field for the global statement. The third challenge is Theorem A, proved from
 the existing spherical-completeness and retraction development. The fourth challenge
 exports the actual analytic alternating-bundle instance over finite-coordinate bases.
+The fifth exports the nonexistence of a largest full analytic domain over the
+`t`-adic rational field in degrees at least its characteristic.
 Import this module separately from `challenge`. -/
 
 open scoped ContDiff
@@ -126,5 +129,28 @@ theorem contMDiffVectorBundle_alternating_of_finiteCoordinates
     (K := K) (M := M) (F₁ := F₁) (F₂ := F₂) (E₁ := E₁) (E₂ := E₂) c k
 
 end AnalyticAlternatingBundle
+
+open scoped NNReal
+
+/-- The degree-`k` alternating-map functor has a largest full analytic domain:
+one full subcategory contains every full subcategory on which the functor is
+analytic on all morphism spaces, with their canonical operator norms. -/
+def HasLargestFullAnalyticDomain
+    (K : Type u) [NontriviallyNormedField K] (k : ℕ) : Prop :=
+  ∃ S, IsGreatest
+    {P | AlternatingAnalytic.IsAlternatingAnalyticDomain K k P} S
+
+/-- **Main Theorem (4).** Over the `t`-adic rational field `𝔽_p(t)`, the degree-`k`
+alternating-map functor has no largest full analytic domain when `k ≥ p`.
+Here `0 < r < 1` is the norm of `t`; this scalar field is incomplete. -/
+theorem no_largest_full_analytic_domain_charP
+    (p k : ℕ) [Fact p.Prime] (hpk : p ≤ k)
+    (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
+    ¬ HasLargestFullAnalyticDomain
+      (AlternatingAnalytic.RationalField (ZMod p) r) k := by
+  rcases AlternatingAnalytic.DeterminantPair.Padding.no_largest_full_analytic_domain
+      p r k hpk with
+    ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, h, _⟩
+  exact h
 
 end AlternatingAnalyticChallenge
