@@ -1,6 +1,6 @@
 # Analyticity of alternating-map functors and vector bundles
 
-> **Formalization checkpoint: 34 accepted extension nodes.** All four categorical main results have Lean declarations in the stated scopes. Whole-project builds cover all library modules.
+> **Formalization checkpoint: 40 accepted extension nodes.** All four categorical main results have Lean declarations in the stated scopes. Whole-project builds cover all library modules.
 
 Research manuscript by Jack McCarthy, with a Lean 4 / Mathlib proof library.
 The central distinction is between analyticity on entire operator spaces and preservation of analytic families: alternating maps preserve finite-coordinate analytic families in every characteristic and degree, even when the operator action is nonanalytic.
@@ -53,6 +53,12 @@ Names below are in namespace `AlternatingAnalytic` unless indicated otherwise. T
 | Finite-coordinate analytic families | [FiniteCoordinateFamilies.lean](AlternatingAnalytic/Analysis/FiniteCoordinateFamilies.lean): `finite_coordinate_analytic_families` |
 | Actual analytic alternating bundle | [AnalyticAlternatingBundle.lean](AlternatingAnalytic/Geometry/AnalyticAlternatingBundle.lean): `analyticAlternatingBundle_of_finiteCoordinates` |
 | Operator-valued bundle morphisms and actual bifunctor | [AnalyticAlternatingBundleMorphism.lean](AlternatingAnalytic/Geometry/AnalyticAlternatingBundleMorphism.lean): `analyticAlternatingBundleMorphism_of_finiteCoordinates`; [AnalyticAlternatingBundleFunctor.lean](AlternatingAnalytic/Geometry/AnalyticAlternatingBundleFunctor.lean): `alternatingBundleFunctor` |
+| Shared finite-word coefficient grouping | [FiniteWordGrouping.lean](AlternatingAnalytic/Algebra/FiniteWordGrouping.lean): `FiniteWord.finite_word_grouping_spec`, `FiniteWord.finite_diagonal_grouping` |
+| Ordinary ℓ¹ homogeneous diagonal lift | [L1PolynomialLift.lean](AlternatingAnalytic/Analysis/L1PolynomialLift.lean): `L1PolynomialLift.exists_l1_diagonal_lift` |
+| Fixed-degree reflection along ordinary ℓ¹ families | [L1FixedDegreeReflection.lean](AlternatingAnalytic/Analysis/L1FixedDegreeReflection.lean): `analyticOn_comp_of_l1_fixed_degree`, `exists_l1_completion_diagonal_lift` |
+| Ordinary ℓ¹ analytic alternating families and bounded retracts | [L1Families.lean](AlternatingAnalytic/Analysis/L1Families.lean): `l1_family_admissibility`, `isAdmissibleOn_of_l1_of_isOpen`, `isAdmissibleOn_of_l1_retract_of_isOpen` |
+| Ordinary ℓ¹ bounded coefficient arrays | [L1Coordinates.lean](AlternatingAnalytic/Analysis/L1Coordinates.lean): `L1Coordinates.exists_l1_multilinear_of_bounded_coefficients` |
+| Local analytic factorization through ordinary ℓ¹ | [L1AnalyticFactorization.lean](AlternatingAnalytic/Analysis/L1AnalyticFactorization.lean): `L1Coordinates.l1_word_factorization`, `L1Coordinates.exists_analyticAt_l1_factorization` |
 | Finite-coordinate operator inputs | [FiniteCoordinateDomain.lean](AlternatingAnalytic/Analysis/FiniteCoordinateDomain.lean): `finiteCoordinateDomain`; [FiniteCoordinateCodomain.lean](AlternatingAnalytic/Analysis/FiniteCoordinateCodomain.lean): `finiteCoordinateCodomain` |
 | Finite-dimensional inputs over complete K | [FiniteDimensionalPositive.lean](AlternatingAnalytic/Analysis/FiniteDimensionalPositive.lean): `finiteDimensional_positive` |
 | Universal-target core and split analytic domains | [AnalyticDomains.lean](AlternatingAnalytic/Category/AnalyticDomains.lean): `universalTarget_core`, `product_isAnalyticDomain_iff`, `splitPairs_incoming_analytic` |
@@ -65,13 +71,19 @@ Main Theorem (4) is collected by `DeterminantPair.Padding.no_largest_full_analyt
 
 The limits theorem also shows that the constructed rigid object cannot be adjoined to the full split-pair domain. After passing to the explicitly identified completions over `L = F_p((t))`, the corresponding joint action is analytic; an explicit p-linear product of constant coefficients lifts the old determinant coordinate after inclusion into L. This lift is p-linear even when the alternating degree is `p+n`. These particular completion results do not settle the complete-field or Banach largest-domain questions.
 
+The ordinary sum-norm ℓ¹ results are formalized: Lemma 28 (`fam:lem:l1-polynomial`), Theorem 29 (`fam:thm:l1-families`) and Corollary 30 (`fam:cor:l1-families`). In every characteristic and degree, analytic joint morphism families on `ℓ¹(I,K)` or any supplied bounded linear retract are admissible for the alternating-map construction. Only the final value target F′ must be complete; K, E, E′, F and the retract parameter P may be incomplete. Indices are arbitrary, including empty and uncountable sets, and degree zero is included. The open-domain wrappers retain an open parameter set; neighborhood-analytic forms apply on arbitrary sets. The inclusion and retraction are bounded linear maps whose composition is the identity, with no norm-one or isometry condition.
+
+The proof library supplies the coefficient-array sum, finite-word grouping and local word factorization. The homogeneous lift has the same diagonal as its ambient representative B and norm at most `(d! : ℝ) · ‖B‖`, for the same lift. Fixed-degree reflection retains W closed in Banach Z and merely normed H, with no analyticity or continuity premise on the represented map P. Its quantitative lift has bound `(d! : ℝ) · ‖B‖ · ‖T‖^d`, depending only on the fixed outer degree. The auxiliary analytic map in the local factorization lands in **uncompleted K-valued ℓ¹**; the bounded synthesis map lands in the completion of H.
+
+These results establish analytic morphism-family admissibility. Actual alternating bundles over ordinary ℓ¹ or retract bases remain a separate formalization task, as do the c₀, quotient-parameter and tensor results.
+
 ## Verification and remaining scope
 
-The original operator proof library is complete for its stated scope, without admitted proofs. Thirty-four extension nodes have passed the shared build/kernel/axiom gates and clean independent AI jury review.
-Whole-project builds include every library module through recursive library globs; the accepted root import now reaches the no-largest-domain construction and both coordinate-positive modules.
+The original operator proof library is complete for its stated scope, without admitted proofs. Forty extension nodes have passed the shared build/kernel/axiom gates and clean independent AI jury review.
+Whole-project builds include every library module through recursive library globs. The root import accepted with the final ordinary ℓ¹ node reaches all 172 project submodules, including the full family/retract chain.
 The expanded manuscript is still partly formalized. The full **71-node extension plan** remains the implementation objective, including proved remarks and consequences.
 
-Remaining work includes set-sized maximal analytic domains and any separately stated normable-category packaging; nonarchimedean `c₀` and ordinary `ℓ¹` parameter results; tensor reflection, optimal projections and separation examples; finite-dimensional value-target reduction; the weighted nonspherical target; other positive bundle regimes and the general Cⁿ multifunctor construction; and the remaining family and support-transport results.
+Remaining work includes set-sized maximal analytic domains and any separately stated normable-category packaging; nonarchimedean `c₀` parameter results; tensor reflection, optimal projections and separation examples; finite-dimensional value-target reduction; the weighted nonspherical target; other positive bundle regimes and the general Cⁿ multifunctor construction; and the remaining family and support-transport results.
 The [roadmap](FORMALIZATION_ROADMAP.md) and [pending theorem inventory](THEOREM_MAP.md#new-manuscript-results-awaiting-formalization) distinguish these from mathematical open problems and explicitly unproved proposals.
 No human expert review or complete formalization of the expanded manuscript is claimed.
 
@@ -87,7 +99,7 @@ lake build AlternatingAnalytic
 ```
 
 The cache download is optional. Import the module for the desired result from the table above, or `AlternatingAnalytic.MainTheorem` for the complete operator counterexample.
-The root import `AlternatingAnalytic` exposes the accepted library, including the new no-largest-domain construction.
+The root import `AlternatingAnalytic` exposes the accepted library, including the no-largest-domain construction and the full ordinary ℓ¹ family/retract chain. Import `AlternatingAnalytic.Analysis.L1Coordinates` for the coefficient foundation, `AlternatingAnalytic.Analysis.L1AnalyticFactorization` for the local factorization, `AlternatingAnalytic.Analysis.L1PolynomialLift` for the homogeneous lift, or `AlternatingAnalytic.Analysis.L1FixedDegreeReflection` for fixed-degree reflection.
 
 ## Challenge and solution
 
@@ -111,7 +123,7 @@ After following the comparator’s installation instructions, run:
 lake env /path/to/comparator/.lake/build/bin/comparator comparator.json
 ```
 
-All five selected statements passed local comparator checking and Lean default-kernel replay on 26 September 2026. The first four signatures and the original two transparent predicates remain unchanged.
+All five selected statements passed local comparator checking and Lean default-kernel replay on 26 September 2026. This publication reuses that successful receipt: the challenge, solution, configuration, dependency pins and all 126 project modules in the solution import closure are byte-for-byte unchanged. No new comparator run was needed for this batch. The first four signatures and the original two transparent predicates remain unchanged.
 The checked selected scope includes the bundle witness and the principal unrestricted no-largest conclusion. It does not certify the separate bundle category, morphism construction, final bifunctor, the other collected Main Theorem (4) clauses or all manuscript extensions.
 The macOS check used upstream’s development launcher. The [GitHub workflow](.github/workflows/comparator.yml) uses the Linux Landrun sandbox; the recorded hosted run did not start because of an account billing/spending restriction, so no hosted CI success is claimed.
 
@@ -121,4 +133,4 @@ The current manuscript is in [paper/](paper/); original PDF and LaTeX snapshots 
 The disclosure credits the original Claude-assisted informal result and write-up separately from the later Codex/Autoform formalization and editorial work. Codex is the persisted proof backend.
 Informal manuscript audits are distinct from kernel verification and independent proof review. The [earlier characteristic-two development](https://github.com/Deicyde/alternating-analytic-counterexample) remains separate.
 
-[`formalization.yaml`](formalization.yaml), using schema **0.4**, records scope, provenance, automation and the reported total cost of **USD 200**, using the ChatGPT Pro subscription price specified by the maintainer.
+[`formalization.yaml`](formalization.yaml), using schema **0.4** (`version: 'v0.4'`), records scope, provenance, automation and the reported total cost of **USD 200**, using the ChatGPT Pro subscription price specified by the maintainer.

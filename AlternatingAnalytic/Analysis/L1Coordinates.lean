@@ -1,0 +1,139 @@
+import AlternatingAnalytic.Analysis.L1ProductSummation
+import AlternatingAnalytic.Analysis.L1FiniteSupport
+
+/-!
+# Bounded coefficient arrays on ordinary ℓ¹
+
+The domain is the ordinary sum-norm `lp` subtype, including when the scalar
+field is incomplete. Only the output space needs to be complete.
+-/
+
+open scoped lp BigOperators
+
+namespace L1Coordinates
+
+variable {K J W : Type*} [NontriviallyNormedField K]
+  [NormedAddCommGroup W] [NormedSpace K W]
+
+noncomputable local instance : DecidableEq J := Classical.decEq J
+
+/-- One coordinate monomial with a vector coefficient. -/
+noncomputable def coordinateTerm {d : ℕ} (c : (Fin d → J) → W) (a : Fin d → J) :
+    MultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) W :=
+  (MultilinearMap.mkPiRing K (Fin d) (c a)).compLinearMap
+    (fun r => lp.evalₗ (fun _ : J => K) 1 (a r))
+
+@[simp]
+theorem coordinateTerm_apply {d : ℕ} (c : (Fin d → J) → W) (a : Fin d → J)
+    (x : Fin d → lp (fun _ : J => K) 1) :
+    coordinateTerm (K := K) c a x = (∏ r, x r (a r)) • c a := rfl
+
+theorem norm_coordinateTerm_le {d : ℕ} (c : (Fin d → J) → W) (M : ℝ)
+    (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → lp (fun _ : J => K) 1) (a : Fin d → J) :
+    ‖coordinateTerm (K := K) c a x‖ ≤ M * ∏ r, ‖x r (a r)‖ := by
+  rw [coordinateTerm_apply, norm_smul, norm_prod, mul_comm]
+  exact mul_le_mul_of_nonneg_right (hc a) (Finset.prod_nonneg fun r _ => norm_nonneg _)
+
+/-- Absolute summability of the evaluated array; the array itself need not be summable. -/
+theorem summable_norm_coordinateTerm {d : ℕ} (c : (Fin d → J) → W) (M : ℝ)
+    (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → lp (fun _ : J => K) 1) :
+    Summable (fun a => ‖coordinateTerm (K := K) c a x‖) :=
+  ((hasSum_prod_norm d x).summable.mul_left M).of_nonneg_of_le
+    (fun _ => norm_nonneg _) (norm_coordinateTerm_le c M hc x)
+
+variable [CompleteSpace W]
+
+theorem summable_coordinateTerm {d : ℕ} (c : (Fin d → J) → W) (M : ℝ)
+    (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → lp (fun _ : J => K) 1) :
+    Summable (fun a => coordinateTerm (K := K) c a x) :=
+  (summable_norm_coordinateTerm (K := K) c M hc x).of_norm
+
+/-- The actual unconditional sum, bundled as a multilinear map. -/
+noncomputable def multilinearOfBounded {d : ℕ} (c : (Fin d → J) → W) (M : ℝ)
+    (hc : ∀ a, ‖c a‖ ≤ M) :
+    MultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) W where
+  toFun x := ∑' a, coordinateTerm (K := K) c a x
+  map_update_add' x r y z := by
+    simp only [MultilinearMap.map_update_add]
+    exact (summable_coordinateTerm (K := K) c M hc _).tsum_add
+      (summable_coordinateTerm (K := K) c M hc _)
+  map_update_smul' x r t y := by
+    simp only [MultilinearMap.map_update_smul]
+    exact (summable_coordinateTerm (K := K) c M hc _).tsum_const_smul t
+
+theorem norm_multilinearOfBounded_le {d : ℕ} (c : (Fin d → J) → W) (M : ℝ)
+    (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → lp (fun _ : J => K) 1) :
+    ‖multilinearOfBounded (K := K) c M hc x‖ ≤ M * ∏ r, ‖x r‖ :=
+  (summable_coordinateTerm (K := K) c M hc x).hasSum.norm_le_of_bounded
+    ((hasSum_prod_norm d x).mul_left M) (norm_coordinateTerm_le c M hc x)
+
+/-- The continuous multilinear map associated to a bounded coefficient array. -/
+noncomputable def continuousMultilinearOfBounded {d : ℕ} (c : (Fin d → J) → W)
+    (M : ℝ) (hc : ∀ a, ‖c a‖ ≤ M) :
+    ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) W :=
+  (multilinearOfBounded (K := K) c M hc).mkContinuous M (norm_multilinearOfBounded_le c M hc)
+
+theorem continuousMultilinearOfBounded_hasSum {d : ℕ} (c : (Fin d → J) → W)
+    (M : ℝ) (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → lp (fun _ : J => K) 1) :
+    HasSum (fun a : Fin d → J => (∏ r, x r (a r)) • c a)
+      (continuousMultilinearOfBounded (K := K) c M hc x) :=
+  (summable_coordinateTerm (K := K) c M hc x).hasSum
+
+theorem continuousMultilinearOfBounded_norm_le {d : ℕ} (c : (Fin d → J) → W)
+    (M : ℝ) (hM : 0 ≤ M) (hc : ∀ a, ‖c a‖ ≤ M) :
+    ‖continuousMultilinearOfBounded (K := K) c M hc‖ ≤ M :=
+  (multilinearOfBounded (K := K) c M hc).mkContinuous_norm_le hM _
+
+/-- Coordinate tuples recover the specified coefficient, including in degree zero. -/
+@[simp]
+theorem continuousMultilinearOfBounded_single {d : ℕ} (c : (Fin d → J) → W)
+    (M : ℝ) (hc : ∀ a, ‖c a‖ ≤ M) (a : Fin d → J) :
+    continuousMultilinearOfBounded (K := K) c M hc (fun r => lp.single 1 (a r) (1 : K)) = c a := by
+  classical
+  change (∑' b, coordinateTerm (K := K) c b (fun r => lp.single 1 (a r) (1 : K))) = c a
+  rw [tsum_eq_single a]
+  · simp [coordinateTerm_apply]
+  · intro b hba
+    obtain ⟨r, hr⟩ := Function.ne_iff.mp hba
+    rw [coordinateTerm_apply,
+      Finset.prod_eq_zero (Finset.mem_univ r) (lp.single_apply_ne 1 (a r) 1 hr), zero_smul]
+
+/-- Finite-support compatibility of the unconditional array construction. -/
+theorem continuousMultilinearOfBounded_sum_single {d : ℕ} (c : (Fin d → J) → W)
+    (M : ℝ) (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → J → K) (s : Fin d → Finset J) :
+    continuousMultilinearOfBounded (K := K) c M hc
+        (fun r => ∑ j ∈ s r, lp.single 1 j (x r j)) =
+      ∑ a ∈ Fintype.piFinset s, (∏ r, x r (a r)) • c a := by
+  classical
+  simp only [map_sum_single, continuousMultilinearOfBounded_single]
+
+/-- Finite coefficient sums approximate the constructed map, using the actual `lp`
+coordinate truncations rather than a completion of the domain. -/
+theorem continuousMultilinearOfBounded_tendsto {d : ℕ} (c : (Fin d → J) → W)
+    (M : ℝ) (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → lp (fun _ : J => K) 1) :
+    Filter.Tendsto
+      (fun s : Finset J =>
+        ∑ a ∈ Fintype.piFinset (fun _ : Fin d => s), (∏ r, x r (a r)) • c a)
+      Filter.atTop (nhds (continuousMultilinearOfBounded (K := K) c M hc x)) := by
+  classical
+  simpa only [continuousMultilinearOfBounded_sum_single] using
+    tendsto_map_sum_single (continuousMultilinearOfBounded (K := K) c M hc) x
+
+/-- A bounded coefficient array defines a continuous multilinear map on ordinary ℓ¹.
+The same map has the unconditional sum formula, the asserted operator norm bound,
+and the exact specified coordinate values. No completeness of `K` is assumed. -/
+theorem exists_l1_multilinear_of_bounded_coefficients
+    (d : ℕ) (c : (Fin d → J) → W)
+    (M : ℝ) (hM : 0 ≤ M) (hc : ∀ a, ‖c a‖ ≤ M) :
+    ∃ C : ContinuousMultilinearMap K
+        (fun _ : Fin d => lp (fun _ : J => K) 1) W,
+      (∀ x, HasSum
+        (fun a : Fin d → J => (∏ r, x r (a r)) • c a) (C x)) ∧
+      ‖C‖ ≤ M ∧
+      (∀ a : Fin d → J, C (fun r => lp.single 1 (a r) (1 : K)) = c a) :=
+  ⟨continuousMultilinearOfBounded (K := K) c M hc,
+    continuousMultilinearOfBounded_hasSum c M hc,
+    continuousMultilinearOfBounded_norm_le c M hM hc,
+    continuousMultilinearOfBounded_single c M hc⟩
+
+end L1Coordinates

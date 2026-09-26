@@ -1,0 +1,97 @@
+import AlternatingAnalytic.Analysis.L1WordBlocks
+import Mathlib.Analysis.SpecificLimits.Normed
+
+/-!
+# Explicit geometric word series in ordinary ℓ¹
+
+The coordinates are ordinary `K` values. Real coordinate-norm sums establish membership;
+Cauchy partial sums and convergence to these explicit coordinates establish the series
+identity without any completeness assumption on `K`.
+-/
+
+open scoped lp BigOperators
+open Filter Topology
+
+namespace L1Coordinates
+
+variable {K I : Type*} [NontriviallyNormedField K]
+
+theorem word_ratio_lt_one {s : K} {x : L1 K I} (hx : ‖x‖ < ‖s‖) :
+    ‖s⁻¹‖ * ‖x‖ < 1 := by
+  rw [norm_inv, inv_mul_eq_div]
+  exact (div_lt_one (lt_of_le_of_lt (norm_nonneg x) hx)).2 hx
+
+theorem hasSum_norm_word_coordinates (s : K) (x : L1 K I) (n : ℕ) :
+    HasSum (fun a : Fin n → I => ‖(s⁻¹)^n * ∏ i, x (a i)‖)
+      ((‖s⁻¹‖ * ‖x‖)^n) := by
+  have h := (hasSum_prod_norm n (fun _ => x)).mul_left (‖s⁻¹‖ ^ n)
+  simpa [norm_mul, norm_pow, norm_prod, mul_pow] using h
+
+theorem memℓp_word_coordinates {s : K} {x : L1 K I} (hx : ‖x‖ < ‖s‖) :
+    Memℓp (fun a : Words I => (s⁻¹)^a.1 * ∏ i, x (a.2 i)) 1 := by
+  apply memℓp_gen
+  simp only [ENNReal.toReal_one, Real.rpow_one]
+  apply (summable_sigma_of_nonneg (fun _ => norm_nonneg _)).2
+  refine ⟨fun n => (hasSum_norm_word_coordinates s x n).summable, ?_⟩
+  simpa only [(hasSum_norm_word_coordinates s x _).tsum_eq] using
+    summable_geometric_of_norm_lt_one
+      (show ‖‖s⁻¹‖ * ‖x‖‖ < 1 by
+        rw [Real.norm_of_nonneg (mul_nonneg (norm_nonneg _) (norm_nonneg _))]
+        exact word_ratio_lt_one hx)
+
+/-- The explicit ordinary ℓ¹ word vector, set to zero outside its ball. -/
+noncomputable def geometricWordVector (s : K) (x : L1 K I) : L1 K (Words I) :=
+  if hx : ‖x‖ < ‖s‖ then
+    ⟨fun a => (s⁻¹)^a.1 * ∏ i, x (a.2 i), memℓp_word_coordinates hx⟩
+  else 0
+
+theorem geometricWordVector_apply {s : K} {x : L1 K I} (hx : ‖x‖ < ‖s‖)
+    (n : ℕ) (a : Fin n → I) :
+    geometricWordVector s x ⟨n, a⟩ = (s⁻¹)^n * ∏ i, x (a i) := by
+  simp [geometricWordVector, hx]
+
+/-- Absolute summability and convergence in each coordinate identify an ordinary ℓ¹ limit,
+even when its coordinates take values in an incomplete field. -/
+theorem hasSum_l1_of_hasSum_coordinates {f : ℕ → L1 K I} {a : L1 K I}
+    (hf : Summable (fun n => ‖f n‖)) (ha : ∀ i, HasSum (fun n => f n i) (a i)) :
+    HasSum f a := by
+  apply (hasSum_iff_tendsto_nat_of_summable_norm hf).2
+  apply lp.tendsto_lp_of_tendsto_pi
+    ((cauchySeq_finset_of_summable_norm hf).comp_tendsto tendsto_finset_range)
+  apply tendsto_pi_nhds.2
+  intro i
+  simpa only [id_eq, Function.comp_def, lp.coeFn_sum, Finset.sum_apply] using (ha i).tendsto_sum_nat
+
+@[simp]
+theorem geometricWordVector_of_not_lt {s : K} {x : L1 K I} (hx : ¬‖x‖ < ‖s‖) :
+    geometricWordVector s x = 0 := by
+  simp [geometricWordVector, hx]
+
+theorem geometricWordVector_apply_zero {s : K} {x : L1 K I} (hx : ‖x‖ < ‖s‖)
+    (a : Fin 0 → I) : geometricWordVector s x ⟨0, a⟩ = 1 := by
+  simp [geometricWordVector_apply hx]
+
+/-- The word blocks converge to the explicit K-valued ordinary ℓ¹ vector. The proof uses
+coordinate stabilization and a real geometric bound, without completeness of `K`. -/
+theorem hasSum_wordBlock (s : K)
+    {x : L1 K I} (hx : ‖x‖ < ‖s‖) :
+    HasSum (fun n => wordBlock s n (fun _ => x)) (geometricWordVector s x) := by
+  have hgeom : Summable (fun n : ℕ => (‖s⁻¹‖ * ‖x‖)^n) :=
+    summable_geometric_of_norm_lt_one (by
+      rw [Real.norm_of_nonneg (mul_nonneg (norm_nonneg _) (norm_nonneg _))]
+      exact word_ratio_lt_one hx)
+  have hbound (n : ℕ) : ‖wordBlock s n (fun _ => x)‖ ≤ (‖s⁻¹‖ * ‖x‖)^n := by
+    calc
+      ‖wordBlock s n (fun _ => x)‖ ≤ ‖wordBlock (I := I) s n‖ * ∏ _ : Fin n, ‖x‖ :=
+        (wordBlock s n).le_opNorm _
+      _ ≤ ‖s⁻¹‖^n * ∏ _ : Fin n, ‖x‖ :=
+        mul_le_mul_of_nonneg_right (norm_wordBlock_le s n)
+          (Finset.prod_nonneg (fun _ _ => norm_nonneg x))
+      _ = (‖s⁻¹‖ * ‖x‖)^n := by simp [mul_pow]
+  apply hasSum_l1_of_hasSum_coordinates
+    (hgeom.of_nonneg_of_le (fun _ => norm_nonneg _) hbound)
+  rintro ⟨m, a⟩
+  rw [geometricWordVector_apply hx, ← wordBlock_apply_same s m (fun _ => x) a]
+  exact hasSum_single m (fun n hn => wordBlock_apply_ne s n (fun _ => x) a (Ne.symm hn))
+
+end L1Coordinates

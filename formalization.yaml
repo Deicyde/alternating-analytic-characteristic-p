@@ -1,19 +1,19 @@
-version: '0.4'
+version: 'v0.4'
 project:
   name: alternating-analytic-characteristic-p
   description: 'Lean 4 / Mathlib formalization of alternating-map functors and vector bundles. The library
     proves the prescribed-field Banach counterexample and sharp factorial classification, the actual normed/Banach/spherical
     categorical functors and their joint regularity, and the finite-coordinate analytic alternating bundle
     and literal bundle bifunctor with operator-valued analytic morphisms. It also proves both continuous-finite-coordinate
-    operator-positive cases and their finite-dimensional corollary over complete fields. Main Theorem (4) is
-    formalized over the t-adic rational field F_p(t), for every prime p, radius 0<r<1 and degree k≥p: no largest
-    full analytic domain exists, including the relatively isomorphism-closed variants and the finite algebraic
-    dimensional nonarchimedean ambient. The construction includes the split-domain limit and its explicit analytic
-    completed-L-action/coordinate-lift comparison. Core family laws, shear, radius preservation, canonical
-    exterior support and the scalar/determinant prerequisites are also checked. The expanded manuscript remains
-    partly formalized; the full 71-node extension plan continues with parameter-space/tensor branches, finite-value-target
-    reduction, further bundle cases, family/support transport and set-sized maximality. THEOREM_MAP.md records
-    exact scope.'
+    operator-positive cases and their finite-dimensional corollary over complete fields. Main Theorem
+    (4) is formalized over the t-adic rational field F_p(t), for every prime p, radius 0<r<1 and degree
+    k≥p: no largest full analytic domain exists, including the relatively isomorphism-closed variants
+    and the finite algebraic dimensional nonarchimedean ambient. The construction includes the split-domain
+    limit and its explicit analytic completed-L-action/coordinate-lift comparison. Core family laws, shear,
+    radius preservation, canonical exterior support and the scalar/determinant prerequisites are also
+    checked. The expanded manuscript remains partly formalized; the full 71-node extension plan continues
+    with parameter-space/tensor branches, finite-value-target reduction, further bundle cases, family/support
+    transport and set-sized maximality. THEOREM_MAP.md records exact scope.'
   authors:
   - Jack McCarthy
   responsible_maintainers:
@@ -30,23 +30,23 @@ sources:
     role: credited by the paper for producing the informal result, proof, and write-up
   id: https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/main/paper/charp.pdf
   type: manuscript
-  location: Counterexample theorem (thm:main), operator Corollary cor:class, all four categorical Main Theorem
-    parts in their stated scopes, finite-coordinate/finite-dimensional operator positives, the split-domain
-    and completion consequences, and supporting proved complements
+  location: Counterexample theorem (thm:main), operator Corollary cor:class, all four categorical Main
+    Theorem parts in their stated scopes, finite-coordinate/finite-dimensional operator positives, the
+    split-domain and completion consequences, and supporting proved complements
   relationship: formalizes
   note: The current manuscript is paper/charp.pdf with source paper/charp.tex; sources/ contains historical
     snapshots. The original Claude-assisted informal result, proof and write-up remain attributed separately
-    from the later Codex/Autoform formalization and editorial work. The original operator results and all four
-    categorical main parts now have checked Lean declarations. Part (3) retains fixed analytic bases with explicit
-    continuous finite coordinates, arbitrary normed model fibers and topological/normable actual fibers, all
-    degrees/dimensions and no completeness assumptions. Its actual ContMDiffVectorBundle omega witness is the
-    fourth comparator statement. Part (4) is over the concrete incomplete t-adic F_p(t), every prime p and
-    radius 0<r<1, all k≥p, and universe-zero normed-space objects; it includes all four full/replete and finite-nonarchimedean
-    ambient variants. The split-domain limit and actual completed-L-action with a p-linear coordinate-product
-    lift are also formalized. This does not settle largest-domain questions over complete fields or Banach
-    pairs. Further proved manuscript extensions remain pending, as mapped in THEOREM_MAP.md. Open problems,
-    the alternative infinite-field obstruction and the proposed large-index construction are not claimed as
-    proved results.
+    from the later Codex/Autoform formalization and editorial work. The original operator results and
+    all four categorical main parts now have checked Lean declarations. Part (3) retains fixed analytic
+    bases with explicit continuous finite coordinates, arbitrary normed model fibers and topological/normable
+    actual fibers, all degrees/dimensions and no completeness assumptions. Its actual ContMDiffVectorBundle
+    omega witness is the fourth comparator statement. Part (4) is over the concrete incomplete t-adic
+    F_p(t), every prime p and radius 0<r<1, all k≥p, and universe-zero normed-space objects; it includes
+    all four full/replete and finite-nonarchimedean ambient variants. The split-domain limit and actual
+    completed-L-action with a p-linear coordinate-product lift are also formalized. This does not settle
+    largest-domain questions over complete fields or Banach pairs. Further proved manuscript extensions
+    remain pending, as mapped in THEOREM_MAP.md. Open problems, the alternative infinite-field obstruction
+    and the proposed large-index construction are not claimed as proved results.
   license: ''
   author_endorsement: participated
 - title: Existing Lean ingredients supplied with the round-24 paper materials
@@ -54,19 +54,20 @@ sources:
   id: https://github.com/Deicyde/alternating-analytic-characteristic-p/tree/main/AlternatingAnalytic/Analysis
   type: software
   relationship: adapts
-  note: Existing proofs of the lift criterion, factorial-invertible positive result, symmetric diagonal obstruction,
-    positive-characteristic ultrametricity, spherical completeness and extension, and the operator form of
-    Main Theorem (2) were integrated into the development. These supplied ingredients are distinct from proofs
-    newly authored in the formalization session; their exact original model authorship is not inferred here.
+  note: Existing proofs of the lift criterion, factorial-invertible positive result, symmetric diagonal
+    obstruction, positive-characteristic ultrametricity, spherical completeness and extension, and the
+    operator form of Main Theorem (2) were integrated into the development. These supplied ingredients
+    are distinct from proofs newly authored in the formalization session; their exact original model authorship
+    is not inferred here.
   license: ''
   author_endorsement: n/a
 related_formalizations:
 - id: https://github.com/Deicyde/alternating-analytic-counterexample
   relationship: other
-  note: Earlier characteristic-two formalization used as a workflow precedent and cited by the paper for comparison.
-    Its different Pfaffian/parity construction is not re-proved or re-audited here, and that repository is
-    unchanged. This project establishes the new every-prescribed-field result with a target having no equivalent
-    ultrametric norm.
+  note: Earlier characteristic-two formalization used as a workflow precedent and cited by the paper for
+    comparison. Its different Pfaffian/parity construction is not re-proved or re-audited here, and that
+    repository is unchanged. This project establishes the new every-prescribed-field result with a target
+    having no equivalent ultrametric norm.
 classification:
   arxiv:
   - math.FA
@@ -78,32 +79,40 @@ classification:
   - 58B99
   - 68V20
 status:
-  scope: 'The original operator proof library is complete for its stated scope; the expanded manuscript is
-    partly formalized. Thirty-four extension nodes have passed original shared whole-project build/kernel/axiom
+  scope: The original operator proof library is complete for its stated scope; the expanded manuscript
+    remains partly formalized. Forty extension nodes have passed their original shared whole-project build/kernel/axiom
     gates and full clean independent AI juries. These include categorical Main Theorem (1)–(2), finite-coordinate
-    reflection and analytic families, the actual ContMDiffVectorBundle omega witness, operator-valued analytic
-    bundle morphisms and literal fixed-base alternating bifunctor completing Main Theorem (3), and Main Theorem
-    (4). The geometric statements require supplied continuous finite coordinates on the analytic base and retain
-    arbitrary normed models/topological normable fibers without completeness. Both finite-coordinate operator-input
-    cases and their complete-field finite-dimensional corollary are proved, with arbitrary normed value target
-    F. Main Theorem (4) uses concrete K=F_p(t) with every 0<r<1 and prime p, universe-zero normed objects and
-    every k≥p. It collects incompatible analytic singleton domains, actual categorical and coordinate cross-action
-    nonanalyticity, isomorphism closures, and absence of a greatest analytic domain in both full normed and
-    finite-dimensional fixed-nonarchimedean ambient categories, with and without relative isomorphism closure.
-    The separate limits theorem includes split-domain non-adjoinability, explicit completion maps, joint analyticity
-    over L=F_p((t)) and the p-linear coordinate-product lift agreeing with the original bad coordinate after
-    inclusion. Generic bounded-isomorphism transport is proved; no separate normable-category theorem is asserted.
-    Complete-field/Banach largest-domain existence questions stay open. Set-sized maximality, parameter-space/tensor
-    results, finite-dimensional value-target reduction, weighted nonspherical example, further bundle/family/support
-    consequences remain pending. All 71 prepared extension nodes remain the objective. Accepted library/solution
-    declarations contain no admitted proofs; five intentional challenge placeholders are excluded. Kim Morrison’s
-    comparator checks five selected statements: the original four, including the actual finite-coordinate bundle
-    witness, and the principal unrestricted no-largest conclusion of Main Theorem (4). All five passed local
-    comparator checking and Lean default-kernel replay on 26 September 2026. It does not select the collected
-    witnesses, replete/finite-ambient variants or completion clauses, or certify the full extension library.
-    No human expert review is claimed. The latest accepted gate at 2026-09-26T20:47:37Z includes the root and
-    all five new Main Theorem (4) modules; recursive library globs cover all modules independently of root
-    imports.'
+    reflection and analytic families, the actual ContMDiffVectorBundle omega witness, operator-valued
+    bundle morphisms and fixed-base alternating bifunctor completing Main Theorem (3), and Main Theorem
+    (4). The finite-coordinate geometric results require supplied continuous coordinates on the analytic
+    base and retain arbitrary normed model fibers without completeness. Both finite-coordinate operator-input
+    cases and the complete-field finite-dimensional corollary are proved with arbitrary normed value target
+    F. Main Theorem (4) uses concrete incomplete K=F_p(t), every prime p, every radius 0<r<1, universe-zero
+    normed objects and all k≥p. It collects incompatible analytic singleton domains, nonanalytic categorical/operator
+    cross-action, isomorphism closures and no greatest domain in full normed and finite-dimensional fixed-nonarchimedean
+    ambients, with and without relative isomorphism closure. Its limits theorem includes split-domain
+    non-adjoinability, explicit completion maps, analyticity over F_p((t)) and a p-linear coordinate lift;
+    complete-field and Banach largest-domain questions remain open. The ordinary sum-norm ℓ¹ chain now
+    formalizes fam:lem:l1-polynomial, fam:thm:l1-families and fam:cor:l1-families. Arbitrary indices,
+    degree zero and possibly incomplete K are retained. The homogeneous lift has one C with diagonal equality
+    and real factorial norm bound; fixed-degree reflection retains closed W in Banach Z and merely normed
+    H. Local factorization uses uncompleted K-valued lp for its analytic word map and Completion H for
+    synthesis. For joint alternating morphism families on ordinary ℓ¹ or every supplied bounded linear
+    retract, only the final value target F′ is complete; no completeness of K, E, E′, F or parameter P,
+    or norm-one/isometry assumption on retract maps, is added. AnalyticOnNhd forms work on arbitrary sets,
+    and AnalyticOn forms retain openness. This is family admissibility, not an actual infinite-dimensional
+    bundle construction. The full 71-node extension plan remains in scope. Remaining work includes set-sized
+    maximality and separate normable-category packaging, c₀ reflection/families, quotient parameters,
+    tensors and separation examples, finite-dimensional value-target reduction, the weighted nonspherical
+    example, further bundle regimes and general Cⁿ multifunctors, and remaining family/support transport
+    consequences. Accepted library/solution declarations have no admitted proofs; the five intentional
+    challenge placeholders are separate. Kim Morrison’s comparator checks five selected statements, all
+    passed with Lean default-kernel replay on 26 September 2026, including the bundle witness and principal
+    unrestricted no-largest conclusion. The ordinary ℓ¹ batch is outside that selected comparator scope,
+    as are the other collected Main Theorem (4) clauses and the full extension library. The accepted node40
+    gate includes the root import of L1Families and the new module; the ordinary ℓ¹ chain is exposed by
+    the root and covered by the original recursive whole-project builds. No human expert review or complete
+    formalization of the expanded manuscript is claimed.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -1380,6 +1389,186 @@ status:
     - Quot.sound
     comparator_config: comparator.json
     literature_dependencies: []
+  - declaration: L1Coordinates.exists_l1_multilinear_of_bounded_coefficients
+    file: AlternatingAnalytic/Analysis/L1Coordinates.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: L1Coordinates.hasSum_prod_norm
+    file: AlternatingAnalytic/Analysis/L1ProductSummation.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: L1Coordinates.continuousMultilinearOfBounded_sum_single
+    file: AlternatingAnalytic/Analysis/L1Coordinates.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: L1Coordinates.continuousMultilinearOfBounded_tendsto
+    file: AlternatingAnalytic/Analysis/L1Coordinates.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: L1Coordinates.l1_word_factorization
+    file: AlternatingAnalytic/Analysis/L1AnalyticFactorization.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: L1Coordinates.exists_analyticAt_l1_factorization
+    file: AlternatingAnalytic/Analysis/L1AnalyticFactorization.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: L1Coordinates.hasSum_l1_of_hasSum_coordinates
+    file: AlternatingAnalytic/Analysis/L1WordSeries.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: FiniteWord.finite_word_grouping_spec
+    file: AlternatingAnalytic/Algebra/FiniteWordGrouping.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: FiniteWord.finite_diagonal_grouping
+    file: AlternatingAnalytic/Algebra/FiniteWordGrouping.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: FiniteWord.card_wordOrbit_le
+    file: AlternatingAnalytic/Algebra/FiniteWordGrouping.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: L1PolynomialLift.exists_l1_diagonal_lift
+    file: AlternatingAnalytic/Analysis/L1PolynomialLift.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: L1PolynomialLift.exists_l1_diagonal_lift_of_completeSpace
+    file: AlternatingAnalytic/Analysis/L1PolynomialLift.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: L1PolynomialLift.norm_groupedCoefficient_le
+    file: AlternatingAnalytic/Analysis/L1PolynomialLift.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.exists_l1_completion_diagonal_lift
+    file: AlternatingAnalytic/Analysis/L1FixedDegreeReflection.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.analyticAt_comp_of_l1_fixed_degree
+    file: AlternatingAnalytic/Analysis/L1FixedDegreeReflection.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.analyticOn_comp_of_l1_fixed_degree
+    file: AlternatingAnalytic/Analysis/L1FixedDegreeReflection.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.analyticOn_comp_of_l1_fixed_degree_isometry
+    file: AlternatingAnalytic/Analysis/L1FixedDegreeReflection.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.l1_family_admissibility
+    file: AlternatingAnalytic/Analysis/L1Families.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.isAdmissibleOn_of_l1_of_isOpen
+    file: AlternatingAnalytic/Analysis/L1Families.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.isAdmissibleOn_of_l1_retract_of_isOpen
+    file: AlternatingAnalytic/Analysis/L1Families.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
 automation:
   spend_usd: 200
   methods:
@@ -1388,119 +1577,129 @@ automation:
     - gpt-6-astra
     framework: Codex desktop with Autoform
     tool_setup: GPT-6 Astra in Codex coordinated native proof workers through Autoform's durable dependency
-      plan. Workers constructed Lean proofs and iterated with the pinned Lean toolchain; separate checks built
-      the modules and audited transitive axiom dependencies. Final library verification enumerated all module-owned
-      declarations, including private and compiler-generated declarations. Statement audits compared the actual
-      Lean objects with the frozen paper. Comparator wrappers and repository metadata were prepared in the
-      same Codex session. Lean 4.34.0-rc2 and the exact Mathlib revision are locked by lean-toolchain, lakefile.toml
-      and lake-manifest.json. The extension run uses Autoform's deterministic Codex CLI proof and review adapters
-      through the maintainer's ChatGPT login, with shared kernel/axiom verification and targeted Lake builds.
-      Codex is the configured proof backend.
-    prompting_notes: Jack McCarthy requested formalization of the supplied characteristic-p paper in the style
-      of the earlier characteristic-two project, then requested a private repository, formalization.yaml metadata
-      and comparator files. The proof task retained arbitrary prescribed fields, incomplete bases, every allowed
-      degree, every base point and the actual Banach witnesses; it did not replace the target by an assumed
-      obstruction.
+      plan. Workers constructed Lean proofs and iterated with the pinned Lean toolchain; separate checks
+      built the modules and audited transitive axiom dependencies. Final library verification enumerated
+      all module-owned declarations, including private and compiler-generated declarations. Statement
+      audits compared the actual Lean objects with the frozen paper. Comparator wrappers and repository
+      metadata were prepared in the same Codex session. Lean 4.34.0-rc2 and the exact Mathlib revision
+      are locked by lean-toolchain, lakefile.toml and lake-manifest.json. The extension run uses Autoform's
+      deterministic Codex CLI proof and review adapters through the maintainer's ChatGPT login, with shared
+      kernel/axiom verification and targeted Lake builds. Codex is the configured proof backend.
+    prompting_notes: Jack McCarthy requested formalization of the supplied characteristic-p paper in the
+      style of the earlier characteristic-two project, then requested a private repository, formalization.yaml
+      metadata and comparator files. The proof task retained arbitrary prescribed fields, incomplete bases,
+      every allowed degree, every base point and the actual Banach witnesses; it did not replace the target
+      by an assumed obstruction.
   - method: other
     models: []
     framework: Integration of pre-existing Lean proof sources
-    tool_setup: The supplied existing ingredients were preserved or adapted in the library. They are not represented
-      as newly authored proofs from the current GPT-6 Astra run. The paper's informal Claude/Claude Code authorship
-      is recorded under sources and is distinct from the current formalization automation.
-  notes: The reported total cost is USD 200, using the ChatGPT Pro subscription price specified by the maintainer.
-    Hardware specifications and end-to-end runtime were not measured reliably for the whole project. Existing
-    proof integrations and newly constructed proofs remain distinct. Codex is the persisted proof backend.
-    Challenge and solution validation uses only Kim Morrison’s leanprover/comparator; custom verification scripts
-    and operational audit records are excluded from the published repository.
+    tool_setup: The supplied existing ingredients were preserved or adapted in the library. They are not
+      represented as newly authored proofs from the current GPT-6 Astra run. The paper's informal Claude/Claude
+      Code authorship is recorded under sources and is distinct from the current formalization automation.
+  notes: The reported total cost is USD 200, using the ChatGPT Pro subscription price specified by the
+    maintainer. Hardware specifications and end-to-end runtime were not measured reliably for the whole
+    project. Existing proof integrations and newly constructed proofs remain distinct. Codex is the persisted
+    proof backend. Challenge and solution validation uses only Kim Morrison’s leanprover/comparator; custom
+    verification scripts and operational audit records are excluded from the published repository.
 fidelity:
   divergences: 'The full operator counterexample keeps every prescribed nontrivially normed positive-characteristic
-    field, including incomplete fields, and every k >= p. It produces E'' = E with actual completeness and
-    no equivalent ultrametric target norm; the same witnesses work for every finite index type of cardinality
-    k and every base point. The no-lift and nowhere-C^omega formulations are bundled explicitly. The classification
-    uses Fin k, with genuine finite-index transport for other finite types; its positive direction applies
-    to arbitrary normed spaces and degree zero. Several auxiliaries are generalized, including arbitrary discrete
-    index sets for the Laurent coefficient construction and arbitrary ordered unconditional Schauder bases
-    with the source''s orthogonal coordinate bound for the sorted lift. The coefficient map is kappa-linear,
-    not Laurent-field-linear; the projective norm uses ordinary sums. The formalization does not assert injectivity
-    of the completed determinant-array map. The comparator exposes two contradiction corollaries in the earlier
-    characteristic-two challenge style, together with the full positive operator form of Main Theorem (2).
-    Its general assertion quantifies over types in universe zero; its characteristic-p corollary fixes arbitrary
-    K : Type u and ranges over Banach E,F : Type u with index Fin k. The global statement uses Mathlib constants
-    directly. The fixed-field hypothesis uses the transparent predicate BanachPrecompositionAnalytic K k, defined
-    identically in both comparator files using Mathlib''s existing definitions; unfolding it recovers the original
-    quantified hypothesis. Neither contradiction corollary is presented as equivalent to the full constructive
-    operator counterexample or factorial classification; those stronger theorems and their general universe
-    parameters remain in the library. The operator form of Main Theorem (2) uses independent universes for
-    all five types, arbitrary finite indices, all n : WithTop ℕ∞, an ultrametric nontrivially normed field
-    and an ultrametric target with explicit hF : SphericallyComplete F. This second transparent predicate says
-    that every nonempty family of pairwise-meeting closed balls has a common point; it is definitionally the
-    property of the existing library class. The solution constructs that class instance from hF and invokes
-    the existing theorem. No characteristic or degree restriction, or completeness assumption on K, E or E'',
-    is introduced. The comparator checks the current challenge and solution against comparator.json, including
-    both fixed predicates and their transitive dependencies. No proposed or open paper claim is included as
-    an axiom. The fourth comparator statement is the actual finite-coordinate ContMDiffVectorBundle omega witness,
-    using Mathlib’s existing alternating-bundle topology and actual fibers. It assumes supplied continuous
-    finite coordinates on a self-model analytic base and retains arbitrary normed models and the exact topological-module
-    fiber hypotheses; no completeness, characteristic, degree or factorial restriction is added. The original
-    four statements and the original two transparent definitions are unchanged. The fifth selected statement
-    is no_largest_full_analytic_domain_charP, whose transparent HasLargestFullAnalyticDomain predicate uses
-    the actual full analytic-domain definition. For every prime p, k≥p and radius 0<r<1 it asserts principal
-    unrestricted nonexistence over RationalField(ZModp)r with universe-zero objects. It does not select the
-    witness/replete/finite-ambient/completion clauses of the collected library theorem. The challenge now imports
-    accepted field/category/domain definitions with supporting positive facts through RationalLaurentScalars
-    and AnalyticDomains; the import closure excludes the final no-largest theorem and determinant/padded obstruction
-    modules. All five selected statements passed Kim Morrison’s comparator and Lean default-kernel replay on
-    26 September 2026. The separate analytic bundle category, alternating morphisms, final bifunctor and other
-    parameter/shear/tensor extensions are not individually selected comparator statements; their Lean status
-    is recorded separately.'
+    field, including incomplete fields, and every k >= p. It produces E'' = E with actual completeness
+    and no equivalent ultrametric target norm; the same witnesses work for every finite index type of
+    cardinality k and every base point. The no-lift and nowhere-C^omega formulations are bundled explicitly.
+    The classification uses Fin k, with genuine finite-index transport for other finite types; its positive
+    direction applies to arbitrary normed spaces and degree zero. Several auxiliaries are generalized,
+    including arbitrary discrete index sets for the Laurent coefficient construction and arbitrary ordered
+    unconditional Schauder bases with the source''s orthogonal coordinate bound for the sorted lift. The
+    coefficient map is kappa-linear, not Laurent-field-linear; the projective norm uses ordinary sums.
+    The formalization does not assert injectivity of the completed determinant-array map. The comparator
+    exposes two contradiction corollaries in the earlier characteristic-two challenge style, together
+    with the full positive operator form of Main Theorem (2). Its general assertion quantifies over types
+    in universe zero; its characteristic-p corollary fixes arbitrary K : Type u and ranges over Banach
+    E,F : Type u with index Fin k. The global statement uses Mathlib constants directly. The fixed-field
+    hypothesis uses the transparent predicate BanachPrecompositionAnalytic K k, defined identically in
+    both comparator files using Mathlib''s existing definitions; unfolding it recovers the original quantified
+    hypothesis. Neither contradiction corollary is presented as equivalent to the full constructive operator
+    counterexample or factorial classification; those stronger theorems and their general universe parameters
+    remain in the library. The operator form of Main Theorem (2) uses independent universes for all five
+    types, arbitrary finite indices, all n : WithTop ℕ∞, an ultrametric nontrivially normed field and
+    an ultrametric target with explicit hF : SphericallyComplete F. This second transparent predicate
+    says that every nonempty family of pairwise-meeting closed balls has a common point; it is definitionally
+    the property of the existing library class. The solution constructs that class instance from hF and
+    invokes the existing theorem. No characteristic or degree restriction, or completeness assumption
+    on K, E or E'', is introduced. The comparator checks the current challenge and solution against comparator.json,
+    including both fixed predicates and their transitive dependencies. No proposed or open paper claim
+    is included as an axiom. The fourth comparator statement is the actual finite-coordinate ContMDiffVectorBundle
+    omega witness, using Mathlib’s existing alternating-bundle topology and actual fibers. It assumes
+    supplied continuous finite coordinates on a self-model analytic base and retains arbitrary normed
+    models and the exact topological-module fiber hypotheses; no completeness, characteristic, degree
+    or factorial restriction is added. The original four statements and the original two transparent definitions
+    are unchanged. The fifth selected statement is no_largest_full_analytic_domain_charP, whose transparent
+    HasLargestFullAnalyticDomain predicate uses the actual full analytic-domain definition. For every
+    prime p, k≥p and radius 0<r<1 it asserts principal unrestricted nonexistence over RationalField(ZModp)r
+    with universe-zero objects. It does not select the witness/replete/finite-ambient/completion clauses
+    of the collected library theorem. The challenge now imports accepted field/category/domain definitions
+    with supporting positive facts through RationalLaurentScalars and AnalyticDomains; the import closure
+    excludes the final no-largest theorem and determinant/padded obstruction modules. All five selected
+    statements passed Kim Morrison’s comparator and Lean default-kernel replay on 26 September 2026. The
+    separate analytic bundle category, alternating morphisms, final bifunctor and other parameter/shear/tensor
+    extensions are not individually selected comparator statements; their Lean status is recorded separately.
+    The ordinary ℓ¹ family/retract result retains arbitrary index sets and all degrees, including zero,
+    with completeness only of final F′; bounded retract maps need not be isometries or norm-one. Its source-exact
+    AnalyticOn versions retain open domains. The fixed-degree reflection theorem separately retains Banach
+    Z and closed W. These family results do not assert actual infinite-dimensional bundle constructions
+    and are outside the five selected comparator statements.'
 review:
   status: agent-reviewed
   reviewers: []
-  notes: The accepted extension frontier is 34 nodes with original shared Lean build/kernel/axiom gates and
-    full clean independent AI juries. No human expert review is claimed. Main Theorem (4) passed its original
-    shared gate on 26 September 2026 at 20:47:37Z and full independent jury review at 20:50:54Z (faithfulness
-    5, proof integrity 5, code quality 4). The final source inventory matches accepted receipt hashes for the
-    22 library files added or changed since the 28-node publication baseline, and the root import exposes all
-    project modules. Earlier incomplete jury attempts and the runtime recovery are preserved in external operational
-    evidence; missing scores were not accepted and full clean retries used unchanged proof sources and review
-    settings. The common determinant helper ownership correction was recorded transparently without changing
-    mathematical scope. All five selected challenge statements passed Kim Morrison’s comparator and Lean default-kernel
-    replay at 2026-09-26T21:05:03Z, using the pinned upstream comparator and permitting only propext, Quot.sound
-    and Classical.choice. The first four signatures and original two transparent predicates are unchanged.
-    The fifth statement checks principal unrestricted no-largest-domain nonexistence via the transparent HasLargestFullAnalyticDomain
-    predicate; collected witnesses, replete/finite-ambient variants and completion clauses remain separate
-    library results. The challenge import closure includes accepted field/domain definitions and supporting
-    positive results but excludes the final no-largest theorem and determinant/padded obstruction modules.
-    The macOS upstream development launcher was used; the recorded hosted CI run did not start because of account
-    billing/spending restrictions. All 140 previously listed main_results records are preserved, with the fifth
-    comparator wrapper appended as record 141. This administrative documentation update ran no Lean build,
-    comparator or proof review; it records the actual accepted gate, jury, source-inventory and comparator
-    receipts.
+  notes: 'The accepted extension frontier is 40 nodes with original shared Lean build/kernel/axiom gates
+    and full clean independent AI juries. No human expert review is claimed. The ordinary ℓ¹ batch retains
+    actual uncompleted lp parameters, all index sets/degrees, incomplete K and the exact output-completeness
+    hypotheses of each statement. Its final family/retract node passed the original shared gate at 2026-09-26T22:45:32.142164Z,
+    including the root aggregate and L1Families.lean, with seven explicit public declarations. The first
+    full jury ended flagged at22:59:08Z with missing faithfulness and code-quality scores (null/5/null);
+    those missing reports were not accepted. Two verified read-only reviewer processes had exceeded ten
+    minutes without public progress. The parent stopped only their exact process trees after confirming
+    no active Lean/lake/proof worker/shared gate, preserved the watcher/feeder and all12 source/root hashes,
+    and reran a full fresh jury with unchanged proof sources, wrapper, model settings, rubrics and thresholds.
+    The fresh full jury was clean5/5/4 at23:03:24Z. The incomplete attempt, process recovery and before/after
+    snapshots are preserved in external operational evidence. Earlier incomplete review attempts and runtime
+    recovery also remain in their external records; clean retries did not replace or conceal that history.
+    All12 final batch source/root hashes match their accepted receipts. The accepted root reaches all172
+    project submodules with no import gap. Exact current accepted source hashes and graph-routed names
+    were matched administratively; no new proof review, Lean build or comparator was run by this documentation
+    task. All 158 prior cumulative39 main_results records are preserved, with three actual family/retract
+    declarations appended. The successful five-statement comparator/default-kernel receipt from26 September
+    is reused: direct inputs, dependency pins and all126 project modules in the solution import closure
+    are unchanged. No fresh comparator run is claimed, and this batch adds no sixth challenge statement.
+    The recorded hosted CI run did not start because of account billing/spending restrictions, so no hosted
+    success is claimed. Corrected version v0.4 preserves schema family0.4 and USD200; both pinned official
+    dispatcher and concrete schemas validate the complete manifest.'
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
-  comparator_scope: Five selected theorems. The original two contradiction corollaries retain their exact universal-all-fields
-    and fixed-prescribed-field Banach signatures and the transparent BanachPrecompositionAnalytic hypothesis.
-    The third is the operator spherical-target theorem for independent universes, arbitrary finite indices
-    and every differentiability order including omega, using the unchanged transparent SphericallyComplete
-    predicate. The fourth is the actual finite-coordinate analytic ContMDiffVectorBundle omega witness, with
-    arbitrary normed model fibers, existing topological actual fibers, every degree/dimension and no completeness
-    or characteristic assumption. The fifth, no_largest_full_analytic_domain_charP, uses the new transparent
-    HasLargestFullAnalyticDomain predicate and proves only principal unrestricted full-domain nonexistence
-    over RationalField(ZModp)r, every prime p, k≥p, and 0<r<1, with universe-zero scalar/object carriers. The
-    first four signatures and original two definitions are unchanged. The challenge imports Mathlib plus RationalLaurentScalars
-    and AnalyticDomains for actual accepted field/category/domain definitions and their supporting positives;
-    it does not import the final no-largest theorem or determinant/padded obstruction modules. All five selected
-    statements passed local Kim Morrison comparator checking and Lean default-kernel replay at 2026-09-26T21:05:03Z.
-    No comparator acceptance of collected witnesses, replete/finite-ambient variants, completion clauses, the
-    separate bundle category/morphisms/final bifunctor or the whole manuscript is asserted.
+  comparator_scope: Five selected theorems. The original two contradiction corollaries retain their exact
+    universal-all-fields and fixed-prescribed-field Banach signatures and the transparent BanachPrecompositionAnalytic
+    hypothesis. The third is the operator spherical-target theorem for independent universes, arbitrary
+    finite indices and every differentiability order including omega, using the unchanged transparent
+    SphericallyComplete predicate. The fourth is the actual finite-coordinate analytic ContMDiffVectorBundle
+    omega witness, with arbitrary normed model fibers, existing topological actual fibers, every degree/dimension
+    and no completeness or characteristic assumption. The fifth, no_largest_full_analytic_domain_charP,
+    uses the new transparent HasLargestFullAnalyticDomain predicate and proves only principal unrestricted
+    full-domain nonexistence over RationalField(ZModp)r, every prime p, k≥p, and 0<r<1, with universe-zero
+    scalar/object carriers. The first four signatures and original two definitions are unchanged. The
+    challenge imports Mathlib plus RationalLaurentScalars and AnalyticDomains for actual accepted field/category/domain
+    definitions and their supporting positives; it does not import the final no-largest theorem or determinant/padded
+    obstruction modules. All five selected statements passed local Kim Morrison comparator checking and
+    Lean default-kernel replay at 2026-09-26T21:05:03Z. No comparator acceptance of collected witnesses,
+    replete/finite-ambient variants, completion clauses, the separate bundle category/morphisms/final
+    bifunctor or the whole manuscript is asserted.
   statements:
   - source: Counterexample theorem (thm:main) and adjacent C^omega sharpness statement
     lean: AlternatingAnalytic.exists_banach_counterexample_full
     module: AlternatingAnalytic.MainTheorem
     status: proved
-    note: All prescribed fields, actual Banach E = E', no equivalent ultrametric target norm, all finite indices
-      and all base points.
+    note: All prescribed fields, actual Banach E = E', no equivalent ultrametric target norm, all finite
+      indices and all base points.
   - source: Explicit construction underlying the Counterexample theorem (thm:main)
     lean: AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample
     module: AlternatingAnalytic.Main
@@ -1553,14 +1752,14 @@ alignment:
     lean: exists_extension_of_sphericallyComplete
     module: AlternatingAnalytic.Analysis.SphericalCompleteness
     status: proved
-    note: Existing global declaration; an ultrametric seminormed source and an ultrametric, spherically complete
-      target suffice, with no completeness assumption on the field or source.
+    note: Existing global declaration; an ultrametric seminormed source and an ultrametric, spherically
+      complete target suffice, with no completeness assumption on the field or source.
   - source: 'Proposition alt-spherical in sec:theoremA: spherical completeness of alternating-map spaces'
     lean: sphericallyCompleteSpace_continuousAlternatingMap
     module: AlternatingAnalytic.Analysis.SphericalAnalytic
     status: proved
-    note: Existing global instance; an ultrametric field and a spherically complete ultrametric target, with
-      arbitrary normed source.
+    note: Existing global instance; an ultrametric field and a spherically complete ultrametric target,
+      with arbitrary normed source.
   - source: 'Operator form of Main Theorem (2) in sec:theoremA: spherically complete ultrametric targets'
     lean: ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
     module: AlternatingAnalytic.Analysis.SphericalAnalytic
@@ -1578,10 +1777,10 @@ alignment:
     module: AlternatingAnalytic.Category.NormedSpace
     status: proved
     note: Actual categories and operator-norm hom spaces, canonical coordinates, and coordinate-invariance
-      lemmas. No completeness of K. Shared verification gate passed; independent jury clean. This does not
-      establish the alternating bifunctors. Fresh Codex jury on 25 September 2026 gave faithfulness 5/5 and
-      proof integrity 5/5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
-      No human expert review is claimed.
+      lemmas. No completeness of K. Shared verification gate passed; independent jury clean. This does
+      not establish the alternating bifunctors. Fresh Codex jury on 25 September 2026 gave faithfulness
+      5/5 and proof integrity 5/5; code quality was5 for finite-coordinate families and4 for category
+      foundations/radius. No human expert review is claimed.
   - source: 'Main Theorem (1) and (2): full categorical statements and joint regularity'
     lean: AlternatingAnalytic.alternatingFunctor_main; AlternatingAnalytic.alternatingSphericalFunctor_main;
       AlternatingAnalytic.alternatingSphericalFunctor_main_of_charP
@@ -1590,177 +1789,192 @@ alignment:
     note: Actual functors on normed spaces, Banach spaces and spherical targets; unconditional smoothness,
       both exact factorial analytic equivalences, finite-polynomial positive cases, and the positive-characteristic
       spherical corollary. Joint action includes an explicit degree-(k+1) lift, bounds and identity slice;
-      degree zero is handled explicitly. Shared proof-verification gate passed. Independent jury is clean for
-      the actual functors (5/5/4), factorial classification (5/5/5), spherical result (5/5/5), and combined
-      Main Theorem (5/5/4). The joint-action summary repair passed the shared gate and a fresh clean full review
-      (5/5/5). Earlier incomplete reviews are retained as historical evidence; no human review is claimed.
+      degree zero is handled explicitly. Shared proof-verification gate passed. Independent jury is clean
+      for the actual functors (5/5/4), factorial classification (5/5/5), spherical result (5/5/5), and
+      combined Main Theorem (5/5/4). The joint-action summary repair passed the shared gate and a fresh
+      clean full review (5/5/5). Earlier incomplete reviews are retained as historical evidence; no human
+      review is claimed.
   - source: 'prop:finite-coordinate and cor:finite-dimensional-positive: positive operator cases'
     lean: AlternatingAnalytic.finiteCoordinateDomain; AlternatingAnalytic.finiteCoordinateCodomain; AlternatingAnalytic.finiteDimensional_positive
     module: AlternatingAnalytic.Analysis.FiniteCoordinateDomain; AlternatingAnalytic.Analysis.FiniteCoordinateCodomain;
       AlternatingAnalytic.Analysis.FiniteDimensionalPositive
     status: proved
     note: Both explicit determinant constructions and their exact real bounds, bounded lifts, polynomiality,
-      analyticity and zero/above-dimension cases are proved for a continuous finite-coordinate basis on E or
-      E′ over arbitrary nontrivially normed K. Over complete K, finiteDimensional_positive proves CPolynomialAt
-      and AnalyticAt everywhere in every degree when either E or E′ is finite-dimensional. F is arbitrary normed;
-      the other input need not be complete. The coordinate hypothesis is not replaced by algebraic finite-dimensionality
-      over an incomplete field. The separate finite-dimensional value-target F reduction remains pending. All
-      three nodes passed the original shared gate and full clean independent juries; the finite-dimensional
-      corollary gate was 2026-09-26T20:14:33Z and its fresh clean jury 5/5/4 at 2026-09-26T20:29:35Z. Outside
-      the selected comparator statements.
+      analyticity and zero/above-dimension cases are proved for a continuous finite-coordinate basis on
+      E or E′ over arbitrary nontrivially normed K. Over complete K, finiteDimensional_positive proves
+      CPolynomialAt and AnalyticAt everywhere in every degree when either E or E′ is finite-dimensional.
+      F is arbitrary normed; the other input need not be complete. The coordinate hypothesis is not replaced
+      by algebraic finite-dimensionality over an incomplete field. The separate finite-dimensional value-target
+      F reduction remains pending. All three nodes passed the original shared gate and full clean independent
+      juries; the finite-dimensional corollary gate was 2026-09-26T20:14:33Z and its fresh clean jury
+      5/5/4 at 2026-09-26T20:29:35Z. Outside the selected comparator statements.
   - source: 'rem:finite-target-reduction: finite-dimensional value targets'
     lean: ''
     module: ''
     status: not-formalized
-    note: Over complete K and nonzero finite-dimensional F, analyticity at each specified operator is equivalent
-      to analyticity for scalar-valued forms. Treat F = 0 separately and derive analyticity over spherically
-      complete nonarchimedean K for any norm on F. Do not assert that finite-dimensional F suffices over every
-      field.
-  - source: 'Remark after cor:finite-dimensional-positive: discontinuous coordinates over an incomplete field'
+    note: Over complete K and nonzero finite-dimensional F, analyticity at each specified operator is
+      equivalent to analyticity for scalar-valued forms. Treat F = 0 separately and derive analyticity
+      over spherically complete nonarchimedean K for any norm on F. Do not assert that finite-dimensional
+      F suffices over every field.
+  - source: 'Remark after cor:finite-dimensional-positive: discontinuous coordinates over an incomplete
+      field'
     lean: ''
     module: ''
     status: not-formalized
-    note: For a in the completion of K but outside K, give K + Ka the induced norm and prove that the coordinate
-      of a in the basis (1,a) is discontinuous. This example explains the continuous-coordinate hypothesis;
-      it alone does not prove nonanalyticity of alternating precomposition.
+    note: For a in the completion of K but outside K, give K + Ka the induced norm and prove that the
+      coordinate of a in the basis (1,a) is discontinuous. This example explains the continuous-coordinate
+      hypothesis; it alone does not prove nonanalyticity of alternating precomposition.
   - source: 'rem:nonspherical-analytic-target: weighted c_0 example'
     lean: ''
     module: ''
     status: not-formalized
-    note: Construct the stated weighted norm on c_0(N,F_p((t))), its comparison with the supremum norm and
-      completeness, and the nested closed balls with empty intersection. Prove analytic precomposition for
-      all normed source spaces and all finite degrees using the existing positive theorem and norm transport.
-      A general sufficient theorem does not by itself formalize this example.
+    note: Construct the stated weighted norm on c_0(N,F_p((t))), its comparison with the supremum norm
+      and completeness, and the nested closed balls with empty intersection. Prove analytic precomposition
+      for all normed source spaces and all finite degrees using the existing positive theorem and norm
+      transport. A general sufficient theorem does not by itself formalize this example.
   - source: 'Introduction vector-bundle motivation: the C^n multifunctor construction'
     lean: ''
     module: ''
     status: not-formalized
-    note: Formalize the cocycle construction for jointly C^n maps on morphism spaces, including mixed variance,
-      operator-valued bundle morphisms and independence of trivializations. Inverse transition maps are part
-      of the cocycle data. This tracks the construction proved in the manuscript without assuming an unrestricted
-      analytic alternating functor.
+    note: Formalize the cocycle construction for jointly C^n maps on morphism spaces, including mixed
+      variance, operator-valued bundle morphisms and independence of trivializations. Inverse transition
+      maps are part of the cocycle data. This tracks the construction proved in the manuscript without
+      assuming an unrestricted analytic alternating functor.
   - source: Bundle consequences after fam:cor:quotient-parameters and admissible inverse families
     lean: ''
     module: ''
     status: not-formalized
-    note: Include bundles on nonarchimedean c_0 bases with complete nonarchimedean output fibers, and ordinary
-      l1 bases or bounded linear retracts with complete output fibers. For arbitrary bases retain admissible
-      transitions, changes of atlas and morphisms. Prove inverse admissibility when both alternating-map spaces
-      are Banach and the underlying inverse family is analytic.
+    note: Include bundles on nonarchimedean c_0 bases with complete nonarchimedean output fibers, and
+      ordinary l1 bases or bounded linear retracts with complete output fibers. For arbitrary bases retain
+      admissible transitions, changes of atlas and morphisms. Prove inverse admissibility when both alternating-map
+      spaces are Banach and the underlying inverse family is analytic.
   - source: 'fam:lem:diagonal and fam:thm:finite-reflection: finite-coordinate analytic reflection'
     lean: AlternatingAnalytic.analyticAt_of_closed_linearIsometry
     module: AlternatingAnalytic.Analysis.FiniteCoordinateReflection
     status: proved
     note: Includes closed-subspace homogeneous diagonal membership, coefficient lift bound d^n, open-domain
-      reflection and transport along explicit continuous linear coordinates. All finite d including zero; no
-      completeness or characteristic assumptions. The stronger nonarchimedean radius bound is now proved separately
-      in FiniteCoordinateRadius.lean.
+      reflection and transport along explicit continuous linear coordinates. All finite d including zero;
+      no completeness or characteristic assumptions. The stronger nonarchimedean radius bound is now proved
+      separately in FiniteCoordinateRadius.lean.
   - source: 'Main Theorem (3), fam:cor:finite-families: finite-coordinate alternating morphism families'
     lean: AlternatingAnalytic.finite_coordinate_analytic_families
     module: AlternatingAnalytic.Analysis.FiniteCoordinateFamilies
     status: proved
-    note: All characteristics and degrees, arbitrary normed fibers including incomplete ones, and open subsets
-      of finite-coordinate parameter spaces. Also includes the pointwise and supplied continuous coordinate
-      equivalence versions, actual closed operator embedding, ambient degree-(k+1) multilinear representative,
-      its norm bound at most one and exact diagonal identity. Shared proof-verification gate passed; independent
-      jury clean. The actual finite-coordinate analytic bundle theorem is separately proved and clean-reviewed;
-      its operator-valued alternating morphisms are now separately proved and clean-reviewed, and the final
-      bifunctor is also proved and clean-reviewed. The explicit CPolynomialAt conclusion and combined ambient_alternating_map_action_full
-      statement also passed the repair gate. Fresh Codex jury on 25 September 2026 gave faithfulness 5/5 and
-      proof integrity 5/5; code quality was5 for finite-coordinate families and4 for category foundations/radius.
-      No human expert review is claimed.
+    note: All characteristics and degrees, arbitrary normed fibers including incomplete ones, and open
+      subsets of finite-coordinate parameter spaces. Also includes the pointwise and supplied continuous
+      coordinate equivalence versions, actual closed operator embedding, ambient degree-(k+1) multilinear
+      representative, its norm bound at most one and exact diagonal identity. Shared proof-verification
+      gate passed; independent jury clean. The actual finite-coordinate analytic bundle theorem is separately
+      proved and clean-reviewed; its operator-valued alternating morphisms are now separately proved and
+      clean-reviewed, and the final bifunctor is also proved and clean-reviewed. The explicit CPolynomialAt
+      conclusion and combined ambient_alternating_map_action_full statement also passed the repair gate.
+      Fresh Codex jury on 25 September 2026 gave faithfulness 5/5 and proof integrity 5/5; code quality
+      was5 for finite-coordinate families and4 for category foundations/radius. No human expert review
+      is claimed.
   - source: 'fam:rem:radius: preservation of nonarchimedean coefficient bounds and radius'
     lean: AlternatingAnalytic.exists_hasFPowerSeriesOnBall_of_closed_linearIsometry_of_isUltrametricDist
     module: AlternatingAnalytic.Analysis.FiniteCoordinateRadius
     status: proved
-    note: For maximum-norm parameter coordinates and a nonarchimedean ambient norm, the checked theorem produces
-      one reflected series with norm(q_n) <= norm(p_n), identical diagonals, at least the ambient convergence
-      radius, and the same represented ball, including infinite radius. No completeness of the field or either
-      target is assumed. Includes the closed-submodule version and a generic same-ball subspace-series lemma.
-      Shared proof-verification gate passed; independent jury clean. The public finite_coordinate_radius_preservation_full
-      now also includes the grouped coefficient bound, with all lifted-series conclusions for the same series.
-      Fresh Codex jury on 25 September 2026 gave faithfulness 5/5 and proof integrity 5/5; code quality was5
-      for finite-coordinate families and4 for category foundations/radius. No human expert review is claimed.
+    note: For maximum-norm parameter coordinates and a nonarchimedean ambient norm, the checked theorem
+      produces one reflected series with norm(q_n) <= norm(p_n), identical diagonals, at least the ambient
+      convergence radius, and the same represented ball, including infinite radius. No completeness of
+      the field or either target is assumed. Includes the closed-submodule version and a generic same-ball
+      subspace-series lemma. Shared proof-verification gate passed; independent jury clean. The public
+      finite_coordinate_radius_preservation_full now also includes the grouped coefficient bound, with
+      all lifted-series conclusions for the same series. Fresh Codex jury on 25 September 2026 gave faithfulness
+      5/5 and proof integrity 5/5; code quality was5 for finite-coordinate families and4 for category
+      foundations/radius. No human expert review is claimed.
   - source: 'Main Theorem (3), fam:thm:finite-bundles: the analytic alternating-map bundle bifunctor'
     lean: AlternatingAnalytic.alternatingBundleFunctor; AlternatingAnalytic.alternatingBundleFunctor_spec;
       AlternatingAnalytic.alternatingBundlePresentationIso
     module: AlternatingAnalytic.Geometry.AnalyticAlternatingBundleFunctor
     status: proved
-    note: The literal VB opposite times VB to VB functor on analytic normable bundles over each fixed analytic
-      base with supplied continuous coordinates P equiv Fin d to K. Objects have actual alternating models
-      and fibers, canonical Mathlib fiber/total-space topologies and FiberBundle/VectorBundle structures. Maps
-      are actual operator-valued analytic Hom sections with exact fiber formula m mapped to v composed with
-      m composed with u in every input, including opposite reversal. Functor identity/composition laws are
-      structure fields; public specifications and compatible-presentation transport have explicit forward/inverse
-      fiber formulas. Every nontrivially normed field, all k/d including zero, arbitrary normed models and
-      topological/normable actual fibers; no completeness, characteristic, factorial or fiber-dimension hypothesis.
-      Shared build/kernel/axiom gate passed at 2026-09-26T02:27:03Z; independent jury clean (5/5/5) at 2026-09-26T03:34:35Z.
-      The 17 public declarations complete geometric Main Theorem (3). No arbitrary-base-map morphisms, global
-      bundle-Hom analyticity, unrestricted infinite-dimensional-base or boundary/WithinAt assertion is added.
-      Outside the selected comparator statements.
+    note: The literal VB opposite times VB to VB functor on analytic normable bundles over each fixed
+      analytic base with supplied continuous coordinates P equiv Fin d to K. Objects have actual alternating
+      models and fibers, canonical Mathlib fiber/total-space topologies and FiberBundle/VectorBundle structures.
+      Maps are actual operator-valued analytic Hom sections with exact fiber formula m mapped to v composed
+      with m composed with u in every input, including opposite reversal. Functor identity/composition
+      laws are structure fields; public specifications and compatible-presentation transport have explicit
+      forward/inverse fiber formulas. Every nontrivially normed field, all k/d including zero, arbitrary
+      normed models and topological/normable actual fibers; no completeness, characteristic, factorial
+      or fiber-dimension hypothesis. Shared build/kernel/axiom gate passed at 2026-09-26T02:27:03Z; independent
+      jury clean (5/5/5) at 2026-09-26T03:34:35Z. The 17 public declarations complete geometric Main Theorem
+      (3). No arbitrary-base-map morphisms, global bundle-Hom analyticity, unrestricted infinite-dimensional-base
+      or boundary/WithinAt assertion is added. Outside the selected comparator statements.
   - source: 'fam:prop:category: core admissible analytic-family structure'
     lean: AlternatingAnalytic.admissible_family_structure
     module: AlternatingAnalytic.Analysis.AnalyticFamilies
     status: partial
-    note: Checked joint action, identity/composition, constants, restriction, reparameterization, local gluing,
-      common/independent parameter composition, ambient graph characterization and largest-collection property.
-      Analytic scalar closure, actual addition failure and inverse-family results remain pending.
+    note: Checked joint action, identity/composition, constants, restriction, reparameterization, local
+      gluing, common/independent parameter composition, ambient graph characterization and largest-collection
+      property. Analytic scalar closure, actual addition failure and inverse-family results remain pending.
   - source: 'fam:prop:coefficient-criterion: local common-radius lifting criterion'
     lean: ''
     module: ''
     status: not-formalized
-    note: At each parameter point require subspace-valued homogeneous diagonal representatives with a common
-      positive radius. The finite-coordinate sufficiency theorem alone does not discharge this general iff
-      criterion.
+    note: At each parameter point require subspace-valued homogeneous diagonal representatives with a
+      common positive radius. The finite-coordinate sufficiency theorem alone does not discharge this
+      general iff criterion.
   - source: 'fam:prop:shear: invertible shear transfer of a nonanalytic pullback action'
     lean: AlternatingAnalytic.invertible_shear_transfer_full; AlternatingAnalytic.exists_banach_shear_counterexample
     module: AlternatingAnalytic.Analysis.ShearCounterexample
     status: proved
     note: Checked actual continuous linear shear equivalence, analytic inverse, exact compression identity,
-      general nonanalyticity transfer and the positive-characteristic Banach example at zero where the shear
-      is the identity. The general transfer has no completeness or characteristic assumptions; its explicit
-      bundle/atlas realization remains pending.
+      general nonanalyticity transfer and the positive-characteristic Banach example at zero where the
+      shear is the identity. The general transfer has no completeness or characteristic assumptions; its
+      explicit bundle/atlas realization remains pending.
   - source: 'fam:thm:c0-reflection and fam:cor:c0-families: nonarchimedean c_0 parameters'
     lean: ''
     module: ''
     status: not-formalized
-    note: Paper proof assumes a complete reflection target and nonarchimedean ambient norm. Alternating families
-      are admissible when the final value-space target is complete and nonarchimedean. The index set is arbitrary;
-      these are parameter-space conditions.
-  - source: 'fam:thm:l1-families and fam:cor:l1-families: fixed-degree ordinary l1 parameter theorem'
-    lean: ''
-    module: ''
-    status: not-formalized
-    note: Paper proof treats analytic families composed with a fixed-degree ambient polynomial into a closed
-      Banach subspace, over possibly incomplete K. It passes to bounded linear retracts of ordinary l1; for
-      alternating families only the final value-space target must be complete.
+    note: Paper proof assumes a complete reflection target and nonarchimedean ambient norm. Alternating
+      families are admissible when the final value-space target is complete and nonarchimedean. The index
+      set is arbitrary; these are parameter-space conditions.
+  - source: 'fam:cor:l1-families: ordinary ℓ¹ alternating families and bounded linear retracts'
+    lean: AlternatingAnalytic.l1_family_admissibility; AlternatingAnalytic.isAdmissibleOn_of_l1_of_isOpen;
+      AlternatingAnalytic.isAdmissibleOn_of_l1_retract_of_isOpen
+    module: AlternatingAnalytic.Analysis.L1Families
+    status: proved
+    note: For arbitrary I and all k including zero, actual joint morphism families on ordinary uncompleted
+      sum-norm lp and every supplied bounded linear retract are IsAdmissibleOn. Only final F′ is complete;
+      K,E,E′,F and P need not be complete. The retract data are actual continuous linear maps i:P→L1 K
+      I and r:L1 K I→P with r.comp i=id, without norm-one, isometry or additional closed-range assumptions.
+      Neighborhood-analytic versions apply on arbitrary parameter subsets; the source-exact AnalyticOn
+      wrappers explicitly assume IsOpen U. No countability, nonempty-index, characteristic, nonarchimedean,
+      spherical or factorial-invertibility hypothesis appears. The combined public theorem collects the
+      direct and supplied-retract clauses. This is family admissibility, not a new actual bundle instance
+      or quotient/tensor conclusion. Combined theorem line109, direct open wrapper60 and retract open
+      wrapper98; pointwise and separate AnalyticOnNhd forms are also public. Original gate22:45:32Z includes
+      root; fresh fulljury5/5/4 at23:03:24Z after an explicitly retained incomplete null/5/null attempt.
+      Seven owned names are explicit public declarations, no private/generated extras. Outside the unchanged
+      five selected comparator statements.
   - source: 'fam:cor:quotient-parameters: failure of descent through quotient parameters'
     lean: ''
     module: ''
     status: not-formalized
-    note: Paper proof over complete K of characteristic p and k >= p constructs a bounded open linear surjection
-      q from ordinary l1 onto the Banach counterexample operator space. Q composed with q is analytic although
-      Q is nowhere analytic. No local right inverse on a nonempty open subset is differentiable even at one
-      point; openness follows from a direct uniform one-term lifting estimate. Also prove that the bad operator
-      space is not a bounded linear retract of any ordinary l1 space.
+    note: Paper proof over complete K of characteristic p and k >= p constructs a bounded open linear
+      surjection q from ordinary l1 onto the Banach counterexample operator space. Q composed with q is
+      analytic although Q is nowhere analytic. No local right inverse on a nonempty open subset is differentiable
+      even at one point; openness follows from a direct uniform one-term lifting estimate. Also prove
+      that the bad operator space is not a bounded linear retract of any ordinary l1 space.
   - source: 'fam:prop:tensor-homogeneous, fam:thm:tensor-analytic and fam:prop:l1-optimal: diagonal tensor
       projection criteria'
     lean: ''
     module: ''
     status: not-formalized
     note: Paper proofs over complete K characterize universal Banach-valued analytic reflection by projections
-      with exponentially bounded norms. For infinite ordinary l1 over a nonarchimedean field, the optimal degree-n
-      projection norm is the real number n!, so universal reflection fails despite the alternating-family theorem.
-      The ordinary and nonarchimedean tensor norms are distinguished.
+      with exponentially bounded norms. For infinite ordinary l1 over a nonarchimedean field, the optimal
+      degree-n projection norm is the real number n!, so universal reflection fails despite the alternating-family
+      theorem. The ordinary and nonarchimedean tensor norms are distinguished.
   - source: 'fam:cor:no-common-radius: entire polynomial approximation of a nonanalytic smooth map'
     lean: ''
     module: ''
     status: not-formalized
-    note: Paper proof over every complete nonarchimedean K, including characteristic zero, gives x mapped to
-      its tensor powers on the unit ball of ordinary l1. It is analytic into the ambient Banach c0-sum and
-      C^infinity into its closed diagonal-span subspace, but nonanalytic there at zero. Necessary coefficient
-      norms are at least the real numbers n!, while entire polynomial truncations converge uniformly on each
-      smaller ball.
+    note: Paper proof over every complete nonarchimedean K, including characteristic zero, gives x mapped
+      to its tensor powers on the unit ball of ordinary l1. It is analytic into the ambient Banach c0-sum
+      and C^infinity into its closed diagonal-span subspace, but nonanalytic there at zero. Necessary
+      coefficient norms are at least the real numbers n!, while entire polynomial truncations converge
+      uniformly on each smaller ball.
   - source: Tensor-section structural consequences and the nonarchimedean c_0 tensor comparison
     lean: ''
     module: ''
@@ -1768,135 +1982,138 @@ alignment:
     note: Include finite-coordinate projections with exponential norm bounds, the ordinary l1 tensor identification
       and orbit-constant diagonal spans with actual sorted projections, and the resulting strict separation
       between alternating-family admissibility and universal reflection. Separately establish the nonarchimedean
-      projective tensor identification for c_0 and its projection of norm at most one; an ordinary tensor theorem
-      does not supply this distinct normed construction.
+      projective tensor identification for c_0 and its projection of norm at most one; an ordinary tensor
+      theorem does not supply this distinct normed construction.
   - source: 'dom:core and dom:split-incoming: universal-target core and split destinations'
-    lean: AlternatingAnalytic.universalTarget_core; AlternatingAnalytic.product_isAnalyticDomain_iff; AlternatingAnalytic.IsAlternatingAnalyticDomain.union_core;
-      AlternatingAnalytic.splitPairs_incoming_analytic
+    lean: AlternatingAnalytic.universalTarget_core; AlternatingAnalytic.product_isAnalyticDomain_iff;
+      AlternatingAnalytic.IsAlternatingAnalyticDomain.union_core; AlternatingAnalytic.splitPairs_incoming_analytic
     module: AlternatingAnalytic.Category.AnalyticDomains
     status: proved
-    note: 'For every nontrivially normed K and every k, universalTarget_core (AnalyticDomains222–241) gives
-      the actual universal-target core as a full analytic domain, its union with every full analytic domain,
-      and closure of universal targets under continuous linear retracts, continuous linear equivalences and
-      finite indexed products. The precise source-unrestricted product criterion is: for every object property
-      T on NormedSpaceCat K, the pair property (fun X => T X.2) is an analytic domain iff every target F satisfying
-      T is a UniversalAlternatingTarget. This is the largest-rectangle assertion with unrestricted first variable,
-      without a repleteness assumption. splitPairs_incoming_analytic (253–256) proves incoming joint analyticity
-      from every source into a split destination and the full split-pair domain. No completeness, dimension,
-      characteristic or positive-degree restriction. Shared gate accepted 2026-09-26T19:14:57Z and full independent
-      jury clean 5/5/4 at 2026-09-26T19:17:08Z. This row is reconciled with the accepted detailed entries below;
-      it does not assert repleteness, normable transport, dom:limits or Main Theorem (4), which remain separately
-      scoped.'
+    note: 'For every nontrivially normed K and every k, universalTarget_core (AnalyticDomains222–241)
+      gives the actual universal-target core as a full analytic domain, its union with every full analytic
+      domain, and closure of universal targets under continuous linear retracts, continuous linear equivalences
+      and finite indexed products. The precise source-unrestricted product criterion is: for every object
+      property T on NormedSpaceCat K, the pair property (fun X => T X.2) is an analytic domain iff every
+      target F satisfying T is a UniversalAlternatingTarget. This is the largest-rectangle assertion with
+      unrestricted first variable, without a repleteness assumption. splitPairs_incoming_analytic (253–256)
+      proves incoming joint analyticity from every source into a split destination and the full split-pair
+      domain. No completeness, dimension, characteristic or positive-degree restriction. Shared gate accepted
+      2026-09-26T19:14:57Z and full independent jury clean 5/5/4 at 2026-09-26T19:17:08Z. This row is
+      reconciled with the accepted detailed entries below; it does not assert repleteness, normable transport,
+      dom:limits or Main Theorem (4), which remain separately scoped.'
   - source: 'dom:maximal: compatibility graph and maximal analytic domains'
     lean: ''
     module: ''
     status: not-formalized
-    note: Paper proof fixes a set of objects, identifies full analytic domains with cliques among objects with
-      analytic self-action and two analytic cross-actions, and uses Zorn to obtain maximal extensions containing
-      all available core objects. It makes no proper-class choice assertion and does not produce a largest
-      domain.
+    note: Paper proof fixes a set of objects, identifies full analytic domains with cliques among objects
+      with analytic self-action and two analytic cross-actions, and uses Zorn to obtain maximal extensions
+      containing all available core objects. It makes no proper-class choice assertion and does not produce
+      a largest domain.
   - source: 'Main Theorem (4) and dom:no-largest: no largest full analytic domain'
     lean: AlternatingAnalytic.DeterminantPair.Padding.no_largest_full_analytic_domain
     module: AlternatingAnalytic.Category.NoLargestAnalyticDomain
     status: proved
-    note: 'The collected theorem at148–180 covers every prime p, radius r:ℝ≥0 with 0<r<1 and degree k≥p over
-      actual K=RationalField(ZModp)r=F_p(t), with universe-zero normed object carriers. It states incomplete
-      K, finite-dimensional nonarchimedean objectX/objectY, both analytic singleton domains/self-actions, objectY
-      splitness, exact badHom coordinates(auxiliaryIdentity,idG), nonanalytic categorical and operator cross-action,
-      analytic isomorphism closures, and no greatest domain in four classes: all full analytic domains, isomorphism-closed
-      full domains, full analytic domains in the finite-dimensional fixed-nonarchimedean ambient, and relatively
-      isomorphism-closed domains there. Greatest means containing every analytic domain, not merely maximal.
-      The generic isomorphism transport is explicit; no distinct normable-space category is asserted. Gate
-      20:47:37Z,63 explicit owned declarations across five modules plus root; full clean jury 5/5/4 at 20:50:54Z
-      on 26 September 2026. The original incomplete field is essential to the stated construction; complete-field
-      and Banach questions remain open. The fifth comparator wrapper selects only principal unrestricted full-domain
-      nonexistence; the collected witnesses, isomorphism-closed/finite-ambient variants and completion clauses
-      remain distinct library results. All five selected statements passed Kim Morrison’s comparator and Lean
-      default-kernel replay on 26 September 2026.'
+    note: 'The collected theorem at148–180 covers every prime p, radius r:ℝ≥0 with 0<r<1 and degree k≥p
+      over actual K=RationalField(ZModp)r=F_p(t), with universe-zero normed object carriers. It states
+      incomplete K, finite-dimensional nonarchimedean objectX/objectY, both analytic singleton domains/self-actions,
+      objectY splitness, exact badHom coordinates(auxiliaryIdentity,idG), nonanalytic categorical and
+      operator cross-action, analytic isomorphism closures, and no greatest domain in four classes: all
+      full analytic domains, isomorphism-closed full domains, full analytic domains in the finite-dimensional
+      fixed-nonarchimedean ambient, and relatively isomorphism-closed domains there. Greatest means containing
+      every analytic domain, not merely maximal. The generic isomorphism transport is explicit; no distinct
+      normable-space category is asserted. Gate 20:47:37Z,63 explicit owned declarations across five modules
+      plus root; full clean jury 5/5/4 at 20:50:54Z on 26 September 2026. The original incomplete field
+      is essential to the stated construction; complete-field and Banach questions remain open. The fifth
+      comparator wrapper selects only principal unrestricted full-domain nonexistence; the collected witnesses,
+      isomorphism-closed/finite-ambient variants and completion clauses remain distinct library results.
+      All five selected statements passed Kim Morrison’s comparator and Lean default-kernel replay on
+      26 September 2026.'
   - source: Completion principle preceding dom:rigid
     lean: AlternatingAnalytic.existsUnique_denseScalarFamilyExtension; AlternatingAnalytic.existsUnique_denseScalarFamilyExtension_of_bound;
       AlternatingAnalytic.existsUnique_denseScalarSubmoduleFamilyExtension; AlternatingAnalytic.existsUnique_denseScalarSubmoduleFamilyExtension_of_bound
     module: AlternatingAnalytic.Analysis.DenseScalarFamilyExtension
     status: proved
-    note: Unique continuous L-multilinear extension for K dense in a normed extension L, on arbitrary finite
-      heterogeneous families of dense K-linear isometries, with exact operator norm, original-input agreement
-      and scalar-restriction identity. Only the target must be complete; K, L and all input spaces may be incomplete.
-      Includes the empty family without forcing zero-ary maps to vanish. The raw bounded-map forms preserve
-      a supplied C-bound and use the operator norm of mkContinuous for the exact equality; arbitrary C is not
-      identified with the optimal norm. Literal dense K-submodules are covered. Values remain in a smaller
-      incomplete target only on original inputs. The manuscript Banach-ambient/complete-L specialization follows.
-      Shared gate passed at 2026-09-26T03:17:08Z; independent jury clean at 2026-09-26T03:31:13Z (5/5/5), with
-      16 routed public declarations. This is the scalar-extension prerequisite; the separate rigid-source and
-      Main Theorem (4) declarations are mapped below. Outside the selected comparator statements.
+    note: Unique continuous L-multilinear extension for K dense in a normed extension L, on arbitrary
+      finite heterogeneous families of dense K-linear isometries, with exact operator norm, original-input
+      agreement and scalar-restriction identity. Only the target must be complete; K, L and all input
+      spaces may be incomplete. Includes the empty family without forcing zero-ary maps to vanish. The
+      raw bounded-map forms preserve a supplied C-bound and use the operator norm of mkContinuous for
+      the exact equality; arbitrary C is not identified with the optimal norm. Literal dense K-submodules
+      are covered. Values remain in a smaller incomplete target only on original inputs. The manuscript
+      Banach-ambient/complete-L specialization follows. Shared gate passed at 2026-09-26T03:17:08Z; independent
+      jury clean at 2026-09-26T03:31:13Z (5/5/5), with 16 routed public declarations. This is the scalar-extension
+      prerequisite; the separate rigid-source and Main Theorem (4) declarations are mapped below. Outside
+      the selected comparator statements.
   - source: 'prop:canonical-support: smallest exterior support and contraction-rank equality'
     lean: AlternatingAnalytic.canonical_exterior_support_full; AlternatingAnalytic.mem_exteriorPowerSubmodule_contractionSpan;
       AlternatingAnalytic.mem_exteriorPowerSubmodule_iff_contractionSpan_le; AlternatingAnalytic.exteriorSupportDim_eq_finrank_contractionSpan;
       AlternatingAnalytic.rank_exteriorContractionMatrix
     module: AlternatingAnalytic.Algebra.CanonicalExteriorSupport
     status: partial
-    note: The smallest-support and dimension equalities hold over every field in every positive degree, with
-      arbitrary ambient dimension. Degree zero and one are formalized separately. The contraction-matrix rank
-      theorem is proved for a finite basis of the ambient space; transport from a finite supporting subspace
-      into arbitrary V remains pending. Shared proof-verification gate and full proof-library integration build
-      passed; independent jury clean (faithfulness 5/5, integrity 5/5, style 4/5).
-  - source: Remark routeII, proposed Remark R, explicit mathematical open problems, and externally cited Serre
-      classification
+    note: The smallest-support and dimension equalities hold over every field in every positive degree,
+      with arbitrary ambient dimension. Degree zero and one are formalized separately. The contraction-matrix
+      rank theorem is proved for a finite basis of the ambient space; transport from a finite supporting
+      subspace into arbitrary V remains pending. Shared proof-verification gate and full proof-library
+      integration build passed; independent jury clean (faithfulness 5/5, integrity 5/5, style 4/5).
+  - source: Remark routeII, proposed Remark R, explicit mathematical open problems, and externally cited
+      Serre classification
     lean: ''
     module: ''
     status: not-formalized
     note: Explicit exclusions from the proved-paper scope; see THEOREM_MAP.md. The infinite-field obstruction
-      and large-index extension remain unproved. The support/contraction-rank equality formerly proposed in
-      routeII is now formalized as prop:canonical-support; finite-support transport of the matrix consequence
+      and large-index extension remain unproved. The support/contraction-rank equality formerly proposed
+      in routeII is now formalized as prop:canonical-support; finite-support transport of the matrix consequence
       is separately pending.
   - source: Open-manifold family prerequisite for fam:thm:finite-bundles
     lean: AlternatingAnalytic.contMDiffOn_alternatingMapAction_of_finiteCoordinates; AlternatingAnalytic.contMDiff_alternatingMapAction_of_finiteCoordinates
     module: AlternatingAnalytic.Geometry.FiniteCoordinateManifoldFamilies
     status: proved
-    note: 'For an analytic manifold modeled on P with explicit continuous linear coordinates P equiv Fin d
-      to K, the alternating action preserves analytic operator families on open sets, with a global corollary.
-      All k and d including zero, arbitrary normed fibers and nontrivially normed K; no completeness. Shared
-      gate passed; independent jury clean: faithfulness 5/5, proof integrity 5/5, code quality 4/5. The actual
-      finite-coordinate alternating bundle is now proved separately; bundle morphisms are also now proved and
-      clean-reviewed, and the final bundle functor is also proved and clean-reviewed.'
+    note: 'For an analytic manifold modeled on P with explicit continuous linear coordinates P equiv Fin
+      d to K, the alternating action preserves analytic operator families on open sets, with a global
+      corollary. All k and d including zero, arbitrary normed fibers and nontrivially normed K; no completeness.
+      Shared gate passed; independent jury clean: faithfulness 5/5, proof integrity 5/5, code quality
+      4/5. The actual finite-coordinate alternating bundle is now proved separately; bundle morphisms
+      are also now proved and clean-reviewed, and the final bundle functor is also proved and clean-reviewed.'
   - source: Actual finite-coordinate analytic bundle and transition formulas in fam:thm:finite-bundles
     lean: AlternatingAnalytic.analyticAlternatingBundle_of_finiteCoordinates; AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family
     module: AlternatingAnalytic.Geometry.AnalyticAlternatingBundle
     status: proved
     note: The existing Mathlib alternating prebundle is analytic and supplies the actual ContMDiffVectorBundle
-      omega witness with exact model/actual transition formulas. Explicit continuous finite coordinates, all
-      k/d including zero, arbitrary normed models and topological/normable actual fibers; no completeness.
+      omega witness with exact model/actual transition formulas. Explicit continuous finite coordinates,
+      all k/d including zero, arbitrary normed models and topological/normable actual fibers; no completeness.
       Generic assembly works at every regularity order and model with corners under local family preservation,
       which is discharged in the finite-coordinate analytic specialization. Shared gate and library/solution
-      integration passed; independent review clean (5/5/4). The actual bundle witness also passed the fourth
-      comparator statement and default-kernel replay. The separately proved operator-valued morphisms are mapped
-      below; the literal bundle bifunctor is also proved and clean-reviewed.
+      integration passed; independent review clean (5/5/4). The actual bundle witness also passed the
+      fourth comparator statement and default-kernel replay. The separately proved operator-valued morphisms
+      are mapped below; the literal bundle bifunctor is also proved and clean-reviewed.
   - source: Analytic bundle category underlying fam:thm:finite-bundles
     lean: AlternatingAnalytic.AnalyticBundleCat; AlternatingAnalytic.AnalyticBundleCat.category; AlternatingAnalytic.AnalyticBundleCat.exists_hom_iff_operatorAnalytic;
       AlternatingAnalytic.AnalyticBundleCat.isoOfOperatorAnalytic
     module: AlternatingAnalytic.Geometry.AnalyticBundleCategory
     status: proved
-    note: Actual category of analytic normable vector bundles over a fixed analytic base, with analytic Hom
-      sections, identity/composition and category laws, operator-local analytic characterization, and compatible
-      analytic fiberwise isomorphisms. Arbitrary normed models and topological/normable actual fibers; no completeness
-      or fiber-dimension hypothesis. Shared verification gate and independent jury clean (5/5/5). This supplies
-      the category; the alternating action on its morphisms is now separately proved and clean-reviewed, and
-      the final bifunctor is also proved and clean-reviewed.
+    note: Actual category of analytic normable vector bundles over a fixed analytic base, with analytic
+      Hom sections, identity/composition and category laws, operator-local analytic characterization,
+      and compatible analytic fiberwise isomorphisms. Arbitrary normed models and topological/normable
+      actual fibers; no completeness or fiber-dimension hypothesis. Shared verification gate and independent
+      jury clean (5/5/5). This supplies the category; the alternating action on its morphisms is now separately
+      proved and clean-reviewed, and the final bifunctor is also proved and clean-reviewed.
   - source: Operator-valued analytic alternating bundle morphisms in fam:thm:finite-bundles
     lean: AlternatingAnalytic.analyticAlternatingBundleMorphism_of_finiteCoordinates; AlternatingAnalytic.alternatingBundleHom_of_finiteCoordinates;
       AlternatingAnalytic.alternatingBundleHom_of_finiteCoordinates_coordinates; AlternatingAnalytic.alternatingBundleHom_of_finiteCoordinates_id;
       AlternatingAnalytic.alternatingBundleHom_of_finiteCoordinates_comp; AlternatingAnalytic.alternatingBundleHom_of_family
     module: AlternatingAnalytic.Geometry.AnalyticAlternatingBundleMorphism
     status: proved
-    note: Actual analytic Hom section induced by ordinary operator-valued analytic u:Eprime to E and v:F to
-      Fprime, with fiber formula m mapped to v composed with m composed with u in every input, exact alternatingMapAction
-      local operator coordinates, and identity/contravariant-covariant composition laws. The generic helper
-      allows arbitrary regularity order and model with corners under local family preservation; the finite-coordinate
-      analytic specialization has no added action-regularity premise. All k/d including zero, arbitrary nontrivially
-      normed K and normed models, topological/normable actual fibers; no completeness, characteristic or factorial
-      condition. The 22 public declarations span ContMDiffBundleHom, AlternatingBundleMorphismAlgebra and AnalyticAlternatingBundleMorphism.
+    note: Actual analytic Hom section induced by ordinary operator-valued analytic u:Eprime to E and v:F
+      to Fprime, with fiber formula m mapped to v composed with m composed with u in every input, exact
+      alternatingMapAction local operator coordinates, and identity/contravariant-covariant composition
+      laws. The generic helper allows arbitrary regularity order and model with corners under local family
+      preservation; the finite-coordinate analytic specialization has no added action-regularity premise.
+      All k/d including zero, arbitrary nontrivially normed K and normed models, topological/normable
+      actual fibers; no completeness, characteristic or factorial condition. The 22 public declarations
+      span ContMDiffBundleHom, AlternatingBundleMorphismAlgebra and AnalyticAlternatingBundleMorphism.
       Shared build/kernel/axiom gate passed at 2026-09-26T02:01:11Z; independent jury clean at 2026-09-26T02:07:41Z
-      (5/5/4). The final literal categorical bifunctor is also proved and clean-reviewed. This node is outside
-      the selected comparator statements.
+      (5/5/4). The final literal categorical bifunctor is also proved and clean-reviewed. This node is
+      outside the selected comparator statements.
   - source: Concrete t-adic rational/Laurent fields and jointly independent scalars preceding dom:rigid
     lean: AlternatingAnalytic.RationalLaurentScalars.concrete_setup; AlternatingAnalytic.RationalField.norm_X;
       AlternatingAnalytic.RationalField.isometry_algebraMap; AlternatingAnalytic.RationalField.denseRange_algebraMap;
@@ -1904,19 +2121,20 @@ alignment:
       AlternatingAnalytic.RationalLaurentScalars.algebraicIndependent_auxiliaryScalars
     module: AlternatingAnalytic.Analysis.RationalLaurentScalars
     status: proved
-    note: For every prime p and radius 0<r<1, the radius-tagged rational field has the exact norm induced by
-      its inclusion into LaurentField (ZMod p) r, with norm X=r, an actual normed algebra and an isometric
+    note: For every prime p and radius 0<r<1, the radius-tagged rational field has the exact norm induced
+      by its inclusion into LaurentField (ZMod p) r, with norm X=r, an actual normed algebra and an isometric
       dense inclusion. The rational field is countable and incomplete; the complete Laurent field is uncountable.
-      Actual finite jointly algebraically independent families supply coordinates a and auxiliary tau from
-      the same family, including the tagged auxiliary index. No CompleteSpace K assumption or rigidity, determinant,
-      tau-gap, all-alt or degree-gap conclusion. The collected theorem concrete_setup (line 221) packages the
-      actual field norms and algebra structures, norm-greater-than-one witnesses, characteristic-p and nonarchimedean
-      properties, countability and completeness/incompleteness, isometric dense inclusion and valuation norm
-      formulas, and the finite common independent family with its coordinate/auxiliary identities. The current
-      source passed the shared gate at 2026-09-26T05:12:02Z and a clean independent jury at 2026-09-26T05:15:38Z
-      (faithfulness 5/5, proof integrity 5/5, code quality 4/5). The accepted source SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a,
-      with 27 explicit public declarations and 37 gate-owned names including 10 generated anonymous instances.
-      Outside the selected comparator statements.
+      Actual finite jointly algebraically independent families supply coordinates a and auxiliary tau
+      from the same family, including the tagged auxiliary index. No CompleteSpace K assumption or rigidity,
+      determinant, tau-gap, all-alt or degree-gap conclusion. The collected theorem concrete_setup (line
+      221) packages the actual field norms and algebra structures, norm-greater-than-one witnesses, characteristic-p
+      and nonarchimedean properties, countability and completeness/incompleteness, isometric dense inclusion
+      and valuation norm formulas, and the finite common independent family with its coordinate/auxiliary
+      identities. The current source passed the shared gate at 2026-09-26T05:12:02Z and a clean independent
+      jury at 2026-09-26T05:15:38Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). The accepted
+      source SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a, with 27 explicit
+      public declarations and 37 gate-owned names including 10 generated anonymous instances. Outside
+      the selected comparator statements.
   - source: Max-norm truncated polynomial algebra in the setup preceding dom:rigid
     lean: AlternatingAnalytic.TruncatedPolynomial.max_norm_properties; AlternatingAnalytic.TruncatedPolynomial.coefficientIsometry;
       AlternatingAnalytic.TruncatedPolynomial.norm_eq_max; AlternatingAnalytic.TruncatedPolynomial.epsilon_pow;
@@ -1927,67 +2145,71 @@ alignment:
     status: proved
     note: The accepted generic collected theorem max_norm_properties (line 191) gives the actual AdjoinRoot
       (X^n) quotient its exact maximum coefficient norm, the coefficient isometry with forward and inverse
-      formulas, the basis-to-power identity, norm-one basis powers and identity, nilpotence, truncated convolution
-      and submultiplicativity. For positive n over a nontrivially normed nonarchimedean field L, completeness
-      follows when L is complete. The prime-degree wrapper is prime_max_norm_properties (line 216). The truncated
-      algebra's repaired source passed the shared gate at 2026-09-26T04:54:53Z and a clean independent jury
-      at 2026-09-26T04:59:09Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). Its SHA256 is 1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e.
-      The module has 30 explicit public declarations; the gate owns 31 names including the generated helper
-      AdjoinRoot.powerBasis'.congr_simp. Outside the selected comparator statements. Main Theorem (4), relative
-      isomorphism closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
-      this entry records its own prerequisite scope. Latest accepted root imports cover these modules; the
-      accepted root exposes every project module.
+      formulas, the basis-to-power identity, norm-one basis powers and identity, nilpotence, truncated
+      convolution and submultiplicativity. For positive n over a nontrivially normed nonarchimedean field
+      L, completeness follows when L is complete. The prime-degree wrapper is prime_max_norm_properties
+      (line 216). The truncated algebra's repaired source passed the shared gate at 2026-09-26T04:54:53Z
+      and a clean independent jury at 2026-09-26T04:59:09Z (faithfulness 5/5, proof integrity 5/5, code
+      quality 4/5). Its SHA256 is 1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The
+      module has 30 explicit public declarations; the gate owns 31 names including the generated helper
+      AdjoinRoot.powerBasis'.congr_simp. Outside the selected comparator statements. Main Theorem (4),
+      relative isomorphism closure and the split-domain/completed-action limits are separately proved
+      in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest accepted root
+      imports cover these modules; the accepted root exposes every project module.
   - source: 'dom:rigid: generic dense rigid source and concrete t-adic truncated-algebra realization'
     lean: AlternatingAnalytic.RigidDenseSource.rigid_source_properties; AlternatingAnalytic.RigidDenseSource.Concrete.rigid_source_properties;
       AlternatingAnalytic.RigidDenseSource.endScalarEquiv; AlternatingAnalytic.RigidDenseSource.Concrete.endScalarEquiv;
       AlternatingAnalytic.RigidDenseSource.Concrete.sourceEquiv
     module: AlternatingAnalytic.Analysis.RigidDenseSource
     status: proved
-    note: The generic collected theorem (line 18) takes nontrivially normed K/L with NormedAlgebra K L, complete
-      L, dense algebraMap, a finite nonempty index type I and an algebraically independent tuple a. It constructs
-      the literal K-subspace K^I + K a in the exact maximum-norm Pi space, with dense isometric inclusion,
-      complete ambient space, norm-one standard vectors and K-dimension card I + 1. Every continuous K-linear
-      endomorphism is uniquely scalar and every continuous K-linear functional to K is zero. The actual linear
-      isometric equivalence endScalarEquiv identifies the endomorphism space with K, with evaluation, inverse
-      scalar identity, exact norm, identity and composition formulas. The generic theorem adds no characteristic,
-      nonarchimedean or complete-K hypothesis; the source is not assumed complete and I is nonempty. The concrete
-      collected theorem (line 61) specializes to every prime p and 0<r<1 using the actual RationalField/LaurentField
-      pair, the same jointly independent a/tau family and A=AdjoinRoot(X^p) with its accepted maximum coefficient
-      norm. It constructs the literal span of the standard epsilon powers and the vector with coefficients
-      a, uses the actual coefficient isometry for sourceEquiv, retains incomplete K, and proves dense inclusion,
-      complete A, dimension p+1, scalar endomorphisms, zero dual and the same End-coordinate laws. Implementation
+    note: The generic collected theorem (line 18) takes nontrivially normed K/L with NormedAlgebra K L,
+      complete L, dense algebraMap, a finite nonempty index type I and an algebraically independent tuple
+      a. It constructs the literal K-subspace K^I + K a in the exact maximum-norm Pi space, with dense
+      isometric inclusion, complete ambient space, norm-one standard vectors and K-dimension card I +
+      1. Every continuous K-linear endomorphism is uniquely scalar and every continuous K-linear functional
+      to K is zero. The actual linear isometric equivalence endScalarEquiv identifies the endomorphism
+      space with K, with evaluation, inverse scalar identity, exact norm, identity and composition formulas.
+      The generic theorem adds no characteristic, nonarchimedean or complete-K hypothesis; the source
+      is not assumed complete and I is nonempty. The concrete collected theorem (line 61) specializes
+      to every prime p and 0<r<1 using the actual RationalField/LaurentField pair, the same jointly independent
+      a/tau family and A=AdjoinRoot(X^p) with its accepted maximum coefficient norm. It constructs the
+      literal span of the standard epsilon powers and the vector with coefficients a, uses the actual
+      coefficient isometry for sourceEquiv, retains incomplete K, and proves dense inclusion, complete
+      A, dimension p+1, scalar endomorphisms, zero dual and the same End-coordinate laws. Implementation
       modules are RigidDenseSourceBasic, RigidDenseSourceAlgebra, RigidDenseSourceCoordinates, RigidDenseSourceGeneric,
       RigidDenseSourceConcrete and the RigidDenseSource aggregate. Shared gate accepted at 2026-09-26T05:43:12Z;
-      fresh independent jury clean 5/5/4 at 2026-09-26T05:46:00Z. There are 88 explicit non-private names and
-      91 gate-owned names, including three generated helpers. Outside the selected comparator statements. Main
-      Theorem (4), relative isomorphism closure and the split-domain/completed-action limits are separately
-      proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest accepted root
-      imports cover these modules; the accepted root exposes every project module.
+      fresh independent jury clean 5/5/4 at 2026-09-26T05:46:00Z. There are 88 explicit non-private names
+      and 91 gate-owned names, including three generated helpers. Outside the selected comparator statements.
+      Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits are
+      separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
+      accepted root imports cover these modules; the accepted root exposes every project module.
   - source: Determinant-generated finite spaces and dom:tau-gap
     lean: AlternatingAnalytic.DeterminantPair.determinant_spaces_properties; AlternatingAnalytic.DeterminantPair.tau_gap;
-      AlternatingAnalytic.DeterminantPair.completionD; AlternatingAnalytic.DeterminantPair.completionG; AlternatingAnalytic.denseSubmoduleCompletionEquiv;
-      AlternatingAnalytic.determinant_span_generator_tuples; AlternatingAnalytic.aeval_square_scalar_gap
+      AlternatingAnalytic.DeterminantPair.completionD; AlternatingAnalytic.DeterminantPair.completionG;
+      AlternatingAnalytic.denseSubmoduleCompletionEquiv; AlternatingAnalytic.determinant_span_generator_tuples;
+      AlternatingAnalytic.aeval_square_scalar_gap
     module: AlternatingAnalytic.Analysis.DeterminantPairScalars; AlternatingAnalytic.Analysis.DeterminantDensity;
       AlternatingAnalytic.Analysis.DeterminantSpan; AlternatingAnalytic.Analysis.DeterminantPolynomialDegree
     status: proved
-    note: For every prime p and radius 0<r<1, the actual rational/Laurent field pair, max-norm truncated algebra
-      A and common jointly algebraically independent coordinate/auxiliary family define the literal spaces
-      D0, D and G. The collected determinant_spaces_properties (line 343) gives their prescribed generator
-      and determinant-span identities, finite algebraic dimension of D/G, determinant of the standard basis
-      equal to one, exact inherited norms and dense isometric inclusions. The actual K-linear isometric equivalences
-      completionD and completionG identify their completions with A and L and agree with the original inclusions.
-      K remains incomplete; A and L are complete. The determinant polynomial span maps injectively to G and
-      gives unique representatives of degree at most one in every auxiliary variable. The collected tau_gap
-      (line 405) states both that c in G and tau^2*c in G force c=0 and that the literal image-intersection
-      is {0}. The four implementation modules are DeterminantDensity, DeterminantSpan, DeterminantPolynomialDegree
-      and DeterminantPairScalars, with 83 gate-owned names. Shared gate accepted at 2026-09-26T06:01:20Z; fresh
-      independent jury clean 5/5/4 at 2026-09-26T06:03:14Z. The primary source SHA256 is c4053c7b07306e486fbec9fbda5a3c3ed72e05e71513f0a7b836b184762bfdce.
-      At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed
-      at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation modules
-      against their accepted hashes at 2026-09-26T07:04:27Z. Outside the selected comparator statements. Main
-      Theorem (4), relative isomorphism closure and the split-domain/completed-action limits are separately
-      proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest accepted root
-      imports cover these modules; the accepted root exposes every project module.
+    note: For every prime p and radius 0<r<1, the actual rational/Laurent field pair, max-norm truncated
+      algebra A and common jointly algebraically independent coordinate/auxiliary family define the literal
+      spaces D0, D and G. The collected determinant_spaces_properties (line 343) gives their prescribed
+      generator and determinant-span identities, finite algebraic dimension of D/G, determinant of the
+      standard basis equal to one, exact inherited norms and dense isometric inclusions. The actual K-linear
+      isometric equivalences completionD and completionG identify their completions with A and L and agree
+      with the original inclusions. K remains incomplete; A and L are complete. The determinant polynomial
+      span maps injectively to G and gives unique representatives of degree at most one in every auxiliary
+      variable. The collected tau_gap (line 405) states both that c in G and tau^2*c in G force c=0 and
+      that the literal image-intersection is {0}. The four implementation modules are DeterminantDensity,
+      DeterminantSpan, DeterminantPolynomialDegree and DeterminantPairScalars, with 83 gate-owned names.
+      Shared gate accepted at 2026-09-26T06:01:20Z; fresh independent jury clean 5/5/4 at 2026-09-26T06:03:14Z.
+      The primary source SHA256 is c4053c7b07306e486fbec9fbda5a3c3ed72e05e71513f0a7b836b184762bfdce. At
+      the preceding published twenty-three-node checkpoint, the original whole-project build gate passed
+      at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation
+      modules against their accepted hashes at 2026-09-26T07:04:27Z. Outside the selected comparator statements.
+      Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits are
+      separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
+      accepted root imports cover these modules; the accepted root exposes every project module.
   - source: Determinant coefficient spaces, auxiliary specialization and algebraic padding before dom:degree-gap
     lean: AlternatingAnalytic.determinantCoefficientEquiv; AlternatingAnalytic.DeterminantPair.coefficient_spaces;
       AlternatingAnalytic.DeterminantPair.padded_coefficient_spaces; AlternatingAnalytic.DeterminantPair.coefficient_polynomial_specialization;
@@ -1997,33 +2219,35 @@ alignment:
       AlternatingAnalytic.Analysis.DeterminantCoefficientPadding; AlternatingAnalytic.Analysis.DeterminantCoefficientSpan;
       AlternatingAnalytic.Analysis.DeterminantCoefficientSpecialization
     status: proved
-    note: 'For every prime p and 0<r<1, C consists exactly of c in G such that every primary coordinate a_i
-      times c lies in G, with its inherited L-norm and 1 in C. The collected coefficient_spaces (line 251)
-      supplies the actual K-linear isometric equivalence from continuous alternating p-forms E to G onto C,
-      via evaluation on the standard tuple, with pointwise determinant and inverse formulas and exact norms.
-      Scalar extension lands in complete L, agrees on original inputs and preserves the norm; no completeness
-      of K or G is imposed. The generic determinantCoefficientEquiv (Equiv line 124) requires dense scalar/input
-      inclusions, complete L, a norm-one standard tuple and an explicit determinant product norm bound, without
-      an explicit nonarchimedean assumption. Polynomial evaluation identifies Gpoly with G and Cpoly with C,
-      with unique coefficient representatives. The algebraic specialization fixes primary variables/constants,
-      sends auxiliary variables to zero and preserves products; Gpoly maps onto G0poly while Cpoly maps into
-      C0poly, without a surjectivity or continuity assertion for the latter map. The collected coefficient_polynomial_specialization
-      is at Specialization line 263. The padded_coefficient_spaces theorem (Spaces line 307) covers every n
-      including zero: the actual E times K^n and D times K^n with max norms are densely isometrically included
-      in complete A times L^n of L-dimension p+n, and the determinant is normalized with product norm bound.
-      The primary determinant span and coefficient space remain the same; paddedCoefficientEquiv gives the
-      actual degree-p+n isometry onto C and paddedScalarExtension gives the L-valued pointwise formula and
-      exact norm. The five implementation modules are DeterminantCoefficientEquiv, DeterminantCoefficientPadding,
-      DeterminantCoefficientSpaces, DeterminantCoefficientSpan and DeterminantCoefficientSpecialization, with
-      162 explicit names and four generated helpers, for 166 gate-owned names. Shared gate accepted at 2026-09-26T06:34:09Z;
-      a fresh complete independent jury returned clean 5/5/4 at 2026-09-26T07:03:11Z. At the preceding published
-      twenty-three-node checkpoint, the original whole-project build gate passed at 2026-09-26T06:34:09Z and
-      the idle checkpoint confirmed the root and all 15 new implementation modules against their accepted hashes
-      at 2026-09-26T07:04:27Z. Outside the selected comparator statements. Main Theorem (4), relative isomorphism
-      closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
-      this entry records its own prerequisite scope. Latest accepted root imports cover these modules; the
-      accepted root exposes every project module.'
-  - source: Algebraic quadratic coefficient gap and normalized-family obstruction for the determinant source
+    note: 'For every prime p and 0<r<1, C consists exactly of c in G such that every primary coordinate
+      a_i times c lies in G, with its inherited L-norm and 1 in C. The collected coefficient_spaces (line
+      251) supplies the actual K-linear isometric equivalence from continuous alternating p-forms E to
+      G onto C, via evaluation on the standard tuple, with pointwise determinant and inverse formulas
+      and exact norms. Scalar extension lands in complete L, agrees on original inputs and preserves the
+      norm; no completeness of K or G is imposed. The generic determinantCoefficientEquiv (Equiv line
+      124) requires dense scalar/input inclusions, complete L, a norm-one standard tuple and an explicit
+      determinant product norm bound, without an explicit nonarchimedean assumption. Polynomial evaluation
+      identifies Gpoly with G and Cpoly with C, with unique coefficient representatives. The algebraic
+      specialization fixes primary variables/constants, sends auxiliary variables to zero and preserves
+      products; Gpoly maps onto G0poly while Cpoly maps into C0poly, without a surjectivity or continuity
+      assertion for the latter map. The collected coefficient_polynomial_specialization is at Specialization
+      line 263. The padded_coefficient_spaces theorem (Spaces line 307) covers every n including zero:
+      the actual E times K^n and D times K^n with max norms are densely isometrically included in complete
+      A times L^n of L-dimension p+n, and the determinant is normalized with product norm bound. The primary
+      determinant span and coefficient space remain the same; paddedCoefficientEquiv gives the actual
+      degree-p+n isometry onto C and paddedScalarExtension gives the L-valued pointwise formula and exact
+      norm. The five implementation modules are DeterminantCoefficientEquiv, DeterminantCoefficientPadding,
+      DeterminantCoefficientSpaces, DeterminantCoefficientSpan and DeterminantCoefficientSpecialization,
+      with 162 explicit names and four generated helpers, for 166 gate-owned names. Shared gate accepted
+      at 2026-09-26T06:34:09Z; a fresh complete independent jury returned clean 5/5/4 at 2026-09-26T07:03:11Z.
+      At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed
+      at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation
+      modules against their accepted hashes at 2026-09-26T07:04:27Z. Outside the selected comparator statements.
+      Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits are
+      separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
+      accepted root imports cover these modules; the accepted root exposes every project module.'
+  - source: Algebraic quadratic coefficient gap and normalized-family obstruction for the determinant
+      source
     lean: AlternatingAnalytic.DeterminantQuadratic.quadratic_coefficient_gap; AlternatingAnalytic.DeterminantQuadratic.no_coefficient_family;
       AlternatingAnalytic.DeterminantPair.quadratic_coefficient_gap; AlternatingAnalytic.DeterminantPair.no_coefficient_family;
       AlternatingAnalytic.DeterminantQuadratic.phi
@@ -2031,26 +2255,27 @@ alignment:
       AlternatingAnalytic.Algebra.DeterminantQuadraticPhi; AlternatingAnalytic.Algebra.DeterminantQuadraticReduction;
       AlternatingAnalytic.Algebra.DeterminantQuadraticGap
     status: proved
-    note: The generic collected theorem quadratic_coefficient_gap (Gap line 86) assumes Field K, CharP K p
-      and Fact p.Prime, retaining every prime including p=2. G0poly and C0poly are closed under homogeneous
+    note: The generic collected theorem quadratic_coefficient_gap (Gap line 86) assumes Field K, CharP
+      K p and Fact p.Prime, retaining every prime including p=2. G0poly and C0poly are closed under homogeneous
       components, and the degree-two component of every element of G0poly lies in the declared quadraticSpan.
       The actual polynomial-valued K-linear map phi (Phi line 11) sends X_i*X_j to the univariate monomial
       X^(i+j) when p-1<=i+j and to zero otherwise; it annihilates the declared minors and square-coordinate
-      quadratics, hence the degree-two component of every element of G0poly. Every degree-one homogeneous member
-      of C0poly is zero, and every member has zero first homogeneous component. The generic no_coefficient_family
+      quadratics, hence the degree-two component of every element of G0poly. Every degree-one homogeneous
+      member of C0poly is zero, and every member has zero first homogeneous component. The generic no_coefficient_family
       theorem (Gap line 107) rules out d:Fin p to C0poly with d_0=1 and sum_i X_i*d_i in C0poly. The actual
       concrete DeterminantPair wrappers at Gap lines 154 and 173 identify the specialized polynomial spaces
       of the t-adic construction and retain prime p and 0<r<1. These are algebraic conclusions; no continuity
       or operator-norm bound is asserted for phi. The five implementation modules are DeterminantQuadraticBasic,
       DeterminantQuadraticGrading, DeterminantQuadraticPhi, DeterminantQuadraticReduction and DeterminantQuadraticGap;
-      all 46 receipt-owned names are explicitly named public declarations, with no anonymous or extra generated
-      names. Shared gate passed at 2026-09-26T07:23:07Z; independent jury clean 5/5/4 at 2026-09-26T07:25:24Z.
-      The primary source SHA256 is 48636a4ac93a4569e967515cff64f357e1a9e2b090be0689c403d85ccce19b40. The current
-      twenty-five-node checkpoint has an accepted original whole-project build gate at 2026-09-26T07:37:00Z
+      all 46 receipt-owned names are explicitly named public declarations, with no anonymous or extra
+      generated names. Shared gate passed at 2026-09-26T07:23:07Z; independent jury clean 5/5/4 at 2026-09-26T07:25:24Z.
+      The primary source SHA256 is 48636a4ac93a4569e967515cff64f357e1a9e2b090be0689c403d85ccce19b40. The
+      current twenty-five-node checkpoint has an accepted original whole-project build gate at 2026-09-26T07:37:00Z
       and paused-idle root/source hash confirmation at 2026-09-26T08:03:28Z. Outside the selected comparator
-      statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits
-      are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
-      accepted root imports cover these modules; the accepted root exposes every project module.
+      statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action
+      limits are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite
+      scope. Latest accepted root imports cover these modules; the accepted root exposes every project
+      module.
   - source: Nonanalytic determinant coordinate and degree-p cross-action in the no-largest construction
     lean: AlternatingAnalytic.DeterminantPair.nonanalytic_determinant_coordinate_and_cross_action; AlternatingAnalytic.DeterminantPair.not_analyticAt_determinantCoordinate;
       AlternatingAnalytic.DeterminantPair.not_analyticAt_crossAction; AlternatingAnalytic.DeterminantPair.no_multilinear_coordinate;
@@ -2059,50 +2284,52 @@ alignment:
     module: AlternatingAnalytic.Analysis.DeterminantCoefficientObstruction; AlternatingAnalytic.Analysis.DeterminantCrossActionObstruction;
       AlternatingAnalytic.Analysis.DeterminantMultilinearObstruction; AlternatingAnalytic.Analysis.DeterminantMultiplication
     status: proved
-    note: For every prime p and 0<r<1, the actual incomplete t-adic rational field K, rigid source E, determinant
-      space D and inherited small targets C/G are retained. The scalar coefficient-family obstruction transfers
-      the algebraic gap to C. The exact no_multilinear_coordinate theorem (Multilinear line 69) excludes a
-      continuous p-multilinear B:E^p to C whose value on the repeated standard-zero vector, after inclusion
-      into L, is 1; it does not assert that all such maps vanish. Multiplication E times E to D is an actual
-      bounded bilinear map with norm of multiplication x at most norm x. Completed multiplication agrees on
-      original inputs; the multiplication matrix is lower triangular with diagonal coeff(x,0) and determinant
-      coeff(x,0)^p. The G-valued determinant on D is normalized to one on the standard tuple. The actual C-valued
-      determinantCoordinate (CrossAction line 54) is coefficientEquiv of determinant pullback, has scalar formula
-      coeff(x,0)^p and p-homogeneity, and is not analytic at zero. The actual bounded linear determinantCoordinateEvaluation
-      recovers it from alternatingMapAction along multiplicationSlice x=(multiplication x,id_G), which is analytic
-      at every x. The joint action has parameter domain (E to D continuous linear maps) times End(G), output
-      continuous linear operators from Alt^p(D,G) to Alt^p(E,G), and is not analytic at (0,id_G). No nowhere-analytic
-      statement, failure at (0,0), higher-degree cross-action result or complete-field/Banach version is asserted.
-      The collected nonanalytic_determinant_coordinate_and_cross_action is at CrossAction lines 146–175. All
-      39 gate-owned names are explicit public declarations across the four modules, with no anonymous or extra
-      generated declarations and two private helpers excluded. Shared gate accepted at 2026-09-26T07:37:00Z;
-      fresh complete independent jury clean 5/5/4 at 2026-09-26T07:57:29Z. The current twenty-five-node checkpoint
+    note: For every prime p and 0<r<1, the actual incomplete t-adic rational field K, rigid source E,
+      determinant space D and inherited small targets C/G are retained. The scalar coefficient-family
+      obstruction transfers the algebraic gap to C. The exact no_multilinear_coordinate theorem (Multilinear
+      line 69) excludes a continuous p-multilinear B:E^p to C whose value on the repeated standard-zero
+      vector, after inclusion into L, is 1; it does not assert that all such maps vanish. Multiplication
+      E times E to D is an actual bounded bilinear map with norm of multiplication x at most norm x. Completed
+      multiplication agrees on original inputs; the multiplication matrix is lower triangular with diagonal
+      coeff(x,0) and determinant coeff(x,0)^p. The G-valued determinant on D is normalized to one on the
+      standard tuple. The actual C-valued determinantCoordinate (CrossAction line 54) is coefficientEquiv
+      of determinant pullback, has scalar formula coeff(x,0)^p and p-homogeneity, and is not analytic
+      at zero. The actual bounded linear determinantCoordinateEvaluation recovers it from alternatingMapAction
+      along multiplicationSlice x=(multiplication x,id_G), which is analytic at every x. The joint action
+      has parameter domain (E to D continuous linear maps) times End(G), output continuous linear operators
+      from Alt^p(D,G) to Alt^p(E,G), and is not analytic at (0,id_G). No nowhere-analytic statement, failure
+      at (0,0), higher-degree cross-action result or complete-field/Banach version is asserted. The collected
+      nonanalytic_determinant_coordinate_and_cross_action is at CrossAction lines 146–175. All 39 gate-owned
+      names are explicit public declarations across the four modules, with no anonymous or extra generated
+      declarations and two private helpers excluded. Shared gate accepted at 2026-09-26T07:37:00Z; fresh
+      complete independent jury clean 5/5/4 at 2026-09-26T07:57:29Z. The current twenty-five-node checkpoint
       has an accepted original whole-project build gate at 2026-09-26T07:37:00Z and paused-idle root/source
-      hash confirmation at 2026-09-26T08:03:28Z. Outside the selected comparator statements. Main Theorem (4),
-      relative isomorphism closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
-      this entry records its own prerequisite scope. Latest accepted root imports cover these modules; the
-      accepted root exposes every project module.
+      hash confirmation at 2026-09-26T08:03:28Z. Outside the selected comparator statements. Main Theorem
+      (4), relative isomorphism closure and the split-domain/completed-action limits are separately proved
+      in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest accepted root
+      imports cover these modules; the accepted root exposes every project module.
   - source: 'dom:all-alt: all multilinear maps on the concrete determinant pair are alternating'
     lean: AlternatingAnalytic.DeterminantPair.all_multilinear_maps_alternating; AlternatingAnalytic.DeterminantPair.allAlternatingEquiv;
       AlternatingAnalytic.DeterminantPair.retractionR; AlternatingAnalytic.multilinear_alternating_of_basis_repeated;
       AlternatingAnalytic.DeterminantPair.inclusionJ; AlternatingAnalytic.DeterminantPair.norm_retractionR_le
     module: AlternatingAnalytic.Analysis.BasisAlternatingCriterion; AlternatingAnalytic.Analysis.DeterminantPairAllAlternating
     status: proved
-    note: For every prime p (including two) and 0<r<1, every continuous p-multilinear map on the actual D^p
-      into the small target G is alternating. The exact-norm extension is L-valued, agrees with original G-valued
-      inputs and vanishes whenever two inputs coincide; it does not assert arbitrary extended values belong
-      to G. inclusionJ (lines 162–164) is the actual alternating-to-multilinear linear isometry; allAlternatingEquiv
-      (177–179) is its linear isometric equivalence; retractionR (184–186) is the continuous linear inverse.
-      Both inverse laws, pointwise identity, norm preservation and operator norm at most one are collected
-      by all_multilinear_maps_alternating at lines 218–234. No completeness of K or G is assumed; the concrete
-      K is incomplete by the accepted scalar foundation. Two modules contain 26 explicit public declarations
-      plus three anonymous local instances and generated tau.congr_simp, for 30 gate-owned names. Shared gate
-      2026-09-26T08:21:32Z; full independent jury clean 5/5/4 at 2026-09-26T08:24:53Z. The twenty-eight-node
-      checkpoint has the original whole-project build gate at 2026-09-26T09:06:06Z and paused-idle confirmation
-      of the root plus four new implementation hashes at 2026-09-26T09:09:13Z. Outside the selected comparator
-      statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits
-      are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
-      accepted root imports cover these modules; the accepted root exposes every project module.
+    note: For every prime p (including two) and 0<r<1, every continuous p-multilinear map on the actual
+      D^p into the small target G is alternating. The exact-norm extension is L-valued, agrees with original
+      G-valued inputs and vanishes whenever two inputs coincide; it does not assert arbitrary extended
+      values belong to G. inclusionJ (lines 162–164) is the actual alternating-to-multilinear linear isometry;
+      allAlternatingEquiv (177–179) is its linear isometric equivalence; retractionR (184–186) is the
+      continuous linear inverse. Both inverse laws, pointwise identity, norm preservation and operator
+      norm at most one are collected by all_multilinear_maps_alternating at lines 218–234. No completeness
+      of K or G is assumed; the concrete K is incomplete by the accepted scalar foundation. Two modules
+      contain 26 explicit public declarations plus three anonymous local instances and generated tau.congr_simp,
+      for 30 gate-owned names. Shared gate 2026-09-26T08:21:32Z; full independent jury clean 5/5/4 at
+      2026-09-26T08:24:53Z. The twenty-eight-node checkpoint has the original whole-project build gate
+      at 2026-09-26T09:06:06Z and paused-idle confirmation of the root plus four new implementation hashes
+      at 2026-09-26T09:09:13Z. Outside the selected comparator statements. Main Theorem (4), relative
+      isomorphism closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
+      this entry records its own prerequisite scope. Latest accepted root imports cover these modules;
+      the accepted root exposes every project module.
   - source: 'Universal alternating targets: operator laws and transport'
     lean: AlternatingAnalytic.UniversalAlternatingTarget; AlternatingAnalytic.universalAlternatingTarget_operator_laws;
       AlternatingAnalytic.analyticOnNhd_alternatingMapAction_of_universal_target; AlternatingAnalytic.universalAlternatingTarget_iff_of_continuousLinearEquiv
@@ -2110,18 +2337,19 @@ alignment:
     status: proved
     note: Over any nontrivially normed field K, for every degree k and normed spaces, UniversalAlternatingTarget
       K k F requires source-precomposition to be analytic everywhere for every pair of normed source spaces
-      in the stated universe. The collected universalAlternatingTarget_operator_laws at lines 285–311 gives
-      both literal alternatingMapAction factorizations and AnalyticAt at every operator parameter if UniversalAlternatingTarget
-      K k F or UniversalAlternatingTarget K k F′. It also gives closure under a continuous linear retraction
-      r.comp i=id, invariance under continuous linear equivalence, and finite indexed products. No completeness
-      hypothesis is imposed. The 14 public declarations comprise 12 theorems and two definitions; no anonymous/generated
-      extras, two private helpers excluded. Source SHA256 b372df79d5e04acf6f50daf5a726264cc634edd31b4f4bce9eb1c23d921902fd.
-      Shared gate accepted 2026-09-26T08:35:58Z; fresh full jury clean 5/5/4 at 2026-09-26T08:49:34Z. The twenty-eight-node
-      checkpoint has the original whole-project build gate at 2026-09-26T09:06:06Z and paused-idle confirmation
-      of the root plus four new implementation hashes at 2026-09-26T09:09:13Z. Outside the selected comparator
-      statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits
-      are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
-      accepted root imports cover these modules; the accepted root exposes every project module.
+      in the stated universe. The collected universalAlternatingTarget_operator_laws at lines 285–311
+      gives both literal alternatingMapAction factorizations and AnalyticAt at every operator parameter
+      if UniversalAlternatingTarget K k F or UniversalAlternatingTarget K k F′. It also gives closure
+      under a continuous linear retraction r.comp i=id, invariance under continuous linear equivalence,
+      and finite indexed products. No completeness hypothesis is imposed. The 14 public declarations comprise
+      12 theorems and two definitions; no anonymous/generated extras, two private helpers excluded. Source
+      SHA256 b372df79d5e04acf6f50daf5a726264cc634edd31b4f4bce9eb1c23d921902fd. Shared gate accepted 2026-09-26T08:35:58Z;
+      fresh full jury clean 5/5/4 at 2026-09-26T08:49:34Z. The twenty-eight-node checkpoint has the original
+      whole-project build gate at 2026-09-26T09:06:06Z and paused-idle confirmation of the root plus four
+      new implementation hashes at 2026-09-26T09:09:13Z. Outside the selected comparator statements. Main
+      Theorem (4), relative isomorphism closure and the split-domain/completed-action limits are separately
+      proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest accepted
+      root imports cover these modules; the accepted root exposes every project module.
   - source: Split destinations have polynomial incoming alternating action
     lean: AlternatingAnalytic.IsSplitAlternatingPair; AlternatingAnalytic.split_destination_polynomial_action;
       AlternatingAnalytic.splitDestinationLift; AlternatingAnalytic.cpolynomialAt_precomposition_of_split_destination;
@@ -2130,112 +2358,120 @@ alignment:
     status: proved
     note: IsSplitAlternatingPair K k E′ F′ means the alternating-to-multilinear inclusion has a continuous
       linear left inverse; no contractive or numeric norm condition is part of the predicate. For arbitrary
-      source pair (E,F), the incoming parameter is (u:E′→L[K]E,v:F→L[K]F′), and the split hypothesis is on
-      the destination (E′,F′). The collected split_destination_polynomial_action at lines 125–143 supplies
-      an actual Option(Fin k)-indexed continuous multilinear lift; the mixed-slot formula uses the output map
-      in slot none and source maps in slots some i followed by the retraction, and the diagonal is alternatingMapAction.
-      It proves CPolynomialAt at every parameter and AnalyticOnNhd on Set.univ. All nontrivially normed K,
-      degrees k including zero and arbitrary normed spaces are allowed, with no completeness assumptions. The
-      explicit (k+1)-multilinear witness is recorded without a separate numeric degree or norm-bound claim.
-      All 10 gate-owned declarations are explicit public names, with no anonymous/generated/private extras.
-      Shared gate 2026-09-26T09:06:06Z; independent jury clean 5/5/4 at 2026-09-26T09:08:06Z. The twenty-eight-node
-      checkpoint has the original whole-project build gate at 2026-09-26T09:06:06Z and paused-idle confirmation
-      of the root plus four new implementation hashes at 2026-09-26T09:09:13Z. Outside the selected comparator
-      statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits
-      are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
-      accepted root imports cover these modules; the accepted root exposes every project module.
+      source pair (E,F), the incoming parameter is (u:E′→L[K]E,v:F→L[K]F′), and the split hypothesis is
+      on the destination (E′,F′). The collected split_destination_polynomial_action at lines 125–143 supplies
+      an actual Option(Fin k)-indexed continuous multilinear lift; the mixed-slot formula uses the output
+      map in slot none and source maps in slots some i followed by the retraction, and the diagonal is
+      alternatingMapAction. It proves CPolynomialAt at every parameter and AnalyticOnNhd on Set.univ.
+      All nontrivially normed K, degrees k including zero and arbitrary normed spaces are allowed, with
+      no completeness assumptions. The explicit (k+1)-multilinear witness is recorded without a separate
+      numeric degree or norm-bound claim. All 10 gate-owned declarations are explicit public names, with
+      no anonymous/generated/private extras. Shared gate 2026-09-26T09:06:06Z; independent jury clean
+      5/5/4 at 2026-09-26T09:08:06Z. The twenty-eight-node checkpoint has the original whole-project build
+      gate at 2026-09-26T09:06:06Z and paused-idle confirmation of the root plus four new implementation
+      hashes at 2026-09-26T09:09:13Z. Outside the selected comparator statements. Main Theorem (4), relative
+      isomorphism closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
+      this entry records its own prerequisite scope. Latest accepted root imports cover these modules;
+      the accepted root exposes every project module.
   - source: Padded split pairs with incompatible analytic self-actions, every degree k≥p
     lean: AlternatingAnalytic.DeterminantPair.unpadded_analytic_self_actions; AlternatingAnalytic.DeterminantPair.Padding.padded_analytic_self_action;
       AlternatingAnalytic.DeterminantPair.Padding.padded_nonanalytic_cross_action; AlternatingAnalytic.DeterminantPair.Padding.padded_split_pair;
       AlternatingAnalytic.DeterminantPair.Padding.canonical_padded_split_pair; AlternatingAnalytic.DeterminantPair.Padding.padded_split_pairs_with_incompatible_analytic_self_actions;
       AlternatingAnalytic.DeterminantPair.Padding.realized_pairs_for_every_degree; AlternatingAnalytic.DeterminantPair.Padding.concrete_completion_identifications
     module: AlternatingAnalytic.Analysis.DeterminantPairSelfActions; AlternatingAnalytic.Analysis.PaddedSelfAction;
-      AlternatingAnalytic.Analysis.PaddedCrossAction; AlternatingAnalytic.Analysis.PaddedSplitRetraction; AlternatingAnalytic.Analysis.PaddedSplitCanonical;
-      AlternatingAnalytic.Analysis.PaddedCompletions; AlternatingAnalytic.Analysis.PaddedIncompatiblePairs
+      AlternatingAnalytic.Analysis.PaddedCrossAction; AlternatingAnalytic.Analysis.PaddedSplitRetraction;
+      AlternatingAnalytic.Analysis.PaddedSplitCanonical; AlternatingAnalytic.Analysis.PaddedCompletions;
+      AlternatingAnalytic.Analysis.PaddedIncompatiblePairs
     status: proved
-    note: For every prime p, every r:ℝ≥0 with 0<r<1 and every n:ℕ, the actual padded degree is p+n. The collected
-      padded_split_pairs_with_incompatible_analytic_self_actions (PaddedIncompatiblePairs lines 29–94) gives
-      the concrete padded witnesses; realized_pairs_for_every_degree (137–158) uses n=k−p for every k≥p and
-      retains incomplete K, finite algebraic dimension and nonarchimedean E,D,G, splitness of D/G, analytic
-      E/G and D/G self-actions and nonanalytic cross-action at (auxiliaryIdentity p r n,id_G). The zero-source-operator
-      base point is not asserted for positive padding. canonical_padded_split_pair (PaddedSplitCanonical182–192)
-      records freezing/padTuple, canonicalRetraction=iteratedWedgeLast∘retractionR∘freezeAuxiliaryLast, the
-      left-inverse law, splitness and analytic D/G self-action; that collected API asserts no numeric retraction
-      norm bound. concrete_completion_identifications (PaddedIncompatiblePairs115–131) gives E/D completion
-      isometries to H and G/C completion isometries to L, density/isometry/coercion formulas, complete H/L,
-      L-finrank H=p+n and the scalar norm formula. It does not assert completed-action analyticity or a coordinate-polynomial
-      diagonal lift. Seven implementation modules contribute 117 explicit public names and generated ContinuousLinearEquiv.mk.congr_simp,
-      for 118 gate-owned names. There are no anonymous instances; 12 named instances include six local registrations,
-      and two private helpers are excluded. Shared gate 2026-09-26T19:02:51Z; full jury clean 5/5/4 at 2026-09-26T19:05:47Z.
-      Outside the selected comparator statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action
-      limits are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope.
-      Latest accepted root imports cover these modules; the accepted root exposes every project module.
+    note: For every prime p, every r:ℝ≥0 with 0<r<1 and every n:ℕ, the actual padded degree is p+n. The
+      collected padded_split_pairs_with_incompatible_analytic_self_actions (PaddedIncompatiblePairs lines
+      29–94) gives the concrete padded witnesses; realized_pairs_for_every_degree (137–158) uses n=k−p
+      for every k≥p and retains incomplete K, finite algebraic dimension and nonarchimedean E,D,G, splitness
+      of D/G, analytic E/G and D/G self-actions and nonanalytic cross-action at (auxiliaryIdentity p r
+      n,id_G). The zero-source-operator base point is not asserted for positive padding. canonical_padded_split_pair
+      (PaddedSplitCanonical182–192) records freezing/padTuple, canonicalRetraction=iteratedWedgeLast∘retractionR∘freezeAuxiliaryLast,
+      the left-inverse law, splitness and analytic D/G self-action; that collected API asserts no numeric
+      retraction norm bound. concrete_completion_identifications (PaddedIncompatiblePairs115–131) gives
+      E/D completion isometries to H and G/C completion isometries to L, density/isometry/coercion formulas,
+      complete H/L, L-finrank H=p+n and the scalar norm formula. It does not assert completed-action analyticity
+      or a coordinate-polynomial diagonal lift. Seven implementation modules contribute 117 explicit public
+      names and generated ContinuousLinearEquiv.mk.congr_simp, for 118 gate-owned names. There are no
+      anonymous instances; 12 named instances include six local registrations, and two private helpers
+      are excluded. Shared gate 2026-09-26T19:02:51Z; full jury clean 5/5/4 at 2026-09-26T19:05:47Z. Outside
+      the selected comparator statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action
+      limits are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite
+      scope. Latest accepted root imports cover these modules; the accepted root exposes every project
+      module.
   - source: Actual universal-target core and full split-pair analytic domains
-    lean: AlternatingAnalytic.UniversalAlternatingTargetCat; AlternatingAnalytic.UniversalTargetCoreCat; AlternatingAnalytic.SplitAlternatingPairCat;
-      AlternatingAnalytic.restrictedAlternatingFunctor; AlternatingAnalytic.IsAlternatingAnalyticDomain; AlternatingAnalytic.universalTarget_core;
-      AlternatingAnalytic.product_isAnalyticDomain_iff; AlternatingAnalytic.splitPairs_incoming_analytic; AlternatingAnalytic.IsAlternatingAnalyticDomain.union_core;
-      AlternatingAnalytic.NormedSpaceCat.restrictedPairHomCoordinates
+    lean: AlternatingAnalytic.UniversalAlternatingTargetCat; AlternatingAnalytic.UniversalTargetCoreCat;
+      AlternatingAnalytic.SplitAlternatingPairCat; AlternatingAnalytic.restrictedAlternatingFunctor; AlternatingAnalytic.IsAlternatingAnalyticDomain;
+      AlternatingAnalytic.universalTarget_core; AlternatingAnalytic.product_isAnalyticDomain_iff; AlternatingAnalytic.splitPairs_incoming_analytic;
+      AlternatingAnalytic.IsAlternatingAnalyticDomain.union_core; AlternatingAnalytic.NormedSpaceCat.restrictedPairHomCoordinates
     module: AlternatingAnalytic.Category.AnalyticDomains
     status: proved
     note: 'For any nontrivially normed K and every degree k, the three actual full categories UniversalAlternatingTargetCat,
-      UniversalTargetCoreCat and SplitAlternatingPairCat are declared. restrictedAlternatingFunctor S is the
-      actual inclusion followed by alternatingFunctor. IsAlternatingAnalyticDomain (107–109) is FunctorAnalyticOnHoms
-      of that restriction. The canonical Hom-coordinate equivalence (54–58) is linear isometric to reversed-first
-      and forward-second continuous linear operators, with maximum norm (83–86). universalTarget_core (222–241)
-      packages the core analytic-domain theorem, the criterion that the product predicate(fun X=>T X.2) is
-      a domain iff every F satisfying arbitrary ObjectProperty T is a UniversalAlternatingTarget, union_core
-      adjoining the core to any domain, and retract/equivalence/finite-product laws. splitPairs_incoming_analytic
-      (253–256) requires splitness only of the destination Y with arbitrary source X and proves the full split-pair
-      domain. There are no completeness, finite-dimension, characteristic or positive-degree assumptions. All
-      28 gate-owned names are explicit public declarations: six definitions, five abbreviations, 15 theorems
-      and two named instances; no anonymous/generated/private extras. Gate 2026-09-26T19:14:57Z; full jury
-      clean 5/5/4 at 2026-09-26T19:17:08Z. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action
-      limits are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope.
-      Latest accepted root imports cover these modules; the accepted root exposes every project module.'
+      UniversalTargetCoreCat and SplitAlternatingPairCat are declared. restrictedAlternatingFunctor S
+      is the actual inclusion followed by alternatingFunctor. IsAlternatingAnalyticDomain (107–109) is
+      FunctorAnalyticOnHoms of that restriction. The canonical Hom-coordinate equivalence (54–58) is linear
+      isometric to reversed-first and forward-second continuous linear operators, with maximum norm (83–86).
+      universalTarget_core (222–241) packages the core analytic-domain theorem, the criterion that the
+      product predicate(fun X=>T X.2) is a domain iff every F satisfying arbitrary ObjectProperty T is
+      a UniversalAlternatingTarget, union_core adjoining the core to any domain, and retract/equivalence/finite-product
+      laws. splitPairs_incoming_analytic (253–256) requires splitness only of the destination Y with arbitrary
+      source X and proves the full split-pair domain. There are no completeness, finite-dimension, characteristic
+      or positive-degree assumptions. All 28 gate-owned names are explicit public declarations: six definitions,
+      five abbreviations, 15 theorems and two named instances; no anonymous/generated/private extras.
+      Gate 2026-09-26T19:14:57Z; full jury clean 5/5/4 at 2026-09-26T19:17:08Z. Main Theorem (4), relative
+      isomorphism closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
+      this entry records its own prerequisite scope. Latest accepted root imports cover these modules;
+      the accepted root exposes every project module.'
   - source: 'prop:finite-coordinate: continuous finite coordinates on the operator domain E'
-    lean: AlternatingAnalytic.finiteCoordinateDomain; AlternatingAnalytic.finiteCoordinateRetraction; AlternatingAnalytic.finiteCoordinateDomainLift;
-      AlternatingAnalytic.hasBoundedLift_of_finiteCoordinateDomain; AlternatingAnalytic.cpolynomialAt_Q_of_finiteCoordinateDomain;
-      AlternatingAnalytic.analyticAt_Q_of_finiteCoordinateDomain
+    lean: AlternatingAnalytic.finiteCoordinateDomain; AlternatingAnalytic.finiteCoordinateRetraction;
+      AlternatingAnalytic.finiteCoordinateDomainLift; AlternatingAnalytic.hasBoundedLift_of_finiteCoordinateDomain;
+      AlternatingAnalytic.cpolynomialAt_Q_of_finiteCoordinateDomain; AlternatingAnalytic.analyticAt_Q_of_finiteCoordinateDomain
     module: AlternatingAnalytic.Analysis.FiniteCoordinateDomain; AlternatingAnalytic.Analysis.BoundedRetractionLift;
       AlternatingAnalytic.Analysis.FiniteCoordinateDeterminant
     status: proved
     note: 'A basis b : Basis (Fin d) K E with each coordinate continuous yields the actual determinant-sum
-      continuous linear retraction and k-multilinear lift for Q on E→L[K]E′, with arbitrary normed E′ and F
-      and any nontrivially normed K. finiteCoordinateDomain (300–332) collects exact formulas, norm bounds,
-      retraction and diagonal identities, HasBoundedLift and CPolynomialAt/AnalyticAt at every operator. The
-      real bound is k! times the k-subset sum of products of coordinate-functional and basis-vector norms;
-      no factorial division in K. For k>d the bound, retraction, lift and Q vanish; for k=0 the bound is one,
-      the retraction is pointwise identity and Q is constant. No completeness, characteristic or nonarchimedean
-      assumptions. Three modules, 35 explicit plus three generated names, 38 gate-owned declarations. Gate
-      accepted 2026-09-26T19:27:18Z. First jury flagged None/5/4 for a missing faithfulness final; full fresh
-      jury on unchanged sources clean 5/5/4 at 2026-09-26T19:41:32Z. The codomain-coordinate case and complete-field
-      finite-dimensional corollary are also proved in their separate entries below. Outside the selected comparator
-      statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits
-      are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
-      accepted root imports cover these modules; the accepted root exposes every project module.'
+      continuous linear retraction and k-multilinear lift for Q on E→L[K]E′, with arbitrary normed E′
+      and F and any nontrivially normed K. finiteCoordinateDomain (300–332) collects exact formulas, norm
+      bounds, retraction and diagonal identities, HasBoundedLift and CPolynomialAt/AnalyticAt at every
+      operator. The real bound is k! times the k-subset sum of products of coordinate-functional and basis-vector
+      norms; no factorial division in K. For k>d the bound, retraction, lift and Q vanish; for k=0 the
+      bound is one, the retraction is pointwise identity and Q is constant. No completeness, characteristic
+      or nonarchimedean assumptions. Three modules, 35 explicit plus three generated names, 38 gate-owned
+      declarations. Gate accepted 2026-09-26T19:27:18Z. First jury flagged None/5/4 for a missing faithfulness
+      final; full fresh jury on unchanged sources clean 5/5/4 at 2026-09-26T19:41:32Z. The codomain-coordinate
+      case and complete-field finite-dimensional corollary are also proved in their separate entries below.
+      Outside the selected comparator statements. Main Theorem (4), relative isomorphism closure and the
+      split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain; this entry
+      records its own prerequisite scope. Latest accepted root imports cover these modules; the accepted
+      root exposes every project module.'
   - source: 'prop:finite-coordinate: continuous finite coordinates on the operator codomain E′'
-    lean: AlternatingAnalytic.finiteCoordinateCodomain; AlternatingAnalytic.finiteCoordinateCodomainLift; AlternatingAnalytic.finiteCoordinateCodomainBound;
-      AlternatingAnalytic.hasBoundedLift_of_finiteCoordinateCodomain; AlternatingAnalytic.cpolynomialAt_Q_of_finiteCoordinateCodomain;
-      AlternatingAnalytic.analyticAt_Q_of_finiteCoordinateCodomain; AlternatingAnalytic.finiteCoordinate_expansion_algebraic
+    lean: AlternatingAnalytic.finiteCoordinateCodomain; AlternatingAnalytic.finiteCoordinateCodomainLift;
+      AlternatingAnalytic.finiteCoordinateCodomainBound; AlternatingAnalytic.hasBoundedLift_of_finiteCoordinateCodomain;
+      AlternatingAnalytic.cpolynomialAt_Q_of_finiteCoordinateCodomain; AlternatingAnalytic.analyticAt_Q_of_finiteCoordinateCodomain;
+      AlternatingAnalytic.finiteCoordinate_expansion_algebraic
     module: AlternatingAnalytic.Analysis.FiniteCoordinateCodomain; AlternatingAnalytic.Analysis.FiniteCoordinateCodomainAlgebra;
       AlternatingAnalytic.Analysis.FiniteCoordinateCodomainBounds; AlternatingAnalytic.Analysis.FiniteCoordinateExpansion
     status: proved
     note: Basis (Fin d) K E′ with explicitly continuous coordinates, arbitrary normed E/F, any nontrivially
       normed K and all k. finiteCoordinateCodomain (210–252) collects the determinant-sum k-linear operator
-      lift, separate operator linearity before diagonalization, linearity in the map and vector slots, strong
-      alternation, pointwise and operator norm bounds, exact diagonal Q, HasBoundedLift, CPolynomialAt and
-      AnalyticAt everywhere. The real bound is k! times the finite subset sum of products of coordinate-functional
-      and basis-vector norms. k>d gives zero bound, lift, alternating maps on E′ and Q; k=0 gives bound one
-      and constant-value formulas. No completeness, characteristic or nonarchimedean hypotheses. The algebraic
-      finite-coordinate expansion is stated over a commutative ring. Four new modules and root import, 38 explicit
-      plus two generated gate-owned names, five excluded private helpers. Gate accepted 2026-09-26T20:00:54Z;
-      first jury failed with no usable scores because of a relocated Codex executable. Full fresh jury after
-      path repair on unchanged sources clean 5/5/4 at 2026-09-26T20:06:33Z, same settings and thresholds. Common
-      determinant-estimate helper reuse is separate from the domain-coordinate positivity theorem. The complete-field
-      finite-dimensional corollary is also proved in its separate entry below. Outside the selected comparator
-      statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits
-      are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
-      accepted root imports cover these modules; the accepted root exposes every project module.
+      lift, separate operator linearity before diagonalization, linearity in the map and vector slots,
+      strong alternation, pointwise and operator norm bounds, exact diagonal Q, HasBoundedLift, CPolynomialAt
+      and AnalyticAt everywhere. The real bound is k! times the finite subset sum of products of coordinate-functional
+      and basis-vector norms. k>d gives zero bound, lift, alternating maps on E′ and Q; k=0 gives bound
+      one and constant-value formulas. No completeness, characteristic or nonarchimedean hypotheses. The
+      algebraic finite-coordinate expansion is stated over a commutative ring. Four new modules and root
+      import, 38 explicit plus two generated gate-owned names, five excluded private helpers. Gate accepted
+      2026-09-26T20:00:54Z; first jury failed with no usable scores because of a relocated Codex executable.
+      Full fresh jury after path repair on unchanged sources clean 5/5/4 at 2026-09-26T20:06:33Z, same
+      settings and thresholds. Common determinant-estimate helper reuse is separate from the domain-coordinate
+      positivity theorem. The complete-field finite-dimensional corollary is also proved in its separate
+      entry below. Outside the selected comparator statements. Main Theorem (4), relative isomorphism
+      closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
+      this entry records its own prerequisite scope. Latest accepted root imports cover these modules;
+      the accepted root exposes every project module.
   - source: 'cor:finite-dimensional-positive: complete-field positivity and coordinate boundedness'
     lean: AlternatingAnalytic.finiteDimensional_positive; AlternatingAnalytic.finiteDimensional_bounded_and_complete;
       AlternatingAnalytic.cpolynomialAt_Q_of_finiteDimensionalDomain; AlternatingAnalytic.analyticAt_Q_of_finiteDimensionalCodomain;
@@ -2243,29 +2479,31 @@ alignment:
       AlternatingAnalytic.bounded_linearFunctional_of_finiteDimensional; AlternatingAnalytic.analyticAt_Q_of_finiteDimensionalDomain
     module: AlternatingAnalytic.Analysis.FiniteDimensionalPositive
     status: proved
-    note: Under NontriviallyNormedField K and CompleteSpace K, finiteDimensional_positive (71–75) assumes FiniteDimensional
-      K E or FiniteDimensional K E′ and proves CPolynomialAt and AnalyticAt Q at every operator for every k.
-      The other input and value target F are arbitrary normed spaces. finiteDimensional_bounded_and_complete
-      (33–35) collects boundedness of each linear functional and completeness of a finite-dimensional normed
-      space; continuous_finBasis_coord (39–40) supplies continuity of its canonical basis coordinates. Eight
-      explicit public theorems, no generated/private extras. Gate accepted 2026-09-26T20:14:33Z including root
-      import. Initial jury flagged None/5/4 at 20:27:16Z because faithfulness produced no final; full fresh
-      jury on unchanged sources clean 5/5/4 at 2026-09-26T20:29:35Z. The module imports both accepted coordinate
-      constructions and the root now reaches both. This is distinct from the still-pending finite-dimensional
-      value-target F reduction and remains outside the selected comparator statements.
+    note: Under NontriviallyNormedField K and CompleteSpace K, finiteDimensional_positive (71–75) assumes
+      FiniteDimensional K E or FiniteDimensional K E′ and proves CPolynomialAt and AnalyticAt Q at every
+      operator for every k. The other input and value target F are arbitrary normed spaces. finiteDimensional_bounded_and_complete
+      (33–35) collects boundedness of each linear functional and completeness of a finite-dimensional
+      normed space; continuous_finBasis_coord (39–40) supplies continuity of its canonical basis coordinates.
+      Eight explicit public theorems, no generated/private extras. Gate accepted 2026-09-26T20:14:33Z
+      including root import. Initial jury flagged None/5/4 at 20:27:16Z because faithfulness produced
+      no final; full fresh jury on unchanged sources clean 5/5/4 at 2026-09-26T20:29:35Z. The module imports
+      both accepted coordinate constructions and the root now reaches both. This is distinct from the
+      still-pending finite-dimensional value-target F reduction and remains outside the selected comparator
+      statements.
   - source: 'dom:limits: split-domain obstruction and actual completed analytic action/coordinate lift'
     lean: AlternatingAnalytic.DeterminantPair.Padding.no_largest_domain_limits; AlternatingAnalytic.DeterminantPair.Padding.concrete_completed_analytic_action_and_lift
     module: AlternatingAnalytic.Category.NoLargestAnalyticDomain; AlternatingAnalytic.Analysis.PaddedCompletionAnalytic
     status: proved
-    note: no_largest_domain_limits (202–246) prevents adjoining the particular rigid objectX to the full split-pair
-      domain. It includes original-element completionE/D/G/C formulas, complete finite-dimensional H over complete
-      L, joint analyticity of the completed action over L in degree k, an explicit p-linear coordinateLift
-      whose value is the product of constant coefficients and whose diagonal is their pth power, agreement
-      with the original determinant coordinate after inclusion, completed padded multiplication and determinant
-      formulas, and exact completed/original action evaluations. The lift is p-linear even when the alternating
-      degree is p+n. concrete_completed_analytic_action_and_lift (143–177) gives the p+n API. These statements
-      concern these particular completions and do not solve largest-domain questions over complete fields or
-      Banach pairs. Same Main Theorem (4) gate and clean jury; outside the selected comparator statements.
+    note: no_largest_domain_limits (202–246) prevents adjoining the particular rigid objectX to the full
+      split-pair domain. It includes original-element completionE/D/G/C formulas, complete finite-dimensional
+      H over complete L, joint analyticity of the completed action over L in degree k, an explicit p-linear
+      coordinateLift whose value is the product of constant coefficients and whose diagonal is their pth
+      power, agreement with the original determinant coordinate after inclusion, completed padded multiplication
+      and determinant formulas, and exact completed/original action evaluations. The lift is p-linear
+      even when the alternating degree is p+n. concrete_completed_analytic_action_and_lift (143–177) gives
+      the p+n API. These statements concern these particular completions and do not solve largest-domain
+      questions over complete fields or Banach pairs. Same Main Theorem (4) gate and clean jury; outside
+      the selected comparator statements.
   - source: Isomorphism transport and relative full analytic-domain framework for Main Theorem (4)
     lean: AlternatingAnalytic.IsAlternatingAnalyticDomain.isoClosure; AlternatingAnalytic.IsRelativeAlternatingAnalyticDomain.isoClosure;
       AlternatingAnalytic.no_greatest_relative_analytic_domain; AlternatingAnalytic.no_greatest_replete_relative_analytic_domain
@@ -2273,24 +2511,114 @@ alignment:
       AlternatingAnalytic.Category.FiniteUltrametricDomains
     status: proved
     note: For general K:Typeu and degree k, analytic joint Hom maps transport along actual bounded categorical
-      isomorphisms. Arbitrary analytic domains and domains inside any full ambient object property retain analyticity
-      under their respective isomorphism closure. The relative Hom spaces have linear isometric operator coordinates
-      and literal inclusion-composite functors. Incompatible analytic self-actions give no greatest domain,
-      both unrestricted and replete inside the selected ambient. These are actual normed-space categories,
-      not a separately declared normable-space category. Same Main Theorem (4) gate and clean jury; outside
-      the selected comparator statements.
-  - source: 'Selected comparator consequence of Main Theorem (4): principal unrestricted no-largest full analytic
-      domain'
+      isomorphisms. Arbitrary analytic domains and domains inside any full ambient object property retain
+      analyticity under their respective isomorphism closure. The relative Hom spaces have linear isometric
+      operator coordinates and literal inclusion-composite functors. Incompatible analytic self-actions
+      give no greatest domain, both unrestricted and replete inside the selected ambient. These are actual
+      normed-space categories, not a separately declared normable-space category. Same Main Theorem (4)
+      gate and clean jury; outside the selected comparator statements.
+  - source: 'Selected comparator consequence of Main Theorem (4): principal unrestricted no-largest full
+      analytic domain'
     lean: AlternatingAnalyticChallenge.no_largest_full_analytic_domain_charP
     module: solution
     status: proved
-    note: The implemented wrapper states ¬HasLargestFullAnalyticDomain (RationalField (ZModp)r) k for p,k:ℕ,
-      Fact p.Prime, p≤k, r:ℝ≥0, Fact(0<r) and Fact(r<1). HasLargestFullAnalyticDomain is a transparent definition
-      of existence of an IsGreatest object property among actual full analytic domains, copied identically
-      in challenge and solution. Scalar and object carriers are Type0. It assumes no incompatible witness and
-      selects only unrestricted nonexistence, not the collected witnesses/replete/finite-ambient/completion
-      clauses. Proof packaging uses the accepted library theorem. All five selected challenge statements passed
-      Kim Morrison’s comparator and Lean default-kernel replay at 2026-09-26T21:05:03Z.
+    note: The implemented wrapper states ¬HasLargestFullAnalyticDomain (RationalField (ZModp)r) k for
+      p,k:ℕ, Fact p.Prime, p≤k, r:ℝ≥0, Fact(0<r) and Fact(r<1). HasLargestFullAnalyticDomain is a transparent
+      definition of existence of an IsGreatest object property among actual full analytic domains, copied
+      identically in challenge and solution. Scalar and object carriers are Type0. It assumes no incompatible
+      witness and selects only unrestricted nonexistence, not the collected witnesses/replete/finite-ambient/completion
+      clauses. Proof packaging uses the accepted library theorem. All five selected challenge statements
+      passed Kim Morrison’s comparator and Lean default-kernel replay at 2026-09-26T21:05:03Z.
+  - source: Bounded-coefficient and finite-support foundation for fam:lem:l1-polynomial
+    lean: L1Coordinates.exists_l1_multilinear_of_bounded_coefficients; L1Coordinates.hasSum_prod_norm;
+      L1Coordinates.continuousMultilinearOfBounded_sum_single; L1Coordinates.continuousMultilinearOfBounded_tendsto
+    module: AlternatingAnalytic.Analysis.L1Coordinates; AlternatingAnalytic.Analysis.L1ProductSummation;
+      AlternatingAnalytic.Analysis.L1FiniteSupport
+    status: proved
+    note: 'The ordinary ℓ¹ bounded-coefficient foundation is now proved: for arbitrary J, every d including
+      zero, complete normed output W and possibly incomplete K, the actual sum-norm lp coefficient constructor
+      returns one continuous multilinear map with unconditional HasSum formula, norm bound and exact coordinate
+      values. The real product-norm sum and finite-support expansion/approximation are included. This
+      foundation is supplemented by the separately recorded homogeneous lift and local factorization;
+      the alternating-family/retract corollary is now proved separately. The actual namespace is L1Coordinates.
+      There are no characteristic, nonarchimedean, spherical, countability or factorial assumptions. The
+      principal theorem is at L1Coordinates.lean:125; degree-zero and empty-index cases are included by
+      its unrestricted quantifiers. Three modules, 22 gate-owned declarations, original gate 21:20:16Z
+      and full fresh jury 5/5/5 at 21:22:48Z on 26 September 2026. Outside the unchanged five selected
+      comparator statements. The subsequent local-factorization ingredient is now proved separately below;
+      this foundation alone is not a reflection or family theorem.'
+  - source: Local-factorization ingredient in the proof of fam:thm:l1-families
+    lean: L1Coordinates.l1_word_factorization; L1Coordinates.exists_analyticAt_l1_factorization; L1Coordinates.hasSum_l1_of_hasSum_coordinates
+    module: AlternatingAnalytic.Analysis.L1AnalyticFactorization; AlternatingAnalytic.Analysis.L1WordBlocks;
+      AlternatingAnalytic.Analysis.L1WordSeries; AlternatingAnalytic.Analysis.L1WordSynthesis
+    status: proved
+    note: Local ordinary ℓ¹ analytic factorization is now proved over possibly incomplete K and arbitrary
+      normed H, with arbitrary index I. The auxiliary analytic g lands in uncompleted K-valued lp on Σ
+      n:ℕ,Fin n→I; the bounded linear T lands in UniformSpace.Completion H. The collected theorem supplies
+      exact word coordinates, actual power series, scalar/radius and coefficient/operator norm bounds,
+      local equality, zero extension outside the chosen ball and the degree-zero coordinate carrying the
+      central value. A pointwise AnalyticAt germ wrapper and explicit-limit ℓ¹ convergence support are
+      also proved. This is the factorization ingredient of fam:thm:l1-families; the full reflection theorem
+      and alternating-family/retract corollary are recorded separately. The main collected statement is
+      at L1AnalyticFactorization.lean:93 and germ wrapper at :138. The explicit-limit convergence helper
+      at L1WordSeries.lean:55 assumes a supplied lp limit, summable norms and coordinate HasSum, with
+      no CompleteSpace K. No countability, nonempty-index, characteristic, nonarchimedean, spherical or
+      factorial assumption is added. Original gate 21:37:48Z; full clean jury 5/5/5 at 21:40:40Z on 26
+      September 2026. Outside the unchanged five selected comparator statements.
+  - source: Shared finite-word coefficient argument in fam:lem:l1-polynomial and fam:thm:c0-reflection
+    lean: FiniteWord.finite_word_grouping_spec; FiniteWord.finite_diagonal_grouping; FiniteWord.card_wordOrbit_le
+    module: AlternatingAnalytic.Algebra.FiniteWordGrouping
+    status: proved
+    note: The shared finite-word coefficient grouping foundation is now proved in namespace FiniteWord.
+      Orbit/representative/multiplicity laws require no scalar field, with natural cardinality bound ≤d.factorial;
+      finite diagonal regrouping uses an arbitrary field and ordinary modules; recovering grouped coefficients
+      in a submodule from the full diagonal additionally assumes Infinite K. Arbitrary J, degree zero
+      and empty finite supports are retained. The collected theorem combines orbit/cardinality, grouped
+      membership and finite diagonal identity. There is no norm, topology, completeness or factorial-invertibility
+      assumption and no real factorial or nonarchimedean norm estimate is attributed to this algebraic
+      node. The main collected header is at line389; finite_diagonal_grouping at344 does not require Infinite
+      K; card_wordOrbit_le at89 needs no field. Fintype J appears only in local selection-type comparison
+      helpers, not as a global hypothesis. Distinct orbit tuples are summed at one representative; no
+      stabilizer repetitions are inserted. The ordinary ℓ¹ normed homogeneous lift is now proved separately
+      below; the c₀ lift/reflection remains pending, while the ordinary ℓ¹ corollary is proved separately.
+      Original gate21:50:54Z/fullfreshjury5/5/4 at21:52:52Z on26September2026. Outside the unchanged five
+      selected comparator statements.
+  - source: 'fam:lem:l1-polynomial: ordinary ℓ¹ homogeneous diagonal lifting'
+    lean: L1PolynomialLift.exists_l1_diagonal_lift; L1PolynomialLift.exists_l1_diagonal_lift_of_completeSpace;
+      L1PolynomialLift.norm_groupedCoefficient_le
+    module: AlternatingAnalytic.Analysis.L1PolynomialLift
+    status: proved
+    note: The ordinary ℓ¹ homogeneous diagonal lifting lemma fam:lem:l1-polynomial is now proved in namespace
+      L1PolynomialLift. Over any nontrivially normed field K, possibly incomplete, for arbitrary J and
+      every d including zero, a continuous d-multilinear B on actual sum-norm lp with diagonal in a closed
+      submodule W of Banach Z admits ONE continuous W-valued lift C with both the same included diagonal
+      and norm(C)≤(d.factorial:ℝ)*norm(B). The stronger helper requires only CompleteSpace W. The real
+      grouped-coefficient factorial norm bound and finite-support-to-full-diagonal equality helpers are
+      also present. No countability, nonempty-index, nonarchimedean, spherical, characteristic or factorial-invertibility
+      hypothesis is added. Main wrapper at line140; complete-W helper at107; grouped coefficient norm
+      bound at29. The original induced submodule norm is retained, and the conclusion concerns the diagonal
+      rather than asserting that B is W-valued off-diagonal. The c₀ lift and both reflection/family branches
+      remain separate. Original gate22:04:00Z/fresh full jury5/5/4 at22:06:29Z on26September2026. Outside
+      the unchanged five selected comparator statements.
+  - source: 'fam:thm:l1-families: fixed-degree reflection along ordinary ℓ¹ analytic families'
+    lean: AlternatingAnalytic.analyticOn_comp_of_l1_fixed_degree; AlternatingAnalytic.analyticAt_comp_of_l1_fixed_degree;
+      AlternatingAnalytic.analyticOnNhd_comp_of_l1_fixed_degree; AlternatingAnalytic.analyticOn_comp_of_l1_fixed_degree_isometry;
+      AlternatingAnalytic.exists_l1_completion_diagonal_lift
+    module: AlternatingAnalytic.Analysis.L1FixedDegreeReflection
+    status: proved
+    note: Fixed-degree reflection along ordinary ℓ¹ families now completes fam:thm:l1-families (Theorem
+      29). The public theorem assumes closed W in complete normed Z, arbitrary normed H, a fixed bounded
+      d-multilinear B on H and P:H→W whose inclusion equals B on the diagonal; P is not assumed continuous
+      or analytic. K and H may be incomplete; indices and d including zero are arbitrary. The open AnalyticOn
+      wrapper retains IsOpen U, with pointwise and AnalyticOnNhd wrappers and closed-linear-isometry variants
+      also available. The same completed lift C satisfies its diagonal identity and bound (d.factorial:ℝ)*norm(B)*norm(T)^d.
+      The factorial concerns the fixed outer degree, not the Taylor degree. This is fixed-degree polynomial
+      reflection, not universal reflection for arbitrary ambient analytic maps. Main open wrapper line154;
+      pointwise132; AnalyticOnNhd145; isometry forms166/180/189; quantitative lift93. The isometry variants
+      assume a normed V with closed linear-isometric inclusion into Banach Z, with no extra CompleteSpace
+      V premise. Original gate22:20:43Z/fullfreshjury5/5/5 at22:24:08Z on26September2026. The ordinary
+      ℓ¹ family/retract corollary is proved separately; c₀ and actual bundle conclusions remain pending.
+      Outside the unchanged five selected comparator statements.
 acknowledgements: Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform; leanprover/comparator;
   and mathlib-initiative/formalization.yaml. The source paper's attribution to Claude and its bibliographic
   author are preserved separately above.

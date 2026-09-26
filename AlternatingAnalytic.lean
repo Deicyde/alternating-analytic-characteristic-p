@@ -131,3 +131,4 @@ import AlternatingAnalytic.Category.AnalyticDomains
 import AlternatingAnalytic.Analysis.FiniteCoordinateCodomain
 import AlternatingAnalytic.Analysis.FiniteDimensionalPositive
 import AlternatingAnalytic.Category.NoLargestAnalyticDomain
+import AlternatingAnalytic.Analysis.L1Families
