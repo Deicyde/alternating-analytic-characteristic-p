@@ -11,11 +11,13 @@ project:
     the category of operator-analytic normable vector bundles and its actual alternating bifunctor with
     analytic operator-valued morphisms and compatible-presentation transport, core admissible-family laws,
     the invertible-shear obstruction, canonical exterior support, exact-norm dense scalar-family extension,
-    concrete t-adic rational/Laurent fields with jointly independent scalars, and the max-norm truncated
-    polynomial algebra. The expanded manuscript remains only partly formalized: further operator-positive,
-    parameter and tensor results, and analytic-domain results remain unfinished. Geometric Main Theorem
-    (3) is complete over fixed bases with the stated continuous finite coordinates. THEOREM_MAP.md records
-    the exact scope and review status.'
+    concrete t-adic rational/Laurent fields with jointly independent scalars, the max-norm truncated polynomial
+    algebra, the generic and concrete rigid dense source with its isometric scalar endomorphism coordinates,
+    the determinant-generated finite spaces with their auxiliary scalar gap, and the determinant coefficient
+    spaces with auxiliary specialization and algebraic padding. The expanded manuscript remains only partly
+    formalized: further operator-positive, parameter and tensor results, and analytic-domain results remain
+    unfinished. Geometric Main Theorem (3) is complete over fixed bases with the stated continuous finite
+    coordinates. THEOREM_MAP.md records the exact scope and review status.'
   authors:
   - Jack McCarthy
   responsible_maintainers:
@@ -51,10 +53,9 @@ sources:
     now proved and clean-reviewed, including finite heterogeneous and empty families with exact norm and
     uniqueness. The max-norm truncated quotient algebra is also proved and clean-reviewed as setup for
     dom:rigid. The concrete t-adic scalar fields and their jointly independent families are also proved
-    and clean-reviewed. Part (4)'s no-largest-domain
-    theorem and the remaining proved extensions are not yet formalized. Theorem-level boundaries are in
-    THEOREM_MAP.md. Open problems, the alternative infinite-field obstruction and the proposed large-index
-    construction are not claimed as proved results.
+    and clean-reviewed. Part (4)'s no-largest-domain theorem and the remaining proved extensions are not
+    yet formalized. Theorem-level boundaries are in THEOREM_MAP.md. Open problems, the alternative infinite-field
+    obstruction and the proposed large-index construction are not claimed as proved results.
   license: ''
   author_endorsement: participated
 - title: Existing Lean ingredients supplied with the round-24 paper materials
@@ -88,32 +89,43 @@ classification:
   - 68V20
 status:
   scope: 'The original operator proof library is complete for its stated scope; the expanded manuscript
-    is not fully formalized. Twenty extension nodes have passed the shared proof-verification gate and
-    clean independent AI jury reviews, including categorical Main Theorem (1) and (2), the repaired joint-action
-    summary, finite-coordinate reflection and families, the actual analytic alternating bundle, analytic
-    bundle category, alternating bundle morphisms, literal alternating bundle bifunctor, dense scalar-family
-    extension, concrete t-adic rational/Laurent scalars and the max-norm truncated polynomial algebra.
-    The central bundle theorem supplies an actual ContMDiffVectorBundle omega witness on Mathlib’s existing
-    topology for analytic bases with explicit continuous finite coordinates, over every nontrivially normed
-    field and all finite degrees/dimensions including zero. Model fibers are arbitrary normed spaces;
-    actual fibers retain their topological/normable structures. No completeness, characteristic or factorial
-    assumption is added. The operator-valued analytic alternating Hom section, exact fiber and local operator-coordinate
-    formulas, and identity/composition laws are proved, with no extra family-preservation premise in the
-    finite-coordinate specialization. The literal VB opposite times VB to VB functor, canonical model/fiber/topology
-    and bundle-structure formulas, functor laws and compatible-presentation transport complete geometric
-    Main Theorem (3) over each fixed finite-coordinate analytic base. The source completion principle
-    preceding dom:rigid is also proved: unique exact-norm scalar/input extension on arbitrary finite heterogeneous
-    families including the empty family, with bounded-map and dense-submodule forms, requiring completeness
-    only of the target. The exact max-norm truncated quotient algebra is also proved and clean-reviewed;
-    the concrete t-adic rational/Laurent fields and jointly independent coordinate/auxiliary scalars
-    are also proved and clean-reviewed. These prerequisites do
-    not establish rigidity, the determinant pair, the degree gap or no-largest domains. The additional
-    operator-positive, parameter-space, tensor, universal-target and analytic-domain results remain unfinished
-    in THEOREM_MAP.md and FORMALIZATION_ROADMAP.md. Accepted proof-library and solution declarations contain
-    no admitted proofs; four intentional challenge placeholders are excluded. Kim Morrison’s comparator
-    checks four selected statements, including the actual finite-coordinate bundle witness, not the full
-    extension library. Proposed/open claims, the external Serre classification and the separate characteristic-two
-    proof are excluded from local completion claims.'
+    is not fully formalized. Twenty-three extension nodes have passed the shared proof-verification gate
+    and clean independent AI jury reviews, including categorical Main Theorem (1) and (2), the repaired
+    joint-action summary, finite-coordinate reflection and families, the actual analytic alternating bundle,
+    analytic bundle category, alternating bundle morphisms, literal alternating bundle bifunctor, dense
+    scalar-family extension, concrete t-adic rational/Laurent scalars, the max-norm truncated polynomial
+    algebra, the generic/concrete rigid-source theorem the determinant/scalar-gap construction and the
+    coefficient-space/specialization construction with algebraic padding. The central bundle theorem supplies
+    an actual ContMDiffVectorBundle omega witness on Mathlib’s existing topology for analytic bases with
+    explicit continuous finite coordinates, over every nontrivially normed field and all finite degrees/dimensions
+    including zero. Model fibers are arbitrary normed spaces; actual fibers retain their topological/normable
+    structures. No completeness, characteristic or factorial assumption is added. The operator-valued
+    analytic alternating Hom section, exact fiber and local operator-coordinate formulas, and identity/composition
+    laws are proved, with no extra family-preservation premise in the finite-coordinate specialization.
+    The literal VB opposite times VB to VB functor, canonical model/fiber/topology and bundle-structure
+    formulas, functor laws and compatible-presentation transport complete geometric Main Theorem (3) over
+    each fixed finite-coordinate analytic base. The source completion principle preceding dom:rigid is
+    also proved: unique exact-norm scalar/input extension on arbitrary finite heterogeneous families including
+    the empty family, with bounded-map and dense-submodule forms, requiring completeness only of the target.
+    The exact max-norm truncated quotient algebra is also proved and clean-reviewed; the concrete t-adic
+    rational/Laurent fields and jointly independent coordinate/auxiliary scalars are also proved and clean-reviewed.
+    The generic rigid-source theorem and its actual t-adic truncated-algebra realization are now proved
+    and clean-reviewed, including exact norms, density, algebraic dimension, scalar endomorphisms, zero
+    continuous dual and the isometric End-to-scalar coordinate laws. The determinant-generated finite
+    spaces D and G, their exact norms and density, actual K-linear isometric completion equivalences,
+    unique polynomial representatives with auxiliary degree at most one, and the scalar gap tau-squared
+    G intersect G equals zero are now proved and clean-reviewed. The concrete coefficient isometry, injective
+    polynomial models and auxiliary specialization, and their algebraically padded counterparts in every
+    degree p+n are now proved and clean-reviewed. The all-alternating/split retraction, degree gap, cross-action
+    obstruction, analytic padded retraction, completed-action consequences and no-largest domains remain
+    pending. The latest original whole-project build gate passed at 2026-09-26T06:34:09Z; the idle checkpoint
+    confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z.
+    The additional operator-positive, parameter-space, tensor, universal-target and analytic-domain results
+    remain unfinished in THEOREM_MAP.md and FORMALIZATION_ROADMAP.md. Accepted proof-library and solution
+    declarations contain no admitted proofs; four intentional challenge placeholders are excluded. Kim
+    Morrison’s comparator checks four selected statements, including the actual finite-coordinate bundle
+    witness, not the full extension library. Proposed/open claims, the external Serre classification and
+    the separate characteristic-two proof are excluded from local completion claims.'
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -544,6 +556,177 @@ status:
     - Quot.sound
     comparator_config: ''
     literature_dependencies: []
+  - declaration: AlternatingAnalytic.RigidDenseSource.rigid_source_properties
+    file: AlternatingAnalytic/Analysis/RigidDenseSource.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.RigidDenseSource.Concrete.rigid_source_properties
+    file: AlternatingAnalytic/Analysis/RigidDenseSource.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.RigidDenseSource.endScalarEquiv
+    file: AlternatingAnalytic/Analysis/RigidDenseSourceGeneric.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.RigidDenseSource.Concrete.endScalarEquiv
+    file: AlternatingAnalytic/Analysis/RigidDenseSourceConcrete.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.determinant_spaces_properties
+    file: AlternatingAnalytic/Analysis/DeterminantPairScalars.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.tau_gap
+    file: AlternatingAnalytic/Analysis/DeterminantPairScalars.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.completionD
+    file: AlternatingAnalytic/Analysis/DeterminantPairScalars.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.completionG
+    file: AlternatingAnalytic/Analysis/DeterminantPairScalars.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.denseSubmoduleCompletionEquiv
+    file: AlternatingAnalytic/Analysis/DeterminantDensity.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.determinant_span_generator_tuples
+    file: AlternatingAnalytic/Analysis/DeterminantSpan.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.aeval_square_scalar_gap
+    file: AlternatingAnalytic/Analysis/DeterminantPolynomialDegree.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.determinantCoefficientEquiv
+    file: AlternatingAnalytic/Analysis/DeterminantCoefficientEquiv.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.coefficient_spaces
+    file: AlternatingAnalytic/Analysis/DeterminantCoefficientSpaces.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.padded_coefficient_spaces
+    file: AlternatingAnalytic/Analysis/DeterminantCoefficientSpaces.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.coefficientEquiv
+    file: AlternatingAnalytic/Analysis/DeterminantCoefficientSpaces.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.paddedCoefficientEquiv
+    file: AlternatingAnalytic/Analysis/DeterminantCoefficientSpaces.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.coefficient_polynomial_specialization
+    file: AlternatingAnalytic/Analysis/DeterminantCoefficientSpecialization.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.delta_span_E
+    file: AlternatingAnalytic/Analysis/DeterminantCoefficientSpan.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.DeterminantPair.Padding.span_delta_eq_unpadded
+    file: AlternatingAnalytic/Analysis/DeterminantCoefficientPadding.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
 automation:
   spend_usd: 200
   methods:
@@ -614,8 +797,8 @@ fidelity:
 review:
   status: agent-reviewed
   reviewers: []
-  notes: Twenty extension nodes have complete clean independent Codex jury reviews as of 26 September
-    2026. The eighteen nodes in the previous published checkpoint received 5/5 for statement faithfulness
+  notes: Twenty-three extension nodes have complete clean independent Codex jury reviews as of 26 September
+    2026. The twenty nodes in the previous published checkpoint received 5/5 for statement faithfulness
     and proof integrity and at least 4/5 for code quality. The repaired joint-action summary is clean
     (5/5/5), the actual finite-coordinate analytic bundle is clean (5/5/4), the analytic bundle category
     is clean (5/5/5), and the operator-valued alternating bundle morphisms are clean (5/5/4). Earlier
@@ -644,16 +827,51 @@ review:
     gate at 2026-09-26T04:54:53Z and a clean independent jury (5/5/4) at 2026-09-26T04:59:09Z. The accepted
     generic collected theorem is AlternatingAnalytic.TruncatedPolynomial.max_norm_properties at line 191,
     with prime_max_norm_properties at line 216; 30 explicit public declarations account for 31 gate-owned
-    names including the generated helper AdjoinRoot.powerBasis'.congr_simp. The accepted source SHA256 is
-    1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The rational/Laurent scalar construction
-    passed its current-source shared gate at 2026-09-26T05:12:02Z and a clean independent jury (5/5/4) at
-    2026-09-26T05:15:38Z. The collected theorem
-    AlternatingAnalytic.RationalLaurentScalars.concrete_setup is at line 221. The accepted field source
-    SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a (13,028 bytes), with 27 explicit
-    public declarations and 37 gate-owned names including 10 generated anonymous instances. Root-module
-    integration including both algebra foundations passed lake build AlternatingAnalytic with 3,235 jobs
-    at 2026-09-26T05:14:35Z; the accepted source hashes were unchanged. This is a library integration build,
-    distinct from the earlier library-and-solution check. No additional comparator run is claimed.
+    names including the generated helper AdjoinRoot.powerBasis'.congr_simp. The accepted source SHA256
+    is 1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The rational/Laurent scalar construction
+    passed its current-source shared gate at 2026-09-26T05:12:02Z and a clean independent jury (5/5/4)
+    at 2026-09-26T05:15:38Z. The collected theorem AlternatingAnalytic.RationalLaurentScalars.concrete_setup
+    is at line 221. The accepted field source SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a
+    (13,028 bytes), with 27 explicit public declarations and 37 gate-owned names including 10 generated
+    anonymous instances. At the preceding twenty-node checkpoint, root-module integration including both
+    algebra foundations passed lake build AlternatingAnalytic with 3,235 jobs at 2026-09-26T05:14:35Z;
+    the accepted source hashes were unchanged. This is a library integration build, distinct from the
+    earlier library-and-solution check. No additional comparator run is claimed. The rigid-source node
+    passed the original shared build/kernel/axiom gate at 2026-09-26T05:43:12Z and a fresh complete independent
+    jury at 2026-09-26T05:46:00Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). Its 88 explicit
+    non-private declarations across six rigid-source modules, including three named local instances, account
+    for 91 gate-owned names after including three generated helpers. The receipt covers the root aggregator
+    and all six modules; their accepted source hashes are recorded in the public inventory and release
+    status. The collected generic and concrete statements are AlternatingAnalytic.RigidDenseSource.rigid_source_properties
+    and AlternatingAnalytic.RigidDenseSource.Concrete.rigid_source_properties at lines 18 and 61 of RigidDenseSource.lean,
+    whose accepted SHA256 is a00220d583b4b29d9b0b5bbc0ea052838b003348077bae63d5157dd334b119c9. The determinant
+    spaces and auxiliary scalar gap are also accepted below; Main Theorem (4) and the subsequent no-largest
+    construction remain pending. No new comparator run, whole-paper completion or human expert review
+    is claimed. The determinant/scalar-gap node passed the original shared build/kernel/axiom gate at
+    2026-09-26T06:01:20Z and a fresh complete independent jury at 2026-09-26T06:03:14Z (faithfulness 5/5,
+    proof integrity 5/5, code quality 4/5). Its accepted receipt owns 83 names across DeterminantDensity,
+    DeterminantSpan, DeterminantPolynomialDegree and DeterminantPairScalars. The collected construction
+    is AlternatingAnalytic.DeterminantPair.determinant_spaces_properties at line 343 and the scalar-gap
+    summary is AlternatingAnalytic.DeterminantPair.tau_gap at line 405 of DeterminantPairScalars.lean,
+    whose accepted SHA256 is c4053c7b07306e486fbec9fbda5a3c3ed72e05e71513f0a7b836b184762bfdce. The latest
+    original whole-project build gate passed at 2026-09-26T06:34:09Z; the idle checkpoint confirmed the
+    root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z.
+    The concrete completion equivalences do not by themselves establish analytic completed-action or coordinate-polynomial
+    lifting consequences. No additional comparator statement or run is claimed. The determinant coefficient-space
+    and auxiliary-specialization node is now accepted. Its original shared build/kernel/axiom gate accepted
+    at 2026-09-26T06:34:09Z; a fresh complete independent jury returned clean 5/5/4 at 2026-09-26T07:03:11Z.
+    The five implementation modules have 162 explicitly named non-private declarations, including six
+    named local instances, and four generated helpers, for 166 gate-owned names. The collected coefficient_spaces
+    and padded_coefficient_spaces statements are at lines 251 and 307 of DeterminantCoefficientSpaces.lean,
+    whose accepted SHA256 is 0d2776a1d05f6425e8b473347175644a173dd4925a37c3b9b3ba3f350bb13dab. The specialization
+    summary coefficient_polynomial_specialization is at line 263 of DeterminantCoefficientSpecialization.lean.
+    This stage does not claim the degree-gap obstruction, all-multilinear alternation or analytic padded
+    retraction. The latest original whole-project build gate passed at 2026-09-26T06:34:09Z; the idle
+    checkpoint confirmed the root and all 15 new implementation modules against their accepted hashes
+    at 2026-09-26T07:04:27Z. No redundant build or new comparator run was performed. The first coefficient
+    jury ended flagged at 2026-09-26T07:00:41Z with a missing faithfulness score after a stalled review
+    process; the fresh full three-axis jury supersedes that incomplete review without any source change.
+    No negative mathematical verdict was inferred from the missing score.
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -1056,9 +1274,9 @@ alignment:
       outside the unchanged four-statement comparator scope.
   - source: Concrete t-adic rational/Laurent fields and jointly independent scalars preceding dom:rigid
     lean: AlternatingAnalytic.RationalLaurentScalars.concrete_setup; AlternatingAnalytic.RationalField.norm_X;
-      AlternatingAnalytic.RationalField.isometry_algebraMap;
-      AlternatingAnalytic.RationalField.denseRange_algebraMap; AlternatingAnalytic.RationalField.not_completeSpace;
-      AlternatingAnalytic.RationalLaurentScalars.exists_jointly_algebraicIndependent; AlternatingAnalytic.RationalLaurentScalars.algebraicIndependent_auxiliaryScalars
+      AlternatingAnalytic.RationalField.isometry_algebraMap; AlternatingAnalytic.RationalField.denseRange_algebraMap;
+      AlternatingAnalytic.RationalField.not_completeSpace; AlternatingAnalytic.RationalLaurentScalars.exists_jointly_algebraicIndependent;
+      AlternatingAnalytic.RationalLaurentScalars.algebraicIndependent_auxiliaryScalars
     module: AlternatingAnalytic.Analysis.RationalLaurentScalars
     status: proved
     note: For every prime p and radius 0<r<1, the radius-tagged rational field has the exact norm induced
@@ -1066,33 +1284,123 @@ alignment:
       dense inclusion. The rational field is countable and incomplete; the complete Laurent field is uncountable.
       Actual finite jointly algebraically independent families supply coordinates a and auxiliary tau
       from the same family, including the tagged auxiliary index. No CompleteSpace K assumption or rigidity,
-      determinant, tau-gap, all-alt or degree-gap conclusion. The collected theorem concrete_setup (line 221)
-      packages the actual field norms and algebra structures, norm-greater-than-one witnesses, characteristic-p
+      determinant, tau-gap, all-alt or degree-gap conclusion. The collected theorem concrete_setup (line
+      221) packages the actual field norms and algebra structures, norm-greater-than-one witnesses, characteristic-p
       and nonarchimedean properties, countability and completeness/incompleteness, isometric dense inclusion
-      and valuation norm formulas, and the finite common independent family with its coordinate/auxiliary identities.
-      The current source passed the shared gate at 2026-09-26T05:12:02Z and a clean independent jury at
-      2026-09-26T05:15:38Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). The accepted source SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a,
-      with 27 explicit public declarations and 37 gate-owned names including 10 generated anonymous instances.
-      Outside the unchanged four-statement comparator scope.
+      and valuation norm formulas, and the finite common independent family with its coordinate/auxiliary
+      identities. The current source passed the shared gate at 2026-09-26T05:12:02Z and a clean independent
+      jury at 2026-09-26T05:15:38Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). The accepted
+      source SHA256 is cebe465507976e6153f9d20f4cfb8e46cf8ba132533143eb4dc7323e63e4093a, with 27 explicit
+      public declarations and 37 gate-owned names including 10 generated anonymous instances. Outside
+      the unchanged four-statement comparator scope.
   - source: Max-norm truncated polynomial algebra in the setup preceding dom:rigid
     lean: AlternatingAnalytic.TruncatedPolynomial.max_norm_properties; AlternatingAnalytic.TruncatedPolynomial.coefficientIsometry;
-      AlternatingAnalytic.TruncatedPolynomial.norm_eq_max;
-      AlternatingAnalytic.TruncatedPolynomial.epsilon_pow; AlternatingAnalytic.TruncatedPolynomial.coeff_mul;
-      AlternatingAnalytic.TruncatedPolynomial.norm_mul_le; AlternatingAnalytic.TruncatedPolynomial.instCompleteSpace;
-      AlternatingAnalytic.TruncatedPolynomial.instNormedAlgebra; AlternatingAnalytic.TruncatedPolynomial.prime_max_norm_properties
+      AlternatingAnalytic.TruncatedPolynomial.norm_eq_max; AlternatingAnalytic.TruncatedPolynomial.epsilon_pow;
+      AlternatingAnalytic.TruncatedPolynomial.coeff_mul; AlternatingAnalytic.TruncatedPolynomial.norm_mul_le;
+      AlternatingAnalytic.TruncatedPolynomial.instCompleteSpace; AlternatingAnalytic.TruncatedPolynomial.instNormedAlgebra;
+      AlternatingAnalytic.TruncatedPolynomial.prime_max_norm_properties
     module: AlternatingAnalytic.Analysis.TruncatedPolynomialMaxNorm
     status: proved
-    note: The accepted generic collected theorem max_norm_properties (line 191) gives the actual
-      AdjoinRoot (X^n) quotient its exact maximum coefficient norm, the coefficient isometry with forward
-      and inverse formulas, the basis-to-power identity, norm-one basis powers and identity, nilpotence,
-      truncated convolution and submultiplicativity. For positive n over a nontrivially normed nonarchimedean
-      field L, completeness follows when L is complete. The prime-degree wrapper is prime_max_norm_properties
-      (line 216). The truncated algebra's repaired source passed the shared gate at 2026-09-26T04:54:53Z and a clean independent
-      jury at 2026-09-26T04:59:09Z (faithfulness 5/5, proof integrity 5/5, code quality 4/5). Its SHA256 is
-      1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The module has 30 explicit public
-      declarations; the gate owns 31 names including the generated helper AdjoinRoot.powerBasis'.congr_simp.
-      Rigidity, determinant, scalar-gap, degree-gap and no-largest conclusions remain pending. Outside the
-      unchanged four-statement comparator scope.
+    note: The accepted generic collected theorem max_norm_properties (line 191) gives the actual AdjoinRoot
+      (X^n) quotient its exact maximum coefficient norm, the coefficient isometry with forward and inverse
+      formulas, the basis-to-power identity, norm-one basis powers and identity, nilpotence, truncated
+      convolution and submultiplicativity. For positive n over a nontrivially normed nonarchimedean field
+      L, completeness follows when L is complete. The prime-degree wrapper is prime_max_norm_properties
+      (line 216). The truncated algebra's repaired source passed the shared gate at 2026-09-26T04:54:53Z
+      and a clean independent jury at 2026-09-26T04:59:09Z (faithfulness 5/5, proof integrity 5/5, code
+      quality 4/5). Its SHA256 is 1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The
+      module has 30 explicit public declarations; the gate owns 31 names including the generated helper
+      AdjoinRoot.powerBasis'.congr_simp. The rigid-source result and determinant spaces with auxiliary
+      scalar gap are separately proved below; all-alternating, coefficient/degree-gap and no-largest conclusions
+      remain pending. Outside the unchanged four-statement comparator scope.
+  - source: 'dom:rigid: generic dense rigid source and concrete t-adic truncated-algebra realization'
+    lean: AlternatingAnalytic.RigidDenseSource.rigid_source_properties; AlternatingAnalytic.RigidDenseSource.Concrete.rigid_source_properties;
+      AlternatingAnalytic.RigidDenseSource.endScalarEquiv; AlternatingAnalytic.RigidDenseSource.Concrete.endScalarEquiv;
+      AlternatingAnalytic.RigidDenseSource.Concrete.sourceEquiv
+    module: AlternatingAnalytic.Analysis.RigidDenseSource
+    status: proved
+    note: The generic collected theorem (line 18) takes nontrivially normed K/L with NormedAlgebra K L,
+      complete L, dense algebraMap, a finite nonempty index type I and an algebraically independent tuple
+      a. It constructs the literal K-subspace K^I + K a in the exact maximum-norm Pi space, with dense
+      isometric inclusion, complete ambient space, norm-one standard vectors and K-dimension card I +
+      1. Every continuous K-linear endomorphism is uniquely scalar and every continuous K-linear functional
+      to K is zero. The actual linear isometric equivalence endScalarEquiv identifies the endomorphism
+      space with K, with evaluation, inverse scalar identity, exact norm, identity and composition formulas.
+      The generic theorem adds no characteristic, nonarchimedean or complete-K hypothesis; the source
+      is not assumed complete and I is nonempty. The concrete collected theorem (line 61) specializes
+      to every prime p and 0<r<1 using the actual RationalField/LaurentField pair, the same jointly independent
+      a/tau family and A=AdjoinRoot(X^p) with its accepted maximum coefficient norm. It constructs the
+      literal span of the standard epsilon powers and the vector with coefficients a, uses the actual
+      coefficient isometry for sourceEquiv, retains incomplete K, and proves dense inclusion, complete
+      A, dimension p+1, scalar endomorphisms, zero dual and the same End-coordinate laws. Implementation
+      modules are RigidDenseSourceBasic, RigidDenseSourceAlgebra, RigidDenseSourceCoordinates, RigidDenseSourceGeneric,
+      RigidDenseSourceConcrete and the RigidDenseSource aggregate. Shared gate accepted at 2026-09-26T05:43:12Z;
+      fresh independent jury clean 5/5/4 at 2026-09-26T05:46:00Z. There are 88 explicit non-private names
+      and 91 gate-owned names, including three generated helpers. The determinant spaces and auxiliary
+      scalar gap are separately proved below; all-alternating, degree-gap, padding, dom:limits analytic/lifting
+      consequences and final no-largest conclusions remain pending. Outside the unchanged four-statement
+      comparator scope.
+  - source: Determinant-generated finite spaces and dom:tau-gap
+    lean: AlternatingAnalytic.DeterminantPair.determinant_spaces_properties; AlternatingAnalytic.DeterminantPair.tau_gap;
+      AlternatingAnalytic.DeterminantPair.completionD; AlternatingAnalytic.DeterminantPair.completionG;
+      AlternatingAnalytic.denseSubmoduleCompletionEquiv; AlternatingAnalytic.determinant_span_generator_tuples;
+      AlternatingAnalytic.aeval_square_scalar_gap
+    module: AlternatingAnalytic.Analysis.DeterminantPairScalars; AlternatingAnalytic.Analysis.DeterminantDensity;
+      AlternatingAnalytic.Analysis.DeterminantSpan; AlternatingAnalytic.Analysis.DeterminantPolynomialDegree
+    status: proved
+    note: For every prime p and radius 0<r<1, the actual rational/Laurent field pair, max-norm truncated
+      algebra A and common jointly algebraically independent coordinate/auxiliary family define the literal
+      spaces D0, D and G. The collected determinant_spaces_properties (line 343) gives their prescribed
+      generator and determinant-span identities, finite algebraic dimension of D/G, determinant of the
+      standard basis equal to one, exact inherited norms and dense isometric inclusions. The actual K-linear
+      isometric equivalences completionD and completionG identify their completions with A and L and agree
+      with the original inclusions. K remains incomplete; A and L are complete. The determinant polynomial
+      span maps injectively to G and gives unique representatives of degree at most one in every auxiliary
+      variable. The collected tau_gap (line 405) states both that c in G and tau^2*c in G force c=0 and
+      that the literal image-intersection is {0}. The four implementation modules are DeterminantDensity,
+      DeterminantSpan, DeterminantPolynomialDegree and DeterminantPairScalars, with 83 gate-owned names.
+      Shared gate accepted at 2026-09-26T06:01:20Z; fresh independent jury clean 5/5/4 at 2026-09-26T06:03:14Z.
+      The primary source SHA256 is c4053c7b07306e486fbec9fbda5a3c3ed72e05e71513f0a7b836b184762bfdce. All-alternating
+      and its norm-at-most-one retraction, the degree gap, nonanalytic cross-action, analytic padded retraction,
+      dom:limits analytic/lifting consequences and categorical Main Theorem (4) remain pending. The latest
+      original whole-project build gate passed at 2026-09-26T06:34:09Z; the idle checkpoint confirmed
+      the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z.
+      Outside the unchanged four-statement comparator scope.
+  - source: Determinant coefficient spaces, auxiliary specialization and algebraic padding before dom:degree-gap
+    lean: AlternatingAnalytic.determinantCoefficientEquiv; AlternatingAnalytic.DeterminantPair.coefficient_spaces;
+      AlternatingAnalytic.DeterminantPair.padded_coefficient_spaces; AlternatingAnalytic.DeterminantPair.coefficient_polynomial_specialization;
+      AlternatingAnalytic.DeterminantPair.coefficientEquiv; AlternatingAnalytic.DeterminantPair.paddedCoefficientEquiv;
+      AlternatingAnalytic.DeterminantPair.delta_span_E; AlternatingAnalytic.DeterminantPair.Padding.span_delta_eq_unpadded
+    module: AlternatingAnalytic.Analysis.DeterminantCoefficientSpaces; AlternatingAnalytic.Analysis.DeterminantCoefficientEquiv;
+      AlternatingAnalytic.Analysis.DeterminantCoefficientPadding; AlternatingAnalytic.Analysis.DeterminantCoefficientSpan;
+      AlternatingAnalytic.Analysis.DeterminantCoefficientSpecialization
+    status: proved
+    note: 'For every prime p and 0<r<1, C consists exactly of c in G such that every primary coordinate
+      a_i times c lies in G, with its inherited L-norm and 1 in C. The collected coefficient_spaces (line
+      251) supplies the actual K-linear isometric equivalence from continuous alternating p-forms E to
+      G onto C, via evaluation on the standard tuple, with pointwise determinant and inverse formulas
+      and exact norms. Scalar extension lands in complete L, agrees on original inputs and preserves the
+      norm; no completeness of K or G is imposed. The generic determinantCoefficientEquiv (Equiv line
+      124) requires dense scalar/input inclusions, complete L, a norm-one standard tuple and an explicit
+      determinant product norm bound, without an explicit nonarchimedean assumption. Polynomial evaluation
+      identifies Gpoly with G and Cpoly with C, with unique coefficient representatives. The algebraic
+      specialization fixes primary variables/constants, sends auxiliary variables to zero and preserves
+      products; Gpoly maps onto G0poly while Cpoly maps into C0poly, without a surjectivity or continuity
+      assertion for the latter map. The collected coefficient_polynomial_specialization is at Specialization
+      line 263. The padded_coefficient_spaces theorem (Spaces line 307) covers every n including zero:
+      the actual E times K^n and D times K^n with max norms are densely isometrically included in complete
+      A times L^n of L-dimension p+n, and the determinant is normalized with product norm bound. The primary
+      determinant span and coefficient space remain the same; paddedCoefficientEquiv gives the actual
+      degree-p+n isometry onto C and paddedScalarExtension gives the L-valued pointwise formula and exact
+      norm. The five implementation modules are DeterminantCoefficientEquiv, DeterminantCoefficientPadding,
+      DeterminantCoefficientSpaces, DeterminantCoefficientSpan and DeterminantCoefficientSpecialization,
+      with 162 explicit names and four generated helpers, for 166 gate-owned names. Shared gate accepted
+      at 2026-09-26T06:34:09Z; a fresh complete independent jury returned clean 5/5/4 at 2026-09-26T07:03:11Z.
+      All-multilinear alternation, the degree-gap functional, nonanalytic cross-action, analytic padded
+      retraction, dom:limits analytic/lifting conclusions and categorical Main Theorem (4) remain pending.
+      The latest original whole-project build gate passed at 2026-09-26T06:34:09Z; the idle checkpoint
+      confirmed the root and all 15 new implementation modules against their accepted hashes at 2026-09-26T07:04:27Z.
+      Outside the unchanged four-statement comparator scope.'
 acknowledgements: Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform; leanprover/comparator;
   and mathlib-initiative/formalization.yaml. The source paper's attribution to Claude and its bibliographic
   author are preserved separately above.

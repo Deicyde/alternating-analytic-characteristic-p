@@ -119,3 +119,6 @@ import AlternatingAnalytic.Category.AlternatingRegularity
 import AlternatingAnalytic.Geometry.AnalyticAlternatingBundleFunctor
 import AlternatingAnalytic.Analysis.DenseScalarFamilyExtension
 import AlternatingAnalytic.Analysis.TruncatedPolynomialMaxNorm
+import AlternatingAnalytic.Analysis.RigidDenseSource
+import AlternatingAnalytic.Analysis.DeterminantPairScalars
+import AlternatingAnalytic.Analysis.DeterminantCoefficientSpaces
