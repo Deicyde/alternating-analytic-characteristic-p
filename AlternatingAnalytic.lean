@@ -122,3 +122,5 @@ import AlternatingAnalytic.Analysis.TruncatedPolynomialMaxNorm
 import AlternatingAnalytic.Analysis.RigidDenseSource
 import AlternatingAnalytic.Analysis.DeterminantPairScalars
 import AlternatingAnalytic.Analysis.DeterminantCoefficientSpaces
+import AlternatingAnalytic.Algebra.DeterminantQuadraticGap
+import AlternatingAnalytic.Analysis.DeterminantCrossActionObstruction
