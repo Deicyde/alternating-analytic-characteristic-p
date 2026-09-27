@@ -79,40 +79,77 @@ classification:
   - 58B99
   - 68V20
 status:
-  scope: The original operator proof library is complete for its stated scope; the expanded manuscript
-    remains partly formalized. Forty extension nodes have passed their original shared whole-project build/kernel/axiom
-    gates and full clean independent AI juries. These include categorical Main Theorem (1)–(2), finite-coordinate
-    reflection and analytic families, the actual ContMDiffVectorBundle omega witness, operator-valued
-    bundle morphisms and fixed-base alternating bifunctor completing Main Theorem (3), and Main Theorem
-    (4). The finite-coordinate geometric results require supplied continuous coordinates on the analytic
-    base and retain arbitrary normed model fibers without completeness. Both finite-coordinate operator-input
-    cases and the complete-field finite-dimensional corollary are proved with arbitrary normed value target
-    F. Main Theorem (4) uses concrete incomplete K=F_p(t), every prime p, every radius 0<r<1, universe-zero
-    normed objects and all k≥p. It collects incompatible analytic singleton domains, nonanalytic categorical/operator
-    cross-action, isomorphism closures and no greatest domain in full normed and finite-dimensional fixed-nonarchimedean
-    ambients, with and without relative isomorphism closure. Its limits theorem includes split-domain
-    non-adjoinability, explicit completion maps, analyticity over F_p((t)) and a p-linear coordinate lift;
-    complete-field and Banach largest-domain questions remain open. The ordinary sum-norm ℓ¹ chain now
-    formalizes fam:lem:l1-polynomial, fam:thm:l1-families and fam:cor:l1-families. Arbitrary indices,
-    degree zero and possibly incomplete K are retained. The homogeneous lift has one C with diagonal equality
-    and real factorial norm bound; fixed-degree reflection retains closed W in Banach Z and merely normed
-    H. Local factorization uses uncompleted K-valued lp for its analytic word map and Completion H for
-    synthesis. For joint alternating morphism families on ordinary ℓ¹ or every supplied bounded linear
-    retract, only the final value target F′ is complete; no completeness of K, E, E′, F or parameter P,
-    or norm-one/isometry assumption on retract maps, is added. AnalyticOnNhd forms work on arbitrary sets,
-    and AnalyticOn forms retain openness. This is family admissibility, not an actual infinite-dimensional
-    bundle construction. The full 71-node extension plan remains in scope. Remaining work includes set-sized
-    maximality and separate normable-category packaging, c₀ reflection/families, quotient parameters,
-    tensors and separation examples, finite-dimensional value-target reduction, the weighted nonspherical
-    example, further bundle regimes and general Cⁿ multifunctors, and remaining family/support transport
-    consequences. Accepted library/solution declarations have no admitted proofs; the five intentional
-    challenge placeholders are separate. Kim Morrison’s comparator checks five selected statements, all
-    passed with Lean default-kernel replay on 26 September 2026, including the bundle witness and principal
-    unrestricted no-largest conclusion. The ordinary ℓ¹ batch is outside that selected comparator scope,
-    as are the other collected Main Theorem (4) clauses and the full extension library. The accepted node40
-    gate includes the root import of L1Families and the new module; the ordinary ℓ¹ chain is exposed by
-    the root and covered by the original recursive whole-project builds. No human expert review or complete
-    formalization of the expanded manuscript is claimed.
+  scope: 'The original operator proof library is complete for its stated scope; the expanded manuscript
+    remains partly formalized. Forty-four extension nodes have passed their original shared whole-project
+    build/kernel/axiom gates and full clean independent AI juries. These include categorical Main Theorem
+    (1)–(2), finite-coordinate reflection and analytic families, the actual ContMDiffVectorBundle omega
+    witness, operator-valued bundle morphisms and fixed-base alternating bifunctor completing Main Theorem
+    (3), and Main Theorem (4). The finite-coordinate geometric results require supplied continuous coordinates
+    on the analytic base and retain arbitrary normed model fibers without completeness. Both finite-coordinate
+    operator-input cases and the complete-field finite-dimensional corollary are proved with arbitrary
+    normed value target F. Main Theorem (4) uses concrete incomplete K=F_p(t), every prime p, every radius
+    0<r<1, universe-zero normed objects and all k≥p. It collects incompatible analytic singleton domains,
+    nonanalytic categorical/operator cross-action, isomorphism closures and no greatest domain in full
+    normed and finite-dimensional fixed-nonarchimedean ambients, with and without relative isomorphism
+    closure. Its limits theorem includes split-domain non-adjoinability, explicit completion maps, analyticity
+    over F_p((t)) and a p-linear coordinate lift; complete-field and Banach largest-domain questions remain
+    open. The ordinary sum-norm ℓ¹ chain now formalizes fam:lem:l1-polynomial, fam:thm:l1-families and
+    fam:cor:l1-families. Arbitrary indices, degree zero and possibly incomplete K are retained. The homogeneous
+    lift has one C with diagonal equality and real factorial norm bound; fixed-degree reflection retains
+    closed W in Banach Z and merely normed H. Local factorization uses uncompleted K-valued lp for its
+    analytic word map and Completion H for synthesis. For joint alternating morphism families on ordinary
+    ℓ¹ or every supplied bounded linear retract, only the final value target F′ is complete; no completeness
+    of K, E, E′, F or parameter P, or norm-one/isometry assumption on retract maps, is added. AnalyticOnNhd
+    forms work on arbitrary sets, and AnalyticOn forms retain openness. This is family admissibility,
+    not an actual infinite-dimensional bundle construction. The c₀ coordinate/array foundation is now
+    proved on genuine supremum-norm C₀(I,K), with arbitrary discrete I and all degrees including zero.
+    Coordinate calculus and finite-support density need only nontrivially normed K, with neither completeness
+    nor a separate nonarchimedean K assumption. Bounded coefficient arrays require a complete nonarchimedean
+    output W and return the same continuous multilinear map with actual summability, exact unconditional
+    sum formula, norm bound, coordinate values and finite-support/truncation identities. The c₀ homogeneous
+    diagonal lift is now proved: for arbitrary discrete I and every degree n including zero, nonarchimedean
+    normed Z and a submodule W complete in its inherited norm, every continuous n-multilinear p with diagonal
+    in W admits one continuous W-valued q with both the exact included diagonal and norm(q)≤norm(p). K
+    and Z may be incomplete, and no separate nonarchimedean K or closedness premise on W is added. The
+    sharp grouped-coefficient estimate, constructed-lift sum/coordinate formulas and explicit degree-zero
+    and empty-index wrappers are also public. This is a diagonal lift, not an assertion that p takes every
+    off-diagonal tuple into W. The c₀ analytic reflection theorem fam:thm:c0-reflection is now proved.
+    For a linear isometry j:W→Z with complete W and nonarchimedean normed Z, a supplied ambient HasFPowerSeriesOnBall
+    admits one reflected q with every coefficient norm≤the corresponding ambient coefficient, exact included
+    coefficient diagonals, p.radius≤q.radius, and HasFPowerSeriesOnBall on the same represented ball r:ℝ≥0∞,
+    including infinite r. This does not assert equality of intrinsic convergence radii. K and Z may be
+    incomplete; K has no separate nonarchimedean hypothesis. The parameter is genuine C₀(I,K) with arbitrary
+    discrete I. The subtype version assumes a submodule complete in its inherited norm. AnalyticAt, arbitrary-set
+    AnalyticOnNhd and open-set AnalyticOn wrappers are public, as is analyticity transport along supplied
+    continuous linear parameter equivalences. Those equivalence wrappers do not assert preservation of
+    the same coefficient/radius estimates under nonisometric parameter changes. Explicit extension-by-zero
+    wrappers handle functions supplied on open subtypes. The c₀ alternating-family corollary fam:cor:c0-families
+    is now proved. For every k including zero, genuine C₀(I,K) with arbitrary discrete I, and every supplied
+    continuous linear parameter equivalence P≃L[K]C₀(I,K), analytic joint morphism families are admissible
+    for alternatingMapAction. Only the final value target F′ is complete and nonarchimedean; K has no
+    completeness or separate nonarchimedean hypothesis, and E,E′,F,P are arbitrary normed spaces. The
+    collected theorem includes target-space completeness/nonarchimedean properties, pointwise AnalyticAt,
+    arbitrary-set AnalyticOnNhd admissibility, and open-domain AnalyticOn of the action together with
+    IsAdmissibleOn, both directly and under parameter isomorphisms. Indices may be empty or uncountable.
+    No characteristic, factorial-invertibility or spherical-completeness premise occurs. Parameter transport
+    here is by continuous linear equivalence, not an arbitrary bounded retract. These are actual joint-action
+    family statements, not global analyticity of the entire operator action or actual infinite-dimensional
+    bundle/tensor constructions. The full 71-node extension plan remains in scope. Remaining work includes
+    set-sized maximality and separate normable-category packaging, quotient parameters, tensors and separation
+    examples, finite-dimensional value-target reduction, the weighted nonspherical example, further bundle
+    regimes and general Cⁿ multifunctors, and remaining family/support transport consequences. Accepted
+    library/solution declarations have no admitted proofs; the five intentional challenge placeholders
+    are separate. Kim Morrison’s comparator checks five selected statements, all passed with Lean default-kernel
+    replay on 26 September 2026, including the bundle witness and principal unrestricted no-largest conclusion.
+    The ordinary ℓ¹ batch and c₀ foundation/lift/reflection/families are outside that selected comparator
+    scope, as are the other collected Main Theorem (4) clauses and the full extension library. The accepted
+    node40 gate includes the root import of L1Families and the new module; the ordinary ℓ¹ chain is exposed
+    by the root and covered by the original recursive whole-project builds. The node41 original gate also
+    includes the worker-added CZeroCoordinates root import and all four new modules. The node42 original
+    gate includes the worker-added CZeroCoefficients root import and its new module. The node43 original
+    gate includes CZeroReflection and its root import. The node44 original gate includes CZeroFamilies
+    and its root import. No human expert review or complete formalization of the expanded manuscript is
+    claimed.'
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -1569,6 +1606,133 @@ status:
     - Quot.sound
     comparator_config: ''
     literature_dependencies: []
+  - declaration: CZero.coordinate_calculus
+    file: AlternatingAnalytic/Analysis/CZeroCoordinateBasics.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: CZero.boundedArrayMultilinearMap_spec
+    file: AlternatingAnalytic/Analysis/CZeroCoordinates.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: CZero.boundedArrayMultilinearMap_zero
+    file: AlternatingAnalytic/Analysis/CZeroCoordinates.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: CZero.homogeneous_diagonal_lifting
+    file: AlternatingAnalytic/Analysis/CZeroCoefficients.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: CZero.norm_groupedCoefficient_le
+    file: AlternatingAnalytic/Analysis/CZeroCoefficients.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: CZero.homogeneousLift_zero
+    file: AlternatingAnalytic/Analysis/CZeroCoefficients.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: CZero.homogeneousLift_apply_of_isEmpty
+    file: AlternatingAnalytic/Analysis/CZeroCoefficients.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.c0_exists_hasFPowerSeriesOnBall_linearIsometry
+    file: AlternatingAnalytic/Analysis/CZeroReflection.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.c0_analyticOn_linearIsometry
+    file: AlternatingAnalytic/Analysis/CZeroReflection.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.c0_analyticOn_linearIsometry_of_equiv
+    file: AlternatingAnalytic/Analysis/CZeroReflection.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.c0_analyticOn_extend_linearIsometry_of_equiv
+    file: AlternatingAnalytic/Analysis/CZeroReflection.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.c0_analytic_family_admissibility
+    file: AlternatingAnalytic/Analysis/CZeroFamilies.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.isAdmissibleOn_of_c0_of_isOpen
+    file: AlternatingAnalytic/Analysis/CZeroFamilies.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.isAdmissibleOn_of_c0_equiv_of_isOpen
+    file: AlternatingAnalytic/Analysis/CZeroFamilies.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+
 automation:
   spend_usd: 200
   methods:
@@ -1651,7 +1815,7 @@ fidelity:
 review:
   status: agent-reviewed
   reviewers: []
-  notes: 'The accepted extension frontier is 40 nodes with original shared Lean build/kernel/axiom gates
+  notes: 'The accepted extension frontier is 44 nodes with original shared Lean build/kernel/axiom gates
     and full clean independent AI juries. No human expert review is claimed. The ordinary ℓ¹ batch retains
     actual uncompleted lp parameters, all index sets/degrees, incomplete K and the exact output-completeness
     hypotheses of each statement. Its final family/retract node passed the original shared gate at 2026-09-26T22:45:32.142164Z,
@@ -1664,16 +1828,38 @@ review:
     The fresh full jury was clean5/5/4 at23:03:24Z. The incomplete attempt, process recovery and before/after
     snapshots are preserved in external operational evidence. Earlier incomplete review attempts and runtime
     recovery also remain in their external records; clean retries did not replace or conceal that history.
-    All12 final batch source/root hashes match their accepted receipts. The accepted root reaches all172
-    project submodules with no import gap. Exact current accepted source hashes and graph-routed names
-    were matched administratively; no new proof review, Lean build or comparator was run by this documentation
-    task. All 158 prior cumulative39 main_results records are preserved, with three actual family/retract
-    declarations appended. The successful five-statement comparator/default-kernel receipt from26 September
-    is reused: direct inputs, dependency pins and all126 project modules in the solution import closure
-    are unchanged. No fresh comparator run is claimed, and this batch adds no sixth challenge statement.
-    The recorded hosted CI run did not start because of account billing/spending restrictions, so no hosted
-    success is claimed. Corrected version v0.4 preserves schema family0.4 and USD200; both pinned official
-    dispatcher and concrete schemas validate the complete manifest.'
+    At checkpoint40 all12 batch source/root hashes matched their accepted receipts and the root reached
+    all172 project submodules with no import gap. Exact current accepted source hashes and graph-routed
+    names were matched administratively; no new proof review, Lean build or comparator was run by this
+    documentation task. All172 prior cumulative43 main_results records are preserved, with three actual
+    c₀ alternating-family declarations appended. The successful five-statement comparator/default-kernel
+    receipt from26 September is reused: direct inputs, dependency pins and all126 project modules in the
+    solution import closure are unchanged. No fresh comparator run is claimed, and this batch adds no
+    sixth challenge statement. The recorded hosted CI run did not start because of account billing/spending
+    restrictions, so no hosted success is claimed. Corrected version v0.4 preserves schema family0.4 and
+    USD200; both pinned official dispatcher and concrete schemas validate the complete manifest. Node41
+    passed its original shared gate at2026-09-26T23:42:03.174178Z and its full fresh jury was clean5/5/4
+    at23:44:23Z. The exact five source/root hashes and all45 graph-routed owned names match the receipt:41
+    explicitly named public declarations, three generated congr_simp declarations and the generated name
+    for one local DecidableEq instance. The historical cumulative41 draft was held for a later publication
+    batch; no feeder pause or live repository edit is requested. Node42 passed its original shared gate
+    at2026-09-26T23:54:07.875365Z, including the root import and CZeroCoefficients.lean; its full fresh
+    jury was clean5/5/5 at23:56:21Z. At accepted-header capture both source/root hashes matched the receipt,
+    and all15 graph-routed owned names match:13 explicitly named public declarations and two generated
+    congr_simp declarations, without private helpers. The historical cumulative42 remained not ready for
+    publication until the parent batches subsequent results; no live repository, feeder, queue or graph
+    action is requested. Node43 passed its original shared gate at2026-09-27T00:03:54.858481Z with root
+    and CZeroReflection.lean, followed by full fresh jury5/5/5 at00:05:50Z. Both source/root hashes matched
+    at accepted-header capture; all10 receipt-owned names are explicit public declarations and match graph
+    routing, with no generated/private extras. Any subsequent active-worker root aggregation drift is
+    preserved separately; final idle publication must merge receipt roots chronologically. The historical
+    cumulative43 was not ready for publication batching; no live repository or engine change, extra build
+    or comparator run is requested. Node44 passed its original shared gate at2026-09-27T00:13:53.284789Z
+    with root and CZeroFamilies.lean and full fresh jury5/5/5 at00:15:50Z. Exact source/root hashes and
+    all10 graph-routed names match the receipt: nine named public theorems and one named public instance,
+    without private/generated extras. The final cumulative44 documentation is ready after both official
+    schema and preservation checks; final source/PDF/idle integration and publication remain the parent
+    responsibility. No new comparator run or human expert review is claimed.'
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -1704,10 +1890,12 @@ alignment:
     lean: AlternatingAnalytic.exists_nowhereAnalytic_banach_counterexample
     module: AlternatingAnalytic.Main
     status: proved
+    note: ''
   - source: 'Corollary cor:class: the exact operator factorial classification'
     lean: AlternatingAnalytic.factorial_ne_zero_iff_allBanachPrecompositionAnalytic
     module: AlternatingAnalytic.Analysis.FactorialClassification
     status: proved
+    note: ''
   - source: 'Proposition lift: bounded lift and analyticity equivalences'
     lean: Round24Transfer.tfae_Q
     module: AlternatingAnalytic.Analysis.LiftCriterion
@@ -1722,10 +1910,12 @@ alignment:
     lean: AlternatingAnalytic.completedLaurentCoefficient_full_properties
     module: AlternatingAnalytic.Analysis.LaurentCoefficientTheorem
     status: proved
+    note: ''
   - source: 'Lemma Psi: all four residue-lift properties, including full grouped polarization'
     lean: AlternatingAnalytic.laurentResidueLift_full_properties
     module: AlternatingAnalytic.Analysis.LaurentResidueTheorem
     status: proved
+    note: ''
   - source: 'Proposition nonultra: the target admits no equivalent ultrametric norm'
     lean: AlternatingAnalytic.laurentExterior_not_hasEquivalentUltrametricNorm
     module: AlternatingAnalytic.Analysis.LaurentCompletedCoefficient
@@ -1735,19 +1925,23 @@ alignment:
     lean: AlternatingAnalytic.exists_denseMultilinearFamilyExtension_of_bound
     module: AlternatingAnalytic.Analysis.DenseMultilinearFamilyExtension
     status: proved
+    note: ''
   - source: 'Remark K2: nonspherical completeness and descending empty balls'
     lean: AlternatingAnalytic.hasEmptyDescendingBallSequence_iff
     module: AlternatingAnalytic.Analysis.NonsphericalSequence
     status: proved
+    note: ''
   - source: 'Remark FFunit: the normalized multiplier example and its support and cluster values'
     lean: AlternatingAnalytic.normalizedMultiplierLift_pol1, AlternatingAnalytic.exteriorSupportDim_normalizedMultiplierLift_le,
       AlternatingAnalytic.clusterValue_normalizedClusterLift
     module: AlternatingAnalytic.Algebra.NormalizedMultiplierLift
     status: proved
+    note: ''
   - source: 'Remark sorted: the contracting lift and its actual convergent infinite determinant formula'
     lean: AlternatingAnalytic.exists_sortedSchauderLift
     module: AlternatingAnalytic.Analysis.SortedBasisFormula
     status: proved
+    note: ''
   - source: 'Lemma compatible-extension in sec:theoremA: extension preserving compatible operator bounds'
     lean: exists_extension_of_sphericallyComplete
     module: AlternatingAnalytic.Analysis.SphericalCompleteness
@@ -1771,6 +1965,7 @@ alignment:
     lean: AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup
     module: AlternatingAnalytic.Analysis.DiscreteTargetAnalytic
     status: proved
+    note: ''
   - source: 'Categorical foundations: normed spaces and regularity on hom spaces'
     lean: AlternatingAnalytic.NormedSpaceCat; AlternatingAnalytic.FunctorContDiffOnHoms; AlternatingAnalytic.FunctorAnalyticOnHoms;
       AlternatingAnalytic.FunctorCPolynomialOnHoms
@@ -1923,13 +2118,29 @@ alignment:
       general nonanalyticity transfer and the positive-characteristic Banach example at zero where the
       shear is the identity. The general transfer has no completeness or characteristic assumptions; its
       explicit bundle/atlas realization remains pending.
-  - source: 'fam:thm:c0-reflection and fam:cor:c0-families: nonarchimedean c_0 parameters'
-    lean: ''
-    module: ''
-    status: not-formalized
-    note: Paper proof assumes a complete reflection target and nonarchimedean ambient norm. Alternating
-      families are admissible when the final value-space target is complete and nonarchimedean. The index
-      set is arbitrary; these are parameter-space conditions.
+  - source: 'fam:thm:c0-reflection: nonarchimedean ambient analytic reflection from c₀ parameters'
+    lean: AlternatingAnalytic.c0_exists_hasFPowerSeriesOnBall_linearIsometry; AlternatingAnalytic.c0_exists_hasFPowerSeriesOnBall_subtype;
+      AlternatingAnalytic.c0_analyticAt_linearIsometry; AlternatingAnalytic.c0_analyticOnNhd_linearIsometry;
+      AlternatingAnalytic.c0_analyticOn_linearIsometry; AlternatingAnalytic.c0_analyticOn_linearIsometry_of_equiv;
+      AlternatingAnalytic.c0_analyticOn_extend_linearIsometry_of_equiv
+    module: AlternatingAnalytic.Analysis.CZeroReflection
+    status: proved
+    note: The c₀ analytic reflection theorem fam:thm:c0-reflection is now proved. For a linear isometry
+      j:W→Z with complete W and nonarchimedean normed Z, a supplied ambient HasFPowerSeriesOnBall admits
+      one reflected q with every coefficient norm≤the corresponding ambient coefficient, exact included
+      coefficient diagonals, p.radius≤q.radius, and HasFPowerSeriesOnBall on the same represented ball
+      r:ℝ≥0∞, including infinite r. This does not assert equality of intrinsic convergence radii. K and
+      Z may be incomplete; K has no separate nonarchimedean hypothesis. The parameter is genuine C₀(I,K)
+      with arbitrary discrete I. The subtype version assumes a submodule complete in its inherited norm.
+      AnalyticAt, arbitrary-set AnalyticOnNhd and open-set AnalyticOn wrappers are public, as is analyticity
+      transport along supplied continuous linear parameter equivalences. Those equivalence wrappers do
+      not assert preservation of the same coefficient/radius estimates under nonisometric parameter changes.
+      Explicit extension-by-zero wrappers handle functions supplied on open subtypes. Main same-q linear-isometry
+      package at52, subtype package29; pointwise80, neighborhood88, open94; parameter-equivalence wrappers102/113/119
+      and open-subtype Function.extend wrappers128/136. No countability, nonempty-index, spherical, characteristic
+      or scalar-factorial premise occurs; all coefficient degrees including0 are included. The family
+      corollary is proved in its separate alignment row. Original gate00:03:54Z/full fresh jury5/5/5 at00:05:50Z
+      on27September2026. Outside the unchanged five selected comparator statements.
   - source: 'fam:cor:l1-families: ordinary ℓ¹ alternating families and bounded linear retracts'
     lean: AlternatingAnalytic.l1_family_admissibility; AlternatingAnalytic.isAdmissibleOn_of_l1_of_isOpen;
       AlternatingAnalytic.isAdmissibleOn_of_l1_retract_of_isOpen
@@ -2580,9 +2791,9 @@ alignment:
       K; card_wordOrbit_le at89 needs no field. Fintype J appears only in local selection-type comparison
       helpers, not as a global hypothesis. Distinct orbit tuples are summed at one representative; no
       stabilizer repetitions are inserted. The ordinary ℓ¹ normed homogeneous lift is now proved separately
-      below; the c₀ lift/reflection remains pending, while the ordinary ℓ¹ corollary is proved separately.
-      Original gate21:50:54Z/fullfreshjury5/5/4 at21:52:52Z on26September2026. Outside the unchanged five
-      selected comparator statements.
+      below; the c₀ lift is now proved separately and c₀ reflection is now proved separately, while the
+      ordinary ℓ¹ corollary is proved separately. Original gate21:50:54Z/fullfreshjury5/5/4 at21:52:52Z
+      on26September2026. Outside the unchanged five selected comparator statements.
   - source: 'fam:lem:l1-polynomial: ordinary ℓ¹ homogeneous diagonal lifting'
     lean: L1PolynomialLift.exists_l1_diagonal_lift; L1PolynomialLift.exists_l1_diagonal_lift_of_completeSpace;
       L1PolynomialLift.norm_groupedCoefficient_le
@@ -2617,8 +2828,70 @@ alignment:
       pointwise132; AnalyticOnNhd145; isometry forms166/180/189; quantitative lift93. The isometry variants
       assume a normed V with closed linear-isometric inclusion into Banach Z, with no extra CompleteSpace
       V premise. Original gate22:20:43Z/fullfreshjury5/5/5 at22:24:08Z on26September2026. The ordinary
-      ℓ¹ family/retract corollary is proved separately; c₀ and actual bundle conclusions remain pending.
+      ℓ¹ family/retract corollary is proved separately; the c₀ alternating-family conclusion is now proved
+      separately, while actual infinite-dimensional bundle conclusions remain pending. Outside the unchanged
+      five selected comparator statements.
+  - source: Coordinate and bounded-coefficient foundation for fam:thm:c0-reflection and fam:cor:c0-families
+    lean: CZero.coordinate_calculus; CZero.boundedArrayMultilinearMap_spec; CZero.boundedArrayMultilinearMap_zero
+    module: AlternatingAnalytic.Analysis.CZeroCoordinateBasics; AlternatingAnalytic.Analysis.CZeroCoordinates
+    status: proved
+    note: The c₀ coordinate/array foundation is now proved on genuine supremum-norm C₀(I,K), with arbitrary
+      discrete I and all degrees including zero. Coordinate calculus and finite-support density need only
+      nontrivially normed K, with neither completeness nor a separate nonarchimedean K assumption. Bounded
+      coefficient arrays require a complete nonarchimedean output W and return the same continuous multilinear
+      map with actual summability, exact unconditional sum formula, norm bound, coordinate values and
+      finite-support/truncation identities. The homogeneous lift is now proved separately; this foundation
+      alone does not establish the analytic reflection/radius theorem or family corollary. Public collected
+      coordinate theorem is CZeroCoordinateBasics.lean:178; boundedArrayMultilinearMap_spec is CZeroCoordinates.lean:140
+      and the explicit degree-zero wrapper is at128. The collected specification supplies cofinite convergence,
+      actual Summable, exact tsum and real C/product norm bounds, coordinate-tuple evaluation, finite-support
+      and finite-truncation formulas for the same Q. There is no characteristic, factorial-invertibility,
+      spherical-completeness, countability or nonempty-index hypothesis. No completed replacement of K-valued
+      c₀ is used. Original gate23:42:03Z includes root and four modules; full jury5/5/4 at23:44:23Z on26September2026.
       Outside the unchanged five selected comparator statements.
+  - source: Homogeneous coefficient-lifting ingredient of fam:thm:c0-reflection
+    lean: CZero.homogeneous_diagonal_lifting; CZero.norm_groupedCoefficient_le; CZero.homogeneousLift_zero;
+      CZero.homogeneousLift_apply_of_isEmpty
+    module: AlternatingAnalytic.Analysis.CZeroCoefficients
+    status: proved
+    note: 'The c₀ homogeneous diagonal lift is now proved: for arbitrary discrete I and every degree n
+      including zero, nonarchimedean normed Z and a submodule W complete in its inherited norm, every
+      continuous n-multilinear p with diagonal in W admits one continuous W-valued q with both the exact
+      included diagonal and norm(q)≤norm(p). K and Z may be incomplete, and no separate nonarchimedean
+      K or closedness premise on W is added. The sharp grouped-coefficient estimate, constructed-lift
+      sum/coordinate formulas and explicit degree-zero and empty-index wrappers are also public. This
+      is a diagonal lift, not an assertion that p takes every off-diagonal tuple into W. The parameter
+      remains genuine supremum-norm C₀(I,K), not a completion replacement. There is no countability, nonempty-index,
+      characteristic, spherical-completeness or factorial-invertibility assumption and no real factorial
+      loss. Main collected theorem line161, sharp grouped bound29, degree-zero wrapper137 and empty-index
+      wrapper146. Imports are exactly FiniteWordGrouping and CZeroCoordinates, matching the existing prerequisite
+      nodes. Original gate23:54:07Z/full fresh jury5/5/5 at23:56:21Z on26September2026. The analytic reflection/same-ball/radius
+      theorem is now proved separately; the c₀ family corollary is now proved separately, while later
+      tensor and actual infinite-dimensional bundle results remain pending. Outside the unchanged five
+      selected comparator statements.'
+  - source: 'fam:cor:c0-families: analytic alternating morphism families on c₀ and linearly isomorphic
+      parameters'
+    lean: AlternatingAnalytic.c0_analytic_family_admissibility; AlternatingAnalytic.isAdmissibleOn_of_c0_of_isOpen;
+      AlternatingAnalytic.isAdmissibleOn_of_c0_equiv_of_isOpen; AlternatingAnalytic.alternatingMapAction_target_properties
+    module: AlternatingAnalytic.Analysis.CZeroFamilies
+    status: proved
+    note: The c₀ alternating-family corollary fam:cor:c0-families is now proved. For every k including
+      zero, genuine C₀(I,K) with arbitrary discrete I, and every supplied continuous linear parameter
+      equivalence P≃L[K]C₀(I,K), analytic joint morphism families are admissible for alternatingMapAction.
+      Only the final value target F′ is complete and nonarchimedean; K has no completeness or separate
+      nonarchimedean hypothesis, and E,E′,F,P are arbitrary normed spaces. The collected theorem includes
+      target-space completeness/nonarchimedean properties, pointwise AnalyticAt, arbitrary-set AnalyticOnNhd
+      admissibility, and open-domain AnalyticOn of the action together with IsAdmissibleOn, both directly
+      and under parameter isomorphisms. Indices may be empty or uncountable. No characteristic, factorial-invertibility
+      or spherical-completeness premise occurs. Parameter transport here is by continuous linear equivalence,
+      not an arbitrary bounded retract. These are actual joint-action family statements, not global analyticity
+      of the entire operator action or actual infinite-dimensional bundle/tensor constructions. Collected
+      theorem line115; direct/equivalence open wrappers104/98; target properties58; pointwise direct/equivalence78/67;
+      neighborhood direct/equivalence92/86. Imports CZeroReflection, FiniteCoordinateFamilies and the
+      existing SphericalCompleteness module; that import introduces no spherical hypothesis into these
+      statements. The operator nonarchimedean norm bound and named instance are public in namespace ContinuousLinearMap
+      at27/38. Original gate00:13:53Z/full fresh jury5/5/5 at00:15:50Z on27September2026. Outside the
+      unchanged five selected comparator statements.
 acknowledgements: Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform; leanprover/comparator;
   and mathlib-initiative/formalization.yaml. The source paper's attribution to Claude and its bibliographic
   author are preserved separately above.

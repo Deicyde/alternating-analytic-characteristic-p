@@ -103,10 +103,14 @@ import AlternatingAnalytic.MainTheorem
 import AlternatingAnalytic.Analysis.LaurentCoefficientTheorem
 
 import AlternatingAnalytic.Analysis.FiniteCoordinateReflection
+import AlternatingAnalytic.Analysis.CZeroCoordinates
+import AlternatingAnalytic.Analysis.CZeroCoefficients
+import AlternatingAnalytic.Analysis.CZeroReflection
 
 import AlternatingAnalytic.Analysis.AnalyticFamilies
 import AlternatingAnalytic.Analysis.ShearCounterexample
 import AlternatingAnalytic.Analysis.FiniteCoordinateFamilies
+import AlternatingAnalytic.Analysis.CZeroFamilies
 import AlternatingAnalytic.Geometry.FiniteCoordinateManifoldFamilies
 import AlternatingAnalytic.Geometry.AnalyticAlternatingBundle
 import AlternatingAnalytic.Geometry.AnalyticAlternatingBundleMorphism
