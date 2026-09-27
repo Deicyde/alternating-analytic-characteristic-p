@@ -80,7 +80,7 @@ classification:
   - 68V20
 status:
   scope: 'The original operator proof library is complete for its stated scope; the expanded manuscript
-    remains partly formalized. Forty-four extension nodes have passed their original shared whole-project
+    remains partly formalized. Forty-six extension nodes have passed their original shared whole-project
     build/kernel/axiom gates and full clean independent AI juries. These include categorical Main Theorem
     (1)–(2), finite-coordinate reflection and analytic families, the actual ContMDiffVectorBundle omega
     witness, operator-valued bundle morphisms and fixed-base alternating bifunctor completing Main Theorem
@@ -134,22 +134,42 @@ status:
     No characteristic, factorial-invertibility or spherical-completeness premise occurs. Parameter transport
     here is by continuous linear equivalence, not an arbitrary bounded retract. These are actual joint-action
     family statements, not global analyticity of the entire operator action or actual infinite-dimensional
-    bundle/tensor constructions. The full 71-node extension plan remains in scope. Remaining work includes
-    set-sized maximality and separate normable-category packaging, quotient parameters, tensors and separation
-    examples, finite-dimensional value-target reduction, the weighted nonspherical example, further bundle
-    regimes and general Cⁿ multifunctors, and remaining family/support transport consequences. Accepted
-    library/solution declarations have no admitted proofs; the five intentional challenge placeholders
-    are separate. Kim Morrison’s comparator checks five selected statements, all passed with Lean default-kernel
-    replay on 26 September 2026, including the bundle witness and principal unrestricted no-largest conclusion.
-    The ordinary ℓ¹ batch and c₀ foundation/lift/reflection/families are outside that selected comparator
-    scope, as are the other collected Main Theorem (4) clauses and the full extension library. The accepted
-    node40 gate includes the root import of L1Families and the new module; the ordinary ℓ¹ chain is exposed
-    by the root and covered by the original recursive whole-project builds. The node41 original gate also
-    includes the worker-added CZeroCoordinates root import and all four new modules. The node42 original
-    gate includes the worker-added CZeroCoefficients root import and its new module. The node43 original
-    gate includes CZeroReflection and its root import. The node44 original gate includes CZeroFamilies
-    and its root import. No human expert review or complete formalization of the expanded manuscript is
-    claimed.'
+    bundle/tensor constructions. The ordinary ℓ¹ unit-ball quotient foundation is now proved. For a Banach
+    K-space H over complete nontrivially normed K, the actual sum-norm lp indexed by the closed unit ball
+    of H admits a continuous linear open surjection q onto H with norm≤1. For any supplied c:K with1<‖c‖,
+    every h has a single-coordinate lift of norm≤‖c‖·‖h‖, with strict inequality when h≠0. The same q
+    has an actual HasSum synthesis formula, exact coordinate values and the estimate ball(qx,ε/‖c‖)⊆q(image
+    of ball(x,ε)) for every ε>0; the source is complete. Constructor and estimate/open-surjection helpers
+    retain complete H but omit CompleteSpace K; the collected Banach-source wrapper retains complete K.
+    No nonarchimedean, countability, separability, finite-dimensionality or nonzero-H assumption occurs.
+    The quotient-parameter counterexample fam:cor:quotient-parameters and following non-retract consequence
+    are now proved over complete nontrivially normed K with CharP K p, p>0 and k≥p. One combined theorem
+    supplies the same Banach E,F, actual H=E→L[K]E, closed-unit-ball index J and q=unitBallL1Quotient
+    K H for every clause: norm(q)≤1, openness and surjectivity, AnalyticOnNhd of Q∘q on the whole source,
+    nowhere AnalyticAt for Q downstairs, and failure of DifferentiableAt at every point of every open-domain
+    local section. It does not rule out continuous sections. For that same H, every index I:Type v and
+    every pair of bounded linear maps i:H→lp(I,K), r:lp(I,K)→H fails r.comp i=id, with v independent of
+    the universe u of K,E,F. Original norms, genuine ordinary sum-norm lp and actual operator H are retained;
+    no nonarchimedean, countability or separability hypothesis is added. This proves failure of quotient
+    descent, not a new bundle/tensor theorem or the largest-domain question over complete fields or Banach
+    pairs. The full 71-node extension plan remains in scope. Remaining work includes set-sized maximality
+    and separate normable-category packaging, tensors and separation examples, finite-dimensional value-target
+    reduction, the weighted nonspherical example, further bundle regimes and general Cⁿ multifunctors,
+    and remaining family/support transport consequences. Accepted library/solution declarations have no
+    admitted proofs; the five intentional challenge placeholders are separate. Kim Morrison’s comparator
+    checks five selected statements, all passed with Lean default-kernel replay on 26 September 2026,
+    including the bundle witness and principal unrestricted no-largest conclusion. The ordinary ℓ¹ batch
+    and c₀ foundation/lift/reflection/families are outside that selected comparator scope, as are the
+    other collected Main Theorem (4) clauses and the full extension library. The accepted node40 gate
+    includes the root import of L1Families and the new module; the ordinary ℓ¹ chain is exposed by the
+    root and covered by the original recursive whole-project builds. The node41 original gate also includes
+    the worker-added CZeroCoordinates root import and all four new modules. The node42 original gate includes
+    the worker-added CZeroCoefficients root import and its new module. The node43 original gate includes
+    CZeroReflection and its root import. The node44 original gate includes CZeroFamilies and its root
+    import. Node45 adds the generic quotient foundation, with its module and root import covered by the
+    original shared gate. Node46 adds the combined quotient counterexample/non-retract statement and root
+    import, covered by its original gate. No human expert review or complete formalization of the expanded
+    manuscript is claimed.'
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -1732,6 +1752,69 @@ status:
     - Quot.sound
     comparator_config: ''
     literature_dependencies: []
+  - declaration: AlternatingAnalytic.unitBall_l1_quotient
+    file: AlternatingAnalytic/Analysis/L1BanachQuotient.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.unitBallL1Quotient_exists_single_lt
+    file: AlternatingAnalytic/Analysis/L1BanachQuotient.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.unitBallL1Quotient_ball_subset
+    file: AlternatingAnalytic/Analysis/L1BanachQuotient.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.exists_quotient_parameter_counterexample
+    file: AlternatingAnalytic/Analysis/QuotientParameterCounterexample.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.quotient_parameter_counterexample_of_nowhereAnalytic
+    file: AlternatingAnalytic/Analysis/QuotientParameterCounterexample.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.no_l1_retract_of_nowhere_analytic_Q
+    file: AlternatingAnalytic/Analysis/QuotientParameterCounterexample.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
+  - declaration: AlternatingAnalytic.not_differentiableWithinAt_section_of_isOpen
+    file: AlternatingAnalytic/Analysis/QuotientParameterCounterexample.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+    comparator_config: ''
+    literature_dependencies: []
 
 automation:
   spend_usd: 200
@@ -1815,7 +1898,7 @@ fidelity:
 review:
   status: agent-reviewed
   reviewers: []
-  notes: 'The accepted extension frontier is 44 nodes with original shared Lean build/kernel/axiom gates
+  notes: 'The accepted extension frontier is 46 nodes with original shared Lean build/kernel/axiom gates
     and full clean independent AI juries. No human expert review is claimed. The ordinary ℓ¹ batch retains
     actual uncompleted lp parameters, all index sets/degrees, incomplete K and the exact output-completeness
     hypotheses of each statement. Its final family/retract node passed the original shared gate at 2026-09-26T22:45:32.142164Z,
@@ -1831,8 +1914,8 @@ review:
     At checkpoint40 all12 batch source/root hashes matched their accepted receipts and the root reached
     all172 project submodules with no import gap. Exact current accepted source hashes and graph-routed
     names were matched administratively; no new proof review, Lean build or comparator was run by this
-    documentation task. All172 prior cumulative43 main_results records are preserved, with three actual
-    c₀ alternating-family declarations appended. The successful five-statement comparator/default-kernel
+    documentation task. All178 prior cumulative45 main_results records are preserved, with four actual
+    quotient-counterexample/non-retract declarations appended. The successful five-statement comparator/default-kernel
     receipt from26 September is reused: direct inputs, dependency pins and all126 project modules in the
     solution import closure are unchanged. No fresh comparator run is claimed, and this batch adds no
     sixth challenge statement. The recorded hosted CI run did not start because of account billing/spending
@@ -1859,7 +1942,19 @@ review:
     all10 graph-routed names match the receipt: nine named public theorems and one named public instance,
     without private/generated extras. The final cumulative44 documentation is ready after both official
     schema and preservation checks; final source/PDF/idle integration and publication remain the parent
-    responsibility. No new comparator run or human expert review is claimed.'
+    responsibility. No new comparator run or human expert review is claimed. Node45 passed the original
+    shared gate at2026-09-27T00:29:22.504719Z, including root and L1BanachQuotient.lean, and full fresh
+    jury5/5/4 at00:31:58Z. Both source/root hashes matched at accepted-header capture; all14 receipt-owned
+    names equal graph routing:12 named public declarations, one generated congruence declaration and a
+    generated name for one explicit local DecidableEq instance. Any downstream root aggregation drift
+    is recorded in the external inventory/status; final idle publication merges receipt roots chronologically.
+    The historical cumulative45 was held NOT READY for batching with46. No source/proof/build/comparator/engine
+    action or human review is claimed. Node46 passed the original shared gate at2026-09-27T00:37:55.030510Z
+    with root and QuotientParameterCounterexample.lean, then full fresh jury5/5/4 at00:39:45Z. Exact current
+    source/root hashes and all11 graph-routed names match the receipt; all11 are explicitly public theorems,
+    without private/generated extras. Final cumulative46 documentation is ready after schema/preservation
+    checks; parent owns final idle source/PDF integration and publication. No new comparator run or human
+    expert review claimed.'
 alignment:
   namespace: AlternatingAnalytic
   theorem_map: THEOREM_MAP.md
@@ -2159,15 +2254,30 @@ alignment:
       root; fresh fulljury5/5/4 at23:03:24Z after an explicitly retained incomplete null/5/null attempt.
       Seven owned names are explicit public declarations, no private/generated extras. Outside the unchanged
       five selected comparator statements.
-  - source: 'fam:cor:quotient-parameters: failure of descent through quotient parameters'
-    lean: ''
-    module: ''
-    status: not-formalized
-    note: Paper proof over complete K of characteristic p and k >= p constructs a bounded open linear
-      surjection q from ordinary l1 onto the Banach counterexample operator space. Q composed with q is
-      analytic although Q is nowhere analytic. No local right inverse on a nonempty open subset is differentiable
-      even at one point; openness follows from a direct uniform one-term lifting estimate. Also prove
-      that the bad operator space is not a bounded linear retract of any ordinary l1 space.
+  - source: fam:cor:quotient-parameters and following non-retract consequence
+    lean: AlternatingAnalytic.exists_quotient_parameter_counterexample; AlternatingAnalytic.quotient_parameter_counterexample_of_nowhereAnalytic;
+      AlternatingAnalytic.no_l1_retract_of_nowhere_analytic_Q; AlternatingAnalytic.not_differentiableWithinAt_section_of_isOpen
+    module: AlternatingAnalytic.Analysis.QuotientParameterCounterexample
+    status: proved
+    note: 'The quotient-parameter counterexample fam:cor:quotient-parameters and following non-retract
+      consequence are now proved over complete nontrivially normed K with CharP K p, p>0 and k≥p. One
+      combined theorem supplies the same Banach E,F, actual H=E→L[K]E, closed-unit-ball index J and q=unitBallL1Quotient
+      K H for every clause: norm(q)≤1, openness and surjectivity, AnalyticOnNhd of Q∘q on the whole source,
+      nowhere AnalyticAt for Q downstairs, and failure of DifferentiableAt at every point of every open-domain
+      local section. It does not rule out continuous sections. For that same H, every index I:Type v and
+      every pair of bounded linear maps i:H→lp(I,K), r:lp(I,K)→H fails r.comp i=id, with v independent
+      of the universe u of K,E,F. Original norms, genuine ordinary sum-norm lp and actual operator H are
+      retained; no nonarchimedean, countability or separability hypothesis is added. This proves failure
+      of quotient descent, not a new bundle/tensor theorem or the largest-domain question over complete
+      fields or Banach pairs. Principal collected statement line194. The conditional nowhere-analytic
+      helper at165 assumes Banach E,F but no CompleteSpace K; source Banach completeness is therefore
+      not advertised in that weaker helper. Generic all-index non-retract at137 needs only complete F
+      and nowhere-analytic Q, with upstairs AnalyticOnNhd/precomposition wrappers129/122. Generic local-section
+      derivative right inverse40, non-differentiability66, open-set version80 and within-set version91
+      have no completeness premise. Source-exact section encoding is a total s with the right-inverse
+      equation on an open U. Main witness H is Banach from E and the principal source is Banach using
+      complete K. Original gate00:37:55Z/fulljury5/5/4 at00:39:45Z on27September2026; all11 declarations
+      public. Outside the unchanged five selected comparator statements.'
   - source: 'fam:prop:tensor-homogeneous, fam:thm:tensor-analytic and fam:prop:l1-optimal: diagonal tensor
       projection criteria'
     lean: ''
@@ -2892,6 +3002,25 @@ alignment:
       statements. The operator nonarchimedean norm bound and named instance are public in namespace ContinuousLinearMap
       at27/38. Original gate00:13:53Z/full fresh jury5/5/5 at00:15:50Z on27September2026. Outside the
       unchanged five selected comparator statements.
+  - source: Unit-ball quotient foundation in the proof of fam:cor:quotient-parameters
+    lean: AlternatingAnalytic.unitBall_l1_quotient; AlternatingAnalytic.unitBallL1Quotient_exists_single_lt;
+      AlternatingAnalytic.unitBallL1Quotient_ball_subset
+    module: AlternatingAnalytic.Analysis.L1BanachQuotient
+    status: proved
+    note: The ordinary ℓ¹ unit-ball quotient foundation is now proved. For a Banach K-space H over complete
+      nontrivially normed K, the actual sum-norm lp indexed by the closed unit ball of H admits a continuous
+      linear open surjection q onto H with norm≤1. For any supplied c:K with1<‖c‖, every h has a single-coordinate
+      lift of norm≤‖c‖·‖h‖, with strict inequality when h≠0. The same q has an actual HasSum synthesis
+      formula, exact coordinate values and the estimate ball(qx,ε/‖c‖)⊆q(image of ball(x,ε)) for every
+      ε>0; the source is complete. Constructor and estimate/open-surjection helpers retain complete H
+      but omit CompleteSpace K; the collected Banach-source wrapper retains complete K. No nonarchimedean,
+      countability, separability, finite-dimensionality or nonzero-H assumption occurs. This is the generic
+      quotient foundation; the quotient-parameter counterexample, local-section obstruction and non-retract
+      consequence are now proved separately. L1UnitBallIndex at20 is exactly the closed-unit-ball subtype.
+      Main collected theorem line138, strict lift64, non-strict lift91, ball image109, surjective102 and
+      open126. The map is an actual continuous linear synthesis with no c₀ identification or completion
+      replacement. Original gate00:29:22Z/fulljury5/5/4 at00:31:58Z on27September2026. Outside the unchanged
+      five selected comparator statements.
 acknowledgements: Mathlib and its contributors; the supplied round-24 Lean proof sources; Autoform; leanprover/comparator;
   and mathlib-initiative/formalization.yaml. The source paper's attribution to Claude and its bibliographic
   author are preserved separately above.
