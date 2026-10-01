@@ -72,7 +72,9 @@ A different picture emerges when regularity is tested on families of morphisms. 
 parametrized by an open subset of $K^d$ induces an analytic alternating-map family, in every characteristic
 and degree, without completeness assumptions on the fibers. Consequently alternating maps preserve analytic
 normed vector bundles and their operator-valued analytic morphisms over analytic manifolds with open $K^d$ charts. We also prove positive results for $c_0$ and ordinary $\ell^1$ parameter spaces, explain the obstruction
-for invertible families over general Banach bases, and characterize universal analytic reflection through closed
+for invertible families over general Banach bases, and show that the finite-coordinate hypothesis on the base is
+sharp: over $\F_q((u))$, an infinite-dimensional Banach model space with an equivalent nonarchimedean norm
+always carries analytic bundles whose alternating-map bundle is not analytic. We also characterize universal analytic reflection through closed
 Banach subspaces by projections onto diagonal tensor powers with exponential norm bounds.
 The main operator, analytic-bundle and no-largest-domain results are formalized in Lean with Mathlib;
 the verification scope of the remaining extensions is stated separately.
@@ -290,7 +292,14 @@ The parameter-space hypothesis matters. An affine analytic family of invertible 
 induce a nonanalytic pullback family on alternating maps (Proposition~\ref{fam:prop:shear}). Thus an arbitrary
 analytic change of frame over a general Banach base need not be preserved. This is a failure of the natural
 construction under changes of trivialization, not a claim that the underlying pointwise bundle admits no
-analytic structure.
+analytic structure. It nevertheless shows that the $C^\omega$ alternating-bundle construction cannot hold over
+arbitrary analytic bases (Corollary~\ref{fam:cor:banach-base-failure}), although its $C^n$ analogue holds for
+every $n\le\infty$. The bad base need not be an operator space: the proof of Theorem~\ref{thm:main} uses only
+coordinatewise multiplication operators, and over $\F_q((u))$ the open unit ball of $c_0(\N,K)$, with diagonal
+isometric transitions, already fails (Corollary~\ref{lau:cor:diagonal-bundle}). Among Banach model spaces with an
+equivalent nonarchimedean norm over $\F_q((u))$, finite dimension is therefore exactly the right hypothesis
+(Corollary~\ref{lau:cor:dichotomy}). Over an incomplete field, finite algebraic dimension without continuous
+coordinates does not suffice (Remark~\ref{dom:finite-algebraic-base}).
 
 \subsection*{Related results}
 Mathlib treats manifolds and vector bundles over arbitrary nontrivially normed fields, with the same regularity
@@ -1180,12 +1189,48 @@ for every smoothness order over such finite-coordinate bases. The analytic concl
 that the action on arbitrary operator spaces is analytic; it uses the base charts as parameter spaces.
 Over a complete field, the hypothesis includes every finite-dimensional normed model space.
 
-The shear of Proposition~\ref{fam:prop:shear} explains the limit of this conclusion. On the trivial bundle
-with base $\cL(E,D)$ and fiber $H$, the map $(u,z)\mapsto(u,g(u)z)$ is an analytic change of trivialization
-with analytic inverse. Its induced change of trivialization on the alternating-map bundle is not
-operator-valued analytic. Thus the construction is not preserved by every analytic change of frame over
-arbitrary Banach bases. This does not assert that the underlying pointwise alternating-map bundle has
-no analytic structure: the counterexample concerns compatibility with the original analytic bundle atlas.
+Finite dimension enters the proof only through Theorem~\ref{fam:thm:finite-reflection}: the ambient
+transition $j\circ\eqref{fam:eq:bundle-transitions}$ is analytic over every base, by~\eqref{fam:eq:ambient-polynomial},
+and the finitely many monomial coefficients give $W$\nobreakdash-valued representatives with the exponential
+bound~\eqref{fam:eq:finite-bound}. No reflection step is needed, over any base, when the joint action itself has a
+bounded multilinear lift: when $k!\ne0$ in $K$, when the target fibers lie in $T_k(K)$, or when the source fibers have
+finite continuous coordinates. The shear of Proposition~\ref{fam:prop:shear} shows that the hypothesis on the
+base cannot simply be removed.
+
+\begin{corollary}[failure over a Banach base]\label{fam:cor:banach-base-failure}
+Let $K$ be a nontrivially normed field of characteristic $p>0$, let $k\ge p$, and let $E,F$ be Banach spaces as in
+Theorem~\ref{thm:main}. Put $M=\cL(E,E)$, an analytic manifold with one chart, and $H=E\times E$. Let
+$\mathcal H\to M$ be the trivial bundle with fiber $H$, equipped with the two global trivializations
+\[
+ \tau_0(u,z)=(u,z),\qquad \tau_1(u,z)=(u,g(u)z),
+\]
+where $g$ is the shear of Proposition~\ref{fam:prop:shear}, and let $\mathcal F=M\times F$. Then $\mathcal H$ and
+$\mathcal F$ are analytic normed vector bundles, but the alternating-map bundle $\Alt^k(\mathcal H;\mathcal F)$ with the
+transitions~\eqref{fam:eq:bundle-transitions} is not analytic: its transition between the charts induced by $\tau_0$
+and $\tau_1$ is analytic at no point of $M$. Equivalently, $u\mapsto g(u)$ is an automorphism of $M\times H$ in
+$\mathsf{VB}^\omega_K(M)$ whose fiberwise alternating action on $M\times\Alt^k(H;F)$ is not an analytic bundle morphism.
+Thus Theorem~\ref{fam:thm:finite-bundles} fails over this Banach base, both for objects and for morphisms.
+\end{corollary}
+
+\begin{proof}
+The transition of $\mathcal H$ from $\tau_0$ to $\tau_1$ is the affine analytic family $g$, with affine analytic inverse
+$u\mapsto g(-u)$. By~\eqref{fam:eq:bundle-transitions}, the induced transitions of the alternating bundle are pullbacks
+by $g(\pm u)$, with the identity on $F$. Theorem~\ref{thm:main} makes $Q^K_{E,E,F}$ analytic at no point, so
+Proposition~\ref{fam:prop:shear} shows that $u\mapsto g(u)^*$ is analytic at no point. The same holds for
+$u\mapsto g(-u)^*$ after the linear reparameterization $u\mapsto-u$. The morphism statement is the same computation
+in the global product chart of $M\times\Alt^k(H;F)$.
+\end{proof}
+
+Consequently the $C^\omega$ form of the alternating-bundle construction cannot hold for all nontrivially normed
+fields, analytic bases and normed fibers, although its $C^n$ forms hold over arbitrary bases for every
+$n\le\infty$ by Proposition~\ref{prop:smooth-positive}. The Lean formalization proves exactly this
+contradiction for Mathlib's existing alternating-bundle topology (\S\ref{sec:lean}). The corollary does not
+assert that the underlying pointwise alternating-map bundle has no analytic structure: the bundle is trivial,
+and the counterexample concerns compatibility with the given analytic atlas, or equivalently functoriality.
+Corollary~\ref{lau:cor:diagonal-bundle} replaces the operator base by the space $c_0(\N,K)$ and the shear by
+diagonal isometries when $K=\F_q((u))$, and Corollary~\ref{lau:cor:dichotomy} shows that finite dimension is then
+exactly the right hypothesis on nonarchimedean Banach model spaces. Remark~\ref{dom:finite-algebraic-base} shows
+that over an incomplete field a base of finite algebraic dimension without continuous coordinates also fails.
 
 \subsection{Nonarchimedean \texorpdfstring{$c_0$}{c0} parameters}
 For an arbitrary index set $I$, write $c_0(I,K)$ for the space of scalar families tending to zero outside
@@ -1761,6 +1806,19 @@ contains $Y_k$. It does not establish that the split-pair category has no other 
 Nor does it resolve the largest-domain question for complete fields or Banach pairs. Completing this
 particular construction removes the obstruction: the sources become finite-dimensional $L$\nobreakdash-spaces,
 the target becomes $L$, and the coordinate polynomial acquires a bounded multilinear lift.
+\end{remark}
+
+\begin{remark}[finite algebraic dimension does not suffice for bundles]\label{dom:finite-algebraic-base}
+The same objects show that the coordinate hypothesis in Theorem~\ref{fam:thm:finite-bundles} cannot be weakened
+to finite algebraic dimension over an incomplete field. Take $M=E$, of dimension $p+1$ over $K=\F_p(t)$, as an
+analytic manifold with one chart; by Lemma~\ref{dom:rigid} it has no nonzero bounded linear functional. Let the
+fiber be $H=D_k\times E_k$ with two global trivializations differing by the shear
+$g(x)=\bigl(\begin{smallmatrix}\id&u(x)\\0&\id\end{smallmatrix}\bigr)$, where $u(x)=M_x\oplus I_r$ is the bounded affine
+family of \S\ref{dom:section}, and take the trivial target bundle with fiber $G$. The transitions $g(\pm x)$ are affine
+analytic. By~\eqref{fam:eq:shear-retract}, compressing the induced pullback recovers $Q^K_{E_k,D_k,G}(u(x))$, and evaluation
+at $\det_k$ followed by coefficient extraction gives the map~\eqref{dom:bad-coordinate}, which is not analytic at zero.
+Hence the alternating-map bundle is not analytic, although the base and all fibers have finite algebraic dimension.
+Over a complete field this cannot happen, by Lemma~\ref{lem:findim}.
 \end{remark}
 
 \section{A tensor criterion for analytic reflection}\label{fam:sec:tensors}
@@ -2822,6 +2880,109 @@ characteristic $p$ the field $\kappa((X))$ is covered by Theorem~\ref{thm:main},
 subfield $\F_p((X))$.
 \end{remark}
 
+\subsection{Multiplier families and \texorpdfstring{$c_0$}{c0} bases}\label{lau:ssec:multipliers}
+The proof of Theorem~\ref{thm:laurent} uses the hypothetical lift only on coordinatewise multiplication operators and
+only at the single form $W_B$. Moreover, Theorem~\ref{thm:FF}(1) needs only finitely supported test vectors with
+entries in $\{0,\pm1\}$. Both observations give a much smaller bad parameter space. Throughout this subsection
+$\kappa$, $k$, $r$, $K_1$, $E_1$, $B$ and $W_B$ are as in Theorem~\ref{thm:laurent}, $c_0(\N,K_1)\subseteq E_1$ carries the
+supremum norm, and $D_a\in\cL(E_1,E_1)$ denotes multiplication by $a$.
+
+\begin{proposition}[multipliers on $c_0$]\label{lau:prop:c0-multipliers}
+The homogeneous polynomial
+\[
+ \sigma\colon c_0(\N,K_1)\to\Alt^k_{K_1}(E_1;B),\qquad
+ \sigma(a)(x_1,\dots,x_k)=W_B(ax_1,\dots,ax_k)=(ax_1)\wedge\dots\wedge(ax_k),
+\]
+has no bounded $k$\nobreakdash-linear lift with values in $\Alt^k_{K_1}(E_1;B)$. Consequently, for every
+$u_0\in\cL(E_1,E_1)$, the map $a\mapsto Q^{K_1}_{E_1,E_1,B}(u_0+D_a)(W_B)$ is analytic at no point of $c_0(\N,K_1)$. In
+particular $a\mapsto Q^{K_1}_{E_1,E_1,B}(u_0+D_a)$ is analytic at no point.
+\end{proposition}
+
+\begin{proof}
+Suppose $p\colon c_0(\N,K_1)^k\to\Alt^k_{K_1}(E_1;B)$ is a bounded $k$\nobreakdash-linear lift of $\sigma$. Let
+$V_{\mathrm{fin}}=\kappa^{(\N)}$ be the finitely supported sequences with entries in $\kappa$; it lies in both $c_0(\N,K_1)$
+and $E_0$. Define $\Psi(a;x)=\eta\bigl(p(a_1,\dots,a_k)(x_1,\dots,x_k)\bigr)$ for $a,x\in V_{\mathrm{fin}}^k$. The proof of
+Lemma~\ref{lem:Psi} applies verbatim. The map $\Psi$ is $2k$\nobreakdash-linear over $\kappa$ and alternating in the last
+$k$ slots. Its inputs have supremum norm at most one, so~\eqref{eq:suppest} gives
+$\sdim\Psi(a;x)\le\lfloor kM_r\norm p\rfloor$. The polarization points $a_\lambda=\sum_i\lambda_ib_i$, with
+$b_i\in V_{\mathrm{fin}}$, are finitely supported and hence lie in $c_0(\N,K_1)$, so the identity~\eqref{eq:Pol}, and in
+particular~\eqref{eq:Pol1}, follows from the diagonal identity as before. This contradicts Theorem~\ref{thm:FF}(1), since
+$k!=0$ in $\kappa$.
+
+For the second assertion, suppose that the map is analytic at $a_0$, with expansion $\sum_n p_n$ there. For
+$h\in c_0(\N,K_1)$ and $t\in K_1$, multilinearity gives, in $\Mult^k_{K_1}(E_1;B)$,
+\[
+ W_B\circ(u_0+D_{a_0}+tD_h,\dots,u_0+D_{a_0}+tD_h)=\sum_{r=0}^kt^rA_r(h),\qquad A_k(h)=\sigma(h).
+\]
+Comparing this with the given expansion on scalar lines, Lemma~\ref{lem:unique} shows, exactly as in
+Proposition~\ref{prop:lift}(2), that $p_k$ is a bounded lift of $\sigma$. This is impossible. The operator-valued
+statement follows by evaluation at $W_B$.
+\end{proof}
+
+\begin{corollary}[diagonal transitions over a $c_0$ base]\label{lau:cor:diagonal-bundle}
+Let $U$ be the open unit ball of $c_0(\N,K_1)$, an analytic manifold with one chart. Let $\mathcal V\to U$ be the
+trivial bundle with fiber $E_1$ and the two global trivializations $\tau_0(a,z)=(a,z)$ and $\tau_1(a,z)=(a,D_{1+a}z)$,
+and let $\mathcal B=U\times B$. Then $\mathcal V$ is an analytic normed vector bundle whose transitions are isometric
+diagonal automorphisms of $E_1$. The alternating-map bundle $\Alt^k(\mathcal V;\mathcal B)$ is not analytic: the section
+that is constantly $W_B$ in the chart induced by $\tau_1$ is, in the chart induced by $\tau_0$, the map
+$a\mapsto W_B\circ(D_{1+a},\dots,D_{1+a})$, which is analytic at no point of $U$.
+\end{corollary}
+
+\begin{proof}
+For $a\in U$ every coordinate satisfies $\abs{1+a_i}=1$, so $D_{1+a}$ is an isometry of $E_1$. Its inverse
+$D_{(1+a)^{-1}}=\sum_{n\ge0}(-D_a)^n$ is a power series of radius one in $a$, since $D_a^n=D_{a^n}$ has norm at most
+$\norm a^n$. Hence both transitions are analytic. If $\omega_a\in\Alt^k(\mathcal V_a;B)$ has coordinates $m_0(a)$ and
+$m_1(a)$ in the two induced charts, then $m_0(a)=m_1(a)\circ(D_{1+a},\dots,D_{1+a})$. With $m_1\equiv W_B$, this is the
+map of Proposition~\ref{lau:prop:c0-multipliers} with $u_0=\id$, which is analytic at no point.
+\end{proof}
+
+Thus the analyticity of a section of the alternating-map bundle depends on the analytic frame used to read it, at
+every point of the base. This shows that the nonarchimedean hypothesis on the final value space $F'$ in
+Corollary~\ref{fam:cor:c0-families} cannot be removed: $B$ is complete but admits no equivalent nonarchimedean norm
+(Proposition~\ref{prop:nonultra}). It also contrasts with Corollary~\ref{fam:cor:l1-families}. On
+$\ell^1(\N,K_1)$, with its ordinary sum norm, the same multiplier family is admissible; its sorted-word lift has norm at
+most $k!$. The test vectors above are finitely supported in both spaces, so only the norm on the parameter space
+distinguishes them. This is a concrete instance of Corollary~\ref{fam:cor:quotient-parameters}.
+
+\begin{corollary}[finite dimension is sharp for nonarchimedean bases]\label{lau:cor:dichotomy}
+Let $K=\F_q((u))$, where $q$ is a power of $p$, with a $u$\nobreakdash-adic absolute value, and let $k\ge p$. Let $P$ be a
+$K$\nobreakdash-Banach space admitting an equivalent nonarchimedean norm. Then the conclusion of
+Theorem~\ref{fam:thm:finite-bundles} holds over every analytic manifold modeled on $P$, with arbitrary normed fibers,
+if and only if $P$ is finite-dimensional.
+\end{corollary}
+
+\begin{proof}
+If $\dim P<\infty$, Lemma~\ref{lem:findim} supplies continuous coordinates and Theorem~\ref{fam:thm:finite-bundles}
+applies. Conversely, suppose $\dim P=\infty$. Remark~\ref{rem:spaces} allows us to apply
+Theorem~\ref{thm:laurent} with $\kappa=\F_q$ and $K_1=K$. By Serre's theorem cited in Remark~\ref{rem:sorted}, $P$ is
+topologically isomorphic to $c_0(I,K)$ for an infinite set $I$. Choosing a countable subset of $I$ gives bounded linear
+maps $\iota\colon c_0(\N,K)\to P$ and $\pi\colon P\to c_0(\N,K)$ with $\pi\iota=\id$. On the open set
+$V=\{x\in P:\norm{\pi x}<1\}$, take the bundle with fiber $E_1$ and transition $D_{1+\pi(x)}$, as in
+Corollary~\ref{lau:cor:diagonal-bundle}, together with the trivial bundle with fiber $B$. If the induced transition were
+analytic at $x_0\in V$, restriction to the affine subspace $x_0+\iota(c_0(\N,K))$ would make
+$b\mapsto Q^{K}_{E_1,E_1,B}(D_{1+\pi(x_0)}+D_b)$ analytic at zero. This contradicts
+Proposition~\ref{lau:prop:c0-multipliers} with $u_0=D_{1+\pi(x_0)}$.
+\end{proof}
+
+The ordinary sum norm on $\ell^1$ is not equivalent to a nonarchimedean norm, so Corollary~\ref{fam:cor:l1-families}
+does not conflict with this dichotomy. Over $\F_q((u))$, every counterexample must also use a target fiber outside
+$T_k(K)$; by Proposition~\ref{prop:discrete}, a Banach target fiber must then admit no equivalent nonarchimedean norm.
+Thus the obstruction does not occur among bundles all of whose target fibers are nonarchimedean Banach spaces.
+
+\begin{remark}[pullback of differential forms]\label{lau:rem:pullback}
+The same computation shows that pullback along analytic maps does not preserve analytic $B$\nobreakdash-valued forms on
+infinite-dimensional bases. Let $f\colon E_1\times E_1\to E_1$ be the bounded bilinear map $f(x,y)=xy$, and let
+$\omega_0\equiv W_B$ be the constant $B$\nobreakdash-valued $k$\nobreakdash-form on $E_1$. At $(x,y)$, the restriction of
+$f^*\omega_0=W_B\circ(Df,\dots,Df)$ to vectors in $\{0\}\times E_1$ is $\sigma(x)$, because $Df(x,y)(0,h)=xh$. By
+Proposition~\ref{lau:prop:c0-multipliers} and the lift criterion at points of $E_1$, the form $f^*\omega_0$ is analytic
+at no point of $E_1\times E_1$. In the same way, the chart change $(x,y)\mapsto((1+y)x,y)$ on
+$\{(x,y):\norm y<1\}$ has derivative $\bigl(\begin{smallmatrix}D_{1+y}&D_x\\0&\id\end{smallmatrix}\bigr)$, which is the
+shear with $u=D_x$ along $y=0$. Hence the bundle of $B$\nobreakdash-valued differential $k$\nobreakdash-forms on this open
+subset of $E_1\times E_1$ is not analytic for the atlas induced by the analytic structure. For scalar-valued forms the
+target $K$ is spherically complete when $K=\F_q((u))$, so Main Theorem~(\ref{main:spherical}) makes the bundle of
+differential $k$\nobreakdash-forms analytic over every base.
+\end{remark}
+
 \section{Ascent to an arbitrary base field}\label{sec:ascent}
 
 To pass from a Laurent series field to a prescribed field, we work first inside its completion. A suitable Laurent
@@ -3546,6 +3707,9 @@ target fibers should be recorded explicitly: completeness and nonarchimedean nor
 positive results. General reflection of analyticity through closed linear embeddings is a sufficient
 condition, but it is stronger than the property needed for this particular finite-degree construction.
 The ordinary $\ell^1$ parameter theorem makes this distinction concrete.
+The answer depends on the admitted target fibers: by Corollaries~\ref{fam:cor:c0-families}
+and~\ref{lau:cor:diagonal-bundle}, the space $c_0(\N,\F_q((u)))$ qualifies for complete nonarchimedean
+final targets but not for all complete targets.
 
 \item \emph{Countable index.}
 Let $K$ be complete, not spherically complete, of characteristic $p\ge3$, and let $k\ge p$.
@@ -3699,6 +3863,18 @@ Every local section of $q$ on an open subset fails to be Fr\'echet differentiabl
 of its domain, and this same $H$ is not a bounded linear retract of $\ell^1(I,K)$ for any index set $I$.
 The norms on $H$ and $F$ need not be nonarchimedean.
 
+Proposition~\ref{fam:prop:tensor-homogeneous} and Theorem~\ref{fam:thm:tensor-analytic}
+are also formalized over a complete nontrivially normed field $K$ and a Banach parameter space $P$.
+The tensor powers are separated completions for the ordinary sum projective seminorm,
+with the norm-controlled universal property for Banach targets.
+The homogeneous lift preserves the diagonal and has norm at most $\norm B\norm{R_n}$.
+The analytic criterion characterizes reflection into every closed subspace of every Banach target,
+on every open subset of $P$, by one family of projections $R_n\colon T_n(P)\to\Delta_n(P)$,
+$n\ge1$, with a common bound $\norm{R_n}\le A^n$ for some $A\ge1$.
+The equivalent finite root-limsup condition is included, and the degree-zero Taylor coefficient
+is handled separately. The necessity proof uses the actual dependent $c_0$ Banach test space
+and its ambient-analytic pure-power family on the whole open unit ball.
+
 The checked development further includes the joint action and its functorial laws, the core
 admissible-family laws and graph characterization of Proposition~\ref{fam:prop:category},
 Proposition~\ref{fam:prop:shear} with its Banach counterexample at the identity, and the
@@ -3716,13 +3892,20 @@ The declaration \texttt{alternatingBundleFunctor} completes Main Theorem~(\ref{m
 as an actual bifunctor on analytic normable bundles. Its object and morphism formulas use the existing
 bundle topologies and operator-valued analytic Hom sections; identity, composition and transport
 between analytically compatible presentations are formalized.
+Corollary~\ref{fam:cor:banach-base-failure} is formalized as
+\texttt{exists\_\allowbreak{}banach\_\allowbreak{}base\_\allowbreak{}alternatingBundle\_\allowbreak{}not\_\allowbreak{}analytic},
+over every nontrivially normed field of characteristic $p$ and every $k\ge p$. The shear bundle is a Mathlib
+vector bundle core over the Banach base $\cL(E,E)$ with two global charts; it and the trivial bundle with fiber $F$
+are analytic, but the actual alternating-map bundle, with Mathlib's existing topology, is not analytic. The
+multiplier strengthening of \S\ref{lau:ssec:multipliers}, the dichotomy of Corollary~\ref{lau:cor:dichotomy} and
+Remark~\ref{dom:finite-algebraic-base} are not formalized.
 Main Theorem~(\ref{main:domains}) is also formalized over the $t$\nobreakdash-adic field $K=\F_p(t)$,
 for every prime $p$ and every $k\ge p$. The checked statement rules out a largest full analytic domain,
 also with isomorphism closure and within the finite-dimensional nonarchimedean ambient category
 (with isomorphism closure relative to that ambient category). It includes the incompatible analytic
 objects, the split-destination obstruction and the analytic completed models of Remark~\ref{dom:limits}.
 The witnesses are incomplete; this result does not settle the corresponding questions over complete
-fields or among Banach pairs. The $c_0$ and $\ell^1$ bundle constructions, the tensor results,
+fields or among Banach pairs. The $c_0$ and $\ell^1$ bundle constructions, the remaining tensor results,
 the remaining analytic-domain results and finite-support matrix transport remain pending.
 The theorem map records their scope and status.
 
@@ -3732,8 +3915,9 @@ The proposed alternative route of Remark~\ref{rem:routeII}, the proposed large-i
 Remark~\ref{rem:R}, the open problems, and Serre's external classification cited in
 Remark~\ref{rem:sorted} are excluded from the proved results. The repository's comparator challenge contains
 two short contradiction corollaries of Theorem~\ref{thm:main}, the operator form of Main Theorem~(\ref{main:spherical}) for every regularity order,
-the finite-coordinate analytic alternating-bundle theorem, and the nonexistence of a largest full analytic
-domain over $\F_p(t)$ in degrees $k\ge p$.
+the finite-coordinate analytic alternating-bundle theorem, a contradiction from the analytic alternating-bundle
+instance with no restriction on the field, model with corners, base manifold, normed fibers or finite index type,
+and the nonexistence of a largest full analytic domain over $\F_p(t)$ in degrees $k\ge p$.
 Their solutions use the corresponding library theorems. The Banach and spherical-completeness hypotheses
 are given by transparent definitions in Mathlib terms. The largest-domain predicate uses the development's
 actual categorical definition of joint analyticity on every full hom space. Intentional placeholders occur only in the challenge
