@@ -6,6 +6,7 @@
         "AlternatingAnalyticChallenge.false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach",
         "AlternatingAnalyticChallenge.contDiff_compContinuousLinearMapCLM_of_sphericallyComplete",
         "AlternatingAnalyticChallenge.contMDiffVectorBundle_alternating_of_finiteCoordinates",
+        "AlternatingAnalyticChallenge.false_of_contMDiffVectorBundle_omega_alternating",
         "AlternatingAnalyticChallenge.no_largest_full_analytic_domain_charP"
     ],
     "permitted_axioms": [

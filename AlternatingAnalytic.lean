@@ -138,3 +138,5 @@ import AlternatingAnalytic.Category.NoLargestAnalyticDomain
 import AlternatingAnalytic.Analysis.L1Families
 import AlternatingAnalytic.Analysis.L1BanachQuotient
 import AlternatingAnalytic.Analysis.QuotientParameterCounterexample
+import AlternatingAnalytic.Analysis.UniversalAnalyticReflection
+import AlternatingAnalytic.Geometry.AlternatingBundleShearCounterexample

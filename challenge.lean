@@ -9,7 +9,7 @@ import Mathlib.Geometry.Manifold.VectorBundle.Basic
 import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 
 /-!
-Five challenges about continuous alternating maps and their vector bundles.
+Six challenges about continuous alternating maps and their vector bundles.
 The first three concern precomposition `f ↦ (m ↦ m ∘ (f, …, f))`.
 The first two refute universal `C^ω` regularity: first over all fields and normed
 spaces, then over any prescribed positive-characteristic field in degree at least
@@ -18,11 +18,13 @@ The third is Theorem A: a spherically complete ultrametric target gives `C^n`
 precomposition for every regularity order, including `ω`.
 The fourth gives the actual analytic alternating-map bundle over an analytic base
 with supplied finite continuous linear coordinates, in every characteristic and degree.
-The fifth states that no largest full analytic domain exists over the `t`-adic
+The fifth refutes the same analytic bundle conclusion with no restriction on the field,
+the base manifold or the fibers.
+The sixth states that no largest full analytic domain exists over the `t`-adic
 rational field in degrees at least its characteristic.
 
 The named Banach and spherical-completeness assumptions below are defined directly
-in Mathlib terms. All five proofs are intentional challenge placeholders.
+in Mathlib terms. All six proofs are intentional challenge placeholders.
 -/
 
 open scoped ContDiff
@@ -119,6 +121,34 @@ theorem contMDiffVectorBundle_alternating_of_finiteCoordinates
     {d : ℕ} (c : P ≃L[K] (Fin d → K)) (k : ℕ) :
     ContMDiffVectorBundle ω (F₁ [⋀^Fin k]→L[K] F₂)
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
+  sorry
+
+/-- Assume the fully general analytic alternating-bundle instance: for every
+nontrivially normed field, every analytic manifold over an arbitrary model with
+corners, every pair of analytic normed vector bundles over it, and every finite
+index type, the bundle of continuous alternating maps between the fibers, with
+Mathlib's existing topology, is analytic. This is the `ω` case of the `C^n`
+alternating-bundle instance with no restriction on the field, the base or the
+fibers. Then `False`. -/
+theorem false_of_contMDiffVectorBundle_omega_alternating
+    (h : ∀ (K : Type) [NontriviallyNormedField K]
+      (EB HB : Type) [NormedAddCommGroup EB] [NormedSpace K EB] [TopologicalSpace HB]
+      (IB : ModelWithCorners K EB HB)
+      (M : Type) [TopologicalSpace M] [ChartedSpace HB M] [IsManifold IB ω M]
+      (F₁ F₂ : Type) [NormedAddCommGroup F₁] [NormedSpace K F₁]
+      [NormedAddCommGroup F₂] [NormedSpace K F₂]
+      (E₁ E₂ : M → Type)
+      [∀ x, AddCommGroup (E₁ x)] [∀ x, Module K (E₁ x)]
+      [∀ x, AddCommGroup (E₂ x)] [∀ x, Module K (E₂ x)]
+      [TopologicalSpace (TotalSpace F₁ E₁)] [TopologicalSpace (TotalSpace F₂ E₂)]
+      [∀ x, TopologicalSpace (E₁ x)] [∀ x, TopologicalSpace (E₂ x)]
+      [FiberBundle F₁ E₁] [VectorBundle K F₁ E₁]
+      [FiberBundle F₂ E₂] [VectorBundle K F₂ E₂]
+      [∀ x, IsTopologicalAddGroup (E₂ x)] [∀ x, ContinuousSMul K (E₂ x)]
+      [ContMDiffVectorBundle ω F₁ E₁ IB] [ContMDiffVectorBundle ω F₂ E₂ IB]
+      (ι : Type) [Fintype ι],
+      ContMDiffVectorBundle ω (F₁ [⋀^ι]→L[K] F₂)
+        (fun x ↦ E₁ x [⋀^ι]→L[K] E₂ x) IB) : False := by
   sorry
 
 end AnalyticAlternatingBundle

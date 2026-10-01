@@ -2,6 +2,7 @@ import AlternatingAnalytic.Category.NoLargestAnalyticDomain
 import AlternatingAnalytic.MainTheorem
 import AlternatingAnalytic.Analysis.SphericalAnalytic
 import AlternatingAnalytic.Geometry.AnalyticAlternatingBundle
+import AlternatingAnalytic.Geometry.AlternatingBundleShearCounterexample
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -10,7 +11,10 @@ The prescribed-field result is proved first, then specialized to a characteristi
 Laurent field for the global statement. The third challenge is Theorem A, proved from
 the existing spherical-completeness and retraction development. The fourth challenge
 exports the actual analytic alternating-bundle instance over finite-coordinate bases.
-The fifth exports the nonexistence of a largest full analytic domain over the
+The fifth refutes the unrestricted analytic bundle instance: over the Banach base
+`E →L[K] E` of the main counterexample, the shear bundle and a trivial bundle are
+analytic, but their alternating-map bundle is not.
+The sixth exports the nonexistence of a largest full analytic domain over the
 `t`-adic rational field in degrees at least its characteristic.
 Import this module separately from `challenge`. -/
 
@@ -127,6 +131,54 @@ theorem contMDiffVectorBundle_alternating_of_finiteCoordinates
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_finiteCoordinates
     (K := K) (M := M) (F₁ := F₁) (F₂ := F₂) (E₁ := E₁) (E₂ := E₂) c k
+
+/-- Assume the fully general analytic alternating-bundle instance: for every
+nontrivially normed field, every analytic manifold over an arbitrary model with
+corners, every pair of analytic normed vector bundles over it, and every finite
+index type, the bundle of continuous alternating maps between the fibers, with
+Mathlib's existing topology, is analytic. This is the `ω` case of the `C^n`
+alternating-bundle instance with no restriction on the field, the base or the
+fibers. Then `False`. -/
+theorem false_of_contMDiffVectorBundle_omega_alternating
+    (h : ∀ (K : Type) [NontriviallyNormedField K]
+      (EB HB : Type) [NormedAddCommGroup EB] [NormedSpace K EB] [TopologicalSpace HB]
+      (IB : ModelWithCorners K EB HB)
+      (M : Type) [TopologicalSpace M] [ChartedSpace HB M] [IsManifold IB ω M]
+      (F₁ F₂ : Type) [NormedAddCommGroup F₁] [NormedSpace K F₁]
+      [NormedAddCommGroup F₂] [NormedSpace K F₂]
+      (E₁ E₂ : M → Type)
+      [∀ x, AddCommGroup (E₁ x)] [∀ x, Module K (E₁ x)]
+      [∀ x, AddCommGroup (E₂ x)] [∀ x, Module K (E₂ x)]
+      [TopologicalSpace (TotalSpace F₁ E₁)] [TopologicalSpace (TotalSpace F₂ E₂)]
+      [∀ x, TopologicalSpace (E₁ x)] [∀ x, TopologicalSpace (E₂ x)]
+      [FiberBundle F₁ E₁] [VectorBundle K F₁ E₁]
+      [FiberBundle F₂ E₂] [VectorBundle K F₂ E₂]
+      [∀ x, IsTopologicalAddGroup (E₂ x)] [∀ x, ContinuousSMul K (E₂ x)]
+      [ContMDiffVectorBundle ω F₁ E₁ IB] [ContMDiffVectorBundle ω F₂ E₂ IB]
+      (ι : Type) [Fintype ι],
+      ContMDiffVectorBundle ω (F₁ [⋀^ι]→L[K] F₂)
+        (fun x ↦ E₁ x [⋀^ι]→L[K] E₂ x) IB) : False := by
+  let r : NNReal := 1 / 2
+  let : Fact (0 < r) := ⟨by norm_num [r]⟩
+  let : Fact (r < 1) := ⟨by norm_num [r]⟩
+  let : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
+  obtain ⟨E, F, gE, gF, nE, nF, _, _, _, _, hno⟩ :=
+    AlternatingAnalytic.exists_banach_base_alternatingBundle_not_analytic
+      (AlternatingAnalytic.LaurentField (ZMod 2) r) 2 2 Nat.prime_two le_rfl
+  let : NormedAddCommGroup E := gE
+  let : NormedAddCommGroup F := gF
+  let : NormedSpace (AlternatingAnalytic.LaurentField (ZMod 2) r) E := nE
+  let : NormedSpace (AlternatingAnalytic.LaurentField (ZMod 2) r) F := nF
+  exact hno (h (AlternatingAnalytic.LaurentField (ZMod 2) r)
+    (E →L[AlternatingAnalytic.LaurentField (ZMod 2) r] E)
+    (E →L[AlternatingAnalytic.LaurentField (ZMod 2) r] E)
+    𝓘(AlternatingAnalytic.LaurentField (ZMod 2) r,
+      E →L[AlternatingAnalytic.LaurentField (ZMod 2) r] E)
+    (E →L[AlternatingAnalytic.LaurentField (ZMod 2) r] E) (E × E) F
+    (AlternatingAnalytic.shearBundleCore
+      (K := AlternatingAnalytic.LaurentField (ZMod 2) r) (D := E) (E := E)).Fiber
+    (AlternatingAnalytic.ShearTargetBundle
+      (AlternatingAnalytic.LaurentField (ZMod 2) r) E E F) (Fin 2))
 
 end AnalyticAlternatingBundle
 
