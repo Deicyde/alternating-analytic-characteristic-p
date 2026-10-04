@@ -5,8 +5,7 @@ project:
     proves the prescribed-field Banach counterexample and sharp factorial classification, the actual normed/Banach/spherical
     categorical functors and their joint regularity, and the finite-coordinate analytic alternating bundle
     and literal bundle bifunctor with operator-valued analytic morphisms. It also proves both continuous-finite-coordinate
-    operator-positive cases and their finite-dimensional corollary over complete fields. Main Theorem
-    (4) is formalized over the t-adic rational field F_p(t), for every prime p, radius 0<r<1 and degree
+    operator-positive cases and their finite-dimensional corollary over complete fields. Main Theorem (7) is formalized over the t-adic rational field F_p(t), for every prime p, radius 0<r<1 and degree
     k≥p: no largest full analytic domain exists, including the relatively isomorphism-closed variants
     and the finite algebraic dimensional nonarchimedean ambient. The construction includes the split-domain
     limit and its explicit analytic completed-L-action/coordinate-lift comparison. Core family laws, shear,
@@ -30,23 +29,25 @@ sources:
     role: credited by the paper for producing the informal result, proof, and write-up
   id: https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/main/paper/charp.pdf
   type: manuscript
-  location: Counterexample theorem (thm:main), operator Corollary cor:class, all four categorical Main
-    Theorem parts in their stated scopes, finite-coordinate/finite-dimensional operator positives, the
-    split-domain and completion consequences, and supporting proved complements
+  location: Counterexample theorem (thm:main), operator Corollary cor:class, categorical results
+    main:general and main:spherical, finite-coordinate families and bundles (main:families),
+    the general Banach-base obstruction (main:failure), the no-largest-domain theorem (main:domains),
+    and the supporting declarations identified in THEOREM_MAP.md
   relationship: formalizes
   note: The current manuscript is paper/charp.pdf with source paper/charp.tex; sources/ contains historical
     snapshots. The original Claude-assisted informal result, proof and write-up remain attributed separately
-    from the later Codex/Autoform formalization and editorial work. The original operator results and
-    all four categorical main parts now have checked Lean declarations. Part (3) retains fixed analytic
-    bases with explicit continuous finite coordinates, arbitrary normed model fibers and topological/normable
-    actual fibers, all degrees/dimensions and no completeness assumptions. Its actual ContMDiffVectorBundle
-    omega witness is the fourth comparator statement. Part (4) is over the concrete incomplete t-adic
-    F_p(t), every prime p and radius 0<r<1, all k≥p, and universe-zero normed-space objects; it includes
-    all four full/replete and finite-nonarchimedean ambient variants. The split-domain limit and actual
-    completed-L-action with a p-linear coordinate-product lift are also formalized. This does not settle
-    largest-domain questions over complete fields or Banach pairs. Further proved manuscript extensions
-    remain pending, as mapped in THEOREM_MAP.md. Open problems, the alternative infinite-field obstruction
-    and the proposed large-index construction are not claimed as proved results.
+    from the later Codex/Autoform formalization and editorial work. The finite-coordinate bundle theorem
+    retains arbitrary fields, degrees and normed fibers; the general Banach-base obstruction uses a general
+    target. The no-largest-domain theorem concerns the incomplete t-adic field F_p(t), and does not settle
+    the corresponding complete-field or Banach-pair questions. The manuscript additions of 3 October 2026
+    are not newly formalized here, namely main:scalar, thm:scalar-counter, thm:scalar-tangent, thm:scalar-pullback,
+    prop:scalar-countable, prop:universal-zero-dual, prop:ambient-calculus and prop:ambient-comparison.
+    The earlier arbitrary-arity tail input and four auxiliary vector-space form lemmas were independently
+    compiled against an existing Mathlib branch, but this does not formalize the new chain-space construction,
+    scalar obstruction or manifold-level form calculus. THEOREM_MAP.md records the distinct scopes.
+    Open problems, the alternative infinite-field obstruction and the proposed prescribed-source
+    large-index construction are not claimed as proved results. This manuscript edit does not change
+    the selected challenge or claim a new comparator run.
   license: ''
   author_endorsement: participated
 - title: Existing Lean ingredients supplied with the round-24 paper materials
@@ -84,10 +85,10 @@ status:
     build/kernel/axiom gates and full clean independent AI juries. These include categorical Main Theorem
     (1)–(2), finite-coordinate reflection and analytic families, the actual ContMDiffVectorBundle omega
     witness, operator-valued bundle morphisms and fixed-base alternating bifunctor completing Main Theorem
-    (3), and Main Theorem (4). The finite-coordinate geometric results require supplied continuous coordinates
+    (4), and Main Theorem (7). The finite-coordinate geometric results require supplied continuous coordinates
     on the analytic base and retain arbitrary normed model fibers without completeness. Both finite-coordinate
     operator-input cases and the complete-field finite-dimensional corollary are proved with arbitrary
-    normed value target F. Main Theorem (4) uses concrete incomplete K=F_p(t), every prime p, every radius
+    normed value target F. Main Theorem (7) uses concrete incomplete K=F_p(t), every prime p, every radius
     0<r<1, universe-zero normed objects and all k≥p. It collects incompatible analytic singleton domains,
     nonanalytic categorical/operator cross-action, isomorphism closures and no greatest domain in full
     normed and finite-dimensional fixed-nonarchimedean ambients, with and without relative isomorphism
@@ -160,7 +161,7 @@ status:
     checks five selected statements, all passed with Lean default-kernel replay on 26 September 2026,
     including the bundle witness and principal unrestricted no-largest conclusion. The ordinary ℓ¹ batch
     and c₀ foundation/lift/reflection/families are outside that selected comparator scope, as are the
-    other collected Main Theorem (4) clauses and the full extension library. The accepted node40 gate
+    other collected Main Theorem (7) clauses and the full extension library. The accepted node40 gate
     includes the root import of L1Families and the new module; the ordinary ℓ¹ chain is exposed by the
     root and covered by the original recursive whole-project builds. The node41 original gate also includes
     the worker-added CZeroCoordinates root import and all four new modules. The node42 original gate includes
@@ -2146,7 +2147,7 @@ alignment:
       reflection and transport along explicit continuous linear coordinates. All finite d including zero;
       no completeness or characteristic assumptions. The stronger nonarchimedean radius bound is now proved
       separately in FiniteCoordinateRadius.lean.
-  - source: 'Main Theorem (3), fam:cor:finite-families: finite-coordinate alternating morphism families'
+  - source: 'Main Theorem (4), fam:cor:finite-families: finite-coordinate alternating morphism families'
     lean: AlternatingAnalytic.finite_coordinate_analytic_families
     module: AlternatingAnalytic.Analysis.FiniteCoordinateFamilies
     status: proved
@@ -2174,7 +2175,7 @@ alignment:
       all lifted-series conclusions for the same series. Fresh Codex jury on 25 September 2026 gave faithfulness
       5/5 and proof integrity 5/5; code quality was5 for finite-coordinate families and4 for category
       foundations/radius. No human expert review is claimed.
-  - source: 'Main Theorem (3), fam:thm:finite-bundles: the analytic alternating-map bundle bifunctor'
+  - source: 'Main Theorem (4), fam:thm:finite-bundles: the analytic alternating-map bundle bifunctor'
     lean: AlternatingAnalytic.alternatingBundleFunctor; AlternatingAnalytic.alternatingBundleFunctor_spec;
       AlternatingAnalytic.alternatingBundlePresentationIso
     module: AlternatingAnalytic.Geometry.AnalyticAlternatingBundleFunctor
@@ -2189,7 +2190,7 @@ alignment:
       normed models and topological/normable actual fibers; no completeness, characteristic, factorial
       or fiber-dimension hypothesis. Shared build/kernel/axiom gate passed at 2026-09-26T02:27:03Z; independent
       jury clean (5/5/5) at 2026-09-26T03:34:35Z. The 17 public declarations complete geometric Main Theorem
-      (3). No arbitrary-base-map morphisms, global bundle-Hom analyticity, unrestricted infinite-dimensional-base
+      (4). No arbitrary-base-map morphisms, global bundle-Hom analyticity, unrestricted infinite-dimensional-base
       or boundary/WithinAt assertion is added. Outside the selected comparator statements.
   - source: 'fam:prop:category: core admissible analytic-family structure'
     lean: AlternatingAnalytic.admissible_family_structure
@@ -2321,7 +2322,7 @@ alignment:
       domain. No completeness, dimension, characteristic or positive-degree restriction. Shared gate accepted
       2026-09-26T19:14:57Z and full independent jury clean 5/5/4 at 2026-09-26T19:17:08Z. This row is
       reconciled with the accepted detailed entries below; it does not assert repleteness, normable transport,
-      dom:limits or Main Theorem (4), which remain separately scoped.'
+      dom:limits or Main Theorem (7), which remain separately scoped.'
   - source: 'dom:maximal: compatibility graph and maximal analytic domains'
     lean: ''
     module: ''
@@ -2330,7 +2331,7 @@ alignment:
       with analytic self-action and two analytic cross-actions, and uses Zorn to obtain maximal extensions
       containing all available core objects. It makes no proper-class choice assertion and does not produce
       a largest domain.
-  - source: 'Main Theorem (4) and dom:no-largest: no largest full analytic domain'
+  - source: 'Main Theorem (7) and dom:no-largest: no largest full analytic domain'
     lean: AlternatingAnalytic.DeterminantPair.Padding.no_largest_full_analytic_domain
     module: AlternatingAnalytic.Category.NoLargestAnalyticDomain
     status: proved
@@ -2363,7 +2364,7 @@ alignment:
       are covered. Values remain in a smaller incomplete target only on original inputs. The manuscript
       Banach-ambient/complete-L specialization follows. Shared gate passed at 2026-09-26T03:17:08Z; independent
       jury clean at 2026-09-26T03:31:13Z (5/5/5), with 16 routed public declarations. This is the scalar-extension
-      prerequisite; the separate rigid-source and Main Theorem (4) declarations are mapped below. Outside
+      prerequisite; the separate rigid-source and Main Theorem (7) declarations are mapped below. Outside
       the selected comparator statements.
   - source: 'prop:canonical-support: smallest exterior support and contraction-rank equality'
     lean: AlternatingAnalytic.canonical_exterior_support_full; AlternatingAnalytic.mem_exteriorPowerSubmodule_contractionSpan;
@@ -2473,7 +2474,7 @@ alignment:
       and a clean independent jury at 2026-09-26T04:59:09Z (faithfulness 5/5, proof integrity 5/5, code
       quality 4/5). Its SHA256 is 1c228a40af925d3871a12bb568401760d2349356c39191ad7cf7f7a29977651e. The
       module has 30 explicit public declarations; the gate owns 31 names including the generated helper
-      AdjoinRoot.powerBasis'.congr_simp. Outside the selected comparator statements. Main Theorem (4),
+      AdjoinRoot.powerBasis'.congr_simp. Outside the selected comparator statements. Main Theorem (7),
       relative isomorphism closure and the split-domain/completed-action limits are separately proved
       in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest accepted root
       imports cover these modules; the accepted root exposes every project module.
@@ -2501,7 +2502,7 @@ alignment:
       RigidDenseSourceConcrete and the RigidDenseSource aggregate. Shared gate accepted at 2026-09-26T05:43:12Z;
       fresh independent jury clean 5/5/4 at 2026-09-26T05:46:00Z. There are 88 explicit non-private names
       and 91 gate-owned names, including three generated helpers. Outside the selected comparator statements.
-      Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits are
+      Main Theorem (7), relative isomorphism closure and the split-domain/completed-action limits are
       separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
       accepted root imports cover these modules; the accepted root exposes every project module.
   - source: Determinant-generated finite spaces and dom:tau-gap
@@ -2528,7 +2529,7 @@ alignment:
       the preceding published twenty-three-node checkpoint, the original whole-project build gate passed
       at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation
       modules against their accepted hashes at 2026-09-26T07:04:27Z. Outside the selected comparator statements.
-      Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits are
+      Main Theorem (7), relative isomorphism closure and the split-domain/completed-action limits are
       separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
       accepted root imports cover these modules; the accepted root exposes every project module.
   - source: Determinant coefficient spaces, auxiliary specialization and algebraic padding before dom:degree-gap
@@ -2564,7 +2565,7 @@ alignment:
       At the preceding published twenty-three-node checkpoint, the original whole-project build gate passed
       at 2026-09-26T06:34:09Z and the idle checkpoint confirmed the root and all 15 new implementation
       modules against their accepted hashes at 2026-09-26T07:04:27Z. Outside the selected comparator statements.
-      Main Theorem (4), relative isomorphism closure and the split-domain/completed-action limits are
+      Main Theorem (7), relative isomorphism closure and the split-domain/completed-action limits are
       separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest
       accepted root imports cover these modules; the accepted root exposes every project module.'
   - source: Algebraic quadratic coefficient gap and normalized-family obstruction for the determinant
@@ -2593,7 +2594,7 @@ alignment:
       The primary source SHA256 is 48636a4ac93a4569e967515cff64f357e1a9e2b090be0689c403d85ccce19b40. The
       current twenty-five-node checkpoint has an accepted original whole-project build gate at 2026-09-26T07:37:00Z
       and paused-idle root/source hash confirmation at 2026-09-26T08:03:28Z. Outside the selected comparator
-      statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action
+      statements. Main Theorem (7), relative isomorphism closure and the split-domain/completed-action
       limits are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite
       scope. Latest accepted root imports cover these modules; the accepted root exposes every project
       module.
@@ -2625,8 +2626,7 @@ alignment:
       declarations and two private helpers excluded. Shared gate accepted at 2026-09-26T07:37:00Z; fresh
       complete independent jury clean 5/5/4 at 2026-09-26T07:57:29Z. The current twenty-five-node checkpoint
       has an accepted original whole-project build gate at 2026-09-26T07:37:00Z and paused-idle root/source
-      hash confirmation at 2026-09-26T08:03:28Z. Outside the selected comparator statements. Main Theorem
-      (4), relative isomorphism closure and the split-domain/completed-action limits are separately proved
+      hash confirmation at 2026-09-26T08:03:28Z. Outside the selected comparator statements. Main Theorem (7), relative isomorphism closure and the split-domain/completed-action limits are separately proved
       in NoLargestAnalyticDomain; this entry records its own prerequisite scope. Latest accepted root
       imports cover these modules; the accepted root exposes every project module.
   - source: 'dom:all-alt: all multilinear maps on the concrete determinant pair are alternating'
@@ -2647,7 +2647,7 @@ alignment:
       for 30 gate-owned names. Shared gate 2026-09-26T08:21:32Z; full independent jury clean 5/5/4 at
       2026-09-26T08:24:53Z. The twenty-eight-node checkpoint has the original whole-project build gate
       at 2026-09-26T09:06:06Z and paused-idle confirmation of the root plus four new implementation hashes
-      at 2026-09-26T09:09:13Z. Outside the selected comparator statements. Main Theorem (4), relative
+      at 2026-09-26T09:09:13Z. Outside the selected comparator statements. Main Theorem (7), relative
       isomorphism closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
       this entry records its own prerequisite scope. Latest accepted root imports cover these modules;
       the accepted root exposes every project module.
@@ -2690,7 +2690,7 @@ alignment:
       no anonymous/generated/private extras. Shared gate 2026-09-26T09:06:06Z; independent jury clean
       5/5/4 at 2026-09-26T09:08:06Z. The twenty-eight-node checkpoint has the original whole-project build
       gate at 2026-09-26T09:06:06Z and paused-idle confirmation of the root plus four new implementation
-      hashes at 2026-09-26T09:09:13Z. Outside the selected comparator statements. Main Theorem (4), relative
+      hashes at 2026-09-26T09:09:13Z. Outside the selected comparator statements. Main Theorem (7), relative
       isomorphism closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
       this entry records its own prerequisite scope. Latest accepted root imports cover these modules;
       the accepted root exposes every project module.
@@ -2719,7 +2719,7 @@ alignment:
       names and generated ContinuousLinearEquiv.mk.congr_simp, for 118 gate-owned names. There are no
       anonymous instances; 12 named instances include six local registrations, and two private helpers
       are excluded. Shared gate 2026-09-26T19:02:51Z; full jury clean 5/5/4 at 2026-09-26T19:05:47Z. Outside
-      the selected comparator statements. Main Theorem (4), relative isomorphism closure and the split-domain/completed-action
+      the selected comparator statements. Main Theorem (7), relative isomorphism closure and the split-domain/completed-action
       limits are separately proved in NoLargestAnalyticDomain; this entry records its own prerequisite
       scope. Latest accepted root imports cover these modules; the accepted root exposes every project
       module.
@@ -2742,7 +2742,7 @@ alignment:
       source X and proves the full split-pair domain. There are no completeness, finite-dimension, characteristic
       or positive-degree assumptions. All 28 gate-owned names are explicit public declarations: six definitions,
       five abbreviations, 15 theorems and two named instances; no anonymous/generated/private extras.
-      Gate 2026-09-26T19:14:57Z; full jury clean 5/5/4 at 2026-09-26T19:17:08Z. Main Theorem (4), relative
+      Gate 2026-09-26T19:14:57Z; full jury clean 5/5/4 at 2026-09-26T19:17:08Z. Main Theorem (7), relative
       isomorphism closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
       this entry records its own prerequisite scope. Latest accepted root imports cover these modules;
       the accepted root exposes every project module.'
@@ -2764,7 +2764,7 @@ alignment:
       declarations. Gate accepted 2026-09-26T19:27:18Z. First jury flagged None/5/4 for a missing faithfulness
       final; full fresh jury on unchanged sources clean 5/5/4 at 2026-09-26T19:41:32Z. The codomain-coordinate
       case and complete-field finite-dimensional corollary are also proved in their separate entries below.
-      Outside the selected comparator statements. Main Theorem (4), relative isomorphism closure and the
+      Outside the selected comparator statements. Main Theorem (7), relative isomorphism closure and the
       split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain; this entry
       records its own prerequisite scope. Latest accepted root imports cover these modules; the accepted
       root exposes every project module.'
@@ -2789,7 +2789,7 @@ alignment:
       Full fresh jury after path repair on unchanged sources clean 5/5/4 at 2026-09-26T20:06:33Z, same
       settings and thresholds. Common determinant-estimate helper reuse is separate from the domain-coordinate
       positivity theorem. The complete-field finite-dimensional corollary is also proved in its separate
-      entry below. Outside the selected comparator statements. Main Theorem (4), relative isomorphism
+      entry below. Outside the selected comparator statements. Main Theorem (7), relative isomorphism
       closure and the split-domain/completed-action limits are separately proved in NoLargestAnalyticDomain;
       this entry records its own prerequisite scope. Latest accepted root imports cover these modules;
       the accepted root exposes every project module.
@@ -2823,9 +2823,9 @@ alignment:
       and determinant formulas, and exact completed/original action evaluations. The lift is p-linear
       even when the alternating degree is p+n. concrete_completed_analytic_action_and_lift (143–177) gives
       the p+n API. These statements concern these particular completions and do not solve largest-domain
-      questions over complete fields or Banach pairs. Same Main Theorem (4) gate and clean jury; outside
+      questions over complete fields or Banach pairs. Same Main Theorem (7) gate and clean jury; outside
       the selected comparator statements.
-  - source: Isomorphism transport and relative full analytic-domain framework for Main Theorem (4)
+  - source: Isomorphism transport and relative full analytic-domain framework for Main Theorem (7)
     lean: AlternatingAnalytic.IsAlternatingAnalyticDomain.isoClosure; AlternatingAnalytic.IsRelativeAlternatingAnalyticDomain.isoClosure;
       AlternatingAnalytic.no_greatest_relative_analytic_domain; AlternatingAnalytic.no_greatest_replete_relative_analytic_domain
     module: AlternatingAnalytic.Category.AnalyticDomainIsoClosure; AlternatingAnalytic.Category.AnalyticDomainWitnesses;
@@ -2836,9 +2836,9 @@ alignment:
       analyticity under their respective isomorphism closure. The relative Hom spaces have linear isometric
       operator coordinates and literal inclusion-composite functors. Incompatible analytic self-actions
       give no greatest domain, both unrestricted and replete inside the selected ambient. These are actual
-      normed-space categories, not a separately declared normable-space category. Same Main Theorem (4)
+      normed-space categories, not a separately declared normable-space category. Same Main Theorem (7)
       gate and clean jury; outside the selected comparator statements.
-  - source: 'Selected comparator consequence of Main Theorem (4): principal unrestricted no-largest full
+  - source: 'Selected comparator consequence of Main Theorem (7): principal unrestricted no-largest full
       analytic domain'
     lean: AlternatingAnalyticChallenge.no_largest_full_analytic_domain_charP
     module: solution
