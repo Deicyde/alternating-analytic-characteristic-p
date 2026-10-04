@@ -48,6 +48,8 @@ sources:
     Open problems, the alternative infinite-field obstruction and the proposed prescribed-source
     large-index construction are not claimed as proved results. This manuscript edit does not change
     the selected challenge or claim a new comparator run.
+    The manuscript denotes the precomposition action by A^k with source and target indices;
+    existing Lean declarations and the historical verification records retain Round24Transfer.Q.
   license: ''
   author_endorsement: participated
 - title: Existing Lean ingredients supplied with the round-24 paper materials

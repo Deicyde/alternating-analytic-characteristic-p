@@ -166,28 +166,30 @@ The proofs work with the action of a fixed-target functor $\Alt^k(-;F)$ on hom s
 For normed $K$\nobreakdash-spaces $E,E',F$ and a fixed degree $k\ge0$, the pullback action is
 \begin{equation}\label{eq:Q}
 \begin{aligned}
-Q=Q^K_{E,E',F}\colon\cL(E,E')&\longrightarrow\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr),\\
-Q(f)(m)&=m\circ(f,\dots,f).
+A=A^k_{E,E';F}\colon\cL(E,E')&\longrightarrow\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr),\\
+A(f)(m)&=m\circ(f,\dots,f).
 \end{aligned}
 \end{equation}
+Thus $A^k_{E,E';F}(u)=\Alt^k(u,\id_F)$. We abbreviate this action to $A$ when the
+spaces and degree are fixed, and write $A^{k,K}_{E,E';F}$ when the base field must be specified.
 For multilinear maps without the alternation condition, precomposition is the diagonal of a bounded multilinear
 map and is therefore analytic. Requiring the values to remain alternating changes the problem: polarization is
 unavailable when $k!=0$ in $K$, and over Banach spaces this obstruction cannot be avoided (Theorem~\ref{thm:main}). For $k\ge1$, the lift criterion
-(Proposition~\ref{prop:lift}) shows that $Q$ is analytic at one point if and only if it is analytic at every
-point, and that this holds if and only if $Q$ has a bounded $k$\nobreakdash-linear lift
+(Proposition~\ref{prop:lift}) shows that $A$ is analytic at one point if and only if it is analytic at every
+point, and that this holds if and only if $A$ has a bounded $k$\nobreakdash-linear lift
 (Definition~\ref{def:lift}).
 
 The translation between operators and functors uses only bounded bilinear postcomposition. Write $v_*a=v\circ a$.
 The map $(v,T)\mapsto v_*\circ T$ is bounded bilinear, with $\norm{v_*\circ T}\le\norm v\,\norm T$, and for
 $u\in\cL(E,E')$ and $v\in\cL(F,F')$ the joint action of the bifunctor is
 \begin{equation}\label{eq:joint-action}
-\Alt^k(u,v)=v_*\circ Q^K_{E,E',F}(u).
+\Alt^k(u,v)=v_*\circ A^k_{E,E';F}(u).
 \end{equation}
-Consequently $C^n$ regularity or analyticity of every $Q$ gives the same regularity of the bifunctor.
-Conversely, restriction to $v=\id_F$ recovers $Q$. A bounded $k$\nobreakdash-linear lift $P$ of $Q$ gives the
+Consequently $C^n$ regularity or analyticity of every $A$ gives the same regularity of the bifunctor.
+Conversely, restriction to $v=\id_F$ recovers $A$. A bounded $k$\nobreakdash-linear lift $P$ of $A$ gives the
 bounded $(k+1)$\nobreakdash-linear map $(u_1,\dots,u_k,v)\mapsto v_*\circ P(u_1,\dots,u_k)$, with the pushforward
 variable in the last slot and value $\Alt^k(u,v)$ at $(u,\dots,u,v)$, so finite-power-series conclusions pass from
-$Q$ to the bifunctor.
+$A$ to the bifunctor.
 
 The space $\Alt^k(E;F)$ is complete whenever $F$ is complete: an operator-norm Cauchy sequence converges
 pointwise in $F$, and its boundedness, multilinearity and alternation pass to the limit. Hence the bifunctor
@@ -259,7 +261,7 @@ assertion of item~(\ref{main:general}) gives the exact range $k<p$ in characteri
 characteristic zero; the positive direction is Proposition~\ref{prop:factorial-positive}.
 Item~(\ref{main:spherical}) removes the restriction on the degree by restricting the target category, and no
 completeness of $K$ is needed. In the analytic cases of items~(\ref{main:general}) and~(\ref{main:spherical}),
-the maps on hom spaces are given by finite power series. Over a complete field, $Q^K_{E,E',F}$ is also analytic in
+the maps on hom spaces are given by finite power series. Over a complete field, $A^k_{E,E';F}$ is also analytic in
 every degree when $E$ or $E'$ is finite-dimensional (Corollary~\ref{cor:finite-dimensional-positive}), and a
 finite-dimensional target reduces the question to scalar-valued forms (Remark~\ref{rem:finite-target-reduction}).
 Item~(\ref{main:scalar}) settles that scalar question over complete fields: the only extra positive case,
@@ -278,7 +280,7 @@ are complete and nonarchimedean (Corollaries~\ref{fam:cor:l1-families} and~\ref{
 
 Item~(\ref{main:failure}) is the outcome of the second step. Like the negative direction of
 item~(\ref{main:general}), it rests on the counterexample theorem (Theorem~\ref{thm:main}): for every $K$ of
-characteristic $p>0$ and every $k\ge p$, there are Banach spaces $E,F$ such that $Q^K_{E,E,F}$ is analytic at no
+characteristic $p>0$ and every $k\ge p$, there are Banach spaces $E,F$ such that $A^k_{E,E;F}$ is analytic at no
 point, where $F$ admits no equivalent nonarchimedean norm. Corollary~\ref{cor:class} combines
 Theorem~\ref{thm:main} with the factorial case, and the shear construction (Proposition~\ref{fam:prop:shear}) turns
 it into Corollary~\ref{fam:cor:banach-base-failure}, which is item~(\ref{main:failure}). This is a failure of the
@@ -315,7 +317,7 @@ contribution~\cite{PR} is sharp over every field of characteristic $p>0$ once $k
 Mathlib's \texttt{ContDiffAt K $\omega$} fails at every point.
 
 The answer is different if the target norm is required to be nonarchimedean. If $K$ is nonarchimedean and $F$ is
-nonarchimedean and spherically complete, then $Q$ is analytic for all normed $E,E'$ (Main Theorem). The proof,
+nonarchimedean and spherically complete, then $A$ is analytic for all normed $E,E'$ (Main Theorem). The proof,
 outlined in \S\ref{sec:theoremA} and given in Appendix~\ref{app:spherical}, constructs a contracting retraction from
 multilinear maps to alternating maps by spherical completeness and extension of bounded linear maps. This positive
 result is independent of the counterexample theorem and Corollary~\ref{cor:class}. A special case appears
@@ -382,13 +384,13 @@ We index the $k$ arguments by $\{1,\dots,k\}$ throughout. Reindexing by any fini
 isometric isomorphism of alternating-map spaces and intertwines precomposition. Thus the results also apply to
 the arbitrary finite index types used in Lean, with the same counterexample spaces. For each fixed degree we write
 \[
-Q=Q^K_{E,E',F}\colon\cL(E,E')\to\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr),
+A=A^k_{E,E';F}\colon\cL(E,E')\to\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr),
 \]
-where $Q(f)(m)(x_1,\dots,x_k)=m(fx_1,\dots,fx_k)$.
+where $A(f)(m)(x_1,\dots,x_k)=m(fx_1,\dots,fx_k)$.
 
 \begin{definition}\label{def:lift}
-A \emph{bounded $k$\nobreakdash-linear lift} of $Q$ is a bounded $k$\nobreakdash-linear map
-$P\colon\cL(E,E')^k\to\cL(\Alt^k(E';F),\Alt^k(E;F))$ with $P(f,\dots,f)=Q(f)$ for all $f\in\cL(E,E')$.
+A \emph{bounded $k$\nobreakdash-linear lift} of $A$ is a bounded $k$\nobreakdash-linear map
+$P\colon\cL(E,E')^k\to\cL(\Alt^k(E';F),\Alt^k(E;F))$ with $P(f,\dots,f)=A(f)$ for all $f\in\cL(E,E')$.
 \end{definition}
 
 A map $g\colon X\to Z$ between normed spaces is \emph{analytic at} $x_0$ if there are bounded $n$\nobreakdash-linear maps
@@ -411,24 +413,24 @@ Taking $p^m$\nobreakdash-th roots and letting $m\to\infty$ proves the assertion.
 \end{proof}
 
 \subsection{The lift criterion}
-A power series for $Q$ at any base point determines a lift through its degree-$k$ term. The only uniqueness
+A power series for $A$ at any base point determines a lift through its degree-$k$ term. The only uniqueness
 statement needed is one-dimensional, so the argument does not use a polarization formula or division by $k!$.
 
 \begin{proposition}[lift criterion]\label{prop:lift}
 Let $K$ be any nontrivially normed field, $E,E',F$ normed $K$\nobreakdash-spaces and $k\ge1$.
 \begin{enumerate}
-\item If $Q$ has a bounded $k$\nobreakdash-linear lift $P$, then at every $f_0\in\cL(E,E')$ the map $Q$ is given by a finite power
-series of infinite radius; in particular $Q$ is analytic at every point.
-\item If $Q$ is analytic at some point $f_0$, with power series $(p_n)_n$ there, then $p_k$ is a bounded $k$\nobreakdash-linear
-lift of $Q$.
-\item Hence the following are equivalent: $Q$ has a bounded $k$\nobreakdash-linear lift; $Q$ is analytic at every point; $Q$ is
-analytic at some point. If they fail, then Mathlib's \texttt{ContDiffAt K $\omega$ Q $f_0$} fails at every $f_0$.
+\item If $A$ has a bounded $k$\nobreakdash-linear lift $P$, then at every $f_0\in\cL(E,E')$ the map $A$ is given by a finite power
+series of infinite radius; in particular $A$ is analytic at every point.
+\item If $A$ is analytic at some point $f_0$, with power series $(p_n)_n$ there, then $p_k$ is a bounded $k$\nobreakdash-linear
+lift of $A$.
+\item Hence the following are equivalent: $A$ has a bounded $k$\nobreakdash-linear lift; $A$ is analytic at every point; $A$ is
+analytic at some point. If they fail, then Mathlib's \texttt{ContDiffAt K $\omega$ A $f_0$} fails at every $f_0$.
 \end{enumerate}
 \end{proposition}
 The proof is given in Appendix~\ref{app:lift}.
 
 \begin{remark}\label{rem:liftlean}
-The degree-$k$ term of \emph{every} power series representing $Q$ is a lift, regardless of the base point.
+The degree-$k$ term of \emph{every} power series representing $A$ is a lift, regardless of the base point.
 This does not assert uniqueness of the multilinear lift: in positive characteristic, different multilinear maps
 can have the same diagonal.
 \end{remark}
@@ -438,7 +440,7 @@ can have the same diagonal.
 This section works on whole hom spaces. Regularity of a functor on hom spaces passes to the vector bundles it
 induces (Proposition~\ref{prop:bundle-construction}). The alternating functor is $C^\infty$ in every
 characteristic (Proposition~\ref{prop:smooth-positive}), because smoothness descends from all multilinear maps
-through a closed isometric inclusion. Three constructions give bounded multilinear lifts of $Q^K_{E,E',F}$, and
+through a closed isometric inclusion. Three constructions give bounded multilinear lifts of $A^k_{E,E';F}$, and
 hence analyticity by Proposition~\ref{prop:lift}: division by $k!$ when it is nonzero in $K$
 (Proposition~\ref{prop:factorial-positive}); determinant formulas when $E$ or $E'$ has a finite basis with
 continuous coordinate functionals (Proposition~\ref{prop:finite-coordinate}); and, over a nonarchimedean field, a
@@ -500,13 +502,13 @@ of Proposition~\ref{prop:bundle-construction} for $\Alt^k(\mathcal E;\mathcal H)
 \[
 \theta_{ij}(x)\colon m\longmapsto h_{ij}(x)\circ m\circ\bigl(g_{ji}(x),\dots,g_{ji}(x)\bigr),\qquad m\in\Alt^k(E;F).
 \]
-By~\eqref{eq:joint-action}, $\theta_{ij}(x)$ is obtained from $Q^K_{E,E,F}(g_{ji}(x))$ by postcomposition with
+By~\eqref{eq:joint-action}, $\theta_{ij}(x)$ is obtained from $A^k_{E,E;F}(g_{ji}(x))$ by postcomposition with
 $h_{ij}(x)$, which is bounded bilinear in the pair. These transitions are therefore $C^n$ as soon as
-$Q^K_{E,E,F}$ is $C^n$, and bundle morphisms between bundles with different typical fibers require the same of
-$Q^K_{E,E',F}$. Part~(2) of the proposition is the version used in Corollaries~\ref{cor:analytic-bundles} and~\ref{cor:domain-bundles},
+$A^k_{E,E;F}$ is $C^n$, and bundle morphisms between bundles with different typical fibers require the same of
+$A^k_{E,E';F}$. Part~(2) of the proposition is the version used in Corollaries~\ref{cor:analytic-bundles} and~\ref{cor:domain-bundles},
 which need analyticity only on the hom spaces between fibers satisfying their hypotheses, and in
 Section~\ref{sec:families-bundles}, where analyticity is established only along transition families. The rest of this section supplies the regularity of
-$Q$ on whole hom spaces.
+$A$ on whole hom spaces.
 
 \subsection{Smoothness in every characteristic}
 We first record why finite-order differentiability descends through a closed isometric inclusion. The argument
@@ -540,7 +542,7 @@ $C^n$. Induction proves every finite order, and hence $C^\infty$.
 
 \begin{proposition}[smoothness of precomposition]\label{prop:smooth-positive}
 For every nontrivially normed field $K$, all normed $K$\nobreakdash-spaces $E,E',F$, and every integer $k\ge0$, the map
-$Q^K_{E,E',F}$ is $C^n$ for every $n\in\N\cup\{\infty\}$. In particular, precomposition is always $C^\infty$,
+$A^k_{E,E';F}$ is $C^n$ for every $n\in\N\cup\{\infty\}$. In particular, precomposition is always $C^\infty$,
 without completeness, finite-dimensionality, or characteristic assumptions.
 \end{proposition}
 
@@ -555,10 +557,10 @@ isometry with closed range
 \]
 In the larger target, precomposition is the diagonal of the bounded $k$\nobreakdash-linear map
 \[
-A(f_1,\dots,f_k)(m)(x_1,\dots,x_k)
+\mathcal B(f_1,\dots,f_k)(m)(x_1,\dots,x_k)
 =m(f_1x_1,\dots,f_kx_k),
 \]
-whose norm is at most $1$. Hence $\mathcal I\circ Q$ is a continuous polynomial and is $C^\infty$.
+whose norm is at most $1$. Hence $\mathcal I\circ A$ is a continuous polynomial and is $C^\infty$.
 Lemma~\ref{lem:smooth-reflection} gives the result. The degree-zero case is again constant.
 \end{proof}
 
@@ -581,7 +583,7 @@ and $C^n$ bundle morphisms. No completeness, dimension or characteristic hypothe
 \end{corollary}
 
 \begin{proof}
-By Proposition~\ref{prop:smooth-positive}, every $Q^K_{E,E',F}$ is $C^n$. Since $(v,T)\mapsto v_*\circ T$ is bounded
+By Proposition~\ref{prop:smooth-positive}, every $A^k_{E,E';F}$ is $C^n$. Since $(v,T)\mapsto v_*\circ T$ is bounded
 bilinear, \eqref{eq:joint-action} shows that the joint action of $\Alt^k$ on hom spaces is $C^n$.
 Proposition~\ref{prop:bundle-construction}(1) now applies.
 \end{proof}
@@ -590,7 +592,7 @@ The remaining case is $n=\omega$, which occupies the rest of the paper.
 
 \subsection{Invertible factorial: in particular, \texorpdfstring{$p>k$}{p > k}}
 \begin{proposition}\label{prop:factorial-positive}
-Let $K$ be a nontrivially normed field and let $E,E',F$ be normed $K$\nobreakdash-spaces. If $k!\ne0$ in $K$, then $Q$
+Let $K$ be a nontrivially normed field and let $E,E',F$ be normed $K$\nobreakdash-spaces. If $k!\ne0$ in $K$, then $A$
 is given at every point by a finite power series of infinite radius. In particular, it is analytic whenever
 $\operatorname{char}K=0$, or whenever $\operatorname{char}K=p>k$. No completeness or dimension hypothesis is needed.
 \end{proposition}
@@ -611,7 +613,7 @@ where the second $k!$ on the right is a real number counting the terms. To check
 let $\tau$ exchange $a$ and $b$. The summands indexed by $\sigma$ and $\sigma\circ\tau$ cancel by antisymmetry of $m$.
 This pairing is a fixed-point-free involution, so it proves vanishing also in characteristic $2$. Thus $P$ takes
 values in the required space of alternating maps and is a bounded $k$\nobreakdash-linear lift: on the diagonal,
-all $k!$ summands equal $Q(f)(m)(x)$. Proposition~\ref{prop:lift} gives the claimed power series.
+all $k!$ summands equal $A(f)(m)(x)$. Proposition~\ref{prop:lift} gives the claimed power series.
 
 In a field of characteristic $p>0$, the scalar $k!$ is nonzero precisely when $k<p$. This gives the stated
 positive-characteristic case.
@@ -628,7 +630,7 @@ coordinate topology.
 
 \begin{proposition}[finite coordinate bases]\label{prop:finite-coordinate}
 Let $K$ be a nontrivially normed field and let $E,E',F$ be normed $K$\nobreakdash-spaces. If either $E$ or $E'$ has a
-finite algebraic basis whose coordinate functionals are continuous, then $Q^K_{E,E',F}$ has a bounded
+finite algebraic basis whose coordinate functionals are continuous, then $A^k_{E,E';F}$ has a bounded
 $k$\nobreakdash-linear lift in every degree $k\ge1$. In particular, it is continuously polynomial, and hence analytic,
 at every point. No completeness or nonarchimedean hypothesis on $F$ is required.
 \end{proposition}
@@ -657,7 +659,7 @@ space $\mathbb K^n$, and is itself complete.
 
 \begin{corollary}\label{cor:finite-dimensional-positive}
 Let $K$ be a complete nontrivially normed field, and let $E,E',F$ be normed $K$\nobreakdash-spaces. If either $E$ or $E'$
-is finite-dimensional over $K$, then $Q^K_{E,E',F}$ is analytic at every point in every degree. No completeness
+is finite-dimensional over $K$, then $A^k_{E,E';F}$ is analytic at every point in every degree. No completeness
 assumption on $E,E'$ or $F$ is needed in the statement.
 \end{corollary}
 
@@ -671,7 +673,7 @@ Finite algebraic dimension alone does not imply continuity of coordinate functio
 For example, choose $a\in\widehat K\setminus K$ and give $H:=K+Ka\subseteq\widehat K$ the induced norm. The vectors
 $1,a$ form a $K$\nobreakdash-basis. If $a_j\in K$ tends to $a$, then $a-a_j\to0$ in $H$, whereas its $a$\nobreakdash-coordinate
 is always $1$. Thus that coordinate functional is discontinuous. This prevents dropping the coordinate hypothesis
-from the proof of Proposition~\ref{prop:finite-coordinate}; it does not by itself give a counterexample to analyticity of $Q$ for such spaces.
+from the proof of Proposition~\ref{prop:finite-coordinate}; it does not by itself give a counterexample to analyticity of $A$ for such spaces.
 Over an incomplete field the proposition still applies, for example, to finite-dimensional spaces whose norm is
 equivalent to a coordinate maximum norm.
 \end{remark}
@@ -707,18 +709,18 @@ Positive characteristic implies the nonarchimedean hypothesis by Lemma~\ref{lem:
 We prove the following operator statement, which also records every smoothness order. For normed
 $K$\nobreakdash-spaces $E,E'$ and a nonarchimedean, spherically complete $F$,
 \[
-Q^K_{E,E',F}\text{ is }C^n\qquad(n\in\N\cup\{\infty,\omega\}).
+A^k_{E,E';F}\text{ is }C^n\qquad(n\in\N\cup\{\infty,\omega\}).
 \]
 Together with spherical completeness of $\Alt^k(E;F)$ and~\eqref{eq:joint-action}, this proves Main Theorem~(\ref{main:spherical}).
 
 No completeness assumption on $K,E$ or $E'$ is needed, and no nonarchimedean hypothesis is imposed on $E$ or $E'$.
-For $k\ge1$, put $A=\Alt^k(E;F)$ and $M=\Mult^k(E;F)$. The desired projection is a bounded linear map
-$\rho\colon M\to A$ of norm at most one that fixes every alternating map. Once it is available, the formula
+For $k\ge1$, put $W=\Alt^k(E;F)$ and $M=\Mult^k(E;F)$. The desired projection is a bounded linear map
+$\rho\colon M\to W$ of norm at most one that fixes every alternating map. Once it is available, the formula
 \[
 P(f_1,\dots,f_k)(m)=\rho\bigl(m\circ(f_1,\dots,f_k)\bigr)
 \]
-is bounded and multilinear in the operators $f_i$, and has diagonal $Q$. This is the required analytic lift:
-expansion around any operator gives a finite power series. The construction of $\rho$, outlined after Proposition~\ref{prop:alt-spherical} and carried out in Appendix~\ref{app:spherical}, rests on the spherical completeness of $A$.
+is bounded and multilinear in the operators $f_i$, and has diagonal $A$. This is the required analytic lift:
+expansion around any operator gives a finite power series. The construction of $\rho$, outlined after Proposition~\ref{prop:alt-spherical} and carried out in Appendix~\ref{app:spherical}, rests on the spherical completeness of $W$.
 
 \begin{proposition}\label{prop:alt-spherical}
 For a nonarchimedean nontrivially normed field $K$, a normed $K$\nobreakdash-space $E$ and a nonarchimedean, spherically complete $F$, the space $\Alt^k(E;F)$ is a nonarchimedean, spherically complete normed space
@@ -731,9 +733,9 @@ Appendix~\ref{app:spherical} first proves an extension lemma for spherically com
 prospective extension in several operator balls at once (Lemma~\ref{lem:compatible-extension}).
 It then deduces Proposition~\ref{prop:alt-spherical} by identifying $\Alt^k(E;F)$ isometrically with the bounded
 linear maps into $F$ on a free seminormed space that vanish on the multilinearity and equal-input relations.
-A second application of the lemma, now with target $A$, extends the inverse of the isometric inclusion $A\to M$
-to a contraction $\rho\colon M\to A$ that fixes every alternating map; inserted into the lift formula above, it gives
-a bounded $k$\nobreakdash-linear lift of $Q$ of norm at most one, which completes the proof of
+A second application of the lemma, now with target $W$, extends the inverse of the isometric inclusion $W\to M$
+to a contraction $\rho\colon M\to W$ that fixes every alternating map; inserted into the lift formula above, it gives
+a bounded $k$\nobreakdash-linear lift of $A$ of norm at most one, which completes the proof of
 Main Theorem~(\ref{main:spherical}).
 
 \subsection{Consequences for alternating-map bundles}\label{ssec:analytic-bundles}
@@ -759,7 +761,7 @@ $E$ is finite-dimensional.
 
 \begin{proof}
 For typical source fibers $E_1,E_2$ and a typical target fiber $F_1$ of bundles satisfying the hypothesis, the map
-$Q^K_{E_1,E_2,F_1}$ is analytic: in case~(a) by Proposition~\ref{prop:factorial-positive}, and in case~(c) by
+$A^k_{E_1,E_2;F_1}$ is analytic: in case~(a) by Proposition~\ref{prop:factorial-positive}, and in case~(c) by
 Proposition~\ref{prop:finite-coordinate} and Lemma~\ref{lem:findim}. In case~(b) we may assume $k!=0$ in $K$, so
 that $K$ has positive characteristic. Main Theorem~(\ref{main:spherical}) then applies after an equivalent change of
 norm on $F_1$, which alters the norms of the alternating-map and operator spaces only by fixed factors and so
@@ -768,7 +770,7 @@ its composites with the transition maps, the changes of trivialization and the l
 \end{proof}
 
 Cases~(a) and~(b) concern the target fibers alone. Call a normed space $F$ a \emph{universal target} if
-$Q^K_{E,D,F}$ is analytic for all normed spaces $E,D$, and write $\mathsf T_k(K)$ for the class of universal
+$A^k_{E,D;F}$ is analytic for all normed spaces $E,D$, and write $\mathsf T_k(K)$ for the class of universal
 targets (formally Definition~\ref{dom:definition} in Section~\ref{sec:domains}). Cases~(a) and~(b) say that
 $\mathsf T_k(K)$ contains every normed space when $k!\ne0$ in $K$, and every space with an equivalent
 nonarchimedean, spherically complete norm. Their proof uses only this membership, so the corollary holds verbatim
@@ -807,7 +809,7 @@ $\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K$, write
 and denote the action on morphisms by
 \[
  A_{XY}\colon H_{XY}\longrightarrow\cL(V_X,V_Y),\qquad
- A_{XY}(u,v)m=v\circ m\circ(u,\ldots,u).
+ A_{XY}(u,v)m=\Alt^k(u,v)(m)=v\circ m\circ(u,\ldots,u).
 \]
 The product defining $H_{XY}$ has the maximum norm. These conventions make the contravariance in $E$
 explicit: the first component of a morphism $X\to Y$ is a map $E'\to E$.
@@ -1043,7 +1045,7 @@ bounded open linear surjection
 \[
  q\colon\ell^1(J,K)\longrightarrow H:=\cL(E,E)
 \]
-such that $Q^K_{E,E,F}\circ q$ is analytic, whereas $Q^K_{E,E,F}$ is
+such that $A^k_{E,E;F}\circ q$ is analytic, whereas $A^k_{E,E;F}$ is
 analytic at no point. The map $q$ has no local right inverse on a nonempty open subset of $H$ that is
 Fr\'echet differentiable at even one point of that subset.
 \end{corollary}
@@ -1102,9 +1104,9 @@ coordinates, a base with finite continuous coordinates, or a $c_0$ or $\ell^1$ b
 described in the introduction. When $k!=0$ in $K$ and no such hypothesis is imposed, analyticity fails both for the
 alternating functor and for the alternating-map bundles it induces.
 
-When $k!=0$ in $K$, there are Banach spaces $E$ and $F$ for which the pullback action $Q^K_{E,E,F}$ is analytic at no point
-(Theorem~\ref{thm:main}). Hence $Q$ is analytic for all Banach spaces exactly when $k!\ne0$ in $K$
-(Corollary~\ref{cor:class}). The shear of Proposition~\ref{fam:prop:shear} turns a point of nonanalyticity of $Q$ into a
+When $k!=0$ in $K$, there are Banach spaces $E$ and $F$ for which the pullback action $A^k_{E,E;F}$ is analytic at no point
+(Theorem~\ref{thm:main}). Hence $A$ is analytic for all Banach spaces exactly when $k!\ne0$ in $K$
+(Corollary~\ref{cor:class}). The shear of Proposition~\ref{fam:prop:shear} turns a point of nonanalyticity of $A$ into a
 point of nonanalyticity of the pullback along an affine analytic family of automorphisms. Applied to
 Theorem~\ref{thm:main}, it gives an alternating-map bundle over a Banach base whose transition between the charts
 induced by two analytic trivializations is analytic at no point (Corollary~\ref{fam:cor:banach-base-failure}). This
@@ -1127,21 +1129,21 @@ obstruction is unavoidable if analyticity is required for all Banach spaces over
 Let $K$ be a nontrivially normed field of characteristic $p>0$, and let $k\ge p$. There are Banach spaces $E$ and $F$
 over $K$ such that the degree-$k$ map
 \[
-Q\colon\cL(E,E)\to\cL\bigl(\Alt^k(E;F),\Alt^k(E;F)\bigr),\qquad Q(f)(m)=m\circ(f,\dots,f),
+A\colon\cL(E,E)\to\cL\bigl(\Alt^k(E;F),\Alt^k(E;F)\bigr),\qquad A(f)(m)=m\circ(f,\dots,f),
 \]
 is analytic at no point of $\cL(E,E)$. Equivalently, there is no bounded $k$\nobreakdash-linear map $P$ on $\cL(E,E)$ with
-$P(f,\dots,f)=Q(f)$ for all $f$. The Banach space $F$ admits no equivalent nonarchimedean norm.
+$P(f,\dots,f)=A(f)$ for all $f$. The Banach space $F$ admits no equivalent nonarchimedean norm.
 The same $E,F$ work for any reindexing of the $k$ arguments.
 \end{theorem}
 
 \begin{corollary}\label{cor:class}
-Let $K$ be any nontrivially normed field and $k\ge0$ any integer. Then $Q^K_{E,E',F}$ is analytic for all
+Let $K$ be any nontrivially normed field and $k\ge0$ any integer. Then $A^k_{E,E';F}$ is analytic for all
 $K$\nobreakdash-Banach spaces $E,E',F$ if and only if $k!\ne0$ in $K$. More precisely:
 \begin{enumerate}
-\item if $k!\neq0$ in $K$, then $Q^K_{E,E',F}$ is analytic, indeed given at every point by a finite power
+\item if $k!\neq0$ in $K$, then $A^k_{E,E';F}$ is analytic, indeed given at every point by a finite power
 series, for all normed spaces $E,E',F$, complete or not;
 \item if $k!=0$ in $K$, then there are Banach spaces $E=E'$ and $F$, with $F$ admitting no equivalent
-nonarchimedean norm, such that $Q^K_{E,E,F}$ is analytic at no point.
+nonarchimedean norm, such that $A^k_{E,E;F}$ is analytic at no point.
 \end{enumerate}
 \end{corollary}
 
@@ -1158,18 +1160,18 @@ Thus the factorial condition is exact, even when the source and target of the li
 The failure is also local in the strongest sense: in the examples, analyticity fails at every base point.
 
 \begin{proof}[Proof of Main Theorem~(\ref{main:general})]
-The map $(v,T)\mapsto v_*\circ T$ in~\eqref{eq:joint-action} is bounded bilinear, and every $Q^K_{E,E',F}$ is
+The map $(v,T)\mapsto v_*\circ T$ in~\eqref{eq:joint-action} is bounded bilinear, and every $A^k_{E,E';F}$ is
 $C^\infty$ by Proposition~\ref{prop:smooth-positive}. Hence every joint action, and thus the bifunctor, is $C^\infty$.
-Suppose $k!\ne0$ in $K$. In degree zero, $Q$ is constant and the joint action is a bounded linear function of
+Suppose $k!\ne0$ in $K$. In degree zero, $A$ is constant and the joint action is a bounded linear function of
 $v$ alone. For $k\ge1$, Corollary~\ref{cor:class} and Proposition~\ref{prop:lift} give a bounded
-$k$\nobreakdash-linear lift $P$ of $Q$. Placing the pushforward variable in the last slot,
+$k$\nobreakdash-linear lift $P$ of $A$. Placing the pushforward variable in the last slot,
 \[
 \bigl((u_1,v_1),\dots,(u_{k+1},v_{k+1})\bigr)\longmapsto(v_{k+1})_*\circ P(u_1,\dots,u_k)
 \]
 is a bounded $(k+1)$\nobreakdash-linear lift of the joint action. Expanding it as in Proposition~\ref{prop:lift}(1)
 gives a finite power series at every point. Suppose $k!=0$ in $K$, and let $E=E'$ and $F$ be the Banach spaces of
 Corollary~\ref{cor:class}(2). By~\eqref{eq:joint-action}, composing the joint action with the affine map
-$u\mapsto(u,\id_F)$ recovers $Q^K_{E,E,F}$. Hence the joint action is analytic at no point of the form $(u,\id_F)$.
+$u\mapsto(u,\id_F)$ recovers $A^k_{E,E;F}$. Hence the joint action is analytic at no point of the form $(u,\id_F)$.
 For the restriction to $\mathsf{Ban}_K$, recall from the introduction that $\Alt^k(E;F)$ is complete whenever $F$ is complete. The restricted bifunctor has the same maps on hom spaces, and the counterexample spaces are Banach,
 so both assertions persist.
 \end{proof}
@@ -1184,7 +1186,7 @@ The following elementary construction transfers any bad pullback map to a family
 \begin{proposition}[invertible shear family]\label{fam:prop:shear}
 Let $E,D,F$ be normed $K$\nobreakdash-spaces, and suppose
 \[
- Q\colon\cL(E,D)\longrightarrow
+ A\colon\cL(E,D)\longrightarrow
  \cL\bigl(\Alt^k(D;F),\Alt^k(E;F)\bigr)
 \]
 is not analytic at $u_0$. Put $H=D\oplus E$, with the maximum norm, and define
@@ -1204,9 +1206,9 @@ The inverse is $g(-u)$. Let
 and let $R\colon\Alt^k(H;F)\to\Alt^k(E;F)$ be restriction along $i_E\colon E\to H$.
 Both maps are bounded linear, and $\pi_Dg(u)i_E=u$, so
 \begin{equation}\label{fam:eq:shear-retract}
- R\circ g(u)^*\circ J=Q(u).
+ R\circ g(u)^*\circ J=A(u).
 \end{equation}
-If $g(u)^*$ were analytic at $u_0$, bounded linear composition with $R$ and $J$ would make $Q$ analytic there.
+If $g(u)^*$ were analytic at $u_0$, bounded linear composition with $R$ and $J$ would make $A$ analytic there.
 For the last assertion, take the counterexample of Theorem~\ref{thm:main}, which is nonanalytic at zero.
 \end{proof}
 
@@ -1234,13 +1236,13 @@ Thus Theorem~\ref{fam:thm:finite-bundles} fails over this Banach base, both for 
 \begin{proof}
 The transition of $\mathcal E$ from $\tau_0$ to $\tau_1$ is the affine analytic family $g$, with affine analytic inverse
 $u\mapsto g(-u)$. By~\eqref{fam:eq:bundle-transitions}, the induced transitions of the alternating bundle are pullbacks
-by $g(\pm u)$, with the identity on $F$. Theorem~\ref{thm:main} makes $Q^K_{E,E,F}$ analytic at no point, so
+by $g(\pm u)$, with the identity on $F$. Theorem~\ref{thm:main} makes $A^k_{E,E;F}$ analytic at no point, so
 Proposition~\ref{fam:prop:shear} shows that $u\mapsto g(u)^*$ is analytic at no point. The same holds for
 $u\mapsto g(-u)^*$ after the linear reparameterization $u\mapsto-u$. The morphism statement is the same computation
 in the global product chart of $M\times\Alt^k(H;F)$.
 \end{proof}
 
-The proof uses Theorem~\ref{thm:main} only through Proposition~\ref{fam:prop:shear}. Hence, whenever $Q^K_{E,D,F}$ fails to be analytic at some $u_0$, the same construction over $M=\cL(E,D)$, with fiber $D\oplus E$ and target bundle $M\times F$, gives analytic input bundles whose alternating-map bundle has a transition that is not analytic at $u_0$. Every failure of analyticity of the functor therefore appears as a failure for bundles. The corollary concerns the compatibility of the natural construction with the given analytic atlas, or
+The proof uses Theorem~\ref{thm:main} only through Proposition~\ref{fam:prop:shear}. Hence, whenever $A^k_{E,D;F}$ fails to be analytic at some $u_0$, the same construction over $M=\cL(E,D)$, with fiber $D\oplus E$ and target bundle $M\times F$, gives analytic input bundles whose alternating-map bundle has a transition that is not analytic at $u_0$. Every failure of analyticity of the functor therefore appears as a failure for bundles. The corollary concerns the compatibility of the natural construction with the given analytic atlas, or
 equivalently its functoriality. It does not assert that the trivial pointwise alternating-map bundle admits no
 analytic structure, and the $C^n$ forms of the construction hold over every base for $n\le\infty$ (Corollary~\ref{cor:smooth-bundles}).
 The Lean formalization proves the corresponding contradiction for Mathlib's existing alternating-bundle topology
@@ -1261,12 +1263,12 @@ blocks, so $B$ admits no equivalent nonarchimedean norm (Proposition~\ref{prop:n
 $W_B\in\Alt^k_{K_1}(E_1;B)$ is $W_B(x_1,\dots,x_k)=x_1\wedge\dots\wedge x_k$, and for $a\in E_1$ we write
 $D_a\in\cL(E_1,E_1)$ for multiplication by $a$, $D_ax=ax$.
 
-By Proposition~\ref{prop:lift}, it suffices to exclude a bounded $k$\nobreakdash-linear lift of $Q$. Let
+By Proposition~\ref{prop:lift}, it suffices to exclude a bounded $k$\nobreakdash-linear lift of $A$. Let
 $E_0=\kappa^\N\subseteq E_1$ be the $\kappa$\nobreakdash-subspace of sequences with entries in $\kappa$. When $k\ge p$, the
 multiplier theorem over a finite field (Theorem~\ref{thm:FF}, Appendix~\ref{app:FF}) rules out a multilinear lift of
 coordinatewise multiplication on $E_0$ that satisfies a polarized diagonal identity and whose values have exterior
 support of uniformly bounded dimension. To prove the
-following theorem, we evaluate a hypothetical bounded $k$\nobreakdash-linear lift of $Q^{K_1}_{E_1,E_1,B}$ on multiplication
+following theorem, we evaluate a hypothetical bounded $k$\nobreakdash-linear lift of $A^{k,K_1}_{E_1,E_1;B}$ on multiplication
 operators $D_{a_1},\dots,D_{a_k}$ and at $W_B$, with all $a_i$ and all arguments in $E_0$, and apply the
 $\kappa$\nobreakdash-linear constant-coefficient map $\eta\colon B\to\Lambda^k_\kappa E_0$. Its support dimension is bounded on
 bounded subsets of $B$ (Proposition~\ref{prop:supp}). This converts the norm bound on the lift into an algebraic
@@ -1275,7 +1277,7 @@ Theorem~\ref{thm:FF} when $k\ge p$ (Lemma~\ref{lem:Psi}).
 \begin{theorem}\label{thm:laurent}
 Let $\kappa$ be a finite field of characteristic $p$, let $k\ge p$ and $r\in(0,1)$, and let $K_1=\kappa((X))$ with
 $\abs X=r$. Let $E_1=\linf(\N,K_1)$, and let $B$ be the completion of $\Lambda^k_{K_1}E_1$ under the projective exterior
-norm. Then $Q^{K_1}_{E_1,E_1,B}$ admits no bounded $k$\nobreakdash-linear lift over $K_1$. Consequently it is analytic at no point of
+norm. Then $A^{k,K_1}_{E_1,E_1;B}$ admits no bounded $k$\nobreakdash-linear lift over $K_1$. Consequently it is analytic at no point of
 $\cL(E_1,E_1)$.
 \end{theorem}
 The proof is given in Appendix~\ref{app:laurent}. Theorem~\ref{thm:main} follows by ascent, with $\kappa=\F_p$. For any
@@ -1299,8 +1301,8 @@ The homogeneous polynomial
  \sigma(a)(x_1,\dots,x_k)=W_B(ax_1,\dots,ax_k)=(ax_1)\wedge\dots\wedge(ax_k),
 \]
 has no bounded $k$\nobreakdash-linear lift with values in $\Alt^k_{K_1}(E_1;B)$. Consequently, for every
-$u_0\in\cL(E_1,E_1)$, the map $a\mapsto Q^{K_1}_{E_1,E_1,B}(u_0+D_a)(W_B)$ is analytic at no point of $c_0(\N,K_1)$. In
-particular $a\mapsto Q^{K_1}_{E_1,E_1,B}(u_0+D_a)$ is analytic at no point.
+$u_0\in\cL(E_1,E_1)$, the map $a\mapsto A^{k,K_1}_{E_1,E_1;B}(u_0+D_a)(W_B)$ is analytic at no point of $c_0(\N,K_1)$. In
+particular $a\mapsto A^{k,K_1}_{E_1,E_1;B}(u_0+D_a)$ is analytic at no point.
 \end{proposition}
 The proof is given in Appendix~\ref{app:laurent}.
 
@@ -1345,7 +1347,7 @@ maps $\iota\colon c_0(\N,K)\to P$ and $\pi\colon P\to c_0(\N,K)$ with $\pi\iota=
 $V=\{x\in P:\norm{\pi x}<1\}$, take the bundle with fiber $E_1$ and transition $D_{1+\pi(x)}$, as in
 Corollary~\ref{lau:cor:diagonal-bundle}, together with the trivial bundle with fiber $B$. If the induced transition were
 analytic at $x_0\in V$, restriction to the affine subspace $x_0+\iota(c_0(\N,K))$ would make
-$b\mapsto Q^{K}_{E_1,E_1,B}(D_{1+\pi(x_0)}+D_b)$ analytic at zero. This contradicts
+$b\mapsto A^k_{E_1,E_1;B}(D_{1+\pi(x_0)}+D_b)$ analytic at zero. This contradicts
 Proposition~\ref{lau:prop:c0-multipliers} with $u_0=D_{1+\pi(x_0)}$.
 \end{proof}
 
@@ -1407,7 +1409,7 @@ For a nonarchimedean, spherically complete $K$, the result of
 normed source spaces. Otherwise $K$ has characteristic $p>0$ with $k\ge p$, and is
 nonarchimedean by Lemma~\ref{lem:ultra} but not spherically complete.
 Theorem~\ref{thm:scalar-counter} supplies Banach spaces $E,D$ for which
-$Q^K_{E,D,K}$ is analytic at no point. This already disproves analyticity on
+$A^k_{E,D;K}$ is analytic at no point. This already disproves analyticity on
 $\mathsf{Ban}_K^{\mathrm{op}}$.
 \end{proof}
 
@@ -1420,7 +1422,7 @@ A normed space is \emph{of countable type} if a countable subset has dense linea
 
 \begin{proposition}[countable-type scalar sources]\label{prop:scalar-countable}
 Let $K$ be complete and nonarchimedean. If either $E$ or $D$ is of countable type, then
-$Q^K_{E,D,K}$ is analytic in every degree. Neither completeness nor a nonarchimedean norm
+$A^k_{E,D;K}$ is analytic in every degree. Neither completeness nor a nonarchimedean norm
 is required of $E,D$. In particular, the two spaces in
 Theorem~\ref{thm:scalar-counter} must both fail to be of countable type.
 \end{proposition}
@@ -1462,11 +1464,11 @@ Density proves the same identity everywhere. Hence $R=\mathcal A_V S$ retracts a
 multilinear forms onto alternating forms, while $S|_{\Alt}$ is a bounded right inverse
 of $\mathcal A_V$. Transport through $j_V$ gives both operators on the original $V$.
 
-If $E$ is of countable type, a lift of $Q$ is
+If $E$ is of countable type, a lift of $A$ is
 $R_E\bigl(m\circ(u_1,\ldots,u_k)\bigr)$.
 If $D$ is of countable type, use instead
 $\mathcal A_E\bigl(S_D(m)\circ(u_1,\ldots,u_k)\bigr)$.
-Both are bounded multilinear in the $u_i$, linear in $m$, and have diagonal $Q(u)(m)$;
+Both are bounded multilinear in the $u_i$, linear in $m$, and have diagonal $A(u)(m)$;
 the second identity uses that antisymmetrization commutes with simultaneous precomposition.
 Proposition~\ref{prop:lift} concludes the proof.
 \end{proof}
@@ -1502,11 +1504,11 @@ The space $X$ is Banach, since $D$ is complete, and
 Let $\pi_D\colon X\to D$ be projection and $i_E(b)=(0,0,b)$. The fixed bounded linear maps
 $Jm=m\circ\pi_D^{\times k}$ and $Rn=n\circ i_E^{\times k}$ satisfy
 \begin{equation}\label{eq:scalar-tangent-compression}
- R\circ Q^K_{X,X,K}(D\psi(u,d,e))\circ J=Q^K_{E,D,K}(u),
+ R\circ A^k_{X,X;K}(D\psi(u,d,e))\circ J=A^k_{E,D;K}(u),
 \end{equation}
 because $\pi_DD\psi(u,d,e)i_E=u$. Analyticity of the induced transition at any
 $(u_0,d_0,e_0)$ would, after this bounded linear compression and restriction to
-$u\mapsto(u,d_0,e_0)$, make $Q^K_{E,D,K}$ analytic at $u_0$.
+$u\mapsto(u,d_0,e_0)$, make $A^k_{E,D;K}$ analytic at $u_0$.
 For the reverse transition the same identity uses $-u$ instead of $u$.
 Both conclusions contradict the choice of $E,D$.
 \end{proof}
@@ -1535,8 +1537,8 @@ Its image in $\Mult^k(N;K)$ is nevertheless analytic everywhere.
 \end{theorem}
 
 \begin{proof}
-Keep the spaces $E,D$ above and put $A=\Alt^k(D;K)$,
-$Y=A\times D$, and $N=\cL(E,D)\times A\times E$. Define
+Keep the spaces $E,D$ above and put $H=\Alt^k(D;K)$,
+$Y=H\times D$, and $N=\cL(E,D)\times H\times E$. Define
 \[
  \omega_0(m,d)=m\circ\pi_D^{\times k},\qquad h(u,m,e)=(m,ue).
 \]
@@ -1544,16 +1546,16 @@ The coefficient map of $\omega_0$ is bounded linear into $\Alt^k(Y;K)$, and $h$ 
 polynomial. Since $Dh(u,m,e)(v,a,b)=(a,ve+ub)$, restriction of $h^*\omega_0$ to the
 fixed $E$-directions $(0,0,b_i)$ gives
 \[
- \Gamma(u,m)=Q^K_{E,D,K}(u)(m)\in\Alt^k(E;K).
+ \Gamma(u,m)=A^k_{E,D;K}(u)(m)\in\Alt^k(E;K).
 \]
 If the pulled-back form were intrinsically analytic at $(u_0,m_0,e_0)$, bounded linear
 restriction of its values and the slice $e=e_0$ would make $\Gamma$ analytic at
-$(u_0,m_0)$. Its partial derivative in the $A$-variable is
+$(u_0,m_0)$. Its partial derivative in the $H$-variable is
 \[
- D_m\Gamma(u,m)=Q^K_{E,D,K}(u).
+ D_m\Gamma(u,m)=A^k_{E,D;K}(u).
 \]
 Derivatives of analytic maps into Banach spaces are analytic in operator norm; restricting
-this derivative to $m=m_0$ contradicts the nonanalyticity of $Q$ at $u_0$.
+this derivative to $m=m_0$ contradicts the nonanalyticity of $A$ at $u_0$.
 Finally, after forgetting alternation, the coefficient map of $h^*\omega_0$ is a bounded
 multilinear expression in $Dh$ and $\omega_0\circ h$. It is therefore analytic.
 \end{proof}
@@ -1711,7 +1713,7 @@ Section~\ref{sec:families-bundles} restricted the base. Here the base stays arbi
 class of fiber pairs on which $\Alt^k$ is analytic.
 
 We define analytic domains and record their bundles (Corollary~\ref{cor:domain-bundles}). The targets $F$ for
-which $Q^K_{E,D,F}$ is analytic for all normed $E,D$ form a canonical core compatible with every analytic domain
+which $A^k_{E,D;F}$ is analytic for all normed $E,D$ form a canonical core compatible with every analytic domain
 (Proposition~\ref{dom:core}). Within any set of objects, every analytic domain extends to a maximal one
 (Proposition~\ref{dom:maximal}), and pairs split in the sense of Definition~\ref{dom:split-pair} form a further
 analytic domain (Lemma~\ref{dom:split-incoming}). A largest analytic domain need not exist: for every prime $p$
@@ -1723,7 +1725,7 @@ The section ends with what is known about universal targets (\S\ref{ssec:univers
 A full subcategory $\mathcal D\subseteq\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K$ is an
 \emph{analytic domain} for $\Alt^k$ if the restriction of $\Alt^k$ to $\mathcal D$ is analytic on every
 hom space. Let $\mathsf T_k(K)$ be the full subcategory of normed spaces $F$ such that
-$Q^K_{E,D,F}$ is analytic for every pair of normed spaces $E,D$.
+$A^k_{E,D;F}$ is analytic for every pair of normed spaces $E,D$.
 \end{definition}
 
 \begin{corollary}[bundles with fibers in an analytic domain]\label{cor:domain-bundles}
@@ -1770,8 +1772,8 @@ Consider a morphism from $(E,F)$ to $(D,G)$, represented by $u\colon D\to E$ and
 Writing $v_*$ for postcomposition, its action has the two factorizations
 \begin{equation}\label{dom:two-factorizations}
 \Alt^k(u,v)
- =v_*\circ Q^K_{D,E,F}(u)
- =Q^K_{D,E,G}(u)\circ v_*.
+ =v_*\circ A^k_{D,E;F}(u)
+ =A^k_{D,E;G}(u)\circ v_*.
 \end{equation}
 Operator composition is bounded bilinear. The first expression is therefore jointly analytic if
 $F\in\mathsf T_k(K)$, and the second is jointly analytic if $G\in\mathsf T_k(K)$. Thus a universally
@@ -1781,7 +1783,7 @@ to $v=\id_F$, is exactly the defining property of $\mathsf T_k(K)$.
 
 Suppose $i\colon F\to G$ and $r\colon G\to F$ are bounded linear maps with $r i=\id_F$. Then
 \[
-Q^K_{E,D,F}(u)=r_*\circ Q^K_{E,D,G}(u)\circ i_*.
+A^k_{E,D;F}(u)=r_*\circ A^k_{E,D;G}(u)\circ i_*.
 \]
 Consequently the property passes from $G$ to its retract $F$, and in particular is invariant under bounded
 linear isomorphism. For a finite product of targets, alternating maps identify boundedly with the product
@@ -1902,7 +1904,7 @@ analytic manifold with one chart; by Lemma~\ref{dom:rigid} it has no nonzero bou
 fiber be $H=D_k\times E_k$ with two global trivializations differing by the shear
 $g(x)=\bigl(\begin{smallmatrix}\id&u(x)\\0&\id\end{smallmatrix}\bigr)$, where $u(x)=M_x\oplus I_r$ is the bounded affine
 family of Appendix~\ref{dom:section}, and take the trivial target bundle with fiber $G$. The transitions $g(x)$ and $g(x)^{-1}=\bigl(\begin{smallmatrix}\id&-u(x)\\0&\id\end{smallmatrix}\bigr)$ are affine
-analytic. By~\eqref{fam:eq:shear-retract}, compressing the induced pullback recovers $Q^K_{E_k,D_k,G}(u(x))$, and evaluation
+analytic. By~\eqref{fam:eq:shear-retract}, compressing the induced pullback recovers $A^k_{E_k,D_k;G}(u(x))$, and evaluation
 at $\det_k$ followed by coefficient extraction gives the map~\eqref{dom:bad-coordinate}, which is not analytic at zero.
 Hence the alternating-map bundle is not analytic, although the base and all fibers have finite algebraic dimension.
 Over a complete field this cannot happen, by Lemma~\ref{lem:findim}.
@@ -1937,16 +1939,16 @@ is necessary. Section~\ref{sec:open} asks for an intrinsic characterization of $
 \begin{proposition}[universal targets over a nonspherically complete field]\label{prop:universal-zero-dual}
 Let $K$ be complete, nontrivially normed and not spherically complete, and suppose $k! = 0$ in $K$.
 Then every $F\in\mathsf T_k(K)$ has zero continuous dual. More precisely, the Banach spaces $E,E'$ of
-Theorem~\ref{thm:scalar-counter} make $Q^K_{E,E',F}$ analytic at no point for every normed target $F$
+Theorem~\ref{thm:scalar-counter} make $A^k_{E,E';F}$ analytic at no point for every normed target $F$
 with a nonzero continuous linear functional.
 \end{proposition}
 \begin{proof}
 Choose $\lambda\in\cL(F,K)$ and $v\in F$ with $\lambda(v)=1$. The maps $a\mapsto va$ and
 $m\mapsto\lambda\circ m$ on alternating-map spaces are bounded linear. For every $u\in\cL(E,E')$,
 \[
-Q^K_{E,E',K}(u)(a)=\lambda\circ Q^K_{E,E',F}(u)(va).
+A^k_{E,E';K}(u)(a)=\lambda\circ A^k_{E,E';F}(u)(va).
 \]
-Thus a fixed bounded linear compression sends $Q^K_{E,E',F}(u)$ to $Q^K_{E,E',K}(u)$.
+Thus a fixed bounded linear compression sends $A^k_{E,E';F}(u)$ to $A^k_{E,E';K}(u)$.
 Analyticity of the former at any point would contradict Theorem~\ref{thm:scalar-counter}.
 \end{proof}
 In particular no nonzero finite-dimensional space, dual space or polar space is universal in this regime.
@@ -1958,25 +1960,25 @@ condition only: zero continuous dual has not been shown sufficient for universal
 Let $K$ be a complete nontrivially normed field, let $E,E'$ be normed $K$\nobreakdash-spaces, and let $F$ be finite-dimensional.
 If $F\ne0$, then, at every $f_0\in\cL(E,E')$,
 \[
-Q^K_{E,E',F}\text{ is analytic at }f_0
+A^k_{E,E';F}\text{ is analytic at }f_0
 \quad\Longleftrightarrow\quad
-Q^K_{E,E',K}\text{ is analytic at }f_0.
+A^k_{E,E';K}\text{ is analytic at }f_0.
 \]
 If $F=0$, precomposition is constant and hence analytic.
 
 Indeed, choose a basis $v_1,\dots,v_d$ of $F$ with coordinate functionals
 $\lambda_1,\dots,\lambda_d$. These functionals are continuous because $K$ is complete. For a vector $v$ and a scalar-valued form $a$, write $va$ for the form $x\mapsto a(x)v$. Writing
-$Q_F:=Q^K_{E,E',F}$ and $Q_K:=Q^K_{E,E',K}$, we have
+$A_F:=A^k_{E,E';F}$ and $A_K:=A^k_{E,E';K}$, we have
 \[
-Q_F(f)(m)=\sum_{a=1}^d v_a\,Q_K(f)(\lambda_a\circ m).
+A_F(f)(m)=\sum_{a=1}^d v_a\,A_K(f)(\lambda_a\circ m).
 \]
-The right-hand side is a fixed continuous linear function of the operator $Q_K(f)$, so analyticity
-of $Q_K$ implies that of $Q_F$. Conversely, choose $v\in F$ and $\lambda\in\cL(F,K)$ with
+The right-hand side is a fixed continuous linear function of the operator $A_K(f)$, so analyticity
+of $A_K$ implies that of $A_F$. Conversely, choose $v\in F$ and $\lambda\in\cL(F,K)$ with
 $\lambda(v)=1$. For $a\in\Alt^k(E';K)$,
 \[
-Q_K(f)(a)=\lambda\circ Q_F(f)(v a).
+A_K(f)(a)=\lambda\circ A_F(f)(v a).
 \]
-This expresses $Q_K$ as a fixed continuous linear function of $Q_F$ and proves the converse.
+This expresses $A_K$ as a fixed continuous linear function of $A_F$ and proves the converse.
 Together with Theorem~\ref{thm:scalar-classification}, this proves that a nonzero finite-dimensional target
 is universal over complete nonarchimedean $K$ exactly when $k!\ne0$ or $K$ is spherically complete.
 In particular, finite-dimensionality of the target alone does not ensure analyticity.
@@ -1993,7 +1995,7 @@ spaces only by fixed comparison factors.
 \begin{proposition}[targets over discretely valued bases]\label{prop:discrete}
 Let $K$ be a nonarchimedean normed field with $\abs{K^\times}=r^\Z$ for some $r\in(0,1)$, complete or
 not; for instance $K=\F_q((t))$, or $K=\kappa((t))$ for an arbitrary field $\kappa$. Let $E,E'$ be normed $K$\nobreakdash-spaces and $F$ a $K$\nobreakdash-Banach space that
-admits an equivalent nonarchimedean norm. Then $Q^K_{E,E',F}$ is analytic at every point.
+admits an equivalent nonarchimedean norm. Then $A^k_{E,E';F}$ is analytic at every point.
 \end{proposition}
 The proof is given in Appendix~\ref{app:further}.
 
@@ -2048,7 +2050,7 @@ final targets but not for all complete targets.
 
 \item \emph{Countable index.}
 Let $K$ be complete, not spherically complete, of characteristic $p\ge3$, and let $k\ge p$.
-Is there a complete nonarchimedean $F$ such that $Q^K_{E,E,F}$ is not analytic for
+Is there a complete nonarchimedean $F$ such that $A^k_{E,E;F}$ is not analytic for
 $E=\linf(\N,K)$? For $p=2$, the answer is yes: degree two is the theorem of~\cite{M}, and the higher
 degrees follow by the wedging argument of~\cite[Remark~18]{M}, formalized under hypothesis (K2) of that
 paper (Remark~\ref{rem:K2}). Theorem~\ref{thm:scalar-counter} now gives a counterexample with $F=K$ and
@@ -2069,7 +2071,7 @@ compatibility required for every chart of the maximal analytic atlas.
 
 \item \emph{Densely valued spherically complete bases.}
 Let $K$ be spherically complete, densely valued and of characteristic $p$, for example
-$\F_p((t^{\mathbb Q}))$, and let $k\ge p$. Is $Q^K_{E,E',F}$ analytic for all Banach $E,E'$ and every
+$\F_p((t^{\mathbb Q}))$, and let $k\ge p$. Is $A^k_{E,E';F}$ analytic for all Banach $E,E'$ and every
 complete nonarchimedean $F$? Main Theorem~(\ref{main:spherical}) gives a positive answer for spherically
 complete $F$. The counterexample of Theorem~\ref{thm:main} has a target with no equivalent nonarchimedean
 norm and therefore does not answer this question.
@@ -2102,12 +2104,12 @@ contradiction.
 \begin{proof}[Proof of Proposition~\ref{prop:lift}]
 (1) For $y\in\cL(E,E')$, multilinearity gives
 \[
-Q(f_0+y)=P(f_0+y,\dots,f_0+y)=\sum_{r=0}^kq_r(y,\dots,y),
+A(f_0+y)=P(f_0+y,\dots,f_0+y)=\sum_{r=0}^kq_r(y,\dots,y),
 \]
 where $q_r(y_1,\dots,y_r)$ is the sum, over the $r$\nobreakdash-element subsets $S\subseteq\{1,\dots,k\}$, of $P$ evaluated with
 $y_1,\dots,y_r$ in the slots of $S$ in increasing order and $f_0$ in the other slots. Each $q_r$ is
 bounded $r$\nobreakdash-linear, with $\norm{q_r}\le\binom kr\norm P\norm{f_0}^{k-r}$, so $(q_r)_{r\le k}$ is a power series of
-infinite radius for $Q$ at $f_0$.
+infinite radius for $A$ at $f_0$.
 
 (2) We compare the given power series along each line with the polynomial obtained by expanding precomposition.
 The expansion is taken in the larger space of all multilinear maps, where each coefficient is visibly defined.
@@ -2119,16 +2121,16 @@ Then $\mathcal I$ is a linear isometry into $Z$, hence injective.
 Fix $h\in\cL(E,E')$, $h\neq0$. For $m\in\Alt^k(E';F)$, $x\in E^k$ and $t\in K$, multilinearity of $m$ gives the
 \emph{ambient polynomial identity}
 \begin{equation}\label{eq:ambient}
-\mathcal I\bigl(Q(f_0+th)\bigr)=\sum_{r=0}^kt^rA_r(h),\qquad A_r(h)(m)(x):=\sum_{\abs S=r}m(u^S_1,\dots,u^S_k),
+\mathcal I\bigl(A(f_0+th)\bigr)=\sum_{r=0}^kt^rC_r(h),\qquad C_r(h)(m)(x):=\sum_{\abs S=r}m(u^S_1,\dots,u^S_k),
 \end{equation}
-where $u^S_i=hx_i$ for $i\in S$ and $u^S_i=f_0x_i$ for $i\notin S$. Here $A_r(h)\in Z$ is bounded, with
-$\norm{A_r(h)}\le\binom kr\norm h^r\norm{f_0}^{k-r}$, and $A_k(h)=\mathcal I(Q(h))$. (For $r<k$ we do not need to know whether
-$A_r(h)(m)$ is alternating; this is why~\eqref{eq:ambient} is written in $Z$.) Let $R$ and $M':=\sup_n\norm{p_n}R^n$ be
+where $u^S_i=hx_i$ for $i\in S$ and $u^S_i=f_0x_i$ for $i\notin S$. Here $C_r(h)\in Z$ is bounded, with
+$\norm{C_r(h)}\le\binom kr\norm h^r\norm{f_0}^{k-r}$, and $C_k(h)=\mathcal I(A(h))$. (For $r<k$ we do not need to know whether
+$C_r(h)(m)$ is alternating; this is why~\eqref{eq:ambient} is written in $Z$.) Let $R$ and $M':=\sup_n\norm{p_n}R^n$ be
 as in the definition of analyticity, and put $\rho:=R/\norm h$. For $\abs t<\rho$ we have $\norm{th}<R$, so
-$Q(f_0+th)=\sum_nt^np_n(h,\dots,h)$, and applying $\mathcal I$ and~\eqref{eq:ambient} gives $\sum_nt^nz_n=0$ in $Z$, with
-$z_n:=\mathcal I(p_n(h,\dots,h))-A_n(h)$ and $A_n(h):=0$ for $n>k$. Since
-$\norm{z_n}\rho^n\le M'+\max_{r\le k}\norm{A_r(h)}\rho^r$, Lemma~\ref{lem:unique} gives $z_k=0$, that is,
-$\mathcal I(p_k(h,\dots,h))=\mathcal I(Q(h))$, hence $p_k(h,\dots,h)=Q(h)$. For $h=0$ both sides vanish since $k\ge1$.
+$A(f_0+th)=\sum_nt^np_n(h,\dots,h)$, and applying $\mathcal I$ and~\eqref{eq:ambient} gives $\sum_nt^nz_n=0$ in $Z$, with
+$z_n:=\mathcal I(p_n(h,\dots,h))-C_n(h)$ and $C_n(h):=0$ for $n>k$. Since
+$\norm{z_n}\rho^n\le M'+\max_{r\le k}\norm{C_r(h)}\rho^r$, Lemma~\ref{lem:unique} gives $z_k=0$, that is,
+$\mathcal I(p_k(h,\dots,h))=\mathcal I(A(h))$, hence $p_k(h,\dots,h)=A(h)$. For $h=0$ both sides vanish since $k\ge1$.
 
 (3) follows from (1) and (2), and from \texttt{ContDiffAt.analyticAt} for the last clause.
 \end{proof}
@@ -2171,7 +2173,7 @@ m(fx_1,\dots,fx_k)
 \det\bigl(\varepsilon_{s_a}(x_b)\bigr)_{a,b}\,
  m(fe_{s_1},\dots,fe_{s_k}),
 \]
-so $P(f,\dots,f)=Q(f)$.
+so $P(f,\dots,f)=A(f)$.
 
 Now suppose that $H=E'$. Define instead
 \[
@@ -2193,7 +2195,7 @@ Both formulas are finite sums. Strong alternation follows from equal columns in 
 in every characteristic and involves no division by $k!$. Proposition~\ref{prop:lift} gives continuous
 polynomiality and analyticity. If $k>n$, the sums are empty and the relevant alternating-map space is zero; the
 same argument gives the zero lift. Degree zero, excluded from the lift criterion's statement, is immediate because
-$Q$ is constant.
+$A$ is constant.
 \end{proof}
 
 \section{Spherically complete targets}\label{app:spherical}
@@ -2201,10 +2203,10 @@ $Q$ is constant.
 This appendix proves Main Theorem~(\ref{main:spherical}), following the strategy of \S\ref{sec:theoremA}.
 Throughout, $K$ is a nonarchimedean nontrivially normed field, $E$ and $E'$ are normed $K$\nobreakdash-spaces,
 and $F$ is a nonarchimedean, spherically complete normed $K$\nobreakdash-space; for $k\ge1$ we keep the notation
-$A=\Alt^k(E;F)$ and $M=\Mult^k(E;F)$.
+$W=\Alt^k(E;F)$ and $M=\Mult^k(E;F)$.
 We prove an extension lemma with simultaneous bounds (Lemma~\ref{lem:compatible-extension}), deduce
 Proposition~\ref{prop:alt-spherical} from it, and apply it once more to construct a contraction
-$\rho\colon M\to A$ that fixes every alternating map, which gives the lift described in \S\ref{sec:theoremA}.
+$\rho\colon M\to W$ that fixes every alternating map, which gives the lift described in \S\ref{sec:theoremA}.
 
 \subsection{Extension with simultaneous bounds}
 The following form of the nonarchimedean extension argument keeps a prospective extension in several operator
@@ -2269,7 +2271,7 @@ For the last assertion, take the single pair $(T_\alpha,r_\alpha)=(0,1)$.
 \end{proof}
 
 \subsection{Spherical completeness of alternating-map spaces}
-Ordinary completeness alone would not let us apply the extension lemma with target $A$.
+Ordinary completeness alone would not let us apply the extension lemma with target $W$.
 We prove the required stronger property by presenting alternating maps as linear maps on a free space
 subject to linear relations. The nonarchimedean seminorm on that free space is chosen so that this presentation
 preserves the operator norm, even when $E$ itself is not nonarchimedean.
@@ -2285,7 +2287,7 @@ The maximum is over the finite support, with empty maximum zero. This seminorm i
 the absolute value on $K$ is nonarchimedean. Let $R\subseteq U$ be the linear span of the relations expressing
 additivity and scalar homogeneity in each slot, together with $[x]$ whenever two coordinates of $x$ coincide.
 
-An alternating map $a\in A$ defines a linear map vanishing on $R$ by
+An alternating map $a\in W$ defines a linear map vanishing on $R$ by
 \[
 \widehat a\Bigl(\sum_xc_x[x]\Bigr)=\sum_xc_xa(x).
 \]
@@ -2299,7 +2301,7 @@ Conversely, a bounded linear map $T\colon U\to F$ vanishing on $R$ defines an al
 $a(x)=T([x])$ with $\norm{a(x)}\le\norm T\prod_i\norm{x_i}$. Thus these two constructions are inverse
 linear isometries. In particular, the equal-input relations impose strong alternation in every characteristic.
 
-Take a nonempty family of pairwise-meeting closed balls in $A$, with centres $a_\alpha$ and radii $r_\alpha$.
+Take a nonempty family of pairwise-meeting closed balls in $W$, with centres $a_\alpha$ and radii $r_\alpha$.
 Their corresponding linear maps satisfy
 $\norm{\widehat a_\alpha-\widehat a_\beta}\le\max(r_\alpha,r_\beta)$ and vanish on $R$.
 Apply Lemma~\ref{lem:compatible-extension} with $D=R$, $T_0=0$ and $G=F$.
@@ -2313,11 +2315,11 @@ We now apply the extension lemma a second time, using the alternating-map space 
 This produces the projection needed to turn ordinary precomposition into a polynomial with alternating values.
 
 \begin{proof}[Proof of Main Theorem~(\ref{main:spherical})]
-In degree zero, $\Alt^0(-;F)$ is naturally $F$ and the bifunctor acts by the pushforward morphism, so the conclusion holds. Assume $k\ge1$ and retain $A=\Alt^k(E;F)$ and
-$M=\Mult^k(E;F)$. Their operator norms are nonarchimedean, and $A$ is spherically complete by
-Proposition~\ref{prop:alt-spherical}. The inclusion $j\colon A\to M$ is a linear isometry.
-Its inverse on $j(A)$ is therefore a contraction. Lemma~\ref{lem:compatible-extension} extends this inverse to
-a contraction $\rho\colon M\to A$ with $\rho j=\id_A$.
+In degree zero, $\Alt^0(-;F)$ is naturally $F$ and the bifunctor acts by the pushforward morphism, so the conclusion holds. Assume $k\ge1$ and retain $W=\Alt^k(E;F)$ and
+$M=\Mult^k(E;F)$. Their operator norms are nonarchimedean, and $W$ is spherically complete by
+Proposition~\ref{prop:alt-spherical}. The inclusion $j\colon W\to M$ is a linear isometry.
+Its inverse on $j(W)$ is therefore a contraction. Lemma~\ref{lem:compatible-extension} extends this inverse to
+a contraction $\rho\colon M\to W$ with $\rho j=\id_W$.
 
 For $f_1,\dots,f_k\in\cL(E,E')$ and $m\in\Alt^k(E';F)$, define
 \[
@@ -2329,20 +2331,20 @@ This is linear in $m$ and multilinear in the $f_i$. The estimate
 \]
 shows that $P$ is a bounded $k$\nobreakdash-linear map into $\cL(\Alt^k(E';F),\Alt^k(E;F))$, with
 $\norm P\le1$. On the diagonal, $m\circ(f,\dots,f)$ is already alternating, so
-$P(f,\dots,f)=Q(f)$.
+$P(f,\dots,f)=A(f)$.
 
 For completeness, expand at an arbitrary $f_0\in\cL(E,E')$. For $0\le r\le k$, define a bounded
 $r$\nobreakdash-linear map $q_r$ by summing over the $r$-element subsets $S$ of $\{1,\dots,k\}$:
 insert its $r$ arguments in the slots of $S$, in increasing order, and put $f_0$ in all remaining slots of $P$.
 Multilinearity gives the finite identity
 \[
-Q(f_0+h)=\sum_{r=0}^k q_r(h,\dots,h),
+A(f_0+h)=\sum_{r=0}^k q_r(h,\dots,h),
 \qquad
 \norm{q_r}\le\binom{k}{r}\norm P\norm{f_0}^{k-r}.
 \]
 The binomial coefficient in the bound is an ordinary nonnegative integer counting the summands.
 With $q_r=0$ for $r>k$, this is a power series of infinite radius at every $f_0$.
-Consequently $Q$ is continuously polynomial, hence $C^\omega$ and $C^n$ for all
+Consequently $A$ is continuously polynomial, hence $C^\omega$ and $C^n$ for all
 $n\in\N\cup\{\infty\}$. Equation~\eqref{eq:joint-action} makes the full bifunctor analytic on hom spaces,
 and Proposition~\ref{prop:alt-spherical} shows that its values are nonarchimedean and spherically complete.
 This proves the categorical statement.
@@ -2572,7 +2574,7 @@ $\theta^{-1}\norm h$. Hence $q$ is surjective, and this uniform bound
 also proves that it is open. Both its domain and codomain are Banach.
 
 Corollary~\ref{fam:cor:l1-families}, applied to the analytic family
-$a\mapsto(q(a),\id_F)$, makes $Q^K_{E,E,F}\circ q$ analytic.
+$a\mapsto(q(a),\id_F)$, makes $A^k_{E,E;F}\circ q$ analytic.
 The original map is nowhere analytic by construction.
 
 If a local section $s\colon U\to\ell^1(J,K)$ were differentiable at
@@ -2583,7 +2585,7 @@ $h_0\in U$, differentiating $q\circ s=\id_U$ would give
 The bounded linear map $Ds(h_0)$ would therefore be a global right inverse
 of $q$. But then
 \[
- Q^K_{E,E,F}=(Q^K_{E,E,F}\circ q)\circ Ds(h_0)
+ A^k_{E,E;F}=(A^k_{E,E;F}\circ q)\circ Ds(h_0)
 \]
 would be analytic, a contradiction.
 \end{proof}
@@ -2802,8 +2804,8 @@ points need not be a polynomial identity.
 
 \subsection*{Roadmap of the Banach counterexample}
 The proof separates into an algebraic obstruction, its realization by a normed space, and passage to the prescribed
-field. The analytic input is a lift criterion valid in every characteristic: if $Q$ is analytic at any point, the
-degree-$k$ term of its power series has diagonal $Q$. One-variable uniqueness identifies this diagonal without
+field. The analytic input is a lift criterion valid in every characteristic: if $A$ is analytic at any point, the
+degree-$k$ term of its power series has diagonal $A$. One-variable uniqueness identifies this diagonal without
 dividing by $k!$ (Proposition~\ref{prop:lift}).
 
 \emph{The finite-field obstruction.}
@@ -3545,7 +3547,7 @@ $\kappa$\nobreakdash-linear, and $\Omega^\kappa$ is linear and injective.
 The support estimate converts norm control into an algebraic obstruction. We apply it to a hypothetical lift,
 evaluated on coordinatewise multiplication operators and on the universal wedge map $W_B$.
 
-Suppose that $P$ is a bounded $k$\nobreakdash-linear lift of $Q^{K_1}_{E_1,E_1,B}$ over $K_1$. For $a\in E_1$ let
+Suppose that $P$ is a bounded $k$\nobreakdash-linear lift of $A^{k,K_1}_{E_1,E_1;B}$ over $K_1$. For $a\in E_1$ let
 $D_a\in\cL(E_1,E_1)$ be coordinatewise multiplication, $D_ax=ax$. The map $a\mapsto D_a$ is $K_1$\nobreakdash-linear and
 $\norm{D_a}\le\norm a_\infty$. Define
 \begin{align*}
@@ -3588,7 +3590,7 @@ $a_\lambda:=\sum_i\lambda_ib_i\in E_1$. The diagonal identity for the lift gives
 \[
 \Phi(a_\lambda,\dots,a_\lambda;x)
 =P(D_{a_\lambda},\dots,D_{a_\lambda})(W_B)(x)
-=Q(D_{a_\lambda})(W_B)(x)
+=A(D_{a_\lambda})(W_B)(x)
 =W_B(a_\lambda x_1,\dots,a_\lambda x_k).
 \]
 Expanding both sides by multilinearity gives
@@ -3662,7 +3664,7 @@ $k!=0$ in $\kappa$.
 For the second assertion, suppose that the map is analytic at $a_0$, with expansion $\sum_n p_n$ there. For
 $h\in c_0(\N,K_1)$ and $t\in K_1$, multilinearity gives, in $\Mult^k_{K_1}(E_1;B)$,
 \[
- W_B\circ(u_0+D_{a_0}+tD_h,\dots,u_0+D_{a_0}+tD_h)=\sum_{r=0}^kt^rA_r(h),\qquad A_k(h)=\sigma(h).
+ W_B\circ(u_0+D_{a_0}+tD_h,\dots,u_0+D_{a_0}+tD_h)=\sum_{r=0}^kt^rC_r(h),\qquad C_k(h)=\sigma(h).
 \]
 Comparing this with the given expansion on scalar lines, Lemma~\ref{lem:unique} shows, exactly as in
 Proposition~\ref{prop:lift}(2), that $p_k$ is a bounded lift of $\sigma$. This is impossible. The operator-valued
@@ -3997,9 +3999,9 @@ extensions by uniqueness, proving $K_1$\nobreakdash-linearity of $m\mapsto m_{K'
 
 \begin{proposition}[descent of a lift]\label{prop:ascent}
 Assume \textup{(H1)} and \textup{(H2)}. Let $E_1$ be a normed $K_1$\nobreakdash-space, $F_1$ a $K_1$\nobreakdash-Banach space, and $E,F$ as
-above. If $Q^{K'}_{E,E,F}$ admits a bounded $k$\nobreakdash-linear lift $P$ over $K'$, then $Q^{K_1}_{E_1,E_1,F_1}$ admits a
+above. If $A^{k,K'}_{E,E;F}$ admits a bounded $k$\nobreakdash-linear lift $P$ over $K'$, then $A^{k,K_1}_{E_1,E_1;F_1}$ admits a
 bounded $k$\nobreakdash-linear lift $P_1$ over $K_1$ with $\norm{P_1}\le\norm P$. Equivalently, by Proposition~\ref{prop:lift} over $K_1$ and over
-$K'$: if $Q^{K_1}_{E_1,E_1,F_1}$ is analytic at no point, then $Q^{K'}_{E,E,F}$ is analytic at no point either.
+$K'$: if $A^{k,K_1}_{E_1,E_1;F_1}$ is analytic at no point, then $A^{k,K'}_{E,E;F}$ is analytic at no point either.
 \end{proposition}
 
 \begin{proof}
@@ -4026,14 +4028,14 @@ $f_i$, and $P$ is $K'$\nobreakdash-multilinear with values in $K'$\nobreakdash-l
 Consequently $P_1$ is $K_1$\nobreakdash-linear in $m$ and $K_1$\nobreakdash-multilinear in $(f_1,\dots,f_k)$.
 The displayed estimate proves boundedness at both levels and yields $\norm{P_1}\le\norm P$.
 
-On the diagonal, use $P(g,\dots,g)=Q^{K'}(g)$ with $g=f_{K'}$, followed by the embedding identities in
+On the diagonal, use $P(g,\dots,g)=A^{k,K'}(g)$ with $g=f_{K'}$, followed by the embedding identities in
 Lemmas~\ref{lem:ops} and~\ref{lem:forms-bc} and the retraction identity $\Pi_F\iota_F=\id$:
 \begin{align*}
 P_1(f,\dots,f)(m)(x)
 &=\Pi_F\bigl(m_{K'}(f_{K'}\iota_Ex_1,\dots,f_{K'}\iota_Ex_k)\bigr)\\
 &=\Pi_F\bigl(m_{K'}(\iota_Efx_1,\dots,\iota_Efx_k)\bigr)\\
 &=\Pi_F\bigl(\iota_F(m(fx_1,\dots,fx_k))\bigr)\\
-&=m(fx_1,\dots,fx_k)=Q^{K_1}(f)(m)(x).\qedhere
+&=m(fx_1,\dots,fx_k)=A^{k,K_1}(f)(m)(x).\qedhere
 \end{align*}
 \end{proof}
 
@@ -4051,8 +4053,8 @@ this restriction.
 \begin{lemma}\label{lem:descent}
 Let $K$ be a nontrivially normed field with completion $\Kh$, and let $E,E',F$ be $\Kh$\nobreakdash-Banach spaces, regarded as
 $K$\nobreakdash-Banach spaces by restriction of scalars (with the same norms). Then $\cL_K(E,E')=\cL_{\Kh}(E,E')$,
-$\Alt^k_K(E;F)=\Alt^k_{\Kh}(E;F)$ and $\Alt^k_K(E';F)=\Alt^k_{\Kh}(E';F)$ with the same norms, $Q^K_{E,E',F}=Q^{\Kh}_{E,E',F}$,
-and every bounded $k$\nobreakdash-linear lift of $Q^K_{E,E',F}$ over $K$ is a bounded $k$\nobreakdash-linear lift of $Q^{\Kh}_{E,E',F}$ over
+$\Alt^k_K(E;F)=\Alt^k_{\Kh}(E;F)$ and $\Alt^k_K(E';F)=\Alt^k_{\Kh}(E';F)$ with the same norms, $A^{k,K}_{E,E';F}=A^{k,\Kh}_{E,E';F}$,
+and every bounded $k$\nobreakdash-linear lift of $A^{k,K}_{E,E';F}$ over $K$ is a bounded $k$\nobreakdash-linear lift of $A^{k,\Kh}_{E,E';F}$ over
 $\Kh$.
 \end{lemma}
 
@@ -4069,7 +4071,7 @@ vanishing condition over either field.
 
 The spaces of bounded maps therefore coincide as sets. Their operator norms agree as well, since the norms are
 defined by the same pointwise bounds on the same vectors. They are $\Kh$\nobreakdash-Banach spaces, and
-$Q^K_{E,E',F}$ and $Q^{\Kh}_{E,E',F}$ agree by their defining precomposition formula.
+$A^{k,K}_{E,E';F}$ and $A^{k,\Kh}_{E,E';F}$ agree by their defining precomposition formula.
 Finally, apply the slotwise density argument once more to a bounded $k$\nobreakdash-linear lift $P$ between these
 map spaces. It becomes $\Kh$\nobreakdash-multilinear with the same norm and the same diagonal identity, and hence
 is a lift over $\Kh$.
@@ -4139,7 +4141,7 @@ Completeness of the target is essential in Proposition~\ref{prop:discrete}: it i
 Lemma~\ref{lem:discdist}. Even for complete targets, the absence of an equivalent nonarchimedean norm
 is not sufficient for a counterexample. Take the degree-$3$ space $B$ of \S\ref{ssec:projnorm} over
 $K_1=\F_5((X))$. It admits no equivalent nonarchimedean norm by Proposition~\ref{prop:nonultra}, which requires
-only $k\ge2$, but $Q^{K_1}_{E_1,E_1,B}$ is analytic by Corollary~\ref{cor:class}(1), since $3!=1$ in $\F_5$.
+only $k\ge2$, but $A^{3,K_1}_{E_1,E_1;B}$ is analytic by Corollary~\ref{cor:class}(1), since $3!=1$ in $\F_5$.
 
 The factorial hypothesis is also essential to the finite-field obstruction. Applying the construction of
 \S\ref{ssec:Psi} to this bounded lift gives a map $\Psi$ with all the properties of Lemma~\ref{lem:Psi},
@@ -4160,17 +4162,17 @@ spherically complete.
 $\Lambda^k_{K_1}E_1$ under the projective exterior norm. Transport of scalars along $\mathrm{ev}_t$ preserves
 the norms, exterior powers and completions in this construction. It also identifies the operator and
 alternating-map spaces, their precomposition maps, and bounded lifts. Theorem~\ref{thm:laurent}, with
-$\kappa=\F_p$, therefore shows that $Q^{K_1}_{E_1,E_1,B}$ has no bounded $k$\nobreakdash-linear lift.
+$\kappa=\F_p$, therefore shows that $A^{k,K_1}_{E_1,E_1;B}$ has no bounded $k$\nobreakdash-linear lift.
 \item \emph{Ascend to $\Kh$.} The inclusion $K_1\subseteq\Kh$ satisfies (H1) and (H2), and $B$ is complete.
 Proposition~\ref{prop:ascent}, with $K'=\Kh$, gives Banach spaces
 \[
 E:=E_1\widehat\otimes_\pi\Kh,\qquad F:=B\widehat\otimes_\pi\Kh
 \]
-for which $Q^{\Kh}_{E,E,F}$ has no bounded $k$\nobreakdash-linear lift.
+for which $A^{k,\Kh}_{E,E;F}$ has no bounded $k$\nobreakdash-linear lift.
 \item \emph{Descend to $K$.} Regard the same $E$ and $F$ as $K$\nobreakdash-Banach spaces. By
-Lemma~\ref{lem:descent}, a bounded lift of $Q^K_{E,E,F}$ would extend to a bounded lift of
-$Q^{\Kh}_{E,E,F}$, which is impossible. Proposition~\ref{prop:lift} applies over the possibly incomplete
-field $K$: $Q^K_{E,E,F}$ is analytic at no point, and \texttt{ContDiffAt K $\omega$} fails at every point.
+Lemma~\ref{lem:descent}, a bounded lift of $A^{k,K}_{E,E;F}$ would extend to a bounded lift of
+$A^{k,\Kh}_{E,E;F}$, which is impossible. Proposition~\ref{prop:lift} applies over the possibly incomplete
+field $K$: $A^{k,K}_{E,E;F}$ is analytic at no point, and \texttt{ContDiffAt K $\omega$} fails at every point.
 Reindexing as in \S\ref{sec:prelim} gives the same conclusions, with the same spaces $E,F$, for every finite
 index set with $k$ elements.
 \item \emph{Exclude an equivalent nonarchimedean target norm.} Since $k\ge p\ge2$, Proposition~\ref{prop:nonultra}
@@ -4198,7 +4200,7 @@ degree is needed.
 Let $K$ be a complete, nontrivially normed field that is not spherically complete, and let $k\ge1$ satisfy
 $k! = 0$ in $K$. There are nonarchimedean Banach spaces $E,E'$ for which
 \[
- Q^K_{E,E',K}\colon\cL(E,E')\longrightarrow
+ A^k_{E,E';K}\colon\cL(E,E')\longrightarrow
  \cL\bigl(\Alt^k(E';K),\Alt^k(E;K)\bigr)
 \]
 is analytic at no point. The spaces may be taken to be closed subspaces of
@@ -4493,7 +4495,7 @@ an uncountable set at pairwise distance $1$, so both spaces are nonseparable.
 \subsection{The global contradiction}
 
 \begin{proof}[Proof of Theorem~\ref{thm:scalar-counter}]
-Use the spaces~\eqref{scalar:spaces}. Suppose that $Q=Q^K_{E,E',K}$ has a bounded $k$\nobreakdash-linear
+Use the spaces~\eqref{scalar:spaces}. Suppose that $A=A^k_{E,E';K}$ has a bounded $k$\nobreakdash-linear
 lift $P$. For $i\in\Lambda$, let $\xi_{[i]}\in E$ denote the family equal to $\xi\in V$ at $i$ and zero
 elsewhere. Single-coordinate families belong to $c_0\subseteq E$, and likewise in $E'$. For
 $g\in\operatorname{Hom}_K(V,V')$ let $g_{[i]}\in\cL(E,E')$ send $x$ to the family equal to $g(x_i)$ at
@@ -4586,9 +4588,9 @@ set $\mathcal T_j$. Hence $G_j(i)\to0$ along $T$, and $T\setminus a_j$ is finite
 supplies an $i$ belonging to every $a_j$. But~\eqref{scalar:fibre-diagonal} and
 Lemma~\ref{scalar:certificate} force $G_j(i)\ge1$ for some $j$, a contradiction.
 
-There is therefore no bounded $k$\nobreakdash-linear lift of $Q$. Proposition~\ref{prop:lift} applies in
+There is therefore no bounded $k$\nobreakdash-linear lift of $A$. Proposition~\ref{prop:lift} applies in
 this degree without dividing by $k!$: analyticity at any point would make the degree-$k$ Taylor coefficient
-such a lift. Thus $Q$ is analytic at no point, as claimed.
+such a lift. Thus $A$ is analytic at no point, as claimed.
 \end{proof}
 
 \section{Construction for the no-largest-domain theorem}\label{app:no-largest}\label{dom:section}
@@ -4847,7 +4849,7 @@ $F':=(F,\norm\cdot_u^\sharp)$ is complete with distances in $r^\Z\cup\{0\}$.
 
 \emph{Apply the Main Theorem.} Lemma~\ref{lem:discdist} makes $F'$ spherically complete.
 Part~(\ref{main:general}) in characteristic zero, and part~(\ref{main:spherical}) in positive characteristic,
-therefore give analyticity of $Q':=Q^K_{E,E',F'}$ at every point.
+therefore give analyticity of $A':=A^k_{E,E';F'}$ at every point.
 
 \emph{Return to the original norm.} Equivalent target norms give the same spaces of bounded alternating
 maps, with equivalent operator norms. Consequently
@@ -4856,8 +4858,8 @@ maps, with equivalent operator norms. Consequently
 \quad\text{and}\quad
 \cL\bigl(\Alt^k(E';F'),\Alt^k(E;F')\bigr)
 \]
-are the same vector space with equivalent norms, and $Q=Q'$ under this identification. A power series
-for $Q'$ is therefore a power series for $Q$: coefficient norms change by at most a fixed factor, and
+are the same vector space with equivalent norms, and $A=A'$ under this identification. A power series
+for $A'$ is therefore a power series for $A$: coefficient norms change by at most a fixed factor, and
 convergence is unchanged.
 \end{proof}
 
@@ -4911,7 +4913,7 @@ m(fx^1,\dots,fx^k)=\sum_{s_1<\dots<s_k}\det\bigl(e^*_{s_a}(x^b)\bigr)_{a,b}\,
 m(fe_{s_1},\dots,fe_{s_k});
 \]
 the general identity follows by continuity along finite coordinate projections. Thus
-$P(f,\dots,f)=Q(f)$. For $k=0$, the formula has one empty-index term, with determinant $1$.
+$P(f,\dots,f)=A(f)$. For $k=0$, the formula has one empty-index term, with determinant $1$.
 
 This \emph{sorted lift} works in every characteristic and degree, without division by $k!$ or spherical
 completeness. It is not used in the main proof. Over a complete discretely valued field, every
@@ -4947,7 +4949,7 @@ Then $K$ is nonarchimedean by Lemma~\ref{lem:ultra}. For a cardinal $\mu$ put $\
 $\beth_{n+1}(\mu):=2^{\beth_n(\mu)}$, and let $\mu^+$ be the successor cardinal of $\mu$. Let $I$ be a set of
 cardinality at least $\beth_{3k-1}(\abs K)^+$, put $E:=\linf(I,K)$, and let $F_I$ be the closure in $\linf(I^k,K)$ of
 the span of the determinant arrays $(i_1,\dots,i_k)\mapsto\det(x_b(i_a))_{a,b}$, $x\in E^k$. Then $E$ and $F_I$ are
-nonarchimedean $K$\nobreakdash-Banach spaces, and $Q^K_{E,E,F_I}$ is analytic at no point. The proposed proof uses
+nonarchimedean $K$\nobreakdash-Banach spaces, and $A^k_{E,E;F_I}$ is analytic at no point. The proposed proof uses
 a partition argument with the Erd\H{o}s--Rado theorem in place of Ramsey's theorem. For $k=2$ in
 characteristic~$2$ the countable index set $\N$ suffices~\cite{M}.
 \end{remark}
@@ -5071,7 +5073,7 @@ uses its closed unit ball as the index set and retains the ordinary sum norm;
 it includes one-coordinate lifting estimates and an explicit ball-image bound.
 In characteristic $p>0$ and degree $k\ge p$, the corollary supplies Banach spaces $E,F$
 and a bounded open linear surjection $q\colon\ell^1(J,K)\to H=\cL(E,E)$ of norm at most one.
-The composite $Q^K_{E,E,F}\circ q$ is analytic everywhere, while $Q^K_{E,E,F}$ is nowhere analytic.
+The composite $A^k_{E,E;F}\circ q$ is analytic everywhere, while $A^k_{E,E;F}$ is nowhere analytic.
 Every local section of $q$ on an open subset fails to be Fr\'echet differentiable at each point
 of its domain, and this same $H$ is not a bounded linear retract of $\ell^1(I,K)$ for any index set $I$.
 The norms on $H$ and $F$ need not be nonarchimedean.
