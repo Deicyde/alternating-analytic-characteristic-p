@@ -65,6 +65,7 @@ Neither the manuscript nor its formalization has yet received a human expert rev
 A $C^n$ functor on normed spaces acts on $C^n$ vector bundles through their transition cocycles.
 We study this construction for the alternating-map bifunctor $\Alt^k$ over a nontrivially normed field $K$.
 The bifunctor is always $C^\infty$ and is analytic exactly when $k!\ne0$ in $K$.
+These statements concern all normed $K$\nobreakdash-spaces, without completeness assumptions on $K$ or the spaces.
 Restricting to nonarchimedean spherically complete targets gives analyticity in every degree.
 Even when the bifunctor is not analytic on whole hom spaces, it preserves analytic bundles over bases
 with open $K^d$ charts, in every characteristic and with arbitrary normed fibers.
@@ -89,19 +90,18 @@ ambient analytic forms are proved here but are not yet formalized.
 
 \section{Introduction}\label{sec:intro}
 
-An analytic change of coordinates on a Banach manifold need not act analytically on alternating covectors.
-We construct such examples over complete fields of positive characteristic, with scalar-valued forms.
-The obstruction concerns the natural alternating cotangent bundle: its induced transition maps satisfy
-the cocycle identity, yet fail to be analytic.
+Applying a functor fiberwise is a basic way to construct new vector bundles. Functoriality preserves the
+cocycle identity; the regularity of the resulting bundle depends on how the functor acts on families of
+linear maps. We study this mechanism for the alternating-map bifunctor $\Alt^k$ over an arbitrary
+nontrivially normed field $K$. We work in the category of all normed $K$\nobreakdash-spaces, with no
+completeness assumption on the field or its objects and no restriction on dimension.
 
-This is a question about the passage from functors on vector spaces to constructions on vector bundles.
-Let $\Alt^k(E;F)$ denote the space of bounded alternating $k$\nobreakdash-linear maps $E^k\to F$,
-over a nontrivially normed field $K$. We prove that the action of $\Alt^k$ on spaces of bounded operators
-is always $C^\infty$, and is analytic exactly when $k!\ne0$ in $K$.
-A bundle construction, however, only requires analyticity along its transition families.
-We show that families parametrized by open subsets of $K^d$ remain analytic in every characteristic
-and every degree. Thus alternating maps preserve analytic vector bundles over such bases even when
-the functor is not analytic on whole operator spaces.
+The bifunctor $\Alt^k$ is always $C^\infty$, and is analytic on all hom spaces exactly when $k!\ne0$ in $K$.
+For a vector bundle, only regularity along its transition families is needed. We prove that analytic
+families parametrized by open subsets of $K^d$ remain analytic after applying $\Alt^k$, in every
+characteristic and degree. Consequently the alternating-map construction preserves analytic vector
+bundles over bases with such charts, with arbitrary normed fibers and without requiring $K$ to be complete.
+These results address the general normed-space setting of Mathlib's manifold and vector-bundle theory.
 
 To make the bundle question precise, let $M$ be a $C^n$ manifold over $K$, where
 $n\in\N\cup\{\infty,\omega\}$ and $C^\omega$ means analytic, and let $\mathcal E,\mathcal H\to M$ be
@@ -118,10 +118,10 @@ Functoriality gives the cocycle identity for $\theta_{ij}$, so it remains to est
 on $x$. Regularity on whole hom spaces is sufficient; for a given bundle, regularity along its transition
 families is enough. Proposition~\ref{prop:bundle-construction} gives the precise construction; compare
 Lang's functors of class $C^p$~\cite[Ch.~III, \S4]{La}.
-Taking $\mathcal E=TM$ and $\mathcal H=M\times K$ gives the scalar alternating cotangent bundle discussed above.
-Over a complete field, this failure does not prevent a calculus of analytic differential forms.
-Section~\ref{sec:scalar-forms} defines these as analytic sections of the multilinear bundle with alternating
-values, with pullback, shuffle wedge products and exterior differentiation.
+For an analytic $M$, taking $\mathcal E=TM$ and $\mathcal H=M\times K$ gives the scalar alternating cotangent bundle.
+Section~\ref{sec:scalar-forms} treats scalar-valued forms over complete fields: it characterizes when
+scalar precomposition is analytic for every normed source and develops a calculus of analytic forms
+that remains available even when the natural alternating-bundle atlas is not analytic.
 In characteristic zero, Gou\"ezel proves analyticity by polarization~\cite{G1} and uses it in the construction
 of alternating-map bundles~\cite{G2}. Polarization divides by $k!$, which vanishes in $K$ exactly when $K$ has
 characteristic $p>0$ and $k\ge p$.
@@ -131,6 +131,8 @@ Proposition~\ref{prop:smooth-positive} proves the unconditional $C^\infty$ resul
 formalized in the draft Mathlib contribution~\cite{PR}. Consequently the construction gives $C^n$
 alternating-map bundles over every base for every $n\le\infty$, without completeness or dimension
 assumptions (Corollary~\ref{cor:smooth-bundles}). The restrictions studied here arise at $n=\omega$.
+The counterexamples in the nonanalytic range can already be realized with Banach spaces, so adding
+completeness does not yield a general analytic theorem for all sources and targets.
 
 We treat this question in three steps, which form the program of the paper. The first step shows that
 analyticity of the bifunctor, on whole hom spaces or only along the transition families, makes the
