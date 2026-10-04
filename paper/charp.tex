@@ -89,16 +89,22 @@ ambient analytic forms are proved here but are not yet formalized.
 
 \section{Introduction}\label{sec:intro}
 
-The passage $(E,F)\mapsto\Alt^k(E;F)$ from pairs of normed spaces to bounded alternating $k$\nobreakdash-linear maps
-is contravariant in the source and covariant in the target. We study its regularity on spaces of morphisms, both on
-whole hom spaces and along analytic families of morphisms; in positive characteristic these are different questions.
-The motivation is the construction of vector bundles of alternating maps over manifolds over an arbitrary nontrivially
-normed field $K$. This is the setting of Mathlib's manifolds and vector bundles, with regularity indices
-$n\in\N\cup\{\infty,\omega\}$, where $C^\omega$ means analytic; compare Lang's functors of class
-$C^p$~\cite[Ch.~III, \S4]{La}.
+An analytic change of coordinates on a Banach manifold need not act analytically on alternating covectors.
+We construct such examples over complete fields of positive characteristic, with scalar-valued forms.
+The obstruction concerns the natural alternating cotangent bundle: its induced transition maps satisfy
+the cocycle identity, yet fail to be analytic.
 
-Informally, the construction runs as follows; the precise version is Proposition~\ref{prop:bundle-construction}
-in \S\ref{ssec:bundle-construction}. Let $M$ be a $C^n$ manifold over $K$, and let $\mathcal E,\mathcal H\to M$ be
+This is a question about the passage from functors on vector spaces to constructions on vector bundles.
+Let $\Alt^k(E;F)$ denote the space of bounded alternating $k$\nobreakdash-linear maps $E^k\to F$,
+over a nontrivially normed field $K$. We prove that the action of $\Alt^k$ on spaces of bounded operators
+is always $C^\infty$, and is analytic exactly when $k!\ne0$ in $K$.
+A bundle construction, however, only requires analyticity along its transition families.
+We show that families parametrized by open subsets of $K^d$ remain analytic in every characteristic
+and every degree. Thus alternating maps preserve analytic vector bundles over such bases even when
+the functor is not analytic on whole operator spaces.
+
+To make the bundle question precise, let $M$ be a $C^n$ manifold over $K$, where
+$n\in\N\cup\{\infty,\omega\}$ and $C^\omega$ means analytic, and let $\mathcal E,\mathcal H\to M$ be
 $C^n$ vector bundles with typical fibers $E$ and $F$. Over a common trivializing cover $(U_i)$, their transition maps
 $g_{ij}\colon U_i\cap U_j\to\operatorname{Aut}_K(E)$ and $h_{ij}\colon U_i\cap U_j\to\operatorname{Aut}_K(F)$
 are $C^n$, with regularity measured in the operator norm; here $g_{ij}$ converts coordinates in chart $j$ to
@@ -107,23 +113,24 @@ trivializations must then have the transition maps
 \[
 \theta_{ij}(x)\colon m\longmapsto h_{ij}(x)\circ m\circ\bigl(g_{ji}(x),\dots,g_{ji}(x)\bigr),\qquad m\in\Alt^k(E;F).
 \]
-The inverse transitions $g_{ji}=g_{ij}^{-1}$ belong to the cocycle data and are already $C^n$, and functoriality
-gives the cocycle identity for free. So the only question is whether these maps are $C^n$ in $x$, that is,
-whether the alternating-map bifunctor is regular on hom spaces, or at least along the transition families.
-Taking $\mathcal E=TM$ and $\mathcal H=M\times K$ gives the natural scalar alternating cotangent bundle.
-In positive characteristic its induced atlas need not be analytic, even over a complete field.
-Section~\ref{sec:scalar-forms} distinguishes this bundle question from the definition of analytic differential
-forms: these remain meaningful as analytic sections of the multilinear bundle with alternating values.
+The inverse transitions $g_{ji}=g_{ij}^{-1}$ belong to the cocycle data and are already $C^n$.
+Functoriality gives the cocycle identity for $\theta_{ij}$, so it remains to establish their $C^n$ dependence
+on $x$. Regularity on whole hom spaces is sufficient; for a given bundle, regularity along its transition
+families is enough. Proposition~\ref{prop:bundle-construction} gives the precise construction; compare
+Lang's functors of class $C^p$~\cite[Ch.~III, \S4]{La}.
+Taking $\mathcal E=TM$ and $\mathcal H=M\times K$ gives the scalar alternating cotangent bundle discussed above.
+Over a complete field, this failure does not prevent a calculus of analytic differential forms.
+Section~\ref{sec:scalar-forms} defines these as analytic sections of the multilinear bundle with alternating
+values, with pullback, shuffle wedge products and exterior differentiation.
 In characteristic zero, Gou\"ezel proves analyticity by polarization~\cite{G1} and uses it in the construction
 of alternating-map bundles~\cite{G2}. Polarization divides by $k!$, which vanishes in $K$ exactly when $K$ has
 characteristic $p>0$ and $k\ge p$.
 
-Throughout, \emph{regular} means of class $C^n$ for some $n\in\N\cup\{\infty,\omega\}$. For $n\le\infty$ there is
-no obstruction: over every nontrivially normed field and in every degree, with no completeness or dimension
-assumptions, the action of $\Alt^k$ on hom spaces is $C^\infty$ (Proposition~\ref{prop:smooth-positive}, whose
-argument is formalized in the draft Mathlib contribution~\cite{PR}). So the construction above gives $C^n$
-alternating-map bundles over every base for every $n\le\infty$ (Corollary~\ref{cor:smooth-bundles}). The dichotomy
-therefore occurs only at $n=\omega$, and the real question is analyticity.
+Throughout, \emph{regular} means of class $C^n$ for one of the orders above.
+Proposition~\ref{prop:smooth-positive} proves the unconditional $C^\infty$ result, following the argument
+formalized in the draft Mathlib contribution~\cite{PR}. Consequently the construction gives $C^n$
+alternating-map bundles over every base for every $n\le\infty$, without completeness or dimension
+assumptions (Corollary~\ref{cor:smooth-bundles}). The restrictions studied here arise at $n=\omega$.
 
 We treat this question in three steps, which form the program of the paper. The first step shows that
 analyticity of the bifunctor, on whole hom spaces or only along the transition families, makes the
@@ -205,6 +212,7 @@ $\norm{x+y}\le\max(\norm x,\norm y)$, and likewise for the absolute value of $K$
 is $\Alt^k(E;F)$ for every normed $E$ (Proposition~\ref{prop:alt-spherical}); this closure property is the
 codomain assertion of Main Theorem~(\ref{main:spherical}) below.
 
+\needspace{11\baselineskip}
 \subsection*{Main results}
 \begin{thmMain}
 Let $K$ be a nontrivially normed field and let $k\ge0$ be an integer.
