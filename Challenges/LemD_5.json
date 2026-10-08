@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.LemD_5",
+    "solution_module": "Solutions.LemD_5",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemD_5.part1",
+        "AlternatingAnalyticChallenge.LemD_5.part2"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

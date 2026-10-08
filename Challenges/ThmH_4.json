@@ -1,0 +1,17 @@
+{
+    "challenge_module": "Challenges.ThmH_4",
+    "solution_module": "Solutions.ThmH_4",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.ThmH_4.part1",
+        "AlternatingAnalyticChallenge.ThmH_4.part2",
+        "AlternatingAnalyticChallenge.ThmH_4.part3",
+        "AlternatingAnalyticChallenge.ThmH_4.part4",
+        "AlternatingAnalyticChallenge.ThmH_4.part5"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

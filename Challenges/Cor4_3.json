@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.Cor4_3",
+    "solution_module": "Solutions.Cor4_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Cor4_3.analyticAt_compContinuousLinearMapCLM_of_discreteValueGroup"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

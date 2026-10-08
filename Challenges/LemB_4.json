@@ -1,0 +1,15 @@
+{
+    "challenge_module": "Challenges.LemB_4",
+    "solution_module": "Solutions.LemB_4",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemB_4.part1_contraction_exists",
+        "AlternatingAnalyticChallenge.LemB_4.part2_contraction_mem",
+        "AlternatingAnalyticChallenge.LemB_4.part3_finrank_span_le_sdim"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

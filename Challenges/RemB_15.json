@@ -1,0 +1,17 @@
+{
+    "challenge_module": "Challenges.RemB_15",
+    "solution_module": "Solutions.RemB_15",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.RemB_15.psiAlt_multilinear",
+        "AlternatingAnalyticChallenge.RemB_15.psiAlt_alternating",
+        "AlternatingAnalyticChallenge.RemB_15.psiAlt_pol1",
+        "AlternatingAnalyticChallenge.RemB_15.exteriorSupportDim_psiAlt_le",
+        "AlternatingAnalyticChallenge.RemB_15.clusterValueAlt_eq_inv_factorial"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

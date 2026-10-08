@@ -1,0 +1,16 @@
+{
+    "challenge_module": "Challenges.Prop4_1",
+    "solution_module": "Solutions.Prop4_1",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Prop4_1.lift_of_retraction",
+        "AlternatingAnalyticChallenge.Prop4_1.part1",
+        "AlternatingAnalyticChallenge.Prop4_1.part2_domain",
+        "AlternatingAnalyticChallenge.Prop4_1.part2_codomain"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

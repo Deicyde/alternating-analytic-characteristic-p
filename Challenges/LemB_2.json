@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.LemB_2",
+    "solution_module": "Solutions.LemB_2",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemB_2.part0_determinantArray_exists",
+        "AlternatingAnalyticChallenge.LemB_2.part1_determinantArray_injective"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

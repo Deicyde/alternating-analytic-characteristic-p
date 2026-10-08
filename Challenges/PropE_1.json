@@ -1,0 +1,18 @@
+{
+    "challenge_module": "Challenges.PropE_1",
+    "solution_module": "Solutions.PropE_1",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.PropE_1.norm_blockWedge",
+        "AlternatingAnalyticChallenge.PropE_1.blockWedge_sum_bounds",
+        "AlternatingAnalyticChallenge.PropE_1.not_isUltrametricDist_B",
+        "AlternatingAnalyticChallenge.PropE_1.not_hasEquivalentUltrametricNorm_B",
+        "AlternatingAnalyticChallenge.PropE_1.not_isUltrametricDist_F",
+        "AlternatingAnalyticChallenge.PropE_1.not_hasEquivalentUltrametricNorm_F"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

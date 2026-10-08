@@ -1,0 +1,16 @@
+{
+    "challenge_module": "Challenges.Thm4_2",
+    "solution_module": "Solutions.Thm4_2",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Thm4_2.part1_ultrametric",
+        "AlternatingAnalyticChallenge.Thm4_2.part1_sphericallyComplete",
+        "AlternatingAnalyticChallenge.Thm4_2.part2_retraction",
+        "AlternatingAnalyticChallenge.Thm4_2.part3_continuousPolynomial"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

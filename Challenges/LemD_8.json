@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemD_8",
+    "solution_module": "Solutions.LemD_8",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemD_8.exists_baseChangeAlternatingForms"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

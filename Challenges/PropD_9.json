@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.PropD_9",
+    "solution_module": "Solutions.PropD_9",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.PropD_9.exists_lift_descent",
+        "AlternatingAnalyticChallenge.PropD_9.nowhere_analytic_ascends"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

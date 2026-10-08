@@ -1,0 +1,15 @@
+{
+    "challenge_module": "Challenges.LemH_3",
+    "solution_module": "Solutions.LemH_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemH_3.part1",
+        "AlternatingAnalyticChallenge.LemH_3.part1_operator",
+        "AlternatingAnalyticChallenge.LemH_3.part2"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

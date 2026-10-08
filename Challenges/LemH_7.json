@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.LemH_7",
+    "solution_module": "Solutions.LemH_7",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemH_7.part1",
+        "AlternatingAnalyticChallenge.LemH_7.part2"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemB_6",
+    "solution_module": "Solutions.LemB_6",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemB_6.identity_principle"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

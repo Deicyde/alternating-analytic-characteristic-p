@@ -1,0 +1,16 @@
+{
+    "challenge_module": "Challenges.PropB_8",
+    "solution_module": "Solutions.PropB_8",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.PropB_8.pol_imp_pw_and_pw_imp_pol1",
+        "AlternatingAnalyticChallenge.PropB_8.pw_imp_pol",
+        "AlternatingAnalyticChallenge.PropB_8.exists_pw_not_pol",
+        "AlternatingAnalyticChallenge.PropB_8.exists_pol1_not_pw"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemA_1",
+    "solution_module": "Solutions.LemA_1",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemA_1.one_variable_uniqueness"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.ThmG_3",
+    "solution_module": "Solutions.ThmG_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.ThmG_3.universal_analytic_reflection_iff_tensor_projections_part1",
+        "AlternatingAnalyticChallenge.ThmG_3.universal_analytic_reflection_of_tensor_projections_part2"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

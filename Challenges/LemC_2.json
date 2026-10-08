@@ -1,0 +1,15 @@
+{
+    "challenge_module": "Challenges.LemC_2",
+    "solution_module": "Solutions.LemC_2",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemC_2.part1_projNorm_isNorm",
+        "AlternatingAnalyticChallenge.LemC_2.part2_determinantArray",
+        "AlternatingAnalyticChallenge.LemC_2.part3_completion"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

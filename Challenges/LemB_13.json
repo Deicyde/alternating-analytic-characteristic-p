@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemB_13",
+    "solution_module": "Solutions.LemB_13",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemB_13.sum_clusterValue_eq_one"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

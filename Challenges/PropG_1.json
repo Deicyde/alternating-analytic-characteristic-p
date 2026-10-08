@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.PropG_1",
+    "solution_module": "Solutions.PropG_1",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.PropG_1.homogeneous_reflection_iff_projection_part1",
+        "AlternatingAnalyticChallenge.PropG_1.homogeneous_reflection_iff_projection_part2"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

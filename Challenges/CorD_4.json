@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.CorD_4",
+    "solution_module": "Solutions.CorD_4",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.CorD_4.ingleton_projection"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

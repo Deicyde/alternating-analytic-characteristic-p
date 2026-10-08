@@ -1,0 +1,11 @@
+{
+    "challenge_module": "Challenges.Thm4_5a",
+    "solution_module": "Solutions.Thm4_5a",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Thm4_5a.c0_analyticOn_of_analyticOn_comp_closed_isometry",
+        "AlternatingAnalyticChallenge.Thm4_5a.c0_coefficients_lift_without_increasing_norms",
+        "AlternatingAnalyticChallenge.Thm4_5a.c0_retract_analyticOn_of_analyticOn_comp_closed_isometry"
+    ],
+    "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+    "enable_nanoda": false
+}

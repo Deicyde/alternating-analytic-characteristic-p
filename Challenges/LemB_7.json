@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemB_7",
+    "solution_module": "Solutions.LemB_7",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemB_7.finiteField_homogeneous_form_eq_zero"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

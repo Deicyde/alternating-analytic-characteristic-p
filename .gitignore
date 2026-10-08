@@ -2,3 +2,6 @@
 work/
 .DS_Store
 comparator.log
+
+# lock files of scripts/run_lean.py
+_locks/

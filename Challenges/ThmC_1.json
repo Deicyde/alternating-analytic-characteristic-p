@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.ThmC_1",
+    "solution_module": "Solutions.ThmC_1",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.ThmC_1.part1_not_hasBoundedKLinearLift",
+        "AlternatingAnalyticChallenge.ThmC_1.part2_not_analyticAt"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

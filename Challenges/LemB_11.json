@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemB_11",
+    "solution_module": "Solutions.LemB_11",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemB_11.determinantArray_family_eq_clusterValue"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

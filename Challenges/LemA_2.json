@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemA_2",
+    "solution_module": "Solutions.LemA_2",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemA_2.nonarchimedean_of_charP_pos"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

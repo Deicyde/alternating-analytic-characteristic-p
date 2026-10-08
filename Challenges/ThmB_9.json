@@ -1,0 +1,15 @@
+{
+    "challenge_module": "Challenges.ThmB_9",
+    "solution_module": "Solutions.ThmB_9",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.ThmB_9.no_multiplier_lift_ternary_bound",
+        "AlternatingAnalyticChallenge.ThmB_9.no_multiplier_lift_sequences",
+        "AlternatingAnalyticChallenge.ThmB_9.no_multiplier_lift_finsupp"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

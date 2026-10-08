@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.LemD_11",
+    "solution_module": "Solutions.LemD_11",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemD_11.map_spaces_eq",
+        "AlternatingAnalyticChallenge.LemD_11.lift_is_lift_over_completion"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

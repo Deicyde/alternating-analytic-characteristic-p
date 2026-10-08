@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.ThmD_3",
+    "solution_module": "Solutions.ThmD_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.ThmD_3.ingleton_extension"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

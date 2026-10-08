@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemD_1",
+    "solution_module": "Solutions.LemD_1",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemD_1.sphericallyComplete_of_discrete_distances"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

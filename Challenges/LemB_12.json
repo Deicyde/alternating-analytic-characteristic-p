@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemB_12",
+    "solution_module": "Solutions.LemB_12",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemB_12.clusterValue_eq_of_adjacent_exchange"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

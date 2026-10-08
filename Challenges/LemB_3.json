@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemB_3",
+    "solution_module": "Solutions.LemB_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemB_3.flattening_rank_le_sdim"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

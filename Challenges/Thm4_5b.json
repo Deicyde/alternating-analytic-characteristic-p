@@ -1,0 +1,10 @@
+{
+    "challenge_module": "Challenges.Thm4_5b",
+    "solution_module": "Solutions.Thm4_5b",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Thm4_5b.l1_analyticOn_comp_of_fixed_degree_representation",
+        "AlternatingAnalyticChallenge.Thm4_5b.l1_retract_analyticOn_comp_of_fixed_degree_representation"
+    ],
+    "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+    "enable_nanoda": false
+}

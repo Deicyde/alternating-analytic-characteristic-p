@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemC_4",
+    "solution_module": "Solutions.LemC_4",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemC_4.coefficient_lift"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

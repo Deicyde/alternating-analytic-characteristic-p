@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemB_10",
+    "solution_module": "Solutions.LemB_10",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemB_10.exists_infinite_pattern_homogeneous"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

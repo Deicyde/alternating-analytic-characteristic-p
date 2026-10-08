@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.LemD_7",
+    "solution_module": "Solutions.LemD_7",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemD_7.baseChangeOperator_algebraic",
+        "AlternatingAnalyticChallenge.LemD_7.exists_completedBaseChangeOperator"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

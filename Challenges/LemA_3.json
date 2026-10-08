@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.LemA_3",
+    "solution_module": "Solutions.LemA_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemA_3.part1_linearFunctional_bounded",
+        "AlternatingAnalyticChallenge.LemA_3.part2_completeSpace"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

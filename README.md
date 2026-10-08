@@ -116,6 +116,8 @@ The root import `AlternatingAnalytic` exposes the accepted library, including th
 
 ## Challenge and solution
 
+**Per-claim ledger.** [`challenge.md`](challenge.md) lists every numbered claim of the current manuscript (76 claims) with its own challenge file under [`Challenges/`](Challenges/) (statement with `sorry`), a solution under [`Solutions/`](Solutions/) where the library proves the identical statement (45 claims), a comparator config `Challenges/<ID>.json` for each such pair, and the status of the rest (13 partially proved, 17 not proved, 1 statement pending). The six-statement challenge below is unchanged and is mapped to ledger IDs in `challenge.md`.
+
 [`challenge.lean`](challenge.lean) presents five theorems; [`solution.lean`](solution.lean) supplies their library proofs. Alongside Mathlib, the challenge imports `RationalLaurentScalars` and `AnalyticDomains` for the concrete normed field and actual categorical analytic-domain predicate. This boundary includes their established supporting positive results; it does not import the final no-largest theorem or the determinant/padded obstruction modules.
 The first two follow the style of the [characteristic-two challenge](https://github.com/Deicyde/alternating-analytic-counterexample/blob/main/Challenge.lean):
 
