@@ -1,0 +1,20 @@
+{
+    "challenge_module": "Challenges.RemI_3",
+    "solution_module": "Solutions.RemI_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.RemI_3.part1",
+        "AlternatingAnalyticChallenge.RemI_3.part2",
+        "AlternatingAnalyticChallenge.RemI_3.part3",
+        "AlternatingAnalyticChallenge.RemI_3.part4",
+        "AlternatingAnalyticChallenge.RemI_3.part5",
+        "AlternatingAnalyticChallenge.RemI_3.part6",
+        "AlternatingAnalyticChallenge.RemI_3.part7",
+        "AlternatingAnalyticChallenge.RemI_3.part8"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

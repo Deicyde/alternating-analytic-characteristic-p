@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.LemF_5",
+    "solution_module": "Solutions.LemF_5",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemF_5.exists_finite_test_certificate"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

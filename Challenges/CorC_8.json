@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.CorC_8",
+    "solution_module": "Solutions.CorC_8",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.CorC_8.part1_of_finiteDimensional",
+        "AlternatingAnalyticChallenge.CorC_8.part2_finiteDimensional_of_preserves"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

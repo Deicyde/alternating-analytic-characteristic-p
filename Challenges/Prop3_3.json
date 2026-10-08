@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.Prop3_3",
+    "solution_module": "Solutions.Prop3_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Prop3_3.tfae",
+        "AlternatingAnalyticChallenge.Prop3_3.precomposition_dichotomy"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

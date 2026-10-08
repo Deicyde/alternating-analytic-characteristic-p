@@ -1,0 +1,18 @@
+{
+    "challenge_module": "Challenges.Thm2_1",
+    "solution_module": "Solutions.Thm2_1",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Thm2_1.alternating_object_familywise",
+        "AlternatingAnalyticChallenge.Thm2_1.preservesFamilies_of_contDiffOnHoms",
+        "AlternatingAnalyticChallenge.Thm2_1.liftContinuous",
+        "AlternatingAnalyticChallenge.Thm2_1.liftCore_isContMDiff",
+        "AlternatingAnalyticChallenge.Thm2_1.bundleLifting",
+        "AlternatingAnalyticChallenge.Thm2_1.bundleLifting_familywise"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

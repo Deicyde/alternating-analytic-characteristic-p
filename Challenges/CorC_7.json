@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.CorC_7",
+    "solution_module": "Solutions.CorC_7",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.CorC_7.part1_analytic_isometric_transitions",
+        "AlternatingAnalyticChallenge.CorC_7.part2_not_analyticAt"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

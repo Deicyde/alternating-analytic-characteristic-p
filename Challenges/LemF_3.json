@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.LemF_3",
+    "solution_module": "Solutions.LemF_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemF_3.labelChain_inter_subsingleton",
+        "AlternatingAnalyticChallenge.LemF_3.iInter_nonempty_of_cofinite_on_chains"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

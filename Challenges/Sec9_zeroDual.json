@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.Sec9_zeroDual",
+    "solution_module": "Solutions.Sec9_zeroDual",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Sec9_zeroDual.universal_target_zero_dual"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

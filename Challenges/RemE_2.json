@@ -1,0 +1,15 @@
+{
+    "challenge_module": "Challenges.RemE_2",
+    "solution_module": "Solutions.RemE_2",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.RemE_2.completedBaseChangeEmbedding_surjective_self",
+        "AlternatingAnalyticChallenge.RemE_2.isUltrametricDist_completedBaseChange_self",
+        "AlternatingAnalyticChallenge.RemE_2.laurent_direct_counterexample"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

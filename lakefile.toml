@@ -1,6 +1,6 @@
 name = "AlternatingAnalyticCounterexample"
 version = "0.1.0"
-defaultTargets = ["AlternatingAnalytic", "challenge", "solution", "Challenges", "Solutions", "Partial"]
+defaultTargets = ["AlternatingAnalytic", "challenge", "solution", "Challenges", "Solutions"]
 
 [[require]]
 name = "mathlib"
@@ -19,7 +19,7 @@ name = "challenge"
 name = "solution"
 
 # Per-claim ledger (see challenge.md): one challenge module per numbered claim of the paper,
-# a solution module where the library proves the identical statement, and partial proof files.
+# and a solution module where the library proves the identical statement.
 [[lean_lib]]
 name = "Challenges"
 globs = ["Challenges.+"]
@@ -27,7 +27,3 @@ globs = ["Challenges.+"]
 [[lean_lib]]
 name = "Solutions"
 globs = ["Solutions.+"]
-
-[[lean_lib]]
-name = "Partial"
-globs = ["Partial.+"]

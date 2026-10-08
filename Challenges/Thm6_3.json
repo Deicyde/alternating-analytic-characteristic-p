@@ -1,0 +1,16 @@
+{
+    "challenge_module": "Challenges.Thm6_3",
+    "solution_module": "Solutions.Thm6_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Thm6_3.analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete",
+        "AlternatingAnalyticChallenge.Thm6_3.analytic_on_homs_iff",
+        "AlternatingAnalyticChallenge.Thm6_3.analytic_on_homs_iff_banach",
+        "AlternatingAnalyticChallenge.Thm6_3.analytic_on_homs_iff_nonarchimedean_banach"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

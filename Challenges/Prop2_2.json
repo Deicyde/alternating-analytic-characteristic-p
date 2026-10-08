@@ -1,0 +1,16 @@
+{
+    "challenge_module": "Challenges.Prop2_2",
+    "solution_module": "Solutions.Prop2_2",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Prop2_2.part1",
+        "AlternatingAnalyticChallenge.Prop2_2.part2",
+        "AlternatingAnalyticChallenge.Prop2_2.part3",
+        "AlternatingAnalyticChallenge.Prop2_2.part4"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

@@ -1,0 +1,15 @@
+{
+    "challenge_module": "Challenges.PropC_6",
+    "solution_module": "Solutions.PropC_6",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.PropC_6.part1_sigma_no_bounded_lift",
+        "AlternatingAnalyticChallenge.PropC_6.part2_not_analyticAt_apply_wedge",
+        "AlternatingAnalyticChallenge.PropC_6.part3_not_analyticAt_operator"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

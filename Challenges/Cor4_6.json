@@ -1,0 +1,26 @@
+{
+    "challenge_module": "Challenges.Cor4_6",
+    "solution_module": "Solutions.Cor4_6",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Cor4_6.row1_factorial_bundle",
+        "AlternatingAnalyticChallenge.Cor4_6.row1_factorial_morphism",
+        "AlternatingAnalyticChallenge.Cor4_6.row1_spherical_bundle",
+        "AlternatingAnalyticChallenge.Cor4_6.row1_spherical_morphism",
+        "AlternatingAnalyticChallenge.Cor4_6.row1_finiteSourceCoordinates_bundle",
+        "AlternatingAnalyticChallenge.Cor4_6.row1_finiteSourceCoordinates_morphism",
+        "AlternatingAnalyticChallenge.Cor4_6.row2_finiteCoordinateBase_bundle",
+        "AlternatingAnalyticChallenge.Cor4_6.row2_finiteCoordinateBase_morphism",
+        "AlternatingAnalyticChallenge.Cor4_6.row3_c0Retract_bundle",
+        "AlternatingAnalyticChallenge.Cor4_6.row3_c0Retract_morphism",
+        "AlternatingAnalyticChallenge.Cor4_6.row4_l1Retract_bundle",
+        "AlternatingAnalyticChallenge.Cor4_6.row4_l1Retract_morphism",
+        "AlternatingAnalyticChallenge.Cor4_6.smooth_bundle",
+        "AlternatingAnalyticChallenge.Cor4_6.smooth_morphism"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

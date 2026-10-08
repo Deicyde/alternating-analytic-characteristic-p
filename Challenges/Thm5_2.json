@@ -1,0 +1,18 @@
+{
+    "challenge_module": "Challenges.Thm5_2",
+    "solution_module": "Solutions.Thm5_2",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Thm5_2.part1_analytic",
+        "AlternatingAnalyticChallenge.Thm5_2.part2_analytic",
+        "AlternatingAnalyticChallenge.Thm5_2.part3_analytic",
+        "AlternatingAnalyticChallenge.Thm5_2.part1_contDiff",
+        "AlternatingAnalyticChallenge.Thm5_2.part2_contDiff",
+        "AlternatingAnalyticChallenge.Thm5_2.part3_contDiff"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

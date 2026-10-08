@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.Prop5_1",
+    "solution_module": "Solutions.Prop5_1",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Prop5_1.representation",
+        "AlternatingAnalyticChallenge.Prop5_1.naturality"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

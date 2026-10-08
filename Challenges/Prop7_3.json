@@ -1,0 +1,17 @@
+{
+    "challenge_module": "Challenges.Prop7_3",
+    "solution_module": "Solutions.Prop7_3",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Prop7_3.part1",
+        "AlternatingAnalyticChallenge.Prop7_3.part2",
+        "AlternatingAnalyticChallenge.Prop7_3.part3",
+        "AlternatingAnalyticChallenge.Prop7_3.part2_manifold",
+        "AlternatingAnalyticChallenge.Prop7_3.part3_manifold"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.PropG_4",
+    "solution_module": "Solutions.PropG_4",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.PropG_4.l1_inf_norm_tensor_projection_eq_factorial_part1",
+        "AlternatingAnalyticChallenge.PropG_4.l1_not_universalAnalyticReflection_part2"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

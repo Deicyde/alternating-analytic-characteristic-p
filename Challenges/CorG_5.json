@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.CorG_5",
+    "solution_module": "Solutions.CorG_5",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.CorG_5.exists_smooth_nonanalytic_polynomial_limit"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

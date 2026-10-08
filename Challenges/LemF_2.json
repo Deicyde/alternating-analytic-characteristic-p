@@ -1,0 +1,15 @@
+{
+    "challenge_module": "Challenges.LemF_2",
+    "solution_module": "Solutions.LemF_2",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.LemF_2.multilinear_expansion",
+        "AlternatingAnalyticChallenge.LemF_2.multilinear_tail",
+        "AlternatingAnalyticChallenge.LemF_2.multilinear_diagonal_tendsto_zero"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

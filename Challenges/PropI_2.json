@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.PropI_2",
+    "solution_module": "Solutions.PropI_2",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.PropI_2.exists_boundedLift_of_continuous_algebraicPolynomial"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

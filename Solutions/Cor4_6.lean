@@ -6,104 +6,26 @@ import Mathlib.Topology.ContinuousMap.ZeroAtInfty
 import Mathlib.Analysis.Normed.Lp.lpSpace
 import Mathlib.Analysis.Normed.Group.Ultra
 import Mathlib.Analysis.Normed.Module.Seminorm.Basic
-import AlternatingAnalytic.Geometry.AnalyticAlternatingBundleMorphism
-import AlternatingAnalytic.Analysis.L1Families
-import AlternatingAnalytic.Analysis.CZeroFamilies
-import AlternatingAnalytic.Analysis.AlternatingActionRegularity
-import AlternatingAnalytic.Analysis.FiniteCoordinateDomain
+import AlternatingAnalytic.Geometry.BundleRows.ActionFamilies
 
 /-!
 # Corollary 4.6 (the bundle theorem), p. 12
 
-Partial proof file (not a comparator solution). It repeats the 14 statements of
-`Challenges/Cor4_6.lean` character for character and proves 12 of them from the library plus the
-glue lemmas in the `Helpers` section below. The two `row1_spherical_*` theorems are left as
-`sorry`, so Corollary 4.6 as a whole is partially proved. This file is not listed in any
-comparator config; the docstring below is the challenge file's.
-
-Paper statement (Section 4.3, `cor:bundle-cases`): Let `M` be an analytic manifold over `K`, with
-normed model space `P`. Fiberwise alternating maps give an analytic bifunctor on analytic normed
-vector bundles and their operator-valued analytic morphisms in each of the following settings:
-
-| Base model | Hypotheses on the typical fibers |
-|---|---|
-| Arbitrary `P` | `k! ≠ 0` in `K`; or `K` is nonarchimedean and the target fibers admit equivalent nonarchimedean spherically complete norms; or the source fibers have finite continuous coordinates. |
-| Finite continuous coordinates | Arbitrary normed fibers. |
-| `c₀(I, K)`, or a bounded linear retract | `K` nonarchimedean; complete nonarchimedean target fibers. |
-| `ℓ¹(I, K)`, or a bounded linear retract | Complete target fibers. |
-
-The fiber hypotheses apply to both pairs of bundles at the endpoints of a morphism. Each
-alternative in the first row specifies a separate setting. At every finite smoothness order and
-at `C^∞`, no additional hypothesis on `K`, `P` or the fibers is needed.
-
-## Formalization notes
-* One pair of theorems per setting (six settings: three alternatives of row 1, rows 2-4) plus a
-  pair for the final `C^n`/`C^∞` sentence: `<setting>_bundle` (objects) and
-  `<setting>_morphism` (morphisms). 14 theorems in all.
-* Analytic manifold: `[ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]` (open-chart model, no
-  boundary or corners). Analytic normed vector bundle: Mathlib `FiberBundle` + `VectorBundle` +
-  `ContMDiffVectorBundle ω _ _ 𝓘(K, P)` with normed model fiber; the actual fibers carry
-  topological-vector-space instances.
-* Object part: the bundle `x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x` of continuous alternating maps, with
-  Mathlib's existing topology and trivialization atlas, is `ContMDiffVectorBundle ω` with model
-  fiber `F₁ [⋀^Fin k]→L[K] F₂`. Here `F₁` is the source and `F₂` the target typical fiber.
-* Morphism part: an operator-valued analytic morphism is an analytic section of the Hom bundle
-  (`ContMDiffSection 𝓘(K, P) (A' →L[K] A) ω (fun b ↦ E' b →L[K] E b)`, contravariant slot, and
-  `v` likewise for `F → F'`, covariant slot). The conclusion is that the fiberwise map
-  `m ↦ v ∘ m ∘ (u, …, u)` is an analytic section of the Hom bundle between the two alternating
-  bundles. Source typical fibers are `A, A'`, target typical fibers `B, B'`; the fiber
-  hypotheses are imposed on both pairs, as the paper says.
-* "Bifunctor": the functor laws (identity and composition) are pointwise consequences of the
-  fiber formula `T b m = v b ∘ m ∘ (u b, …, u b)` and are not stated separately. The library
-  states them for the finite-coordinate row only (`alternatingBundleHom_of_finiteCoordinates_id`,
-  `_comp`, `alternatingBundleFunctor`).
-* Degree: index type `Fin k`, as in the library's bundle files.
-* "Finite continuous coordinates" for a space `X` is a continuous linear equivalence
-  `X ≃L[K] (Fin d → K)` (equivalently, a finite basis with continuous coordinate functionals).
-* `k! ≠ 0` is `((k.factorial : ℕ) : K) ≠ 0`.
-* "Nonarchimedean" for `K` and for target fibers in row 3 is `IsUltrametricDist` of the given
-  norm; "complete" is `CompleteSpace`.
-* Row 1, spherical alternative: "admit equivalent nonarchimedean spherically complete norms" is
-  the definition `HasEquivalentSphericallyCompleteUltrametricNorm` introduced here: a seminorm
-  `q` satisfying the strong triangle inequality, two-sided bounds against the given norm, and the
-  spherical-completeness property for `q`-balls (every nonempty family of pairwise-intersecting
-  closed `q`-balls has a common point). It is stated self-containedly. Cross-checked: its first
-  three fields coincide with the library's `HasEquivalentUltrametricNorm`
-  (`Analysis/EquivalentUltrametric.lean`), and its last clause is the library's
-  `SphericallyCompleteSpace.inter_nonempty` (`Analysis/SphericalCompleteness.lean`) restated for
-  `q`-balls; negative radii are excluded automatically, since the self-intersection condition
-  forces `p.2 ≥ 0`.
-* `c₀(I, K)` is `C₀(I, K)` for a discrete index type `I`; `ℓ¹(I, K)` is
-  `lp (fun _ : I => K) 1`. "`P` is the space or a bounded linear retract of it" is stated as
-  bounded linear `i : P → V`, `r : V → P`, `r ∘ i = id`, which includes `P = V`.
-* The `C^n`/`C^∞` sentence: `n : ℕ∞` (finite orders and `∞`, not `ω`), `M` a `C^n` manifold,
-  `C^n` bundles and `C^n` sections; no hypotheses on `K`, `P` or fibers.
-* No completeness of `K`, `P` or the fibers beyond what the table states.
-
-## Library status (per theorem); overall status: partially proved, no comparator solution
-| Theorems | Status | Where |
-|---|---|---|
-| `row2_finiteCoordinateBase_bundle`, `row2_finiteCoordinateBase_morphism` | proved in the library, by `exact` | `contMDiffVectorBundle_alternating_of_finiteCoordinates` (`Geometry/AnalyticAlternatingBundle.lean`), `alternatingBundleHom_of_finiteCoordinates` (`Geometry/AnalyticAlternatingBundleMorphism.lean`) |
-| `row1_factorial_*`, `row1_finiteSourceCoordinates_*`, `row3_c0Retract_*`, `row4_l1Retract_*`, `smooth_*` (10 theorems) | proved in `Partial/Cor4_6.lean` (library + glue), not library declarations | see below |
-| `row1_spherical_bundle`, `row1_spherical_morphism` | not proved (`sorry` in `Partial/Cor4_6.lean`) | see below |
-
-* `Partial/Cor4_6.lean` repeats the 14 statements of this file character for character and
-  proves 12 of them; only the two `row1_spherical_*` theorems are `sorry`. It is a partial proof
-  file, not a comparator solution: there is no `Solutions/Cor4_6.lean` and no `Cor4_6.json`.
-* The 10 glue-proved theorems have no bundle-level statement in the library. Each is derived from
-  the library's generic assemblies `contMDiffVectorBundle_alternating_of_family` /
-  `alternatingBundleHom_of_family` plus an operator- or parameter-level input
-  (`cpolynomialAt_alternatingMapAction_of_factorial_ne_zero`;
-  `hasBoundedLift_of_finiteCoordinateDomain` + `cpolynomialAt_alternatingMapAction_of_boundedLift`;
-  `isAdmissibleOn_of_c0`; `isAdmissibleOn_of_l1_retract`; `contDiff_alternatingMapAction`) and
-  about 100 lines of glue in that file: a chart-level lemma copied from
-  `contMDiffOn_alternatingMapAction_of_finiteCoordinates`, the c₀ retract step for families (not
-  in the library), and a basis built from `X ≃L[K] (Fin d → K)`.
-* `row1_spherical_bundle`, `row1_spherical_morphism`: not proved. The library's
-  `cpolynomialAt_alternatingMapAction_of_sphericallyComplete` needs the given norm of the target
-  fiber to be ultrametric and spherically complete (`[IsUltrametricDist F]
-  [SphericallyCompleteSpace F]`); the transfer to a fiber that only *admits* an equivalent such
-  norm is not formalized.
+Solution: the 14 statements of `Challenges/Cor4_6.lean`, proved from the library. Each object
+part is `AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family` and each morphism part
+is `AlternatingAnalytic.alternatingBundleHom_of_family` (`Geometry/AnalyticAlternatingBundle.lean`,
+`Geometry/AnalyticAlternatingBundleMorphism.lean`), fed with the family-preservation input of its
+setting from `Geometry/BundleRows/ActionFamilies.lean`:
+* row 1, `k! ≠ 0`: `BundleRows.hloc_factorial`;
+* row 1, equivalent spherically complete ultrametric target norm:
+  `BundleRows.hloc_equivalentSphericalNorm`, from the transfer
+  `EquivalentSphericalNorm.hasBoundedLift_of_equivalentSphericalNorm`
+  (`Geometry/BundleRows/EquivalentSphericalNorm.lean`);
+* row 1, finite-coordinate source: `BundleRows.hloc_finiteSource`;
+* row 2: `contMDiffVectorBundle_alternating_of_finiteCoordinates`,
+  `alternatingBundleHom_of_finiteCoordinates`;
+* row 3: `BundleRows.hloc_c0_retract`; row 4: `isAdmissibleOn_of_l1_retract`;
+* `C^n`, `C^∞`: `BundleRows.smooth_family`.
 -/
 
 open Bundle
@@ -113,148 +35,6 @@ open scoped Bundle Manifold ContDiff ZeroAtInfty
 namespace AlternatingAnalyticChallenge.Cor4_6
 
 universe uK uM uP uI uF₁ uF₂ uE₁ uE₂ uA uA' uB uB' uE uE' uF uF' uX
-
-section Helpers
-open AlternatingAnalytic
-
-/-- Generic manifold glue: local open-set family preservation in the model space gives
-manifold family preservation (copied from `contMDiffOn_alternatingMapAction_of_finiteCoordinates`). -/
-theorem glue_contMDiffOn_alternatingMapAction
-    {K P M E E' F F' : Type*} [NontriviallyNormedField K]
-    [NormedAddCommGroup P] [NormedSpace K P]
-    [NormedAddCommGroup E] [NormedSpace K E]
-    [NormedAddCommGroup E'] [NormedSpace K E']
-    [NormedAddCommGroup F] [NormedSpace K F]
-    [NormedAddCommGroup F'] [NormedSpace K F']
-    [TopologicalSpace M] [ChartedSpace P M] [IsManifold 𝓘(K, P) ω M] (k : ℕ)
-    (hloc : ∀ {V : Set P} {γ : P → (E' →L[K] E) × (F →L[K] F')}, IsOpen V →
-      AnalyticOnNhd K γ V → AnalyticOnNhd K (alternatingMapAction k ∘ γ) V)
-    {U : Set M} (hU : IsOpen U)
-    {γ : M → (E' →L[K] E) × (F →L[K] F')}
-    (hγ : ContMDiffOn 𝓘(K, P) 𝓘(K, (E' →L[K] E) × (F →L[K] F')) ω γ U) :
-    ContMDiffOn 𝓘(K, P)
-      𝓘(K, (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))
-      ω (alternatingMapAction k ∘ γ) U := by
-  intro x hx
-  have hV : IsOpen ((extChartAt 𝓘(K, P) x).target ∩
-      (extChartAt 𝓘(K, P) x).symm ⁻¹' U) :=
-    (continuousOn_extChartAt_symm x).isOpen_inter_preimage
-      (isOpen_extChartAt_target x) hU
-  have hxV : extChartAt 𝓘(K, P) x x ∈
-      (extChartAt 𝓘(K, P) x).target ∩ (extChartAt 𝓘(K, P) x).symm ⁻¹' U := by
-    simpa only [mfld_simps] using hx
-  have hγc : ContDiffOn K ω (γ ∘ (extChartAt 𝓘(K, P) x).symm)
-      ((extChartAt 𝓘(K, P) x).target ∩ (extChartAt 𝓘(K, P) x).symm ⁻¹' U) := by
-    simpa [chartAt_self_eq, mfld_simps] using (contMDiffOn_iff.mp hγ).2 x 0
-  have ha := hloc hV (hV.analyticOn_iff_analyticOnNhd.mp
-      ((contDiffOn_omega_iff_analyticOn hV.uniqueDiffOn).mp hγc))
-  have hc : ContMDiffOn 𝓘(K, P)
-      𝓘(K, (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))
-      ω ((alternatingMapAction k ∘ γ) ∘ (extChartAt 𝓘(K, P) x).symm)
-      ((extChartAt 𝓘(K, P) x).target ∩ (extChartAt 𝓘(K, P) x).symm ⁻¹' U) :=
-    contMDiffOn_iff_contDiffOn.mpr (ha.contDiffOn hV.uniqueDiffOn)
-  apply ContMDiffAt.contMDiffWithinAt
-  apply contMDiffAt_iff_source.mpr
-  exact (hc.contMDiffAt (hV.mem_nhds hxV)).contMDiffWithinAt
-
-/-- Global analyticity of the action gives local family preservation. -/
-theorem hloc_of_global
-    {K P E E' F F' : Type*} [NontriviallyNormedField K]
-    [NormedAddCommGroup P] [NormedSpace K P]
-    [NormedAddCommGroup E] [NormedSpace K E]
-    [NormedAddCommGroup E'] [NormedSpace K E']
-    [NormedAddCommGroup F] [NormedSpace K F]
-    [NormedAddCommGroup F'] [NormedSpace K F'] (k : ℕ)
-    (h : ∀ z : (E' →L[K] E) × (F →L[K] F'), AnalyticAt K (alternatingMapAction k) z)
-    {V : Set P} {γ : P → (E' →L[K] E) × (F →L[K] F')} (_ : IsOpen V)
-    (hγ : AnalyticOnNhd K γ V) : AnalyticOnNhd K (alternatingMapAction k ∘ γ) V :=
-  fun x hx => (h (γ x)).comp (hγ x hx)
-
-/-- c₀ retract clause for families (not in the library). -/
-theorem hloc_c0_retract
-    {K I P E E' F F' : Type*} [NontriviallyNormedField K]
-    [TopologicalSpace I] [DiscreteTopology I]
-    [NormedAddCommGroup P] [NormedSpace K P]
-    [NormedAddCommGroup E] [NormedSpace K E]
-    [NormedAddCommGroup E'] [NormedSpace K E']
-    [NormedAddCommGroup F] [NormedSpace K F]
-    [NormedAddCommGroup F'] [NormedSpace K F'] [CompleteSpace F'] [IsUltrametricDist F']
-    (k : ℕ) (i : P →L[K] C₀(I, K)) (r : C₀(I, K) →L[K] P)
-    (hri : r.comp i = ContinuousLinearMap.id K P)
-    {V : Set P} {γ : P → (E' →L[K] E) × (F →L[K] F')} (_ : IsOpen V)
-    (hγ : AnalyticOnNhd K γ V) : AnalyticOnNhd K (alternatingMapAction k ∘ γ) V := by
-  have hri_apply (x : P) : r (i x) = x := DFunLike.congr_fun hri x
-  have hpull : IsAdmissibleOn k (γ ∘ r) (r ⁻¹' V) :=
-    isAdmissibleOn_of_c0 k (hγ.comp (r.analyticOnNhd _) (fun _ hx => hx))
-  have hmaps : Set.MapsTo i V (r ⁻¹' V) := by
-    intro x hx
-    change r (i x) ∈ V
-    rwa [hri_apply]
-  have hcomp : (γ ∘ r) ∘ i = γ := by
-    funext x
-    exact congrArg γ (hri_apply x)
-  exact (by simpa only [hcomp] using hpull.reparam (i.analyticOnNhd V) hmaps :
-    IsAdmissibleOn k γ V).2
-
-/-- Finite continuous coordinates give a basis with continuous coordinates. -/
-theorem hasBoundedLift_of_equiv {K E E' F : Type*} [NontriviallyNormedField K]
-    [NormedAddCommGroup E] [NormedSpace K E]
-    [NormedAddCommGroup E'] [NormedSpace K E']
-    [NormedAddCommGroup F] [NormedSpace K F]
-    {d : ℕ} (c : E ≃L[K] (Fin d → K)) (k : ℕ) :
-    Round24Transfer.HasBoundedLift K (Fin k) E E' F := by
-  let b : Module.Basis (Fin d) K E := (Pi.basisFun K (Fin d)).map c.symm.toLinearEquiv
-  have hb : ∀ i, Continuous (b.coord i) := by
-    intro i
-    have : ⇑(b.coord i) = fun x => c x i := by
-      funext x
-      simp [b, Module.Basis.coord]
-    rw [this]
-    exact (continuous_apply i).comp c.continuous
-  exact hasBoundedLift_of_finiteCoordinateDomain b hb k
-
-
-theorem hloc_factorial
-    {K P E E' F F' : Type*} [NontriviallyNormedField K]
-    [NormedAddCommGroup P] [NormedSpace K P]
-    [NormedAddCommGroup E] [NormedSpace K E]
-    [NormedAddCommGroup E'] [NormedSpace K E']
-    [NormedAddCommGroup F] [NormedSpace K F]
-    [NormedAddCommGroup F'] [NormedSpace K F'] (k : ℕ) (hk : (k.factorial : K) ≠ 0)
-    {V : Set P} {γ : P → (E' →L[K] E) × (F →L[K] F')} (hV : IsOpen V)
-    (hγ : AnalyticOnNhd K γ V) : AnalyticOnNhd K (alternatingMapAction k ∘ γ) V :=
-  hloc_of_global k (fun z ↦
-    (cpolynomialAt_alternatingMapAction_of_factorial_ne_zero k hk z).analyticAt) hV hγ
-
-theorem hloc_finiteSource
-    {K P E E' F F' : Type*} [NontriviallyNormedField K]
-    [NormedAddCommGroup P] [NormedSpace K P]
-    [NormedAddCommGroup E] [NormedSpace K E]
-    [NormedAddCommGroup E'] [NormedSpace K E']
-    [NormedAddCommGroup F] [NormedSpace K F]
-    [NormedAddCommGroup F'] [NormedSpace K F'] (k : ℕ) {d : ℕ} (c : E' ≃L[K] (Fin d → K))
-    {V : Set P} {γ : P → (E' →L[K] E) × (F →L[K] F')} (hV : IsOpen V)
-    (hγ : AnalyticOnNhd K γ V) : AnalyticOnNhd K (alternatingMapAction k ∘ γ) V :=
-  hloc_of_global k (fun z ↦ (cpolynomialAt_alternatingMapAction_of_boundedLift k
-    (hasBoundedLift_of_equiv c k) z).analyticAt) hV hγ
-
-theorem smooth_family
-    {K P M E E' F F' : Type*} [NontriviallyNormedField K]
-    [NormedAddCommGroup P] [NormedSpace K P]
-    [NormedAddCommGroup E] [NormedSpace K E]
-    [NormedAddCommGroup E'] [NormedSpace K E']
-    [NormedAddCommGroup F] [NormedSpace K F]
-    [NormedAddCommGroup F'] [NormedSpace K F']
-    [TopologicalSpace M] [ChartedSpace P M] (k : ℕ) (n : ℕ∞)
-    {U : Set M} (_ : IsOpen U)
-    {γ : M → (E' →L[K] E) × (F →L[K] F')}
-    (hγ : ContMDiffOn 𝓘(K, P) 𝓘(K, (E' →L[K] E) × (F →L[K] F')) n γ U) :
-    ContMDiffOn 𝓘(K, P)
-      𝓘(K, (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))
-      n (alternatingMapAction k ∘ γ) U :=
-  (contDiff_alternatingMapAction k n).contMDiff.comp_contMDiffOn hγ
-
-end Helpers
 
 /-- `X` admits an equivalent nonarchimedean spherically complete norm: a seminorm `q` with the
 strong triangle inequality and two-sided bounds against `‖·‖`, such that every nonempty family
@@ -295,8 +75,8 @@ theorem row1_factorial_bundle
     ContMDiffVectorBundle ω (F₁ [⋀^Fin k]→L[K] F₂)
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_factorial k hk hV hγ') hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_factorial k hk hV hγ') hU hγ)
 
 /-- **Corollary 4.6, Row 1, first alternative: arbitrary model `P`, `k! ≠ 0` in `K`.**
 Morphism part (operator-valued morphisms). -/
@@ -336,14 +116,14 @@ theorem row1_factorial_morphism
       ∀ (b : M) (m : E b [⋀^Fin k]→L[K] F b),
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A) (E₁ := E) (F₂ := B) (E₂ := F) k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_factorial k hk hV hγ') hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_factorial k hk hV hγ') hU hγ)
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A') (E₁ := E') (F₂ := B') (E₂ := F') k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_factorial k hk hV hγ') hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_factorial k hk hV hγ') hU hγ)
   exact ⟨AlternatingAnalytic.alternatingBundleHom_of_family (I := 𝓘(K, P)) k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_factorial k hk hV hγ') hU hγ) u v, fun _ _ ↦ rfl⟩
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_factorial k hk hV hγ') hU hγ) u v, fun _ _ ↦ rfl⟩
 
 /-- **Corollary 4.6, Row 1, second alternative: arbitrary model `P`, `K` nonarchimedean and the target
 fibers admit equivalent nonarchimedean spherically complete norms.**
@@ -371,7 +151,10 @@ theorem row1_spherical_bundle
     (hF₂ : HasEquivalentSphericallyCompleteUltrametricNorm K F₂) :
     ContMDiffVectorBundle ω (F₁ [⋀^Fin k]→L[K] F₂)
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
-  sorry
+  exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family k
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦
+        AlternatingAnalytic.BundleRows.hloc_equivalentSphericalNorm k hF₂ hV hγ') hU hγ)
 
 /-- **Corollary 4.6, Row 1, second alternative: arbitrary model `P`, `K` nonarchimedean and the target
 fibers admit equivalent nonarchimedean spherically complete norms.**
@@ -413,7 +196,19 @@ theorem row1_spherical_morphism
         (fun b ↦ (E b [⋀^Fin k]→L[K] F b) →L[K] (E' b [⋀^Fin k]→L[K] F' b)),
       ∀ (b : M) (m : E b [⋀^Fin k]→L[K] F b),
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
-  sorry
+  letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A) (E₁ := E) (F₂ := B) (E₂ := F) k
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦
+        AlternatingAnalytic.BundleRows.hloc_equivalentSphericalNorm k hB hV hγ') hU hγ)
+  letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A') (E₁ := E') (F₂ := B') (E₂ := F') k
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦
+        AlternatingAnalytic.BundleRows.hloc_equivalentSphericalNorm k hB' hV hγ') hU hγ)
+  exact ⟨AlternatingAnalytic.alternatingBundleHom_of_family (I := 𝓘(K, P)) k
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦
+        AlternatingAnalytic.BundleRows.hloc_equivalentSphericalNorm k hB hV hγ') hU hγ) u v,
+    fun _ _ ↦ rfl⟩
 
 /-- **Corollary 4.6, Row 1, third alternative: arbitrary model `P`, the source fibers have finite continuous
 coordinates.**
@@ -441,8 +236,8 @@ theorem row1_finiteSourceCoordinates_bundle
     ContMDiffVectorBundle ω (F₁ [⋀^Fin k]→L[K] F₂)
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_finiteSource k c₁ hV hγ') hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_finiteSource k c₁ hV hγ') hU hγ)
 
 /-- **Corollary 4.6, Row 1, third alternative: arbitrary model `P`, the source fibers have finite continuous
 coordinates.**
@@ -483,14 +278,14 @@ theorem row1_finiteSourceCoordinates_morphism
       ∀ (b : M) (m : E b [⋀^Fin k]→L[K] F b),
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A) (E₁ := E) (F₂ := B) (E₂ := F) k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_finiteSource k cA hV hγ') hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_finiteSource k cA hV hγ') hU hγ)
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A') (E₁ := E') (F₂ := B') (E₂ := F') k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_finiteSource k cA' hV hγ') hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_finiteSource k cA' hV hγ') hU hγ)
   exact ⟨AlternatingAnalytic.alternatingBundleHom_of_family (I := 𝓘(K, P)) k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_finiteSource k cA' hV hγ') hU hγ) u v, fun _ _ ↦ rfl⟩
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_finiteSource k cA' hV hγ') hU hγ) u v, fun _ _ ↦ rfl⟩
 
 /-- **Corollary 4.6, Row 2: the base model `P` has finite continuous coordinates; arbitrary normed fibers.**
 Object part (analytic alternating bundle). -/
@@ -587,8 +382,8 @@ theorem row3_c0Retract_bundle
     ContMDiffVectorBundle ω (F₁ [⋀^Fin k]→L[K] F₂)
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_c0_retract k i r hri hV hγ') hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_c0_retract k i r hri hV hγ') hU hγ)
 
 /-- **Corollary 4.6, Row 3: the base model `P` is `c₀(I, K)` or a bounded linear retract of it; `K`
 nonarchimedean; complete nonarchimedean target fibers.**
@@ -633,14 +428,14 @@ theorem row3_c0Retract_morphism
       ∀ (b : M) (m : E b [⋀^Fin k]→L[K] F b),
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A) (E₁ := E) (F₂ := B) (E₂ := F) k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_c0_retract k i r hri hV hγ') hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_c0_retract k i r hri hV hγ') hU hγ)
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A') (E₁ := E') (F₂ := B') (E₂ := F') k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_c0_retract k i r hri hV hγ') hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_c0_retract k i r hri hV hγ') hU hγ)
   exact ⟨AlternatingAnalytic.alternatingBundleHom_of_family (I := 𝓘(K, P)) k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
-      (fun {_} {_} hV hγ' ↦ hloc_c0_retract k i r hri hV hγ') hU hγ) u v, fun _ _ ↦ rfl⟩
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
+      (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_c0_retract k i r hri hV hγ') hU hγ) u v, fun _ _ ↦ rfl⟩
 
 /-- **Corollary 4.6, Row 4: the base model `P` is `ℓ¹(I, K)` or a bounded linear retract of it; complete
 target fibers.**
@@ -671,7 +466,7 @@ theorem row4_l1Retract_bundle
     ContMDiffVectorBundle ω (F₁ [⋀^Fin k]→L[K] F₂)
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ (AlternatingAnalytic.isAdmissibleOn_of_l1_retract k i r hri hγ').2) hU hγ)
 
 /-- **Corollary 4.6, Row 4: the base model `P` is `ℓ¹(I, K)` or a bounded linear retract of it; complete
@@ -716,13 +511,13 @@ theorem row4_l1Retract_morphism
       ∀ (b : M) (m : E b [⋀^Fin k]→L[K] F b),
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A) (E₁ := E) (F₂ := B) (E₂ := F) k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ (AlternatingAnalytic.isAdmissibleOn_of_l1_retract k i r hri hγ').2) hU hγ)
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (F₁ := A') (E₁ := E') (F₂ := B') (E₂ := F') k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ (AlternatingAnalytic.isAdmissibleOn_of_l1_retract k i r hri hγ').2) hU hγ)
   exact ⟨AlternatingAnalytic.alternatingBundleHom_of_family (I := 𝓘(K, P)) k
-    (fun {_} hU {_} hγ ↦ glue_contMDiffOn_alternatingMapAction k
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ (AlternatingAnalytic.isAdmissibleOn_of_l1_retract k i r hri hγ').2) hU hγ) u v, fun _ _ ↦ rfl⟩
 
 /-- **Corollary 4.6, Final sentence: at every finite smoothness order and at `C^∞` (`n : ℕ∞`), no hypothesis
@@ -751,7 +546,7 @@ theorem smooth_bundle
     ContMDiffVectorBundle (n : WithTop ℕ∞) (F₁ [⋀^Fin k]→L[K] F₂)
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (n := (n : WithTop ℕ∞)) k
-    (fun {_} hU {_} hγ ↦ smooth_family k n hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.smooth_family k n hU hγ)
 
 /-- **Corollary 4.6, Final sentence: at every finite smoothness order and at `C^∞` (`n : ℕ∞`), no hypothesis
 on `K`, `P` or the fibers.**
@@ -792,8 +587,8 @@ theorem smooth_morphism
       ∀ (b : M) (m : E b [⋀^Fin k]→L[K] F b),
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (n := (n : WithTop ℕ∞)) (F₁ := A) (E₁ := E) (F₂ := B) (E₂ := F) k
-    (fun {_} hU {_} hγ ↦ smooth_family k n hU hγ)
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.smooth_family k n hU hγ)
   letI := AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (n := (n : WithTop ℕ∞)) (F₁ := A') (E₁ := E') (F₂ := B') (E₂ := F') k
-    (fun {_} hU {_} hγ ↦ smooth_family k n hU hγ)
-  exact ⟨AlternatingAnalytic.alternatingBundleHom_of_family (I := 𝓘(K, P)) (n := (n : WithTop ℕ∞)) k (fun {_} hU {_} hγ ↦ smooth_family k n hU hγ) u v, fun _ _ ↦ rfl⟩
+    (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.smooth_family k n hU hγ)
+  exact ⟨AlternatingAnalytic.alternatingBundleHom_of_family (I := 𝓘(K, P)) (n := (n : WithTop ℕ∞)) k (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.smooth_family k n hU hγ) u v, fun _ _ ↦ rfl⟩
 end AlternatingAnalyticChallenge.Cor4_6

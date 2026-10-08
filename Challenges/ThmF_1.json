@@ -1,0 +1,14 @@
+{
+    "challenge_module": "Challenges.ThmF_1",
+    "solution_module": "Solutions.ThmF_1",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.ThmF_1.exists_nonarchimedean_banach_nowhere_analytic_scalar",
+        "AlternatingAnalyticChallenge.ThmF_1.exists_nowhere_analytic_scalar_in_bounded_sequences"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}

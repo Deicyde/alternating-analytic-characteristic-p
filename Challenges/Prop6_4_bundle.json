@@ -1,0 +1,13 @@
+{
+    "challenge_module": "Challenges.Prop6_4_bundle",
+    "solution_module": "Solutions.Prop6_4_bundle",
+    "theorem_names": [
+        "AlternatingAnalyticChallenge.Prop6_4_bundle.bundle_realization"
+    ],
+    "permitted_axioms": [
+        "propext",
+        "Quot.sound",
+        "Classical.choice"
+    ],
+    "enable_nanoda": false
+}
