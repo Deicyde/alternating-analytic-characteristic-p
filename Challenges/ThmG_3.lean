@@ -5,7 +5,7 @@ import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
 import Mathlib.Order.LiminfLimsup
 
 /-!
-# Theorem G.3 (analytic tensor criterion), p. 54 (proof pp. 54-55)
+# Theorem G.3 (analytic tensor criterion), p. 55 (proof pp. 55-56)
 
 Paper statement (Appendix G; `K` complete and nontrivially normed, `P` Banach, `T_n(P)` the
 separated completed ordinary projective tensor power, `Δ_n(P)` the closed span of the pure

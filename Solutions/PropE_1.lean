@@ -6,7 +6,7 @@ import AlternatingAnalytic.Analysis.EquivalentUltrametric
 import AlternatingAnalytic.Analysis.CompletedBaseChange
 
 /-!
-# Proposition E.1 (the target has no equivalent nonarchimedean norm), pp. 46-47
+# Proposition E.1 (the target has no equivalent nonarchimedean norm), pp. 47-48
 
 Solution: the statements of `Challenges/PropE_1.lean`, proved from
 `AlternatingAnalytic/Analysis/LaurentBlockNorms.lean` (`norm_laurentBlockWedge`,

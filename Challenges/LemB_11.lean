@@ -2,7 +2,7 @@ import AlternatingAnalytic.Algebra.DeterminantArray
 import Mathlib.Data.Fin.VecNotation
 
 /-!
-# Lemma B.11 (cancellation of output-free clusters), p. 32
+# Lemma B.11 (cancellation of output-free clusters), p. 33
 
 Setting (Appendix B.3-B.5): `L` is a finite field, `V = L^ℕ`, `V_fin = L^(ℕ)`, `Ψ` is a
 `2k`-linear map `V_fin^k × V_fin^k → Λ^k V`, `T(a; y; c) := Ω_{Ψ(e_a; e_y)}(c)`, and

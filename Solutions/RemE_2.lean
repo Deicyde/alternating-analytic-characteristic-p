@@ -7,7 +7,7 @@ import AlternatingAnalytic.Analysis.BaseChangeCompleteSelf
 import AlternatingAnalytic.Analysis.LaurentResidueLift
 
 /-!
-# Remark E.2 (the case `K₁ = K̂`; direct `F_q((u))` route), p. 48
+# Remark E.2 (the case `K₁ = K̂`; direct `F_q((u))` route), p. 49
 
 Solution: the statements of `Challenges/RemE_2.lean`, proved from the library:
 * part 1: `AlternatingAnalytic.completedBaseChangeEmbedding_surjective_self`

@@ -8,7 +8,7 @@ import Mathlib.Data.Nat.Factorial.Basic
 import Mathlib.Data.Finset.Defs
 
 /-!
-# Lemma F.5 (finite test certificate), p. 51
+# Lemma F.5 (finite test certificate), p. 52
 
 Paper setting: as in Lemma F.4, now over the normed field K: "Give K^{k+1} and K^k their maximum
 norms and use the same family (F.2) over K." Here V = K^{k+1}, V' = K^k, ε^a are the coordinate

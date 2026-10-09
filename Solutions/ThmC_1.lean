@@ -3,7 +3,7 @@ import AlternatingAnalytic.Analysis.ProjectiveExterior
 import AlternatingAnalytic.Analysis.LaurentResidueLift
 
 /-!
-# Theorem C.1 (no bounded lift over a Laurent series field), p. 35
+# Theorem C.1 (no bounded lift over a Laurent series field), p. 36
 
 Solution: both parts are `AlternatingAnalytic.laurent_not_hasBoundedLift` and
 `AlternatingAnalytic.laurent_not_analyticAt` (`Analysis/LaurentResidueLift.lean`), with the lift

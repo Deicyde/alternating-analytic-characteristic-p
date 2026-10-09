@@ -1,7 +1,7 @@
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
 /-!
-# Theorem D.3 (Ingleton), p. 42
+# Theorem D.3 (Ingleton), p. 43
 
 Solution: the statement of `Challenges/ThmD_3.lean`, proved from the library's master
 extension lemma `exists_extension_of_sphericallyComplete`

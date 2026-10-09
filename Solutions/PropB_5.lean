@@ -5,7 +5,7 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 import AlternatingAnalytic.Algebra.CanonicalExteriorSupport
 
 /-!
-# Proposition B.5 (canonical exterior support), p. 27
+# Proposition B.5 (canonical exterior support), p. 28
 
 Paper statement: "Let L be any field, V an L-vector space, k ≥ 2, and ω ∈ Λ^k V. Then
 S(ω) := span{c_φ(ω) : φ ∈ (V*)^{k−1}}

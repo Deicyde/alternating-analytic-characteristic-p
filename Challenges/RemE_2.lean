@@ -5,7 +5,7 @@ import AlternatingAnalytic.Analysis.CompletedBaseChange
 import Mathlib.Analysis.Analytic.Basic
 
 /-!
-# Remark E.2 (the case `K₁ = K̂`; direct `F_q((u))` route), p. 48
+# Remark E.2 (the case `K₁ = K̂`; direct `F_q((u))` route), p. 49
 
 Paper statement (Appendix E, after the proof of Theorem 6.1(1)). "If `K₁ = K̂`, as when
 `K = F_p((u))` and `t = u`, the completed tensor products identify isometrically with `E₁` and

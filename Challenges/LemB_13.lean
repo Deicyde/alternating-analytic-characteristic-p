@@ -3,7 +3,7 @@ import Mathlib.Data.Fin.VecNotation
 import Mathlib.GroupTheory.Perm.Sign
 
 /-!
-# Lemma B.13 (the diagonal), p. 33
+# Lemma B.13 (the diagonal), p. 34
 
 Setting (Appendix B.3-B.6): as for Lemma B.11. `L` is a finite field, `Ψ : V_fin^k × V_fin^k →
 Λ^k V` is `2k`-linear, antisymmetric in the last `k` slots (hypothesis (a) of Theorem B.9(1)) and

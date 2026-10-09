@@ -2,7 +2,7 @@ import Mathlib.Analysis.Normed.Module.PiTensorProduct.ProjectiveSeminorm
 import Mathlib.Analysis.Normed.Module.Completion
 
 /-!
-# Proposition G.1 (homogeneous reflection), p. 54
+# Proposition G.1 (homogeneous reflection), p. 55
 
 Paper statement (Appendix G; throughout the appendix `K` is complete and nontrivially normed,
 `P` is Banach, `T_n(P)` is the separated completed ordinary projective tensor power and

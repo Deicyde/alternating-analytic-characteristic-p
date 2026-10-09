@@ -5,7 +5,7 @@ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 
 /-!
-# Lemma H.6 (every bounded `p`-linear map `D^p → G` is alternating; `(D, G)` is split), p. 58
+# Lemma H.6 (every bounded `p`-linear map `D^p → G` is alternating; `(D, G)` is split), p. 59
 
 Solution: the statements of `Challenges/LemH_6.lean`, proved for an arbitrary algebraically
 independent family `z` in `AlternatingAnalytic/Category/DeterminantPairGeneral/`:

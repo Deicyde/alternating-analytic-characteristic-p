@@ -2,7 +2,7 @@ import AlternatingAnalytic.Analysis.RationalLaurentScalars
 import AlternatingAnalytic.Analysis.RigidDenseSource
 
 /-!
-# Lemma H.5 (rigidity of the source `E`), p. 58
+# Lemma H.5 (rigidity of the source `E`), p. 59
 
 Solution: the statements of `Challenges/LemH_5.lean`, from the generic rigidity theorems
 `AlternatingAnalytic.RigidDenseSource.existsUnique_scalar` and

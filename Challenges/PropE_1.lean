@@ -4,7 +4,7 @@ import AlternatingAnalytic.Analysis.EquivalentUltrametric
 import AlternatingAnalytic.Analysis.CompletedBaseChange
 
 /-!
-# Proposition E.1 (the target has no equivalent nonarchimedean norm), pp. 46-47
+# Proposition E.1 (the target has no equivalent nonarchimedean norm), pp. 47-48
 
 Paper statement (Appendix E). "Let `κ` be any field, `k ≥ 2`, `r ∈ (0,1)`, and let
 `K₁ = κ((X))`, `E₁`, `E₀` and `B` be as in Appendix C. Let `e_i ∈ E₀` be the unit vectors and

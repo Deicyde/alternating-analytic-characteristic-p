@@ -3,7 +3,7 @@ import Mathlib.Data.Fin.VecNotation
 import AlternatingAnalytic.Algebra.ClusterCancellation
 
 /-!
-# Lemma B.11 (cancellation of output-free clusters), p. 32
+# Lemma B.11 (cancellation of output-free clusters), p. 33
 
 Solution file: unlike the challenge, it additionally imports the library modules that prove
 the claim. Remarks below about imports describe the challenge file.

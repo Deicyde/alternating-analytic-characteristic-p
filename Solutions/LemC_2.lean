@@ -2,7 +2,7 @@ import AlternatingAnalytic.Analysis.LaurentField
 import AlternatingAnalytic.Analysis.ProjectiveExterior
 
 /-!
-# Lemma C.2 (the projective exterior norm), pp. 35-36
+# Lemma C.2 (the projective exterior norm), pp. 36-37
 
 Solution: from `AlternatingAnalytic.projectiveExteriorSeminorm_eq_iInf_wedgeCost`,
 `projectiveExteriorSeminorm_ιMulti_le`, `boundedFunction_projectiveExteriorSeminorm_eq_zero_iff`,

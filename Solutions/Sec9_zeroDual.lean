@@ -7,7 +7,7 @@ import AlternatingAnalytic.Scalar.ScalarObstruction
 import AlternatingAnalytic.Scalar.ChainSpaces.Unconditional
 
 /-!
-# Section 9 (universal targets have zero dual), p. 23
+# Section 9 (universal targets have zero dual), p. 24
 
 Solution: a nonzero functional makes `K` a bounded retract of `F`, so `K` is a universal target
 (`AlternatingAnalytic.UniversalAlternatingTarget.of_retract`, packaged as

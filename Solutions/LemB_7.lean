@@ -2,7 +2,7 @@ import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import AlternatingAnalytic.Algebra.FiniteHomogeneousIdentity
 
 /-!
-# Lemma B.7 (homogeneous forms over a finite field), p. 28
+# Lemma B.7 (homogeneous forms over a finite field), p. 29
 
 Paper statement: "Let q be a prime power, L′ ⊇ F_q a field, 1 ≤ e ≤ q, and
 g ∈ L′[λ₁, …, λ_m] homogeneous of degree e with g(λ) = 0 for every λ ∈ F_q^m. Then g = 0."

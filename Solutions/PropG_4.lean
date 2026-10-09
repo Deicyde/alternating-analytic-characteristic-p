@@ -6,7 +6,7 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import AlternatingAnalytic.Tensor.L1Projection.Optimal
 
 /-!
-# Proposition G.4 (projection norms for ℓ¹), p. 55
+# Proposition G.4 (projection norms for ℓ¹), p. 56
 
 Paper statement (Appendix G; `T_n(P)` is the separated completed ordinary projective tensor
 power, `Δ_n(P)` the closed span of pure powers, a projection onto `Δ_n(P)` a bounded linear

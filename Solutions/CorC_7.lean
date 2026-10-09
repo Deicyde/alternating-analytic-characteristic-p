@@ -5,7 +5,7 @@ import AlternatingAnalytic.Laurent.DiagonalTransitions
 import AlternatingAnalytic.Laurent.CZeroMultipliers.Analytic
 
 /-!
-# Corollary C.7 (diagonal transitions over a `c₀` base), pp. 39-40
+# Corollary C.7 (diagonal transitions over a `c₀` base), pp. 40-41
 
 Solution: the statements of `Challenges/CorC_7.lean`, proved from the library
 (`Laurent/DiagonalTransitions.lean`):

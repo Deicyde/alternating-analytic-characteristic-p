@@ -4,7 +4,7 @@ import AlternatingAnalytic.Algebra.ExteriorSupportDimension
 import AlternatingAnalytic.Analysis.LaurentCoefficientTheorem
 
 /-!
-# Proposition C.3 (support estimate), pp. 36-37
+# Proposition C.3 (support estimate), pp. 37-38
 
 Solution: `η := AlternatingAnalytic.completedLaurentCoefficient κ r ℕ k ⟨0, _⟩` with
 `completedLaurentCoefficient_array`, `completedLaurentCoefficient_unique`,

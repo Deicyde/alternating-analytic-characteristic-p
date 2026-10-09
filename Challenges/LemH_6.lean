@@ -4,7 +4,7 @@ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 
 /-!
-# Lemma H.6 (every bounded `p`-linear map `D^p → G` is alternating; `(D, G)` is split), p. 58
+# Lemma H.6 (every bounded `p`-linear map `D^p → G` is alternating; `(D, G)` is split), p. 59
 
 Setting (Appendix H.1): `p` is prime, `K = 𝔽_p(t)` with its `t`-adic absolute value,
 `L = 𝔽_p((t))` its completion, `A = L[ε]/(ε^p)` with `e_i = ε^i` (`0 ≤ i < p`) and "the maximum

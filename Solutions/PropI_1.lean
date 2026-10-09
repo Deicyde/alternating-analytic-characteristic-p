@@ -4,7 +4,7 @@ import Mathlib.Analysis.Analytic.Basic
 import AlternatingAnalytic.Coordinates.CountableType.Lift
 
 /-!
-# Proposition I.1 (countable-type scalar sources), pp. 61-62
+# Proposition I.1 (countable-type scalar sources), pp. 62-63
 
 Solution: the statements of `Challenges/PropI_1.lean`, proved from the library
 (`AlternatingAnalytic/Coordinates/CountableType/`):

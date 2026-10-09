@@ -6,12 +6,12 @@ import AlternatingAnalytic.Algebra.FiniteHomogeneousIdentity
 import AlternatingAnalytic.Algebra.PolarizationCounterexamples
 
 /-!
-# Proposition B.8 (pointwise versus polarized), p. 29
+# Proposition B.8 (pointwise versus polarized), p. 30
 
 Solution file: unlike the challenge, it additionally imports the library modules that prove
 the claim. Remarks below about imports describe the challenge file.
 
-Setting (Appendix B.2, p. 28): fix a field `L`, an integer `k ≥ 1`, `L`-vector spaces `A` and
+Setting (Appendix B.2, p. 29): fix a field `L`, an integer `k ≥ 1`, `L`-vector spaces `A` and
 `V`, and a linear map `D : A → End_L(V)`, `a ↦ D_a`. A *lift of `D` in degree `k`* is a
 `2k`-linear map `Ψ : A^k × V^k → Λ^k V` over `L` that is alternating in the `V`-slots. For
 `f : [k] → [m]` and `b ∈ A^m` put `b_f := (b_{f(1)}, …, b_{f(k)})` and

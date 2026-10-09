@@ -2,7 +2,7 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Analysis.DiscreteSphericalCompleteness
 
 /-!
-# Lemma D.1 (discrete distances), pp. 40-41
+# Lemma D.1 (discrete distances), pp. 41-42
 
 Solution: the statement of `Challenges/LemD_1.lean`, proved from the library theorem
 `AlternatingAnalytic.sphericallyCompleteSpace_of_discreteDist_radius`

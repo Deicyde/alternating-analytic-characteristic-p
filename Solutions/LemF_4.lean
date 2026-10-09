@@ -7,7 +7,7 @@ import Mathlib.Data.Nat.Factorial.Basic
 import AlternatingAnalytic.Scalar.FibreObstruction
 
 /-!
-# Lemma F.4 (finite fibre obstruction), p. 50
+# Lemma F.4 (finite fibre obstruction), p. 51
 
 Solution: the statement of `Challenges/LemF_4.lean`, proved from the library by
 `AlternatingAnalytic.FibreObstruction.not_exists_fibre_map` (`Scalar/FibreObstruction.lean`),

@@ -4,7 +4,7 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import AlternatingAnalytic.Coordinates.AlgebraicPolynomialCZero.BoundedLift
 
 /-!
-# Proposition I.2 (continuous algebraic polynomials on c₀), pp. 62-63
+# Proposition I.2 (continuous algebraic polynomials on c₀), pp. 63-64
 
 Solution: the statement of `Challenges/PropI_2.lean`, proved by
 `AlgebraicPolynomialCZero.exists_boundedLift_of_continuous_algebraicPolynomial`

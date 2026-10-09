@@ -3,7 +3,7 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import Mathlib.Analysis.Analytic.Basic
 
 /-!
-# Proposition I.1 (countable-type scalar sources), pp. 61-62
+# Proposition I.1 (countable-type scalar sources), pp. 62-63
 
 Paper statement (Appendix I.1, `prop:scalar-countable`): A normed space is *of countable
 type* if a countable subset has dense linear span. Let `K` be complete and nonarchimedean.

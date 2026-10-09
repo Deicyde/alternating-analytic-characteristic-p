@@ -4,7 +4,7 @@ import AlternatingAnalytic.Analysis.DenseMultilinearExtension
 import AlternatingAnalytic.Analysis.DenseMultilinearFamilyExtension
 
 /-!
-# Lemma D.5 (extension), p. 42
+# Lemma D.5 (extension), p. 43
 
 Solution: the statements of `Challenges/LemD_5.lean`. Part (1) uses the library's
 `AlternatingAnalytic.denseLinearExtension` with `denseLinearExtension_apply` and

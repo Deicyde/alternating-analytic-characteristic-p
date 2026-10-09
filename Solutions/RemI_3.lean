@@ -7,7 +7,7 @@ import AlternatingAnalytic.Coordinates.WeightedNorm.SupNorm
 import AlternatingAnalytic.Coordinates.WeightedNorm.Balls
 
 /-!
-# Remark I.3 (a nonspherical target norm with analytic precomposition), p. 63
+# Remark I.3 (a nonspherical target norm with analytic precomposition), p. 64
 
 Solution: the statements of `Challenges/RemI_3.lean`, proved from the library
 (`AlternatingAnalytic/Coordinates/WeightedNorm/`):

@@ -4,7 +4,7 @@ import Mathlib.Algebra.Field.ZMod
 import AlternatingAnalytic.Analysis.LaurentSubfieldExtra.LaurentSubfieldClosure
 
 /-!
-# Lemma D.2 (Laurent subfield), p. 41
+# Lemma D.2 (Laurent subfield), p. 42
 
 Solution: the statements of `Challenges/LemD_2.lean`, proved from the library
 (`AlternatingAnalytic/Analysis/LaurentSubfieldExtra/`):

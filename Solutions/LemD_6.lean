@@ -7,7 +7,7 @@ import AlternatingAnalytic.Analysis.CompletedBaseChange
 import AlternatingAnalytic.Analysis.DenseMultilinearExtension
 
 /-!
-# Lemma D.6 (projective base change), p. 43
+# Lemma D.6 (projective base change), p. 44
 
 Solution: the statements of `Challenges/LemD_6.lean`, from the library's binary projective
 base change (`AlternatingAnalytic/Analysis/ProjectiveBaseChange.lean`,

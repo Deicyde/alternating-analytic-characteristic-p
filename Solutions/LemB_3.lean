@@ -3,7 +3,7 @@ import Mathlib.LinearAlgebra.Matrix.Rank
 import AlternatingAnalytic.Algebra.ExteriorFlattening
 
 /-!
-# Lemma B.3 (support bounds flattening rank), p. 26
+# Lemma B.3 (support bounds flattening rank), p. 27
 
 Setting (Section B.1): `L` a field, `k ≥ 1`, `S` a set, `V ⊆ L^S`, and `Ω : Λ^k V → L^(S^k)`
 the determinant array, `Ω_{y₁ ∧ ⋯ ∧ y_k}(c) = det (y_b(c_a))_{a,b}`.

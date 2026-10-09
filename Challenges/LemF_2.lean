@@ -5,7 +5,7 @@ import Mathlib.Topology.Algebra.InfiniteSum.Defs
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
 /-!
-# Lemma F.2 (multilinear tails), pp. 48-49
+# Lemma F.2 (multilinear tails), pp. 49-50
 
 Paper statement: "Let K be complete, nonarchimedean and not spherically complete, let I be
 countably infinite, and let d ≥ 1. Every bounded d-linear map λ : ℓ^∞(I, K)^d → K has an

@@ -8,7 +8,7 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Scalar.ChainSpaces.Unconditional
 
 /-!
-# Theorem F.1 (scalar counterexample), pp. 48-53
+# Theorem F.1 (scalar counterexample), pp. 49-54
 
 Solution: both parts are `AlternatingAnalytic.ChainSpaces.abstractConclusion` and
 `AlternatingAnalytic.ChainSpaces.sequenceConclusion` (`Scalar/ChainSpaces/Unconditional.lean`).

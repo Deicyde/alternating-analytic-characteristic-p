@@ -3,7 +3,7 @@ import AlternatingAnalytic.Category.FiniteUltrametricDomains
 import AlternatingAnalytic.Category.NoLargestAnalyticDomain
 
 /-!
-# Theorem H.4 (No largest full analytic domain), p. 57
+# Theorem H.4 (No largest full analytic domain), p. 58
 
 Solution: the statements of `Challenges/ThmH_4.lean`, from
 `AlternatingAnalytic.DeterminantPair.Padding.no_largest_full_analytic_domain`

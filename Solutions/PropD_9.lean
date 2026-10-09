@@ -3,7 +3,7 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Analytic.Basic
 
 /-!
-# Proposition D.9 (descent of a lift), p. 45
+# Proposition D.9 (descent of a lift), p. 46
 
 Solution: the statements of `Challenges/PropD_9.lean`, proved from
 `AlternatingAnalytic/Analysis/BaseChangeLiftDescent.lean`

@@ -6,7 +6,7 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Scalar.Tails.Expansion
 
 /-!
-# Lemma F.2 (multilinear tails), pp. 48-49
+# Lemma F.2 (multilinear tails), pp. 49-50
 
 Solution: the three statements of `Challenges/LemF_2.lean`, proved from the library
 (`AlternatingAnalytic/Scalar/Tails/`):

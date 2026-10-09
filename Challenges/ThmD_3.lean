@@ -1,7 +1,7 @@
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
 /-!
-# Theorem D.3 (Ingleton), p. 42
+# Theorem D.3 (Ingleton), p. 43
 
 Paper statement: "Let K₁ be a spherically complete nonarchimedean normed field, V a
 K₁-vector space with a nonarchimedean norm, V₀ ⊆ V a subspace, C ≥ 0, and T₀ : V₀ → K₁

@@ -1,7 +1,7 @@
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
 /-!
-# Lemma D.1 (discrete distances), pp. 40-41
+# Lemma D.1 (discrete distances), pp. 41-42
 
 Paper statement: "Let Y be a complete nonarchimedean space whose distances lie in
 r^ℤ ∪ {0} for some r ∈ (0, 1). Then Y is spherically complete."

@@ -3,7 +3,7 @@ import Mathlib.Data.Fin.VecNotation
 import AlternatingAnalytic.Algebra.ClusterStaircase
 
 /-!
-# Lemma B.12 (staircase), pp. 32-33
+# Lemma B.12 (staircase), pp. 33-34
 
 Solution file: unlike the challenge, it additionally imports the library modules that prove
 the claim. Remarks below about imports describe the challenge file.

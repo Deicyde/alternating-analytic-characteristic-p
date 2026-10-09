@@ -5,7 +5,7 @@ import AlternatingAnalytic.Algebra.ExteriorSupportDimension
 import AlternatingAnalytic.Analysis.LaurentResidueTheorem
 
 /-!
-# Lemma C.4 (the coefficient lift `Ψ`), pp. 37-38
+# Lemma C.4 (the coefficient lift `Ψ`), pp. 38-39
 
 Solution: `Ψ := AlternatingAnalytic.laurentResidueLift κ r k ⟨0, _⟩ P`
 (`Analysis/LaurentResidueLift.lean`) with `laurentResidueLift_apply`,

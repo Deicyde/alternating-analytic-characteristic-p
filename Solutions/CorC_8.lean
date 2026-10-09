@@ -8,7 +8,7 @@ import AlternatingAnalytic.Laurent.FiniteDimSharp.IfHalf
 import AlternatingAnalytic.Laurent.FiniteDimSharp.OnlyIf
 
 /-!
-# Corollary C.8 (finite dimension is sharp for nonarchimedean bases), p. 40
+# Corollary C.8 (finite dimension is sharp for nonarchimedean bases), p. 41
 
 Solution: the statements of `Challenges/CorC_8.lean`, proved from the library
 (`Laurent/FiniteDimSharp/`; the two predicates are copies of

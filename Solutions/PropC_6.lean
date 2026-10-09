@@ -4,7 +4,7 @@ import Mathlib.Topology.ContinuousMap.ZeroAtInfty
 import AlternatingAnalytic.Laurent.CZeroMultipliers.Analytic
 
 /-!
-# Proposition C.6 (multipliers on `c₀`), p. 39
+# Proposition C.6 (multipliers on `c₀`), p. 40
 
 Solution: the statements of `Challenges/PropC_6.lean`, proved from the library
 (`Laurent/CZeroMultipliers/NoLift.lean`, `Laurent/CZeroMultipliers/Analytic.lean`):

@@ -1,7 +1,7 @@
 import AlternatingAnalytic.Analysis.BaseChangeOperators
 
 /-!
-# Lemma D.7 (operators), p. 44
+# Lemma D.7 (operators), p. 45
 
 Solution: the statements of `Challenges/LemD_7.lean`, proved from
 `AlternatingAnalytic/Analysis/BaseChangeOperators.lean`.

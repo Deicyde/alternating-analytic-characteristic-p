@@ -2,7 +2,7 @@ import AlternatingAnalytic.Analysis.LaurentField
 import AlternatingAnalytic.Analysis.ProjectiveExterior
 
 /-!
-# Theorem C.1 (no bounded lift over a Laurent series field), p. 35
+# Theorem C.1 (no bounded lift over a Laurent series field), p. 36
 
 Paper statement (Appendix C, `Theorem C.1`): Let `κ` be a finite field of characteristic `p`,
 let `k ≥ p` and `r ∈ (0, 1)`, and let `K₁ = κ((X))` with `|X| = r`. Let `E₁ = ℓ^∞(ℕ, K₁)`, and

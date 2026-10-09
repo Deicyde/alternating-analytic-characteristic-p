@@ -2,7 +2,7 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Analysis.ScalarProjection
 
 /-!
-# Corollary D.4 (Ingleton projection), p. 42
+# Corollary D.4 (Ingleton projection), p. 43
 
 Solution: the statement of `Challenges/CorD_4.lean`, proved from the library theorem
 `AlternatingAnalytic.exists_scalar_projection`

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3 -I
 """Check that a ledger claim is proved.
 
-Usage: python3 -I scripts/check_claim.py ID [--allow-challenge-edit]
+Usage: python3 -I scripts/check_claim.py ID
 
 Checks, in order, and prints one JSON object (also written to work/checks/ID.json):
-  1. Challenges/ID.lean is unchanged relative to the commit `ledger-base` (git tag or ref),
-     unless --allow-challenge-edit is given.
-  2. Solutions/ID.lean exists and contains no `sorry`, `admit`, `native_decide`, new `axiom`.
+  1. The code of Challenges/ID.lean, with comments and docstrings removed, is unchanged since
+     the ledger was created (git tag `ledger-base`).
+  2. Solutions/ID.lean exists and contains no `sorry`, `admit`, `native_decide` or `axiom`.
   3. Challenges/ID.json exists and names every theorem of the challenge.
   4. `lake build Challenges.ID Solutions.ID` succeeds (through scripts/run_lean.py --build).
   5. `#print axioms` of every theorem in the solution shows only propext, Classical.choice,
@@ -20,6 +20,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RUN = [sys.executable, '-I', os.path.join(ROOT, 'scripts', 'run_lean.py')]
 OK_AXIOMS = {'propext', 'Classical.choice', 'Quot.sound'}
 BASE = 'ledger-base'
+# Statements written after the ledger was created, with the commit that added them.
+STATEMENT_ADDED = {'Thm2_1': '7c9f61c'}
 
 
 def sh(cmd):
@@ -28,8 +30,34 @@ def sh(cmd):
 
 
 def strip_comments(src):
-    src = re.sub(r'/-.*?-/', '', src, flags=re.S)
-    return re.sub(r'--[^\n]*', '', src)
+    """Remove Lean comments and docstrings (nested block comments included); keep strings."""
+    out, i, n, depth = [], 0, len(src), 0
+    while i < n:
+        if depth:
+            if src.startswith('/-', i):
+                depth += 1; i += 2
+            elif src.startswith('-/', i):
+                depth -= 1; i += 2
+            else:
+                i += 1
+        elif src.startswith('/-', i):
+            depth = 1; i += 2
+        elif src.startswith('--', i):
+            j = src.find('\n', i)
+            i = n if j < 0 else j
+        elif src[i] == '"':
+            j = i + 1
+            while j < n and src[j] != '"':
+                j += 2 if src[j] == '\\' else 1
+            out.append(src[i:j + 1]); i = j + 1
+        else:
+            out.append(src[i]); i += 1
+    return ''.join(out)
+
+
+def code_of(src):
+    """The code of a Lean file: comments removed, whitespace collapsed."""
+    return ' '.join(strip_comments(src).split())
 
 
 def theorems_and_defs(src):
@@ -46,7 +74,6 @@ def main(argv):
     if not argv:
         print(__doc__); return 1
     cid = argv[0]
-    allow_edit = '--allow-challenge-edit' in argv
     res = {'id': cid, 'ok': False, 'steps': {}}
     chal = os.path.join(ROOT, 'Challenges', f'{cid}.lean')
     sol = os.path.join(ROOT, 'Solutions', f'{cid}.lean')
@@ -60,10 +87,11 @@ def main(argv):
         print(out)
         return 0 if ok else 1
 
-    rc, out = sh(['git', 'diff', '--quiet', BASE, '--', f'Challenges/{cid}.lean'])
-    res['steps']['challenge_unchanged'] = (rc == 0) or allow_edit
+    base = STATEMENT_ADDED.get(cid, BASE)
+    rc, old = sh(['git', 'show', f'{base}:Challenges/{cid}.lean'])
+    res['steps']['challenge_unchanged'] = rc == 0 and code_of(old) == code_of(open(chal).read())
     if not res['steps']['challenge_unchanged']:
-        res['error'] = f'Challenges/{cid}.lean differs from {BASE}; challenge statements must not change'
+        res['error'] = f'the code of Challenges/{cid}.lean differs from {base}; challenge statements must not change'
         return finish(False)
     if not os.path.exists(sol):
         res['error'] = 'no solution file'; return finish(False)

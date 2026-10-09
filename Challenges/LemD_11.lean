@@ -3,7 +3,7 @@ import Mathlib.Analysis.Normed.Module.Completion
 import Mathlib.Analysis.Normed.Field.Instances
 
 /-!
-# Lemma D.11 (incomplete base fields), p. 46
+# Lemma D.11 (incomplete base fields), p. 47
 
 Paper statement (Appendix D, "Incomplete base fields"). "Let `K` be a nontrivially normed field
 with completion `K̂`, and let `E, E', F` be `K̂`-Banach spaces, regarded as `K`-Banach spaces by

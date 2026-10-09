@@ -3,7 +3,7 @@ import Mathlib.Data.Set.Finite.Basic
 import AlternatingAnalytic.Algebra.OrderPattern
 
 /-!
-# Lemma B.10 (pattern homogeneity), pp. 30-31
+# Lemma B.10 (pattern homogeneity), pp. 31-32
 
 Solution file: unlike the challenge, it additionally imports the library modules that prove
 the claim. Remarks below about imports describe the challenge file.

@@ -2,7 +2,7 @@ import Mathlib.Analysis.Analytic.Uniqueness
 import Mathlib.Analysis.Normed.Group.InfiniteSum
 
 /-!
-# Lemma A.1 (one-variable uniqueness), p. 24
+# Lemma A.1 (one-variable uniqueness), p. 25
 
 Paper statement: "Let K be nontrivially normed and Z a normed K-space, not necessarily
 complete. Let z₀, z₁, … ∈ Z, ρ > 0 and M ≥ 0 with ‖zₙ‖ρⁿ ≤ M for all n. If ∑ₙ tⁿ zₙ

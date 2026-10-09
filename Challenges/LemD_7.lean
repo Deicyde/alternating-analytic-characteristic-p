@@ -1,7 +1,7 @@
 import AlternatingAnalytic.Analysis.CompletedBaseChange
 
 /-!
-# Lemma D.7 (operators), p. 44
+# Lemma D.7 (operators), p. 45
 
 Paper statement (Appendix D, "Projective base change"). Assume (H1) `K₁` with the restricted
 absolute value is nontrivially normed, complete and spherically complete, and (H2) `K' ⊇ K₁` is

@@ -5,7 +5,7 @@ import Mathlib.FieldTheory.Finite.Basic
 import AlternatingAnalytic.Algebra.DeterminantQuadraticGap
 
 /-!
-# Lemma H.7 (the degree-one part of `C_0` is zero), p. 59
+# Lemma H.7 (the degree-one part of `C_0` is zero), p. 60
 
 Solution: the statements of `Challenges/LemH_7.lean`, from
 `AlternatingAnalytic.DeterminantQuadratic.homogeneous_linear_eq_zero` and

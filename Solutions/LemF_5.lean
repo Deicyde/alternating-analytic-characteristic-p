@@ -9,7 +9,7 @@ import Mathlib.Data.Finset.Defs
 import AlternatingAnalytic.Scalar.TestCertificate
 
 /-!
-# Lemma F.5 (finite test certificate), p. 51
+# Lemma F.5 (finite test certificate), p. 52
 
 Solution: the statement of `Challenges/LemF_5.lean`, proved from the library by
 `AlternatingAnalytic.TestCertificate.exists_finite_test_certificate`

@@ -2,9 +2,9 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basic
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-!
-# Lemma B.2 (the determinant array is injective), p. 26
+# Lemma B.2 (the determinant array is injective), p. 27
 
-Setting (Section B.1, p. 26): `L` is a field, `k ≥ 1`, `S` is a set and `V ⊆ L^S` is a
+Setting (Section B.1, p. 27): `L` is a field, `k ≥ 1`, `S` is a set and `V ⊆ L^S` is a
 space of functions on `S`. The determinant array is the linear map
 `Ω : Λ^k V → L^(S^k)`, `Ω_{y₁ ∧ ⋯ ∧ y_k}(c₁, …, c_k) := det (y_b(c_a))_{a,b=1}^k`.
 
@@ -25,7 +25,7 @@ Formalization notes:
 
 namespace AlternatingAnalyticChallenge.LemB_2
 
-/-- **Definition of the determinant array (p. 26), well-definedness.** There is a linear
+/-- **Definition of the determinant array (p. 27), well-definedness.** There is a linear
 map `Λ^k V → L^(S^k)` given on pure wedges by the determinant formula. -/
 theorem part0_determinantArray_exists
     (L : Type*) [Field L] (S : Type*) (V : Submodule L (S → L)) (k : ℕ) (hk : 1 ≤ k) :

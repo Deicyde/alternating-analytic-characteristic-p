@@ -2,7 +2,7 @@ import AlternatingAnalytic.Category.AnalyticDomains
 import AlternatingAnalytic.Analysis.SplitAlternatingPairs
 
 /-!
-# Lemma H.3 (split destinations give analytic actions), p. 57
+# Lemma H.3 (split destinations give analytic actions), p. 58
 
 Solution: the statements of `Challenges/LemH_3.lean`, from
 `AlternatingAnalytic.alternatingFunctor_analyticOnNhd_hom_of_split_destination`,

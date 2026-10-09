@@ -4,7 +4,7 @@ import Mathlib.GroupTheory.Perm.Sign
 import AlternatingAnalytic.Algebra.ClusterDiagonal
 
 /-!
-# Lemma B.13 (the diagonal), p. 33
+# Lemma B.13 (the diagonal), p. 34
 
 Solution file: unlike the challenge, it additionally imports the library modules that prove
 the claim. Remarks below about imports describe the challenge file.

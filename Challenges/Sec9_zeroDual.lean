@@ -4,7 +4,7 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Analysis.UniversalAlternatingTargets
 
 /-!
-# Section 9, "Which fibers remove the obstruction?" (universal targets have zero dual), p. 23
+# Section 9, "Which fibers remove the obstruction?" (universal targets have zero dual), p. 24
 
 Paper statement (Section 9, in the obstructed range `char K = p > 0`, `k ≥ p`): Call `F` a
 universal target if `Alt^k(−; F)` is analytic on every hom space. [...] Over a complete

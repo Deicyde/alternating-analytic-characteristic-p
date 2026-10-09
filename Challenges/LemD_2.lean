@@ -3,7 +3,7 @@ import Mathlib.Algebra.Field.Subfield.Basic
 import Mathlib.Algebra.Field.ZMod
 
 /-!
-# Lemma D.2 (Laurent subfield), p. 41
+# Lemma D.2 (Laurent subfield), p. 42
 
 Paper statement: "Let K′ be a complete nontrivially normed field of characteristic p, and let
 t ∈ K′ with 0 < |t| = r < 1.

@@ -5,7 +5,7 @@ import Mathlib.Data.Set.Lattice.Indexed
 import AlternatingAnalytic.Scalar.ChainGap
 
 /-!
-# Lemma F.3 (chain gap), pp. 49-50
+# Lemma F.3 (chain gap), pp. 50-51
 
 Solution: the statements of `Challenges/LemF_3.lean`, proved from the library:
 * part 1: `AlternatingAnalytic.ChainGap.labelChain_inter_subsingleton`;

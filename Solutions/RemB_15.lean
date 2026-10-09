@@ -4,7 +4,7 @@ import Mathlib.GroupTheory.Perm.Sign
 import AlternatingAnalytic.Algebra.NormalizedMultiplierLift
 
 /-!
-# Remark B.15 (when k! is invertible: the normalized lift), p. 34
+# Remark B.15 (when k! is invertible: the normalized lift), p. 35
 
 Solution file: unlike the challenge, it additionally imports the library modules that prove
 the claim. Remarks below about imports describe the challenge file.

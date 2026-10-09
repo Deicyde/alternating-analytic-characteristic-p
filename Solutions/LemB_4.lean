@@ -5,7 +5,7 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 import AlternatingAnalytic.Algebra.ExteriorContraction
 
 /-!
-# Lemma B.4 (contraction), p. 27
+# Lemma B.4 (contraction), p. 28
 
 Setting (Section B.1): `L` a field, `V` an `L`-vector space, `Λ^k V` the algebraic exterior
 power, `sdim` the support dimension of Definition B.1.

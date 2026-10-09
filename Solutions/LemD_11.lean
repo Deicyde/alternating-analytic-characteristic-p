@@ -4,7 +4,7 @@ import Mathlib.Analysis.Normed.Module.Completion
 import Mathlib.Analysis.Normed.Field.Instances
 
 /-!
-# Lemma D.11 (incomplete base fields), p. 46
+# Lemma D.11 (incomplete base fields), p. 47
 
 Solution: the statements of `Challenges/LemD_11.lean`, proved from
 `AlternatingAnalytic/Analysis/DenseScalarRestriction.lean` (`denseScalarLinearEquiv`,

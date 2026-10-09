@@ -1,7 +1,7 @@
 import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-!
-# Lemma A.3 (finite-dimensional spaces over complete fields), pp. 24-25
+# Lemma A.3 (finite-dimensional spaces over complete fields), pp. 25-26
 
 Paper statement: "Let K be a complete nontrivially normed field and U a finite-dimensional
 normed K-space. Then every linear functional on U is bounded, and U is complete."

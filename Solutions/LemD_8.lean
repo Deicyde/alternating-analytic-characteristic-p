@@ -2,7 +2,7 @@ import AlternatingAnalytic.Analysis.BaseChangeAlternatingForms
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 
 /-!
-# Lemma D.8 (forms), pp. 44-45
+# Lemma D.8 (forms), pp. 45-46
 
 Solution: the statement of `Challenges/LemD_8.lean`, proved from
 `AlternatingAnalytic/Analysis/BaseChangeAlternatingForms.lean` (strong alternation comes from
