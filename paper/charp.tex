@@ -79,10 +79,12 @@
 \title{Alternating bundles and analytic descent}
 \author{Jack McCarthy}
 \thanks{The original counterexample and its initial write-up were developed with Anthropic's Claude.
-Subsequent research and exposition used Claude and OpenAI's Codex; the present reorganization was
+Subsequent research and exposition used Claude and OpenAI's Codex; the organization of the paper was
 prepared with Codex. AI assistants contributed to mathematical arguments and independent proof audits.
-The original Lean formalization used Codex and Autoform. Section~\ref{sec:verification} records the
-verification scope. Neither the manuscript nor its formalization has yet received a human expert review.}
+The original Lean formalization used Codex and Autoform. The remaining claims and the per-claim
+ledger were formalized with Anthropic's Claude Code in October 2026. Proposition~\ref{prop:tangent-values}
+was developed and written with Claude and is not formalized.
+Section~\ref{sec:verification} records the verification scope.}
 \makeatletter
 % Keep the complete front matter on one page without changing the body layout.
 \patchcmd{\@maketitle}{\global\topskip42\p@}{\global\topskip30\p@}{}%
@@ -102,7 +104,7 @@ lifting homogeneous coefficients through a closed linear subspace with controlle
 We give an exact descent criterion and two mechanisms for satisfying it, using retractions in the
 fibers or coordinates on the parameter space.
 
-The alternating bifunctor is always $C^\infty$ and is analytic on all hom spaces exactly when $k!\ne0$.
+The alternating bifunctor is always $C^\infty$ and is analytic on all hom spaces exactly when $k!\ne0$ in the field.
 Nonarchimedean spherically complete targets give analyticity in every degree. Independently, bases
 with open $K^d$ charts support analytic alternating bundles with arbitrary normed fibers in every
 characteristic; summable infinite-dimensional parameter spaces give further cases.
@@ -112,14 +114,16 @@ The exterior-power representation identifies the universal action and its scalar
 Finally, over complete fields, ambient analytic differential forms retain pullback, wedge products
 and exterior differentiation even when the natural alternating atlas is not analytic.
 The counterexamples and supplementary classification results are proved in the appendices.
-Formal verification covers the scope recorded in the text.
+Every theorem, proposition, lemma and corollary except Proposition~\ref{prop:tangent-values} has a
+Lean proof of a corresponding statement; Section~\ref{sec:verification} lists the main places where those statements
+are narrower than the text.
 \end{abstract}
 \maketitle
 \setcounter{tocdepth}{1}
 \begingroup
 \small
 \linespacing=8pt
-\tableofcontents
+\tableofcontents\removelastskip
 \endgroup
 \clearpage
 
@@ -195,6 +199,8 @@ there is an exact classification over complete nonarchimedean fields:
  k!\ne0\ \text{or}\ K\text{ is spherically complete}.
 \]
 In the negative case, even the alternating cotangent atlas of an analytic Banach manifold can fail.
+With Banach or tangent values the corresponding atlas can fail over every field of characteristic $p$ once $k\ge p$
+(Proposition~\ref{prop:tangent-values}).
 Section~\ref{sec:sharpness} proves the geometric reductions from the two operator obstructions.
 
 An analytic calculus of forms nevertheless survives. Over every complete field, alternating-valued
@@ -220,8 +226,11 @@ attached to the arguments that need them, rather than imposed on the category at
 Our bundle construction follows Lang's functors of class $C^n$~\cite[Ch.~III, \S4]{La}.
 Gou\"ezel's characteristic-zero alternating-map construction~\cite{G1,G2} provides the factorial case,
 and closed-range reflection of smoothness is the argument formalized in~\cite{PR}.
+Bourbaki states the alternating bundle under the hypothesis that the field has characteristic zero or that
+the vector bundles have finite dimension~\cite[7.8]{Bou}, as quoted in~\cite{G1}; Gou\"ezel notes there that the
+finite-dimensional case works in positive characteristic, which over a complete field is Proposition~\ref{prop:split-lift}(2).
 The nonarchimedean extension mechanism belongs to the functional analysis of spherical completeness;
-we use its norm-controlled form and relate it to~\cite{In,Sch,Schi,Yuan}.
+we use its norm-controlled form and relate it to~\cite{In,Schi,Sch,Yuan}.
 
 The long constructions are proved in the appendices. Appendices~\ref{app:FF}--\ref{app:assembly}
 establish the general operator obstruction, and Appendix~\ref{app:scalar} proves the scalar obstruction.
@@ -230,7 +239,7 @@ Appendix~\ref{app:no-largest} proves that a largest full analytic domain need no
 Further coordinate methods and a nonspherical analytic target appear in
 Appendix~\ref{app:coordinate-methods}. These results supplement the common descent framework without
 interrupting the bundle arguments. Section~\ref{sec:verification} distinguishes the Lean-checked
-theorems from the later mathematical extensions; a proof in this article is not by itself a claim
+statements from those with written proofs only; a proof in this article is not by itself a claim
 of formal verification.
 
 \subsection*{Conventions}
@@ -248,15 +257,16 @@ $\abs{x+y}^{p^m}\le2\max(\abs x,\abs y)^{p^m}$, and taking roots and letting $m\
 For $n\le\infty$, $C^n$ refers to iterated Fr\'echet differentiability. Power-series analyticity means
 local expansion in bounded multilinear coefficients with a positive norm-controlled radius.
 For manifolds and $C^\omega$ bundles we use the analytic calculus in which the iterated derivatives are
-analytic as well. With complete ranges this agrees with power-series analyticity. For incomplete ranges
-we retain the derivative condition, as in Mathlib's $C^\omega$ convention~\cite{docs}.
-Section~\ref{sec:descent} explains why the descent results used for bundles also preserve that condition.
+analytic as well, as in Mathlib's $C^\omega$ convention~\cite{docs}. On open sets this agrees with
+power-series analyticity at every point, even for incomplete ranges: the derivative series at each point
+converges in the completion to the Fr\'echet derivative, which exists in the original operator space because every nearby point is again a point of analyticity. The two notions
+differ only for germs at a single point.
 
 \section{From linear constructions to bundles}\label{sec:bundles}
 
 A vector bundle allows a linear construction to vary over a manifold. The construction must act on linear maps, so that it transports changes of coordinates; its regularity must also be strong enough to transport families of those maps. These are separate requirements. Functoriality supplies the compatibility of the new coordinates, while analysis determines whether they define a smooth or analytic bundle.
 
-Throughout, $K$ is a nontrivially normed field and $\mathsf{Vec}_K$ is the category of normed $K$-spaces and bounded linear maps. No completeness assumption is imposed on the spaces. Write $\cL(E,E')$ for its hom spaces, equipped with the operator norm. For $n\in\N\cup\{\infty,\omega\}$, regularity of order $n$ means continuity when $n=0$, iterated Fr\'echet smoothness for finite $n$ and $n=\infty$, and the analytic manifold regularity class for $n=\omega$. When the range is incomplete, this last convention includes the derivative regularity required by that calculus; we do not identify it with the existence of a power series at each point alone.
+Throughout, $K$ is a nontrivially normed field and $\mathsf{Vec}_K$ is the category of normed $K$-spaces and bounded linear maps. No completeness assumption is imposed on the spaces. Write $\cL(E,E')$ for its hom spaces, equipped with the operator norm. For $n\in\N\cup\{\infty,\omega\}$, regularity of order $n$ means continuity when $n=0$, iterated Fr\'echet smoothness for finite $n$ and $n=\infty$, and the analytic manifold regularity class for $n=\omega$. When the range is incomplete, this last convention includes the derivative regularity required by that calculus.
 
 \subsection{The bundle construction}
 
@@ -322,9 +332,9 @@ The familywise hypothesis is a condition on $\mathcal F$ for \emph{all} families
  \prod_{a=1}^r\operatorname{Hom}_{\mathsf C_a}(E_a,E'_a),
  \qquad U\subseteq P\text{ open},
 \]
-the operator family $\mathcal F\circ\gamma$ must be $C^n$. It is weaker than regularity on whole hom spaces. In particular, preserving finite-dimensional analytic families can suffice for bundles on a finite-dimensional base even when the functor fails to be analytic on an infinite-dimensional hom space. The distinction between these two requirements is central to this paper.
+the operator family $\mathcal F\circ\gamma$ must be $C^n$. It is weaker than regularity on whole hom spaces. In particular, preserving finite-coordinate analytic families can suffice for bundles on a finite-coordinate base even when the functor fails to be analytic on an infinite-dimensional hom space. The distinction between these two requirements is central to this paper.
 
-The theorem also applies to restricted categories of fibers, provided the prescribed bundle morphisms take values in their hom spaces. It is the familiar transport of a linear construction to bundles, expressed so that both mixed variance and the required operator regularity are explicit; compare \cite{La,G2}.
+The theorem also applies to restricted categories of fibers, provided the prescribed bundle morphisms take values in their hom spaces. It is the familiar transport of a linear construction to bundles, expressed so that both mixed variance and the required operator regularity are explicit; compare \cite{G2,La}.
 
 \subsection{Alternating maps inside multilinear maps}
 
@@ -451,7 +461,7 @@ There are two ways to solve the coefficient problem. One can retract the ambient
 \subsection{Retractions and lifts in the fibers}
 
 \begin{proposition}[splitting the alternating inclusion]\label{prop:split-lift}
-If the inclusion $j_E\colon\Alt^k(E;F)\hookrightarrow\Mult^k(E;F)$ has a bounded linear retraction $\rho$, then $A^k_{E,E';F}$ has a bounded $k$-linear lift of norm at most $\norm\rho$, for every normed $E'$. Such a lift also exists in each of the following cases:
+If the inclusion $j_{E,F}\colon\Alt^k(E;F)\hookrightarrow\Mult^k(E;F)$ has a bounded linear retraction $\rho$, then $A^k_{E,E';F}$ has a bounded $k$-linear lift of norm at most $\norm\rho$, for every normed $E'$. Such a lift also exists in each of the following cases:
 \begin{enumerate}
 \item $k!\ne0$ in $K$;
 \item either $E$ or $E'$ has a finite algebraic basis with continuous coordinate functionals.
@@ -519,7 +529,7 @@ The spaces $\Mult^k(E;F)$ and $\Alt^k(E;F)$ have nonarchimedean operator norms. 
 
 Quotienting the free-space construction by its relations and then by zero seminorm gives the separated nonarchimedean exterior power; completion gives the Banach-target representation in Section~\ref{sec:duality}. Its maximum seminorm is essential here; the norm on $E$ itself need not satisfy a nonarchimedean inequality. Equivalent changes of norms preserve all analytic conclusions, so an equivalent nonarchimedean spherically complete norm on $F$ is sufficient.
 
-\begin{corollary}[discretely valued bases]\label{cor:discrete-targets}
+\begin{corollary}[discretely valued fields]\label{cor:discrete-targets}
 Suppose $K$ is nonarchimedean with $\abs{K^\times}=r^\Z$ for some $0<r<1$.
 Every Banach target $F$ admitting an equivalent nonarchimedean norm makes $A^k_{E,E';F}$
 analytic in every degree and for all normed $E,E'$. The field itself need not be complete.
@@ -557,15 +567,15 @@ For each $\alpha$, choose the nondecreasing coordinate word $i_1(\alpha),\ldots,
 There are exactly $d^n$ ordered terms before grouping. Thus the triangle inequality gives the stated bound, and two maximum estimates give the nonarchimedean refinement. The diagonals agree. Their exponential bounds preserve a positive radius in Theorem~\ref{thm:coefficient-descent}. The case $d=0$ is immediate.
 \end{proof}
 
-Finite-coordinate bases therefore support alternating bundles in every characteristic and degree, regardless of fiber dimension or completeness. Infinite coordinates require a summability mechanism. There are two distinct versions; their differing hypotheses matter.
+Finite-coordinate bases therefore support alternating bundles in every characteristic and degree, regardless of fiber dimension or completeness. Finite algebraic dimension of the base is not enough over an incomplete field: for $K=\F_p(t)$ and $k\ge p$, the end of Appendix~\ref{app:no-largest} gives a base of dimension $p+1$ without continuous coordinates and a nonanalytic alternating atlas. Infinite coordinates require a summability mechanism. There are two distinct versions; their differing hypotheses matter.
 
 \begin{theorem}[summable parameter spaces]\label{thm:summable-parameters}
 Let $j\colon W\to Z$ be a closed linear isometry.
 \begin{enumerate}
 \item Suppose $K$ and $Z$ are nonarchimedean and $W$ is complete. For $U\subseteq c_0(I,K)$ open, analyticity of $jf$ implies analyticity of $f\colon U\to W$. Coefficients can be lifted without increasing their norms.
-\item Suppose $Z$ is complete. Let $a\colon H\to W$ have an ambient bounded homogeneous polynomial representation of fixed degree $d$. For every analytic $\gamma\colon U\to H$, with $U\subseteq\ell^1(I,K)$ open, the composite $a\gamma$ is analytic.
+\item Suppose $Z$ is complete. Let $a\colon H\to W$ have an ambient bounded homogeneous polynomial representation of fixed degree $d$, that is, $ja(h)=B(h,\ldots,h)$ for a bounded $d$-linear $B\colon H^d\to Z$ on a normed space $H$. For every analytic $\gamma\colon U\to H$, with $U\subseteq\ell^1(I,K)$ open, the composite $a\gamma$ is analytic.
 \end{enumerate}
-Here $c_0$ carries the supremum norm and $\ell^1$ the ordinary sum norm. The field need not be complete. Each assertion remains valid for a parameter space that is a bounded linear retract of the indicated space.
+Here $c_0$ carries the supremum norm and $\ell^1$ the ordinary sum norm. The field need not be complete. Each analyticity assertion remains valid for a parameter space $P$ that is a bounded linear retract of the indicated space $V$, with bounded linear $i\colon P\to V$, $r\colon V\to P$ and $ri=\id_P$; in~(1) the lifted coefficients then satisfy $\norm{q_n}\le(\norm r\norm i)^n\norm{b_n}$.
 \end{theorem}
 \begin{proof}
 For $c_0$, order $I$ and group the coordinate coefficients of each ambient $b_n$ into nondecreasing words. Finite-coordinate uniqueness puts the grouped coefficients $c_{i_1,\ldots,i_n}$ in $W$, and the nonarchimedean inequality bounds their norms by $\norm{b_n}$. The formula
@@ -576,7 +586,7 @@ For $c_0$, order $I$ and group the coordinate coefficients of each ambient $b_n$
 \]
 converges: outside finite sets of words some coordinate factor is arbitrarily small, while the others are bounded. Completeness of $W$ supplies the sum, with norm at most $\norm{b_n}\prod_r\norm{x_r}$. Equality of diagonals holds on finite supports and then by density. Apply Theorem~\ref{thm:coefficient-descent}.
 
-For $\ell^1$, the same sorting argument in degree $d$ gives a lift of norm at most $d!\norm B$ for every bounded $d$-linear $B\colon\ell^1(J,K)^d\to Z$ whose diagonal lies in $W$. Each grouped coefficient has at most $d!$ terms, and the resulting series is absolutely summable, bounded by $d!\norm B\prod_r\norm{x_r}_1$.
+For $\ell^1$, the same sorting argument in degree $d$ gives a lift of norm at most $d!\norm{B'}$ for every bounded $d$-linear $B'\colon\ell^1(J,K)^d\to Z$ whose diagonal lies in $W$. Each grouped coefficient has at most $d!$ terms, and the resulting series is absolutely summable, bounded by $d!\norm{B'}\prod_r\norm{x_r}_1$.
 
 To apply this bound to a nonlinear $\gamma$, factor its expansion locally as $Tg$, where $T\colon\ell^1(J,K)\to\widehat H$ is bounded linear. Explicitly, write $\gamma(x_0+x)=\sum_na_n(x,\ldots,x)$ and choose $s\in K$, $0<\abs s$ within its radius. Set $J=\coprod_{n\ge0}I^n$ and
 \[
@@ -588,7 +598,7 @@ The first formula has uniformly bounded values and extends by absolute summation
 The degree-$n$ multilinear coefficient of $g$ has entries
 $s^{-n}(x_1)_{i_1}\cdots(x_n)_{i_n}$ in its $n$th block and zero elsewhere, so its norm is at most
 $\abs s^{-n}$. Its diagonal block has sum norm $(\norm{x}_1/\abs s)^n$, so $g$ has a convergent
-multilinear expansion for $\norm{x}_1<\abs s$, without requiring completeness of $K$, and $Tg=\gamma$.
+multilinear expansion for $\norm{x}_1<\abs s$, without requiring completeness of $K$, and $T(g(x))=\gamma(x_0+x)$ there.
 Extend the fixed outer multilinear map to $\widehat H$ using completeness of $Z$; its diagonal still
 lies in $W$ by closedness. The sorted lift of its composite with $T$ is a bounded polynomial into $W$.
 Composing with $g$ proves analyticity at $x_0$, and the argument applies at each point.
@@ -598,7 +608,7 @@ independent of the degrees in the expansion of $\gamma$.
 Finally, if $ri=\id_P$ for bounded maps $i\colon P\to V$, $r\colon V\to P$, apply either result to the family composed with $r$ on $r^{-1}(U)$, and then restrict along $i$.
 \end{proof}
 
-These parameter results also preserve the stronger $C^\omega$ convention in which the iterated derivatives are analytic. Smooth descent first constructs derivatives in the smaller target. For finite coordinates and $c_0$, apply the same reflection theorem to every induced closed isometry $\Mult^r(P;W)\hookrightarrow\Mult^r(P;Z)$. For $\ell^1$, each derivative $D^s a$ has an ambient bounded homogeneous polynomial expression of degree $d-s$ (and vanishes for $s>d$), with values in the closed subspace of $W$-valued operators. Apply the fixed-degree result to $(D^s a)\gamma$; the iterated chain rule combines these maps with the analytic derivatives of $\gamma$. Thus the bundle applications below use the same regularity convention as their input manifolds and bundles.
+Since Theorems~\ref{thm:finite-parameters} and~\ref{thm:summable-parameters} give analyticity at every point of an open set, the $C^\omega$ conclusion follows (see Conventions).
 
 The $\ell^1$ assertion uses one factorial bound for the fixed outer degree. Applying $n!$ separately to every Taylor coefficient of an arbitrary ambient analytic map would not yield an exponential bound, and does not prove general analytic descent. For the alternating joint action the outer degree is $k+1$, or $k$ for precomposition alone.
 
@@ -621,7 +631,7 @@ $\ell^1(I,K)$, or a bounded linear retract & Complete target fibers.\\
 The fiber hypotheses apply to both pairs of bundles at the endpoints of a morphism. Each alternative in the first row specifies a separate setting. At every finite smoothness order and at $C^\infty$, no additional hypothesis on $K,P$ or the fibers is needed.
 \end{corollary}
 \begin{proof}
-The fiber results make the appropriate operator actions analytic. The parameter results instead apply directly to their ambient polynomial along transition families and local morphism families. When the final value-space fiber is complete, the ambient multilinear and operator spaces are complete; they are also nonarchimedean when that fiber is. Theorem~\ref{thm:bundle-lifting} supplies the bundle construction in every case. The smooth assertion follows from Lemma~\ref{lem:closed-smooth}.
+The fiber results give a bounded $k$-linear lift $Q$ of $A$; then $(u_1,\ldots,u_k,g)\mapsto\bigl(m\mapsto g\circ Q(u_1,\ldots,u_k)(m)\bigr)$ is a bounded $(k+1)$-linear lift of the joint action $B$, which is therefore analytic. The parameter results instead apply directly to their ambient polynomial along transition families and local morphism families. When the final value-space fiber is complete, the ambient multilinear and operator spaces are complete; they are also nonarchimedean when that fiber is. Theorem~\ref{thm:bundle-lifting} supplies the bundle construction in every case. The smooth assertion follows from Lemma~\ref{lem:closed-smooth}.
 \end{proof}
 
 For both $\mathbb Q_p$ and $\mathbb C_p$, every finite degree belongs to the first row: these fields have characteristic zero, although their residue characteristic is $p$. The possibly large bound $k!/\abs{k!}_p$ remains finite and causes no convergence problem for a finite polynomial. Spherical completeness of $\mathbb Q_p$, and its failure for $\mathbb C_p$~\cite[\S1]{Sch}, are therefore irrelevant to this conclusion.
@@ -709,7 +719,7 @@ Finally, if $P_YJ_Y=\id_Y$, then $W=P_Y\Theta(R_K)$. If $P_FJ_F=\id_F$, use
 All identities use bounded linear operations, which preserve each stated regularity class.
 \end{proof}
 
-Apply the theorem with $X=\Lambda^k_\pi E$, $Y=\Lambda^k_\pi D$ and $W(u)=\Lambda^k_\pi u$.
+Apply the theorem with $X=\Lambda^k_\pi E$, $Y=\Lambda^k_\pi D$ and $W(u)=\Lambda^k_\pi u$. Under the isometry of Proposition~\ref{prop:exterior}, $R_F$ is the precomposition action $A^k_{E,D;F}$, which is $C^\infty$ by Proposition~\ref{prop:ambient-polynomial} and Lemma~\ref{lem:closed-smooth}.
 It follows that the exterior-power functor is $C^\infty$, and is analytic on all hom spaces exactly
 when $\Alt^k$ is. Scalar alternating maps detect its operator-norm action after composition with $J_Y$;
 this is norm analyticity in a new target, not a weak-star regularity condition. In particular every
@@ -728,7 +738,7 @@ However, the chosen mixed coefficients need not depend linearly on $z$. Operator
 requires precisely such a bounded linear dependence. Thus even uniformly bounded choices of individual
 orbit lifts do not finish the construction. Degree zero has constant action.
 
-\paragraph{Changing the target category.}
+\paragraph{\textit{Changing the target category.}}
 Over a nonarchimedean field replace the sum in the projective seminorm by a maximum, then separate
 and complete. Write the result as $\widehat\Lambda^k_{\pi,\mathrm{na}}E$, with
 $\widehat\Lambda^0_{\pi,\mathrm{na}}E=\widehat K$. The preceding universal-property proof, using the
@@ -739,9 +749,9 @@ nonarchimedean inequality, gives
 \]
 This is the exterior version of Serre's nonarchimedean projective tensor construction~\cite[\S4]{Se}.
 The sum and maximum constructions represent different target categories.
-Over a discretely valued base, the completed nonarchimedean exterior-power action is analytic in every
+Over a discretely valued field, the completed nonarchimedean exterior-power action is analytic in every
 degree: use its own target $F=\widehat\Lambda^k_{\pi,\mathrm{na}}D$ in
-Corollary~\ref{cor:discrete-targets}, and evaluate the action at $\omega_D$.
+Corollary~\ref{cor:discrete-targets}, and evaluate the action at the universal alternating map $D^k\to\widehat\Lambda^k_{\pi,\mathrm{na}}D$.
 The general-target obstruction of Section~\ref{sec:sharpness} therefore concerns the sum construction;
 its target admits no equivalent nonarchimedean norm. This distinction is necessary when interpreting
 the result in the usual nonarchimedean Banach category.
@@ -777,7 +787,8 @@ projective exterior target. The finite-field multiplier theorem of Appendix~\ref
 the required homogeneous lift, as shown in Appendix~\ref{app:laurent}. Projective extension of
 scalars and passage through the completion transfer the obstruction to every $K$ in the statement
 (Appendix~\ref{app:ascent}); Appendix~\ref{app:assembly} assembles the proof and establishes the claim
-about the target norm. The same Laurent construction gives the sharper $c_0$-base obstruction in
+about the target norm. Over the Laurent field itself, the same construction gives the sharper
+$c_0$-base obstruction in
 Corollary~\ref{lau:cor:diagonal-bundle}.
 
 For part~(2), the source spaces are cut out by limit conditions along chains in a countable tree.
@@ -807,7 +818,7 @@ Let $K$ be a complete nonarchimedean, nontrivially normed field. For any $k\ge0$
 \[
  \Alt^k(-;K)\colon\mathsf{Vec}_K^{\mathrm{op}}\longrightarrow\mathsf{Vec}_K
 \]
-is analytic on every Hom space if and only if $k!\ne0$ in $K$ or $K$ is spherically complete. The same equivalence holds when the source category is restricted to Banach spaces, or to nonarchimedean Banach spaces.
+is analytic on every hom space if and only if $k!\ne0$ in $K$ or $K$ is spherically complete. The same equivalence holds when the source category is restricted to Banach spaces, or to nonarchimedean Banach spaces.
 \end{theorem}
 
 \begin{proof}
@@ -852,7 +863,7 @@ Bounded linear compression preserves analyticity, so analyticity of $g(u)^*$ at 
 
 Take the base $M=\cL(E,D)$ and the trivial bundle $M\times H$. Its product trivialization and the trivialization $(u,z)\mapsto(u,g(u)z)$ form an analytic bundle atlas. The associated alternating transitions are pullback by $g(u)$ and $g(-u)$. Equation~\eqref{eq:shear-compression} proves that this induced atlas fails to be analytic whenever $A$ does. Equivalently, the analytic bundle automorphism $(u,z)\mapsto(u,g(u)z)$ does not induce an analytic morphism on the alternating product bundle.
 
-Thus every failure of the Hom-space criterion has a bundle realization. Theorem~\ref{thm:operator-obstructions} supplies Banach bases on which this failure occurs at every point, including the identity operator $g(0)$. This is a statement about the natural construction from an analytic atlas, and about its action on morphisms. The underlying pointwise bundle is trivial and still has an analytic product structure.
+Thus every failure of the hom-space criterion has a bundle realization. Theorem~\ref{thm:operator-obstructions} supplies Banach bases on which this failure occurs at every point, including the identity operator $g(0)$. This is a statement about the natural construction from an analytic atlas, and about its action on morphisms. The underlying pointwise bundle is trivial and still has an analytic product structure.
 
 \subsection{Tangent bundles and individual forms}
 
@@ -861,7 +872,7 @@ For scalar values the obstruction can be realized by derivatives of analytic coo
 \begin{proposition}[tangent and pullback obstructions]\label{prop:tangent-obstruction}
 Suppose $K$ is complete, has characteristic $p>0$, is not spherically complete, and $k\ge p$.
 \begin{enumerate}
-\item An analytic Banach manifold has two global analytic charts whose induced transition on scalar alternating $k$\nobreakdash-forms is analytic at no point.
+\item There is an analytic Banach manifold with two global analytic charts whose induced transition on scalar alternating $k$\nobreakdash-forms is analytic at no point.
 \item There are Banach spaces $N,Y$, a polynomial analytic map $h\colon N\to Y$, and an analytic map $\omega_0\colon Y\to\Alt^k(Y;K)$ such that $h^*\omega_0$, expressed in the product coordinates on $N$, is analytic at no point as an $\Alt^k(N;K)$\nobreakdash-valued map. After inclusion in $\Mult^k(N;K)$ it is analytic everywhere.
 \end{enumerate}
 \end{proposition}
@@ -895,9 +906,42 @@ restriction of the pulled-back form to the fixed $E$\nobreakdash-directions give
 
 The second assertion distinguishes a failure of intrinsic analyticity for individual forms from a failure of operator-valued bundle transitions. It also suggests the appropriate calculus when analytic descent is unavailable.
 
+The chart in Proposition~\ref{prop:tangent-obstruction}(1) realizes any nowhere analytic action $A^k_{E,D;F}$. With Theorem~\ref{thm:operator-obstructions}(1) it works over every field of characteristic $p$, and it extends to tangent-valued forms.
+
+\begin{proposition}[tangent obstructions with other values]\label{prop:tangent-values}
+Let $K$ be a nontrivially normed field of characteristic $p>0$, complete or not, and let $k\ge p$.
+\begin{enumerate}
+\item There are a Banach space $F$ and an analytic Banach manifold with two global analytic charts whose induced transition on $F$\nobreakdash-valued alternating $k$\nobreakdash-forms is analytic at no point.
+\item There is an analytic Banach manifold with two global analytic charts whose induced transition on tangent-valued alternating $k$\nobreakdash-forms is analytic at no point.
+\item If $K$ is complete and not spherically complete, a manifold as in~(2) exists with a nonarchimedean Banach model.
+\end{enumerate}
+The target $F$ constructed for~(1) admits no equivalent nonarchimedean norm; for $K=\F_q((u))$ as in Corollary~\ref{lau:cor:dichotomy}, the model space can be chosen nonarchimedean. The model space constructed for~(2) admits no equivalent nonarchimedean norm.
+\end{proposition}
+
+\begin{proof}
+For~(1), take $E,F$ from Theorem~\ref{thm:operator-obstructions}(1). Repeat the proof of Proposition~\ref{prop:tangent-obstruction}(1) with $D=E$ and values in $F$. On $X=\cL(E,E)\times E\times E$ the same maps $J,R$ give
+\[
+ R\circ A^k_{X,X;F}(D\psi(w,d,e))\circ J=A^k_{E,E;F}(w),
+\]
+which is analytic at no point. The argument uses only bounded linear compression and affine slices, so completeness of $K$ is not needed. For $K=\F_q((u))$ with its $u$\nobreakdash-adic absolute value, Remark~\ref{rem:spaces} allows $E=\linf(\N,K)$ and $F=B$, the completed projective exterior power of Theorem~\ref{thm:laurent}, and $B$ has no equivalent nonarchimedean norm by Proposition~\ref{prop:nonultra}. Then $X$ is nonarchimedean, since operator norms into a nonarchimedean space and maximum norms of products are nonarchimedean.
+
+For~(2) and~(3), suppose that $A^k_{E,D;F}$ is analytic at no point. Put $D'=D\times F$ and $X=\cL(E,D')\times D'\times E$, with the charts $\id_X$ and $\psi(u,d,e)=(u,d+ue,e)$ as before. Write $g=D\psi(u,d,e)$, so that $g^{-1}(v,a,b)=(v,a-ve-ub,b)$. As functions of the point $(u,d,e)$, the induced transitions on tangent-valued forms are $m\mapsto g\circ m\circ(g^{-1},\ldots,g^{-1})$ and $m\mapsto g^{-1}\circ m\circ(g,\ldots,g)$. Let $\pi_D\colon X\to D$ and $\pi_F\colon X\to F$ be the components of the middle factor, and put $i_F(y)=(0,(0,y),0)$ and $i_E(b)=(0,0,b)$. The bounded linear map
+\[
+ \Phi(T)(m)=\pi_F\circ T\bigl(i_F\circ m\circ\pi_D^{\times k}\bigr)\circ i_E^{\times k}
+\]
+sends operators on $\Alt^k(X;X)$ to operators $\Alt^k(D;F)\to\Alt^k(E;F)$. For $f,h\in\cL(X,X)$ it sends $m\mapsto h\circ m\circ(f,\ldots,f)$ to $m\mapsto(\pi_Fhi_F)\circ m\circ(\pi_Dfi_E,\ldots,\pi_Dfi_E)$. Here $\pi_Fg^{\pm1}i_F=\id_F$ and $\pi_Dg^{\pm1}i_E=\pm u_D$, where $u_D\in\cL(E,D)$ is the $D$\nobreakdash-component of $u$. So $\Phi$ sends the two transitions to $A^k_{E,D;F}(\mp u_D)=(\mp1)^kA^k_{E,D;F}(u_D)$. If either transition were analytic at $(u_0,d_0,e_0)$, restriction to the affine slice $w\mapsto(u_0+(w,0),d_0,e_0)$, $w\in\cL(E,D)$, would make $A^k_{E,D;F}$ analytic at the $D$\nobreakdash-component of $u_0$.
+
+For~(2), take $E,F$ from Theorem~\ref{thm:operator-obstructions}(1) and $D=E$. The model $X$ contains the isometric copy $i_F(F)$ of $F$, so it admits no equivalent nonarchimedean norm. For~(3), take $E,D$ from Theorem~\ref{thm:operator-obstructions}(2) and $F=K$. Then $X$ is a nonarchimedean Banach space, as in~(1).
+\end{proof}
+
+\paragraph{\textit{Tangent bundles.}}
+For $\Alt^k(TM;F)$ the source fiber is the model space $P$. Finite coordinates on the base are therefore finite coordinates on the source fiber, and Proposition~\ref{prop:split-lift}(2) already makes the action analytic on whole hom spaces. This is the last case of the first row of Corollary~\ref{cor:bundle-cases}. Over a finite-coordinate base, Theorem~\ref{thm:finite-parameters} and the second row add cases only when the source fibers lack finite coordinates. Examples are source bundles of infinite rank, and pulled-back tangent bundles $f^*TN$ along analytic maps $f\colon M\to N$ from a finite-coordinate manifold $M$ into an infinite-dimensional manifold $N$.
+
+Over a discretely valued field, Corollary~\ref{cor:discrete-targets} makes $\Alt^k(TM;F)$ analytic on every analytic manifold for every Banach $F$ with an equivalent nonarchimedean norm, as noted after Corollary~\ref{lau:cor:dichotomy}. It also makes tangent-valued forms analytic when the model is such a space. So over $\F_q((u))$ the target in Proposition~\ref{prop:tangent-values}(1) cannot have an equivalent nonarchimedean norm, while the manifold can be modeled on a nonarchimedean Banach space. This is consistent with~(3): a complete discretely valued field is spherically complete (Lemma~\ref{lem:discdist}).
+
 \section{Analytic differential forms}\label{sec:forms}
 
-An alternating form can be analytic as a multilinear-valued function even when it has no analytic expansion with alternating-valued coefficients. The ambient viewpoint retains exactly the regularity needed for the usual operations on differential forms.
+An alternating form can be analytic as a multilinear-valued function even when it has no analytic expansion with alternating-valued coefficients (Proposition~\ref{prop:tangent-obstruction}(2)). The ambient viewpoint retains exactly the regularity needed for the usual operations on differential forms.
 
 Throughout this section $K$ is complete and nontrivially normed. Manifold models may be arbitrary normed spaces. We use $C^\omega$ analytic charts and maps, so their derivatives are analytic also for incomplete models. Coefficient spaces of scalar multilinear forms are Banach, where this agrees with power-series analyticity. No characteristic or degree restriction is imposed.
 
@@ -960,7 +1004,7 @@ The second derivative of an analytic map is symmetric in every characteristic. A
 Differentiate the pullback formula. Terms differentiating $\eta$ give $h^*(d\eta)$ after the signed sum~\eqref{eq:exterior-derivative}. The other terms insert $D^2h(v_a,v_b)$ into one argument of $\eta$. Symmetry of $D^2h$ and alternation of $\eta$ cancel the terms in pairs. Therefore $d(h^*\eta)=h^*(d\eta)$; applying this identity to chart changes proves that the local derivatives glue. Finally, differentiating the shuffle formula gives the Leibniz rule: placing the derivative index in the second block moves it past the first $k$ arguments and contributes $(-1)^k$. Every identity uses finite sums and cancellation, with no division by a factorial.
 \end{proof}
 
-The same proof gives Banach-valued forms, with products associated to bounded bilinear maps of value spaces. For such a product the shuffle bound is $\binom{k+l}{k}\norm{\beta}$. The scalar case already supplies the differential graded algebra relevant to the cotangent construction.
+The same proof gives forms with values in a commutative Banach algebra; for a general bounded bilinear product $\beta$ all properties except associativity and graded commutativity carry over. For such a product the shuffle bound is $\binom{k+l}{k}\norm{\beta}$. The scalar case already supplies the differential graded algebra relevant to the cotangent construction.
 
 \begin{proposition}[comparison with alternating-bundle sections]\label{prop:ambient-agreement}
 Every intrinsically analytic alternating-valued coefficient map is ambient analytic. If, for the model space $P$, the inclusion $j$ has a bounded linear retraction, then the natural alternating cotangent atlas is analytic and its analytic sections are precisely the ambient analytic forms. The same conclusion holds when $P$ has finite continuous coordinates.
@@ -972,7 +1016,7 @@ The first statement follows by composition with $j$. For a bounded retraction $R
  (u_1,\ldots,u_k)\longmapsto
  \bigl[m\longmapsto R\bigl(m\circ(u_1,\ldots,u_k)\bigr)\bigr]
 \]
-is a bounded multilinear lift of the precomposition action. Thus the induced tangent transitions are analytic. For finite continuous coordinates, analytic descent through closed subspaces applies to the coefficient map itself, and Corollary~\ref{cor:bundle-cases} supplies the analytic bundle atlas.
+is a bounded multilinear lift of the precomposition action. Thus the induced alternating cotangent transitions are analytic. For finite continuous coordinates, analytic descent through closed subspaces applies to the coefficient map itself, and Corollary~\ref{cor:bundle-cases} supplies the analytic bundle atlas.
 \end{proof}
 
 The retraction hypothesis holds for invertible $k!$, by normalized antisymmetrization, and for spherically complete nonarchimedean $K$, by Theorem~\ref{thm:spherical}. These are sufficient conditions, not a necessity claim. An arbitrarily chosen analytic structure on a pointwise alternating bundle is weaker: the product bundles in Proposition~\ref{prop:tangent-obstruction}(2) have such structures, yet pullback fails to preserve their intrinsically analytic sections. The ambient definition avoids that dependence on an unjustified analytic descent, while preserving the geometric operations that motivate differential forms.
@@ -983,9 +1027,8 @@ The preceding results suggest a single interface for constructing alternating bu
 regularity. Gou\"ezel's proposed construction~\cite{G2} uses characteristic zero
 to prove regularity of the induced transition operators. Its assembly through
 \texttt{VectorPrebundle.\allowbreak IsContMDiff} can instead use the family-preservation premise below.
-The general constructor and its finite-coordinate application are already implemented in our
-development~\cite{LeanP}. The proof class and instance organization in this section are a proposed
-upstream interface; they are not asserted to be existing Mathlib declarations.
+The general constructor and its finite-coordinate application are proved in~\cite{LeanP}. The proof class and its instance are a proposal: they are not Mathlib
+declarations and are not in~\cite{LeanP}.
 
 \subsection{The family-preservation premise}
 
@@ -1015,8 +1058,7 @@ $E=E'=F_1$ and $F=F'=F_2$.
 
 The following complete definition uses the joint action \texttt{alternatingMapAction} from our
 development. All parameters and typeclass hypotheses are explicit; the local names \texttt{Op}
-and \texttt{Out} abbreviate $\mathcal O$ and $\mathcal T$. The definition has been checked against
-the imported development. Stating this predicate requires a charted base, but no completeness or
+and \texttt{Out} abbreviate $\mathcal O$ and $\mathcal T$. The definition typechecks against~\cite{LeanP}. Stating this predicate requires a charted base, but no completeness or
 manifold-regularity assumption.
 
 \Needspace{30\baselineskip}
@@ -1118,7 +1160,7 @@ following proof constructors, with commonly used ones eligible for automatic ins
 preservation over every nontrivially normed field, for arbitrary normed model fibers and every
 model with corners.
 \item If $k!\ne0$ in $K$, Proposition~\ref{prop:split-lift} proves preservation at every regularity,
-including $\omega$. Characteristic zero supplies this condition in every degree.
+including $\omega$. Characteristic zero supplies this condition in every degree. Part~(2) of the same proposition proves the same when a source model fiber $E$ or $E'$ has finite continuous coordinates; this covers $\Alt^k(TM;F)$ over a finite-coordinate base.
 \item For ordinary open-chart models $I=\mathcal I(K,P)$, continuous coordinates
 $P\simeq_L K^d$ give analytic family preservation with arbitrary normed fibers
 (Theorem~\ref{thm:finite-parameters}). The manifold application assumes the corresponding analytic
@@ -1143,7 +1185,7 @@ The smooth family proof is available independently from closed-range reflection.
 once a particular bundle has been proved analytic, its lower-order bundle regularity follows
 through Mathlib's existing instances.
 
-\subsection{Coherence, morphisms, and verification scope}
+\subsection{Coherence, morphisms, and verification scope}\label{sec:coherence}
 
 Mathlib's \texttt{ContMDiffVectorBundle} is itself a \texttt{Prop} class: it asserts regularity of
 the transition operators and carries no new bundle data. Proof irrelevance identifies different
@@ -1163,7 +1205,7 @@ The four-endpoint premise also supports the morphism construction of
 Section~\ref{sec:bundles}. Given regular input morphisms and regular alternating bundles at both
 endpoints, apply it to their local operator coordinates to obtain a regular morphism between the
 alternating bundles. The self-endpoint premise used for a bundle instance alone does not establish
-this cross-endpoint condition. The local development implements this distinction in
+this cross-endpoint condition. The development~\cite{LeanP} implements this distinction in
 \texttt{alternatingBundleHom\_\allowbreak of\_\allowbreak family}.
 
 For an individual chosen atlas the family premise is sufficient and may be stronger than
@@ -1172,7 +1214,7 @@ over all normed fibers and all compatible input frames, its necessity is detecte
 construction of Proposition~\ref{prop:shear}. An arbitrary family $u(x)\colon E\to D$ factors as
 \[
  u(x)=\pi_D S_x i_E,\qquad
- S_x(d,e)=(d+u(x)e,e),\qquad S_x^{-1}=S_{-u(x)}.
+ S_x(d,e)=(d+u(x)e,e),\qquad S_x^{-1}(d,e)=(d-u(x)e,e).
 \]
 The two frames of the trivial $(D\oplus E)$-bundle defined by the identity and $S_x$ test the induced
 action on $S_x$; fixed bounded compression then recovers the action on $u(x)$. Together with bounded
@@ -1180,15 +1222,23 @@ bilinear postcomposition this recovers the joint alternating family. This conver
 universal quantifiers and the enlarged source fiber, and is not a converse instance for one fixed
 bundle or one fixed pair of models.
 
-The implemented theorem kernel consists of the first three declarations below; the fourth is the
-supplied-coordinate application.
+For the ordinary model $I=\mathcal I(K,P)$ and a nonempty $C^n$ manifold $M$, whether
+\eqref{eq:mathlib-family-premise} holds depends only on $P$, $n$, $k$ and the model fibers, not on $M$.
+Regularity on $M$ is checked in charts. Conversely, a family on an open subset of $P$ near $x_0$ can be
+composed with $y\mapsto x_0+\lambda(y-y_0)$, for $\lambda\in K^\times$ small, and with a chart of $M$
+whose image contains a ball around $y_0$; the premise on $M$ then gives regularity near $x_0$. With the
+shear converse, if the alternating construction preserves $C^n$ bundles with all normed fibers over one
+nonempty manifold modeled on $P$, it does so over every such manifold.
+
+The theorem kernel in~\cite{LeanP} consists of the first three declarations below; the fourth is
+the supplied-coordinate application.
 \begin{leancode}
 contMDiffOn_continuousAlternatingMapCoordChange_of_family
 alternatingVectorPrebundle_isContMDiff_of_family
 contMDiffVectorBundle_alternating_of_family
 contMDiffVectorBundle_alternating_of_finiteCoordinates
 \end{leancode}
-These declarations in our development use \texttt{Fin k}. An upstream presentation should retain
+These declarations use \texttt{Fin k}. An upstream presentation should retain
 Mathlib's arbitrary finite index type, transporting the coordinate-based proofs along a bijection
 with \texttt{Fin k}, where $k$ is its cardinality. The new proof class, its automatic instances, this
 index-type adaptation, and the proposed search organization have not been implemented or checked
@@ -1200,10 +1250,10 @@ Section~\ref{sec:verification}.
 The descent formulation leaves three closely related questions in the obstructed range
 $\operatorname{char}K=p>0$, $k\ge p$.
 
-\paragraph{Which fibers remove the obstruction?}
+\paragraph{\textit{Which fibers remove the obstruction?}}
 Call $F$ a universal target if $\Alt^k(-;F)$ is analytic on every hom space. A nonarchimedean,
 spherically complete norm is sufficient, as is any equivalent norm of that kind. Over a complete
-nonspherically complete field, however, every universal target must have zero continuous dual.
+field that is not spherically complete, however, every universal target must have zero continuous dual.
 Indeed, if $\lambda(v)=1$ for $\lambda\in F^*$ and $v\in F$, then
 \[
  A^k_{E,D;K}(u)(a)=\lambda\circ A^k_{E,D;F}(u)(v a).
@@ -1215,20 +1265,24 @@ given norm is not necessary: an equivalent spherically complete norm can suffice
 spherically complete field, it is also open whether every nonarchimedean Banach target is universal.
 The general-target obstruction has no equivalent nonarchimedean norm and does not decide this question.
 
-\paragraph{Which bases permit descent?}
+\paragraph{\textit{Which bases permit descent?}}
 The finite-coordinate, $c_0$ and $\ell^1$ arguments impose different conditions on the final target.
 The remaining problem is to characterize model spaces $P$ for which every analytic family of operators
 parametrized by an open subset of $P$ is preserved by $\Alt^k$, separately for arbitrary normed,
-complete, and complete nonarchimedean targets. Over a complete field, universal Banach-valued analytic
-reflection through closed linear inclusions is sufficient for complete targets, but is stronger
-than necessary for this fixed-degree action. For Banach parameter spaces,
+complete, and complete nonarchimedean targets. Over $\F_q((u))$ with a $u$\nobreakdash-adic absolute
+value, Corollary~\ref{lau:cor:dichotomy} answers this for arbitrary normed targets and Banach models
+with an equivalent nonarchimedean norm: exactly the finite-dimensional models qualify.
+Over a complete field, universal Banach-valued analytic reflection through closed linear inclusions is
+sufficient for complete targets. Over a complete nonarchimedean field it is stronger than necessary for
+this fixed-degree action, by Proposition~\ref{fam:prop:l1-optimal} and
+Theorem~\ref{thm:summable-parameters}(2). Over $\mathbb R$ and $\mathbb C$ every Banach space has it, by symmetrization (Appendix~\ref{app:reflection}). For Banach parameter spaces,
 Theorem~\ref{fam:thm:tensor-analytic} characterizes this reflection property by exponentially bounded
 projections onto the closed spans of pure powers in projective tensor powers. The proof and the
 sharp factorial projection bounds of Proposition~\ref{fam:prop:l1-optimal} appear in
 Appendix~\ref{app:reflection}; they explain why the fixed-degree $\ell^1$ argument goes beyond
 universal analytic reflection.
 
-\paragraph{When do the two notions of analytic form coincide?}
+\paragraph{\textit{When do the two notions of analytic form coincide?}}
 For a fixed model $P$, a bounded retraction onto alternating forms gives both an analytic cotangent
 atlas and equality of ambient and intrinsic analytic forms. It is not known whether compatibility with
 every analytic coordinate change on $P$ already forces that equality. A chosen analytic product
@@ -1244,37 +1298,51 @@ without continuous coordinates. Whether an analogous failure occurs over complet
 Banach pairs remains open.
 
 \subsection*{Formal verification}
-The Lean development~\cite{LeanP} predates this reorganization. Its theorem map records the precise
-declarations, hypotheses and reviewed scope; the table below summarizes the coverage relevant here.
-It does not assert that every combined statement in the present exposition is a separate Lean theorem.
+The Lean proofs are in~\cite{LeanP}. Its file
+\texttt{challenge.md} is a ledger of 76 claims of this paper. Each claim has a challenge file, stating it in Lean with
+\texttt{sorry} in place of the proof, and a solution file proving the identical statement. The command
+\texttt{python3 scripts/check\_claim.py ID}, with \texttt{ID} such as \texttt{Thm4\_4}, builds both
+files, checks that the proof uses only the axioms \texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound}, and checks that the two statements agree when printed with all implicit arguments shown (\texttt{pp.all}). All 76 claims
+pass. The check uses Lean~\texttt{4.34.0-rc2} and the Mathlib fork \texttt{Deicyde/mathlib4} at
+\texttt{2b73d98}, which is upstream \texttt{0383a80e64} plus the commit of~\cite{PR}. The six
+statements of the earlier comparator challenge in the same repository pass the comparator
+\url{https://github.com/leanprover/comparator} at revision \texttt{19e111e}.
 
 \begin{center}
 \small
-\begin{tabular}{p{0.67\textwidth}p{0.23\textwidth}}
+\begin{tabular}{lp{0.62\textwidth}r}
 \hline
-Result or ingredient & Verification status\\[3pt]
+Part & Ledger claims & Number\\
 \hline
-Smoothness; factorial criterion; the general Banach operator obstruction & Lean-checked\\[3pt]
-Spherical-target and discrete-target operator theorems; finite-coordinate lifts & Lean-checked\\[3pt]
-Finite-coordinate, $c_0$ and ordinary $\ell^1$ analytic-family theorems & Lean-checked\\[3pt]
-Finite-coordinate analytic bundle bifunctor; Banach shear bundle obstruction & Lean-checked\\[3pt]
-General bundle lifting, including natural transformations & Written proof\\[3pt]
-Scalar obstruction and its tangent and pullback realizations & Written proofs\\[3pt]
-Manifold-level ambient differential calculus & Written proof; auxiliary lemmas checked\\[3pt]
-Normed exterior representation and bidual detection & Written proofs\\[3pt]
+Sections 2--3 & \ref{thm:bundle-lifting}--\ref{prop:homogeneous-lift} & 5\\
+Section 4 & \ref{prop:split-lift}--\ref{cor:bundle-cases}, with both parts of \ref{thm:summable-parameters} & 7\\
+Section 5 & \ref{prop:exterior}, \ref{thm:duality} & 2\\
+Section 6 & both parts of \ref{thm:operator-obstructions}; \ref{cor:classification}--\ref{prop:tangent-obstruction}; the bundle statement after \ref{prop:shear} & 7\\
+Section 7 & \ref{thm:ambient-forms}, \ref{prop:ambient-agreement} & 2\\
+Section 9 & zero dual of universal targets & 1\\
+Appendices A--B & \ref{lem:unique}--\ref{lem:findim}, \ref{lem:detinj}--\ref{lem:D}, \ref{rem:FFunit} & 16\\
+Appendix C & \ref{thm:laurent}--\ref{lem:Psi}, \ref{lau:prop:c0-multipliers}--\ref{lau:cor:dichotomy} & 7\\
+Appendices D--E & \ref{lem:discdist}--\ref{prop:ascent}, \ref{lem:descent}, \ref{prop:nonultra}, \ref{rem:spaces} & 12\\
+Appendix F & \ref{thm:scalar-counter}--\ref{scalar:certificate} & 5\\
+Appendix G & \ref{fam:prop:tensor-homogeneous}, \ref{fam:thm:tensor-analytic}--\ref{fam:cor:no-common-radius} & 4\\
+Appendix H & \ref{dom:split-incoming}--\ref{dom:degree-gap} & 5\\
+Appendix I & \ref{prop:scalar-countable}--\ref{rem:nonspherical-analytic-target} & 3\\
 \hline
 \end{tabular}
 \end{center}
 
-The original operator verification used Lean~\texttt{4.34.0-rc2}, with the versions and later extensions
-recorded in the repository. Its checked proof library has no admitted proofs and uses only
-\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. The scalar tail input and four
-vector-space lemmas underlying the ambient calculus were separately checked; these do not constitute
-a formalization of the scalar construction or the manifold-level differential graded algebra.
-The existing challenge is checked with Kim Morrison's comparator. This manuscript rewrite introduces
-no changes to that challenge or new claims of Lean verification.
+Apart from Proposition~\ref{prop:tangent-values}, the ledger covers every theorem, proposition, lemma and corollary. It also covers three remarks,
+the bundle statement after Proposition~\ref{prop:shear}, and one claim of this section. It does not cover the definitions or
+Remarks~\ref{rem:FFhyp}, \ref{rem:infkappa} and~\ref{rem:ascent}. Proposition~\ref{prop:tangent-values}, the coefficient bound on retracts in Theorem~\ref{thm:summable-parameters}(1), and the remaining unnumbered arguments of the text are outside the ledger. Apart from the declarations named in Section~\ref{sec:mathlib-interface}, they have written proofs only.
 
-
+Some ledger statements differ from the text, and \texttt{challenge.md} and the docstrings of the challenge files list the differences. The main
+ones are these. Theorem~\ref{thm:ambient-forms} and Proposition~\ref{prop:ambient-agreement} are stated
+on open subsets of a normed space, since Mathlib has no differential forms on manifolds. The Lean
+statement of Theorem~\ref{thm:bundle-lifting} groups the variables by variance, uses the canonical trivializations, and
+does not state independence of the trivializing cover. Corollary~\ref{lau:cor:diagonal-bundle} is
+stated for the explicit transition and section maps, and Corollary~\ref{cor:bundle-cases} for objects
+and morphisms without the functor laws.
 
 \appendix
 
@@ -1282,7 +1350,7 @@ no changes to that challenge or new claims of Lean verification.
 The constructions below use three elementary facts about valued fields and power series. We record their proofs to make explicit the scope of the coefficient argument, including incomplete base fields.
 
 \begin{lemma}[one-variable uniqueness]\label{lem:unique}
-Let $K$ be nontrivially normed and $Z$ a normed $K$\nobreakdash-space, not necessarily complete. Let $z_0,z_1,\dots\in Z$, $\rho>0$
+Let $K$ be nontrivially normed and $Z$ a normed $K$\nobreakdash-space, not necessarily complete. Let $z_0,z_1,\ldots\in Z$, $\rho>0$
 and $M\ge0$ with $\norm{z_n}\rho^n\le M$ for all $n$. If $\sum_nt^nz_n$ converges to $0$ for every $t\in K$ with
 $\abs t<\rho$, then $z_n=0$ for all $n$.
 \end{lemma}
@@ -1635,6 +1703,7 @@ For the proof of the theorem, assume that $L$ is a \emph{finite} field with $k!=
 particular $k\ge2$. Put $V:=L^\N$ and let $V_{\mathrm{fin}}:=L^{(\N)}\subseteq V$ be the subspace of finitely supported
 sequences. For $u,x\in V$ we write $ux$ for the coordinatewise product; so $D_ux=ux$ is the multiplier family.
 
+\Needspace{16\baselineskip}
 \begin{samepage}
 \begin{theorem}[multipliers over a finite field]\label{thm:FF}
 Let $L$ be a finite field and $k\ge1$ with $k!=0$ in $L$.
@@ -2302,7 +2371,7 @@ The discrete distance assumption also gives
 \]
 We may therefore replace every radius by a value in $r^\Z\cup\{0\}$.
 
-Let $(\cD(a_i,\rho_i))_{i\in I}$ be a nonempty family of pairwise meeting closed balls. If its radii have a least
+Let $(\cD(a_i,\rho_i))_{i\in I}$ be a nonempty family of pairwise-meeting closed balls. If its radii have a least
 element $\rho_{i_0}$, then $\cD(a_{i_0},\rho_{i_0})$ lies in every ball of the family, so $a_{i_0}$ is a common point.
 Otherwise, discreteness implies that all the radii are positive and that their infimum is zero. Choose
 $i_1,i_2,\dots$ so that $\rho_{i_n}$ decreases strictly to zero. The corresponding balls are nested, and
@@ -2750,7 +2819,7 @@ $A^{k,\Kh}_{E,E;F}$, which is impossible. Proposition~\ref{prop:homogeneous-lift
 field $K$: $A^{k,K}_{E,E;F}$ is analytic at no point. Reindexing the arguments by a bijection gives the same conclusion, with the same spaces $E,F$, for every finite index set with $k$ elements.
 \item \emph{Exclude an equivalent nonarchimedean target norm.} Since $k\ge p\ge2$, Proposition~\ref{prop:nonultra}
 applies to $B$ and $F$, after the scalar identification in step~(2). Its conclusion persists when $F$ is
-regarded over $K$.
+regarded over $K$.\qedhere
 \end{enumerate}
 \end{proof}
 
@@ -2759,7 +2828,7 @@ If $K_1=\Kh$, as when $K=\F_p((u))$ and $t=u$, the completed tensor products ide
 $E_1$ and $B$: use Lemma~\ref{lem:bc}(3) and $x\otimes\lambda=\lambda x\otimes1$. Thus $E$ is nonarchimedean in
 this case. For $K=\F_q((u))$, $q=p^n$, with its $u$\nobreakdash-adic absolute value, one can instead apply
 Theorem~\ref{thm:laurent} directly with $\kappa=\F_q$ and $X=u$, obtaining $E=\linf(\N,K)$ and $F=B$.
-The proof over a general base does not require, or assert, that $E$ is nonarchimedean.
+The proof over a general base field does not require, or assert, that $E$ is nonarchimedean.
 \end{remark}
 
 \section{A counterexample with scalar values}\label{app:scalar}
@@ -2822,7 +2891,7 @@ $\varepsilon>0$, each slice of the set
 \]
 obtained by fixing one coordinate is finite.
 
-If $W$ were infinite, we could choose $w^{(0)},w^{(1)},\dots\in W$ with the coordinates
+If $W$ were infinite, we could choose $w^{(0)},w^{(1)},\ldots\in W$ with the coordinates
 $w^{(n)}_r$ distinct as $n$ varies, for each $r$: a finite list of forbidden coordinates excludes only
 finitely many elements of $W$. Define an isometric embedding $T_r\colon\linf(\N,K)\to\linf(\N,K)$
 by putting $(T_rx)_{w^{(n)}_r}=x_n$ and zero elsewhere. The pulled-back form
@@ -2896,7 +2965,7 @@ and consider the finite family of pairs
 \end{equation}
 Let $g_0\colon V\to V'$ be the coordinate projection onto the first $k$ coordinates.
 
-\begin{lemma}[finite fibre obstruction]\label{scalar:fibre}
+\begin{lemma}[finite fiber obstruction]\label{scalar:fibre}
 Suppose $k! = 0$ in $\kappa$. There is no $k$\nobreakdash-linear map
 \[
  \tau\colon\operatorname{Hom}_\kappa(V,V')^k\longrightarrow\Alt^k_\kappa(V;\kappa)
@@ -2974,7 +3043,7 @@ We will need a quantitative consequence of this finite incompatibility. Give $K^
 maximum norms and use the same family~\eqref{scalar:family} over $K$.
 
 \begin{lemma}[finite test certificate]\label{scalar:certificate}
-There are finite sets of tests $\mathcal T_j$, one for each $j=(\Sigma^j,\Sigma'^j)\in\mathcal F$, consisting of
+Assume $k!=0$ in $K$, as in Theorem~\ref{thm:scalar-counter}. There are finite sets of tests $\mathcal T_j$, one for each $j=(\Sigma^j,\Sigma'^j)\in\mathcal F$, consisting of
 tuples $(g^1,\dots,g^k;\xi_1,\dots,\xi_k)$ with $g^r\Sigma^j\subseteq\Sigma'^j$ and $\xi_r\in\Sigma^j$,
 such that every $K$\nobreakdash-multilinear $\tau$ satisfying condition (1) of Lemma~\ref{scalar:fibre} obeys
 \begin{equation}\label{scalar:threshold}
@@ -3065,7 +3134,7 @@ $i$ and zero elsewhere. Its norm is at most $\norm g$. Set
 \[
  \delta'_i(z_1,\dots,z_k)=\delta'(z_{1,i},\dots,z_{k,i})\in\Alt^k(E';K).
 \]
-The determinant estimate for the maximum norm gives $\norm{\delta'_i}\le1$. Define the fibre map
+The determinant estimate for the maximum norm gives $\norm{\delta'_i}\le1$. Define the fiber map
 \begin{equation}\label{scalar:fibre-map}
  \pi_i(g^1,\dots,g^k)(\xi_1,\dots,\xi_k)
  =P(g^1_{[i]},\dots,g^k_{[i]})(\delta'_i)
@@ -3121,7 +3190,7 @@ Thus $c\mapsto m_c$ is a bounded linear map into $\Alt^k(E';K)$, of norm at most
 
 Let $x^r$ be the family equal to $\xi_r$ on $T$ and zero elsewhere; it belongs to $E$ by the
 chain-generator inclusion already proved. Coordinatewise multiplication defines a bounded linear map
-$r\mapsto rx^r$ from $\linf(\Lambda,K)$ to $E$. Consequently
+$\rho\mapsto\rho x^r$ from $\linf(\Lambda,K)$ to $E$. Consequently
 \[
  \begin{split}
  \Phi(t^1,\dots,t^k,c,r^1,\dots,r^k)
@@ -3287,7 +3356,7 @@ Thus $\norm R\ge n!$. Finally, $(n!)^{1/n}$ is unbounded, so
 Theorem~\ref{fam:thm:tensor-analytic} excludes universal analytic reflection.
 \end{proof}
 
-\begin{corollary}[Entire polynomial approximation of a nonanalytic smooth map]
+\begin{corollary}[entire polynomial approximation of a nonanalytic smooth map]
 \label{fam:cor:no-common-radius}
 Let $K$ be a complete nonarchimedean nontrivially normed field and put
 $P=\ell^1(\N,K)$, with the ordinary sum norm. There are Banach spaces
@@ -3342,10 +3411,11 @@ multilinear bounds grow factorially. The fixed-degree argument for alternating
 families avoids this obstruction by using one outer degree throughout.
 
 There is no conflict with Theorem~\ref{thm:summable-parameters}(2): every alternating-map family on these
-parameter spaces is still admissible when its final output fiber is complete. The ambient alternating action
+parameter spaces is still analytic as an operator family when its final output fiber is complete. The ambient alternating action
 has a fixed polynomial degree. Factoring a general analytic parameter map through a free $\ell^1$ space
 therefore incurs a single factorial bound, rather than a sequence of factorial bounds across Taylor degrees.
-The special alternating-family property is consequently strictly weaker than universal analytic reflection.
+Over a complete nonarchimedean field, the alternating-family property is consequently strictly weaker
+than universal analytic reflection. Over $\mathbb R$ and $\mathbb C$ every Banach space has universal analytic reflection, by Theorem~\ref{fam:thm:tensor-analytic}: the symmetrization $\frac1{n!}\sum_{\sigma\in S_n}\sigma$ has norm at most one on $T_n(P)$ and, by polarization, is a projection onto $\Delta_n(P)$.
 
 For comparison, in the category of nonarchimedean normed spaces with the \emph{nonarchimedean} projective
 tensor norm, the corresponding tensor power of $c_0(I,K)$ is $c_0(I^n,K)$ and the same sorted-orbit
@@ -3355,9 +3425,12 @@ It is the tensor counterpart of the norm-preserving coefficient construction in
 Theorem~\ref{thm:summable-parameters}(1); the two tensor norms must not be interchanged.
 
 Theorem~\ref{fam:thm:tensor-analytic} thus gives a complete answer for universal Banach-valued analytic
-reflection. It supplies a sufficient parameter criterion for alternating families, while
-Proposition~\ref{fam:prop:l1-optimal} shows that it is not a necessary one.
-An intrinsic characterization of the parameter spaces for which every alternating-map family is admissible
+reflection. It supplies a sufficient parameter criterion for alternating families. Indeed, if the final
+fiber is complete, the ambient multilinear operator space is Banach, and universal reflection through the
+closed inclusion of alternating operators makes every alternating-map family analytic as an operator family.
+Over a complete nonarchimedean field, Proposition~\ref{fam:prop:l1-optimal} shows that the criterion is not a necessary one.
+An intrinsic characterization of the parameter spaces for which every alternating-map family is analytic
+as an operator family
 remains a separate question.
 
 
@@ -3375,6 +3448,7 @@ A full subcategory $\mathcal D\subseteq\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf
 hom space.
 \end{definition}
 
+\Needspace{5\baselineskip}
 \begin{definition}\label{dom:split-pair}
 A pair $(E,F)$ is \emph{split in degree $k$} if the isometric inclusion
 \[
@@ -3400,7 +3474,7 @@ $\cL(\Alt^k(D;G),\Mult^k(E;F))$. Postcomposition with $R$ gives a lift with the 
 codomain. No compatibility between the retractions chosen for different objects is needed.
 \end{proof}
 
-\begin{theorem}[No largest full analytic domain]\label{dom:no-largest}
+\begin{theorem}[no largest full analytic domain]\label{dom:no-largest}
 Let $p$ be prime, let $k\ge p$, and equip $K=\F_p(t)$ with its $t$\nobreakdash-adic absolute value.
 There is no largest full analytic domain for
 \[
@@ -3577,7 +3651,7 @@ Indeed, writing $x=b+ha$ with $b\in K^p$ and $h\in K$, its values on the generat
 K^p+\sum_iK\epsilon^ia+Ka^2\subseteq D.
 \]
 Submultiplicativity gives a bounded linear family $x\mapsto M_x$ from $E$ to $\cL(E,D)$.
-Its matrix is lower triangular with diagonal entry $x_0$, so $\det M_x=x_0^p$. In the cross-action from
+Its matrix is lower triangular with diagonal entry $x_0$, the $e_0$\nobreakdash-coordinate of $x$ in $A$, so $\det M_x=x_0^p$. In the cross-action from
 $Y$ to $X$, fix the target morphism to $\id_G$, evaluate at $\det\in\Alt^p(D;G)$, and use
 \eqref{dom:coefficient-space}. The resulting map is
 \begin{equation}\label{dom:bad-coordinate}
@@ -3652,7 +3726,7 @@ Finally, restrict the cross-action along the bounded affine family
 \[
 E\longrightarrow\cL(E_k,D_k),\qquad x\longmapsto M_x\oplus I_r.
 \]
-Evaluation at $\det_k$ and coefficient extraction through~\eqref{dom:padded-coefficients} give exactly
+Evaluation at $\det_k$, which is $G$\nobreakdash-valued on $D_k$ by Laplace expansion along the first $p$ rows, and coefficient extraction through~\eqref{dom:padded-coefficients} give exactly
 the nonanalytic map~\eqref{dom:bad-coordinate}. Thus the cross-action from $Y_k$ to $X_k$ is not analytic.
 
 A largest analytic full subcategory would have to contain both individually analytic singleton
@@ -3663,10 +3737,24 @@ coordinates, so both closures remain analytic. The same contradiction proves The
 
 
 The scope of this obstruction is precise. Finite algebraic dimension over an incomplete field does
-not ensure continuous coordinates, so the result does not conflict with
-Theorem~\ref{thm:finite-parameters}. The same construction does not answer the largest-domain question
+not ensure continuous coordinates. The same construction does not answer the largest-domain question
 over complete fields or for Banach pairs: completion replaces the exotic finite-dimensional
 $K$-spaces by ordinary finite-coordinate $L$-spaces and removes the missing-coefficient obstruction.
+
+\paragraph{\textit{Finite-dimensional bases.}}
+The same spaces show that Theorem~\ref{thm:finite-parameters} needs continuous coordinates on the base,
+not only finite algebraic dimension. Let $k=p+r$, and regard $E$, of dimension $p+1$, as an analytic
+manifold with one chart. It has no continuous coordinates, since every bounded linear map $E\to K$ is
+zero by Lemma~\ref{dom:rigid}. Over $E$ take the trivial bundle with fiber $D_k\oplus E_k$ and the two
+frames $\id$ and
+\[
+ S_x(d,e)=\bigl(d+(M_x\oplus I_r)e,e\bigr),\qquad S_x^{-1}(d,e)=\bigl(d-(M_x\oplus I_r)e,e\bigr),
+\]
+and the trivial bundle with fiber $G$. Both $S_x$ and $S_x^{-1}$ are affine in $x$, so these are analytic bundles with
+finite-dimensional fibers. By~\eqref{eq:shear-compression}, analyticity of the induced alternating
+transition at $x=0$ would make $x\mapsto A^k_{E_k,D_k;G}(M_x\oplus I_r)$ analytic at zero. Evaluation at
+$\det_k$ and~\eqref{dom:padded-coefficients} would then make~\eqref{dom:bad-coordinate} analytic at zero,
+which was excluded above. So the induced alternating atlas is not analytic.
 
 
 \section{Further coordinate methods}\label{app:coordinate-methods}
@@ -3831,11 +3919,14 @@ spherically complete norm: this target has exactly such a norm.
 \begin{thebibliography}{99}
 \bibitem{BGN} W.~Bertram, H.~Gl\"ockner and K.-H.~Neeb,
 \emph{Differential calculus, manifolds and Lie groups over arbitrary infinite fields},
-arXiv:math/0303300 (2003),\\
+arXiv:math/0303300 (2003); published as \emph{Differential calculus over general base fields and rings}, Expo.\ Math.\ \textbf{22} (2004), 213--282,\\
 {\small\url{https://arxiv.org/abs/math/0303300}}.
 
+\bibitem{Bou} N.~Bourbaki, \emph{Vari\'et\'es diff\'erentielles et analytiques. Fascicule de r\'esultats}, Hermann, Paris,
+1967 (\S\S1--7) and 1971 (\S\S8--15); reprinted by Springer, 2007.
+
 \bibitem{G1} S.~Gou\"ezel, \emph{In characteristic $0$, precomposition by a linear map is analytic on the space of
-alternating maps}, pull request \#43338 to Mathlib,\\ {\small\url{https://github.com/leanprover-community/mathlib4/pull/43338}}.
+alternating maps}, pull request \#43338 to Mathlib, merged 30 September 2026,\\ {\small\url{https://github.com/leanprover-community/mathlib4/pull/43338}}.
 
 \bibitem{G2} S.~Gou\"ezel, \emph{The bundle of continuous alternating maps is $C^n$}, draft pull request \#43234 to Mathlib,\\
 {\small\url{https://github.com/leanprover-community/mathlib4/pull/43234}}.
@@ -3849,37 +3940,39 @@ Soc.\ \textbf{48} (1952), 41--45.
 \S4.2, Propositions, accessed 6 October 2026,\\
 {\small\url{https://lean-lang.org/doc/reference/latest/The-Type-System/Propositions/}}.
 
+\bibitem{docs} The mathlib Community, \emph{Mathlib documentation}, \texttt{docs\#ContDiffWithinAt},\\
+{\footnotesize\url{https://leanprover-community.github.io/mathlib4_docs/find/?pattern=ContDiffWithinAt#doc}}.
+
 \bibitem{LeanP} J.~McCarthy, \emph{Lean formalization of alternating precomposition in positive characteristic},
-private repository, verified commit \texttt{5e9c3cf},\\
+commit \texttt{3ac80b2},\\
 {\small\url{https://github.com/Deicyde/alternating-analytic-characteristic-p}}.
 
-\bibitem{PR} J.~McCarthy, \emph{Smoothness reflects along a linear isometry with closed range}, draft pull request \#43548
+\bibitem{PR} J.~McCarthy, \emph{Smoothness reflects along a linear isometry with closed range},\\ draft pull request \#43548
 to Mathlib,\\ {\small\url{https://github.com/leanprover-community/mathlib4/pull/43548}}.
 
-\bibitem{Se} J.-P.~Serre, \emph{Endomorphismes compl\`etement continus des espaces de Banach $p$\nobreakdash-adiques}, Publ.\ Math.\
-IH\'ES \textbf{12} (1962), 69--85.
+\bibitem{VdP} M.~van der Put, \emph{Espaces de Banach non archim\'ediens}, Bull.\ Soc.\ Math.\ France
+\textbf{97} (1969), 309--320,\\
+{\small\url{https://www.numdam.org/article/BSMF_1969__97__309_0.pdf}}.
+
+\bibitem{Ra} F.~P.~Ramsey, \emph{On a problem of formal logic}, Proc.\ London Math.\ Soc.\ (2) \textbf{30} (1930), 264--286.
+
+\bibitem{vR} A.~C.~M.~van Rooij, \emph{Non-Archimedean Functional Analysis}, Marcel Dekker, 1978.
+
+\bibitem{Schi} W.~H.~Schikhof, \emph{Banach spaces over nonarchimedean valued fields}, Topology Proc.\
+\textbf{24} (1999), 547--581,\\
+{\small\url{https://topology.nipissingu.ca/tp/reprints/v24/tp24224.pdf}}.
 
 \bibitem{Sch} P.~Schneider, \emph{Nonarchimedean Functional Analysis}, Springer Monographs in Mathematics,
 Springer, Berlin, 2002, \href{https://doi.org/10.1007/978-3-662-04728-6}{doi:10.1007/978-3-662-04728-6}.
 Online version of 25 October 2005,\\
 {\small\url{https://ivv5hpp.uni-muenster.de/u/pschnei/publ/lectnotes/nfa.pdf}}.
 
-\bibitem{Schi} W.~H.~Schikhof, \emph{Banach spaces over nonarchimedean valued fields}, Topology Proc.\
-\textbf{24} (1999), 547--581,\\
-{\small\url{https://topology.nipissingu.ca/tp/reprints/v24/tp24224.pdf}}.
+\bibitem{Se} J.-P.~Serre, \emph{Endomorphismes compl\`etement continus des espaces de Banach $p$\nobreakdash-adiques}, Publ.\ Math.\
+IH\'ES \textbf{12} (1962), 69--85.
 
-\bibitem{Yuan} Y.~Yuan, \emph{Formalization of non-Archimedean functional analysis 1: spherically complete spaces},
+\bibitem{Yuan} Y.~Yuan, \emph{Formalization of non-Archimedean functional analysis 1: spherically complete spaces},\\
 arXiv:2601.21734v3 (2026), accepted for publication in the Journal of Symbolic Logic,\\
 {\small\url{https://arxiv.org/abs/2601.21734v3}}.
-
-\bibitem{docs} The mathlib Community, \emph{Mathlib documentation}, \texttt{docs\#AnalyticAt},\\
-{\small\url{https://leanprover-community.github.io/mathlib4_docs/find/?pattern=AnalyticAt#doc}}.
-\bibitem{VdP} M.~van der Put, \emph{Espaces de Banach non archim\'ediens}, Bull.\ Soc.\ Math.\ France
-\textbf{97} (1969), 309--320,\\
-{\small\url{https://www.numdam.org/article/BSMF_1969__97__309_0.pdf}}.
-\bibitem{Ra} F.~P.~Ramsey, \emph{On a problem of formal logic}, Proc.\ London Math.\ Soc.\ (2) \textbf{30} (1930), 264--286.
-
-\bibitem{vR} A.~C.~M.~van Rooij, \emph{Non-Archimedean Functional Analysis}, Marcel Dekker, 1978.
 
 \end{thebibliography}
 \end{document}
