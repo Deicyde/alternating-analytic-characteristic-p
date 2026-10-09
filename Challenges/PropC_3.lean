@@ -3,7 +3,7 @@ import AlternatingAnalytic.Analysis.ProjectiveExterior
 import AlternatingAnalytic.Algebra.ExteriorSupportDimension
 
 /-!
-# Proposition C.3 (support estimate), pp. 37-38
+# Proposition C.3 (support estimate), pp. 39-40
 
 Paper statement (Appendix C, `Proposition C.3`; setting §C.1: `k ≥ 1`, `κ` a field,
 `r ∈ (0, 1)`, `K₁ = κ((X))`, `E₁ = ℓ^∞(ℕ, K₁)`, `E₀ = κ^ℕ ⊆ E₁`, `B`, `J` as in Lemma C.2,

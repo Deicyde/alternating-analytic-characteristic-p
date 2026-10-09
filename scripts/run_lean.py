@@ -10,7 +10,8 @@ Usage, from anywhere (paths are relative to the repository root):
   python3 -I scripts/run_lean.py --build MODULE [MODULE ...]
       Run `lake build MODULE ...` (e.g. AlternatingAnalytic.Scalar.ChainGap or
       Solutions.LemF_3), holding ALL slots, so that the build runs alone.
-      Build only named modules; never run a bare `lake build`.
+      On a machine with less than about 32 GB of memory, build named modules this way
+      rather than running a bare `lake build`.
 
 Exit code: 0 if everything succeeded without errors (warnings allowed), else 1.
 """

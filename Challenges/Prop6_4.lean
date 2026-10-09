@@ -2,7 +2,7 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Analytic.Constructions
 
 /-!
-# Proposition 6.4 (shear realization), p. 16
+# Proposition 6.4 (shear realization), pp. 16-17
 
 Paper statement (Section 6.1): Suppose `A = A^k_{E,D;F}` is not analytic at `u₀ ∈ L(E, D)`.
 Set `H = D ⊕ E`, with the maximum norm, and `g(u)(d, e) = (d + u e, e)`. Both `g` and its

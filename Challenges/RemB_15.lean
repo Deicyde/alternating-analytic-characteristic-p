@@ -3,7 +3,7 @@ import Mathlib.Data.Fin.VecNotation
 import Mathlib.GroupTheory.Perm.Sign
 
 /-!
-# Remark B.15 (when k! is invertible: the normalized lift), p. 35
+# Remark B.15 (when k! is invertible), p. 37
 
 Setting (Appendix B.3-B.5): `L` is a finite field, `V = L^ℕ`, `ux` is the coordinatewise
 product; `sdim` is the support dimension (Definition B.1); `Ω` is the determinant array; for a

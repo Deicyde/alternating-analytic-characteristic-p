@@ -3,9 +3,9 @@ import Mathlib.Data.Finsupp.Pointwise
 import Mathlib.GroupTheory.Perm.Sign
 
 /-!
-# Theorem B.9 (multipliers over a finite field), p. 31
+# Theorem B.9 (multipliers over a finite field), p. 33
 
-Setting (Appendix B.3, p. 31): `L` is a finite field, `V := L^ℕ` and `V_fin := L^(ℕ) ⊆ V` is the
+Setting (Appendix B.3, p. 32): `L` is a finite field, `V := L^ℕ` and `V_fin := L^(ℕ) ⊆ V` is the
 subspace of finitely supported sequences. For `u, x ∈ V`, `ux` is the coordinatewise product, so
 `D_u x = ux` is the multiplier family. `sdim` is the support dimension of Definition B.1:
 `sdim(ω) = min {dim W : W ⊆ V finite-dimensional, ω ∈ Λ^k W}`.

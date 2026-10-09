@@ -6,7 +6,7 @@ import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 import Mathlib.CategoryTheory.Pi.Basic
 
 /-!
-# Theorem 2.1 (lifting linear constructions to bundles), pp. 4–5
+# Theorem 2.1 (lifting linear constructions to bundles), pp. 4-5
 
 Setting (Section 2.1). `K` is a nontrivially normed field, `Vec_K` the category of normed
 `K`-spaces and bounded linear maps, and `n ∈ ℕ ∪ {∞, ω}`. `VBⁿ_K(M)` is the category of `Cⁿ`

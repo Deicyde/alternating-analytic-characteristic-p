@@ -4,7 +4,7 @@ import Mathlib.Data.Fintype.Defs
 import Mathlib.Data.Set.Lattice.Indexed
 
 /-!
-# Lemma F.3 (chain gap), pp. 50-51
+# Lemma F.3 (chain gap), p. 52
 
 Paper setting: "Let L be a nonempty finite set and Λ = L^{<ω} the set of finite words in L,
 including the empty word. Write s ⪯ t when t extends s, and write sj for the word obtained by

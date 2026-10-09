@@ -5,7 +5,7 @@ import Mathlib.Geometry.Manifold.VectorBundle.Hom
 import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 
 /-!
-# Proposition 6.4, bundle realization (paragraph after the proposition), p. 16
+# Proposition 6.4, bundle realization (paragraph after the proposition), p. 17
 
 Paper statement (Section 6.1, after Proposition 6.4): with `A = A^k_{E,D;F}`, `H = D ⊕ E` and
 `g(u)(d, e) = (d + u e, e)` as in Proposition 6.4, take the base `M = L(E, D)` and the trivial
@@ -13,7 +13,7 @@ bundle `M × H`. Its product trivialization and the trivialization `(u, z) ↦ (
 analytic bundle atlas. The associated alternating transitions are pullback by `g(u)` and
 `g(-u)`. Equation (6.1) proves that this induced atlas fails to be analytic whenever `A` does.
 Equivalently, the analytic bundle automorphism `(u, z) ↦ (u, g(u) z)` does not induce an
-analytic morphism on the alternating product bundle. (Thus every failure of the Hom-space
+analytic morphism on the alternating product bundle. (Thus every failure of the hom-space
 criterion has a bundle realization; Theorem 6.1 supplies Banach bases on which this failure
 occurs at every point, including the identity operator `g(0)`.)
 

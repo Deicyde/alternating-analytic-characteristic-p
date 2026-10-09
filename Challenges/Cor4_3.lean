@@ -4,7 +4,7 @@ import Mathlib.Analysis.Analytic.Basic
 import AlternatingAnalytic.Analysis.EquivalentUltrametric
 
 /-!
-# Corollary 4.3 (discretely valued bases), p. 10
+# Corollary 4.3 (discretely valued fields), p. 10
 
 Paper statement (Section 4.1): "Suppose `K` is nonarchimedean with `|K^×| = r^ℤ` for some
 `0 < r < 1`. Every Banach target `F` admitting an equivalent nonarchimedean norm makes

@@ -4,14 +4,16 @@ import Mathlib.Analysis.Analytic.Basic
 import Mathlib.Analysis.Analytic.Within
 
 /-!
-# Theorem 4.5(2) (summable parameter spaces: ℓ¹), p. 11
+# Theorem 4.5(2) (summable parameter spaces: ℓ¹), pp. 11-12
 
 Paper statement (Section 4.2, part (2)): Let `j : W → Z` be a closed
 linear isometry. Suppose `Z` is complete. Let `a : H → W` have an ambient bounded homogeneous
-polynomial representation of fixed degree `d`. For every analytic `γ : U → H`, with
+polynomial representation of fixed degree `d`, that is, `j a(h) = B(h, …, h)` for a bounded
+`d`-linear `B : H^d → Z` on a normed space `H`. For every analytic `γ : U → H`, with
 `U ⊆ ℓ¹(I, K)` open, the composite `a γ` is analytic. Here `ℓ¹` carries the ordinary sum norm.
-The field need not be complete. Each assertion remains valid for a parameter space that is a
-bounded linear retract of the indicated space. (The proof continues on p. 12.)
+The field need not be complete. Each analyticity assertion remains valid for a parameter space
+`P` that is a bounded linear retract of the indicated space `V`, with bounded linear
+`i : P → V`, `r : V → P` and `r i = id_P`. (The proof continues on p. 12.)
 
 ## Formalization notes
 * `ℓ¹(I, K)` is Mathlib's `lp (fun _ : I => K) 1` (the library's `L1 K I`).

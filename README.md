@@ -1,6 +1,6 @@
 # Alternating bundles and analytic descent
 
-This repository holds the paper *Alternating bundles and analytic descent* (Jack McCarthy, October 2026) and a Lean 4 / Mathlib formalization of all its numbered results.
+This repository holds the paper *Alternating bundles and analytic descent* (Jack McCarthy, October 2026) and a Lean 4 / Mathlib formalization of its numbered results.
 
 The paper asks when the construction E, F ↦ Alt^k(E; F) of bounded alternating maps is analytic: as a functor on normed spaces over a nontrivially normed field K, and on analytic vector bundles. In short:
 
@@ -10,7 +10,7 @@ The paper asks when the construction E, F ↦ Alt^k(E; F) of bounded alternating
 
 ## Status
 
-All 76 numbered claims of the paper are proved in Lean. [challenge.md](challenge.md) lists them, one row per claim, with links to the Lean statement and its proof, and notes where the Lean statement differs from the paper.
+Every theorem, proposition, lemma and corollary of the paper except Proposition 6.6 is proved in Lean, as are three remarks and two unnumbered statements: 76 claims in all. [challenge.md](challenge.md) lists them, one row per claim, with links to the Lean statement and its proof, and notes where the Lean statement differs from the paper. Proposition 6.6 has a written proof only.
 
 No human expert has reviewed the paper or the Lean statements yet.
 
@@ -54,11 +54,13 @@ lake build
 python3 scripts/check_claim.py ThmF_1
 ```
 
-`check_claim.py` confirms that the challenge's code is unchanged since the ledger was created, builds the challenge and solution, checks that the proof uses only `propext`, `Classical.choice` and `Quot.sound`, and checks that both files state the same theorem. To run the [comparator](https://github.com/leanprover/comparator) (revision `19e111e`) on a claim, run `lake env <comparator> Challenges/<ID>.json`. Use `comparator.json` for the original challenge.
+`check_claim.py` needs the git history and the tag `ledger-base`, so use an ordinary clone, not a ZIP download or a shallow clone. It confirms that the challenge's code is unchanged since the ledger was created, builds the challenge and solution, checks that the proof uses only `propext`, `Classical.choice` and `Quot.sound`, and checks that both files state the same theorem. To run the [comparator](https://github.com/leanprover/comparator) (revision `19e111e`) on a claim, run `lake env <comparator> Challenges/<ID>.json`. Use `comparator.json` for the original challenge.
 
 ## How this was made
 
 The paper was developed with Anthropic's Claude and OpenAI's Codex. The original library was formalized with Codex and Autoform in September 2026. The per-claim challenges and the 31 claims the original library did not cover were formalized with Claude Code on 2026-10-08. [formalization.yaml](formalization.yaml) records the details.
+
+The proof of `cpolynomialAt_nsmul_compContinuousLinearMapCLM` in `AlternatingAnalytic/Analysis/FactorialInvertible.lean` is adapted from Sébastien Gouëzel's Mathlib pull request [#43338](https://github.com/leanprover-community/mathlib4/pull/43338), which is released under the Apache 2.0 license.
 
 ## License
 

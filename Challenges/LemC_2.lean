@@ -2,7 +2,7 @@ import AlternatingAnalytic.Analysis.LaurentField
 import AlternatingAnalytic.Analysis.ProjectiveExterior
 
 /-!
-# Lemma C.2 (the projective exterior norm), pp. 36-37
+# Lemma C.2 (the projective exterior norm), p. 38
 
 Paper statement (Appendix C, `Lemma C.2`; setting §C.1: `k ≥ 1`, `κ` a field, `r ∈ (0, 1)`,
 `K₁ = κ((X))` with `|a| = r^{ord a}`, `E₁ = ℓ^∞(ℕ, K₁)`): on `Λ := Λ^k_{K₁} E₁` put

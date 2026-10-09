@@ -4,14 +4,15 @@ import Mathlib.Analysis.Analytic.Within
 import Mathlib.Analysis.Normed.Group.Ultra
 
 /-!
-# Theorem 4.5(1) (summable parameter spaces: c₀), p. 11
+# Theorem 4.5(1) (summable parameter spaces: c₀), pp. 11-12
 
 Paper statement (Section 4.2, part (1)): Let `j : W → Z` be a closed
 linear isometry. Suppose `K` and `Z` are nonarchimedean and `W` is complete. For `U ⊆ c₀(I, K)`
 open, analyticity of `j f` implies analyticity of `f : U → W`. Coefficients can be lifted without
 increasing their norms. Here `c₀` carries the supremum norm. The field need not be complete.
-Each assertion remains valid for a parameter space that is a bounded linear retract of the
-indicated space.
+Each analyticity assertion remains valid for a parameter space `P` that is a bounded linear
+retract of the indicated space `V`, with bounded linear `i : P → V`, `r : V → P` and `r i = id_P`;
+in (1) the lifted coefficients then satisfy `‖q_n‖ ≤ (‖r‖ ‖i‖)^n ‖b_n‖`.
 
 ## Formalization notes
 * `c₀(I, K)` is Mathlib's `C₀(I, K)` for an index type `I` with the discrete topology; its norm
@@ -23,7 +24,8 @@ indicated space.
   `B(x, r)`: a `W`-valued `q` with the same diagonals, `‖q n‖ ≤ ‖p n‖`, representing `f` on the
   same ball. Only diagonals are lifted, as in the proof of Theorem 3.1.
 * The retract clause is stated for analyticity only, with bounded linear `i : P → c₀(I, K)`,
-  `r : c₀(I, K) → P`, `r ∘ i = id`; the paper gives no coefficient bound there.
+  `r : c₀(I, K) → P`, `r ∘ i = id`; the paper's coefficient bound
+  `‖q_n‖ ≤ (‖r‖ ‖i‖)^n ‖b_n‖` on retracts is not stated.
 -/
 
 open scoped ZeroAtInfty

@@ -3,7 +3,7 @@ import AlternatingAnalytic.Analysis.ProjectiveExterior
 import Mathlib.Topology.ContinuousMap.ZeroAtInfty
 
 /-!
-# Proposition C.6 (multipliers on `c₀`), p. 40
+# Proposition C.6 (multipliers on `c₀`), p. 42
 
 Paper statement (Appendix C, §C.6, `Proposition C.6`; `κ`, `k`, `r`, `K₁`, `E₁`, `B` and `W_B` are
 as in Theorem C.1, i.e. `κ` a finite field of characteristic `p`, `k ≥ p`, `r ∈ (0, 1)`,

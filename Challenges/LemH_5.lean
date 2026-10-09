@@ -1,7 +1,7 @@
 import AlternatingAnalytic.Analysis.RationalLaurentScalars
 
 /-!
-# Lemma H.5 (rigidity of the source `E`), p. 59
+# Lemma H.5 (rigidity of the source `E`), p. 61
 
 Setting (Appendix H.1): `p` is prime, `K = 𝔽_p(t)` with its `t`-adic absolute value and
 `L = 𝔽_p((t))` its completion. `A = L[ε]/(ε^p)` with basis `e_i = ε^i` (`0 ≤ i < p`) carries

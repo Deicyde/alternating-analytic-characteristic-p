@@ -7,7 +7,7 @@ import Mathlib.Topology.Bases
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
 /-!
-# Theorem F.1 (scalar counterexample), p. 49
+# Theorem F.1 (scalar counterexample), p. 51
 
 Paper statement: "Let K be a complete, nontrivially normed field that is not spherically
 complete, and let k ≥ 1 satisfy k! = 0 in K. There are nonarchimedean Banach spaces E, E' for

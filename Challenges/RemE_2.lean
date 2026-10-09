@@ -5,14 +5,14 @@ import AlternatingAnalytic.Analysis.CompletedBaseChange
 import Mathlib.Analysis.Analytic.Basic
 
 /-!
-# Remark E.2 (the case `K₁ = K̂`; direct `F_q((u))` route), p. 49
+# Remark E.2 (the case `K₁ = K̂`; direct `F_q((u))` route), p. 50
 
 Paper statement (Appendix E, after the proof of Theorem 6.1(1)). "If `K₁ = K̂`, as when
 `K = F_p((u))` and `t = u`, the completed tensor products identify isometrically with `E₁` and
 `B`: use Lemma D.6(3) and `x ⊗ λ = λx ⊗ 1`. Thus `E` is nonarchimedean in this case. For
 `K = F_q((u))`, `q = p^n`, with its `u`-adic absolute value, one can instead apply Theorem C.1
 directly with `κ = F_q` and `X = u`, obtaining `E = ℓ^∞(ℕ, K)` and `F = B`. The proof over a
-general base does not require, or assert, that `E` is nonarchimedean."
+general base field does not require, or assert, that `E` is nonarchimedean."
 
 In the proof of Theorem 6.1(1), `E = E₁ ⊗̂_π K̂` and `F = B ⊗̂_π K̂` with `E₁ = ℓ^∞(ℕ, K₁)`;
 Theorem 6.1(1) asserts that `A^k_{E,E;F}` is analytic at no point and that `F` admits no

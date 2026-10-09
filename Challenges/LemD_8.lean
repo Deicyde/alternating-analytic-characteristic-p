@@ -2,7 +2,7 @@ import AlternatingAnalytic.Analysis.CompletedBaseChange
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 
 /-!
-# Lemma D.8 (forms), pp. 45-46
+# Lemma D.8 (forms), pp. 46-47
 
 Paper statement (Appendix D). Assume (H1) `K₁` is nontrivially normed, complete and spherically
 complete, and (H2) `K' ⊇ K₁` is nonarchimedean. Let `E₁` be a normed `K₁`-space, `F₁` a

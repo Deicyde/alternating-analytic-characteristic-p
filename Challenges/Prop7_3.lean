@@ -7,7 +7,7 @@ import Mathlib.Geometry.Manifold.VectorBundle.Tangent
 import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 
 /-!
-# Proposition 7.3 (comparison with alternating-bundle sections), p. 19
+# Proposition 7.3 (comparison with alternating-bundle sections), pp. 20-21
 
 Setting (Section 7): `K` complete and nontrivially normed, manifold models arbitrary normed
 spaces, `C^ω` charts; an ambient analytic form is one whose chart representatives are analytic

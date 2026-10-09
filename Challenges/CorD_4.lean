@@ -1,7 +1,7 @@
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
 /-!
-# Corollary D.4 (Ingleton projection), p. 43
+# Corollary D.4 (Ingleton projection), pp. 44-45
 
 Paper statement (standing hypotheses of Appendix D): fix fields K₁ ⊆ K′ such that
 "(H1) K₁, with the restricted absolute value, is nontrivially normed, complete and spherically

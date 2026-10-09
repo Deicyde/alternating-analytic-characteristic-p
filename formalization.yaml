@@ -3,8 +3,8 @@ project:
   name: alternating-analytic-characteristic-p
   description: >-
     Lean 4 / Mathlib formalization of the paper "Alternating bundles and analytic descent".
-    Every numbered claim of the paper has a challenge file with a proved solution; challenge.md
-    lists them.
+    Every theorem, proposition, lemma and corollary of the paper except Proposition 6.6 has a
+    challenge file with a proved solution; challenge.md lists them.
   authors:
   - Jack McCarthy
   responsible_maintainers:
@@ -23,7 +23,7 @@ sources:
     role: later research, exposition and the October 2026 reorganization of the paper
   id: https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/main/paper/charp.pdf
   type: manuscript
-  location: every numbered claim; see challenge.md
+  location: see challenge.md
   relationship: formalizes
   note: paper/ holds the current manuscript; sources/ holds the snapshot from 2026-09-23.
   author_endorsement: participated
@@ -31,8 +31,8 @@ related_formalizations:
 - id: https://github.com/Deicyde/alternating-analytic-counterexample
   relationship: other
   note: >-
-    Earlier characteristic-two counterexample. Its multilinear tail lemma was ported here for
-    Lemma F.2.
+    Earlier characteristic-two counterexample (a private repository). Its multilinear tail lemma
+    was ported here for Lemma F.2.
 classification:
   arxiv:
   - math.FA
@@ -45,8 +45,11 @@ classification:
   - '68V20'
 status:
   scope: >-
-    All 76 numbered claims of the paper are formalized. Each challenge file lists how its Lean
-    statement differs from the paper. Theorem 7.2 and Proposition 7.3 are stated at chart level,
+    The 76 claims listed in challenge.md are formalized: every theorem, proposition, lemma and
+    corollary of the paper other than Proposition 6.6, together with three remarks and two unnumbered
+    statements.
+    Proposition 6.6 has a written proof only. Each challenge file lists how its Lean statement
+    differs from the paper. Theorem 7.2 and Proposition 7.3 are stated at chart level,
     because Mathlib has no differential forms on manifolds.
   sorry_count: 0
   sorry_in_definitions: 0

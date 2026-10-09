@@ -5,12 +5,12 @@ import Mathlib.Algebra.CharP.Defs
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
 /-!
-# Proposition 6.5 (tangent and pullback obstructions), p. 17
+# Proposition 6.5 (tangent and pullback obstructions), pp. 17-18
 
 Paper statement (Section 6.2): Suppose `K` is complete, has characteristic `p > 0`, is not
 spherically complete, and `k ≥ p`.
-1. An analytic Banach manifold has two global analytic charts whose induced transition on scalar
-   alternating `k`-forms is analytic at no point.
+1. There is an analytic Banach manifold with two global analytic charts whose induced transition
+   on scalar alternating `k`-forms is analytic at no point.
 2. There are Banach spaces `N, Y`, a polynomial analytic map `h : N → Y`, and an analytic map
    `ω₀ : Y → Alt^k(Y; K)` such that `h^* ω₀`, expressed in the product coordinates on `N`, is
    analytic at no point as an `Alt^k(N; K)`-valued map. After inclusion in `Mult^k(N; K)` it is

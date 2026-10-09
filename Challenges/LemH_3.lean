@@ -1,7 +1,7 @@
 import AlternatingAnalytic.Category.AnalyticDomains
 
 /-!
-# Lemma H.3 (split destinations give analytic actions), p. 58
+# Lemma H.3 (split destinations give analytic actions), p. 60
 
 Setting (Appendix H): `Vec_K` is the category of normed `K`-spaces and bounded linear maps.
 `Alt^k : Vec_K^op × Vec_K → Vec_K` sends `(E, F)` to the bounded alternating `k`-linear maps

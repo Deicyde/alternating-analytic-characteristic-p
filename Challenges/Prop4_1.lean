@@ -6,7 +6,7 @@ import Mathlib.LinearAlgebra.Basis.Defs
 
 Setting: `K` is a nontrivially normed field and `E, E', F` are normed `K`-spaces.
 
-Paper statement (Section 4.1): "If the inclusion `j_E : Alt^k(E;F) ↪ Mult^k(E;F)` has a bounded
+Paper statement (Section 4.1): "If the inclusion `j_{E,F} : Alt^k(E;F) ↪ Mult^k(E;F)` has a bounded
 linear retraction `ρ`, then `A^k_{E,E';F}` has a bounded `k`-linear lift of norm at most `‖ρ‖`,
 for every normed `E'`. Such a lift also exists in each of the following cases:
 1. `k! ≠ 0` in `K`;
@@ -17,7 +17,7 @@ Here `A^k_{E,E';F}(f)(m) = m ∘ (f, …, f)` is precomposition, and a bounded `
 bounded `k`-linear map `Q : L(E,E')^k → L(Alt^k(E';F), Alt^k(E;F))` whose diagonal is `A`.
 
 ## Formalization notes
-* `Alt^k(E;F)` is `E [⋀^Fin k]→L[K] F`, `Mult^k(E;F)` is `E [×k]→L[K] F`, `j_E` is
+* `Alt^k(E;F)` is `E [⋀^Fin k]→L[K] F`, `Mult^k(E;F)` is `E [×k]→L[K] F`, `j_{E,F}` is
   `toContinuousMultilinearMap`, and `A^k_{E,E';F}` is
   `ContinuousAlternatingMap.compContinuousLinearMapCLM`.
 * The bound `‖P‖ ≤ ‖ρ‖` is stated in the equivalent pointwise form

@@ -6,7 +6,7 @@ import Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection
 import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 
 /-!
-# Corollary C.8 (finite dimension is sharp for nonarchimedean bases), p. 41
+# Corollary C.8 (finite dimension is sharp for nonarchimedean bases), pp. 42-43
 
 Paper statement (Appendix C, §C.6, `Corollary C.8`): Let `K = 𝔽_q((u))`, where `q` is a power of
 `p`, with a `u`-adic absolute value, and let `k ≥ p`. Let `P` be a `K`-Banach space admitting an

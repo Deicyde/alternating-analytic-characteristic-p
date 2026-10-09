@@ -5,7 +5,7 @@ import Mathlib.Analysis.Normed.Lp.lpSpace
 import Mathlib.Analysis.Normed.Group.Ultra
 
 /-!
-# Proposition G.4 (projection norms for ℓ¹), p. 56
+# Proposition G.4 (projection norms for ℓ¹), p. 58
 
 Paper statement (Appendix G: `T_n(P)`, `Δ_n(P)` and projections onto `Δ_n(P)` are as in
 Proposition G.1; `ℓ¹(I,K)` carries the sum norm; universal analytic reflection is

@@ -2,7 +2,7 @@ import Mathlib.Analysis.Normed.Module.Multilinear.Basic
 import Mathlib.Analysis.Normed.Operator.Basic
 
 /-!
-# Lemma D.5 (extension), p. 43
+# Lemma D.5 (extension), p. 45
 
 Paper statement: "Let K ∈ {K₁, K′} and let C ≥ 0.
 (1) Let V₀ be a dense K-subspace of a normed K-space V, let Y be a K-Banach space and

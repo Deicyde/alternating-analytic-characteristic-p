@@ -1,7 +1,7 @@
 import Mathlib.Algebra.MvPolynomial.Funext
 
 /-!
-# Lemma B.6 (identity principle), p. 29
+# Lemma B.6 (identity principle), p. 31
 
 Paper statement: "Let K be an infinite field, Y a K-vector space and
 g(λ) = ∑_α λ^α y_α a polynomial in λ ∈ K^m with finitely many nonzero coefficients

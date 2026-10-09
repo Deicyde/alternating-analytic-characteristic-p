@@ -2,7 +2,7 @@ import AlternatingAnalytic.Algebra.DeterminantArray
 import Mathlib.Data.Fin.VecNotation
 
 /-!
-# Lemma B.12 (staircase), pp. 33-34
+# Lemma B.12 (staircase), pp. 35-36
 
 Setting (Appendix B.3-B.6): as for Lemma B.11. `L` is a finite field, `Ψ : V_fin^k × V_fin^k →
 Λ^k V` is `2k`-linear and satisfies hypothesis (c) of Theorem B.9(1) with bound `d`

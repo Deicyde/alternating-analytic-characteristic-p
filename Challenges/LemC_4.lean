@@ -4,7 +4,7 @@ import AlternatingAnalytic.Analysis.ProjectiveExterior
 import AlternatingAnalytic.Algebra.ExteriorSupportDimension
 
 /-!
-# Lemma C.4 (the coefficient lift `Ψ`), pp. 38-39
+# Lemma C.4 (the coefficient lift `Ψ`), pp. 40-41
 
 Paper statement (Appendix C, §C.4, `Lemma C.4`; setting §C.1: `k ≥ 1`, `κ` a field,
 `r ∈ (0, 1)`, `K₁ = κ((X))`, `E₁ = ℓ^∞(ℕ, K₁)`, `E₀ = κ^ℕ ⊆ E₁`; `B`, `J`, `W_B` as in

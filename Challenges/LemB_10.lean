@@ -2,7 +2,7 @@ import Mathlib.Algebra.Field.Defs
 import Mathlib.Data.Set.Finite.Basic
 
 /-!
-# Lemma B.10 (pattern homogeneity), pp. 31-32
+# Lemma B.10 (pattern homogeneity), p. 33
 
 Setting (Appendix B.3-B.4): `L` is a finite field. For a tuple `z ∈ ℕ^N` with distinct values
 `y₁ < ⋯ < y_r`, its *pattern* is the map `i ↦ j` determined by `z_i = y_j` (repeated entries

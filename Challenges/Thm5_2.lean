@@ -3,7 +3,7 @@ import Mathlib.Analysis.Calculus.ContDiff.Defs
 import Mathlib.Analysis.Normed.Operator.Bilinear
 
 /-!
-# Theorem 5.2 (universal and scalar tests), pp. 13–14
+# Theorem 5.2 (universal and scalar tests), p. 14
 
 Paper statement: "Let U be an open parameter domain and W : U → L(X, Y) a family. Define
 R_F(t)(T) = T ∘ W(t), R_F : U → L(L(Y, F), L(X, F)). For power-series analyticity, or for any

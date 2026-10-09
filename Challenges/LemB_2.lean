@@ -2,9 +2,9 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basic
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-!
-# Lemma B.2 (the determinant array is injective), p. 27
+# Lemma B.2 (the determinant array is injective), p. 29
 
-Setting (Section B.1, p. 27): `L` is a field, `k ≥ 1`, `S` is a set and `V ⊆ L^S` is a
+Setting (Section B.1, pp. 28-29): `L` is a field, `k ≥ 1`, `S` is a set and `V ⊆ L^S` is a
 space of functions on `S`. The determinant array is the linear map
 `Ω : Λ^k V → L^(S^k)`, `Ω_{y₁ ∧ ⋯ ∧ y_k}(c₁, …, c_k) := det (y_b(c_a))_{a,b=1}^k`.
 

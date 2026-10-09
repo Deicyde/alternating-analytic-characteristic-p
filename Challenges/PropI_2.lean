@@ -3,7 +3,7 @@ import Mathlib.Analysis.Normed.Module.Multilinear.Basic
 import Mathlib.Analysis.Normed.Group.Ultra
 
 /-!
-# Proposition I.2 (continuous algebraic polynomials on c₀), pp. 63-64
+# Proposition I.2 (continuous algebraic polynomials on c₀), pp. 65-66
 
 Paper statement (Appendix I.2): Let `K` be nontrivially normed and
 nonarchimedean, let `Z` be complete and nonarchimedean, and let `n ≥ 1`. Suppose

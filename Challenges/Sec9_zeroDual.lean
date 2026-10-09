@@ -4,11 +4,12 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Analysis.UniversalAlternatingTargets
 
 /-!
-# Section 9, "Which fibers remove the obstruction?" (universal targets have zero dual), p. 24
+# Section 9, "Which fibers remove the obstruction?" (universal targets have zero dual), p. 25
 
 Paper statement (Section 9, in the obstructed range `char K = p > 0`, `k ≥ p`): Call `F` a
 universal target if `Alt^k(−; F)` is analytic on every hom space. [...] Over a complete
-nonspherically complete field, however, every universal target must have zero continuous dual.
+field that is not spherically complete, however, every universal target must have zero
+continuous dual.
 Indeed, if `λ(v) = 1` for `λ ∈ F*` and `v ∈ F`, then
 `A^k_{E,D;K}(u)(a) = λ ∘ A^k_{E,D;F}(u)(v a)`. The scalar counterexample (Theorem 6.1(2))
 excludes analyticity of the right-hand action.

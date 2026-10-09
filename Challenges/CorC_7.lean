@@ -3,7 +3,7 @@ import AlternatingAnalytic.Analysis.ProjectiveExterior
 import Mathlib.Topology.ContinuousMap.ZeroAtInfty
 
 /-!
-# Corollary C.7 (diagonal transitions over a `c₀` base), pp. 40-41
+# Corollary C.7 (diagonal transitions over a `c₀` base), p. 42
 
 Paper statement (Appendix C, §C.6, `Corollary C.7`; `κ`, `k`, `r`, `K₁`, `E₁`, `B`, `W_B` as in
 Theorem C.1: `κ` a finite field of characteristic `p`, `k ≥ p`, `r ∈ (0, 1)`, `K₁ = κ((X))`,

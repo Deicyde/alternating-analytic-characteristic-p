@@ -6,7 +6,7 @@ import Mathlib.Algebra.Module.Equiv.Basic
 import Mathlib.Data.Nat.Factorial.Basic
 
 /-!
-# Lemma F.4 (finite fibre obstruction), p. 51
+# Lemma F.4 (finite fiber obstruction), p. 53
 
 Paper setting: "Over a field κ, put V = κ^{k+1} and V' = κ^k. Write e_1, …, e_{k+1} and
 e'_1, …, e'_k for their bases, ε^a for the coordinate forms on V, and δ' for the determinant on

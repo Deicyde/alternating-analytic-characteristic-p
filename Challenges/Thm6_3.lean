@@ -8,7 +8,7 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 # Theorem 6.3 (universal scalar classification), p. 16
 
 Paper statement: "Let K be a complete nonarchimedean, nontrivially normed field. For any
-k ≥ 0, the contravariant functor Alt^k(−; K) : Vec_K^op → Vec_K is analytic on every Hom space
+k ≥ 0, the contravariant functor Alt^k(−; K) : Vec_K^op → Vec_K is analytic on every hom space
 if and only if k! ≠ 0 in K or K is spherically complete. The same equivalence holds when the
 source category is restricted to Banach spaces, or to nonarchimedean Banach spaces."
 
@@ -20,7 +20,7 @@ On the Hom space `Hom_{Vec^op}(D, E) = L(E, D)` the functor acts by
 * "Complete nonarchimedean" is `[CompleteSpace K] [IsUltrametricDist K]`. "Spherically
   complete" is the library class `SphericallyCompleteSpace K` (every nonempty family of
   pairwise-meeting closed balls has a common point).
-* "Analytic on every Hom space" is `AnalyticOnNhd K A^k_{E,D;K} Set.univ` for all spaces in the
+* "Analytic on every hom space" is `AnalyticOnNhd K A^k_{E,D;K} Set.univ` for all spaces in the
   universe of `K`.
 * The paper's "analytic" means the class `C^ω`; the power-series form is stated here. The two
   agree in this case: the positive directions give `CPolynomialAt`, and the negative direction

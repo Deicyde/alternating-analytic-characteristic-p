@@ -2,7 +2,7 @@ import Mathlib.Analysis.Normed.Field.Ultra
 import Mathlib.Algebra.CharP.Defs
 
 /-!
-# Lemma A.2 (positive characteristic is nonarchimedean), p. 25
+# Lemma A.2 (positive characteristic is nonarchimedean), p. 27
 
 Paper statement: "A normed field of characteristic p > 0 is nonarchimedean."
 

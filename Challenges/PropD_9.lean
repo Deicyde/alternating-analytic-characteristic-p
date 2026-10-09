@@ -3,7 +3,7 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Analytic.Basic
 
 /-!
-# Proposition D.9 (descent of a lift), p. 46
+# Proposition D.9 (descent of a lift), p. 48
 
 Paper statement (Appendix D). "Assume (H1) and (H2). Let `E₁` be a normed `K₁`-space, `F₁` a
 `K₁`-Banach space, and `E, F` as above [`E = E₁ ⊗̂_π K'`, `F = F₁ ⊗̂_π K'`]. If `A^{k,K'}_{E,E;F}`

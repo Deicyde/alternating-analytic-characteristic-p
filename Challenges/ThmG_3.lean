@@ -5,7 +5,7 @@ import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
 import Mathlib.Order.LiminfLimsup
 
 /-!
-# Theorem G.3 (analytic tensor criterion), p. 55 (proof pp. 55-56)
+# Theorem G.3 (analytic tensor criterion), p. 57
 
 Paper statement (Appendix G: `K` is complete and nontrivially normed, `P` is Banach, `T_n(P)`
 and `Δ_n(P)` are as in Proposition G.1, and a projection onto `Δ_n(P)` is a bounded linear

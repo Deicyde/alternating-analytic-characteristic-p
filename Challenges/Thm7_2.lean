@@ -6,7 +6,7 @@ import Mathlib.Analysis.Analytic.Basic
 import Mathlib.Analysis.Calculus.ContDiff.Defs
 
 /-!
-# Theorem 7.2 (ambient differential calculus), pp. 18-19
+# Theorem 7.2 (ambient differential calculus), pp. 19-20
 
 Setting (Section 7): `K` is complete and nontrivially normed; manifold models may be arbitrary
 normed spaces; no characteristic or degree restriction.

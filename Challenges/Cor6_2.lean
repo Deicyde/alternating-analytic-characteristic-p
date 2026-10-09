@@ -4,7 +4,7 @@ import Mathlib.Analysis.Calculus.ContDiff.Defs
 import Mathlib.Data.Nat.Factorial.Basic
 
 /-!
-# Corollary 6.2 (regularity on whole hom spaces), p. 15
+# Corollary 6.2 (regularity on whole hom spaces), p. 16
 
 Paper statement: "For every nontrivially normed field K, the bifunctor
 Alt^k : Vec_K^op × Vec_K → Vec_K is C^∞, and is analytic if and only if k! ≠ 0 in K. Both

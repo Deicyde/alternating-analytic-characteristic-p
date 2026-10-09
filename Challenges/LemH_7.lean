@@ -5,7 +5,7 @@ import Mathlib.FieldTheory.Finite.Basic
 import AlternatingAnalytic.Algebra.DeterminantQuadraticGap
 
 /-!
-# Lemma H.7 (the degree-one part of `C_0` is zero), p. 60
+# Lemma H.7 (the degree-one part of `C_0` is zero), p. 62
 
 Setting (Appendix H.1–H.2): `p` is prime, `K = 𝔽_p(t)`, `A = L[ε]/(ε^p)` with basis
 `e_i = ε^i`, `a = ∑ a_i e_i` with `a_0, …, a_{p-1}` (and the `τ_w`) algebraically independent over

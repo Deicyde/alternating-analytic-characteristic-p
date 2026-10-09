@@ -5,7 +5,7 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Analytic.Basic
 
 /-!
-# Remark I.3 (a nonspherical target norm with analytic precomposition), p. 64
+# Remark I.3 (a nonspherical target norm with analytic precomposition), pp. 66-67
 
 Paper statement (Appendix I.3): Spherical completeness of the given target norm is not
 necessary for analyticity, even in degrees at least the characteristic. Let `K = F_p((t))` with
