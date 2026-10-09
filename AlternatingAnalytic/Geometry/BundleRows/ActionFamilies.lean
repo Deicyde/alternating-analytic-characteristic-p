@@ -8,11 +8,12 @@ import AlternatingAnalytic.Geometry.BundleRows.EquivalentSphericalNorm
 /-!
 # Family preservation for the alternating action, setting by setting
 
-Inputs for the generic bundle assemblies `contMDiffVectorBundle_alternating_of_family` and
-`alternatingBundleHom_of_family`, one per setting of Corollary 4.6: the passage from local
-analytic family preservation in the model space to manifold family preservation, the local
-statements for a nonzero factorial, a target with an equivalent spherically complete ultrametric
-norm, a finite-coordinate source and a `c₀` retract base, and the `C^n` statement.
+The hypothesis of `contMDiffVectorBundle_alternating_of_family` and
+`alternatingBundleHom_of_family` is that the model action `alternatingMapAction` takes analytic
+(or `C^n`) families to analytic (or `C^n`) families. It holds in each setting of Corollary 4.6:
+`k! ≠ 0`, a target with an equivalent spherically complete ultrametric norm, a source with finite
+coordinates, a base that is a retract of `c₀`, and every finite smoothness order. The first lemma
+passes from the model space to manifolds.
 -/
 
 open scoped Manifold ContDiff ZeroAtInfty

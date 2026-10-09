@@ -2,7 +2,13 @@ import Mathlib.Analysis.Normed.Operator.Extend
 import Mathlib.Analysis.Normed.Module.Multilinear.Curry
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 
-/-! Contracting extension of multilinear and alternating maps across a dense linear isometry. -/
+/-!
+# Extending multilinear maps from a dense subspace
+
+Along a dense linear isometry `j : D → E` into a space with complete target `F`,
+continuous linear, multilinear and alternating maps on `D` extend uniquely to `E`
+without increasing their norms. This is Lemma D.5.
+-/
 
 noncomputable section
 namespace AlternatingAnalytic
@@ -60,7 +66,7 @@ theorem norm_denseLinearExtension_le (f : D →L[K] F) :
     f.opNorm_extend_le (N := 1) hd (fun x => by simp [j.norm_map])
 
 include hd in
-/-- Existence of a simultaneous linear contraction extending every n-linear map. -/
+/-- There is a linear map of norm at most one extending every `n`-linear map along `j`. -/
 theorem exists_denseMultilinearExtension (n : ℕ) :
     ∃ T : ContinuousMultilinearMap K (fun _ : Fin n => D) F →L[K]
       ContinuousMultilinearMap K (fun _ : Fin n => E) F,
@@ -104,7 +110,7 @@ theorem exists_denseMultilinearExtension (n : ℕ) :
         _ ≤ ‖P.curryLeft‖ * ‖x‖ := P.curryLeft.le_opNorm x
         _ = ‖P‖ * ‖x‖ := by rw [ContinuousMultilinearMap.curryLeft_norm]
 
-/-- The actual contracting family of dense multilinear extensions. -/
+/-- The extension of `n`-linear maps along `j`, of norm at most one. -/
 def denseMultilinearExtension (n : ℕ) :
     ContinuousMultilinearMap K (fun _ : Fin n => D) F →L[K]
       ContinuousMultilinearMap K (fun _ : Fin n => E) F :=
@@ -121,7 +127,7 @@ theorem norm_denseMultilinearExtension_le (n : ℕ)
     ‖denseMultilinearExtension j hd n P‖ ≤ ‖P‖ :=
   (exists_denseMultilinearExtension j hd n).choose_spec.2 P
 
-/-- Strong alternation survives dense extension, including in characteristic two. -/
+/-- The extension of an alternating map vanishes when two arguments are equal. -/
 theorem denseMultilinearExtension_alternating (n : ℕ) (P : D [⋀^Fin n]→L[K] F)
     (x : Fin n → E) {a b : Fin n} (hab : a ≠ b) (hx : x a = x b) :
     denseMultilinearExtension j hd n P.toContinuousMultilinearMap x = 0 := by
@@ -141,7 +147,7 @@ theorem denseMultilinearExtension_alternating (n : ℕ) (P : D [⋀^Fin n]→L[K
   have h := congrFun hfun x
   simpa only [hx, Function.update_eq_self] using h
 
-/-- Contracting linear extension of continuous alternating maps along a dense linear isometry. -/
+/-- The extension of continuous alternating maps along `j`, of norm at most one. -/
 def denseAlternatingExtension (n : ℕ) :
     (D [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F) :=
   LinearMap.mkContinuous

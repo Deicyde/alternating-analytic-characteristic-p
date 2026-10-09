@@ -2,16 +2,12 @@ import AlternatingAnalytic.Analysis.RationalLaurentScalars
 import AlternatingAnalytic.Analysis.RigidDenseSource
 
 /-!
-# Lemma H.5 (rigidity of the source `E`), p. 59
+# Proof of Lemma H.5
 
-Solution: the statements of `Challenges/LemH_5.lean`, from the generic rigidity theorems
-`AlternatingAnalytic.RigidDenseSource.existsUnique_scalar` and
+Uses `AlternatingAnalytic.RigidDenseSource.existsUnique_scalar` and
 `AlternatingAnalytic.RigidDenseSource.dual_eq_zero`
-(`AlternatingAnalytic/Analysis/RigidDenseSourceGeneric.lean`, collected in
-`RigidDenseSource.rigid_source_properties`), which hold for any dense normed field extension
-`K → L` with `L` complete and any algebraically independent `a : I → L` with `I` finite and
-nonempty; density is `AlternatingAnalytic.RationalField.denseRange_algebraMap`. The file's
-`coordinateInclusion` and `sourceE` are the library's `coordinateMap` and `source` verbatim.
+(`AlternatingAnalytic/Analysis/RigidDenseSourceGeneric.lean`), with density from
+`AlternatingAnalytic.RationalField.denseRange_algebraMap`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemH_5
@@ -36,7 +32,7 @@ def sourceE {p : ℕ} (a : Fin p → L) : Submodule K (Fin p → L) :=
 
 end Definitions
 
-/-- **Lemma H.5, first assertion.** Every bounded endomorphism of `E = K^p + K a` is
+/-- Lemma H.5, first assertion: every bounded endomorphism of `E = K^p + K a` is
 multiplication by a scalar in `K`. -/
 theorem part1 (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
     (a : Fin p → AlternatingAnalytic.LaurentField (ZMod p) r)
@@ -50,7 +46,7 @@ theorem part1 (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1
     (AlternatingAnalytic.RationalField.denseRange_algebraMap (ZMod p) r) ha T
   exact ⟨s, hs⟩
 
-/-- **Lemma H.5, second assertion.** Every bounded linear map `E → K` is zero. -/
+/-- Lemma H.5, second assertion: every bounded linear map `E → K` is zero. -/
 theorem part2 (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
     (a : Fin p → AlternatingAnalytic.LaurentField (ZMod p) r)
     (ha : AlgebraicIndependent (AlternatingAnalytic.RationalField (ZMod p) r) a)

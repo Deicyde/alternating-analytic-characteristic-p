@@ -12,17 +12,17 @@ import Mathlib.Analysis.Normed.Operator.ContinuousLinearMap
 /-!
 # Analytic precomposition for equivalent ultrametric targets over a discrete base
 
-This is proposition `discrete` of `sources/charp.tex`. We construct the rounded norm on an
-actual copy of the target, prove the identity is a continuous linear equivalence, transfer
-completeness, and apply spherical completeness for discrete distances and Theorem A.
-The given norm on the original target need not itself be ultrametric or discrete.
+Corollary 4.3: if the value group of `K` is `r ^ ℤ`, a Banach target with an equivalent
+ultrametric norm makes alternating precomposition analytic. The proof puts the rounded norm
+on a copy of the target, which is then spherically complete, applies Theorem 4.2 there, and
+transports the lift back. `K` need not be complete.
 -/
 
 open scoped ContDiff
 
 namespace AlternatingAnalytic
 
-/-- A separate carrier for the rounded target norm, with the same algebraic vector space. -/
+/-- A copy of `F` to carry the rounded norm. -/
 def DiscreteRenormedTarget (F : Type*) := F
 
 namespace DiscreteRenormedTarget
@@ -33,14 +33,13 @@ instance {F : Type*} [AddCommGroup F] : AddCommGroup (DiscreteRenormedTarget F) 
 instance {K F : Type*} [Semiring K] [AddCommGroup F] [Module K F] :
     Module K (DiscreteRenormedTarget F) := inferInstanceAs (Module K F)
 
-/-- The algebraic identity from the separate normed carrier to the original space. -/
+/-- The identity map from the copy to `F`. -/
 def linearEquiv (K F : Type*) [Semiring K] [AddCommGroup F] [Module K F] :
     DiscreteRenormedTarget F ≃ₗ[K] F := LinearEquiv.refl K F
 
 end DiscreteRenormedTarget
 
-/-- Equality with the nontrivial discrete value group supplies Mathlib's nontrivial norm
-hypothesis; the underlying normed-field structure is unchanged. -/
+/-- A field with value group `r ^ ℤ`, `0 < r < 1`, is nontrivially normed. -/
 @[instance_reducible]
 def nontriviallyNormedFieldOfDiscreteValueGroup (K : Type*) [NormedField K]
     {r : ℝ} (hr0 : 0 < r) (hr1 : r < 1)
@@ -57,7 +56,7 @@ def nontriviallyNormedFieldOfDiscreteValueGroup (K : Type*) [NormedField K]
     rw [hc, zpow_neg_one]
     exact (one_lt_inv₀ hr0).mpr hr1
 
-/-- The value-group equality in the paper implies the containment used by the rounding proof. -/
+/-- If the value group is `r ^ ℤ`, every nonzero scalar has norm in `r ^ ℤ`. -/
 theorem norm_mem_zpowers_of_discreteValueGroup {K : Type*} [NormedField K] {r : ℝ}
     (hvalue : Set.range (fun c : Kˣ => ‖(c : K)‖) = Set.range (fun n : ℤ => r ^ n))
     (c : K) (hc : c ≠ 0) : ∃ n : ℤ, ‖c‖ = r ^ n := by
@@ -70,8 +69,8 @@ variable {K ι E E' F : Type*} [NontriviallyNormedField K] [IsUltrametricDist K]
   [NormedAddCommGroup E] [NormedSpace K E] [NormedAddCommGroup E'] [NormedSpace K E']
   [NormedAddCommGroup F] [NormedSpace K F] [CompleteSpace F]
 
-/-- A complete target with an equivalent ultrametric norm has bounded precomposition lifts
-when the nonzero scalar norms lie in a discrete cyclic group. -/
+/-- If nonzero scalar norms lie in `e ^ ℤ`, a complete target with an equivalent
+ultrametric norm has bounded precomposition lifts. -/
 theorem hasBoundedLift_of_equivalentUltrametricNorm_discreteField
     (hF : HasEquivalentUltrametricNorm K F) {e : ℝ} (he : 1 < e)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = e ^ n) :
@@ -113,7 +112,7 @@ theorem hasBoundedLift_of_equivalentUltrametricNorm_discreteField
   exact Round24Transfer.hasBoundedLift_of_retract ψ.symm.toContinuousLinearMap
     ψ.toContinuousLinearMap (fun x => ψ.apply_symm_apply x) hG
 
-/-- Under the discrete-base hypotheses, precomposition is continuously polynomial everywhere. -/
+/-- Under the same hypotheses, precomposition is continuously polynomial everywhere. -/
 theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteField
     (hF : HasEquivalentUltrametricNorm K F) {e : ℝ} (he : 1 < e)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = e ^ n) (f₀ : E →L[K] E') :
@@ -122,14 +121,14 @@ theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteField
     (ι := ι) (E := E) (E' := E') hF he hval
   exact Round24Transfer.cpolynomialAt_of_lift P hP f₀
 
-/-- The full discrete-base positive complement, for the original target norm. -/
+/-- Under the same hypotheses, precomposition is analytic everywhere. -/
 theorem analyticAt_of_equivalentUltrametricNorm_discreteField
     (hF : HasEquivalentUltrametricNorm K F) {e : ℝ} (he : 1 < e)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = e ^ n) (f₀ : E →L[K] E') :
     AnalyticAt K (Round24Transfer.Q K ι E E' F) f₀ :=
   (cpolynomialAt_of_equivalentUltrametricNorm_discreteField hF he hval f₀).analyticAt
 
-/-- The paper's radius convention, using powers of `r ∈ (0,1)`. -/
+/-- Continuous polynomiality with scalar norms in `r ^ ℤ`, `0 < r < 1`. -/
 theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteField_radius
     (hF : HasEquivalentUltrametricNorm K F) {r : ℝ} (hr0 : 0 < r) (hr1 : r < 1)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = r ^ n) (f₀ : E →L[K] E') :
@@ -140,14 +139,14 @@ theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteField_radius
   obtain ⟨n, hn⟩ := hval c hc
   exact ⟨-n, by simpa [zpow_neg] using hn⟩
 
-/-- Analyticity everywhere in the paper's radius convention. -/
+/-- Analyticity with scalar norms in `r ^ ℤ`, `0 < r < 1`. -/
 theorem analyticAt_of_equivalentUltrametricNorm_discreteField_radius
     (hF : HasEquivalentUltrametricNorm K F) {r : ℝ} (hr0 : 0 < r) (hr1 : r < 1)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = r ^ n) (f₀ : E →L[K] E') :
     AnalyticAt K (Round24Transfer.Q K ι E E' F) f₀ :=
   (cpolynomialAt_of_equivalentUltrametricNorm_discreteField_radius hF hr0 hr1 hval f₀).analyticAt
 
-/-- The paper's exact value-group hypothesis gives continuous polynomiality everywhere. -/
+/-- Continuous polynomiality when the value group of `K` is `r ^ ℤ`. -/
 theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteValueGroup
     (hF : HasEquivalentUltrametricNorm K F) {r : ℝ} (hr0 : 0 < r) (hr1 : r < 1)
     (hvalue : Set.range (fun c : Kˣ => ‖(c : K)‖) = Set.range (fun n : ℤ => r ^ n))
@@ -155,8 +154,8 @@ theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteValueGroup
   cpolynomialAt_of_equivalentUltrametricNorm_discreteField_radius hF hr0 hr1
     (norm_mem_zpowers_of_discreteValueGroup hvalue) f₀
 
-/-- Proposition `discrete`: analyticity for equivalent ultrametric Banach targets over a
-field with value group `r^ℤ`, in the original target norm and without completeness of K. -/
+/-- Corollary 4.3: if the value group of `K` is `r ^ ℤ` and the Banach space `F` has an
+equivalent ultrametric norm, precomposition is analytic everywhere. -/
 theorem analyticAt_of_equivalentUltrametricNorm_discreteValueGroup
     (hF : HasEquivalentUltrametricNorm K F) {r : ℝ} (hr0 : 0 < r) (hr1 : r < 1)
     (hvalue : Set.range (fun c : Kˣ => ‖(c : K)‖) = Set.range (fun n : ℤ => r ^ n))

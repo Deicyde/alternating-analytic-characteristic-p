@@ -5,9 +5,9 @@ import Mathlib.LinearAlgebra.Matrix.Rank
 /-!
 # Flattening ranks of determinant arrays
 
-Contracting the antisymmetrized tensor leaves a vector in every supporting subspace.
-Evaluating that vector gives a column of the determinant-array flattening. Therefore
-the column space has dimension at most the support dimension of the exterior vector.
+Contracting the antisymmetrized tensor gives a vector in every supporting subspace, and
+evaluating that vector gives a column of the determinant-array flattening. So the rank of
+a flattening is at most the support dimension of the exterior vector (Lemma B.3).
 -/
 
 open scoped TensorProduct
@@ -126,7 +126,8 @@ theorem exteriorFlattening_column_mem {R C : Type*} (W : Submodule L (S → L))
   funext r
   exact exteriorContraction_coordinate W α (columns c) ω (rows r)
 
-/-- The rank of any finite determinant-array flattening is bounded by exterior support dimension. -/
+/-- Lemma B.3: a finite flattening of the determinant array has rank at most the support
+dimension. -/
 theorem exteriorFlattening_rank_le {R C : Type*} [Fintype R] [Fintype C]
     (W : Submodule L (S → L)) (ω : ⋀[L]^k W) (α : Fin k) (rows : R → S)
     (columns : C → {i : Fin k // i ≠ α} → S) :

@@ -3,9 +3,11 @@ import AlternatingAnalytic.Analysis.AlternatingActionRegularity
 /-!
 # Universal alternating targets
 
-Universal targets are defined by analyticity of the actual precomposition operator
-for all normed spaces in the carrier universe of the field. The operator laws use
-ordinary operator norms, in every degree, without completeness assumptions.
+`F` is a universal target in degree `k` if precomposition `u ↦ (m ↦ m ∘ u)` on
+`F`-valued alternating maps is analytic for all normed spaces `E`, `D` (Section 9).
+The joint action `(u, g) ↦ g ∘ m ∘ u` is analytic whenever the source or destination
+target is universal. Universal targets are closed under bounded retracts, isomorphisms
+and finite products.
 -/
 
 noncomputable section
@@ -25,7 +27,7 @@ variable {K : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup F] [NormedSpace K F]
   [NormedAddCommGroup F'] [NormedSpace K F']
 
-/-- Pull back first, then postcompose on the destination source space. -/
+/-- The joint action factors as precomposition followed by postcomposition. -/
 theorem alternatingMapAction_eq_source_precomposition (k : ℕ)
     (a : (E' →L[K] E) × (F →L[K] F')) :
     alternatingMapAction k a =
@@ -43,7 +45,7 @@ variable {K : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup F] [NormedSpace K F]
   [NormedAddCommGroup F'] [NormedSpace K F']
 
-/-- Postcompose first, then pull back with the destination target. -/
+/-- The joint action factors as postcomposition followed by precomposition. -/
 theorem alternatingMapAction_eq_target_precomposition (k : ℕ)
     (a : (E' →L[K] E) × (F →L[K] F')) :
     alternatingMapAction k a =
@@ -52,7 +54,8 @@ theorem alternatingMapAction_eq_target_precomposition (k : ℕ)
   ext m x
   rfl
 
-/-- Pointwise analytic target pullback gives joint analyticity by bounded bilinear composition. -/
+/-- If precomposition into the destination target is analytic at `a₀.1`, the joint action
+is analytic at `a₀`. -/
 theorem analyticAt_alternatingMapAction_of_target_precomposition
     (k : ℕ) (a₀ : (E' →L[K] E) × (F →L[K] F'))
     (hQ : AnalyticAt K
@@ -98,7 +101,8 @@ private theorem cpolynomialAt_bilinear
   rw [Nat.add_comm 3 m]
   exact b.fpowerSeriesBilinear_apply_add_three x m
 
-/-- Pointwise finite-polynomial target pullback gives a finite-polynomial joint action. -/
+/-- If precomposition into the destination target is a continuous polynomial at `a₀.1`, so
+is the joint action at `a₀`. -/
 theorem cpolynomialAt_alternatingMapAction_of_target_precomposition
     (k : ℕ) (a₀ : (E' →L[K] E) × (F →L[K] F'))
     (hQ : CPolynomialAt K
@@ -150,7 +154,7 @@ theorem alternatingTargetOperatorTransport_apply (k : ℕ)
         (T.comp (ContinuousLinearMap.compContinuousAlternatingMapCLM K D F G (Fin k) i)) :=
   rfl
 
-/-- A bounded retraction transports the actual pullback operator exactly. -/
+/-- If `r ∘ i = id`, the transport sends precomposition by `u` to precomposition by `u`. -/
 theorem alternatingTargetOperatorTransport_precomposition (k : ℕ)
     (i : F →L[K] G) (r : G →L[K] F)
     (hri : r.comp i = ContinuousLinearMap.id K F) (u : E →L[K] D) :
@@ -164,8 +168,8 @@ end Transport
 
 variable (K : Type u) [NontriviallyNormedField K]
 
-/-- Analyticity of all pullback operators with this target. All carriers are in
-`Type u`, the carrier universe used by `NormedSpaceCat K`. -/
+/-- `F` is a universal target in degree `k`: precomposition on `F`-valued alternating maps
+is analytic for all normed spaces `E`, `D` in `Type u`. -/
 def UniversalAlternatingTarget (k : ℕ) (F : Type u)
     [NormedAddCommGroup F] [NormedSpace K F] : Prop :=
   ∀ (E D : Type u) [NormedAddCommGroup E] [NormedSpace K E]
@@ -208,7 +212,7 @@ variable {K} {F G : Type u}
   [NormedAddCommGroup F] [NormedSpace K F]
   [NormedAddCommGroup G] [NormedSpace K G]
 
-/-- Universal targets descend along arbitrary bounded linear retractions. -/
+/-- A bounded linear retract of a universal target is universal. -/
 theorem UniversalAlternatingTarget.of_retract {k : ℕ}
     (i : F →L[K] G) (r : G →L[K] F)
     (hri : r.comp i = ContinuousLinearMap.id K F)
@@ -222,7 +226,7 @@ theorem UniversalAlternatingTarget.of_retract {k : ℕ}
   simpa only [Function.comp_def,
     alternatingTargetOperatorTransport_precomposition k i r hri] using h
 
-/-- Universal-target regularity is invariant under bounded linear isomorphism. -/
+/-- Being a universal target is invariant under bounded linear isomorphism. -/
 theorem universalAlternatingTarget_iff_of_continuousLinearEquiv
     (k : ℕ) (e : F ≃L[K] G) :
     UniversalAlternatingTarget K k F ↔ UniversalAlternatingTarget K k G := by
@@ -232,7 +236,7 @@ theorem universalAlternatingTarget_iff_of_continuousLinearEquiv
   · intro h
     exact h.of_retract e.toContinuousLinearMap e.symm.toContinuousLinearMap (by ext; simp)
 
-/-- Finite max-norm products of universal targets are universal, including the empty product. -/
+/-- A finite product of universal targets, with the max norm, is universal. -/
 theorem UniversalAlternatingTarget.pi
     {I : Type u} [Fintype I] {Fi : I → Type u}
     [∀ i, NormedAddCommGroup (Fi i)] [∀ i, NormedSpace K (Fi i)]
@@ -279,9 +283,9 @@ theorem UniversalAlternatingTarget.pi
   ext u m x i
   rfl
 
-/-- The operator part of `dom:core`: both exact factorizations, joint analyticity
-from either universal endpoint, and closure under bounded retracts, bounded linear
-isomorphisms, and finite products (including the empty product). -/
+/-- Summary: the two factorizations of the joint action, its analyticity when either
+target is universal, and closure of universal targets under retracts, isomorphisms and
+finite products. -/
 theorem universalAlternatingTarget_operator_laws (k : ℕ) :
     (∀ (E E' F F' : Type u)
       [NormedAddCommGroup E] [NormedSpace K E]

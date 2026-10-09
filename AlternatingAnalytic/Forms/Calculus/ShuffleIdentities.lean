@@ -6,13 +6,9 @@ import AlternatingAnalytic.Forms.Calculus.Representation
 
 The unit laws, associativity and graded commutativity of the shuffle product of scalar
 alternating maps, and the expression of `alternatizeUncurryFin (φ.smulRight θ)` as the shuffle
-product of the `1`-form `φ` with `θ`. Each identity is evaluated at a tuple `v` of `M`; pulling
-back along `tupleMap v` reduces it to alternating maps on `Fin N → R`, which are
-alternatizations (`exists_alternatization_eq`), where it becomes an identity between products of
-multilinear maps (`shuffle_alternatization`). No factorial is inverted, so the identities hold
-over every commutative ring. The sign of graded commutativity is the sign of a rotation, computed
-from `sign_finRotate`; the expansion of `alternatizeUncurryFin` uses Mathlib's
-`Equiv.Perm.decomposeFin'`.
+product of the `1`-form `φ` with `θ`. Each identity is evaluated at a tuple `v`; pulling back
+along `tupleMap v` reduces it to an identity between alternatizations on `Fin N → R`. No factorial
+is inverted, so the identities hold over every commutative ring.
 -/
 
 open Equiv

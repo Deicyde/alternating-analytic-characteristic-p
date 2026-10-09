@@ -4,13 +4,10 @@ import AlternatingAnalytic.Analysis.DenseScalarRestriction
 /-!
 # Dense inputs and dense scalar extension for multilinear families
 
-The core construction needs completeness only of the codomain. It applies to arbitrary
-finite dependent input families, including the empty family. Scalar promotion alone needs
-no completeness. The final submodule specialization retains the manuscript's additional
-completeness assumptions on the larger field and the ambient input spaces.
-
-An incomplete original codomain must first be included in the complete codomain. Agreement
-retains its values on original inputs; no range assertion is made on all ambient inputs.
+Let `K` be dense in `L`. A bounded `K`-multilinear map on dense `K`-subspaces of
+`L`-spaces `H i`, with values in a complete space `Z`, extends uniquely to a bounded
+`L`-multilinear map on `∏ i, H i` with the same norm. This is the completion
+principle stated in Appendix H before Lemma H.5. Only `Z` needs to be complete.
 -/
 
 noncomputable section
@@ -26,7 +23,8 @@ variable {K L : Type*} [NontriviallyNormedField K] [NontriviallyNormedField L]
   [NormedAddCommGroup Z] [NormedSpace K Z] [NormedSpace L Z]
   [IsScalarTower K L Z]
 
-/-- Promote the scalar field slotwise, keeping the actual heterogeneous map unchanged. -/
+/-- A continuous `K`-multilinear map between `L`-spaces is `L`-multilinear when `K` is
+dense in `L`. -/
 def denseScalarMultilinearFamilyExtension (hKL : DenseRange (algebraMap K L))
     (f : ContinuousMultilinearMap K H Z) : ContinuousMultilinearMap L H Z where
   toFun := f
@@ -62,7 +60,7 @@ variable {E : I → Type*}
   [∀ i, NormedAddCommGroup (E i)] [∀ i, NormedSpace K (E i)]
   [CompleteSpace Z]
 
-/-- Extend across independent dense input isometries, then promote the scalar field. -/
+/-- The extension along the dense isometries `j i`, as an `L`-multilinear map. -/
 def denseScalarFamilyExtension (hKL : DenseRange (algebraMap K L))
     (j : ∀ i, E i →ₗᵢ[K] H i) (hj : ∀ i, DenseRange (j i))
     (P : ContinuousMultilinearMap K E Z) : ContinuousMultilinearMap L H Z :=
@@ -91,7 +89,7 @@ theorem norm_denseScalarFamilyExtension (hKL : DenseRange (algebraMap K L))
   rw [denseScalarFamilyExtension, norm_denseScalarMultilinearFamilyExtension,
     norm_denseMultilinearFamilyExtension]
 
-/-- Agreement on the original inputs determines the extension among all larger-field maps. -/
+/-- Agreement on the original inputs determines the extension among `L`-multilinear maps. -/
 theorem denseScalarFamilyExtension_unique (hKL : DenseRange (algebraMap K L))
     (j : ∀ i, E i →ₗᵢ[K] H i) (hj : ∀ i, DenseRange (j i))
     (P : ContinuousMultilinearMap K E Z) (R : ContinuousMultilinearMap L H Z)
@@ -101,7 +99,7 @@ theorem denseScalarFamilyExtension_unique (hKL : DenseRange (algebraMap K L))
   ext x
   exact congrArg (fun f : ContinuousMultilinearMap K H Z => f x) h
 
-/-- The continuous completion principle, with agreement, scalar restriction, and exact norm. -/
+/-- The completion principle: existence and uniqueness of the extension, with the same norm. -/
 theorem existsUnique_denseScalarFamilyExtension (hKL : DenseRange (algebraMap K L))
     (j : ∀ i, E i →ₗᵢ[K] H i) (hj : ∀ i, DenseRange (j i))
     (P : ContinuousMultilinearMap K E Z) :
@@ -115,7 +113,8 @@ theorem existsUnique_denseScalarFamilyExtension (hKL : DenseRange (algebraMap K 
   · intro R hR
     exact denseScalarFamilyExtension_unique hKL j hj P R hR.1
 
-/-- A supplied nonnegative bound persists; the exact norm is that of `P.mkContinuous`. -/
+/-- The completion principle for a multilinear map with a bound `C`; the extension
+keeps the bound. -/
 theorem existsUnique_denseScalarFamilyExtension_of_bound
     (hKL : DenseRange (algebraMap K L))
     (j : ∀ i, E i →ₗᵢ[K] H i) (hj : ∀ i, DenseRange (j i))
@@ -138,7 +137,7 @@ theorem existsUnique_denseScalarFamilyExtension_of_bound
   · intro R hR
     exact denseScalarFamilyExtension_unique hKL j hj P₀ R hR.1
 
-/-- Raw input agreement alone suffices for uniqueness, without imposing a norm on the competitor. -/
+/-- Agreement on the original inputs determines the extension. -/
 theorem denseScalarFamilyExtension_mkContinuous_unique
     (hKL : DenseRange (algebraMap K L))
     (j : ∀ i, E i →ₗᵢ[K] H i) (hj : ∀ i, DenseRange (j i))
@@ -151,7 +150,8 @@ theorem denseScalarFamilyExtension_mkContinuous_unique
 
 variable {W : Type*} [NormedAddCommGroup W] [NormedSpace K W]
 
-/-- An actual inclusion of an incomplete codomain retains its range on the original inputs. -/
+/-- For a map into a smaller space `W` included in `Z`, the extension takes values in
+`W` on the original inputs. -/
 theorem denseScalarFamilyExtension_comp_apply_mem_range
     (hKL : DenseRange (algebraMap K L))
     (j : ∀ i, E i →ₗᵢ[K] H i) (hj : ∀ i, DenseRange (j i))
@@ -161,7 +161,7 @@ theorem denseScalarFamilyExtension_comp_apply_mem_range
   rw [denseScalarFamilyExtension_apply]
   exact ⟨P x, rfl⟩
 
-/-- An isometric codomain inclusion also preserves the norm of the original smaller-valued map. -/
+/-- Composing with an isometric inclusion of the codomain does not change the norm. -/
 @[simp]
 theorem norm_denseScalarFamilyExtension_comp
     (hKL : DenseRange (algebraMap K L))
@@ -177,7 +177,7 @@ section Submodules
 
 variable [CompleteSpace Z]
 
-/-- Literal dense smaller-field subspaces; no larger-field structure on the subspaces is needed. -/
+/-- The completion principle for dense `K`-submodules of the `L`-spaces `H i`. -/
 theorem existsUnique_denseScalarSubmoduleFamilyExtension
     (hKL : DenseRange (algebraMap K L))
     (S : ∀ i, Submodule K (H i)) (hS : ∀ i, Dense (S i : Set (H i)))
@@ -193,10 +193,8 @@ theorem existsUnique_denseScalarSubmoduleFamilyExtension
   · intro R hR
     exact denseScalarFamilyExtension_unique hKL j hj P R hR.1
 
-/-- The manuscript completion principle for bounded maps on dense subspaces of Banach spaces.
-The extra completeness hypotheses here are retained to match the manuscript; the core theorem
-above only requires the complete target. In particular, neither `K` nor the subspaces are
-assumed complete. -/
+/-- The completion principle of Appendix H, for bounded maps on dense subspaces of
+Banach spaces. The completeness of `L` and `H i` matches the paper and is not used. -/
 theorem existsUnique_denseScalarSubmoduleFamilyExtension_of_bound
     [CompleteSpace L] [∀ i, CompleteSpace (H i)]
     (hKL : DenseRange (algebraMap K L))

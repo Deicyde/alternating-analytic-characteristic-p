@@ -4,7 +4,14 @@ import Mathlib.RingTheory.Localization.Cardinality
 import Mathlib.RingTheory.AlgebraicIndependent.RankAndCardinality
 import Mathlib.Topology.Algebra.Module.Cardinality
 
-/-! The rational and Laurent fields with a prescribed `X`-adic radius. -/
+/-!
+# The fields `K = F_p(t)` and `L = F_p((t))` with an `X`-adic norm
+
+`RationalField κ r` is `RatFunc κ` with the norm `‖q‖ = r ^ ord q` induced from the Laurent
+field. It is countable, incomplete and dense in `LaurentField κ r`, which is uncountable. Hence
+`L` contains algebraically independent tuples over `K` of every finite size. This is the scalar
+setup of Appendix H, before Lemma H.5.
+-/
 
 noncomputable section
 
@@ -14,7 +21,7 @@ open scoped NNReal Cardinal
 
 namespace AlternatingAnalytic
 
-/-- Rational functions with the norm radius retained in the carrier. -/
+/-- Rational functions over `κ`; the radius `r` of the norm is part of the type. -/
 def RationalField (κ : Type*) [Field κ] (_r : ℝ≥0) := RatFunc κ
 
 namespace RationalField
@@ -28,11 +35,11 @@ instance : Algebra κ (RationalField κ r) := inferInstanceAs (Algebra κ (RatFu
 instance (p : ℕ) [CharP κ p] : CharP (RationalField κ r) p :=
   inferInstanceAs (CharP (RatFunc κ) p)
 
-/-- The actual rational-function inclusion into the local Laurent field. -/
+/-- The inclusion of rational functions into the Laurent field. -/
 def toLaurentField : RationalField κ r →+* LaurentField κ r :=
   ratFuncToLaurentField κ r
 
-/-- The rational parameter, before taking its Laurent expansion. -/
+/-- The variable `X` as a rational function. -/
 def X : RationalField κ r := algebraMap (Polynomial κ) (RatFunc κ) Polynomial.X
 
 @[simp]
@@ -47,13 +54,12 @@ instance : Algebra (RationalField κ r) (LaurentField κ r) :=
 theorem algebraMap_eq :
     algebraMap (RationalField κ r) (LaurentField κ r) = toLaurentField κ r := rfl
 
-/-- The valuation used here is precisely the `X`-adic rational-function valuation. -/
+/-- The valuation is the `X`-adic valuation of rational functions. -/
 theorem valuation_eq (q : RationalField κ r) :
     RatFunc.polynomialValuationX κ q =
       Valued.v (show LaurentSeries κ from toLaurentField κ r q) :=
   RatFunc.valuation_eq_LaurentSeries_valuation κ q
 
-/-- Countability follows explicitly from the fraction-field and polynomial cardinalities. -/
 instance [Countable κ] : Countable (RationalField κ r) := by
   change Countable (RatFunc κ)
   apply Cardinal.mk_le_aleph0_iff.mp
@@ -86,11 +92,11 @@ instance : NormedAlgebra (RationalField κ r) (LaurentField κ r) where
     change ‖toLaurentField κ r q * x‖ ≤ ‖q‖ * ‖x‖
     rw [norm_mul, norm_toLaurentField]
 
-/-- Inclusion preserves the exact prescribed norm. -/
+/-- The inclusion into the Laurent field is an isometry. -/
 theorem isometry_toLaurentField : Isometry (toLaurentField κ r) :=
   AddMonoidHomClass.isometry_of_norm _ (norm_toLaurentField κ r)
 
-/-- Density is the existing density theorem for rational Laurent expansions. -/
+/-- Rational functions are dense in the Laurent field. -/
 theorem denseRange_toLaurentField : DenseRange (toLaurentField κ r) :=
   LaurentSeries.coe_range_dense
 
@@ -102,7 +108,7 @@ theorem denseRange_algebraMap :
     DenseRange (algebraMap (RationalField κ r) (LaurentField κ r)) :=
   denseRange_toLaurentField κ r
 
-/-- The induced rational norm is the radius to the order of its Laurent expansion. -/
+/-- `‖q‖ = r ^ ord q`, the order taken in the Laurent expansion. -/
 theorem norm_of_ne_zero (q : RationalField κ r) (hq : q ≠ 0) :
     ‖q‖ = (r : ℝ) ^ (show LaurentSeries κ from toLaurentField κ r q).order :=
   LaurentField.norm_of_ne_zero κ r _ ((map_ne_zero (toLaurentField κ r)).mpr hq)
@@ -112,7 +118,7 @@ instance : IsUltrametricDist (RationalField κ r) :=
     simpa only [← norm_toLaurentField, map_add] using
       IsUltrametricDist.norm_add_le_max (toLaurentField κ r x) (toLaurentField κ r y))
 
-/-- The countable rational field with this nontrivial norm is incomplete. -/
+/-- Over a countable field `κ`, the rational field is not complete. -/
 theorem not_completeSpace [Countable κ] : ¬ CompleteSpace (RationalField κ r) := by
   intro h
   let := h
@@ -122,14 +128,14 @@ theorem not_completeSpace [Countable κ] : ¬ CompleteSpace (RationalField κ r)
 
 end RationalField
 
-/-- Uncountability comes from completeness of the existing nontrivially normed Laurent field. -/
+/-- The Laurent field is uncountable, being complete and nontrivially normed. -/
 theorem laurentField_uncountable (κ : Type*) [Field κ] (r : ℝ≥0)
     [Fact (0 < r)] [Fact (r < 1)] : Uncountable (LaurentField κ r) :=
   Cardinal.aleph0_lt_mk_iff.mp (Cardinal.aleph0_lt_continuum.trans_le
     (continuum_le_cardinal_of_nontriviallyNormedField (LaurentField κ r)))
 
-/-- An uncountable extension of a countable field contains independent tuples of every
-finite size. The basis is nonempty because an algebraic extension would be countable. -/
+/-- An uncountable extension of a countable field contains algebraically independent tuples
+of every finite size. -/
 theorem exists_finite_algebraicIndependent_of_uncountable
     (K L : Type) [Field K] [Field L] [Algebra K L] [Countable K]
     (hL : Cardinal.aleph0 < Cardinal.mk L) (I : Type*) [Finite I] :
@@ -159,7 +165,7 @@ theorem exists_finite_algebraicIndependent_of_uncountable
 
 namespace RationalLaurentScalars
 
-/-- Tags for the vectors `e_i` and `e_i + e_j` (`i < j`) in the paper's auxiliary set. -/
+/-- Indices for the vectors `e_i` and `e_i + e_j` (`i < j`) of the set `𝒲` in Appendix H. -/
 def AuxiliaryIndex (p : ℕ) := Fin p ⊕ {ij : Fin p × Fin p // ij.1 < ij.2}
 
 instance (p : ℕ) : Finite (AuxiliaryIndex p) :=
@@ -167,8 +173,8 @@ instance (p : ℕ) : Finite (AuxiliaryIndex p) :=
 
 variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 
-/-- All primary and auxiliary scalars can be chosen jointly independent over the actual
-normed rational field. No completeness of that rational field is assumed. -/
+/-- The scalars `a_i` and the auxiliary scalars `τ_w` can be chosen jointly algebraically
+independent over `K`. -/
 theorem exists_jointly_algebraicIndependent (Tau : Type*) [Finite Tau] :
     ∃ z : Fin p ⊕ Tau → LaurentField (ZMod p) r,
       AlgebraicIndependent (RationalField (ZMod p) r) z :=
@@ -176,7 +182,7 @@ theorem exists_jointly_algebraicIndependent (Tau : Type*) [Finite Tau] :
     (RationalField (ZMod p) r) (LaurentField (ZMod p) r)
     (Cardinal.aleph0_lt_mk_iff.mpr (laurentField_uncountable (ZMod p) r)) (Fin p ⊕ Tau)
 
-/-- One chosen family supplies both sorts of scalars. -/
+/-- A chosen jointly independent family of scalars `a_i` and `τ_w`. -/
 def jointFamily (Tau : Type*) [Finite Tau] : Fin p ⊕ Tau → LaurentField (ZMod p) r :=
   Classical.choose (exists_jointly_algebraicIndependent p r Tau)
 
@@ -184,11 +190,11 @@ theorem algebraicIndependent_jointFamily (Tau : Type*) [Finite Tau] :
     AlgebraicIndependent (RationalField (ZMod p) r) (jointFamily p r Tau) :=
   Classical.choose_spec (exists_jointly_algebraicIndependent p r Tau)
 
-/-- The primary scalars are the left part of the chosen family. -/
+/-- The scalars `a_i`. -/
 def a (Tau : Type*) [Finite Tau] (i : Fin p) : LaurentField (ZMod p) r :=
   jointFamily p r Tau (Sum.inl i)
 
-/-- The auxiliary scalars are the right part of the same chosen family. -/
+/-- The auxiliary scalars `τ_w`. -/
 def tau (Tau : Type*) [Finite Tau] (w : Tau) : LaurentField (ZMod p) r :=
   jointFamily p r Tau (Sum.inr w)
 
@@ -207,17 +213,15 @@ theorem algebraicIndependent_tau (Tau : Type*) [Finite Tau] :
     AlgebraicIndependent (RationalField (ZMod p) r) (tau p r Tau) :=
   (algebraicIndependent_jointFamily p r Tau).comp Sum.inr Sum.inr_injective
 
-/-- The particular joint family used in the setup preceding `dom:rigid` and `dom:tau-gap`. -/
+/-- The `a_i` and `τ_w`, `w ∈ 𝒲`, are jointly algebraically independent over `K`. -/
 theorem algebraicIndependent_auxiliaryScalars :
     AlgebraicIndependent (RationalField (ZMod p) r)
       (Sum.elim (a p r (AuxiliaryIndex p)) (tau p r (AuxiliaryIndex p))) :=
   algebraicIndependent_a_tau p r (AuxiliaryIndex p)
 
-/-- The complete concrete field and scalar setup preceding `dom:rigid` and `dom:tau-gap`.
-All norms, scalar actions, and topologies below are the existing radius-tagged instances.
-The nontrivial norm witnesses and scalar norm identity concern these same instances.
-The chosen auxiliary scalars and primary coordinates are restrictions of the one family `z`.
--/
+/-- The field and scalar setup of Appendix H preceding Lemma H.5: `K` countable and incomplete,
+dense and isometric in the complete uncountable `L`, and the scalars `a_i`, `τ_w` restricted from
+one algebraically independent family `z`. -/
 theorem concrete_setup :
     let K := RationalField (ZMod p) r
     let L := LaurentField (ZMod p) r

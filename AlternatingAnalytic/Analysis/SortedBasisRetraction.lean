@@ -3,8 +3,15 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Normed.Module.Bases
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
-/-! The sorted retraction on an orthogonal algebraic basis. This is the finite-span
-stage of the topological-basis construction in `charp.tex`, lines 1444–1459. -/
+/-!
+# Sorted retraction for an orthogonal basis
+
+Let `b` be an algebraic basis of `D`, indexed by a linear order, with
+`‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖`, and let the target be ultrametric. Sending a multilinear map
+to the alternating map with the same values on increasing basis tuples is a linear retraction
+of norm at most one onto alternating maps. The file also shows that the finite span of an
+unconditional Schauder basis is dense and inherits the norm bound.
+-/
 
 noncomputable section
 
@@ -17,8 +24,8 @@ variable {K I D F : Type*} [NontriviallyNormedField K] [IsUltrametricDist K]
   [LinearOrder I] [NormedAddCommGroup D] [NormedSpace K D]
   [NormedAddCommGroup F] [NormedSpace K F] [IsUltrametricDist F]
 
-/-- Prescribe a multilinear map's values on increasing basis tuples and extend
-them by the universal property of the actual exterior power. -/
+/-- The alternating map that agrees with `g` on increasing basis tuples, built through
+the exterior power. -/
 def sortedAlternatingMap (b : Basis I K D) (n : ℕ) :
     (D [×n]→L[K] F) →ₗ[K] (D [⋀^Fin n]→ₗ[K] F) :=
   exteriorPower.alternatingMapLinearEquiv.symm.toLinearMap.comp
@@ -88,7 +95,7 @@ theorem norm_sortedAlternatingMap_le (b : Basis I K D)
         ∏ i, ‖b (t i)‖) := by ring
     _ ≤ ‖g‖ * ∏ i, ‖v i‖ := mul_le_mul_of_nonneg_left hdet (norm_nonneg _)
 
-/-- Sorting is a linear contraction onto continuous alternating maps. -/
+/-- Sorting as a continuous linear map of norm at most one onto alternating maps. -/
 def sortedBasisRetraction (b : Basis I K D)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (n : ℕ) :
     (D [×n]→L[K] F) →L[K] (D [⋀^Fin n]→L[K] F) :=
@@ -113,8 +120,8 @@ theorem sortedBasisRetraction_retract (b : Basis I K D)
   exact DFunLike.congr_fun (sortedAlternatingMap_retract b n g) v
 
 omit [IsUltrametricDist K] in
-/-- On the algebraic span of a Schauder basis, its Hamel coordinates agree with
-the given continuous coordinate functionals. -/
+/-- On the span of a Schauder basis, the algebraic coordinates are the Schauder
+coordinates. -/
 theorem schauderSpanBasis_coord (b : UnconditionalSchauderBasis I K D)
     (i : I) (x : Submodule.span K (Set.range b)) :
     (Basis.span b.linearIndependent).coord i x = b.coord i x := by
@@ -136,8 +143,7 @@ theorem schauderSpanBasis_bound (b : UnconditionalSchauderBasis I K D)
   simpa only [← Submodule.norm_coe, Basis.coe_span_apply] using hb i x
 
 omit [IsUltrametricDist K] [LinearOrder I] in
-/-- Unconditional expansion gives density of the finite coordinate span, with
-no countability or completeness assumption on the ambient space. -/
+/-- The span of an unconditional Schauder basis is dense. -/
 theorem schauderSpan_denseRange (b : UnconditionalSchauderBasis I K D) :
     DenseRange (Submodule.span K (Set.range b)).subtypeₗᵢ := by
   classical

@@ -2,13 +2,21 @@ import AlternatingAnalytic.Geometry.AlternatingBundleMorphismAlgebra
 import AlternatingAnalytic.Geometry.ContMDiffBundleHom
 
 /-!
-# Operator regularity of alternating bundle morphisms
+# Alternating bundle morphisms
 
-The fiberwise action uses only topological continuous linear maps. Its model
-coordinates are the four-model alternating action. Local preservation of regular
-operator families assembles a genuine Hom section at arbitrary order and over
-an arbitrary model with corners. On finite-coordinate analytic manifolds the
-preservation premise and both endpoint instances are discharged unconditionally.
+Given `C^n` bundle morphisms `u : E' → E` and `v : F → F'`, the fiberwise operators
+`m ↦ v ∘ m ∘ (u, …, u)` form a `C^n` section of the Hom bundle from `Alt^k(E; F)` to
+`Alt^k(E'; F')`, provided the model action preserves `C^n` families. Over an analytic
+manifold with finite continuous coordinates this hypothesis always holds. This is the
+morphism part of Corollary 4.6 in the finite-coordinate setting.
+
+## Main results
+
+- `alternatingBundleHom_of_family`: the induced `C^n` Hom section.
+- `alternatingBundleHom_of_finiteCoordinates`: the induced analytic Hom section over a
+  finite-coordinate base.
+- `analyticAlternatingBundleMorphism_of_finiteCoordinates`: its fiber formula,
+  coordinates and functor laws.
 -/
 
 noncomputable section
@@ -55,8 +63,8 @@ variable {P H : Type*} [NormedAddCommGroup P] [NormedSpace K P]
 
 include hfamily
 
-/-- Operator coordinates are regular in every pair of input atlas charts, on
-any open subset of their common valid domain. -/
+/-- In atlas trivializations, the coordinates of the induced operators are `C^n` on any
+open subset of the common domain. -/
 theorem contMDiffOn_alternatingBundleMap_coordinates_of_family
     (eA : Trivialization A (π A E)) (eA' : Trivialization A' (π A' E'))
     (eB : Trivialization B (π B F)) (eB' : Trivialization B' (π B' F'))
@@ -83,8 +91,8 @@ variable
   [ContMDiffVectorBundle n (A' [⋀^Fin k]→L[K] B')
     (fun b ↦ E' b [⋀^Fin k]→L[K] F' b) I]
 
-/-- Local four-model family preservation constructs the actual regular section
-of the alternating Hom bundle. Endpoint regularity is an explicit premise. -/
+/-- The induced `C^n` section of the alternating Hom bundle. The regularity of the two
+alternating bundles is assumed as instances. -/
 def alternatingBundleHom_of_family :
     ContMDiffSection I ((A [⋀^Fin k]→L[K] B) →L[K] (A' [⋀^Fin k]→L[K] B')) n
       (fun b ↦ (E b [⋀^Fin k]→L[K] F b) →L[K] (E' b [⋀^Fin k]→L[K] F' b)) where
@@ -112,15 +120,14 @@ theorem alternatingBundleHom_of_family_apply (b : M) :
     alternatingBundleHom_of_family k hfamily u v b = alternatingBundleMap k (u b) (v b) :=
   rfl
 
-/-- The constructed section has the literal postcomposition/pullback value. -/
+/-- The section acts on each fiber by pullback in every input and postcomposition. -/
 theorem alternatingBundleHom_of_family_apply_apply (b : M)
     (m : E b [⋀^Fin k]→L[K] F b) :
     alternatingBundleHom_of_family k hfamily u v b m =
       (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) :=
   rfl
 
-/-- The generic regular section has the exact joint-action operator coordinates
-in every choice of atlas trivializations, on their common valid domain. -/
+/-- In atlas trivializations, the section is the model action of the trivialized pair. -/
 theorem alternatingBundleHom_of_family_coordinates
     (eA : Trivialization A (π A E)) (eA' : Trivialization A' (π A' E'))
     (eB : Trivialization B (π B F)) (eB' : Trivialization B' (π B' F'))
@@ -149,8 +156,7 @@ variable {P : Type*} [NormedAddCommGroup P] [NormedSpace K P]
 
 include c
 
-/-- Unconditional analytic morphism preservation over finite-coordinate open-chart
-manifolds, for all degrees and arbitrary normable fibers. -/
+/-- The induced analytic Hom section over a finite-coordinate analytic base. -/
 def alternatingBundleHom_of_finiteCoordinates :
     ContMDiffSection 𝓘(K, P)
       ((A [⋀^Fin k]→L[K] B) →L[K] (A' [⋀^Fin k]→L[K] B')) ω
@@ -168,15 +174,14 @@ theorem alternatingBundleHom_of_finiteCoordinates_apply (b : M) :
       alternatingBundleMap k (u b) (v b) :=
   rfl
 
-/-- The analytic section acts by postcomposition and simultaneous pullback
-on the actual fibers. -/
+/-- The section acts on each fiber by pullback in every input and postcomposition. -/
 theorem alternatingBundleHom_of_finiteCoordinates_apply_apply (b : M)
     (m : E b [⋀^Fin k]→L[K] F b) :
     alternatingBundleHom_of_finiteCoordinates c k u v b m =
       (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) :=
   rfl
 
-/-- Exact operator coordinates in arbitrary analytic-atlas trivializations. -/
+/-- In atlas trivializations, the section is the model action of the trivialized pair. -/
 theorem alternatingBundleHom_of_finiteCoordinates_coordinates
     (eA : Trivialization A (π A E)) (eA' : Trivialization A' (π A' E'))
     (eB : Trivialization B (π B F)) (eB' : Trivialization B' (π B' F'))
@@ -191,7 +196,8 @@ theorem alternatingBundleHom_of_finiteCoordinates_coordinates
           ((eB.continuousLinearMap (RingHom.id K) eB') ⟨b, v b⟩).2) :=
   alternatingBundleMap_coordinates k eA eA' eB eB' b hb (u b) (v b)
 
-/-- Operator-coordinate analyticity holds on each valid open chart intersection. -/
+/-- In atlas trivializations, the coordinates of the section are analytic on the
+common domain. -/
 theorem contMDiffOn_alternatingBundleHom_of_finiteCoordinates_coordinates
     (eA : Trivialization A (π A E)) (eA' : Trivialization A' (π A' E'))
     (eB : Trivialization B (π B F)) (eB' : Trivialization B' (π B' F'))
@@ -209,7 +215,7 @@ theorem contMDiffOn_alternatingBundleHom_of_finiteCoordinates_coordinates
     ((eA.open_baseSet.inter eB.open_baseSet).inter (eA'.open_baseSet.inter eB'.open_baseSet))
     subset_rfl
 
-/-- Identity is preserved as equality of actual analytic Hom sections. -/
+/-- The construction preserves identities. -/
 @[simp]
 theorem alternatingBundleHom_of_finiteCoordinates_id :
     alternatingBundleHom_of_finiteCoordinates c k
@@ -239,8 +245,7 @@ variable {A'' B'' : Type*}
   (u' : ContMDiffSection 𝓘(K, P) (A'' →L[K] A') ω (fun b ↦ E'' b →L[K] E' b))
   (v' : ContMDiffSection 𝓘(K, P) (B' →L[K] B'') ω (fun b ↦ F' b →L[K] F'' b))
 
-/-- Composition reverses the source slot and preserves the target slot, as an
-identity of analytic operator Hom sections. -/
+/-- The construction is contravariant in the source and covariant in the target. -/
 theorem alternatingBundleHom_of_finiteCoordinates_comp :
     alternatingBundleHom_of_finiteCoordinates c k
       (contMDiffHomComp u' u) (contMDiffHomComp v v') =
@@ -250,10 +255,9 @@ theorem alternatingBundleHom_of_finiteCoordinates_comp :
   intro b
   exact alternatingBundleMap_comp k (u b) (u' b) (v b) (v' b)
 
-/-- The source theorem with its fiber formula, exact coordinates, and identity
-and mixed-variance composition laws. All sections in the conclusion are actual
-operator-valued analytic Hom sections. The two further bundles only express the
-composition law; the morphism construction itself takes the original four. -/
+/-- Over a finite-coordinate analytic base, `(u, v)` induces an analytic Hom section
+with the expected fiber formula and coordinates, and the construction preserves
+identities and composition. The bundles `E''`, `F''` appear only in the composition law. -/
 theorem analyticAlternatingBundleMorphism_of_finiteCoordinates :
     ∃ T : ContMDiffSection 𝓘(K, P)
         ((A [⋀^Fin k]→L[K] B) →L[K] (A' [⋀^Fin k]→L[K] B')) ω

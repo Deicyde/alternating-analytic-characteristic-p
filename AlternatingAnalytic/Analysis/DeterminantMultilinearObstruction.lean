@@ -2,10 +2,12 @@ import AlternatingAnalytic.Analysis.DeterminantCoefficientObstruction
 import AlternatingAnalytic.Analysis.DenseScalarFamilyExtension
 
 /-!
-# Multilinear obstruction for the determinant coefficient space
+# No bounded multilinear lift into the coefficient space
 
-The extension takes values only in the complete ambient Laurent field. Its values
-on the original source tuples agree with the given coefficient-valued map.
+There is no bounded `p`-linear map `B : E^p → C` with `B(e_0, ..., e_0) = 1`. Extending `B`
+to `A^p → L` and evaluating at `a` in one slot gives `∑ a_i b_i ∈ C` with `b_0 = 1`,
+which `no_scalar_coefficient_family` rules out. This is the last step in the proof of
+Theorem H.4 that the map (H.3) is not analytic.
 -/
 
 noncomputable section
@@ -17,7 +19,7 @@ namespace AlternatingAnalytic.DeterminantPair
 variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 attribute [local instance] preferredNormedFieldK preferredFieldK preferredFieldL
 
-/-- Extend a coefficient-valued multilinear map only after including its target in `L`. -/
+/-- The extension of a bounded multilinear map `E^p → C` to an `L`-multilinear map `A^p → L`. -/
 def coefficientMultilinearExtension
     (B : ContinuousMultilinearMap (K p r) (fun _ : Fin p => E p r) (C p r)) :
     ContinuousMultilinearMap (L p r) (fun _ : Fin p => A p r) (L p r) :=
@@ -33,7 +35,7 @@ def coefficientMultilinearExtension
       (B x : L p r) :=
   denseScalarFamilyExtension_apply _ _ _ _ x
 
-/-- Linear expansion in any one original slot gives the actual small-target relation. -/
+/-- Putting `a` in slot `j` gives `∑ a_i B(x[j := e_i]) ∈ C`. -/
 theorem multilinear_coefficient_relation
     (B : ContinuousMultilinearMap (K p r) (fun _ : Fin p => E p r) (C p r))
     (j : Fin p) (x : Fin p → E p r) :
@@ -65,7 +67,7 @@ theorem multilinear_coefficient_relation
   rw [← heq, ← hupd ⟨a p r, a_mem_E p r⟩, hQ]
   exact (B (Function.update x j ⟨a p r, a_mem_E p r⟩)).property
 
-/-- No continuous coefficient-valued multilinear map has normalized value on the constant tuple. -/
+/-- No bounded `p`-linear map `B : E^p → C` has `B(e_0, ..., e_0) = 1`. -/
 theorem no_multilinear_coordinate :
     ¬ ∃ B : ContinuousMultilinearMap (K p r) (fun _ : Fin p => E p r) (C p r),
       ((B (fun _ => RigidDenseSource.Concrete.standard p r 0)) : L p r) = 1 := by

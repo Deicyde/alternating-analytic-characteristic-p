@@ -10,8 +10,8 @@ the lifted morphism between the glued bundles. In the trivializations at a fixed
 lifted morphism is `F` applied to the local expressions at `x₀`, so it is `Cⁿ` when `F` preserves
 `Cⁿ` families on open subsets of the model space. A natural transformation gives the constant
 operator of its component, which intertwines the two transition systems by naturality; it is a
-`Cⁿ` morphism with no regularity assumption on the functors beyond the existence of the bundles.
-Identities and composition are preserved fiberwise.
+`Cⁿ` morphism with no regularity assumption on the functors. Identities and composition are
+preserved fiberwise. This is the morphism part of Theorem 2.1.
 -/
 
 noncomputable section

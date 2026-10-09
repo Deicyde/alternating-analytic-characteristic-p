@@ -10,12 +10,11 @@ import AlternatingAnalytic.Scalar.FibreObstruction.WedgeEval
 /-!
 # The finite fibre obstruction: the forms `B_a` and the target sign rule
 
-This file sets up the proof of Lemma F.4 (finite fibre obstruction). It repeats the definitions of
-the family `F` of pairs from (F.2), the projection `g₀`, the determinant `δ'` and the two
-conditions on a `k`-linear `τ : Hom(κ^{k+1}, κ^k)^k → Alt^k(κ^{k+1}; κ)`, and proves the first
-half of the paper's argument, everything evaluated at the basis tuple `(e₀, …, e_{k-1})`:
-the forms `B_a(ψ) = τ(ψ₁ ⊗ e'_{a(1)}, …, ψ_k ⊗ e'_{a(k)})` vanish there when `a` misses a target
-coordinate, and `B_σ = sign(σ) B_id` there for permutations `σ` (the paper's (F.4)).
+Definitions and first steps for Lemma F.4: the family `F` of pairs from (F.2), the projection
+`g₀`, the determinant `δ'` and the two conditions on a `k`-linear
+`τ : Hom(κ^{k+1}, κ^k)^k → Alt^k(κ^{k+1}; κ)`. Evaluated at the basis tuple `(e₀, …, e_{k-1})`,
+the forms `B_a(ψ) = τ(ψ₁ ⊗ e'_{a(1)}, …, ψ_k ⊗ e'_{a(k)})` vanish when `a` misses a target
+coordinate, and `B_σ = sign(σ) B_id` for permutations `σ` (F.4).
 -/
 
 namespace AlternatingAnalytic.FibreObstruction
@@ -210,7 +209,7 @@ theorem evalFirst_targetForm_comp_swap (h2 : FibreCondition2 κ k τ) {a : Fin k
   rw [h1, h2', h3, h4] at hzero
   linear_combination hzero
 
-/-- The paper's (F.4) at `(e₀, …, e_{k-1})`: `B_σ = sign(σ) B_id` for permutations `σ`. -/
+/-- (F.4) at `(e₀, …, e_{k-1})`: `B_σ = sign(σ) B_id` for permutations `σ`. -/
 theorem evalFirst_targetForm_perm (h2 : FibreCondition2 κ k τ) (σ : Equiv.Perm (Fin k))
     (ψ : Fin k → ((Fin (k + 1) → κ) →ₗ[κ] κ)) :
     evalFirst (targetForm τ σ ψ) =

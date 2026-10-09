@@ -12,39 +12,32 @@ R′ ⊆ S^({1,…,k}∖{α}) be finite. The R × R′ matrix M with entries M(c
 where c has c_α in slot α and the entries of c′ in the other slots, has rank at most
 sdim(ω)."
 
-Formalization notes:
-* `V` is a `Submodule L (S → L)`; slots are `Fin k` (so `α : Fin k` is 0-indexed);
-  `S^({1,…,k}∖{α})` is `{i : Fin k // i ≠ α} → S`; `R`, `R′` are `Finset`s and the matrix is
-  indexed by their elements.
-* As in `LemB_2`, the determinant array is any linear map `Ω` satisfying the determinant
-  formula on pure wedges (such a map exists by `LemB_2.part0_determinantArray_exists` and is
-  unique).
-* `sdim ω` is computed inside `V`, as in the paper.
-* `supportedBy k W` (the image of `Λ^k W → Λ^k V`) and `sdim` (Definition B.1, as an
-  `sInf` over dimensions of finite-dimensional supporting subspaces) are defined in this
-  file in Mathlib terms. `sInf ∅ = 0` cannot occur, since every exterior vector has a
-  finite-dimensional supporting subspace.
-* The standing assumption `k ≥ 1` of Section B.1 is kept as a hypothesis; the library proof
-  does not need it.
+## Formalization notes
+* `V` is a `Submodule L (S → L)`; slots are `Fin k`, so `α` is 0-indexed;
+  `S^({1,…,k}∖{α})` is `{i : Fin k // i ≠ α} → S`; `R` and `R′` are `Finset`s.
+* As in `LemB_2`, `Ω` is any linear map satisfying the determinant formula on pure wedges.
+* `sdim ω` is computed inside `V`.
+* `supportedBy k W` (the image of `Λ^k W → Λ^k V`) and `sdim` (Definition B.1) are defined
+  here. `sdim` is an `sInf` over a set that is never empty.
+* The hypothesis `k ≥ 1` of Section B.1 is kept but not used.
 -/
 
 namespace AlternatingAnalyticChallenge.LemB_3
 
 variable {L : Type*} [Field L] {V : Type*} [AddCommGroup V] [Module L V]
 
-/-- `Λ^k W`, regarded as a subspace of `Λ^k V`: the image of the map induced by the
-inclusion `W → V` (Section B.1). Membership of `ω` means that `W` supports `ω`. -/
+/-- The image of `Λ^k W` in `Λ^k V` (Section B.1); `ω` lies in it when `W` supports `ω`. -/
 noncomputable def supportedBy (k : ℕ) (W : Submodule L V) : Submodule L (⋀[L]^k V) :=
   LinearMap.range (exteriorPower.map k W.subtype)
 
-/-- **Definition B.1.** The support dimension
+/-- The support dimension of Definition B.1:
 `sdim ω = min {dim W : W ⊆ V finite-dimensional, ω ∈ Λ^k W}`. -/
 noncomputable def sdim {k : ℕ} (ω : ⋀[L]^k V) : ℕ :=
   sInf {n : ℕ | ∃ W : Submodule L V, FiniteDimensional L W ∧ ω ∈ supportedBy k W ∧
     Module.finrank L W = n}
 
-/-- **Lemma B.3.** The flattening of `Ω ω` along slot `α`, restricted to finite row and
-column sets, has rank at most `sdim ω`. -/
+/-- The flattening of `Ω ω` along slot `α`, restricted to finite row and column sets, has
+rank at most `sdim ω`. -/
 theorem flattening_rank_le_sdim
     (L : Type*) [Field L] (S : Type*) (V : Submodule L (S → L)) (k : ℕ) (hk : 1 ≤ k)
     (Ω : (⋀[L]^k V) →ₗ[L] ((Fin k → S) → L))

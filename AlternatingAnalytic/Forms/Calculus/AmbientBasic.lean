@@ -3,14 +3,11 @@ import AlternatingAnalytic.Forms.Calculus.AmbientDeriv
 /-!
 # Sheaf property, linear structure and pullbacks of ambient analytic forms
 
-Ambient analyticity is a pointwise condition on `j ∘ η`, so it is local and compatible local
-forms glue; it is preserved by addition and scalar multiplication. For a `C^ω` map `h` between
-open sets, the pullback `h^*η = (η ∘ h) ∘ (Dh, …, Dh)` satisfies
-`j (h^*η) = (j (η ∘ h)) ∘ (Dh, …, Dh)`, a bounded multilinear expression in the analytic maps
-`j ∘ η ∘ h` and `Dh`; hence it is ambient analytic. The chain rule gives the identity and
-composition laws, naturality of the shuffle product gives compatibility with `∧`, and Mathlib's
-`extDeriv_pullback` (which only needs the form to be differentiable and `h` to be `C^ω`) gives
-compatibility with `d`.
+Part of Theorem 7.2. Ambient analyticity is local, compatible local forms glue, and it is
+preserved by addition and scalar multiplication. For a `C^ω` map `h`, the pullback
+`h^*η = (η ∘ h) ∘ (Dh, …, Dh)` is ambient analytic, since `j (h^*η)` is a bounded multilinear
+expression in `j ∘ η ∘ h` and `Dh`. Pullback is functorial and commutes with `∧` and, by
+Mathlib's `extDeriv_pullback`, with `d`.
 -/
 
 set_option maxSynthPendingDepth 3
@@ -37,7 +34,7 @@ theorem analyticAt_clm_apply {X E F : Type*} [NormedAddCommGroup X] [NormedSpace
 
 section Sheaf
 
-/-- Sheaf, locality: ambient analyticity on a set is checked on open neighborhoods. -/
+/-- Ambient analyticity is local: it can be checked on open neighborhoods. -/
 theorem isAmbientAnalyticOn_iff_local [CompleteSpace K] (η : P → P [⋀^Fin k]→L[K] K)
     (U : Set P) :
     IsAmbientAnalyticOn η U ↔
@@ -47,7 +44,7 @@ theorem isAmbientAnalyticOn_iff_local [CompleteSpace K] (η : P → P [⋀^Fin k
   obtain ⟨V, -, hyV, hV⟩ := h y hy
   exact hV y hyV
 
-/-- Sheaf, gluing: compatible ambient analytic forms on an open family glue. -/
+/-- Ambient analytic forms that agree on overlaps of an open family glue. -/
 theorem exists_glue {ι : Type*} (V : ι → Set P) (hV : ∀ i, IsOpen (V i))
     (η : ι → P → P [⋀^Fin k]→L[K] K) (hη : ∀ i, IsAmbientAnalyticOn (η i) (V i))
     (hagree : ∀ i j, EqOn (η i) (η j) (V i ∩ V j)) :

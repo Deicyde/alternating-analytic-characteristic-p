@@ -2,10 +2,11 @@ import AlternatingAnalytic.Analysis.BaseChangeAlternatingCriterion
 import Mathlib.LinearAlgebra.Basis.Basic
 
 /-!
-# A basis criterion for strong alternation
+# A basis criterion for alternation
 
-Vanishing on repeated basis vectors and on repeated sums of two distinct basis
-vectors implies equal-input vanishing. The argument works in characteristic two.
+A continuous multilinear map is alternating if it vanishes whenever a basis vector, or
+a sum of two distinct basis vectors, is repeated in two slots. The proof does not divide
+by two, so it works in characteristic two.
 -/
 
 open Function
@@ -20,8 +21,7 @@ variable {L V G I B : Type*} [NontriviallyNormedField L]
   [Fintype I] [DecidableEq I] [LinearOrder B]
 
 omit [Fintype I] in
-/-- The repeated-basis and repeated-sum certificates force the two cross terms
-to sum to zero, without dividing by two. -/
+/-- Under the basis hypotheses, the two cross terms sum to zero. -/
 theorem multilinear_basis_cross_sum_zero
     (g : ContinuousMultilinearMap L (fun _ : I => V) G)
     (e : Module.Basis B L V)
@@ -47,7 +47,7 @@ theorem multilinear_basis_cross_sum_zero
     simp only [hdiag f i j hij b, zero_add]
   · simpa only [add_comm] using hordered c b hcb
 
-/-- The cross-term identities on basis tuples extend to the global swap identity. -/
+/-- Under the basis hypotheses, swapping two slots negates `g`. -/
 theorem multilinear_basis_swap_add
     (g : ContinuousMultilinearMap L (fun _ : I => V) G)
     (e : Module.Basis B L V)
@@ -80,9 +80,8 @@ theorem multilinear_basis_swap_add
     simpa only [hswaparg, update_eq_self] using hcross
   exact congrArg (fun q : ContinuousMultilinearMap L (fun _ : I => V) G => q x) hz
 
-/-- Strong alternation follows from repeated-basis and ordered repeated-sum
-certificates. The basis need not be finite, and the scalar field need not be
-complete or have characteristic different from two. -/
+/-- `g` is alternating if it vanishes when a basis vector or a sum of two distinct basis
+vectors is repeated. The basis may be infinite. -/
 theorem multilinear_alternating_of_basis_repeated
     (g : ContinuousMultilinearMap L (fun _ : I => V) G)
     (e : Module.Basis B L V)

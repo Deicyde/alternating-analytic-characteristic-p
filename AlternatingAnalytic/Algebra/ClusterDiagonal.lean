@@ -1,11 +1,11 @@
 import AlternatingAnalytic.Algebra.ClusterValues
 
 /-!
-# The polarized diagonal sum of cluster values
+# The diagonal sum of cluster values
 
-The genuine multiplier-wedge identity and vector-slot antisymmetry give a sum of
-actual cluster values equal to one. The determinant calculation is valid in every
-characteristic; no vanishing on repeated vector inputs is assumed.
+Lemma B.13: if Ψ is antisymmetric in the vector slots and satisfies (Pol1), then the
+cluster values over all `k!` order patterns sum to one. Antisymmetry is stated with the
+permutation sign only, so the argument works in every characteristic.
 -/
 
 open Finset Module
@@ -14,13 +14,13 @@ namespace AlternatingAnalytic
 
 variable {L : Type*} [Field L] {k : ℕ}
 
-/-- Antisymmetry in the vector slots, stated by the permutation sign. This does
-not impose the additional equal-input vanishing condition of an alternating map. -/
+/-- Antisymmetry in the vector slots, stated with the permutation sign. This is weaker
+than being alternating. -/
 def ClusterVectorAntisymmetric (Ψ : ClusterMap L k) : Prop :=
   ∀ (u v : Fin k → ℕ →₀ L) (σ : Equiv.Perm (Fin k)),
     Ψ u (v ∘ σ) = Equiv.Perm.sign σ • Ψ u v
 
-/-- The multilinear polarized identity for actual pointwise sequence multipliers. -/
+/-- The polarized diagonal identity (Pol1) for pointwise multiplication of sequences. -/
 def ClusterPol1 (Ψ : ClusterMap L k) : Prop :=
   ∀ (u v : Fin k → ℕ →₀ L),
     (∑ σ : Equiv.Perm (Fin k), Ψ (u ∘ σ) v) =
@@ -34,7 +34,7 @@ theorem determinantArray_perm (ω : ⋀[L]^k (ℕ → L)) (c : Fin k → ℕ)
   exteriorEvaluationArray_perm (L := L) (V := ℕ → L) (S := ℕ) (k := k)
     (fun n : ℕ => (LinearMap.proj n : (ℕ → L) →ₗ[L] L)) ω c σ
 
-/-- Integer-unit scalar multiplication commutes with determinant evaluation. -/
+/-- Determinant array evaluation commutes with multiplication by a unit of `ℤ`. -/
 theorem determinantArray_units_smul (s : ℤˣ) (ω : ⋀[L]^k (ℕ → L)) (c : Fin k → ℕ) :
     determinantArray (s • ω) c = s • determinantArray ω c := by
   simp only [Units.smul_def, map_zsmul, Pi.smul_apply]
@@ -114,8 +114,8 @@ theorem cluster_multiplier_det_eq (C : Fin k → Fin 4 → ℕ)
       simp [hj]
     · simp [hji]
 
-/-- The polarized multiplier identity gives the sum of the actual permuted cluster
-values. This needs only disjoint block coordinates, without homogeneity or a bound. -/
+/-- The cluster values of the `k!` permuted cluster families sum to one, for disjoint
+clusters. -/
 theorem sum_clusterValue_perm_eq_one (Ψ : ClusterMap L k)
     (hanti : ClusterVectorAntisymmetric Ψ) (hpol : ClusterPol1 Ψ)
     (C : Fin k → Fin 4 → ℕ)
@@ -155,7 +155,7 @@ theorem cluster_coordinates_injective_of_separated (C : Fin k → Fin 4 → ℕ)
     · exact ((ne_of_lt (hlt p q)) h).elim
     · exact ((ne_of_gt (hgt q p)) h).elim
 
-/-- The actual permutation sum for increasing pairwise separated clusters. -/
+/-- `sum_clusterValue_perm_eq_one` for increasing, pairwise separated clusters. -/
 theorem sum_clusterValue_perm_eq_one_of_separated (Ψ : ClusterMap L k)
     (hanti : ClusterVectorAntisymmetric Ψ) (hpol : ClusterPol1 Ψ)
     (C : Fin k → Fin 4 → ℕ) (hmono : ∀ j, StrictMono (C j))
@@ -164,8 +164,8 @@ theorem sum_clusterValue_perm_eq_one_of_separated (Ψ : ClusterMap L k)
   sum_clusterValue_perm_eq_one Ψ hanti hpol C
     (cluster_coordinates_injective_of_separated C hmono hsep)
 
-/-- On a coefficient-homogeneous set the diagonal identity also holds for any
-actual representative of each permutation order. This is the paper's sum of χ(τ). -/
+/-- Lemma B.13: on an order-homogeneous set, `∑_τ χ(τ) = 1`, where `R τ` is any
+cluster family with order pattern `τ`. -/
 theorem sum_clusterValue_order_eq_one (Ψ : ClusterMap L k)
     (hanti : ClusterVectorAntisymmetric Ψ) (hpol : ClusterPol1 Ψ)
     (H : Set ℕ)

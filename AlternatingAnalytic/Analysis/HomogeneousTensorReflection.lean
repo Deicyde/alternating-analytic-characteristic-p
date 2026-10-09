@@ -8,12 +8,11 @@ import AlternatingAnalytic.Analysis.CompletedProjectiveTensor
 /-!
 # Homogeneous tensor reflection
 
-The closed span of diagonal powers in the ordinary completed projective tensor power is
-complemented precisely when every continuous multilinear diagonal in a closed subspace
-has a continuous multilinear representative in that subspace. A supplied retraction gives
-an explicit representative of norm at most the original norm times the retraction norm.
-
-This formalizes `fam:prop:tensor-homogeneous`. The components also allow degree zero.
+The closed span `Δ_n(P)` of the powers `x ⊗ ⋯ ⊗ x` in the completed projective tensor
+power `T_n(P)` is the range of a bounded projection if and only if every bounded
+`n`-linear map whose diagonal lies in a closed subspace `W` has a `W`-valued
+representative with the same diagonal (Proposition G.1). A projection `R` gives a
+representative of norm at most `‖B‖ ‖R‖`. Degree zero is allowed.
 -/
 
 namespace AlternatingAnalytic
@@ -23,16 +22,16 @@ universe u v
 variable {K P : Type u} [NontriviallyNormedField K]
   [NormedAddCommGroup P] [NormedSpace K P]
 
-/-- The ordinary separated completed projective tensor power. -/
+/-- The completed projective tensor power `T_n(P)`. -/
 abbrev TensorPower (K P : Type u) [NontriviallyNormedField K]
     [NormedAddCommGroup P] [NormedSpace K P] (n : ℕ) :=
   CompletedProjectiveTensor K (fun _ : Fin n => P)
 
-/-- A diagonal pure tensor; this map is generally polynomial rather than linear. -/
+/-- The pure power `x ⊗ ⋯ ⊗ x`; this map is polynomial, not linear. -/
 noncomputable def diagonalTensor (n : ℕ) (x : P) : TensorPower K P n :=
   completedProjectiveTensorTprod (K := K) (fun _ : Fin n => P) (fun _ => x)
 
-/-- The closed linear span of the diagonal pure tensors. -/
+/-- The closed linear span `Δ_n(P)` of the pure powers. -/
 noncomputable def DiagonalSpan (K P : Type u) [NontriviallyNormedField K]
     [NormedAddCommGroup P] [NormedSpace K P] (n : ℕ) : Submodule K (TensorPower K P n) :=
   (Submodule.span K (Set.range (diagonalTensor (K := K) (P := P) n))).topologicalClosure
@@ -51,7 +50,8 @@ instance (n : ℕ) : CompleteSpace (DiagonalSpan K P n) :=
 variable {n : ℕ} {Z : Type v}
   [NormedAddCommGroup Z] [NormedSpace K Z] [CompleteSpace Z]
 
-/-- Closedness of the inverse image extends diagonal membership to the closed span. -/
+/-- If the diagonal of `B` lies in a closed subspace `W`, its linearization maps
+`Δ_n(P)` into `W`. -/
 theorem linearized_mem_of_mem_diagonalSpan
     (W : Submodule K Z) (hW : IsClosed (W : Set Z))
     (B : ContinuousMultilinearMap K (fun _ : Fin n => P) Z)
@@ -69,7 +69,7 @@ theorem linearized_mem_of_mem_diagonalSpan
     hW.preimage L.continuous
   exact Submodule.topologicalClosure_minimal _ hspan hclosed ht
 
-/-- The actual linearization restricted to the diagonal span and to the closed target. -/
+/-- The linearization of `B`, restricted to `Δ_n(P) → W`. -/
 noncomputable def diagonalSpanLift
     (W : Submodule K Z) (hW : IsClosed (W : Set Z))
     (B : ContinuousMultilinearMap K (fun _ : Fin n => P) Z)
@@ -96,7 +96,7 @@ theorem norm_diagonalSpanLift_le
   simpa only [norm_completedProjectiveTensorLiftIsometry, Submodule.norm_coe] using
     (completedProjectiveTensorLiftIsometry (fun _ : Fin n => P) Z B).le_opNorm t
 
-/-- Compose the restricted linearization, the supplied retraction, and the canonical map. -/
+/-- The representative built from a projection `R`: linearize, project, restrict. -/
 noncomputable def diagonalLiftOfProjection
     (R : TensorPower K P n →L[K] DiagonalSpan K P n)
     (W : Submodule K Z) (hW : IsClosed (W : Set Z))
@@ -139,7 +139,7 @@ theorem norm_diagonalLiftOfProjection_le
     _ ≤ ‖B‖ * ‖R‖ :=
       mul_le_mul_of_nonneg_right (norm_diagonalSpanLift_le W hW B hB) (norm_nonneg R)
 
-/-- A map into the diagonal span that fixes its generators is a retraction on that span. -/
+/-- A map into `Δ_n(P)` that fixes every pure power is a projection onto it. -/
 theorem retraction_of_fixes_diagonalTensor
     (R : TensorPower K P n →L[K] DiagonalSpan K P n)
     (hR : ∀ x, (R (diagonalTensor (K := K) n x) : TensorPower K P n) =
@@ -159,8 +159,8 @@ theorem retraction_of_fixes_diagonalTensor
 
 section Source
 
-/-- A supplied projection gives one representative with both the correct diagonal and
-the stated norm bound, in any target universe. -/
+/-- A projection `R` onto `Δ_n(P)` gives a `W`-valued representative with the same
+diagonal and norm at most `‖B‖ ‖R‖`. -/
 theorem exists_diagonal_lift_of_projection [CompleteSpace K] [CompleteSpace P]
     (n : ℕ) (R : TensorPower K P n →L[K] DiagonalSpan K P n)
     (hR : R.comp (DiagonalSpan K P n).subtypeL =
@@ -176,8 +176,8 @@ theorem exists_diagonal_lift_of_projection [CompleteSpace K] [CompleteSpace P]
 
 variable [CompleteSpace K] [CompleteSpace P]
 
-/-- Universal diagonal lifting is equivalent to a bounded retraction onto the actual
-closed diagonal span. The target universe includes the completed tensor power itself. -/
+/-- Proposition G.1: diagonal lifting into every closed subspace is equivalent to a bounded
+projection onto `Δ_n(P)`. Targets range over `Type u`, which contains `T_n(P)`. -/
 theorem homogeneous_reflection_iff_projection (n : ℕ) :
     (∀ (Z : Type u) [NormedAddCommGroup Z] [NormedSpace K Z] [CompleteSpace Z],
       ∀ (W : Submodule K Z), IsClosed (W : Set Z) →
@@ -201,9 +201,7 @@ theorem homogeneous_reflection_iff_projection (n : ℕ) :
     obtain ⟨C, hC, _⟩ := exists_diagonal_lift_of_projection n R hR W hW B hB
     exact ⟨C, hC⟩
 
-/-- Homogeneous tensor reflection, including its quantitative construction: every supplied
-projection produces a single multilinear lift with the exact diagonal and norm bound.
-The all-natural-degree formulation extends the source's positive-degree statement. -/
+/-- Proposition G.1 in every degree `n`, with the norm bound `‖B‖ ‖R‖` from its proof. -/
 theorem homogeneous_tensor_reflection (n : ℕ) :
     ((∀ (Z : Type u) [NormedAddCommGroup Z] [NormedSpace K Z] [CompleteSpace Z],
       ∀ (W : Submodule K Z), IsClosed (W : Set Z) →
@@ -227,8 +225,8 @@ theorem homogeneous_tensor_reflection (n : ℕ) :
   intro R hR Z _ _ _ W hW B hB
   exact exists_diagonal_lift_of_projection n R hR W hW B hB
 
-/-- The positive-degree form of `fam:prop:tensor-homogeneous`, with the quantitative
-conclusion from its proof included in the same statement. -/
+/-- Proposition G.1 for `n ≥ 1`, as stated in the paper, with the norm bound from its
+proof. -/
 theorem homogeneous_tensor_reflection_of_one_le (n : ℕ) (_hn : 1 ≤ n) :
     ((∀ (Z : Type u) [NormedAddCommGroup Z] [NormedSpace K Z] [CompleteSpace Z],
       ∀ (W : Submodule K Z), IsClosed (W : Set Z) →
@@ -252,7 +250,7 @@ theorem homogeneous_tensor_reflection_of_one_le (n : ℕ) (_hn : 1 ≤ n) :
 
 end Source
 
-/-- At degree zero every pure tensor is a diagonal tensor, so the diagonal span is full. -/
+/-- In degree zero every pure tensor is a pure power, so `Δ_0(P)` is everything. -/
 theorem diagonalSpan_zero : DiagonalSpan K P 0 = ⊤ := by
   have hrange : Set.range (diagonalTensor (K := K) (P := P) 0) =
       Set.range (completedProjectiveTensorTprod (K := K) (fun _ : Fin 0 => P)) := by
@@ -267,7 +265,7 @@ theorem diagonalSpan_zero : DiagonalSpan K P 0 = ⊤ := by
   rw [DiagonalSpan, hrange]
   exact completedProjectiveTensor_tprod_dense_span (fun _ : Fin 0 => P)
 
-/-- For a trivial parameter space, every positive-degree completed tensor is zero. -/
+/-- If `P` is trivial, every tensor of positive degree is zero. -/
 theorem tensorPower_eq_zero_of_subsingleton [Subsingleton P] (hn : 0 < n)
     (t : TensorPower K P n) : t = 0 := by
   have hrange : Set.range (completedProjectiveTensorTprod (K := K) (fun _ : Fin n => P)) ⊆

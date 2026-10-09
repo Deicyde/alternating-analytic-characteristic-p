@@ -6,9 +6,16 @@ import Mathlib.Data.Finsupp.Pointwise
 /-!
 # The finite-field multiplier obstruction
 
-Finite coloring of genuine coefficients, the support-rank argument, and the
-polarized diagonal identity rule out bounded-support multiplier lifts when the
-factorial of their degree vanishes in the field.
+Over a finite field with `k! = 0` there is no multiplier lift of bounded support dimension
+(Theorem B.9). The proof combines a Ramsey argument on coefficients (Lemma B.10), the
+staircase lemma (Lemma B.12) and the diagonal identity (Lemma B.13): all `k!` cluster values
+are equal and sum to `1`, so `k! ≠ 0`.
+
+## Main results
+
+- `finiteField_multiplier_obstruction`: part (1).
+- `finiteField_multiplier_obstruction_full`: part (2) on `ℕ → L`.
+- `finiteField_multiplier_obstruction_finsupp`: part (2) on `ℕ →₀ L`.
 -/
 
 open Finset Module
@@ -40,10 +47,8 @@ theorem permutation_value_eq_of_adjacent {A : Type*} (n : ℕ)
       rw [mul_assoc, hs, ht]
   simpa using h 1
 
-/-- The finite-field obstruction on finitely supported inputs. The support
-bound is required only on actual inputs taking their values in `{0,1,-1}`;
-vector antisymmetry and the multiplier-wedge identity are genuine identities
-of the given doubly multilinear map. -/
+/-- Theorem B.9 (1): no lift on finitely supported inputs. The support bound is assumed
+only for inputs with entries in `{0, 1, -1}`. -/
 theorem finiteField_multiplier_obstruction [Finite L]
     (hfactorial : (k.factorial : L) = 0) (Ψ : ClusterMap L k)
     (hanti : ClusterVectorAntisymmetric Ψ) (hpol : ClusterPol1 Ψ)
@@ -126,7 +131,7 @@ abbrev MultiplierMap (L : Type*) [Field L] (k : ℕ) (E : Type*)
     (MultilinearMap L (fun _ : Fin k => E) (⋀[L]^k E))
 
 /-- Restrict both groups of inputs through `inc` and push the exterior output
-forward through `out`. Its definition uses only multilinear-map composition. -/
+forward through `out`. -/
 noncomputable def restrictClusterMap (inc : (ℕ →₀ L) →ₗ[L] E)
     (out : E →ₗ[L] (ℕ → L)) (Ψ : MultiplierMap L k E) : ClusterMap L k :=
   ((exteriorPower.map k out).compMultilinearMapₗ L).compMultilinearMap
@@ -140,9 +145,9 @@ theorem restrictClusterMap_apply (inc : (ℕ →₀ L) →ₗ[L] E)
     restrictClusterMap inc out Ψ u v =
       exteriorPower.map k out (Ψ (fun j => inc (u j)) (fun j => inc (v j))) := rfl
 
-/-- The obstruction is preserved by a genuine inclusion of finite sequences
-into an input space and a compatible map from that space to all sequences.
-The polarized identity is required only at the finite-sequence inputs. -/
+/-- The obstruction for any space `E` with a map `inc` from finite sequences and a map `out`
+to all sequences whose composite is the inclusion. The polarized identity is assumed only
+on finite sequences. -/
 theorem finiteField_multiplier_obstruction_of_restriction [Finite L]
     (hfactorial : (k.factorial : L) = 0)
     (inc : (ℕ →₀ L) →ₗ[L] E) (out : E →ₗ[L] (ℕ → L))
@@ -170,8 +175,8 @@ theorem finiteField_multiplier_obstruction_of_restriction [Finite L]
   · intro u v _ _
     exact (exteriorSupportDim_map_le out _).trans (hbound _ _)
 
-/-- The full-sequence version of the paper's finite-field theorem. Its
-polarized identity is needed only on finitely supported tuples. -/
+/-- Theorem B.9 (2) for `E₀ = ℕ → L`. The polarized identity is assumed only on finitely
+supported tuples. -/
 theorem finiteField_multiplier_obstruction_full [Finite L]
     (hfactorial : (k.factorial : L) = 0) (Ψ : MultiplierMap L k (ℕ → L))
     (hanti : ∀ (u v : Fin k → ℕ → L) (σ : Equiv.Perm (Fin k)),
@@ -185,9 +190,7 @@ theorem finiteField_multiplier_obstruction_full [Finite L]
   exact finiteField_multiplier_obstruction_of_restriction hfactorial
     Finsupp.lcoeFun LinearMap.id (fun _ => rfl) Ψ hanti hpol d hbound
 
-/-- The finite-sequence input and output version of the paper's finite-field
-theorem. The exterior output is mapped to the exterior power of all sequences;
-this cannot increase its support dimension. -/
+/-- Theorem B.9 (2) for `E₀ = ℕ →₀ L`. -/
 theorem finiteField_multiplier_obstruction_finsupp [Finite L]
     (hfactorial : (k.factorial : L) = 0) (Ψ : MultiplierMap L k (ℕ →₀ L))
     (hanti : ∀ (u v : Fin k → ℕ →₀ L) (σ : Equiv.Perm (Fin k)),

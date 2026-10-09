@@ -2,10 +2,11 @@ import Mathlib.Analysis.Normed.Lp.lpSpace
 import Mathlib.Analysis.Normed.Module.Multilinear.Basic
 
 /-!
-# Finite-support approximation in ordinary ℓ¹
+# Finite-support approximation in ℓ¹
 
-Finite coordinate expansions and approximation for continuous multilinear maps on the
-ordinary sum-norm `lp` space. No completeness of the scalar field or domain is used.
+Coordinate expansions of continuous multilinear maps on ℓ¹(J, K) (the sum-norm `lp`
+space) at finitely supported inputs, and convergence of these expansions under finite
+truncation. The scalar field need not be complete.
 -/
 
 open scoped BigOperators lp
@@ -20,7 +21,7 @@ variable {K J W : Type*} [NontriviallyNormedField K]
 
 local instance : DecidableEq J := Classical.decEq J
 
-/-- Expand a continuous multilinear map on finite coordinate truncations. -/
+/-- Expansion of a continuous multilinear map at finitely supported inputs. -/
 theorem map_sum_single
     (C : ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) W)
     (x : Fin d → J → K) (s : Fin d → Finset J) :
@@ -38,8 +39,7 @@ theorem map_sum_single
       (lp.single_smul (E := fun _ : J => K) 1 (a r) (x r (a r)) (1 : K))
   simp only [hsingle, C.map_smul_univ]
 
-/-- Common finite coordinate truncations converge in the ordinary ℓ¹ norm, even over an
-incomplete scalar field. -/
+/-- Finite coordinate truncations converge in ℓ¹. -/
 theorem tendsto_sum_single (x : Fin d → lp (fun _ : J => K) 1) :
     Tendsto (fun s : Finset J => fun r : Fin d => ∑ j ∈ s, lp.single 1 j (x r j))
       atTop (𝓝 x) := by
@@ -47,7 +47,7 @@ theorem tendsto_sum_single (x : Fin d → lp (fun _ : J => K) 1) :
   intro r
   exact lp.hasSum_single (by simp) (x r)
 
-/-- Continuous multilinear maps respect the canonical finite coordinate approximation. -/
+/-- A continuous multilinear map converges along finite coordinate truncations. -/
 theorem tendsto_map_sum_single
     (C : ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) W)
     (x : Fin d → lp (fun _ : J => K) 1) :

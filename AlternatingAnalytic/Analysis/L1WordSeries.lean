@@ -2,11 +2,11 @@ import AlternatingAnalytic.Analysis.L1WordBlocks
 import Mathlib.Analysis.SpecificLimits.Normed
 
 /-!
-# Explicit geometric word series in ordinary ℓ¹
+# The geometric word series in ℓ¹
 
-The coordinates are ordinary `K` values. Real coordinate-norm sums establish membership;
-Cauchy partial sums and convergence to these explicit coordinates establish the series
-identity without any completeness assumption on `K`.
+For `‖x‖ < ‖s‖` the vector with coordinates `(s⁻¹)^n * ∏ i, x (a i)` on words `a` of length
+`n` lies in ℓ¹(Words I, K) and is the sum of the word blocks applied to `x`. This is the map
+`g` in the proof of Theorem 4.5(2). The scalar field need not be complete.
 -/
 
 open scoped lp BigOperators
@@ -39,7 +39,7 @@ theorem memℓp_word_coordinates {s : K} {x : L1 K I} (hx : ‖x‖ < ‖s‖) :
         rw [Real.norm_of_nonneg (mul_nonneg (norm_nonneg _) (norm_nonneg _))]
         exact word_ratio_lt_one hx)
 
-/-- The explicit ordinary ℓ¹ word vector, set to zero outside its ball. -/
+/-- The word vector of `x`, set to zero when `‖x‖ ≥ ‖s‖`. -/
 noncomputable def geometricWordVector (s : K) (x : L1 K I) : L1 K (Words I) :=
   if hx : ‖x‖ < ‖s‖ then
     ⟨fun a => (s⁻¹)^a.1 * ∏ i, x (a.2 i), memℓp_word_coordinates hx⟩
@@ -50,8 +50,7 @@ theorem geometricWordVector_apply {s : K} {x : L1 K I} (hx : ‖x‖ < ‖s‖)
     geometricWordVector s x ⟨n, a⟩ = (s⁻¹)^n * ∏ i, x (a i) := by
   simp [geometricWordVector, hx]
 
-/-- Absolute summability and convergence in each coordinate identify an ordinary ℓ¹ limit,
-even when its coordinates take values in an incomplete field. -/
+/-- An absolutely summable series in ℓ¹ that sums to `a` coordinatewise sums to `a`. -/
 theorem hasSum_l1_of_hasSum_coordinates {f : ℕ → L1 K I} {a : L1 K I}
     (hf : Summable (fun n => ‖f n‖)) (ha : ∀ i, HasSum (fun n => f n i) (a i)) :
     HasSum f a := by
@@ -71,8 +70,7 @@ theorem geometricWordVector_apply_zero {s : K} {x : L1 K I} (hx : ‖x‖ < ‖s
     (a : Fin 0 → I) : geometricWordVector s x ⟨0, a⟩ = 1 := by
   simp [geometricWordVector_apply hx]
 
-/-- The word blocks converge to the explicit K-valued ordinary ℓ¹ vector. The proof uses
-coordinate stabilization and a real geometric bound, without completeness of `K`. -/
+/-- The word blocks applied to `x` sum to the word vector of `x`. -/
 theorem hasSum_wordBlock (s : K)
     {x : L1 K I} (hx : ‖x‖ < ‖s‖) :
     HasSum (fun n => wordBlock s n (fun _ => x)) (geometricWordVector s x) := by

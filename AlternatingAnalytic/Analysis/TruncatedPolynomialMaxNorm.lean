@@ -6,21 +6,17 @@ import Mathlib.Analysis.Normed.Group.Ultra
 /-!
 # The maximum coefficient norm on truncated polynomial algebras
 
-The carrier is the actual quotient `AdjoinRoot (X ^ n)`, with its existing
-multiplication and scalar action. Coordinates in its monic power basis carry
-exactly the ordinary finite supremum norm. These coordinates are a linear
-isometric equivalence; they do not identify multiplication with pointwise
-multiplication. The quotient multiplication is the truncated convolution below.
-
-The normed ring and normed algebra instances require an ultrametric field.
-Completeness is inherited from the finite product of the coefficient field.
+The algebra `A = L[ε]/(ε^n)`, modelled as `AdjoinRoot (X ^ n)`, with the maximum norm on
+coefficients in the basis `1, ε, …, ε^(n-1)`. Over an ultrametric field this norm is
+submultiplicative, so `A` is a normed algebra. In Appendix H it is used with `n = p` and
+`L = 𝔽_p((t))`.
 -/
 
 noncomputable section
 open scoped BigOperators NNReal
 namespace AlternatingAnalytic.TruncatedPolynomial
 
-/-- The actual truncated polynomial quotient. -/
+/-- The algebra `L[ε]/(ε^n)`. -/
 abbrev A (L : Type*) [Field L] (n : ℕ) :=
   AdjoinRoot (Polynomial.X ^ n : Polynomial L)
 
@@ -30,16 +26,16 @@ section Algebra
 
 variable [Field L]
 
-/-- The class of `X` in the quotient. -/
+/-- The element `ε`, the class of `X`. -/
 def epsilon : A L n := AdjoinRoot.root (Polynomial.X ^ n : Polynomial L)
 
-/-- The monic power basis, indexed by `Fin n`. -/
+/-- The basis `1, ε, …, ε^(n-1)`, indexed by `Fin n`. -/
 def basis : Module.Basis (Fin n) L (A L n) :=
   (AdjoinRoot.powerBasis' (Polynomial.monic_X_pow n :
     (Polynomial.X ^ n : Polynomial L).Monic)).basis.reindex
       (finCongr (Polynomial.natDegree_X_pow n))
 
-/-- Coefficients in the powers of the actual quotient generator. -/
+/-- Coefficients in the basis `1, ε, …, ε^(n-1)`. -/
 def coeff : A L n ≃ₗ[L] (Fin n → L) := (basis L n).equivFun
 
 instance instNontrivial [NeZero n] : Nontrivial (A L n) := by
@@ -77,7 +73,7 @@ theorem coeff_pow (m : ℕ) (k : Fin n) :
 theorem expansion (x : A L n) : x = ∑ i : Fin n, coeff L n x i • basis L n i := by
   exact ((basis L n).sum_equivFun x).symm
 
-/-- Multiplication in the quotient is truncated convolution of coefficients. -/
+/-- Multiplication is truncated convolution of coefficients. -/
 theorem coeff_mul (x y : A L n) (k : Fin n) :
     coeff L n (x * y) k =
       ∑ i : Fin n, ∑ j : Fin n,
@@ -93,14 +89,14 @@ section Norm
 
 variable [NontriviallyNormedField L]
 
-/-- Pull back the ordinary finite supremum norm along the coefficient map. -/
+/-- The maximum norm on coefficients. -/
 instance instNormedAddCommGroup : NormedAddCommGroup (A L n) :=
   NormedAddCommGroup.induced (A L n) (Fin n → L) (coeff L n) (coeff L n).injective
 
 instance instNormedSpace : NormedSpace L (A L n) :=
   NormedSpace.induced L (A L n) (Fin n → L) (coeff L n)
 
-/-- The coefficient map with its exact, rather than merely equivalent, norm. -/
+/-- The coefficient map is a linear isometry onto `Fin n → L` with the sup norm. -/
 def coefficientIsometry : A L n ≃ₗᵢ[L] (Fin n → L) :=
   { coeff L n with norm_map' := fun _ => rfl }
 
@@ -117,7 +113,7 @@ theorem coefficientIsometry_symm_apply (v : Fin n → L) :
 @[simp]
 theorem norm_coeff (x : A L n) : ‖coeff L n x‖ = ‖x‖ := rfl
 
-/-- The norm is exactly the maximum of the coefficient norms. -/
+/-- The norm is the maximum of the coefficient norms. -/
 theorem norm_eq_max (x : A L n) :
     ‖x‖ = (Finset.univ.sup fun i : Fin n => ‖coeff L n x i‖₊ : ℝ≥0) := rfl
 
@@ -156,7 +152,7 @@ instance instIsUltrametricDist : IsUltrametricDist (A L n) :=
     exact (IsUltrametricDist.norm_add_le_max _ _).trans
       (max_le_max (norm_le_pi_norm _ i) (norm_le_pi_norm _ i))
 
-/-- The constant-one bound is a consequence of ultrametric finite-sum bounds. -/
+/-- Over an ultrametric field the norm is submultiplicative. -/
 theorem norm_mul_le (x y : A L n) : ‖x * y‖ ≤ ‖x‖ * ‖y‖ := by
   change ‖coeff L n (x * y)‖ ≤ ‖coeff L n x‖ * ‖coeff L n y‖
   apply (pi_norm_le_iff_of_nonneg (mul_nonneg (norm_nonneg _) (norm_nonneg _))).2
@@ -176,7 +172,6 @@ theorem norm_mul_le (x y : A L n) : ‖x * y‖ ≤ ‖x‖ * ‖y‖ := by
     exact mul_le_mul' (nnnorm_le_pi_nnnorm _ i) (nnnorm_le_pi_nnnorm _ j)
   · simp
 
-/-- The ring operations are the original quotient operations. -/
 instance instNormedCommRing : NormedCommRing (A L n) :=
   { instNormedAddCommGroup L n, (inferInstance : CommRing (A L n)) with
     norm_mul_le := norm_mul_le L n }
@@ -184,10 +179,7 @@ instance instNormedCommRing : NormedCommRing (A L n) :=
 instance instNormedAlgebra : NormedAlgebra L (A L n) where
   norm_smul_le := (instNormedSpace L n).norm_smul_le
 
-/-- All maximum-norm properties of the actual quotient for every positive
-truncation degree. The displayed coefficient isometry uses the ordinary finite
-supremum norm, and multiplication has the displayed truncated convolution.
-Completeness is conditional on completeness of the coefficient field. -/
+/-- Summary of the properties of the maximum norm on `L[ε]/(ε^n)`, for `n ≠ 0`. -/
 theorem max_norm_properties [NeZero n] :
     (∀ x : A L n,
       ‖x‖ = (Finset.univ.sup fun i : Fin n => ‖coeff L n x i‖₊ : ℝ≥0)) ∧
@@ -211,8 +203,7 @@ theorem max_norm_properties [NeZero n] :
     coeff_mul L n, fun _ => instCompleteSpace L n, epsilon_pow L n,
     basis_eq_pow L n, norm_basis L n, norm_epsilon_pow L n, norm_one, norm_mul_le L n⟩
 
-/-- The complete maximum-norm package in prime degree, as used in the
-rigid-source construction, for the same quotient and coefficient isometry. -/
+/-- The same summary for `n = p` prime, the case used in Appendix H. -/
 theorem prime_max_norm_properties (p : ℕ) [Fact p.Prime] :
     (∀ x : A L p,
       ‖x‖ = (Finset.univ.sup fun i : Fin p => ‖coeff L p x i‖₊ : ℝ≥0)) ∧

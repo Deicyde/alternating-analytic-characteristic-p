@@ -3,13 +3,12 @@ import Mathlib.Analysis.Analytic.Constructions
 import AlternatingAnalytic.Main
 
 /-!
-# Invertible shears transfer alternating nonanalyticity
+# Invertible shears with nonanalytic pullback
 
-This is Proposition `fam:prop:shear` of `paper/charp.tex`. The product `D × E`
-has its usual maximum norm. The shear is `(d, e) ↦ (d + u e, e)`, its inverse
-is the shear at `-u`, and both operator-valued families are affine analytic.
-Extension along the first projection and restriction along the second inclusion
-recover the original pullback from the shear's pullback.
+On `D × E` with the maximum norm, the shear `g(u)(d, e) = (d + u e, e)` and its inverse `g(-u)`
+are affine analytic in `u`. Extending forms along the first projection and restricting to the
+second summand recovers `u ↦ u^*` from `u ↦ g(u)^*`, so the latter is not analytic where the
+former is not. This is Proposition 6.4.
 -/
 
 noncomputable section
@@ -104,7 +103,7 @@ def shearCompression :
     ((ContinuousLinearMap.compL K (D [⋀^ι]→L[K] F)
       ((D × E) [⋀^ι]→L[K] F) ((D × E) [⋀^ι]→L[K] F)).flip shearExtend)
 
-/-- The exact retraction identity `R ∘ g(u)^* ∘ J = Q(u)`. -/
+/-- `R ∘ g(u)^* ∘ J = u^*`. -/
 @[simp]
 theorem shearCompression_pullback (u : E →L[K] D) :
     shearCompression (F := F) (ι := ι)
@@ -113,7 +112,7 @@ theorem shearCompression_pullback (u : E →L[K] D) :
   ext m x
   simp [shearCompression, shearRestrict, shearExtend, Function.comp_def]
 
-/-- Nonanalyticity of the original pullback transfers to the invertible shear family. -/
+/-- If `u ↦ u^*` is not analytic at `u₀`, neither is `u ↦ g(u)^*`. -/
 theorem not_analyticAt_shear_pullback (u₀ : E →L[K] D)
     (h : ¬ AnalyticAt K
       (fun u : E →L[K] D =>
@@ -133,8 +132,8 @@ theorem not_analyticAt_shear_pullback (u₀ : E →L[K] D)
   apply h
   simpa only [Function.comp_def, shearCompression_pullback] using hQ
 
-/-- Proposition `fam:prop:shear`: analytic automorphisms with analytic inverse
-can have a nonanalytic induced action on alternating forms. -/
+/-- The shear and its inverse are analytic, and `u ↦ g(u)^*` is not analytic at `u₀` when
+`u ↦ u^*` is not. -/
 theorem invertible_shear_counterexample (u₀ : E →L[K] D)
     (h : ¬ AnalyticAt K
       (fun u : E →L[K] D =>
@@ -150,9 +149,9 @@ theorem invertible_shear_counterexample (u₀ : E →L[K] D)
   ⟨fun u _ => analyticAt_shear u, fun u _ => analyticAt_shear_inverse u,
     not_analyticAt_shear_pullback u₀ h⟩
 
-/-- Over each positive-characteristic normed field, the main Banach counterexample
-gives an analytic shear family through the identity, with analytic inverse, whose
-action on alternating forms is not analytic at the zero parameter. -/
+/-- In characteristic `p` with `p ≤ k`, there are Banach spaces for which the shear family
+through the identity is analytic with analytic inverse, but its action on alternating `k`-forms
+is not analytic at `0`. -/
 theorem exists_banach_shear_counterexample
     (K : Type u) [NontriviallyNormedField K] (p k : ℕ) (hp : p.Prime)
     [CharP K p] (hpk : p ≤ k) :
@@ -186,11 +185,9 @@ theorem exists_banach_shear_counterexample
   exact invertible_shear_counterexample (F := F) (ι := Fin k)
     (0 : E →L[K] E) (hbad (Fin k) (by simp) 0)
 
-/-- The full invertible-shear proposition `fam:prop:shear`: the shear and its inverse
-are affine analytic, compression recovers the original pullback, and nonanalyticity
-transfers at every parameter. In prime characteristic and degree at least that
-characteristic, Banach witnesses give a counterexample at zero, through the identity.
-The general transfer requires neither completeness nor a characteristic assumption. -/
+/-- Proposition 6.4 in full: formulas for the shear and its inverse, their analyticity, the
+compression identity, transfer of nonanalyticity, and Banach witnesses in characteristic `p`
+for `k ≥ p`. -/
 theorem invertible_shear_transfer_full :
     (∀ (u : E →L[K] D) (z : D × E), shearEquiv u z = (z.1 + u z.2, z.2)) ∧
     (∀ u : E →L[K] D,

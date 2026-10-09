@@ -7,11 +7,10 @@ import Mathlib.Analysis.SpecificLimits.Basic
 /-!
 # Dependent c₀ sums
 
-The closed span of coordinate vectors in dependent `lp E ∞`, with its inherited
-supremum norm. The construction applies to arbitrary normed fibers; completeness
-is needed only for the Banach-space instances. No tensor or ultrametric structure
-is used here. In the later tensor application, `E n = T_(n+1)(P)`;
-retaining coordinates `n < N` retains tensor degrees 1 through N.
+The space `c₀({E i})` of families `x i ∈ E i` with `‖x i‖ → 0`, defined as the
+closed span of coordinate vectors in `lp E ∞` with the supremum norm. It is used
+in Appendix G with `E n = T_(n+1)(P)`, so the coordinates `n < N` hold tensor
+degrees 1 through `N`.
 -/
 
 noncomputable section
@@ -62,7 +61,7 @@ def toLp : DependentCZero K E →ₗᵢ[K] lp E ∞ :=
 
 @[simp] theorem toLp_apply (x : DependentCZero K E) : toLp x = x.val := rfl
 
-/-- The actual supremum norm, also for empty index types. -/
+/-- The norm is the supremum of the coordinate norms (zero for an empty index type). -/
 theorem norm_eq (x : DependentCZero K E) : ‖x‖ = ⨆ i, ‖x i‖ :=
   lp.norm_eq_ciSup x.val
 
@@ -143,7 +142,7 @@ def finiteVector (s : Finset I) (v : ∀ i, E i) : DependentCZero K E :=
   change eval i (∑ j ∈ s, single j (v j)) = _
   simp only [map_sum, eval_apply, single_apply, Finset.sum_pi_single]
 
-/-- Exact, empty-set-safe finite-vector norm formula. -/
+/-- The norm of a finite vector is the maximum of its coordinate norms. -/
 theorem nnnorm_finiteVector (s : Finset I) (v : ∀ i, E i) :
     ‖finiteVector (K := K) s v‖₊ = s.sup (fun i => ‖v i‖₊) := by
   classical
@@ -217,7 +216,7 @@ theorem ambient_sum_single_apply [DecidableEq I] (s : Finset I) (v : ∀ i, E i)
   classical
   simp only [lp.coeFn_sum, Finset.sum_apply, lp.single_apply, Finset.sum_pi_single]
 
-/-- The closed coordinate span consists exactly of the families vanishing along `cofinite`. -/
+/-- The closed coordinate span consists of the families with `‖x i‖ → 0` along `cofinite`. -/
 theorem mem_iff (x : lp E ∞) :
     x ∈ dependentCZeroSubmodule K E ↔
       Tendsto (fun i => ‖x i‖) cofinite (𝓝 0) := by
@@ -299,9 +298,8 @@ theorem isometry_single (i : I) : Isometry (single (K := K) (E := E) i) :=
 theorem isClosed_submodule : IsClosed (dependentCZeroSubmodule K E : Set (lp E ∞)) :=
   (dependentCZeroSpan K E).isClosed_topologicalClosure
 
-/-- The dependent Banach sum, collecting its closed-span characterization, actual
-supremum norm, coordinate maps, finite-vector norm and convergent contractions.
-No restriction on the cardinality of the index type is imposed. -/
+/-- Summary of the basic properties of `DependentCZero`: completeness, the
+characterization by decay, the norm, coordinate maps, finite vectors and truncations. -/
 theorem banach_sum [∀ i, CompleteSpace (E i)] :
     letI := Classical.decEq I
     CompleteSpace (DependentCZero K E) ∧
@@ -405,7 +403,7 @@ theorem range_coordinateInclusion :
     funext i
     rfl
 
-/-- The sum of the coordinate subspaces is isometrically equivalent to its concrete image. -/
+/-- The `c₀` sum of the subspaces `D i` is isometric to the coordinatewise submodule. -/
 def coordinateEquiv :
     DependentCZero K (fun i ↦ D i) ≃ₗᵢ[K] coordinateSubmodule D where
   toFun x := ⟨coordinateInclusion D x,
@@ -464,7 +462,7 @@ theorem completeSpace_coordinateSum [∀ i, CompleteSpace (E i)]
   have : ∀ i, CompleteSpace (D i) := fun i ↦ (hD i).completeSpace_coe
   infer_instance
 
--- Give instance search direct access to the inherited structures on this nested subtype.
+-- Direct instances on this nested subtype, to help instance search.
 instance coordinateSubmoduleNormedAddCommGroup : NormedAddCommGroup (coordinateSubmodule D) :=
   inferInstance
 
@@ -486,7 +484,7 @@ theorem norm_coordinateEval_le (i : I) : ‖coordinateEval D i‖ ≤ 1 := by
   rw [one_mul]
   exact norm_apply_le_norm (x : DependentCZero K E) i
 
-/-- The closed-coordinate-space construction, including its concrete range and contractions. -/
+/-- Summary of the coordinatewise subspace construction for closed subspaces `D i`. -/
 theorem closed_coordinate_subspaces [∀ i, CompleteSpace (E i)]
     (hD : ∀ i, IsClosed (D i : Set (E i))) :
     (∀ x : DependentCZero K E, x ∈ coordinateSubmodule D ↔ ∀ i, x i ∈ D i) ∧
@@ -513,8 +511,8 @@ end CoordinateSubspaces
 
 end DependentCZero
 
-/- The natural-number coordinate convention here starts with degree one: the n-th
-coordinate is bounded by C * r^(n+1). No tensor construction is used. -/
+/- Geometric bounds for `ℕ`-indexed families. The convention starts in degree one:
+the `n`-th coordinate is bounded by `C * r^(n+1)`. -/
 
 namespace DependentCZero
 
@@ -550,7 +548,7 @@ private lemma geometric_tendsto (v : ∀ n, E n) {C r : ℝ}
   rw [Nat.cofinite_eq_atTop]
   exact squeeze_zero (fun n => norm_nonneg _) hv (tendsto_geometric_bound hr₀ hr₁)
 
-/-- A dependent family with geometric coordinate bounds, as an actual c₀ vector. -/
+/-- A family with geometric coordinate bounds, as an element of c₀. -/
 def ofGeometric (v : ∀ n, E n) {C r : ℝ} (hC : 0 ≤ C)
     (hr₀ : 0 ≤ r) (hr₁ : r < 1) (hv : ∀ n, ‖v n‖ ≤ C * r ^ (n + 1)) :
     DependentCZero K E :=
@@ -561,7 +559,8 @@ def ofGeometric (v : ∀ n, E n) {C r : ℝ} (hC : 0 ≤ C)
     (hr₀ : 0 ≤ r) (hr₁ : r < 1) (hv : ∀ n, ‖v n‖ ≤ C * r ^ (n + 1))
     (n : ℕ) : ofGeometric (K := K) v hC hr₀ hr₁ hv n = v n := rfl
 
-/-- The omitted coordinates start at `N`, hence their first exponent is `N + 1`. -/
+/-- Under the bounds `‖x n‖ ≤ C * r^(n+1)`, truncation to the coordinates `n < N`
+has error at most `C * r^(N+1)`. -/
 theorem norm_sub_truncate_range_le (x : DependentCZero K E) {C r : ℝ}
     (hC : 0 ≤ C) (hr₀ : 0 ≤ r) (hr₁ : r < 1)
     (hx : ∀ n, ‖x n‖ ≤ C * r ^ (n + 1)) (N : ℕ) :
@@ -576,7 +575,7 @@ theorem norm_sub_truncate_range_le (x : DependentCZero K E) {C r : ℝ}
       (mul_le_mul_of_nonneg_left (pow_le_pow_of_le_one hr₀ hr₁.le hNn) hC)
     simpa [truncate_apply, Finset.mem_range, hn] using hbound
 
-/-- The actual geometric constructor, its coordinates, and its estimates. -/
+/-- Coordinates and truncation estimates for `ofGeometric`. -/
 theorem geometric_construction (v : ∀ n, E n) {C r : ℝ} (hC : 0 ≤ C)
     (hr₀ : 0 ≤ r) (hr₁ : r < 1) (hv : ∀ n, ‖v n‖ ≤ C * r ^ (n + 1)) :
     (∀ n, ofGeometric (K := K) v hC hr₀ hr₁ hv n = v n) ∧
@@ -616,7 +615,7 @@ noncomputable def ofGeometricOn {X : Type*} (v : X → ∀ n, E n) (A : Set X)
   classical
   simp [ofGeometricOn, hx]
 
-/-- A single public statement for reconstruction and geometric uniform approximation on a set. -/
+/-- Coordinates and uniform truncation estimates for `ofGeometricOn` on `A`. -/
 theorem geometric_uniform_construction {X : Type*} (v : X → ∀ n, E n) (A : Set X)
     {C r : ℝ} (hC : 0 ≤ C) (hr₀ : 0 ≤ r) (hr₁ : r < 1)
     (hv : ∀ x ∈ A, ∀ n, ‖v x n‖ ≤ C * r ^ (n + 1)) :

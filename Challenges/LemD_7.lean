@@ -14,25 +14,17 @@ and `f_{K'} ∘ ι_E = ι_E ∘ f`, and `f ↦ f_{K'}` is `K₁`-linear."
 
 ## Formalization notes
 
-* The projective base change is the library's construction, imported as a definition:
-  `E₁ ⊗[K₁] K'` with the projective norm `‖·‖_π` (local instances `baseChangeModule`,
-  `baseChangeNormedAddCommGroup`, `baseChangeNormedSpace`, ... from
-  `AlternatingAnalytic.Analysis.ProjectiveBaseChange`), its completion
-  `CompletedBaseChange K₁ E₁ K'`, the dense inclusion `baseChangeToCompletionK` and
-  `ι_E = completedBaseChangeEmbedding`. The module `CompletedBaseChange` is imported only for
-  these definitions; the operator construction (`BaseChangeOperators.lean`) is not imported.
-* `K₁ ⊆ K'` with the restricted absolute value is `[NormedAlgebra K₁ K']` (isometric scalar
-  inclusion). (H1) is `[CompleteSpace K₁] [SphericallyCompleteSpace K₁]`; (H2) is
-  `[IsUltrametricDist K']`. The library's norm on the algebraic tensor product also requires
-  `[IsUltrametricDist K₁]`, which follows from (H2) and the isometric inclusion, so this adds no
-  real hypothesis.
-* `K'` is taken `NontriviallyNormedField` (automatic: it contains the nontrivially normed `K₁`
-  isometrically).
-* `E₁` and `K'` live in the same universe `u` (required by the library construction).
-* Part 1 is the algebraic statement (`f ⊗ id = LinearMap.rTensor K' f` is `K'`-linear and
-  `π`-bounded). Part 2 asserts the existence of a `K₁`-linear family `Φ f = f_{K'}` of continuous
-  `K'`-linear operators on `E` that extend `f ⊗ id` from the dense algebraic tensor product, with
-  `‖f_{K'}‖ ≤ ‖f‖` and `f_{K'} ∘ ι_E = ι_E ∘ f`.
+* `E₁ ⊗[K₁] K'` with `‖·‖_π`, its completion `CompletedBaseChange K₁ E₁ K'`, the dense map
+  `baseChangeToCompletionK` and `ι_E = completedBaseChangeEmbedding` are library definitions
+  (`AlternatingAnalytic/Analysis/ProjectiveBaseChange.lean`, `CompletedBaseChange.lean`), used
+  through the local instances below.
+* `K₁ ⊆ K'` is `[NormedAlgebra K₁ K']`; (H1) is `[CompleteSpace K₁] [SphericallyCompleteSpace K₁]`;
+  (H2) is `[IsUltrametricDist K']`. The library also needs `[IsUltrametricDist K₁]`, which
+  follows from (H2).
+* `K'` is a `NontriviallyNormedField`; this follows from containing `K₁` isometrically.
+* `E₁` and `K'` lie in one universe.
+* The lemma is split in two: `f ⊗ id = f.rTensor K'` is `K'`-linear and bounded by `‖f‖`; and
+  there is a `K₁`-linear family `Φ f = f_{K'}` of continuous `K'`-linear extensions to `E`.
 -/
 
 open scoped TensorProduct
@@ -46,8 +38,7 @@ universe u
 attribute [local instance] baseChangeModule baseChangeNormedAddCommGroup
   baseChangeNormedSpaceRestrictScalars baseChangeNormedSpace baseChangeIsScalarTower
 
-/-- Lemma D.7, algebraic part: `f ⊗ id` is `K'`-linear on `E₁ ⊗[K₁] K'` and bounded by `‖f‖`
-for the projective norm. -/
+/-- `f ⊗ id` is `K'`-linear on `E₁ ⊗[K₁] K'` and bounded by `‖f‖` for `‖·‖_π`. -/
 theorem baseChangeOperator_algebraic
     (K₁ : Type*) (E₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]
@@ -58,8 +49,8 @@ theorem baseChangeOperator_algebraic
     ∀ u : E₁ ⊗[K₁] K', ‖f.toLinearMap.rTensor K' u‖ ≤ ‖f‖ * ‖u‖ := by
   sorry
 
-/-- Lemma D.7, completed part: a `K₁`-linear family `f ↦ f_{K'}` of continuous `K'`-linear
-extensions of `f ⊗ id` to the completion, with `‖f_{K'}‖ ≤ ‖f‖` and `f_{K'} ∘ ι_E = ι_E ∘ f`. -/
+/-- There is a `K₁`-linear family `f ↦ f_{K'}` of continuous `K'`-linear operators on `E`
+extending `f ⊗ id`, with `‖f_{K'}‖ ≤ ‖f‖` and `f_{K'} ∘ ι_E = ι_E ∘ f`. -/
 theorem exists_completedBaseChangeOperator
     (K₁ : Type*) (E₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]

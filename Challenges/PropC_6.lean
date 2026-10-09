@@ -16,21 +16,18 @@ has no bounded `k`-linear lift with values in `Alt^k_{K₁}(E₁; B)`. Consequen
 `c₀(ℕ, K₁)`. In particular `a ↦ A^{k,K₁}_{E₁,E₁;B}(u₀ + D_a)` is analytic at no point.
 
 ## Formalization notes
-* Degree: index type `Fin k`. "Finite field of characteristic `p`": `[Finite κ]`, `p.Prime`,
-  `[CharP κ p]`.
-* `K₁ = AlternatingAnalytic.LaurentField κ r`, `E₁ = ℕ →ᵇ K₁`, `B` = the library's
-  `ProjectiveExteriorCompletion K₁ ℕ k`, `W_B` = the library's `completedExteriorWedge K₁ ℕ k`
-  (definitions only; see challenges `ThmC_1` and `LemC_2`).
-* `c₀(ℕ, K₁)` is Mathlib's `C₀(ℕ, K₁)` (`ZeroAtInftyContinuousMap` on discrete `ℕ`, sup norm), and
-  the inclusion `c₀ ⊆ E₁` is `ZeroAtInftyContinuousMap.toBCF` (an isometry).
-* `D_a` is `ContinuousLinearMap.mul K₁ (ℕ →ᵇ K₁) a` (coordinatewise multiplication).
-* `σ` is `sigma` (introduced here). A bounded `k`-linear lift of `σ` is a continuous `k`-linear map
-  `p : c₀(ℕ, K₁)^k → Alt^k(E₁; B)` with `p(a, …, a) = σ(a)`.
-* `A(u)` is `ContinuousAlternatingMap.compContinuousLinearMapCLM u` on `Alt^k(E₁; B)`.
-* Status: not formalized in the library (no declaration about lifts over a `c₀` base).
-* Universe: `κ : Type u`.
-* `set_option backward.isDefEq.respectTransparency false` (as in the library) is needed for
-  instance search on `ℕ →ᵇ K₁`; it does not change any statement.
+* The degree index type is `Fin k`. "Finite field of characteristic `p`" is `[Finite κ]`,
+  `p.Prime`, `[CharP κ p]`.
+* `K₁ = LaurentField κ r`, `E₁ = ℕ →ᵇ K₁`; `B` and `W_B` are the library's
+  `ProjectiveExteriorCompletion K₁ ℕ k` and `completedExteriorWedge K₁ ℕ k` (see Lemma C.2).
+* `c₀(ℕ, K₁)` is `C₀(ℕ, K₁)` with the sup norm; the inclusion into `E₁` is
+  `ZeroAtInftyContinuousMap.toBCF`.
+* `D_a` is `ContinuousLinearMap.mul K₁ (ℕ →ᵇ K₁) a`.
+* A bounded `k`-linear lift of `sigma` is a continuous `k`-linear map
+  `P : c₀(ℕ, K₁)^k → Alt^k(E₁; B)` with `P(a, …, a) = σ(a)`.
+* `A(u)` is `ContinuousAlternatingMap.compContinuousLinearMapCLM u`.
+* `set_option backward.isDefEq.respectTransparency false` is needed for instance search on
+  `ℕ →ᵇ K₁`; it does not change any statement.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -51,8 +48,7 @@ noncomputable def sigma (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [F
   (completedExteriorWedge (LaurentField κ r) ℕ k).compContinuousLinearMap
     (ContinuousLinearMap.mul (LaurentField κ r) (ℕ →ᵇ LaurentField κ r) a.toBCF)
 
-/-- **Proposition C.6, main part.** `σ` has no bounded `k`-linear lift with values in
-`Alt^k(E₁; B)`. -/
+/-- `σ` has no bounded `k`-linear lift with values in `Alt^k(E₁; B)`. -/
 theorem part1_sigma_no_bounded_lift
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]
     (k : ℕ) (hpk : p ≤ k) (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
@@ -63,8 +59,7 @@ theorem part1_sigma_no_bounded_lift
       ∀ a : C₀(ℕ, LaurentField κ r), P (fun _ => a) = sigma κ r k a := by
   sorry
 
-/-- **Proposition C.6, consequence.** For every `u₀`, `a ↦ A(u₀ + D_a)(W_B)` is analytic at no
-point of `c₀(ℕ, K₁)`. -/
+/-- For every `u₀`, `a ↦ A(u₀ + D_a)(W_B)` is analytic at no point of `c₀(ℕ, K₁)`. -/
 theorem part2_not_analyticAt_apply_wedge
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]
     (k : ℕ) (hpk : p ≤ k) (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
@@ -77,8 +72,7 @@ theorem part2_not_analyticAt_apply_wedge
           (completedExteriorWedge (LaurentField κ r) ℕ k)) a₀ := by
   sorry
 
-/-- **Proposition C.6, operator form.** For every `u₀`, `a ↦ A(u₀ + D_a)` is analytic at no
-point of `c₀(ℕ, K₁)`. -/
+/-- For every `u₀`, `a ↦ A(u₀ + D_a)` is analytic at no point of `c₀(ℕ, K₁)`. -/
 theorem part3_not_analyticAt_operator
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]
     (k : ℕ) (hpk : p ≤ k) (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]

@@ -1,7 +1,12 @@
 import AlternatingAnalytic.Main
 import AlternatingAnalytic.Analysis.FactorialInvertible
 
-/-! The exact factorial criterion for analyticity on all Banach spaces. -/
+/-!
+# The factorial criterion
+
+Degree-`k` alternating precomposition is analytic for all Banach spaces exactly when
+`k! ≠ 0` in `K`. This is the Banach-space part of Corollary 6.2.
+-/
 
 noncomputable section
 
@@ -11,14 +16,14 @@ open Round24Transfer
 
 universe u
 
-/-- Analyticity of degree-k alternating precomposition for every triple of Banach spaces. -/
+/-- Degree-`k` alternating precomposition is analytic for all Banach spaces in one universe. -/
 def AllBanachPrecompositionAnalytic (K : Type u) [NontriviallyNormedField K] (k : ℕ) : Prop :=
   ∀ (E E' F : Type u) [NormedAddCommGroup E] [NormedAddCommGroup E']
     [NormedAddCommGroup F] [NormedSpace K E] [NormedSpace K E'] [NormedSpace K F]
     [CompleteSpace E] [CompleteSpace E'] [CompleteSpace F],
     ∀ f₀ : E →L[K] E', AnalyticAt K (Q K (Fin k) E E' F) f₀
 
-/-- The paper's complete classification, valid for every prescribed nontrivially normed field. -/
+/-- Precomposition is analytic for all Banach spaces if and only if `k! ≠ 0` in `K`. -/
 theorem factorial_ne_zero_iff_allBanachPrecompositionAnalytic
     (K : Type u) [NontriviallyNormedField K] (k : ℕ) :
     (k.factorial : K) ≠ 0 ↔ AllBanachPrecompositionAnalytic K k := by

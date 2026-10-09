@@ -3,16 +3,6 @@ Copyright (c) 2026 Jack McCarthy. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jack McCarthy
 -/
-/-
-Source: round24/charp/lean/r1/SC_01to05.lean, integrated on 2026-09-23.
-Original root and `MasterExtension` declarations are retained.
-Provenance and verification: planning/charp-paper/planning/integration-positive-manifest.json.
-
-This module proves the master extension lemma, ultrametric map-space instances, spherical
-completeness of proper ultrametric spaces, and the complete discretely normed field case.
-It does not yet prove the paper's general additive-group discrete-distance theorem or its
-scalar alternating-projection result.
--/
 import Mathlib.Analysis.Calculus.ContDiff.ContinuousAlternatingMap
 import Mathlib.Analysis.Normed.Field.Ultra
 import Mathlib.Analysis.Normed.Group.Ultra
@@ -26,17 +16,17 @@ import Mathlib.Topology.MetricSpace.Pseudo.Defs
 # Spherically complete spaces
 
 `SphericallyCompleteSpace F` says that every nonempty family of closed balls of `F`, any two of
-which meet, has a point in common. Over an ultrametric space this is the usual strengthening
-of completeness used in Ingleton's Hahn-Banach theorem.
-
-The declarations below include a master extension theorem, spherical completeness of proper
-ultrametric spaces, and spherical completeness of complete discretely normed fields.
+which meet, has a point in common. The main result is Ingleton's extension theorem
+(Theorem D.3), in the form with simultaneous bounds used in the proof of Theorem 4.2.
+The file also shows that spaces of multilinear and alternating maps into an ultrametric space
+are ultrametric, and that proper ultrametric spaces and complete discretely normed fields are
+spherically complete.
 -/
 
 open Metric ContinuousMultilinearMap ContinuousAlternatingMap
 open scoped ContDiff NNReal
 
-/-- Spherical completeness: every family of closed balls, any two of which meet, has a common point. -/
+/-- Every nonempty family of closed balls, any two of which meet, has a common point. -/
 class SphericallyCompleteSpace (F : Type*) [PseudoMetricSpace F] : Prop where
   inter_nonempty : ∀ S : Set (F × ℝ), S.Nonempty →
     (∀ p ∈ S, ∀ q ∈ S, (closedBall p.1 p.2 ∩ closedBall q.1 q.2).Nonempty) →
@@ -44,21 +34,13 @@ class SphericallyCompleteSpace (F : Type*) [PseudoMetricSpace F] : Prop where
 
 
 /-!
-# The master extension lemma over a spherically complete target
+## The extension theorem
 
-`exists_extension_of_sphericallyComplete` is an Ingleton-type Hahn-Banach theorem with an
-approximation constraint built in: given a family `S` of pairs `(T_α, r_α)` of continuous linear
-maps `X → F` and radii, pairwise compatible in the sense `‖T_α - T_β‖ ≤ max r_α r_β`, and a
-linear map `T₀` defined on a submodule `D` that lies within `r_α ‖·‖` of every `T_α`, there is a
-global continuous linear `T : X →L[𝕜] F` extending `T₀` and still lying within `r_α ‖·‖` of every
-`T_α`.
-
-The proof is a Zorn's-lemma argument on `X →ₗ.[𝕜] F`, modelled on Mathlib's Riesz extension
-theorem.  The scalar field is **not** assumed ultrametric; only `X` and `F` are.
-
-Taking `S = {(0, 1)}` gives norm-preserving extension; the extra parameters are what makes the
-lemma strong enough both for the retraction (`07_Retraction.lean`) and for the spherical
-completeness of alternating maps (`06_AltSphericallyComplete.lean`).
+Let `S` be a nonempty family of pairs `(T_α, r_α)` of continuous linear maps `X → F` and radii
+with `‖T_α - T_β‖ ≤ max r_α r_β`, and let `T₀` be a linear map on a submodule `D` with
+`‖T₀ d - T_α d‖ ≤ r_α ‖d‖`. Then `T₀` extends to a continuous linear `T : X →L[𝕜] F` with
+`‖T x - T_α x‖ ≤ r_α ‖x‖` for all `α`. Taking `S = {(0, 1)}` gives norm-preserving extension.
+The proof is a Zorn's lemma argument on `X →ₗ.[𝕜] F`. Only `X` and `F` are assumed ultrametric.
 -/
 
 open Metric ContinuousMultilinearMap ContinuousAlternatingMap
@@ -79,8 +61,7 @@ def IsGood (S : Set ((X →L[𝕜] F) × ℝ)) (f : X →ₗ.[𝕜] F) : Prop :=
   ∀ p ∈ S, ∀ d : f.domain, ‖f d - p.1 d‖ ≤ p.2 * ‖(d : X)‖
 
 omit [IsUltrametricDist F] [SphericallyCompleteSpace F] in
-/-- Two closed balls with nonnegative radii whose centres are at distance at most the larger
-radius meet (the centre of the smaller ball lies in both). -/
+/-- Two closed balls whose centres are at distance at most the larger radius meet. -/
 theorem balls_meet {c₁ c₂ : F} {r₁ r₂ : ℝ} (h₁ : 0 ≤ r₁) (h₂ : 0 ≤ r₂)
     (h : dist c₁ c₂ ≤ max r₁ r₂) : (closedBall c₁ r₁ ∩ closedBall c₂ r₂).Nonempty := by
   rcases le_total r₁ r₂ with h' | h'
@@ -90,14 +71,14 @@ theorem balls_meet {c₁ c₂ : F} {r₁ r₂ : ℝ} (h₁ : 0 ≤ r₁) (h₂ :
 variable {S : Set ((X →L[𝕜] F) × ℝ)}
 
 omit [IsUltrametricDist X] [SphericallyCompleteSpace F] in
-/-- The radii occurring in `S` are nonnegative: this follows from `hS` applied with `p = q`. -/
+/-- The radii occurring in `S` are nonnegative. -/
 theorem radius_nonneg (hS : ∀ p ∈ S, ∀ q ∈ S, ‖p.1 - q.1‖ ≤ max p.2 q.2) {p} (hp : p ∈ S) :
     0 ≤ p.2 := by
   have := hS p hp p hp
   simpa using this
 
 omit [SphericallyCompleteSpace F] in
-/-- The core estimate between the centres of two of the balls, in the case `p.2 ≤ q.2`. -/
+/-- The estimate between the centres of two of the balls, in the case `p.2 ≤ q.2`. -/
 theorem centre_dist_aux (hS : ∀ p ∈ S, ∀ q ∈ S, ‖p.1 - q.1‖ ≤ max p.2 q.2)
     {f : X →ₗ.[𝕜] F} (hf : IsGood S f) (x : X)
     {p q : (X →L[𝕜] F) × ℝ} (hp : p ∈ S) (hq : q ∈ S) (hpq : p.2 ≤ q.2)
@@ -135,7 +116,7 @@ theorem centre_dist_aux (hS : ∀ p ∈ S, ∀ q ∈ S, ‖p.1 - q.1‖ ≤ max 
     exact mul_le_mul_of_nonneg_right ((hS p hp q hq).trans (max_eq_right hpq).le)
       (norm_nonneg _)
 
-/-- One-step extension. -/
+/-- A good partial map with proper domain extends to a strictly larger good one. -/
 theorem step (hne : S.Nonempty) (hS : ∀ p ∈ S, ∀ q ∈ S, ‖p.1 - q.1‖ ≤ max p.2 q.2)
     {f : X →ₗ.[𝕜] F} (hf : IsGood S f) (hdom : f.domain ≠ ⊤) :
     ∃ g, f < g ∧ IsGood S g := by
@@ -205,7 +186,7 @@ theorem step (hne : S.Nonempty) (hS : ∀ p ∈ S, ∀ q ∈ S, ‖p.1 - q.1‖ 
         _ = p.2 * (‖l‖ * ‖(l⁻¹ • d : X) + x‖) := by ring
         _ = p.2 * ‖d + l • x‖ := by rw [e2]
 
-/-- Zorn step: a maximal good extension has full domain. -/
+/-- Every good partial map extends to a good map defined everywhere. -/
 theorem exists_top (hne : S.Nonempty) (hS : ∀ p ∈ S, ∀ q ∈ S, ‖p.1 - q.1‖ ≤ max p.2 q.2)
     (f : X →ₗ.[𝕜] F) (hf : IsGood S f) :
     ∃ g ≥ f, g.domain = ⊤ ∧ IsGood S g := by
@@ -232,7 +213,7 @@ theorem exists_top (hne : S.Nonempty) (hS : ∀ p ∈ S, ∀ q ∈ S, ‖p.1 - q
 end MasterExtension
 
 open MasterExtension in
-/-- Master extension lemma (Ingleton + engine lemma in one statement). -/
+/-- Ingleton's extension theorem with simultaneous bounds (Theorem D.3). -/
 theorem exists_extension_of_sphericallyComplete
     (S : Set ((X →L[𝕜] F) × ℝ)) (hne : S.Nonempty)
     (hS : ∀ p ∈ S, ∀ q ∈ S, ‖p.1 - q.1‖ ≤ max p.2 q.2)
@@ -262,12 +243,10 @@ end Master
 
 
 /-!
-# Ultrametric instances on spaces of multilinear and alternating maps
+## Ultrametric spaces of multilinear and alternating maps
 
-If the target `F` is ultrametric then so are `ContinuousMultilinearMap 𝕜 (fun _ : ι ↦ E) F` and
-`E [⋀^ι]→L[𝕜] F`, with their operator norms.  Both are immediate from
-`IsUltrametricDist.isUltrametricDist_of_forall_norm_add_le_max_norm`; the alternating case
-reduces to the multilinear one because the inclusion is an isometry.
+If `F` is ultrametric, so are `ContinuousMultilinearMap 𝕜 (fun _ : ι ↦ E) F` and
+`E [⋀^ι]→L[𝕜] F` with their operator norms.
 -/
 
 open Metric ContinuousMultilinearMap ContinuousAlternatingMap
@@ -298,21 +277,17 @@ end Alt
 
 
 /-!
-# Proper ultrametric spaces are spherically complete
+## Proper ultrametric spaces are spherically complete
 
 In an ultrametric space two closed balls are nested or disjoint, so a pairwise-meeting family of
-closed balls is downward directed; in a proper space the balls are compact, and a directed family
-of nonempty compact sets has nonempty intersection.
-
-This covers every local field, and is the instance behind the scalar-valued corollary of
-Theorem A (`ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_scalar`).
+closed balls is directed. In a proper space the balls are compact, so they have a common point.
 -/
 
 open Metric ContinuousMultilinearMap ContinuousAlternatingMap
 open scoped ContDiff NNReal
 
 
-/-- Locally compact (proper) ultrametric spaces are spherically complete; covers every local field. -/
+/-- A proper ultrametric space is spherically complete. -/
 instance {F : Type*} [PseudoMetricSpace F] [IsUltrametricDist F] [ProperSpace F] :
     SphericallyCompleteSpace F := by
   constructor
@@ -335,16 +310,11 @@ instance {F : Type*} [PseudoMetricSpace F] [IsUltrametricDist F] [ProperSpace F]
 
 
 /-!
-# Complete discretely normed fields are spherically complete
+## Complete discretely normed fields are spherically complete
 
-`sphericallyCompleteSpace_of_discreteNorm`: if `K` is a complete ultrametric field whose nonzero
-norms are exactly the integer powers of a fixed `e > 1`, then `K` is spherically complete.
-
-The point of this route is that, unlike `04_Proper.lean`, it does not need local compactness, and
-in particular it applies to `𝔽_p((X))` in the current Mathlib checkout, where the `ProperSpace`
-instance for a characteristic-`p` local field is not available
-(`LaurentSeries`/`FqtInfty`/`LocallyCompact` are not imported here).  See
-`10_LaurentSeriesExample.lean`.
+If `K` is a complete ultrametric field whose nonzero norms are integer powers of a fixed
+`e > 1`, then `K` is spherically complete. This does not use local compactness, so it applies
+to fields such as `𝔽_p((X))`.
 -/
 
 open Metric ContinuousMultilinearMap ContinuousAlternatingMap
@@ -356,7 +326,7 @@ open Filter Topology
 
 variable {K : Type*} [NormedField K] [IsUltrametricDist K] [CompleteSpace K]
 
-/-- **A complete field with a discrete norm is spherically complete.** -/
+/-- A complete ultrametric field with norms in `e ^ ℤ ∪ {0}` is spherically complete. -/
 theorem sphericallyCompleteSpace_of_discreteNorm {e : ℝ} (he : 1 < e)
     (hval : ∀ x : K, x ≠ 0 → ∃ n : ℤ, ‖x‖ = e ^ n) :
     SphericallyCompleteSpace K := by

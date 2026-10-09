@@ -1,12 +1,17 @@
 import AlternatingAnalytic.Analysis.PositiveCharacteristic
 
-/-! Finite coefficient fields have trivial norm in every normed field extension. -/
+/-!
+# Norms of finite-field elements
+
+A finite field embedded in a normed field has trivial norm: nonzero elements have norm
+one, since `c ^ (q - 1) = 1`.
+-/
 
 namespace AlternatingAnalytic
 
 variable {κ K : Type*} [Field κ] [Finite κ] [NormedField K]
 
-/-- A nonzero element of a finite field has norm one in any normed field image. -/
+/-- A nonzero element of a finite field maps to an element of norm one. -/
 theorem norm_finiteField_map (f : κ →+* K) (c : κ) (hc : c ≠ 0) : ‖f c‖ = 1 := by
   classical
   let : Fintype κ := Fintype.ofFinite κ

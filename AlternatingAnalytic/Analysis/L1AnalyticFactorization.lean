@@ -4,10 +4,13 @@ import Mathlib.Analysis.Analytic.Basic
 import Mathlib.Analysis.Normed.Module.Completion
 
 /-!
-# Local analytic factorization through ordinary ℓ¹
+# Local factorization of analytic maps on ℓ¹
 
-The word coordinates remain in the original scalar field, which need not be complete.
-Only the linear synthesis map takes values in the completion of the output space.
+An analytic map `γ` on `ℓ¹(I, K)` factors locally as `T ∘ g`, where
+`g(x)_{n,a} = s⁻ⁿ x_{a_1} ⋯ x_{a_n}` is analytic into `ℓ¹` over finite words and
+`T(e_{n,a}) = sⁿ aₙ(e_{a_1}, …, e_{a_n})` is bounded linear into the completion of the
+output. This is the factorization step in the proof of Theorem 4.5(2). The field `K`
+need not be complete.
 -/
 
 open scoped lp BigOperators ENNReal
@@ -23,7 +26,7 @@ variable {K I H : Type*} [NontriviallyNormedField K]
 local instance : DecidableEq I := Classical.decEq I
 local instance : DecidableEq (Words I) := Classical.decEq _
 
-/-- Choose one nonzero scalar inside the expansion ball and a uniform coefficient bound. -/
+/-- A nonzero scalar `s` inside the expansion ball, with `‖p n‖ ‖s‖ⁿ ≤ M` for all `n`. -/
 theorem exists_scalar_coefficient_bound
     {γ : lp (fun _ : I => K) 1 → H}
     {p : FormalMultilinearSeries K (lp (fun _ : I => K) 1) H}
@@ -35,7 +38,7 @@ theorem exists_scalar_coefficient_bound
   obtain ⟨M, hM, hpM⟩ := p.norm_mul_pow_le_of_lt_radius (h := hsr.trans_le hp.r_le)
   exact ⟨s, by simpa using ne_of_gt hs, hsr, M, hM, hpM⟩
 
-/-- The formal series of the actual multilinear word blocks. -/
+/-- The power series of `g`, made of the multilinear word blocks. -/
 def wordSeries (s : K) : FormalMultilinearSeries K (L1 K I) (L1 K (Words I)) :=
   wordBlock s
 
@@ -49,7 +52,7 @@ theorem wordSeries_radius (s : K) (hs : s ≠ 0) :
     _ = 1 := by
       rw [← mul_pow, norm_inv, inv_mul_cancel₀ (norm_ne_zero_iff.mpr hs), one_pow]
 
-/-- The explicit word vector has its word-block expansion on the full scalar-norm ball. -/
+/-- The word vector `g` has the word-block expansion on the ball of radius `‖s‖`. -/
 theorem geometricWordVector_hasFPowerSeriesOnBall (s : K) (hs : s ≠ 0) (x₀ : L1 K I) :
     HasFPowerSeriesOnBall (fun x => geometricWordVector s (x - x₀))
       (wordSeries s) x₀ ‖s‖ₑ where
@@ -62,7 +65,7 @@ theorem geometricWordVector_hasFPowerSeriesOnBall (s : K) (hs : s ≠ 0) (x₀ :
         ← NNReal.coe_lt_coe, coe_nnnorm] using hy
     simpa only [add_sub_cancel_left, wordSeries] using hasSum_wordBlock s hyn
 
-/-- Synthesis sends the explicit geometric vector to the original analytic function. -/
+/-- On the ball of radius `‖s‖`, `T (g y) = γ y`. -/
 theorem wordSynthesis_geometricWordVector
     {γ : L1 K I → H} {p : FormalMultilinearSeries K (L1 K I) H}
     {x₀ : L1 K I} {r : ℝ≥0∞} (hp : HasFPowerSeriesOnBall γ p x₀ r)
@@ -84,12 +87,8 @@ theorem wordSynthesis_geometricWordVector
     ((UniformSpace.Completion.toComplL : H →L[K] UniformSpace.Completion H).hasSum
       (hp.hasSum_sub hyr))
 
-/-- Quantitative local factorization through ordinary scalar-valued ℓ¹ on all finite words.
-
-The same scalar, bound, synthesis map, explicit word vector, and actual word-block series
-satisfy every conclusion. No completeness of the scalar field or of `H` is assumed, and
-the degree-zero coordinate retains the value at the expansion point, even for empty `I`.
--/
+/-- Local factorization `γ = T ∘ g` through `ℓ¹` on finite words, with the explicit
+formulas and bounds for `s`, `M`, `T`, `g` and the power series of `g`. -/
 theorem l1_word_factorization
     {γ : L1 K I → H} {p : FormalMultilinearSeries K (L1 K I) H}
     {x₀ : L1 K I} {r : ℝ≥0∞} (hp : HasFPowerSeriesOnBall γ p x₀ r) :
@@ -133,8 +132,8 @@ theorem l1_word_factorization
       simpa using (norm_pos_iff.mpr hs)
     · rw [wordSynthesis_single, pow_zero, one_smul, hp.coeff_zero]
 
-/-- Every analytic map on ordinary ℓ¹ locally factors through a bounded linear map
-from ordinary ℓ¹ on finite words into the completion of its output. -/
+/-- An analytic map on `ℓ¹(I, K)` locally factors as `T ∘ g`, with `g` analytic into
+`ℓ¹` over finite words and `T` bounded linear into the completion of the output. -/
 theorem exists_analyticAt_l1_factorization
     {γ : L1 K I → H} {x₀ : L1 K I} (hγ : AnalyticAt K γ x₀) :
     ∃ (T : L1 K (Words I) →L[K] UniformSpace.Completion H)

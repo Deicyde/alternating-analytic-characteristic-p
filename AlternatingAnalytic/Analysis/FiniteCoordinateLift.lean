@@ -1,6 +1,14 @@
 import AlternatingAnalytic.Analysis.FiniteCoordinateCoefficients
 import Mathlib.Analysis.Normed.Module.Multilinear.Basic
 
+/-!
+# Coefficient lifts in finite coordinates
+
+On `Fin d → K` with the maximum norm, a bounded `n`-linear map whose diagonal lies in a
+subspace `W` has a `W`-valued representative with the same diagonal and norm at most
+`d ^ n` times the original. This is the coefficient bound of Theorem 4.4.
+-/
+
 noncomputable section
 
 namespace FiniteCoordinateReflection
@@ -31,7 +39,7 @@ theorem norm_coordinateMonomial_le (r : Fin n → Fin d) (z : Z) :
   gcongr with i
   exact norm_le_pi_norm (m i) (r i)
 
-/-- Finite coordinate lifting once the grouped coefficients lie in the subspace. -/
+/-- The lift with bound `d ^ n`, assuming the grouped coefficients lie in `W`. -/
 theorem exists_lift_of_sumOfType_mem (W : Submodule K Z)
     (p : ContinuousMultilinearMap K (fun _ : Fin n => Fin d → K) Z)
     (hc : ∀ α : Fin d → ℕ,
@@ -108,8 +116,8 @@ theorem exists_lift_of_sumOfType_mem (W : Submodule K Z)
       _ = ∑ _f : Fin n → Fin d, ‖p‖ := Finset.sum_fiberwise Finset.univ g _
       _ = (d : ℝ) ^ n * ‖p‖ := by simp
 
-/-- A finite-coordinate multilinear diagonal taking values in a subspace has a
-subspace-valued multilinear representative with an exponential norm bound. -/
+/-- A multilinear map on `Fin d → K` whose diagonal lies in `W` has a `W`-valued
+representative with the same diagonal and norm at most `d ^ n` times the original. -/
 theorem exists_lift (W : Submodule K Z)
     (p : ContinuousMultilinearMap K (fun _ : Fin n => Fin d → K) Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) :

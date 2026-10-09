@@ -5,10 +5,9 @@ import AlternatingAnalytic.Analysis.EquivalentUltrametric
 import AlternatingAnalytic.Analysis.DiscreteTargetAnalytic
 
 /-!
-# Corollary 4.3 (discretely valued bases), p. 10
+# Proof of Corollary 4.3
 
-Solution: the statement of `Challenges/Cor4_3.lean`, proved by
-`AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup`
+The statement is `AlternatingAnalytic.analyticAt_of_equivalentUltrametricNorm_discreteValueGroup`
 (`DiscreteTargetAnalytic.lean`) with index type `Fin k`.
 -/
 
@@ -16,9 +15,9 @@ namespace AlternatingAnalyticChallenge.Cor4_3
 
 universe uK uE uE' uF
 
-/-- **Corollary 4.3.** Over a nonarchimedean field with value group `r^ℤ`, `0 < r < 1`, a Banach
-target `F` with an equivalent nonarchimedean norm makes precomposition on degree-`k` continuous
-alternating maps analytic at every point, for all normed `E, E'` and every `k`. -/
+/-- Over a nonarchimedean field with value group `r^ℤ`, `0 < r < 1`, precomposition
+`A^k_{E,E';F}` is analytic at every point when `F` is Banach with an equivalent nonarchimedean
+norm. -/
 theorem analyticAt_compContinuousLinearMapCLM_of_discreteValueGroup
     (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K]
     (r : ℝ) (hr0 : 0 < r) (hr1 : r < 1)

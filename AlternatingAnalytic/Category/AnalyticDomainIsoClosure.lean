@@ -4,9 +4,9 @@ import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
 /-!
 # Isomorphism closure of full analytic domains
 
-Fixed bounded changes of source and target coordinates preserve analyticity of
-all hom actions. Consequently the actual full isomorphism closure of an analytic
-domain is again analytic, without completeness assumptions on the scalar field.
+Composing with fixed isomorphisms at both ends preserves analyticity of a hom action of
+`Alt^k`. Hence the isomorphism closure of an analytic domain (Definition H.1) is again an
+analytic domain. This is used for the isomorphism-closed variant of Theorem H.4.
 -/
 
 noncomputable section
@@ -34,7 +34,7 @@ theorem homSandwichCLM_apply {E E' F F' : NormedSpaceCat K}
     (f : E' ⟶ E) (g : F ⟶ F') (h : E ⟶ F) :
     homSandwichCLM f g h = f ≫ h ≫ g := rfl
 
-/-- Fixed categorical composition is bounded linear in the canonical pair hom norms. -/
+/-- Composition with fixed arrows on both sides, as a bounded linear map on pair hom spaces. -/
 def pairHomSandwichCLM
     {X X' Y Y' : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K}
     (f : X' ⟶ X) (g : Y ⟶ Y') : (X ⟶ Y) →L[K] (X' ⟶ Y') :=
@@ -55,8 +55,7 @@ end NormedSpaceCat
 
 variable (k : ℕ)
 
-/-- Analyticity of an actual hom action transports along bounded categorical
-isomorphisms at its two endpoints. -/
+/-- Analyticity of a hom action of `Alt^k` transports along isomorphisms of its endpoints. -/
 theorem alternatingFunctor_analyticOnNhd_hom_of_iso
     {X Y X' Y' : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K}
     (e : X' ≅ X) (f : Y' ≅ Y)
@@ -77,8 +76,7 @@ theorem alternatingFunctor_analyticOnNhd_hom_of_iso
   exact (output.analyticAt _).comp
     ((h (input a) (Set.mem_univ _)).comp (input.analyticAt a))
 
-/-- Coordinate form of bounded-isomorphism transport, with the first source
-coordinate contravariant. -/
+/-- `alternatingFunctor_analyticOnNhd_hom_of_iso` in operator coordinates. -/
 theorem analyticOnNhd_alternatingMapAction_of_iso
     {X Y X' Y' : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K}
     (e : X' ≅ X) (f : Y' ≅ Y)
@@ -96,8 +94,7 @@ theorem analyticOnNhd_alternatingMapAction_of_iso
     (NormedSpaceCat.homCoordinates _ _)).2
       (alternatingFunctor_analyticOnNhd_hom_of_iso K k e f h')
 
-/-- A full analytic domain remains analytic after taking its actual isomorphism
-closure in the ambient category of normed pairs. -/
+/-- The isomorphism closure of an analytic domain is an analytic domain. -/
 theorem IsAlternatingAnalyticDomain.isoClosure
     {P : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K)}
     (hP : IsAlternatingAnalyticDomain K k P) :

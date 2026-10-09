@@ -5,9 +5,10 @@ import Mathlib.LinearAlgebra.Dual.Lemmas
 /-!
 # Determinant arrays of exterior vectors
 
-Evaluation on coordinate tuples embeds the exterior power of a space of functions
-into the space of scalar arrays. Finite-dimensional support allows the coordinate
-evaluations to detect every exterior vector, without restrictions on characteristic.
+For a subspace `W` of the functions `S → L`, evaluating an exterior vector of `Λ^k W`
+on `k`-tuples of points gives the determinant array Ω, and Ω is injective over any
+field (Lemma B.2). The proof reduces to a finite-dimensional support, where the
+coordinate evaluations span the dual.
 -/
 
 namespace AlternatingAnalytic
@@ -111,7 +112,7 @@ theorem determinantArray_ιMulti (x : Fin k → S → L) (c : Fin k → S) :
       Matrix.det (fun i j ↦ x j (c i)) :=
   exteriorEvaluationArray_ιMulti _ x c
 
-/-- Determinant arrays distinguish exterior vectors in every characteristic. -/
+/-- The determinant array is injective. -/
 theorem determinantArray_injective :
     Function.Injective (determinantArray (L := L) (S := S) (k := k)) := by
   apply LinearMap.ker_eq_bot.mp
@@ -141,7 +142,7 @@ theorem determinantArraySubmodule_ιMulti (W : Submodule L (S → L))
     exteriorPower.map_apply_ιMulti, determinantArray_ιMulti, Function.comp_apply]
   rfl
 
-/-- The determinant array is injective on every function subspace. -/
+/-- Lemma B.2: the determinant array on `Λ^k W` is injective. -/
 theorem determinantArraySubmodule_injective (W : Submodule L (S → L)) :
     Function.Injective (determinantArraySubmodule (k := k) W) :=
   determinantArray_injective.comp
@@ -160,7 +161,7 @@ theorem determinantArraySubmodule_perm (W : Submodule L (S → L))
       Equiv.Perm.sign σ • determinantArraySubmodule W ω c :=
   exteriorEvaluationArray_perm _ _ c σ
 
-/-- The determinant array's defining formula, injectivity, and coordinate alternation. -/
+/-- The determinant formula, injectivity and alternation of the determinant array. -/
 theorem determinantArray_properties (W : Submodule L (S → L)) :
     (∀ (x : Fin k → W) (c : Fin k → S),
       determinantArraySubmodule W (exteriorPower.ιMulti L k x) c =

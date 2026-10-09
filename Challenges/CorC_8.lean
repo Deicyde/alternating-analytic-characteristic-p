@@ -15,38 +15,25 @@ operator-valued analytic morphisms over every analytic manifold modeled on `P`, 
 normed fibers, if and only if `P` is finite-dimensional.
 
 ## Formalization notes
-* `K = 𝔽_q((u))` with a `u`-adic absolute value is `AlternatingAnalytic.LaurentField κ r` for a
-  finite field `κ` of characteristic `p` (`[Finite κ]`, `p.Prime`, `[CharP κ p]`; a finite field of
-  characteristic `p` has `q = p^n` elements) and `|u| = r ∈ (0, 1)`.
-* "`K`-Banach space admitting an equivalent nonarchimedean norm": `[CompleteSpace P]` and the
-  library's `HasEquivalentUltrametricNorm K P` (a seminorm satisfying the ultrametric inequality,
-  two-sided equivalent to `‖·‖`), imported from `EquivalentUltrametric.lean` for this definition.
-* "Analytic manifold modeled on `P`" is `[ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]` (open-chart
-  manifolds without boundary, as in the paper's Corollary 4.6); "analytic bundle with normed fiber"
-  is a Mathlib `ContMDiffVectorBundle ω F E 𝓘(K, P)` with normed model fiber `F`.
-* `PreservesAnalyticBundles K P k` (introduced here): for all such `M` and all analytic bundles
-  `E₁, E₂` with normed model fibers `F₁, F₂`, the bundle `x ↦ Alt^k(E₁ x; E₂ x)` with Mathlib's
-  topology on continuous alternating maps is `ContMDiffVectorBundle ω` with fiber
-  `F₁ [⋀^Fin k]→L[K] F₂`.
-* `PreservesAnalyticMorphisms K P k` (introduced here): for analytic bundles `E, E', F, F'` and
-  analytic operator-valued sections `u : E' → E`, `v : F → F'` (Mathlib `ContMDiffSection`s of the
-  `→L` bundles), the induced fiberwise map `m ↦ v_b ∘ m ∘ (u_b, …, u_b)` is an analytic section of
-  the operator bundle `Alt^k(E; F) →L Alt^k(E'; F')`.
-* Universes: `κ`, `P`, the base manifolds, model fibers and fibers all live in `Type u`
-  (the paper's "arbitrary normed fibers" is read within one universe).
-* Degree: index type `Fin k`.
-* The equivalence is split into its two implications, `part1_of_finiteDimensional` ("if") and
+* `K = 𝔽_q((u))` is `LaurentField κ r` with `κ` finite of characteristic `p` (`[Finite κ]`,
+  `p.Prime`, `[CharP κ p]`) and `|u| = r ∈ (0, 1)`.
+* "Banach space with an equivalent nonarchimedean norm" is `[CompleteSpace P]` plus the library's
+  `HasEquivalentUltrametricNorm K P`.
+* "Analytic manifold modeled on `P`" is `[ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]` (no
+  boundary, as in Corollary 4.6); an analytic bundle is a `ContMDiffVectorBundle ω F E 𝓘(K, P)`
+  with normed model fiber `F`.
+* `PreservesAnalyticBundles K P k`: for all such `M`, `E₁`, `E₂`, the bundle
+  `x ↦ Alt^k(E₁ x; E₂ x)` is a `ContMDiffVectorBundle ω` with fiber `F₁ [⋀^Fin k]→L[K] F₂`.
+* `PreservesAnalyticMorphisms K P k`: analytic operator-valued sections `u : E' → E`,
+  `v : F → F'` induce an analytic section `m ↦ v_b ∘ m ∘ (u_b, …, u_b)` of
+  `Alt^k(E; F) →L Alt^k(E'; F')`.
+* All base manifolds, fibers and model fibers live in the universe of `κ` and `P`, so "arbitrary
+  normed fibers" is read within one universe.
+* The degree index type is `Fin k`.
+* The equivalence is split into `part1_of_finiteDimensional` ("if") and
   `part2_finiteDimensional_of_preserves` ("only if").
-* Status: the "if" half follows from the library's finite-coordinate bundle theorems
-  `contMDiffVectorBundle_alternating_of_finiteCoordinates` (`Geometry/AnalyticAlternatingBundle.lean`)
-  and `alternatingBundleHom_of_finiteCoordinates` (`Geometry/AnalyticAlternatingBundleMorphism.lean`)
-  plus continuous coordinates on a finite-dimensional space (paper Lemma A.3; Mathlib), but this
-  assembly is not in the library (a check proved `part1_of_finiteDimensional` in about 8 lines:
-  `ContinuousLinearEquiv.ofFinrankEq (by simp)`, then the two theorems above, with the morphism
-  part closed by `rfl`); the "only if" half (via Serre's orthonormal-basis theorem and
-  Proposition C.6) is not formalized.
-* `set_option backward.isDefEq.respectTransparency false` (as in the library) is needed for
-  instance search on `ℕ →ᵇ K₁`; it does not change any statement.
+* `set_option backward.isDefEq.respectTransparency false` matches the library files; it does not
+  change any statement.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -113,8 +100,8 @@ def PreservesAnalyticMorphisms (K : Type u) [NontriviallyNormedField K]
       ∀ (b : M) (m : E b [⋀^Fin k]→L[K] F b),
         s b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b))
 
-/-- **Corollary C.8, "if".** Over `K = 𝔽_q((u))`, a finite-dimensional `P` admits preservation of
-analytic bundles and of operator-valued analytic morphisms. -/
+/-- Over `K = 𝔽_q((u))`, if `P` is finite-dimensional then the alternating construction preserves
+analytic bundles and operator-valued analytic morphisms over manifolds modeled on `P`. -/
 theorem part1_of_finiteDimensional
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]
     (k : ℕ) (hpk : p ≤ k) (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
@@ -125,9 +112,8 @@ theorem part1_of_finiteDimensional
       PreservesAnalyticMorphisms (LaurentField κ r) P k := by
   sorry
 
-/-- **Corollary C.8, "only if".** Over `K = 𝔽_q((u))` with `k ≥ p`, if the alternating construction
-preserves analytic bundles and operator-valued analytic morphisms over every analytic manifold
-modeled on the Banach space `P` (with an equivalent nonarchimedean norm), then `P` is
+/-- Over `K = 𝔽_q((u))` with `k ≥ p`, if the alternating construction preserves analytic bundles
+and operator-valued analytic morphisms over manifolds modeled on `P`, then `P` is
 finite-dimensional. -/
 theorem part2_finiteDimensional_of_preserves
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]

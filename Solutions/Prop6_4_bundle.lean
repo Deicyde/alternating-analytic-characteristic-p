@@ -6,13 +6,10 @@ import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 import AlternatingAnalytic.Geometry.ShearBundleGeneral
 
 /-!
-# Proposition 6.4, bundle realization (paragraph after the proposition), p. 16
+# Proof of Proposition 6.4, bundle realization
 
-Solution: the statements of `Challenges/Prop6_4_bundle.lean`, proved from the library
-(`AlternatingAnalytic/Geometry/ShearBundleGeneral.lean`): `shearBundle_realization` applies to
-any vector bundle core over `E →L[K] D` with shear transitions `shear ((w j - w i) • u)` and
-two global charts with `w j - w i = 1`. The local `shear` and `shearChartWeight` are
-definitionally the library's, so the transition hypothesis holds by `rfl`.
+Uses `shearBundle_realization` (`Geometry/ShearBundleGeneral.lean`), which applies to any vector
+bundle core over `E →L[K] D` with shear transitions and two global charts.
 -/
 
 open Bundle Set
@@ -69,9 +66,9 @@ noncomputable def shearBundleCore (K : Type uK) [NontriviallyNormedField K]
       ring
     · simp [shear, shearLinear]
 
-/-- **Bundle realization of Proposition 6.4.** If `A^k_{E,D;F}` is not analytic at `u₀`, then
-the two-trivialization shear bundle over `L(E, D)` and the trivial `F`-bundle are analytic,
-but the induced atlas of the alternating bundle `u ↦ Alt^k(H_u; F)` is not analytic. -/
+/-- If `A^k_{E,D;F}` is not analytic at `u₀`, then the shear bundle over `L(E, D)` and the
+trivial `F`-bundle are analytic, but the induced atlas of the alternating bundle
+`u ↦ Alt^k(H_u; F)` is not analytic. -/
 theorem bundle_realization (K : Type uK) [NontriviallyNormedField K]
     (D : Type uD) (E : Type uE) (F : Type uF)
     [NormedAddCommGroup D] [NormedSpace K D] [NormedAddCommGroup E] [NormedSpace K E]

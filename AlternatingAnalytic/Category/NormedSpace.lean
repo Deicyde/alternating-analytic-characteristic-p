@@ -8,22 +8,17 @@ import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Mathlib.CategoryTheory.Products.Basic
 
 /-!
-# Normed-space categories and canonical hom coordinates
+# Categories of normed spaces and their hom spaces
 
-The categories in `paper/charp.tex`, Main Theorem (1)/(2), have all bounded linear maps
-as morphisms. `BanachCat` and `SphericalNormedSpaceCat` are full subcategories of
-`NormedSpaceCat`. The latter requires both an ultrametric norm and spherical completeness.
-Neither the field nor the objects of the ambient category are assumed complete.
+Defines `Vec_K` (`NormedSpaceCat`: normed spaces and bounded linear maps, as in the
+Introduction) and its full subcategories `BanachCat` and `SphericalNormedSpaceCat`
+(`Vec_K°`: ultrametric and spherically complete). Hom spaces carry the operator norm, products
+the max norm, and the first coordinate of a hom in `Vec_Kᵒᵖ × Vec_K` is reversed. All spaces and
+the field lie in one universe.
 
-Hom coordinates carry the operator norm; products carry the maximum norm. The first
-coordinate in the opposite/product category is reversed, as required for pullback in
-the paper's "From operators to functors" discussion. All carriers, including the field,
-lie in the same universe, matching the existing universal Banach classification.
-
-`FunctorContDiffOnHoms`, `FunctorAnalyticOnHoms`, and `FunctorCPolynomialOnHoms`
-express regularity of the actual functor maps. Their coordinate characterizations use
-linear isometries, so they apply to all the opposite, product, and full-subcategory
-hom spaces above without changing the topology or imposing completeness on the field.
+`FunctorContDiffOnHoms`, `FunctorAnalyticOnHoms` and `FunctorCPolynomialOnHoms` say that every
+hom map of a functor is `C^n`, analytic, or a continuous polynomial. Each can be checked in any
+linear isometric coordinates on the hom spaces.
 -/
 
 noncomputable section
@@ -104,7 +99,7 @@ instance fullHomNormedSpace (P : ObjectProperty (NormedSpaceCat K))
     change ‖c • (fullHomEquiv P E F f)‖ ≤ ‖c‖ * ‖fullHomEquiv P E F f‖
     exact norm_smul_le c (fullHomEquiv P E F f)
 
-/-- Full-subcategory homs retain precisely the operator norm and linear structure. -/
+/-- Homs in a full subcategory, as a linear isometry with bounded linear maps. -/
 def fullHomCoordinates (P : ObjectProperty (NormedSpaceCat K)) (E F : P.FullSubcategory) :
     (E ⟶ F) ≃ₗᵢ[K] (E.obj →L[K] F.obj) where
   __ := (fullHomEquiv P E F).addEquiv.linearEquiv K
@@ -152,7 +147,7 @@ instance opHomNormedSpace (X Y : Cᵒᵖ) : NormedSpace K (X ⟶ Y) where
     simpa only [Equiv.apply_symm_apply] using
       (norm_smul_le a ((CategoryTheory.opEquiv X Y) f))
 
-/-- Removing the opposite wrapper preserves the norm and linear operations. -/
+/-- Homs in `Cᵒᵖ`, as a linear isometry with homs in `C`. -/
 def opHomCoordinates (X Y : Cᵒᵖ) : (X ⟶ Y) ≃ₗᵢ[K] (Y.unop ⟶ X.unop) where
   toLinearEquiv := (CategoryTheory.opEquiv X Y).addEquiv.linearEquiv K
   norm_map' _ := rfl
@@ -181,7 +176,7 @@ instance prodHomNormedSpace (X Y : C × D) : NormedSpace K (X ⟶ Y) :=
 
 end Product
 
-/-- Coordinates on morphisms of `Vec_Kᵒᵖ × Vec_K`, with the maximum product norm. -/
+/-- Coordinates on homs of `Vec_Kᵒᵖ × Vec_K`, with the max norm. -/
 def pairHomCoordinates (X Y : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K) :
     (X ⟶ Y) ≃ₗᵢ[K] (Y.1.unop →L[K] X.1.unop) × (X.2 →L[K] Y.2) where
   toLinearEquiv := (opHomCoordinates X.1 Y.1).toLinearEquiv.prodCongr
@@ -213,7 +208,7 @@ theorem pairHomCoordinates_comp {X Y Z : (NormedSpaceCat K)ᵒᵖ × NormedSpace
       ((pairHomCoordinates X Y f).1.comp (pairHomCoordinates Y Z g).1,
         (pairHomCoordinates Y Z g).2.comp (pairHomCoordinates X Y f).2) := rfl
 
-/-- The same coordinates for two arbitrary full subcategories. -/
+/-- `pairHomCoordinates` for full subcategories in each factor. -/
 def fullPairHomCoordinates (P Q : ObjectProperty (NormedSpaceCat K))
     (X Y : P.FullSubcategoryᵒᵖ × Q.FullSubcategory) :
     (X ⟶ Y) ≃ₗᵢ[K]
@@ -257,7 +252,7 @@ abbrev BanachSpaceCat := BanachCat K
 def isSpherical : ObjectProperty (NormedSpaceCat K) :=
   fun E => IsUltrametricDist E ∧ SphericallyCompleteSpace E
 
-/-- The full subcategory used for spherical targets in Main Theorem (2). -/
+/-- The full subcategory `Vec_K°` of spherically complete targets (Theorem 4.2). -/
 abbrev SphericalNormedSpaceCat := (isSpherical K).FullSubcategory
 
 namespace BanachCat
@@ -274,11 +269,11 @@ abbrev of (E : Type u) [NormedAddCommGroup E] [NormedSpace K E] [CompleteSpace E
 /-- The fully faithful inclusion into normed spaces. -/
 abbrev inclusion : BanachCat K ⥤ NormedSpaceCat K := (isBanach K).ι
 
-/-- Banach hom coordinates use the same operator norm as the ambient category. -/
+/-- Hom coordinates in `BanachCat`, with the operator norm. -/
 abbrev homCoordinates (E F : BanachCat K) : (E ⟶ F) ≃ₗᵢ[K] (E →L[K] F) :=
   NormedSpaceCat.fullHomCoordinates (isBanach K) E F
 
-/-- Canonical coordinates on the domain of the Banach restriction. -/
+/-- Hom coordinates in `BanachCatᵒᵖ × BanachCat`. -/
 abbrev pairHomCoordinates (X Y : (BanachCat K)ᵒᵖ × BanachCat K) :
     (X ⟶ Y) ≃ₗᵢ[K] (Y.1.unop →L[K] X.1.unop) × (X.2 →L[K] Y.2) :=
   NormedSpaceCat.fullPairHomCoordinates (isBanach K) (isBanach K) X Y
@@ -301,7 +296,7 @@ abbrev of (E : Type u) [NormedAddCommGroup E] [NormedSpace K E]
 /-- The fully faithful inclusion into normed spaces. -/
 abbrev inclusion : SphericalNormedSpaceCat K ⥤ NormedSpaceCat K := (isSpherical K).ι
 
-/-- Spherical hom coordinates impose no restriction on the bounded linear maps. -/
+/-- Hom coordinates in `SphericalNormedSpaceCat`, with the operator norm. -/
 abbrev homCoordinates (E F : SphericalNormedSpaceCat K) : (E ⟶ F) ≃ₗᵢ[K] (E →L[K] F) :=
   NormedSpaceCat.fullHomCoordinates (isSpherical K) E F
 
@@ -337,16 +332,15 @@ variable {C D : Type*} [Category C] [Category D]
   [∀ X Y : C, NormedAddCommGroup (X ⟶ Y)] [∀ X Y : C, NormedSpace K (X ⟶ Y)]
   [∀ X Y : D, NormedAddCommGroup (X ⟶ Y)] [∀ X Y : D, NormedSpace K (X ⟶ Y)]
 
-/-- Every actual hom map is `C^n`. The order `n : ℕ∞` includes smooth order `∞`,
-but not the outer analytic order `ω` of `ContDiff`. -/
+/-- Every hom map of `A` is `C^n`. Here `n : ℕ∞`, so `n = ∞` is allowed but `ω` is not. -/
 def FunctorContDiffOnHoms (n : ℕ∞) (A : C ⥤ D) : Prop :=
   ∀ X Y : C, ContDiff K n (fun f : X ⟶ Y => A.map f)
 
-/-- Every actual hom map is analytic on a neighborhood of every point. -/
+/-- Every hom map of `A` is analytic at every point. -/
 def FunctorAnalyticOnHoms (A : C ⥤ D) : Prop :=
   ∀ X Y : C, AnalyticOnNhd K (fun f : X ⟶ Y => A.map f) Set.univ
 
-/-- Every actual hom map has a finite continuous power series at every point. -/
+/-- Every hom map of `A` is a continuous polynomial near every point. -/
 def FunctorCPolynomialOnHoms (A : C ⥤ D) : Prop :=
   ∀ (X Y : C) (f : X ⟶ Y), CPolynomialAt K (fun g : X ⟶ Y => A.map g) f
 
@@ -369,7 +363,7 @@ theorem functorAnalyticOnHoms_iff_analyticAt (A : C ⥤ D) :
       ∀ (X Y : C) (f : X ⟶ Y), AnalyticAt K (fun g : X ⟶ Y => A.map g) f := by
   simp only [FunctorAnalyticOnHoms, AnalyticOnNhd, Set.mem_univ, forall_true_left]
 
-/-- Finite continuous power series give analytic hom maps, without completeness. -/
+/-- Continuous polynomial hom maps are analytic. -/
 theorem FunctorCPolynomialOnHoms.analyticOnHoms {A : C ⥤ D}
     (h : FunctorCPolynomialOnHoms K A) : FunctorAnalyticOnHoms K A :=
   fun X Y f _ => (h X Y f).analyticAt
@@ -378,7 +372,7 @@ variable (A : C ⥤ D) {X Y : C}
   {H H' : Type*} [NormedAddCommGroup H] [NormedSpace K H]
   [NormedAddCommGroup H'] [NormedSpace K H']
 
-/-- The actual functor map expressed in chosen linear isometric hom coordinates. -/
+/-- The hom map of `A` in chosen linear isometric coordinates. -/
 def functorMapInCoordinates (e : (X ⟶ Y) ≃ₗᵢ[K] H)
     (e' : (A.obj X ⟶ A.obj Y) ≃ₗᵢ[K] H') : H → H' :=
   fun f => e' (A.map (e.symm f))
@@ -388,14 +382,14 @@ theorem functorMapInCoordinates_apply (e : (X ⟶ Y) ≃ₗᵢ[K] H)
     (e' : (A.obj X ⟶ A.obj Y) ≃ₗᵢ[K] H') (f : H) :
     functorMapInCoordinates A e e' f = e' (A.map (e.symm f)) := rfl
 
-/-- In coordinates, an actual arrow is sent to the coordinates of its actual image. -/
+/-- In coordinates, an arrow is sent to the coordinates of its image. -/
 @[simp]
 theorem functorMapInCoordinates_apply_coordinates (e : (X ⟶ Y) ≃ₗᵢ[K] H)
     (e' : (A.obj X ⟶ A.obj Y) ≃ₗᵢ[K] H') (f : X ⟶ Y) :
     functorMapInCoordinates A e e' (e f) = e' (A.map f) := by
   simp only [functorMapInCoordinates, LinearIsometryEquiv.symm_apply_apply]
 
-/-- Recover the actual map by undoing its hom coordinates. -/
+/-- Undoing the coordinates recovers `A.map`. -/
 theorem functorMapInCoordinates_eq_map (e : (X ⟶ Y) ≃ₗᵢ[K] H)
     (e' : (A.obj X ⟶ A.obj Y) ≃ₗᵢ[K] H') (f : X ⟶ Y) :
     e'.symm (functorMapInCoordinates A e e' (e f)) = A.map f := by
@@ -465,7 +459,7 @@ variable {V W : C → C → Type*}
   [∀ X Y, NormedAddCommGroup (V X Y)] [∀ X Y, NormedSpace K (V X Y)]
   [∀ X Y, NormedAddCommGroup (W X Y)] [∀ X Y, NormedSpace K (W X Y)]
 
-/-- Check all smooth hom maps in any family of canonical hom coordinates. -/
+/-- `FunctorContDiffOnHoms` can be checked in any isometric hom coordinates. -/
 theorem functorContDiffOnHoms_iff_mapInCoordinates (n : ℕ∞)
     (e : ∀ X Y, (X ⟶ Y) ≃ₗᵢ[K] V X Y)
     (e' : ∀ X Y, (A.obj X ⟶ A.obj Y) ≃ₗᵢ[K] W X Y) :
@@ -473,7 +467,7 @@ theorem functorContDiffOnHoms_iff_mapInCoordinates (n : ℕ∞)
       ∀ X Y, ContDiff K n (functorMapInCoordinates A (e X Y) (e' X Y)) := by
   simp only [FunctorContDiffOnHoms, contDiff_functorMapInCoordinates_iff]
 
-/-- Check all analytic hom maps in any family of canonical hom coordinates. -/
+/-- `FunctorAnalyticOnHoms` can be checked in any isometric hom coordinates. -/
 theorem functorAnalyticOnHoms_iff_mapInCoordinates
     (e : ∀ X Y, (X ⟶ Y) ≃ₗᵢ[K] V X Y)
     (e' : ∀ X Y, (A.obj X ⟶ A.obj Y) ≃ₗᵢ[K] W X Y) :
@@ -481,7 +475,7 @@ theorem functorAnalyticOnHoms_iff_mapInCoordinates
       ∀ X Y, AnalyticOnNhd K (functorMapInCoordinates A (e X Y) (e' X Y)) Set.univ := by
   simp only [FunctorAnalyticOnHoms, analyticOnNhd_functorMapInCoordinates_iff]
 
-/-- Check finite continuous power series at every point in canonical hom coordinates. -/
+/-- `FunctorCPolynomialOnHoms` can be checked in any isometric hom coordinates. -/
 theorem functorCPolynomialOnHoms_iff_mapInCoordinates
     (e : ∀ X Y, (X ⟶ Y) ≃ₗᵢ[K] V X Y)
     (e' : ∀ X Y, (A.obj X ⟶ A.obj Y) ≃ₗᵢ[K] W X Y) :

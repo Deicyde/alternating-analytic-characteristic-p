@@ -1,9 +1,12 @@
 import AlternatingAnalytic.Analysis.DenseMultilinearExtension
 
 /-!
-Dense extension for a finite family of possibly different input spaces.  The reduction
-uses the finite product with its supremum norm: coordinate projections encode a
-heterogeneous map, and coordinate injections recover it after homogeneous extension.
+# Extending multilinear maps on a family of dense subspaces
+
+A continuous multilinear map on a finite family of spaces `D₁ i` extends uniquely,
+with the same norm, along dense linear isometries `D₁ i → E₁ i` when the target is
+complete. This is Lemma D.5(2). The proof passes through the product `∀ i, D₁ i`
+with the supremum norm and the homogeneous case in `DenseMultilinearExtension`.
 -/
 
 noncomputable section
@@ -17,7 +20,7 @@ variable {K : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup E] [NormedSpace K E]
   [NormedAddCommGroup F] [NormedSpace K F] [CompleteSpace F]
 
-/-- Dense homogeneous extension with any finite set of input indices. -/
+/-- Extension of multilinear maps along `j`, indexed by any finite type. -/
 def denseMultilinearExtensionFinite (j : D →ₗᵢ[K] E) (hd : DenseRange j) :
     ContinuousMultilinearMap K (fun _ : I => D) F →L[K]
       ContinuousMultilinearMap K (fun _ : I => E) F :=
@@ -118,7 +121,7 @@ theorem norm_multilinearProductToFamily_le (P :
   classical
   exact P.norm_compContinuous_linearIsometry_le fun i => LinearIsometry.single K E₁ i
 
-/-- The contracting linear family of extensions across arbitrary dense input isometries. -/
+/-- Extension of multilinear maps along a family of dense linear isometries. -/
 def denseMultilinearFamilyExtension (j : ∀ i, D₁ i →ₗᵢ[K] E₁ i)
     (hd : ∀ i, DenseRange (j i)) :
     ContinuousMultilinearMap K D₁ F →L[K] ContinuousMultilinearMap K E₁ F :=
@@ -162,7 +165,8 @@ theorem continuousMultilinearMap_eq_of_dense_family
   apply ContinuousMultilinearMap.ext
   exact congrFun ((DenseRange.piMap hd).equalizer P.cont Q.cont (funext h))
 
-/-- The extension is uniquely characterized by agreement on the dense input subspaces. -/
+/-- The extension is the only continuous multilinear map agreeing with `P` on the
+dense subspaces. -/
 theorem denseMultilinearFamilyExtension_unique
     (j : ∀ i, D₁ i →ₗᵢ[K] E₁ i) (hd : ∀ i, DenseRange (j i))
     (P : ContinuousMultilinearMap K D₁ F) (Q : ContinuousMultilinearMap K E₁ F)
@@ -172,7 +176,7 @@ theorem denseMultilinearFamilyExtension_unique
   intro x
   rw [hQ, denseMultilinearFamilyExtension_apply]
 
-/-- Dense extension preserves the operator norm exactly. -/
+/-- Dense extension preserves the operator norm. -/
 @[simp]
 theorem norm_denseMultilinearFamilyExtension
     (j : ∀ i, D₁ i →ₗᵢ[K] E₁ i) (hd : ∀ i, DenseRange (j i))
@@ -195,7 +199,8 @@ def denseMultilinearFamilyExtensionIsometry
   toLinearMap := (denseMultilinearFamilyExtension j hd).toLinearMap
   norm_map' := norm_denseMultilinearFamilyExtension j hd
 
-/-- The bounded multilinear version of dense extension, with its original bound. -/
+/-- A multilinear map bounded by `C` on the dense subspaces extends uniquely, with
+norm at most `C`. -/
 theorem exists_denseMultilinearFamilyExtension_of_bound
     (j : ∀ i, D₁ i →ₗᵢ[K] E₁ i) (hd : ∀ i, DenseRange (j i))
     (P : MultilinearMap K D₁ F) {C : ℝ} (hC : 0 ≤ C)

@@ -2,7 +2,13 @@ import AlternatingAnalytic.Analysis.FiniteFieldNorm
 import Mathlib.Algebra.Polynomial.Degree.TrailingDegree
 import Mathlib.Algebra.Polynomial.Eval.Defs
 
-/-! Evaluation at a small nonzero element preserves the Laurent valuation. -/
+/-!
+# Norms of polynomials evaluated at a small element
+
+If `K` is ultrametric, `κ` is a finite field mapped into `K`, and `0 < ‖t‖ < 1`, then
+`‖p(t)‖ = ‖t‖^(trailing degree of p)` for every nonzero `p ∈ κ[X]`. In particular `t` is
+transcendental over `κ`. This is used for the Laurent subfield of Lemma D.2.
+-/
 
 open scoped BigOperators
 
@@ -26,7 +32,7 @@ theorem norm_sum_eq_of_strictly_largest {V ι : Type*} [NormedAddCommGroup V]
 
 variable {κ K : Type*} [Field κ] [Finite κ] [NormedField K] [IsUltrametricDist K]
 
-/-- The least nonzero coefficient is the unique largest term at a small argument. -/
+/-- `‖p(t)‖ = ‖t‖ ^ natTrailingDegree p` for nonzero `p`. -/
 theorem norm_polynomial_eval₂ (f : κ →+* K) (t : K) (ht0 : t ≠ 0) (ht1 : ‖t‖ < 1)
     (p : Polynomial κ) (hp : p ≠ 0) :
     ‖p.eval₂ f t‖ = ‖t‖ ^ p.natTrailingDegree := by
@@ -47,7 +53,7 @@ theorem norm_polynomial_eval₂ (f : κ →+* K) (t : K) (ht0 : t ≠ 0) (ht1 : 
     exact (pow_lt_pow_iff_right_of_lt_one₀ (norm_pos_iff.mpr ht0) ht1).2
       (lt_of_le_of_ne (p.natTrailingDegree_le_of_mem_supp n hn) hne.symm)
 
-/-- A small nonzero element is transcendental over every finite coefficient field. -/
+/-- Evaluation at `t` is injective on `κ[X]`. -/
 theorem polynomial_eval₂_injective (f : κ →+* K) (t : K)
     (ht0 : t ≠ 0) (ht1 : ‖t‖ < 1) :
     Function.Injective (Polynomial.eval₂RingHom f t) := by

@@ -10,11 +10,11 @@ import AlternatingAnalytic.Analysis.DeterminantPolynomialDegree
 /-!
 # Determinant pairs for an arbitrary algebraically independent family
 
-This file sets up the determinant pair `(D, G)` of Appendix H.1 for an arbitrary family
-`z : Fin p ⊕ Tau p → 𝔽_p((t))` of scalars `a_i = z (inl i)`, `τ_w = z (inr w)`, with the
-definitions spelled exactly as in the ledger challenge for Lemma H.6. When `z` is algebraically
-independent over `𝔽_p(t)`, every element of `G` has a unique polynomial representative of degree
-at most one in each auxiliary variable, which gives the gap `τ_w² G ∩ G = 0` (H.1).
+Defines the determinant pair `(D, G)` of Appendix H.1 for a family
+`z : Fin p ⊕ Tau p → 𝔽_p((t))` of scalars `a_i = z (inl i)`, `τ_w = z (inr w)`, with the same
+definitions as in `Challenges/LemH_6.lean`. When `z` is algebraically independent over
+`𝔽_p(t)`, every element of `G` has a polynomial representative of degree at most one in each
+auxiliary variable, which gives the gap `τ_w² G ∩ G = 0` of (H.1).
 -/
 
 namespace AlternatingAnalytic.DeterminantPairGeneral

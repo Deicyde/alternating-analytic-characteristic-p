@@ -14,8 +14,8 @@ For a tuple `v : Fin n → I`, the coordinate functional `coord n v` on `T_n(ℓ
 tensor `x₁ ⊗ ⋯ ⊗ xₙ` to `∏ r, x_r (v r)`. These functionals are contractive, and for any finite
 family of distinct tuples their absolute values sum to at most the tensor norm, because the
 coordinate array of a pure tensor is a product of `ℓ¹` arrays. Every element of the diagonal
-span `Δ_n` has the same coordinate at all permutations of a tuple. These are the facts about the
-identification `T_n(ℓ¹(I,K)) = ℓ¹(Iⁿ,K)` used in the lower bound of `fam:prop:l1-optimal`.
+span `Δ_n` has the same coordinate at all permutations of a tuple. These are the facts about
+`T_n(ℓ¹(I,K)) = ℓ¹(Iⁿ,K)` used in the lower bound of Proposition G.4.
 -/
 
 open scoped TensorProduct BigOperators

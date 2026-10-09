@@ -6,14 +6,14 @@ import AlternatingAnalytic.Scalar.FibreObstruction
 
 Over a normed field `K` with `k! = 0`, there are finite sets of admissible tests for the family
 `F` of (F.2) such that every `k`-linear `τ` satisfying condition (1) of Lemma F.4 has a test value
-of norm at least `1`. This discharges the hypothesis of
-`exists_finite_test_certificate_of_fibre` by Lemma F.4 over the prime field `ZMod p`
-(`AlternatingAnalytic.FibreObstruction.not_exists_fibre_map`).
+of norm at least `1`. The proof applies `exists_finite_test_certificate_of_fibre` with Lemma F.4
+over the prime field `ZMod p` (`AlternatingAnalytic.FibreObstruction.not_exists_fibre_map`).
+The paper leaves the hypothesis `k! = 0` implicit in Lemma F.5.
 -/
 
 namespace AlternatingAnalytic.TestCertificate
 
-/-- **Lemma F.5 (finite test certificate).** -/
+/-- Lemma F.5: finite test sets certify threshold `1` for every `τ` satisfying condition (1). -/
 theorem exists_finite_test_certificate (K : Type*) [NormedField K] (k : ℕ)
     (hk : (k.factorial : K) = 0) :
     ∃ T : Submodule K (Fin (k + 1) → K) × Submodule K (Fin k → K) →

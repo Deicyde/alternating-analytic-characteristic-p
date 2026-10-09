@@ -12,13 +12,11 @@ import Mathlib.Analysis.Analytic.Uniqueness
 /-!
 # The tensor test family in independent universes
 
-The necessity half of the analytic tensor criterion (`fam:thm:tensor-analytic`) with the scalar
-field and the parameter space in independent universes. The dependent `c₀` sum of the tensor
-powers `T_{m+1}(P)` lies in `Type (max uK uP)`, the pure-power map `x ↦ (x^{⊗ (m+1)})_m` is
-analytic on the open unit ball, and universal analytic reflection therefore produces
-projections `T_{m+1}(P) → Δ_{m+1}(P)` with norms bounded by `C r^(m+1)`. This follows
-`AlternatingAnalytic.Analysis.TensorTestFamily` and `UniversalAnalyticReflection`, which fix a
-single universe.
+The necessity half of Theorem G.3, with the scalar field and the parameter space in independent
+universes. The dependent `c₀` sum of the tensor powers `T_{m+1}(P)` lies in `Type (max uK uP)`,
+the pure-power map `x ↦ (x^{⊗ (m+1)})_m` is analytic on the open unit ball, and universal
+analytic reflection therefore gives projections `T_{m+1}(P) → Δ_{m+1}(P)` with norms at most
+`C r^(m+1)`. The single-universe version is in `Analysis/TensorTestFamily.lean`.
 -/
 
 noncomputable section
@@ -222,7 +220,7 @@ theorem norm_tensorTestProjection_le
     _ = ‖q (m + 1)‖ := one_mul _
 
 /-- Universal analytic reflection gives projections onto the diagonal spans with a common
-exponential norm bound (the necessity half of `fam:thm:tensor-analytic`). -/
+exponential norm bound (the necessity half of Theorem G.3). -/
 theorem tensor_projections_of_universalAnalyticReflection
     (h : UniversalAnalyticReflection K P) :
     ∃ R : ∀ m : ℕ, TensorPower K P (m + 1) →L[K] DiagonalSpan K P (m + 1),

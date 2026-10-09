@@ -4,12 +4,13 @@ import AlternatingAnalytic.Analysis.PaddedIncompatiblePairs
 import AlternatingAnalytic.Analysis.PaddedCompletionAnalytic
 
 /-!
-# No largest full alternating analytic domain over the t-adic rational field
+# No largest analytic domain over F_p(t)
 
-The objects are the actual padded determinant pairs over `F_p(t)`. Their given
-norms are nonarchimedean and their algebraic dimensions are finite. The bad arrow
-goes from the split pair `Y` to `X`, so its contravariant coordinate goes from `E`
-to `D`. All assertions concern greatest domains, not maximal domains.
+Theorem H.4: over `F_p(t)` with the `t`-adic norm and `k ≥ p`, `Alt^k` has no largest full
+analytic domain, also among isomorphism-closed domains and inside the finite-dimensional
+ultrametric pairs. The witnesses are the padded pairs `X = (E_k, G)` and `Y = (D_k, G)`; `Y` is
+split and the action from `Y` to `X` is not analytic. Its contravariant coordinate is a map
+`E_k → D_k`. Nothing is said about maximal domains.
 -/
 
 noncomputable section
@@ -24,15 +25,15 @@ variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (n
 attribute [local instance] DeterminantPair.preferredNormedFieldK
   DeterminantPair.preferredFieldK DeterminantPair.preferredFieldL
 
-/-- The rigid padded pair, with the original small target. -/
+/-- The rigid pair `X_k = (E_k, G)`. -/
 def objectX : (NormedSpaceCat (K p r))ᵒᵖ × NormedSpaceCat (K p r) :=
   (op (NormedSpaceCat.of (K p r) (E p r n)), NormedSpaceCat.of (K p r) (G p r))
 
-/-- The split padded determinant pair, with the same original target. -/
+/-- The split pair `Y_k = (D_k, G)`. -/
 def objectY : (NormedSpaceCat (K p r))ᵒᵖ × NormedSpaceCat (K p r) :=
   (op (NormedSpaceCat.of (K p r) (D p r n)), NormedSpaceCat.of (K p r) (G p r))
 
-/-- The point of the actual hom space where analyticity fails. -/
+/-- The hom `Y_k ⟶ X_k` at which the action fails to be analytic. -/
 def badHom : objectY p r n ⟶ objectX p r n :=
   (Quiver.Hom.op (show NormedSpaceCat.of (K p r) (E p r n) ⟶
       NormedSpaceCat.of (K p r) (D p r n) from auxiliaryIdentity p r n),
@@ -56,7 +57,7 @@ theorem objectY_singleton_analytic :
   exact analyticOnNhd_alternatingMapAction_of_split_destination (p+n)
     (isSplitAlternatingPair_canonical p r n)
 
-/-- Nonanalyticity on the actual categorical hom, with its canonical operator norm. -/
+/-- The action on homs `Y_k ⟶ X_k` is not analytic at `badHom`. -/
 theorem not_analyticAt_badHom :
     ¬ AnalyticAt (K p r)
       (fun h : objectY p r n ⟶ objectX p r n => (alternatingFunctor (K p r) (p+n)).map h)
@@ -99,11 +100,11 @@ theorem objectY_finiteUltrametric : finiteUltrametricPairs (K p r) (objectY p r 
     IsUltrametricDist (D p r n) ∧ IsUltrametricDist (G p r)
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
 
-/-- The same rigid pair as an object of the restricted ambient category. -/
+/-- `objectX` as an object of `FiniteUltrametricPairCat`. -/
 def finiteObjectX : FiniteUltrametricPairCat (K p r) :=
   ⟨objectX p r n, objectX_finiteUltrametric p r n⟩
 
-/-- The same split pair as an object of the restricted ambient category. -/
+/-- `objectY` as an object of `FiniteUltrametricPairCat`. -/
 def finiteObjectY : FiniteUltrametricPairCat (K p r) :=
   ⟨objectY p r n, objectY_finiteUltrametric p r n⟩
 
@@ -117,8 +118,8 @@ theorem no_greatest_finiteUltrametricAnalyticDomain :
   · intro h
     exact not_analyticAt_crossAction p r n (h _ (Set.mem_univ _))
 
-/-- Repleteness here is internal to `FiniteUltrametricPairCat`, so every object
-retains an ultrametric given norm. -/
+/-- No largest isomorphism-closed analytic domain among finite-dimensional ultrametric pairs,
+with isomorphism closure taken inside `FiniteUltrametricPairCat`. -/
 theorem no_greatest_repleteFiniteUltrametricAnalyticDomain :
     ¬ ∃ S, IsGreatest
       {P | IsFiniteUltrametricAnalyticDomain (K p r) (p+n) P ∧
@@ -131,8 +132,7 @@ theorem no_greatest_repleteFiniteUltrametricAnalyticDomain :
   · intro h
     exact not_analyticAt_crossAction p r n (h _ (Set.mem_univ _))
 
-/-- `dom:limits` (first conclusion): adjoining this particular `X` to the entire
-split domain is impossible. No claim about other extensions of the split domain is made. -/
+/-- No analytic domain contains all split pairs together with `X_k`. -/
 theorem not_analyticDomain_of_splitPairs_and_objectX
     (S : ObjectProperty ((NormedSpaceCat (K p r))ᵒᵖ × NormedSpaceCat (K p r)))
     (hSplit : splitPairs (K p r) (p+n) ≤ S) (hX : S (objectX p r n)) :
@@ -142,9 +142,8 @@ theorem not_analyticDomain_of_splitPairs_and_objectX
     (objectY p r n) (objectX p r n) (hSplit _ (objectY_split p r n)) hX
   exact not_analyticAt_crossAction p r n (h _ (Set.mem_univ _))
 
-/-- Main Theorem (4) and `dom:no-largest`, with the actual witnesses and all four
-greatest-domain obstructions. The isomorphism closures in the last conclusion
-are relative to the finite-dimensional ultrametric ambient category. -/
+/-- Theorem H.4, with its witnesses and all four variants. In the last conclusion, isomorphism
+closure is taken inside the finite-dimensional ultrametric pairs. -/
 theorem no_largest_full_analytic_domain (k : ℕ) (hpk : p ≤ k) :
     ¬ CompleteSpace (K p r) ∧
     finiteUltrametricPairs (K p r) (objectX p r (k-p)) ∧
@@ -195,10 +194,10 @@ theorem no_largest_full_analytic_domain (k : ℕ) (hpk : p ≤ k) :
     no_greatest_finiteUltrametricAnalyticDomain p r m,
     no_greatest_repleteFiniteUltrametricAnalyticDomain p r m⟩
 
-/-- Both conclusions of `dom:limits`: this `X` cannot be adjoined to all split
-pairs, while these specific completions have analytic action over `L` and the
-literal L-valued coordinate lift. The completion equivalences respect the
-original K-linear inclusions; the analytic assertion uses the explicit L-models. -/
+/-- The closing remark of Appendix H: `X_k` cannot be adjoined to all split pairs, but completion
+removes the obstruction. The completions of `E_k`, `D_k`, `G` and `C` are identified with explicit
+`L`-spaces compatibly with the inclusions, and there the action over `L = F_p((t))` is analytic,
+with an explicit coordinate lift. -/
 theorem no_largest_domain_limits (k : ℕ) (hpk : p ≤ k) :
     (∀ S : ObjectProperty ((NormedSpaceCat (K p r))ᵒᵖ × NormedSpaceCat (K p r)),
       splitPairs (K p r) k ≤ S → S (objectX p r (k-p)) →

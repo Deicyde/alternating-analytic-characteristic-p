@@ -1,7 +1,14 @@
 import AlternatingAnalytic.Analysis.DeterminantCoefficientSpaces
 import AlternatingAnalytic.Analysis.AnalyticFamilies
 
-/-! The genuine self-action of each maximum-norm padded rigid source. -/
+/-!
+# The self-action of the padded rigid pair
+
+Every bounded endomorphism `u` of `E_k = E × Kⁿ` extends to `H` with block form
+`[[s I_p, B], [0, T]]`, where `s ∈ K` comes from rigidity of `E` (Lemma H.5) and `T ∈ M_n(K)`.
+So `u` acts on top-degree forms `Alt^k(E_k; G) = C det_k` by `s ^ p * det T`, a polynomial in
+bounded coordinates of `u`, and the joint self-action of `(E_k, G)` is analytic (Appendix H).
+-/
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 800000
@@ -13,7 +20,7 @@ attribute [local instance] preferredNormedFieldK preferredFieldK preferredFieldL
 
 abbrev OriginalE := RigidDenseSource.Concrete.source p r
 
-/-- Bounded extraction of the original-source block by genuine product maps. -/
+/-- The `E → E` block of an endomorphism of `E_k`. -/
 def sourceBlock : (E p r n →L[K p r] E p r n) →L[K p r]
     (OriginalE p r →L[K p r] OriginalE p r) :=
   (ContinuousLinearMap.compL (K p r) (OriginalE p r) (E p r n) (OriginalE p r)
@@ -21,12 +28,12 @@ def sourceBlock : (E p r n →L[K p r] E p r n) →L[K p r]
     ((ContinuousLinearMap.compL (K p r) (OriginalE p r) (E p r n) (E p r n)).flip
       (ContinuousLinearMap.inl (K p r) (OriginalE p r) (Fin n → K p r)))
 
-/-- The scalar coordinate uses rigidity, rather than algebraic coordinates of E. -/
+/-- The scalar `s` with `u (x, 0) = (s x, 0)`, given by rigidity of `E` (Lemma H.5). -/
 def scalarCoordinate : (E p r n →L[K p r] E p r n) →L[K p r] K p r :=
   (RigidDenseSource.Concrete.endScalarEquiv p r).toContinuousLinearEquiv.toContinuousLinearMap.comp
     (sourceBlock p r n)
 
-/-- The actual bounded standard matrix coordinate of the auxiliary block. -/
+/-- The `(i, j)` entry of the `Kⁿ → Kⁿ` block. -/
 def auxiliaryCoordinate (i j : Fin n) :
     (E p r n →L[K p r] E p r n) →L[K p r] K p r :=
   ((ContinuousLinearMap.proj i).comp
@@ -45,7 +52,7 @@ theorem sourceBlock_apply (u : E p r n →L[K p r] E p r n) (x : OriginalE p r) 
     (u (x, 0)).1 = scalarCoordinate p r n u • x :=
   RigidDenseSource.Concrete.endScalarEquiv_apply p r (sourceBlock p r n u) x
 
-/-- Vanishing is proved separately for each bounded auxiliary functional. -/
+/-- The `E → Kⁿ` block vanishes, since `E` has no nonzero bounded functionals. -/
 theorem lowerLeft_eq_zero (u : E p r n →L[K p r] E p r n) (x : OriginalE p r) :
     (u (x, 0)).2 = 0 := by
   ext i
@@ -56,7 +63,7 @@ theorem lowerLeft_eq_zero (u : E p r n →L[K p r] E p r n) (x : OriginalE p r) 
   exact congrArg (fun g : OriginalE p r →L[K p r] K p r => g x)
     (RigidDenseSource.Concrete.dual_eq_zero p r f)
 
-/-- Extend only into the complete ambient product, then promote to L-linearity. -/
+/-- The extension of `u` to an `L`-linear endomorphism of `H`. -/
 def completedEndomorphism (u : E p r n →L[K p r] E p r n) :
     H p r n →L[L p r] H p r n :=
   denseScalarLinearExtension (RationalField.denseRange_algebraMap (ZMod p) r)
@@ -68,7 +75,7 @@ def completedEndomorphism (u : E p r n →L[K p r] E p r n) :
     completedEndomorphism p r n u (inclusionE p r n x) = inclusionE p r n (u x) :=
   denseLinearExtension_apply (inclusionE p r n) (denseRange_inclusionE p r n) _ x
 
-/-- Upper-right coefficients live in L; no K-coordinate functional of E is used. -/
+/-- The `Lⁿ → A` block, with entries in `L`. -/
 def upperRightMatrix (u : E p r n →L[K p r] E p r n) :
     Matrix (Fin p) (Fin n) (L p r) :=
   fun i j => TruncatedPolynomial.coeff (L p r) p (u (0, Pi.single j 1)).1 i
@@ -84,7 +91,7 @@ def auxiliaryMatrix (u : E p r n →L[K p r] E p r n) :
     standardE p r n (Fin.natAdd p i) = (0, Pi.single i 1) := by
   simp [standardE]
 
-/-- In the ordered standard basis the extension has the required upper-triangular blocks. -/
+/-- In the standard basis the extension has block form `[[s I, B], [0, T]]`. -/
 theorem completedEndomorphism_matrix (u : E p r n →L[K p r] E p r n) :
     Matrix.reindex finSumFinEquiv.symm finSumFinEquiv.symm
       (LinearMap.toMatrix (basis p r n) (basis p r n)
@@ -145,7 +152,7 @@ theorem completedEndomorphism_matrix (u : E p r n →L[K p r] E p r n) :
             repr_natAdd]
           rfl
 
-/-- The genuine K-valued determinant polynomial of the bounded coordinates. -/
+/-- `s ^ p * det T`, the determinant of the extension. -/
 def determinantFactor (u : E p r n →L[K p r] E p r n) : K p r :=
   scalarCoordinate p r n u ^ p * (auxiliaryMatrix p r n u).det
 
@@ -160,7 +167,7 @@ theorem det_completedEndomorphism (u : E p r n →L[K p r] E p r n) :
   simp only [determinantFactor, map_mul, map_pow, Fintype.card_fin, mul_one]
   rw [RingHom.map_det]
 
-/-- The determinant identity holds for every ambient tuple. -/
+/-- `δ (u x₁, …, u x_k) = (s ^ p * det T) * δ x` for every tuple in `H`. -/
 theorem delta_completedEndomorphism (u : E p r n →L[K p r] E p r n)
     (x : Fin (p+n) → H p r n) :
     delta p r n (fun i => completedEndomorphism p r n u (x i)) =
@@ -169,7 +176,7 @@ theorem delta_completedEndomorphism (u : E p r n →L[K p r] E p r n)
   rw [Module.Basis.det_comp, det_completedEndomorphism]
   rfl
 
-/-- Top-degree pullback is scalar multiplication in the original G-valued form space. -/
+/-- Pullback along `u` multiplies top-degree forms by `s ^ p * det T`. -/
 theorem pullback_eq_smul (u : E p r n →L[K p r] E p r n)
     (m : E p r n [⋀^Fin (p+n)]→L[K p r] G p r) :
     m.compContinuousLinearMap u = determinantFactor p r n u • m := by
@@ -184,7 +191,7 @@ theorem pullback_eq_smul (u : E p r n →L[K p r] E p r n)
     rw [delta_completedEndomorphism, delta_basis, mul_one]
   rw [hd, Algebra.smul_def, mul_comm]
 
-/-- The actual joint operator action includes the actual bounded postcomposition family. -/
+/-- The joint action is `(u, v) ↦ (s ^ p * det T) • (m ↦ v ∘ m)`. -/
 theorem selfActionE_eq (h : (E p r n →L[K p r] E p r n) ×
     (G p r →L[K p r] G p r)) :
     alternatingMapAction (p+n) h = determinantFactor p r n h.1 •
@@ -198,7 +205,7 @@ theorem selfActionE_eq (h : (E p r n →L[K p r] E p r n) ×
   rw [pullback_eq_smul]
   simp
 
-/-- A finite determinant expansion in the genuine bounded coordinates is analytic. -/
+/-- `u ↦ s ^ p * det T` is analytic, being a polynomial in bounded coordinates. -/
 theorem analyticAt_determinantFactor (u : E p r n →L[K p r] E p r n) :
     AnalyticAt (K p r) (determinantFactor p r n) u := by
   classical
@@ -210,7 +217,7 @@ theorem analyticAt_determinantFactor (u : E p r n →L[K p r] E p r n) :
     (Finset.analyticAt_fun_prod _ (fun i _ =>
       (auxiliaryCoordinate p r n (σ i) i).analyticAt u))
 
-/-- The existing postcomposition family with the operator norm type made explicit. -/
+/-- Postcomposition `v ↦ (m ↦ v ∘ m)`. -/
 def selfPostcomposition : (G p r →L[K p r] G p r) →L[K p r]
     ((E p r n [⋀^Fin (p+n)]→L[K p r] G p r) →L[K p r]
       (E p r n [⋀^Fin (p+n)]→L[K p r] G p r)) :=
@@ -224,7 +231,7 @@ theorem selfActionE_function_eq :
       determinantFactor p r n h.1 • selfPostcomposition p r n h.2) :=
   funext (selfActionE_eq p r n)
 
-/-- Global joint self-action analyticity, with neither K nor G assumed complete. -/
+/-- The joint self-action of `(E_k, G)` is analytic everywhere. -/
 theorem analyticAt_selfActionE (h : (E p r n →L[K p r] E p r n) ×
     (G p r →L[K p r] G p r)) :
     AnalyticAt (K p r)
@@ -252,9 +259,7 @@ theorem analyticAt_selfActionE (h : (E p r n →L[K p r] E p r n) ×
   rw [selfActionE_function_eq]
   exact hs.smul hv
 
-/-- The complete self-action statement for each literal padded rigid pair,
-including the empty auxiliary block. The maps occurring here are the bounded
-coordinate maps and the actual complete-field extension constructed above. -/
+/-- Summary of the self-action of `(E_k, G)`; `n = 0` is allowed. -/
 theorem padded_analytic_self_action :
     (∀ (u : E p r n →L[K p r] E p r n) (x : E p r n),
       completedEndomorphism p r n u (inclusionE p r n x) = inclusionE p r n (u x)) ∧

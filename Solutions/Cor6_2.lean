@@ -6,14 +6,14 @@ import AlternatingAnalytic.Analysis.AlternatingActionRegularity
 import AlternatingAnalytic.Analysis.FactorialClassification
 
 /-!
-# Corollary 6.2 (regularity on whole hom spaces), p. 15
+# Proof of Corollary 6.2
 
-Solution: `alternatingAction` is definitionally the library's `AlternatingAnalytic.alternatingMapAction`.
-Smoothness: `AlternatingAnalytic.contDiff_alternatingMapAction` (`Analysis/AlternatingActionRegularity.lean`).
-Analytic iff: the argument of `AlternatingAnalytic.alternatingFunctor_analyticOnHoms_iff`
-(`Category/AlternatingRegularity.lean`), i.e. `cpolynomialAt_alternatingMapAction_of_factorial_ne_zero`,
+Uses `AlternatingAnalytic.contDiff_alternatingMapAction`
+(`Analysis/AlternatingActionRegularity.lean`) for smoothness, and
+`cpolynomialAt_alternatingMapAction_of_factorial_ne_zero`,
 `analyticAt_precomposition_of_analyticAt_alternatingMapAction` and
-`factorial_ne_zero_iff_allBanachPrecompositionAnalytic` (`Analysis/FactorialClassification.lean`).
+`factorial_ne_zero_iff_allBanachPrecompositionAnalytic` (`Analysis/FactorialClassification.lean`)
+for analyticity.
 -/
 
 open scoped ContDiff
@@ -34,7 +34,7 @@ noncomputable def alternatingAction (K : Type*) [NontriviallyNormedField K]
   (ContinuousLinearMap.compContinuousAlternatingMapCLM K E' F F' (Fin k) h.2).comp
     (ContinuousAlternatingMap.compContinuousLinearMapCLM h.1)
 
-/-- **Corollary 6.2, smoothness on `Vec_K`.** Every joint hom map of `Alt^k` is `C^∞`. -/
+/-- Corollary 6.2, smoothness: every joint hom map of `Alt^k` is `C^∞`. -/
 theorem alternatingAction_contDiff (K : Type u) [NontriviallyNormedField K] (k : ℕ)
     (E : Type uE) (E' : Type uE') (F : Type uF) (F' : Type uF')
     [NormedAddCommGroup E] [NormedSpace K E] [NormedAddCommGroup E'] [NormedSpace K E']
@@ -42,7 +42,7 @@ theorem alternatingAction_contDiff (K : Type u) [NontriviallyNormedField K] (k :
     ContDiff K ∞ (alternatingAction K (E := E) (E' := E') (F := F) (F' := F') k) := by
   exact AlternatingAnalytic.contDiff_alternatingMapAction k ⊤
 
-/-- **Corollary 6.2, smoothness on Banach spaces.** -/
+/-- Corollary 6.2, smoothness on Banach spaces. -/
 theorem alternatingAction_contDiff_banach (K : Type u) [NontriviallyNormedField K] (k : ℕ)
     (E : Type uE) (E' : Type uE') (F : Type uF) (F' : Type uF')
     [NormedAddCommGroup E] [NormedSpace K E] [NormedAddCommGroup E'] [NormedSpace K E']
@@ -51,8 +51,8 @@ theorem alternatingAction_contDiff_banach (K : Type u) [NontriviallyNormedField 
     ContDiff K ∞ (alternatingAction K (E := E) (E' := E') (F := F) (F' := F') k) := by
   exact AlternatingAnalytic.contDiff_alternatingMapAction k ⊤
 
-/-- **Corollary 6.2, analyticity on `Vec_K`.** The bifunctor `Alt^k` is analytic on every hom
-space of `Vec_K^op × Vec_K` if and only if `k! ≠ 0` in `K`. -/
+/-- Corollary 6.2, analyticity: `Alt^k` is analytic on every hom space of `Vec_K^op × Vec_K`
+if and only if `k! ≠ 0` in `K`. -/
 theorem alternatingAction_analytic_iff (K : Type u) [NontriviallyNormedField K] (k : ℕ) :
     (∀ (E E' F F' : Type u)
       [NormedAddCommGroup E] [NormedSpace K E] [NormedAddCommGroup E'] [NormedSpace K E']
@@ -70,8 +70,7 @@ theorem alternatingAction_analytic_iff (K : Type u) [NontriviallyNormedField K] 
     exact (AlternatingAnalytic.cpolynomialAt_alternatingMapAction_of_factorial_ne_zero k hk
       z).analyticAt
 
-/-- **Corollary 6.2, analyticity on Banach spaces.** The same equivalence on the full
-subcategory of Banach spaces. -/
+/-- Corollary 6.2, analyticity on Banach spaces: the same equivalence for Banach spaces. -/
 theorem alternatingAction_analytic_iff_banach (K : Type u) [NontriviallyNormedField K] (k : ℕ) :
     (∀ (E E' F F' : Type u)
       [NormedAddCommGroup E] [NormedSpace K E] [NormedAddCommGroup E'] [NormedSpace K E']

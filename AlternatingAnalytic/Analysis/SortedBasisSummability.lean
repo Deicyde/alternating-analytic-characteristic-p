@@ -4,7 +4,14 @@ import Mathlib.Analysis.Normed.Module.Multilinear.Basic
 import Mathlib.Order.Hom.PowersetCard
 import Mathlib.Topology.Algebra.InfiniteSum.Nonarchimedean
 
-/-! Convergence of the actual sorted determinant family for an unconditional basis. -/
+/-!
+# Summability of the sorted determinant family
+
+For an unconditional Schauder basis `b`, the terms
+`det (b.coord (t i) (x j)) • g (b ∘ t)`, indexed by increasing `n`-tuples `t` of indices,
+tend to zero along the cofinite filter. Over a complete ultrametric target they are
+therefore summable.
+-/
 
 noncomputable section
 open scoped BigOperators
@@ -12,8 +19,7 @@ open Filter Topology
 
 namespace AlternatingAnalytic
 
-/-- Products of finitely many independent null families tend to zero on the
-cofinite filter of the entire tuple space, including degree zero. -/
+/-- A product `∏ j, a j (t j)` of null families is null on the space of tuples `t`. -/
 theorem tendsto_fin_product_cofinite_zero {I : Type*} (n : ℕ)
     (a : Fin n → I → ℝ) (ha : ∀ j, Tendsto (a j) cofinite (𝓝 0)) :
     Tendsto (fun t : Fin n → I => ∏ j, a j (t j)) cofinite (𝓝 0) := by
@@ -36,14 +42,13 @@ theorem tendsto_schauder_weighted_coord (b : UnconditionalSchauderBasis I K E) (
     Tendsto (fun i => ‖b.coord i x‖ * ‖b i‖) cofinite (𝓝 0) := by
   simpa only [norm_smul, norm_zero] using (b.expansion x).summable.tendsto_cofinite_zero.norm
 
-/-- The actual determinant term indexed by an increasing finite set of basis indices. -/
+/-- The determinant term indexed by an `n`-element set of basis indices. -/
 def sortedBasisTerm (b : UnconditionalSchauderBasis I K E) (n : ℕ)
     (g : E [×n]→L[K] F) (x : Fin n → E) (s : Set.powersetCard I n) : F :=
   let t := Set.powersetCard.ofFinEmbEquiv.symm s
   (Matrix.of fun i j => b.coord (t i) (x j)).det • g (b ∘ t)
 
-/-- Permuting the increasing enumeration still gives an injective map from
-finite subsets into the tuple space. -/
+/-- A permuted increasing enumeration is injective on `n`-element sets. -/
 theorem sortedEnumeration_perm_injective (n : ℕ) (σ : Equiv.Perm (Fin n)) :
     Function.Injective (fun s : Set.powersetCard I n =>
       fun j => Set.powersetCard.ofFinEmbEquiv.symm s (σ j)) := by
@@ -96,8 +101,7 @@ theorem norm_sortedBasisTerm_le (b : UnconditionalSchauderBasis I K E) (n : ℕ)
         (Equiv.prod_comp σ (fun j => ‖b (t j)‖)).symm
     _ = _ := rfl
 
-/-- The actual sorted determinant terms tend to zero without countability or
-completeness of the space carrying the basis. -/
+/-- The sorted determinant terms tend to zero. -/
 theorem tendsto_sortedBasisTerm (b : UnconditionalSchauderBasis I K E) (n : ℕ)
     (g : E [×n]→L[K] F) (x : Fin n → E) :
     Tendsto (sortedBasisTerm b n g x) cofinite (𝓝 0) := by
@@ -106,7 +110,7 @@ theorem tendsto_sortedBasisTerm (b : UnconditionalSchauderBasis I K E) (n : ℕ)
   have h := tendsto_finsetSum Finset.univ (fun σ _ => tendsto_sorted_weighted_product b n x σ)
   simpa only [Finset.sum_const_zero, mul_zero] using h.const_mul ‖g‖
 
-/-- Over a complete ultrametric target the sorted determinant family is summable. -/
+/-- Over a complete ultrametric target, the sorted determinant family is summable. -/
 theorem summable_sortedBasisTerm [IsUltrametricDist F] [CompleteSpace F]
     (b : UnconditionalSchauderBasis I K E) (n : ℕ)
     (g : E [×n]→L[K] F) (x : Fin n → E) :

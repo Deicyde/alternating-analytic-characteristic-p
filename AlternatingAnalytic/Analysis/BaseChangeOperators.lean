@@ -6,18 +6,18 @@ Authors: Jack McCarthy
 import AlternatingAnalytic.Analysis.CompletedBaseChange
 
 /-!
-# Operators on completed projective scalar extension
+# Base change of operators
 
-The actual map `f ⊗ id` is linear over the extension field, bounded by `‖f‖`, and extends
-to the completed tensor product. This is `sources/charp.tex`, lemma `ops`.
+For a bounded operator `f` on `V`, the map `f ⊗ id` on `V ⊗_K L` is `L`-linear, bounded by
+`‖f‖`, and extends to the completed base change. The resulting map `f ↦ f_{K'}` is a
+`K`-linear contraction (Lemma D.7).
 -/
 
 open scoped TensorProduct
 
 namespace AlternatingAnalytic
 
-/-- An isometric normed extension of a nontrivially normed field is nontrivially normed.
-This supplies the extension-field hypothesis used by Mathlib's operator-norm API below. -/
+/-- A normed algebra over a nontrivially normed field is nontrivially normed. -/
 @[instance_reducible]
 def normedExtensionNontriviallyNormedField (K L : Type*) [NontriviallyNormedField K]
     [NormedField L] [NormedAlgebra K L] : NontriviallyNormedField L where
@@ -36,7 +36,7 @@ variable (K : Type*) (V L : Type u) [NontriviallyNormedField K]
 attribute [local instance] baseChangeModule baseChangeNormedAddCommGroup
   baseChangeNormedSpaceRestrictScalars baseChangeNormedSpace baseChangeIsScalarTower
 
-/-- The actual algebraic tensor map `f ⊗ id`, linear over the extension field. -/
+/-- The map `f ⊗ id` on `V ⊗[K] L`, as an `L`-linear map. -/
 def baseChangeOperatorAlgebraic (f : V →L[K] V) : V ⊗[K] L →ₗ[L] V ⊗[K] L where
   toFun := f.toLinearMap.rTensor L
   map_add' := map_add _
@@ -65,13 +65,13 @@ theorem norm_baseChangeOperatorAlgebraic_apply_le (f : V →L[K] V) (u : V ⊗[K
       mul_le_mul_of_nonneg_right (f.le_opNorm v) (norm_nonneg l)
     _ = ‖f‖ * (‖v‖ * ‖l‖) := mul_assoc _ _ _
 
-/-- Algebraic base change as a bounded operator over the extension field. -/
+/-- `f ⊗ id` as a bounded `L`-linear operator. -/
 noncomputable def baseChangeOperatorContinuous (f : V →L[K] V) :
     V ⊗[K] L →L[L] V ⊗[K] L :=
   (baseChangeOperatorAlgebraic K V L f).mkContinuous ‖f‖
     (norm_baseChangeOperatorAlgebraic_apply_le K V L f)
 
-/-- Extension of `f ⊗ id` to the completed scalar extension. -/
+/-- The extension of `f ⊗ id` to the completed base change. -/
 noncomputable def completedBaseChangeOperator (f : V →L[K] V) :
     CompletedBaseChange K V L →L[L] CompletedBaseChange K V L :=
   (baseChangeOperatorContinuous K V L f).completion
@@ -107,7 +107,7 @@ theorem completedBaseChangeOperator_embedding (f : V →L[K] V) (v : V) :
       completedBaseChangeEmbedding K V L (f v) := by
   simp
 
-/-- Continuous operators on completed base change are determined by the dense tensor subspace. -/
+/-- Operators on the completed base change are determined on the dense tensor subspace. -/
 theorem completedBaseChangeOperator_ext
     {S T : CompletedBaseChange K V L →L[L] CompletedBaseChange K V L}
     (h : ∀ u : V ⊗[K] L,
@@ -116,7 +116,7 @@ theorem completedBaseChangeOperator_ext
   exact (denseRange_baseChangeToCompletionK K V L).equalizer S.continuous T.continuous
     (funext h)
 
-/-- Base change of operators is linear over the original field. -/
+/-- Base change of operators is `K`-linear. -/
 noncomputable def baseChangeOperatorsLinear :
     (V →L[K] V) →ₗ[K] (CompletedBaseChange K V L →L[L] CompletedBaseChange K V L) where
   toFun := completedBaseChangeOperator K V L
@@ -129,7 +129,7 @@ noncomputable def baseChangeOperatorsLinear :
     intro u
     simp [baseChangeOperatorAlgebraic]
 
-/-- Base change of operators is a contraction as a linear map over the original field. -/
+/-- Base change of operators `f ↦ f_{K'}` as a `K`-linear contraction (Lemma D.7). -/
 noncomputable def baseChangeOperators :
     (V →L[K] V) →L[K] (CompletedBaseChange K V L →L[L] CompletedBaseChange K V L) :=
   (baseChangeOperatorsLinear K V L).mkContinuous 1 fun f => by

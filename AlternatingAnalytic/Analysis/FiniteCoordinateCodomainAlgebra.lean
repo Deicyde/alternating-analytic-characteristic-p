@@ -2,7 +2,13 @@ import AlternatingAnalytic.Analysis.LiftCriterion
 import AlternatingAnalytic.Analysis.FiniteCoordinateDeterminant
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
-/-! Algebraic codomain-coordinate determinant lift, valid in arbitrary characteristic. -/
+/-!
+# The determinant lift for a finite basis of the codomain
+
+The algebraic form of the determinant lift of Proposition 4.1(2), before norm estimates:
+a multilinear map in the operators whose diagonal value is precomposition. It needs no
+assumption on the characteristic.
+-/
 
 noncomputable section
 
@@ -30,7 +36,7 @@ private theorem alternating_sum_apply {α : Type*} (s : Finset α)
 private theorem alternating_smulRight_apply (g : E [⋀^Fin k]→ₗ[K] K)
     (z : F) (x : Fin k → E) : g.smulRight z x = g x • z := rfl
 
-/-- The determinant coefficient, strongly alternating in the vector arguments. -/
+/-- The determinant coefficient, as an alternating map in the vectors. -/
 def finiteCoordinateCodomainScalar (b : Basis (Fin d) K E')
     (t : Fin k → Fin d) (f : Fin k → E →L[K] E') : E [⋀^Fin k]→ₗ[K] K :=
   Matrix.detRowAlternating.compLinearMap
@@ -45,7 +51,7 @@ theorem finiteCoordinateCodomainScalar_apply (b : Basis (Fin d) K E')
   change Matrix.det (Matrix.transpose (fun a j => b.coord (t a) (f a (x j)))) = _
   exact Matrix.det_transpose _
 
-/-- The same coefficient is separately linear in every operator argument. -/
+/-- The same coefficient, as a multilinear map in the operators. -/
 def finiteCoordinateCodomainRows (b : Basis (Fin d) K E')
     (t : Fin k → Fin d) (x : Fin k → E) :
     MultilinearMap K (fun _ : Fin k => E →L[K] E') K :=
@@ -59,7 +65,7 @@ theorem finiteCoordinateCodomainRows_apply (b : Basis (Fin d) K E')
     finiteCoordinateCodomainRows b t x f =
       Matrix.det (fun a j => b.coord (t a) (f a (x j))) := rfl
 
-/-- For fixed operator arguments, the determinant formula is linear in the input form. -/
+/-- For fixed operators, the determinant formula is linear in the input form. -/
 def finiteCoordinateCodomainFamily (b : Basis (Fin d) K E') (k : ℕ)
     (f : Fin k → E →L[K] E') :
     (E' [⋀^Fin k]→L[K] F) →ₗ[K] (E [⋀^Fin k]→ₗ[K] F) where
@@ -88,7 +94,7 @@ theorem finiteCoordinateCodomainFamily_apply (b : Basis (Fin d) K E') (k : ℕ)
   simp [finiteCoordinateCodomainFamily, alternating_sum_apply,
     finiteCoordinateCodomainScalar_apply]
 
-/-- The algebraic codomain-coordinate lift retains separate linearity in all operators. -/
+/-- The algebraic lift, multilinear in the operators. -/
 def finiteCoordinateCodomainAlgebra (b : Basis (Fin d) K E') (k : ℕ) :
     MultilinearMap K (fun _ : Fin k => E →L[K] E')
       ((E' [⋀^Fin k]→L[K] F) →ₗ[K] (E [⋀^Fin k]→ₗ[K] F)) where
@@ -116,7 +122,7 @@ theorem finiteCoordinateCodomainAlgebra_apply (b : Basis (Fin d) K E') (k : ℕ)
           (f a (x j))) • m (fun a => b (Set.powersetCard.ofFinEmbEquiv.symm s a)) :=
   finiteCoordinateCodomainFamily_apply b k f m x
 
-/-- Equal vector columns annihilate the algebraic lift, with no characteristic assumption. -/
+/-- The lifted map vanishes when two inputs are equal. -/
 theorem finiteCoordinateCodomainAlgebra_map_eq_zero_of_eq
     (b : Basis (Fin d) K E') (k : ℕ) (f : Fin k → E →L[K] E')
     (m : E' [⋀^Fin k]→L[K] F) (x : Fin k → E) {i j : Fin k}

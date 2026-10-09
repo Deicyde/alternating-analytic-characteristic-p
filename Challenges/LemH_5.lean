@@ -13,23 +13,17 @@ finitely many auxiliary scalars `τ_w` introduced below, algebraically independe
 Paper statement: "Every bounded endomorphism of `E` is multiplication by a scalar in `K`, and
 every bounded linear map `E → K` is zero."
 
-Formalization notes:
+## Formalization notes
+
 * `K` and `L` are the library's `AlternatingAnalytic.RationalField (ZMod p) r` and
-  `AlternatingAnalytic.LaurentField (ZMod p) r` (imported for these definitions): rational
-  functions, resp. Laurent series, over `ZMod p` with the `t`-adic norm `‖t‖ = r`, for a parameter
-  `0 < r < 1`; `K → L` is the library's isometric dense inclusion (`NormedAlgebra K L`).
-* Only the normed `K`-space structure of `A` enters this lemma, so `A` is modelled by its
-  coordinate space `Fin p → L` in the basis `e_i`, with Mathlib's sup norm; this is exactly the
-  paper's maximum norm in that basis. `K^p ⊆ A` is the image of `Fin p → K` under the
-  coordinatewise inclusion `coordinateInclusion` (defined here), and `a` is its coordinate vector
-  `(a_0, …, a_{p-1})`. `sourceE K L a` (defined here) is the `K`-submodule
-  `K^p + K a` of `Fin p → L`, with the induced norm.
-* Hypothesis: only the algebraic independence of `a_0, …, a_{p-1}` over `K` is assumed. The paper
-  chooses them jointly independent with the auxiliary scalars `τ_w`, which implies this, so the
-  Lean statement is at least as strong as the paper's.
-* "Bounded endomorphism" is `sourceE K L a →L[K] sourceE K L a`, "multiplication by a scalar in
-  `K`" is `∃ s : K, ∀ x, T x = s • x`, and "bounded linear map `E → K`" is
-  `sourceE K L a →L[K] K`.
+  `AlternatingAnalytic.LaurentField (ZMod p) r`, with the `t`-adic norm `‖t‖ = r` for
+  `0 < r < 1`.
+* Only the normed `K`-space structure of `A` is used, so `A` is modelled as `Fin p → L` with the
+  sup norm, the maximum norm in the basis `e_i`. `K^p ⊆ A` is the range of
+  `coordinateInclusion`, and `sourceE K L a` is `K^p + K a` with the induced norm.
+* Only the algebraic independence of `a_0, …, a_{p-1}` over `K` is assumed. The paper's
+  hypothesis (joint independence with the `τ_w`) implies it, so the Lean statement is at least
+  as strong.
 -/
 
 namespace AlternatingAnalyticChallenge.LemH_5
@@ -54,7 +48,7 @@ def sourceE {p : ℕ} (a : Fin p → L) : Submodule K (Fin p → L) :=
 
 end Definitions
 
-/-- **Lemma H.5, first assertion.** Every bounded endomorphism of `E = K^p + K a` is
+/-- Lemma H.5, first assertion: every bounded endomorphism of `E = K^p + K a` is
 multiplication by a scalar in `K`. -/
 theorem part1 (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
     (a : Fin p → AlternatingAnalytic.LaurentField (ZMod p) r)
@@ -65,7 +59,7 @@ theorem part1 (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1
     ∃ s : AlternatingAnalytic.RationalField (ZMod p) r, ∀ x, T x = s • x := by
   sorry
 
-/-- **Lemma H.5, second assertion.** Every bounded linear map `E → K` is zero. -/
+/-- Lemma H.5, second assertion: every bounded linear map `E → K` is zero. -/
 theorem part2 (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
     (a : Fin p → AlternatingAnalytic.LaurentField (ZMod p) r)
     (ha : AlgebraicIndependent (AlternatingAnalytic.RationalField (ZMod p) r) a)

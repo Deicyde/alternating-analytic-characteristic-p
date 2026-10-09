@@ -3,7 +3,14 @@ import AlternatingAnalytic.Analysis.RigidDenseSourceCoordinates
 import AlternatingAnalytic.Analysis.RigidDenseSourceBasic
 import AlternatingAnalytic.Analysis.RigidDenseSourceAlgebra
 
-/-! Analytic rigidity obtained by extending into complete ambient spaces. -/
+/-!
+# Rigidity of the dense source (Lemma H.5)
+
+For `K` dense in a complete `L` and `a` algebraically independent over `K`, every bounded
+endomorphism of `E = K^I + K a` is a scalar and every bounded functional `E → K` is zero.
+Bounded maps are extended to `L^I`, where they are `L`-linear, and the coefficient comparison
+of `RigidDenseSourceAlgebra` applies.
+-/
 
 noncomputable section
 namespace AlternatingAnalytic.RigidDenseSource
@@ -11,7 +18,7 @@ variable {K L I : Type*} [NontriviallyNormedField K] [NontriviallyNormedField L]
   [NormedAlgebra K L] [Fintype I] [CompleteSpace L]
   (S : Submodule K (I → L)) (hd : DenseRange S.subtypeₗᵢ)
   (hKL : DenseRange (algebraMap K L))
-/-- Extend after embedding the output into the complete ambient Pi space. -/
+/-- The `L`-linear extension of a bounded endomorphism of `S` to `L^I`. -/
 def completedEndomorphism (T : S →L[K] S) : (I → L) →L[L] (I → L) :=
   denseScalarLinearExtension hKL
     (denseLinearExtension S.subtypeₗᵢ hd (S.subtypeL.comp T))
@@ -19,7 +26,7 @@ def completedEndomorphism (T : S →L[K] S) : (I → L) →L[L] (I → L) :=
     completedEndomorphism S hd hKL T x = (T x : I → L) := by
   exact denseLinearExtension_apply S.subtypeₗᵢ hd (S.subtypeL.comp T) x
 
-/-- Extend after embedding the output field into its complete scalar extension. -/
+/-- The `L`-linear extension of a bounded functional `S → K` to `L^I → L`. -/
 def completedFunctional (f : S →L[K] K) : (I → L) →L[L] L :=
   denseScalarLinearExtension hKL
     (denseLinearExtension S.subtypeₗᵢ hd ((algebraMapCLM K L).comp f))
@@ -60,7 +67,7 @@ theorem exists_scalar (hKL : DenseRange (algebraMap K L))
   rw [← completedEndomorphism_apply (source K a) hd hKL T x, hS]
   simp only [algebraMap_smul]
 
-/-- The scalar is unique because the source contains a nonzero standard vector. -/
+/-- A bounded endomorphism of the source is multiplication by a unique scalar. -/
 theorem existsUnique_scalar (hKL : DenseRange (algebraMap K L))
     (ha : AlgebraicIndependent K a) (T : source K a →L[K] source K a) :
     ∃! s : K, ∀ x, T x = s • x := by
@@ -72,7 +79,7 @@ theorem existsUnique_scalar (hKL : DenseRange (algebraMap K L))
   exact (ht x).symm.trans (hs x)
 
 omit [Nonempty I] in
-/-- Every bounded functional from the source to the original, possibly incomplete field is zero. -/
+/-- Every bounded functional from the source to `K` is zero. `K` need not be complete. -/
 theorem dual_eq_zero (hKL : DenseRange (algebraMap K L))
     (ha : AlgebraicIndependent K a) (f : source K a →L[K] K) : f = 0 := by
   classical
@@ -92,7 +99,7 @@ theorem dual_eq_zero (hKL : DenseRange (algebraMap K L))
   rw [map_zero, ← completedFunctional_apply (source K a) hd hKL f x]
   exact LinearMap.congr_fun hell (x : I → L)
 
-/-- Actual isometric scalar coordinates on all bounded endomorphisms of the source. -/
+/-- The isometry `End(E) ≃ K` sending an endomorphism to its scalar. -/
 def endScalarEquiv (hKL : DenseRange (algebraMap K L)) (ha : AlgebraicIndependent K a) :
     (source K a →L[K] source K a) ≃ₗᵢ[K] K :=
   endScalarEquivOfRigidity (exists_scalar hKL ha)

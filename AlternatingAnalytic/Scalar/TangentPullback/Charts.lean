@@ -6,13 +6,11 @@ import AlternatingAnalytic.Scalar.TangentPullback.Compression
 /-!
 # Two global charts with nonanalytic transition on forms
 
-This is Proposition 6.5(1). On `X = L(E, D) × D × E` the chart change
-`ψ(u, d, e) = (u, d + u e, e)` and its inverse `(u, d, e) ↦ (u, d - u e, e)` are polynomial.
-Its derivative is `Dψ(u, d, e)(v, a, b) = (v, a + v e + u b, b)`, so the projection to `D`
-of `Dψ(u, d, e)` restricted to the `E`-directions is `u`. Compressing the induced transition
-on alternating forms along the affine slice `u ↦ (u, d₀, e₀)` recovers the operator
-obstruction `A(u) = u^*`; hence the transition is analytic at no point when `A` is analytic
-at no point. The same holds for the inverse chart change, using the slice `u ↦ (-u, d₀, e₀)`.
+Proposition 6.5(1). On `X = L(E, D) × D × E` the chart change `ψ(u, d, e) = (u, d + u e, e)`
+and its inverse `(u, d, e) ↦ (u, d - u e, e)` are polynomial. The `D`-component of `Dψ(u, d, e)`
+on the `E`-directions is `u`, so compressing the induced transition on alternating forms along
+the slice `u ↦ (u, d₀, e₀)` recovers `A(u) = u^*`. Hence the transition is analytic at no point
+when `A` is analytic at no point; likewise for the inverse, using the slice `u ↦ (-u, d₀, e₀)`.
 -/
 
 noncomputable section

@@ -2,10 +2,12 @@ import AlternatingAnalytic.Analysis.L1ProductSummation
 import AlternatingAnalytic.Analysis.L1FiniteSupport
 
 /-!
-# Bounded coefficient arrays on ordinary ℓ¹
+# Bounded coefficient arrays on ℓ¹
 
-The domain is the ordinary sum-norm `lp` subtype, including when the scalar
-field is incomplete. Only the output space needs to be complete.
+A bounded array `c : (Fin d → J) → W` with `‖c a‖ ≤ M` defines a continuous `d`-linear
+map on `ℓ¹(J, K)`, `x ↦ ∑_a (∏_r x_r(a_r)) • c a`, of norm at most `M`. This is the
+summation used in the proof of Theorem 4.5(2). The output `W` must be complete;
+`K` need not be.
 -/
 
 open scoped lp BigOperators
@@ -17,7 +19,7 @@ variable {K J W : Type*} [NontriviallyNormedField K]
 
 noncomputable local instance : DecidableEq J := Classical.decEq J
 
-/-- One coordinate monomial with a vector coefficient. -/
+/-- The coordinate monomial `x ↦ (∏_r x_r(a_r)) • c a`. -/
 noncomputable def coordinateTerm {d : ℕ} (c : (Fin d → J) → W) (a : Fin d → J) :
     MultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) W :=
   (MultilinearMap.mkPiRing K (Fin d) (c a)).compLinearMap
@@ -34,7 +36,7 @@ theorem norm_coordinateTerm_le {d : ℕ} (c : (Fin d → J) → W) (M : ℝ)
   rw [coordinateTerm_apply, norm_smul, norm_prod, mul_comm]
   exact mul_le_mul_of_nonneg_right (hc a) (Finset.prod_nonneg fun r _ => norm_nonneg _)
 
-/-- Absolute summability of the evaluated array; the array itself need not be summable. -/
+/-- The terms of the array, evaluated at `x`, are absolutely summable. -/
 theorem summable_norm_coordinateTerm {d : ℕ} (c : (Fin d → J) → W) (M : ℝ)
     (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → lp (fun _ : J => K) 1) :
     Summable (fun a => ‖coordinateTerm (K := K) c a x‖) :=
@@ -48,7 +50,7 @@ theorem summable_coordinateTerm {d : ℕ} (c : (Fin d → J) → W) (M : ℝ)
     Summable (fun a => coordinateTerm (K := K) c a x) :=
   (summable_norm_coordinateTerm (K := K) c M hc x).of_norm
 
-/-- The actual unconditional sum, bundled as a multilinear map. -/
+/-- The unconditional sum of the coordinate monomials, as a multilinear map. -/
 noncomputable def multilinearOfBounded {d : ℕ} (c : (Fin d → J) → W) (M : ℝ)
     (hc : ∀ a, ‖c a‖ ≤ M) :
     MultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) W where
@@ -84,7 +86,7 @@ theorem continuousMultilinearOfBounded_norm_le {d : ℕ} (c : (Fin d → J) → 
     ‖continuousMultilinearOfBounded (K := K) c M hc‖ ≤ M :=
   (multilinearOfBounded (K := K) c M hc).mkContinuous_norm_le hM _
 
-/-- Coordinate tuples recover the specified coefficient, including in degree zero. -/
+/-- On a tuple of basis vectors `e_{a_r}` the map takes the value `c a`. -/
 @[simp]
 theorem continuousMultilinearOfBounded_single {d : ℕ} (c : (Fin d → J) → W)
     (M : ℝ) (hc : ∀ a, ‖c a‖ ≤ M) (a : Fin d → J) :
@@ -98,7 +100,7 @@ theorem continuousMultilinearOfBounded_single {d : ℕ} (c : (Fin d → J) → W
     rw [coordinateTerm_apply,
       Finset.prod_eq_zero (Finset.mem_univ r) (lp.single_apply_ne 1 (a r) 1 hr), zero_smul]
 
-/-- Finite-support compatibility of the unconditional array construction. -/
+/-- On finitely supported vectors the map is the finite coefficient sum. -/
 theorem continuousMultilinearOfBounded_sum_single {d : ℕ} (c : (Fin d → J) → W)
     (M : ℝ) (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → J → K) (s : Fin d → Finset J) :
     continuousMultilinearOfBounded (K := K) c M hc
@@ -107,8 +109,7 @@ theorem continuousMultilinearOfBounded_sum_single {d : ℕ} (c : (Fin d → J) �
   classical
   simp only [map_sum_single, continuousMultilinearOfBounded_single]
 
-/-- Finite coefficient sums approximate the constructed map, using the actual `lp`
-coordinate truncations rather than a completion of the domain. -/
+/-- The finite coefficient sums over truncations of `x` converge to the map at `x`. -/
 theorem continuousMultilinearOfBounded_tendsto {d : ℕ} (c : (Fin d → J) → W)
     (M : ℝ) (hc : ∀ a, ‖c a‖ ≤ M) (x : Fin d → lp (fun _ : J => K) 1) :
     Filter.Tendsto
@@ -119,9 +120,8 @@ theorem continuousMultilinearOfBounded_tendsto {d : ℕ} (c : (Fin d → J) → 
   simpa only [continuousMultilinearOfBounded_sum_single] using
     tendsto_map_sum_single (continuousMultilinearOfBounded (K := K) c M hc) x
 
-/-- A bounded coefficient array defines a continuous multilinear map on ordinary ℓ¹.
-The same map has the unconditional sum formula, the asserted operator norm bound,
-and the exact specified coordinate values. No completeness of `K` is assumed. -/
+/-- A bounded coefficient array defines a continuous multilinear map on `ℓ¹` with the
+sum formula, norm at most `M`, and the given values on basis tuples. -/
 theorem exists_l1_multilinear_of_bounded_coefficients
     (d : ℕ) (c : (Fin d → J) → W)
     (M : ℝ) (hM : 0 ≤ M) (hc : ∀ a, ‖c a‖ ≤ M) :

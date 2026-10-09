@@ -5,17 +5,16 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 /-!
 # Finite staircase matrices
 
-Over every field, a square matrix equal to `a` on and above the diagonal and to
-`b` below it has rank at least its size minus one if `a ≠ b`. This is the finite
-rank calculation in the cluster staircase argument; constructing that matrix
-from a hypothetical multiplier lift is a separate step.
+Over every field, a square matrix equal to `a` on and above the diagonal and to `b` below it
+has rank at least its size minus one if `a ≠ b`. This is the rank step in the staircase
+Lemma B.12.
 -/
 
 namespace AlternatingAnalytic
 
 variable {L : Type*} [Field L]
 
-/-- The two-letter square staircase matrix. -/
+/-- The `n × n` matrix with `a` on and above the diagonal and `b` below it. -/
 def staircaseMatrix (a b : L) (n : ℕ) : Matrix (Fin n) (Fin n) L :=
   fun i j => if i ≤ j then a else b
 
@@ -34,7 +33,8 @@ theorem matrix_rank_sub_le {m n : Type*} [Fintype m] [Fintype n]
         (Submodule.mem_sup_right ⟨v, rfl⟩)
     _ ≤ A.rank + B.rank := Submodule.finrank_add_le_finrank_add_finrank _ _
 
-/-- Subtracting the constant lower letter gives an upper triangular determinant. -/
+/-- Subtracting the constant matrix `b` leaves an upper triangular matrix of determinant
+`(a - b) ^ n`. -/
 theorem det_staircaseMatrix_sub_constant (a b : L) (n : ℕ) :
     (staircaseMatrix a b n - (Matrix.of fun _ _ : Fin n => b)).det = (a - b) ^ n := by
   rw [Matrix.det_of_isUpperTriangular]
@@ -44,7 +44,7 @@ theorem det_staircaseMatrix_sub_constant (a b : L) (n : ℕ) :
     change (if i ≤ j then a else b) - b = 0
     rw [ite_eq_right (not_le.mpr hij), sub_self]
 
-/-- A staircase with distinct letters has rank at least its size minus one. -/
+/-- A staircase with `a ≠ b` has rank at least its size minus one. -/
 theorem staircaseMatrix_size_le_rank_add_one (a b : L) (hab : a ≠ b) (n : ℕ) :
     n ≤ (staircaseMatrix a b n).rank + 1 := by
   let C : Matrix (Fin n) (Fin n) L := Matrix.of fun _ _ => b
@@ -64,7 +64,7 @@ theorem staircaseMatrix_size_le_rank_add_one (a b : L) (hab : a ≠ b) (n : ℕ)
     _ ≤ (staircaseMatrix a b n).rank + C.rank := matrix_rank_sub_le _ _
     _ ≤ (staircaseMatrix a b n).rank + 1 := Nat.add_le_add_left hC _
 
-/-- The size `d + 2` staircase of rank at most `d` must have equal letters. -/
+/-- A staircase of size `d + 2` and rank at most `d` has `a = b`. -/
 theorem staircaseMatrix_letters_eq_of_rank_le (a b : L) (d : ℕ)
     (h : (staircaseMatrix a b (d + 2)).rank ≤ d) : a = b := by
   by_contra hab

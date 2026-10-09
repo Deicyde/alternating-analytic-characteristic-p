@@ -4,7 +4,7 @@ import Mathlib.Topology.ContinuousMap.ZeroAtInfty
 /-!
 # Multipliers on a `c₀` base have no bounded lift
 
-Proposition C.6, main part. Over `K₁ = κ((X))`, the homogeneous map
+The first assertion of Proposition C.6. Over `K₁ = κ((X))`, the homogeneous map
 `σ(a) = W_B ∘ (D_a, …, D_a)` on `c₀(ℕ, K₁)` has no bounded `k`-linear lift into
 `Alt^k(ℓ^∞(ℕ, K₁); B)` when `κ` is finite and `k! = 0` in `κ`. The residue of a hypothetical lift
 is taken on finitely supported coefficient-field multipliers, which lie in `c₀`, and the
@@ -159,9 +159,8 @@ theorem czeroResidue_support_le (α : Fin k) (P : CZeroLiftCandidate κ r k) :
 
 variable (κ r k)
 
-/-- **Proposition C.6, main part, factorial form.** Over a finite coefficient field with
-`k! = 0`, the multiplier map `a ↦ W_B ∘ (D_a, …, D_a)` on `c₀(ℕ, K₁)` has no bounded `k`-linear
-lift. -/
+/-- Over a finite coefficient field with `k! = 0`, the multiplier map
+`a ↦ W_B ∘ (D_a, …, D_a)` on `c₀(ℕ, K₁)` has no bounded `k`-linear lift. -/
 theorem czero_not_exists_multiplierLift_of_factorial [Finite κ] (hk : 0 < k)
     (hfactorial : (k.factorial : κ) = 0) :
     ¬ ∃ P : CZeroLiftCandidate κ r k, ∀ a : C₀(ℕ, LaurentField κ r), P (fun _ => a) =
@@ -173,8 +172,8 @@ theorem czero_not_exists_multiplierLift_of_factorial [Finite κ] (hk : 0 < k)
   exact finiteField_multiplier_obstruction hfactorial (czeroResidue α P)
     (czeroResidue_antisymmetric α P) (czeroResidue_pol1 α P hP) d (fun u v _ _ => hd u v)
 
-/-- **Proposition C.6, main part.** For `κ` finite of characteristic `p ≤ k`, the multiplier
-map on `c₀(ℕ, K₁)` has no bounded `k`-linear lift. -/
+/-- For `κ` finite of characteristic `p ≤ k`, the multiplier map on `c₀(ℕ, K₁)` has no bounded
+`k`-linear lift (Proposition C.6). -/
 theorem czero_not_exists_multiplierLift [Finite κ] (p : ℕ) [Fact p.Prime] [CharP κ p]
     (hpk : p ≤ k) :
     ¬ ∃ P : CZeroLiftCandidate κ r k, ∀ a : C₀(ℕ, LaurentField κ r), P (fun _ => a) =

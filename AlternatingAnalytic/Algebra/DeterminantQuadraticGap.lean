@@ -4,12 +4,18 @@ import AlternatingAnalytic.Analysis.DeterminantCoefficientSpaces
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-!
-# Quadratic coefficient gap for the determinant source
+# The degree gap in the coefficient space
 
-The degree-one coefficient space vanishes in every prime characteristic, including two.
-The algebraic theorem uses the literal determinant generators over an arbitrary field.
-The final section identifies them definitionally with the coefficient spaces of the
-actual t-adic determinant pair. Specialization is algebraic throughout.
+Lemma H.7: the homogeneous degree-one part of `C_0` is zero, over any field of prime
+characteristic `p` (including `p = 2`). The last section restates this for the
+coefficient spaces of the determinant pair in Appendix H, which agree with the
+generic ones by definition.
+
+## Main results
+
+- `DeterminantQuadratic.homogeneous_linear_eq_zero`: Lemma H.7.
+- `DeterminantQuadratic.no_coefficient_family`: the contradiction that ends the proof
+  that the cross-action in Appendix H is not analytic.
 -/
 
 noncomputable section
@@ -48,12 +54,13 @@ theorem coeff_sum_X_C (c : Fin p → K) (j : Fin p) :
 
 variable [CharP K p] [Fact p.Prime]
 
-/-- The concrete map `phi` kills the quadratic component of every determinant coefficient. -/
+/-- `phi` kills the degree-two component of every element of `G_0`. -/
 theorem phi_homogeneousComponent_two_eq_zero {P : Poly K p} (hP : P ∈ G0poly K p) :
     phi K p (homogeneousComponent 2 P) = 0 :=
   phi_eq_zero_of_mem_quadraticSpan K p (homogeneousComponent_two_mem_quadraticSpan K p hP)
 
-/-- A homogeneous linear coefficient is detected by multiplication by the last variable. -/
+/-- Lemma H.7: a homogeneous linear element of `C_0` is zero. The proof applies `phi`
+after multiplying by the last variable. -/
 theorem homogeneous_linear_eq_zero {P : Poly K p}
     (hP : P ∈ C0poly K p) (hlin : P.IsHomogeneous 1) : P = 0 := by
   classical
@@ -76,13 +83,13 @@ theorem homogeneous_linear_eq_zero {P : Poly K p}
     exact h
   simp [hc, hc0]
 
-/-- The degree-one component of the actual algebraic coefficient submodule vanishes. -/
+/-- The degree-one component of every element of `C_0` is zero. -/
 theorem homogeneousComponent_one_eq_zero {P : Poly K p} (hP : P ∈ C0poly K p) :
     homogeneousComponent 1 P = 0 :=
   homogeneous_linear_eq_zero K p (homogeneousComponent_mem_C0poly K p 1 hP)
     (homogeneousComponent_isHomogeneous 1 P)
 
-/-- All conclusions of the quadratic coefficient-gap argument, with its concrete maps. -/
+/-- The steps of the proof of Lemma H.7, collected. -/
 theorem quadratic_coefficient_gap :
     (∀ n P, P ∈ G0poly K p → homogeneousComponent n P ∈ G0poly K p) ∧
     (∀ n P, P ∈ C0poly K p → homogeneousComponent n P ∈ C0poly K p) ∧
@@ -103,7 +110,8 @@ theorem quadratic_coefficient_gap :
     fun _ h => homogeneous_linear_eq_zero K p h,
     fun _ h => homogeneousComponent_one_eq_zero K p h⟩
 
-/-- The constant-component contradiction; no coefficient `d i` is assumed homogeneous. -/
+/-- There are no `d_i ∈ C_0` with `d_0 = 1` and `∑ X_i d_i ∈ C_0`. The `d_i` need not
+be homogeneous. -/
 theorem no_coefficient_family :
     ¬ ∃ d : Fin p → C0poly K p, (d 0 : Poly K p) = 1 ∧
       (∑ i : Fin p, X i * (d i : Poly K p)) ∈ C0poly K p := by
@@ -131,10 +139,10 @@ local instance gapNormedFieldK : NormedField (K p r) :=
 local instance gapFieldK : Field (K p r) :=
   (inferInstance : NontriviallyNormedField (K p r)).toField
 
-/-- The generic algebraic model is literally the previously defined determinant span. -/
+/-- The determinant-pair `G0poly` is the generic one by definition. -/
 theorem G0poly_eq_algebraic : G0poly p r = DeterminantQuadratic.G0poly (K p r) p := rfl
 
-/-- The generic coefficient membership conditions are literally the previous conditions. -/
+/-- The determinant-pair `C0poly` is the generic one by definition. -/
 theorem C0poly_eq_algebraic : C0poly p r = DeterminantQuadratic.C0poly (K p r) p := rfl
 
 theorem homogeneousComponent_mem_G0poly (n : ℕ) {P : Poly0 p r} (hP : P ∈ G0poly p r) :
@@ -145,12 +153,12 @@ theorem homogeneousComponent_mem_C0poly (n : ℕ) {P : Poly0 p r} (hP : P ∈ C0
     homogeneousComponent n P ∈ C0poly p r :=
   DeterminantQuadratic.homogeneousComponent_mem_C0poly (K p r) p n hP
 
-/-- `dom:degree-gap` on the coefficient space from algebraic specialization. -/
+/-- Lemma H.7 for the determinant pair. -/
 theorem homogeneousComponent_one_eq_zero {P : Poly0 p r} (hP : P ∈ C0poly p r) :
     homogeneousComponent 1 P = 0 :=
   DeterminantQuadratic.homogeneousComponent_one_eq_zero (K p r) p hP
 
-/-- The complete `dom:degree-gap` package for the original polynomial coefficient spaces. -/
+/-- The steps of the proof of Lemma H.7, for the determinant pair. -/
 theorem quadratic_coefficient_gap :
     (∀ n P, P ∈ G0poly p r → homogeneousComponent n P ∈ G0poly p r) ∧
     (∀ n P, P ∈ C0poly p r → homogeneousComponent n P ∈ C0poly p r) ∧
@@ -169,7 +177,7 @@ theorem quadratic_coefficient_gap :
     (∀ P, P ∈ C0poly p r → homogeneousComponent 1 P = 0) :=
   DeterminantQuadratic.quadratic_coefficient_gap (K p r) p
 
-/-- The exact constant-component obstruction used for the nonanalytic coordinate. -/
+/-- `no_coefficient_family` for the determinant pair. -/
 theorem no_coefficient_family :
     ¬ ∃ d : Fin p → C0poly p r, (d 0 : Poly0 p r) = 1 ∧
       (∑ i : Fin p, X i * (d i : Poly0 p r)) ∈ C0poly p r :=

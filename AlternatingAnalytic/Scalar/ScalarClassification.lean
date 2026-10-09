@@ -14,11 +14,10 @@ import Mathlib.Data.Nat.Prime.Factorial
 For a complete nonarchimedean nontrivially normed field `K` and a degree `k`, scalar pullback
 `u ↦ u^*` on `Alt^k(−; K)` is analytic on every Hom space if and only if `k! ≠ 0` in `K` or `K` is
 spherically complete; the same holds for Banach and for nonarchimedean Banach sources. The "if"
-direction combines the factorial-invertible case (`FactorialInvertible.lean`) with Theorem A for a
-spherically complete target (`SphericalAnalytic.lean`). The "only if" directions reduce to the
-existence of nowhere-analytic nonarchimedean Banach witnesses over a complete, non-spherically
-complete field of characteristic `p ≤ k` (Theorem 6.1(2)), which is taken here as the hypothesis
-`ScalarObstruction K k`; `k! = 0` in `K` forces `char K = p` prime with `p ≤ k`.
+direction combines the case `k! ≠ 0` (`FactorialInvertible.lean`) with Theorem 4.2
+(`SphericalAnalytic.lean`). The "only if" direction is proved here assuming the conclusion of
+Theorem 6.1(2), stated as `ScalarObstruction K k`; `ScalarClassification/Unconditional.lean`
+removes this hypothesis.
 -/
 
 open scoped Nat
@@ -55,7 +54,7 @@ theorem exists_charP_le_of_factorial_eq_zero {K : Type*} [Field K] {k : ℕ}
   · exact ⟨p, hp, hprime, (Nat.Prime.dvd_factorial hprime).1 hdvd⟩
   · exact absurd (Nat.eq_zero_of_zero_dvd hdvd) (Nat.factorial_ne_zero k)
 
-/-- **Theorem 6.3, "if" direction.** If `k! ≠ 0` in `K` or `K` is spherically complete, scalar
+/-- Theorem 6.3, "if" direction: if `k! ≠ 0` in `K` or `K` is spherically complete, scalar
 pullback on `Alt^k(−; K)` is analytic on every Hom space between normed spaces. -/
 theorem analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete
     (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] (k : ℕ)
@@ -85,8 +84,8 @@ theorem not_analytic_of_witness (K : Type u) [NontriviallyNormedField K] (k : �
   obtain ⟨E, D, _, _, _, _, _, _, _, _, hE⟩ := hw
   exact hE 0 (H E D 0 (Set.mem_univ _))
 
-/-- Under Theorem 6.1(2), analyticity on every nonarchimedean Banach Hom space forces `k! ≠ 0`
-in `K` or spherical completeness of `K`. -/
+/-- Assuming the conclusion of Theorem 6.1(2), analyticity on every nonarchimedean Banach Hom
+space forces `k! ≠ 0` in `K` or spherical completeness of `K`. -/
 theorem factorial_ne_zero_or_sphericallyComplete_of_analytic
     (K : Type u) [NontriviallyNormedField K] (k : ℕ) (hobs : ScalarObstruction K k)
     (H : ∀ (E D : Type u) [NormedAddCommGroup E] [NormedSpace K E] [CompleteSpace E]
@@ -102,7 +101,7 @@ theorem factorial_ne_zero_or_sphericallyComplete_of_analytic
   obtain ⟨p, hp, hprime, hpk⟩ := exists_charP_le_of_factorial_eq_zero (not_not.1 hk)
   exact not_analytic_of_witness K k (hobs p hprime.pos hpk hK) H
 
-/-- **Theorem 6.3, normed sources**, conditional on Theorem 6.1(2). -/
+/-- Theorem 6.3 for normed sources, assuming the conclusion of Theorem 6.1(2). -/
 theorem analytic_on_homs_iff
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ)
     (hobs : ScalarObstruction K k) :
@@ -117,7 +116,7 @@ theorem analytic_on_homs_iff
       H E D,
     fun h E D _ _ _ _ => analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete K k h E D⟩
 
-/-- **Theorem 6.3, Banach sources**, conditional on Theorem 6.1(2). -/
+/-- Theorem 6.3 for Banach sources, assuming the conclusion of Theorem 6.1(2). -/
 theorem analytic_on_homs_iff_banach
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ)
     (hobs : ScalarObstruction K k) :
@@ -132,7 +131,8 @@ theorem analytic_on_homs_iff_banach
       H E D,
     fun h E D _ _ _ _ _ _ => analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete K k h E D⟩
 
-/-- **Theorem 6.3, nonarchimedean Banach sources**, conditional on Theorem 6.1(2). -/
+/-- Theorem 6.3 for nonarchimedean Banach sources, assuming the conclusion of
+Theorem 6.1(2). -/
 theorem analytic_on_homs_iff_nonarchimedean_banach
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ)
     (hobs : ScalarObstruction K k) :

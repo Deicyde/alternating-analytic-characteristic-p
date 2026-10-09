@@ -19,34 +19,26 @@ On the Hom space `Hom_{Vec^op}(D, E) = L(E, D)` the functor acts by
 * The degree is `Fin k`; `k! ≠ 0 in K` is `(k.factorial : K) ≠ 0`.
 * "Complete nonarchimedean" is `[CompleteSpace K] [IsUltrametricDist K]`. "Spherically
   complete" is the library class `SphericallyCompleteSpace K` (every nonempty family of
-  pairwise-meeting closed balls has a common point), imported from the definition module
-  `AlternatingAnalytic.Analysis.SphericalCompleteness`; that module does not prove this claim
-  (it contains the extension lemma used for the positive direction).
-* "Analytic on every Hom space" is `AnalyticOnNhd K A^k_{E,D;K} Set.univ` for all objects.
-  Since the equivalence quantifies over all objects, these are taken in the universe of `K`.
-* The paper's §2 convention reads "analytic" for a functor as the `C^ω` class, which it does
-  not identify with having a power series at each point in general. The power-series form
-  (`AnalyticOnNhd`) is stated here. In this case the two readings agree: both positive arguments
-  give `CPolynomialAt`, hence `ContDiffAt K ω`, and the negative direction (Theorem 6.1(2)) gives
-  `¬ AnalyticAt`, which rules out `ContDiffAt K ω` (in Mathlib `ContDiffAt ω` implies
-  `AnalyticAt`). The `C^ω` form is not stated.
-* The functor is stated in hom coordinates via `ContinuousAlternatingMap.compContinuousLinearMapCLM`;
-  functoriality is not restated.
-* The three source categories are: all normed spaces; Banach spaces (`CompleteSpace`);
+  pairwise-meeting closed balls has a common point).
+* "Analytic on every Hom space" is `AnalyticOnNhd K A^k_{E,D;K} Set.univ` for all spaces in the
+  universe of `K`.
+* The paper's "analytic" means the class `C^ω`; the power-series form is stated here. The two
+  agree in this case: the positive directions give `CPolynomialAt`, and the negative direction
+  gives failure of `AnalyticAt`, which rules out `C^ω`.
+* The functor is stated in hom coordinates via
+  `ContinuousAlternatingMap.compContinuousLinearMapCLM`; functoriality is not restated.
+* The three source categories are all normed spaces, Banach spaces (`CompleteSpace`), and
   nonarchimedean Banach spaces (`CompleteSpace` and `IsUltrametricDist`).
 * `analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete` is the "if" direction for
-  arbitrary normed sources (the paper notes that both positive arguments allow them; it implies
-  the "if" directions of all three equivalences). It is listed separately because it is the part
-  supported by the library, while the "only if" directions need Theorem 6.1(2).
+  arbitrary normed sources; it gives the "if" direction of all three equivalences.
 -/
 
 namespace AlternatingAnalyticChallenge.Thm6_3
 
 universe u
 
-/-- **Theorem 6.3, "if" direction, arbitrary normed sources.** If `k! ≠ 0` in `K` or `K` is
-spherically complete, scalar pullback `u ↦ u^*` on `Alt^k(−; K)` is analytic on every Hom
-space. -/
+/-- Theorem 6.3, "if" direction: if `k! ≠ 0` in `K` or `K` is spherically complete, the
+pullback `u ↦ u^*` on `Alt^k(−; K)` is analytic on every Hom space. -/
 theorem analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ)
     (h : (k.factorial : K) ≠ 0 ∨ SphericallyCompleteSpace K)
@@ -58,7 +50,7 @@ theorem analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete
           (D [⋀^Fin k]→L[K] K) →L[K] (E [⋀^Fin k]→L[K] K))) Set.univ := by
   sorry
 
-/-- **Theorem 6.3, normed sources.** `Alt^k(−; K)` on `Vec_K^op` is analytic on every Hom space
+/-- Theorem 6.3, normed sources: `Alt^k(−; K)` on `Vec_K^op` is analytic on every Hom space
 if and only if `k! ≠ 0` in `K` or `K` is spherically complete. -/
 theorem analytic_on_homs_iff
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ) :
@@ -71,7 +63,7 @@ theorem analytic_on_homs_iff
     ((k.factorial : K) ≠ 0 ∨ SphericallyCompleteSpace K) := by
   sorry
 
-/-- **Theorem 6.3, Banach sources.** The same equivalence for Banach source spaces. -/
+/-- Theorem 6.3, Banach sources: the same equivalence for Banach source spaces. -/
 theorem analytic_on_homs_iff_banach
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ) :
     (∀ (E D : Type u) [NormedAddCommGroup E] [NormedSpace K E] [CompleteSpace E]
@@ -83,7 +75,7 @@ theorem analytic_on_homs_iff_banach
     ((k.factorial : K) ≠ 0 ∨ SphericallyCompleteSpace K) := by
   sorry
 
-/-- **Theorem 6.3, nonarchimedean Banach sources.** The same equivalence for nonarchimedean
+/-- Theorem 6.3, nonarchimedean Banach sources: the same equivalence for nonarchimedean
 Banach source spaces. -/
 theorem analytic_on_homs_iff_nonarchimedean_banach
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ) :

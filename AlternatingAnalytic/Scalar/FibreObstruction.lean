@@ -37,7 +37,7 @@ theorem evalFirst_detV'_compLinearMap :
     simp [firstCoords, Pi.single_apply, Fin.castSucc_inj]
   rw [h, detV', Module.Basis.det_self]
 
-/-- **Lemma F.4 (finite fibre obstruction).** If `k! = 0` in `κ`, no `k`-linear map
+/-- Lemma F.4: if `k! = 0` in `κ`, no `k`-linear map
 `τ : Hom_κ(κ^{k+1}, κ^k)^k → Alt^k_κ(κ^{k+1}; κ)` satisfies both conditions (1) and (2). -/
 theorem not_exists_fibre_map (hk : (k.factorial : κ) = 0) :
     ¬ ∃ τ : MultilinearMap κ (fun _ : Fin k => (Fin (k + 1) → κ) →ₗ[κ] (Fin k → κ))

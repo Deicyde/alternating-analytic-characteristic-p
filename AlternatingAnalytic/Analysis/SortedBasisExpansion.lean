@@ -2,7 +2,13 @@ import AlternatingAnalytic.Analysis.SortedBasisSummability
 import AlternatingAnalytic.Analysis.SortedBasisRetraction
 import Mathlib.Order.Filter.AtTopBot.Finset
 
-/-! The actual infinite sorted determinant expansion of a continuous alternating map. -/
+/-!
+# Sorted determinant expansion of alternating maps
+
+For an unconditional Schauder basis `b` and a continuous alternating map `a` into a complete
+ultrametric space, `a x = ∑_s det (b.coord (s_i) (x_j)) · a (b_s)`, summed unconditionally over
+the `n`-element subsets `s` of the index set, listed in increasing order.
+-/
 
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
@@ -15,7 +21,7 @@ variable {K I E F : Type*} [NontriviallyNormedField K]
   [LinearOrder I] [NormedAddCommGroup E] [NormedSpace K E]
   [NormedAddCommGroup F] [NormedSpace K F]
 
-/-- The n-element subsets contained in a specified finite set. -/
+/-- The `n`-element subsets of a finite set `A`. -/
 def sortedFiniteSubsets (n : ℕ) (A : Finset I) : Finset (Set.powersetCard I n) :=
   (A.powersetCard n).subtype (fun s : Finset I => s.card = n)
 
@@ -26,7 +32,7 @@ theorem mem_sortedFiniteSubsets (n : ℕ) (A : Finset I) (s : Set.powersetCard I
   simp [sortedFiniteSubsets, Finset.mem_powersetCard]
 
 omit [LinearOrder I] in
-/-- These finite subset families are cofinal among all finite collections of n-element sets. -/
+/-- `sortedFiniteSubsets n` tends to `atTop`. -/
 theorem tendsto_sortedFiniteSubsets (n : ℕ) :
     Tendsto (sortedFiniteSubsets (I := I) n) atTop atTop := by
   apply Monotone.tendsto_atTop_finset
@@ -36,7 +42,7 @@ theorem tendsto_sortedFiniteSubsets (n : ℕ) :
   · intro s
     exact ⟨s.val, (mem_sortedFiniteSubsets n s.val s).mpr Finset.Subset.rfl⟩
 
-/-- A finite coordinate projection regarded as a vector in the basis span. -/
+/-- The coordinate projection onto `A`, as a vector in the span of the basis. -/
 def schauderProjectionSpan (b : UnconditionalSchauderBasis I K E) (A : Finset I) (x : E) :
     Submodule.span K (Set.range b) :=
   ⟨b.proj A x, by
@@ -44,13 +50,13 @@ def schauderProjectionSpan (b : UnconditionalSchauderBasis I K E) (A : Finset I)
     exact Submodule.sum_mem _ fun i _ =>
       Submodule.smul_mem _ _ (Submodule.subset_span (Set.mem_range_self i))⟩
 
-/-- A finite coordinate projection keeps exactly the indicated coordinates. -/
+/-- The coordinate projection onto `A` keeps the coordinates in `A` and kills the others. -/
 theorem schauder_coord_proj (b : UnconditionalSchauderBasis I K E) (A : Finset I)
     (i : I) (x : E) : b.coord i (b.proj A x) = if i ∈ A then b.coord i x else 0 := by
   classical
   simp [b.proj_apply, b.ortho, Pi.single_apply, smul_eq_mul]
 
-/-- Projection cuts off a determinant coefficient unless every selected index is retained. -/
+/-- After projecting onto `A`, the determinant coefficient at `s` vanishes unless `s ⊆ A`. -/
 theorem sorted_coefficient_proj (b : UnconditionalSchauderBasis I K E) (n : ℕ)
     (A : Finset I) (x : Fin n → E) (s : Set.powersetCard I n) :
     (Matrix.of fun i j => b.coord (Set.powersetCard.ofFinEmbEquiv.symm s i)
@@ -74,7 +80,7 @@ theorem sorted_coefficient_proj (b : UnconditionalSchauderBasis I K E) (n : ℕ)
     intro l
     simp only [Matrix.of_apply, hj, schauder_coord_proj, ite_eq_right hiA]
 
-/-- The finite sorted expansion follows from the exterior-power basis formula. -/
+/-- The sum over `s ⊆ A` of the sorted terms is `a` evaluated at the projections onto `A`. -/
 theorem sum_sortedBasisTerm_eq_projection [IsUltrametricDist F]
     (b : UnconditionalSchauderBasis I K E) (n : ℕ)
     (a : E [⋀^Fin n]→L[K] F) (x : Fin n → E) (A : Finset I) :
@@ -117,7 +123,7 @@ theorem sum_sortedBasisTerm_eq_projection [IsUltrametricDist F]
   rw [hc, sorted_coefficient_proj, ite_eq_left ((mem_sortedFiniteSubsets n A s).mp hs)]
   rfl
 
-/-- The exact infinite sorted determinant expansion, for any continuous alternating map. -/
+/-- The sorted determinant expansion of a continuous alternating map. -/
 theorem hasSum_sortedBasisTerm [IsUltrametricDist F] [CompleteSpace F]
     (b : UnconditionalSchauderBasis I K E) (n : ℕ)
     (a : E [⋀^Fin n]→L[K] F) (x : Fin n → E) :

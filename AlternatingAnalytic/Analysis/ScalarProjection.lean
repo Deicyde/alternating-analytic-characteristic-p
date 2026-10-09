@@ -7,11 +7,11 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import Mathlib.Analysis.Normed.Operator.LinearIsometry
 
 /-!
-# Contracting scalar retractions from Ingleton extension
+# Contracting scalar projections
 
-The scalar projection in the characteristic-p paper is obtained by extending the inverse
-of the scalar embedding from its range. The extension is applied only to the ultrametric
-scalar domain, with the spherically complete base field as target.
+If `K` is spherically complete and `L ⊇ K` is an ultrametric normed field, Ingleton's theorem
+extends the identity of `K` to a `K`-linear map `ϖ : L → K` of norm at most one. This is
+Corollary D.4.
 -/
 
 namespace AlternatingAnalytic
@@ -53,9 +53,8 @@ theorem exists_scalar_retraction_of_linearIsometry (i : K →ₗᵢ[K] X) :
 
 end LinearIsometry
 
-/-- Ingleton's scalar projection: an ultrametric normed field extension of a spherically
-complete nontrivially normed field admits a contracting linear retraction to the base field.
-Neither field is given an additional completeness hypothesis. -/
+/-- Corollary D.4: an ultrametric normed extension `L` of a spherically complete field `K`
+has a `K`-linear retraction `L → K` of norm at most one. -/
 theorem exists_scalar_projection (K L : Type*) [NontriviallyNormedField K]
     [NormedField L] [NormedAlgebra K L] [IsUltrametricDist K] [IsUltrametricDist L]
     [SphericallyCompleteSpace K] :

@@ -9,10 +9,11 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Normed.Module.Multilinear.Curry
 
 /-!
-# Alternating forms on completed scalar extension
+# Base change of alternating forms
 
-This develops scalar extension of bounded forms for `sources/charp.tex`, lemma `forms-bc`.
-The construction first extends bounded linear maps and then curries multilinear maps.
+Defines the base change `m ↦ m_{K'}` of bounded alternating maps to the completed
+base change and shows it is a contraction (Lemma D.8). Bounded linear maps are extended first;
+multilinear maps are then extended one variable at a time by currying.
 -/
 
 open scoped TensorProduct
@@ -33,7 +34,7 @@ variable (K : Type*) (E L : Type u) [NontriviallyNormedField K]
 attribute [local instance] baseChangeModule baseChangeNormedAddCommGroup
   baseChangeNormedSpaceRestrictScalars baseChangeNormedSpace baseChangeIsScalarTower
 
-/-- The bilinear scalar extension formula on the actual algebraic tensor product. -/
+/-- The map `x ⊗ l ↦ l • f x` on the algebraic tensor product. -/
 def scalarExtensionTensorMap (f : E →L[K] G) : E ⊗[K] L →ₗ[K] G :=
   TensorProduct.lift (LinearMap.mk₂ K (fun x l => l • f x)
     (by intros; simp [map_add, smul_add])
@@ -47,7 +48,7 @@ omit [CompleteSpace K] [IsUltrametricDist K] [SphericallyCompleteSpace K]
 theorem scalarExtensionTensorMap_tmul (f : E →L[K] G) (x : E) (l : L) :
     scalarExtensionTensorMap K E L G f (x ⊗ₜ[K] l) = l • f x := rfl
 
-/-- The same tensor map is linear over the extension field. -/
+/-- `scalarExtensionTensorMap` as an `L`-linear map. -/
 def scalarExtensionTensorMapL (f : E →L[K] G) : E ⊗[K] L →ₗ[L] G where
   toFun := scalarExtensionTensorMap K E L G f
   map_add' := map_add _
@@ -75,7 +76,7 @@ noncomputable def scalarExtensionTensorContinuous (f : E →L[K] G) : E ⊗[K] L
   (scalarExtensionTensorMapL K E L G f).mkContinuous ‖f‖
     (norm_scalarExtensionTensorMap_le K E L G f)
 
-/-- Scalar extension of a bounded linear map into a complete extension-field space. -/
+/-- Base change of a bounded linear map into a complete `L`-space. -/
 noncomputable def scalarExtensionLinear (f : E →L[K] G) :
     CompletedBaseChange K E L →L[L] G :=
   (scalarExtensionTensorContinuous K E L G f).fromCompletion
@@ -109,7 +110,7 @@ theorem norm_scalarExtensionLinear_le (f : E →L[K] G) :
   ContinuousLinearMap.opNorm_le_bound _ (norm_nonneg f)
     (norm_scalarExtensionLinear_apply_le K E L G f)
 
-/-- The scalar-extension construction is linear in the original map. -/
+/-- `scalarExtensionLinear` is linear in the original map. -/
 noncomputable def scalarExtensionLinearFamily :
     (E →L[K] G) →ₗ[K] (CompletedBaseChange K E L →L[L] G) where
   toFun := scalarExtensionLinear K E L G
@@ -140,14 +141,14 @@ noncomputable def scalarExtensionLinearFamily :
       exact smul_comm l c (f x)
     | add x y hx hy => simp only [map_add, hx, hy, smul_add]
 
-/-- The scalar-extension family is a contraction. -/
+/-- `scalarExtensionLinear` as a contraction. -/
 noncomputable def scalarExtensionLinearFamilyContinuous :
     (E →L[K] G) →L[K] (CompletedBaseChange K E L →L[L] G) :=
   (scalarExtensionLinearFamily K E L G).mkContinuous 1 fun f => by
     change ‖scalarExtensionLinear K E L G f‖ ≤ 1 * ‖f‖
     simpa only [one_mul] using norm_scalarExtensionLinear_le K E L G f
 
-/-- The zero-variable scalar extension, keeping its constant value. -/
+/-- Base change of multilinear maps in zero variables. -/
 noncomputable def scalarExtensionMultilinearZero :
     (E [×0]→L[K] G) →L[K] (CompletedBaseChange K E L [×0]→L[L] G) :=
   LinearMap.mkContinuous
@@ -189,7 +190,7 @@ theorem norm_scalarExtensionMultilinearStep_apply_le {n : ℕ}
       (norm_nonneg m.curryLeft)
     _ = ‖m‖ := by simp
 
-/-- Scalar extension of continuous multilinear maps by iterated currying. -/
+/-- Base change of continuous multilinear maps by iterated currying. -/
 noncomputable def scalarExtensionMultilinear : (n : ℕ) →
     (E [×n]→L[K] G) →L[K] (CompletedBaseChange K E L [×n]→L[L] G)
   | 0 => scalarExtensionMultilinearZero K E L G
@@ -225,7 +226,7 @@ theorem scalarExtensionMultilinear_embedding (n : ℕ) (m : E [×n]→L[K] G)
     rw [ih]
     exact congrArg m (Fin.cons_self_tail x)
 
-/-- Strongly alternating scalar extension into a complete extension-field space. -/
+/-- Base change of an alternating map into a complete `L`-space. -/
 noncomputable def scalarExtensionAlternating (n : ℕ) (m : E [⋀^Fin n]→L[K] G) :
     CompletedBaseChange K E L [⋀^Fin n]→L[L] G where
   toContinuousMultilinearMap :=
@@ -245,7 +246,7 @@ theorem norm_scalarExtensionAlternating_le (n : ℕ) (m : E [⋀^Fin n]→L[K] G
     ‖scalarExtensionAlternating K E L G n m‖ ≤ ‖m‖ :=
   norm_scalarExtensionMultilinear_apply_le K E L G n m.toContinuousMultilinearMap
 
-/-- Scalar extension is linear in a strongly alternating form. -/
+/-- `scalarExtensionAlternating` is linear in the form. -/
 noncomputable def scalarExtensionAlternatingLinear (n : ℕ) :
     (E [⋀^Fin n]→L[K] G) →ₗ[K] (CompletedBaseChange K E L [⋀^Fin n]→L[L] G) where
   toFun := scalarExtensionAlternating K E L G n
@@ -259,7 +260,7 @@ noncomputable def scalarExtensionAlternatingLinear (n : ℕ) :
     change scalarExtensionMultilinear K E L G n (c • f.toContinuousMultilinearMap) = _
     exact map_smul _ _ _
 
-/-- The family of scalar-extension maps on alternating forms is a contraction. -/
+/-- `scalarExtensionAlternating` as a contraction. -/
 noncomputable def scalarExtensionAlternatingFamily (n : ℕ) :
     (E [⋀^Fin n]→L[K] G) →L[K] (CompletedBaseChange K E L [⋀^Fin n]→L[L] G) :=
   (scalarExtensionAlternatingLinear K E L G n).mkContinuous 1 fun m => by
@@ -275,7 +276,7 @@ variable (K : Type*) (E F L : Type u) [NontriviallyNormedField K]
   [NontriviallyNormedField L] [NormedAlgebra K L] [CompleteSpace K]
   [IsUltrametricDist K] [SphericallyCompleteSpace K] [IsUltrametricDist L]
 
-/-- The paper's completed scalar extension of alternating forms, as a K-linear family. -/
+/-- The base change `m ↦ m_{K'}` of alternating forms (Lemma D.8), as a `K`-linear map. -/
 noncomputable def baseChangeAlternatingForms (n : ℕ) :
     (E [⋀^Fin n]→L[K] F) →L[K]
       (CompletedBaseChange K E L [⋀^Fin n]→L[L] CompletedBaseChange K F L) :=

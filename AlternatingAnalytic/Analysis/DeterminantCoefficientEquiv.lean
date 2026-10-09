@@ -5,8 +5,11 @@ import Mathlib.LinearAlgebra.Determinant
 /-!
 # Top-degree coefficients on dense normed sources
 
-The target submodule need not be complete. Extension takes place only after its
-isometric inclusion into the complete scalar field.
+Let `j : E → H` be a dense linear isometry from a normed `K`-space into an `L`-space
+with basis `b`, and let `G` be a `K`-submodule of `L`, not necessarily complete. Every
+bounded alternating map `E^I → G` is `c • det_b ∘ j`, and the coefficient `c` gives an
+isometric equivalence with a coefficient submodule of `L`. This is the identification
+`Alt^p(E; G) = C det` of equations (H.2) and (H.4).
 -/
 
 noncomputable section
@@ -20,7 +23,7 @@ variable {K L E H I : Type*}
   [NormedAddCommGroup H] [NormedSpace K H] [NormedSpace L H]
   [IsScalarTower K L H] [CompleteSpace L] [Fintype I] [DecidableEq I]
 
-/-- Coefficients whose determinant form takes values in the original target. -/
+/-- The scalars `c` such that `c * det_b (j ∘ x)` lies in `G` for every tuple `x`. -/
 def determinantCoefficientSubmodule (j : E →ₗ[K] H) (b : Module.Basis I L H)
     (G : Submodule K L) : Submodule K L where
   carrier := {c | ∀ x : I → E, c * b.det (fun i => j (x i)) ∈ G}
@@ -33,7 +36,7 @@ variable (hKL : DenseRange (algebraMap K L))
   (j : E →ₗᵢ[K] H) (hj : DenseRange j) (b : Module.Basis I L H)
   (G : Submodule K L) (s : I → E) (hs : ∀ i, j (s i) = b i)
 
-/-- Extend an already alternating map into the complete field, preserving strong alternation. -/
+/-- The extension of a bounded alternating map `E^I → G` to an alternating map `H^I → L`. -/
 def denseAlternatingScalarExtension (m : E [⋀^I]→L[K] G) : H [⋀^I]→L[L] L :=
   let q := denseScalarFamilyExtension hKL (fun _ : I => j) (fun _ => hj)
     (G.subtypeL.compContinuousMultilinearMap m.toContinuousMultilinearMap)
@@ -51,7 +54,7 @@ theorem denseAlternatingScalarExtension_apply (m : E [⋀^I]→L[K] G) (x : I �
     denseAlternatingScalarExtension hKL j hj G m (fun i => j (x i)) = (m x : L) :=
   denseScalarFamilyExtension_apply hKL (fun _ : I => j) (fun _ => hj) _ x
 
-/-- The complete-field extension retains the original operator norm. -/
+/-- The extension has the same operator norm. -/
 @[simp]
 theorem norm_denseAlternatingScalarExtension (m : E [⋀^I]→L[K] G) :
     ‖denseAlternatingScalarExtension hKL j hj G m‖ = ‖m‖ := by
@@ -62,7 +65,7 @@ theorem norm_denseAlternatingScalarExtension (m : E [⋀^I]→L[K] G) :
     G.subtypeₗᵢ m.toContinuousMultilinearMap
 
 include hs in
-/-- Determinant uniqueness describes the extension at every ambient tuple. -/
+/-- The extension is `m s` times the determinant, where `j ∘ s = b`. -/
 theorem denseAlternatingScalarExtension_eq_coefficient_det
     (m : E [⋀^I]→L[K] G) (x : I → H) :
     denseAlternatingScalarExtension hKL j hj G m x = (m s : L) * b.det x := by
@@ -75,7 +78,7 @@ theorem denseAlternatingScalarExtension_eq_coefficient_det
   simpa only [q, denseAlternatingScalarExtension_apply] using hq
 
 include hKL hj hs in
-/-- Top-degree uniqueness is applied over the complete extension field. -/
+/-- A bounded alternating map `E^I → G` is `m s` times the determinant, where `j ∘ s = b`. -/
 theorem alternating_eq_coefficient_mul_det (m : E [⋀^I]→L[K] G) (x : I → E) :
     (m x : L) = (m s : L) * b.det (fun i => j (x i)) := by
   let q := denseAlternatingScalarExtension hKL j hj G m
@@ -86,7 +89,7 @@ theorem alternating_eq_coefficient_mul_det (m : E [⋀^I]→L[K] G) (x : I → E
   rw [← hs'] at hq
   simpa only [q, denseAlternatingScalarExtension_apply] using hq
 
-/-- Evaluation on the normalized basis takes values in the coefficient submodule. -/
+/-- Evaluation at `s`, as a linear map into the coefficient submodule. -/
 def determinantCoefficientLinearMap :
     (E [⋀^I]→L[K] G) →ₗ[K] determinantCoefficientSubmodule j.toLinearMap b G where
   toFun m := ⟨(m s : L), fun x => by
@@ -96,13 +99,13 @@ def determinantCoefficientLinearMap :
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
-/-- Restrict scalars on the determinant before restricting its inputs. -/
+/-- The determinant `det_b ∘ j`, as a `K`-alternating map on `E`. -/
 def determinantOnDenseSource : E [⋀^I]→ₗ[K] L :=
   ({ b.det with
       toMultilinearMap := b.det.toMultilinearMap.restrictScalars K } :
     H [⋀^I]→ₗ[K] L).compLinearMap j.toLinearMap
 
-/-- The algebraic inverse uses the actual determinant and the inherited target submodule. -/
+/-- The map `c ↦ c • det_b ∘ j`, inverse to evaluation at `s`. -/
 def determinantCoefficientInverse (c : determinantCoefficientSubmodule j.toLinearMap b G)
     (hdet : ∀ x : I → E, ‖b.det (fun i => j (x i))‖ ≤ ∏ i, ‖x i‖) :
     E [⋀^I]→L[K] G :=
@@ -120,7 +123,8 @@ theorem determinantCoefficientInverse_apply
     (determinantCoefficientInverse j b G c hdet x : L) =
       (c : L) * b.det (fun i => j (x i)) := rfl
 
-/-- Exact coefficient extraction, including empty index types. -/
+/-- Coefficient extraction is a linear isometric equivalence onto the coefficient submodule.
+The index type `I` may be empty. -/
 def determinantCoefficientEquiv (hnorm : ∀ i, ‖s i‖ = 1)
     (hdet : ∀ x : I → E, ‖b.det (fun i => j (x i))‖ ≤ ∏ i, ‖x i‖) :
     (E [⋀^I]→L[K] G) ≃ₗᵢ[K] determinantCoefficientSubmodule j.toLinearMap b G where

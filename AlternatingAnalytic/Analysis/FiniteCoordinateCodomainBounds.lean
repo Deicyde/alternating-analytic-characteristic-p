@@ -2,7 +2,12 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateDeterminant
 import AlternatingAnalytic.Analysis.LiftCriterion
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
-/-! Ordinary norm estimates for the codomain-coordinate determinant lift. -/
+/-!
+# Norm bounds for the codomain determinant lift
+
+The triangle-inequality bound for the determinant lift of Proposition 4.1(2), with an
+explicit real constant `finiteCoordinateCodomainBound`.
+-/
 
 noncomputable section
 
@@ -17,7 +22,7 @@ variable {K E E' F : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup F] [NormedSpace K F]
   {d : ℕ}
 
-/-- A continuous coordinate functional on the finite-coordinate codomain. -/
+/-- A coordinate functional of `b`, as a continuous linear map. -/
 def finiteCoordinateCodomainFunctional (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (i : Fin d) : E' →L[K] K :=
   ⟨b.coord i, hb i⟩
@@ -26,7 +31,7 @@ def finiteCoordinateCodomainFunctional (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (i : Fin d) (x : E') :
     finiteCoordinateCodomainFunctional b hb i x = b.coord i x := rfl
 
-/-- The explicit real norm constant in the codomain-coordinate construction. -/
+/-- The norm constant of the codomain determinant lift. -/
 def finiteCoordinateCodomainBound (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) : ℝ :=
   (k.factorial : ℝ) * ∑ s : Set.powersetCard (Fin d) k,
@@ -40,7 +45,7 @@ theorem finiteCoordinateCodomainBound_nonneg (b : Basis (Fin d) K E')
   unfold finiteCoordinateCodomainBound
   positivity
 
-/-- The ordinary triangle-inequality bound, with a separate operator in each row. -/
+/-- The triangle-inequality bound, with a separate operator in each row. -/
 theorem norm_finiteCoordinateCodomain_sum_le (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ)
     (f : Fin k → E →L[K] E') (m : E' [⋀^Fin k]→L[K] F) (x : Fin k → E) :
@@ -84,7 +89,7 @@ theorem norm_finiteCoordinateCodomain_sum_le (b : Basis (Fin d) K E')
     _ = _ := by
       simp only [finiteCoordinateCodomainBound, Finset.sum_mul, Finset.mul_sum]
 
-/-- There are no increasing tuples above the coordinate dimension. -/
+/-- There are no `k`-element subsets of `Fin d` when `d < k`. -/
 theorem finiteCoordinateCodomainIndices_isEmpty {d k : ℕ} (h : d < k) :
     IsEmpty (Set.powersetCard (Fin d) k) := by
   refine ⟨fun s => ?_⟩

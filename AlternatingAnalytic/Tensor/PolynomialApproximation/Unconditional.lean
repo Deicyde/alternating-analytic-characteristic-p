@@ -9,11 +9,10 @@ import AlternatingAnalytic.Tensor.L1Projection.Optimal
 /-!
 # Corollary G.5
 
-Corollary G.5 for `P = ℓ¹(ℕ,K)`: the conditional statement of `Corollary.lean` with its
-hypothesis, the factorial lower bound on projection norms, discharged by Proposition G.4
-(`L1Projection.factorial_le_norm_of_projection`). The two spellings of `T_n(P)` and `Δ_n(P)` (the
-library's `HomogeneousTensorReflection` and the universe-polymorphic copies of `L1Projection`)
-agree definitionally.
+Corollary G.5 for `P = ℓ¹(ℕ,K)`: the statement of `Corollary.lean`, with its hypothesis (the
+factorial lower bound on projection norms) discharged by Proposition G.4
+(`L1Projection.factorial_le_norm_of_projection`). The library's `TensorPower` and `DiagonalSpan`
+agree definitionally with the copies in `L1Projection`.
 -/
 
 open Filter
@@ -34,7 +33,7 @@ theorem factorial_le_norm_projection_l1
     (n.factorial : ℝ) ≤ ‖R‖ :=
   L1Projection.factorial_le_norm_of_projection (K := K) (I := ℕ) n R hR
 
-/-- **Corollary G.5.** On the unit ball of `ℓ¹(ℕ,K)` over a complete nonarchimedean field there
+/-- Corollary G.5: on the unit ball of `ℓ¹(ℕ,K)` over a complete nonarchimedean field there
 is a map analytic into `Z`, `C^∞` into a closed subspace `W`, not analytic into `W` at `0`, and a
 locally uniform limit of entire `W`-valued polynomials. -/
 theorem exists_smooth_nonanalytic_polynomial_limit

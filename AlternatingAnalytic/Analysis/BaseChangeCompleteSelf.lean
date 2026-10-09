@@ -9,12 +9,10 @@ import Mathlib.Topology.ContinuousMap.Bounded.Normed
 /-!
 # Completed base change along the identity extension
 
-When the extension field equals the base field, every algebraic tensor `u ∈ V ⊗_K K` is the
-pure tensor `rid u ⊗ 1` (`x ⊗ λ = λx ⊗ 1`), so the dense inclusion into the completion has the
-same range as the canonical isometry `ι_V`. For complete `V` this range is closed, hence
-`ι_V : V → V ⊗̂_π K` is a surjective linear isometry. Consequently the completed base change
-of an ultrametric Banach space (for instance `ℓ^∞(ℕ, K)`) is again ultrametric. This is
-Remark E.2 of the paper (the case `K₁ = K̂`).
+When the extension field is the base field, every tensor in `V ⊗_K K` is a pure tensor
+`v ⊗ 1`, so for complete `V` the isometry `ι_V : V → V ⊗̂_π K` is surjective. Hence the
+completed base change of an ultrametric Banach space, such as `ℓ^∞(ℕ, K)`, is ultrametric.
+This is Remark E.2 (the case `K₁ = K̂`).
 -/
 
 open scoped TensorProduct BoundedContinuousFunction
@@ -84,7 +82,7 @@ theorem isUltrametricDist_completedBaseChange_self_of [CompleteSpace V] [IsUltra
 
 end Self
 
-/-- Bounded continuous functions into an ultrametric space carry the ultrametric sup distance. -/
+/-- The sup distance on bounded continuous functions into an ultrametric space is ultrametric. -/
 theorem BoundedContinuousFunction.isUltrametricDist {α β : Type*} [TopologicalSpace α]
     [PseudoMetricSpace β] [IsUltrametricDist β] : IsUltrametricDist (α →ᵇ β) := by
   constructor

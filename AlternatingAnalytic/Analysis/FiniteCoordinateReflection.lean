@@ -3,11 +3,11 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateLift
 import Mathlib.Analysis.Analytic.Within
 
 /-!
-# Finite coordinate analytic reflection through closed subspaces
+# Finite-coordinate analytic reflection
 
-Analyticity reflects through closed linear isometric embeddings when the parameter
-space has finitely many continuous coordinates. No completeness or restriction on
-the characteristic of the field is imposed.
+Let `j : F → G` be a closed linear isometry and let the parameter space be boundedly
+isomorphic to `K^d`. Then `f` is analytic if and only if `j ∘ f` is (Theorem 4.4).
+Neither the field nor the spaces need be complete.
 -/
 
 noncomputable section
@@ -48,8 +48,8 @@ theorem radius_pos_of_exponential_bound
         ring]
       rw [mul_assoc, ← mul_pow, mul_inv_cancel₀ hb.ne', one_pow, mul_one]
 
-/-- A series whose diagonals lift with an exponential bound still represents the
-given map into the subspace. Convergence is reflected by the induced topology. -/
+/-- A subspace-valued series with the same diagonals and coefficients bounded by
+`a ^ n ‖p n‖` makes `f` analytic. -/
 theorem analyticAt_of_subspace_series
     (W : Submodule K F) {f : E → W} {x : E}
     {p : FormalMultilinearSeries K E F}
@@ -68,8 +68,8 @@ theorem analyticAt_of_subspace_series
   change HasSum (fun n => (q n (fun _ => y) : F)) (f (x + y) : F)
   simpa only [hdiag] using hsum
 
-/-- Finite coordinate power series with values in a closed subspace lift analytically
-to that subspace, including over incomplete fields and in positive characteristic. -/
+/-- On `Fin d → K`, a map into a closed subspace is analytic if it is analytic as a
+map into the ambient space. -/
 theorem analyticAt_subtype_of_finite_coordinates {d : ℕ}
     (W : Submodule K F) (hW : IsClosed (W : Set F))
     {f : (Fin d → K) → W} {x : Fin d → K}
@@ -83,8 +83,7 @@ theorem analyticAt_subtype_of_finite_coordinates {d : ℕ}
     FiniteCoordinateReflection.exists_lift W (p n) (hmem n)
   exact analyticAt_of_subspace_series W hp q (Nat.cast_nonneg d) hnorm hdiag
 
-/-- Analyticity on a standard finite coordinate space reflects through a closed
-linear isometric embedding. Neither the field nor the spaces need be complete. -/
+/-- On `Fin d → K`, analyticity reflects through a closed linear isometry. -/
 theorem analyticAt_of_closed_linearIsometry {d : ℕ}
     (j : F →ₗᵢ[K] G) (hj : IsClosed (Set.range j))
     {f : (Fin d → K) → F} {x : Fin d → K}
@@ -96,8 +95,7 @@ theorem analyticAt_of_closed_linearIsometry {d : ℕ}
   change AnalyticAt K (fun y => j.equivRange.symm (j.equivRange (f y))) x at h
   simpa only [LinearIsometryEquiv.symm_apply_apply] using h
 
-/-- The finite coordinate reflection theorem on an open domain. A map defined
-only on the domain can be represented by any extension outside it. -/
+/-- Analytic reflection on an open subset of `Fin d → K`. -/
 theorem analyticOn_of_closed_linearIsometry {d : ℕ}
     (j : F →ₗᵢ[K] G) (hj : IsClosed (Set.range j))
     {U : Set (Fin d → K)} (hU : IsOpen U) {f : (Fin d → K) → F}
@@ -107,8 +105,8 @@ theorem analyticOn_of_closed_linearIsometry {d : ℕ}
   exact analyticAt_of_closed_linearIsometry j hj
     (hU.analyticOn_iff_analyticOnNhd.mp hf x hx)
 
-/-- Reflection also holds in any parameter space with continuous finite coordinates.
-The coordinate equivalence is explicit because the base field may be incomplete. -/
+/-- Analytic reflection on a space boundedly isomorphic to `Fin d → K` (Theorem 4.4).
+The isomorphism is a hypothesis because `K` may be incomplete. -/
 theorem analyticAt_of_closed_linearIsometry_of_equiv {d : ℕ}
     (e : E ≃L[K] (Fin d → K)) (j : F →ₗᵢ[K] G) (hj : IsClosed (Set.range j))
     {f : E → F} {x : E} (hf : AnalyticAt K (j ∘ f) x) : AnalyticAt K f x := by
@@ -129,8 +127,7 @@ theorem analyticOn_of_closed_linearIsometry_of_equiv {d : ℕ}
   exact analyticAt_of_closed_linearIsometry_of_equiv e j hj
     (hU.analyticOn_iff_analyticOnNhd.mp hf x hx)
 
-/-- The subtype-domain formulation: extend the given `f : U → F` by zero solely
-to express Mathlib's `AnalyticOn` predicate on its open domain. -/
+/-- Analytic reflection for `f : U → F`, extended by zero to state `AnalyticOn`. -/
 theorem analyticOn_extend_of_closed_linearIsometry {d : ℕ}
     (j : F →ₗᵢ[K] G) (hj : IsClosed (Set.range j))
     {U : Set (Fin d → K)} (hU : IsOpen U) (f : U → F)

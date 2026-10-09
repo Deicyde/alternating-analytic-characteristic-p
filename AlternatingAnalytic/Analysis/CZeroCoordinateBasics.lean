@@ -3,10 +3,11 @@ import Mathlib.Analysis.Normed.Operator.Basic
 import Mathlib.Topology.Order.MonotoneConvergence
 
 /-!
-# Coordinates and finite truncations in discrete `C₀`
+# Coordinates and finite truncations in `C₀(I, K)`
 
-All norms below are the supremum norm inherited from bounded continuous maps.
-The scalar field need not be complete, and the index type has no cardinality restriction.
+Coordinate vectors, coordinate evaluations and finite truncations on `C₀(I, K)` for a
+discrete index type `I`, with the sup norm. Truncations converge to every vector, so
+finitely supported vectors are dense.
 -/
 
 noncomputable section
@@ -47,12 +48,12 @@ def coordinate (i : I) : C₀(I, K) := by
   rfl
 
 omit [DiscreteTopology I] in
-/-- Pointwise values are bounded by the genuine supremum norm. -/
+/-- Pointwise values are bounded by the sup norm. -/
 theorem norm_apply_le (x : C₀(I, K)) (i : I) : ‖x i‖ ≤ ‖x‖ :=
   BoundedContinuousFunction.norm_coe_le_norm x.toBCF i
 
 omit [DiscreteTopology I] in
-/-- The supremum-norm characterization, valid also when the index type is empty. -/
+/-- The sup norm is at most `C` iff every value is. -/
 theorem norm_le {x : C₀(I, K)} {C : ℝ} (hC : 0 ≤ C) :
     ‖x‖ ≤ C ↔ ∀ i, ‖x i‖ ≤ C :=
   BoundedContinuousFunction.norm_le hC
@@ -78,7 +79,7 @@ omit [DiscreteTopology I] in
 theorem norm_evalCLM_le (i : I) : ‖evalCLM (K := K) i‖ ≤ 1 :=
   LinearMap.mkContinuous_norm_le _ zero_le_one _
 
-/-- Retain the coordinates in the finite set `s`. -/
+/-- Keep the coordinates in the finite set `s` and set the others to zero. -/
 def truncate (s : Finset I) (x : C₀(I, K)) : C₀(I, K) := by
   classical
   exact ofFiniteSupport (fun i => if i ∈ s then x i else 0) (by
@@ -130,7 +131,7 @@ def truncation (s : Finset I) : C₀(I, K) →L[K] C₀(I, K) :=
 theorem norm_truncation_le (s : Finset I) : ‖truncation (K := K) s‖ ≤ 1 :=
   LinearMap.mkContinuous_norm_le _ zero_le_one _
 
-/-- Truncation is the finite coordinate expansion of a vector. -/
+/-- A truncation is the finite sum of its coordinates. -/
 theorem truncation_eq_sum (s : Finset I) (x : C₀(I, K)) :
     truncation s x = ∑ i ∈ s, x i • coordinate (K := K) i := by
   classical
@@ -139,7 +140,7 @@ theorem truncation_eq_sum (s : Finset I) (x : C₀(I, K)) :
   rw [map_sum]
   simp [map_smul, mul_ite]
 
-/-- The cofinite decay property of a discrete `C₀` vector. -/
+/-- An element of `C₀(I, K)` tends to zero along the cofinite filter. -/
 theorem tendsto_cofinite (x : C₀(I, K)) : Tendsto x cofinite (𝓝 0) := by
   simpa only [Filter.cocompact_eq_cofinite] using zero_at_infty x
 
@@ -165,16 +166,15 @@ theorem tendsto_truncation (x : C₀(I, K)) :
       exact hi (hs (hfin.mem_toFinset.mpr h))
     simpa [hi] using hxi.le
 
-/-- Finitely supported vectors are dense, without completeness of the field. -/
+/-- Finitely supported vectors are dense. -/
 theorem dense_finiteSupport :
     Dense {x : C₀(I, K) | (x : I → K).HasFiniteSupport} := by
   intro x
   exact mem_closure_of_tendsto (tendsto_truncation x)
     (Eventually.of_forall fun s => truncate_hasFiniteSupport s x)
 
-/-- The coordinate calculus for supremum-norm `C₀` over an arbitrary discrete index
-space. The coordinate maps and truncations are contractions, and finite truncation
-converges to every vector, giving finite-support density. -/
+/-- Summary of this file: coordinates and truncations are contractions, truncations
+converge, and finitely supported vectors are dense. -/
 theorem coordinate_calculus :
     (∀ i j : I, coordinate (K := K) i j = if j = i then 1 else 0) ∧
     (∀ i : I, ‖coordinate (K := K) i‖ ≤ 1) ∧

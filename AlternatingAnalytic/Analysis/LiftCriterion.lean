@@ -1,11 +1,3 @@
-/-
-Characteristic-free bounded-lift criterion and transfer for precomposition on continuous
-alternating maps. No completeness assumptions are used.
-
-Source: round24/charp/lean/Transfer.lean, integrated on 2026-09-23.
-Original declaration names in `Round24Transfer` are retained for paper references.
-Provenance and verification: planning/charp-paper/planning/integration-manifest.json.
--/
 import Mathlib.Analysis.Analytic.Uniqueness
 import Mathlib.Analysis.Analytic.Constructions
 import Mathlib.Analysis.Analytic.CPolynomial
@@ -14,11 +6,28 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Normed.Module.Alternating.Uncurry.Fin
 import Mathlib.Analysis.Calculus.ContDiff.CPolynomial
 
+/-!
+# Bounded lifts and analyticity of precomposition
+
+The precomposition map `Q f = (m ↦ m ∘ (f, …, f))` on continuous alternating maps is analytic at
+one point if and only if it has a bounded `k`-linear lift, and then it is a continuous polynomial
+everywhere (Proposition 3.3). Lifts also transfer along conjugation, source equivalences, target
+retracts, reindexing, and from `(E × 𝕜, E' × 𝕜)` to `(E, E')`. Neither completeness nor a
+hypothesis on the characteristic is used.
+
+## Main results
+
+* `tfae_Q`: bounded lift, polynomial everywhere, analytic somewhere, `C^ω` are equivalent.
+* `hasBoundedLift_of_hasBoundedLift_succ`: a lift in degree `n + 1` on `(E × 𝕜, E' × 𝕜, F)`
+  gives a lift in degree `n` on `(E, E', F)`.
+* `hasBoundedLift_reindex`: the lift property depends only on the number of arguments.
+-/
+
 open scoped ContDiff
 
 namespace Round24Transfer
 
-/-! ## Part 1. One-variable top-coefficient identification (series-specific form) -/
+/-! ## The top coefficient of a power series along lines -/
 
 section Extraction
 
@@ -70,9 +79,8 @@ lemma hasFPowerSeriesAt_shift {Q : X → Z} {x₀ : X} {p : FormalMultilinearSer
   exact ⟨r, { r_le := hr.r_le, r_pos := hr.r_pos,
               hasSum := fun {y} hy => by simpa using hr.hasSum hy }⟩
 
-/-- **Series-specific top-coefficient identification.** If `Q` has the power series `p` at `x₀`,
-and along every line through `x₀` the map `Q` is a polynomial of degree `≤ k` with coefficient
-functions `B r`, then the `k`-th term of the *given* series `p` has diagonal `B k`. -/
+/-- If `Q` has power series `p` at `x₀` and `Q (x₀ + t • x) = ∑_{r ≤ k} t ^ r • B r x`, then the
+`k`-th term of `p` has diagonal `B k`. -/
 theorem coeff_eq_of_hasFPowerSeriesAt (Q : X → Z) (x₀ : X) (k : ℕ) (B : ℕ → X → Z)
     (hB : ∀ (t : 𝕜) (x : X), Q (x₀ + t • x) = ∑ r ∈ Finset.range (k + 1), t ^ r • B r x)
     (p : FormalMultilinearSeries 𝕜 X Z) (hp : HasFPowerSeriesAt Q p x₀) :
@@ -97,10 +105,8 @@ theorem coeff_eq_of_hasFPowerSeriesAt (Q : X → Z) (x₀ : X) (k : ℕ) (B : �
   simp only [Function.comp_def, huapp, one_smul, Finset.prod_const_one] at key
   simpa using key
 
-/-- **Ambient form of the extraction (the repaired step (iv) ⇒ (i)).** Let `j : Z →L W` be
-injective. If `Q : X → Z` has power series `p` at `x₀` (in `Z`), and the *ambient* identity
-`j (Q (x₀ + t • x)) = ∑_{r ≤ k} t ^ r • B r x` holds in `W` with top coefficient
-`B k x = j (Qtop x)`, then the `k`-th term of the `Z`-valued series `p` has diagonal `Qtop`. -/
+/-- Version of `coeff_eq_of_hasFPowerSeriesAt` where the line expansion holds only after an
+injective map `j : Z →L W`, with top coefficient `j ∘ Qtop`. -/
 theorem coeff_eq_of_ambient (Q : X → Z) (x₀ : X) (k : ℕ) (B : ℕ → X → W) (j : Z →L[𝕜] W)
     (hj : Function.Injective j) (Qtop : X → Z)
     (hB : ∀ (t : 𝕜) (x : X), j (Q (x₀ + t • x)) = ∑ r ∈ Finset.range (k + 1), t ^ r • B r x)
@@ -120,7 +126,7 @@ theorem coeff_eq_of_ambient (Q : X → Z) (x₀ : X) (k : ℕ) (B : ℕ → X �
 
 end Extraction
 
-/-! ## Part 2. Line expansion of a continuous multilinear map on the diagonal -/
+/-! ## Line expansion of a multilinear map on the diagonal -/
 
 section LineExpansion
 
@@ -137,7 +143,7 @@ noncomputable def lineCoeff (A : ContinuousMultilinearMap 𝕜 (fun _ : ι => X)
   ∑ s ∈ (Finset.univ : Finset (Finset ι)).filter (fun s => s.card = r),
     A (s.piecewise (fun _ => h) (fun _ => x₀))
 
-/-- **Line expansion of a multilinear map on the diagonal.** -/
+/-- Expansion of `t ↦ A (x₀ + t • h, …, x₀ + t • h)` in powers of `t`. -/
 theorem map_diag_add_smul (A : ContinuousMultilinearMap 𝕜 (fun _ : ι => X) W) (x₀ h : X)
     (t : 𝕜) :
     A (fun _ => x₀ + t • h) =
@@ -177,7 +183,7 @@ theorem lineCoeff_card (A : ContinuousMultilinearMap 𝕜 (fun _ : ι => X) W) (
 
 end LineExpansion
 
-/-! ## Part 3. T1 for precomposition on continuous alternating maps -/
+/-! ## Bounded lifts and analyticity -/
 
 section T1
 
@@ -210,8 +216,8 @@ lemma jAmb_injective : Function.Injective (jAmb 𝕜 ι E E' F) := by
   simpa only [jAmb_apply_apply] using this
 
 variable (𝕜 ι E E' F) in
-/-- The ambient lift `A (f₁, …, f_k) m = m ∘ (f₁, …, f_k)`, valued in `L(Alt(E',F), Mult(E,F))`.
-It always exists; this is why the ambient space alone carries no information. -/
+/-- The multilinear lift `(f₁, …, f_k) ↦ (m ↦ m ∘ (f₁, …, f_k))`, valued in
+`L(Alt(E',F), Mult(E,F))`. -/
 noncomputable def ambLift : ContinuousMultilinearMap 𝕜 (fun _ : ι => E →L[𝕜] E')
     ((E' [⋀^ι]→L[𝕜] F) →L[𝕜] ContinuousMultilinearMap 𝕜 (fun _ : ι => E) F) :=
   ((ContinuousLinearMap.compL 𝕜 (E' [⋀^ι]→L[𝕜] F) (ContinuousMultilinearMap 𝕜 (fun _ : ι => E') F)
@@ -225,8 +231,7 @@ lemma ambLift_diag (f : E →L[𝕜] E') :
   ext m x
   rfl
 
-/-- **Key step of T1, (iv) ⇒ (i), repaired form.** If `Q` has power series `p` at *any* base point
-`f₀`, then the `card ι`-th term of `p` is a bounded `card ι`-linear lift of `Q`. -/
+/-- If `Q` has power series `p` at some `f₀`, the `card ι`-th term of `p` is a lift of `Q`. -/
 theorem coeff_card_eq_Q {p} {f₀ : E →L[𝕜] E'}
     (hp : HasFPowerSeriesAt (𝕜 := 𝕜) (Q 𝕜 ι E E' F) p f₀) (h : E →L[𝕜] E') :
     p (Fintype.card ι) (fun _ => h) = Q 𝕜 ι E E' F h := by
@@ -259,13 +264,13 @@ def HasBoundedLift : Prop :=
       ((E' [⋀^ι]→L[𝕜] F) →L[𝕜] (E [⋀^ι]→L[𝕜] F)),
     ∀ f, P (fun _ => f) = Q 𝕜 ι E E' F f
 
-/-- (iv) ⇒ (i). -/
+/-- Analyticity at one point gives a bounded lift. -/
 theorem hasBoundedLift_of_analyticAt {f₀ : E →L[𝕜] E'} (h : AnalyticAt 𝕜 (Q 𝕜 ι E E' F) f₀) :
     HasBoundedLift 𝕜 ι E E' F := by
   obtain ⟨p, hp⟩ := h
   exact ⟨p (Fintype.card ι), coeff_card_eq_Q hp⟩
 
-/-- (i) ⇒ (ii), for a lift of any arity. -/
+/-- A bounded lift of any arity makes `Q` a continuous polynomial at every point. -/
 theorem cpolynomialAt_of_lift {n : ℕ} (P : ContinuousMultilinearMap 𝕜 (fun _ : Fin n => E →L[𝕜] E')
       ((E' [⋀^ι]→L[𝕜] F) →L[𝕜] (E [⋀^ι]→L[𝕜] F)))
     (hP : ∀ f, P (fun _ => f) = Q 𝕜 ι E E' F f) (f₀ : E →L[𝕜] E') :
@@ -277,8 +282,8 @@ theorem cpolynomialAt_of_lift {n : ℕ} (P : ContinuousMultilinearMap 𝕜 (fun 
     (ContinuousLinearMap.cpolynomialAt
       (ContinuousLinearMap.pi fun _ : Fin n => ContinuousLinearMap.id 𝕜 (E →L[𝕜] E')) f₀)
 
-/-- **T1 (LEAN).** The six conditions are equivalent. Items 5–6 (`C^ω` in Mathlib's sense, globally
-or at one point) were added in repair round 1; no completeness is needed anywhere. -/
+/-- Bounded lift, continuous polynomial everywhere, analytic everywhere, analytic somewhere,
+`C^ω`, and `C^ω` somewhere are equivalent. -/
 theorem tfae_Q : List.TFAE
     [HasBoundedLift 𝕜 ι E E' F,
      ∀ f₀, CPolynomialAt 𝕜 (Q 𝕜 ι E E' F) f₀,
@@ -295,19 +300,18 @@ theorem tfae_Q : List.TFAE
   tfae_have 6 → 4 := fun ⟨f₀, h⟩ => ⟨f₀, h.analyticAt⟩
   tfae_finish
 
-/-- **`C^ω` form of T1 (LEAN).** The project question "is `Q` of class `C^ω`?" is exactly the
-bounded-lift question. -/
+/-- `Q` is `C^ω` if and only if it has a bounded lift. -/
 theorem contDiff_omega_iff_hasBoundedLift :
     ContDiff 𝕜 ω (Q 𝕜 ι E E' F) ↔ HasBoundedLift 𝕜 ι E E' F :=
   (tfae_Q (𝕜 := 𝕜) (ι := ι) (E := E) (E' := E') (F := F)).out 5 1
 
-/-- **Dichotomy.** Analytic at one point ⇒ continuously polynomial at every point. -/
+/-- If `Q` is analytic at one point, it is a continuous polynomial at every point. -/
 theorem cpolynomialAt_of_analyticAt {f₀ : E →L[𝕜] E'} (h : AnalyticAt 𝕜 (Q 𝕜 ι E E' F) f₀)
     (f₁ : E →L[𝕜] E') : CPolynomialAt 𝕜 (Q 𝕜 ι E E' F) f₁ := by
   obtain ⟨P, hP⟩ := hasBoundedLift_of_analyticAt h
   exact cpolynomialAt_of_lift P hP f₁
 
-/-- **Nowhere-analytic transfer.** Not analytic at one point ⇒ analytic at no point. -/
+/-- If `Q` is not analytic at one point, it is analytic at no point. -/
 theorem not_analyticAt_of_not_analyticAt {f₀ : E →L[𝕜] E'} (h : ¬ AnalyticAt 𝕜 (Q 𝕜 ι E E' F) f₀)
     (f₁ : E →L[𝕜] E') : ¬ AnalyticAt 𝕜 (Q 𝕜 ι E E' F) f₁ :=
   fun h₁ => h (cpolynomialAt_of_analyticAt h₁ f₀).analyticAt
@@ -326,7 +330,7 @@ theorem hasBoundedLift_iff_exists_ι :
 
 end T1
 
-/-! ## Part 4. T2: degree propagation `k + 1 → k` -/
+/-! ## Lowering the degree by one -/
 
 section T2
 
@@ -338,9 +342,8 @@ variable {𝕜 : Type*} [NontriviallyNormedField 𝕜]
   {n : ℕ}
 
 variable (𝕜 E' F n) in
-/-- `S m ((y₀,t₀),…,(yₙ,tₙ)) = ∑ᵢ (-1)^i • tᵢ • m(y₀,…,ŷᵢ,…,yₙ)`: division-free "wedge with the
-last coordinate", built from Mathlib's `alternatizeUncurryFin` (whose alternating property is proved
-in Mathlib with no hypothesis on the characteristic). -/
+/-- `S m ((y₀,t₀),…,(yₙ,tₙ)) = ∑ᵢ (-1)^i • tᵢ • m(y₀,…,ŷᵢ,…,yₙ)`, the wedge with the last
+coordinate, built from Mathlib's `alternatizeUncurryFin`. It involves no division. -/
 noncomputable def Smap : (E' [⋀^Fin n]→L[𝕜] F) →L[𝕜] ((E' × 𝕜) [⋀^Fin (n + 1)]→L[𝕜] F) :=
   (alternatizeUncurryFinCLM 𝕜 (E' × 𝕜) F).comp
     ((ContinuousLinearMap.smulRightL 𝕜 (E' × 𝕜) ((E' × 𝕜) [⋀^Fin n]→L[𝕜] F)
@@ -363,7 +366,7 @@ noncomputable def Rmap : ((E × 𝕜) [⋀^Fin (n + 1)]→L[𝕜] F) →L[𝕜] 
 lemma Rmap_apply (M : (E × 𝕜) [⋀^Fin (n + 1)]→L[𝕜] F) (x : Fin n → E) :
     Rmap 𝕜 E F n M x = M (Matrix.vecCons ((0 : E), (1 : 𝕜)) (fun j => (x j, (0 : 𝕜)))) := rfl
 
-/-- Sign bookkeeping: with these conventions `R ∘ S = id` (no sign), in every characteristic. -/
+/-- `R ∘ S = id`. -/
 theorem Rmap_Smap (m : E' [⋀^Fin n]→L[𝕜] F) : Rmap 𝕜 E' F n (Smap 𝕜 E' F n m) = m := by
   ext x
   rw [Rmap_apply, Smap_apply, Fin.sum_univ_succ]
@@ -396,7 +399,7 @@ noncomputable def jj : E × 𝕜 →L[𝕜] E' × 𝕜 :=
 
 lemma jj_apply (x : E × 𝕜) : jj 𝕜 E E' x = (0, x.2) := rfl
 
-/-- **Intertwining identity** `R ∘ Q_{n+1}(f ⊕ id) ∘ S = Q_n(f)` (no sign with these conventions). -/
+/-- `R ∘ Q_{n+1}(f ⊕ id) ∘ S = Q_n(f)`. -/
 theorem Γ_Q_succ (f : E →L[𝕜] E') :
     Γ 𝕜 E E' F n (Q 𝕜 (Fin (n + 1)) (E × 𝕜) (E' × 𝕜) F (φ 𝕜 E E' f + jj 𝕜 E E')) =
       Q 𝕜 (Fin n) E E' F f := by
@@ -409,15 +412,14 @@ theorem Γ_Q_succ (f : E →L[𝕜] E') :
   funext j
   simp [Fin.tail, φ_apply, jj_apply]
 
-/-- **T2 (LEAN).** A bounded `(n+1)`-linear lift of `Q_{n+1}` on `(E × 𝕜, E' × 𝕜, F)` yields a
-bounded `n`-linear lift of `Q_n` on `(E, E', F)`. The target `F` is unchanged. -/
+/-- A bounded lift of `Q_{n+1}` on `(E × 𝕜, E' × 𝕜, F)` gives a bounded lift of `Q_n` on
+`(E, E', F)`. -/
 theorem hasBoundedLift_of_hasBoundedLift_succ
     (h : HasBoundedLift 𝕜 (Fin (n + 1)) (E × 𝕜) (E' × 𝕜) F) : HasBoundedLift 𝕜 (Fin n) E E' F := by
   obtain ⟨P, hP⟩ := h
-  -- upstairs: the lift makes `Q_(n+1)` continuously polynomial, in particular analytic at `j`
+  -- the lift makes `Q_(n+1)` analytic at `j`
   have hup : AnalyticAt 𝕜 (Q 𝕜 (Fin (n + 1)) (E × 𝕜) (E' × 𝕜) F) (φ 𝕜 E E' 0 + jj 𝕜 E E') :=
     (cpolynomialAt_of_lift P hP _).analyticAt
-  -- the affine map `f ↦ φ f + j` is analytic
   have haff : AnalyticAt 𝕜 (fun f : E →L[𝕜] E' => φ 𝕜 E E' f + jj 𝕜 E E') 0 :=
     ((φ 𝕜 E E').analyticAt 0).add analyticAt_const
   have h2 : AnalyticAt 𝕜
@@ -431,7 +433,7 @@ theorem hasBoundedLift_of_hasBoundedLift_succ
           (fun f : E →L[𝕜] E' => φ 𝕜 E E' f + jj 𝕜 E E')) 0) :=
       ContinuousLinearMap.analyticAt (𝕜 := 𝕜) (E := (((E' × 𝕜) [⋀^Fin (n + 1)]→L[𝕜] F) →L[𝕜] ((E × 𝕜) [⋀^Fin (n + 1)]→L[𝕜] F))) (F := ((E' [⋀^Fin n]→L[𝕜] F) →L[𝕜] (E [⋀^Fin n]→L[𝕜] F))) (Γ 𝕜 E E' F n) _
     exact AnalyticAt.comp (𝕜 := 𝕜) (E := E →L[𝕜] E') (F := (((E' × 𝕜) [⋀^Fin (n + 1)]→L[𝕜] F) →L[𝕜] ((E × 𝕜) [⋀^Fin (n + 1)]→L[𝕜] F))) (G := ((E' [⋀^Fin n]→L[𝕜] F) →L[𝕜] (E [⋀^Fin n]→L[𝕜] F))) hΓ h2
-  -- downstairs: by the intertwining identity this composite IS `Q_n`, so `Q_n` is analytic at 0
+  -- by `Γ_Q_succ` the composite is `Q_n`
   have heq : ((Γ 𝕜 E E' F n) ∘
       ((Q 𝕜 (Fin (n + 1)) (E × 𝕜) (E' × 𝕜) F) ∘ (fun f : E →L[𝕜] E' => φ 𝕜 E E' f + jj 𝕜 E E')))
       = Q 𝕜 (Fin n) E E' F := funext fun f => Γ_Q_succ f
@@ -440,7 +442,7 @@ theorem hasBoundedLift_of_hasBoundedLift_succ
 
 end T2
 
-/-! ## Part 5. The conjugation transfer principle and its corollaries -/
+/-! ## Transfer along conjugation -/
 
 section Conjugation
 
@@ -453,8 +455,8 @@ variable {𝕜 : Type*} [NontriviallyNormedField 𝕜]
   [NormedAddCommGroup E₁] [NormedSpace 𝕜 E₁]
   [NormedAddCommGroup E₁'] [NormedSpace 𝕜 E₁'] [NormedAddCommGroup F₁] [NormedSpace 𝕜 F₁]
 
-/-- **Conjugation transfer (LEAN).** If `Q₁ = Ψ ∘ Q ∘ A` with `Ψ` continuous linear and `A` analytic
-at one point, then a bounded lift of `Q` gives a bounded lift of `Q₁`. -/
+/-- If `Q₁ = Ψ ∘ Q ∘ A` with `Ψ` continuous linear and `A` analytic at one point, a bounded lift
+of `Q` gives one of `Q₁`. -/
 theorem hasBoundedLift_of_eq_comp
     (A : (E₁ →L[𝕜] E₁') → (E →L[𝕜] E')) {a : E₁ →L[𝕜] E₁'} (hA : AnalyticAt 𝕜 A a)
     (Ψ : ((E' [⋀^ι]→L[𝕜] F) →L[𝕜] (E [⋀^ι]→L[𝕜] F)) →L[𝕜]
@@ -476,8 +478,7 @@ theorem hasBoundedLift_of_eq_comp
   rw [heq] at h3
   exact hasBoundedLift_of_analyticAt h3
 
-/-- **Naturality in the source spaces (LEAN).** Continuous linear equivalences `E ≃ E₁`, `E' ≃ E₁'`
-transport bounded lifts (no isometry needed). -/
+/-- Continuous linear equivalences `E ≃ E₁`, `E' ≃ E₁'` transport bounded lifts. -/
 theorem hasBoundedLift_of_equiv (e : E ≃L[𝕜] E₁) (e' : E' ≃L[𝕜] E₁')
     (h : HasBoundedLift 𝕜 ι E E' F) : HasBoundedLift 𝕜 ι E₁ E₁' F := by
   refine hasBoundedLift_of_eq_comp (a := 0)
@@ -502,8 +503,8 @@ theorem hasBoundedLift_equiv_iff (e : E ≃L[𝕜] E₁) (e' : E' ≃L[𝕜] E�
     HasBoundedLift 𝕜 ι E E' F ↔ HasBoundedLift 𝕜 ι E₁ E₁' F :=
   ⟨hasBoundedLift_of_equiv e e', hasBoundedLift_of_equiv e.symm e'.symm⟩
 
-/-- **Target retracts (LEAN; round 23 Lemma 5.2).** If `F` is a retract of `F₁`
-(`π ∘ g = id`), a bounded lift for the target `F₁` gives one for `F`. -/
+/-- If `F` is a retract of `F₁` (`π ∘ g = id`), a bounded lift for the target `F₁` gives one
+for `F`. -/
 theorem hasBoundedLift_of_retract (g : F →L[𝕜] F₁) (π : F₁ →L[𝕜] F) (hπg : ∀ y, π (g y) = y)
     (h : HasBoundedLift 𝕜 ι E E' F₁) : HasBoundedLift 𝕜 ι E E' F := by
   refine hasBoundedLift_of_eq_comp (a := 0) id (analyticAt_id)
@@ -518,14 +519,10 @@ theorem hasBoundedLift_of_retract (g : F →L[𝕜] F₁) (π : F₁ →L[𝕜] 
 
 end Conjugation
 
-/-! ## Part 5b. Same-degree summand transfer (added in repair round 2)
+/-! ## Adding a line in the same degree
 
-Adding a line to both sources, in the SAME degree, cannot create a lift. This is Theorem 4.1 with
-`A = φ` (linear, so analytic) and `Ψ(T) = inl^* ∘ T ∘ fst^*`. It was first machine-checked by the
-round-2 controls auditor (`round24/audit/transfer-r2-controls/build/SameDegreeSummand.lean`,
-`audit_hasBoundedLift_of_prod_same_degree`); it is re-proved here so that the track's own file
-contains it. It is used in THEOREM.md §8, Scope item 1 (no downward propagation, also over
-incomplete `𝕜`). -/
+Adding a line to both sources in the same degree cannot create a lift: apply
+`hasBoundedLift_of_eq_comp` with `A = φ` and `Ψ T = inl^* ∘ T ∘ fst^*`. -/
 
 section SameDegree
 
@@ -535,8 +532,7 @@ variable {𝕜 : Type*} [NontriviallyNormedField 𝕜] {ι : Type*} [Fintype ι]
   {E E' F : Type*} [NormedAddCommGroup E] [NormedSpace 𝕜 E]
   [NormedAddCommGroup E'] [NormedSpace 𝕜 E'] [NormedAddCommGroup F] [NormedSpace 𝕜 F]
 
-/-- **Same-degree summand transfer (LEAN, repair round 2).** A bounded lift in degree `ι` for
-`(E × 𝕜, E' × 𝕜, F)` gives one in the same degree for `(E, E', F)`. -/
+/-- A bounded lift for `(E × 𝕜, E' × 𝕜, F)` gives one in the same degree for `(E, E', F)`. -/
 theorem hasBoundedLift_of_prod_same_degree
     (h : HasBoundedLift 𝕜 ι (E × 𝕜) (E' × 𝕜) F) : HasBoundedLift 𝕜 ι E E' F := by
   refine hasBoundedLift_of_eq_comp (a := 0) (φ 𝕜 E E') ((φ 𝕜 E E').analyticAt 0)
@@ -553,8 +549,8 @@ theorem hasBoundedLift_of_prod_same_degree
     ContinuousLinearMap.flip_apply]
   congr 1
 
-/-- **Contrapositive with T1 (LEAN, repair round 2).** If `Q` fails to be analytic at one point for
-`(E, E', F)`, then in the same degree it is analytic at no point for `(E × 𝕜, E' × 𝕜, F)`. -/
+/-- If `Q` is not analytic at one point for `(E, E', F)`, it is analytic at no point for
+`(E × 𝕜, E' × 𝕜, F)` in the same degree. -/
 theorem not_analyticAt_prod_of_not_analyticAt {f₀ : E →L[𝕜] E'}
     (h : ¬ AnalyticAt 𝕜 (Q 𝕜 ι E E' F) f₀) (g₀ : E × 𝕜 →L[𝕜] E' × 𝕜) :
     ¬ AnalyticAt 𝕜 (Q 𝕜 ι (E × 𝕜) (E' × 𝕜) F) g₀ := by
@@ -564,7 +560,7 @@ theorem not_analyticAt_prod_of_not_analyticAt {f₀ : E →L[𝕜] E'}
 
 end SameDegree
 
-/-! ## Part 6. Iterated degree propagation -/
+/-! ## All higher degrees -/
 
 section Iterate
 
@@ -572,8 +568,8 @@ variable {𝕜 : Type*} [NontriviallyNormedField 𝕜]
   {E E' F : Type*} [NormedAddCommGroup E] [NormedSpace 𝕜 E]
   [NormedAddCommGroup E'] [NormedSpace 𝕜 E'] [NormedAddCommGroup F] [NormedSpace 𝕜 F]
 
-/-- **All degrees (LEAN).** If `E × 𝕜 ≃ E` and `E' × 𝕜 ≃ E'` (e.g. `E = E' = ℓ∞`), failure of the
-bounded-lift property in degree `n` propagates to every degree `m ≥ n`, with the SAME `E, E', F`. -/
+/-- If `E × 𝕜 ≃ E` and `E' × 𝕜 ≃ E'` (e.g. `E = E' = ℓ∞`), failure of the lift property in
+degree `n` gives failure in every degree `m ≥ n`, for the same `E, E', F`. -/
 theorem not_hasBoundedLift_of_le (u : (E × 𝕜) ≃L[𝕜] E) (u' : (E' × 𝕜) ≃L[𝕜] E') {n : ℕ}
     (h : ¬ HasBoundedLift 𝕜 (Fin n) E E' F) {m : ℕ} (hm : n ≤ m) :
     ¬ HasBoundedLift 𝕜 (Fin m) E E' F := by
@@ -584,8 +580,8 @@ theorem not_hasBoundedLift_of_le (u : (E × 𝕜) ≃L[𝕜] E) (u' : (E' × �
     exact ih (hasBoundedLift_of_hasBoundedLift_succ
       (hasBoundedLift_of_equiv u.symm u'.symm hsucc))
 
-/-- **All degrees, all base points (LEAN).** Under the same hypotheses, if `Q_n` fails to be
-analytic at one point then `Q_m` is analytic at no point, for every `m ≥ n`. -/
+/-- Under the same hypotheses, if `Q_n` is not analytic at one point, then `Q_m` is analytic at
+no point for every `m ≥ n`. -/
 theorem not_analyticAt_of_le (u : (E × 𝕜) ≃L[𝕜] E) (u' : (E' × 𝕜) ≃L[𝕜] E') {n : ℕ}
     {f₀ : E →L[𝕜] E'} (h : ¬ AnalyticAt 𝕜 (Q 𝕜 (Fin n) E E' F) f₀) {m : ℕ} (hm : n ≤ m)
     (f₁ : E →L[𝕜] E') : ¬ AnalyticAt 𝕜 (Q 𝕜 (Fin m) E E' F) f₁ := by
@@ -596,7 +592,7 @@ theorem not_analyticAt_of_le (u : (E × 𝕜) ≃L[𝕜] E) (u' : (E' × 𝕜) �
 
 end Iterate
 
-/-! ## Part 7. Reindexing: the index type only matters through its cardinality -/
+/-! ## Reindexing -/
 
 section Reindex
 
@@ -634,7 +630,7 @@ noncomputable def reindexCLM (σ : ι ≃ ι₁) : (E [⋀^ι]→L[𝕜] F) →L
 lemma reindexCLM_apply (σ : ι ≃ ι₁) (m : E [⋀^ι]→L[𝕜] F) (v : ι₁ → E) :
     reindexCLM 𝕜 E F σ m v = m (fun k => v (σ k)) := rfl
 
-/-- **Reindexing (LEAN).** The bounded-lift property depends on `ι` only through `card ι`. -/
+/-- The bounded-lift property depends on `ι` only through `card ι`. -/
 theorem hasBoundedLift_reindex (σ : ι ≃ ι₁) (h : HasBoundedLift 𝕜 ι E E' F) :
     HasBoundedLift 𝕜 ι₁ E E' F := by
   refine hasBoundedLift_of_eq_comp (a := 0) id analyticAt_id
@@ -656,8 +652,7 @@ theorem hasBoundedLift_reindex_iff (σ : ι ≃ ι₁) :
     HasBoundedLift 𝕜 ι E E' F ↔ HasBoundedLift 𝕜 ι₁ E E' F :=
   ⟨hasBoundedLift_reindex σ, hasBoundedLift_reindex σ.symm⟩
 
-/-- **Nowhere-analyticity along `ι ≃ ι₁` (LEAN, repair round 1).** If `Q_ι` fails to be analytic at
-one point, then `Q_{ι₁}` is analytic at no point. -/
+/-- If `ι ≃ ι₁` and `Q_ι` is not analytic at one point, then `Q_{ι₁}` is analytic at no point. -/
 theorem not_analyticAt_of_equiv_index (σ : ι ≃ ι₁) {f₀ : E →L[𝕜] E'}
     (h : ¬ AnalyticAt 𝕜 (Q 𝕜 ι E E' F) f₀) (f₁ : E →L[𝕜] E') :
     ¬ AnalyticAt 𝕜 (Q 𝕜 ι₁ E E' F) f₁ := by
@@ -665,8 +660,7 @@ theorem not_analyticAt_of_equiv_index (σ : ι ≃ ι₁) {f₀ : E →L[𝕜] E
   obtain ⟨P, hP⟩ := hasBoundedLift_reindex σ.symm (hasBoundedLift_of_analyticAt h₁)
   exact h (cpolynomialAt_of_lift P hP f₀).analyticAt
 
-/-- **T2 for arbitrary index types (LEAN).** If `card ι₁ = card ι + 1`, a bounded lift of
-`Q_{ι₁}` on `(E × 𝕜, E' × 𝕜, F)` gives a bounded lift of `Q_ι` on `(E, E', F)`. -/
+/-- `hasBoundedLift_of_hasBoundedLift_succ` for index types with `card ι₁ = card ι + 1`. -/
 theorem hasBoundedLift_of_card_eq_succ (hcard : Fintype.card ι₁ = Fintype.card ι + 1)
     (h : HasBoundedLift 𝕜 ι₁ (E × 𝕜) (E' × 𝕜) F) : HasBoundedLift 𝕜 ι E E' F :=
   hasBoundedLift_reindex (Fintype.equivFin ι).symm

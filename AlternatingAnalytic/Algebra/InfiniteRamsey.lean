@@ -8,9 +8,8 @@ import Mathlib.Order.Monotone.Basic
 # Infinite Ramsey theorem for fixed-size subsets
 
 Every finite coloring of the `n`-element subsets of an infinite set of natural
-numbers has an infinite homogeneous subset. The proof recursively thins infinite
-tails using the induction hypothesis, then uses an infinite monochromatic fiber
-of the colors attached to the chosen minima.
+numbers has an infinite homogeneous subset. This is the form of Ramsey's theorem used
+in Lemma B.10.
 -/
 
 namespace InfiniteRamsey

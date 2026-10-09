@@ -5,10 +5,12 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 /-!
 # Finite coordinate bases in the domain
 
-The source-coordinate construction in `charp.tex`, Proposition
-`prop:finite-coordinate`. The estimate uses the ordinary triangle inequality,
-and the factorial is a real counting constant. No completeness, characteristic,
-or ultrametric hypothesis is used, and all degrees, including zero, are allowed.
+If `E` has a finite basis with continuous coordinate functionals, the determinant
+formula over increasing basis tuples gives a bounded retraction from multilinear to
+alternating maps on `E`, and hence a bounded lift of `A^k`. This is the source case
+of Proposition 4.1(2). The norm bound `k! ∑_s ∏_a ‖ε_{s_a}‖ ‖e_{s_a}‖` uses the real
+factorial, and all degrees, including zero, are allowed. In Lean, `A^k` is
+`Round24Transfer.Q`, the map `f ↦ (m ↦ m ∘ (f, …, f))`.
 -/
 
 noncomputable section
@@ -24,7 +26,7 @@ variable {K E E' F : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup F] [NormedSpace K F]
   {d : ℕ}
 
-/-- The continuous coordinate functional supplied by the coordinate hypothesis. -/
+/-- The `i`-th coordinate functional, as a continuous linear map. -/
 def finiteCoordinateFunctional (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) (i : Fin d) : E →L[K] K :=
   ⟨b.coord i, hb i⟩
@@ -33,7 +35,7 @@ def finiteCoordinateFunctional (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) (i : Fin d) (x : E) :
     finiteCoordinateFunctional b hb i x = b.coord i x := rfl
 
-/-- The manuscript's explicit real norm bound. -/
+/-- The norm bound `k! ∑_s ∏_a ‖ε_{s_a}‖ ‖e_{s_a}‖` of Proposition 4.1. -/
 def finiteCoordinateBound (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) : ℝ :=
   (k.factorial : ℝ) * ∑ s : Set.powersetCard (Fin d) k,
@@ -168,7 +170,7 @@ noncomputable local instance finiteCoordinateDomainLiftNorm (k : ℕ) :
     (𝕜 := K) (E := fun _ : Fin k => E →L[K] E')
     (G := (E' [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F))
 
-/-- The source-coordinate bounded lift, obtained from the actual retraction. -/
+/-- The bounded lift of `A^k` obtained from the coordinate retraction. -/
 def finiteCoordinateDomainLift (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) :
     (E →L[K] E') [×k]→L[K]
@@ -240,8 +242,7 @@ theorem finiteCoordinateBound_eq_zero_of_lt (b : Basis (Fin d) K E)
   let := finiteCoordinateIndices_isEmpty h
   simp [finiteCoordinateBound]
 
-/-- Above the coordinate dimension the defining sum is empty. This includes
-dimension zero in every positive degree. -/
+/-- Above the coordinate dimension the defining sum is empty, so the retraction is zero. -/
 theorem finiteCoordinateRetraction_eq_zero_of_lt (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) {k : ℕ} (h : d < k) :
     finiteCoordinateRetraction (F := F) b hb k = 0 := by
@@ -294,9 +295,9 @@ theorem Q_zero_constant_of_finiteCoordinateDomain (f f' : E →L[K] E') :
   ext m x
   exact congrArg m (Subsingleton.elim _ _)
 
-/-- The source-coordinate case of `prop:finite-coordinate`, collected with its
-concrete retraction and lift, both determinant formulas, all quantitative bounds,
-the diagonal identity, polynomiality, analyticity, and the boundary cases. -/
+/-- Proposition 4.1(2), source case: the coordinate retraction and lift, their
+determinant formulas and norm bounds, the diagonal identity, polynomiality and
+analyticity of `A^k`, and the cases `d < k` and `k = 0`. -/
 theorem finiteCoordinateDomain (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) :
     let C := finiteCoordinateBound b hb k

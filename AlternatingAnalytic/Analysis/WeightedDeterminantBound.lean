@@ -3,12 +3,17 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Analysis.Normed.Ring.Lemmas
 
-/-! The weighted determinant estimate used by the sorted orthogonal-basis lift. -/
+/-!
+# A weighted determinant bound
+
+Over an ultrametric field, if `‖a i j‖ * w i ≤ v j` then `‖det a‖ * ∏ i, w i ≤ ∏ j, v j`.
+This bounds the sorted retraction for an orthogonal basis by one.
+-/
 
 namespace AlternatingAnalytic
 
-/-- Over an ultrametric field, row weights can be paired with each permutation
-term, so the determinant estimate has no factorial loss. -/
+/-- Over an ultrametric field, `‖a i j‖ * w i ≤ v j` implies
+`‖det a‖ * ∏ i, w i ≤ ∏ j, v j`. -/
 theorem norm_det_mul_prod_le {K ι : Type*} [NormedField K] [IsUltrametricDist K]
     [Fintype ι] [DecidableEq ι] (a : Matrix ι ι K) (w v : ι → ℝ)
     (hw : ∀ i, 0 ≤ w i) (hbound : ∀ i j, ‖a i j‖ * w i ≤ v j) :

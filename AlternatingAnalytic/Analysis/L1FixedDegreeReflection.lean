@@ -6,12 +6,13 @@ import Mathlib.Analysis.Analytic.Composition
 import Mathlib.Analysis.Analytic.Within
 
 /-!
-# Fixed degree reflection along ordinary ℓ¹ families
+# Fixed-degree reflection along ℓ¹ families
 
-Extend the ambient multilinear map to the completion, retain its diagonal in the
-closed submodule, and lift after every bounded linear map from ordinary ℓ¹.
-Local word factorization then gives analytic reflection at the fixed outer degree.
-The scalar field and the original source need not be complete; degree zero is included.
+Theorem 4.5(2): if `a : H → W` has a bounded homogeneous polynomial representative of
+fixed degree `d` with values in a Banach space `Z ⊇ W` (closed), then `a ∘ γ` is analytic
+for every analytic `γ` on an open subset of ℓ¹(I, K). The proof extends the multilinear
+map to the completion of `H`, lifts it after a bounded linear map from ℓ¹, and uses the
+local factorization of `γ` through ℓ¹ words. Neither `K` nor `H` need be complete.
 -/
 
 open scoped lp
@@ -26,7 +27,7 @@ variable {K I J H Z : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup H] [NormedSpace K H]
   [NormedAddCommGroup Z] [NormedSpace K Z] [CompleteSpace Z]
 
-/-- The contracting extension to the completion, using the existing dense-extension API. -/
+/-- The norm-nonincreasing extension of a multilinear map to the completion of `H`. -/
 def completionMultilinear (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z) :
     ContinuousMultilinearMap K (fun _ : Fin d => UniformSpace.Completion H) Z :=
@@ -49,7 +50,7 @@ theorem norm_completionMultilinear_le (d : ℕ)
     (UniformSpace.Completion.toComplₗᵢ : H →ₗᵢ[K] UniformSpace.Completion H)
     UniformSpace.Completion.denseRange_coe d B
 
-/-- Closedness retains the diagonal in the original submodule after completion. -/
+/-- The completed diagonal stays in the closed submodule `W`. -/
 theorem completionMultilinear_diagonal_mem
     (W : Submodule K Z) (hW : IsClosed (W : Set Z)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)
@@ -62,7 +63,7 @@ theorem completionMultilinear_diagonal_mem
   rw [completionMultilinear_apply, ← hP]
   exact (P h).property
 
-/-- The actual completed diagonal, with the original induced norm on `W`. -/
+/-- The diagonal of the completed multilinear map, as a map into `W`. -/
 def completionDiagonal
     (W : Submodule K Z) (hW : IsClosed (W : Set Z)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)
@@ -89,7 +90,8 @@ theorem completionDiagonal_coe
   apply Subtype.ext
   exact (completionMultilinear_apply d B (fun _ => h)).trans (hP h).symm
 
-/-- One multilinear lift has both the exact completed diagonal and the fixed-degree bound. -/
+/-- After a bounded linear map `T` from ℓ¹, the completed diagonal has a `W`-valued
+multilinear representative of norm at most `d! * ‖B‖ * ‖T‖ ^ d`. -/
 theorem exists_l1_completion_diagonal_lift
     (W : Submodule K Z) (hW : IsClosed (W : Set Z)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)
@@ -114,7 +116,7 @@ theorem exists_l1_completion_diagonal_lift
       mul_le_mul_of_nonneg_left hD (by positivity)
     _ = (d.factorial : ℝ) * ‖B‖ * ‖T‖ ^ d := (mul_assoc _ _ _).symm
 
-/-- After a bounded linear map from ordinary ℓ¹, the completed diagonal is polynomial. -/
+/-- After a bounded linear map from ℓ¹, the completed diagonal is polynomial. -/
 theorem cpolynomialAt_completionDiagonal_comp
     (W : Submodule K Z) (hW : IsClosed (W : Set Z)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)
@@ -128,7 +130,7 @@ theorem cpolynomialAt_completionDiagonal_comp
     C.cpolynomialAt.comp (f := Δ) (Δ.cpolynomialAt x)
   exact hdiag.congr (Filter.Eventually.of_forall hC)
 
-/-- Fixed-degree reflection at a point of ordinary ℓ¹, including degree zero. -/
+/-- Fixed-degree reflection at a point of ℓ¹. -/
 theorem analyticAt_comp_of_l1_fixed_degree
     (W : Submodule K Z) (hW : IsClosed (W : Set Z)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)
@@ -141,7 +143,7 @@ theorem analyticAt_comp_of_l1_fixed_degree
   change completionDiagonal W hW d B P hP (T (g y)) = P (γ y)
   rw [hy, completionDiagonal_coe]
 
-/-- Neighborhood analyticity for ordinary ℓ¹ parameter sets. -/
+/-- Neighborhood version of `analyticAt_comp_of_l1_fixed_degree`. -/
 theorem analyticOnNhd_comp_of_l1_fixed_degree
     (W : Submodule K Z) (hW : IsClosed (W : Set Z)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)
@@ -150,7 +152,7 @@ theorem analyticOnNhd_comp_of_l1_fixed_degree
     AnalyticOnNhd K (P ∘ γ) U :=
   fun x hx => analyticAt_comp_of_l1_fixed_degree W hW d B P hP (hγ x hx)
 
-/-- `fam:thm:l1-families`: the exact open-domain fixed-degree reflection theorem. -/
+/-- Theorem 4.5(2) for a closed submodule, on an open subset of ℓ¹. -/
 theorem analyticOn_comp_of_l1_fixed_degree
     (W : Submodule K Z) (hW : IsClosed (W : Set Z)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)
@@ -162,7 +164,7 @@ theorem analyticOn_comp_of_l1_fixed_degree
 
 variable {V : Type*} [NormedAddCommGroup V] [NormedSpace K V]
 
-/-- Reflection through a linear isometry with closed range, using its range equivalence. -/
+/-- Fixed-degree reflection through a linear isometry with closed range. -/
 theorem analyticAt_comp_of_l1_fixed_degree_isometry
     (j : V →ₗᵢ[K] Z) (hj : IsClosed (Set.range j)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)
@@ -176,7 +178,7 @@ theorem analyticAt_comp_of_l1_fixed_degree_isometry
     (j.equivRange.symm.analyticAt (j.equivRange (P (γ x)))).comp
       (f := (fun h => j.equivRange (P h)) ∘ γ) ha
 
-/-- The neighborhood version for a closed linear isometric inclusion. -/
+/-- Neighborhood version of `analyticAt_comp_of_l1_fixed_degree_isometry`. -/
 theorem analyticOnNhd_comp_of_l1_fixed_degree_isometry
     (j : V →ₗᵢ[K] Z) (hj : IsClosed (Set.range j)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)
@@ -185,7 +187,7 @@ theorem analyticOnNhd_comp_of_l1_fixed_degree_isometry
     AnalyticOnNhd K (P ∘ γ) U :=
   fun x hx => analyticAt_comp_of_l1_fixed_degree_isometry j hj d B P hP (hγ x hx)
 
-/-- The exact open-domain version for a closed linear isometric inclusion. -/
+/-- Theorem 4.5(2) for a linear isometry with closed range, on an open subset of ℓ¹. -/
 theorem analyticOn_comp_of_l1_fixed_degree_isometry
     (j : V →ₗᵢ[K] Z) (hj : IsClosed (Set.range j)) (d : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin d => H) Z)

@@ -3,9 +3,9 @@ import AlternatingAnalytic.Laurent.CZeroMultipliers.NoLift
 /-!
 # Nowhere analyticity of precomposition with multipliers on a `c₀` base
 
-Proposition C.6, consequences. If `x ↦ w ∘ (u₀ + D x, …, u₀ + D x)` has a power series at some
-point, then along every line its value is a polynomial whose top coefficient is
-`w ∘ (D h, …, D h)`, so the degree-`n` term of the series is a bounded `n`-linear lift of
+The second and third assertions of Proposition C.6. If `x ↦ w ∘ (u₀ + D x, …, u₀ + D x)` has a
+power series at some point, then along every line its value is a polynomial whose top coefficient
+is `w ∘ (D h, …, D h)`, so the degree-`n` term of the series is a bounded `n`-linear lift of
 `h ↦ w ∘ (D h, …, D h)`. For the Laurent pair and coordinatewise multipliers on `c₀(ℕ, K₁)` no
 such lift exists, so `a ↦ A(u₀ + D_a)(W_B)` and `a ↦ A(u₀ + D_a)` are analytic nowhere.
 -/
@@ -85,8 +85,8 @@ def czeroMultiplier : C₀(ℕ, LaurentField κ r) →ₗ[K] (E →L[K] E) where
     rw [← map_smul]
     rfl
 
-/-- **Proposition C.6, consequence.** For every `u₀`, `a ↦ A(u₀ + D_a)(W_B)` is analytic at no
-point of `c₀(ℕ, K₁)`. -/
+/-- For every `u₀`, `a ↦ A(u₀ + D_a)(W_B)` is analytic at no point of `c₀(ℕ, K₁)`
+(Proposition C.6). -/
 theorem czero_not_analyticAt_precomp_wedge [Finite κ] (p : ℕ) [Fact p.Prime] [CharP κ p]
     (hpk : p ≤ k) (u₀ : E →L[K] E) (a₀ : C₀(ℕ, LaurentField κ r)) :
     ¬ AnalyticAt K
@@ -98,8 +98,7 @@ theorem czero_not_analyticAt_precomp_wedge [Finite κ] (p : ℕ) [Fact p.Prime] 
     ⟨q k, precompAffine_coeff_eq_of_hasFPowerSeriesAt k (Fintype.card_fin k)
       (czeroMultiplier κ r) u₀ (completedExteriorWedge K ℕ k) hq⟩
 
-/-- **Proposition C.6, operator form.** For every `u₀`, `a ↦ A(u₀ + D_a)` is analytic at no
-point of `c₀(ℕ, K₁)`. -/
+/-- For every `u₀`, `a ↦ A(u₀ + D_a)` is analytic at no point of `c₀(ℕ, K₁)` (Proposition C.6). -/
 theorem czero_not_analyticAt_precomp [Finite κ] (p : ℕ) [Fact p.Prime] [CharP κ p]
     (hpk : p ≤ k) (u₀ : E →L[K] E) (a₀ : C₀(ℕ, LaurentField κ r)) :
     ¬ AnalyticAt K

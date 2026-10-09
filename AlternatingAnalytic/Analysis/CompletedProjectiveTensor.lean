@@ -7,11 +7,11 @@ import Mathlib.Analysis.Normed.Module.PiTensorProduct.ProjectiveSeminorm
 import Mathlib.Analysis.Normed.Module.Completion
 
 /-!
-# Completed ordinary projective tensors
+# Completed projective tensor products
 
-The Hausdorff completion of Mathlib's ordinary projective seminorm represents continuous
-multilinear maps into complete normed spaces, preserving the operator norm. The projective
-seminorm uses sums of products of norms. No separation of the algebraic tensor is assumed.
+The completion of the projective tensor product `⨂[K] i, E i` (Mathlib's projective
+seminorm) represents continuous multilinear maps into complete normed spaces, with
+equal operator norms. These completed tensor powers are used in Appendix G.
 -/
 
 open scoped TensorProduct
@@ -66,17 +66,17 @@ variable (K : Type*) [NontriviallyNormedField K]
   {ι : Type*} [Fintype ι] (E : ι → Type*)
   [∀ i, SeminormedAddCommGroup (E i)] [∀ i, NormedSpace K (E i)]
 
-/-- The separated completion of the ordinary projective tensor seminorm. -/
+/-- The completion of the projective tensor product. -/
 abbrev CompletedProjectiveTensor := UniformSpace.Completion (⨂[K] i, E i)
 
-/-- The ordinary completed projective tensor power, including the zeroth power. -/
+/-- The completed projective tensor power `P^{⊗n}`, including `n = 0`. -/
 abbrev CompletedProjectiveTensorPower (P : Type*) [SeminormedAddCommGroup P]
     [NormedSpace K P] (n : ℕ) :=
   CompletedProjectiveTensor K (fun _ : Fin n => P)
 
 variable {K}
 
-/-- The canonical multilinear map followed by the Hausdorff completion map. -/
+/-- The canonical multilinear map into the completed tensor product. -/
 noncomputable def completedProjectiveTensorTprod :
     ContinuousMultilinearMap K E (CompletedProjectiveTensor K E) :=
   UniformSpace.Completion.toComplL.compContinuousMultilinearMap (PiTensorProduct.tprodL K)
@@ -92,7 +92,7 @@ theorem norm_completedProjectiveTensorTprod_le :
   simpa only [completedProjectiveTensorTprod_apply, UniformSpace.Completion.norm_coe, one_mul]
     using PiTensorProduct.projectiveSeminorm_tprod_le (𝕜 := K) x
 
-/-- All pure tensors have dense linear span in the separated completion. -/
+/-- Pure tensors span a dense subspace of the completion. -/
 theorem completedProjectiveTensor_tprod_dense_span :
     (Submodule.span K
       (Set.range (completedProjectiveTensorTprod (K := K) E))).topologicalClosure = ⊤ := by
@@ -113,8 +113,8 @@ theorem completedProjectiveTensor_tprod_dense_span :
 
 variable (Z : Type*) [NormedAddCommGroup Z] [NormedSpace K Z] [CompleteSpace Z]
 
-/-- The isometric universal linearization into a complete normed target. Its forward map
-extends the algebraic projective tensor lift to the Hausdorff completion. -/
+/-- Continuous multilinear maps into a complete space are isometrically the continuous
+linear maps on the completed projective tensor product. -/
 noncomputable def completedProjectiveTensorLiftIsometry :
     ContinuousMultilinearMap K E Z ≃ₗᵢ[K] (CompletedProjectiveTensor K E →L[K] Z) :=
   (PiTensorProduct.liftIsometry K E Z).trans completionLiftIsometry
@@ -162,9 +162,9 @@ theorem completedProjectiveTensorLift_unique (B : ContinuousMultilinearMap K E Z
 
 variable (Z)
 
-/-- The completed ordinary projective tensor universal property: the canonical map is
-contractive and its pure tensors span densely; every continuous multilinear map into the
-given Banach target has a unique continuous linear lift with exactly the same norm. -/
+/-- Universal property of the completed projective tensor product: the canonical map
+has norm at most one, pure tensors span densely, and every continuous multilinear map
+into a complete space has a unique continuous linear lift of the same norm. -/
 theorem completedProjectiveTensor_universal :
     ‖completedProjectiveTensorTprod (K := K) E‖ ≤ 1 ∧
     (Submodule.span K

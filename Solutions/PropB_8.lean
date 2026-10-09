@@ -6,47 +6,12 @@ import AlternatingAnalytic.Algebra.FiniteHomogeneousIdentity
 import AlternatingAnalytic.Algebra.PolarizationCounterexamples
 
 /-!
-# Proposition B.8 (pointwise versus polarized), p. 30
+# Proof of Proposition B.8
 
-Solution file: unlike the challenge, it additionally imports the library modules that prove
-the claim. Remarks below about imports describe the challenge file.
-
-Setting (Appendix B.2, p. 29): fix a field `L`, an integer `k ≥ 1`, `L`-vector spaces `A` and
-`V`, and a linear map `D : A → End_L(V)`, `a ↦ D_a`. A *lift of `D` in degree `k`* is a
-`2k`-linear map `Ψ : A^k × V^k → Λ^k V` over `L` that is alternating in the `V`-slots. For
-`f : [k] → [m]` and `b ∈ A^m` put `b_f := (b_{f(1)}, …, b_{f(k)})` and
-`type f := (|f⁻¹(1)|, …, |f⁻¹(m)|) ∈ ℕ^m`.
-
-* (Pw)   `Ψ(a, …, a; x₁, …, x_k) = D_a x₁ ∧ ⋯ ∧ D_a x_k` for all `a ∈ A`, `x ∈ V^k`.
-* (Pol)  for all `m ≥ 1`, `b ∈ A^m`, `α ∈ ℕ^m` with `|α| = k`, and `x ∈ V^k`:
-         `∑_{type f = α} Ψ(b_f; x) = ∑_{type f = α} D_{b_{f(1)}} x₁ ∧ ⋯ ∧ D_{b_{f(k)}} x_k`.
-* (Pol1) for all `b₁, …, b_k ∈ A` and `x ∈ V^k`:
-         `∑_{σ ∈ S_k} Ψ(b_{σ(1)}, …, b_{σ(k)}; x) = ∑_{σ ∈ S_k} D_{b_{σ(1)}} x₁ ∧ ⋯ ∧ D_{b_{σ(k)}} x_k`.
-
-Paper statement: "Let Ψ be a lift of D in degree k over a field L.
-(1) (Pol)⇒(Pw)⇒(Pol1), over every field.
-(2) If L is infinite, or if L = F_q and k ≤ q, then (Pw)⇒(Pol).
-(3) If L = F_q and k ≥ q + 1, then (Pw) does not imply (Pol) in general.
-(4) If k! = 0 in L, then (Pol1) does not imply (Pw) in general."
-
-Formalization notes:
-* Definitions introduced (identical in challenge and solution): `Lift L A V k` is
-  `MultilinearMap L (fun _ : Fin k => A) (V [⋀^Fin k]→ₗ[L] ⋀[L]^k V)`, i.e. a map multilinear in
-  the `k` operator slots with values in Mathlib alternating maps of the `k` vector slots into
-  Mathlib's exterior power `⋀[L]^k V` (in which a wedge with two equal factors vanishes, as in
-  the paper). `typeOf f` is the multiplicity vector `type f`. `Pw`, `Pol`, `Pol1` are the three
-  identities, with the wedge `exteriorPower.ιMulti L k`.
-* `D : A → End_L(V)` is a linear map `A →ₗ[L] (V →ₗ[L] V)`.
-* Index sets: `[k] = Fin k`, `[m] = Fin m`, `S_k = Equiv.Perm (Fin k)`; the paper's
-  1-based labels become 0-based.
-* "k ≥ 1" is the standing hypothesis `hk : 1 ≤ k` (in parts (3) and (4) it is implied by the
-  other hypotheses and is still listed for uniformity).
-* "L = F_q" is `[Finite L]` with `q = Nat.card L`; in part (2) the hypothesis "L infinite, or
-  L = F_q and k ≤ q" is the disjunction `Infinite L ∨ (Finite L ∧ k ≤ Nat.card L)`.
-* "Does not imply in general" (parts 3, 4) is formalized as the existence of `A`, `V`, `D` and a
-  lift `Ψ` for which the first identity holds and the second fails. The witnesses `A`, `V` are
-  required to live in the universe of `L`.
-* No library module is imported: all notions are defined here from Mathlib.
+Uses `MultilinearMap.sum_perm_eq_of_multiplier_diagonal` (`Algebra/Polarization.lean`),
+`MultilinearMap.sumOfType_eq_of_diagonal_eq` (`Algebra/FullPolarization.lean`), its finite-field
+version `sumOfType_eq_of_diagonal_eq_of_card` (`Algebra/FiniteHomogeneousIdentity.lean`), and the
+counterexamples in `Algebra/PolarizationCounterexamples.lean`.
 -/
 
 namespace AlternatingAnalyticChallenge.PropB_8
@@ -91,7 +56,7 @@ def Pol1 (D : A →ₗ[L] (V →ₗ[L] V)) (Ψ : Lift L A V k) : Prop :=
 
 end
 
-/-- **Proposition B.8 (1).** Over every field, (Pol) ⇒ (Pw) ⇒ (Pol1). -/
+/-- Part (1): over every field, (Pol) ⇒ (Pw) ⇒ (Pol1). -/
 theorem pol_imp_pw_and_pw_imp_pol1
     {L : Type u} [Field L] {A : Type v} [AddCommGroup A] [Module L A]
     {V : Type w} [AddCommGroup V] [Module L V] {k : ℕ} (hk : 1 ≤ k)
@@ -114,7 +79,7 @@ theorem pol_imp_pw_and_pw_imp_pol1
       (exteriorPower.ιMulti L k).toMultilinearMap D x (fun a => hPw a x) b
     simpa [ev] using h
 
-/-- **Proposition B.8 (2).** If `L` is infinite, or `L = F_q` with `k ≤ q`, then (Pw) ⇒ (Pol). -/
+/-- Part (2): if `L` is infinite, or `L = F_q` with `k ≤ q`, then (Pw) ⇒ (Pol). -/
 theorem pw_imp_pol
     {L : Type u} [Field L] {A : Type v} [AddCommGroup A] [Module L A]
     {V : Type w} [AddCommGroup V] [Module L V] {k : ℕ} (hk : 1 ≤ k)
@@ -142,8 +107,7 @@ theorem pw_imp_pol
   simp only [MultilinearMap.sumOfType, hsel] at key
   convert key using 2 <;> simp [M, N, ev]
 
-/-- **Proposition B.8 (3).** If `L = F_q` and `k ≥ q + 1`, then (Pw) does not imply (Pol) in
-general: some lift satisfies (Pw) but not (Pol). -/
+/-- Part (3): if `L = F_q` and `k ≥ q + 1`, some lift satisfies (Pw) but not (Pol). -/
 theorem exists_pw_not_pol
     {L : Type u} [Field L] [Finite L] {k : ℕ} (hk : 1 ≤ k) (hkq : Nat.card L + 1 ≤ k) :
     ∃ (A : Type u) (_ : AddCommGroup A) (_ : Module L A)
@@ -166,8 +130,7 @@ theorem exists_pw_not_pol
     { toFun := fun g => g x, map_add' := fun _ _ => rfl, map_smul' := fun _ _ => rfl }
   exact map_sum ev _ _
 
-/-- **Proposition B.8 (4).** If `k! = 0` in `L`, then (Pol1) does not imply (Pw) in general:
-some lift satisfies (Pol1) but not (Pw). -/
+/-- Part (4): if `k! = 0` in `L`, some lift satisfies (Pol1) but not (Pw). -/
 theorem exists_pol1_not_pw
     {L : Type u} [Field L] {k : ℕ} (hk : 1 ≤ k) (hfact : (k.factorial : L) = 0) :
     ∃ (A : Type u) (_ : AddCommGroup A) (_ : Module L A)

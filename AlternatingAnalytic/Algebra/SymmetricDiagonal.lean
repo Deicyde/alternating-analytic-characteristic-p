@@ -1,23 +1,19 @@
-/-
-The factorial contradiction for symmetric diagonal lifts.
-
-Source: round24/lean-conditional-core/lean/Symmetric.lean, integrated on 2026-09-23.
-Original declaration names in `R24` are retained for paper references.
-Provenance and verification: planning/charp-paper/planning/integration-manifest.json.
-
-A map `q`, multilinear in `k` "operator groups" (each group a vector in `R^k`, indexed by the
-`k` coordinate positions), with the diagonal law `q (a, …, a) = a_1 ⋯ a_k` and invariance under
-simultaneous permutation of the coordinate positions, satisfies `k! * c = 1` where
-`c = q (e_1, …, e_k)` is the common coefficient of the squarefree monomials.  Hence
-`(k! : R) ≠ 0` in any nontrivial commutative ring.  Pure algebra: no field size, no
-characteristic, no topology.  (round22/finite-alphabet/work.md §4, round22/ramsey §7.)
--/
 import Mathlib.LinearAlgebra.Multilinear.Basic
 import Mathlib.GroupTheory.Perm.Sign
 import Mathlib.Data.Nat.Choose.Sum
 import Mathlib.Data.Fintype.Perm
 import Mathlib.Algebra.BigOperators.Pi
 import Mathlib.Algebra.BigOperators.GroupWithZero.Finset
+
+/-!
+# The factorial identity for symmetric diagonal lifts
+
+Let `q` be multilinear in `k` groups of variables, each group a vector in `R^k`, with
+diagonal `q (a, …, a) = a_1 ⋯ a_k` and invariant under simultaneous permutation of the
+coordinates. Then `k! * q (e_1, …, e_k) = 1`, so `(k! : R) ≠ 0` in any nontrivial commutative
+ring. This mirrors the last step of the proof of Theorem B.9. The rest of the library uses only
+the Möbius identity `sum_superset_neg_one_pow` from this file.
+-/
 
 namespace R24
 
@@ -59,7 +55,8 @@ theorem coeffOf_perm (q : MultilinearMap R (fun _ : Fin k => Fin k → R) R)
   rw [coeffOf, ← h]
   rfl
 
-/-- The Möbius identity on the Boolean lattice used for the squarefree coefficient. -/
+/-- Möbius inversion on the Boolean lattice: `∑_{T ⊇ S} (-1)^|Tᶜ|` is `1` if `S` is everything
+and `0` otherwise. -/
 theorem sum_superset_neg_one_pow (S : Finset (Fin k)) :
     (∑ T : Finset (Fin k), if S ⊆ T then ((-1 : R) ^ Tᶜ.card) else 0)
       = if S = univ then 1 else 0 := by
@@ -81,13 +78,12 @@ theorem sum_superset_neg_one_pow (S : Finset (Fin k)) :
   · have : Sᶜ ≠ ∅ := by rwa [Ne, Finset.compl_eq_empty_iff]
     simp [hS, this]
 
-/-- **The factorial identity.**  `k! * c = 1` with `c = q (e_1, …, e_k)`. -/
+/-- The factorial identity `k! * q (e_1, …, e_k) = 1`. -/
 theorem factorial_mul_coeff_eq_one (q : MultilinearMap R (fun _ : Fin k => Fin k → R) R)
     (hdiag : ∀ a : Fin k → R, q (fun _ => a) = ∏ t, a t)
     (hsymm : ∀ (π : Equiv.Perm (Fin k)) (A : Fin k → Fin k → R), q (fun s => A s ∘ π) = q A) :
     (k.factorial : R) * q (fun s => Pi.single s 1) = 1 := by
   classical
-  -- indicator vectors of subsets
   let ind : Finset (Fin k) → Fin k → R := fun T t => if t ∈ T then 1 else 0
   have hdiagT : ∀ T : Finset (Fin k),
       (∑ σ : Fin k → Fin k, (if univ.image σ ⊆ T then (1 : R) else 0) * coeffOf q σ)
@@ -100,7 +96,7 @@ theorem factorial_mul_coeff_eq_one (q : MultilinearMap R (fun _ : Fin k => Fin k
       intro σ; simp [Finset.image_subset_iff]
     simp only [e1, Finset.image_id', Finset.univ_subset_iff] at this
     exact this
-  -- Möbius-sum the identities over `T`
+  -- Möbius-sum the diagonal identities over `T`
   have hsum : (∑ T : Finset (Fin k), (-1 : R) ^ Tᶜ.card *
       ∑ σ : Fin k → Fin k, (if univ.image σ ⊆ T then (1 : R) else 0) * coeffOf q σ)
       = ∑ T : Finset (Fin k), (-1 : R) ^ Tᶜ.card * (if T = univ then (1 : R) else 0) :=
@@ -154,9 +150,8 @@ theorem factorial_mul_coeff_eq_one (q : MultilinearMap R (fun _ : Fin k => Fin k
   rw [hconst] at hsum
   exact hsum
 
-/-- **The factorial contradiction.**  If `(k! : R) = 0` in a nontrivial commutative ring, no map
-multilinear in `k` operator groups can have the diagonal law `q (a,…,a) = ∏ a` and be invariant
-under coordinate permutations. -/
+/-- If `(k! : R) = 0`, no multilinear `q` has diagonal `∏ a` and is invariant under coordinate
+permutations. -/
 theorem no_symmetric_diagonal_lift [Nontrivial R] (hk : (k.factorial : R) = 0)
     (q : MultilinearMap R (fun _ : Fin k => Fin k → R) R)
     (hdiag : ∀ a : Fin k → R, q (fun _ => a) = ∏ t, a t)
@@ -166,7 +161,7 @@ theorem no_symmetric_diagonal_lift [Nontrivial R] (hk : (k.factorial : R) = 0)
   rw [hk, zero_mul] at h
   exact zero_ne_one h
 
-/-- Invariance under the adjacent transpositions `(i, i+1)` already gives invariance under all
+/-- Invariance under the adjacent transpositions `(i, i+1)` gives invariance under all
 permutations of `Fin (n+1)`. -/
 theorem perm_invariant_of_adjacent {n : ℕ}
     (q : MultilinearMap R (fun _ : Fin (n + 1) => Fin (n + 1) → R) R)
@@ -186,7 +181,7 @@ theorem perm_invariant_of_adjacent {n : ℕ}
       funext s; rfl
     rw [this, hy, hx]
 
-/-- The factorial contradiction from adjacent-swap invariance (the form produced by Lemma S). -/
+/-- The factorial contradiction from adjacent-swap invariance, the form given by Lemma B.12. -/
 theorem no_adjacent_symmetric_diagonal_lift [Nontrivial R] {n : ℕ}
     (hk : ((n + 1).factorial : R) = 0)
     (q : MultilinearMap R (fun _ : Fin (n + 1) => Fin (n + 1) → R) R)

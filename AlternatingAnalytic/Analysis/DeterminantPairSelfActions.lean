@@ -3,10 +3,11 @@ import AlternatingAnalytic.Analysis.DeterminantPairAllAlternating
 import AlternatingAnalytic.Analysis.SplitAlternatingPairs
 
 /-!
-# The two unpadded analytic self-actions
+# The two analytic self-actions in degree p
 
-This is the separate degree-p setup preceding the padded construction. Both
-actions use the actual determinant-pair carriers and the original target G.
+In the proof of Theorem H.4, the self-action of `X = (E, G)` is `(s, v) ↦ s^p v_*`, a bounded
+polynomial, so it is analytic. The pair `Y = (D, G)` is split by Lemma H.6, so its self-action
+is analytic by Lemma H.3.
 -/
 
 noncomputable section
@@ -19,7 +20,7 @@ namespace AlternatingAnalytic.DeterminantPair
 variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 attribute [local instance] preferredNormedFieldK preferredFieldK preferredFieldL
 
-/-- The original rigid-source self-action, including actual postcomposition. -/
+/-- The self-action of `(E, G)` sends `(h, v)` to `s^p v_*`, where `s` is the scalar of `h`. -/
 theorem unpadded_selfAction_eq
     (h : (E p r →L[K p r] E p r) × (G p r →L[K p r] G p r)) :
     alternatingMapAction p h =
@@ -39,18 +40,18 @@ theorem unpadded_selfAction_eq
   rw [hm]
   simp
 
-/-- The isometric scalar endomorphism coordinate as a bounded linear map. -/
+/-- The scalar of an endomorphism of `E`, as a bounded linear map (Lemma H.5). -/
 def unpaddedScalarCoordinate : (E p r →L[K p r] E p r) →L[K p r] K p r :=
   (RigidDenseSource.Concrete.endScalarEquiv p r).toContinuousLinearEquiv.toContinuousLinearMap
 
-/-- The actual bounded postcomposition operator with its normed type explicit. -/
+/-- Postcomposition `v ↦ v_*`, as a bounded linear map. -/
 def unpaddedPostcomposition : (G p r →L[K p r] G p r) →L[K p r]
     ((E p r [⋀^Fin p]→L[K p r] G p r) →L[K p r]
       (E p r [⋀^Fin p]→L[K p r] G p r)) :=
   ContinuousLinearMap.compContinuousAlternatingMapCLM
     (K p r) (E p r) (G p r) (G p r) (Fin p)
 
-/-- The unpadded rigid-source action is analytic at every actual operator pair. -/
+/-- The self-action of `(E, G)` is analytic everywhere. -/
 theorem analyticAt_unpaddedSelfActionE
     (h : (E p r →L[K p r] E p r) × (G p r →L[K p r] G p r)) :
     AnalyticAt (K p r)
@@ -83,11 +84,11 @@ theorem analyticAt_unpaddedSelfActionE
   rw [heq] at ha
   exact ha
 
-/-- The original degree-p all-alternating inverse is the split witness. -/
+/-- `(D, G)` is split in degree `p`. -/
 theorem isSplit_unpaddedD : IsSplitAlternatingPair (K p r) p (D p r) (G p r) :=
   ⟨retractionR p r, retractionR_inclusionJ p r⟩
 
-/-- The original determinant-source action is analytic at every operator pair. -/
+/-- The self-action of `(D, G)` is analytic everywhere. -/
 theorem analyticAt_unpaddedSelfActionD
     (h : (D p r →L[K p r] D p r) × (G p r →L[K p r] G p r)) :
     AnalyticAt (K p r)
@@ -95,7 +96,7 @@ theorem analyticAt_unpaddedSelfActionD
         (F := G p r) (F' := G p r) p) h :=
   analyticAt_alternatingMapAction_of_split_destination p (isSplit_unpaddedD p r) h
 
-/-- The separate degree-p source statement preceding the padded construction. -/
+/-- The degree-`p` self-action statements, collected. -/
 theorem unpadded_analytic_self_actions :
     (∀ h : (E p r →L[K p r] E p r) × (G p r →L[K p r] G p r),
       alternatingMapAction p h =

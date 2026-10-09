@@ -4,16 +4,16 @@ import Mathlib.Algebra.Module.BigOperators
 /-!
 # Squarefree polarization over arbitrary commutative rings
 
-The sum of a multilinear map over all permutations is determined by its diagonal.
-The formula is an inclusion-exclusion sum over subsets, so it is valid in every
-characteristic and requires neither symmetry nor alternation.
+The sum of a multilinear map over all permutations of its arguments is determined by its
+diagonal, through an inclusion-exclusion sum over subsets. The formula involves no division,
+so it holds in every characteristic. It gives (Pw) ⇒ (Pol1) in Proposition B.8(1).
 -/
 
 open Finset
 
 namespace Polarization
 
-/-- A self-map of a finite set has full range exactly when it comes from a permutation. -/
+/-- Summing over self-maps of `Fin k` with full range is summing over permutations. -/
 theorem sum_full_range_eq_sum_perm {k : ℕ} {M : Type*} [AddCommMonoid M]
     (g : (Fin k → Fin k) → M) :
     (∑ σ : Fin k → Fin k, if univ.image σ = univ then g σ else 0) =
@@ -51,8 +51,7 @@ namespace MultilinearMap
 variable {R A M : Type*} [CommRing R]
   [AddCommMonoid A] [Module R A] [AddCommMonoid M] [Module R M] {k : ℕ}
 
-/-- Expand a diagonal evaluated at a partial sum into the coordinate selection maps
-whose ranges lie in the chosen subset. -/
+/-- Expand the diagonal at a subset sum `∑_{i ∈ S} b i` over the self-maps with range in `S`. -/
 theorem map_diagonal_sum (P : MultilinearMap R (fun _ : Fin k => A) M)
     (b : Fin k → A) (S : Finset (Fin k)) :
     P (fun _ => ∑ i ∈ S, b i) =
@@ -98,8 +97,8 @@ theorem squarefree_polarization (P : MultilinearMap R (fun _ : Fin k => A) M)
           split_ifs <;> simp
     _ = _ := Polarization.sum_full_range_eq_sum_perm _
 
-/-- The pointwise diagonal identity implies its multilinear polarized instance over
-every commutative ring, even when the factorial vanishes. -/
+/-- Multilinear maps with the same diagonal have the same permutation sums, over every
+commutative ring. -/
 theorem sum_perm_eq_of_diagonal_eq
     (P Q : MultilinearMap R (fun _ : Fin k => A) M)
     (h : ∀ a : A, P (fun _ => a) = Q (fun _ => a)) (b : Fin k → A) :
@@ -108,9 +107,8 @@ theorem sum_perm_eq_of_diagonal_eq
   rw [← squarefree_polarization P b, ← squarefree_polarization Q b]
   exact Finset.sum_congr rfl fun S _ => congrArg (((-1 : R) ^ Sᶜ.card) • ·) (h _)
 
-/-- Specialize pointwise-to-squarefree polarization to a linear family of operators,
-with fixed vector arguments. Taking `W` to be the universal wedge gives `Pw → Pol1`
-for multiplier lifts. -/
+/-- (Pw) implies (Pol1) (Proposition B.8(1)). Here `P` is a lift with the vector arguments `x`
+fixed, and taking `W` to be the wedge gives the paper's statement. -/
 theorem sum_perm_eq_of_multiplier_diagonal
     {V : Type*} [AddCommMonoid V] [Module R V]
     (P : MultilinearMap R (fun _ : Fin k => A) M)

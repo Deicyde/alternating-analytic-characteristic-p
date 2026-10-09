@@ -7,12 +7,10 @@ import Mathlib.Analysis.Analytic.CPolynomial
 # The ambient joint action on multilinear maps
 
 For `f : E →L[K] E'` and `g : F →L[K] F'` the joint action sends a continuous multilinear map
-`m` on `E'` to `g ∘ m ∘ (f, …, f)` on `E`. This file shows that the action
-`(f, g) ↦ (m ↦ g ∘ m ∘ (f, …, f))` is the diagonal of a bounded `(k + 1)`-linear map built from
-`ContinuousMultilinearMap.compContinuousLinearMapContinuousMultilinear`, hence continuously
-polynomial, analytic and `C^ω` at every point, and that its restriction to alternating inputs is
-analytic with alternating values in a closed set (`paper/charp.tex`, Proposition 2.2). No
-completeness of the field or of the spaces is needed.
+`m` on `E'` to `g ∘ m ∘ (f, …, f)` on `E`. The action `(f, g) ↦ (m ↦ g ∘ m ∘ (f, …, f))` is the
+diagonal of a bounded `(k + 1)`-linear map, hence continuously polynomial and `C^ω`; its
+restriction to alternating inputs is analytic, with alternating values in a closed set. This is
+Proposition 2.2.
 -/
 
 noncomputable section

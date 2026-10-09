@@ -2,20 +2,18 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Analysis.ScalarProjection
 
 /-!
-# Corollary D.4 (Ingleton projection), p. 43
+# Proof of Corollary D.4
 
-Solution: the statement of `Challenges/CorD_4.lean`, proved from the library theorem
-`AlternatingAnalytic.exists_scalar_projection`
-(`AlternatingAnalytic/Analysis/ScalarProjection.lean`). The library also assumes
-`IsUltrametricDist K₁`; it is derived here from (H2) through the isometric `algebraMap`.
+Uses `AlternatingAnalytic.exists_scalar_projection`
+(`AlternatingAnalytic/Analysis/ScalarProjection.lean`), after deriving `IsUltrametricDist K₁`
+from (H2).
 -/
 
 namespace AlternatingAnalyticChallenge.CorD_4
 
 universe u₁ u'
 
-/-- **Corollary D.4 (Ingleton projection).** Under (H1) and (H2) there is a `K₁`-linear map
-`ϖ : K′ → K₁` with `ϖ|K₁ = id` and `|ϖ(λ)| ≤ |λ|`. -/
+/-- There is a `K₁`-linear map `ϖ : K′ → K₁` with `ϖ|K₁ = id` and `‖ϖ λ‖ ≤ ‖λ‖`. -/
 theorem ingleton_projection
     (K₁ : Type u₁) (K' : Type u') [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [SphericallyCompleteSpace K₁] [NormedField K'] [NormedAlgebra K₁ K']

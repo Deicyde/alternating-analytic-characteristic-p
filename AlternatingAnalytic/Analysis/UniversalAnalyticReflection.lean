@@ -6,8 +6,11 @@ import Mathlib.Order.Filter.AtTopBot.Finset
 /-!
 # Universal analytic reflection and exponential tensor projections
 
-The analytic tensor criterion `fam:thm:tensor-analytic`, for ordinary separated
-completed projective tensor powers over a complete nontrivially normed field.
+Theorem G.3: a Banach space `P` has universal analytic reflection if and only if there are
+projections `R_n : T_n(P) → Δ_n(P)` with `limsup ‖R_n‖^{1/n} < ∞`. Here `T_n(P)` is the
+completed projective tensor power and `Δ_n(P)` the closed span of the pure powers `x^{⊗n}`.
+The "if" direction replaces each ambient coefficient by a `W`-valued one using `R_n`; the
+"only if" direction applies reflection to the tensor test map of `TensorTestFamily.lean`.
 -/
 
 noncomputable section
@@ -19,8 +22,8 @@ namespace AlternatingAnalytic
 
 universe u v
 
-/-- A finite extended root-limsup is equivalent to a uniform exponential bound;
-the finitely many initial exceptions are absorbed into the same constant. -/
+/-- `limsup s_m^{1/(m+1)} < ∞` in `ℝ≥0∞` if and only if `s_m ≤ A^(m+1)` for some
+`A ≥ 1` and all `m`. -/
 theorem root_limsup_lt_top_iff_exponential_bound (s : ℕ → ℝ≥0) :
     Filter.limsup
       (fun m : ℕ => (s m : ℝ≥0∞) ^ (((m + 1 : ℕ) : ℝ)⁻¹))
@@ -58,8 +61,8 @@ theorem root_limsup_lt_top_iff_exponential_bound (s : ℕ → ℝ≥0) :
       exact_mod_cast hm
     · exact ENNReal.coe_lt_top
 
-/-- A coefficient estimate with a constant factor gives a uniform bound in every
-positive degree. -/
+/-- A bound `s_m ≤ C r^(m+1)` with `C, r > 0` gives a bound `s_m ≤ A^(m+1)` for some
+`A ≥ 1`. -/
 theorem exponential_bound_of_mul_pow_bound (s : ℕ → ℝ)
     {C r : ℝ} (_hC : 0 < C) (hr : 0 < r)
     (hs : ∀ m, s m ≤ C * r ^ (m + 1)) :
@@ -82,13 +85,11 @@ theorem exponential_bound_of_mul_pow_bound (s : ℕ → ℝ)
 variable (K P : Type u) [NontriviallyNormedField K] [CompleteSpace K]
   [NormedAddCommGroup P] [NormedSpace K P] [CompleteSpace P]
 
-/-- Universal analytic reflection through closed subspaces of Banach targets.
-The target universe contains the actual dependent c₀ tensor test space.
+/-- `P` has universal analytic reflection: for every closed subspace `W` of a Banach space
+`Z` in `Type u`, a map into `W` that is analytic into `Z` on an open set is analytic into `W`.
 
-We use total maps on `P` to express analyticity on an open set `U`. This is equivalent
-to the source's maps `U → W`: extend such a map by zero outside `U`, and restrict a
-total map to `U`. Analyticity is local on `U`, so the exterior values have no effect.
--/
+Maps are total on `P`; a map `U → W` corresponds to its extension by zero, and analyticity
+on the open set `U` does not see values outside `U`. -/
 def UniversalAnalyticReflection : Prop :=
   ∀ (Z : Type u) [NormedAddCommGroup Z] [NormedSpace K Z] [CompleteSpace Z],
     ∀ (W : Submodule K Z), IsClosed (W : Set Z) →
@@ -98,7 +99,7 @@ def UniversalAnalyticReflection : Prop :=
 variable {K P}
 
 omit [CompleteSpace K] [CompleteSpace P] in
-/-- Universal reflection applied to a map defined only on its open domain. -/
+/-- Universal reflection for a map defined on an open set, extended by zero. -/
 theorem UniversalAnalyticReflection.analyticOnNhd_extend
     (h : UniversalAnalyticReflection K P)
     {Z : Type u} [NormedAddCommGroup Z] [NormedSpace K Z] [CompleteSpace Z]
@@ -109,7 +110,7 @@ theorem UniversalAnalyticReflection.analyticOnNhd_extend
   h Z W hW U hU _ hf
 
 omit [CompleteSpace K] [CompleteSpace P] in
-/-- The source's open-domain formulation, expressed by zero extension. -/
+/-- The same, with `AnalyticOn` on the open set. -/
 theorem UniversalAnalyticReflection.analyticOn_extend
     (h : UniversalAnalyticReflection K P)
     {Z : Type u} [NormedAddCommGroup Z] [NormedSpace K Z] [CompleteSpace Z]
@@ -121,8 +122,8 @@ theorem UniversalAnalyticReflection.analyticOn_extend
     (h.analyticOnNhd_extend W hW hU f (hU.analyticOn_iff_analyticOnNhd.mp hf))
 
 omit [CompleteSpace K] [CompleteSpace P] in
-/-- The degree-zero coefficient restricts directly to the subspace, preserving its
-original norm bound. No degree-zero tensor projection is needed. -/
+/-- A degree-zero coefficient with values in `W` restricts to `W` with the same norm
+bound. -/
 theorem exists_zero_subspace_coefficient
     {Z : Type v} [NormedAddCommGroup Z] [NormedSpace K Z]
     (W : Submodule K Z)
@@ -137,8 +138,8 @@ theorem exists_zero_subspace_coefficient
   refine ⟨B.codRestrict W hmem, fun _ => rfl, ?_⟩
   exact ContinuousMultilinearMap.opNorm_le_bound (norm_nonneg B) (fun v => B.le_opNorm v)
 
-/-- Exponentially bounded tensor projections reflect every ambient analytic germ
-with values in a closed subspace. The target may lie in any universe. -/
+/-- Exponentially bounded tensor projections reflect analyticity at a point into any closed
+subspace. The target may lie in any universe. -/
 theorem analyticAt_subtype_of_tensor_projections
     (R : ∀ m : ℕ, TensorPower K P (m + 1) →L[K] DiagonalSpan K P (m + 1))
     (hR : ∀ m, (R m).comp (DiagonalSpan K P (m + 1)).subtypeL =
@@ -172,7 +173,8 @@ theorem analyticAt_subtype_of_tensor_projections
   choose q hdiag hnorm using hcoeff
   exact analyticAt_of_subspace_series W hp q (zero_le_one.trans hA) hnorm hdiag
 
-/-- Sufficiency of a single uniformly exponentially bounded projection family. -/
+/-- The "if" direction of Theorem G.3, for projections with a bound `‖R_n‖ ≤ A^n`
+in every degree `n ≥ 1`. -/
 theorem universal_analytic_reflection_of_tensor_projections
     (R : ∀ m : ℕ, TensorPower K P (m + 1) →L[K] DiagonalSpan K P (m + 1))
     (hR : ∀ m, (R m).comp (DiagonalSpan K P (m + 1)).subtypeL =
@@ -186,8 +188,7 @@ section TensorTest
 
 omit [CompleteSpace K] [CompleteSpace P]
 
-/-- The coefficient coordinate of an expansion of the reflected tensor test map
-has the prescribed diagonal. This uses diagonal uniqueness only. -/
+/-- For a `W`-valued expansion `q` of the tensor test map, `π_n q_n (x, …, x) = x^{⊗n}`. -/
 theorem tensorTest_expansion_deltaCoordinate
     {q : FormalMultilinearSeries K P (tensorTestSubmodule (K := K) (P := P))}
     (hq : HasFPowerSeriesAt (tensorTestMap (K := K) (P := P)) q 0)
@@ -213,8 +214,7 @@ theorem tensorTest_expansion_deltaCoordinate
   simpa only [tensorTestDeltaCoordinate_coe, j, Submodule.subtypeL_apply,
     tensorTestSeries_coordinate, diagonalTensor] using congrArg (tensorTestCoordinate m) he
 
-/-- The actual tensor linearization of the selected coordinate of one reflected
-series coefficient. -/
+/-- The projection `T_n(P) → Δ_n(P)` obtained by linearizing `π_n q_n`. -/
 def tensorTestProjection
     (q : FormalMultilinearSeries K P (tensorTestSubmodule (K := K) (P := P))) (m : ℕ) :
     TensorPower K P (m + 1) →L[K] DiagonalSpan K P (m + 1) :=
@@ -247,8 +247,8 @@ theorem norm_tensorTestProjection_le
       (norm_tensorTestDeltaCoordinate_le m) (norm_nonneg _)
     _ = ‖q (m + 1)‖ := one_mul _
 
-/-- A reflected analytic test germ produces one projection family with a common
-exponential coefficient bound, retaining the quantitative linearization estimate. -/
+/-- If the tensor test map is analytic into `W` at zero, there are projections `R_n` with
+`‖R_n‖ ≤ C r^n`. -/
 theorem tensor_projections_of_analyticAt_tensorTestMap
     (h : AnalyticAt K (tensorTestMap (K := K) (P := P)) 0) :
     ∃ R : ∀ m : ℕ, TensorPower K P (m + 1) →L[K] DiagonalSpan K P (m + 1),
@@ -264,8 +264,8 @@ theorem tensor_projections_of_analyticAt_tensorTestMap
 end TensorTest
 
 omit [CompleteSpace K] [CompleteSpace P] in
-/-- Necessity retains a common coefficient bound for the same family of projections
-obtained by linearizing the reflected dependent c₀ tensor test series. -/
+/-- The "only if" direction of Theorem G.3: reflecting the tensor test map gives
+projections with `‖R_n‖ ≤ C r^n`. -/
 theorem tensor_projections_of_universal_analytic_reflection
     (h : UniversalAnalyticReflection K P) :
     ∃ R : ∀ m : ℕ, TensorPower K P (m + 1) →L[K] DiagonalSpan K P (m + 1),
@@ -278,8 +278,8 @@ theorem tensor_projections_of_universal_analytic_reflection
     0 (by simp)
 
 omit [CompleteSpace K] [CompleteSpace P] in
-/-- For one fixed projection family, the paper's extended root-limsup condition is
-equivalent to a uniform exponential norm bound in every positive degree. -/
+/-- For a family of projections, `limsup ‖R_n‖^{1/n} < ∞` is equivalent to a bound
+`‖R_n‖ ≤ A^n`. -/
 theorem tensor_projections_root_limsup_iff
     (R : ∀ m : ℕ, TensorPower K P (m + 1) →L[K] DiagonalSpan K P (m + 1)) :
     Filter.limsup
@@ -288,7 +288,7 @@ theorem tensor_projections_root_limsup_iff
     ∃ A : ℝ, 1 ≤ A ∧ ∀ m, ‖R m‖ ≤ A ^ (m + 1) :=
   root_limsup_lt_top_iff_exponential_bound (fun m => ‖R m‖₊)
 
-/-- The uniform-exponential-bound form of the analytic tensor criterion. -/
+/-- Theorem G.3, with the condition stated as a bound `‖R_n‖ ≤ A^n`. -/
 theorem universal_analytic_reflection_iff_exponential_tensor_projections :
     UniversalAnalyticReflection K P ↔
       ∃ R : ∀ m : ℕ, TensorPower K P (m + 1) →L[K] DiagonalSpan K P (m + 1),
@@ -303,9 +303,9 @@ theorem universal_analytic_reflection_iff_exponential_tensor_projections :
   · rintro ⟨R, hR, A, hA, hbound⟩
     exact universal_analytic_reflection_of_tensor_projections R hR hA hbound
 
-/-- The full analytic tensor criterion: universal reflection holds exactly when the
-actual positive-degree diagonal spans have a single family of bounded projections
-whose norm roots have finite extended limsup. -/
+/-- Theorem G.3: universal analytic reflection holds if and only if there are projections
+`R_n : T_n(P) → Δ_n(P)`, `n ≥ 1`, with `limsup ‖R_n‖^{1/n} < ∞`; the limsup is taken
+in `ℝ≥0∞`. -/
 theorem universal_analytic_reflection_iff_tensor_projections :
     UniversalAnalyticReflection K P ↔
       ∃ R : ∀ m : ℕ, TensorPower K P (m + 1) →L[K] DiagonalSpan K P (m + 1),

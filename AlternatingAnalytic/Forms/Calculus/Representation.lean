@@ -7,12 +7,9 @@ import Mathlib.Data.Fin.Tuple.Sort
 # Alternating maps on `R^N` are alternatizations
 
 Over any commutative ring `R`, every scalar alternating map `μ` on the free module `Fin N → R`
-is the alternatization of a multilinear map: `μ = Alt a` with
-`a = ∑_{f strictly monotone} μ(e_f) · ∏_t (coordinate f t)` (`exists_alternatization_eq`). The
-proof evaluates both sides on tuples of distinct basis vectors: exactly one permutation sorts
-such a tuple. Together with `tupleMap v : (Fin N → R) →ₗ M`, which sends the standard basis to a
-given tuple `v`, this reduces identities between alternating maps evaluated at a tuple of `M` to
-identities between alternatizations.
+is the alternatization of a multilinear map (`exists_alternatization_eq`). Together with
+`tupleMap v : (Fin N → R) →ₗ M`, which sends the standard basis to a tuple `v`, this reduces
+identities between alternating maps evaluated at `v` to identities between alternatizations.
 -/
 
 open Equiv

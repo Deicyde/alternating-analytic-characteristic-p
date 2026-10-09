@@ -22,37 +22,23 @@ consistent. So the obstruction is exactly the vanishing of k!, not positive char
 such. For example, at (p, k) = (5, 3) every step is consistent, since 3! = 6 = 1 in F₅ and
 χ₀ = 1."
 
-Formalization notes:
-* Definitions introduced (identical in challenge and solution): `psiAlt L k u x` is the paper's
-  formula for `Ψ_alt(u; x)` on `u, x ∈ V^k`, `V = ℕ → L`, with values in `⋀[L]^k (ℕ → L)`
-  (`1/k!` is `(k! : L)⁻¹`, the wedge is `exteriorPower.ιMulti`); `opWeight`, `vecWeight`, `sC`,
-  `wC` are `s`, `w`, `s_C`, `w_C` (finitely supported, coerced into `V`); `clusterValueAlt` is the
-  cluster value of `Ψ_alt`.
-* The claims are split into five theorems: `Ψ_alt` is a `2k`-linear map (implicit in calling it
-  a lift; stated as existence of a curried multilinear map agreeing with the formula), alternating
-  in `x` (vanishing when two vector arguments coincide), (Pol1) for the multipliers, the bound
-  `sdim ≤ k²`, and `χ = 1/k!` on pairwise disjoint clusters.
-* `sdim` is the library definition `AlternatingAnalytic.exteriorSupportDim` and `Ω` is
-  `AlternatingAnalytic.determinantArray`, imported (via `Algebra/DeterminantArray.lean`) only for
-  these definitions; the proofs live in `Algebra/NormalizedMultiplierLift.lean`, not imported.
-* Domain: in the setting of Theorem B.9(1) the paper's `Ψ_alt` is defined on
-  `V_fin^k × V_fin^k`. Here `Ψ_alt` is defined on `V^k × V^k` (`V = ℕ → L`); restricted to
-  `V_fin` it is the paper's map, and every claim ((Pol1), alternation, `sdim ≤ k²`) is stated on
-  the larger domain, which implies the paper's version. The paper does not restrict the inputs
-  of (Pol1) here.
-* Not formalized (commentary, not mathematical claims beyond the five theorems): the sentence
-  that "the preceding homogeneity, cancellation, staircase and diagonal arguments apply" (the
-  Lean statement records only the resulting value `χ = 1/k!`), the remark that
-  `k! · (1/k!) = 1` is consistent, the conclusion that the obstruction is exactly the vanishing
-  of `k!`, and the example `(p, k) = (5, 3)`.
-* "k! ≠ 0 in L" is `hfact : (k.factorial : L) ≠ 0`, assumed in every part as in the remark
-  (alternation and the support bound do not need it). `[Finite L]` is the standing context of
-  Appendix B.3; none of the claims uses it.
-* "Pairwise disjoint clusters" in the last part: `C j` is strictly increasing in its four points
-  and distinct slots have no common point. Clusters need not consist of consecutive elements of
-  a homogeneous set `H` (the computation does not use `H`), so this is the paper's claim for
-  every `H`.
-* Paper labels are 1-based, Lean's are 0-based (`C(1)` is `C 0`).
+## Formalization notes
+* `psiAlt L k u x` is the paper's formula for `Ψ_alt(u; x)`, with `1/k! = (k! : L)⁻¹` and wedge
+  `exteriorPower.ιMulti`. `opWeight`, `vecWeight`, `sC`, `wC` are `s`, `w`, `s_C`, `w_C`
+  (finitely supported, coerced into `V`); `clusterValueAlt` is the cluster value of `Ψ_alt`.
+* The remark is split into five theorems: `Ψ_alt` is `2k`-linear (as a curried multilinear map
+  agreeing with the formula), alternating in `x`, satisfies (Pol1), `sdim ≤ k²`, and `χ = 1/k!`.
+* `sdim` is `AlternatingAnalytic.exteriorSupportDim` and `Ω` is
+  `AlternatingAnalytic.determinantArray`, imported only for these definitions.
+* `Ψ_alt` is defined on `V^k × V^k` with `V = ℕ → L` rather than on `V_fin^k × V_fin^k`; every
+  claim on the larger domain implies the paper's version.
+* Not formalized: that the earlier arguments apply, the consistency of `k! · (1/k!) = 1`, the
+  conclusion about the obstruction, and the example `(p, k) = (5, 3)`.
+* `hfact : (k.factorial : L) ≠ 0` is assumed in every part, though alternation and the support
+  bound do not need it. `[Finite L]` is standing context and is not used.
+* In the last part, "pairwise disjoint clusters" means each `C j` is strictly increasing and
+  distinct slots share no point; the clusters need not come from a homogeneous set `H`.
+* Labels are 0-based: `C(1)` is `C 0`.
 -/
 
 namespace AlternatingAnalyticChallenge.RemB_15
@@ -94,7 +80,7 @@ noncomputable def clusterValueAlt (L : Type u) [Field L] (k : ℕ) (C : Fin k �
 
 end ClusterDefinitions
 
-/-- **Remark B.15, lift.** `Ψ_alt` is a `2k`-linear map `V^k × V^k → Λ^k V`. -/
+/-- `Ψ_alt` is a `2k`-linear map `V^k × V^k → Λ^k V`. -/
 theorem psiAlt_multilinear {L : Type u} [Field L] [Finite L] {k : ℕ}
     (hfact : (k.factorial : L) ≠ 0) :
     ∃ Ψ : MultilinearMap L (fun _ : Fin k => ℕ → L)
@@ -102,14 +88,14 @@ theorem psiAlt_multilinear {L : Type u} [Field L] [Finite L] {k : ℕ}
       ∀ u x : Fin k → ℕ → L, Ψ u x = psiAlt L k u x := by
   sorry
 
-/-- **Remark B.15, alternation.** `Ψ_alt(u; x)` is alternating in `x`. -/
+/-- `Ψ_alt(u; x)` is alternating in `x`. -/
 theorem psiAlt_alternating {L : Type u} [Field L] [Finite L] {k : ℕ}
     (hfact : (k.factorial : L) ≠ 0) (u x : Fin k → ℕ → L) {i j : Fin k}
     (hx : x i = x j) (hij : i ≠ j) :
     psiAlt L k u x = 0 := by
   sorry
 
-/-- **Remark B.15, (Pol1).** `Ψ_alt` satisfies (Pol1) for the multipliers `D_u x = ux`. -/
+/-- `Ψ_alt` satisfies (Pol1) for the multipliers `D_u x = ux`. -/
 theorem psiAlt_pol1 {L : Type u} [Field L] [Finite L] {k : ℕ}
     (hfact : (k.factorial : L) ≠ 0) (u x : Fin k → ℕ → L) :
     ∑ σ : Equiv.Perm (Fin k), psiAlt L k (fun j => u (σ j)) x =
@@ -117,14 +103,13 @@ theorem psiAlt_pol1 {L : Type u} [Field L] [Finite L] {k : ℕ}
         exteriorPower.ιMulti L k (fun j => fun n => u (σ j) n * x j n) := by
   sorry
 
-/-- **Remark B.15, support bound.** `sdim(Ψ_alt(u; x)) ≤ k²`. -/
+/-- `sdim(Ψ_alt(u; x)) ≤ k²`. -/
 theorem exteriorSupportDim_psiAlt_le {L : Type u} [Field L] [Finite L] {k : ℕ}
     (hfact : (k.factorial : L) ≠ 0) (u x : Fin k → ℕ → L) :
     AlternatingAnalytic.exteriorSupportDim (psiAlt L k u x) ≤ k ^ 2 := by
   sorry
 
-/-- **Remark B.15, cluster value.** For pairwise disjoint clusters the cluster value of `Ψ_alt` is
-`1/k!`. -/
+/-- For pairwise disjoint clusters the cluster value of `Ψ_alt` is `1/k!`. -/
 theorem clusterValueAlt_eq_inv_factorial {L : Type u} [Field L] [Finite L] {k : ℕ}
     (hfact : (k.factorial : L) ≠ 0) (C : Fin k → Fin 4 → ℕ) (hC : ∀ j, StrictMono (C j))
     (hdisj : ∀ j l, j ≠ l → ∀ p q, C j p ≠ C l q) :

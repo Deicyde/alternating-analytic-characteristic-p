@@ -5,10 +5,10 @@ import Mathlib.Analysis.Normed.Field.Instances
 /-!
 # Restriction along a dense scalar inclusion
 
-Continuous linear, multilinear, and alternating maps over a dense normed
-subfield are automatically maps over the larger field, with the same underlying
-functions and norms. This is the map-identification part of the paper's descent
-lemma. No completeness assumption on the input or output spaces is used.
+Let `K` be dense in `L`. Continuous `K`-linear, multilinear and alternating maps
+between `L`-spaces are `L`-linear, with the same functions and norms, so the map
+spaces over `K` and over `L` are isometric. This is the map-space part of
+Lemma D.11.
 -/
 
 namespace AlternatingAnalytic
@@ -20,8 +20,7 @@ variable {K L E F : Type*} [NontriviallyNormedField K] [NontriviallyNormedField 
   [NormedAddCommGroup E] [NormedSpace K E] [NormedSpace L E] [IsScalarTower K L E]
   [NormedAddCommGroup F] [NormedSpace K F] [NormedSpace L F] [IsScalarTower K L F]
 
-/-- Continuity promotes original-field linearity to extension-field linearity
-when the scalar inclusion has dense range. -/
+/-- A continuous `K`-linear map is `L`-linear when `K` is dense in `L`. -/
 theorem map_smul_of_dense_algebraMap (hd : DenseRange (algebraMap K L))
     (f : E →L[K] F) (c : L) (x : E) : f (c • x) = c • f x := by
   have h : (fun a : L => f (a • x)) = fun a : L => a • f x := by
@@ -32,8 +31,7 @@ theorem map_smul_of_dense_algebraMap (hd : DenseRange (algebraMap K L))
     simpa only [algebraMap_smul] using f.map_smul a x
   exact congrFun h c
 
-/-- A continuous map over the smaller field, with its proved larger-field
-linear structure and unchanged underlying function. -/
+/-- A continuous `K`-linear map viewed as an `L`-linear map. -/
 def denseScalarLinearExtension (hd : DenseRange (algebraMap K L))
     (f : E →L[K] F) : E →L[L] F where
   toFun := f
@@ -57,8 +55,8 @@ theorem norm_denseScalarLinearExtension (hd : DenseRange (algebraMap K L))
   rw [← ContinuousLinearMap.norm_restrictScalars (𝕜' := K),
     restrict_denseScalarLinearExtension]
 
-/-- The actual spaces of continuous linear maps are linearly isometric over
-the larger field; the inverse is restriction of scalars. -/
+/-- The spaces of continuous linear maps over `K` and over `L` are isometric; the
+inverse is restriction of scalars. -/
 def denseScalarLinearEquiv (hd : DenseRange (algebraMap K L)) :
     (E →L[K] F) ≃ₗᵢ[L] (E →L[L] F) where
   toFun := denseScalarLinearExtension hd
@@ -79,8 +77,7 @@ theorem denseScalarLinearEquiv_symm_apply (hd : DenseRange (algebraMap K L))
 
 variable {n : ℕ}
 
-/-- Every scalar identity in every slot follows from the dense scalar
-inclusion, applied to the continuous linear map in that slot. -/
+/-- A continuous `K`-multilinear map viewed as an `L`-multilinear map. -/
 def denseScalarMultilinearExtension (hd : DenseRange (algebraMap K L))
     (f : E [×n]→L[K] F) : E [×n]→L[L] F where
   toFun := f
@@ -102,8 +99,7 @@ theorem restrict_denseScalarMultilinearExtension (hd : DenseRange (algebraMap K 
 theorem norm_denseScalarMultilinearExtension (hd : DenseRange (algebraMap K L))
     (f : E [×n]→L[K] F) : ‖denseScalarMultilinearExtension hd f‖ = ‖f‖ := rfl
 
-/-- Isometric identification of continuous multilinear map spaces, with
-inverse given by actual scalar restriction. -/
+/-- The spaces of continuous multilinear maps over `K` and over `L` are isometric. -/
 def denseScalarMultilinearEquiv (hd : DenseRange (algebraMap K L)) :
     (E [×n]→L[K] F) ≃ₗᵢ[L] (E [×n]→L[L] F) where
   toFun := denseScalarMultilinearExtension hd
@@ -125,8 +121,7 @@ theorem denseScalarMultilinearEquiv_symm_apply (hd : DenseRange (algebraMap K L)
     (denseScalarMultilinearEquiv (E := E) (F := F) (n := n) hd).symm f =
       f.restrictScalars K := rfl
 
-/-- Alternation is preserved because the underlying multilinear function is
-unchanged, including its equal-input vanishing property. -/
+/-- A continuous `K`-alternating map viewed as an `L`-alternating map. -/
 def denseScalarAlternatingExtension (hd : DenseRange (algebraMap K L))
     (f : E [⋀^Fin n]→L[K] F) : E [⋀^Fin n]→L[L] F :=
   ⟨denseScalarMultilinearExtension hd f.toContinuousMultilinearMap,
@@ -146,8 +141,7 @@ theorem restrict_denseScalarAlternatingExtension (hd : DenseRange (algebraMap K 
 theorem norm_denseScalarAlternatingExtension (hd : DenseRange (algebraMap K L))
     (f : E [⋀^Fin n]→L[K] F) : ‖denseScalarAlternatingExtension hd f‖ = ‖f‖ := rfl
 
-/-- Isometric identification of continuous alternating map spaces over a
-dense field inclusion, linear over the larger field. -/
+/-- The spaces of continuous alternating maps over `K` and over `L` are isometric. -/
 def denseScalarAlternatingEquiv (hd : DenseRange (algebraMap K L)) :
     (E [⋀^Fin n]→L[K] F) ≃ₗᵢ[L] (E [⋀^Fin n]→L[L] F) where
   toFun := denseScalarAlternatingExtension hd
@@ -172,7 +166,7 @@ section Completion
 
 variable (K : Type*) [NontriviallyNormedField K]
 
-/-- The field completion retains a scalar of norm greater than one. -/
+/-- The completion of `K` is a nontrivially normed field. -/
 noncomputable instance completionNontriviallyNormedField :
     NontriviallyNormedField (UniformSpace.Completion K) where
   __ : NormedField (UniformSpace.Completion K) := inferInstance
@@ -180,7 +174,7 @@ noncomputable instance completionNontriviallyNormedField :
     obtain ⟨x, hx⟩ := NormedField.exists_one_lt_norm K
     exact ⟨(x : UniformSpace.Completion K), by simpa using hx⟩
 
-/-- The algebra map to the actual field completion has dense range. -/
+/-- The algebra map to the completion of `K` has dense range. -/
 theorem denseRange_algebraMap_completion :
     DenseRange (algebraMap K (UniformSpace.Completion K)) := by
   change DenseRange (fun x : K => (x : UniformSpace.Completion K))
@@ -197,17 +191,17 @@ variable {E F : Type*}
   [NormedAddCommGroup F] [NormedSpace K F] [NormedSpace (UniformSpace.Completion K) F]
   [IsScalarTower K (UniformSpace.Completion K) F]
 
-/-- Completion specialization of the linear map identification. -/
+/-- The identification of linear map spaces, for the completion of `K`. -/
 noncomputable def completionScalarLinearEquiv :
     (E →L[K] F) ≃ₗᵢ[UniformSpace.Completion K] (E →L[UniformSpace.Completion K] F) :=
   denseScalarLinearEquiv (denseRange_algebraMap_completion K)
 
-/-- Completion specialization of the multilinear map identification. -/
+/-- The identification of multilinear map spaces, for the completion of `K`. -/
 noncomputable def completionScalarMultilinearEquiv (n : ℕ) :
     (E [×n]→L[K] F) ≃ₗᵢ[UniformSpace.Completion K] (E [×n]→L[UniformSpace.Completion K] F) :=
   denseScalarMultilinearEquiv (denseRange_algebraMap_completion K)
 
-/-- Completion specialization of the alternating map identification. -/
+/-- The identification of alternating map spaces, for the completion of `K`. -/
 noncomputable def completionScalarAlternatingEquiv (n : ℕ) :
     (E [⋀^Fin n]→L[K] F) ≃ₗᵢ[UniformSpace.Completion K]
       (E [⋀^Fin n]→L[UniformSpace.Completion K] F) :=

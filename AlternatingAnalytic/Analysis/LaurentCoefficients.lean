@@ -1,7 +1,13 @@
 import AlternatingAnalytic.Analysis.LaurentField
 import AlternatingAnalytic.Analysis.DiscreteSupNorm
 
-/-! Bounded Laurent arrays, constant arrays, and coefficient extraction. -/
+/-!
+# Bounded Laurent arrays and their coefficients
+
+Bounded arrays `S →ᵇ κ((X))`, the coordinatewise coefficient maps `coeff_n`, and the
+embedding of `κ`-valued arrays as constant arrays. Arrays of norm less than one have zero
+constant coefficient (Appendix C, Setting).
+-/
 
 noncomputable section
 
@@ -43,7 +49,7 @@ theorem boundedLaurentCoeff_sub (n : ℤ) (f g : S →ᵇ LaurentField κ r) :
   ext s
   exact (LaurentField.coeff κ r n).map_sub (f s) (g s)
 
-/-- Coefficient extraction is linear with respect to the constant coefficient field. -/
+/-- Coefficient extraction is `κ`-linear. -/
 theorem boundedLaurentCoeff_smul_const (n : ℤ) (c : κ) (f : S →ᵇ LaurentField κ r) :
     boundedLaurentCoeff κ r n ((algebraMap κ (LaurentField κ r) c) • f) =
       c • boundedLaurentCoeff κ r n f := by
@@ -53,21 +59,21 @@ theorem boundedLaurentCoeff_smul_const (n : ℤ) (c : κ) (f : S →ᵇ LaurentF
   rw [IsScalarTower.algebraMap_smul]
   exact (LaurentField.coeff κ r n).map_smul c (f s)
 
-/-- Arrays of norm less than one have zero constant coefficient array. -/
+/-- Arrays of norm less than one have zero constant coefficient. -/
 theorem boundedLaurentCoeff_zero_of_norm_lt_one (f : S →ᵇ LaurentField κ r)
     (hf : ‖f‖ < 1) : boundedLaurentCoeff κ r 0 f = 0 := by
   ext s
   exact LaurentField.coeff_zero_of_norm_lt_one κ r (f s)
     ((f.norm_coe_le_norm s).trans_lt hf)
 
-/-- Constant coefficients agree whenever the uniform distance is less than one. -/
+/-- Arrays at distance less than one have the same constant coefficient. -/
 theorem boundedLaurentCoeff_eq_of_norm_sub_lt_one (f g : S →ᵇ LaurentField κ r)
     (hfg : ‖f - g‖ < 1) : boundedLaurentCoeff κ r 0 f = boundedLaurentCoeff κ r 0 g := by
   apply sub_eq_zero.mp
   rw [← boundedLaurentCoeff_sub]
   exact boundedLaurentCoeff_zero_of_norm_lt_one κ r _ hfg
 
-/-- The least coordinate order of a nonzero bounded Laurent array is attained. -/
+/-- A nonzero bounded array has a least coordinate order `ν`, attained, with `‖f‖ = r ^ ν`. -/
 theorem exists_boundedLaurent_order (f : S →ᵇ LaurentField κ r) (hf : f ≠ 0) :
     ∃ ν : ℤ, ‖f‖ = (r : ℝ) ^ ν ∧
       (∃ s, f s ≠ 0 ∧ (show LaurentSeries κ from f s).order = ν) ∧
@@ -99,7 +105,7 @@ section Constants
 
 variable [DiscreteTopology S]
 
-/-- Embed an arbitrary coefficient-field array as constant Laurent series. -/
+/-- A `κ`-valued array, viewed as an array of constant Laurent series. -/
 noncomputable def constantLaurentArray (a : S → κ) : S →ᵇ LaurentField κ r :=
   BoundedContinuousFunction.mkOfDiscrete
     (fun s => algebraMap κ (LaurentField κ r) (a s)) 2 (fun s t => by
@@ -136,7 +142,7 @@ theorem norm_constantLaurentArray (a : S → κ) (ha : a ≠ 0) :
   simpa [constantLaurentArray_apply, LaurentField.norm_algebraMap κ r (a s) hs] using
     (constantLaurentArray κ r a).norm_coe_le_norm s
 
-/-- Constant coefficient extraction fixes every embedded coefficient-field array. -/
+/-- The constant coefficient of a constant array is the array itself. -/
 theorem boundedLaurentCoeff_constantLaurentArray (a : S → κ) :
     boundedLaurentCoeff κ r 0 (constantLaurentArray κ r a) = a := by
   ext s

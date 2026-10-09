@@ -13,7 +13,7 @@ from the countable span `V₀` to its image in the bidual, apply the sorted lift
 basis there, pull back, and extend from `V₀` by density. Neither completeness nor an ultrametric
 norm is required of `V`.
 
-As in Proposition I.1 (`prop:scalar-countable`), `R = alternatization ∘ S` lifts
+As in the proof of Proposition I.1, `R = alternatization ∘ S` lifts
 `A^k_{E,D;K}` when `E` has countable type, and `u ↦ alternatization (S_D m ∘ u)` lifts it when
 `D` has countable type. Hence precomposition on scalar alternating forms is analytic in every
 degree in both cases (`analyticAt_compContinuousLinearMapCLM_of_countableType_source`,
@@ -32,8 +32,8 @@ variable {K V E D : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup V] [NormedSpace K V] [NormedAddCommGroup E] [NormedSpace K E]
   [NormedAddCommGroup D] [NormedSpace K D]
 
-/-- **Sorted lift on a space of countable type.** A bounded linear operator on scalar
-`k`-linear forms whose alternatization is the identity on alternating forms. -/
+/-- On a space of countable type, some bounded linear operator on scalar `k`-linear forms has
+alternatization equal to the identity on alternating forms. -/
 theorem exists_sortedLift_of_countableType [IsUltrametricDist K] [CompleteSpace K]
     (hV : ∃ S : Set V, S.Countable ∧ Dense (Submodule.span K S : Set V)) (k : ℕ) :
     ∃ L : ContinuousMultilinearMap K (fun _ : Fin k => V) K →L[K]
@@ -81,7 +81,7 @@ theorem exists_sortedLift_of_countableType [IsUltrametricDist K] [CompleteSpace 
   ext v
   exact congrFun heq v
 
-/-- **Proposition I.1, source case.** If `E` has countable type, precomposition on scalar
+/-- Proposition I.1, source case: if `E` has countable type, precomposition on scalar
 alternating `k`-forms is analytic at every point. -/
 theorem analyticAt_compContinuousLinearMapCLM_of_countableType_source
     [IsUltrametricDist K] [CompleteSpace K]
@@ -132,7 +132,7 @@ theorem targetLift_diag (k : ℕ)
     ContinuousMultilinearMap.alternatization_apply_apply]
   rfl
 
-/-- **Proposition I.1, target case.** If `D` has countable type, precomposition on scalar
+/-- Proposition I.1, target case: if `D` has countable type, precomposition on scalar
 alternating `k`-forms is analytic at every point. -/
 theorem analyticAt_compContinuousLinearMapCLM_of_countableType_target
     [IsUltrametricDist K] [CompleteSpace K]

@@ -6,25 +6,19 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Scalar.ScalarClassification.Unconditional
 
 /-!
-# Theorem 6.3 (universal scalar classification), p. 16
+# Proof of Theorem 6.3
 
-Solution: the "if" direction is
-`AlternatingAnalytic.ScalarClassification.analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete`
-(`Scalar/ScalarClassification.lean`: the factorial-invertible case from `FactorialInvertible.lean`
-and the spherically complete case from `SphericalAnalytic.lean`). The three equivalences are
-`analytic_on_homs_iff'`, `analytic_on_homs_iff_banach'` and
-`analytic_on_homs_iff_nonarchimedean_banach'` (`Scalar/ScalarClassification/Unconditional.lean`),
-whose "only if" halves use Theorem 6.1(2) (`scalarObstruction`): `k! = 0` in `K` forces
-`char K = p` prime with `p ≤ k`.
+Uses `AlternatingAnalytic.ScalarClassification.analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete`
+(`Scalar/ScalarClassification.lean`) and `analytic_on_homs_iff'`, `analytic_on_homs_iff_banach'`,
+`analytic_on_homs_iff_nonarchimedean_banach'` (`Scalar/ScalarClassification/Unconditional.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.Thm6_3
 
 universe u
 
-/-- **Theorem 6.3, "if" direction, arbitrary normed sources.** If `k! ≠ 0` in `K` or `K` is
-spherically complete, scalar pullback `u ↦ u^*` on `Alt^k(−; K)` is analytic on every Hom
-space. -/
+/-- Theorem 6.3, "if" direction: if `k! ≠ 0` in `K` or `K` is spherically complete, the
+pullback `u ↦ u^*` on `Alt^k(−; K)` is analytic on every Hom space. -/
 theorem analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ)
     (h : (k.factorial : K) ≠ 0 ∨ SphericallyCompleteSpace K)
@@ -37,7 +31,7 @@ theorem analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete
   exact AlternatingAnalytic.ScalarClassification.analyticOnNhd_of_factorial_ne_zero_or_sphericallyComplete
     K k h E D
 
-/-- **Theorem 6.3, normed sources.** `Alt^k(−; K)` on `Vec_K^op` is analytic on every Hom space
+/-- Theorem 6.3, normed sources: `Alt^k(−; K)` on `Vec_K^op` is analytic on every Hom space
 if and only if `k! ≠ 0` in `K` or `K` is spherically complete. -/
 theorem analytic_on_homs_iff
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ) :
@@ -50,7 +44,7 @@ theorem analytic_on_homs_iff
     ((k.factorial : K) ≠ 0 ∨ SphericallyCompleteSpace K) := by
   exact AlternatingAnalytic.ScalarClassification.analytic_on_homs_iff' K k
 
-/-- **Theorem 6.3, Banach sources.** The same equivalence for Banach source spaces. -/
+/-- Theorem 6.3, Banach sources: the same equivalence for Banach source spaces. -/
 theorem analytic_on_homs_iff_banach
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ) :
     (∀ (E D : Type u) [NormedAddCommGroup E] [NormedSpace K E] [CompleteSpace E]
@@ -62,7 +56,7 @@ theorem analytic_on_homs_iff_banach
     ((k.factorial : K) ≠ 0 ∨ SphericallyCompleteSpace K) := by
   exact AlternatingAnalytic.ScalarClassification.analytic_on_homs_iff_banach' K k
 
-/-- **Theorem 6.3, nonarchimedean Banach sources.** The same equivalence for nonarchimedean
+/-- Theorem 6.3, nonarchimedean Banach sources: the same equivalence for nonarchimedean
 Banach source spaces. -/
 theorem analytic_on_homs_iff_nonarchimedean_banach
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] (k : ℕ) :

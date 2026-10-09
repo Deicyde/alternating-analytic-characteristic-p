@@ -3,13 +3,12 @@ import AlternatingAnalytic.Geometry.AnalyticAlternatingBundleMorphism
 import Mathlib.CategoryTheory.Products.Basic
 
 /-!
-# The alternating bifunctor on analytic normable bundles
+# The alternating bifunctor on analytic bundles
 
-Over a fixed analytic manifold with supplied finite coordinates, alternating maps
-form a literal bifunctor, contravariant in their source and covariant in their
-target. The object construction retains Mathlib's canonical topological fibers,
-total-space topology and bundle atlas. Only its analytic mixin uses the supplied
-coordinates. All degrees, including zero, and arbitrary normed models are allowed.
+Over an analytic manifold whose model has finite continuous coordinates, fiberwise
+alternating maps give a functor `(AnalyticBundleCat)ᵒᵖ × AnalyticBundleCat ⥤
+AnalyticBundleCat`. The objects keep Mathlib's fibers, total-space topology and atlas.
+This is the bifunctor of Corollary 4.6 in the finite-coordinate setting.
 -/
 
 noncomputable section
@@ -26,7 +25,7 @@ variable {K P M : Type u} [NontriviallyNormedField K]
   [TopologicalSpace M] [ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]
   {d : ℕ} (c : P ≃L[K] (Fin d → K)) (k : ℕ)
 
-/-- The actual alternating bundle, with its existing topology and atlas. -/
+/-- The alternating bundle of two analytic bundles, with Mathlib's topology and atlas. -/
 def alternatingBundleObj (X Y : AnalyticBundleCat 𝓘(K, P) M) :
     AnalyticBundleCat 𝓘(K, P) M := by
   letI := contMDiffVectorBundle_alternating_of_finiteCoordinates
@@ -34,7 +33,7 @@ def alternatingBundleObj (X Y : AnalyticBundleCat 𝓘(K, P) M) :
   exact AnalyticBundleCat.of 𝓘(K, P) M (X.Model [⋀^Fin k]→L[K] Y.Model)
     (fun b ↦ X.Fiber b [⋀^Fin k]→L[K] Y.Fiber b)
 
-/-- The alternating bundle bifunctor on the common-universe category. -/
+/-- The alternating bundle bifunctor. -/
 def alternatingBundleFunctor :
     (AnalyticBundleCat 𝓘(K, P) M)ᵒᵖ × AnalyticBundleCat 𝓘(K, P) M ⥤
       AnalyticBundleCat 𝓘(K, P) M where
@@ -57,26 +56,26 @@ def alternatingBundleFunctor :
       AnalyticBundleCat.comp_apply]
     exact alternatingBundleMap_comp k (a.1.unop b) (a'.1.unop b) (a.2 b) (a'.2 b)
 
-/-- The model is the actual normed space of continuous alternating maps. -/
+/-- The model fiber is the space of continuous alternating maps between the models. -/
 @[simp]
 theorem alternatingBundleFunctor_obj_model (X Y : AnalyticBundleCat 𝓘(K, P) M) :
     ((alternatingBundleFunctor c k).obj (op X, Y)).Model =
       (X.Model [⋀^Fin k]→L[K] Y.Model) := rfl
 
-/-- The fibers are the actual topological spaces of continuous alternating maps. -/
+/-- The fibers are the spaces of continuous alternating maps between the fibers. -/
 @[simp]
 theorem alternatingBundleFunctor_obj_fiber (X Y : AnalyticBundleCat 𝓘(K, P) M) (b : M) :
     ((alternatingBundleFunctor c k).obj (op X, Y)).Fiber b =
       (X.Fiber b [⋀^Fin k]→L[K] Y.Fiber b) := rfl
 
-/-- Actual fibers retain the topology of continuous alternating maps. -/
+/-- The fibers carry the topology of continuous alternating maps. -/
 theorem alternatingBundleFunctor_obj_fiberTopology
     (X Y : AnalyticBundleCat 𝓘(K, P) M) (b : M) :
     ((alternatingBundleFunctor c k).obj (op X, Y)).fiberTopology b =
       ContinuousAlternatingMap.instTopologicalSpace
         (𝕜 := K) (ι := Fin k) (E := X.Fiber b) (F := Y.Fiber b) := rfl
 
-/-- No new total-space topology is introduced. -/
+/-- The total-space topology is Mathlib's. -/
 theorem alternatingBundleFunctor_obj_totalSpaceTopology
     (X Y : AnalyticBundleCat 𝓘(K, P) M) :
     ((alternatingBundleFunctor c k).obj (op X, Y)).totalSpaceTopology =
@@ -84,7 +83,7 @@ theorem alternatingBundleFunctor_obj_totalSpaceTopology
         (𝕜 := K) (ι := Fin k) (F₁ := X.Model) (E₁ := X.Fiber)
         (F₂ := Y.Model) (E₂ := Y.Fiber) := rfl
 
-/-- The selected atlas is precisely Mathlib's existing alternating bundle atlas. -/
+/-- The fiber bundle structure is Mathlib's alternating bundle atlas. -/
 theorem alternatingBundleFunctor_obj_fiberBundle
     (X Y : AnalyticBundleCat 𝓘(K, P) M) :
     ((alternatingBundleFunctor c k).obj (op X, Y)).fiberBundle =
@@ -92,7 +91,7 @@ theorem alternatingBundleFunctor_obj_fiberBundle
         (𝕜 := K) (ι := Fin k) (F₁ := X.Model) (E₁ := X.Fiber)
         (F₂ := Y.Model) (E₂ := Y.Fiber) := rfl
 
-/-- The vector-bundle structure is the canonical one on that atlas. -/
+/-- The vector bundle structure is Mathlib's. -/
 theorem alternatingBundleFunctor_obj_vectorBundle
     (X Y : AnalyticBundleCat 𝓘(K, P) M) :
     ((alternatingBundleFunctor c k).obj (op X, Y)).vectorBundle =
@@ -100,7 +99,7 @@ theorem alternatingBundleFunctor_obj_vectorBundle
         (𝕜 := K) (ι := Fin k) (F₁ := X.Model) (E₁ := X.Fiber)
         (F₂ := Y.Model) (E₂ := Y.Fiber) := rfl
 
-/-- The operator on a fiber is the previously constructed alternating operator. -/
+/-- On each fiber, the functor acts by `alternatingBundleMap`. -/
 @[simp]
 theorem alternatingBundleFunctor_map_apply
     {X Y : (AnalyticBundleCat 𝓘(K, P) M)ᵒᵖ × AnalyticBundleCat 𝓘(K, P) M}
@@ -108,7 +107,7 @@ theorem alternatingBundleFunctor_map_apply
     (alternatingBundleFunctor c k).map a b =
       alternatingBundleMap k (a.1.unop b) (a.2 b) := rfl
 
-/-- Literal postcomposition and simultaneous pullback, including the opposite reversal. -/
+/-- On each fiber, a morphism acts by pullback in every input and postcomposition. -/
 theorem alternatingBundleFunctor_map_apply_apply
     {X Y : (AnalyticBundleCat 𝓘(K, P) M)ᵒᵖ × AnalyticBundleCat 𝓘(K, P) M}
     (a : X ⟶ Y) (b : M) (m : X.1.unop.Fiber b [⋀^Fin k]→L[K] X.2.Fiber b) :
@@ -116,8 +115,7 @@ theorem alternatingBundleFunctor_map_apply_apply
       (a.2 b).compContinuousAlternatingMap (m.compContinuousLinearMap (a.1.unop b)) :=
   alternatingBundleHom_of_finiteCoordinates_apply_apply c k a.1.unop a.2 b m
 
-/-- The literal functor has the required model, actual fibers and morphism action,
-uniformly in the field, common universe, finite base coordinates and degree. -/
+/-- The model, fibers and morphism action of the alternating bundle functor. -/
 theorem alternatingBundleFunctor_spec :
     (∀ X Y : AnalyticBundleCat 𝓘(K, P) M,
       ((alternatingBundleFunctor c k).obj (op X, Y)).Model =
@@ -172,8 +170,9 @@ variable {X X' Y Y' : AnalyticBundleCat 𝓘(K, P) M}
   (hY' : AnalyticBundleCat.OperatorAnalytic (X := Y') (Y := Y)
     (fun b ↦ (eY b).symm.toContinuousLinearMap))
 
-/-- Transport through analytically compatible presentations. Taking identity
-fiber equivalences covers compatible changes of model and atlas on the same fibers. -/
+/-- Fiberwise equivalences that are analytic in both directions induce an isomorphism
+of alternating bundles. With identity equivalences, this covers a compatible change of
+model or atlas. -/
 def alternatingBundlePresentationIso :
     (alternatingBundleFunctor c k).obj (op X, Y) ≅
       (alternatingBundleFunctor c k).obj (op X', Y') :=

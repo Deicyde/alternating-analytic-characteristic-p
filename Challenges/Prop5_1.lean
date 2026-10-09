@@ -5,7 +5,7 @@ import AlternatingAnalytic.Analysis.ProjectiveExterior
 /-!
 # Proposition 5.1 (representation), p. 13
 
-Setting (paper, §5): for `k ≥ 1` give the algebraic exterior power `Λ^k_K E` the seminorm
+Setting (Section 5): for `k ≥ 1` give the algebraic exterior power `Λ^k_K E` the seminorm
 `‖z‖_π = inf { Σ_j Π_{a=1}^k ‖x_{ja}‖ : z = Σ_j x_{j1} ∧ ⋯ ∧ x_{jk} }`. "Its quotient by the
 zero-seminorm subspace is denoted Λ^k_π E. This is an uncompleted normed space, with universal
 alternating map ω_E(x_1, …, x_k) = [x_1 ∧ ⋯ ∧ x_k]. Put Λ^0_π E = K and ω_E() = 1."
@@ -15,27 +15,16 @@ normed F. Under it, precomposition by u : E → D is precomposition by
 Λ^k_π u : Λ^k_π E → Λ^k_π D."
 
 ## Formalization notes
-* The degree is `Fin k`; `E`, `D`, `F` are normed spaces over a nontrivially normed field `K`,
-  none assumed complete.
-* `ProjExteriorPre K k E` is a type synonym for Mathlib's algebraic exterior power
-  `⋀[K]^k E`, normed by the library seminorm `AlternatingAnalytic.projectiveExteriorSeminorm`
-  (imported from `AlternatingAnalytic.Analysis.ProjectiveExterior`, which contains only the
-  construction of this seminorm and facts about bounded-function sources; it does not prove
-  this claim). The library seminorm is the infimum over weighted decompositions
-  `z = Σ_j a_j x_{j1} ∧ ⋯ ∧ x_{jk}` of `Σ_j ‖a_j‖ Π_a ‖x_{ja}‖`. For `k ≥ 1` this equals the
-  paper's unweighted infimum (library lemma `projectiveExteriorSeminorm_eq_iInf_wedgeCost`).
-  For `k = 0` it is the absolute value on `⋀^0 E ≅ K`, so `ProjExterior K 0 E` is isometric to
-  `K` with `ω_E() = 1`, matching the paper's convention `Λ^0_π E = K`.
-* `ProjExterior K k E` (the paper's `Λ^k_π E`) is Mathlib's `SeparationQuotient` of that
-  seminormed space: the quotient by the zero-seminorm subspace, with Mathlib's normed-space
-  structure. `wedge K k E` is `ω_E`.
-* The natural isometry is stated as the existence, for every normed `F`, of a linear isometric
-  equivalence `Φ : Alt^k(E; F) ≃ₗᵢ L(Λ^k_π E, F)` with `Φ m ∘ ω_E = m`. This condition
-  determines `Φ` (the wedges span), so naturality in `F` follows from it.
-* The intertwining clause is stated as: for `u : E →L D` there is a bounded linear
-  `Λ^k_π u` with `Λ^k_π u (ω_E x) = ω_D (u ∘ x)`, and for all such isometries `Φ_E`, `Φ_D`,
-  `Φ_E (m ∘ (u, …, u)) = Φ_D m ∘ Λ^k_π u`. The bound `‖Λ^k_π u‖ ≤ ‖u‖^k` appears only in the
-  paper's proof and is not stated.
+* The degree is `Fin k`; `E`, `D`, `F` are normed `K`-spaces, not assumed complete.
+* `ProjExteriorPre K k E` is Mathlib's `⋀[K]^k E` with the library seminorm
+  `projectiveExteriorSeminorm`, an infimum over weighted decompositions
+  `Σ_j a_j x_{j1} ∧ ⋯ ∧ x_{jk}`. For `k ≥ 1` it equals the paper's infimum
+  (`projectiveExteriorSeminorm_eq_iInf_wedgeCost`); for `k = 0` it gives `Λ^0_π E = K`.
+* `ProjExterior K k E` (`Λ^k_π E`) is the `SeparationQuotient`; `wedge K k E` is `ω_E`.
+* The isometry is the existence of `Φ : Alt^k(E; F) ≃ₗᵢ L(Λ^k_π E, F)` with `Φ m ∘ ω_E = m`.
+  This determines `Φ`, so naturality in `F` follows.
+* Naturality in the source: a bounded `Λ^k_π u` with `Λ^k_π u ∘ ω_E = ω_D ∘ (u, …, u)` and
+  `Φ_E (m ∘ (u, …, u)) = Φ_D m ∘ Λ^k_π u`. The bound `‖Λ^k_π u‖ ≤ ‖u‖^k` is not stated.
 -/
 
 namespace AlternatingAnalyticChallenge.Prop5_1
@@ -57,7 +46,7 @@ noncomputable instance : AddCommGroup (ProjExteriorPre K k E) :=
 noncomputable instance : Module K (ProjExteriorPre K k E) :=
   inferInstanceAs (Module K (⋀[K]^k E))
 
-/-- The (sum) projective seminorm on the algebraic exterior power. -/
+/-- The projective seminorm on the algebraic exterior power. -/
 noncomputable instance : SeminormedAddCommGroup (ProjExteriorPre K k E) :=
   AddGroupSeminorm.toSeminormedAddCommGroup (E := ProjExteriorPre K k E)
     (AlternatingAnalytic.projectiveExteriorSeminorm (K := K) (V := E) (k := k)).toAddGroupSeminorm
@@ -75,18 +64,15 @@ abbrev ProjExterior : Type (max uK uE) := SeparationQuotient (ProjExteriorPre K 
 noncomputable def wedge (x : Fin k → E) : ProjExterior K k E :=
   SeparationQuotient.mk (show ProjExteriorPre K k E from exteriorPower.ιMulti K k x)
 
-/-- **Proposition 5.1, representation.** For every normed `F` there is a linear isometric
-equivalence `Alt^k(E; F) ≃ L(Λ^k_π E, F)` sending `m` to the bounded linear map `M` with
-`M ∘ ω_E = m`. -/
+/-- Proposition 5.1, representation: `Alt^k(E; F) ≃ L(Λ^k_π E, F)` isometrically, with
+`Φ m ∘ ω_E = m`. -/
 theorem representation (F : Type uF) [NormedAddCommGroup F] [NormedSpace K F] :
     ∃ Φ : (E [⋀^Fin k]→L[K] F) ≃ₗᵢ[K] (ProjExterior K k E →L[K] F),
       ∀ (m : E [⋀^Fin k]→L[K] F) (x : Fin k → E), Φ m (wedge K k E x) = m x := by
   sorry
 
-/-- **Proposition 5.1, naturality in the source.** For `u : E →L D` there is a bounded linear
-map `Λ^k_π u` with `Λ^k_π u ∘ ω_E = ω_D ∘ (u, …, u)`, and under the isometries of
-`representation`, precomposition by `u` on `Alt^k` corresponds to precomposition by
-`Λ^k_π u`. -/
+/-- Proposition 5.1, naturality: under the isometries of `representation`, precomposition by
+`u : E →L D` corresponds to precomposition by `Λ^k_π u`. -/
 theorem naturality (D : Type uD) [NormedAddCommGroup D] [NormedSpace K D] (u : E →L[K] D) :
     ∃ Λu : ProjExterior K k E →L[K] ProjExterior K k D,
       (∀ x : Fin k → E, Λu (wedge K k E x) = wedge K k D (u ∘ x)) ∧

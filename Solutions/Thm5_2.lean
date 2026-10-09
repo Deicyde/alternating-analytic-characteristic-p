@@ -4,13 +4,9 @@ import Mathlib.Analysis.Normed.Operator.Bilinear
 import AlternatingAnalytic.Exterior.DualTests
 
 /-!
-# Theorem 5.2 (universal and scalar tests), pp. 13–14
+# Proof of Theorem 5.2
 
-Solution: the statements of `Challenges/Thm5_2.lean`, proved by
-`AlternatingAnalytic.DualTests.part1_analytic` … `part3_contDiff`
-(`AlternatingAnalytic/Exterior/DualTests.lean`). Each comparison is a fixed bounded linear map
-(a flip, a sandwich `T ↦ A ∘ T ∘ B`, or evaluation), so regularity transfers along it. The
-library definitions `precompFamily`, `bidualMap` have the same bodies as the challenge's.
+Uses `DualTests.part1_analytic` through `DualTests.part3_contDiff` (`Exterior/DualTests.lean`).
 -/
 
 set_option maxSynthPendingDepth 2
@@ -40,8 +36,8 @@ noncomputable def bidualMap (K : Type*) [NontriviallyNormedField K]
 
 /-! ### Power-series analyticity -/
 
-/-- **Theorem 5.2(1), analytic.** `W` analytic ⇒ `R_F` analytic for every normed `F`;
-and `R_Y` analytic ⇒ `W` analytic. -/
+/-- Theorem 5.2(1), analytic: if `W` is analytic then every `R_F` is, and if `R_Y` is analytic
+then so is `W`. -/
 theorem part1_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (AnalyticOnNhd K W U →
       ∀ (F : Type uF) [NormedAddCommGroup F] [NormedSpace K F],
@@ -49,9 +45,8 @@ theorem part1_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (AnalyticOnNhd K (precompFamily K Y W) U → AnalyticOnNhd K W U) := by
   exact AlternatingAnalytic.DualTests.part1_analytic (U := U) W
 
-/-- **Theorem 5.2(2), analytic.** `R_K` analytic ⇔ `J_Y ∘ W` analytic in `L(X, Y**)`;
-`R_K` analytic ⇒ `R_{G*}` analytic for every normed `G`; and for any `G` with a nonzero
-continuous dual, `R_{G*}` analytic ⇒ `R_K` analytic. -/
+/-- Theorem 5.2(2), analytic: `R_K` is analytic iff `J_Y ∘ W` is, iff `R_{G*}` is for every
+`G`; one `G` with a nonzero dual suffices. -/
 theorem part2_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (AnalyticOnNhd K (precompFamily K K W) U ↔
       AnalyticOnNhd K (fun t => (bidualMap K Y).comp (W t)) U) ∧
@@ -64,9 +59,8 @@ theorem part2_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
       AnalyticOnNhd K (precompFamily K K W) U) := by
   exact AlternatingAnalytic.DualTests.part2_analytic (U := U) W
 
-/-- **Theorem 5.2(3), analytic.** A bounded linear left inverse of `J_Y` makes `R_K`-analyticity
-imply analyticity of `W`; a bounded linear left inverse of `J_F` makes it imply analyticity of
-`R_F`. -/
+/-- Theorem 5.2(3), analytic: with a bounded left inverse of `J_Y` (resp. `J_F`), analyticity
+of `R_K` implies that of `W` (resp. `R_F`). -/
 theorem part3_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (∀ PY : StrongDual K (StrongDual K Y) →L[K] Y,
       PY.comp (bidualMap K Y) = ContinuousLinearMap.id K Y →
@@ -80,7 +74,7 @@ theorem part3_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
 
 /-! ### The classes `C^n`, `n ≤ ∞` -/
 
-/-- **Theorem 5.2(1), `C^n`.** -/
+/-- Theorem 5.2(1) for `C^n`. -/
 theorem part1_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (ContDiffOn K n W U →
       ∀ (F : Type uF) [NormedAddCommGroup F] [NormedSpace K F],
@@ -88,7 +82,7 @@ theorem part1_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →
     (ContDiffOn K n (precompFamily K Y W) U → ContDiffOn K n W U) := by
   exact AlternatingAnalytic.DualTests.part1_contDiff (U := U) W n
 
-/-- **Theorem 5.2(2), `C^n`.** -/
+/-- Theorem 5.2(2) for `C^n`. -/
 theorem part2_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (ContDiffOn K n (precompFamily K K W) U ↔
       ContDiffOn K n (fun t => (bidualMap K Y).comp (W t)) U) ∧
@@ -101,7 +95,7 @@ theorem part2_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →
       ContDiffOn K n (precompFamily K K W) U) := by
   exact AlternatingAnalytic.DualTests.part2_contDiff (U := U) W n
 
-/-- **Theorem 5.2(3), `C^n`.** -/
+/-- Theorem 5.2(3) for `C^n`. -/
 theorem part3_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (∀ PY : StrongDual K (StrongDual K Y) →L[K] Y,
       PY.comp (bidualMap K Y) = ContinuousLinearMap.id K Y →

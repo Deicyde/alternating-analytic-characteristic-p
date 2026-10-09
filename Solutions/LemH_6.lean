@@ -5,15 +5,11 @@ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 
 /-!
-# Lemma H.6 (every bounded `p`-linear map `D^p → G` is alternating; `(D, G)` is split), p. 59
+# Proof of Lemma H.6
 
-Solution: the statements of `Challenges/LemH_6.lean`, proved for an arbitrary algebraically
-independent family `z` in `AlternatingAnalytic/Category/DeterminantPairGeneral/`:
-* `part1`: `AlternatingAnalytic.DeterminantPairGeneral.map_eq_zero_of_eq` (`AllAlternating.lean`),
-  from the gap `τ_w² G ∩ G = 0` (`eq_zero_of_tau_sq_mul_mem`, `Spaces.lean`) and polarization
-  with `w = e_i + e_j`;
-* `part2`: `AlternatingAnalytic.DeterminantPairGeneral.exists_retraction`.
-The library's `D z`, `G z` are this file's, definitionally (same definitions, other namespace).
+Uses `AlternatingAnalytic.DeterminantPairGeneral.map_eq_zero_of_eq` and
+`AlternatingAnalytic.DeterminantPairGeneral.exists_retraction`
+(`AlternatingAnalytic/Category/DeterminantPairGeneral/AllAlternating.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.LemH_6
@@ -109,14 +105,14 @@ def IsSplitInDegree (K : Type*) [NontriviallyNormedField K] (k : ℕ) (E F : Typ
   ∃ R : ContinuousMultilinearMap K (fun _ : Fin k => E) F →L[K] (E [⋀^Fin k]→L[K] F),
     ∀ m : E [⋀^Fin k]→L[K] F, R m.toContinuousMultilinearMap = m
 
-/-- **Lemma H.6, first assertion.** For every choice of `a_i, τ_w ∈ L` algebraically independent
-over `K`, every bounded `p`-linear map `D^p → G` is alternating. -/
+/-- Lemma H.6, first assertion: for `a_i, τ_w ∈ L` algebraically independent over `K`, every
+bounded `p`-linear map `D^p → G` is alternating. -/
 theorem part1 (z : Fin p ⊕ Tau p → Lt p r) (hz : AlgebraicIndependent (Kt p r) z)
     (m : ContinuousMultilinearMap (Kt p r) (fun _ : Fin p => D z) (G z))
     (v : Fin p → D z) (i j : Fin p) (hv : v i = v j) (hij : i ≠ j) : m v = 0 := by
   exact AlternatingAnalytic.DeterminantPairGeneral.map_eq_zero_of_eq hz m v i j hv hij
 
-/-- **Lemma H.6, second assertion.** For every such choice, `(D, G)` is split in degree `p`. -/
+/-- Lemma H.6, second assertion: `(D, G)` is split in degree `p`. -/
 theorem part2 (z : Fin p ⊕ Tau p → Lt p r) (hz : AlgebraicIndependent (Kt p r) z) :
     IsSplitInDegree (Kt p r) p (D z) (G z) := by
   exact AlternatingAnalytic.DeterminantPairGeneral.exists_retraction hz

@@ -2,7 +2,12 @@ import AlternatingAnalytic.Analysis.PolynomialEvaluationNorm
 import AlternatingAnalytic.Analysis.LaurentField
 import Mathlib.Topology.Algebra.UniformRing
 
-/-! Isometric evaluation of rational functions inside a complete normed field. -/
+/-!
+# Evaluation of polynomials at an element of norm `r`
+
+For finite `κ` and `t` in a nonarchimedean field with `‖t‖ = r`, evaluating a polynomial
+over `κ` at `t` preserves its norm in `κ((X))`. This is the isometry part of Lemma D.2.
+-/
 
 noncomputable section
 
@@ -12,7 +17,7 @@ namespace AlternatingAnalytic
 
 variable (κ : Type*) [Field κ] (r : ℝ≥0)
 
-/-- The usual polynomial inclusion, with the norm radius visible in the codomain. -/
+/-- The inclusion of `κ[X]` into `κ((X))` with absolute value radius `r`. -/
 def polynomialToLaurentField : Polynomial κ →+* LaurentField κ r :=
   algebraMap (Polynomial κ) (LaurentSeries κ)
 
@@ -44,7 +49,7 @@ theorem polynomialToLaurentField_eq_eval₂ :
         (polynomialToLaurentField κ r Polynomial.X) Polynomial.X
     rw [Polynomial.eval₂_X]
 
-/-- The usual rational-function inclusion into the Laurent field. -/
+/-- The inclusion of `κ(X)` into `κ((X))`. -/
 def ratFuncToLaurentField : RatFunc κ →+* LaurentField κ r :=
   algebraMap (RatFunc κ) (LaurentSeries κ)
 
@@ -63,7 +68,7 @@ theorem norm_polynomialToLaurentField_X :
 
 variable [Finite κ] {K : Type*} [NormedField K] [IsUltrametricDist K]
 
-/-- Evaluation at a nonzero argument of norm `r` has exactly the Laurent norm. -/
+/-- Evaluation at `t` with `‖t‖ = r` has the same norm as the Laurent series. -/
 theorem norm_polynomial_eval₂_eq_laurent (f : κ →+* K) (t : K) (ht : ‖t‖ = r)
     (p : Polynomial κ) :
     ‖p.eval₂ f t‖ = ‖polynomialToLaurentField κ r p‖ := by

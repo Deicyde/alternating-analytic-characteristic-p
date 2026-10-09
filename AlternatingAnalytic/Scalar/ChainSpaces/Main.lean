@@ -14,9 +14,9 @@ Let `K` be complete, not spherically complete, with `k! = 0` (so `K` is nonarchi
 (F.2), idempotents `ρ j`, `ρ' j` with kernels `Σ^j`, `Σ'^j`, and the chain-limit spaces
 `E = chainSpace ρ ⊆ ℓ^∞(List L; K^{k+1})`, `E' = chainSpace ρ' ⊆ ℓ^∞(List L; K^k)` (F.6). They are
 closed, contain `c₀`, are complete, ultrametric and not separable, and scalar precomposition
-`A^k_{E,E';K}` is analytic at no point. Lemma F.3 (chain gap) is used from the library;
-Lemma F.2 (multilinear tails, part 3) and Lemma F.5 (finite test certificate) enter as the
-hypotheses `MultilinearDiagonalTail K` and `FiniteTestCertificate K k`.
+`A^k_{E,E';K}` is analytic at no point. Lemma F.3 (chain gap) comes from `ChainGap`; Lemma F.2
+(multilinear tails, part 3) and Lemma F.5 (finite test certificate) enter as the hypotheses
+`MultilinearDiagonalTail K` and `FiniteTestCertificate K k`.
 -/
 
 open Filter Topology
@@ -98,7 +98,7 @@ def AbstractConclusion (K : Type u) [NontriviallyNormedField K] (k : ℕ) : Prop
           (ContinuousAlternatingMap.compContinuousLinearMapCLM u :
             (E' [⋀^Fin k]→L[K] K) →L[K] (E [⋀^Fin k]→L[K] K))) u₀
 
-/-- **Theorem F.1, part 2, conditional on Lemmas F.2 and F.5.** -/
+/-- Theorem F.1, part 2, assuming Lemmas F.2 and F.5. -/
 theorem sequenceConclusion_of_lemmas (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) (k : ℕ) (hk : (k.factorial : K) = 0)
     (hF2 : MultilinearDiagonalTail K) (hF5 : FiniteTestCertificate K k) :
@@ -154,7 +154,7 @@ theorem abstractConclusion_of_sequenceConclusion (K : Type u) [NontriviallyNorme
   obtain ⟨Λ, _, E, E', -, -, -, -, hE, hE', hu, hu', -, -, hna⟩ := h
   exact ⟨E, E', inferInstance, inferInstance, hE, hu, inferInstance, inferInstance, hE', hu', hna⟩
 
-/-- **Theorem F.1, part 1, conditional on Lemmas F.2 and F.5.** -/
+/-- Theorem F.1, part 1, assuming Lemmas F.2 and F.5. -/
 theorem abstractConclusion_of_lemmas (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) (k : ℕ) (hk : (k.factorial : K) = 0)
     (hF2 : MultilinearDiagonalTail K) (hF5 : FiniteTestCertificate K k) :

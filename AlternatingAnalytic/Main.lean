@@ -3,7 +3,15 @@ import AlternatingAnalytic.Analysis.PrescribedLaurentBase
 import AlternatingAnalytic.Analysis.BaseChangeLiftDescent
 import AlternatingAnalytic.Analysis.DenseScalarLiftTransport
 
-/-! The paper's counterexample over every prescribed positive-characteristic normed field. -/
+/-!
+# Banach counterexamples in characteristic `p`
+
+For every nontrivially normed field `K` of characteristic `p` and every `k ≥ p`, there are Banach
+spaces `E`, `F` over `K` such that `F` has no equivalent ultrametric norm and the precomposition
+action `A^k` is analytic nowhere (Theorem 6.1(1), proved in Appendix E). `E` and `F` are first built
+over a Laurent series field over `ZMod p` (bounded sequences and a completed projective exterior
+power), then base changed to the completion of `K` and restricted to `K`.
+-/
 
 noncomputable section
 
@@ -17,8 +25,8 @@ open Round24Transfer
 
 universe u v
 
-/-- The complete-field construction retains a scalar-independent growth witness,
-which will also exclude ultrametric renorming after restricting scalars. -/
+/-- The counterexample over a complete field, with a growth witness on `F` that still excludes
+an equivalent ultrametric norm after restricting scalars. -/
 theorem exists_completeField_counterexample
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (p k : ℕ) [Fact p.Prime] [CharP K p] (hpk : p ≤ k) :
@@ -52,10 +60,9 @@ theorem exists_completeField_counterexample
       (completedBaseChangeEmbedding K₁ B K).isometry
   · exact not_hasBoundedLift_completedBaseChange K₁ E₁ B K k hno
 
-/-- The main theorem of `charp.pdf`: for every prescribed nontrivially normed
-positive-characteristic field, including incomplete fields, every degree at least
-the characteristic has a Banach counterexample with no equivalent ultrametric target norm.
-The same source and target work for every finite index type of the given cardinality. -/
+/-- Theorem 6.1(1): over any nontrivially normed field of characteristic `p`, complete or not,
+and for `k ≥ p`, there are Banach `E`, `F` with `F` not equivalently ultrametric and `A^k`
+analytic nowhere. The same `E`, `F` work for every index type of cardinality `k`. -/
 theorem exists_nowhereAnalytic_banach_counterexample
     (K : Type u) [NontriviallyNormedField K] (p k : ℕ) (hp : p.Prime)
     [CharP K p] (hpk : p ≤ k) :

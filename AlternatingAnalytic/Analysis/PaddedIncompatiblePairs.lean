@@ -5,12 +5,11 @@ import AlternatingAnalytic.Analysis.PaddedCrossAction
 import AlternatingAnalytic.Analysis.PaddedCompletions
 
 /-!
-# Padded split pairs with incompatible analytic self-actions
+# Padded pairs in every degree `k ≥ p`
 
-The witnesses use the literal maximum-norm products E × Kⁿ and D × Kⁿ,
-the original target G and its actual coefficient subspace C. The retraction
-freezes the last n auxiliary arguments and uses signed, division-free local
-padding. Completion identifications refer only to these concrete carriers.
+The objects `X_k = (E_k, G)` and `Y_k = (D_k, G)` of Theorem H.4, with `E_k = E × Kⁿ`,
+`D_k = D × Kⁿ`, maximum norms and `n = k - p`: both self-actions are analytic, `Y_k` is split,
+and the cross-action from `Y_k` to `X_k` is not analytic.
 -/
 
 noncomputable section
@@ -23,9 +22,9 @@ variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (n
 attribute [local instance] DeterminantPair.preferredNormedFieldK
   DeterminantPair.preferredFieldK DeterminantPair.preferredFieldL
 
-/-- The complete padded source statement. Every operator, coefficient map,
-retraction, determinant and bad slice below is an actual defined bounded map
-on the original carriers. The auxiliary dimension can be zero. -/
+/-- The padded pairs in degree `p + n`: norms, the coefficient isometry, the block form of
+endomorphisms, analytic self-actions, the split retraction, and the nonanalytic cross-action.
+`n = 0` is allowed. -/
 theorem padded_split_pairs_with_incompatible_analytic_self_actions :
     (∀ x : E p r n, ‖x‖ = max ‖x.1‖ ‖x.2‖) ∧
     (∀ x : D p r n, ‖x‖ = max ‖x.1‖ ‖x.2‖) ∧
@@ -110,8 +109,7 @@ theorem padded_split_pairs_with_incompatible_analytic_self_actions :
   · intro x
     rw [crossActionEvaluation_slice, determinantCoordinate_scalar]
 
-/-- The concrete completion statement is separate from the original K-action
-statement. The complete model has its literal L-vector-space structure. -/
+/-- The completion identifications of `PaddedCompletions`. -/
 theorem concrete_completion_identifications :
     Isometry (inclusionE p r n) ∧ DenseRange (inclusionE p r n) ∧
     Isometry (inclusionD p r n) ∧ DenseRange (inclusionD p r n) ∧
@@ -131,9 +129,9 @@ theorem concrete_completion_identifications :
     (∀ (a : L p r) (x : H p r n), ‖a • x‖ = ‖a‖ * ‖x‖) ∧ CompleteSpace (L p r) :=
   concrete_completions p r n
 
-/-- A combined realized witness for every degree at least p, with exactly n=k-p
-auxiliary coordinates. These are the actual rational/Laurent fields and actual
-max-norm carriers, with no completeness assumption on the original field or target. -/
+/-- For every `k ≥ p`, with `n = k - p`: `K` is not complete, the pairs are finite-dimensional
+and nonarchimedean, `Y_k` is split, both self-actions are analytic, and the cross-action is not
+analytic. -/
 theorem realized_pairs_for_every_degree (k : ℕ) (hpk : p ≤ k) :
     p + (k-p) = k ∧ ¬ CompleteSpace (K p r) ∧
     FiniteDimensional (K p r) (E p r (k-p)) ∧

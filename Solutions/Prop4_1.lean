@@ -6,16 +6,12 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateDomain
 import AlternatingAnalytic.Analysis.FiniteCoordinateCodomain
 
 /-!
-# Proposition 4.1 (splitting the alternating inclusion), pp. 8-9
+# Proof of Proposition 4.1
 
-Solution: the statements of `Challenges/Prop4_1.lean`, proved from the library.
-* main part: `AlternatingAnalytic.contractingRetractionLift`,
-  `contractingRetractionLift_diag` (SortedBasisLift.lean) and
-  `norm_contractingRetractionLift_apply_le` (BoundedRetractionLift.lean);
-* (1): the main part applied to `ContinuousAlternatingMap.altProj`
-  (`altProj_toContinuousMultilinearMap`, FactorialInvertible.lean);
-* (2): `finiteCoordinateDomainLift_diag` (FiniteCoordinateDomain.lean) and
-  `finiteCoordinateCodomainLift_diag` (FiniteCoordinateCodomain.lean).
+The main part is `AlternatingAnalytic.contractingRetractionLift` (`SortedBasisLift.lean`,
+`BoundedRetractionLift.lean`); (1) applies it to `ContinuousAlternatingMap.altProj`
+(`FactorialInvertible.lean`); (2) is `finiteCoordinateDomainLift` and
+`finiteCoordinateCodomainLift` (`FiniteCoordinateDomain.lean`, `FiniteCoordinateCodomain.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.Prop4_1
@@ -31,7 +27,7 @@ def HasBoundedLift (K : Type uK) [NontriviallyNormedField K] (k : ℕ)
   ∃ P : (E →L[K] E') [×k]→L[K] ((E' [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F)),
     ∀ f : E →L[K] E', P (fun _ => f) = ContinuousAlternatingMap.compContinuousLinearMapCLM f
 
-/-- **Proposition 4.1, main part.** A bounded linear retraction `ρ` of the inclusion
+/-- A bounded linear retraction `ρ` of the inclusion
 `Alt^k(E;F) ↪ Mult^k(E;F)` gives, for every normed `E'`, a bounded `k`-linear lift of
 `A^k_{E,E';F}` of norm at most `‖ρ‖`. -/
 theorem lift_of_retraction
@@ -49,7 +45,7 @@ theorem lift_of_retraction
     AlternatingAnalytic.contractingRetractionLift_diag k ρ hρ,
     AlternatingAnalytic.norm_contractingRetractionLift_apply_le k ρ⟩
 
-/-- **Proposition 4.1 (1).** If `k! ≠ 0` in `K`, precomposition has a bounded `k`-linear lift. -/
+/-- If `k! ≠ 0` in `K`, precomposition has a bounded `k`-linear lift. -/
 theorem part1
     (K : Type uK) [NontriviallyNormedField K] (k : ℕ)
     (E : Type uE) (E' : Type uE') (F : Type uF)
@@ -63,7 +59,7 @@ theorem part1
     (ContinuousAlternatingMap.altProj_toContinuousMultilinearMap hk')
   exact ⟨P, hP⟩
 
-/-- **Proposition 4.1 (2), coordinates on `E`.** If `E` has a finite algebraic basis with
+/-- If `E` has a finite algebraic basis with
 continuous coordinate functionals, precomposition has a bounded `k`-linear lift. -/
 theorem part2_domain
     (K : Type uK) [NontriviallyNormedField K] (k : ℕ)
@@ -75,7 +71,7 @@ theorem part2_domain
   ⟨AlternatingAnalytic.finiteCoordinateDomainLift (E' := E') (F := F) b hb k,
     AlternatingAnalytic.finiteCoordinateDomainLift_diag b hb k⟩
 
-/-- **Proposition 4.1 (2), coordinates on `E'`.** If `E'` has a finite algebraic basis with
+/-- If `E'` has a finite algebraic basis with
 continuous coordinate functionals, precomposition has a bounded `k`-linear lift. -/
 theorem part2_codomain
     (K : Type uK) [NontriviallyNormedField K] (k : ℕ)

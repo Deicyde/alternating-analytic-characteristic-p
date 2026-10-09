@@ -1,13 +1,13 @@
-/-
-Positive prime characteristic forces a normed field to be ultrametric.
-
-Source: round24/ultrametric-huge/lean/CharPUltrametric.lean, integrated on 2026-09-23.
-The original root declaration `charP_isUltrametricDist` is retained.
-Provenance and verification: planning/charp-paper/planning/integration-positive-manifest.json.
--/
 import Mathlib.Analysis.Normed.Field.Ultra
 import Mathlib.FieldTheory.Finite.Basic
 
+/-!
+# Normed fields of positive characteristic are nonarchimedean
+
+Lemma A.2: a normed field of prime characteristic `p` is ultrametric.
+-/
+
+/-- A normed field of prime characteristic is ultrametric. -/
 theorem charP_isUltrametricDist {K : Type*} [NormedField K] (p : ℕ) [hp : Fact p.Prime]
     [CharP K p] : IsUltrametricDist K := by
   refine IsUltrametricDist.isUltrametricDist_of_forall_norm_natCast_le_one (fun n => ?_)

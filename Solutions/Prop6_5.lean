@@ -8,24 +8,19 @@ import AlternatingAnalytic.Scalar.ChainSpaces.Unconditional
 import AlternatingAnalytic.Scalar.TangentPullback.Main
 
 /-!
-# Proposition 6.5 (tangent and pullback obstructions), p. 17
+# Proof of Proposition 6.5
 
-Solution: both parts follow from Theorem 6.1(2)
-(`AlternatingAnalytic.ScalarObstruction.exists_nonarchimedean_banach_nowhere_analytic_scalar_of_thmF`
-with `AlternatingAnalytic.ChainSpaces.abstractConclusion`) via
-`AlternatingAnalytic.TangentPullback.tangent_obstruction_of_scalar_obstruction` (charts `id` and
-the shear `(u, d, e) ↦ (u, d + u e, e)` on `L(E,D) × D × E`) and
-`AlternatingAnalytic.TangentPullback.pullback_obstruction_of_scalar_obstruction`
-(`h(u, m, e) = (m, u e)`, `ω₀(m, d) = m ∘ π_D`), in `Scalar/TangentPullback/`.
+Uses Theorem 6.1(2) (`ScalarObstruction.exists_nonarchimedean_banach_nowhere_analytic_scalar_of_thmF`
+with `ChainSpaces.abstractConclusion`) and `TangentPullback.tangent_obstruction_of_scalar_obstruction`,
+`TangentPullback.pullback_obstruction_of_scalar_obstruction` (`Scalar/TangentPullback/`).
 -/
 
 namespace AlternatingAnalyticChallenge.Prop6_5
 
 universe u
 
-/-- **Proposition 6.5(1).** A Banach space `X` (an analytic Banach manifold) with two global
-analytic charts `id` and `ψ` whose induced transitions on scalar alternating `k`-forms are
-analytic at no point. -/
+/-- Proposition 6.5(1): a Banach space `X` with two global analytic charts `id` and `ψ` whose
+induced transitions on scalar alternating `k`-forms are analytic at no point. -/
 theorem part1 (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (p k : ℕ) (hp : p.Prime) [CharP K p] (hK : ¬ SphericallyCompleteSpace K) (hpk : p ≤ k) :
     ∃ (X : Type u) (_ : NormedAddCommGroup X) (_ : NormedSpace K X) (_ : CompleteSpace X)
@@ -41,7 +36,7 @@ theorem part1 (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (AlternatingAnalytic.ScalarObstruction.exists_nonarchimedean_banach_nowhere_analytic_scalar_of_thmF
       K p k hp.pos hpk hK (fun hK _ hk => AlternatingAnalytic.ChainSpaces.abstractConclusion K hK k hk))
 
-/-- **Proposition 6.5(2).** Banach spaces `N, Y`, a polynomial analytic `h : N → Y` and an
+/-- Proposition 6.5(2): Banach spaces `N, Y`, a polynomial analytic `h : N → Y` and an
 analytic scalar `k`-form `ω₀` on `Y` whose pullback `h^* ω₀` is analytic at no point as an
 `Alt^k(N; K)`-valued map, but is analytic everywhere as a `Mult^k(N; K)`-valued map. -/
 theorem part2 (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]

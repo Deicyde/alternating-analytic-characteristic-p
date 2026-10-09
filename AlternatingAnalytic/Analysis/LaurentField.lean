@@ -1,7 +1,13 @@
 import AlternatingAnalytic.Analysis.LaurentNorm
 import Mathlib.Algebra.CharP.Algebra
 
-/-! A parameterized carrier for Laurent series with the prescribed real norm. -/
+/-!
+# The Laurent series field `κ((X))` with `‖X‖ = r`
+
+`LaurentField κ r` is `LaurentSeries κ` with the norm `‖x‖ = r ^ order x` for `0 < r < 1`.
+It is a complete, ultrametric, spherically complete nontrivially normed field. This is the
+field `K₁ = κ((X))` of Appendix C.
+-/
 
 noncomputable section
 
@@ -9,7 +15,7 @@ open scoped NNReal
 
 namespace AlternatingAnalytic
 
-/-- Laurent series with a radius parameter, kept in the type to avoid global norm choices. -/
+/-- Laurent series over `κ`. The radius `r` is a type parameter so that the norm is an instance. -/
 def LaurentField (κ : Type*) [Field κ] (_r : ℝ≥0) := LaurentSeries κ
 
 namespace LaurentField
@@ -23,7 +29,7 @@ instance : Algebra κ (LaurentField κ r) := inferInstanceAs (Algebra κ (Lauren
 instance (p : ℕ) [CharP κ p] : CharP (LaurentField κ r) p :=
   charP_of_injective_algebraMap (algebraMap κ (LaurentField κ r)).injective p
 
-/-- Coefficient extraction is linear over the coefficient field. -/
+/-- The `X^n`-coefficient, as a `κ`-linear map. -/
 noncomputable def coeff (n : ℤ) : LaurentField κ r →ₗ[κ] κ where
   toFun x := (show LaurentSeries κ from x).coeff n
   map_add' x y := HahnSeries.coeff_add

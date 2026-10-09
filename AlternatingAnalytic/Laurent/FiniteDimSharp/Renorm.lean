@@ -5,11 +5,11 @@ import AlternatingAnalytic.Analysis.LaurentField
 /-!
 # Complemented copies of `c₀(ℕ, K)` in infinite-dimensional nonarchimedean Banach spaces
 
-Let `K` be a complete ultrametric field whose nonzero norms are exactly the integral powers of
-`e > 1`, and let `P` be an infinite-dimensional `K`-Banach space with an equivalent ultrametric
-norm. Rounding that norm to `e ^ ℤ` (`HasEquivalentUltrametricNorm.exists_discrete`) and passing
-to the type synonym `Renormed q` carrying it, the orthonormal-sequence construction gives a linear
-isometry `C₀(ℕ, K) → Renormed q`, and Ingleton's theorem a contracting left inverse. Transported
+Let `K` be a complete ultrametric field whose nonzero norms are the integral powers of `e > 1`,
+all of which occur, and let `P` be an infinite-dimensional `K`-Banach space with an equivalent
+ultrametric norm. Rounding that norm to `e ^ ℤ` (`HasEquivalentUltrametricNorm.exists_discrete`)
+and passing to the type synonym `Renormed q` carrying it, the orthonormal-sequence construction
+gives a linear isometry `C₀(ℕ, K) → Renormed q`, and Ingleton's theorem a contracting left inverse. Transported
 back to `P`, this gives bounded `ι : C₀(ℕ, K) → P` and `π : P → C₀(ℕ, K)` with `π ∘ ι = id`
 (`exists_cZero_retraction_of_discrete`), the part of Serre's orthonormal-basis theorem used in
 Corollary C.8. `K = κ((X))` satisfies the hypotheses with `e = r⁻¹` (`laurent_norm_mem_zpowers`,

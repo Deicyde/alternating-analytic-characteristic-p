@@ -6,9 +6,15 @@ import Mathlib.Algebra.BigOperators.Fin
 /-!
 # Sharp counterexamples to converses of polarization
 
-All examples are actual multilinear maps into alternating exterior-valued maps.
-Their nonzero exterior value is the wedge of the standard coordinate basis,
-whose determinant array has a coordinate equal to one.
+Lifts of the zero operator family `D = 0` showing that the converses in Proposition B.8 fail:
+(Pol1) does not imply (Pw) when `k! = 0` (part 4), and over a finite field `F_q` with
+`k ≥ q + 1`, (Pw) does not imply (Pol) (part 3). In both, the nonzero value is the wedge of
+the standard basis of `K^k`.
+
+## Main results
+
+- `exists_pol1_not_pw`: Proposition B.8(4).
+- `exists_pw_not_pol`: Proposition B.8(3).
 -/
 
 noncomputable section
@@ -19,11 +25,11 @@ namespace PolarizationCounterexamples
 
 variable {K A J : Type*} [Field K] [AddCommGroup A] [Module K A] {k : ℕ}
 
-/-- The actual exterior-valued alternating maps on the standard coordinate space. -/
+/-- Alternating maps `(K^k)^k → Λ^k K^k`. -/
 abbrev ExteriorForm (K : Type*) [Field K] (k : ℕ) :=
   (Fin k → K) [⋀^Fin k]→ₗ[K] (⋀[K]^k (Fin k → K))
 
-/-- The genuine lift type, with strong alternation in all vector arguments. -/
+/-- Lifts in degree `k`: multilinear maps from `A^k` to alternating maps on `K^k`. -/
 abbrev ExteriorLift (K A : Type*) [Field K] [AddCommGroup A] [Module K A] (k : ℕ) :=
   MultilinearMap K (fun _ : Fin k => A)
     (ExteriorForm K k)
@@ -32,7 +38,7 @@ abbrev ExteriorLift (K A : Type*) [Field K] [AddCommGroup A] [Module K A] (k : �
 def coordinateBasis (K : Type*) [Field K] (J : Type*) (j : J) : J → K :=
   Pi.single j 1
 
-/-- An explicitly constructed exterior vector. -/
+/-- The wedge `e_1 ∧ ⋯ ∧ e_k` of the standard basis. -/
 def standardWedge (K : Type*) [Field K] (k : ℕ) : ⋀[K]^k (Fin k → K) :=
   exteriorPower.ιMulti K k (coordinateBasis K (Fin k))
 
@@ -51,7 +57,7 @@ theorem standardWedge_ne_zero (K : Type*) [Field K] (k : ℕ) : standardWedge K 
   rw [hz, map_zero] at h
   exact zero_ne_one h
 
-/-- Multiply the actual universal alternating wedge by a scalar multilinear map. -/
+/-- The lift `θ(a) x_1 ∧ ⋯ ∧ x_k` of a scalar multilinear map `θ`. -/
 def scalarExteriorLift (θ : MultilinearMap K (fun _ : Fin k => A) K) : ExteriorLift K A k :=
   θ.smulRight (exteriorPower.ιMulti K k)
 
@@ -60,26 +66,26 @@ theorem scalarExteriorLift_apply (θ : MultilinearMap K (fun _ : Fin k => A) K)
     (a : Fin k → A) (x : Fin k → Fin k → K) :
     scalarExteriorLift θ a x = θ a • exteriorPower.ιMulti K k x := rfl
 
-/-- Strong alternation is actual vanishing at repeated vector arguments. -/
+/-- The lift vanishes when two vector arguments are equal. -/
 theorem scalarExteriorLift_alternating (θ : MultilinearMap K (fun _ : Fin k => A) K)
     (a : Fin k → A) (x : Fin k → Fin k → K) (i j : Fin k)
     (h : x i = x j) (hij : i ≠ j) : scalarExteriorLift θ a x = 0 :=
   (scalarExteriorLift θ a).map_eq_zero_of_eq x h hij
 
-/-- The paper's pointwise identity for the actual zero operator family. -/
+/-- The pointwise identity (Pw) for `D = 0`. -/
 def ZeroMultiplierPw (Ψ : ExteriorLift K A k) : Prop :=
   ∀ (a : A) (x : Fin k → Fin k → K), Ψ (fun _ => a) x =
     exteriorPower.ιMulti K k (fun i =>
       (0 : A →ₗ[K] ((Fin k → K) →ₗ[K] (Fin k → K))) a (x i))
 
-/-- The actual permutation-sum identity for the zero operator family. -/
+/-- The identity (Pol1) for `D = 0`. -/
 def ZeroMultiplierPol1 (Ψ : ExteriorLift K A k) : Prop :=
   ∀ (b : Fin k → A) (x : Fin k → Fin k → K),
     (∑ σ : Equiv.Perm (Fin k), Ψ (b ∘ σ) x) =
       ∑ σ : Equiv.Perm (Fin k), exteriorPower.ιMulti K k (fun i =>
         (0 : A →ₗ[K] ((Fin k → K) →ₗ[K] (Fin k → K))) (b (σ i)) (x i))
 
-/-- The genuine grouped polarized identity, for a specified finite label type. -/
+/-- The polarized identity (Pol) for `D = 0`, with labels in a finite type `J`. -/
 def ZeroMultiplierPol (J : Type*) [Fintype J] (Ψ : ExteriorLift K A k) : Prop :=
   ∀ (b : J → A) (α : J → ℕ) (_hα : ∑ j, α j = k) (x : Fin k → Fin k → K),
     (MultilinearMap.sumOfType (K := K) (Y := ExteriorForm K k) Ψ b α) x =
@@ -92,7 +98,7 @@ theorem zero_multiplier_wedge (hk : 0 < k) (a : Fin k → A) (x : Fin k → Fin 
       (0 : A →ₗ[K] ((Fin k → K) →ₗ[K] (Fin k → K))) (a i) (x i)) = 0 :=
   (exteriorPower.ιMulti K k).map_coord_zero ⟨0, hk⟩ rfl
 
-/-- The factorial-zero example is the coordinate product times the wedge. -/
+/-- The lift `b_1 ⋯ b_k x_1 ∧ ⋯ ∧ x_k` of Proposition B.8(4). -/
 def factorialCounterexample (K : Type*) [Field K] (k : ℕ) : ExteriorLift K K k :=
   MultilinearMap.mkPiRing K (Fin k) (exteriorPower.ιMulti K k)
 
@@ -100,7 +106,7 @@ def factorialCounterexample (K : Type*) [Field K] (k : ℕ) : ExteriorLift K K k
 theorem factorialCounterexample_apply (b : Fin k → K) (x : Fin k → Fin k → K) :
     factorialCounterexample K k b x = (∏ i, b i) • exteriorPower.ιMulti K k x := rfl
 
-/-- Permutation polarization vanishes when the factorial vanishes. -/
+/-- When `k! = 0`, the lift satisfies (Pol1). -/
 theorem factorialCounterexample_pol1 (hfact : (Nat.factorial k : K) = 0) :
     ZeroMultiplierPol1 (factorialCounterexample K k) := by
   have hk : 0 < k := by
@@ -116,7 +122,7 @@ theorem factorialCounterexample_pol1 (hfact : (Nat.factorial k : K) = 0) :
     simp [Fintype.card_perm, nsmul_eq_mul, hfact]
   rw [hs, zero_smul]
 
-/-- The same example has a concrete nonzero pointwise value. -/
+/-- The lift takes the nonzero value `e_1 ∧ ⋯ ∧ e_k` on the diagonal `b = (1, …, 1)`. -/
 theorem factorialCounterexample_value :
     factorialCounterexample K k (fun _ => 1) (coordinateBasis K (Fin k)) =
       standardWedge K k := by
@@ -129,8 +135,7 @@ theorem factorialCounterexample_not_pw (hk : 0 < k) :
   rw [factorialCounterexample_value, zero_multiplier_wedge hk] at hz
   exact standardWedge_ne_zero K k hz
 
-/-- In every characteristic where k! vanishes, Pol1 does not imply Pw, witnessed
-by an actual exterior-valued lift alternating in its vector slots. -/
+/-- If `k! = 0`, (Pol1) does not imply (Pw) (Proposition B.8(4)). -/
 theorem exists_pol1_not_pw (hfact : (Nat.factorial k : K) = 0) :
     ∃ Ψ : ExteriorLift K K k, ZeroMultiplierPol1 Ψ ∧ ¬ ZeroMultiplierPw Ψ := by
   refine ⟨factorialCounterexample K k, factorialCounterexample_pol1 hfact,
@@ -140,7 +145,7 @@ theorem exists_pol1_not_pw (hfact : (Nat.factorial k : K) = 0) :
   subst k
   simp at hfact
 
-/-- A product of selected coordinate functionals is genuinely multilinear. -/
+/-- The multilinear map `a ↦ ∏ i, a i (p i)`. -/
 def coordinateProduct (p : Fin k → J) :
     MultilinearMap K (fun _ : Fin k => J → K) K :=
   (MultilinearMap.mkPiAlgebra K (Fin k) K).compLinearMap fun i => LinearMap.proj (p i)
@@ -149,14 +154,14 @@ def coordinateProduct (p : Fin k → J) :
 theorem coordinateProduct_apply (p : Fin k → J) (a : Fin k → J → K) :
     coordinateProduct (K := K) p a = ∏ i, a i (p i) := rfl
 
-/-- Coordinate basis evaluation detects exactly the chosen coordinate pattern. -/
+/-- On basis vectors, `coordinateProduct p` detects the pattern `p`. -/
 theorem coordinateProduct_basis (p f : Fin k → J) :
     coordinateProduct (K := K) p (fun i => coordinateBasis K J (f i)) =
       if f = p then 1 else 0 := by
   simp [coordinateProduct_apply, coordinateBasis, Pi.single_apply, Fintype.prod_boole,
     funext_iff, eq_comm]
 
-/-- The actual grouped coefficient of a coordinate product is a Kronecker delta. -/
+/-- The grouped coefficient of a coordinate product is a Kronecker delta. -/
 theorem coordinateProduct_sumOfType [Fintype J] (p : Fin k → J) (α : J → ℕ) :
     (coordinateProduct (K := K) p).sumOfType (coordinateBasis K J) α =
       if Polarization.selectionType p = α then 1 else 0 := by
@@ -212,7 +217,7 @@ theorem pattern_types_ne (q r : ℕ) (hq : 1 < q) :
   rw [firstPattern_type_zero, secondPattern_type_zero] at this
   omega
 
-/-- Grouping the scalar-times-wedge construction groups its actual scalar values. -/
+/-- Grouped sums of `scalarExteriorLift θ` are the grouped sums of `θ` times the wedge. -/
 theorem scalarExteriorLift_sumOfType [Fintype J]
     (θ : MultilinearMap K (fun _ : Fin k => A) K) (b : J → A) (α : J → ℕ) :
     MultilinearMap.sumOfType (K := K) (Y := ExteriorForm K k) (scalarExteriorLift θ) b α =
@@ -220,13 +225,13 @@ theorem scalarExteriorLift_sumOfType [Fintype J]
   simp only [MultilinearMap.sumOfType, scalarExteriorLift, MultilinearMap.smulRight_apply,
     Finset.sum_smul]
 
-/-- The paper's two monomials, with an arbitrary additional r-slot coordinate factor. -/
+/-- The form `θ` of Proposition B.8(3), with `q = card K` and `r = k - q - 1`. -/
 def finiteScalarCounterexample (K : Type*) [Field K] [Fintype K] (r : ℕ) :
     MultilinearMap K (fun _ : Fin (Fintype.card K + 1 + r) => Fin 3 → K) K :=
   coordinateProduct (firstPattern (Fintype.card K) r) -
     coordinateProduct (secondPattern (Fintype.card K) r)
 
-/-- The two scalar monomials have equal values on every diagonal over the finite field. -/
+/-- `θ` vanishes on the diagonal, since `c^q = c` in `F_q`. -/
 theorem finiteScalarCounterexample_diagonal [Fintype K] (r : ℕ) (a : Fin 3 → K) :
     finiteScalarCounterexample K r (fun _ => a) = 0 := by
   change (∏ i, a (firstPattern (Fintype.card K) r i)) -
@@ -234,7 +239,7 @@ theorem finiteScalarCounterexample_diagonal [Fintype K] (r : ℕ) (a : Fin 3 →
   rw [firstPattern_product, secondPattern_product,
     FiniteField.pow_card, FiniteField.pow_card, sub_self]
 
-/-- Nevertheless, a genuine grouped coefficient of their difference is exactly one. -/
+/-- The grouped coefficient of `θ` of type `(q, 1, r)` is `1`. -/
 theorem finiteScalarCounterexample_grouped [Fintype K] (r : ℕ) :
     (finiteScalarCounterexample K r).sumOfType (coordinateBasis K (Fin 3))
       (Polarization.selectionType (firstPattern (Fintype.card K) r)) = 1 := by
@@ -246,12 +251,12 @@ theorem finiteScalarCounterexample_grouped [Fintype K] (r : ℕ) :
     (coordinateProduct (K := K) (secondPattern (Fintype.card K) r)).sumOfType _ _ = 1
   rw [coordinateProduct_sumOfType, coordinateProduct_sumOfType, ite_eq_left rfl, ite_eq_right hne, sub_zero]
 
-/-- An explicit exterior-valued alternating lift in every degree q+1+r. -/
+/-- The lift `Θ(a; x) = θ(a) x_1 ∧ ⋯ ∧ x_k` of Proposition B.8(3), in degree `q + 1 + r`. -/
 def finiteCounterexample (K : Type*) [Field K] [Fintype K] (r : ℕ) :
     ExteriorLift K (Fin 3 → K) (Fintype.card K + 1 + r) :=
   scalarExteriorLift (finiteScalarCounterexample K r)
 
-/-- Its actual pointwise multiplier identity holds for the zero operator family. -/
+/-- `Θ` satisfies (Pw). -/
 theorem finiteCounterexample_pw [Fintype K] (r : ℕ) :
     ZeroMultiplierPw (finiteCounterexample K r) := by
   intro a x
@@ -259,7 +264,7 @@ theorem finiteCounterexample_pw [Fintype K] (r : ℕ) :
   rw [scalarExteriorLift_apply, finiteScalarCounterexample_diagonal, zero_smul,
     zero_multiplier_wedge (by omega)]
 
-/-- Its violating grouped coefficient is the explicitly constructed standard wedge. -/
+/-- The grouped coefficient of `Θ` of type `(q, 1, r)` is `e_1 ∧ ⋯ ∧ e_k`. -/
 theorem finiteCounterexample_grouped [Fintype K] (r : ℕ) :
     (MultilinearMap.sumOfType (K := K)
       (Y := ExteriorForm K (Fintype.card K + 1 + r)) (finiteCounterexample K r)
@@ -281,8 +286,7 @@ theorem finiteCounterexample_not_pol [Fintype K] (r : ℕ) :
   simp only [zero_multiplier_wedge hk, Finset.sum_const_zero] at hz
   exact standardWedge_ne_zero K _ hz
 
-/-- For every finite field and every k≥q+1, Pw does not imply full grouped Pol.
-The witness is a genuine exterior-valued lift with strongly alternating vector slots. -/
+/-- Over `F_q` with `k ≥ q + 1`, (Pw) does not imply (Pol) (Proposition B.8(3)). -/
 theorem exists_pw_not_pol [Fintype K] (hk : Fintype.card K + 1 ≤ k) :
     ∃ Ψ : ExteriorLift K (Fin 3 → K) k,
       ZeroMultiplierPw Ψ ∧ ¬ ZeroMultiplierPol (Fin 3) Ψ := by

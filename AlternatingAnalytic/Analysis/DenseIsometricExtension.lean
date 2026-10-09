@@ -2,7 +2,13 @@ import Mathlib.Analysis.Normed.Group.Hom
 import Mathlib.Analysis.Normed.Ring.Lemmas
 import Mathlib.Topology.Algebra.UniformRing
 
-/-! Isometric ring homomorphisms extend from a dense subring to a complete target. -/
+/-!
+# Extending isometric ring homomorphisms
+
+An isometric ring homomorphism from a dense subring into a complete normed ring
+extends isometrically to the whole ring. This is used for the Laurent subfield
+in Lemma D.2.
+-/
 
 namespace AlternatingAnalytic
 
@@ -26,7 +32,8 @@ theorem exists_isometric_ringHom_extension (i : A →+* B) (f : A →+* C)
     (AddMonoidHomClass.isometry_iff_norm i).mp hi]
 
 omit [CompleteSpace C] in
-/-- The image of a complete space is the closure of the image of any dense subring. -/
+/-- The image of a complete ring under an isometry is the closure of the image of any
+dense subring. -/
 theorem closure_range_comp_eq_range [CompleteSpace B] (i : A →+* B) (g : B →+* C)
     (hd : DenseRange i) (hg : Isometry g) :
     closure (Set.range (g.comp i)) = Set.range g := by

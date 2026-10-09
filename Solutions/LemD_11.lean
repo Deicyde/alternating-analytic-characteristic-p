@@ -4,21 +4,17 @@ import Mathlib.Analysis.Normed.Module.Completion
 import Mathlib.Analysis.Normed.Field.Instances
 
 /-!
-# Lemma D.11 (incomplete base fields), p. 47
+# Proof of Lemma D.11
 
-Solution: the statements of `Challenges/LemD_11.lean`, proved from
-`AlternatingAnalytic/Analysis/DenseScalarRestriction.lean` (`denseScalarLinearEquiv`,
-`denseScalarAlternatingEquiv`) and `AlternatingAnalytic/Analysis/DenseScalarLiftTransport.lean`
-(`denseScalarLiftTransport`, `norm_denseScalarLiftTransport`,
-`denseScalarLiftTransport_diagonal`).
+Uses `denseScalarLinearEquiv` and `denseScalarAlternatingEquiv` from
+`AlternatingAnalytic/Analysis/DenseScalarRestriction.lean`, and `denseScalarLiftTransport` from
+`AlternatingAnalytic/Analysis/DenseScalarLiftTransport.lean`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemD_11
 
-/-- The standard operator norm on the space of candidate lifts
-`L(A, B)^n → L(Alt^k(B; C), Alt^k(A; C))`, exposed as a local instance because typeclass search
-does not find `ContinuousMultilinearMap.hasOpNorm` through the nested alternating-map codomain
-on its own. (This mirrors the library's local instance in `DenseScalarLiftTransport.lean`.) -/
+/-- The operator norm on candidate lifts `L(A, B)^n → L(Alt^k(B; C), Alt^k(A; C))`.
+Instance search does not find `ContinuousMultilinearMap.hasOpNorm` here unaided. -/
 noncomputable local instance liftOpNorm {R A B C : Type*} [NontriviallyNormedField R]
     [NormedAddCommGroup A] [NormedSpace R A] [NormedAddCommGroup B] [NormedSpace R B]
     [NormedAddCommGroup C] [NormedSpace R C] {k n : ℕ} :
@@ -27,9 +23,8 @@ noncomputable local instance liftOpNorm {R A B C : Type*} [NontriviallyNormedFie
   ContinuousMultilinearMap.hasOpNorm (𝕜 := R) (E := fun _ : Fin n => A →L[R] B)
     (G := (B [⋀^Fin k]→L[R] C) →L[R] (A [⋀^Fin k]→L[R] C))
 
-/-- Lemma D.11, map spaces: `L_K(E, E') = L_{K̂}(E, E')`, `Alt^k_K(E; F) = Alt^k_{K̂}(E; F)` and
-`Alt^k_K(E'; F) = Alt^k_{K̂}(E'; F)` (same underlying maps, same norms), and
-`A^{k,K}_{E,E';F} = A^{k,K̂}_{E,E';F}` under these identifications. -/
+/-- Lemma D.11, map spaces: `L_K(E, E')`, `Alt^k_K(E; F)` and `Alt^k_K(E'; F)` equal their
+`K̂` versions (same maps, same norms), and under these identifications `A^{k,K} = A^{k,K̂}`. -/
 theorem map_spaces_eq
     (K Kh : Type*) [NontriviallyNormedField K] [NontriviallyNormedField Kh]
     [NormedAlgebra K Kh] [CompleteSpace Kh] (hd : DenseRange (algebraMap K Kh))
@@ -53,9 +48,8 @@ theorem map_spaces_eq
     AlternatingAnalytic.denseScalarAlternatingEquiv hd, fun _ _ => rfl, fun _ _ => rfl,
     fun _ _ => rfl, fun _ _ => rfl⟩
 
-/-- Lemma D.11, lifts: every bounded `k`-linear lift `P` of `A^{k,K}_{E,E';F}` over `K` is (as the
-same map, after the identifications above) a bounded `k`-linear lift of `A^{k,K̂}_{E,E';F}` over
-`K̂`, with the same norm. -/
+/-- Lemma D.11, lifts: every bounded `k`-linear lift of `A^{k,K}` over `K` is, as the same map, a
+bounded `k`-linear lift of `A^{k,K̂}` over `K̂` with the same norm. -/
 theorem lift_is_lift_over_completion
     (K Kh : Type*) [NontriviallyNormedField K] [NontriviallyNormedField Kh]
     [NormedAlgebra K Kh] [CompleteSpace Kh] (hd : DenseRange (algebraMap K Kh))

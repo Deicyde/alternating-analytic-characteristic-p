@@ -4,11 +4,12 @@ import AlternatingAnalytic.Analysis.FiniteDimensionalPositive
 import AlternatingAnalytic.Analysis.AlternatingActionRegularity
 
 /-!
-# Analyticity and the coordinate lift on the concrete completed models
+# The padded pairs after completion
 
-The models `H = A × Lⁿ` and `L` are the actual completions constructed in
-`PaddedCompletions`. The conclusions here use their explicit Laurent-field
-scalar structures. The coordinate lift is L-valued.
+After completion over `L = F_p((t))`, both `E_k` and `D_k` become `H = A × Lⁿ`, a
+finite-dimensional space over a complete field. There the joint action is analytic and the bad
+coordinate `x ↦ x₀ ^ p` of Appendix H has a bounded `L`-valued `p`-linear lift. This is the
+closing remark of Appendix H: completion removes the obstruction of Theorem H.4.
 -/
 
 noncomputable section
@@ -24,7 +25,7 @@ attribute [local instance] preferredNormedFieldK preferredFieldK preferredFieldL
 local instance completedScalarContinuousMul : ContinuousMul (L p r) :=
   NonUnitalSeminormedRing.toContinuousMul
 
-/-- The actual completed pair action is analytic everywhere over complete L. -/
+/-- The joint action on `(H, L)` is analytic everywhere. -/
 theorem analyticAt_completedAction
     (h : (H p r n →L[L p r] H p r n) × (L p r →L[L p r] L p r)) :
     AnalyticAt (L p r)
@@ -33,7 +34,7 @@ theorem analyticAt_completedAction
   apply analyticAt_alternatingMapAction_of_precomposition
   exact analyticAt_Q_of_finiteDimensionalDomain (p+n) h.1
 
-/-- Bounded projection onto the constant coefficient of the algebra component. -/
+/-- The constant coefficient of the `A` component, as an `L`-linear functional on `H`. -/
 def constantCoefficient : H p r n →L[L p r] L p r :=
   (ContinuousLinearMap.proj (0 : Fin p)).comp
     ((TruncatedPolynomial.coefficientIsometry (L p r) p).toContinuousLinearEquiv.toContinuousLinearMap.comp
@@ -42,7 +43,7 @@ def constantCoefficient : H p r n →L[L p r] L p r :=
 @[simp] theorem constantCoefficient_apply (z : H p r n) :
     constantCoefficient p r n z = TruncatedPolynomial.coeff (L p r) p z.1 0 := rfl
 
-/-- The literal continuous p-multilinear coordinate product. -/
+/-- The `p`-linear map `(z₁, …, z_p) ↦ ∏ⱼ constantCoefficient zⱼ`. -/
 def coordinateLift : ContinuousMultilinearMap (L p r) (fun _ : Fin p => H p r n) (L p r) :=
   (ContinuousMultilinearMap.mkPiAlgebra (L p r) (Fin p) (L p r)).compContinuousLinearMap
     (fun _ => constantCoefficient p r n)
@@ -50,32 +51,31 @@ def coordinateLift : ContinuousMultilinearMap (L p r) (fun _ : Fin p => H p r n)
 @[simp] theorem coordinateLift_apply (z : Fin p → H p r n) :
     coordinateLift p r n z = ∏ j, constantCoefficient p r n (z j) := rfl
 
-/-- Its diagonal is exactly the ambient scalar coordinate polynomial. -/
+/-- Its diagonal is the `p`-th power of the constant coefficient. -/
 @[simp] theorem coordinateLift_diagonal (z : H p r n) :
     coordinateLift p r n (fun _ => z) = (constantCoefficient p r n z) ^ p := by
   simp [coordinateLift_apply]
 
-/-- On the embedded old source, the diagonal agrees with f after C ↪ L. -/
+/-- On `E ⊆ H` the diagonal is the determinant coordinate. -/
 theorem coordinateLift_original (x : DeterminantPair.E p r) :
     coordinateLift p r n (fun _ => inclusionE p r n (x, 0)) =
       (determinantCoordinate p r x : L p r) := by
   rw [coordinateLift_diagonal, determinantCoordinate_scalar]
   rfl
 
-/-- The completed affine family is literal multiplication on A and identity on Lⁿ. -/
+/-- Multiplication by `x` on `A` and the identity on `Lⁿ`. -/
 def completedPaddedMultiplication (x : A p r) : H p r n →L[L p r] H p r n :=
   (completedMultiplication p r x).prodMap (ContinuousLinearMap.id (L p r) (Fin n → L p r))
 
 @[simp] theorem completedPaddedMultiplication_apply (x : A p r) (z : H p r n) :
     completedPaddedMultiplication p r n x z = (x * z.1, z.2) := rfl
 
-/-- This L-linear operator extends the specific old K-linear padded operator. -/
+/-- It extends the operator `M_x ⊕ id : E_k → D_k`. -/
 theorem completedPaddedMultiplication_original (x : DeterminantPair.E p r) (y : E p r n) :
     completedPaddedMultiplication p r n (x : A p r) (inclusionE p r n y) =
       inclusionD p r n (paddedMultiplication p r n x y) := rfl
 
-/-- The completed multiplication matrix has the actual lower-triangular
-multiplication block and the auxiliary identity, including n = 0. -/
+/-- In the standard basis, `M_x ⊕ id` has diagonal blocks `multiplicationMatrix x` and `1`. -/
 theorem completedPaddedMultiplication_matrix (x : A p r) :
     Matrix.reindex finSumFinEquiv.symm finSumFinEquiv.symm
       (LinearMap.toMatrix (basis p r n) (basis p r n)
@@ -89,7 +89,7 @@ theorem completedPaddedMultiplication_matrix (x : A p r) :
       completedPaddedMultiplication_apply, Matrix.fromBlocks,
       multiplicationMatrix, Matrix.one_apply, Pi.single_apply]
 
-/-- The determinant of completed `M_x ⊕ id` is the same constant-coordinate pth power. -/
+/-- `det (M_x ⊕ id) = x₀ ^ p`. -/
 theorem det_completedPaddedMultiplication (x : A p r) :
     LinearMap.det (completedPaddedMultiplication p r n x).toLinearMap =
       TruncatedPolynomial.coeff (L p r) p x 0 ^ p := by
@@ -99,7 +99,7 @@ theorem det_completedPaddedMultiplication (x : A p r) :
     completedPaddedMultiplication_matrix, Matrix.det_fromBlocks_zero₂₁,
     Matrix.det_one, mul_one, det_multiplicationMatrix]
 
-/-- The normalized ambient determinant as an actual continuous L-alternating map. -/
+/-- The normalized determinant on `H` as a continuous `L`-alternating map. -/
 def completedDeterminant : H p r n [⋀^Fin (p+n)]→L[L p r] L p r :=
   (basis p r n).det.mkContinuous 1 (fun z => by
     change ‖delta p r n z‖ ≤ 1 * ∏ i, ‖z i‖
@@ -109,12 +109,12 @@ def completedDeterminant : H p r n [⋀^Fin (p+n)]→L[L p r] L p r :=
 @[simp] theorem completedDeterminant_apply (z : Fin (p+n) → H p r n) :
     completedDeterminant p r n z = delta p r n z := rfl
 
-/-- The completed L-valued determinant extends the original G-valued determinant. -/
+/-- It extends the determinant `det_k` on `D_k`. -/
 theorem completedDeterminant_original (z : Fin (p+n) → D p r n) :
     completedDeterminant p r n (fun i => inclusionD p r n (z i)) =
       (determinantD p r n z : L p r) := rfl
 
-/-- The diagonal lift is the exact completed determinant slice. -/
+/-- The diagonal of the lift is the determinant of `M_x ⊕ id` on the standard basis. -/
 theorem coordinateLift_completedDeterminant (z : H p r n) :
     coordinateLift p r n (fun _ => z) =
       delta p r n (fun i => completedPaddedMultiplication p r n z.1 (basis p r n i)) := by
@@ -123,7 +123,8 @@ theorem coordinateLift_completedDeterminant (z : H p r n) :
     ((completedPaddedMultiplication p r n z.1).toLinearMap ∘ basis p r n)
   rw [Module.Basis.det_comp, det_completedPaddedMultiplication, Module.Basis.det_self, mul_one]
 
-/-- The exact action/evaluation slice on the completed pair is this coordinate lift. -/
+/-- The diagonal of the lift is the completed action evaluated at the determinant and the
+standard basis. -/
 theorem coordinateLift_completedAction (z : H p r n) :
     coordinateLift p r n (fun _ => z) =
       alternatingMapAction (p+n)
@@ -131,15 +132,15 @@ theorem coordinateLift_completedAction (z : H p r n) :
         (completedDeterminant p r n) (basis p r n) :=
   coordinateLift_completedDeterminant p r n z
 
-/-- It also agrees with the original C-valued obstruction observation, in L. -/
+/-- On `E` the diagonal agrees with the cross-action coordinate over `K`. -/
 theorem coordinateLift_originalAction (x : DeterminantPair.E p r) :
     coordinateLift p r n (fun _ => inclusionE p r n (x, 0)) =
       (crossActionEvaluation p r n
         (alternatingMapAction (p+n) (crossActionSlice p r n x)) : L p r) := by
   rw [crossActionEvaluation_slice, coordinateLift_original]
 
-/-- The scalar-extension conclusion of `dom:limits` for these concrete models,
-including the literal bounded multilinear lift and the determinant slice. -/
+/-- Summary: `H` is complete and finite-dimensional over `L`, the joint action is analytic,
+and the bad coordinate has a bounded lift. -/
 theorem concrete_completed_analytic_action_and_lift :
     CompleteSpace (H p r n) ∧ FiniteDimensional (L p r) (H p r n) ∧
     CompleteSpace (L p r) ∧

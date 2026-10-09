@@ -1,7 +1,12 @@
 import AlternatingAnalytic.Analysis.LiftCriterion
 
-/-! Norm-one lifts obtained from a contracting retraction onto alternating maps.
-The orthogonal topological-basis construction supplies the sorted retraction. -/
+/-!
+# Lifts from a retraction
+
+A bounded linear retraction `r` of multilinear maps onto alternating maps gives a multilinear
+lift `(u₁, …, uₙ) ↦ (m ↦ r (m ∘ (u₁, …, uₙ)))` of the precomposition action, of norm at most
+`‖r‖`. This is the first part of Proposition 4.1; here only the case `‖r‖ ≤ 1` is stated.
+-/
 
 noncomputable section
 
@@ -21,7 +26,7 @@ noncomputable local instance contractingRetractionLiftNorm (n : ℕ) :
     (𝕜 := K) (E := fun _ : Fin n => E →L[K] E')
     (G := (E' [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F))
 
-/-- Apply the retraction to ordered multilinear precomposition. -/
+/-- The lift `(u₁, …, uₙ) ↦ (m ↦ r (m ∘ (u₁, …, uₙ)))` built from a retraction `r`. -/
 def contractingRetractionLift (n : ℕ)
     (r : (E [×n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F)) :
     (E →L[K] E') [×n]→L[K]

@@ -11,14 +11,12 @@ import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 
 /-!
-# Ordinary projective scalar extension
+# Projective base change
 
-Scalar functionals act on the second factor of the actual algebraic tensor product.
-Their separation property is obtained on finite-dimensional scalar subspaces and extended
-by Ingleton; it requires no continuous linear functional on the original space.
-
-This is the ordinary projective base-change construction in `sources/charp.tex`,
-Lemma `bc`, parts (1) and (2). The original normed space need not be complete or ultrametric.
+For a normed `K`-space `V` and a normed extension `L` of `K`, we put the projective seminorm
+(an infimum of ordinary sums `∑ ‖x_j‖ ‖λ_j‖`) on `V ⊗[K] L`. When `K` is spherically complete,
+it is an `L`-norm: functionals on finite-dimensional subspaces of `L` extend by Ingleton and
+separate tensors. This is Lemma D.6 (1)-(2). `V` need not be complete or ultrametric.
 -/
 
 open scoped TensorProduct
@@ -47,8 +45,8 @@ variable {K L : Type*} [NontriviallyNormedField K] [CompleteSpace K]
   [IsUltrametricDist K] [SphericallyCompleteSpace K]
   [NormedAddCommGroup L] [NormedSpace K L] [IsUltrametricDist L]
 
-/-- A functional on a finite-dimensional scalar subspace extends continuously to the
-ultrametric ambient space. Completeness is needed only for the scalar field. -/
+/-- A functional on a finite-dimensional subspace of `L` extends to a continuous functional
+on `L`. -/
 theorem exists_continuous_extension_of_finiteDimensional
     (D : Submodule K L) [FiniteDimensional K D] (φ : D →ₗ[K] K) :
     ∃ ψ : L →L[K] K, ∀ d : D, ψ d = φ d := by
@@ -68,8 +66,8 @@ theorem exists_continuous_extension_of_finiteDimensional
       simpa only [sub_zero, Submodule.norm_coe] using φL.le_opNorm d)
   exact ⟨ψ, hψ⟩
 
-/-- Continuous scalar functionals separate the second factor of an algebraic tensor product.
-No topology or continuous dual on `V` is used. -/
+/-- Continuous functionals on `L`, applied to the second factor, separate `V ⊗[K] L`.
+No topology on `V` is used. -/
 theorem exists_scalarContraction_ne_zero {V : Type*} [AddCommGroup V] [Module K V]
     (u : V ⊗[K] L) (hu : u ≠ 0) :
     ∃ ψ : L →L[K] K, scalarContraction ψ.toLinearMap u ≠ 0 := by
@@ -156,8 +154,8 @@ theorem baseChangeFactors_prod_norm (f : ∀ i, baseChangeFactors V L i) :
     (∏ i, ‖f i‖) = ‖f (.inl ())‖ * ‖f (.inr ())‖ := by
   simp [Fintype.prod_sum_type]
 
-/-- The ordinary sum projective seminorm on the actual binary tensor product. It is the
-pullback of Mathlib's finite-decomposition projective seminorm, not an ultrametric maximum. -/
+/-- The projective seminorm on `V ⊗[K] L`, pulled back from Mathlib's
+`PiTensorProduct.projectiveSeminorm`. It uses ordinary sums, not maxima. -/
 noncomputable def baseChangeSeminorm : Seminorm K (V ⊗[K] L) :=
   PiTensorProduct.projectiveSeminorm.comp (baseChangeTensorEquiv K V L).toLinearMap
 
@@ -216,7 +214,7 @@ theorem baseChangeSeminorm_list_sum_le (s : List (V × L)) :
     exact (norm_add_le _ _).trans
       (add_le_add (baseChangeSeminorm_tmul_le K V L z.1 z.2) ih)
 
-/-- The defining infimum is over ordinary finite sums of products of norms. -/
+/-- The seminorm is the infimum of `∑ ‖x_j‖ ‖λ_j‖` over decompositions `u = ∑ x_j ⊗ λ_j`. -/
 theorem baseChangeSeminorm_eq_iInf (u : V ⊗[K] L) :
     baseChangeSeminorm K V L u =
       ⨅ s : BaseChangeDecomposition K V L u, (s.val.map fun z => ‖z.1‖ * ‖z.2‖).sum := by
@@ -238,7 +236,7 @@ theorem baseChangeSeminorm_eq_iInf (u : V ⊗[K] L) :
 
 variable {K V L}
 
-/-- A bound on pure tensors extends with the same constant to the ordinary projective seminorm. -/
+/-- A bound on pure tensors extends with the same constant to the projective seminorm. -/
 theorem norm_le_baseChangeSeminorm {G : Type*} [SeminormedAddCommGroup G]
     [NormedSpace K G] (f : V ⊗[K] L →ₗ[K] G) {C : ℝ} (hC : 0 ≤ C)
     (hf : ∀ v l, ‖f (v ⊗ₜ[K] l)‖ ≤ C * (‖v‖ * ‖l‖)) (u : V ⊗[K] L) :
@@ -263,7 +261,7 @@ theorem norm_le_baseChangeSeminorm {G : Type*} [SeminormedAddCommGroup G]
   rw [heval] at h
   exact h.trans (mul_le_mul_of_nonneg_right hnorm (norm_nonneg _))
 
-/-- Scalar contraction is bounded for the ordinary sum projective seminorm. -/
+/-- `‖T_ψ u‖ ≤ ‖ψ‖ ‖u‖_π` (Lemma D.6 (1)). -/
 theorem norm_scalarContraction_le (ψ : L →L[K] K) (u : V ⊗[K] L) :
     ‖scalarContraction ψ.toLinearMap u‖ ≤ ‖ψ‖ * baseChangeSeminorm K V L u := by
   apply norm_le_baseChangeSeminorm _ (norm_nonneg ψ) _ u
@@ -277,7 +275,6 @@ theorem norm_scalarContraction_le (ψ : L →L[K] K) (u : V ⊗[K] L) :
 variable [CompleteSpace K] [IsUltrametricDist K] [SphericallyCompleteSpace K]
   [IsUltrametricDist L]
 
-/-- Positivity uses coordinates on a finite-dimensional subspace of the scalar factor. -/
 theorem baseChangeSeminorm_eq_zero_iff (u : V ⊗[K] L) :
     baseChangeSeminorm K V L u = 0 ↔ u = 0 := by
   refine ⟨fun h => ?_, fun h => by simp [h]⟩
@@ -300,8 +297,7 @@ universe u
 variable (K : Type*) (V L : Type u) [NontriviallyNormedField K]
   [NormedAddCommGroup V] [NormedSpace K V] [NormedField L] [NormedAlgebra K L]
 
-/-- The extension-field module structure on the actual algebraic tensor product,
-transported through the swap so that scalars act on the second factor. -/
+/-- The `L`-module structure on `V ⊗[K] L`, with `L` acting on the second factor. -/
 @[instance_reducible]
 noncomputable def baseChangeModule : Module L (V ⊗[K] L) :=
   (TensorProduct.comm K V L).toAddEquiv.module L
@@ -315,7 +311,7 @@ theorem baseChange_smul_tmul (a : L) (v : V) (l : L) :
     (a • (TensorProduct.comm K V L) (v ⊗ₜ[K] l)) = _
   simp [TensorProduct.smul_tmul']
 
-/-- Multiplication on the scalar factor, as a linear map over the original field. -/
+/-- Multiplication by `a` on the second factor, as a `K`-linear map. -/
 def baseChangeScalarMap (a : L) : V ⊗[K] L →ₗ[K] V ⊗[K] L :=
   (LinearMap.mulLeft K a).lTensor V
 
@@ -343,7 +339,7 @@ theorem baseChangeSeminorm_smul_le (a : L) (u : V ⊗[K] L) :
       _ ≤ ‖v‖ * ‖a * l‖ := baseChangeSeminorm_tmul_le K V L v (a * l)
       _ = ‖a‖ * (‖v‖ * ‖l‖) := by rw [norm_mul]; ring
 
-/-- The same ordinary-sum seminorm is homogeneous over the extension field. -/
+/-- The projective seminorm as an `L`-seminorm. -/
 noncomputable def baseChangeSeminormL : Seminorm L (V ⊗[K] L) :=
   Seminorm.ofSMulLE (baseChangeSeminorm K V L) (map_zero _)
     (map_add_le_add _) (baseChangeSeminorm_smul_le K V L)
@@ -355,17 +351,17 @@ theorem baseChangeSeminorm_smul (a : L) (u : V ⊗[K] L) :
 variable [CompleteSpace K] [IsUltrametricDist K] [SphericallyCompleteSpace K]
   [IsUltrametricDist L]
 
-/-- The projective seminorm is a genuine additive group norm on the algebraic tensor product. -/
+/-- The projective seminorm is a norm on `V ⊗[K] L`. -/
 noncomputable def baseChangeNorm : AddGroupNorm (V ⊗[K] L) where
   __ := (baseChangeSeminorm K V L).toAddGroupSeminorm
   eq_zero_of_map_eq_zero' u hu := (baseChangeSeminorm_eq_zero_iff u).mp hu
 
-/-- The normed additive group structure induced by the ordinary-sum projective norm. -/
+/-- The normed group structure given by the projective norm. -/
 @[instance_reducible]
 noncomputable def baseChangeNormedAddCommGroup : NormedAddCommGroup (V ⊗[K] L) :=
   (baseChangeNorm K V L).toNormedAddCommGroup
 
-/-- Projective scalar extension is a normed space over the extension field. -/
+/-- `V ⊗[K] L` with the projective norm is a normed `L`-space. -/
 @[instance_reducible]
 noncomputable def baseChangeNormedSpace :
     letI := baseChangeNormedAddCommGroup K V L
@@ -376,11 +372,11 @@ noncomputable def baseChangeNormedSpace :
 
 omit [CompleteSpace K] [IsUltrametricDist K] [SphericallyCompleteSpace K]
   [IsUltrametricDist L] in
-/-- The original scalar action is compatible with the extension-field action. -/
+/-- The `K`- and `L`-actions on `V ⊗[K] L` form a scalar tower. -/
 theorem baseChangeIsScalarTower : IsScalarTower K L (V ⊗[K] L) :=
   LinearEquiv.isScalarTower L (TensorProduct.comm K V L)
 
-/-- The projective norm also gives the original-field normed space structure. -/
+/-- `V ⊗[K] L` with the projective norm is a normed `K`-space. -/
 @[instance_reducible]
 noncomputable def baseChangeNormedSpaceRestrictScalars :
     letI := baseChangeNormedAddCommGroup K V L

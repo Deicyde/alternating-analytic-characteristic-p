@@ -4,12 +4,11 @@ import AlternatingAnalytic.Analysis.AlternatingActionZero
 import AlternatingAnalytic.Analysis.SphericalAnalytic
 
 /-!
-# Alternating bifunctors on normed, Banach, and spherical spaces
+# The functor Alt^k on normed, Banach and spherical spaces
 
-The first variable is contravariant: an arrow `(op E', F) ⟶ (op E, F')`
-with coordinates `(u, v)` acts by `m ↦ v ∘ m ∘ (u, …, u)`.
-The restrictions are obtained by composing with inclusions and then applying
-`ObjectProperty.lift`. Completeness of the scalar field is never required.
+Defines `Alt^k : Vec_K^op × Vec_K ⥤ Vec_K` and its restrictions to Banach spaces and to
+spherically complete targets. An arrow `(op E', F) ⟶ (op E, F')` with coordinates `(u, v)`
+acts by `m ↦ v ∘ m ∘ (u, …, u)`. The scalar field need not be complete.
 -/
 
 noncomputable section
@@ -52,7 +51,7 @@ theorem alternatingFunctor_map_apply {E E' F F' : NormedSpaceCat K}
         (CategoryTheory.Prod.mkHom (Quiver.Hom.op (show E ⟶ E' from u)) v)) m x =
         v (m (u ∘ x)) := rfl
 
-/-- The actual hom map is exactly the checked joint action in operator coordinates. -/
+/-- In operator coordinates, the hom map of `alternatingFunctor` is `alternatingMapAction`. -/
 theorem alternatingFunctor_mapInCoordinates
     (X Y : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K) :
     functorMapInCoordinates (alternatingFunctor K k)
@@ -61,7 +60,7 @@ theorem alternatingFunctor_mapInCoordinates
         ((alternatingFunctor K k).obj X) ((alternatingFunctor K k).obj Y)) =
       alternatingMapAction k := rfl
 
-/-- Banach closure uses only completeness of the target. -/
+/-- `Alt^k(E; F)` is complete when `F` is. -/
 theorem alternating_completeSpace (E F : NormedSpaceCat K) [CompleteSpace F] :
     CompleteSpace (E [⋀^Fin k]→L[K] F) := inferInstance
 
@@ -78,7 +77,7 @@ theorem alternatingBanachFunctor_obj (E F : BanachCat K) :
     (alternatingBanachFunctor K k).obj (op E, F) =
       BanachCat.of K (E [⋀^Fin k]→L[K] F) := rfl
 
-/-- Forgetting the output restriction gives precisely the inclusion restriction. -/
+/-- The Banach functor followed by the inclusion is the restriction of `alternatingFunctor`. -/
 theorem alternatingBanachFunctor_comp_inclusion :
     alternatingBanachFunctor K k ⋙ BanachCat.inclusion K =
       ((BanachCat.inclusion K).op.prod (BanachCat.inclusion K)) ⋙
@@ -116,7 +115,7 @@ section Spherical
 
 variable [IsUltrametricDist K]
 
-/-- Spherical closure places no completeness or ultrametric condition on `E`. -/
+/-- `Alt^k(E; F)` is ultrametric and spherically complete when `F` is, for any `E`. -/
 theorem alternating_isSpherical (E : NormedSpaceCat K) (F : SphericalNormedSpaceCat K) :
     IsUltrametricDist (E [⋀^Fin k]→L[K] F) ∧
       SphericallyCompleteSpace (E [⋀^Fin k]→L[K] F) :=
@@ -177,7 +176,7 @@ def alternatingFunctorZeroCoordinates (E F : NormedSpaceCat K) :
     ((alternatingFunctor K 0).obj (op E, F)) ≃ₗᵢ[K] F :=
   (ContinuousAlternatingMap.constOfIsEmptyLIE K E F (Fin 0)).symm
 
-/-- Under the degree-zero isometries, the actual functor map is `v`. -/
+/-- Under the degree-zero isometries, the functor map at `(u, v)` is `v`. -/
 theorem alternatingFunctor_zero_map (X Y : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K)
     (z : (Y.1.unop →L[K] X.1.unop) × (X.2 →L[K] Y.2)) :
     ((ContinuousAlternatingMap.constOfIsEmptyLIE K Y.1.unop Y.2 (Fin 0)).symm :

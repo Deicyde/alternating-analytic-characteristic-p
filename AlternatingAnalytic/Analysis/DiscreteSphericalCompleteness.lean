@@ -1,7 +1,11 @@
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
-/-! Spherical completeness for every complete ultrametric space with discrete distances.
-The descending-ball argument generalizes the integrated field proof and uses no group structure. -/
+/-!
+# Discrete distances give spherical completeness
+
+A complete ultrametric space whose nonzero distances lie in `e ^ ℤ` is spherically
+complete (Lemma D.1, also used in the proof of Corollary 4.3).
+-/
 
 open Metric Filter Topology
 
@@ -40,7 +44,7 @@ theorem sphericallyCompleteSpace_of_discreteDist {e : ℝ} (he : 1 < e)
     rw [mem_closedBall]
     exact h q hq
   · push Not at hcase
-    -- one step of the descent
+    -- If no centre lies in every ball, there is a strictly descending step.
     have step : ∀ p : Y × ℝ, p ∈ S → ∃ q, q ∈ S ∧ dist p.1 q.1 ≤ p.2 ∧ q.2 < dist p.1 q.1 := by
       intro p hp
       obtain ⟨q, hq, hlt⟩ := hcase p hp
@@ -61,7 +65,6 @@ theorem sphericallyCompleteSpace_of_discreteDist {e : ℝ} (he : 1 < e)
     have hd_gt : ∀ n, (u (n + 1)).2 < d n := fun n => hnxt2 _ (huS n)
     have hd_pos : ∀ n, 0 < d n := fun n => lt_of_le_of_lt (hrnn _ (huS (n + 1))) (hd_gt n)
     have hd_anti : ∀ n, d (n + 1) < d n := fun n => lt_of_le_of_lt (hd_le (n + 1)) (hd_gt n)
-    -- the discrete exponents
     have hd_mono : ∀ n m : ℕ, n ≤ m → d m ≤ d n := by
       intro n m h
       induction m with
@@ -136,7 +139,6 @@ theorem sphericallyCompleteSpace_of_discreteDist {e : ℝ} (he : 1 < e)
     by_contra hcon
     push Not at hcon
     have hpos : 0 < dist x q.1 := lt_of_le_of_lt (hrnn q hq) hcon
-    -- The distances from the limit to the centres tend to zero.
     have ha : Tendsto (fun n => dist x (u n).1) atTop (𝓝 0) := by
       have h := tendsto_iff_dist_tendsto_zero.mp hx
       simpa only [dist_comm] using h
@@ -158,7 +160,7 @@ theorem sphericallyCompleteSpace_of_discreteDist {e : ℝ} (he : 1 < e)
       max_lt h1 (lt_of_le_of_lt h3 (max_lt h2 hcon))
     exact absurd h4 (not_le.mpr h5)
 
-/-- The radius convention used in the paper, with powers of a number in `(0,1)`. -/
+/-- The same statement with distances in `r ^ ℤ` for `0 < r < 1`, as in Lemma D.1. -/
 theorem sphericallyCompleteSpace_of_discreteDist_radius {r : ℝ}
     (hr0 : 0 < r) (hr1 : r < 1)
     (hval : ∀ x y : Y, x ≠ y → ∃ n : ℤ, dist x y = r ^ n) :

@@ -9,11 +9,10 @@ import Mathlib.Analysis.Analytic.Basic
 /-!
 # Tensor powers and diagonal spans in independent universes
 
-The completed ordinary projective tensor power `T_n(P)`, the pure powers `x^{⊗ n}`, the closed
-diagonal span `Δ_n(P)` and universal analytic reflection, with the scalar field and the
-parameter space in independent universes. The library's `AlternatingAnalytic.TensorPower`
-requires both in one universe; the spellings here are those of the ledger challenge files, and
-the basic facts about them are re-proved in this generality.
+The completed projective tensor power `T_n(P)`, the pure powers `x^{⊗ n}`, the closed diagonal
+span `Δ_n(P)` and universal analytic reflection (Appendix G), with the scalar field and the
+parameter space in independent universes. The library's `AlternatingAnalytic.TensorPower` puts
+both in one universe; these are the definitions used in the challenge files for Appendix G.
 -/
 
 open scoped TensorProduct

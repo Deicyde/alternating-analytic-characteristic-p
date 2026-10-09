@@ -1,13 +1,17 @@
 import AlternatingAnalytic.Algebra.FiniteFieldObstruction
 
-/-! Both numbered parts of the paper's finite-field multiplier theorem, bundled. -/
+/-!
+# The finite-field multiplier theorem
+
+Theorem B.9: over a finite field with `k! = 0` there is no multiplier lift with bounded
+support dimension. The proofs are in `FiniteFieldObstruction.lean`.
+-/
 
 open Finset Module
 namespace AlternatingAnalytic
 
-/-- The complete finite-field theorem: the ternary-input obstruction with exterior
-output in all sequences, together with both full-sequence and finite-sequence
-uniform-support versions. These are the two numbered parts of Theorem FF. -/
+/-- Theorem B.9, with `V = ℕ → L` and `V_fin = ℕ →₀ L`. The first conjunct is part (1);
+part (2) is split into the cases `E₀ = V` and `E₀ = V_fin`. -/
 theorem finiteField_multiplier_theorem
     {L : Type*} [Field L] [Finite L] {k : ℕ}
     (hfactorial : (k.factorial : L) = 0) :

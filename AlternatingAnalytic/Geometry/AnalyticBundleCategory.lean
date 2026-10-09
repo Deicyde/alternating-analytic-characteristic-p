@@ -4,15 +4,13 @@ import Mathlib.CategoryTheory.Iso
 import Mathlib.Geometry.Manifold.ContMDiff.NormedSpace
 
 /-!
-# The category of operator analytic normable vector bundles
+# The category of analytic vector bundles
 
-The base manifold is fixed. Objects retain their chosen normed model, topological
-fibers, total-space topology and analytic vector-bundle atlas. Morphisms are
-analytic sections of the operator Hom bundle. Actual fibers need no chosen norm.
-
-All stored types lie in `Type u`; objects lie in `Type (u + 1)` and the category
-has the separately specified hom universe `u`. No completeness, characteristic
-or finite-dimensionality assumption is imposed.
+Over a fixed base manifold, `AnalyticBundleCat I M` has as objects analytic vector
+bundles with a normed model fiber (the fibers themselves are topological vector
+spaces), and as morphisms analytic sections of the Hom bundle. This is the category
+on which Corollary 4.6 builds the alternating bifunctor. Morphisms are characterized
+by analyticity of their operator coordinates (`exists_hom_iff_operatorAnalytic`).
 -/
 
 noncomputable section
@@ -31,8 +29,8 @@ variable {K P M G : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup G] [NormedSpace K G]
   [TopologicalSpace M] [ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]
 
-/-- The open-chart criterion for analytic manifold maps into a normed space.
-No completeness is required of either the field or the target. -/
+/-- A map into a normed space is analytic on an open set iff it is analytic in every
+chart. -/
 theorem contMDiffOn_iff_analyticOnNhd_extChartAt {U : Set M} (hU : IsOpen U)
     {γ : M → G} :
     ContMDiffOn 𝓘(K, P) 𝓘(K, G) ω γ U ↔
@@ -75,8 +73,8 @@ variable {F₁ F₂ : Type*} {E₁ E₂ : M → Type*}
   [ContMDiffVectorBundle ω F₁ E₁ 𝓘(K, P)]
   [ContMDiffVectorBundle ω F₂ E₂ 𝓘(K, P)]
 
-/-- Ordinary operator-valued analyticity on each open base-chart domain is
-exactly analytic section regularity on an open common trivialization domain. -/
+/-- On an open subset of a common trivialization domain, a Hom section is analytic iff
+its operator coordinates are analytic in every chart. -/
 theorem contMDiffOn_hom_section_iff_analyticOnNhd
     (e₁ : Trivialization F₁ (π F₁ E₁)) (e₂ : Trivialization F₂ (π F₂ E₂))
     [MemTrivializationAtlas e₁] [MemTrivializationAtlas e₂]
@@ -91,9 +89,8 @@ theorem contMDiffOn_hom_section_iff_analyticOnNhd
   rw [(e₁.continuousLinearMap (RingHom.id K) e₂).contMDiffOn_section_iff hU hUe]
   exact contMDiffOn_iff_analyticOnNhd_extChartAt hU
 
-/-- A fiberwise operator family is an analytic Hom section exactly when all
-its model-operator expressions are ordinarily analytic on the open domains
-cut out by base charts and the chosen source/target trivializations. -/
+/-- A fiberwise operator family is an analytic Hom section iff its coordinates in the
+chosen trivializations are analytic in every chart. -/
 theorem contMDiff_hom_section_iff_analyticOnNhd
     (f : ∀ b, E₁ b →L[K] E₂ b) :
     ContMDiff 𝓘(K, P) (𝓘(K, P).prod 𝓘(K, F₁ →L[K] F₂)) ω
@@ -125,15 +122,14 @@ variable {K P H : Type u} [NontriviallyNormedField K]
   [NormedAddCommGroup P] [NormedSpace K P] [TopologicalSpace H]
   (I : ModelWithCorners K P H) (M : Type u) [TopologicalSpace M] [ChartedSpace H M]
 
-/-- An analytic normable vector bundle with its specified atlas over a fixed base.
-The fibers carry their original topological module structures; only the model
-has a chosen norm. -/
+/-- An analytic vector bundle over `M` with its atlas. Only the model fiber carries a
+norm; the fibers are topological vector spaces. -/
 structure AnalyticBundleCat : Type (u + 1) where
   /-- The normed model of the fibers. -/
   Model : Type u
   [modelNormedAddCommGroup : NormedAddCommGroup Model]
   [modelNormedSpace : NormedSpace K Model]
-  /-- The actual topological fibers. -/
+  /-- The fibers. -/
   Fiber : M → Type u
   [fiberAddCommGroup : ∀ b, AddCommGroup (Fiber b)]
   [fiberModule : ∀ b, Module K (Fiber b)]
@@ -154,7 +150,7 @@ attribute [instance] AnalyticBundleCat.modelNormedAddCommGroup
 
 namespace AnalyticBundleCat
 
-/-- Bundle any unbundled analytic vector bundle without changing its topology or atlas. -/
+/-- The object of `AnalyticBundleCat` given by an analytic vector bundle. -/
 abbrev of (F : Type u) [NormedAddCommGroup F] [NormedSpace K F]
     (E : M → Type u) [∀ b, AddCommGroup (E b)] [∀ b, Module K (E b)]
     [∀ b, TopologicalSpace (E b)] [∀ b, IsTopologicalAddGroup (E b)]
@@ -164,14 +160,13 @@ abbrev of (F : Type u) [NormedAddCommGroup F] [NormedSpace K F]
 
 variable {I M}
 
-/-- Morphisms are precisely analytic sections of the operator Hom bundle. -/
+/-- Morphisms are analytic sections of the Hom bundle. -/
 abbrev Hom (X Y : AnalyticBundleCat I M) : Type u :=
   ContMDiffSection I (X.Model →L[K] Y.Model) ω (fun b ↦ X.Fiber b →L[K] Y.Fiber b)
 
 variable {X Y Z : AnalyticBundleCat I M}
 
-/-- The identity operator is constant in the same source and target coordinates,
-on the domain where the trivialization is invertible. -/
+/-- In a single trivialization, the identity has coordinates the identity. -/
 theorem inCoordinates_id (X : AnalyticBundleCat I M) {a b : M}
     (hb : b ∈ (trivializationAt X.Model X.Fiber a).baseSet) :
     ContinuousLinearMap.inCoordinates X.Model X.Fiber X.Model X.Fiber a b a b
@@ -181,8 +176,7 @@ theorem inCoordinates_id (X : AnalyticBundleCat I M) {a b : M}
   simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply,
     ContinuousLinearEquiv.coe_coe, ContinuousLinearEquiv.apply_symm_apply]
 
-/-- Composition in common valid coordinates cancels the intermediate
-trivialization. No identity is asserted outside the three base sets. -/
+/-- On the common domain of three trivializations, coordinates respect composition. -/
 theorem inCoordinates_comp {a b : M}
     (hX : b ∈ (trivializationAt X.Model X.Fiber a).baseSet)
     (hY : b ∈ (trivializationAt Y.Model Y.Fiber a).baseSet)
@@ -198,7 +192,7 @@ theorem inCoordinates_comp {a b : M}
   simp only [ContinuousLinearMap.comp_apply, ContinuousLinearEquiv.coe_coe,
     ContinuousLinearEquiv.symm_apply_apply]
 
-/-- Identity as an analytic operator section. -/
+/-- The identity morphism. -/
 def id (X : AnalyticBundleCat I M) : Hom X X where
   toFun b := ContinuousLinearMap.id K (X.Fiber b)
   contMDiff_toFun := by
@@ -210,7 +204,7 @@ def id (X : AnalyticBundleCat I M) : Hom X X where
       (mem_baseSet_trivializationAt X.Model X.Fiber a)] with b hb
     exact inCoordinates_id X hb
 
-/-- Compose analytic operator sections using composition on their normed models. -/
+/-- Composition of morphisms, fiber by fiber. -/
 def comp (f : Hom X Y) (g : Hom Y Z) : Hom X Z where
   toFun b := (g b).comp (f b)
   contMDiff_toFun := by
@@ -228,7 +222,7 @@ def comp (f : Hom X Y) (g : Hom Y Z) : Hom X Z where
       (mem_baseSet_trivializationAt Z.Model Z.Fiber a)] with b hX hY hZ
     exact inCoordinates_comp hX hY hZ (f b) (g b)
 
-/-- The hom universe is explicit and smaller than the object universe. -/
+/-- Objects live in `Type (u + 1)` and morphisms in `Type u`. -/
 instance category : Category.{u} (AnalyticBundleCat I M) where
   Hom := Hom
   id := id
@@ -241,7 +235,7 @@ instance category : Category.{u} (AnalyticBundleCat I M) where
 instance homDFunLike : DFunLike (X ⟶ Y) M (fun b ↦ X.Fiber b →L[K] Y.Fiber b) :=
   inferInstanceAs (DFunLike (Hom X Y) M (fun b ↦ X.Fiber b →L[K] Y.Fiber b))
 
-/-- Morphisms are equal exactly when their fiber operators are equal. -/
+/-- Morphisms are equal when their fiber operators are equal. -/
 @[ext]
 theorem hom_ext {f g : X ⟶ Y} (h : ∀ b, f b = g b) : f = g :=
   ContMDiffSection.ext h
@@ -254,7 +248,7 @@ theorem id_apply (X : AnalyticBundleCat I M) (b : M) :
 theorem comp_apply (f : X ⟶ Y) (g : Y ⟶ Z) (b : M) :
     (f ≫ g) b = (g b).comp (f b) := rfl
 
-/-- The local operator criterion also constructs morphisms from unbundled families. -/
+/-- A morphism from a fiberwise family whose coordinates are analytic near each point. -/
 def homOfCoordinates (f : ∀ b, X.Fiber b →L[K] Y.Fiber b)
     (hf : ∀ a, ContMDiffAt I 𝓘(K, X.Model →L[K] Y.Model) ω
       (fun b ↦ ContinuousLinearMap.inCoordinates X.Model X.Fiber Y.Model Y.Fiber
@@ -267,8 +261,8 @@ theorem homOfCoordinates_apply (f : ∀ b, X.Fiber b →L[K] Y.Fiber b)
       (fun b ↦ ContinuousLinearMap.inCoordinates X.Model X.Fiber Y.Model Y.Fiber
         a b a b (f b)) a) (b : M) : homOfCoordinates f hf b = f b := rfl
 
-/-- Analytic compatibility in both directions identifies presentations by an
-isomorphism. The bundle records and their designated atlases need not be equal. -/
+/-- Fiberwise equivalences that are analytic sections in both directions give an
+isomorphism. -/
 def isoOfFiberwiseContinuousLinearEquiv (e : ∀ b, X.Fiber b ≃L[K] Y.Fiber b)
     (he : ContMDiff I (I.prod 𝓘(K, X.Model →L[K] Y.Model)) ω
       (fun b ↦ TotalSpace.mk' (X.Model →L[K] Y.Model) b (e b).toContinuousLinearMap))
@@ -310,9 +304,8 @@ variable {K P M : Type u} [NontriviallyNormedField K]
   [TopologicalSpace M] [ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]
   {X Y : AnalyticBundleCat 𝓘(K, P) M}
 
-/-- Ordinary operator analyticity on the open intersections of base charts and
-source/target trivialization domains. In particular this does not merely ask for
-analyticity after evaluating at each individual vector. -/
+/-- A fiberwise operator family is operator analytic if its coordinates, as
+operator-valued maps, are analytic in every chart and trivialization. -/
 def OperatorAnalytic (f : ∀ b, X.Fiber b →L[K] Y.Fiber b) : Prop :=
   ∀ z x : M, AnalyticOnNhd K
     ((fun b ↦ ContinuousLinearMap.inCoordinates X.Model X.Fiber Y.Model Y.Fiber
@@ -321,20 +314,19 @@ def OperatorAnalytic (f : ∀ b, X.Fiber b →L[K] Y.Fiber b) : Prop :=
       ((trivializationAt X.Model X.Fiber z).baseSet ∩
         (trivializationAt Y.Model Y.Fiber z).baseSet))
 
-/-- The section condition agrees with ordinary operator analyticity, including
-for incomplete targets. The proof converts on open domains, not at isolated points. -/
+/-- A fiberwise family is operator analytic iff it is an analytic Hom section. -/
 theorem operatorAnalytic_iff_contMDiff (f : ∀ b, X.Fiber b →L[K] Y.Fiber b) :
     OperatorAnalytic (X := X) (Y := Y) f ↔
       ContMDiff 𝓘(K, P) (𝓘(K, P).prod 𝓘(K, X.Model →L[K] Y.Model)) ω
         (fun b ↦ TotalSpace.mk' (X.Model →L[K] Y.Model) b (f b)) :=
   (contMDiff_hom_section_iff_analyticOnNhd f).symm
 
-/-- Every morphism has ordinary analytic model-operator expressions. -/
+/-- Every morphism is operator analytic. -/
 theorem hom_operatorAnalytic (f : X ⟶ Y) :
     OperatorAnalytic (X := X) (Y := Y) (fun b ↦ f b) :=
   (operatorAnalytic_iff_contMDiff _).mpr (ContMDiffSection.contMDiff f)
 
-/-- Include any operator-analytic fiberwise family as a morphism. -/
+/-- The morphism given by an operator-analytic fiberwise family. -/
 def homOfOperatorAnalytic (f : ∀ b, X.Fiber b →L[K] Y.Fiber b)
     (hf : OperatorAnalytic (X := X) (Y := Y) f) : X ⟶ Y :=
   ⟨f, (operatorAnalytic_iff_contMDiff f).mp hf⟩
@@ -344,7 +336,7 @@ theorem homOfOperatorAnalytic_apply (f : ∀ b, X.Fiber b →L[K] Y.Fiber b)
     (hf : OperatorAnalytic (X := X) (Y := Y) f) (b : M) :
     homOfOperatorAnalytic f hf b = f b := rfl
 
-/-- The morphism type contains precisely the operator-analytic families. -/
+/-- The morphisms are the operator-analytic families. -/
 theorem exists_hom_iff_operatorAnalytic (f : ∀ b, X.Fiber b →L[K] Y.Fiber b) :
     (∃ g : X ⟶ Y, (fun b ↦ g b) = f) ↔ OperatorAnalytic (X := X) (Y := Y) f := by
   constructor
@@ -353,10 +345,9 @@ theorem exists_hom_iff_operatorAnalytic (f : ∀ b, X.Fiber b →L[K] Y.Fiber b)
   · intro hf
     exact ⟨homOfOperatorAnalytic f hf, rfl⟩
 
-/-- Compatible analytic presentations are isomorphic, with explicit operator
-compatibility in both directions. For presentations on the same topological
-fibers, take `e b` to be the identity equivalence; differing normed models and
-atlases are allowed. This construction asserts no equality of bundle records. -/
+/-- Fiberwise equivalences that are operator analytic in both directions give an
+isomorphism. Taking `e b` to be the identity relates two presentations of the same
+fibers with different models or atlases. -/
 def isoOfOperatorAnalytic (e : ∀ b, X.Fiber b ≃L[K] Y.Fiber b)
     (he : OperatorAnalytic (X := X) (Y := Y) (fun b ↦ (e b).toContinuousLinearMap))
     (he_symm : OperatorAnalytic (X := Y) (Y := X)

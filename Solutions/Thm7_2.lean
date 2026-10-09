@@ -8,24 +8,12 @@ import Mathlib.Analysis.Calculus.ContDiff.Defs
 import AlternatingAnalytic.Forms.Calculus.AmbientCalculus
 
 /-!
-# Theorem 7.2 (ambient differential calculus), pp. 18-19
+# Proof of Theorem 7.2
 
-Solution: the definitions and statements of `Challenges/Thm7_2.lean`, proved from the library
-`AlternatingAnalytic/Forms/Calculus/` (namespace `AlternatingAnalytic.Forms`), whose definitions
-`IsAmbientAnalyticOn`, `wedgeAlg`, `wedge`, `extDeriv`, `pullback` have the same bodies:
-* sheaf: `isAmbientAnalyticOn_iff_local`, `exists_glue` (`AmbientBasic.lean`);
-* graded algebra: `isAmbientAnalyticOn_zero`, `IsAmbientAnalyticOn.add`, `.const_smul`
-  (`AmbientBasic.lean`), `IsAmbientAnalyticOn.wedge` (`WedgeAnalytic.lean`, via the bounded
-  bilinear `wedgeMult` on multilinear coefficient spaces);
-* algebra of `∧`: `one_wedge`, `wedge_one`, `wedge_assoc`, `wedge_comm` (`AmbientCalculus.lean`,
-  from `ShuffleIdentities.lean`: reduction to alternatizations on `Fin N → K` and Mathlib's
-  `MultilinearMap.domCoprod_alternization`; no factorial is inverted);
-* pullback: `IsAmbientAnalyticOn.pullback`, `pullback_id`, `pullback_comp`, `pullback_wedge`,
-  `pullback_extDeriv` (`AmbientBasic.lean`; the last is Mathlib's `extDeriv_pullback`);
-* `d`: `IsAmbientAnalyticOn.extDeriv`, `extDeriv_extDeriv` (`AmbientDeriv.lean`: derivatives of
-  `j ∘ η` factor through the closed isometric inclusion `j`, and the second derivative of the
-  analytic map `j ∘ η` is symmetric), `leibniz` (`AmbientCalculus.lean`, from the product rule
-  `fderiv_wedge_apply` and the algebraic identities of `UncurryShuffle.lean`).
+Uses the library `AlternatingAnalytic/Forms/Calculus/` (namespace `AlternatingAnalytic.Forms`),
+mainly `AmbientBasic.lean`, `AmbientDeriv.lean`, `WedgeAnalytic.lean` and `AmbientCalculus.lean`,
+whose definitions of `IsAmbientAnalyticOn`, `wedge`, `extDeriv` and `pullback` have the same
+bodies.
 -/
 
 open scoped ContDiff

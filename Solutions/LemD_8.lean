@@ -2,11 +2,9 @@ import AlternatingAnalytic.Analysis.BaseChangeAlternatingForms
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 
 /-!
-# Lemma D.8 (forms), pp. 45-46
+# Proof of Lemma D.8
 
-Solution: the statement of `Challenges/LemD_8.lean`, proved from
-`AlternatingAnalytic/Analysis/BaseChangeAlternatingForms.lean` (strong alternation comes from
-`alternating_of_baseChangeEmbedding` in `BaseChangeAlternatingCriterion.lean`).
+Uses `baseChangeAlternatingForms` from `AlternatingAnalytic/Analysis/BaseChangeAlternatingForms.lean`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemD_8
@@ -15,9 +13,8 @@ open AlternatingAnalytic
 
 universe u
 
-/-- Lemma D.8: every continuous alternating `K₁`-form extends `K₁`-linearly to a continuous
-alternating `K'`-form on the completed base change, without increasing its norm and compatibly
-with the embeddings `ι_E`, `ι_F`. -/
+/-- Every continuous alternating `K₁`-form `m` extends to a continuous alternating `K'`-form
+`m_{K'}` on the completed base changes, with `‖m_{K'}‖ ≤ ‖m‖`, `K₁`-linearly in `m`. -/
 theorem exists_baseChangeAlternatingForms
     (K₁ : Type*) (E₁ F₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]

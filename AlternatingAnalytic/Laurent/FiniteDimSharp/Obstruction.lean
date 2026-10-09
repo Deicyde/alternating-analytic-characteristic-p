@@ -6,13 +6,12 @@ import AlternatingAnalytic.Laurent.CZeroMultipliers.Analytic
 /-!
 # The `c₀` multiplier obstruction as a proposition
 
-`CZeroOperatorObstruction κ r k` is the operator form of Proposition C.6 of the paper: over
+`CZeroOperatorObstruction κ r k` is the operator form of Proposition C.6: over
 `K₁ = κ((X))` with `|X| = r`, for every `u₀ ∈ L(E₁, E₁)`, `E₁ = ℓ^∞(ℕ, K₁)`, the map
 `a ↦ A(u₀ + D_a)` on `Alt^k(E₁; B)` (`B` the completed projective exterior power, `D_a`
-coordinatewise multiplication) is analytic at no point of `c₀(ℕ, K₁)`. It is stated here with the
-imports of the paper's challenge file, so that its instance paths agree with that statement, and
-holds for a finite `κ` of characteristic `p ≤ k` by `czero_not_analyticAt_precomp`
-(`Laurent/CZeroMultipliers/Analytic.lean`).
+coordinatewise multiplication) is analytic at no point of `c₀(ℕ, K₁)`. The imports match those of
+the challenge file for Proposition C.6, so that instance paths agree. It holds for a finite `κ` of
+characteristic `p ≤ k` by `czero_not_analyticAt_precomp` (`Laurent/CZeroMultipliers/Analytic.lean`).
 -/
 
 set_option backward.isDefEq.respectTransparency false

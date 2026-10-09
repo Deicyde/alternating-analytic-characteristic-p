@@ -40,8 +40,8 @@ section Claims
 variable {D : ℕ} {Φ : (Fin (D + 1) → Linf 𝕜) → 𝕜} {C ε : ℝ}
 
 omit [CompleteSpace 𝕜] in
-/-- **Claim 1.** If the tail property fails with margin `ε`, then it fails with *all* slots
-supported arbitrarily far out. -/
+/-- If the tail property fails with margin `ε`, then it fails with all slots supported
+arbitrarily far out. -/
 theorem claim_all_slots (hΦ : IsBddML Φ C) (hε : 0 < ε) (ih : TailAt 𝕜 D)
     (hF : ∀ N : ℕ, ∃ u : Fin (D + 1) → Linf 𝕜, (∀ j, ‖u j‖ ≤ 1) ∧
       (∃ j, ∀ i < N, u j i = 0) ∧ ε < ‖Φ u‖) (M : ℕ) :
@@ -159,7 +159,7 @@ theorem claim_all_slots (hΦ : IsBddML Φ C) (hε : 0 < ε) (ih : TailAt 𝕜 D)
   obtain ⟨u, hu1, hu2, -, hu4⟩ := R (D + 1) M M
   exact ⟨u, hu1, fun j i hi => hu2 j j.isLt i hi, hu4⟩
 
-/-- **Claim 2.** One may moreover take all the slots supported in a finite window `[M, M')`. -/
+/-- The witnesses of `claim_all_slots` can moreover be supported in a finite window `[M, M')`. -/
 theorem claim_window (h : NSC 𝕜) (hΦ : IsBddML Φ C) (hε : 0 < ε)
     (hc1 : ∀ M : ℕ, ∃ u : Fin (D + 1) → Linf 𝕜, (∀ j, ‖u j‖ ≤ 1) ∧ (∀ j, ∀ i < M, u j i = 0) ∧
       ε < ‖Φ u‖) (M : ℕ) :
@@ -237,7 +237,7 @@ theorem tailAt_succ (h : NSC 𝕜) {D : ℕ} (hD : 0 < D) (ih : TailAt 𝕜 D) :
   intro Φ C hΦ ε hε
   by_contra hcon
   push Not at hcon
-  -- Claims 1 and 2: witnesses supported in finite windows
+  -- witnesses supported in finite windows
   have hc2 := claim_window h hΦ hε (claim_all_slots hΦ hε ih hcon)
   choose W Z hW hZ1 hZ2 hZ3 hZ4 using hc2
   -- tail thresholds for the forms obtained by freezing slot `0`

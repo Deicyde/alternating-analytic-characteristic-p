@@ -1,10 +1,12 @@
 import AlternatingAnalytic.Algebra.DeterminantQuadraticGap
 
 /-!
-# Algebraic obstruction in the actual determinant coefficient space
+# The missing coefficient in the determinant coefficient space
 
-The unique polynomial representatives and auxiliary specialization are used only
-algebraically. No continuity of either map is asserted or needed.
+Specializing the auxiliary scalars `τ_w` to zero sends the coefficient space `C` into `C_0`.
+Combined with Lemma H.7 this shows that no family `b_i ∈ C` with `b_0 = 1` has
+`∑ a_i b_i ∈ C`, the contradiction at the end of the proof of Theorem H.4.
+Specialization is used only algebraically; no continuity is asserted.
 -/
 
 noncomputable section
@@ -16,8 +18,7 @@ namespace AlternatingAnalytic.DeterminantPair
 variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 attribute [local instance] preferredNormedFieldK preferredFieldK preferredFieldL
 
-/-- Specialization carries an original scalar relation into the polynomial
-coefficient space, by injectivity of evaluation on polynomial representatives. -/
+/-- Specialization carries the relation `∑ a_i b_i ∈ C` to the same relation in `C_0`. -/
 theorem specializeCoefficient_relation
     (b : Fin p → C p r)
     (hsum : (∑ i : Fin p, z p r (Sum.inl i) * (b i : L p r)) ∈ C p r) :
@@ -32,8 +33,7 @@ theorem specializeCoefficient_relation
   simpa only [map_sum, map_mul, specialization_X, P,
     ← specializeCoefficient_apply] using h
 
-/-- There are no original small-target coefficients with constant term one
-whose primary-coordinate combination still belongs to the small target. -/
+/-- There is no family `b : Fin p → C` with `b 0 = 1` and `∑ a_i b_i ∈ C`. -/
 theorem no_scalar_coefficient_family :
     ¬ ∃ b : Fin p → C p r, (b 0 : L p r) = 1 ∧
       (∑ i : Fin p, z p r (Sum.inl i) * (b i : L p r)) ∈ C p r := by

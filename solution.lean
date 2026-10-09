@@ -6,17 +6,16 @@ import AlternatingAnalytic.Geometry.AlternatingBundleShearCounterexample
 
 set_option backward.isDefEq.respectTransparency false
 
-/-! The two contradiction challenges are proved from the actual Banach counterexample.
-The prescribed-field result is proved first, then specialized to a characteristic-two
-Laurent field for the global statement. The third challenge is Theorem A, proved from
-the existing spherical-completeness and retraction development. The fourth challenge
-exports the actual analytic alternating-bundle instance over finite-coordinate bases.
-The fifth refutes the unrestricted analytic bundle instance: over the Banach base
-`E →L[K] E` of the main counterexample, the shear bundle and a trivial bundle are
-analytic, but their alternating-map bundle is not.
-The sixth exports the nonexistence of a largest full analytic domain over the
-`t`-adic rational field in degrees at least its characteristic.
-Import this module separately from `challenge`. -/
+/-! # Proof of the original comparator challenge
+
+Proofs of the six statements in `challenge.lean`, from `exists_banach_counterexample_full`
+(MainTheorem.lean), `contDiff_compContinuousLinearMapCLM_of_sphericallyComplete`
+(Analysis/SphericalAnalytic.lean), `contMDiffVectorBundle_alternating_of_finiteCoordinates`
+(Geometry/AnalyticAlternatingBundle.lean), `exists_banach_base_alternatingBundle_not_analytic`
+(Geometry/AlternatingBundleShearCounterexample.lean) and
+`DeterminantPair.Padding.no_largest_full_analytic_domain`
+(Category/NoLargestAnalyticDomain.lean). The two general counterexamples specialize to the
+Laurent field over `ZMod 2`. -/
 
 open scoped ContDiff
 
@@ -24,9 +23,8 @@ namespace AlternatingAnalyticChallenge
 
 universe u uK uE uE' uF uι uS
 
-/-- Precomposition on degree-`k` continuous alternating maps is `C^ω` for every
-pair of Banach spaces over `K`, with `E' = E` and index `Fin k`.
-The field `K` itself need not be complete. -/
+/-- Precomposition on degree-`k` alternating maps is `C^ω` for all Banach spaces `E`, `F`
+over `K`, with `E' = E`. -/
 def BanachPrecompositionAnalytic
     (K : Type u) [NontriviallyNormedField K] (k : ℕ) : Prop :=
   ∀ (E F : Type u) [NormedAddCommGroup E] [NormedSpace K E] [CompleteSpace E]
@@ -36,9 +34,8 @@ def BanachPrecompositionAnalytic
           (ContinuousAlternatingMap.compContinuousLinearMapCLM f :
             (E [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F)))
 
-/-- For any prescribed nontrivially normed field of characteristic `p` and any
-`k ≥ p`, assume `C^ω` precomposition for all Banach spaces with `E' = E` and index
-`Fin k`. Then `False`. The field need not be complete. -/
+/-- Over a nontrivially normed field of characteristic `p`, precomposition in degree `k ≥ p`
+is not `C^ω` for all Banach spaces (Theorem 6.1(1)). `K` need not be complete. -/
 theorem false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach
     (K : Type u) [NontriviallyNormedField K] (p k : ℕ) (hp : p.Prime)
     [CharP K p] (hpk : p ≤ k)
@@ -53,8 +50,8 @@ theorem false_of_contDiff_omega_compContinuousLinearMapCLM_charP_banach
   let : CompleteSpace F := cF
   exact ((hno (Fin k) (by simp)).2 0).2 (h E F).contDiffAt
 
-/-- Assume that precomposition on continuous alternating maps is `C^ω` for all
-nontrivially normed fields, all normed spaces, and all finite index types. Then `False`. -/
+/-- Precomposition on continuous alternating maps is not `C^ω` for all nontrivially normed
+fields, normed spaces and finite index types (Theorem 6.1(1), Corollary 6.2). -/
 theorem false_of_contDiff_omega_compContinuousLinearMapCLM
     (h : ∀ (𝕜 : Type) [NontriviallyNormedField 𝕜] (E E' F : Type)
       [NormedAddCommGroup E] [NormedSpace 𝕜 E] [NormedAddCommGroup E'] [NormedSpace 𝕜 E']
@@ -72,18 +69,15 @@ theorem false_of_contDiff_omega_compContinuousLinearMapCLM
   intro E F _ _ _ _ _ _
   exact h (AlternatingAnalytic.LaurentField (ZMod 2) r) E E F (Fin 2)
 
-/-- Every nonempty family of pairwise-intersecting closed balls has a common point.
-This is the spherical-completeness hypothesis in Theorem A. -/
+/-- Every nonempty family of pairwise-intersecting closed balls has a common point. -/
 def SphericallyComplete (F : Type uS) [PseudoMetricSpace F] : Prop :=
   ∀ S : Set (F × ℝ), S.Nonempty →
     (∀ p ∈ S, ∀ q ∈ S,
       (Metric.closedBall p.1 p.2 ∩ Metric.closedBall q.1 q.2).Nonempty) →
     (⋂ p ∈ S, Metric.closedBall p.1 p.2).Nonempty
 
-/-- **Theorem A.** A spherically complete ultrametric target makes alternating
-precomposition `C^n` for every order `n`, including analytic regularity `ω`.
-There is no restriction on the characteristic or finite degree. Neither `K`, `E`
-nor `E'` is assumed complete, and the norms on `E` and `E'` need not be ultrametric. -/
+/-- With a spherically complete ultrametric target, precomposition is `C^n` for every `n`,
+including `ω` (Theorem 4.2). `K`, `E`, `E'` need not be complete, nor `E`, `E'` ultrametric. -/
 theorem contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
     (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K]
     (E : Type uE) (E' : Type uE') (F : Type uF)
@@ -105,11 +99,8 @@ section AnalyticAlternatingBundle
 open Bundle
 open scoped Bundle Manifold
 
-/-- The alternating-map bundle of two analytic normed vector bundles is itself
-analytic when the base has supplied finite continuous linear coordinates.
-This uses Mathlib's existing topology on the actual alternating-map fibers.
-The field and model fibers need not be complete; every characteristic and every
-base dimension `d` and alternating degree `k`, including zero, are allowed. -/
+/-- Over a base modelled on a space with finite coordinates `c`, the alternating-map bundle
+of two analytic vector bundles is analytic (Corollary 4.6). -/
 theorem contMDiffVectorBundle_alternating_of_finiteCoordinates
     {K M F₁ F₂ : Type*} [NontriviallyNormedField K] [TopologicalSpace M]
     [NormedAddCommGroup F₁] [NormedSpace K F₁]
@@ -132,13 +123,8 @@ theorem contMDiffVectorBundle_alternating_of_finiteCoordinates
   exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_finiteCoordinates
     (K := K) (M := M) (F₁ := F₁) (F₂ := F₂) (E₁ := E₁) (E₂ := E₂) c k
 
-/-- Assume the fully general analytic alternating-bundle instance: for every
-nontrivially normed field, every analytic manifold over an arbitrary model with
-corners, every pair of analytic normed vector bundles over it, and every finite
-index type, the bundle of continuous alternating maps between the fibers, with
-Mathlib's existing topology, is analytic. This is the `ω` case of the `C^n`
-alternating-bundle instance with no restriction on the field, the base or the
-fibers. Then `False`. -/
+/-- The alternating-map bundle of two analytic vector bundles need not be analytic when the
+field, base and fibers are unrestricted (Proposition 6.4). -/
 theorem false_of_contMDiffVectorBundle_omega_alternating
     (h : ∀ (K : Type) [NontriviallyNormedField K]
       (EB HB : Type) [NormedAddCommGroup EB] [NormedSpace K EB] [TopologicalSpace HB]
@@ -184,17 +170,15 @@ end AnalyticAlternatingBundle
 
 open scoped NNReal
 
-/-- The degree-`k` alternating-map functor has a largest full analytic domain:
-one full subcategory contains every full subcategory on which the functor is
-analytic on all morphism spaces, with their canonical operator norms. -/
+/-- The degree-`k` alternating-map functor has a largest full subcategory on which it is
+analytic on all hom spaces, with their operator norms. -/
 def HasLargestFullAnalyticDomain
     (K : Type u) [NontriviallyNormedField K] (k : ℕ) : Prop :=
   ∃ S, IsGreatest
     {P | AlternatingAnalytic.IsAlternatingAnalyticDomain K k P} S
 
-/-- **Main Theorem (4).** Over the `t`-adic rational field `𝔽_p(t)`, the degree-`k`
-alternating-map functor has no largest full analytic domain when `k ≥ p`.
-Here `0 < r < 1` is the norm of `t`; this scalar field is incomplete. -/
+/-- Over `𝔽_p(t)` with `‖t‖ = r`, the degree-`k` alternating-map functor has no largest
+full analytic domain when `k ≥ p` (Theorem H.4). -/
 theorem no_largest_full_analytic_domain_charP
     (p k : ℕ) [Fact p.Prime] (hpk : p ≤ k)
     (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :

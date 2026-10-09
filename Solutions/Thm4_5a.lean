@@ -5,14 +5,11 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import AlternatingAnalytic.Analysis.CZeroReflection
 
 /-!
-# Theorem 4.5(1) (summable parameter spaces: c₀), p. 11
+# Proof of Theorem 4.5(1)
 
-Solution: identical statements to `Challenges/Thm4_5a.lean`, proved from
-`AlternatingAnalytic.c0_analyticOn_linearIsometry`,
-`AlternatingAnalytic.c0_exists_hasFPowerSeriesOnBall_linearIsometry` and
-`AlternatingAnalytic.c0_analyticOnNhd_linearIsometry` (`Analysis/CZeroReflection.lean`).
-The retract clause is not in the library; it is derived here in a few lines
-(pull back along `r`, reflect on `c₀`, restrict along `i`), exactly as in the paper's proof.
+Uses `c0_analyticOn_linearIsometry`, `c0_exists_hasFPowerSeriesOnBall_linearIsometry` and
+`c0_analyticOnNhd_linearIsometry` (`Analysis/CZeroReflection.lean`). The retract clause is
+proved here: pull back along `r`, reflect on `c₀`, restrict along `i`.
 -/
 
 open scoped ZeroAtInfty
@@ -21,9 +18,7 @@ namespace AlternatingAnalyticChallenge.Thm4_5a
 
 universe uI uK uW uZ uP
 
-/-- **Theorem 4.5(1), analyticity.** `K` and `Z` nonarchimedean, `W` complete,
-`j : W → Z` a closed linear isometry, `U ⊆ c₀(I, K)` open: if `j ∘ f` is analytic on `U`,
-then `f` is analytic on `U`. -/
+/-- Theorem 4.5(1), analyticity: if `j ∘ f` is analytic on an open `U ⊆ c₀(I, K)`, so is `f`. -/
 theorem c0_analyticOn_of_analyticOn_comp_closed_isometry
     {I : Type uI} [TopologicalSpace I] [DiscreteTopology I]
     {K : Type uK} [NontriviallyNormedField K] [IsUltrametricDist K]
@@ -35,10 +30,8 @@ theorem c0_analyticOn_of_analyticOn_comp_closed_isometry
     AnalyticOn K f U := by
   exact AlternatingAnalytic.c0_analyticOn_linearIsometry j hU hf
 
-/-- **Theorem 4.5(1), coefficient lifting.** Under the same hypotheses, every power series
-`p` of `j ∘ f` on a ball `B(x, r)` with `x ∈ U` can be replaced by a `W`-valued power series `q`
-with the same diagonals (`j (q n (y, …, y)) = p n (y, …, y)`) and no larger coefficient norms
-(`‖q n‖ ≤ ‖p n‖`), which represents `f` on the same ball. -/
+/-- Theorem 4.5(1), coefficients: a power series of `j ∘ f` on a ball lifts to a `W`-valued
+power series of `f` on the same ball, with the same diagonals and no larger norms. -/
 theorem c0_coefficients_lift_without_increasing_norms
     {I : Type uI} [TopologicalSpace I] [DiscreteTopology I]
     {K : Type uK} [NontriviallyNormedField K] [IsUltrametricDist K]
@@ -57,9 +50,8 @@ theorem c0_coefficients_lift_without_increasing_norms
     AlternatingAnalytic.c0_exists_hasFPowerSeriesOnBall_linearIsometry j hp
   exact ⟨q, hnorm, hdiag, hq⟩
 
-/-- **Theorem 4.5(1), bounded linear retract clause.** The analyticity assertion remains valid
-for a parameter space `P` that is a bounded linear retract of `c₀(I, K)`: `i : P → c₀(I, K)` and
-`r : c₀(I, K) → P` bounded linear with `r ∘ i = id_P`. -/
+/-- Theorem 4.5(1), retracts: the analyticity assertion holds on a bounded linear retract `P`
+of `c₀(I, K)`. -/
 theorem c0_retract_analyticOn_of_analyticOn_comp_closed_isometry
     {I : Type uI} [TopologicalSpace I] [DiscreteTopology I]
     {K : Type uK} [NontriviallyNormedField K] [IsUltrametricDist K]

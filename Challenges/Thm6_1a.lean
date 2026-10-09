@@ -15,27 +15,22 @@ Here `A^k_{E,E;F}(u)` is precomposition `m ↦ m ∘ (u, …, u)`, and "analytic
 power-series analyticity (Mathlib `AnalyticAt`).
 
 ## Formalization notes
-* The degree is `Fin k`.
-* "Characteristic p > 0" is `[CharP K p]` with `0 < p` (primality of `p` is then automatic).
-  The field `K` is not assumed complete, as in the paper.
-* `E` and `F` are taken in the same universe as `K`; the paper does not discuss universes.
-* `A^k_{E,E;F}` is `ContinuousAlternatingMap.compContinuousLinearMapCLM`.
-* "Banach" is `CompleteSpace`.
-* "F admits no equivalent nonarchimedean norm" is `¬ AlternatingAnalytic.HasEquivalentUltrametricNorm K F`,
-  imported from the library definition module `AlternatingAnalytic.Analysis.EquivalentUltrametric`
-  (a `K`-seminorm `q` with `q (x + y) ≤ max (q x) (q y)` and positive constants with
-  `‖x‖ ≤ C q x` and `q x ≤ C' ‖x‖`). That module contains only this definition and an
-  elementary criterion; it does not prove the claim.
+* The degree is `Fin k`. "Characteristic p > 0" is `[CharP K p]` with `0 < p`. `K` is not
+  assumed complete.
+* `E` and `F` live in the universe of `K`.
+* `A^k_{E,E;F}` is `ContinuousAlternatingMap.compContinuousLinearMapCLM`; "Banach" is
+  `CompleteSpace`.
+* "No equivalent nonarchimedean norm" is `¬ HasEquivalentUltrametricNorm K F`, from the
+  definition file `Analysis/EquivalentUltrametric.lean`: a seminorm with the strong triangle
+  inequality, two-sided equivalent to the norm.
 -/
 
 namespace AlternatingAnalyticChallenge.Thm6_1a
 
 universe u
 
-/-- **Theorem 6.1(1).** Over a nontrivially normed field of characteristic `p > 0`, in every
-degree `k ≥ p`, there are Banach spaces `E`, `F` such that precomposition
-`u ↦ (m ↦ m ∘ (u, …, u))` on `Alt^k(E; F)` is analytic at no point of `L(E, E)`, and `F`
-has no equivalent nonarchimedean norm. -/
+/-- Theorem 6.1(1): in characteristic `p > 0` and degree `k ≥ p` there are Banach `E`, `F`
+with `A^k_{E,E;F}` analytic at no point and `F` without an equivalent nonarchimedean norm. -/
 theorem exists_banach_nowhere_analytic_precomposition
     (K : Type u) [NontriviallyNormedField K] (p k : ℕ) [CharP K p] (hp : 0 < p)
     (hpk : p ≤ k) :

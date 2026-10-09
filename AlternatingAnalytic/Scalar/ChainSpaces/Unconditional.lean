@@ -29,13 +29,13 @@ theorem finiteTestCertificate (K : Type u) [NormedField K] (k : ℕ) : FiniteTes
   fun hk => AlternatingAnalytic.TestCertificate.exists_finite_test_certificate_of_fibre K k hk
     fun _ _ hp => AlternatingAnalytic.FibreObstruction.not_exists_fibre_map hp
 
-/-- **Theorem F.1, part 2 (sequence-space form).** -/
+/-- Theorem F.1, part 2 (sequence-space form). -/
 theorem sequenceConclusion (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) (k : ℕ) (hk : (k.factorial : K) = 0) :
     SequenceConclusion K k :=
   sequenceConclusion_of_lemmas K hK k hk (multilinearDiagonalTail K) (finiteTestCertificate K k)
 
-/-- **Theorem F.1, part 1 (abstract form).** -/
+/-- Theorem F.1, part 1 (abstract form). -/
 theorem abstractConclusion (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) (k : ℕ) (hk : (k.factorial : K) = 0) :
     AbstractConclusion K k :=

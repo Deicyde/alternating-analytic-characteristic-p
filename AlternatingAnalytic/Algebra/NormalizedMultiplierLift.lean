@@ -3,9 +3,12 @@ import AlternatingAnalytic.Algebra.MultiplierObstruction
 import AlternatingAnalytic.Algebra.Polarization
 
 /-!
-The normalized multiplier lift when the factorial is invertible.  The map is an
-actual doubly multilinear map on all scalar sequences, with strongly alternating
-vector slots.  Its support is contained in the span of the k² pairwise products.
+# The normalized multiplier lift
+
+When `k!` is invertible, `Ψ(u; x) = (1/k!) ∑_σ u_{σ 1} x_1 ∧ ⋯ ∧ u_{σ k} x_k` is a lift of
+coordinatewise multiplication that is alternating in `x`, satisfies (Pol1), has support
+dimension at most `k²`, and has cluster value `1/k!` (Remark B.15). It is defined on all
+sequences `ℕ → L`, not only on finitely supported ones.
 -/
 
 noncomputable section
@@ -25,7 +28,7 @@ def multiplierWedge : MultiplierMap L k (ℕ → L) :=
 theorem multiplierWedge_apply (u x : Fin k → ℕ → L) :
     multiplierWedge L k u x = exteriorPower.ιMulti L k (fun i n => u i n * x i n) := rfl
 
-/-- The paper's normalized alternatization, with its literal permutation-sum formula. -/
+/-- The normalized alternatization `(1/k!) ∑_σ`. -/
 def normalizedMultiplierLift : MultiplierMap L k (ℕ → L) :=
   (k.factorial : L)⁻¹ • ∑ σ : Equiv.Perm (Fin k), (multiplierWedge L k).domDomCongr σ
 
@@ -54,7 +57,7 @@ theorem sum_multiplierWedge_eq_alternatization (u x : Fin k → ℕ → L) :
   exact (Equiv.sum_comp (Equiv.inv (Equiv.Perm (Fin k)))
     (fun σ => exteriorPower.ιMulti L k (fun i n => u (σ i) n * x i n))).symm
 
-/-- Strong alternation holds over every field, including characteristic two. -/
+/-- The lift is alternating in the vector slots over every field, including characteristic two. -/
 theorem normalizedMultiplierLift_alternating (u x : Fin k → ℕ → L)
     {i j : Fin k} (hx : x i = x j) (hij : i ≠ j) :
     normalizedMultiplierLift L k u x = 0 := by
@@ -62,7 +65,7 @@ theorem normalizedMultiplierLift_alternating (u x : Fin k → ℕ → L)
     (MultilinearMap.alternatization (multiplierWedge L k u)).map_eq_zero_of_eq x hx hij,
     smul_zero]
 
-/-- The vector-slot permutation formula follows from the actual alternating map. -/
+/-- The lift is antisymmetric in the vector slots. -/
 theorem normalizedMultiplierLift_antisymmetric (u x : Fin k → ℕ → L)
     (σ : Equiv.Perm (Fin k)) :
     normalizedMultiplierLift L k u (x ∘ σ) =
@@ -71,7 +74,7 @@ theorem normalizedMultiplierLift_antisymmetric (u x : Fin k → ℕ → L)
     AlternatingMap.map_perm]
   exact smul_comm _ _ _
 
-/-- With invertible factorial, the pointwise diagonal is exactly the multiplier wedge. -/
+/-- With invertible factorial, the lift satisfies the pointwise identity (Pw). -/
 theorem normalizedMultiplierLift_diagonal (hfactorial : (k.factorial : L) ≠ 0)
     (a : ℕ → L) (x : Fin k → ℕ → L) :
     normalizedMultiplierLift L k (fun _ => a) x =
@@ -80,7 +83,7 @@ theorem normalizedMultiplierLift_diagonal (hfactorial : (k.factorial : L) ≠ 0)
   simp only [Finset.sum_const, Finset.card_univ, Fintype.card_perm, Fintype.card_fin]
   rw [← Nat.cast_smul_eq_nsmul L, smul_smul, inv_mul_cancel₀ hfactorial, one_smul]
 
-/-- The normalized lift satisfies the genuine polarized multiplier-wedge identity. -/
+/-- With invertible factorial, the lift satisfies (Pol1). -/
 theorem normalizedMultiplierLift_pol1 (hfactorial : (k.factorial : L) ≠ 0)
     (u x : Fin k → ℕ → L) :
     (∑ σ : Equiv.Perm (Fin k), normalizedMultiplierLift L k (u ∘ σ) x) =
@@ -97,7 +100,8 @@ theorem normalizedMultiplierLift_pol1 (hfactorial : (k.factorial : L) ≠ 0)
   have hx := congrArg (fun M => M x) h
   simpa only [_root_.sum_apply, multiplierWedge_apply, Function.comp_def] using hx
 
-/-- All summands lie in the span of the k² pairwise pointwise products. -/
+/-- The support dimension of the lift is at most `k²`: every summand lies in the span of the
+pointwise products `u_i x_j`. -/
 theorem exteriorSupportDim_normalizedMultiplierLift_le (u x : Fin k → ℕ → L) :
     exteriorSupportDim (normalizedMultiplierLift L k u x) ≤ k ^ 2 := by
   classical
@@ -118,7 +122,7 @@ theorem exteriorSupportDim_normalizedMultiplierLift_le (u x : Fin k → ℕ → 
     _ ≤ (Finset.univ : Finset (Fin k × Fin k)).card := Finset.card_image_le
     _ = k ^ 2 := by simp [pow_two]
 
-/-- The normalized full-sequence lift restricted to the genuine finite cluster inputs. -/
+/-- The normalized lift restricted to finitely supported inputs. -/
 def normalizedClusterLift : ClusterMap L k :=
   restrictClusterMap Finsupp.lcoeFun LinearMap.id (normalizedMultiplierLift L k)
 
@@ -141,7 +145,7 @@ theorem normalizedClusterLift_pol1 (hfactorial : (k.factorial : L) ≠ 0) :
   simpa only [normalizedClusterLift_apply, Function.comp_def] using
     normalizedMultiplierLift_pol1 L k hfactorial (fun i n => u i n) (fun i n => x i n)
 
-/-- On every family of disjoint clusters, the actual determinant value is `1 / k!`. -/
+/-- On every family of disjoint clusters, the cluster value is `1 / k!`. -/
 theorem clusterValue_normalizedClusterLift (C : Fin k → Fin 4 → ℕ)
     (hinj : Function.Injective (fun t : Fin k × Fin 4 => C t.1 t.2)) :
     clusterValue (normalizedClusterLift L k) C = (k.factorial : L)⁻¹ := by

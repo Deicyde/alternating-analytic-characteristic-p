@@ -8,9 +8,9 @@ import AlternatingAnalytic.Analysis.BaseChangeAlternatingCriterion
 
 For every family `z` of scalars `a_i, τ_w ∈ 𝔽_p((t))` algebraically independent over `𝔽_p(t)`,
 every bounded `p`-linear map `D^p → G` is alternating, and so `(D, G)` is split in degree `p`.
-A map `m` is extended to an `L`-multilinear map on `A`; its values on tuples from `D` stay in
-`G`, so the gap `τ_w² G ∩ G = 0` kills its values on tuples with a repeated `w ∈ 𝒲`, and
-polarization with `w = e_i + e_j` (no division by two) gives alternation on all of `A`.
+The proof extends `m` to an `L`-multilinear map on `A`. Its values on tuples from `D` stay in
+`G`, so the gap `τ_w² G ∩ G = 0` kills its values on tuples with a repeated `w ∈ 𝒲`.
+Polarization with `w = e_i + e_j`, which needs no division by two, gives alternation on `A`.
 -/
 
 namespace AlternatingAnalytic.DeterminantPairGeneral
@@ -113,7 +113,7 @@ theorem multilinearExtension_repeated_basis_add_eq_zero (hz : AlgebraicIndepende
   simpa only [← e_eq_basis, w] using
     multilinearExtension_repeated_w_eq_zero hz m f i j hij (Sum.inr ⟨(b, c), hbc⟩)
 
-/-- **Lemma H.6, first assertion.** Every bounded `p`-linear map `D^p → G` is alternating. -/
+/-- Lemma H.6, first part: every bounded `p`-linear map `D^p → G` is alternating. -/
 theorem map_eq_zero_of_eq (hz : AlgebraicIndependent (Kt p r) z)
     (m : ContinuousMultilinearMap (Kt p r) (fun _ : Fin p => D z) (G z))
     (v : Fin p → D z) (i j : Fin p) (hv : v i = v j) (hij : i ≠ j) : m v = 0 := by
@@ -134,7 +134,7 @@ def allAlternatingEquiv (hz : AlgebraicIndependent (Kt p r) z) :
     (fun m => ⟨{ toContinuousMultilinearMap := m
                  map_eq_zero_of_eq' := map_eq_zero_of_eq hz m }, rfl⟩)
 
-/-- **Lemma H.6, second assertion.** `(D, G)` is split in degree `p`. -/
+/-- Lemma H.6, second part: `(D, G)` is split in degree `p`. -/
 theorem exists_retraction (hz : AlgebraicIndependent (Kt p r) z) :
     ∃ R : ContinuousMultilinearMap (Kt p r) (fun _ : Fin p => D z) (G z) →L[Kt p r]
       (D z [⋀^Fin p]→L[Kt p r] G z),

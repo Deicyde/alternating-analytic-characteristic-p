@@ -1,8 +1,14 @@
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
-/-! Exterior-basis expansion for a finite coordinate basis. The determinant is
-oriented with the coordinate index in the row, as in the manuscript. -/
+/-!
+# Exterior-basis expansion
+
+For a finite basis `e` with coordinates `ε`, an alternating map satisfies
+`m y = ∑_s det (ε_{s_a} (y_b)) • m (e_{s_1}, …, e_{s_k})`, summed over increasing
+tuples `s`. This is the diagonal identity in the proof of Proposition 4.1. The
+coordinate index is the row index of the determinant, as in the paper.
+-/
 
 noncomputable section
 
@@ -11,7 +17,7 @@ namespace AlternatingAnalytic
 open scoped BigOperators
 open Module
 
-/-- The exterior-basis expansion, with no topological or characteristic assumptions. -/
+/-- The exterior-basis expansion of an alternating map, over any commutative ring. -/
 theorem finiteCoordinate_expansion_algebraic
     {K H G : Type*} [CommRing K] [AddCommGroup H] [Module K H]
     [AddCommGroup G] [Module K G] {d : ℕ}
@@ -40,8 +46,8 @@ theorem finiteCoordinate_expansion_algebraic
     _ = L (exteriorPower.ιMulti K k y) := h
     _ = m y := exteriorPower.alternatingMapLinearEquiv_apply_ιMulti m y
 
-/-- Exterior-basis expansion for continuous alternating maps. This uses only
-algebraic coordinates and does not require that they be continuous. -/
+/-- The exterior-basis expansion of a continuous alternating map. The coordinates
+need not be continuous. -/
 theorem finiteCoordinate_expansion
     {K H F : Type*} [NontriviallyNormedField K]
     [NormedAddCommGroup H] [NormedSpace K H]

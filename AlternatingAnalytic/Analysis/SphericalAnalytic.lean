@@ -12,13 +12,12 @@ import Mathlib.Analysis.Normed.Module.Multilinear.Curry
 /-!
 # Analytic precomposition with a spherically complete ultrametric target
 
-This formalizes Theorem A in `sources/charp.tex`. The free-module and spherical-completeness
-arguments come from sections 06–08 of the original `DiscreteTargetViaTheoremA_recheck.lean`.
-The master extension theorem and ultrametric instances are imported from the previously
-integrated `SphericalCompleteness` module. See the `spherical-analytic-*` provenance notes.
-
-The retraction is genuinely contracting and preserves strong alternation. No factorial
-condition, completeness of the source spaces, or ultrametric source norm is required.
+Theorem 4.2. Over a nonarchimedean field, if `F` is ultrametric and spherically complete,
+then `E [⋀^ι]→L[𝕜] F` is spherically complete and its inclusion into multilinear maps has a
+retraction of norm at most one. Hence precomposition `f ↦ (m ↦ m ∘ f)` on alternating maps
+is a continuous polynomial, in every characteristic and with no condition on `E` or `E'`.
+The proof applies the extension theorem `exists_extension_of_sphericallyComplete` on the
+free space `AltFree` of tuples.
 -/
 
 open Metric ContinuousMultilinearMap ContinuousAlternatingMap
@@ -39,7 +38,7 @@ variable {𝕜 ι E : Type*} [NontriviallyNormedField 𝕜] [Fintype ι]
 instance : AddCommGroup (AltFree 𝕜 ι E) := inferInstanceAs (AddCommGroup ((ι → E) →₀ 𝕜))
 instance : Module 𝕜 (AltFree 𝕜 ι E) := inferInstanceAs (Module 𝕜 ((ι → E) →₀ 𝕜))
 
-/-- The tautological identification of `AltFree` with the underlying finitely supported family. -/
+/-- The identification of `AltFree` with `(ι → E) →₀ 𝕜`. -/
 def toFin : AltFree 𝕜 ι E ≃ₗ[𝕜] ((ι → E) →₀ 𝕜) := LinearEquiv.refl 𝕜 _
 
 /-- The weight `∏ i, ‖v i‖` of a tuple. -/
@@ -187,8 +186,8 @@ section Rels
 
 variable (𝕜 ι E)
 
-/-- The generating relations: multilinearity (additivity and homogeneity in one slot, expressed
-without `Function.update` so as to avoid any `DecidableEq ι` bookkeeping) and alternation. -/
+/-- The relations of multilinearity (additivity and homogeneity in one slot) and
+alternation. They are stated without `Function.update`. -/
 def rels : Set (AltFree 𝕜 ι E) :=
   {z | (∃ (v v' v'' : ι → E) (i : ι), (∀ j, j ≠ i → v j = v' j) ∧ (∀ j, j ≠ i → v j = v'' j) ∧
           v i = v' i + v'' i ∧ z = sng v - sng v' - sng v'') ∨
@@ -315,7 +314,7 @@ instance sphericallyCompleteSpace_continuousAlternatingMap :
   -- radii are nonnegative
   have hr : ∀ p ∈ S, 0 ≤ p.2 := fun p hp =>
     Metric.nonempty_closedBall.1 ((hmeet p hp p hp).mono Set.inter_subset_left)
-  -- the centres are pairwise at distance at most the larger radius
+  -- the centres are at distance at most the larger radius
   have hdist : ∀ p ∈ S, ∀ q ∈ S, ‖p.1 - q.1‖ ≤ max p.2 q.2 := by
     intro p hp q hq
     obtain ⟨a, ha, ha'⟩ := hmeet p hp q hq
@@ -368,7 +367,8 @@ variable {𝕜 ι E E' F : Type*} [NontriviallyNormedField 𝕜] [IsUltrametricD
   [NormedAddCommGroup E] [NormedSpace 𝕜 E] [NormedAddCommGroup E'] [NormedSpace 𝕜 E']
   [NormedAddCommGroup F] [NormedSpace 𝕜 F] [IsUltrametricDist F] [SphericallyCompleteSpace F]
 
-/-- A norm-one continuous linear retraction of the inclusion `Alt → Mult`. -/
+/-- The inclusion of alternating maps into multilinear maps has a retraction of norm at
+most one. -/
 theorem exists_contracting_retraction_toContinuousMultilinearMap :
     ∃ r : ContinuousMultilinearMap 𝕜 (fun _ : ι => E) F →L[𝕜] (E [⋀^ι]→L[𝕜] F),
       ‖r‖ ≤ 1 ∧ ∀ a : E [⋀^ι]→L[𝕜] F, r a.toContinuousMultilinearMap = a := by
@@ -430,8 +430,8 @@ variable {𝕜 ι E E' F : Type*} [NontriviallyNormedField 𝕜] [IsUltrametricD
   [NormedAddCommGroup F] [NormedSpace 𝕜 F] [IsUltrametricDist F] [SphericallyCompleteSpace F]
 
 omit [IsUltrametricDist 𝕜] [SphericallyCompleteSpace F] in
-/-- The master lemma: a continuous linear retraction of the inclusion of alternating maps
-into multilinear maps makes precomposition `C^n` for every `n : WithTop ℕ∞`.  The proof composes the actual inclusion, ambient multilinear precomposition, and retraction. -/
+/-- If the inclusion of alternating maps into multilinear maps has a continuous linear
+retraction, precomposition is `C^n` for every `n : WithTop ℕ∞`. -/
 theorem contDiff_compContinuousLinearMapCLM_of_retraction {n : WithTop ℕ∞}
     (r : ContinuousMultilinearMap 𝕜 (fun _ : ι => E) F →L[𝕜] (E [⋀^ι]→L[𝕜] F))
     (hr : ∀ a : E [⋀^ι]→L[𝕜] F, r a.toContinuousMultilinearMap = a) :
@@ -446,22 +446,21 @@ theorem contDiff_compContinuousLinearMapCLM_of_retraction {n : WithTop ℕ∞}
   refine ContinuousLinearMap.ext fun m => ?_
   exact (hr (m.compContinuousLinearMap f)).symm
 
-/-- **Theorem A.** Over a nonarchimedean field, if the target `F` is ultrametric and spherically complete,
-precomposition on continuous alternating maps is `C^n` for every `n : WithTop ℕ∞`, in particular analytic —
-in every characteristic, with no hypothesis on `E`, `E'`. -/
+/-- Theorem 4.2: if `F` is ultrametric and spherically complete, precomposition on
+alternating maps is `C^n` for every `n : WithTop ℕ∞`, in particular analytic. -/
 theorem contDiff_compContinuousLinearMapCLM_of_sphericallyComplete {n : WithTop ℕ∞} :
     ContDiff 𝕜 n (compContinuousLinearMapCLM :
       (E →L[𝕜] E') → (E' [⋀^ι]→L[𝕜] F) →L[𝕜] (E [⋀^ι]→L[𝕜] F)) := by
   obtain ⟨r, hr⟩ := exists_retraction_toContinuousMultilinearMap (𝕜 := 𝕜) (ι := ι) (E := E) (F := F)
   exact contDiff_compContinuousLinearMapCLM_of_retraction r hr
 
-/-- The actual precomposition map has a bounded multilinear lift in every degree. -/
+/-- Precomposition has a bounded multilinear lift. -/
 theorem hasBoundedLift_of_sphericallyComplete :
     Round24Transfer.HasBoundedLift 𝕜 ι E E' F :=
   Round24Transfer.contDiff_omega_iff_hasBoundedLift.mp
     contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
 
-/-- Precomposition is continuously polynomial at every point. -/
+/-- Precomposition is a continuous polynomial at every point. -/
 theorem cpolynomialAt_compContinuousLinearMapCLM_of_sphericallyComplete
     (f₀ : E →L[𝕜] E') :
     CPolynomialAt 𝕜 (compContinuousLinearMapCLM :
@@ -470,7 +469,7 @@ theorem cpolynomialAt_compContinuousLinearMapCLM_of_sphericallyComplete
     (𝕜 := 𝕜) (ι := ι) (E := E) (E' := E') (F := F)
   exact Round24Transfer.cpolynomialAt_of_lift P hP f₀
 
-/-- Theorem A: precomposition is analytic at every point, in every characteristic. -/
+/-- Precomposition is analytic at every point. -/
 theorem analyticAt_compContinuousLinearMapCLM_of_sphericallyComplete
     (f₀ : E →L[𝕜] E') :
     AnalyticAt 𝕜 (compContinuousLinearMapCLM :

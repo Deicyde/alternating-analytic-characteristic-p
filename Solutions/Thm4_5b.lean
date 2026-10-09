@@ -5,24 +5,19 @@ import Mathlib.Analysis.Analytic.Within
 import AlternatingAnalytic.Analysis.L1FixedDegreeReflection
 
 /-!
-# Theorem 4.5(2) (summable parameter spaces: ℓ¹), p. 11
+# Proof of Theorem 4.5(2)
 
-Solution: identical statements to `Challenges/Thm4_5b.lean`, proved from
-`AlternatingAnalytic.analyticOn_comp_of_l1_fixed_degree_isometry` and
-`AlternatingAnalytic.analyticOnNhd_comp_of_l1_fixed_degree_isometry`
-(`Analysis/L1FixedDegreeReflection.lean`). The retract clause for this reflection statement is
-not in the library (only for the family corollary in `Analysis/L1Families.lean`); it is derived
-here in a few lines (pull back along `r`, apply the ℓ¹ theorem, restrict along `i`).
+Uses `analyticOn_comp_of_l1_fixed_degree_isometry` and
+`analyticOnNhd_comp_of_l1_fixed_degree_isometry` (`Analysis/L1FixedDegreeReflection.lean`).
+The retract clause is proved here: pull back along `r`, apply the ℓ¹ case, restrict along `i`.
 -/
 
 namespace AlternatingAnalyticChallenge.Thm4_5b
 
 universe uI uK uH uW uZ uP
 
-/-- **Theorem 4.5(2).** `Z` complete, `j : W → Z` a closed linear isometry, and `a : H → W`
-with an ambient bounded homogeneous polynomial representation of fixed degree `d`
-(`j (a h) = B (h, …, h)` for a bounded `d`-linear `B : H^d → Z`). For every `γ : U → H`
-analytic on an open `U ⊆ ℓ¹(I, K)`, the composite `a ∘ γ` is analytic on `U`. -/
+/-- Theorem 4.5(2): if `j (a h) = B (h, …, h)` for a bounded `d`-linear `B`, then `a ∘ γ` is
+analytic on `U ⊆ ℓ¹(I, K)` for every `γ` analytic on `U`. -/
 theorem l1_analyticOn_comp_of_fixed_degree_representation
     {I : Type uI} {K : Type uK} [NontriviallyNormedField K]
     {H : Type uH} [NormedAddCommGroup H] [NormedSpace K H]
@@ -36,9 +31,8 @@ theorem l1_analyticOn_comp_of_fixed_degree_representation
     AnalyticOn K (a ∘ γ) U := by
   exact AlternatingAnalytic.analyticOn_comp_of_l1_fixed_degree_isometry j hj d B a ha hU hγ
 
-/-- **Theorem 4.5(2), bounded linear retract clause.** The same conclusion for a parameter
-space `P` that is a bounded linear retract of `ℓ¹(I, K)`: `i : P → ℓ¹(I, K)` and
-`r : ℓ¹(I, K) → P` bounded linear with `r ∘ i = id_P`. -/
+/-- Theorem 4.5(2), retracts: the same conclusion on a bounded linear retract `P` of
+`ℓ¹(I, K)`. -/
 theorem l1_retract_analyticOn_comp_of_fixed_degree_representation
     {I : Type uI} {K : Type uK} [NontriviallyNormedField K]
     {H : Type uH} [NormedAddCommGroup H] [NormedSpace K H]

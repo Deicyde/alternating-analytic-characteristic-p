@@ -1,7 +1,12 @@
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 import Mathlib.Topology.Order.IsLUB
 
-/-! The paper's condition K2 is equivalent to failure of spherical completeness. -/
+/-!
+# Empty descending ball sequences
+
+An ultrametric space fails to be spherically complete if and only if it has a sequence of nested
+closed balls with strictly decreasing radii and empty intersection.
+-/
 
 open Metric Filter Topology
 
@@ -9,14 +14,14 @@ namespace AlternatingAnalytic
 
 variable {Y : Type*} [MetricSpace Y] [IsUltrametricDist Y]
 
-/-- K2: strictly decreasing radii, each next center in the previous ball,
-and no point common to the sequence of closed balls. -/
+/-- A sequence of closed balls with strictly decreasing radii, each center in the previous
+ball, and empty intersection. -/
 def HasEmptyDescendingBallSequence (Y : Type*) [MetricSpace Y] : Prop :=
   ∃ (c : ℕ → Y) (r : ℕ → ℝ), StrictAnti r ∧
     (∀ n, dist (c (n + 1)) (c n) ≤ r n) ∧
     ¬ (⋂ n, closedBall (c n) (r n)).Nonempty
 
-/-- A K2 sequence obstructs spherical completeness in any ultrametric space. -/
+/-- An empty descending ball sequence rules out spherical completeness. -/
 theorem HasEmptyDescendingBallSequence.not_sphericallyComplete
     (h : HasEmptyDescendingBallSequence Y) : ¬ SphericallyCompleteSpace Y := by
   classical
@@ -42,8 +47,7 @@ theorem HasEmptyDescendingBallSequence.not_sphericallyComplete
   refine ⟨x, Set.mem_iInter.mpr fun n => ?_⟩
   exact Set.mem_iInter.mp (Set.mem_iInter.mp hx (c n, r n)) ⟨n, rfl⟩
 
-/-- A non-spherically-complete ultrametric space has a countable K2 witness.
-No completeness or group structure is required. -/
+/-- A non-spherically-complete ultrametric space has an empty descending ball sequence. -/
 theorem hasEmptyDescendingBallSequence_of_not_sphericallyComplete
     (h : ¬ SphericallyCompleteSpace Y) : HasEmptyDescendingBallSequence Y := by
   classical
@@ -98,7 +102,8 @@ theorem hasEmptyDescendingBallSequence_of_not_sphericallyComplete
       (hdist (c n, r n) (hc n) p hp).trans (max_le hn.le le_rfl)
     exact (IsUltrametricDist.dist_triangle_max x (c n) p.1).trans (max_le hxp hcp)
 
-/-- The exact equivalence asserted in Remark K2 of the paper. -/
+/-- An ultrametric space has an empty descending ball sequence if and only if it is not
+spherically complete. -/
 theorem hasEmptyDescendingBallSequence_iff :
     HasEmptyDescendingBallSequence Y ↔ ¬ SphericallyCompleteSpace Y :=
   ⟨HasEmptyDescendingBallSequence.not_sphericallyComplete,

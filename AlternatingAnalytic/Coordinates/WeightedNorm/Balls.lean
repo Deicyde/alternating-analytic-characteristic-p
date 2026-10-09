@@ -11,8 +11,7 @@ import AlternatingAnalytic.Coordinates.WeightedNorm.Model
 Over an ultrametric normed field `𝕜`, let `a_n = ∑_{j<n} e_j ∈ C₀(ℕ, 𝕜)` and let
 `B_n = {x | ‖x - a_n‖_w ≤ w_n}`. These balls are nonempty and nested, but a common point `x`
 would satisfy `|x_j - 1| < 1`, hence `|x_j| = 1`, for every `j`, contradicting `x_j → 0`.
-Consequently no model of the weighted norm (`Model.lean`) is spherically complete
-(Remark I.3 of the paper).
+Hence no model of the weighted norm (`Model.lean`) is spherically complete (Remark I.3).
 -/
 
 set_option backward.isDefEq.respectTransparency false

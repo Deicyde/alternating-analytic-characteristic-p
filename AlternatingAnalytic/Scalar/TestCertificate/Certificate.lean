@@ -41,8 +41,8 @@ noncomputable def testSets (j : Submodule K (Fin (k + 1) → K) × Submodule K (
 
 variable [IsUltrametricDist K]
 
-/-- **Lemma F.5 from Lemma F.4 over a finite subfield.** If Lemma F.4 holds over a finite field
-`F ⊆ K`, the `F`-rational tests certify threshold `1` for every `τ` satisfying condition (1). -/
+/-- If Lemma F.4 holds over a finite field `F ⊆ K`, the `F`-rational tests certify threshold `1`
+for every `τ` satisfying condition (1). -/
 theorem exists_test_certificate_of_subfield
     (hF4 : ¬ ∃ τ : MultilinearMap F (fun _ : Fin k => (Fin (k + 1) → F) →ₗ[F] (Fin k → F))
         ((Fin (k + 1) → F) [⋀^Fin k]→ₗ[F] F),
@@ -95,9 +95,8 @@ theorem exists_test_certificate_of_subfield
 
 end Subfield
 
-/-- **Lemma F.5, conditional on Lemma F.4 over the prime fields.** For a normed field `K` with
-`k! = 0`, there are finite test sets certifying threshold `1` for every `K`-multilinear `τ`
-satisfying condition (1) of Lemma F.4. -/
+/-- Lemma F.5, assuming Lemma F.4 over the prime fields: if `k! = 0` in `K`, finite test sets
+certify threshold `1` for every `K`-multilinear `τ` satisfying condition (1) of Lemma F.4. -/
 theorem exists_finite_test_certificate_of_fibre (K : Type*) [NormedField K] (k : ℕ)
     (hk : (k.factorial : K) = 0)
     (hF4 : ∀ (p : ℕ) [Fact p.Prime], (k.factorial : ZMod p) = 0 →

@@ -3,11 +3,10 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Analytic.Basic
 
 /-!
-# Proposition D.9 (descent of a lift), p. 46
+# Proof of Proposition D.9
 
-Solution: the statements of `Challenges/PropD_9.lean`, proved from
-`AlternatingAnalytic/Analysis/BaseChangeLiftDescent.lean`
-(`exists_baseChangeLiftDescent`, `not_analyticAt_completedBaseChange_of_not_analyticAt`).
+Uses `exists_baseChangeLiftDescent` and `not_analyticAt_completedBaseChange_of_not_analyticAt`
+from `AlternatingAnalytic/Analysis/BaseChangeLiftDescent.lean`.
 -/
 
 namespace AlternatingAnalyticChallenge.PropD_9
@@ -16,10 +15,8 @@ open AlternatingAnalytic
 
 universe u
 
-/-- The standard operator norm on the space of candidate lifts
-`L(A, A)^n → L(Alt^k(A; C), Alt^k(A; C))`, exposed as a local instance because typeclass search
-does not find `ContinuousMultilinearMap.hasOpNorm` through the nested alternating-map codomain
-on its own. (This mirrors the library's local instance in `BaseChangeLiftDescent.lean`.) -/
+/-- The operator norm on candidate lifts. Instance search does not find
+`ContinuousMultilinearMap.hasOpNorm` through the alternating-map codomain. -/
 noncomputable local instance liftOpNorm {R A C : Type*} [NontriviallyNormedField R]
     [NormedAddCommGroup A] [NormedSpace R A] [NormedAddCommGroup C] [NormedSpace R C]
     {k n : ℕ} :
@@ -28,8 +25,8 @@ noncomputable local instance liftOpNorm {R A C : Type*} [NontriviallyNormedField
   ContinuousMultilinearMap.hasOpNorm (𝕜 := R) (E := fun _ : Fin n => A →L[R] A)
     (G := (A [⋀^Fin k]→L[R] C) →L[R] (A [⋀^Fin k]→L[R] C))
 
-/-- Proposition D.9, first sentence: a bounded `k`-linear lift of `A^{k,K'}_{E,E;F}` over `K'`
-descends to a bounded `k`-linear lift of `A^{k,K₁}_{E₁,E₁;F₁}` over `K₁` with `‖P₁‖ ≤ ‖P‖`. -/
+/-- A bounded `k`-linear lift of `A^{k,K'}_{E,E;F}` over `K'` gives a bounded `k`-linear lift of
+`A^{k,K₁}_{E₁,E₁;F₁}` over `K₁` with `‖P₁‖ ≤ ‖P‖`. -/
 theorem exists_lift_descent
     (K₁ : Type*) (E₁ F₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]
@@ -49,8 +46,7 @@ theorem exists_lift_descent
           P₁ (fun _ => f) = ContinuousAlternatingMap.compContinuousLinearMapCLM f :=
   exists_baseChangeLiftDescent K₁ E₁ F₁ K' k P hP
 
-/-- Proposition D.9, second sentence: if `A^{k,K₁}_{E₁,E₁;F₁}` is analytic at no point, then
-`A^{k,K'}_{E,E;F}` is analytic at no point. -/
+/-- If `A^{k,K₁}_{E₁,E₁;F₁}` is analytic at no point, then neither is `A^{k,K'}_{E,E;F}`. -/
 theorem nowhere_analytic_ascends
     (K₁ : Type*) (E₁ F₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]

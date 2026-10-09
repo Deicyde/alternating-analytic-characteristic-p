@@ -3,13 +3,17 @@ import Mathlib.Analysis.Normed.Ring.Lemmas
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Data.Fintype.Perm
 
-/-! Ordinary triangle-inequality determinant bounds for finite-coordinate lifts. -/
+/-!
+# A determinant bound
+
+The Leibniz bound `‖det a‖ ≤ k! ∏ rᵢ ∏ cⱼ` when `‖aᵢⱼ‖ ≤ rᵢ cⱼ`, used for the
+finite-coordinate lifts of Proposition 4.1(2).
+-/
 
 namespace AlternatingAnalytic
 
-/-- The Leibniz determinant estimate with a separate nonnegative weight for each
-row and column. The factorial is a real counting constant, with no restriction
-on the characteristic of the field. -/
+/-- If `‖aᵢⱼ‖ ≤ rᵢ cⱼ`, then `‖det a‖ ≤ k! ∏ rᵢ ∏ cⱼ`. Here `k!` is a real number, so
+there is no condition on the characteristic. -/
 theorem norm_det_le_factorial_mul_prod {K : Type*} [NormedField K] {k : ℕ}
     (a : Matrix (Fin k) (Fin k) K) (r c : Fin k → ℝ)
     (_hr : ∀ i, 0 ≤ r i) (_hc : ∀ j, 0 ≤ c j)

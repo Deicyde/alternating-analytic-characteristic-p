@@ -2,7 +2,12 @@ import Mathlib.Topology.ContinuousMap.Bounded.Normed
 import Mathlib.Data.Int.ConditionallyCompleteOrder
 import Mathlib.Algebra.Order.Archimedean.Basic
 
-/-! Bounded functions with discrete nonzero norms attain their supremum norm. -/
+/-!
+# Discrete sup norms are attained
+
+A bounded function whose nonzero values have norms in `e ^ ℤ`, `e > 1`, attains its
+supremum norm. Used for sequence spaces over a discretely valued field.
+-/
 
 open scoped BoundedContinuousFunction
 
@@ -10,8 +15,8 @@ namespace AlternatingAnalytic
 
 variable {S Y : Type*} [TopologicalSpace S] [NormedAddCommGroup Y]
 
-/-- A bounded function with nonzero norms in `e ^ ℤ`, `e > 1`, attains its norm.
-No compactness of the index space is required. -/
+/-- A nonzero bounded function with nonzero norms in `e ^ ℤ`, `e > 1`, attains its
+norm, with no compactness of the index space. -/
 theorem exists_norm_eq_of_discrete (e : ℝ) (he : 1 < e)
     (hdiscrete : ∀ y : Y, y ≠ 0 → ∃ n : ℤ, ‖y‖ = e ^ n)
     (f : S →ᵇ Y) (hf : f ≠ 0) : ∃ s : S, f s ≠ 0 ∧ ‖f‖ = ‖f s‖ := by

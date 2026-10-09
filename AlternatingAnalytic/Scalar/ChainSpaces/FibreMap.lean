@@ -57,7 +57,7 @@ theorem fibreMap_apply (i : List L) (g : Fin k → V →ₗ[K] V') (ξ : Fin k �
       fibreVal ρ ρ' P δ i (fun r => LinearMap.toContinuousLinearMap (g r)) ξ :=
   rfl
 
-/-- **(F.9).** If `P` lifts the precomposition action, then `π_i(g, …, g) = δ ∘ (g, …, g)`. -/
+/-- (F.9): if `P` lifts the precomposition action, then `π_i(g, …, g) = δ ∘ (g, …, g)`. -/
 theorem fibreMap_diag
     (hP : ∀ f, P (fun _ => f) = ContinuousAlternatingMap.compContinuousLinearMapCLM f)
     (i : List L) (g : V →ₗ[K] V') :

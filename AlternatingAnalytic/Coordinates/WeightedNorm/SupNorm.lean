@@ -13,11 +13,10 @@ import AlternatingAnalytic.Analysis.LaurentField
 /-!
 # The supremum norm on null sequences
 
-For the space `C₀(ℕ, β)` of null sequences with its supremum norm we show that the norm of a
-sequence is attained at some coordinate, that the norm is ultrametric when `β` is, and, over the
-Laurent field `κ((t))` with `‖t‖ = r`, that nonzero norms lie in `r^ℤ`, so that the space is
-spherically complete. We also record that precomposition on continuous alternating maps into any
-complete ultrametric space over `κ((t))` is analytic (Remark I.3 of the paper).
+On the space `C₀(ℕ, β)` of null sequences, the supremum norm is attained at some coordinate and
+is ultrametric when `β` is. Over the Laurent field `κ((t))` with `‖t‖ = r`, nonzero norms lie in
+`r^ℤ`, so the space is spherically complete. Precomposition on continuous alternating maps into a
+complete ultrametric space over `κ((t))` is analytic (Remark I.3).
 -/
 
 set_option backward.isDefEq.respectTransparency false

@@ -3,15 +3,18 @@ import AlternatingAnalytic.Analysis.UniversalAlternatingTargets
 import AlternatingAnalytic.Analysis.SplitAlternatingPairs
 
 /-!
-# Universal-target core and split-pair analytic domains
+# Analytic domains: universal targets and split pairs
 
-All carriers and the field lie in `Type u`. An analytic domain tests every hom
-space of the actual full restriction of `alternatingFunctor`, including homs
-between distinct objects. The full-subcategory and opposite wrappers retain
-the canonical operator norms, with the maximum norm on pairs of operators.
+Defines analytic domains (Definition H.1): full subcategories of pairs `(op E, F)` on whose hom
+spaces `Alt^k` is analytic, including homs between distinct objects. Hom spaces carry the max of
+the two operator norms. Proves Lemma H.3 (split pairs form an analytic domain) and the basic
+properties of the domain of pairs with a universal target (Section 9). All spaces and the field
+lie in `Type u`.
 
-This file proves `dom:core` and `dom:split-incoming` from `paper/charp.tex`.
-The product characterization concerns unrestricted first factors only.
+## Main results
+
+- `splitPairs_incoming_analytic`: Lemma H.3.
+- `universalTarget_core`: the universal-target domain and its closure properties.
 -/
 
 noncomputable section
@@ -28,8 +31,8 @@ namespace NormedSpaceCat
 
 variable {K}
 
-/-- Remove the full-subcategory wrapper, then use the canonical opposite/product
-coordinates. The first operator goes from the destination source to the source source. -/
+/-- Operator coordinates of a hom in a full subcategory of pairs. The first operator goes
+from the source space of `Y` to the source space of `X`. -/
 def restrictedPairHomEquiv
     (S : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     (X Y : S.FullSubcategory) :
@@ -73,7 +76,7 @@ theorem restrictedPairHomCoordinates_symm_apply
     (restrictedPairHomCoordinates S X Y).symm z =
       ObjectProperty.homMk ((pairHomCoordinates X.obj Y.obj).symm z) := rfl
 
-/-- The inclusion changes neither the linear coordinates nor the operator norms. -/
+/-- The inclusion of the full subcategory preserves operator coordinates. -/
 theorem restrictedPairHomCoordinates_inclusion
     (S : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     {X Y : S.FullSubcategory} (f : X ⟶ Y) :
@@ -87,12 +90,12 @@ theorem norm_restrictedPair_hom
 
 end NormedSpaceCat
 
-/-- The actual full restriction, with all cross-object morphisms. -/
+/-- The restriction of `alternatingFunctor` to the full subcategory on `S`. -/
 abbrev restrictedAlternatingFunctor
     (S : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K)) :=
   S.ι ⋙ alternatingFunctor K k
 
-/-- The restricted functor's actual hom map in canonical operator coordinates. -/
+/-- In operator coordinates, the hom map of the restricted functor is `alternatingMapAction`. -/
 theorem restrictedAlternatingFunctor_mapInCoordinates
     (S : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     (X Y : S.FullSubcategory) :
@@ -103,7 +106,8 @@ theorem restrictedAlternatingFunctor_mapInCoordinates
         ((restrictedAlternatingFunctor K k S).obj Y)) =
       alternatingMapAction k := rfl
 
-/-- An analytic domain means joint analyticity on every actual restricted hom space. -/
+/-- Definition H.1: `Alt^k` restricted to the full subcategory on `S` is analytic on every
+hom space. -/
 def IsAlternatingAnalyticDomain
     (S : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K)) : Prop :=
   FunctorAnalyticOnHoms K (S.ι ⋙ alternatingFunctor K k)
@@ -113,7 +117,7 @@ theorem isAlternatingAnalyticDomain_iff_functorAnalyticOnHoms
     IsAlternatingAnalyticDomain K k S ↔
       FunctorAnalyticOnHoms K (S.ι ⋙ alternatingFunctor K k) := Iff.rfl
 
-/-- Fullness allows arbitrary pairs of objects satisfying `S`, not just endomorphisms. -/
+/-- `S` is an analytic domain iff the action between any two objects of `S` is analytic. -/
 theorem isAlternatingAnalyticDomain_iff_coordinates
     (S : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K)) :
     IsAlternatingAnalyticDomain K k S ↔
@@ -131,11 +135,11 @@ theorem isAlternatingAnalyticDomain_iff_coordinates
   · intro h X Y
     exact h X.obj Y.obj X.property Y.property
 
-/-- The target property defining the full category `T_k(K)`. -/
+/-- The property of being a universal alternating target in degree `k`. -/
 def isUniversalAlternatingTarget : ObjectProperty (NormedSpaceCat K) :=
   fun F => UniversalAlternatingTarget K k F
 
-/-- The actual full category of universal alternating targets. -/
+/-- The full subcategory of universal alternating targets. -/
 abbrev UniversalAlternatingTargetCat := (isUniversalAlternatingTarget K k).FullSubcategory
 
 /-- The fully faithful inclusion of universal targets into normed spaces. -/
@@ -143,19 +147,20 @@ abbrev UniversalAlternatingTargetCat.inclusion :
     UniversalAlternatingTargetCat K k ⥤ NormedSpaceCat K :=
   (isUniversalAlternatingTarget K k).ι
 
-/-- The universal-target core has an unrestricted contravariant first factor. -/
+/-- Pairs `(op E, F)` with `F` a universal target and `E` arbitrary. -/
 def universalTargetCore : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K) :=
   fun X => UniversalAlternatingTarget K k X.2
 
 abbrev UniversalTargetCoreCat := (universalTargetCore K k).FullSubcategory
 
-/-- The actual full category of pairs whose alternating inclusion has a bounded retraction. -/
+/-- Definition H.2: pairs whose inclusion `Alt^k(E; F) → Mult^k(E; F)` has a bounded
+retraction. -/
 def splitPairs : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K) :=
   fun X => IsSplitAlternatingPair K k X.1.unop X.2
 
 abbrev SplitAlternatingPairCat := (splitPairs K k).FullSubcategory
 
-/-- A universal target at either endpoint makes the actual hom action analytic. -/
+/-- A universal target at either endpoint makes the hom action analytic. -/
 theorem alternatingFunctor_analyticOnNhd_hom_of_universal_target
     (X Y : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K)
     (h : universalTargetCore K k X ∨ universalTargetCore K k Y) :
@@ -172,9 +177,8 @@ theorem universalTargetCore_isAnalyticDomain :
   intro X Y hX _
   exact analyticOnNhd_alternatingMapAction_of_universal_target k (Or.inl hX)
 
-/-- Largest among analytic domains with unrestricted first factor.
-The converse uses the affine slice `u ↦ (u, id_F)` between `(op D,F)` and
-`(op E,F)` for arbitrary, independently chosen normed spaces `E` and `D`. -/
+/-- A domain of the form `{(op E, F) | T F}` is analytic iff every `F` in `T` is a
+universal target. -/
 theorem product_isAnalyticDomain_iff (T : ObjectProperty (NormedSpaceCat K)) :
     IsAlternatingAnalyticDomain K k (fun X => T X.2) ↔
       ∀ F, T F → UniversalAlternatingTarget K k F := by
@@ -187,7 +191,7 @@ theorem product_isAnalyticDomain_iff (T : ObjectProperty (NormedSpaceCat K)) :
   · intro h X Y hX _
     exact analyticOnNhd_alternatingMapAction_of_universal_target k (Or.inl (h X.2 hX))
 
-/-- Adjoining the core preserves all cross-object hom actions. -/
+/-- Adjoining the universal-target pairs to an analytic domain keeps it analytic. -/
 theorem IsAlternatingAnalyticDomain.union_core
     {S : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K)}
     (hS : IsAlternatingAnalyticDomain K k S) :
@@ -200,7 +204,7 @@ theorem IsAlternatingAnalyticDomain.union_core
     · exact analyticOnNhd_alternatingMapAction_of_universal_target k (Or.inr hY)
   · exact analyticOnNhd_alternatingMapAction_of_universal_target k (Or.inl hX)
 
-/-- Every incoming hom action with split destination is analytic; the source is arbitrary. -/
+/-- Every hom action whose destination is a split pair is analytic. -/
 theorem alternatingFunctor_analyticOnNhd_hom_of_split_destination
     (X Y : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K) (hY : splitPairs K k Y) :
     AnalyticOnNhd K (fun f : X ⟶ Y => (alternatingFunctor K k).map f) Set.univ := by
@@ -216,9 +220,9 @@ theorem splitPairs_isAnalyticDomain :
   intro X Y _ hY
   exact analyticOnNhd_alternatingMapAction_of_split_destination k hY
 
-/-- `dom:core`: core analyticity, the exact product characterization, compatibility
-with every analytic domain, and closure under bounded retracts, bounded linear
-isomorphisms, and all finite max-norm products, including the empty product. -/
+/-- The universal-target pairs form an analytic domain, the largest of product form, and can be
+adjoined to any analytic domain. Universal targets are closed under retracts, isomorphisms and
+finite products. -/
 theorem universalTarget_core :
     IsAlternatingAnalyticDomain K k (universalTargetCore K k) ∧
     (∀ T : ObjectProperty (NormedSpaceCat K),
@@ -248,8 +252,8 @@ theorem universalTarget_core :
   · intro I _ Fi _ _ h
     exact UniversalAlternatingTarget.pi h
 
-/-- `dom:split-incoming`: analyticity of every actual incoming hom map to a split
-destination and analytic-domain status of the full category of all split pairs. -/
+/-- Lemma H.3: every hom action with split destination is analytic, so the split pairs form
+an analytic domain. -/
 theorem splitPairs_incoming_analytic :
     (∀ (X Y : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K), splitPairs K k Y →
       AnalyticOnNhd K (fun f : X ⟶ Y => (alternatingFunctor K k).map f) Set.univ) ∧

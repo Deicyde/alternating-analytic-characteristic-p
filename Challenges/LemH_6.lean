@@ -20,34 +20,21 @@ in the basis `(e_0, …, e_{p-1})`. A pair `(E, F)` is split in degree `k` if th
 Paper statement: "Every bounded `p`-linear map `D^p → G` is alternating. Thus `(D, G)` is split in
 degree `p`."
 
-Formalization notes:
+## Formalization notes
+
 * `K` and `L` are the library's `AlternatingAnalytic.RationalField (ZMod p) r` and
-  `AlternatingAnalytic.LaurentField (ZMod p) r` (`‖t‖ = r`, `0 < r < 1`), with the library's
-  isometric dense inclusion `K → L`. `A` is the library's
-  `AlternatingAnalytic.TruncatedPolynomial.A L p` (`AdjoinRoot (X^p)` over `L`) with the library's
-  maximum coefficient norm in the basis `ε^i`; `ε` is `TruncatedPolynomial.epsilon` and
-  coordinates are `TruncatedPolynomial.coeff`. These library files are imported for these
-  definitions only. The `K`-normed structure on `A` (`instNormedSpaceKA`) is defined here by
-  restricting scalars along `K → L`, and the field instances on `K`, `L` are pinned to those of
-  their normed-field structures (as in the library).
-* The auxiliary index set is `Tau p = Fin p ⊕ {(i, j) // i < j}`, `w (inl i) = e_i`,
-  `w (inr (i, j)) = e_i + e_j` (this lists `𝒲`). The scalars are one family
-  `z : Fin p ⊕ Tau p → L`, `a_i = z (inl i)`, `τ_w = z (inr w)`, assumed algebraically independent
-  over `K` (the paper's hypothesis). The statements are for every such choice.
-* `D z` and `G z` (defined here) are `K`-submodules of `A` and `L` with induced norms. `G` is
-  the span of `det(d_1, …, d_p)` over all tuples from `D`, literally.
-* `part1`: "alternating" means vanishing whenever two distinct argument slots are equal (Mathlib's
-  convention for `ContinuousAlternatingMap`). "Bounded `p`-linear map `D^p → G`" is
-  `ContinuousMultilinearMap K (fun _ : Fin p => D z) (G z)`.
-  `part2`: `IsSplitInDegree` (defined here, as in Lemma H.3).
-* Library status (no solution file): the library proves both assertions only for its own fixed
-  choice `AlternatingAnalytic.DeterminantPair.z p r` of the scalars
-  (`DeterminantPair.all_multilinear_maps_alternating` with its retraction `retractionR`, in
-  `AlternatingAnalytic/Analysis/DeterminantPairAllAlternating.lean`, and
-  `DeterminantPair.isSplit_unpaddedD` in `DeterminantPairSelfActions.lean`), not for an
-  arbitrary algebraically independent family as stated here. At that choice the definitions `D`
-  and `G` of this file agree with the library's `DeterminantPair.D p r` and `DeterminantPair.G p r`
-  (checked in a scratch file).
+  `AlternatingAnalytic.LaurentField (ZMod p) r` (`‖t‖ = r`, `0 < r < 1`). `A` is the library's
+  `TruncatedPolynomial.A L p` (`AdjoinRoot (X^p)`) with the maximum coefficient norm; `ε` is
+  `TruncatedPolynomial.epsilon` and coordinates are `TruncatedPolynomial.coeff`.
+* The normed `K`-space structure on `A` (`instNormedSpaceKA`) restricts scalars along `K → L`.
+  The local field instances on `K` and `L` are pinned to those of their normed-field structures,
+  only to align instances with the library.
+* `𝒲` is indexed by `Tau p = Fin p ⊕ {(i, j) // i < j}`. The scalars form one family
+  `z : Fin p ⊕ Tau p → L` with `a_i = z (inl i)` and `τ_w = z (inr w)`, assumed algebraically
+  independent over `K`, as in the paper.
+* `D z` and `G z` are `K`-submodules of `A` and `L` with the induced norms.
+* "Alternating" means vanishing whenever two distinct argument slots are equal, Mathlib's
+  convention for `ContinuousAlternatingMap`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemH_6
@@ -143,14 +130,14 @@ def IsSplitInDegree (K : Type*) [NontriviallyNormedField K] (k : ℕ) (E F : Typ
   ∃ R : ContinuousMultilinearMap K (fun _ : Fin k => E) F →L[K] (E [⋀^Fin k]→L[K] F),
     ∀ m : E [⋀^Fin k]→L[K] F, R m.toContinuousMultilinearMap = m
 
-/-- **Lemma H.6, first assertion.** For every choice of `a_i, τ_w ∈ L` algebraically independent
-over `K`, every bounded `p`-linear map `D^p → G` is alternating. -/
+/-- Lemma H.6, first assertion: for `a_i, τ_w ∈ L` algebraically independent over `K`, every
+bounded `p`-linear map `D^p → G` is alternating. -/
 theorem part1 (z : Fin p ⊕ Tau p → Lt p r) (hz : AlgebraicIndependent (Kt p r) z)
     (m : ContinuousMultilinearMap (Kt p r) (fun _ : Fin p => D z) (G z))
     (v : Fin p → D z) (i j : Fin p) (hv : v i = v j) (hij : i ≠ j) : m v = 0 := by
   sorry
 
-/-- **Lemma H.6, second assertion.** For every such choice, `(D, G)` is split in degree `p`. -/
+/-- Lemma H.6, second assertion: `(D, G)` is split in degree `p`. -/
 theorem part2 (z : Fin p ⊕ Tau p → Lt p r) (hz : AlgebraicIndependent (Kt p r) z) :
     IsSplitInDegree (Kt p r) p (D z) (G z) := by
   sorry

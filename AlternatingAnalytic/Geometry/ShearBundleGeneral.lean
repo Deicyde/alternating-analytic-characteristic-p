@@ -1,17 +1,15 @@
 import AlternatingAnalytic.Geometry.AlternatingBundleShearCounterexample
 
 /-!
-# The shear bundle realization over `L(E, D)` at an arbitrary parameter
+# The shear bundle realization over `L(E, D)`
 
-This generalizes `not_contMDiffVectorBundle_alternating_shearBundle` (base `L(D, D)`,
-parameter `0`) to the bundle paragraph of Proposition `fam:prop:shear` in full: the base
-is `E →L[K] D`, the fiber is `D × E` with the maximum norm, and the nonanalytic parameter
-`u₀` is arbitrary. The statements are phrased for any vector bundle core over `E →L[K] D`
-whose charts have shear transitions, so that they apply to every copy of the shear bundle
-core. If two global charts change coordinates by `shear u`, then the coordinate change of
-the induced alternating trivializations is pullback by `shear u`; analyticity of the
-alternating bundle would make this analytic everywhere, and the shear compression then
-makes the original pullback `u ↦ u^*` analytic at `u₀`.
+The bundle paragraph after Proposition 6.4. The base is `E →L[K] D`, the fiber is `D × E` with
+the maximum norm, and `u₀` is any point where `A^k : u ↦ u^*` is not analytic. If two global
+charts of a vector bundle core change coordinates by `shear u`, the induced alternating
+trivializations change by pullback along `shear u`. If the alternating bundle were analytic,
+this pullback would be analytic, and the compression identity of Proposition 6.4 would make
+`u ↦ u^*` analytic at `u₀`. This generalizes
+`not_contMDiffVectorBundle_alternating_shearBundle`, which has base `L(D, D)` and `u₀ = 0`.
 -/
 
 noncomputable section
@@ -108,10 +106,9 @@ theorem not_contMDiffVectorBundle_alternating_of_coordChange_eq_shear (k : ℕ)
     exact hc.congr fun b _ ↦ (heq b).symm
   exact not_analyticAt_shear_pullback (ι := Fin k) u₀ hA hcd.contDiffAt.analyticAt
 
-/-- **Bundle realization of the shear obstruction.** For a vector bundle core over
-`E →L[K] D` with transitions `shear ((w j - w i) • u)` and two global charts `i, j` with
-`w j - w i = 1`, if `u ↦ u^*` is not analytic at `u₀` then the core and the trivial
-`F`-bundle are analytic but their alternating bundle is not. -/
+/-- Let a vector bundle core over `E →L[K] D` have transitions `shear ((w j - w i) • u)` and two
+global charts `i, j` with `w j - w i = 1`. If `u ↦ u^*` is not analytic at `u₀`, the core and the
+trivial `F`-bundle are analytic but their alternating bundle is not. -/
 theorem shearBundle_realization (k : ℕ)
     (Z : VectorBundleCore K (E →L[K] D) (D × E) ι) (w : ι → K)
     (h : ∀ i j u, Z.coordChange i j u = shear ((w j - w i) • u))
@@ -130,8 +127,8 @@ theorem shearBundle_realization (k : ℕ)
     not_contMDiffVectorBundle_alternating_of_coordChange_eq_shear k Z i j hi hj
       (fun u ↦ by rw [h, hw, one_smul]) u₀ hA⟩
 
-/-- The library shear bundle core over `E →L[K] D` realizes the obstruction at every
-parameter `u₀` at which `u ↦ u^*` is not analytic. -/
+/-- `shearBundleCore` realizes the obstruction at every `u₀` where `u ↦ u^*` is not
+analytic. -/
 theorem shearBundleCore_realization (k : ℕ) (u₀ : E →L[K] D)
     (hA : ¬ AnalyticAt K
       (fun u : E →L[K] D =>

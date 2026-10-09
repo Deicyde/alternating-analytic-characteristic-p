@@ -2,11 +2,11 @@ import Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection
 import Mathlib.Geometry.Manifold.VectorBundle.Hom
 
 /-!
-# Identity and composition of operator-valued regular bundle morphisms
+# Identity and composition of `C^n` bundle morphisms
 
-The actual fibers retain their topological module structures. Regularity is
-measured in the normed model spaces, at every order and for arbitrary models
-with corners.
+The identity of a vector bundle and the composite of two `C^n` sections of Hom bundles are
+`C^n` sections of the Hom bundle. The fibers are topological vector spaces; regularity is
+measured in the normed model fibers.
 -/
 
 noncomputable section
@@ -29,7 +29,7 @@ variable (A : Type*) [NormedAddCommGroup A] [NormedSpace K A]
   [∀ b, ContinuousSMul K (E b)] [TopologicalSpace (TotalSpace A E)]
   [FiberBundle A E] [VectorBundle K A E]
 
-/-- The identity map of a vector bundle is a regular operator Hom section. -/
+/-- The identity of a vector bundle, as a `C^n` section of its Hom bundle. -/
 def contMDiffHomId : ContMDiffSection I (A →L[K] A) n (fun b ↦ E b →L[K] E b) where
   toFun b := ContinuousLinearMap.id K (E b)
   contMDiff_toFun := by
@@ -68,7 +68,7 @@ variable {A B C : Type*}
   [FiberBundle B F] [VectorBundle K B F]
   [FiberBundle C G] [VectorBundle K C G]
 
-/-- Compose operator Hom sections using operator-valued composition on their models. -/
+/-- The fiberwise composite of two `C^n` Hom sections. -/
 def contMDiffHomComp
     (f : ContMDiffSection I (A →L[K] B) n (fun b ↦ E b →L[K] F b))
     (g : ContMDiffSection I (B →L[K] C) n (fun b ↦ F b →L[K] G b)) :

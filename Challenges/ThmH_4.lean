@@ -20,34 +20,23 @@ subcategories are analytic, such that `Y_k` is split and the action on morphisms
 `X_k` is not analytic." ("Finite-dimensional means finite algebraic dimension over the
 incomplete field `K`.")
 
-Formalization notes:
-* `K = 𝔽_p(t)` with the `t`-adic absolute value is the library's
-  `AlternatingAnalytic.RationalField (ZMod p) r` (imported for this definition): rational
-  functions over `ZMod p` with the norm induced from the Laurent series field, `‖t‖ = r`, for a
-  parameter `0 < r < 1` (all such `r` give equivalent `t`-adic absolute values; the statement is
-  for every such `r`). `p` prime is `[Fact p.Prime]`.
-* The category `Vec_K` is the library's `NormedSpaceCat K` (carriers in the universe of `K`,
-  here `Type`), the bifunctor is the library's `alternatingFunctor K k` (index `Fin k`), hom spaces
-  of `(NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K` carry the library's operator norms (maximum norm on
-  pairs). A full subcategory is an `ObjectProperty`, ordered by inclusion; "largest" is
-  `IsGreatest` in that order. "Analytic domain" is the library predicate
-  `IsAlternatingAnalyticDomain K k S` (analyticity, `AnalyticOnNhd`, of the restricted functor on
-  every hom space, including hom spaces between distinct objects).
-* Restricted ambient category: the library's `finiteUltrametricPairs K` (both spaces finite
-  algebraic dimension over `K`, `FiniteDimensional`, and both norms ultrametric,
-  `IsUltrametricDist`) and its full subcategory `FiniteUltrametricPairCat K`; analytic domains in it
-  are the library's `IsFiniteUltrametricAnalyticDomain K k`, and isomorphism closure
-  (`IsClosedUnderIsomorphisms`) is taken in `FiniteUltrametricPairCat K`, as the paper says.
-  These are imported from `AlternatingAnalytic/Category/FiniteUltrametricDomains.lean`
-  (definitions only; the theorem itself is proved in a different module).
-* One theorem per variant: `part1` (no largest full analytic domain), `part2` (none among
-  isomorphism-closed domains), `part3` (none in the finite-dimensional nonarchimedean ambient
-  category), `part4` (none among domains of that ambient category closed under isomorphism inside
-  it), and `part5` ("more precisely": the witnesses). In `part5` the shared second component
-  `G` of `X_k` and `Y_k` is recorded as `X.2 = Y.2`, both witnesses are required to be
-  finite-dimensional nonarchimedean pairs (as the paper's witnesses are, which the restricted
-  variant uses), splitness is the in-file `IsSplitInDegree` (same as in Lemma H.3), and "not
-  analytic" is `¬ AnalyticOnNhd` on the whole hom space `Y ⟶ X`.
+## Formalization notes
+
+* `K = 𝔽_p(t)` is the library's `AlternatingAnalytic.RationalField (ZMod p) r`: rational
+  functions over `ZMod p` with the norm from the Laurent series field and `‖t‖ = r`. The
+  statement holds for every `0 < r < 1`; all such `r` give equivalent `t`-adic absolute values.
+* `Vec_K` is the library's `NormedSpaceCat K` (carriers in `Type`), `Alt^k` is
+  `alternatingFunctor K k`, and "analytic domain" is `IsAlternatingAnalyticDomain K k`, which
+  asks for `AnalyticOnNhd` on every hom space. A full subcategory is an `ObjectProperty`, and
+  "largest" is `IsGreatest` for inclusion.
+* The restricted ambient category is `finiteUltrametricPairs K` (both spaces
+  `FiniteDimensional` over `K` and `IsUltrametricDist`), with analytic domains
+  `IsFiniteUltrametricAnalyticDomain K k`; isomorphism closure is taken inside
+  `FiniteUltrametricPairCat K`. These come from
+  `AlternatingAnalytic/Category/FiniteUltrametricDomains.lean`.
+* `part1` to `part4` are the four variants; `part5` gives the witnesses. In `part5` the
+  shared target `G` is `X.2 = Y.2`, both witnesses are finite-dimensional nonarchimedean pairs,
+  and "not analytic" is `¬ AnalyticOnNhd` on the whole hom space `Y ⟶ X`.
 -/
 
 namespace AlternatingAnalyticChallenge.ThmH_4
@@ -87,38 +76,38 @@ def HasLargestIsoClosedFiniteUltrametricAnalyticDomain (K : Type*) [Nontrivially
     {P | AlternatingAnalytic.IsFiniteUltrametricAnalyticDomain K k P ∧
       P.IsClosedUnderIsomorphisms} S
 
-/-- **Theorem H.4.** Over `𝔽_p(t)` with a `t`-adic absolute value and `k ≥ p`, `Alt^k` has no
+/-- Theorem H.4: over `𝔽_p(t)` with a `t`-adic absolute value and `k ≥ p`, `Alt^k` has no
 largest full analytic domain. -/
 theorem part1 (p k : ℕ) [Fact p.Prime] (hpk : p ≤ k)
     (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
     ¬ HasLargestFullAnalyticDomain (AlternatingAnalytic.RationalField (ZMod p) r) k := by
   sorry
 
-/-- **Theorem H.4, isomorphism-closed variant.** -/
+/-- Theorem H.4: there is no largest isomorphism-closed full analytic domain. -/
 theorem part2 (p k : ℕ) [Fact p.Prime] (hpk : p ≤ k)
     (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
     ¬ HasLargestIsoClosedFullAnalyticDomain (AlternatingAnalytic.RationalField (ZMod p) r) k := by
   sorry
 
-/-- **Theorem H.4, finite-dimensional nonarchimedean variant.** -/
+/-- Theorem H.4: there is no largest full analytic domain among pairs of finite-dimensional
+nonarchimedean spaces. -/
 theorem part3 (p k : ℕ) [Fact p.Prime] (hpk : p ≤ k)
     (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
     ¬ HasLargestFiniteUltrametricAnalyticDomain
       (AlternatingAnalytic.RationalField (ZMod p) r) k := by
   sorry
 
-/-- **Theorem H.4, finite-dimensional nonarchimedean variant with isomorphism closure inside
-the restricted ambient category.** -/
+/-- Theorem H.4: there is no largest full analytic domain among pairs of finite-dimensional
+nonarchimedean spaces that is closed under isomorphisms in that category. -/
 theorem part4 (p k : ℕ) [Fact p.Prime] (hpk : p ≤ k)
     (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
     ¬ HasLargestIsoClosedFiniteUltrametricAnalyticDomain
       (AlternatingAnalytic.RationalField (ZMod p) r) k := by
   sorry
 
-/-- **Theorem H.4, "more precisely".** There are objects `X = (E_k, G)` and `Y = (D_k, G)`,
-pairs of finite-dimensional nonarchimedean spaces, whose singleton full subcategories are
-analytic domains, such that `Y` is split in degree `k` and the action of `Alt^k` on the hom
-space from `Y` to `X` is not analytic. -/
+/-- Theorem H.4, witnesses: there are pairs `X = (E_k, G)` and `Y = (D_k, G)` of
+finite-dimensional nonarchimedean spaces whose singletons are analytic domains, such that `Y`
+is split in degree `k` and the action of `Alt^k` on `Y ⟶ X` is not analytic. -/
 theorem part5 (p k : ℕ) [Fact p.Prime] (hpk : p ≤ k)
     (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
     ∃ X Y : (AlternatingAnalytic.NormedSpaceCat (AlternatingAnalytic.RationalField (ZMod p) r))ᵒᵖ ×

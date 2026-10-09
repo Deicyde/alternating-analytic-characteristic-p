@@ -10,7 +10,7 @@ import Mathlib.Analysis.Normed.Module.Seminorm.Basic
 /-!
 # Corollary 4.6 (the bundle theorem), p. 12
 
-Paper statement (Section 4.3, `cor:bundle-cases`): Let `M` be an analytic manifold over `K`, with
+Paper statement (Section 4.3): Let `M` be an analytic manifold over `K`, with
 normed model space `P`. Fiberwise alternating maps give an analytic bifunctor on analytic normed
 vector bundles and their operator-valued analytic morphisms in each of the following settings:
 
@@ -26,73 +26,24 @@ alternative in the first row specifies a separate setting. At every finite smoot
 at `C^∞`, no additional hypothesis on `K`, `P` or the fibers is needed.
 
 ## Formalization notes
-* One pair of theorems per setting (six settings: three alternatives of row 1, rows 2-4) plus a
-  pair for the final `C^n`/`C^∞` sentence: `<setting>_bundle` (objects) and
-  `<setting>_morphism` (morphisms). 14 theorems in all.
-* Analytic manifold: `[ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]` (open-chart model, no
-  boundary or corners). Analytic normed vector bundle: Mathlib `FiberBundle` + `VectorBundle` +
-  `ContMDiffVectorBundle ω _ _ 𝓘(K, P)` with normed model fiber; the actual fibers carry
-  topological-vector-space instances.
-* Object part: the bundle `x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x` of continuous alternating maps, with
-  Mathlib's existing topology and trivialization atlas, is `ContMDiffVectorBundle ω` with model
-  fiber `F₁ [⋀^Fin k]→L[K] F₂`. Here `F₁` is the source and `F₂` the target typical fiber.
-* Morphism part: an operator-valued analytic morphism is an analytic section of the Hom bundle
-  (`ContMDiffSection 𝓘(K, P) (A' →L[K] A) ω (fun b ↦ E' b →L[K] E b)`, contravariant slot, and
-  `v` likewise for `F → F'`, covariant slot). The conclusion is that the fiberwise map
-  `m ↦ v ∘ m ∘ (u, …, u)` is an analytic section of the Hom bundle between the two alternating
-  bundles. Source typical fibers are `A, A'`, target typical fibers `B, B'`; the fiber
-  hypotheses are imposed on both pairs, as the paper says.
-* "Bifunctor": the functor laws (identity and composition) are pointwise consequences of the
-  fiber formula `T b m = v b ∘ m ∘ (u b, …, u b)` and are not stated separately. The library
-  states them for the finite-coordinate row only (`alternatingBundleHom_of_finiteCoordinates_id`,
-  `_comp`, `alternatingBundleFunctor`).
-* Degree: index type `Fin k`, as in the library's bundle files.
-* "Finite continuous coordinates" for a space `X` is a continuous linear equivalence
-  `X ≃L[K] (Fin d → K)` (equivalently, a finite basis with continuous coordinate functionals).
-* `k! ≠ 0` is `((k.factorial : ℕ) : K) ≠ 0`.
-* "Nonarchimedean" for `K` and for target fibers in row 3 is `IsUltrametricDist` of the given
-  norm; "complete" is `CompleteSpace`.
-* Row 1, spherical alternative: "admit equivalent nonarchimedean spherically complete norms" is
-  the definition `HasEquivalentSphericallyCompleteUltrametricNorm` introduced here: a seminorm
-  `q` satisfying the strong triangle inequality, two-sided bounds against the given norm, and the
-  spherical-completeness property for `q`-balls (every nonempty family of pairwise-intersecting
-  closed `q`-balls has a common point). It is stated self-containedly. Cross-checked: its first
-  three fields coincide with the library's `HasEquivalentUltrametricNorm`
-  (`Analysis/EquivalentUltrametric.lean`), and its last clause is the library's
-  `SphericallyCompleteSpace.inter_nonempty` (`Analysis/SphericalCompleteness.lean`) restated for
-  `q`-balls; negative radii are excluded automatically, since the self-intersection condition
-  forces `p.2 ≥ 0`.
-* `c₀(I, K)` is `C₀(I, K)` for a discrete index type `I`; `ℓ¹(I, K)` is
-  `lp (fun _ : I => K) 1`. "`P` is the space or a bounded linear retract of it" is stated as
-  bounded linear `i : P → V`, `r : V → P`, `r ∘ i = id`, which includes `P = V`.
-* The `C^n`/`C^∞` sentence: `n : ℕ∞` (finite orders and `∞`, not `ω`), `M` a `C^n` manifold,
-  `C^n` bundles and `C^n` sections; no hypotheses on `K`, `P` or fibers.
-* No completeness of `K`, `P` or the fibers beyond what the table states.
-
-## Library status (per theorem); overall status: partially proved, no comparator solution
-| Theorems | Status | Where |
-|---|---|---|
-| `row2_finiteCoordinateBase_bundle`, `row2_finiteCoordinateBase_morphism` | proved in the library, by `exact` | `contMDiffVectorBundle_alternating_of_finiteCoordinates` (`Geometry/AnalyticAlternatingBundle.lean`), `alternatingBundleHom_of_finiteCoordinates` (`Geometry/AnalyticAlternatingBundleMorphism.lean`) |
-| `row1_factorial_*`, `row1_finiteSourceCoordinates_*`, `row3_c0Retract_*`, `row4_l1Retract_*`, `smooth_*` (10 theorems) | proved in `Partial/Cor4_6.lean` (library + glue), not library declarations | see below |
-| `row1_spherical_bundle`, `row1_spherical_morphism` | not proved (`sorry` in `Partial/Cor4_6.lean`) | see below |
-
-* `Partial/Cor4_6.lean` repeats the 14 statements of this file character for character and
-  proves 12 of them; only the two `row1_spherical_*` theorems are `sorry`. It is a partial proof
-  file, not a comparator solution: there is no `Solutions/Cor4_6.lean` and no `Cor4_6.json`.
-* The 10 glue-proved theorems have no bundle-level statement in the library. Each is derived from
-  the library's generic assemblies `contMDiffVectorBundle_alternating_of_family` /
-  `alternatingBundleHom_of_family` plus an operator- or parameter-level input
-  (`cpolynomialAt_alternatingMapAction_of_factorial_ne_zero`;
-  `hasBoundedLift_of_finiteCoordinateDomain` + `cpolynomialAt_alternatingMapAction_of_boundedLift`;
-  `isAdmissibleOn_of_c0`; `isAdmissibleOn_of_l1_retract`; `contDiff_alternatingMapAction`) and
-  about 100 lines of glue in that file: a chart-level lemma copied from
-  `contMDiffOn_alternatingMapAction_of_finiteCoordinates`, the c₀ retract step for families (not
-  in the library), and a basis built from `X ≃L[K] (Fin d → K)`.
-* `row1_spherical_bundle`, `row1_spherical_morphism`: not proved. The library's
-  `cpolynomialAt_alternatingMapAction_of_sphericallyComplete` needs the given norm of the target
-  fiber to be ultrametric and spherically complete (`[IsUltrametricDist F]
-  [SphericallyCompleteSpace F]`); the transfer to a fiber that only *admits* an equivalent such
-  norm is not formalized.
+* Two theorems per setting, `<setting>_bundle` (objects) and `<setting>_morphism` (morphisms):
+  the three alternatives of row 1, rows 2-4, and the `C^n`/`C^∞` sentence. The functor laws
+  follow pointwise from the fiber formula and are not stated.
+* Analytic manifold: `[ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]`, so no boundary or corners.
+  Analytic vector bundle: `FiberBundle`, `VectorBundle` and `ContMDiffVectorBundle ω _ _ 𝓘(K, P)`
+  with normed model fiber.
+* Objects: the bundle `x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x` with Mathlib's topology and trivializations
+  is `ContMDiffVectorBundle ω` with model fiber `F₁ [⋀^Fin k]→L[K] F₂`.
+* Morphisms: `u`, `v` are analytic sections of Hom bundles (`u` contravariant, `v` covariant);
+  the conclusion is that `m ↦ v ∘ m ∘ (u, …, u)` is an analytic section of the Hom bundle
+  between the alternating bundles. Source typical fibers are `A, A'`, target `B, B'`.
+* "Finite continuous coordinates" for `X` is `X ≃L[K] (Fin d → K)`; `k! ≠ 0` is
+  `((k.factorial : ℕ) : K) ≠ 0`; "nonarchimedean" is `IsUltrametricDist`.
+* "Admits an equivalent nonarchimedean spherically complete norm" is the definition
+  `HasEquivalentSphericallyCompleteUltrametricNorm` below, stated for seminorm balls.
+* `c₀(I, K)` is `C₀(I, K)` for discrete `I`; `ℓ¹(I, K)` is `lp (fun _ : I => K) 1`. "A bounded
+  linear retract" is `i : P → V`, `r : V → P`, `r ∘ i = id`, which includes `P = V`.
+* The `C^n`/`C^∞` sentence takes `n : ℕ∞`, a `C^n` manifold, `C^n` bundles and sections.
 -/
 
 open Bundle
@@ -116,8 +67,7 @@ def HasEquivalentSphericallyCompleteUltrametricNorm
       (∀ p ∈ S, ∀ p' ∈ S, ∃ z, q (z - p.1) ≤ p.2 ∧ q (z - p'.1) ≤ p'.2) →
       ∃ z, ∀ p ∈ S, q (z - p.1) ≤ p.2)
 
-/-- **Corollary 4.6, Row 1, first alternative: arbitrary model `P`, `k! ≠ 0` in `K`.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 1, `k! ≠ 0` in `K`: the alternating bundle is analytic. -/
 theorem row1_factorial_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -142,8 +92,7 @@ theorem row1_factorial_bundle
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   sorry
 
-/-- **Corollary 4.6, Row 1, first alternative: arbitrary model `P`, `k! ≠ 0` in `K`.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 1, `k! ≠ 0` in `K`: analytic morphisms induce an analytic morphism. -/
 theorem row1_factorial_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -181,9 +130,8 @@ theorem row1_factorial_morphism
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   sorry
 
-/-- **Corollary 4.6, Row 1, second alternative: arbitrary model `P`, `K` nonarchimedean and the target
-fibers admit equivalent nonarchimedean spherically complete norms.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 1, `K` nonarchimedean and target fibers with an equivalent
+spherically complete ultrametric norm: the alternating bundle is analytic. -/
 theorem row1_spherical_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -209,9 +157,8 @@ theorem row1_spherical_bundle
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   sorry
 
-/-- **Corollary 4.6, Row 1, second alternative: arbitrary model `P`, `K` nonarchimedean and the target
-fibers admit equivalent nonarchimedean spherically complete norms.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 1, `K` nonarchimedean and target fibers with an equivalent
+spherically complete ultrametric norm: analytic morphisms induce an analytic morphism. -/
 theorem row1_spherical_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -251,9 +198,8 @@ theorem row1_spherical_morphism
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   sorry
 
-/-- **Corollary 4.6, Row 1, third alternative: arbitrary model `P`, the source fibers have finite continuous
-coordinates.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 1, source fibers with finite continuous coordinates: the alternating
+bundle is analytic. -/
 theorem row1_finiteSourceCoordinates_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -278,9 +224,8 @@ theorem row1_finiteSourceCoordinates_bundle
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   sorry
 
-/-- **Corollary 4.6, Row 1, third alternative: arbitrary model `P`, the source fibers have finite continuous
-coordinates.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 1, source fibers with finite continuous coordinates: analytic
+morphisms induce an analytic morphism. -/
 theorem row1_finiteSourceCoordinates_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -318,8 +263,8 @@ theorem row1_finiteSourceCoordinates_morphism
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   sorry
 
-/-- **Corollary 4.6, Row 2: the base model `P` has finite continuous coordinates; arbitrary normed fibers.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 2, model `P` with finite continuous coordinates: the alternating
+bundle is analytic. -/
 theorem row2_finiteCoordinateBase_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -344,8 +289,8 @@ theorem row2_finiteCoordinateBase_bundle
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   sorry
 
-/-- **Corollary 4.6, Row 2: the base model `P` has finite continuous coordinates; arbitrary normed fibers.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 2, model `P` with finite continuous coordinates: analytic morphisms
+induce an analytic morphism. -/
 theorem row2_finiteCoordinateBase_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -383,9 +328,8 @@ theorem row2_finiteCoordinateBase_morphism
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   sorry
 
-/-- **Corollary 4.6, Row 3: the base model `P` is `c₀(I, K)` or a bounded linear retract of it; `K`
-nonarchimedean; complete nonarchimedean target fibers.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 3, model a retract of `c₀(I, K)`, `K` nonarchimedean, complete
+nonarchimedean target fibers: the alternating bundle is analytic. -/
 theorem row3_c0Retract_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -414,9 +358,8 @@ theorem row3_c0Retract_bundle
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   sorry
 
-/-- **Corollary 4.6, Row 3: the base model `P` is `c₀(I, K)` or a bounded linear retract of it; `K`
-nonarchimedean; complete nonarchimedean target fibers.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 3, model a retract of `c₀(I, K)`, `K` nonarchimedean, complete
+nonarchimedean target fibers: analytic morphisms induce an analytic morphism. -/
 theorem row3_c0Retract_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -458,9 +401,8 @@ theorem row3_c0Retract_morphism
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   sorry
 
-/-- **Corollary 4.6, Row 4: the base model `P` is `ℓ¹(I, K)` or a bounded linear retract of it; complete
-target fibers.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 4, model a retract of `ℓ¹(I, K)`, complete target fibers: the
+alternating bundle is analytic. -/
 theorem row4_l1Retract_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -488,9 +430,8 @@ theorem row4_l1Retract_bundle
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   sorry
 
-/-- **Corollary 4.6, Row 4: the base model `P` is `ℓ¹(I, K)` or a bounded linear retract of it; complete
-target fibers.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 4, model a retract of `ℓ¹(I, K)`, complete target fibers: analytic
+morphisms induce an analytic morphism. -/
 theorem row4_l1Retract_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -531,9 +472,8 @@ theorem row4_l1Retract_morphism
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   sorry
 
-/-- **Corollary 4.6, Final sentence: at every finite smoothness order and at `C^∞` (`n : ℕ∞`), no hypothesis
-on `K`, `P` or the fibers.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, last sentence: for `n : ℕ∞`, the alternating bundle of `C^n` bundles
+is `C^n`. -/
 theorem smooth_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -558,9 +498,7 @@ theorem smooth_bundle
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   sorry
 
-/-- **Corollary 4.6, Final sentence: at every finite smoothness order and at `C^∞` (`n : ℕ∞`), no hypothesis
-on `K`, `P` or the fibers.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, last sentence: for `n : ℕ∞`, `C^n` morphisms induce a `C^n` morphism. -/
 theorem smooth_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]

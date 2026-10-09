@@ -6,7 +6,7 @@ import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 /-!
 # Preservation of analytic bundles by the alternating construction
 
-The two properties of a model space `P` compared in Corollary C.8 of the paper: over every
+The two properties of a model space `P` compared in Corollary C.8: over every
 analytic manifold modeled on `P`, the bundle `x ↦ Alt^k(E₁ x; E₂ x)` of two analytic bundles is
 analytic (`PreservesAnalyticBundles`), and analytic operator-valued sections `u : E' → E`,
 `v : F → F'` induce the analytic section `m ↦ v ∘ m ∘ (u, …, u)` of the operator bundle

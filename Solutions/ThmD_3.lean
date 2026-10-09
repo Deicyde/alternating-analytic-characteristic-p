@@ -1,21 +1,18 @@
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
 /-!
-# Theorem D.3 (Ingleton), p. 43
+# Proof of Theorem D.3
 
-Solution: the statement of `Challenges/ThmD_3.lean`, proved from the library's master
-extension lemma `exists_extension_of_sphericallyComplete`
-(`AlternatingAnalytic/Analysis/SphericalCompleteness.lean`) with the single approximation
-pair `S = {(0, C)}`.
+Applies `exists_extension_of_sphericallyComplete`
+(`AlternatingAnalytic/Analysis/SphericalCompleteness.lean`) to the single pair `(0, C)`.
 -/
 
 namespace AlternatingAnalyticChallenge.ThmD_3
 
 universe uK uV
 
-/-- **Theorem D.3 (Ingleton).** Over a spherically complete ultrametric field, a linear
-functional on a subspace of an ultrametric normed space bounded by `C ‖·‖` extends to a linear
-functional on the whole space with the same bound. -/
+/-- Ingleton's theorem: over a spherically complete ultrametric field, a linear functional on
+a subspace with `‖T₀ v‖ ≤ C ‖v‖` extends to the whole space with the same bound. -/
 theorem ingleton_extension
     {K₁ : Type uK} [NontriviallyNormedField K₁] [IsUltrametricDist K₁]
     [SphericallyCompleteSpace K₁]

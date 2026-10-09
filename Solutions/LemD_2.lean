@@ -4,18 +4,12 @@ import Mathlib.Algebra.Field.ZMod
 import AlternatingAnalytic.Analysis.LaurentSubfieldExtra.LaurentSubfieldClosure
 
 /-!
-# Lemma D.2 (Laurent subfield), p. 42
+# Proof of Lemma D.2
 
-Solution: the statements of `Challenges/LemD_2.lean`, proved from the library
-(`AlternatingAnalytic/Analysis/LaurentSubfieldExtra/`):
-* (1): `AlternatingAnalytic.charP_isUltrametricDist_and_norm_zmod` (`LaurentPolynomialNorm.lean`);
-* (2): `AlternatingAnalytic.norm_sum_zmod_zpow_eq` (`LaurentPolynomialNorm.lean`), the lowest
-  term dominates by the ultrametric inequality;
-* (3): `AlternatingAnalytic.exists_laurentField_evaluation` (`LaurentSubfieldClosure.lean`), from
-  `exists_isometric_laurentField_embedding`, the Laurent expansion `hasSum_laurentSingle`
-  (`LaurentExpansion.lean`) and `fieldRange_ratFunc_eq_subfieldClosure`;
-* (4): `AlternatingAnalytic.sphericallyCompleteSpace_closure_subfieldClosure`
-  (`LaurentSubfieldClosure.lean`), via `laurentField_range_properties`.
+Uses `charP_isUltrametricDist_and_norm_zmod` and `norm_sum_zmod_zpow_eq`
+(`LaurentPolynomialNorm.lean`), `exists_laurentField_evaluation` and
+`sphericallyCompleteSpace_closure_subfieldClosure` (`LaurentSubfieldClosure.lean`), all in
+`AlternatingAnalytic/Analysis/LaurentSubfieldExtra/`.
 -/
 
 open scoped NNReal
@@ -26,8 +20,8 @@ universe u
 
 open AlternatingAnalytic
 
-/-- **Lemma D.2(1).** A complete nontrivially normed field of characteristic `p` is
-ultrametric, and every nonzero element of `𝔽_p` has absolute value `1` in it. -/
+/-- A complete nontrivially normed field of characteristic `p` is ultrametric, and
+nonzero elements of `𝔽_p` have norm `1` in it. -/
 theorem part1
     (K' : Type u) [NontriviallyNormedField K'] [CompleteSpace K']
     (p : ℕ) [Fact p.Prime] [CharP K' p] :
@@ -35,8 +29,8 @@ theorem part1
       ∀ c : ZMod p, c ≠ 0 → ‖ZMod.castHom (dvd_refl p) K' c‖ = 1 := by
   exact AlternatingAnalytic.charP_isUltrametricDist_and_norm_zmod K' p
 
-/-- **Lemma D.2(2).** A finite `𝔽_p`-combination `∑_{i=m}^{M} a_i t^i`, not all `a_i` zero,
-has absolute value `‖t‖ ^ i₀`, where `i₀` is the least index with `a_{i₀} ≠ 0`. -/
+/-- A sum `∑_{i=m}^{M} a_i t^i` with not all `a_i` zero has norm `‖t‖ ^ i₀`, where `i₀` is
+the least index with `a_{i₀} ≠ 0`. -/
 theorem part2
     (K' : Type u) [NontriviallyNormedField K'] [CompleteSpace K']
     (p : ℕ) [Fact p.Prime] [CharP K' p]
@@ -46,9 +40,8 @@ theorem part2
     ‖∑ i ∈ Finset.Icc m M, ZMod.castHom (dvd_refl p) K' (a i) * t ^ i‖ = ‖t‖ ^ i₀ := by
   exact AlternatingAnalytic.norm_sum_zmod_zpow_eq p t ht0 ht1 _ a i₀ hi₀ ha hmin
 
-/-- **Lemma D.2(3).** For `‖t‖ = r ∈ (0, 1)` there is a continuous isometric ring
-homomorphism `ev_t : 𝔽_p((X)) → K′` (with `|X| = r`) sending `∑ a_i X^i` to `∑ a_i t^i`;
-its image is a closed subfield of `K′` equal to the closure of `𝔽_p(t)`. -/
+/-- Evaluation at `t` is a continuous isometric ring homomorphism `𝔽_p((X)) → K′`, with
+`|X| = ‖t‖`, whose image is closed and equals the closure of `𝔽_p(t)`. -/
 theorem part3
     (K' : Type u) [NontriviallyNormedField K'] [CompleteSpace K']
     (p : ℕ) [Fact p.Prime] [CharP K' p]
@@ -62,7 +55,7 @@ theorem part3
       (ev.fieldRange : Set K') = closure (Subfield.closure {t} : Set K') := by
   exact AlternatingAnalytic.exists_laurentField_evaluation p r t ht
 
-/-- **Lemma D.2(4).** The closure `K₁` of `𝔽_p(t)` in `K′` is spherically complete. -/
+/-- The closure of `𝔽_p(t)` in `K′` is spherically complete. -/
 theorem part4
     (K' : Type u) [NontriviallyNormedField K'] [CompleteSpace K']
     (p : ℕ) [Fact p.Prime] [CharP K' p]

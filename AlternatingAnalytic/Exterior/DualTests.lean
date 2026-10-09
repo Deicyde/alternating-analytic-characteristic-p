@@ -5,13 +5,11 @@ import Mathlib.Analysis.Normed.Operator.Bilinear
 /-!
 # Universal and scalar tests for operator families (Theorem 5.2)
 
-For a family `W : P → L(X, Y)` and a normed space `F`, the precomposition family
-`R_F(t)(T) = T ∘ W(t)` takes values in `L(L(Y, F), L(X, F))`. Every comparison in Theorem 5.2 of
-the paper is a fixed bounded linear map carrying one family to another: `R_F` is a bounded linear
-function of `W`, `W` is `R_Y` evaluated at `id_Y`, `J_Y ∘ W` and `R_K` are flips of each other,
-`R_{G*}` is a bounded linear function of `R_K` (through `L(X, G*) ≅ L(G, X*)`), and `R_K` is
-recovered from `R_{G*}` with one nonzero functional on `G`. Hence power-series analyticity on a
-set and the classes `C^n` transfer along each comparison.
+For `W : P → L(X, Y)` and a normed space `F`, the precomposition family is
+`R_F(t)(T) = T ∘ W(t)`, with values in `L(L(Y, F), L(X, F))`. Each comparison in Theorem 5.2 is a
+fixed bounded linear map carrying one family to another (for example, `W` is `R_Y` evaluated at
+`id_Y`, and `J_Y ∘ W` is the flip of `R_K`), so analyticity and the classes `C^n` transfer along
+it.
 -/
 
 set_option maxSynthPendingDepth 2

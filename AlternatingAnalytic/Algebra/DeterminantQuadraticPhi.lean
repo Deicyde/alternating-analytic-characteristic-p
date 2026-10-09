@@ -1,5 +1,13 @@
 import AlternatingAnalytic.Algebra.DeterminantQuadraticBasic
 
+/-!
+# The map Φ of Lemma H.7
+
+The linear map Φ sends `X_i X_j` (the paper's `a_i a_j`) to `T^(i+j)` when
+`i + j ≥ p - 1` and to zero otherwise. In characteristic `p` it kills the 2x2
+Toeplitz minors and the coordinates of `a^2`, hence the degree-two part of `G_0`.
+-/
+
 noncomputable section
 open scoped BigOperators
 
@@ -7,7 +15,7 @@ namespace AlternatingAnalytic.DeterminantQuadratic
 
 variable (K : Type*) [Field K] (p : ℕ)
 
-/-- Discard the powers below `p - 1` after substituting `X_i = U^i`. -/
+/-- Discard the powers below `p - 1` after substituting `X_i = T^i`. -/
 def phi : Poly K p →ₗ[K] Polynomial K :=
   (LinearMap.id - Polynomial.modByMonicHom (Polynomial.X ^ (p - 1))).comp
     (MvPolynomial.aeval (fun i : Fin p => (Polynomial.X : Polynomial K) ^ i.val)).toLinearMap

@@ -4,9 +4,9 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 /-!
 # Support dimension of an exterior vector
 
-The support dimension is the least dimension of a finite-dimensional subspace whose
-exterior power contains the given vector. Finiteness is part of admissibility, so the
-convention that `finrank` is zero for infinite-dimensional spaces cannot affect the minimum.
+The support dimension `sdim ω` is the least dimension of a finite-dimensional subspace whose
+exterior power contains `ω` (Definition B.1). The minimum ranges over finite-dimensional
+subspaces only, so the convention `finrank = 0` in infinite dimension does not interfere.
 -/
 
 namespace AlternatingAnalytic
@@ -64,7 +64,7 @@ theorem exists_finite_exterior_support (ω : ⋀[L]^k V) :
     obtain ⟨W, hW, hω⟩ := hω
     exact ⟨W, hW, Submodule.smul_mem _ c hω⟩
 
-/-- The set of admissible finite support dimensions is nonempty. -/
+/-- Some finite-dimensional subspace supports `ω`; used to define the minimum. -/
 theorem exists_exterior_support_finrank (ω : ⋀[L]^k V) :
     ∃ n : ℕ, ∃ W : Submodule L V,
       Module.Finite L W ∧ ω ∈ exteriorPowerSubmodule k W ∧ finrank L W = n := by
@@ -95,7 +95,7 @@ theorem exteriorSupportDim_zero : exteriorSupportDim (0 : ⋀[L]^k V) = 0 := by
   apply Nat.eq_zero_of_le_zero
   simpa using exteriorSupportDim_le_finrank (⊥ : Submodule L V) (Submodule.zero_mem _)
 
-/-- Scalar multiplication cannot increase support dimension. -/
+/-- Scalar multiplication does not increase support dimension. -/
 theorem exteriorSupportDim_smul_le (c : L) (ω : ⋀[L]^k V) :
     exteriorSupportDim (c • ω) ≤ exteriorSupportDim ω := by
   obtain ⟨W, hW, hω, hdim⟩ := exteriorSupportDim_attained ω
@@ -152,7 +152,7 @@ theorem exteriorPower_map_mem_exteriorPowerSubmodule (f : V →ₗ[L] V')
     ← LinearMap.comp_apply, ← exteriorPower.map_comp]
   rfl
 
-/-- Exterior support dimension cannot increase under any linear map. -/
+/-- Support dimension does not increase under a linear map. -/
 theorem exteriorSupportDim_map_le (f : V →ₗ[L] V') (ω : ⋀[L]^k V) :
     exteriorSupportDim (exteriorPower.map k f ω) ≤ exteriorSupportDim ω := by
   obtain ⟨W, hW, hω, hdim⟩ := exteriorSupportDim_attained ω
@@ -163,7 +163,7 @@ theorem exteriorSupportDim_map_le (f : V →ₗ[L] V') (ω : ⋀[L]^k V) :
     _ ≤ finrank L W := Submodule.finrank_map_le f W
     _ = exteriorSupportDim ω := hdim
 
-/-- The defining attainment and all basic properties of exterior support dimension. -/
+/-- The basic properties of support dimension listed after Definition B.1. -/
 theorem exteriorSupportDim_properties (ι : Type*) :
     (∀ ω : ⋀[L]^k V, ∃ W : Submodule L V, Module.Finite L W ∧
       ω ∈ exteriorPowerSubmodule k W ∧ finrank L W = exteriorSupportDim ω) ∧

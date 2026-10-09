@@ -5,9 +5,9 @@ import Mathlib.Analysis.Normed.Group.Ultra
 /-!
 # Proposition 6.5 from the scalar operator obstruction
 
-Proposition 6.5 (tangent and pullback obstructions) follows from Theorem 6.1(2): Banach spaces
-`E`, `D` for which scalar precomposition `A^k_{E,D;K}` is analytic at no point. The two
-theorems below take such spaces as a hypothesis, stated exactly as the conclusion of
+Proposition 6.5 (tangent and pullback obstructions) follows from Theorem 6.1(2), which gives
+Banach spaces `E`, `D` for which scalar precomposition `A^k_{E,D;K}` is analytic at no point.
+The two theorems below take such spaces as a hypothesis, in the form of the conclusion of
 Theorem 6.1(2), and produce the two global charts of part (1) and the pullback of part (2).
 -/
 
@@ -17,7 +17,7 @@ namespace AlternatingAnalytic.TangentPullback
 
 universe u
 
-/-- **Proposition 6.5(1)**, from witnesses of Theorem 6.1(2): two global analytic charts `id`
+/-- Proposition 6.5(1), given the spaces of Theorem 6.1(2): two global analytic charts `id`
 and `ψ` on a Banach space whose induced transitions on scalar alternating `k`-forms are
 analytic at no point. -/
 theorem tangent_obstruction_of_scalar_obstruction (K : Type u) [NontriviallyNormedField K]
@@ -45,7 +45,7 @@ theorem tangent_obstruction_of_scalar_obstruction (K : Type u) [NontriviallyNorm
     cpolynomialOn_chartShear.analyticOnNhd, cpolynomialOn_chartShear_symm.analyticOnNhd,
     not_analyticAt_chartShear_pullback hA, not_analyticAt_chartShear_symm_pullback hA⟩
 
-/-- **Proposition 6.5(2)**, from witnesses of Theorem 6.1(2): a polynomial map `h` and an
+/-- Proposition 6.5(2), given the spaces of Theorem 6.1(2): a polynomial map `h` and an
 analytic scalar `k`-form `ω₀` whose pullback is analytic at no point as an alternating-valued
 map, but analytic everywhere as a multilinear-valued map. -/
 theorem pullback_obstruction_of_scalar_obstruction (K : Type u) [NontriviallyNormedField K]

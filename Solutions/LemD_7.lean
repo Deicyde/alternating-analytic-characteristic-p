@@ -1,9 +1,9 @@
 import AlternatingAnalytic.Analysis.BaseChangeOperators
 
 /-!
-# Lemma D.7 (operators), p. 45
+# Proof of Lemma D.7
 
-Solution: the statements of `Challenges/LemD_7.lean`, proved from
+Uses `baseChangeOperatorAlgebraic` and `baseChangeOperatorsLinear` from
 `AlternatingAnalytic/Analysis/BaseChangeOperators.lean`.
 -/
 
@@ -18,8 +18,7 @@ universe u
 attribute [local instance] baseChangeModule baseChangeNormedAddCommGroup
   baseChangeNormedSpaceRestrictScalars baseChangeNormedSpace baseChangeIsScalarTower
 
-/-- Lemma D.7, algebraic part: `f ⊗ id` is `K'`-linear on `E₁ ⊗[K₁] K'` and bounded by `‖f‖`
-for the projective norm. -/
+/-- `f ⊗ id` is `K'`-linear on `E₁ ⊗[K₁] K'` and bounded by `‖f‖` for `‖·‖_π`. -/
 theorem baseChangeOperator_algebraic
     (K₁ : Type*) (E₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]
@@ -31,8 +30,8 @@ theorem baseChangeOperator_algebraic
   ⟨(baseChangeOperatorAlgebraic K₁ E₁ K' f).map_smul,
     norm_baseChangeOperatorAlgebraic_apply_le K₁ E₁ K' f⟩
 
-/-- Lemma D.7, completed part: a `K₁`-linear family `f ↦ f_{K'}` of continuous `K'`-linear
-extensions of `f ⊗ id` to the completion, with `‖f_{K'}‖ ≤ ‖f‖` and `f_{K'} ∘ ι_E = ι_E ∘ f`. -/
+/-- There is a `K₁`-linear family `f ↦ f_{K'}` of continuous `K'`-linear operators on `E`
+extending `f ⊗ id`, with `‖f_{K'}‖ ≤ ‖f‖` and `f_{K'} ∘ ι_E = ι_E ∘ f`. -/
 theorem exists_completedBaseChangeOperator
     (K₁ : Type*) (E₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]

@@ -7,15 +7,11 @@ import Mathlib.Data.Nat.Factorial.Basic
 import AlternatingAnalytic.Scalar.FibreObstruction
 
 /-!
-# Lemma F.4 (finite fibre obstruction), p. 51
+# Proof of Lemma F.4
 
-Solution: the statement of `Challenges/LemF_4.lean`, proved from the library by
-`AlternatingAnalytic.FibreObstruction.not_exists_fibre_map` (`Scalar/FibreObstruction.lean`),
-whose ingredients are the (F.3) directions `wedgeEval_proj_eq_zero`,
-`wedgeEval_proj_add_eq_zero` (`Scalar/FibreObstruction/WedgeEval.lean`), the target sign rule
-(F.4) `evalFirst_targetForm_perm` (`Scalar/FibreObstruction/Basic.lean`) and the source sign
-rule `lastSlotValue_comp_perm` (`Scalar/FibreObstruction/SourceSign.lean`). The library repeats
-the definitions below verbatim in the namespace `AlternatingAnalytic.FibreObstruction`.
+Uses `FibreObstruction.not_exists_fibre_map` from
+`AlternatingAnalytic/Scalar/FibreObstruction.lean`; the definitions below match those in
+`FibreObstruction/Basic.lean`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemF_4
@@ -68,7 +64,7 @@ def FibreCondition2
     (∀ r, P.1.map (g r) ≤ P.2) →
       ∀ ξ : Fin k → (Fin (k + 1) → κ), (∀ r, ξ r ∈ P.1) → τ g ξ = 0
 
-/-- **Lemma F.4 (finite fibre obstruction).** If `k! = 0` in `κ`, no `k`-linear map
+/-- Lemma F.4: if `k! = 0` in `κ`, no `k`-linear map
 `τ : Hom_κ(κ^{k+1}, κ^k)^k → Alt^k_κ(κ^{k+1}; κ)` satisfies both conditions (1) and (2). -/
 theorem not_exists_fibre_map (hk : (k.factorial : κ) = 0) :
     ¬ ∃ τ : MultilinearMap κ (fun _ : Fin k => (Fin (k + 1) → κ) →ₗ[κ] (Fin k → κ))

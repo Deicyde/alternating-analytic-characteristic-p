@@ -1,7 +1,13 @@
 import AlternatingAnalytic.Analysis.LaurentSubfield
 import Mathlib.Algebra.Field.ULift
 
-/-! A Laurent coefficient field in the universe of the prescribed base field. -/
+/-!
+# A Laurent subfield of a complete field of characteristic p
+
+Every complete nontrivially normed field `K` of characteristic `p` is a normed algebra over some
+`F_p((X))` with `0 < |X| < 1`, as in step (1) of the proof of Theorem 6.1(1). The prime field is
+lifted to the universe of `K`.
+-/
 
 noncomputable section
 
@@ -13,8 +19,8 @@ namespace AlternatingAnalytic
 
 universe u
 
-/-- Lifting the finite prime field puts the Laurent construction in the same
-universe as the prescribed complete field, without changing its mathematics. -/
+/-- `K` is a normed algebra over `F_p((X))` for some radius `0 < r < 1`, with `F_p` lifted to the
+universe of `K`. -/
 theorem exists_sameUniverse_laurentField_normedAlgebra
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (p : ℕ) [Fact p.Prime] [CharP K p] :

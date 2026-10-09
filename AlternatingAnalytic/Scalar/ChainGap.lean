@@ -9,12 +9,10 @@ import Mathlib.Data.Finset.Insert
 # Chain gap in the word tree (Lemma F.3)
 
 Let `L` be a set of labels and `List L` the word tree `L^{<ω}`, ordered by the prefix relation.
-A `j`-chain is the range of a sequence `s₀, s₁, …` with `s_r ++ [j] <+: s_{r+1}`. We show that
-chains with different labels share at most one word, and that if, for each label `j` of a finite
-label set, a set `a j` contains all but finitely many words of every `j`-chain, then the sets
-`a j` have a common word. The second statement first finds, for each label `j` and each word `t`,
-an extension `s` of `t` all of whose extensions past `s ++ [j]` lie in `a j`, and then applies this
-once for each label.
+A `j`-chain is the range of a sequence `s₀, s₁, …` with `s_r ++ [j] <+: s_{r+1}`. Chains with
+different labels share at most one word. If the label set is finite and, for each label `j`, a set
+`a j` contains all but finitely many words of every `j`-chain, then the sets `a j` have a common
+word.
 -/
 
 namespace AlternatingAnalytic.ChainGap
@@ -54,7 +52,7 @@ theorem not_append_prefix_and {j h : L} (hjh : j ≠ h) {x y : List L} (hx : x +
   simp at this
   exact hjh this
 
-/-- **Lemma F.3, part 1.** Chains with different labels have at most one common word. -/
+/-- Chains with different labels have at most one common word (Lemma F.3, part 1). -/
 theorem labelChain_inter_subsingleton {j h : L} (hjh : j ≠ h) {T T' : Set (List L)}
     (hT : IsLabelChain j T) (hT' : IsLabelChain h T') : (T ∩ T').Subsingleton := by
   obtain ⟨s, hs, rfl⟩ := hT
@@ -95,7 +93,7 @@ theorem exists_extension_forall_mem {j : L} {a : Set (List L)}
   rintro _ ⟨r, rfl⟩
   exact ⟨⟨r + 1, rfl⟩, hout r⟩
 
-/-- **Lemma F.3, part 2 (chain gap).** If, for each label `j`, the set `a j` contains all but
+/-- Chain gap (Lemma F.3, part 2): if, for each label `j`, the set `a j` contains all but
 finitely many words of every `j`-chain, then the sets `a j` have a common word. -/
 theorem iInter_nonempty_of_cofinite_on_chains [Fintype L] (a : L → Set (List L))
     (ha : ∀ j : L, ∀ T : Set (List L), IsLabelChain j T → (T \ a j).Finite) :

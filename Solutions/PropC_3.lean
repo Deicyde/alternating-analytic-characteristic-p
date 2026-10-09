@@ -4,14 +4,11 @@ import AlternatingAnalytic.Algebra.ExteriorSupportDimension
 import AlternatingAnalytic.Analysis.LaurentCoefficientTheorem
 
 /-!
-# Proposition C.3 (support estimate), pp. 37-38
+# Proof of Proposition C.3
 
-Solution: `η := AlternatingAnalytic.completedLaurentCoefficient κ r ℕ k ⟨0, _⟩` with
-`completedLaurentCoefficient_array`, `completedLaurentCoefficient_unique`,
-`completedLaurentCoefficient_support_le` (`Analysis/LaurentCompletedCoefficient.lean`, bundled as
-`completedLaurentCoefficient_full_properties` in `Analysis/LaurentCoefficientTheorem.lean`);
-`Ωκ = determinantArray` by `exteriorPower.linearMap_ext` and `determinantArray_ιMulti`;
-`Mr r = geometricWeightMaximum r` from `geometricWeight_le_maximum`.
+`η` is `completedLaurentCoefficient κ r ℕ k 0`, with its properties
+`completedLaurentCoefficient_array`, `_unique` and `_support_le`
+(`Analysis/LaurentCompletedCoefficient.lean`).
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -32,7 +29,8 @@ noncomputable def coeff0 (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [
 /-- `M_r := max_{l ∈ ℕ} (l + 1) r^l`. -/
 noncomputable def Mr (r : ℝ≥0) : ℝ := ⨆ l : ℕ, ((l : ℝ) + 1) * (r : ℝ) ^ l
 
-/-- **Proposition C.3 (support estimate).** -/
+/-- Each `b ∈ B` has a unique `η(b) ∈ Λ^k_κ E₀` with `Ω^κ(η(b)) = coeff₀(J b)`; `η` is
+`κ`-linear and `sdim(η(b)) ≤ k M_r ‖b‖`. -/
 theorem support_estimate
     (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hk : 1 ≤ k)
     (Ωκ : (⋀[κ]^k (ℕ → κ)) →ₗ[κ] ((Fin k → ℕ) → κ))

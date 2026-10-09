@@ -3,7 +3,14 @@ import AlternatingAnalytic.Analysis.DenseCoefficientExtension
 import AlternatingAnalytic.Analysis.ExteriorCoefficientGrowth
 import AlternatingAnalytic.Analysis.UnitSumGrowth
 
-/-! The actual completed coefficient map and the target's linearly growing block wedges. -/
+/-!
+# The coefficient map on the completed exterior power
+
+Extends the coefficient map `η` from the algebraic exterior power to its completion `B`,
+keeping the support estimate `sdim (η b) ≤ k M_r ‖b‖` (Proposition C.3). As a consequence,
+for `k ≥ 2` the block wedges in `B` have linearly growing sums, so `B` has no equivalent
+nonarchimedean norm (Proposition E.1).
+-/
 
 noncomputable section
 
@@ -16,7 +23,7 @@ namespace AlternatingAnalytic
 variable (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 variable (S : Type*) [TopologicalSpace S] [DiscreteTopology S] (k : ℕ)
 
-/-- The genuine constant coefficient of the completed determinant array. -/
+/-- The constant coefficient `coeff₀(J b)` of the completed determinant array. -/
 def completedLaurentCoefficientArray :
     ProjectiveExteriorCompletion (LaurentField κ r) S k →ₗ[κ] ((Fin k → S) → κ) where
   toFun b := boundedLaurentCoeff κ r 0 (completedExteriorArray (LaurentField κ r) S k b)
@@ -28,7 +35,7 @@ def completedLaurentCoefficientArray :
       boundedLaurentCoeff_smul_const]
     rfl
 
-/-- Passing to the Banach completion preserves the exterior coefficient and its sharp support bound. -/
+/-- The coefficient map extends to the completion with the same support bound. -/
 theorem exists_completedLaurentCoefficient (α : Fin k) :
     ∃ η : ProjectiveExteriorCompletion (LaurentField κ r) S k →ₗ[κ] (⋀[κ]^k (S → κ)),
       (∀ b, determinantArray (η b) = completedLaurentCoefficientArray κ r S k b) ∧
@@ -63,7 +70,7 @@ theorem exists_completedLaurentCoefficient (α : Fin k) :
     rw [ContinuousLinearMap.fromCompletion_apply_coe]
     exact algebraicLaurentCoefficient_array κ r S k α ω
 
-/-- The paper's coefficient-field linear map on the completed projective exterior target. -/
+/-- The `κ`-linear coefficient map `η` on the completed projective exterior power. -/
 def completedLaurentCoefficient (α : Fin k) :
     ProjectiveExteriorCompletion (LaurentField κ r) S k →ₗ[κ] (⋀[κ]^k (S → κ)) :=
   (exists_completedLaurentCoefficient κ r S k α).choose
@@ -94,7 +101,7 @@ theorem completedLaurentCoefficient_unique (α : Fin k)
     β = completedLaurentCoefficient κ r S k α b :=
   determinantArray_injective (hβ.trans (completedLaurentCoefficient_array κ r S k α b).symm)
 
-/-- Coefficient-field pure wedges retain exactly their original exterior vector. -/
+/-- `η` sends a wedge of constant arrays to the same wedge over `κ`. -/
 theorem completedLaurentCoefficient_constant_wedge (α : Fin k) (x : Fin k → (S → κ)) :
     completedLaurentCoefficient κ r S k α
       (completedExteriorWedge (LaurentField κ r) S k (fun i => constantLaurentArray κ r (x i))) =
@@ -105,7 +112,7 @@ theorem completedLaurentCoefficient_constant_wedge (α : Fin k) (x : Fin k → (
       ProjectiveExteriorCompletion (LaurentField κ r) S k) = _
   rw [completedLaurentCoefficient_coe, algebraicLaurentCoefficient_constant_wedge]
 
-/-- The actual completed Laurent exterior target has linearly growing unit block sums. -/
+/-- For `k ≥ 2`, sums of unit block wedges in `B` grow linearly. -/
 theorem laurentExterior_hasLinearUnitSumGrowth (hk : 2 ≤ k) :
     HasLinearUnitSumGrowth (ProjectiveExteriorCompletion (LaurentField κ r) ℕ k) := by
   let α : Fin k := ⟨0, by omega⟩
@@ -118,6 +125,7 @@ theorem laurentExterior_hasLinearUnitSumGrowth (hk : 2 ≤ k) :
     (zero_lt_one.trans_le (one_le_geometricWeightMaximum r))
     (completedLaurentCoefficient_support_le κ r ℕ k α)
 
+/-- For `k ≥ 2`, `B` has no equivalent nonarchimedean norm (Proposition E.1). -/
 theorem laurentExterior_not_hasEquivalentUltrametricNorm (hk : 2 ≤ k) :
     ¬ HasEquivalentUltrametricNorm (LaurentField κ r)
       (ProjectiveExteriorCompletion (LaurentField κ r) ℕ k) :=

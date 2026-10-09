@@ -23,34 +23,25 @@ Here `f` ranges over maps `[k] → [m]`, `b_f = (b_{f(1)},…,b_{f(k)})`, `type 
 (Pol1) is `∑_{σ ∈ S_k} Ψ(b_{σ(1)},…,b_{σ(k)}; x) = ∑_{σ ∈ S_k} (b_{σ(1)} x₁) ∧ ⋯ ∧ (b_{σ(k)} x_k)`.
 
 ## Formalization notes
-* Degree: index type `Fin k`; `k ≥ 1` is `hk : 1 ≤ k`. `κ` is an arbitrary field
-  (Remark C.5: Lemma C.4 holds for every field `κ`).
-* `K₁ = AlternatingAnalytic.LaurentField κ r`, `E₁ = ℕ →ᵇ K₁`, `E₀ = ℕ → κ`, and the inclusion
-  `E₀ ⊆ E₁` is the library's `constantLaurentArray κ r` (coordinatewise `algebraMap κ K₁`),
-  imported from `LaurentCoefficients.lean` for this definition.
-* The bounded `k`-linear lift is `P : ContinuousMultilinearMap K₁ (fun _ : Fin k => E₁ →L[K₁] E₁)
-  ((E₁ [⋀^Fin k]→L[K₁] B) →L[K₁] (E₁ [⋀^Fin k]→L[K₁] B))` with
-  `P (f, …, f) = compContinuousLinearMapCLM f`.
+* The degree index type is `Fin k`; `k ≥ 1` is `hk`. `κ` is any field (Remark C.5).
+* `K₁ = LaurentField κ r`, `E₁ = ℕ →ᵇ K₁`, `E₀ = ℕ → κ`; the inclusion `E₀ ⊆ E₁` is the
+  library's `constantLaurentArray κ r` (coordinatewise `algebraMap κ K₁`).
+* `P` is a `LiftCandidate` with `P (f, …, f) = compContinuousLinearMapCLM f`.
 * `D_a = ContinuousLinearMap.mul K₁ (ℕ →ᵇ K₁) a`. `B`, `J`, `W_B` are the library's
-  `ProjectiveExteriorCompletion K₁ ℕ k`, `completedExteriorArray K₁ ℕ k`,
-  `completedExteriorWedge K₁ ℕ k` (see challenge `LemC_2`).
-* `η` is not imported: the lemma is stated for every map `η : B → Λ^k_κ E₀` with
-  `Ω^κ(η b) = coeff₀(J b)` for all `b`, where `Ω^κ` is any `κ`-linear map with the determinant
-  formula on pure wedges. By injectivity of `Ω^κ` (Lemma B.2) this pins `η` down to the map of
+  `ProjectiveExteriorCompletion`, `completedExteriorArray` and `completedExteriorWedge`
+  (see Lemma C.2).
+* `η` is a hypothesis: any map with `Ω^κ(η b) = coeff₀(J b)`, where `Ω^κ` is any `κ`-linear map
+  with the determinant formula. Since `Ω^κ` is injective (Lemma B.2), this is the `η` of
   Proposition C.3.
-* (Ψ1) is the existence of a `κ`-multilinear map in the first `k` slots with values in
-  `κ`-multilinear maps of the last `k` slots that agrees with `η ∘ Φ` on `E₀^{2k}`.
-* `M_r` is `⨆ l : ℕ, (l + 1) r^l`, `sdim` is the library's `exteriorSupportDim`, `⌊·⌋` is
-  `Nat.floor`, and `‖P‖` is the multilinear operator norm
-  of `LiftCandidate` (introduced here; the type of `P`), written `liftNorm P` (introduced here).
-  Both are defined for general `K, E, F` because elaborating them directly at the concrete Laurent
-  spaces times out (the library uses the same device, `BoundedPrecompositionLiftCandidate`).
-* `type f` is `selectionType f` (introduced here). In (Ψ4) the label set is `Fin m`.
-  (Pol1) is the final conjunct of `coefficient_lift`. (Ψ1)-(Ψ4) and (Pol1) are bundled into the
-  single theorem `coefficient_lift` because `Ψ` is existentially quantified and the parts share it.
-* Universe: `κ : Type u`.
-* `set_option backward.isDefEq.respectTransparency false` (as in the library) is needed for
-  instance search on `ℕ →ᵇ K₁`; it does not change any statement.
+* (Ψ1) is the existence of a `κ`-multilinear map of the first `k` slots into `κ`-multilinear maps
+  of the last `k` slots that agrees with `η ∘ Φ` on `E₀^{2k}`.
+* `sdim` is `exteriorSupportDim`, `⌊·⌋` is `Nat.floor`, and `‖P‖` is `liftNorm P`.
+  `LiftCandidate` and `liftNorm` are defined for general `K, E, F` because elaborating them at
+  the Laurent spaces directly times out.
+* `type f` is `selectionType f`; in (Ψ4) the label set is `Fin m`.
+* (Ψ1)-(Ψ4) and (Pol1) form one theorem, `coefficient_lift`, since they share `Ψ`.
+* `set_option backward.isDefEq.respectTransparency false` is needed for instance search on
+  `ℕ →ᵇ K₁`; it does not change any statement.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -91,7 +82,7 @@ noncomputable def liftNorm {K : Type*} [NontriviallyNormedField K]
   @Norm.norm _ (ContinuousMultilinearMap.hasOpNorm (𝕜 := K) (E := fun _ : Fin k => E →L[K] E)
     (G := (E [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F))) P
 
-/-- The hypotheses of Lemma C.4, and its four conclusions. -/
+/-- A bounded `k`-linear lift `P` yields a coefficient lift `Ψ` with (Ψ1)-(Ψ4) and (Pol1). -/
 theorem coefficient_lift
     (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hk : 1 ≤ k)
     (P : LiftCandidate (LaurentField κ r) (ℕ →ᵇ LaurentField κ r)
@@ -106,7 +97,7 @@ theorem coefficient_lift
       Ωκ (η b) = coeff0 κ r (completedExteriorArray (LaurentField κ r) ℕ k b)) :
     ∃ Ψ : MultilinearMap κ (fun _ : Fin k => ℕ → κ)
         (MultilinearMap κ (fun _ : Fin k => ℕ → κ) (⋀[κ]^k (ℕ → κ))),
-      -- (Ψ1): `Ψ = η ∘ Φ` on `E₀^{2k}`, and `Ψ` is `2k`-linear over `κ` (by its type)
+      -- (Ψ1): `Ψ = η ∘ Φ` on `E₀^{2k}`; `2k`-linearity is in the type
       (∀ u x : Fin k → ℕ → κ,
         Ψ u x = η (P (fun i => ContinuousLinearMap.mul (LaurentField κ r)
             (ℕ →ᵇ LaurentField κ r) (constantLaurentArray κ r (u i)))

@@ -1,6 +1,11 @@
 import AlternatingAnalytic.Analysis.LaurentCoefficients
 
-/-! Norm estimates from initial Laurent coefficient vanishing. -/
+/-!
+# Norm bounds from vanishing coefficients
+
+If all coefficients of a Laurent series (or of a bounded Laurent array) below degree `m`
+vanish, its norm is at most `r ^ m`.
+-/
 
 open scoped NNReal BoundedContinuousFunction
 
@@ -8,7 +13,7 @@ namespace AlternatingAnalytic
 
 variable (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 
-/-- Vanishing coefficients below degree `m` give the corresponding valuation bound. -/
+/-- If all coefficients of `x` below degree `m` vanish, then `‖x‖ ≤ r ^ m`. -/
 theorem laurentField_norm_le_of_coeff_eq_zero (x : LaurentField κ r) (m : ℤ)
     (h : ∀ n : ℤ, n < m → LaurentField.coeff κ r n x = 0) :
     ‖x‖ ≤ (r : ℝ) ^ m := by

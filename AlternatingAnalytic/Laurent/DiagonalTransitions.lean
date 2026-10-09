@@ -14,7 +14,8 @@ is a unit of `L(E, E)`, since `D_{1+a} = 1 + D_a` and `‖D_a‖ ≤ ‖a‖ < 1
 is ultrametric, since then `‖1 + a_i‖ = 1`. The map `a ↦ D_{1+a}` is affine, hence analytic, and
 `a ↦ D_{1+a}⁻¹` is analytic on the ball because inversion is analytic on the units of the Banach
 algebra `L(E, E)`. Finally `W ∘ (D_{1+a}, …, D_{1+a}) = A(id + D_a)(W)`, so the non-analyticity of
-the induced section is Proposition C.6 (part 2) at `u₀ = id`, taken here as a hypothesis.
+the induced section is the second assertion of Proposition C.6 at `u₀ = id`, taken here as a
+hypothesis.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -108,7 +109,7 @@ theorem compContinuousLinearMap_mul_one_add {ι : Type v} [Fintype ι] {F : Type
   rw [mul_one_add]
   rfl
 
-/-- Non-analyticity of the induced section from Proposition C.6 (part 2) at `u₀ = id`. -/
+/-- Non-analyticity of the induced section, from Proposition C.6 at `u₀ = id`. -/
 theorem not_analyticAt_compContinuousLinearMap_mul_one_add {ι : Type v} [Fintype ι] {F : Type*}
     [NormedAddCommGroup F] [NormedSpace K F] (W : (ℕ →ᵇ K) [⋀^ι]→L[K] F) (a₀ : C₀(ℕ, K))
     (hC6 : ¬ AnalyticAt K
@@ -122,7 +123,7 @@ theorem not_analyticAt_compContinuousLinearMap_mul_one_add {ι : Type v} [Fintyp
   simp_rw [compContinuousLinearMap_mul_one_add]
   exact hC6
 
-/-- **Corollary C.7, part 1.** Over `K₁ = κ((X))`, on the open unit ball `U` of `c₀(ℕ, K₁)` the
+/-- Corollary C.7, first part: over `K₁ = κ((X))`, on the open unit ball `U` of `c₀(ℕ, K₁)` the
 transitions `D_{1+a}` are isometric units of `L(E₁, E₁)`, and the transition and its inverse are
 analytic on `U`. -/
 theorem laurent_part1 (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
@@ -143,9 +144,9 @@ theorem laurent_part1 (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fac
   ⟨fun _ ha => norm_mul_one_add_apply ha, fun _ ha => isUnit_mul_one_add ha,
     fun a _ => analyticAt_mul_one_add a, analyticOnNhd_inverse_mul_one_add⟩
 
-/-- **Corollary C.7, part 2 (conditional on Proposition C.6, part 2).** Over `K₁ = κ((X))`, the
-chart-`τ₀` expression `a ↦ W_B ∘ (D_{1+a}, …, D_{1+a})` is analytic at no point of the open unit
-ball, given that `a ↦ A(u₀ + D_a)(W_B)` is analytic at no point for every `u₀`. -/
+/-- Corollary C.7, second part: over `K₁ = κ((X))`, if `a ↦ A(u₀ + D_a)(W_B)` is analytic at no
+point for every `u₀` (Proposition C.6), then the chart-`τ₀` expression
+`a ↦ W_B ∘ (D_{1+a}, …, D_{1+a})` is analytic at no point of the open unit ball. -/
 theorem not_analyticAt_wedge_mul_one_add (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)]
     [Fact (r < 1)] (k : ℕ)
     (hC6 : ∀ (u₀ : (ℕ →ᵇ LaurentField κ r) →L[LaurentField κ r] (ℕ →ᵇ LaurentField κ r))

@@ -2,19 +2,17 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Analysis.DiscreteSphericalCompleteness
 
 /-!
-# Lemma D.1 (discrete distances), pp. 41-42
+# Proof of Lemma D.1
 
-Solution: the statement of `Challenges/LemD_1.lean`, proved from the library theorem
-`AlternatingAnalytic.sphericallyCompleteSpace_of_discreteDist_radius`
-(`AlternatingAnalytic/Analysis/DiscreteSphericalCompleteness.lean`), whose hypothesis is
-`dist x y = r ^ n` for `x ≠ y`.
+Follows from `sphericallyCompleteSpace_of_discreteDist_radius`
+(`Analysis/DiscreteSphericalCompleteness.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.LemD_1
 
 universe u
 
-/-- **Lemma D.1.** A complete ultrametric space whose distances lie in `r ^ ℤ ∪ {0}` for some
+/-- A complete ultrametric space whose distances lie in `r ^ ℤ ∪ {0}` for some
 `0 < r < 1` is spherically complete. -/
 theorem sphericallyComplete_of_discrete_distances
     {Y : Type u} [MetricSpace Y] [IsUltrametricDist Y] [CompleteSpace Y]

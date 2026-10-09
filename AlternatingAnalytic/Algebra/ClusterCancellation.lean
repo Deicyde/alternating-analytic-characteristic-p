@@ -6,9 +6,12 @@ import Mathlib.Tactic.FinCases
 /-!
 # Cancellation of clusters containing no output index
 
-Finite families are indexed separately for each input slot. Distinct labeled blocks
-are separated: every point of one is below every point of the other. Consecutive,
-disjoint clusters in the homogeneous set have exactly this property.
+Lemma B.11: for finite families of clusters, one family per slot, the determinant
+array of Ψ on the sums of all cluster inputs, evaluated at the first points of chosen
+output clusters, equals the cluster value of the output clusters. Every term with an
+occupied cluster that is not an output cluster cancels. The main proof assumes the
+clusters are pairwise separated (every point of one below every point of the other);
+disjoint clusters of consecutive points of `H` are separated.
 -/
 
 open Finset
@@ -52,8 +55,8 @@ theorem sum_weighted_split_at {I P : Type*} [Fintype I] [DecidableEq I] [Fintype
   rw [hprod]
   ac_rfl
 
-/-- A local weighted double sum vanishing at a coordinate makes the full weighted
-sum vanish. This is a finite-sum statement, independent of the coefficient geometry. -/
+/-- If the weighted double sum over one coordinate vanishes, the full weighted sum
+vanishes. -/
 theorem sum_weighted_double_eq_zero {I P Q : Type*} [Fintype I] [DecidableEq I]
     [Fintype P] [Fintype Q] (j : I) (s : I → P → L) (w : I → Q → L)
     (f : (I → P) → (I → Q) → L)
@@ -106,8 +109,8 @@ theorem sum_weighted_double_eq_zero {I P Q : Type*} [Fintype I] [DecidableEq I]
   · have : IsEmpty P := not_nonempty_iff.mp hP
     simp
 
-/-- Across separated blocks only the labels matter; within one block the internal
-position comparisons determine the order pattern. -/
+/-- For separated blocks, the order pattern of labeled points is determined by the
+block labels and the positions within each block. -/
 theorem separated_blocks_order_pattern {G I : Type*} (C : G → Fin 4 → ℕ)
     (hmono : ∀ g, StrictMono (C g))
     (hsep : ∀ g h, g ≠ h →
@@ -129,8 +132,7 @@ theorem separated_blocks_order_pattern {G I : Type*} (C : G → Fin 4 → ℕ)
     · exact ⟨iff_of_false (not_lt_of_gt (hgt _ _)) (not_lt_of_gt (hgt _ _)),
         iff_of_false (ne_of_gt (hgt _ _)) (ne_of_gt (hgt _ _))⟩
 
-/-- Two disjoint increasing four-point intervals in `H` are separated. The interval
-hypotheses express that the four points are consecutive elements of `H`. -/
+/-- Two disjoint clusters of four consecutive points of `H` are separated. -/
 theorem cluster_separated_of_intervals (H : Set ℕ) (C D : Fin 4 → ℕ)
     (hC : StrictMono C) (hD : StrictMono D)
     (hCH : ∀ p, C p ∈ H) (hDH : ∀ p, D p ∈ H)
@@ -154,16 +156,16 @@ theorem cluster_separated_of_intervals (H : Set ℕ) (C D : Fin 4 → ℕ)
 
 variable {J : Fin k → Type*}
 
-/-- The labeled blocks of the operator, vector, and output coordinates. -/
+/-- The blocks holding the operator, vector and output indices. -/
 def assignmentTag (A B O : ∀ j, J j) (i : Fin 3 × Fin k) : Sigma J :=
   ⟨i.2, ![A i.2, B i.2, O i.2] i.1⟩
 
-/-- The internal positions of the operator, vector, and output coordinates. -/
+/-- The positions of the operator, vector and output indices within their blocks. -/
 def assignmentPosition (a y : Fin k → Fin 4) (i : Fin 3 × Fin k) : Fin 4 :=
   ![a i.2, y i.2, 0] i.1
 
-/-- Changing two positions in a single slot preserves comparisons within each
-occupied block under exactly the three possible coincidence conditions. -/
+/-- Changing the operator and vector positions in one slot preserves comparisons
+within each block, under the stated conditions for blocks that coincide. -/
 theorem assignmentPosition_update_pattern (A B O : ∀ j, J j)
     (a y : Fin k → Fin 4) (j : Fin k) (p q p' q' : Fin 4)
     (hab : A j = B j → (p < q ↔ p' < q') ∧ (p = q ↔ p' = q'))
@@ -188,14 +190,14 @@ theorem assignmentPosition_update_pattern (A B O : ∀ j, J j)
     omega
   · simp [assignmentPosition, hn]
 
-/-- The actual coefficient associated to a fixed assignment of input/output blocks. -/
+/-- The coefficient for a fixed assignment of operator, vector and output blocks. -/
 noncomputable def assignedClusterCoefficient (Ψ : ClusterMap L k)
     (C : Sigma J → Fin 4 → ℕ) (A B O : ∀ j, J j) (a y : Fin k → Fin 4) : L :=
   clusterCoefficient Ψ (fun j => C ⟨j, A j⟩ (a j))
     (fun j => C ⟨j, B j⟩ (y j)) (fun j => C ⟨j, O j⟩ 0)
 
-/-- The actual determinant evaluation with possibly different operator and vector
-block assignments, keeping the selected output blocks fixed. -/
+/-- The determinant array evaluation for a fixed assignment of operator and vector
+blocks, at fixed output blocks. -/
 noncomputable def assignedClusterValue (Ψ : ClusterMap L k)
     (C : Sigma J → Fin 4 → ℕ) (A B O : ∀ j, J j) : L :=
   determinantArray
@@ -213,8 +215,8 @@ theorem assignedClusterValue_expansion (Ψ : ClusterMap L k)
     (fun _ => clusterVectorWeight) (fun j => C ⟨j, A j⟩)
     (fun j => C ⟨j, B j⟩) (fun j => C ⟨j, O j⟩ 0)
 
-/-- A scalar function depending only on the relative order of two internal
-positions is annihilated by the two cluster weights. -/
+/-- The cluster weights kill a function that depends only on the relative order of
+two positions. -/
 theorem sum_cluster_pair_of_pattern (f : Fin 4 → Fin 4 → L)
     (h : ∀ p q p' q', ((p < q ↔ p' < q') ∧ (p = q ↔ p' = q')) →
       f p q = f p' q') :
@@ -252,8 +254,8 @@ variable (Ψ : ClusterMap L k) (H : Set ℕ)
 
 include hpattern hmono hCH hsep
 
-/-- Coefficient homogeneity transports exactly the permissible position changes
-inside the two input blocks assigned to a single slot. -/
+/-- On an order-homogeneous set, the coefficient is unchanged by moving the operator
+and vector positions of one slot in a way that preserves the order pattern. -/
 theorem assignedClusterCoefficient_update_eq (A B O : ∀ j, J j)
     (a y : Fin k → Fin 4) (j : Fin k) (p q p' q' : Fin 4)
     (hab : A j = B j → (p < q ↔ p' < q') ∧ (p = q ↔ p' = q'))
@@ -272,8 +274,8 @@ theorem assignedClusterCoefficient_update_eq (A B O : ∀ j, J j)
   simpa [clusterCoefficientTuple, assignedClusterCoefficient,
     assignmentTag, assignmentPosition] using h
 
-/-- If an assigned operator block is not its slot's output block, the entire
-assigned group of the genuine determinant-array expansion vanishes. -/
+/-- The group of terms vanishes if some operator block is not its slot's output
+block. -/
 theorem assignedClusterValue_eq_zero_of_operator_free (A B O : ∀ j, J j)
     (j : Fin k) (hfree : A j ≠ O j) : assignedClusterValue Ψ C A B O = 0 := by
   classical
@@ -306,7 +308,7 @@ theorem assignedClusterValue_eq_zero_of_operator_free (A B O : ∀ j, J j)
         exact mul_assoc _ _ _
       _ = 0 := by rw [sum_clusterOperatorWeight, zero_mul]
 
-/-- The corresponding cancellation when the free block occurs in a vector input. -/
+/-- The group of terms vanishes if some vector block is not its slot's output block. -/
 theorem assignedClusterValue_eq_zero_of_vector_free (A B O : ∀ j, J j)
     (j : Fin k) (hfree : B j ≠ O j) : assignedClusterValue Ψ C A B O = 0 := by
   classical
@@ -333,9 +335,8 @@ theorem assignedClusterValue_eq_zero_of_vector_free (A B O : ∀ j, J j)
       rw [hc p q]
     _ = 0 := by rw [sum_clusterVectorWeight, mul_zero, zero_mul]
 
-/-- The paper's output-free cluster cancellation lemma. Finite families are indexed
-by `J j`, and `O j` chooses the output cluster in that family. The left side is the
-actual evaluation of Ψ on the sums of all cluster inputs. -/
+/-- Lemma B.11 for separated clusters. The family for slot `j` is indexed by `J j`,
+and `O j` is its output cluster. -/
 theorem cluster_family_cancellation [∀ j, Fintype (J j)] (O : ∀ j, J j) :
     determinantArray
       (Ψ (fun j => ∑ γ : J j, clusterInput clusterOperatorWeight (C ⟨j, γ⟩))
@@ -370,8 +371,8 @@ theorem cluster_family_cancellation [∀ j, Fintype (J j)] (O : ∀ j, J j) :
       · simp
     _ = clusterValue Ψ (fun j => C ⟨j, O j⟩) := rfl
 
-/-- The staircase interface: an entry from the fixed family-sum exterior vector
-equals the value of any representative with the same labeled-block order. -/
+/-- Lemma B.11, with the cluster value computed on any family with the same block
+order. This is the form used in Lemma B.12. -/
 theorem cluster_family_cancellation_of_order [∀ j, Fintype (J j)] (O : ∀ j, J j)
     (D : Fin k → Fin 4 → ℕ) (hD : ∀ j, StrictMono (D j))
     (hDH : ∀ j p, D j p ∈ H) (τ : Equiv.Perm (Fin k))
@@ -387,8 +388,8 @@ theorem cluster_family_cancellation_of_order [∀ j, Fintype (J j)] (O : ∀ j, 
 
 end Homogeneous
 
-/-- The cancellation theorem stated directly for pairwise disjoint consecutive
-clusters of the homogeneous set, as in the paper. -/
+/-- Lemma B.11: output-free clusters cancel, for pairwise disjoint clusters of four
+consecutive points of `H`. -/
 theorem cluster_family_cancellation_of_intervals [∀ j, Fintype (J j)]
     (Ψ : ClusterMap L k) (H : Set ℕ)
     (hpattern : ∀ (z z' : Fin 3 × Fin k → ℕ),

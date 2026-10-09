@@ -1,6 +1,11 @@
 import AlternatingAnalytic.Analysis.SortedBasisLift
 
-/-! Quantitative bounds for lifts arising from any bounded retraction. -/
+/-!
+# Norm of the lift from a bounded retraction
+
+The lift `contractingRetractionLift` built from a bounded retraction `ρ` of multilinear
+onto alternating maps has norm at most `‖ρ‖` (Proposition 4.1).
+-/
 
 noncomputable section
 
@@ -20,8 +25,7 @@ noncomputable local instance boundedRetractionLiftNorm (n : ℕ) :
     (𝕜 := K) (E := fun _ : Fin n => E →L[K] E')
     (G := (E' [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F))
 
-/-- The lift has norm at most the norm of the retraction; no contraction
-assumption is needed. -/
+/-- The lift has norm at most the norm of the retraction. -/
 theorem norm_contractingRetractionLift_le_norm (n : ℕ)
     (r : (E [×n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F)) :
     ‖contractingRetractionLift (E' := E') n r‖ ≤ ‖r‖ := by
@@ -42,7 +46,7 @@ theorem norm_contractingRetractionLift_le_norm (n : ℕ)
       rw [ContinuousAlternatingMap.norm_toContinuousMultilinearMap]
       ring
 
-/-- A pointwise estimate for the actual lift and its operator arguments. -/
+/-- Pointwise bound for the lift. -/
 theorem norm_contractingRetractionLift_apply_le (n : ℕ)
     (r : (E [×n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F))
     (f : Fin n → E →L[K] E') (m : E' [⋀^Fin n]→L[K] F) (x : Fin n → E) :

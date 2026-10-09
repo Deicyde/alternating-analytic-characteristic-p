@@ -7,11 +7,11 @@ import Mathlib.Algebra.BigOperators.Ring.Finset
 /-!
 # Inverse-Vandermonde interpolation of algebraic homogeneous polynomials
 
-Let `b` be an `n`-linear map (no continuity) and `v : ι → E` finitely many vectors. Evaluating the
-diagonal `y ↦ b (y, …, y)` at the grid points `∑ j, ν (g j) • v j`, where `g : ι → Fin (n + 1)`
-selects distinct nodes `ν`, and weighting with entries of the inverse Vandermonde matrix in each
-coordinate isolates the sum of `b (v ∘ f)` over the words `f` with a prescribed multiplicity
-function. This is the interpolation step of Proposition I.2 of the paper.
+Let `b` be an `n`-linear map (not assumed continuous) and `v : ι → E` finitely many vectors.
+Evaluating the diagonal `y ↦ b (y, …, y)` at the grid points `∑ j, ν (g j) • v j`, where
+`g : ι → Fin (n + 1)` selects distinct nodes `ν`, and weighting with entries of the inverse
+Vandermonde matrix in each coordinate isolates the sum of `b (v ∘ f)` over the words `f` with a
+prescribed multiplicity function. This is the interpolation step in the proof of Proposition I.2.
 -/
 
 open Finset
@@ -46,7 +46,7 @@ theorem prod_word_eq_prod_pow {ι : Type*} [Fintype ι] [DecidableEq ι] {n : �
   rw [Finset.prod_congr rfl (fun r hr => by rw [(Finset.mem_filter.mp hr).2]),
     Finset.prod_const, wordCount_val]
 
-/-- **Interpolation identity.** Inverse-Vandermonde weights on the grid isolate the words with a
+/-- Inverse-Vandermonde weights on the grid isolate the words with a
 prescribed multiplicity function `m`. -/
 theorem sum_interpolation {ι : Type*} [Fintype ι] [DecidableEq ι] {n : ℕ}
     (ν : Fin (n + 1) → K) (hν : Function.Injective ν)

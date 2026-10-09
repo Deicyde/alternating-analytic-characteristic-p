@@ -9,11 +9,10 @@ For a commutative ring `R` and an `R`-module `M`, `shuffle μ ν` is the product
 `μ ∈ Alt^k(M; R)` and `ν ∈ Alt^l(M; R)` given by Mathlib's `AlternatingMap.domCoprod` (a signed sum
 over shuffles), followed by multiplication `R ⊗ R → R` and reindexing along `finSumFinEquiv`.
 On multilinear maps, `mulProd a b` is the unsymmetrized product `v ↦ a(v_{<k}) b(v_{≥k})`.
-The main result of this file, `shuffle_alternatization`, says that the shuffle product of two
-alternatizations is the alternatization of the product; it is Mathlib's
-`MultilinearMap.domCoprod_alternization`, transported along `mul'` and `finSumFinEquiv`. We also
-prove the associativity, commutativity and unit laws of `mulProd`, the bilinearity of `shuffle`,
-and its naturality under linear maps and under reindexing by `finCongr`.
+The key lemma `shuffle_alternatization` says that the shuffle product of two alternatizations is
+the alternatization of the product (Mathlib's `MultilinearMap.domCoprod_alternization`). The
+file also gives the laws of `mulProd`, bilinearity of `shuffle`, and its naturality under linear
+maps and reindexing by `finCongr`.
 -/
 
 open Equiv

@@ -5,15 +5,21 @@ import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 /-!
 # Analytic alternating bundles over finite-coordinate manifolds
 
-The existing topological bundle of continuous alternating maps is `C^n` whenever
-the joint model action preserves `C^n` families on open subsets of the fixed base.
-For analytic manifolds with supplied continuous linear coordinates in `K^d`,
-finite-coordinate family preservation discharges this premise for every degree.
+Mathlib's bundle of continuous alternating maps `x ↦ Alt^k(E₁ x; E₂ x)` is `C^n`
+whenever the model action `alternatingMapAction` takes `C^n` families on open subsets
+of the base to `C^n` families. Over an analytic manifold whose model has continuous
+linear coordinates `P ≃L[K] K^d`, this holds for every degree, so the bundle is
+analytic. This is the object part of Corollary 4.6 in the finite-coordinate setting;
+morphisms are in `AnalyticAlternatingBundleMorphism.lean`.
 
-These results use Mathlib's existing total-space topology and its actual,
-topological fibers. They formalize the object construction and transition formula
-of `paper/charp.tex`, `fam:thm:finite-bundles` and `fam:eq:bundle-transitions`.
-The morphism and category-theoretic bifunctor constructions are separate.
+## Main results
+
+- `contMDiffVectorBundle_alternating_of_family`: the bundle is `C^n` if the model action
+  preserves `C^n` families.
+- `coordChangeL_continuousAlternatingMap_eq_alternatingMapAction`: the transition
+  formula.
+- `contMDiffVectorBundle_alternating_of_finiteCoordinates`: the bundle is analytic over
+  a finite-coordinate base.
 -/
 
 noncomputable section
@@ -38,8 +44,8 @@ variable (k : ℕ)
   (e₂ e₂' : Trivialization F₂ (π F₂ E₂))
   [e₁.IsLinear K] [e₁'.IsLinear K] [e₂.IsLinear K] [e₂'.IsLinear K]
 
-/-- The alternating transition uses the reverse source transition and the forward
-target transition. This algebraic identity is independent of regularity order. -/
+/-- The alternating transition is the model action of the reverse source transition and
+the forward target transition. -/
 theorem continuousAlternatingMapCoordChange_eq_alternatingMapAction (b : M) :
     Pretrivialization.continuousAlternatingMapCoordChange K (Fin k) e₁ e₁' e₂ e₂' b =
       alternatingMapAction k
@@ -52,7 +58,7 @@ theorem continuousAlternatingMapCoordChange_eq_alternatingMapAction (b : M) :
 variable [∀ x, TopologicalSpace (E₁ x)] [∀ x, TopologicalSpace (E₂ x)]
   [FiberBundle F₁ E₁] [FiberBundle F₂ E₂]
 
-/-- On the common domain, the model action is the actual pretrivialization change. -/
+/-- On the common domain, the model action computes the change of pretrivialization. -/
 theorem alternatingMapAction_coordChange_apply (b : M)
     (hb : b ∈ e₁.baseSet ∩ e₂.baseSet ∩ (e₁'.baseSet ∩ e₂'.baseSet))
     (L : F₁ [⋀^Fin k]→L[K] F₂) :
@@ -84,8 +90,8 @@ variable {P H : Type*} [NormedAddCommGroup P] [NormedSpace K P]
 
 include hfamily
 
-/-- Local family preservation makes the alternating transition operators `C^n`
-on the four-way open overlap. No global regularity of the joint action is assumed. -/
+/-- If the model action preserves `C^n` families, the alternating transitions are `C^n`
+on the four-way overlap. -/
 theorem contMDiffOn_continuousAlternatingMapCoordChange_of_family
     (e₁ e₁' : Trivialization F₁ (π F₁ E₁))
     (e₂ e₂' : Trivialization F₂ (π F₂ E₂))
@@ -108,8 +114,7 @@ theorem contMDiffOn_continuousAlternatingMapCoordChange_of_family
 
 variable [∀ x, IsTopologicalAddGroup (E₂ x)] [∀ x, ContinuousSMul K (E₂ x)]
 
-/-- Assemble regularity on the existing alternating prebundle, at any order and
-over an arbitrary model with corners, from local joint-action family preservation. -/
+/-- If the model action preserves `C^n` families, the alternating prebundle is `C^n`. -/
 theorem alternatingVectorPrebundle_isContMDiff_of_family :
     (Bundle.ContinuousAlternatingMap.vectorPrebundle K (Fin k) F₁ E₁ F₂ E₂).IsContMDiff
       I n where
@@ -119,8 +124,7 @@ theorem alternatingVectorPrebundle_isContMDiff_of_family :
       contMDiffOn_continuousAlternatingMapCoordChange_of_family k hfamily e₁ e₁' e₂ e₂',
       Pretrivialization.continuousAlternatingMapCoordChange_apply⟩
 
-/-- The actual alternating bundle, with Mathlib's existing topology and fibers,
-is `C^n` under local family preservation. -/
+/-- If the model action preserves `C^n` families, the alternating bundle is `C^n`. -/
 theorem contMDiffVectorBundle_alternating_of_family :
     ContMDiffVectorBundle n (F₁ [⋀^Fin k]→L[K] F₂)
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) I := by
@@ -134,8 +138,8 @@ section BundleTransitions
 
 variable [∀ x, IsTopologicalAddGroup (E₂ x)] [∀ x, ContinuousSMul K (E₂ x)]
 
-/-- The actual alternating-bundle coordinate operator is the joint model action
-on the reverse/forward transition pair on every common trivializing domain. -/
+/-- On a common trivializing domain, the coordinate change of the alternating bundle is
+the model action of the reverse source and forward target transitions. -/
 theorem coordChangeL_continuousAlternatingMap_eq_alternatingMapAction (k : ℕ)
     (e₁ e₁' : Trivialization F₁ (π F₁ E₁))
     (e₂ e₂' : Trivialization F₂ (π F₂ E₂))
@@ -169,25 +173,23 @@ variable {P : Type*} [NormedAddCommGroup P] [NormedSpace K P]
 
 include c
 
-/-- Every alternating degree gives an analytic prebundle over a finite-coordinate
-analytic base. The field and model fibers need not be complete. -/
+/-- Over a finite-coordinate analytic base, the alternating prebundle is analytic in
+every degree. -/
 theorem alternatingVectorPrebundle_isContMDiff_of_finiteCoordinates :
     (Bundle.ContinuousAlternatingMap.vectorPrebundle K (Fin k) F₁ E₁ F₂ E₂).IsContMDiff
       𝓘(K, P) ω :=
   alternatingVectorPrebundle_isContMDiff_of_family k
     (fun {_} hU {_} hγ ↦ contMDiffOn_alternatingMapAction_of_finiteCoordinates c k hU hγ)
 
-/-- Analytic object closure on the existing alternating bundle, with the supplied
-finite coordinates as an explicit argument. Both `d = 0` and `k = 0` are included. -/
+/-- Over a finite-coordinate analytic base, the alternating bundle is analytic. -/
 theorem contMDiffVectorBundle_alternating_of_finiteCoordinates :
     ContMDiffVectorBundle ω (F₁ [⋀^Fin k]→L[K] F₂)
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) :=
   contMDiffVectorBundle_alternating_of_family k
     (fun {_} hU {_} hγ ↦ contMDiffOn_alternatingMapAction_of_finiteCoordinates c k hU hγ)
 
-/-- The finite-coordinate analytic alternating-bundle theorem: the existing
-prebundle is analytic, its actual bundle is analytic, and both the model and actual
-transition operators have the prescribed contravariant/covariant formula. -/
+/-- Over a finite-coordinate analytic base, the alternating prebundle and bundle are
+analytic, and their transitions are given by the model action. -/
 theorem analyticAlternatingBundle_of_finiteCoordinates :
     (Bundle.ContinuousAlternatingMap.vectorPrebundle K (Fin k) F₁ E₁ F₂ E₂).IsContMDiff
         𝓘(K, P) ω ∧

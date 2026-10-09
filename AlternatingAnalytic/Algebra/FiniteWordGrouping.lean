@@ -4,16 +4,13 @@ import Mathlib.Data.Fintype.EquivFin
 import Mathlib.LinearAlgebra.Quotient.Defs
 
 /-!
-# Finite word orbit coefficient grouping
+# Grouping the expansion of a diagonal by word orbits
 
-A word orbit is the finite set of distinct coordinate permutations. One actual
-representative is chosen for each orbit, and its coefficient is the sum on that
-orbit; all other coefficients are zero. No stabilizer multiplicities occur.
-
-Orbit and multiplicity lemmas need no scalar assumptions. Finite diagonal
-regrouping uses ordinary modules over a field. Over an infinite field, algebraic
-polarization in the quotient recovers submodule membership from the diagonal.
-All statements include degree zero and empty label types or finite supports.
+The orbit of a word `a : Fin d → J` is the set of its distinct rearrangements. We choose one
+representative per orbit and give it the sum of `M` over the orbit as coefficient; other words
+get coefficient zero. Expanding `M (fun _ => ∑ j ∈ s, x j • b j)` in these coefficients needs
+no factorial. Over an infinite field, every coefficient lies in any submodule containing the
+diagonal of `M`. The coefficient lifts of Theorem 4.5 on c₀ and ℓ¹ use this grouping.
 -/
 
 noncomputable section
@@ -62,7 +59,7 @@ theorem wordOrbit_eq_of_mem {a u : Fin d → J} (h : u ∈ wordOrbit a) :
 theorem wordOrbit_nonempty (a : Fin d → J) : (wordOrbit a).Nonempty :=
   ⟨a, mem_wordOrbit_self a⟩
 
-/-- A choice depending only on the actual finite orbit. -/
+/-- A representative of the orbit of `a`, depending only on the orbit. -/
 def wordRepresentative (a : Fin d → J) : Fin d → J :=
   (wordOrbit_nonempty a).choose
 
@@ -157,17 +154,17 @@ theorem wordMultiplicity_eq_iff_exists_perm (u a : Fin d → J) :
 theorem selectionType_eq_wordMultiplicity [Fintype J] (a : Fin d → J) :
     Polarization.selectionType a = wordMultiplicity a := rfl
 
-/-- Equal coordinate multiplicities are exactly membership in the distinct-tuple orbit. -/
+/-- Two words have the same multiplicities iff they lie in the same orbit. -/
 theorem wordMultiplicity_eq_iff_mem_wordOrbit (u a : Fin d → J) :
     wordMultiplicity u = wordMultiplicity a ↔ u ∈ wordOrbit a := by
   rw [wordMultiplicity_eq_iff_exists_perm, mem_wordOrbit_iff]
 
-/-- On finite label types, the algebraic coefficient fiber is exactly the tuple orbit. -/
+/-- For finite `J`, `selectionType` fibers are word orbits. -/
 theorem selectionType_eq_iff_mem_wordOrbit [Fintype J] (u a : Fin d → J) :
     Polarization.selectionType u = Polarization.selectionType a ↔ u ∈ wordOrbit a :=
   wordMultiplicity_eq_iff_mem_wordOrbit u a
 
-/-- This fiber contains distinct tuples, with no stabilizer multiplicity. -/
+/-- The orbit of `a` is the set of words with the same `selectionType`. -/
 theorem wordOrbit_eq_selectionType_fiber [Fintype J] (a : Fin d → J) :
     wordOrbit a = Finset.univ.filter
       (fun u => Polarization.selectionType u = Polarization.selectionType a) := by
@@ -182,7 +179,7 @@ section
 
 variable {J J' : Type*} {d : ℕ}
 
-/-- Relabeling commutes with the orbit of distinct words. -/
+/-- Relabeling commutes with taking orbits. -/
 theorem wordOrbit_map (f : J → J') (a : Fin d → J) :
     (wordOrbit a).image (fun u => f ∘ u) = wordOrbit (f ∘ a) := by
   classical
@@ -194,7 +191,7 @@ section Algebra
 variable {K E Z : Type*} [Field K]
   [AddCommGroup E] [Module K E] [AddCommGroup Z] [Module K Z]
 
-/-- The distinct-word orbit sum is the coefficient of the corresponding multiplicities. -/
+/-- The orbit sum is the grouped sum `sumOfType` at the multiplicities of `a`. -/
 theorem sum_wordOrbit_eq_sumOfType [Fintype J]
     (M : MultilinearMap K (fun _ : Fin d => E) Z) (b : J → E) (a : Fin d → J) :
     (∑ u ∈ wordOrbit a, M (fun i => b (u i))) =
@@ -203,7 +200,8 @@ theorem sum_wordOrbit_eq_sumOfType [Fintype J]
   rw [wordOrbit_eq_selectionType_fiber]
   rfl
 
-/-- Polarization in the algebraic quotient recovers membership of every finite-label coefficient. -/
+/-- Over an infinite field, if the diagonal of `M` lies in `W` then so does every grouped sum.
+Proved by polarization in the quotient `Z ⧸ W`. -/
 theorem sumOfType_mem [Infinite K] [Fintype J]
     (W : Submodule K Z) (M : MultilinearMap K (fun _ : Fin d => E) Z)
     (b : J → E) (hM : ∀ x, M (fun _ => x) ∈ W) (α : J → ℕ) :
@@ -215,7 +213,8 @@ theorem sumOfType_mem [Infinite K] [Fintype J]
   apply (Submodule.Quotient.mk_eq_zero W).mp
   simpa [MultilinearMap.sumOfType, ← Submodule.mkQ_apply, map_sum] using h
 
-/-- Each orbit uses only finitely many labels, even when the full label type is infinite. -/
+/-- Over an infinite field, if the diagonal of `M` lies in `W` then so does every orbit sum.
+The label type `J` may be infinite, since a word uses finitely many labels. -/
 theorem sum_wordOrbit_mem [Infinite K]
     (W : Submodule K Z) (M : MultilinearMap K (fun _ : Fin d => E) Z)
     (b : J → E) (hM : ∀ x, M (fun _ => x) ∈ W) (a : Fin d → J) :
@@ -244,7 +243,7 @@ section
 variable {K J E Z : Type*} {d : ℕ}
   [Field K] [AddCommGroup E] [Module K E] [AddCommGroup Z] [Module K Z]
 
-/-- The sum on distinct orbit tuples is placed at the chosen representative only. -/
+/-- The orbit sum at the chosen representative, and zero at other words. -/
 def groupedCoefficient (M : MultilinearMap K (fun _ : Fin d => E) Z)
     (b : J → E) (a : Fin d → J) : Z := by
   classical
@@ -267,7 +266,7 @@ theorem groupedCoefficient_of_not_representative
   classical
   simp [groupedCoefficient, ha]
 
-/-- Evaluating at the representative gives precisely the distinct orbit sum. -/
+/-- At the representative, the grouped coefficient is the orbit sum. -/
 @[simp]
 theorem groupedCoefficient_representative
     (M : MultilinearMap K (fun _ : Fin d => E) Z) (b : J → E) (a : Fin d → J) :
@@ -340,7 +339,7 @@ private theorem sum_piFinset_eq_sum_subtype
   · intro a ha
     rfl
 
-/-- Finite-support diagonal regrouping over a field, with no infinitude or topology. -/
+/-- Expansion of the diagonal at a finite combination in terms of grouped coefficients. -/
 theorem finite_diagonal_grouping
     (M : MultilinearMap K (fun _ : Fin d => E) Z) (b : J → E)
     (s : Finset J) (x : J → K) :
@@ -372,7 +371,8 @@ section
 variable {K J E Z : Type*} [Field K]
   [AddCommGroup E] [Module K E] [AddCommGroup Z] [Module K Z] {d : ℕ}
 
-/-- Every selected coefficient belongs to the submodule containing the full diagonal. -/
+/-- Over an infinite field, every grouped coefficient lies in any submodule containing
+the diagonal. -/
 theorem groupedCoefficient_mem [Infinite K]
     (W : Submodule K Z) (M : MultilinearMap K (fun _ : Fin d => E) Z)
     (b : J → E) (hM : ∀ x, M (fun _ => x) ∈ W) (a : Fin d → J) :
@@ -384,8 +384,8 @@ theorem groupedCoefficient_mem [Infinite K]
   · rw [groupedCoefficient_of_not_representative M b ha]
     exact W.zero_mem
 
-/-- The orbit bound, coefficient membership, and finite diagonal identity for the same
-actual coefficient family, including degree zero and empty finite supports. -/
+/-- The orbit size bound `d!`, membership of the coefficients in `W`, and the finite
+expansion of the diagonal. -/
 theorem finite_word_grouping_spec [Infinite K]
     (d : ℕ) (W : Submodule K Z)
     (M : MultilinearMap K (fun _ : Fin d => E) Z)

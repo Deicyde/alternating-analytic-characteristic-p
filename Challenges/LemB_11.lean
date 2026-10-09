@@ -17,35 +17,21 @@ sets of clusters, such that all clusters in ⋃_j 𝒞_j are pairwise disjoint. 
 u_j := ∑_{C ∈ 𝒞_j} s_C and v_j := ∑_{C ∈ 𝒞_j} w_C. Let C_l ∈ 𝒞_l for l = 1, …, k and
 c := (C₁(1), …, C_k(1)). Then Ω_{Ψ(u;v)}(c) = χ(C₁, …, C_k)."
 
-Formalization notes:
-* Definitions introduced (identical in challenge and solution), mirroring Appendix B.3-B.5:
-  `ClusterMap L k` (the curried `2k`-linear maps `V_fin^k × V_fin^k → Λ^k V`, `V = ℕ → L`,
-  `V_fin = ℕ →₀ L`), `coeff` (the coefficients `T(a; y; c) = Ω_{Ψ(e_a; e_y)}(c)`),
-  `PatternHomogeneous Ψ H` (the conclusion of Lemma B.10 for `T` with `N = 3k`, the 3k-tuple
-  indexed by `Fin 3 × Fin k`, "same pattern" via the paper's comparison characterization),
-  `IsCluster H C` (four consecutive elements of `H`), `HasOrderPattern C τ`, the weights
-  `opWeight = s = (1,0,-1,0)`, `vecWeight = w = (1,-1,1,-1)`, the vectors `sC`, `wC`, and the
-  cluster value `clusterValue = χ`.
-* The determinant array `Ω : Λ^k (ℕ → L) → L^(ℕ^k)`, `Ω_{y₁∧⋯∧y_k}(c) = det(y_b(c_a))`, is the
-  library definition `AlternatingAnalytic.determinantArray`
-  (`AlternatingAnalytic/Algebra/DeterminantArray.lean`, with `determinantArray_ιMulti` giving
-  the determinant formula); that module is imported only for this definition.
-* Paper labels are 1-based, Lean's are 0-based: the cluster point `C(1)` is `C 0`, and the
-  rank `τ(j) ∈ {1, …, k}` is `τ j : Fin k`.
-* Context hypotheses. The lemma sits inside the proof of Theorem B.9, under the standing
-  assumption that `Ψ` satisfies all hypotheses of Theorem B.9(1) with `k! = 0` in the finite
-  field `L`. Taken literally that context is contradictory (Theorem B.9), which would make the
-  statement vacuous. The challenge therefore keeps only the hypotheses the paper's proof uses
-  (the standing objects `L` finite, `H` infinite with pattern homogeneity of `T`), and lists
-  exactly which of Theorem B.9's hypotheses (a)-(c) are assumed; `k! = 0` is not assumed
-  (Remark B.15 applies the same lemmas when `k! ≠ 0`).
-* Hypotheses used here: multilinearity of `Ψ` and pattern homogeneity on `H` only (none of
-  Theorem B.9's (a)-(c)). `[Finite L]` and `H.Infinite` are the standing context; the library
-  proof needs neither.
-* The families: `𝒞_j` is indexed by a finite type `J j`, the cluster with index `γ` being
-  `C ⟨j, γ⟩`. "Pairwise disjoint as sets of clusters, and all clusters pairwise disjoint" is:
-  distinct indices `g ≠ h` of `Σ j, J j` give clusters with no common point. The chosen output
-  clusters are `C_l = C ⟨l, O l⟩`.
+## Formalization notes
+* The definitions below follow Appendix B.3-B.5: `ClusterMap` (curried `2k`-linear maps, with
+  `V = ℕ → L`, `V_fin = ℕ →₀ L`), `coeff` (= `T`), `PatternHomogeneous` (Lemma B.10 for `T`,
+  with the `3k`-tuple indexed by `Fin 3 × Fin k`), `IsCluster`, `HasOrderPattern`, `opWeight`
+  (= `s`), `vecWeight` (= `w`), `sC`, `wC` and `clusterValue` (= `χ`).
+* `Ω` is `AlternatingAnalytic.determinantArray` (`Algebra/DeterminantArray.lean`), imported only
+  for this definition.
+* Labels are 0-based: `C(1)` is `C 0`.
+* The lemma sits inside the proof by contradiction of Theorem B.9, whose hypotheses with
+  `k! = 0` are inconsistent. The statement keeps only what the proof uses: multilinearity of `Ψ`
+  and pattern homogeneity on `H`. None of Theorem B.9 (a)-(c) and not `k! = 0` is assumed.
+* `[Finite L]` and `H.Infinite` are kept as standing context; the proof does not use them.
+* The family `𝒞_j` is indexed by a finite type `J j`, its clusters being `C ⟨j, γ⟩`; the
+  disjointness hypotheses become: distinct indices in `Σ j, J j` give clusters with no common
+  point. The output clusters are `C_l = C ⟨l, O l⟩`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemB_11
@@ -110,8 +96,7 @@ noncomputable def clusterValue (Ψ : ClusterMap L k) (C : Fin k → Fin 4 → �
 
 end ClusterDefinitions
 
-/-- **Lemma B.11 (cancellation of output-free clusters).** For finite families of pairwise
-disjoint clusters in the homogeneous set `H`, one family per slot, and output clusters
+/-- For pairwise disjoint clusters in `H`, one finite family per slot, and output clusters
 `C_l ∈ 𝒞_l`, the determinant array of `Ψ(u; v)` at `(C₁(1), …, C_k(1))` is `χ(C₁, …, C_k)`. -/
 theorem determinantArray_family_eq_clusterValue
     {L : Type u} [Field L] [Finite L] {k : ℕ} (Ψ : ClusterMap L k)

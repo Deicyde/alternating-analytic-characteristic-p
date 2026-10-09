@@ -1,7 +1,14 @@
 import AlternatingAnalytic.Analysis.LaurentEvaluation
 import AlternatingAnalytic.Analysis.DenseIsometricExtension
 
-/-! Isometric Laurent fields in prescribed complete ultrametric fields. -/
+/-!
+# Laurent subfields of complete ultrametric fields
+
+If `K` is a complete ultrametric field, `κ` a finite field mapping into `K`, and `‖t‖ = r < 1`,
+evaluation at `t` extends to an isometric embedding `κ((X)) → K` with `‖X‖ = r`. In
+characteristic `p` this makes every complete nontrivially normed field a normed algebra over
+some `𝔽_p((X))`. This is the Laurent subfield of Lemma D.2.
+-/
 
 noncomputable section
 
@@ -14,7 +21,8 @@ namespace AlternatingAnalytic
 variable (κ : Type*) [Field κ] [Finite κ]
 variable {K : Type*} [NormedField K] [IsUltrametricDist K]
 
-/-- Rational-function evaluation is defined because a small nonzero element is transcendental. -/
+/-- Evaluation `κ(X) → K` at `t`. It is defined because a nonzero `t` with `‖t‖ < 1` is
+transcendental over the finite field `κ`. -/
 def ratFuncEvaluation (f : κ →+* K) (t : K) (ht0 : t ≠ 0) (ht1 : ‖t‖ < 1) :
     RatFunc κ →+* K :=
   RatFunc.liftRingHom (Polynomial.eval₂RingHom f t) (by
@@ -47,7 +55,8 @@ theorem norm_ratFuncEvaluation (f : κ →+* K) (t : K) (ht0 : t ≠ 0)
 
 variable [CompleteSpace K]
 
-/-- A complete ultrametric field contains the Laurent field at every finite-field small parameter. -/
+/-- Evaluation at `t` extends to an isometric embedding `κ((X)) → K` with closed image, equal
+to the closure of the image of `κ(X)`. -/
 theorem exists_isometric_laurentField_embedding (f : κ →+* K) (t : K) (ht : ‖t‖ = r) :
     ∃ g : LaurentField κ r →+* K, Isometry g ∧
       IsClosed (Set.range g) ∧
@@ -74,7 +83,7 @@ theorem exists_isometric_laurentField_embedding (f : κ →+* K) (t : K) (ht : �
     simpa only [i, e, ratFuncToLaurentField_polynomial, ratFuncEvaluation_polynomial,
       Polynomial.eval₂_X] using h
 
-/-- The isometric embedding supplies the normed algebra used for projective base change. -/
+/-- The normed `κ((X))`-algebra structure on `K` given by an isometric embedding. -/
 @[instance_reducible]
 def laurentFieldNormedAlgebra (g : LaurentField κ r →+* K) (hg : Isometry g) :
     NormedAlgebra (LaurentField κ r) K where
@@ -83,7 +92,7 @@ def laurentFieldNormedAlgebra (g : LaurentField κ r →+* K) (hg : Isometry g) 
     change ‖g c * x‖ ≤ ‖c‖ * ‖x‖
     rw [norm_mul, (AddMonoidHomClass.isometry_iff_norm g).mp hg]
 
-/-- Every prescribed complete positive-characteristic field admits an isometric Laurent base. -/
+/-- Every complete nontrivially normed field of characteristic `p` is a normed algebra over some `𝔽_p((X))`. -/
 theorem exists_laurentField_normedAlgebra (K' : Type*) [NontriviallyNormedField K']
     [CompleteSpace K'] (p : ℕ) [Fact p.Prime] [CharP K' p] :
     ∃ (r : ℝ≥0) (hr0 : 0 < r) (hr1 : r < 1),

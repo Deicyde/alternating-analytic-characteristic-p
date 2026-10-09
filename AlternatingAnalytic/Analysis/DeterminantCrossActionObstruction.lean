@@ -7,9 +7,10 @@ import AlternatingAnalytic.Analysis.Homogeneous
 /-!
 # The nonanalytic determinant coordinate and cross-action
 
-The determinant coordinate takes values in the actual incomplete coefficient
-subspace `C`. Its ambient Laurent-field formula is a polynomial, but its
-small-target analyticity is obstructed by algebraic specialization.
+The map `f : E → C`, `f(x) = x_0^p` of equation (H.3), obtained by pulling back the
+determinant on `D` along multiplication by `x` and extracting the coefficient. As a map into
+`L` it is a polynomial, but as a map into `C` it is not analytic at zero, so the cross-action
+from `(D, G)` to `(E, G)` is not analytic. This is the degree-`p` case of Theorem H.4.
 -/
 
 noncomputable section
@@ -21,7 +22,7 @@ namespace AlternatingAnalytic.DeterminantPair
 variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 attribute [local instance] preferredNormedFieldK preferredFieldK preferredFieldL
 
-/-- The normalized ambient determinant with scalars restricted to the rational field. -/
+/-- The determinant on `A`, as a `K`-alternating map. -/
 def determinantK : (A p r) [⋀^Fin p]→ₗ[K p r] (L p r) where
   __ := (deltaAlternating p r).toMultilinearMap.restrictScalars (K p r)
   map_eq_zero_of_eq' v _i _j hv hij :=
@@ -30,7 +31,7 @@ def determinantK : (A p r) [⋀^Fin p]→ₗ[K p r] (L p r) where
 @[simp] theorem determinantK_apply (v : Fin p → A p r) :
     determinantK p r v = delta p r v := deltaAlternating_apply p r v
 
-/-- The actual bounded, G-valued determinant on the unpadded source D. -/
+/-- The determinant as a bounded `G`-valued alternating map on `D`. -/
 def determinantD : (D p r) [⋀^Fin p]→L[K p r] (G p r) :=
   (((determinantK p r).compLinearMap (D p r).subtype).codRestrict
     (G p r) (fun x => by
@@ -49,12 +50,12 @@ def determinantD : (D p r) [⋀^Fin p]→L[K p r] (G p r) :=
     (determinantD p r (fun i => ⟨e p r i, e_mem_D p r i⟩) : L p r) = 1 := by
   rw [determinantD_apply, delta_e]
 
-/-- Pullback of the G-valued determinant, followed by the coefficient isometry.
-This construction, rather than the ambient scalar formula, supplies C-valuedness. -/
+/-- The coordinate `f(x) ∈ C` of equation (H.3): the coefficient of `det ∘ M_x`.
+Defining it this way, rather than by the formula `x_0^p`, shows that it lands in `C`. -/
 def determinantCoordinate (x : E p r) : C p r :=
   coefficientEquiv p r ((determinantD p r).compContinuousLinearMap (multiplication p r x))
 
-/-- The scalar value of the genuine small-target coordinate. -/
+/-- As an element of `L`, `f(x) = x_0^p`. -/
 @[simp] theorem determinantCoordinate_scalar (x : E p r) :
     (determinantCoordinate p r x : L p r) =
       TruncatedPolynomial.coeff (L p r) p (x : A p r) 0 ^ p := by
@@ -70,7 +71,7 @@ def determinantCoordinate (x : E p r) : C p r :=
   simp only [h]
   exact delta_mul_e p r (x : A p r)
 
-/-- Scalar homogeneity in degree p holds in C itself, without completing it. -/
+/-- `f` is homogeneous of degree `p`. -/
 theorem determinantCoordinate_homogeneous (s : K p r) (x : E p r) :
     determinantCoordinate p r (s • x) = s ^ p • determinantCoordinate p r x := by
   apply Subtype.ext
@@ -89,7 +90,7 @@ theorem determinantCoordinate_homogeneous (s : K p r) (x : E p r) :
   rw [h, TruncatedPolynomial.coeff_basis]
   simp
 
-/-- Bounded evaluation at the actual determinant and extraction of its coefficient. -/
+/-- Evaluation at `det` followed by coefficient extraction, as a bounded linear map. -/
 def determinantCoordinateEvaluation :
     (((D p r) [⋀^Fin p]→L[K p r] (G p r)) →L[K p r]
       ((E p r) [⋀^Fin p]→L[K p r] (G p r))) →L[K p r] C p r :=
@@ -97,7 +98,7 @@ def determinantCoordinateEvaluation :
     (ContinuousLinearMap.apply (K p r) ((E p r) [⋀^Fin p]→L[K p r] (G p r))
       (determinantD p r))
 
-/-- The precise affine input slice of the joint action. -/
+/-- The affine family `x ↦ (M_x, id_G)` of morphisms. -/
 def multiplicationSlice (x : E p r) :
     (E p r →L[K p r] D p r) × (G p r →L[K p r] G p r) :=
   (multiplication p r x, ContinuousLinearMap.id (K p r) (G p r))
@@ -110,14 +111,14 @@ theorem analyticAt_multiplicationSlice (x : E p r) :
     AnalyticAt (K p r) (multiplicationSlice p r) x :=
   ((multiplication p r).analyticAt x).prod analyticAt_const
 
-/-- The coordinate is exactly the bounded observation of the actual cross-action. -/
+/-- `f` is the cross-action along `x ↦ (M_x, id_G)`, followed by a bounded linear map. -/
 theorem determinantCoordinate_eq_action (x : E p r) :
     determinantCoordinate p r x = determinantCoordinateEvaluation p r
       (alternatingMapAction p (multiplicationSlice p r x)) := by
   change coefficientEquiv p r _ = coefficientEquiv p r _
   congr 1
 
-/-- The determinant coordinate is not analytic with its genuine coefficient-space target. -/
+/-- `f : E → C` is not analytic at zero. -/
 theorem not_analyticAt_determinantCoordinate :
     ¬ AnalyticAt (K p r) (determinantCoordinate p r) 0 := by
   intro hf
@@ -127,7 +128,7 @@ theorem not_analyticAt_determinantCoordinate :
   refine ⟨B, ?_⟩
   rw [hB, determinantCoordinate_standard_zero]
 
-/-- The actual action from (D,G) to (E,G) fails analyticity at (0,id_G). -/
+/-- The action from `(D, G)` to `(E, G)` is not analytic at `(0, id_G)`. -/
 theorem not_analyticAt_crossAction :
     ¬ AnalyticAt (K p r)
       (alternatingMapAction (K := K p r) (E := D p r) (E' := E p r)
@@ -140,9 +141,7 @@ theorem not_analyticAt_crossAction :
   have he := ((determinantCoordinateEvaluation p r).analyticAt _).comp hs
   simpa only [Function.comp_def, ← determinantCoordinate_eq_action] using he
 
-/-- The complete unpadded nonanalytic-coordinate and cross-action statement.
-All spaces, bounded maps, determinants, norms and the bad point are the actual
-ones in the construction; no completeness assumption is made on C or G. -/
+/-- The degree-`p` nonanalytic coordinate and cross-action, collected. -/
 theorem nonanalytic_determinant_coordinate_and_cross_action :
     (∀ x y : E p r, (x : A p r) * (y : A p r) ∈ D p r) ∧
     (∀ x y : E p r,

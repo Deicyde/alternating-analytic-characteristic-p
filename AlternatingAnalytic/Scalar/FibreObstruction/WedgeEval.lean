@@ -9,8 +9,7 @@ For an alternating `k`-form `α` on `κ^{k+1}` and a linear form `χ`, `wedgeEva
 the value at the standard basis of the alternating `(k+1)`-form
 `AlternatingMap.alternatizeUncurryFin (χ.smulRight α)`, and the alternation of that form gives
 the directions of (F.3) used in the paper: `ν(w_α) = 0` whenever `α` vanishes on `(ker ν)^k`,
-for `ν = εᵃ` and `ν = εᵃ + εᵇ`. We also record bilinearity and the value at the last coordinate
-form, `(-1)^k α(e₀, …, e_{k-1})`.
+for `ν = εᵃ` and `ν = εᵃ + εᵇ`.
 -/
 
 namespace AlternatingAnalytic.FibreObstruction

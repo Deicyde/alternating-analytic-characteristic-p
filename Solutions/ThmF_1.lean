@@ -8,19 +8,11 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Scalar.ChainSpaces.Unconditional
 
 /-!
-# Theorem F.1 (scalar counterexample), pp. 49-54
+# Proof of Theorem F.1
 
-Solution: both parts are `AlternatingAnalytic.ChainSpaces.abstractConclusion` and
-`AlternatingAnalytic.ChainSpaces.sequenceConclusion` (`Scalar/ChainSpaces/Unconditional.lean`).
-The witnesses are the chain-limit spaces `chainSpace ρ ⊆ ℓ^∞(List (Fin N); K^{k+1})` and
-`chainSpace ρ' ⊆ ℓ^∞(List (Fin N); K^k)` (`Scalar/ChainSpaces/Space.lean`), labelled by an
-enumeration of the finite family (F.2) (`Family.lean`, `Main.lean`). Nowhere analyticity is
-`not_analyticAt_compContinuousLinearMapCLM` (`NoLift.lean`): fibre maps (`FibreMap.lean`), chain
-decay through the `(2k+1)`-linear form `Φ` (`ChainDecay.lean`, `ChainForm.lean`, `Operators.lean`),
-the chain gap lemma (`Scalar/ChainGap.lean`), the multilinear tail property (`Scalar/Tails/`), the
-finite test certificate (`Scalar/TestCertificate/`, from `Scalar/FibreObstruction.lean`) and the
-lift criterion `Round24Transfer.hasBoundedLift_of_analyticAt`. The hypothesis `1 ≤ k` is not used
-(`k! = 0` already forces `k ≥ 2`).
+Both parts are `ChainSpaces.abstractConclusion` and `ChainSpaces.sequenceConclusion`
+(`Scalar/ChainSpaces/Unconditional.lean`), built on the chain spaces of
+`Scalar/ChainSpaces/Space.lean` and `not_analyticAt_compContinuousLinearMapCLM` (`NoLift.lean`).
 -/
 
 open Filter Topology
@@ -32,9 +24,8 @@ namespace AlternatingAnalyticChallenge.ThmF_1
 
 universe u
 
-/-- **Theorem F.1, part 1 (abstract form).** Over a complete, nontrivially normed, not spherically
-complete field with `k! = 0`, `k ≥ 1`, there are nonarchimedean Banach spaces `E`, `E'` such that
-scalar precomposition `A^k_{E,E';K}` is analytic at no point of `L(E, E')`. -/
+/-- Theorem F.1, part 1: over a complete field that is not spherically complete, with `k! = 0`,
+there are nonarchimedean Banach spaces `E`, `E'` with `A^k_{E,E';K}` analytic at no point. -/
 theorem exists_nonarchimedean_banach_nowhere_analytic_scalar
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) (k : ℕ) (hk1 : 1 ≤ k)
@@ -50,10 +41,8 @@ theorem exists_nonarchimedean_banach_nowhere_analytic_scalar
               (E' [⋀^Fin k]→L[K] K) →L[K] (E [⋀^Fin k]→L[K] K))) u₀ := by
   exact AlternatingAnalytic.ChainSpaces.abstractConclusion K hK k hk
 
-/-- **Theorem F.1, part 2 (sequence-space form).** The witnesses can be chosen as closed subspaces
-`E ⊆ ℓ^∞(Λ; K^{k+1})` and `E' ⊆ ℓ^∞(Λ; K^k)` containing the corresponding `c_0` spaces, with `Λ`
-countable; they are nonseparable nonarchimedean Banach spaces and `A^k_{E,E';K}` is analytic at no
-point. -/
+/-- Theorem F.1, part 2: the spaces can be taken to be nonseparable closed subspaces
+`E ⊆ ℓ^∞(Λ; K^{k+1})` and `E' ⊆ ℓ^∞(Λ; K^k)` containing `c_0`, with `Λ` countable. -/
 theorem exists_nowhere_analytic_scalar_in_bounded_sequences
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) (k : ℕ) (hk1 : 1 ≤ k)

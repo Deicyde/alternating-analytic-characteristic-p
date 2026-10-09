@@ -4,8 +4,8 @@ import AlternatingAnalytic.Analysis.LiftCriterion
 /-!
 # No bounded lift between chain-limit spaces
 
-This is the global contradiction of Appendix F of the paper, for an abstract finite label set.
-Let `ρ`, `ρ'` be idempotent residual maps on finite-dimensional `V`, `V'` (labels `L`), `δ` a
+The proof of Theorem F.1, for an abstract finite label set `L`. Let `ρ`, `ρ'` be idempotent
+residual maps on finite-dimensional `V`, `V'`, `δ` a
 continuous alternating `k`-form on `V'` vanishing on every `(ker ρ' j)^k`, and `g₀ : V → V'`.
 Suppose finite test sets certify that every `k`-linear `τ` with `τ(g₀, …, g₀) = δ ∘ (g₀, …, g₀)`
 has a test of absolute value at least `1` (`TestCertificate`, the conclusion of Lemma F.5), and
@@ -29,7 +29,7 @@ variable {K : Type*} [NontriviallyNormedField K] {L : Type*}
   {V : Type*} [NormedAddCommGroup V] [NormedSpace K V]
   {V' : Type*} [NormedAddCommGroup V'] [NormedSpace K V']
 
-/-- **Finite test certificate** (the conclusion of Lemma F.5, for the label family `ρ`, `ρ'`):
+/-- Finite test certificate (the conclusion of Lemma F.5, for the label family `ρ`, `ρ'`):
 finite sets of tests `(g; ξ)` for each label `j`, with every `g^r` mapping `ker (ρ j)` into
 `ker (ρ' j)` and every `ξ_r ∈ ker (ρ j)`, such that every `k`-linear `τ` with
 `τ(g₀, …, g₀) = δ ∘ (g₀, …, g₀)` has a test value of absolute value at least `1`. -/
@@ -43,7 +43,7 @@ def TestCertificate {k : ℕ} (ρ : L → V →L[K] V) (ρ' : L → V' →L[K] V
 variable [CompleteSpace K] [IsUltrametricDist K] [Fintype L] [DecidableEq L]
   [FiniteDimensional K V] (ρ : L → V →L[K] V) (ρ' : L → V' →L[K] V') {k : ℕ}
 
-/-- **No bounded lift.** Under the test certificate and the multilinear tail property, the
+/-- Under the test certificate and the multilinear tail property, the
 precomposition action between the chain-limit spaces has no bounded `k`-linear lift. -/
 theorem no_bounded_lift (hidem : ∀ j v, ρ j (ρ j v) = ρ j v)
     (hidem' : ∀ j v, ρ' j (ρ' j v) = ρ' j v) (δ : V' [⋀^Fin k]→L[K] K)
@@ -77,7 +77,7 @@ theorem no_bounded_lift (hidem : ∀ j v, ρ j (ρ j v) = ρ j v)
   obtain ⟨j, t, ht, hge⟩ := hcert (fibreMap ρ ρ' P δ i) (fibreMap_diag ρ ρ' P δ hP i g₀)
   exact absurd hge (not_le.2 (Set.mem_iInter.1 hi j t ht))
 
-/-- **Nowhere analytic.** Under the same hypotheses, the precomposition action between the
+/-- Under the same hypotheses, the precomposition action between the
 chain-limit spaces is analytic at no point (Proposition 3.3). -/
 theorem not_analyticAt_compContinuousLinearMapCLM (hidem : ∀ j v, ρ j (ρ j v) = ρ j v)
     (hidem' : ∀ j v, ρ' j (ρ' j v) = ρ' j v) (δ : V' [⋀^Fin k]→L[K] K)

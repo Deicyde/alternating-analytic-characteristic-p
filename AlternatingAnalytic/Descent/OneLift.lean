@@ -3,16 +3,13 @@ import Mathlib.Analysis.Normed.Operator.LinearIsometry
 import Mathlib.Data.List.TFAE
 
 /-!
-# One lift, every base point
+# One lift, every base point (Proposition 3.3)
 
-For a map `a : H → W` whose image under an injective bounded linear map `j : W → Z` is the
-diagonal of a bounded `k`-linear map `B : H^k → Z`, analyticity of `a` at a single point already
-forces `a` to be the diagonal of a bounded `k`-linear map `H^k → W`, and then `a` has a finite
-power-series expansion of infinite radius at every point. The `k`-th coefficient of any power
-series of `a` is identified through the ambient line expansion of `B`
-(`Round24Transfer.coeff_eq_of_ambient`, `Round24Transfer.map_diag_add_smul`). As a consequence the
-precomposition action on continuous alternating maps is either a continuous polynomial on its
-whole domain or analytic nowhere. No completeness is assumed anywhere.
+Let `j : W → Z` be injective and bounded, and let `j ∘ a` be the diagonal of a bounded `k`-linear
+map `B : H^k → Z`. If `a` is analytic at one point, then `a` is the diagonal of a bounded
+`k`-linear map `H^k → W`, and so has a finite power series of infinite radius at every point.
+Consequently the precomposition action `A^k` is either a continuous polynomial or analytic
+nowhere. No completeness is assumed.
 -/
 
 namespace AlternatingAnalytic.OneLift
@@ -62,9 +59,8 @@ theorem eq_sum_of_hasFiniteFPowerSeriesOnBall_zero {g : H → W}
   have h := hg.eq_partialSum x (by simp) N le_rfl
   rwa [zero_add] at h
 
-/-- **One lift from one point.** If `j ∘ a` is the diagonal of a bounded `k`-linear map and `a`
-has a power series at some point, then the `k`-th coefficient of that series is a bounded
-`k`-linear lift of `a`. -/
+/-- If `j ∘ a` is the diagonal of a bounded `k`-linear map and `a` has a power series at some
+point, then the `k`-th coefficient of that series is a bounded `k`-linear lift of `a`. -/
 theorem coeff_eq_of_hasFPowerSeriesAt (j : W →L[K] Z) (hj : Function.Injective j) (k : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin k => H) Z)
     (a : H → W) (ha : ∀ h, j (a h) = B (fun _ => h))
@@ -78,7 +74,7 @@ theorem coeff_eq_of_hasFPowerSeriesAt (j : W →L[K] Z) (hj : Function.Injective
     rw [Fintype.card_fin] at this
     rw [this, ha]
 
-/-- **Proposition 3.3, (1) ⇒ (2).** -/
+/-- Proposition 3.3, (1) ⇒ (2). -/
 theorem exists_lift_of_analyticAt (j : W →L[K] Z) (hj : Function.Injective j) (k : ℕ)
     (B : ContinuousMultilinearMap K (fun _ : Fin k => H) Z)
     (a : H → W) (ha : ∀ h, j (a h) = B (fun _ => h)) {h₀ : H} (hfa : AnalyticAt K a h₀) :
@@ -86,7 +82,7 @@ theorem exists_lift_of_analyticAt (j : W →L[K] Z) (hj : Function.Injective j) 
   obtain ⟨p, hp⟩ := hfa
   exact ⟨p k, coeff_eq_of_hasFPowerSeriesAt j hj k B a ha hp⟩
 
-/-- **Proposition 3.3.** For `a : H → W` with `j ∘ a` the diagonal of a bounded `k`-linear map,
+/-- Proposition 3.3: for `a : H → W` with `j ∘ a` the diagonal of a bounded `k`-linear map,
 analytic somewhere ⟺ bounded `k`-linear lift ⟺ finite power series of infinite radius
 everywhere. -/
 theorem tfae (j : W →L[K] Z) (hj : Function.Injective j) (k : ℕ)
@@ -111,7 +107,7 @@ variable {ι : Type*} [Fintype ι]
   {E E' F : Type*} [NormedAddCommGroup E] [NormedSpace K E]
   [NormedAddCommGroup E'] [NormedSpace K E'] [NormedAddCommGroup F] [NormedSpace K F]
 
-/-- **Dichotomy for precomposition.** The action `A^k` is a finite sum of diagonals of bounded
+/-- Proposition 3.3, dichotomy: the action `A^k` is a finite sum of diagonals of bounded
 multilinear maps on its whole domain, or analytic nowhere. -/
 theorem precomposition_polynomial_or_nowhereAnalytic :
     (∃ (p : FormalMultilinearSeries K (E →L[K] E')

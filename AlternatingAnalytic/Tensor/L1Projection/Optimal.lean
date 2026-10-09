@@ -10,19 +10,19 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import Mathlib.Topology.Algebra.Order.Floor
 
 /-!
-# Optimal projections onto the diagonal of `T_n(ℓ¹)`
+# Optimal projections onto the diagonal of `T_n(ℓ¹)` (Proposition G.4)
 
-Proposition `fam:prop:l1-optimal`: over a complete nonarchimedean field and for an infinite index
-set `I`, the smallest norm of a projection `T_n(ℓ¹(I,K)) → Δ_n(ℓ¹(I,K))` is `n!`, and therefore
-`ℓ¹(I,K)` does not have universal analytic reflection.
+Over a complete nonarchimedean field and for an infinite index set `I`, the smallest norm of a
+projection `T_n(ℓ¹(I,K)) → Δ_n(ℓ¹(I,K))` is `n!`, so `ℓ¹(I,K)` does not have universal analytic
+reflection.
 
-The upper bound linearizes the sorted-orbit representative of the canonical tensor map supplied
-by `L1PolynomialLift.exists_l1_diagonal_lift`. For the lower bound, fix `n` distinct indices
+The upper bound linearizes the sorted-orbit representative of the canonical tensor map from
+`L1PolynomialLift.exists_l1_diagonal_lift`. For the lower bound, fix `n` distinct indices
 `w`, put `x = ∑ e_{w j}` and expand `x^{⊗ n}` into basis tensors `e_{w ∘ ρ}`. The coordinate of
 `R(x^{⊗ n}) = x^{⊗ n}` at `w` is `1`, so by the ultrametric inequality some `R(e_{w ∘ ρ})` has
 coordinate of absolute value at least `1` at `w`, hence at all `n!` permutations of `w`; the
-ℓ¹ coordinate bound then gives `‖R‖ ≥ n!`. The consequence uses the necessity half of the
-analytic tensor criterion and the growth of `(n!)^{1/n}`.
+ℓ¹ coordinate bound then gives `‖R‖ ≥ n!`. The consequence uses the necessity half of
+Theorem G.3 and the growth of `(n!)^{1/n}`.
 -/
 
 open Filter
@@ -134,7 +134,7 @@ theorem factorial_le_norm_of_projection [IsUltrametricDist K] [CompleteSpace K] 
     _ ≤ ‖R‖ * 1 := mul_le_mul_of_nonneg_left (norm_basisTensor_le n _) (norm_nonneg R)
     _ = ‖R‖ := mul_one _
 
-/-- **Proposition G.4**, first part: the optimal norm of a projection onto
+/-- Proposition G.4, first part: the optimal norm of a projection onto
 `Δ_n(ℓ¹(I,K))` is `n!`. -/
 theorem sInf_norm_projection_eq_factorial [IsUltrametricDist K] [CompleteSpace K] [Infinite I]
     (n : ℕ) :
@@ -149,7 +149,7 @@ theorem sInf_norm_projection_eq_factorial [IsUltrametricDist K] [CompleteSpace K
   rintro c ⟨R', hR', rfl⟩
   exact factorial_le_norm_of_projection n R' hR'
 
-/-- **Proposition G.4**, second part: `ℓ¹(I,K)` does not have universal analytic
+/-- Proposition G.4, second part: `ℓ¹(I,K)` does not have universal analytic
 reflection. -/
 theorem not_universalAnalyticReflection [IsUltrametricDist K] [CompleteSpace K] [Infinite I] :
     ¬ UniversalAnalyticReflection K (lp (fun _ : I => K) 1) := by

@@ -6,20 +6,20 @@ import Mathlib.Analysis.Normed.Group.Ultra
 /-!
 # Norms of finite Laurent sums in characteristic `p`
 
-A normed field of characteristic `p` is ultrametric, nonzero prime-field elements have norm one,
-and a finite sum `∑_{i=m}^{M} a_i t^i` with `a_i ∈ 𝔽_p` and `0 < ‖t‖ < 1` has norm `‖t‖ ^ i₀`,
-where `i₀` is the least index with `a_{i₀} ≠ 0`. Negative exponents are allowed.
+Lemma D.2(1) and (2): a normed field of characteristic `p` is ultrametric with `‖c‖ = 1` for
+`c ∈ 𝔽_p^×`, and if `0 < ‖t‖ < 1` then `‖∑ a_i t^i‖ = ‖t‖ ^ i₀` for `a_i ∈ 𝔽_p`, where `i₀` is
+the least index with `a_{i₀} ≠ 0`. Negative exponents are allowed.
 -/
 
 namespace AlternatingAnalytic
 
-/-- In characteristic `p` the norm is ultrametric and nonzero prime-field elements have norm one. -/
+/-- Lemma D.2(1): in characteristic `p` the norm is ultrametric and `‖c‖ = 1` for `c ∈ 𝔽_p^×`. -/
 theorem charP_isUltrametricDist_and_norm_zmod (K : Type*) [NormedField K] (p : ℕ)
     [Fact p.Prime] [CharP K p] :
     IsUltrametricDist K ∧ ∀ c : ZMod p, c ≠ 0 → ‖ZMod.castHom (dvd_refl p) K c‖ = 1 :=
   ⟨charP_isUltrametricDist p, fun c hc => norm_finiteField_map _ c hc⟩
 
-/-- A finite `𝔽_p`-combination of integer powers of `t` has the norm of its lowest term. -/
+/-- Lemma D.2(2): a finite `𝔽_p`-combination of integer powers of `t` has the norm of its lowest term. -/
 theorem norm_sum_zmod_zpow_eq {K : Type*} [NormedField K] (p : ℕ) [Fact p.Prime] [CharP K p]
     (t : K) (ht0 : 0 < ‖t‖) (ht1 : ‖t‖ < 1) (s : Finset ℤ) (a : ℤ → ZMod p) (i₀ : ℤ)
     (hi₀ : i₀ ∈ s) (ha : a i₀ ≠ 0) (hmin : ∀ i ∈ s, a i ≠ 0 → i₀ ≤ i) :

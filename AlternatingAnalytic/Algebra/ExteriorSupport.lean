@@ -3,15 +3,14 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 /-!
 # Exterior antisymmetrization
 
-Exterior basis coordinates factor through antisymmetrization into the tensor power.
-Consequently antisymmetrization is injective over every field, in every degree and
-characteristic.
+Exterior basis coordinates factor through antisymmetrization into the tensor power,
+so antisymmetrization is injective over every field.
 -/
 
 namespace AlternatingAnalytic
 
-/-- Antisymmetrization into the tensor power is injective over any field, including
-when the degree factorial vanishes in the field. -/
+/-- Antisymmetrization into the tensor power is injective over any field, even when
+`k! = 0`. -/
 theorem toTensorPower_injective
     (L : Type*) [Field L] (V : Type*) [AddCommGroup V] [Module L V] (k : ℕ) :
     Function.Injective (exteriorPower.toTensorPower L V k) := by

@@ -2,11 +2,12 @@ import AlternatingAnalytic.Analysis.CompletedBaseChange
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 
 /-!
-# Strong alternation after completed scalar extension
+# Alternation after completed base change
 
-A continuous multilinear map on completed base change is alternating if its
-values on the original space agree with an alternating map. The proof retains
-equal-input vanishing in characteristic two; antisymmetry alone is insufficient.
+A continuous multilinear map on the completed base change of `E` is alternating
+if its values on tuples from `E` agree with an alternating map. The proof shows
+vanishing on equal inputs directly, not via antisymmetry, so it also works in
+characteristic two. It is used for Lemma D.8.
 -/
 
 open scoped TensorProduct
@@ -64,8 +65,8 @@ theorem multilinear_zero_of_dense_span
   exact h y (fun i => hy i (Finset.mem_univ i))
 
 omit [Fintype I] in
-/-- With the swap identity, the expression obtained by repeating a variable in
-two distinct slots is additive. This identity does not divide by two. -/
+/-- If swapping slots `i` and `j` negates `g`, then putting the same vector in both
+slots is additive in that vector. -/
 theorem multilinear_repeated_update_add
     (g : ContinuousMultilinearMap L (fun _ : I => V) G)
     (i j : I) (hij : i ≠ j)
@@ -107,8 +108,7 @@ theorem multilinear_repeated_update_smul
 
 variable {K E : Type*} [Field K] [AddCommGroup E] [Module K E] [Module K G]
 
-/-- Strong alternation extends from an injectively parametrized set with dense
-linear span. The given alternating map need not be continuous. -/
+/-- Alternation extends from an injectively parametrized set with dense linear span. -/
 theorem alternating_of_dense_span_range
     (f : E → V) (hf : Function.Injective f)
     (hS : Dense (Submodule.span L (Set.range f) : Set V))
@@ -188,8 +188,7 @@ variable (K : Type*) (E L : Type u) [NontriviallyNormedField K]
 attribute [local instance] baseChangeModule baseChangeNormedAddCommGroup
   baseChangeNormedSpaceRestrictScalars baseChangeNormedSpace baseChangeIsScalarTower
 
-/-- The original space has dense extension-field linear span in its actual
-completed projective scalar extension. -/
+/-- The image of `E` spans a dense `L`-subspace of the completed base change. -/
 theorem dense_span_completedBaseChangeEmbedding :
     Dense (Submodule.span L (Set.range (completedBaseChangeEmbedding K E L)) :
       Set (CompletedBaseChange K E L)) := by
@@ -211,9 +210,8 @@ theorem dense_span_completedBaseChangeEmbedding :
 
 variable {G : Type*} [NormedAddCommGroup G] [NormedSpace K G] [NormedSpace L G]
 
-/-- A continuous multilinear map on completed scalar extension is strongly
-alternating when its values on embedded tuples agree with an alternating map.
-No completeness assumption on the output space is needed. -/
+/-- A continuous multilinear map on the completed base change is alternating if it
+agrees with an alternating map on tuples from `E`. -/
 theorem alternating_of_baseChangeEmbedding {n : ℕ}
     (g : (CompletedBaseChange K E L) [×n]→L[L] G)
     (m : E [⋀^Fin n]→L[K] G)

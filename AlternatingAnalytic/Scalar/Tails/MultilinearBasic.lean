@@ -5,8 +5,8 @@ import AlternatingAnalytic.Scalar.Tails.OneVariable
 # Bounded multilinear forms on `ℓ^∞(ℕ)`: basic tools
 
 `IsBddML Φ C` says that a function `Φ` of `d` arguments in `Linf 𝕜 = ℕ →ᵇ 𝕜` is additive and
-homogeneous in each argument and bounded by `C * ∏ j, ‖u j‖`. This file collects the tools for the
-induction on the arity in `AlternatingAnalytic.Scalar.Tails.Multilinear`: the truncations
+homogeneous in each argument and bounded by `C * ∏ j, ‖u j‖`. Tools for the induction on the
+arity in `AlternatingAnalytic.Scalar.Tails.Multilinear`: the truncations
 `headOf` and `tailOf`, the expansion of `headOf` in unit vectors, freezing one slot
 (`freezeSlot`), the functional in one slot (`slotCLM`), and the statement `TailAt 𝕜 d` of the tail
 property in arity `d`.

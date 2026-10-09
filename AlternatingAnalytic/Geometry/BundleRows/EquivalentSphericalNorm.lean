@@ -4,14 +4,11 @@ import AlternatingAnalytic.Analysis.AlternatingActionRegularity
 /-!
 # Targets with an equivalent spherically complete ultrametric norm
 
-The library's spherical lift theorem `ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete`
-asks the given norm of the target to be ultrametric and spherically complete. Here the target
-`F` only carries a seminorm `q`, equivalent to `‖·‖`, with the strong triangle inequality and
-spherical completeness for `q`-balls. We put the norm `q` on the type synonym
-`EquivalentSphericalNorm.WithSeminorm q`, prove that it is ultrametric and spherically complete
-and continuously linearly equivalent to `F`, and transfer the bounded lift back to `F` by the
-library's target-retract lemma. The consequence is finite polynomial regularity of the joint
-alternating action with such a coefficient target.
+`ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete` needs the norm of the target
+to be ultrametric and spherically complete. Here the target `F` only carries an equivalent
+seminorm `q` with these properties. We put `q` on the type synonym `WithSeminorm q` and transfer
+the bounded lift back to `F`. Consequently the alternating action is a continuous polynomial for
+such targets, as used in the first row of Corollary 4.6.
 -/
 
 open Metric
@@ -51,8 +48,7 @@ theorem eq_zero_of_seminorm_eq_zero (q : Seminorm K F) {C : ℝ} (hC : ∀ x, �
 
 variable [IsUltrametricDist K]
 
-/-- **Bounded lifts for an equivalent spherically complete ultrametric norm.** If the target `F`
-carries a seminorm `q` equivalent to its norm, with the strong triangle inequality, such that
+/-- If `F` carries a seminorm `q` equivalent to its norm, ultrametric, and such that
 pairwise-intersecting families of closed `q`-balls have a common point, then precomposition on
 `F`-valued alternating maps has a bounded multilinear lift. -/
 theorem hasBoundedLift_of_equivalentSphericalNorm {ι : Type*} [Fintype ι]
@@ -88,8 +84,8 @@ theorem hasBoundedLift_of_equivalentSphericalNorm {ι : Type*} [Fintype ι]
     (e.symm : WithSeminorm q →L[K] F) (fun y => e.symm_apply_apply y)
     ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete
 
-/-- Finite polynomial regularity of the joint alternating action when the coefficient target `F`
-admits an equivalent spherically complete ultrametric norm. -/
+/-- The alternating action is a continuous polynomial when the target `F` admits an equivalent
+spherically complete ultrametric norm. -/
 theorem cpolynomialAt_alternatingMapAction_of_equivalentSphericalNorm
     {E E' F' : Type*} [NormedAddCommGroup E] [NormedSpace K E]
     [NormedAddCommGroup E'] [NormedSpace K E'] [NormedAddCommGroup F'] [NormedSpace K F']

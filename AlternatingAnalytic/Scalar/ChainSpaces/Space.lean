@@ -14,12 +14,11 @@ sequence of words `s₀, s₁, …` with `s_r ++ [j]` a prefix of `s_{r+1}`. For
 `ρ j` be a continuous linear map on a normed space `V`; in applications `ρ j` is an idempotent
 whose kernel is the subspace `Σ^j`, so that `ρ j v` measures the distance of `v` to `Σ^j`. The
 chain-limit space `chainSpace ρ` consists of the bounded families `x : List L → V` with
-`ρ j (x (s n)) → 0` along every `j`-chain sequence `s`. This is the space `E` of Appendix F of
-the paper (F.6), with the distance to `Σ^j` replaced by the residual `ρ j`. We show that it is a
-closed submodule of `ℓ^∞(List L; V)` containing `c₀`, that it contains every bounded
-`ker (ρ j)`-valued family supported on a `j`-chain (by the chain gap lemma, chains with different
-labels meet at most once), that it is ultrametric and complete when `V` is, and that it is not
-separable as soon as some `ker (ρ j)` is nonzero.
+`ρ j (x (s n)) → 0` along every `j`-chain sequence `s`. It is the space `E` of (F.6), with the
+distance to `Σ^j` replaced by the residual `ρ j`. It is a closed submodule of `ℓ^∞(List L; V)`
+containing `c₀`; it contains every bounded `ker (ρ j)`-valued family supported on a `j`-chain
+(chains with different labels meet at most once); it is ultrametric and complete when `V` is; and
+it is not separable as soon as some `ker (ρ j)` is nonzero.
 -/
 
 open Filter Topology
@@ -143,7 +142,7 @@ theorem mem_chainSpace_of_tendsto (ρ : L → V →L[K] V) {x : lp (fun _ : List
     exact hx.comp hs.injective.tendsto_cofinite
   simpa only [map_zero, Function.comp_def] using ((ρ j).continuous.tendsto 0).comp h1
 
-/-- **Chain generators.** A bounded family with values in `ker (ρ j)`, supported on the words of
+/-- A bounded family with values in `ker (ρ j)`, supported on the words of
 a `j`-chain sequence, lies in the chain-limit space. -/
 theorem mem_chainSpace_of_supported (ρ : L → V →L[K] V) {j : L} {s : ℕ → List L}
     (hs : IsChainSeq j s) {y : lp (fun _ : List L => V) ∞} (hker : ∀ w, ρ j (y w) = 0)

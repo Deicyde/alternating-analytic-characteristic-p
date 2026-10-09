@@ -7,9 +7,10 @@ import Mathlib.Analysis.Normed.Module.Multilinear.Curry
 /-!
 # Joint regularity of the alternating-map action
 
-The action is smooth jointly in pullback and pushforward. A bounded multilinear
-lift of pullback produces a lift of the joint action with one additional slot.
-All degrees, including zero, and arbitrary normed source spaces are allowed.
+The action `(u, v) ↦ (m ↦ v ∘ m ∘ (u, …, u))` on alternating maps of degree `k`
+is jointly C^∞ (Corollary 6.2). A bounded multilinear lift of the pullback
+`u ↦ m ∘ (u, …, u)` gives a lift of the joint action with one more slot, so the
+action is a continuous polynomial when `k! ≠ 0` or `F` is spherically complete.
 -/
 
 noncomputable section
@@ -75,7 +76,7 @@ local instance alternatingPostcompBilinearNorm (k : ℕ) :
     (F := ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)) →L[K]
       ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F')))
 
-/-- Postcomposition is a bilinear contraction, including when a space is zero. -/
+/-- Postcomposition is a bilinear contraction. -/
 theorem norm_alternatingPostcompBilinear_le (k : ℕ) :
     ‖alternatingPostcompBilinear (K := K) (E := E) (E' := E') (F := F) (F' := F') k‖ ≤
       1 := by
@@ -90,7 +91,7 @@ theorem norm_alternatingPostcompBilinear_le (k : ℕ) :
   intro T
   exact norm_alternatingPostcompBilinear_apply_le k v T
 
-/-- The exact bounded-bilinear factorization of the joint action. -/
+/-- The joint action factors through the bounded bilinear postcomposition. -/
 theorem alternatingMapAction_eq_bilinear (k : ℕ)
     (z : (E' →L[K] E) × (F →L[K] F')) :
     alternatingMapAction k z = alternatingPostcompBilinear k z.2
@@ -110,7 +111,7 @@ theorem norm_alternatingMapAction_le (k : ℕ)
         (norm_nonneg _)
     _ = (‖z.2‖ * ‖z.1‖ ^ k) * ‖m‖ := by ring
 
-/-- Smoothness transfer, including analytic order when supplied for pullback. -/
+/-- If the pullback is `C^n` (any `n`, including `ω`), so is the joint action. -/
 theorem contDiff_alternatingMapAction_of_precomposition (k : ℕ) {n : WithTop ℕ∞}
     (hQ : ContDiff K n (ContinuousAlternatingMap.compContinuousLinearMapCLM :
       (E' →L[K] E) → (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F))) :
@@ -118,7 +119,7 @@ theorem contDiff_alternatingMapAction_of_precomposition (k : ℕ) {n : WithTop �
   exact ((ContinuousLinearMap.compContinuousAlternatingMapCLM K E' F F' (Fin k)).contDiff.comp
     contDiff_snd).clm_comp (hQ.comp contDiff_fst)
 
-/-- Joint smoothness for every finite order and for smooth order. -/
+/-- The joint action is `C^n` for every `n : ℕ∞`. -/
 theorem contDiff_alternatingMapAction (k : ℕ) (n : ℕ∞) :
     ContDiff K n (alternatingMapAction (K := K) (E := E) (E' := E') (F := F) (F' := F') k) :=
   contDiff_alternatingMapAction_of_precomposition k
@@ -131,7 +132,7 @@ theorem alternatingMapAction_id_right (k : ℕ) (u : E' →L[K] E) :
   ext m x
   rfl
 
-/-- The identity pushforward slice reflects joint analyticity to pullback. -/
+/-- If the joint action is analytic at `(u₀, id)`, the pullback is analytic at `u₀`. -/
 theorem analyticAt_precomposition_of_analyticAt_alternatingMapAction
     (k : ℕ) (u₀ : E' →L[K] E)
     (h : AnalyticAt K (alternatingMapAction (F := F) (F' := F) k)
@@ -256,7 +257,7 @@ theorem boundedLift_of_fin (k : ℕ)
     Round24Transfer.HasBoundedLift K (Fin k) E' E F := by
   exact ⟨P.domDomCongr (Fintype.equivFin (Fin k)), hP⟩
 
-/-- The global joint lift, including its formula, bound, and diagonal identity. -/
+/-- A bounded lift of the pullback gives a joint lift with its formula, bound and diagonal. -/
 theorem exists_alternatingMapActionLift (k : ℕ)
     (h : Round24Transfer.HasBoundedLift K (Fin k) E' E F) :
     ∃ P : ContinuousMultilinearMap K (fun _ : Fin k => E' →L[K] E)
@@ -273,7 +274,7 @@ theorem exists_alternatingMapActionLift (k : ℕ)
   refine ⟨P, hP, alternatingMapActionLift k P, alternatingMapActionLift_apply k P,
     norm_alternatingMapActionLift_apply_le k P, alternatingMapActionLift_diag k P hP⟩
 
-/-- Finite polynomial regularity follows from the actual global joint lift. -/
+/-- A bounded lift of the pullback makes the joint action a continuous polynomial. -/
 theorem cpolynomialAt_alternatingMapAction_of_boundedLift (k : ℕ)
     (h : Round24Transfer.HasBoundedLift K (Fin k) E' E F)
     (z₀ : (E' →L[K] E) × (F →L[K] F')) :
@@ -287,8 +288,7 @@ theorem cpolynomialAt_alternatingMapAction_of_boundedLift (k : ℕ)
     ((ContinuousLinearMap.pi fun _ : Fin (k + 1) =>
       ContinuousLinearMap.id K ((E' →L[K] E) × (F →L[K] F'))).cpolynomialAt z₀)
 
-/-- Analytic pullback at the first coordinate gives joint analyticity, via its
-bounded lift and the resulting finite polynomial joint action. -/
+/-- If the pullback is analytic at `z.1`, the joint action is analytic at `z`. -/
 theorem analyticAt_alternatingMapAction_of_precomposition (k : ℕ)
     (z : (E' →L[K] E) × (F →L[K] F'))
     (hQ : AnalyticAt K (Round24Transfer.Q K (Fin k) E' E F) z.1) :
@@ -296,7 +296,7 @@ theorem analyticAt_alternatingMapAction_of_precomposition (k : ℕ)
   (cpolynomialAt_alternatingMapAction_of_boundedLift k
     (Round24Transfer.hasBoundedLift_of_analyticAt hQ) z).analyticAt
 
-/-- Invertibility of the factorial gives joint finite polynomial regularity. -/
+/-- If `k! ≠ 0` in `K`, the joint action is a continuous polynomial. -/
 theorem cpolynomialAt_alternatingMapAction_of_factorial_ne_zero (k : ℕ)
     (hk : (k.factorial : K) ≠ 0) (z₀ : (E' →L[K] E) × (F →L[K] F')) :
     CPolynomialAt K (alternatingMapAction k) z₀ := by
@@ -305,8 +305,7 @@ theorem cpolynomialAt_alternatingMapAction_of_factorial_ne_zero (k : ℕ)
   exact (ContinuousAlternatingMap.cpolynomialAt_compContinuousLinearMapCLM
     (by simpa using hk) _).analyticAt
 
-/-- Spherical targets give joint finite polynomial regularity in every degree.
-Neither source space is assumed ultrametric or complete. -/
+/-- If `F` is ultrametric and spherically complete, the joint action is a continuous polynomial. -/
 theorem cpolynomialAt_alternatingMapAction_of_sphericallyComplete
     [IsUltrametricDist K] [IsUltrametricDist F] [SphericallyCompleteSpace F]
     (k : ℕ) (z₀ : (E' →L[K] E) × (F →L[K] F')) :
@@ -314,11 +313,9 @@ theorem cpolynomialAt_alternatingMapAction_of_sphericallyComplete
   cpolynomialAt_alternatingMapAction_of_boundedLift k
     ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete z₀
 
-/-- The operator-to-functor bridge in one concrete statement: bilinear factorization
-and bounds, the identity slice, unconditional joint smoothness, quantitative lifts,
-and finite polynomial regularity from bounded lifts, a nonzero factorial, or a
-spherically complete ultrametric input coefficient target. The output coefficient
-target remains arbitrary. -/
+/-- Summary of this file: factorization and bounds, the identity slice, joint smoothness,
+joint lifts, and polynomial regularity under a bounded lift, `k! ≠ 0`, or a spherically
+complete target `F`. -/
 theorem alternatingMapAction_operator_bridge (k : ℕ) :
     (∀ z : (E' →L[K] E) × (F →L[K] F'),
       alternatingMapAction k z = alternatingPostcompBilinear k z.2

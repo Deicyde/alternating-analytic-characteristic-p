@@ -17,36 +17,25 @@ spherically complete, and `k ≥ p`.
    analytic everywhere.
 
 ## Formalization notes
-* Degree: index type `Fin k`. Characteristic: `p` prime with `[CharP K p]` (equivalent to
-  "characteristic `p > 0`"). `K` is a `NontriviallyNormedField` with `[CompleteSpace K]` and
-  `¬ SphericallyCompleteSpace K`. `SphericallyCompleteSpace` is the library class
-  (`AlternatingAnalytic/Analysis/SphericalCompleteness.lean`, imported for this definition only;
-  that module does not prove this claim). No ultrametric hypothesis is added (a normed field of
-  positive characteristic is automatically nonarchimedean).
-* Part 1. The manifold is the Banach space `X` itself; its two global charts are `id_X` and an
-  equivalence `ψ : X ≃ X` with `ψ` and `ψ⁻¹` analytic on all of `X` (`AnalyticOnNhd`), i.e. two
-  analytically compatible global charts. The induced transition on scalar alternating `k`-forms
-  at `x` is pullback by the chart derivative, `x ↦ (Dψ(x))^*` on `Alt^k(X; K)`
-  (`ContinuousAlternatingMap.compContinuousLinearMapCLM (fderiv K ψ x)`); the reverse
-  transition is `y ↦ (Dψ⁻¹(y))^*`. Both are asserted to be analytic at no point.
-  This model-space formulation (rather than an abstract `ChartedSpace`) is a deliberate
-  simplification: an abstract manifold with two global charts is identified with `X` by the
-  first chart.
-* Part 2. "Polynomial analytic" is Mathlib's `CPolynomialOn K h univ`; "analytic" is
-  `AnalyticOnNhd K · univ`. The pulled-back form in the global product coordinates of `N` is
-  `x ↦ (ω₀ (h x)).compContinuousLinearMap (fderiv K h x)`; the inclusion into `Mult^k(N; K)` is
-  `ContinuousAlternatingMap.toContinuousMultilinearMap`.
-* The witnesses are asserted to exist in the universe of `K` (the paper does not specify
-  universes).
+* The degree is `Fin k`. "Characteristic `p > 0`" is `p` prime with `[CharP K p]`. "Not
+  spherically complete" is `¬ SphericallyCompleteSpace K` (library class). No ultrametric
+  hypothesis is needed: a normed field of positive characteristic is nonarchimedean.
+* Part 1: the manifold is a Banach space `X` with global charts `id_X` and an equivalence
+  `ψ : X ≃ X`, with `ψ` and `ψ⁻¹` analytic on `X`. An abstract manifold with two global charts is
+  identified with `X` by the first chart. The transition on `Alt^k(X; K)` at `x` is pullback by
+  the chart derivative, `(Dψ(x))^*`; the reverse transition is `(Dψ⁻¹(y))^*`.
+* Part 2: "polynomial analytic" is `CPolynomialOn K h univ`. The pulled-back form is
+  `x ↦ (ω₀ (h x)).compContinuousLinearMap (fderiv K h x)`, and the inclusion into
+  `Mult^k(N; K)` is `ContinuousAlternatingMap.toContinuousMultilinearMap`.
+* The witnesses live in the universe of `K`.
 -/
 
 namespace AlternatingAnalyticChallenge.Prop6_5
 
 universe u
 
-/-- **Proposition 6.5(1).** A Banach space `X` (an analytic Banach manifold) with two global
-analytic charts `id` and `ψ` whose induced transitions on scalar alternating `k`-forms are
-analytic at no point. -/
+/-- Proposition 6.5(1): a Banach space `X` with two global analytic charts `id` and `ψ` whose
+induced transitions on scalar alternating `k`-forms are analytic at no point. -/
 theorem part1 (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (p k : ℕ) (hp : p.Prime) [CharP K p] (hK : ¬ SphericallyCompleteSpace K) (hpk : p ≤ k) :
     ∃ (X : Type u) (_ : NormedAddCommGroup X) (_ : NormedSpace K X) (_ : CompleteSpace X)
@@ -60,7 +49,7 @@ theorem part1 (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
           (X [⋀^Fin k]→L[K] K) →L[K] (X [⋀^Fin k]→L[K] K))) x) := by
   sorry
 
-/-- **Proposition 6.5(2).** Banach spaces `N, Y`, a polynomial analytic `h : N → Y` and an
+/-- Proposition 6.5(2): Banach spaces `N, Y`, a polynomial analytic `h : N → Y` and an
 analytic scalar `k`-form `ω₀` on `Y` whose pullback `h^* ω₀` is analytic at no point as an
 `Alt^k(N; K)`-valued map, but is analytic everywhere as a `Mult^k(N; K)`-valued map. -/
 theorem part2 (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]

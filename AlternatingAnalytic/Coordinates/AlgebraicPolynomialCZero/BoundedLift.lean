@@ -9,11 +9,10 @@ import Mathlib.SetTheory.Ordinal.Basic
 
 Over a nonarchimedean field `K` (not necessarily complete), a continuous diagonal
 `p x = b (x, …, x)` of an `n`-linear map `b : c₀(I, K)ⁿ → Z` (not assumed continuous), with `Z`
-complete and nonarchimedean, has a bounded `n`-linear lift `q` with `‖q‖ ≤ L ^ n ‖p‖_diag`. The
-constant comes from the inverse Vandermonde matrix of the nodes `1, t, …, tⁿ` for a fixed
-`0 < |t| < 1`, so it depends only on `K` and `n`. The lift is the bounded-array map of the
-symmetrized coefficients on sorted words; its coefficients are bounded by interpolation on the
-unit grid, and its diagonal agrees with `p` on finite truncations, hence everywhere.
+complete and nonarchimedean, has a bounded `n`-linear lift `q` with `‖q‖ ≤ L ^ n ‖p‖_diag`.
+Here `L` bounds the inverse Vandermonde matrix of the nodes `1, t, …, tⁿ` for a fixed
+`0 < |t| < 1`, so it depends only on `K` and `n`. The lift is built from the symmetrized
+coefficients on sorted words, bounded by interpolation on the unit grid.
 -/
 
 open Finset Filter
@@ -98,8 +97,8 @@ theorem norm_gridVector_le {S : Finset I} (w : S → K) (hw : ∀ j, ‖w j‖ �
 
 variable [LinearOrder I]
 
-/-- **Coefficient bound.** The symmetrized coefficients of an algebraic polynomial whose
-diagonal satisfies `‖p x‖ ≤ D ‖x‖ ^ n` are bounded by `L ^ n D`. -/
+/-- The symmetrized coefficients of an algebraic polynomial whose diagonal satisfies
+`‖p x‖ ≤ D ‖x‖ ^ n` are bounded by `L ^ n D`. -/
 theorem norm_coeff_le (b : MultilinearMap K (fun _ : Fin n => C₀(I, K)) Z) {D : ℝ} (hD : 0 ≤ D)
     (hbD : ∀ x, ‖b (fun _ => x)‖ ≤ D * ‖x‖ ^ n) (a : Fin n → I) :
     ‖coeff (fun a' => b (fun r => CZero.coordinate (K := K) (a' r))) a‖ ≤ liftConst K n * D := by
@@ -156,10 +155,9 @@ theorem diag_truncation [CompleteSpace Z] (b : MultilinearMap K (fun _ : Fin n =
 
 end Coefficients
 
-/-- **Proposition I.2.** Over a nonarchimedean field `K` (not necessarily complete) and for
-`n ≥ 1`, every continuous algebraic homogeneous polynomial `p : c₀(I,K) → Z` of degree `n`, into a
-complete nonarchimedean `Z`, has finite diagonal norm and a bounded `n`-linear lift `q` with
-`‖q‖ ≤ C ‖p‖_diag`, where `C = L ^ n` depends only on `K` and `n`. -/
+/-- Proposition I.2: for `n ≥ 1`, a continuous algebraic homogeneous polynomial
+`p : c₀(I, K) → Z` of degree `n` has finite diagonal norm and a bounded `n`-linear lift `q` with
+`‖q‖ ≤ C ‖p‖_diag`, where `C` depends only on `K` and `n`. -/
 theorem exists_boundedLift_of_continuous_algebraicPolynomial
     (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K] (n : ℕ) (hn : 1 ≤ n) :
     ∃ C : ℝ, 0 ≤ C ∧

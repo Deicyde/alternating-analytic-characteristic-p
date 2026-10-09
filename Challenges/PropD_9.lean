@@ -16,24 +16,17 @@ nontrivially normed, complete and spherically complete; (H2): `K' ⊇ K₁` is n
 
 ## Formalization notes
 
-* `A^k` is `ContinuousAlternatingMap.compContinuousLinearMapCLM`, with degree index `Fin k`.
-* A bounded `k`-linear lift of `A^k` is a continuous `k`-multilinear map
-  `P : L(E,E)^k → L(Alt^k(E;F), Alt^k(E;F))` with `P (g, …, g) = A^k(g)` for every `g`, written
-  out explicitly (the library predicate `Round24Transfer.HasBoundedLift` is not imported).
-  `‖P‖` is the usual multilinear operator norm, supplied by the local instance `liftOpNorm`
-  (definition `ContinuousMultilinearMap.hasOpNorm`; needed only because instance search does not
-  find it unaided).
-* The completed projective base changes `E = CompletedBaseChange K₁ E₁ K'`,
-  `F = CompletedBaseChange K₁ F₁ K'` are the library's construction, imported as definitions from
-  `AlternatingAnalytic.Analysis.CompletedBaseChange`; the proving module
-  `BaseChangeLiftDescent.lean` is not imported.
-* `K₁ ⊆ K'` isometrically is `[NormedAlgebra K₁ K']`; (H1) is `[CompleteSpace K₁]
-  [SphericallyCompleteSpace K₁]`; (H2) is `[IsUltrametricDist K']`. `[IsUltrametricDist K₁]`
-  (implied by (H2)) is required by the construction. `E₁`, `F₁`, `K'` share the universe `u`.
-* `K'` is taken `NontriviallyNormedField` (automatic: it contains the nontrivially normed `K₁`
-  isometrically).
-* The "equivalently" sentence is stated as its own theorem: nowhere-analyticity of `A^{k,K₁}`
-  implies nowhere-analyticity of `A^{k,K'}`.
+* `A^k` is `ContinuousAlternatingMap.compContinuousLinearMapCLM`, indexed by `Fin k`.
+* A bounded `k`-linear lift is a continuous multilinear map
+  `P : L(E,E)^k → L(Alt^k(E;F), Alt^k(E;F))` with `P (g, …, g) = A^k(g)`. `‖P‖` is the
+  multilinear operator norm, supplied by the local instance `liftOpNorm`.
+* `E = CompletedBaseChange K₁ E₁ K'` and `F = CompletedBaseChange K₁ F₁ K'` are library
+  definitions from `AlternatingAnalytic/Analysis/CompletedBaseChange.lean`.
+* `K₁ ⊆ K'` is `[NormedAlgebra K₁ K']`; (H1) is `[CompleteSpace K₁] [SphericallyCompleteSpace K₁]`;
+  (H2) is `[IsUltrametricDist K']`. The library also needs `[IsUltrametricDist K₁]`, which
+  follows from (H2). `E₁`, `F₁`, `K'` lie in one universe.
+* `K'` is a `NontriviallyNormedField`; this follows from containing `K₁` isometrically.
+* The "equivalently" sentence is a separate theorem, `nowhere_analytic_ascends`.
 -/
 
 namespace AlternatingAnalyticChallenge.PropD_9
@@ -42,10 +35,8 @@ open AlternatingAnalytic
 
 universe u
 
-/-- The standard operator norm on the space of candidate lifts
-`L(A, A)^n → L(Alt^k(A; C), Alt^k(A; C))`, exposed as a local instance because typeclass search
-does not find `ContinuousMultilinearMap.hasOpNorm` through the nested alternating-map codomain
-on its own. (This mirrors the library's local instance in `BaseChangeLiftDescent.lean`.) -/
+/-- The operator norm on candidate lifts. Instance search does not find
+`ContinuousMultilinearMap.hasOpNorm` through the alternating-map codomain. -/
 noncomputable local instance liftOpNorm {R A C : Type*} [NontriviallyNormedField R]
     [NormedAddCommGroup A] [NormedSpace R A] [NormedAddCommGroup C] [NormedSpace R C]
     {k n : ℕ} :
@@ -54,8 +45,8 @@ noncomputable local instance liftOpNorm {R A C : Type*} [NontriviallyNormedField
   ContinuousMultilinearMap.hasOpNorm (𝕜 := R) (E := fun _ : Fin n => A →L[R] A)
     (G := (A [⋀^Fin k]→L[R] C) →L[R] (A [⋀^Fin k]→L[R] C))
 
-/-- Proposition D.9, first sentence: a bounded `k`-linear lift of `A^{k,K'}_{E,E;F}` over `K'`
-descends to a bounded `k`-linear lift of `A^{k,K₁}_{E₁,E₁;F₁}` over `K₁` with `‖P₁‖ ≤ ‖P‖`. -/
+/-- A bounded `k`-linear lift of `A^{k,K'}_{E,E;F}` over `K'` gives a bounded `k`-linear lift of
+`A^{k,K₁}_{E₁,E₁;F₁}` over `K₁` with `‖P₁‖ ≤ ‖P‖`. -/
 theorem exists_lift_descent
     (K₁ : Type*) (E₁ F₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]
@@ -75,8 +66,7 @@ theorem exists_lift_descent
           P₁ (fun _ => f) = ContinuousAlternatingMap.compContinuousLinearMapCLM f := by
   sorry
 
-/-- Proposition D.9, second sentence: if `A^{k,K₁}_{E₁,E₁;F₁}` is analytic at no point, then
-`A^{k,K'}_{E,E;F}` is analytic at no point. -/
+/-- If `A^{k,K₁}_{E₁,E₁;F₁}` is analytic at no point, then neither is `A^{k,K'}_{E,E;F}`. -/
 theorem nowhere_analytic_ascends
     (K₁ : Type*) (E₁ F₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]

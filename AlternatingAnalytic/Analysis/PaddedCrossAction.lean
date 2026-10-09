@@ -2,12 +2,11 @@ import AlternatingAnalytic.Analysis.DeterminantCrossActionObstruction
 import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
-# The actual padded cross-action
+# The cross-action between the padded pairs
 
-The affine slice uses multiplication on the original rigid source and the
-identity on the literal auxiliary product. Evaluation at the normalized padded
-determinant, followed by the coefficient isometry, is the original C-valued
-nonanalytic coordinate.
+Along the bounded affine family `x ↦ M_x ⊕ id` from `E` to `L(E_k, D_k)`, evaluating the action at
+`det_k` and taking the coefficient in `C` gives the nonanalytic coordinate of Appendix H. Hence the
+cross-action from `(D_k, G)` to `(E_k, G)` is not analytic (proof of Theorem H.4).
 -/
 
 noncomputable section
@@ -19,19 +18,19 @@ namespace AlternatingAnalytic.DeterminantPair.Padding
 variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (n : ℕ)
 attribute [local instance] preferredNormedFieldK preferredFieldK preferredFieldL
 
-/-- The bounded linear part of the padded multiplication slice. -/
+/-- The linear part `x ↦ M_x ⊕ 0`. -/
 def multiplicationLinearPart :
     DeterminantPair.E p r →L[K p r] E p r n →L[K p r] D p r n :=
   (ContinuousLinearMap.prodMapL (K p r) (DeterminantPair.E p r)
     (DeterminantPair.D p r) (Fin n → K p r) (Fin n → K p r)).comp
       ((DeterminantPair.multiplication p r).prod 0)
 
-/-- The constant auxiliary identity, including the empty auxiliary product. -/
+/-- The constant part `0 ⊕ id`; `n = 0` is allowed. -/
 def auxiliaryIdentity : E p r n →L[K p r] D p r n :=
   (0 : DeterminantPair.E p r →L[K p r] DeterminantPair.D p r).prodMap
     (ContinuousLinearMap.id (K p r) (Fin n → K p r))
 
-/-- The actual bounded affine family `M_x ⊕ id`. -/
+/-- The bounded affine family `M_x ⊕ id : E_k → D_k`. -/
 def paddedMultiplication (x : DeterminantPair.E p r) : E p r n →L[K p r] D p r n :=
   (DeterminantPair.multiplication p r x).prodMap
     (ContinuousLinearMap.id (K p r) (Fin n → K p r))
@@ -53,8 +52,8 @@ theorem analyticAt_paddedMultiplication (x : DeterminantPair.E p r) :
   simp_rw [paddedMultiplication_eq_affine]
   exact ((multiplicationLinearPart p r n).analyticAt x).add analyticAt_const
 
-/-- The ordered standard tuple is sent to the original multiplication tuple
-followed by the auxiliary standard basis. -/
+/-- `M_x ⊕ id` sends the standard tuple of `E_k` to the multiplication tuple followed by the
+auxiliary basis. -/
 theorem paddedMultiplication_standard (x : DeterminantPair.E p r) :
     (fun i => paddedMultiplication p r n x (standardE p r n i)) =
       padTuple p r n (DeterminantPair.D p r)
@@ -66,7 +65,7 @@ theorem paddedMultiplication_standard (x : DeterminantPair.E p r) :
   | inl i => simp [standardE, padTuple, paddedMultiplication_apply]
   | inr i => simp [standardE, padTuple, paddedMultiplication_apply]
 
-/-- The coefficient extraction is exactly the known bad map, in C itself. -/
+/-- The coefficient of `det_k ∘ (M_x ⊕ id)` is the determinant coordinate of `x`. -/
 theorem paddedCoefficient_multiplication (x : DeterminantPair.E p r) :
     paddedCoefficientEquiv p r n
       ((determinantD p r n).compContinuousLinearMap (paddedMultiplication p r n x)) =
@@ -87,7 +86,7 @@ theorem paddedCoefficient_multiplication (x : DeterminantPair.E p r) :
   rw [← DeterminantPair.determinantD_apply]
   rfl
 
-/-- Bounded observation of the actual cross-action at its normalized determinant. -/
+/-- Evaluation at `det_k` followed by the coefficient isometry onto `C`. -/
 def crossActionEvaluation :
     ((D p r n [⋀^Fin (p+n)]→L[K p r] G p r) →L[K p r]
       (E p r n [⋀^Fin (p+n)]→L[K p r] G p r)) →L[K p r] C p r :=
@@ -95,7 +94,7 @@ def crossActionEvaluation :
     (ContinuousLinearMap.apply (K p r) (E p r n [⋀^Fin (p+n)]→L[K p r] G p r)
       (determinantD p r n))
 
-/-- The morphism slice includes the actual identity on the original target G. -/
+/-- The slice `x ↦ (M_x ⊕ id, id_G)` of the joint action. -/
 def crossActionSlice (x : DeterminantPair.E p r) :
     (E p r n →L[K p r] D p r n) × (G p r →L[K p r] G p r) :=
   (paddedMultiplication p r n x, ContinuousLinearMap.id (K p r) (G p r))
@@ -109,8 +108,7 @@ theorem analyticAt_crossActionSlice (x : DeterminantPair.E p r) :
     AnalyticAt (K p r) (crossActionSlice p r n) x :=
   (analyticAt_paddedMultiplication p r n x).prod analyticAt_const
 
-/-- The action/evaluation/coefficient composite equals the old obstruction,
-with its original inherited norm and target C. -/
+/-- Along the slice, evaluation gives the determinant coordinate. -/
 theorem crossActionEvaluation_slice (x : DeterminantPair.E p r) :
     crossActionEvaluation p r n
       (alternatingMapAction (p+n) (crossActionSlice p r n x)) = determinantCoordinate p r x := by
@@ -118,7 +116,7 @@ theorem crossActionEvaluation_slice (x : DeterminantPair.E p r) :
   rw [← paddedCoefficient_multiplication p r n x]
   congr 1
 
-/-- Failure of the actual joint action at `(0 ⊕ id, id_G)`. -/
+/-- The joint cross-action is not analytic at `(0 ⊕ id, id_G)`. -/
 theorem not_analyticAt_crossAction :
     ¬ AnalyticAt (K p r)
       (alternatingMapAction (K := K p r) (E := D p r n) (E' := E p r n)
@@ -130,8 +128,8 @@ theorem not_analyticAt_crossAction :
   have he := ((crossActionEvaluation p r n).analyticAt _).comp hs
   simpa only [Function.comp_def, crossActionEvaluation_slice] using he
 
-/-- The complete padded cross-action statement: the bounded affine family,
-normalized determinant observation, literal C-valued formula and bad point. -/
+/-- Summary: the affine family, the evaluation formula, and nonanalyticity of the
+cross-action. -/
 theorem padded_nonanalytic_cross_action :
     (∀ x : DeterminantPair.E p r,
       paddedMultiplication p r n x = multiplicationLinearPart p r n x + auxiliaryIdentity p r n) ∧

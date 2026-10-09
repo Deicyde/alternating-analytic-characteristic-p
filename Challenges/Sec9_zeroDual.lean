@@ -14,28 +14,21 @@ Indeed, if `λ(v) = 1` for `λ ∈ F*` and `v ∈ F`, then
 excludes analyticity of the right-hand action.
 
 ## Formalization notes
-* Degree: index type `Fin k`. Characteristic: `p` prime with `[CharP K p]`, `p ≤ k`.
-  `K` is a `NontriviallyNormedField` with `[CompleteSpace K]` and `¬ SphericallyCompleteSpace K`
-  (library class, `AlternatingAnalytic/Analysis/SphericalCompleteness.lean`, imported for the
-  definition only).
-* "Universal target" is the library definition `AlternatingAnalytic.UniversalAlternatingTarget K k
-  F` (`AlternatingAnalytic/Analysis/UniversalAlternatingTargets.lean`, imported for this
-  definition): for all normed spaces `E, D` in the universe of `K`, the precomposition map
+* The degree is `Fin k`. The obstructed range is `p` prime with `[CharP K p]` and `p ≤ k`; `K`
+  is complete and `¬ SphericallyCompleteSpace K`.
+* "Universal target" is the library definition `AlternatingAnalytic.UniversalAlternatingTarget K k F`:
+  for all normed spaces `E, D` in the universe of `K`, the map
   `u ↦ u^* : L(E, D) → L(Alt^k(D; F), Alt^k(E; F))` is `AnalyticOnNhd` on all of `L(E, D)`.
-  This is "analytic on every hom space" of the functor `Alt^k(−; F)` on `NormedSpaceCat K`
-  (carriers in the universe of `K`); `F` is also taken in that universe. That module contains
-  the retract-transfer lemma `UniversalAlternatingTarget.of_retract` (the compression step) but
-  not the scalar counterexample, so it does not prove this claim.
+  `F` is also taken in the universe of `K`.
 * "Zero continuous dual" is `∀ λ : F →L[K] K, λ = 0`.
-* The proof depends on Theorem 6.1(2) (scalar counterexample), which is not in the library.
 -/
 
 namespace AlternatingAnalyticChallenge.Sec9_zeroDual
 
 universe u
 
-/-- **Section 9.** Over a complete, non-spherically-complete field of characteristic `p` and in
-degree `k ≥ p`, every universal target `F` of `Alt^k(−; F)` has zero continuous dual. -/
+/-- Over a complete, non-spherically-complete field of characteristic `p` and in degree
+`k ≥ p`, every universal target `F` of `Alt^k(−; F)` has zero continuous dual. -/
 theorem universal_target_zero_dual (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (p k : ℕ) (hp : p.Prime) [CharP K p] (hK : ¬ SphericallyCompleteSpace K) (hpk : p ≤ k)
     (F : Type u) [NormedAddCommGroup F] [NormedSpace K F]

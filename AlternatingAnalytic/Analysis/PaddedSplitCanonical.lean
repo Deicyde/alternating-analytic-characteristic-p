@@ -1,11 +1,11 @@
 import AlternatingAnalytic.Analysis.PaddedSplitRetraction
 
 /-!
-# The retraction with the manuscript's order of arguments
+# The split retraction with auxiliary arguments last
 
-The first p inputs are restricted to D and the last n inputs are frozen at the
-auxiliary standard basis. The local `Smap` inserts an auxiliary argument first,
-so each padding step carries the corresponding cyclic sign.
+The retraction `R` of Appendix H: restrict the first `p` arguments to `D`, fix the last `n` at the
+auxiliary standard basis, apply the degree-`p` retraction, and wedge back. Since `Smap` inserts
+the auxiliary argument first, each wedge step carries the sign of a cyclic shift.
 -/
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
@@ -20,7 +20,7 @@ local instance canonicalFieldK : Field (K p r) :=
 local instance canonicalFieldL : Field (L p r) :=
   (inferInstance : NontriviallyNormedField (L p r)).toField
 
-/-- Bounded curry/evaluation restriction with the auxiliary argument last. -/
+/-- Fix the last argument at `(0, 1)` and restrict the others to `V`. -/
 def freezeLast {V F : Type*} [NormedAddCommGroup V] [NormedSpace (K p r) V]
     [NormedAddCommGroup F] [NormedSpace (K p r) F] (k : ℕ) :
     ((V × K p r) [×(k+1)]→L[K p r] F) →L[K p r] (V [×k]→L[K p r] F) :=
@@ -37,13 +37,13 @@ def freezeLast {V F : Type*} [NormedAddCommGroup V] [NormedSpace (K p r) V]
     (0,1) (fun j => (x j,0)) (finRotate (k+1) i)) = _
   rw [← Fin.snoc_eq_cons_rotate]
 
-/-- Correct the local auxiliary-first wedge to auxiliary-last order. -/
+/-- `wedgeSucc` with the sign `(-1)^(p+n)`, for the auxiliary-last order. -/
 def wedgeLastSucc (n : ℕ) :
     (D p r n [⋀^Fin (p+n)]→L[K p r] G p r) →L[K p r]
       (D p r (n+1) [⋀^Fin (p+(n+1))]→L[K p r] G p r) :=
   (-1 : ℤ) ^ (p+n) • wedgeSucc p r n
 
-/-- The cyclic permutation changes an alternating restriction by its exact sign. -/
+/-- On alternating maps, `freezeLast` is `restrictSucc` up to the sign `(-1)^(p+n)`. -/
 theorem freezeLast_alternating (n : ℕ)
     (m : D p r (n+1) [⋀^Fin (p+(n+1))]→L[K p r] G p r) :
     freezeLast p r (p+n)
@@ -73,7 +73,7 @@ theorem freezeLast_alternating (n : ℕ)
   apply congrArg (appendEquiv p r n)
   rfl
 
-/-- Freeze precisely the last n auxiliary standard arguments in their standard order. -/
+/-- Fix the last `n` arguments at the auxiliary standard basis, in order. -/
 def freezeAuxiliaryLast : (n : ℕ) →
     (D p r n [×(p+n)]→L[K p r] G p r) →L[K p r]
       (DeterminantPair.D p r [×p]→L[K p r] G p r)
@@ -83,7 +83,7 @@ def freezeAuxiliaryLast : (n : ℕ) →
       (ContinuousMultilinearMap.compContinuousLinearMapL
         (fun _ => (appendEquiv p r n).toContinuousLinearMap)))
 
-/-- Iterated bounded local padding in the order used by the manuscript. -/
+/-- Iterated `wedgeLastSucc`. -/
 def iteratedWedgeLast : (n : ℕ) →
     (DeterminantPair.D p r [⋀^Fin p]→L[K p r] G p r) →L[K p r]
       (D p r n [⋀^Fin (p+n)]→L[K p r] G p r)
@@ -91,8 +91,7 @@ def iteratedWedgeLast : (n : ℕ) →
       (ContinuousLinearMap.fst (K p r) (DeterminantPair.D p r) (Fin 0 → K p r))
   | n+1 => (wedgeLastSucc p r n).comp (iteratedWedgeLast n)
 
-/-- The actual source-order retraction: last-argument evaluation, the genuine
-all-alternating inverse in degree p, and division-free local wedge padding. -/
+/-- The retraction `Mult^{p+n}(D_k; G) → Alt^{p+n}(D_k; G)` of Appendix H. -/
 def canonicalRetraction (n : ℕ) :
     (D p r n [×(p+n)]→L[K p r] G p r) →L[K p r]
       (D p r n [⋀^Fin (p+n)]→L[K p r] G p r) :=
@@ -116,7 +115,7 @@ def canonicalRetraction (n : ℕ) :
         wedgeSucc_restrictSucc, smul_smul]
       rw [← pow_add, (Even.add_self (p+n)).neg_one_pow, one_smul]
 
-/-- The normalized determinant retains standard-basis value one after reconstruction. -/
+/-- The retraction of `det_k` takes the value `1` on the standard basis. -/
 @[simp] theorem canonicalRetraction_determinantD_standard (n : ℕ) :
     (canonicalRetraction p r n (determinantD p r n).toContinuousMultilinearMap
       (standardD p r n) : L p r) = 1 := by
@@ -143,8 +142,7 @@ def canonicalRetraction (n : ℕ) :
       refine Fin.lastCases ?_ (fun k => ?_) j <;>
         simp [appendEquiv, Pi.single_apply]
 
-/-- The exact first-p/last-n evaluation formula holds for arbitrary continuous
-multilinear maps, before applying the all-alternating inverse. -/
+/-- `freezeAuxiliaryLast m x = m (x₁, …, x_p, e'₁, …, e'_n)` for every multilinear `m`. -/
 theorem freezeAuxiliaryLast_apply (n : ℕ)
     (m : D p r n [×(p+n)]→L[K p r] G p r) (x : Fin p → DeterminantPair.D p r) :
     freezeAuxiliaryLast p r n m x = m (padTuple p r n (DeterminantPair.D p r) x) := by
@@ -172,13 +170,12 @@ theorem freezeAuxiliaryLast_apply (n : ℕ)
         simp only [standardD, padTuple, finSumFinEquiv_symm_apply_natAdd, Sum.elim_inr]
       · simp only [Fin.snoc_castSucc, appendEquiv_padTuple]
 
-/-- This source-order construction gives the actual split-pair certificate. -/
+/-- `(D_k, G)` is split in degree `p + n`. -/
 theorem isSplitAlternatingPair_canonical (n : ℕ) :
     IsSplitAlternatingPair (K p r) (p+n) (D p r n) (G p r) :=
   ⟨canonicalRetraction p r n, canonicalRetraction_fix p r n⟩
 
-/-- The complete split assertion with the prescribed argument order, actual
-bounded retraction, reconstruction and global joint self-action analyticity. -/
+/-- Summary: the retraction, its formula, splitness and analytic self-action. -/
 theorem canonical_padded_split_pair (n : ℕ) :
     (∀ (m : D p r n [×(p+n)]→L[K p r] G p r) (x : Fin p → DeterminantPair.D p r),
       freezeAuxiliaryLast p r n m x = m (padTuple p r n (DeterminantPair.D p r) x)) ∧

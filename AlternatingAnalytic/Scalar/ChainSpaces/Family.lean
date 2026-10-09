@@ -13,14 +13,13 @@ import Mathlib.Data.Set.Finite.Basic
 /-!
 # The finite family of pairs of subspaces (F.2)
 
-Over a normed field `K` put `V = K^{k+1}`, `V' = K^k`. This file repeats, verbatim, the
-definitions of the challenge for Lemma F.5 (the forms `N`, the subspaces `H'_{cd}`, `C'_s`, the
-family `F` of pairs `(Σ, Σ')`, the projection `g₀`, the determinant `δ'` and condition (1)), and
-records the facts about them used in the construction of Theorem F.1: the family is finite,
-`δ'` vanishes on `(Σ')^k` for every pair (the subspaces `Σ'` are `H'_{cd}` with `c ≠ d` or
-`C'_s`, so the matrix has two equal rows or a zero row), and every subspace of a vector space is
-the kernel of an idempotent linear map. `FiniteTestCertificate K k` is the statement of
-Lemma F.5, which enters the proof of Theorem F.1 as a hypothesis.
+Over a normed field `K` put `V = K^{k+1}`, `V' = K^k`. We define the forms `N`, the subspaces
+`H'_{cd}`, `C'_s`, the family `F` of pairs `(Σ, Σ')`, the projection `g₀`, the determinant `δ'`
+and condition (1), as in the statement of Lemma F.5, and prove the facts used for Theorem F.1:
+`F` is finite, `δ'` vanishes on `(Σ')^k` for every pair (each `Σ'` is `H'_{cd}` with `c ≠ d` or
+`C'_s`, so the matrix has two equal rows or a zero row), and every subspace is the kernel of an
+idempotent linear map. `FiniteTestCertificate K k` states Lemma F.5, which enters the proof of
+Theorem F.1 as a hypothesis.
 -/
 
 namespace AlternatingAnalytic.ChainSpaces

@@ -1,10 +1,12 @@
 import AlternatingAnalytic.Geometry.AnalyticAlternatingBundle
 import Mathlib.Geometry.Manifold.VectorBundle.Hom
 
-/-! # Algebraic action on actual alternating bundle fibers
+/-! # The alternating action on bundle fibers
 
-All fiber operators here use the given topological vector space structures.
-Only the model-coordinate action uses normed spaces.
+Defines the operator `m ↦ v ∘ m ∘ (u, …, u)` on spaces of continuous alternating maps
+between topological vector spaces, proves the functor laws, and shows that in
+bundle trivializations it is given by the model action `alternatingMapAction`.
+This is the fiberwise construction behind Corollary 4.6.
 -/
 
 noncomputable section
@@ -27,8 +29,7 @@ variable {K E E' E'' F F' F'' : Type*} [NontriviallyNormedField K]
   [AddCommGroup F''] [Module K F''] [TopologicalSpace F'']
   [IsTopologicalAddGroup F''] [ContinuousSMul K F'']
 
-/-- Pull back each input by `u` and push forward the output by `v`, on the
-actual topological fibers. -/
+/-- Pull back each input by `u` and push forward the output by `v`. -/
 def alternatingBundleMap (k : ℕ) (u : E' →L[K] E) (v : F →L[K] F') :
     (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F') :=
   (ContinuousLinearMap.compContinuousAlternatingMapCLM K E' F F' (Fin k) v).comp
@@ -49,7 +50,7 @@ theorem alternatingBundleMap_id [ContinuousSMul K E] (k : ℕ) :
   rfl
 
 omit [ContinuousSMul K E'] [ContinuousSMul K E''] in
-/-- Contravariant composition in the inputs and covariant composition in the output. -/
+/-- The action is contravariant in the inputs and covariant in the output. -/
 @[simp]
 theorem alternatingBundleMap_comp (k : ℕ)
     (u : E' →L[K] E) (u' : E'' →L[K] E')
@@ -85,8 +86,8 @@ variable {K M A A' B B' : Type*} [NontriviallyNormedField K] [TopologicalSpace M
   [FiberBundle B' F'] [VectorBundle K B' F']
 
 omit [∀ x, IsTopologicalAddGroup (E' x)] [∀ x, ContinuousSMul K (E' x)] in
-/-- In every four chosen atlas trivializations, on their common domain, the
-induced Hom operator has exactly the joint model-action coordinates. -/
+/-- In four atlas trivializations, on their common domain, the induced operator is
+the model action of the trivialized pair `(u, v)`. -/
 theorem alternatingBundleMap_coordinates (k : ℕ)
     (eA : Trivialization A (π A E)) (eA' : Trivialization A' (π A' E'))
     (eB : Trivialization B (π B F)) (eB' : Trivialization B' (π B' F'))

@@ -2,7 +2,13 @@ import Mathlib.Analysis.Analytic.Uniqueness
 import Mathlib.Analysis.Normed.Group.Quotient
 import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Quotient
 
-/-! Diagonal Taylor coefficients of a map locally valued in a closed subspace. -/
+/-!
+# Diagonal coefficients in a closed subspace
+
+If an analytic map takes values near `x` in a closed subspace `W`, then the
+diagonal values `p n (fun _ => y)` of its power series at `x` lie in `W`. This is
+the first step of coefficient descent (Theorem 3.1).
+-/
 
 noncomputable section
 
@@ -15,8 +21,8 @@ variable {K E Z : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup E] [NormedSpace K E]
   [NormedAddCommGroup Z] [NormedSpace K Z]
 
-/-- Closed subspaces contain the diagonal coefficients of an ambient analytic expansion
-whose represented map locally takes values in that subspace. No completeness is needed. -/
+/-- If `f` locally takes values in a closed subspace `W`, the diagonals of its power
+series lie in `W`. -/
 theorem HasFPowerSeriesAt.diagonal_mem_closedSubspace
     (W : Submodule K Z) (hW : IsClosed (W : Set Z))
     {p : FormalMultilinearSeries K E Z} {f : E → Z} {x : E}

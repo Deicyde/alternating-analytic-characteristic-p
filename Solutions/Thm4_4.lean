@@ -5,25 +5,20 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateReflection
 import AlternatingAnalytic.Analysis.FiniteCoordinateRadius
 
 /-!
-# Theorem 4.4 (finite-coordinate parameters), pp. 10-11
+# Proof of Theorem 4.4
 
-Solution: the statements of `Challenges/Thm4_4.lean`, proved from the library:
-* (1): `AlternatingAnalytic.analyticAt_of_closed_linearIsometry_of_equiv`
-  (`FiniteCoordinateReflection.lean`); the converse direction is composition with `j`;
-* (2): `FiniteCoordinateReflection.exists_lift` (`FiniteCoordinateLift.lean`, the `d^n` bound),
-  `AlternatingAnalytic.HasFPowerSeriesAt.diagonal_mem_closedSubspace` (`ClosedSubspaceCoefficients.lean`) and
-  `AlternatingAnalytic.radius_pos_of_exponential_bound` (`FiniteCoordinateReflection.lean`),
-  assembled as in `analyticAt_subtype_of_finite_coordinates`;
-* (3): `AlternatingAnalytic.exists_hasFPowerSeriesOnBall_of_closed_linearIsometry_of_isUltrametricDist`
-  (`FiniteCoordinateRadius.lean`).
+Uses `analyticAt_of_closed_linearIsometry_of_equiv` (`Analysis/FiniteCoordinateReflection.lean`),
+`FiniteCoordinateReflection.exists_lift` (`Analysis/FiniteCoordinateLift.lean`) and
+`exists_hasFPowerSeriesOnBall_of_closed_linearIsometry_of_isUltrametricDist`
+(`Analysis/FiniteCoordinateRadius.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.Thm4_4
 
 universe uK uP uW uZ
 
-/-- **Theorem 4.4 (1).** With finitely many continuous coordinates on the parameter space,
-analyticity on an open set reflects through a closed linear isometry. -/
+/-- Theorem 4.4(1): with finitely many continuous coordinates on `P`, `f` is analytic on `U`
+iff `j ∘ f` is. -/
 theorem part1_analyticOnNhd_iff
     (K : Type uK) [NontriviallyNormedField K]
     {P : Type uP} {W : Type uW} {Z : Type uZ}
@@ -40,9 +35,8 @@ theorem part1_analyticOnNhd_iff
   · intro hf x hx
     exact AlternatingAnalytic.analyticAt_of_closed_linearIsometry_of_equiv e j hj (hf x hx)
 
-/-- **Theorem 4.4 (2).** For the maximum norm on `K^d`, the ambient coefficients `b_n` of an
-expansion of `j ∘ f` can be replaced by `W`-valued coefficients `q_n`, with the same diagonals,
-forming an expansion of `f`, and with `‖q_n‖ ≤ d^n ‖b_n‖` for `n ≥ 1`. -/
+/-- Theorem 4.4(2): the coefficients of an expansion of `j ∘ f` lift to an expansion of `f`
+with the same diagonals and `‖q_n‖ ≤ d^n ‖b_n‖` for `n ≥ 1`. -/
 theorem part2_coefficient_bound
     (K : Type uK) [NontriviallyNormedField K]
     {W : Type uW} {Z : Type uZ}
@@ -83,7 +77,7 @@ theorem part2_coefficient_bound
     simpa only [Function.comp_def, LinearIsometry.coe_toContinuousLinearMap, hdiag] using hsum
   exact (j.isEmbedding.isInducing.hasSum_iff (g := j.toContinuousLinearMap) _ _).mp hsum'
 
-/-- **Theorem 4.4 (3).** If `Z` is nonarchimedean, the factor `d^n` in part (2) can be replaced
+/-- Theorem 4.4(3): if `Z` is nonarchimedean, the factor `d^n` in part (2) can be replaced
 by `1`. -/
 theorem part3_coefficient_bound_ultrametric
     (K : Type uK) [NontriviallyNormedField K]

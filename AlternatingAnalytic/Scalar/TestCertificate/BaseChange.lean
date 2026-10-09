@@ -7,9 +7,9 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 
 For a field extension `K / F` and finite index types, an `F`-linear map `g : F^n → F^m` has a
 base change `bcMap g : K^n → K^m`, the `K`-linear map with the same matrix, and an `F`-linear
-form `ℓ` on `F^n` has a base change `bcForm ℓ` on `K^n`. We show that base change commutes with
-the inclusion `F^n → K^n`, that a form vanishing on the kernel of another still does so after base
-change, and that the fibre family (F.2) and its admissible tests transfer from `F` to `K`.
+form `ℓ` on `F^n` has a base change `bcForm ℓ` on `K^n`. Base change commutes with the
+inclusion `F^n → K^n`, and a form vanishing on the kernel of another still does so after base
+change. These facts are used to transfer the tests of the family (F.2) from `F` to `K`.
 -/
 
 namespace AlternatingAnalytic.TestCertificate

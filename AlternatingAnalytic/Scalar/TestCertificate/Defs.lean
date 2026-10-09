@@ -8,12 +8,12 @@ import Mathlib.Data.Nat.Factorial.Basic
 /-!
 # The finite fibre data of Appendix F
 
-Over a field `κ`, put `V = κ^{k+1}` and `V' = κ^k`. This file defines the set `N` of linear forms
+Over a field `κ`, put `V = κ^{k+1}` and `V' = κ^k`. Defined here: the set `N` of linear forms
 `ε^a` and `ε^a + ε^b` (`a < b`) on `V`, the subspaces `H'_{cd}` and `C'_s` of `V'`, the finite
 family `F` of pairs `(Σ, Σ')` from (F.2), the projection `g₀ : V → V'` onto the first `k`
 coordinates, the determinant `δ'` on `V'`, and conditions (1) and (2) of Lemma F.4 for a
-`k`-linear map `τ : Hom_κ(V, V')^k → Alt^k_κ(V; κ)`. The definitions agree with those of the
-ledger statements of Lemmas F.4 and F.5.
+`k`-linear map `τ : Hom_κ(V, V')^k → Alt^k_κ(V; κ)`. The challenge statements of Lemmas F.4
+and F.5 use the same definitions.
 -/
 
 namespace AlternatingAnalytic.TestCertificate

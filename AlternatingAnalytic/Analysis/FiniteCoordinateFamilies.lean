@@ -5,13 +5,13 @@ import Mathlib.Analysis.Analytic.CPolynomial
 import Mathlib.Analysis.Calculus.ContDiff.LinearIsometry
 
 /-!
-# Finite coordinate analytic alternating morphism families
+# Analytic alternating families over finite-coordinate parameters
 
-The ambient joint action is the diagonal of a bounded `(k + 1)`-linear map
-(`paper/charp.tex`, `fam:eq:ambient-polynomial`). Reflection through the closed
-isometric inclusion that forgets alternation then proves `fam:cor:finite-families`.
-Neither the field nor the normed fibers need be complete, and there is no
-restriction on the characteristic or the degree.
+The joint action `(f, g) ↦ (m ↦ g ∘ m ∘ (f, …, f))`, followed by the closed isometric
+inclusion that forgets alternation, is the diagonal of a bounded `(k + 1)`-linear map
+(Proposition 2.2). Reflecting through that inclusion with Theorem 4.4 shows that every
+analytic family over a finite-coordinate parameter space is admissible. This is the
+finite-coordinate case of Corollary 4.6, in every characteristic and degree.
 -/
 
 noncomputable section
@@ -45,7 +45,7 @@ theorem alternatingMapActionInclusion_apply (k : ℕ)
     alternatingMapActionInclusion (K := K) (E := E) (E' := E') (F := F) (F' := F') k
       T m x = T m x := rfl
 
-/-- The ambient inclusion has closed range without completeness assumptions. -/
+/-- The inclusion that forgets alternation has closed range. -/
 theorem isClosed_range_alternatingMapActionInclusion (k : ℕ) :
     IsClosed (Set.range (alternatingMapActionInclusion
       (K := K) (E := E) (E' := E') (F := F) (F' := F') k)) :=
@@ -53,7 +53,7 @@ theorem isClosed_range_alternatingMapActionInclusion (k : ℕ) :
     (𝕜 := K) (ι := Fin k) (E := E') (F := F')).isClosed_range_postcomp
       ContinuousAlternatingMap.isClosed_range_toContinuousMultilinearMap
 
-/-- The bounded `(k + 1)`-linear representative of `fam:eq:ambient-polynomial`. -/
+/-- The bounded `(k + 1)`-linear map `H` of Proposition 2.2. -/
 def ambientAlternatingMapAction (k : ℕ) :
     ContinuousMultilinearMap K (fun _ : Fin (k + 1) => (E' →L[K] E) × (F →L[K] F'))
       ((E [⋀^Fin k]→L[K] F) →L[K] ContinuousMultilinearMap K (fun _ : Fin k => E') F') := by
@@ -84,7 +84,7 @@ theorem ambientAlternatingMapAction_apply (k : ℕ)
     ambientAlternatingMapAction (K := K) (E := E) (E' := E') (F := F) (F' := F') k h m x =
       (h (Fin.last k)).2 (m fun i => (h i.castSucc).1 (x i)) := rfl
 
-/-- The pointwise estimate for the ambient multilinear representative. -/
+/-- The pointwise estimate for `ambientAlternatingMapAction`. -/
 theorem ambientAlternatingMapAction_bound (k : ℕ)
     (h : Fin (k + 1) → (E' →L[K] E) × (F →L[K] F'))
     (m : E [⋀^Fin k]→L[K] F) (x : Fin k → E') :
@@ -128,8 +128,7 @@ theorem norm_ambientAlternatingMapAction_le (k : ℕ) :
   intro x
   exact ambientAlternatingMapAction_bound k h m x
 
-/-- The diagonal of the bounded multilinear representative is continuously
-polynomial at every point of the joint hom space. -/
+/-- The diagonal of `ambientAlternatingMapAction` is continuously polynomial. -/
 theorem cpolynomialAt_ambientAlternatingMapAction_diagonal (k : ℕ)
     (h : (E' →L[K] E) × (F →L[K] F')) :
     CPolynomialAt K
@@ -147,7 +146,7 @@ theorem cpolynomialAt_ambientAlternatingMapAction_diagonal (k : ℕ)
       (K := K) (E := E) (E' := E') (F := F) (F' := F') k)).comp
       (diagonal.cpolynomialAt h)
 
-/-- The diagonal of the bounded multilinear representative is analytic. -/
+/-- The diagonal of `ambientAlternatingMapAction` is analytic. -/
 theorem analyticAt_ambientAlternatingMapAction_diagonal (k : ℕ)
     (h : (E' →L[K] E) × (F →L[K] F')) :
     AnalyticAt K
@@ -156,8 +155,8 @@ theorem analyticAt_ambientAlternatingMapAction_diagonal (k : ℕ)
           (fun _ => h)) h := by
   exact (cpolynomialAt_ambientAlternatingMapAction_diagonal k h).analyticAt
 
-/-- The diagonal of the ambient representative is the existing joint action
-followed by the inclusion that forgets alternation. -/
+/-- The diagonal of `ambientAlternatingMapAction` is the joint action followed by
+the inclusion that forgets alternation. -/
 theorem ambientAlternatingMapAction_diag (k : ℕ)
     (h : (E' →L[K] E) × (F →L[K] F')) :
     ambientAlternatingMapAction (K := K) (E := E) (E' := E') (F := F) (F' := F') k
@@ -167,8 +166,7 @@ theorem ambientAlternatingMapAction_diag (k : ℕ)
   ext m x
   rfl
 
-/-- The joint action is continuously polynomial at every point after forgetting
-alternation, with no completeness or characteristic assumption. -/
+/-- The joint action is continuously polynomial after forgetting alternation. -/
 theorem cpolynomialAt_ambient_alternatingMapAction (k : ℕ)
     (h : (E' →L[K] E) × (F →L[K] F')) :
     CPolynomialAt K
@@ -185,9 +183,8 @@ theorem analyticAt_ambient_alternatingMapAction (k : ℕ)
         (alternatingMapAction k h)) h := by
   exact (cpolynomialAt_ambient_alternatingMapAction k h).analyticAt
 
-/-- All conclusions of `fam:eq:ambient-polynomial`: the closed linear isometric
-inclusion, the bounded `(k + 1)`-linear representative and its exact diagonal,
-and continuous polynomiality at every point of the joint hom space. -/
+/-- Proposition 2.2 for alternating inputs: the closed isometric inclusion, the
+bounded `(k + 1)`-linear map, its diagonal, and continuous polynomiality. -/
 theorem ambient_alternating_map_action_full (k : ℕ) :
     let j := alternatingMapActionInclusion
       (K := K) (E := E) (E' := E') (F := F) (F' := F') k
@@ -210,8 +207,8 @@ theorem ambient_alternating_map_action_full (k : ℕ) :
     norm_ambientAlternatingMapAction_le k, ambientAlternatingMapAction_diag k,
     cpolynomialAt_ambient_alternatingMapAction k⟩
 
-/-- Continuous finite coordinates suffice for the action of an analytic family
-to be analytic, even when the field and fibers are incomplete. -/
+/-- Over a parameter space with continuous finite coordinates, the action of an
+analytic family is analytic. -/
 theorem analyticAt_alternatingMapAction_comp_of_finite_coordinates {d : ℕ}
     (e : P ≃L[K] (Fin d → K)) (k : ℕ)
     {γ : P → (E' →L[K] E) × (F →L[K] F')} {x : P}
@@ -231,9 +228,7 @@ theorem isAdmissibleOn_of_finite_coordinates {d : ℕ}
     (hγ : AnalyticOnNhd K γ U) : IsAdmissibleOn k γ U :=
   ⟨hγ, fun x hx => analyticAt_alternatingMapAction_comp_of_finite_coordinates e k (hγ x hx)⟩
 
-/-- `fam:cor:finite-families`: every analytic morphism family on an open subset
-of `K^d` is admissible, in every characteristic and degree, with arbitrary
-normed fibers. -/
+/-- Every analytic family on an open subset of `K^d` is admissible. -/
 theorem finite_coordinate_analytic_families (k : ℕ) {d : ℕ}
     {U : Set (Fin d → K)} (hU : IsOpen U)
     {γ : (Fin d → K) → (E' →L[K] E) × (F →L[K] F')}

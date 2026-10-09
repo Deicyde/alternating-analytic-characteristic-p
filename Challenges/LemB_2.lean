@@ -10,23 +10,18 @@ space of functions on `S`. The determinant array is the linear map
 
 Paper statement: "The determinant array Ω : Λ^k V → L^(S^k) is injective."
 
-Formalization notes:
-* `V` is a `Submodule L (S → L)`; `Λ^k V` is Mathlib's `⋀[L]^k V`; `S^k` is `Fin k → S`.
-* The determinant array is not given by a new definition: both theorems quantify over
-  linear maps `Ω` satisfying the defining determinant formula on pure wedges
-  `exteriorPower.ιMulti L k y`, with rows indexed by evaluation points `a` and columns by
-  vectors `b`, as in the paper. `part0` records that such a map exists (the paper's
-  "it is well defined"), so `part1` is not vacuous; such a map is unique since pure wedges
-  span `Λ^k V`.
-* The standing assumption `k ≥ 1` of Section B.1 is kept as a hypothesis; the library proof
-  does not need it.
-* No definitions are introduced.
+## Formalization notes
+* `V` is a `Submodule L (S → L)`; `Λ^k V` is `⋀[L]^k V`; `S^k` is `Fin k → S`.
+* The determinant array is not defined. The theorems take any linear map `Ω` given on pure
+  wedges `exteriorPower.ιMulti L k y` by the determinant formula, with rows indexed by points
+  `a` and columns by vectors `b`. Such a map is unique, and `part0` shows that it exists.
+* The hypothesis `k ≥ 1` of Section B.1 is kept but not used.
 -/
 
 namespace AlternatingAnalyticChallenge.LemB_2
 
-/-- **Definition of the determinant array (p. 27), well-definedness.** There is a linear
-map `Λ^k V → L^(S^k)` given on pure wedges by the determinant formula. -/
+/-- The determinant array is well defined: some linear map `Λ^k V → L^(S^k)` is given on
+pure wedges by the determinant formula. -/
 theorem part0_determinantArray_exists
     (L : Type*) [Field L] (S : Type*) (V : Submodule L (S → L)) (k : ℕ) (hk : 1 ≤ k) :
     ∃ Ω : (⋀[L]^k V) →ₗ[L] ((Fin k → S) → L),
@@ -34,7 +29,7 @@ theorem part0_determinantArray_exists
       Ω (exteriorPower.ιMulti L k y) c = Matrix.det (fun a b => (y b : S → L) (c a)) := by
   sorry
 
-/-- **Lemma B.2.** The determinant array is injective. -/
+/-- The determinant array is injective. -/
 theorem part1_determinantArray_injective
     (L : Type*) [Field L] (S : Type*) (V : Submodule L (S → L)) (k : ℕ) (hk : 1 ≤ k)
     (Ω : (⋀[L]^k V) →ₗ[L] ((Fin k → S) → L))

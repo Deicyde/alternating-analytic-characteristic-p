@@ -3,10 +3,12 @@ import Mathlib.Topology.Algebra.Valued.NormedValued
 import Mathlib.Data.Int.WithZero
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
-/-! Real norms on Laurent series with an arbitrary prescribed monomial radius.
+/-!
+# The norm `‖x‖ = r ^ order x` on Laurent series
 
-The normed field structures below are explicit, so installing one locally preserves
-the existing valued uniformity and does not introduce a global choice of radius.
+For `0 < r < 1` we put on `LaurentSeries κ` the norm coming from its valuation with `‖X‖ = r`,
+and show it is complete, ultrametric and spherically complete. The normed field structures are
+definitions, not instances, so no radius is fixed globally; `LaurentField` installs them.
 -/
 
 noncomputable section
@@ -18,7 +20,7 @@ namespace AlternatingAnalytic
 
 variable (κ : Type*) [Field κ] {r : ℝ≥0}
 
-/-- The rank-one realization of the Laurent valuation with monomial radius `r`. -/
+/-- The rank-one structure on the Laurent valuation with `‖X‖ = r`. -/
 @[instance_reducible]
 def laurentRankOne (hr0 : 0 < r) (hr1 : r < 1) :
     (Valued.v (R := LaurentSeries κ)).RankOne where
@@ -33,14 +35,14 @@ def laurentRankOne (hr0 : 0 < r) (hr1 : r < 1) :
     · rw [hx]
       simp
 
-/-- The complete, nontrivially normed Laurent field with `‖X‖ = r`. -/
+/-- The nontrivially normed field structure on Laurent series with `‖X‖ = r`. -/
 @[instance_reducible]
 def laurentNormedField (hr0 : 0 < r) (hr1 : r < 1) :
     NontriviallyNormedField (LaurentSeries κ) :=
   let := laurentRankOne κ hr0 hr1
   Valued.toNontriviallyNormedField (LaurentSeries κ) ℤᵐ⁰
 
-/-- The Laurent valuation is the exponential of minus the first nonzero degree. -/
+/-- The valuation of a nonzero Laurent series is `exp (-order x)`. -/
 theorem laurent_valuation_eq_order (x : LaurentSeries κ) (hx : x ≠ 0) :
     Valued.v x = WithZero.exp (-x.order) := by
   have hv0 : Valued.v x ≠ 0 := by simpa using hx
@@ -90,7 +92,7 @@ theorem laurent_isUltrametricDist :
   let := laurentNormedField κ hr0 hr1
   infer_instance
 
-/-- The norm is exactly the prescribed radius to the first nonzero degree. -/
+/-- A nonzero Laurent series has norm `r ^ order x`. -/
 theorem laurent_norm_of_ne_zero (x : LaurentSeries κ) (hx : x ≠ 0) :
     letI := laurentNormedField κ hr0 hr1
     ‖x‖ = (r : ℝ) ^ x.order := by
@@ -99,7 +101,7 @@ theorem laurent_norm_of_ne_zero (x : LaurentSeries κ) (hx : x ≠ 0) :
   rw [laurent_norm_eq κ hr0 hr1, laurent_valuation_eq_order κ x hx]
   simp [WithZeroMulInt.toNNReal, WithZero.exp, zpow_neg]
 
-/-- Every nonzero monomial has norm determined only by its exponent. -/
+/-- A nonzero monomial `c X^n` has norm `r ^ n`. -/
 theorem laurent_norm_single (n : ℤ) (c : κ) (hc : c ≠ 0) :
     letI := laurentNormedField κ hr0 hr1
     ‖(HahnSeries.single n c : LaurentSeries κ)‖ = (r : ℝ) ^ n := by
@@ -115,7 +117,7 @@ theorem laurent_norm_algebraMap (c : κ) (hc : c ≠ 0) :
   let := laurentNormedField κ hr0 hr1
   simpa only [LaurentSeries.algebraMap_apply, HahnSeries.C_apply, zpow_zero] using laurent_norm_single κ hr0 hr1 0 c hc
 
-/-- Every such Laurent norm is discrete, hence spherically complete. -/
+/-- The norm takes values in `r^ℤ ∪ {0}`, so the field is spherically complete. -/
 theorem laurent_sphericallyCompleteSpace :
     letI := laurentNormedField κ hr0 hr1
     SphericallyCompleteSpace (LaurentSeries κ) := by

@@ -16,23 +16,15 @@ The map `f` is analytic at `x₀` if and only if there are bounded `n`-linear ma
 `sup_n ‖q_n‖ rⁿ < ∞`. Only the diagonals must agree; the original mixed values of `b_n` need
 not lie in `j(W)`."
 
-Formalization notes:
-* The open set `U` is dropped: `f` is a total function `P → W`. Every hypothesis and
-  conclusion only involves `f` on the ball `‖h‖ < R` around `x₀` (where the paper's expansion
-  is required to hold, so that ball lies in `U`) or the germ of `f` at `x₀` (`AnalyticAt`), so
-  extending a map `U → W` arbitrarily outside `U` changes nothing.
-* The coefficients `b_n` and `q_n` are packaged as Mathlib formal multilinear series
-  (`FormalMultilinearSeries K P Z`, resp. `K P W`); `b 0` is a constant, as in the paper.
-* `sup_n ‖b_n‖ Rⁿ < ∞` is `BddAbove (Set.range fun n => ‖b n‖ * R ^ n)`, likewise for `q`.
-* Convergence of `∑ b_n(h, …, h)` to `j (f (x₀ + h))` is stated as `HasSum` (unconditional
-  convergence). Under the bound `sup ‖b_n‖ Rⁿ < ∞` and `‖h‖ < R` the terms are dominated by a
-  geometric sequence, so this agrees with convergence of the ordered partial sums.
-* "Analytic at `x₀`" is Mathlib's `AnalyticAt K f x₀` (existence of a convergent power series
-  in `W` at `x₀`).
-* `j` is `W →ₗᵢ[K] Z` with `IsClosed (Set.range j)`. No completeness anywhere.
-* The final sentence ("only the diagonals must agree") is a remark on the statement and is not
-  formalized separately.
-* Two theorems: `part1` (diagonals lie in `j(W)`), `part2` (the analyticity criterion).
+## Formalization notes
+* The open set `U` is dropped: `f` is a total function `P → W`. The statement only uses `f` on
+  the ball `‖h‖ < R` and its germ at `x₀`, so this loses nothing.
+* The coefficients `b_n` and `q_n` are `FormalMultilinearSeries`; the bounds
+  `sup_n ‖b_n‖ Rⁿ < ∞` are `BddAbove (Set.range fun n => ‖b n‖ * R ^ n)`.
+* Convergence is `HasSum`. Under the bound and `‖h‖ < R` the terms are dominated by a geometric
+  sequence, so this agrees with convergence of the partial sums.
+* "Analytic at `x₀`" is Mathlib's `AnalyticAt K f x₀`.
+* The last sentence of the statement is a remark and is not formalized.
 -/
 
 namespace AlternatingAnalyticChallenge.Thm3_1
@@ -41,7 +33,7 @@ variable {K : Type*} [NontriviallyNormedField K]
   {P W Z : Type*} [NormedAddCommGroup P] [NormedSpace K P]
   [NormedAddCommGroup W] [NormedSpace K W] [NormedAddCommGroup Z] [NormedSpace K Z]
 
-/-- **Theorem 3.1, part 1.** Every diagonal of an ambient expansion lies in `j(W)`. -/
+/-- Every diagonal of an ambient expansion lies in `j(W)`. -/
 theorem part1 (j : W →ₗᵢ[K] Z) (hj : IsClosed (Set.range j))
     (f : P → W) (x₀ : P) (b : FormalMultilinearSeries K P Z) (R : ℝ) (hR : 0 < R)
     (hbound : BddAbove (Set.range fun n => ‖b n‖ * R ^ n))
@@ -49,7 +41,7 @@ theorem part1 (j : W →ₗᵢ[K] Z) (hj : IsClosed (Set.range j))
     ∀ (n : ℕ) (h : P), b n (fun _ => h) ∈ Set.range j := by
   sorry
 
-/-- **Theorem 3.1, part 2.** `f` is analytic at `x₀` if and only if the ambient diagonals have
+/-- `f` is analytic at `x₀` if and only if the ambient diagonals have
 `W`-valued bounded multilinear representatives with a positive common radius. -/
 theorem part2 (j : W →ₗᵢ[K] Z) (hj : IsClosed (Set.range j))
     (f : P → W) (x₀ : P) (b : FormalMultilinearSeries K P Z) (R : ℝ) (hR : 0 < R)

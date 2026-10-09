@@ -5,3 +5,6 @@ comparator.log
 
 # lock files of scripts/run_lean.py
 _locks/
+
+# Python bytecode
+__pycache__/

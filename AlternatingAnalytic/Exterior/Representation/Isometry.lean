@@ -1,7 +1,7 @@
 import AlternatingAnalytic.Exterior.Representation.Linearization
 
 /-!
-# The representation isometry `Alt^k(E; F) ≅ L(Λ^k_π E, F)`
+# The representation isometry `Alt^k(E; F) ≅ L(Λ^k_π E, F)` (Proposition 5.1)
 
 Let `X` be a seminormed space identified with `⋀^k E` by a linear equivalence `e` under which the
 seminorm of `X` is the projective exterior seminorm. Its separation quotient `Λ = X/{‖·‖ = 0}`
@@ -93,8 +93,8 @@ theorem lift_compContinuousAlternatingMap_wedge (T : SeparationQuotient X →L[K
     lift e he (T.compContinuousAlternatingMap (wedge e he)) = T :=
   ext_wedge e he fun x => by simp
 
-/-- **Representation.** The linear isometric equivalence `Alt^k(E; F) ≃ L(Λ, F)` given by
-descent, with inverse composition with the universal alternating map. -/
+/-- The linear isometric equivalence `Alt^k(E; F) ≃ L(Λ, F)` given by descent, with inverse
+composition with the universal alternating map. -/
 noncomputable def representation :
     (E [⋀^Fin k]→L[K] F) ≃ₗᵢ[K] (SeparationQuotient X →L[K] F) :=
   LinearIsometryEquiv.ofSurjective (liftLinearIsometry e he) fun T =>

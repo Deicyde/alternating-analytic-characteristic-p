@@ -4,7 +4,7 @@ import Mathlib.Geometry.Manifold.VectorBundle.Basic
 import Mathlib.CategoryTheory.Pi.Basic
 
 /-!
-# Lifting a mixed-variance functor to transition cocycles
+# Lifting a mixed-variance functor to transition cocycles (Theorem 2.1)
 
 `C^ε = (Vec_Kᵒᵖ)^p × Vec_K^q` is the category of `p` contravariant and `q` covariant normed-space
 variables; its hom spaces have operator coordinates `HomCoords X Y` with the maximum norm. A
@@ -12,7 +12,7 @@ functor `F : C^ε ⥤ Vec_K` is applied to the transition cocycles of `p + q` ve
 common trivializing cover indexed by the points of the base: in a contravariant variable the
 reverse transition is used. Functoriality gives the cocycle identities, so the result is a
 `VectorBundleCore`, and it is `Cⁿ` as soon as `F` preserves `Cⁿ` families parametrized by open
-subsets of the model space. The bundles are unbundled families of Mathlib vector bundles.
+subsets of the model space. The input bundles are families of Mathlib vector bundles.
 -/
 
 noncomputable section

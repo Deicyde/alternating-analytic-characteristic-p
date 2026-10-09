@@ -18,23 +18,16 @@ criterion has a bundle realization; Theorem 6.1 supplies Banach bases on which t
 occurs at every point, including the identity operator `g(0)`.)
 
 ## Formalization notes
-* Degree: index type `Fin k`.
-* The two-trivialization bundle `M × H` is encoded as a Mathlib `VectorBundleCore` over
-  `M = E →L[K] D` (a manifold with its single identity chart, model `𝓘(K, E →L[K] D)`) with
-  fiber `D × E`, two global charts indexed by `Bool`, and transition from chart `i` to chart
-  `j` equal to `shear ((w j - w i) • u)` with `w false = 0`, `w true = 1`; so the transition
-  `false → true` is `g(u)` and `true → false` is `g(-u)`. This is the library's
-  `AlternatingAnalytic.shearBundleCore`, re-declared here (with `shearLinear`, `shear`,
-  `shearChartWeight`) using Mathlib only.
+* The degree is `Fin k`.
+* The bundle `M × H` with two trivializations is a Mathlib `VectorBundleCore` over
+  `M = E →L[K] D` (model `𝓘(K, E →L[K] D)`) with fiber `D × E`, two global charts indexed by
+  `Bool`, and transition from chart `i` to chart `j` equal to `shear ((w j - w i) • u)`, where
+  `w false = 0`, `w true = 1`. So `false → true` is `g(u)` and `true → false` is `g(-u)`.
 * The alternating bundle is Mathlib's bundle `u ↦ Alt^k(H_u; F)` of continuous alternating maps
-  from the shear bundle to the trivial bundle `Bundle.Trivial M F`, with Mathlib's induced
-  trivializations. "The induced atlas is analytic" is `ContMDiffVectorBundle ω`.
-* `bundle_realization` asserts, for arbitrary normed `D, E, F` and any `u₀` at which `A` is not
-  analytic: the shear atlas is analytic, the trivial `F`-bundle is analytic, and the induced
-  alternating atlas is not analytic.
-* Not formalized here: the "equivalently ... does not induce an analytic morphism" reformulation
-  and the "failure at every point" sentence (which belongs to Theorem 6.1).
-* No completeness or characteristic hypotheses (as in the paper).
+  into the trivial bundle `Bundle.Trivial M F`, with its induced trivializations. "The atlas is
+  analytic" is `ContMDiffVectorBundle ω`.
+* Not formalized: the "equivalently ... does not induce an analytic morphism" reformulation and
+  the "failure at every point" sentence (which belongs to Theorem 6.1).
 -/
 
 open Bundle Set
@@ -91,9 +84,9 @@ noncomputable def shearBundleCore (K : Type uK) [NontriviallyNormedField K]
       ring
     · simp [shear, shearLinear]
 
-/-- **Bundle realization of Proposition 6.4.** If `A^k_{E,D;F}` is not analytic at `u₀`, then
-the two-trivialization shear bundle over `L(E, D)` and the trivial `F`-bundle are analytic,
-but the induced atlas of the alternating bundle `u ↦ Alt^k(H_u; F)` is not analytic. -/
+/-- If `A^k_{E,D;F}` is not analytic at `u₀`, then the shear bundle over `L(E, D)` and the
+trivial `F`-bundle are analytic, but the induced atlas of the alternating bundle
+`u ↦ Alt^k(H_u; F)` is not analytic. -/
 theorem bundle_realization (K : Type uK) [NontriviallyNormedField K]
     (D : Type uD) (E : Type uE) (F : Type uF)
     [NormedAddCommGroup D] [NormedSpace K D] [NormedAddCommGroup E] [NormedSpace K E]

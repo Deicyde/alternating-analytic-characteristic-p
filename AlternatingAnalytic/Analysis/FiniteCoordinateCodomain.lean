@@ -5,10 +5,10 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateExpansion
 /-!
 # Finite coordinate bases in the codomain
 
-The codomain-coordinate construction of `charp.tex`, Proposition
-`prop:finite-coordinate`. Every row retains its own operator argument.
-The ordinary real norm estimate and exterior-basis expansion require no
-completeness, ultrametricity, or characteristic restriction.
+If `E'` has a finite basis with continuous coordinate functionals, the determinant formula
+gives a bounded multilinear lift of precomposition `Alt^k(E'; F) → Alt^k(E; F)`, so
+precomposition is continuously polynomial in every characteristic. This is the codomain case
+of Proposition 4.1(2). In the lift, each row of the determinant has its own operator.
 -/
 
 noncomputable section
@@ -36,7 +36,7 @@ private theorem codomain_algebra_bound (b : Basis (Fin d) K E')
       norm_finiteCoordinateCodomain_sum_le b hb k f m x
     _ = _ := by ring
 
-/-- The bounded operator supplied by a fixed tuple of operator arguments. -/
+/-- The bounded operator given by a fixed tuple of operators. -/
 def finiteCoordinateCodomainOperator (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) (f : Fin k → E →L[K] E') :
     (E' [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F) :=
@@ -71,7 +71,7 @@ private theorem codomainMultilinear_bound (b : Basis (Fin d) K E')
   exact mul_nonneg (finiteCoordinateCodomainBound_nonneg b hb k)
     (Finset.prod_nonneg fun _ _ => norm_nonneg _)
 
-/-- The bounded codomain-coordinate lift in every degree, including degree zero. -/
+/-- The bounded multilinear lift of precomposition, in every degree. -/
 def finiteCoordinateCodomainLift (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) :
     (E →L[K] E') [×k]→L[K]
@@ -92,7 +92,6 @@ theorem finiteCoordinateCodomainLift_apply (b : Basis (Fin d) K E')
           m (fun a => b (Set.powersetCard.ofFinEmbEquiv.symm s a)) :=
   finiteCoordinateCodomainAlgebra_apply b k f m x
 
-/-- Separate additivity in each operator, before restriction to the diagonal. -/
 theorem finiteCoordinateCodomainLift_update_add (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ)
     (f : Fin k → E →L[K] E') (i : Fin k) (u v : E →L[K] E') :
@@ -101,7 +100,6 @@ theorem finiteCoordinateCodomainLift_update_add (b : Basis (Fin d) K E')
       finiteCoordinateCodomainLift b hb k (Function.update f i v) :=
   (finiteCoordinateCodomainLift b hb k).map_update_add f i u v
 
-/-- Separate homogeneity in each operator, over the original field. -/
 theorem finiteCoordinateCodomainLift_update_smul (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ)
     (f : Fin k → E →L[K] E') (i : Fin k) (c : K) (u : E →L[K] E') :
@@ -109,7 +107,7 @@ theorem finiteCoordinateCodomainLift_update_smul (b : Basis (Fin d) K E')
       c • finiteCoordinateCodomainLift b hb k (Function.update f i u) :=
   (finiteCoordinateCodomainLift b hb k).map_update_smul f i c u
 
-/-- Equal columns give zero, also in characteristic two. -/
+/-- The lifted map vanishes when two inputs are equal. -/
 theorem finiteCoordinateCodomainLift_eq_zero_of_eq (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ)
     (f : Fin k → E →L[K] E') (m : E' [⋀^Fin k]→L[K] F)
@@ -138,7 +136,7 @@ theorem norm_finiteCoordinateCodomainLift_le (b : Basis (Fin d) K E')
       finiteCoordinateCodomainBound b hb k :=
   MultilinearMap.mkContinuous_norm_le _ (finiteCoordinateCodomainBound_nonneg b hb k) _
 
-/-- Exterior-basis expansion proves the diagonal identity. -/
+/-- On the diagonal the lift is precomposition. -/
 theorem finiteCoordinateCodomainLift_diag (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) (f : E →L[K] E') :
     finiteCoordinateCodomainLift (F := F) b hb k (fun _ => f) =
@@ -164,7 +162,7 @@ theorem analyticAt_Q_of_finiteCoordinateCodomain (b : Basis (Fin d) K E')
     AnalyticAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ :=
   (cpolynomialAt_Q_of_finiteCoordinateCodomain b hb k f₀).analyticAt
 
-/-- Above the basis dimension the increasing-tuple sum is empty. -/
+/-- The lift is zero above the dimension `d`. -/
 theorem finiteCoordinateCodomainLift_eq_zero_of_lt (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) {k : ℕ} (h : d < k) :
     finiteCoordinateCodomainLift (E := E) (F := F) b hb k = 0 := by
@@ -179,7 +177,7 @@ theorem Q_eq_zero_of_finiteCoordinateCodomain_lt (b : Basis (Fin d) K E')
     finiteCoordinateCodomainLift_eq_zero_of_lt b hb h]
   rfl
 
-/-- The degree-zero lift retains the value of the empty tuple. -/
+/-- In degree zero the lift returns the value on the empty tuple. -/
 theorem finiteCoordinateCodomainLift_zero_apply (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (f : Fin 0 → E →L[K] E')
     (m : E' [⋀^Fin 0]→L[K] F) (x : Fin 0 → E) :
@@ -204,9 +202,8 @@ theorem alternatingMap_eq_zero_of_finiteCoordinateCodomain_lt
   rw [← finiteCoordinate_expansion b k m y]
   simp
 
-/-- The codomain-coordinate case of `prop:finite-coordinate`, collected with
-the actual lift, its determinant formula, separate linearity, strong alternation,
-both norm bounds, diagonal identity, analytic conclusions, and boundary cases. -/
+/-- The codomain case of Proposition 4.1(2): the lift, its determinant formula, linearity,
+alternation, norm bounds, diagonal identity, analyticity, and the cases `d < k` and `k = 0`. -/
 theorem finiteCoordinateCodomain (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) :
     let C := finiteCoordinateCodomainBound b hb k

@@ -15,29 +15,20 @@ fixed class C^n, the following statements hold.
 (3) If J_Y has a bounded linear left inverse, regularity of R_K implies regularity of W. If J_F
     has such a left inverse, regularity of R_K implies regularity of R_F."
 
-Here `Y* = L(Y, K)` and `J_Y(y)(λ) = λ(y)` is the canonical map into the continuous bidual
-(no Hahn–Banach assumption). `K` is any nontrivially normed field (paper, Conventions).
+Here `Y* = L(Y, K)` and `J_Y(y)(λ) = λ(y)` is the canonical map into the continuous bidual.
+`K` is any nontrivially normed field.
 
 ## Formalization notes
-* The parameter domain is an open set `U` in a normed space `P`, and `W : P → L(X, Y)`;
-  only the values on `U` matter. All spaces are normed `K`-spaces, not assumed complete.
-* "Power-series analyticity" on `U` is `AnalyticOnNhd K _ U`; "class C^n" is
-  `ContDiffOn K n _ U` for `n : ℕ∞` (the paper's `C^n`, `n ≤ ∞`). Each part is stated once for
-  each regularity notion (`_analytic` and `_contDiff`).
-* `R_F` is `precompFamily K F W`, defined below with Mathlib's `ContinuousLinearMap.compL`.
-  `J_Y` is `bidualMap K Y`, defined below as `ContinuousLinearMap.apply K K` (this is exactly
-  Mathlib's `NormedSpace.inclusionInDoubleDual`, whose module is not in the build closure).
-  `Y*` is Mathlib's `StrongDual K Y`.
-* "for every normed F; the single target Y suffices" is split into two implications (W regular
-  ⇒ every `R_F` regular; `R_Y` regular ⇒ W regular), which together give the paper's
-  equivalence for every universe of `F`. Likewise in (2): `R_K` regular ⇒ every `R_{G*}`
-  regular, and for any `G` with a nonzero continuous dual, `R_{G*}` regular ⇒ `R_K` regular.
-* The test spaces `F`, `G` range over a fixed but arbitrary universe (theorem universe
-  parameters).
-* `set_option maxSynthPendingDepth 2` is needed so that Lean finds the operator-norm instance
-  on `L(X, Y**)`; it changes no definition.
-* "Bounded linear left inverse" of `J_Y` is a continuous linear `P_Y : Y** → Y` with
-  `P_Y ∘ J_Y = id`.
+* `U` is an open set in a normed space `P` and `W : P → L(X, Y)`. All spaces are normed
+  `K`-spaces, not assumed complete.
+* Analyticity on `U` is `AnalyticOnNhd K _ U`; class `C^n` is `ContDiffOn K n _ U` for
+  `n : ℕ∞`. Each part is stated once for each (`_analytic`, `_contDiff`).
+* `R_F` is `precompFamily K F W`; `J_Y` is `bidualMap K Y`, which is Mathlib's
+  `NormedSpace.inclusionInDoubleDual`; `Y*` is `StrongDual K Y`.
+* Each "iff for every `F`" with "a single test suffices" is split into two implications. The
+  test spaces `F`, `G` range over one arbitrary universe.
+* `set_option maxSynthPendingDepth 2` lets Lean find the norm instance on `L(X, Y**)`.
+* A bounded linear left inverse of `J_Y` is `P_Y : Y** →L[K] Y` with `P_Y ∘ J_Y = id`.
 -/
 
 set_option maxSynthPendingDepth 2
@@ -67,8 +58,8 @@ noncomputable def bidualMap (K : Type*) [NontriviallyNormedField K]
 
 /-! ### Power-series analyticity -/
 
-/-- **Theorem 5.2(1), analytic.** `W` analytic ⇒ `R_F` analytic for every normed `F`;
-and `R_Y` analytic ⇒ `W` analytic. -/
+/-- Theorem 5.2(1), analytic: if `W` is analytic then every `R_F` is, and if `R_Y` is analytic
+then so is `W`. -/
 theorem part1_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (AnalyticOnNhd K W U →
       ∀ (F : Type uF) [NormedAddCommGroup F] [NormedSpace K F],
@@ -76,9 +67,8 @@ theorem part1_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (AnalyticOnNhd K (precompFamily K Y W) U → AnalyticOnNhd K W U) := by
   sorry
 
-/-- **Theorem 5.2(2), analytic.** `R_K` analytic ⇔ `J_Y ∘ W` analytic in `L(X, Y**)`;
-`R_K` analytic ⇒ `R_{G*}` analytic for every normed `G`; and for any `G` with a nonzero
-continuous dual, `R_{G*}` analytic ⇒ `R_K` analytic. -/
+/-- Theorem 5.2(2), analytic: `R_K` is analytic iff `J_Y ∘ W` is, iff `R_{G*}` is for every
+`G`; one `G` with a nonzero dual suffices. -/
 theorem part2_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (AnalyticOnNhd K (precompFamily K K W) U ↔
       AnalyticOnNhd K (fun t => (bidualMap K Y).comp (W t)) U) ∧
@@ -91,9 +81,8 @@ theorem part2_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
       AnalyticOnNhd K (precompFamily K K W) U) := by
   sorry
 
-/-- **Theorem 5.2(3), analytic.** A bounded linear left inverse of `J_Y` makes `R_K`-analyticity
-imply analyticity of `W`; a bounded linear left inverse of `J_F` makes it imply analyticity of
-`R_F`. -/
+/-- Theorem 5.2(3), analytic: with a bounded left inverse of `J_Y` (resp. `J_F`), analyticity
+of `R_K` implies that of `W` (resp. `R_F`). -/
 theorem part3_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (∀ PY : StrongDual K (StrongDual K Y) →L[K] Y,
       PY.comp (bidualMap K Y) = ContinuousLinearMap.id K Y →
@@ -107,7 +96,7 @@ theorem part3_analytic {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
 
 /-! ### The classes `C^n`, `n ≤ ∞` -/
 
-/-- **Theorem 5.2(1), `C^n`.** -/
+/-- Theorem 5.2(1) for `C^n`. -/
 theorem part1_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (ContDiffOn K n W U →
       ∀ (F : Type uF) [NormedAddCommGroup F] [NormedSpace K F],
@@ -115,7 +104,7 @@ theorem part1_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →
     (ContDiffOn K n (precompFamily K Y W) U → ContDiffOn K n W U) := by
   sorry
 
-/-- **Theorem 5.2(2), `C^n`.** -/
+/-- Theorem 5.2(2) for `C^n`. -/
 theorem part2_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (ContDiffOn K n (precompFamily K K W) U ↔
       ContDiffOn K n (fun t => (bidualMap K Y).comp (W t)) U) ∧
@@ -128,7 +117,7 @@ theorem part2_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →
       ContDiffOn K n (precompFamily K K W) U) := by
   sorry
 
-/-- **Theorem 5.2(3), `C^n`.** -/
+/-- Theorem 5.2(3) for `C^n`. -/
 theorem part3_contDiff (n : ℕ∞) {U : Set P} (hU : IsOpen U) (W : P → X →L[K] Y) :
     (∀ PY : StrongDual K (StrongDual K Y) →L[K] Y,
       PY.comp (bidualMap K Y) = ContinuousLinearMap.id K Y →

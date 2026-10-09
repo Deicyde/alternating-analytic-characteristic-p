@@ -9,8 +9,8 @@ spanned, as a vector space, by a countable set. Approximate Gram–Schmidt produ
 `b` of `M`, indexed by a subset of `ℕ`, whose coordinate functionals satisfy
 `‖b.coord i y‖ * ‖b i‖ ≤ 2 * ‖y‖` (`exists_basis_coord_bound`). The `n`-th vector is `x n` minus
 an approximate best approximation from the span of the earlier vectors, with tolerances whose
-product stays above `1 / 2`. This is the finite-span part of van der Put's basis theorem used in
-Proposition I.1 (`prop:scalar-countable`); no completeness of `M` is needed.
+product stays above `1 / 2`. This is the form of van der Put's basis theorem used in the proof
+of Proposition I.1; `M` need not be complete.
 -/
 
 noncomputable section
@@ -250,8 +250,8 @@ theorem mem_span_gsVec (x : ℕ → M) (n : ℕ) :
     rw [this]
     exact Submodule.add_mem _ hvec happrox
 
-/-- **Van der Put's basis theorem, countable-span form.** A countably spanned ultrametric
-normed space over a complete field has a Hamel basis with `‖b.coord i y‖ * ‖b i‖ ≤ 2 ‖y‖`. -/
+/-- Van der Put's basis theorem, countable-span form: a countably spanned ultrametric normed
+space over a complete field has a Hamel basis with `‖b.coord i y‖ * ‖b i‖ ≤ 2 ‖y‖`. -/
 theorem exists_basis_coord_bound (T : Set M) (hT : T.Countable)
     (hspan : Submodule.span K T = ⊤) :
     ∃ (ι : Type) (_ : LinearOrder ι) (b : Module.Basis ι K M),

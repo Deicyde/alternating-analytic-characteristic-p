@@ -4,9 +4,10 @@ import Mathlib.Logic.Equiv.Fin.Basic
 /-!
 # Support dimension of disjoint exterior blocks
 
-For a biorthogonal family arranged in blocks of size at least two, coordinate
-contractions recover every vector from the sum of the block wedges. Consequently
-every supporting subspace contains the whole family, giving the exact support dimension.
+For a biorthogonal family arranged in blocks of size `k ≥ 2`, contractions recover every
+vector of the family from the sum of the block wedges. So every supporting subspace contains
+the family, and the support dimension of the sum is `k` times the number of blocks.
+This is used in the proof of Proposition E.1.
 -/
 
 namespace AlternatingAnalytic
@@ -32,7 +33,7 @@ noncomputable def exteriorBlockSum [Fintype B] (v : B × Fin k → V) : ⋀[L]^k
   ∑ j : B, exteriorPower.ιMulti L k (fun i ↦ v (j, i))
 
 /-- Contracting against the coordinates of one block recovers its selected vector
-and kills every different block. The degree bound is needed for the latter assertion. -/
+and kills every other block. The second part needs `2 ≤ k`. -/
 theorem exteriorContraction_block [DecidableEq B] (hk : 2 ≤ k)
     (v : B × Fin k → V) (ε : B × Fin k → Dual L V)
     (h₁ : ∀ p, ε p (v p) = 1) (h₀ : ∀ p q, p ≠ q → ε p (v q) = 0)
@@ -93,8 +94,8 @@ theorem block_span_le_exterior_support [Fintype B] (hk : 2 ≤ k)
   rw [← exteriorContraction_blockSum hk v ε h₁ h₀ j α]
   exact exteriorContraction_mem_support α _ U hω
 
-/-- The support dimension of a sum of `k`-fold disjoint biorthogonal blocks is exactly
-the number of vectors in those blocks. -/
+/-- The support dimension of a sum of disjoint biorthogonal blocks is the number of
+vectors in the blocks. -/
 theorem exteriorSupportDim_blockSum [Fintype B] (hk : 2 ≤ k)
     (v : B × Fin k → V) (ε : B × Fin k → Dual L V)
     (h₁ : ∀ p, ε p (v p) = 1) (h₀ : ∀ p q, p ≠ q → ε p (v q) = 0) :
@@ -116,7 +117,7 @@ theorem exteriorSupportDim_blockSum [Fintype B] (hk : 2 ≤ k)
     rw [← hdim, ← hUdim]
     exact Submodule.finrank_mono (block_span_le_exterior_support hk v ε h₁ h₀ U hω)
 
-/-- In particular, disjoint blocks selected from any basis have the expected full support. -/
+/-- Disjoint blocks of basis vectors have support dimension `k * card B`. -/
 theorem exteriorSupportDim_basis_blocks {I : Type*} [Fintype B]
     (b : Basis I L V) (f : B × Fin k ↪ I) (hk : 2 ≤ k) :
     exteriorSupportDim (exteriorBlockSum (L := L) (b ∘ f)) = k * Fintype.card B := by
@@ -127,7 +128,7 @@ theorem exteriorSupportDim_basis_blocks {I : Type*} [Fintype B]
   · intro p q hpq
     simp [Module.Basis.coord_apply, f.injective.ne hpq]
 
-/-- Disjoint coordinate-unit blocks in an arbitrary scalar function space have full support. -/
+/-- Disjoint blocks of coordinate unit vectors in `S → L` have support dimension `k * card B`. -/
 theorem exteriorSupportDim_coordinate_blocks {S : Type*} [DecidableEq S] [Fintype B]
     (f : B × Fin k ↪ S) (hk : 2 ≤ k) :
     exteriorSupportDim (exteriorBlockSum (L := L) (fun p ↦ (Pi.single (f p) (1 : L) : S → L))) =
@@ -139,8 +140,7 @@ theorem exteriorSupportDim_coordinate_blocks {S : Type*} [DecidableEq S] [Fintyp
   · intro p q hpq
     simp [f.injective.ne hpq]
 
-/-- The first `N` consecutive coordinate blocks used in the sequence-space construction
-have support dimension exactly `k * N`. -/
+/-- The first `N` consecutive blocks of unit vectors in `ℕ → L` have support dimension `k * N`. -/
 theorem exteriorSupportDim_consecutive_coordinate_blocks (N k : ℕ) (hk : 2 ≤ k) :
     exteriorSupportDim (∑ j : Fin N, exteriorPower.ιMulti L k
       (fun i : Fin k ↦ (Pi.single (k * j.val + i.val + 1) (1 : L) : ℕ → L))) = k * N := by

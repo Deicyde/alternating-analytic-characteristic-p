@@ -3,19 +3,18 @@ import Mathlib.Analysis.Normed.Operator.LinearIsometry
 import AlternatingAnalytic.Descent.SmoothDescentOn
 
 /-!
-# Lemma 3.2 (smooth descent), p. 8
+# Proof of Lemma 3.2
 
-Solution: the statement of `Challenges/Lem3_2.lean`, proved by
-`AlternatingAnalytic.contDiffOn_iff_comp_linearIsometry` (`Descent/SmoothDescentOn.lean`), the
-open-set induction on the order through `LinearIsometry.postcomp`.
+The statement is `AlternatingAnalytic.contDiffOn_iff_comp_linearIsometry`
+(`Descent/SmoothDescentOn.lean`).
 -/
 
 open scoped ContDiff
 
 namespace AlternatingAnalyticChallenge.Lem3_2
 
-/-- **Lemma 3.2.** On an open set, `f` is `Cⁿ` (`n ≤ ∞`) iff `j ∘ f` is, for a linear isometry `j`
-with closed range. -/
+/-- On an open set, `f` is `Cⁿ` (`n ≤ ∞`) iff `j ∘ f` is, for a linear isometry `j` with closed
+range. -/
 theorem smooth_descent
     {K : Type*} [NontriviallyNormedField K]
     {P W Z : Type*} [NormedAddCommGroup P] [NormedSpace K P]

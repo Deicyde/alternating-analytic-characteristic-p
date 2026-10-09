@@ -4,24 +4,19 @@ import AlternatingAnalytic.Analysis.DenseMultilinearExtension
 import AlternatingAnalytic.Analysis.DenseMultilinearFamilyExtension
 
 /-!
-# Lemma D.5 (extension), p. 43
+# Proof of Lemma D.5
 
-Solution: the statements of `Challenges/LemD_5.lean`. Part (1) uses the library's
-`AlternatingAnalytic.denseLinearExtension` with `denseLinearExtension_apply` and
-`norm_denseLinearExtension_le` (`AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean`)
-along the inclusion `V₀.subtypeₗᵢ`; part (2) is
-`AlternatingAnalytic.exists_denseMultilinearFamilyExtension_of_bound`
-(`AlternatingAnalytic/Analysis/DenseMultilinearFamilyExtension.lean`) along the inclusions
-`(V₀ i).subtypeₗᵢ`.
+Uses `denseLinearExtension` (`AlternatingAnalytic/Analysis/DenseMultilinearExtension.lean`) for
+part (1) and `exists_denseMultilinearFamilyExtension_of_bound`
+(`AlternatingAnalytic/Analysis/DenseMultilinearFamilyExtension.lean`) for part (2).
 -/
 
 namespace AlternatingAnalyticChallenge.LemD_5
 
 universe uK uV uY
 
-/-- **Lemma D.5(1).** A linear map `T₀ : V₀ → Y` from a dense subspace into a Banach space with
-`‖T₀ x‖ ≤ C ‖x‖` extends uniquely to a continuous map `T : V → Y`; this extension is linear and
-satisfies `‖T x‖ ≤ C ‖x‖`. -/
+/-- A linear map `T₀ : V₀ → Y` on a dense subspace with `‖T₀ x‖ ≤ C ‖x‖` extends uniquely to
+a continuous map `V → Y`, which is linear and satisfies the same bound. -/
 theorem part1
     (K : Type uK) [NontriviallyNormedField K]
     {V : Type uV} [NormedAddCommGroup V] [NormedSpace K V]
@@ -43,9 +38,8 @@ theorem part1
           (norm_nonneg x)
   · exact hd.equalizer hT' T.continuous (funext fun x => (hT'x x).trans (hTx x).symm)
 
-/-- **Lemma D.5(2).** A multilinear map `M : ∏ Vᵢ⁰ → Y` on dense subspaces, with
-`‖M d‖ ≤ C ∏ ‖dᵢ‖`, extends uniquely to a continuous multilinear map `∏ Vᵢ → Y` of norm
-at most `C`. -/
+/-- A multilinear map on dense subspaces with `‖M d‖ ≤ C ∏ ‖dᵢ‖` extends uniquely to a
+continuous multilinear map of norm at most `C`. -/
 theorem part2
     (K : Type uK) [NontriviallyNormedField K] (k : ℕ)
     {V : Fin k → Type uV} [∀ i, NormedAddCommGroup (V i)] [∀ i, NormedSpace K (V i)]

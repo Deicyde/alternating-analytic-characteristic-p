@@ -1,13 +1,19 @@
 import Mathlib.Analysis.SpecificLimits.Normed
 import Mathlib.Data.Finset.Max
 
-/-! The finite maximum used in the Laurent constant-coefficient support estimate. -/
+/-!
+# The geometric weight maximum
+
+For `0 ≤ r < 1` the sequence `(l + 1) r ^ l` attains its maximum `M_r ≥ 1`, and
+`M_r = 1` when `r ≤ 1/2`. This constant appears in the support estimate,
+Proposition C.3.
+-/
 
 open Filter Topology
 
 namespace AlternatingAnalytic
 
-/-- The positive geometric weight sequence has an attained maximum. -/
+/-- For `0 ≤ r < 1`, the sequence `(l + 1) r ^ l` attains a maximum, which is at least one. -/
 theorem exists_geometricWeight_max {r : ℝ} (hr0 : 0 ≤ r) (hr1 : r < 1) :
     ∃ n : ℕ, 1 ≤ ((n : ℝ) + 1) * r ^ n ∧
       ∀ m : ℕ, ((m : ℝ) + 1) * r ^ m ≤ ((n : ℝ) + 1) * r ^ n := by
@@ -25,7 +31,7 @@ theorem exists_geometricWeight_max {r : ℝ} (hr0 : 0 ≤ r) (hr1 : r < 1) :
   · exact hmax m (Finset.mem_range.mpr hm)
   · exact (hN m (by omega)).le.trans hpos
 
-/-- At radii at most one half, every geometric weight is at most one. -/
+/-- If `r ≤ 1/2`, then `(n + 1) r ^ n ≤ 1`. -/
 theorem geometricWeight_le_one {r : ℝ} (hr0 : 0 ≤ r) (hrhalf : r ≤ 1 / 2)
     (n : ℕ) : ((n : ℝ) + 1) * r ^ n ≤ 1 := by
   induction n with

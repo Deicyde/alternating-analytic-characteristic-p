@@ -4,7 +4,7 @@ import AlternatingAnalytic.Forms.Calculus.ShuffleIdentities
 # The algebraic Leibniz rule for the shuffle product
 
 For a linear map `A : M → Alt^k(M; R)`, the signed sum `∑ᵢ (-1)^i A(vᵢ)(v₀, …, v̂ᵢ, …)` is
-`alternatizeUncurryFin A`. This file proves the two algebraic identities behind the Leibniz rule
+`alternatizeUncurryFin A`. These are the two algebraic identities behind the Leibniz rule
 `d(η ∧ ζ) = dη ∧ ζ + (-1)^k η ∧ dζ`:
 `∑ᵢ (-1)^i (A(vᵢ) ∧ ζ)(v̂ᵢ) = (alternatizeUncurryFin A ∧ ζ)(v)` (`sum_shuffle_left_removeNth`) and
 `∑ᵢ (-1)^i (μ ∧ B(vᵢ))(v̂ᵢ) = (-1)^k (μ ∧ alternatizeUncurryFin B)(v)`

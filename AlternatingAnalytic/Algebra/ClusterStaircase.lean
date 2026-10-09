@@ -5,9 +5,10 @@ import AlternatingAnalytic.Algebra.StaircaseRank
 /-!
 # The cluster staircase
 
-Interlaced families of separated blocks give a single exterior vector whose sampled
-determinant array is a two-letter staircase. Its support dimension bounds the rank,
-forcing equality of the cluster values before and after an adjacent exchange.
+Lemma B.12: if τ' is τ with two adjacent positions exchanged, then χ(τ) = χ(τ').
+Interlacing two families of `m` clusters gives one exterior vector ω whose sampled
+determinant array is the staircase matrix with entries χ(τ) and χ(τ'). Its rank is at
+most sdim(ω), which is bounded, so the two entries agree.
 -/
 
 open Finset Module
@@ -26,8 +27,8 @@ theorem exists_strictMono_in_infinite_set (H : Set ℕ) (hH : H.Infinite) :
   have : ¬n < N + 1 := by simpa using hn.2
   omega
 
-/-- The rank bound for a sampled determinant array of a full sequence-space exterior
-vector. Columns fix all coordinates except the chosen row coordinate. -/
+/-- A matrix of determinant array entries of ω has rank at most sdim(ω), when the
+rows vary only the coordinate `α`. -/
 theorem determinantArray_update_rank_le {R S : Type*} [Fintype R] [Fintype S]
     (ω : ⋀[L]^k (ℕ → L)) (α : Fin k) (rows : R → ℕ) (columns : S → Fin k → ℕ) :
     (Matrix.of fun r s => determinantArray ω
@@ -62,7 +63,8 @@ theorem determinantArray_update_rank_le {R S : Type*} [Fintype R] [Fintype S]
     _ ≤ Module.finrank L U := Submodule.finrank_map_le restriction U
     _ = exteriorSupportDim ω := hdim
 
-/-- Disjoint block inputs with weights in `{0,1,-1}` still have only those values. -/
+/-- A sum of cluster inputs on disjoint clusters, with weights in `{0,1,-1}`, takes
+values in `{0,1,-1}`. -/
 theorem sum_clusterInput_ternary {B : Type*} [Fintype B]
     (C : B → Fin 4 → ℕ) (hinj : Function.Injective (fun t : B × Fin 4 => C t.1 t.2))
     (w : Fin 4 → L) (hw : ∀ p, w p = 0 ∨ w p = 1 ∨ w p = -1) (x : ℕ) :
@@ -98,8 +100,8 @@ theorem sum_clusterInput_ternary {B : Type*} [Fintype B]
 
 namespace StaircaseClusters
 
-/-- All families have `m` members. The two distinguished families are interlaced;
-the other families occupy their original permutation-ordered ranges. -/
+/-- The rank of the `n`-th cluster of family `j`. Each family has `m` clusters; the
+families of `α` and `β` are interlaced, and the others keep the order given by τ. -/
 def blockRank (τ : Equiv.Perm (Fin k)) (α β : Fin k) (m : ℕ)
     (j : Fin k) (n : Fin m) : ℕ :=
   if j = α then m * (τ α).val + 2 * n.val
@@ -127,7 +129,7 @@ theorem blockRank_bounds (j : Fin k) (n : Fin m) :
       omega
 
 include hαβ hadj in
-/-- Except for the adjacent pair itself, the original permutation order is preserved. -/
+/-- Apart from the pair `(α, β)`, block ranks follow the order given by τ. -/
 theorem blockRank_lt_of_order {j l : Fin k} (n t : Fin m) (hjl : τ j < τ l)
     (hpair : ¬(j = α ∧ l = β)) : blockRank τ α β m j n < blockRank τ α β m l t := by
   have hgap : (if j = α then (τ α).val + 2 else (τ j).val + 1) ≤
@@ -208,7 +210,7 @@ theorem adjacent_swap_order_cases {j l : Fin k}
     by_cases h₃ : l = α <;> by_cases h₄ : l = β <;>
     simp_all <;> omega
 
-/-- The selected output member in each family. -/
+/-- The output cluster chosen in each family. -/
 def selection [NeZero m] (n t : Fin m) (j : Fin k) : Fin m :=
   if j = α then n else if j = β then t else 0
 
@@ -240,7 +242,8 @@ theorem selected_swapped_order [NeZero m] (n t : Fin m) (hnt : t < n)
 
 end Rank
 
-/-- Four successive points of an increasing sequence assigned to a block rank. -/
+/-- The cluster with a given block rank: four successive terms of the increasing
+sequence `e`. -/
 def block (e : ℕ → ℕ) (τ : Equiv.Perm (Fin k)) (α β : Fin k) (m : ℕ)
     (g : Σ _ : Fin k, Fin m) (p : Fin 4) : ℕ :=
   e (4 * blockRank τ α β m g.1 g.2 + p.val)
@@ -311,9 +314,8 @@ theorem family_input_ternary (e : ℕ → ℕ) (he : StrictMono e)
 
 end StaircaseClusters
 
-/-- For separated families with the two interlacing output orders, cancellation
-produces the staircase matrix from one fixed exterior vector. A bound on that
-specific vector's support dimension forces the two actual cluster values to agree. -/
+/-- Lemma B.12 for given interlaced families: if the support dimension of the single
+vector ω built from them is at most `d`, the two cluster values agree. -/
 theorem cluster_staircase_of_families (Ψ : ClusterMap L k) (H : Set ℕ)
     (hpattern : ∀ (z z' : Fin 3 × Fin k → ℕ),
       (∀ i, z i ∈ H) → (∀ i, z' i ∈ H) →
@@ -372,8 +374,9 @@ theorem cluster_staircase_of_families (Ψ : ClusterMap L k) (H : Set ℕ)
   rw [← hM, hflat]
   exact (determinantArray_update_rank_le ω α rows columns).trans hbound
 
-/-- Adjacent cluster invariance under the paper's uniform support bound on the
-genuine finitely supported test inputs with values in `{0,1,-1}`. -/
+/-- Lemma B.12: χ(τ) = χ(τ') for an adjacent exchange, assuming a uniform bound `d` on
+the support dimension of Ψ(u; v) for finitely supported inputs with entries in
+`{0,1,-1}`. -/
 theorem clusterValue_adjacent_eq (Ψ : ClusterMap L k) (H : Set ℕ) (hH : H.Infinite)
     (hpattern : ∀ (z z' : Fin 3 × Fin k → ℕ),
       (∀ i, z i ∈ H) → (∀ i, z' i ∈ H) →

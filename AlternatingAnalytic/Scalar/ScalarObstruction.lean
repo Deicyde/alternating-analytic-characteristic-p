@@ -9,12 +9,11 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 /-!
 # Theorem 6.1(2): the scalar operator obstruction in characteristic `p`
 
-Theorem 6.1(2) of the paper is Theorem F.1 restated with the hypothesis "characteristic `p > 0`,
-`k ≥ p`" in place of "`k ≥ 1`, `k! = 0`". This file proves the reduction: in characteristic
-`p > 0` with `p ≤ k` one has `1 ≤ k` and `(k ! : K) = 0`, so the two forms of Theorem 6.1(2)
-(abstract, and realised in bounded sequence spaces) follow from the corresponding forms of
-Theorem F.1. The conclusions of Theorem F.1 are recorded as the propositions
-`ThmF1Abstract` and `ThmF1Sequence` and enter as explicit hypotheses.
+Theorem 6.1(2) is Theorem F.1 with the hypothesis "characteristic `p > 0`, `k ≥ p`" in place of
+"`k ≥ 1`, `k! = 0`". In characteristic `p > 0` with `p ≤ k` one has `1 ≤ k` and `k! = 0`, so the
+abstract and sequence-space forms of Theorem 6.1(2) follow from those of Theorem F.1. The
+conclusions of Theorem F.1 are the propositions `ThmF1Abstract` and `ThmF1Sequence`, taken here
+as hypotheses.
 -/
 
 open Filter Topology
@@ -62,7 +61,7 @@ def ThmF1Sequence (K : Type u) [NontriviallyNormedField K] (k : ℕ) : Prop :=
           (ContinuousAlternatingMap.compContinuousLinearMapCLM u :
             (E' [⋀^Fin k]→L[K] K) →L[K] (E [⋀^Fin k]→L[K] K))) u₀
 
-/-- **Theorem 6.1(2), abstract form**, from the abstract form of Theorem F.1. -/
+/-- Theorem 6.1(2), abstract form, from the abstract form of Theorem F.1. -/
 theorem exists_nonarchimedean_banach_nowhere_analytic_scalar_of_thmF
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] (p k : ℕ) [CharP K p]
     (hp : 0 < p) (hpk : p ≤ k) (hK : ¬ SphericallyCompleteSpace K)
@@ -78,7 +77,7 @@ theorem exists_nonarchimedean_banach_nowhere_analytic_scalar_of_thmF
               (D [⋀^Fin k]→L[K] K) →L[K] (E [⋀^Fin k]→L[K] K))) u₀ :=
   hF hK (by omega) (factorial_eq_zero_of_charP K p k hp hpk)
 
-/-- **Theorem 6.1(2), sequence-space form**, from the sequence-space form of Theorem F.1
+/-- Theorem 6.1(2), sequence-space form, from the sequence-space form of Theorem F.1
 (forgetting its nonseparability conclusions). -/
 theorem exists_nowhere_analytic_scalar_in_bounded_sequences_of_thmF
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] (p k : ℕ) [CharP K p]

@@ -1,19 +1,25 @@
 import AlternatingAnalytic.Analysis.EquivalentUltrametric
 import Mathlib.Analysis.Normed.Operator.LinearIsometry
 
-/-! Scalar-independent unit-sum growth and its preservation by isometric embeddings. -/
+/-!
+# Linear growth of unit sums
+
+A normed group has linear unit-sum growth if some vectors of norm at most one have partial sums
+of norm at least `N / M`. This rules out an equivalent ultrametric norm over any scalar field.
+It is used in Proposition E.1.
+-/
 
 namespace AlternatingAnalytic
 
-/-- Unit vectors with linearly growing partial sums. This property depends only
-on the additive norm, so survives restriction to a dense scalar field. -/
+/-- There are vectors of norm at most one whose partial sums grow linearly. The property
+involves only the additive norm, not a scalar field. -/
 def HasLinearUnitSumGrowth (F : Type*) [NormedAddCommGroup F] : Prop :=
   ∃ (v : ℕ → F) (M : ℝ), 0 < M ∧ (∀ j, ‖v j‖ ≤ 1) ∧
     ∀ N : ℕ, (N : ℝ) / M ≤ ‖∑ i ∈ Finset.range N, v i‖
 
 variable {E F : Type*} [NormedAddCommGroup E] [NormedAddCommGroup F]
 
-/-- The same unit wedges and growth estimates persist under any additive isometry. -/
+/-- Linear unit-sum growth passes along additive isometries. -/
 theorem HasLinearUnitSumGrowth.map (h : HasLinearUnitSumGrowth E)
     (i : E →+ F) (hi : Isometry i) : HasLinearUnitSumGrowth F := by
   obtain ⟨v, M, hM, hv, hgrowth⟩ := h
@@ -22,8 +28,8 @@ theorem HasLinearUnitSumGrowth.map (h : HasLinearUnitSumGrowth E)
   · simpa only [Function.comp_apply, hn] using hv j
   · simpa only [Function.comp_apply, ← map_sum, hn] using hgrowth N
 
-/-- Unit-sum growth forbids an equivalent ultrametric norm over every scalar field
-that acts as a normed space on the given additive group. -/
+/-- A space with linear unit-sum growth has no equivalent ultrametric norm, over any
+scalar field. -/
 theorem HasLinearUnitSumGrowth.not_hasEquivalentUltrametricNorm
     (h : HasLinearUnitSumGrowth F) (K : Type*) [NormedField K] [NormedSpace K F] :
     ¬ HasEquivalentUltrametricNorm K F := by

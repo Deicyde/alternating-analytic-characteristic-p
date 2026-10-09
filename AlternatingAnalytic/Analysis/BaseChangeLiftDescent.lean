@@ -8,10 +8,12 @@ import AlternatingAnalytic.Analysis.BaseChangeAlternatingForms
 import AlternatingAnalytic.Analysis.LiftCriterion
 
 /-!
-# Descent of a bounded lift through completed scalar extension
+# Descent of a bounded lift through completed base change
 
-This is proposition `ascent` in `sources/charp.tex`. The construction uses the actual
-operator and alternating-form extensions, together with the completed scalar retraction.
+A bounded multilinear lift of the pullback over the completed base change gives one over
+`K` of no larger norm; hence failure of analyticity over `K` persists after base change
+(Proposition D.9). The proof combines base change of operators and of alternating forms
+with a contracting retraction of the completed base change of `F` onto `F`.
 -/
 
 namespace AlternatingAnalytic
@@ -23,8 +25,7 @@ variable (K : Type*) (E F L : Type u) [NontriviallyNormedField K]
   [NontriviallyNormedField L] [NormedAlgebra K L] [CompleteSpace K]
   [IsUltrametricDist K] [SphericallyCompleteSpace K] [IsUltrametricDist L]
 
-/-- The standard operator seminorm on the nested lift space, explicitly named to help
-instance search through the alternating-form endomorphism space. -/
+/-- The operator seminorm on the lift space, named to help instance search. -/
 noncomputable local instance liftSeminormedAddCommGroup (n : ℕ) :
     SeminormedAddCommGroup ((E →L[K] E) [×n]→L[K]
       ((E [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F))) :=
@@ -32,7 +33,7 @@ noncomputable local instance liftSeminormedAddCommGroup (n : ℕ) :
     (E := fun _ : Fin n => E →L[K] E)
     (G := (E [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F))
 
-/-- The same operator norm, exposed directly for nested lift expressions. -/
+/-- The operator norm on the lift space. -/
 noncomputable local instance liftNorm (n : ℕ) :
     Norm ((E →L[K] E) [×n]→L[K]
       ((E [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F))) :=
@@ -43,7 +44,7 @@ noncomputable local instance liftNorm (n : ℕ) :
 set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 omit [CompleteSpace K] [IsUltrametricDist K] [SphericallyCompleteSpace K] in
-/-- The usual multilinear operator-norm bound, with the nested lift space explicit. -/
+/-- The multilinear operator-norm bound on the lift space. -/
 theorem norm_lift_apply_le (n : ℕ)
     (P : (E →L[K] E) [×n]→L[K]
       ((E [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F)))
@@ -65,8 +66,7 @@ theorem norm_lift_apply_le (n : ℕ)
   change ‖P f‖ ≤ sInf S * ∏ i, ‖f i‖
   exact (hclosed.isLeast_csInf hnonempty hbelow).1.2 f
 
-/-- Pull an extension-field alternating form back through the original-space embedding,
-then apply a bounded K-linear map to its values. -/
+/-- Restrict an `L`-alternating form to `E` and compose with a `K`-linear map `r`. -/
 noncomputable def baseChangeFormRestriction
     (r : CompletedBaseChange K F L →L[K] F) (n : ℕ) :
     (CompletedBaseChange K E L [⋀^Fin n]→L[L] CompletedBaseChange K F L) →L[K]
@@ -103,7 +103,7 @@ theorem norm_baseChangeFormRestriction_le
   ContinuousLinearMap.opNorm_le_bound _ (norm_nonneg r)
     (norm_baseChangeFormRestriction_apply_le K E F L r n)
 
-/-- Restrict an upstairs operator on forms after extending its original input form. -/
+/-- `T ↦ (m ↦ restriction of T (m_{K'}))`, from operators over `L` to operators over `K`. -/
 noncomputable def baseChangeLiftRestriction
     (r : CompletedBaseChange K F L →L[K] F) (n : ℕ) :
     ((CompletedBaseChange K E L [⋀^Fin n]→L[L] CompletedBaseChange K F L) →L[L]
@@ -150,7 +150,7 @@ theorem norm_baseChangeLiftRestriction_apply_le
         (norm_nonneg T)) (norm_nonneg r)
     _ = (‖r‖ * ‖T‖) * ‖m‖ := (mul_assoc _ _ _).symm
 
-/-- The paper's explicit descent construction for a continuous multilinear map on operators. -/
+/-- The descended lift `(f_i) ↦ (m ↦ r ∘ P((f_i)_{K'})(m_{K'}) ∘ ι)` (Proposition D.9). -/
 noncomputable def baseChangeLiftDescent
     (r : CompletedBaseChange K F L →L[K] F) (n : ℕ)
     (P : (CompletedBaseChange K E L →L[L] CompletedBaseChange K E L) [×n]→L[L]
@@ -217,7 +217,8 @@ theorem baseChangeLiftDescent_diag
 
 variable [CompleteSpace F]
 
-/-- Proposition `ascent`: an actual upstairs lift descends with no increase of its norm. -/
+/-- A lift over the completed base change descends to a lift over `K` of no larger norm
+(Proposition D.9). -/
 theorem exists_baseChangeLiftDescent (n : ℕ)
     (P : (CompletedBaseChange K E L →L[L] CompletedBaseChange K E L) [×n]→L[L]
       ((CompletedBaseChange K E L [⋀^Fin n]→L[L] CompletedBaseChange K F L) →L[L]
@@ -232,7 +233,7 @@ theorem exists_baseChangeLiftDescent (n : ℕ)
   apply (norm_baseChangeLiftDescent_le K E F L r n P).trans
   simpa only [one_mul] using mul_le_mul_of_nonneg_right hr (norm_nonneg P)
 
-/-- A lift on completed projective scalar extension gives a lift over the original field. -/
+/-- A bounded lift over the completed base change gives one over `K`. -/
 theorem hasBoundedLift_of_completedBaseChange (n : ℕ)
     (h : Round24Transfer.HasBoundedLift L (Fin n) (CompletedBaseChange K E L)
       (CompletedBaseChange K E L) (CompletedBaseChange K F L)) :
@@ -243,14 +244,15 @@ theorem hasBoundedLift_of_completedBaseChange (n : ℕ)
   obtain ⟨P₁, _, hP₁⟩ := exists_baseChangeLiftDescent K E F L n P hP
   exact ⟨P₁, hP₁⟩
 
-/-- Nonexistence of a bounded lift ascends to the completed projective scalar extension. -/
+/-- If there is no bounded lift over `K`, there is none over the completed base change. -/
 theorem not_hasBoundedLift_completedBaseChange (n : ℕ)
     (h : ¬ Round24Transfer.HasBoundedLift K (Fin n) E E F) :
     ¬ Round24Transfer.HasBoundedLift L (Fin n) (CompletedBaseChange K E L)
       (CompletedBaseChange K E L) (CompletedBaseChange K F L) :=
   fun hL => h (hasBoundedLift_of_completedBaseChange K E F L n hL)
 
-/-- Failure of analyticity downstairs forces failure at every upstairs point. -/
+/-- If the pullback is not analytic at some point over `K`, then over the completed base
+change it is analytic nowhere (Proposition D.9). -/
 theorem not_analyticAt_completedBaseChange_of_not_analyticAt (n : ℕ) {f₀ : E →L[K] E}
     (h : ¬ AnalyticAt K (Round24Transfer.Q K (Fin n) E E F) f₀)
     (g₀ : CompletedBaseChange K E L →L[L] CompletedBaseChange K E L) :

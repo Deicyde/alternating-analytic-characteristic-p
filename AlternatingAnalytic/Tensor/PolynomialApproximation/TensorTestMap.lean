@@ -9,7 +9,7 @@ import AlternatingAnalytic.Analysis.L1PolynomialLift
 import Mathlib.Topology.Algebra.Order.Floor
 
 /-!
-# Corollary G.5: entire polynomial approximation of a nonanalytic smooth map
+# The tensor test map for Corollary G.5
 
 The tensor test map `x ↦ (x^{⊗ (m+1)})ₘ` of `TensorTestFamily` is analytic into the dependent
 `c₀` sum `Z` of tensor powers, and `C^∞` on the open unit ball as a map into the closed

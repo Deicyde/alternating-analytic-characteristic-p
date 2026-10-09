@@ -5,11 +5,11 @@ import Mathlib.Analysis.Normed.Module.Basic
 import Mathlib.Algebra.BigOperators.Fin
 
 /-!
-# Unconditional summability of bounded coefficient arrays on discrete c₀
+# Summability of bounded coefficient arrays on c₀
 
-Finite products of c₀ coordinates tend to zero along the cofinite filter on the
-full tuple type. Bounded vector coefficients preserve this decay. Completeness
-is required only of the value space in the unconditional summability theorem.
+For `x r ∈ C₀(I, K)` with `I` discrete, the products `∏ r, x r (a r)` tend to zero
+along the cofinite filter on tuples `a`. Hence, for a bounded array `c` with values in
+a complete ultrametric space, `∑ a, (∏ r, x r (a r)) • c a` is unconditionally summable.
 -/
 
 open scoped Topology ZeroAtInfty BigOperators
@@ -24,8 +24,7 @@ variable {I K W : Type*} [TopologicalSpace I] [DiscreteTopology I]
 theorem tendsto_cofinite_of_zeroAtInfty (x : C₀(I, K)) : Tendsto x cofinite (𝓝 0) := by
   simpa only [Filter.cocompact_eq_cofinite] using zero_at_infty x
 
-/-- Products of finitely many independent c₀ coordinates vanish at infinity on
-all coordinate tuples, including in degree zero. -/
+/-- The products `∏ r, x r (a r)` tend to zero along the cofinite filter on tuples `a`. -/
 theorem tendsto_coordinate_prod (n : ℕ) (x : Fin n → C₀(I, K)) :
     Tendsto (fun a : Fin n → I => ∏ r, x r (a r)) cofinite (𝓝 0) := by
   induction n with
@@ -44,8 +43,7 @@ theorem tendsto_coordinate_prod (n : ℕ) (x : Fin n → C₀(I, K)) :
 
 variable [NormedAddCommGroup W] [NormedSpace K W]
 
-/-- Multiplying a coordinate product by a uniformly bounded vector coefficient
-still tends to zero on the cofinite filter. No completeness is used here. -/
+/-- For a bounded array `c`, the terms `(∏ r, x r (a r)) • c a` tend to zero cofinitely. -/
 theorem tendsto_arraySummand_cofinite_zero {n : ℕ}
     (c : (Fin n → I) → W) (C : ℝ) (_hC : 0 ≤ C) (hc : ∀ a, ‖c a‖ ≤ C)
     (x : Fin n → C₀(I, K)) :
@@ -57,8 +55,8 @@ theorem tendsto_arraySummand_cofinite_zero {n : ℕ}
     (Filter.Eventually.of_forall (fun a => by simpa only [abs_norm] using hc a)) hp
   simpa only [norm_smul, mul_comm] using h
 
-/-- A bounded coefficient array defines an unconditionally summable family over
-arbitrary coordinate tuples when the value space is complete and nonarchimedean. -/
+/-- For a bounded array with values in a complete ultrametric space, the family
+`(∏ r, x r (a r)) • c a` is summable. -/
 theorem summable_arraySummand [IsUltrametricDist W] [CompleteSpace W]
     {n : ℕ} (c : (Fin n → I) → W) (C : ℝ) (hC : 0 ≤ C)
     (hc : ∀ a, ‖c a‖ ≤ C) (x : Fin n → C₀(I, K)) :

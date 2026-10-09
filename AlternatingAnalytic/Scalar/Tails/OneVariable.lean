@@ -9,7 +9,7 @@ import Mathlib.Analysis.SpecificLimits.Basic
 /-!
 # Tails of continuous functionals on `ℓ^∞(ℕ)`
 
-We work on `Linf 𝕜 = ℕ →ᵇ 𝕜` over a complete nonarchimedean field and assume `NSC 𝕜`: every
+On `Linf 𝕜 = ℕ →ᵇ 𝕜` over a complete nonarchimedean field, assume `NSC 𝕜`: every
 continuous linear functional on `ℓ^∞` that vanishes on the unit vectors is zero (this holds when
 `𝕜` is not spherically complete, see `AlternatingAnalytic.Scalar.Tails.NestedBalls`). Under this
 hypothesis a shift argument shows that a functional tends to `0` on the unit vectors, hence on the
@@ -311,7 +311,7 @@ theorem tendsto_apply_tail (h : NSC 𝕜) (φ : Linf 𝕜 →L[𝕜] 𝕜) (x : 
   have := hL x
   rwa [‹L x = 0›] at this
 
-/-- Tails of a functional: uniform smallness on unit vectors supported far out. -/
+/-- The tail property of a functional: `‖φ x‖ ≤ ε` for `x` in the unit ball vanishing below `N`. -/
 theorem tail_functional (h : NSC 𝕜) (φ : Linf 𝕜 →L[𝕜] 𝕜) (ε : ℝ) (hε : 0 < ε) :
     ∃ N : ℕ, ∀ x : Linf 𝕜, ‖x‖ ≤ 1 → (∀ i < N, x i = 0) → ‖φ x‖ ≤ ε := by
   classical

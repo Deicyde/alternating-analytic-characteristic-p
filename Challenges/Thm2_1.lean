@@ -9,13 +9,11 @@ import Mathlib.CategoryTheory.Pi.Basic
 # Theorem 2.1 (lifting linear constructions to bundles), pp. 4–5
 
 Setting (Section 2.1). `K` is a nontrivially normed field, `Vec_K` the category of normed
-`K`-spaces and bounded linear maps (no completeness), `n ∈ ℕ ∪ {∞, ω}`. `M` is a fixed `Cⁿ`
-manifold modelled on a normed space `P`. `VBⁿ_K(M)` is the category of `Cⁿ` normed vector
-bundles over `M`, with morphisms over `id_M` whose local operator-valued expressions
-`x ↦ T(x) ∈ L(E, F)` are `Cⁿ`. For a variance `ε = (ε₁, …, ε_r)`, `C^ε = C₁ × ⋯ × C_r` with each
-`C_a = Vec_K` or `Vec_K^op`; a functor `C^ε → Vec_K` is `Cⁿ` if all its maps on products of hom
-spaces (maximum norm) are jointly `Cⁿ`; `B^ε_M` is the corresponding product of bundle
-categories.
+`K`-spaces and bounded linear maps, and `n ∈ ℕ ∪ {∞, ω}`. `VBⁿ_K(M)` is the category of `Cⁿ`
+normed vector bundles over a `Cⁿ` manifold `M` modelled on `P`, with morphisms over `id_M` whose
+local operator-valued expressions are `Cⁿ`. `C^ε` is a product of copies of `Vec_K` and
+`Vec_K^op`; a functor `C^ε → Vec_K` is `Cⁿ` if its maps on products of hom spaces (maximum norm)
+are jointly `Cⁿ`; `B^ε_M` is the corresponding product of bundle categories.
 
 Paper statement: "For a fixed `Cⁿ` manifold `M`, fiberwise application defines, up to canonical
 natural isomorphism, a functor `Bⁿ_M : Fun^{Cⁿ}(C^ε, Vec_K) → Fun(B^ε_M, VBⁿ_K(M))`,
@@ -25,59 +23,32 @@ morphisms, and natural transformations are given fiberwise by `F`, its action on
 components of `η`, respectively. The same conclusion holds if regularity on whole hom spaces is
 replaced by preservation of `Cⁿ` families parametrized by open subsets of the model space `P`."
 
-Formal statement. `bundleLifting` (regularity on hom spaces) and `bundleLifting_familywise`
-(preservation of families) assert the existence of a functor
-`𝓑 : Fun^{Cⁿ}(C^ε, Vec_K) ⥤ (B^ε_M ⥤ VBⁿ_K(M))` whose object at `(F, V)` is the bundle
-`liftObj F V` glued from the transition functions `F(g_zw)`, whose morphism at a tuple `T` of
-bundle morphisms has fiber `F(T(x))` at `x` (local expressions of `T` in the trivializations at
-`x`, `localTuple T x`), and whose component at a natural transformation `η` has the constant
-fiber `η_{(E₁, …, E_r)}`. Fiber formulas are stated with `HEq`, because the object equation is
-propositional. Supporting statements: `preservesFamilies_of_contDiffOnHoms`, `liftContinuous`
-and `liftCore_isContMDiff` (the glued bundle has `Cⁿ` transition functions `F(g_zw)`).
-
-Formalization notes:
-* **Variances.** The variables are grouped by variance: `p` contravariant variables first, then
-  `q` covariant ones, `C^ε = (Vec_Kᵒᵖ)^p × Vec_K^q` (`VarCat K p q`, Mathlib's pi and product
-  categories). The paper allows any order of the `r = p + q` variances; reordering the factors is
-  an isomorphism of categories, so nothing is lost. `Vec_K` is the library's `NormedSpaceCat K`
-  (all normed spaces in the universe of `K`, all bounded linear maps); the model fibers of the
+## Formalization notes
+* `bundleLifting` (regularity on hom spaces) and `bundleLifting_familywise` (preservation of
+  families) are the two forms of the theorem.
+* The variables are grouped by variance: `C^ε = (Vec_Kᵒᵖ)^p × Vec_K^q` (`VarCat K p q`). The
+  paper allows any order; reordering the factors is an isomorphism of categories.
+* `Vec_K` is `NormedSpaceCat K`, the normed spaces in the universe of `K`. The model fibers of the
   bundles lie in that universe.
-* **Regularity of functors.** `ContDiffOnHoms n F`: for all objects `X, Y`, the map
-  `Hom(X, Y) → L(F X, F Y)` is `ContDiff K n` in operator coordinates `HomCoords X Y` (product of
-  operator spaces with the maximum norm; contravariant coordinates reversed). `PreservesFamilies
-  n P F`: for all `X, Y`, open `U ⊆ P` and `γ : P → HomCoords X Y` that is `ContDiffOn` on `U`,
-  `F ∘ γ` is `ContDiffOn` on `U` (a family on `U` is extended arbitrarily off `U`; only its values
-  on `U` matter). `n : ℕ∞ω` covers `ℕ ∪ {∞, ω}`, with Mathlib's `Cω` convention.
-* **The base and `VBⁿ_K(M)`.** `M` is a `ChartedSpace P M` with `IsManifold 𝓘(K, P) n M` (modelled
-  on `P`, no boundary, as in the paper). An object of `VBⁿ_K(M)` (`VB K P M n`) is a Mathlib
-  vector bundle with a normed model fiber and `ContMDiffVectorBundle n _ _ 𝓘(K, P)`; its fibers are
-  topological vector spaces with no chosen norm. Morphisms are `Cⁿ` sections of the Hom bundle
-  (`ContMDiffSection`), i.e. operator-valued local expressions are `Cⁿ`; identity and composition
-  are the library's `contMDiffHomId` and `contMDiffHomComp`. `B^ε_M` (`BundleVarCat K P M n p q`)
-  is `(VBᵒᵖ)^p × VB^q`.
-* **The glued bundle.** The common trivializing cover is indexed by the points `z` of `M`:
-  `commonBaseSet V z` is the intersection of the base sets of all input trivializations
-  `trivializationAt _ _ z`. The transition functions `liftCoordChange F V z w x` are `F` applied
-  to the input transitions (`transition V z w x`: from chart `z` to chart `w` in covariant
-  variables, from `w` to `z` in contravariant ones). `liftCore F V hV` is the resulting Mathlib
-  `VectorBundleCore`; its fiber at `x` is `F(E₁, …, E_r)` of the model fibers, identified with
-  `F(E₁(x), …, E_r(x))` through the trivializations at `x`. Mathlib's `VectorBundleCore` stores
-  continuity of the transition functions as a field, so it is an argument `hV`; `liftContinuous`
-  proves it, and the functor theorems assert existence of `hV`, so no statement is vacuous.
-* **"Up to canonical natural isomorphism".** The construction uses the canonical choice of
-  trivializations `trivializationAt`, so the functor exists on the nose. Independence of the
-  choice of trivializing cover (the canonical isomorphisms between different choices) is not
-  stated.
-* **The auxiliary special case** `alternating_object_familywise` (the `Alt^k` bifunctor, objects
-  only, familywise, over an arbitrary model with corners) is kept verbatim from the earlier
-  version of this file; it is the library theorem
-  `AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family`. Its own notes: families are
-  parametrized by open subsets of `M` (not of `P`), only the automorphism-type hom spaces
-  `L(F₁, F₁) × L(F₂, F₂)` are tested, and with boundary or corners its hypothesis is a different
-  condition, not a more general one. It is not used by the general statements.
-* Two instances (`IsTopologicalAddGroup`, `ContinuousSMul` on `VectorBundleCore.Fiber`), missing
-  from Mathlib, are declared here; they are needed for the topology of Hom bundles between glued
-  bundles and carry no data.
+* `ContDiffOnHoms n F`: each map `Hom(X, Y) → L(F X, F Y)` is `ContDiff` in operator coordinates
+  `HomCoords X Y` (maximum norm). `PreservesFamilies n P F` asks this only along families that
+  are `ContDiffOn` an open `U ⊆ P`.
+* `M` is modelled on `P` without boundary. An object of `VBⁿ_K(M)` (`VB K P M n`) is a Mathlib
+  `ContMDiffVectorBundle` with a normed model fiber; the fibers carry no chosen norm. Morphisms
+  are `Cⁿ` sections of the Hom bundle.
+* `F_M(V)` (`liftCore`) is glued on the cover indexed by the points `z ∈ M` (`commonBaseSet`),
+  with transition functions `F(g_zw)` (`liftCoordChange`). Continuity of the transitions is a
+  field of Mathlib's `VectorBundleCore`, so `liftCore` takes it as an argument `hV`; the main
+  theorems assert that `hV` exists.
+* The functor is built from the canonical trivializations `trivializationAt`, so it exists on
+  the nose. Independence of the trivializing cover is not stated.
+* The fibers of `F_M(T)` and `η_M` are stated with `HEq`, because the object equation is
+  propositional. `localTuple T x` is the local expression of `T` at `x`.
+* `alternating_object_familywise` is an extra special case (the `Alt^k` bifunctor, objects only)
+  over a model with corners. Its families are parametrized by open subsets of `M`, and only
+  `L(F₁, F₁) × L(F₂, F₂)` is tested. The general theorems do not use it.
+* The two instances on `VectorBundleCore.Fiber` (`IsTopologicalAddGroup`, `ContinuousSMul`) are
+  missing from Mathlib and carry no data.
 -/
 
 open Bundle
@@ -85,9 +56,8 @@ open scoped Bundle Manifold ContDiff
 
 namespace AlternatingAnalyticChallenge.Thm2_1
 
-/-- **Theorem 2.1, alternating special case (objects, familywise form).** If the joint
-alternating action preserves `Cⁿ` families on open subsets of the base, the bundle of continuous
-alternating maps between two `Cⁿ` vector bundles is a `Cⁿ` vector bundle. -/
+/-- If the joint action on `Alt^k` preserves `Cⁿ` families on open subsets of the base, the
+bundle of continuous alternating maps between two `Cⁿ` vector bundles is a `Cⁿ` vector bundle. -/
 theorem alternating_object_familywise
     {K M F₁ F₂ : Type*} [NontriviallyNormedField K] [TopologicalSpace M]
     [NormedAddCommGroup F₁] [NormedSpace K F₁]
@@ -345,24 +315,23 @@ theorem preservesFamilies_of_contDiffOnHoms {F : VarCat K p q ⥤ NormedSpaceCat
     (hF : ContDiffOnHoms n F) : PreservesFamilies n P F := by
   sorry
 
-/-- **Theorem 2.1, transition functions.** For a functor preserving `Cⁿ` families, the
-transition functions `F(g_zw)` of `F_M(V)` are continuous. -/
+/-- For a functor preserving `Cⁿ` families, the transition functions `F(g_zw)` of `F_M(V)` are
+continuous. -/
 theorem liftContinuous [IsManifold 𝓘(K, P) n M] {F : VarCat K p q ⥤ NormedSpaceCat K}
     (hF : PreservesFamilies n P F) (V : BundleVarCat K P M n p q) : LiftContinuous F V := by
   sorry
 
-/-- **Theorem 2.1, objects.** For a functor preserving `Cⁿ` families, the glued bundle `F_M(V)`
-has `Cⁿ` transition functions `F(g_zw)`, so it is a `Cⁿ` vector bundle. -/
+/-- For a functor preserving `Cⁿ` families, the glued bundle `F_M(V)` has `Cⁿ` transition
+functions, so it is a `Cⁿ` vector bundle. -/
 theorem liftCore_isContMDiff [IsManifold 𝓘(K, P) n M] {F : VarCat K p q ⥤ NormedSpaceCat K}
     (hF : PreservesFamilies n P F) (V : BundleVarCat K P M n p q) (hV : LiftContinuous F V) :
     (liftCore F V hV).IsContMDiff 𝓘(K, P) n ∧
       ContMDiffVectorBundle n (F.obj (modelObj V)) (liftCore F V hV).Fiber 𝓘(K, P) := by
   sorry
 
-/-- **Theorem 2.1.** Fiberwise application defines a functor
-`Bⁿ_M : Fun^{Cⁿ}(C^ε, Vec_K) ⥤ Fun(B^ε_M, VBⁿ_K(M))`: its object at `(F, V)` is the bundle glued
-from the transition functions `F(g_zw)`, and the fibers of `F_M(T)` and of `η_M` at `x` are
-`F(T(x))` and `η_{(E₁, …, E_r)}`. -/
+/-- Fiberwise application defines a functor `Bⁿ_M : Fun^{Cⁿ}(C^ε, Vec_K) ⥤ Fun(B^ε_M, VBⁿ_K(M))`.
+Its object at `(F, V)` is the bundle glued from `F(g_zw)`, and the fibers of `F_M(T)` and `η_M`
+at `x` are `F(T(x))` and `η_{(E₁, …, E_r)}`. -/
 theorem bundleLifting [IsManifold 𝓘(K, P) n M] :
     ∃ 𝓑 : CnFunctorCat K n p q ⥤ (BundleVarCat K P M n p q ⥤ VB K P M n),
       (∀ (F : CnFunctorCat K n p q) (V : BundleVarCat K P M n p q),
@@ -376,8 +345,8 @@ theorem bundleLifting [IsManifold 𝓘(K, P) n M] :
         HEq ((𝓑.map η).app V x) (η.hom.app (modelObj V))) := by
   sorry
 
-/-- **Theorem 2.1, familywise form.** The same conclusion for functors that preserve `Cⁿ`
-families parametrized by open subsets of the model space `P`. -/
+/-- The same conclusion for functors that preserve `Cⁿ` families parametrized by open subsets of
+the model space `P`. -/
 theorem bundleLifting_familywise [IsManifold 𝓘(K, P) n M] :
     ∃ 𝓑 : FamilyFunctorCat K n P p q ⥤ (BundleVarCat K P M n p q ⥤ VB K P M n),
       (∀ (F : FamilyFunctorCat K n P p q) (V : BundleVarCat K P M n p q),

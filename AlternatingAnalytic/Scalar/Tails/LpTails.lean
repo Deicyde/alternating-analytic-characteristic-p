@@ -12,9 +12,8 @@ Let `K` be complete, nonarchimedean and not spherically complete, and let `I` be
 infinite. Transporting `tail_multilinear` from `ℓ^∞(ℕ, K)` along an enumeration of `I`, every
 continuous `d`-linear form `μ` on `ℓ^∞(I, K)` has the tail property (`multilinear_tail`). As
 consequences, the diagonal values `μ (e_i, …, e_i)` tend to `0` along the cofinite filter
-(`multilinear_diagonal_tendsto_zero`), the coefficient array `μ (e_{i_1}, …, e_{i_d})` is null on
-`I^d`, and `μ x` is the unconditional sum of `μ (e_{i_1}, …, e_{i_d}) x^1_{i_1} ⋯ x^d_{i_d}`
-(`multilinear_expansion`).
+(`multilinear_diagonal_tendsto_zero`) and the coefficient array `μ (e_{i_1}, …, e_{i_d})` is null
+on `I^d` (`multilinear_coeff_tendsto_zero`). The expansion (F.1) is in `Tails/Expansion.lean`.
 -/
 
 namespace AlternatingAnalytic.Tails
@@ -65,7 +64,7 @@ theorem isBddML_continuousMultilinearMap {d : ℕ}
 
 /-! ### The tail property on `ℓ^∞(I)` -/
 
-/-- **Tail property** on `ℓ^∞(I)` under `NSC`. -/
+/-- The tail property on `ℓ^∞(I)` under `NSC`. -/
 theorem tail_lp_of_nsc [IsUltrametricDist K] [CompleteSpace K] (hK : NSC K)
     [Countable I] [Infinite I] {d : ℕ}
     (μ : ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : I => K) ∞) K)
@@ -86,7 +85,7 @@ theorem tail_lp_of_nsc [IsUltrametricDist K] [CompleteSpace K] (hK : NSC K)
   rw [linfOfLp_apply]
   exact hr _ (Finset.mem_image_of_mem _ (Finset.mem_range.2 hn))
 
-/-- **Tail property** on `ℓ^∞(I)` when `K` is not spherically complete. -/
+/-- Lemma F.2(2): the tail property on `ℓ^∞(I)` when `K` is not spherically complete. -/
 theorem multilinear_tail [IsUltrametricDist K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) [Countable I] [Infinite I] {d : ℕ}
     (μ : ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : I => K) ∞) K)
@@ -117,9 +116,9 @@ lemma norm_single_one [DecidableEq I] (i : I) :
     ‖(lp.single ∞ i (1 : K) : lp (fun _ : I => K) ∞)‖ = 1 := by
   rw [lp.norm_single ENNReal.zero_lt_top, norm_one]
 
-/-! ### Consequences: diagonal, null array and expansion -/
+/-! ### Consequences: diagonal values and null array -/
 
-/-- The diagonal values `μ (e_i, …, e_i)` tend to `0` along the cofinite filter. -/
+/-- Lemma F.2(3): the diagonal values `μ (e_i, …, e_i)` tend to `0` along the cofinite filter. -/
 theorem multilinear_diagonal_tendsto_zero [IsUltrametricDist K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) [Countable I] [Infinite I] [DecidableEq I]
     {d : ℕ} (hd : 1 ≤ d)

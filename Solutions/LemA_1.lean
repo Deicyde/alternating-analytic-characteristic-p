@@ -2,28 +2,18 @@ import Mathlib.Analysis.Analytic.Uniqueness
 import Mathlib.Analysis.Normed.Group.InfiniteSum
 
 /-!
-# Lemma A.1 (one-variable uniqueness), p. 25
+# Proof of Lemma A.1
 
-Paper statement: "Let K be nontrivially normed and Z a normed K-space, not necessarily
-complete. Let z₀, z₁, … ∈ Z, ρ > 0 and M ≥ 0 with ‖zₙ‖ρⁿ ≤ M for all n. If ∑ₙ tⁿ zₙ
-converges to 0 for every t ∈ K with |t| < ρ, then zₙ = 0 for all n."
-
-Formalization notes:
-* No completeness of `K` or `Z` is assumed, as in the paper.
-* "∑ₙ tⁿ zₙ converges to 0" is read as convergence of the ordered partial sums
-  `∑_{n<N} tⁿ • zₙ → 0` (`Filter.Tendsto` along `atTop`), not as unconditional summation
-  (`HasSum`). Under the bound `‖zₙ‖ρⁿ ≤ M` the two readings agree, but the partial-sum
-  reading is the literal one.
-* The hypothesis `M ≥ 0` is kept although it follows from the bound at `n = 0`.
-* No definitions are introduced.
+Uses Mathlib's `HasFPowerSeriesAt.apply_eq_zero`, applied to the power series with
+coefficients `z n`.
 -/
 
 open Filter Topology
 
 namespace AlternatingAnalyticChallenge.LemA_1
 
-/-- **Lemma A.1.** If `‖z n‖ ρ ^ n ≤ M` for all `n` and the partial sums of `∑ tⁿ z n` tend
-to `0` for every `t` with `‖t‖ < ρ`, then every `z n` is zero. `Z` need not be complete. -/
+/-- If `‖z n‖ ρ ^ n ≤ M` for all `n` and the partial sums of `∑ tⁿ z n` tend to `0` whenever
+`‖t‖ < ρ`, then every `z n` is zero. -/
 theorem one_variable_uniqueness
     (K : Type*) [NontriviallyNormedField K]
     (Z : Type*) [NormedAddCommGroup Z] [NormedSpace K Z]
@@ -32,9 +22,8 @@ theorem one_variable_uniqueness
     (hconv : ∀ t : K, ‖t‖ < ρ →
       Tendsto (fun N => ∑ n ∈ Finset.range N, t ^ n • z n) atTop (𝓝 0)) :
     ∀ n, z n = 0 := by
-  -- Package the coefficients as a one-variable formal multilinear series representing `0`
-  -- on the ball of radius `ρ`, then apply Mathlib's `HasFPowerSeriesAt.apply_eq_zero`
-  -- (no completeness assumption).
+  -- The coefficients form a formal multilinear series representing `0` on the ball of
+  -- radius `ρ`.
   let p : FormalMultilinearSeries K K Z := fun n =>
     ContinuousMultilinearMap.mkPiRing K (Fin n) (z n)
   have hp_apply : ∀ (n : ℕ) (t : K), (p n fun _ => t) = t ^ n • z n := by

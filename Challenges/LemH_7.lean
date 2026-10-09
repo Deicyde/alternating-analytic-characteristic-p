@@ -19,28 +19,17 @@ graded, and the defining conditions show that `C_0` is graded as well."
 
 Paper statement: "The homogeneous degree-one part of `C_0` is zero."
 
-Formalization notes:
-* The import of `AlternatingAnalytic.Algebra.DeterminantQuadraticGap` (the library module that
-  proves this lemma) is present only so that the challenge and the solution elaborate in the same
-  environment: without it, Lean resolves the `Module` instance on the submodules `G0`, `C0`
-  through `AddMonoidAlgebra.instModule` instead of `MvPolynomial.instModule`, and the two
-  statements, though textually identical, print differently under `pp.all`. No definition or
-  statement below depends on that module.
-* Everything is algebraic, in the polynomial model the paper uses: the `a_i` are the variables
-  `X 0, …, X (p-1)` of `MvPolynomial (Fin p) K`, and `K = 𝔽_p(t)` is Mathlib's
-  `RatFunc (ZMod p)` (no norm is involved). `p` prime is `[Fact p.Prime]`.
-* `generatorVector K p` (defined here) lists the coordinate vectors, in the basis `e_i`, of the
-  displayed generators of `D_0`: `e_i` (the unit vector), `ε^i a` (coordinate `k` is
-  `a_{k-i}` for `k ≥ i`, else `0`) and `a²` (coordinate `k` is `∑_{i+j=k} a_i a_j`, from
-  `ε^p = 0`). `G0 K p` (defined here) is the `K`-span of the determinants of `p`-tuples of these
-  generators (column `j` of the matrix is the `j`-th vector of the tuple). By multilinearity of
-  the determinant this is the span of `det(d_1, …, d_p)` over all `d_i ∈ D_0`, as the paper
-  itself notes for `G`; the generator form is used as the definition. `C0 K p` (defined here) is
-  `{λ ∈ G_0 : a_i λ ∈ G_0 for every i}`.
-* `part1` is the lemma: an element of `C_0` that is homogeneous of degree one is zero.
-  `part2` is the form in which the lemma is used in H.3 of the paper, combining it with the
-  gradedness of `C_0` asserted just before the lemma: the degree-one homogeneous component of
-  every element of `C_0` is zero.
+## Formalization notes
+* The import of `AlternatingAnalytic.Algebra.DeterminantQuadraticGap` is there only to align
+  instances: without it, the `Module` instance on `G0`, `C0` resolves through
+  `AddMonoidAlgebra.instModule` instead of `MvPolynomial.instModule`. Nothing below uses it.
+* The `a_i` are the variables `X 0, …, X (p-1)` of `MvPolynomial (Fin p) K`, and `K = 𝔽_p(t)`
+  is `RatFunc (ZMod p)`. No norm is involved.
+* `generatorVector` lists the coordinate vectors of the displayed generators of `D_0`; `G0` is the
+  `K`-span of determinants of `p`-tuples of generators. By multilinearity this is the span of
+  `det(d_1, …, d_p)` over `d_i ∈ D_0`.
+* `part1` is the lemma for homogeneous elements. `part2` is the form used in H.3, combined with
+  the gradedness of `C_0`: the degree-one component of every element of `C_0` is zero.
 -/
 
 namespace AlternatingAnalyticChallenge.LemH_7
@@ -52,8 +41,7 @@ section Definitions
 variable (K : Type*) [Field K] (p : ℕ)
 
 /-- Coordinate vectors, in the basis `e_0, …, e_{p-1}`, of the generators of `D_0`:
-`Sum.inl i ↦ e_i`, `Sum.inr (Sum.inl i) ↦ ε^i a`, `Sum.inr (Sum.inr ()) ↦ a²`, with the
-`a_j` replaced by the variables `X j`. -/
+`Sum.inl i ↦ e_i`, `Sum.inr (Sum.inl i) ↦ ε^i a`, `Sum.inr (Sum.inr ()) ↦ a²`. -/
 noncomputable def generatorVector : Fin p ⊕ (Fin p ⊕ Unit) → Fin p → MvPolynomial (Fin p) K
   | Sum.inl i => fun k => if i = k then 1 else 0
   | Sum.inr (Sum.inl i) => fun k =>
@@ -77,14 +65,12 @@ noncomputable def C0 : Submodule K (MvPolynomial (Fin p) K) :=
 
 end Definitions
 
-/-- **Lemma H.7.** The homogeneous degree-one part of `C_0` is zero: every element of `C_0`
-that is homogeneous of degree one vanishes. -/
+/-- An element of `C_0` that is homogeneous of degree one is zero. -/
 theorem part1 (p : ℕ) [Fact p.Prime] (P : MvPolynomial (Fin p) (RatFunc (ZMod p)))
     (hP : P ∈ C0 (RatFunc (ZMod p)) p) (hlin : P.IsHomogeneous 1) : P = 0 := by
   sorry
 
-/-- **Lemma H.7, with the gradedness of `C_0`.** The degree-one homogeneous component of every
-element of `C_0` is zero. -/
+/-- The degree-one homogeneous component of every element of `C_0` is zero. -/
 theorem part2 (p : ℕ) [Fact p.Prime] (P : MvPolynomial (Fin p) (RatFunc (ZMod p)))
     (hP : P ∈ C0 (RatFunc (ZMod p)) p) : MvPolynomial.homogeneousComponent 1 P = 0 := by
   sorry

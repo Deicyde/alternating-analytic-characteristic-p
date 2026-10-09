@@ -3,15 +3,23 @@ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.LinearAlgebra.Span.Basic
 import Mathlib.RingTheory.AlgebraicIndependent.Defs
 
+/-!
+# Degree bounds for polynomial determinants
+
+If a variable occurs, to degree at most one, only in one column of a generator family, then
+every determinant of generators, and every element of their span, has degree at most one in
+it. After an algebraically independent evaluation this gives a gap of the form
+`z_v² S ∩ S = {0}`, used for equation (H.1) in Appendix H.
+-/
+
 open scoped BigOperators
 
 namespace AlternatingAnalytic
 
 open MvPolynomial
 
-/-- A column family whose distinguished variable occurs only in one distinguished
-column has determinants of degree at most one in that variable. Repetition of
-that column is handled by alternation, in every characteristic. -/
+/-- If `v` occurs, to degree at most one, only in the column `g j₀`, every determinant
+of columns from `g` has degree at most one in `v`. -/
 theorem degreeOf_det_column_family_le_one
     {K n J σ : Type*} [Field K] [Fintype n] [DecidableEq n] [DecidableEq J]
     (g : J → n → MvPolynomial σ K) (j₀ : J) (v : σ)
@@ -47,8 +55,7 @@ theorem degreeOf_det_column_family_le_one
     exact hprod.trans ((Finset.sum_le_sum
       (fun k _ => hdeg (s k) (π k))).trans hsum)
 
-/-- The same individual-variable degree bound holds on the scalar span of
-all the symbolic generator determinants. -/
+/-- The same bound holds on the span of these determinants. -/
 theorem degreeOf_mem_span_det_column_family_le_one
     {K n J σ : Type*} [Field K] [Fintype n] [DecidableEq n] [DecidableEq J]
     (g : J → n → MvPolynomial σ K) (j₀ : J) (v : σ)
@@ -69,8 +76,8 @@ theorem degreeOf_mem_span_det_column_family_le_one
       simpa only [Algebra.smul_def, algebraMap_eq] using
         (degreeOf_C_mul_le p v a).trans ihp
 
-/-- Joint algebraic independence gives a unique polynomial representative
-in any fixed scalar submodule of the polynomial algebra. -/
+/-- An element of the image of `S` under an algebraically independent evaluation has a unique
+representative in `S`. -/
 theorem existsUnique_polynomial_rep_of_mem_map
     {K L σ : Type*} [Field K] [CommRing L] [Algebra K L]
     (z : σ → L) (hz : AlgebraicIndependent K z)
@@ -82,8 +89,8 @@ theorem existsUnique_polynomial_rep_of_mem_map
   intro Q hQ
   exact hz hQ.2
 
-/-- A scalar submodule of polynomials with individual variable degree at most
-one has a square-scalar gap after an algebraically independent evaluation. -/
+/-- If every element of `S` has degree at most one in `v`, and `c` and `z v ^ 2 * c` both
+lie in the image of `S` under an algebraically independent evaluation, then `c = 0`. -/
 theorem aeval_square_scalar_gap
     {K L σ : Type*} [Field K] [CommRing L] [Algebra K L]
     (z : σ → L) (hz : AlgebraicIndependent K z)
@@ -106,7 +113,7 @@ theorem aeval_square_scalar_gap
       degreeOf_X_self_pow] at hbound
     omega
 
-/-- The literal scalar-image intersection form of the auxiliary-scalar gap. -/
+/-- The same gap, as `z_v² S ∩ S = {0}` for the image of `S`. -/
 theorem aeval_square_scalar_image_intersection
     {K L σ : Type*} [Field K] [CommRing L] [Algebra K L]
     (z : σ → L) (hz : AlgebraicIndependent K z)

@@ -1,7 +1,13 @@
 import AlternatingAnalytic.Analysis.LaurentCoefficients
 import Mathlib.Analysis.Normed.Operator.Mul
 
-/-! Bounded pointwise multipliers and the constant coefficient-field embedding. -/
+/-!
+# Multiplication operators and constant arrays
+
+The coordinatewise multiplication operators `D_a x = a x` on bounded functions, and the
+`κ`-linear inclusion `κ^S → ℓ^∞(S, κ((X)))` of constant arrays. Both are used to build the
+coefficient lift `Ψ` of Lemma C.4.
+-/
 
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
@@ -10,7 +16,7 @@ namespace AlternatingAnalytic
 
 variable (K : Type*) [NontriviallyNormedField K] (S : Type*) [TopologicalSpace S]
 
-/-- A bounded sequence acts by continuous pointwise multiplication. -/
+/-- The multiplication operator `a ↦ D_a`, with `D_a x = a x`. -/
 def boundedSequenceMultiplier : (S →ᵇ K) →L[K] ((S →ᵇ K) →L[K] (S →ᵇ K)) :=
   ContinuousLinearMap.mul K (S →ᵇ K)
 
@@ -23,7 +29,7 @@ theorem norm_boundedSequenceMultiplier_le (a : S →ᵇ K) :
   ContinuousLinearMap.opNorm_mul_apply_le K (S →ᵇ K) a
 
 variable (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
-/-- Restriction of the bounded-function module to the coefficient field. -/
+/-- Bounded Laurent arrays as a `κ`-module, by restriction of scalars. -/
 instance laurentBoundedFunctionModule : Module κ (S →ᵇ LaurentField κ r) :=
   Module.compHom _ (algebraMap κ (LaurentField κ r))
 
@@ -64,7 +70,7 @@ theorem boundedSequenceMultiplier_constant (a x : S → κ) :
       (constantLaurentArray κ r x) = constantLaurentArray κ r (a * x) :=
   (constantLaurentArray_mul S κ r a x).symm
 
-/-- The coefficient-field embedding of all arrays into bounded Laurent arrays is linear. -/
+/-- The inclusion of `κ`-valued arrays as constant Laurent arrays, as a `κ`-linear map. -/
 def constantLaurentArrayLinear : (S → κ) →ₗ[κ] (S →ᵇ LaurentField κ r) where
   toFun := constantLaurentArray κ r
   map_add' := constantLaurentArray_add S κ r

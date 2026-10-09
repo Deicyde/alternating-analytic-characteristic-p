@@ -4,7 +4,14 @@ import AlternatingAnalytic.Analysis.ProjectiveExterior
 import AlternatingAnalytic.Algebra.ExteriorSupportDimension
 import AlternatingAnalytic.Analysis.GeometricWeightBound
 
-/-! Finite Laurent truncations and the constant coefficient of a pure exterior wedge. -/
+/-!
+# The constant coefficient of a pure Laurent wedge
+
+For `x₁, …, x_k` bounded arrays over the Laurent field `κ((X))`, the constant coefficient of their
+determinant array is the determinant array of an exterior vector `β` over `κ` whose support
+dimension is at most `k M_r ∏ ‖xᵢ‖`. This is the support estimate of Proposition C.3 for pure
+wedges; `β` is built from finite Laurent truncations of the `xᵢ`.
+-/
 
 noncomputable section
 
@@ -31,7 +38,7 @@ theorem norm_laurentMonomial (n : ℤ) :
     ‖laurentMonomial κ r n‖ = (r : ℝ) ^ n :=
   laurent_norm_single_one κ (r := r) Fact.out Fact.out n
 
-/-- A monomial times a constant array has precisely its prescribed Laurent coefficient. -/
+/-- The coefficients of `X^m • a` for a constant array `a`. -/
 theorem boundedLaurentCoeff_monomial_smul_constant (n m : ℤ) (a : S → κ) :
     boundedLaurentCoeff κ r n (laurentMonomial κ r m • constantLaurentArray κ r a) =
       if n = m then a else 0 := by
@@ -83,14 +90,15 @@ theorem finiteLaurentTruncation_coeff_within (ν n : ℤ) (l : ℕ)
     omega
   · simp
 
-/-- The finite truncation has no larger norm than its lowest retained monomial. -/
+/-- The truncation starting at degree `ν` has norm at most `r^ν`. -/
 theorem norm_finiteLaurentTruncation_le (ν : ℤ) (l : ℕ)
     (f : S →ᵇ LaurentField κ r) :
     ‖finiteLaurentTruncation κ r ν l f‖ ≤ (r : ℝ) ^ ν :=
   boundedLaurent_norm_le_of_coeff_eq_zero κ r _ ν
     (fun n hn ↦ finiteLaurentTruncation_coeff_below κ r ν n l f hn)
 
-/-- Truncation leaves a remainder with all coefficients through degree `ν + l` zero. -/
+/-- If `f` has no coefficients below degree `ν`, the truncation error has norm at most
+`r^(ν + l + 1)`. -/
 theorem norm_sub_finiteLaurentTruncation_le (ν : ℤ) (l : ℕ)
     (f : S →ᵇ LaurentField κ r)
     (hf : ∀ n : ℤ, n < ν → boundedLaurentCoeff κ r n f = 0) :
@@ -120,7 +128,7 @@ theorem prod_laurentMonomial {ι : Type*} (t : Finset ι) (n : ι → ℤ) :
       rw [HahnSeries.single_mul_single, one_mul]
     exact h
 
-/-- The actual bounded determinant array, regarded as a continuous alternating map. -/
+/-- The determinant array `x ↦ (c ↦ det (x j (c i)))` as a continuous alternating map. -/
 def laurentDeterminantForm (k : ℕ) :=
   (projectiveExteriorArray (LaurentField κ r) S k).compContinuousAlternatingMap
     (projectiveExteriorWedge (LaurentField κ r) S k)
@@ -149,7 +157,7 @@ theorem norm_laurentDeterminantForm_le (k : ℕ) (x : Fin k → (S →ᵇ Lauren
       (laurentDeterminantForm_norm_le κ r k) (Finset.prod_nonneg fun i _ ↦ norm_nonneg (x i))
     _ = _ := one_mul _
 
-/-- Determinants of constant arrays are obtained by the coefficient-field embedding. -/
+/-- On constant arrays the determinant form is the determinant array over `κ`. -/
 theorem laurentDeterminantForm_constant (k : ℕ) (y : Fin k → (S → κ)) :
     laurentDeterminantForm κ r k (fun i ↦ constantLaurentArray κ r (y i)) =
       constantLaurentArray κ r (determinantArray (exteriorPower.ιMulti κ k y)) := by
@@ -164,7 +172,8 @@ theorem laurentDeterminantForm_constant (k : ℕ) (y : Fin k → (S → κ)) :
       rfl
     _ = _ := ((algebraMap κ (LaurentField κ r)).map_det _).symm
 
-/-- The finite exterior witness obtained by retaining just total exponent zero. -/
+/-- The exterior vector over `κ` formed by the terms of total degree zero in the expansion of
+the truncated wedge. -/
 def finiteLaurentWedgeCoefficient (k l : ℕ) (ν : Fin k → ℤ)
     (x : Fin k → (S →ᵇ LaurentField κ r)) : ⋀[κ]^k (S → κ) := by
   classical
@@ -173,7 +182,7 @@ def finiteLaurentWedgeCoefficient (k l : ℕ) (ν : Fin k → ℤ)
     exteriorPower.ιMulti κ k (fun i ↦ boundedLaurentCoeff κ r (ν i + (n i).val) (x i))
 
 omit [DiscreteTopology S] in
-/-- Every factor of the finite exterior witness belongs to the span of `k(l + 1)` coefficients. -/
+/-- The finite wedge coefficient has support dimension at most `k (l + 1)`. -/
 theorem finiteLaurentWedgeCoefficient_support_le (k l : ℕ) (ν : Fin k → ℤ)
     (x : Fin k → (S →ᵇ LaurentField κ r)) :
     exteriorSupportDim (finiteLaurentWedgeCoefficient κ r k l ν x) ≤ k * (l + 1) := by
@@ -193,7 +202,8 @@ theorem finiteLaurentWedgeCoefficient_support_le (k l : ℕ) (ν : Fin k → ℤ
       (finrank_range_le_card (R := κ) v))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Expanding the finite truncations recovers exactly the determinant array of the finite witness. -/
+/-- The finite wedge coefficient is the constant coefficient of the determinant of the
+truncations. -/
 theorem finiteLaurentWedgeCoefficient_array (k l : ℕ) (ν : Fin k → ℤ)
     (x : Fin k → (S →ᵇ LaurentField κ r)) :
     determinantArray (finiteLaurentWedgeCoefficient κ r k l ν x) =
@@ -235,7 +245,7 @@ theorem finiteLaurentWedgeCoefficient_array (k l : ℕ) (ν : Fin k → ℤ)
       · rw [ite_eq_left h.symm, ite_eq_left h]
       · rw [ite_eq_right (Ne.symm h), ite_eq_right h, map_zero]
 
-/-- The attained maximum of the geometric weights `(l + 1) r^l`. -/
+/-- The constant `M_r = max_l (l + 1) r^l` of Proposition C.3. -/
 def geometricWeightMaximum : ℝ :=
   let n := Classical.choose (exists_geometricWeight_max (NNReal.coe_nonneg r)
     (show (r : ℝ) < 1 from (show r < 1 from Fact.out)))
@@ -259,7 +269,7 @@ theorem add_one_le_geometricWeightMaximum_mul_zpow (l : ℕ) :
     (show 0 < (r : ℝ) from (show 0 < r from Fact.out)) l)).2 (geometricWeight_le_maximum r l)
 
 omit [Fact (r < 1)] in
-/-- A finite product of geometric powers equals the power of the sum of the exponents. -/
+/-- `∏ r^(νᵢ) = r^(∑ νᵢ)`. -/
 theorem prod_radius_zpow {ι : Type*} (t : Finset ι) (ν : ι → ℤ) :
     ∏ i ∈ t, (r : ℝ) ^ (ν i) = (r : ℝ) ^ (∑ i ∈ t, ν i) := by
   classical
@@ -269,7 +279,8 @@ theorem prod_radius_zpow {ι : Type*} (t : Finset ι) (ν : ι → ℤ) :
   | @insert a t ha ih => rw [Finset.prod_insert ha, Finset.sum_insert ha, ih, zpow_add₀ hr]
 
 omit [DiscreteTopology S] in
-/-- The finite support bound has the required geometric normalization when the orders add to `-l`. -/
+/-- When `‖xᵢ‖ = r^(νᵢ)` and `∑ νᵢ = -l`, the support bound `k (l + 1)` is at most
+`k M_r ∏ ‖xᵢ‖`. -/
 theorem finiteLaurentWedgeCoefficient_support_norm_le (k l : ℕ) (ν : Fin k → ℤ)
     (x : Fin k → (S →ᵇ LaurentField κ r))
     (hnorm : ∀ i, ‖x i‖ = (r : ℝ) ^ (ν i)) (hsum : (∑ i, ν i) = -(l : ℤ)) :
@@ -302,8 +313,8 @@ theorem exists_laurentWedgeCoefficient_of_small (k : ℕ)
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- The finite witness also represents the original determinant, because the omitted tails
-have zero constant coefficient in every multilinear difference term. -/
+/-- The finite wedge coefficient represents the constant coefficient of the untruncated
+determinant: the omitted tails contribute nothing in degree zero. -/
 theorem finiteLaurentWedgeCoefficient_represents (k l : ℕ) (ν : Fin k → ℤ)
     (x : Fin k → (S →ᵇ LaurentField κ r))
     (hbelow : ∀ i n, n < ν i → boundedLaurentCoeff κ r n (x i) = 0)
@@ -319,8 +330,8 @@ theorem finiteLaurentWedgeCoefficient_represents (k l : ℕ) (ν : Fin k → ℤ
     (fun i ↦ norm_finiteLaurentTruncation_le κ r (ν i) l (x i))
     (fun i ↦ norm_sub_finiteLaurentTruncation_le κ r (ν i) l (x i) (hbelow i))
 
-/-- The constant determinant coefficient of every pure Laurent wedge is an actual exterior
-vector over the coefficient field, with the required uniform support estimate. -/
+/-- The constant coefficient of the determinant of a pure Laurent wedge is the determinant
+array of some `β` over `κ` with support dimension at most `k M_r ∏ ‖xᵢ‖`. -/
 theorem exists_laurentWedgeCoefficient (k : ℕ)
     (x : Fin k → (S →ᵇ LaurentField κ r)) :
     ∃ β : ⋀[κ]^k (S → κ),
@@ -361,8 +372,8 @@ theorem exists_laurentWedgeCoefficient (k : ℕ)
     · exact finiteLaurentWedgeCoefficient_support_norm_le κ r k l ν x
         (fun i ↦ (hν i).1) hsum
 
-/-- The single-wedge coefficient witness, its geometric support bound, and its explicit
-finite formula when the lower orders add to a nonpositive integer. -/
+/-- Summary: the wedge coefficient with its support bound, and the explicit finite formula
+when the orders `νᵢ` add to `-l`. -/
 theorem laurentWedgeCoefficient_properties (k : ℕ) :
     (∀ x : Fin k → (S →ᵇ LaurentField κ r), ∃ β : ⋀[κ]^k (S → κ),
       determinantArray β = boundedLaurentCoeff κ r 0 (laurentDeterminantForm κ r k x) ∧

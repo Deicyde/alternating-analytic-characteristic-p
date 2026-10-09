@@ -5,10 +5,10 @@ import AlternatingAnalytic.Analysis.BasisAlternatingCriterion
 /-!
 # All multilinear maps on the determinant pair are alternating
 
-This proves `dom:all-alt` for the actual determinant-generated subspaces. The
-extension takes values in the complete Laurent field; its values belong to `G`
-only on tuples from `D`. The auxiliary scalar gap supplies strong alternation,
-including in characteristic two.
+Lemma H.6 for the concrete pair `(D, G)`: every bounded `p`-linear map `D^p → G` is
+alternating, so the inclusion `Alt^p(D; G) → Mult^p(D; G)` is an isometric bijection and
+its inverse is a retraction. The proof extends the map to `A^p → L` and uses the gap
+(H.1) at the auxiliary vectors `τ_w w`; it works for `p = 2` as well.
 -/
 
 noncomputable section
@@ -27,7 +27,7 @@ local instance : Field (K p r) :=
 local instance : Field (L p r) :=
   (inferInstance : NontriviallyNormedField (L p r)).toField
 
-/-- The larger-field extension of an actual smaller-target multilinear map. -/
+/-- The extension of a bounded multilinear map `D^p → G` to an `L`-multilinear map `A^p → L`. -/
 def multilinearExtension
     (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r)) :
     ContinuousMultilinearMap (L p r) (fun _ : Fin p => A p r) (L p r) :=
@@ -48,7 +48,7 @@ theorem norm_multilinearExtension
     ‖multilinearExtension p r m‖ = ‖m‖ :=
   norm_denseScalarFamilyExtension_comp _ _ _ (G p r).subtypeₗᵢ m
 
-/-- Membership is asserted only on tuples whose entries actually lie in `D`. -/
+/-- On tuples from `D`, the extension takes values in `G`. -/
 theorem multilinearExtension_mem_G
     (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r))
     (x : Fin p → A p r) (hx : ∀ i, x i ∈ D p r) :
@@ -65,8 +65,7 @@ theorem w_mem_D (t : Tau p) : w p r t ∈ D p r := by
 theorem tau_smul_w_mem_D (t : Tau p) : tau p r t • w p r t ∈ D p r :=
   gen_mem_D p r (Sum.inr (Sum.inr (Sum.inr t)))
 
-/-- Both the repeated auxiliary vector and its twice-scaled tuple have values in
-the actual determinant target. No ambient range assertion is used. -/
+/-- With `w` in two slots, the value `c` and `τ_w² c` both lie in `G`. -/
 theorem multilinearExtension_repeated_w_certificates
     (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r))
     (f : Fin p → Fin p) (i j : Fin p) (hij : i ≠ j) (t : Tau p) :
@@ -99,7 +98,7 @@ theorem multilinearExtension_repeated_w_certificates
     rw [multilinear_repeated_update_smul _ i j hij] at hmem
     simpa only [smul_eq_mul, pow_two, mul_assoc] using hmem
 
-/-- The source-specific auxiliary square gap forces repeated-vector vanishing. -/
+/-- With the same `w` in two slots, the extension vanishes, by (H.1). -/
 theorem multilinearExtension_repeated_w_eq_zero
     (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r))
     (f : Fin p → Fin p) (i j : Fin p) (hij : i ≠ j) (t : Tau p) :
@@ -108,7 +107,7 @@ theorem multilinearExtension_repeated_w_eq_zero
   obtain ⟨hc, htc⟩ := multilinearExtension_repeated_w_certificates p r m f i j hij t
   exact eq_zero_of_tau_sq_mul_mem p r t hc htc
 
-/-- The single-vector tags give the diagonal identities on basis tuples. -/
+/-- The case `w = e_b`: vanishing on a repeated basis vector. -/
 theorem multilinearExtension_repeated_basis_eq_zero
     (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r))
     (f : Fin p → Fin p) (i j : Fin p) (hij : i ≠ j) (b : Fin p) :
@@ -116,7 +115,7 @@ theorem multilinearExtension_repeated_basis_eq_zero
       (update (update (fun k => e p r (f k)) i (e p r b)) j (e p r b)) = 0 :=
   multilinearExtension_repeated_w_eq_zero p r m f i j hij (Sum.inl b)
 
-/-- The pair tags supply polarization without dividing by two. -/
+/-- The case `w = e_b + e_c`. -/
 theorem multilinearExtension_repeated_basis_add_eq_zero
     (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r))
     (f : Fin p → Fin p) (i j : Fin p) (hij : i ≠ j) (b c : Fin p) (hbc : b < c) :
@@ -125,7 +124,7 @@ theorem multilinearExtension_repeated_basis_add_eq_zero
         j (e p r b + e p r c)) = 0 :=
   multilinearExtension_repeated_w_eq_zero p r m f i j hij (Sum.inr ⟨(b, c), hbc⟩)
 
-/-- The two cross terms sum to zero for every ordering, including equal indices. -/
+/-- Swapping two basis vectors in two slots changes the sign. -/
 theorem multilinearExtension_basis_cross_sum_zero
     (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r))
     (f : Fin p → Fin p) (i j : Fin p) (hij : i ≠ j) (b c : Fin p) :
@@ -138,7 +137,7 @@ theorem multilinearExtension_basis_cross_sum_zero
     (multilinearExtension_repeated_basis_eq_zero p r m)
     (multilinearExtension_repeated_basis_add_eq_zero p r m) f i j hij b c
 
-/-- The actual Laurent-valued extension is strongly alternating. -/
+/-- The extension `A^p → L` is alternating. -/
 theorem multilinearExtension_map_eq_zero_of_eq
     (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r))
     (x : Fin p → A p r) (i j : Fin p) (hx : x i = x j) (hij : i ≠ j) :
@@ -148,7 +147,7 @@ theorem multilinearExtension_map_eq_zero_of_eq
     (multilinearExtension_repeated_basis_eq_zero p r m)
     (multilinearExtension_repeated_basis_add_eq_zero p r m) x i j hx hij
 
-/-- Every continuous multilinear map on the actual determinant pair is alternating. -/
+/-- Every bounded `p`-linear map `D^p → G` is alternating. -/
 theorem multilinear_map_eq_zero_of_eq
     (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r))
     (x : Fin p → D p r) (i j : Fin p) (hx : x i = x j) (hij : i ≠ j) : m x = 0 := by
@@ -158,13 +157,13 @@ theorem multilinear_map_eq_zero_of_eq
   exact multilinearExtension_map_eq_zero_of_eq p r m (fun k => (x k : A p r)) i j
     (congrArg Subtype.val hx) hij
 
-/-- The actual isometric inclusion of alternating maps. -/
+/-- The isometric inclusion `j : Alt^p(D; G) → Mult^p(D; G)`. -/
 def inclusionJ :
     (D p r [⋀^Fin p]→L[K p r] G p r) →ₗᵢ[K p r]
       ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r) :=
   ContinuousAlternatingMap.toContinuousMultilinearMapLI
 
-/-- Strong vanishing proves surjectivity of Mathlib's actual inclusion isometry. -/
+/-- The inclusion `Alt^p(D; G) → Mult^p(D; G)` is surjective. -/
 theorem toContinuousMultilinearMapLI_surjective :
     Function.Surjective (ContinuousAlternatingMap.toContinuousMultilinearMapLI :
       (D p r [⋀^Fin p]→L[K p r] G p r) →ₗᵢ[K p r]
@@ -173,14 +172,14 @@ theorem toContinuousMultilinearMapLI_surjective :
   exact ⟨{ toContinuousMultilinearMap := m
            map_eq_zero_of_eq' := multilinear_map_eq_zero_of_eq p r m }, rfl⟩
 
-/-- Alternating and multilinear maps on this pair are canonically linearly isometric. -/
+/-- `Alt^p(D; G) ≃ₗᵢ Mult^p(D; G)`. -/
 def allAlternatingEquiv :
     (D p r [⋀^Fin p]→L[K p r] G p r) ≃ₗᵢ[K p r]
       ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r) :=
   LinearIsometryEquiv.ofSurjective (inclusionJ p r)
     (toContinuousMultilinearMapLI_surjective p r)
 
-/-- The source splitness witness, as a concrete bounded linear operator. -/
+/-- The retraction `R : Mult^p(D; G) → Alt^p(D; G)` showing that `(D, G)` is split. -/
 def retractionR :
     ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r) →L[K p r]
       (D p r [⋀^Fin p]→L[K p r] G p r) :=
@@ -212,9 +211,7 @@ theorem norm_retractionR_apply
 theorem norm_retractionR_le : ‖retractionR p r‖ ≤ 1 :=
   (allAlternatingEquiv p r).symm.toLinearIsometry.norm_toContinuousLinearMap_le
 
-/-- `dom:all-alt`, including extension, strong alternation, the isometric bijection,
-and every evaluation and norm identity of its concrete inverse. No completeness
-of the rational field or of the determinant target is assumed. -/
+/-- Lemma H.6 for the concrete pair `(D, G)`, with the retraction, collected. -/
 theorem all_multilinear_maps_alternating :
     (∀ (m : ContinuousMultilinearMap (K p r) (fun _ : Fin p => D p r) (G p r))
       (x : Fin p → D p r),

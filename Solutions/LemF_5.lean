@@ -9,16 +9,11 @@ import Mathlib.Data.Finset.Defs
 import AlternatingAnalytic.Scalar.TestCertificate
 
 /-!
-# Lemma F.5 (finite test certificate), p. 52
+# Proof of Lemma F.5
 
-Solution: the statement of `Challenges/LemF_5.lean`, proved from the library by
-`AlternatingAnalytic.TestCertificate.exists_finite_test_certificate`
-(`Scalar/TestCertificate.lean`), which combines the conditional certificate
-`exists_finite_test_certificate_of_fibre` (`Scalar/TestCertificate/Certificate.lean`: tests are
-base changes of `ZMod p`-rational tuples; duality over `ZMod p` replaces the paper's row
-reduction) with Lemma F.4 over `ZMod p` (`AlternatingAnalytic.FibreObstruction.not_exists_fibre_map`).
-The library repeats the definitions below verbatim in the namespace
-`AlternatingAnalytic.TestCertificate`.
+Uses `TestCertificate.exists_finite_test_certificate` from
+`AlternatingAnalytic/Scalar/TestCertificate.lean`; the definitions below match those in
+`TestCertificate/Defs.lean`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemF_5
@@ -62,10 +57,8 @@ def FibreCondition1
       ((Fin (k + 1) → K) [⋀^Fin k]→ₗ[K] K)) : Prop :=
   τ (fun _ => firstCoords K k) = (detV' K k).compLinearMap (firstCoords K k)
 
-/-- **Lemma F.5 (finite test certificate).** Assume `k! = 0` in `K`. There are finite sets of tests
-`T j`, `j ∈ F`, of tuples `(g; ξ)` with every `g^r` mapping `Σ^j` into `Σ'^j` and every
-`ξ_r ∈ Σ^j`, such that every `K`-multilinear `τ` satisfying condition (1) of Lemma F.4 has some
-test value of absolute value at least `1`. -/
+/-- Lemma F.5: if `k! = 0` in `K`, there are finite sets of tests `T j`, `j ∈ F`, such that every
+`τ` satisfying condition (1) of Lemma F.4 has a test value of absolute value at least `1`. -/
 theorem exists_finite_test_certificate (hk : (k.factorial : K) = 0) :
     ∃ T : Submodule K (Fin (k + 1) → K) × Submodule K (Fin k → K) →
         Finset ((Fin k → ((Fin (k + 1) → K) →ₗ[K] (Fin k → K))) × (Fin k → (Fin (k + 1) → K))),

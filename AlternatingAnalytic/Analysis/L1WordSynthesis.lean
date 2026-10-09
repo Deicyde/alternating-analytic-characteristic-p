@@ -4,10 +4,12 @@ import Mathlib.Analysis.Normed.Module.Completion
 import Mathlib.Analysis.Analytic.Basic
 
 /-!
-# Bounded coordinate synthesis and reconstruction on ordinary ℓ¹
+# Synthesis from bounded word coefficients
 
-Only the target of synthesis needs to be complete. The scalar field and all ℓ¹ domains may
-be incomplete.
+A bounded family of vectors in a Banach space defines a bounded linear map on ℓ¹. Applied to
+the scaled coefficients `s^n p_n(e_{a_1}, …, e_{a_n})` of a power series, this gives the map
+`T` in the proof of Theorem 4.5(2), with values in the completion of `H`, and `T` recovers
+each homogeneous term on its word block. The scalar field need not be complete.
 -/
 
 open scoped BigOperators lp
@@ -22,7 +24,7 @@ variable {K J W : Type*} [NontriviallyNormedField K]
 
 local instance : DecidableEq J := Classical.decEq J
 
-/-- Continuous multilinear maps on ordinary ℓ¹ are determined by their coordinate tuples. -/
+/-- Continuous multilinear maps on ℓ¹ are determined by their values on basis vectors. -/
 theorem ext_single {d : ℕ}
     {C D : ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) W}
     (h : ∀ a : Fin d → J,
@@ -39,7 +41,7 @@ theorem ext_single {d : ℕ}
 
 variable [CompleteSpace W]
 
-/-- The degree-one bounded-array construction, viewed as a continuous linear map. -/
+/-- The bounded linear map on ℓ¹ sending each basis vector `e_j` to `c j`. -/
 def linearOfBounded (c : J → W) (M : ℝ) (hc : ∀ j, ‖c j‖ ≤ M) :
     lp (fun _ : J => K) 1 →L[K] W :=
   continuousMultilinearCurryFin1 K (lp (fun _ : J => K) 1) W
@@ -69,7 +71,7 @@ variable {I H : Type*} [NormedAddCommGroup H] [NormedSpace K H]
 local instance : DecidableEq I := Classical.decEq I
 local instance : DecidableEq (Σ n : ℕ, Fin n → I) := Classical.decEq _
 
-/-- The coefficient assigned to a word, valued in the completion of the original output. -/
+/-- The coefficient `s^n p_n(e_{a_1}, …, e_{a_n})` of the word `a`, in the completion of `H`. -/
 def wordCoefficient (p : FormalMultilinearSeries K (lp (fun _ : I => K) 1) H)
     (s : K) (j : Σ n : ℕ, Fin n → I) : UniformSpace.Completion H :=
   s ^ j.1 • ((p j.1 (fun i => lp.single 1 (j.2 i) (1 : K)) : H) :
@@ -87,7 +89,7 @@ theorem norm_wordCoefficient_le
         ≤ ‖s‖ ^ j.1 * ‖p j.1‖ := mul_le_mul_of_nonneg_left hbound (by positivity)
     _ ≤ M := by simpa only [mul_comm] using hp j.1
 
-/-- Bounded word coefficients synthesize into the complete output space. -/
+/-- The bounded linear map on ℓ¹(Words I, K) given by the word coefficients. -/
 def wordSynthesis (p : FormalMultilinearSeries K (lp (fun _ : I => K) 1) H)
     (s : K) (M : ℝ) (hp : ∀ n, ‖p n‖ * ‖s‖ ^ n ≤ M) :
     lp (fun _ : (Σ n : ℕ, Fin n → I) => K) 1 →L[K] UniformSpace.Completion H :=
@@ -108,7 +110,7 @@ theorem norm_wordSynthesis_le
     ‖wordSynthesis p s M hp‖ ≤ M :=
   norm_linearOfBounded_le _ M hM _
 
-/-- Coordinate synthesis reconstructs each original homogeneous term on its actual word block. -/
+/-- Synthesis recovers the homogeneous term `p n` on the degree `n` word block. -/
 theorem wordSynthesis_wordBlock
     (p : FormalMultilinearSeries K (L1 K I) H) (s : K) (hs : s ≠ 0)
     (M : ℝ) (hp : ∀ n, ‖p n‖ * ‖s‖ ^ n ≤ M)

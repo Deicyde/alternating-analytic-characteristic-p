@@ -4,9 +4,8 @@ import AlternatingAnalytic.Algebra.ExteriorFlattening
 # Cofactor formulas and support bounds for exterior contractions
 
 The contraction of a pure wedge is the cofactor expansion in the selected row.
-All contractions lie in every supporting subspace, so their span has dimension at
-most the exterior support dimension. The last-slot version has exactly one covector
-for each of the other slots.
+Contractions lie in every supporting subspace, so their span has dimension at most the
+exterior support dimension. This is Lemma B.4, stated for the last slot and `k = n + 1`.
 -/
 
 namespace AlternatingAnalytic
@@ -89,7 +88,7 @@ theorem exteriorContractionSpan_finrank_le (ω : ⋀[L]^(n + 1) V) :
   rw [← hdim]
   exact Submodule.finrank_mono (exteriorContractionSpan_le W hω)
 
-/-- The cofactor formula, preservation of supports, and the contraction-span bound. -/
+/-- Lemma B.4: the cofactor formula, preservation of supports, and the contraction-span bound. -/
 theorem exteriorLastContraction_properties :
     (∀ (φ : Fin n → Dual L V) (x : Fin (n + 1) → V),
       exteriorLastContraction φ (exteriorPower.ιMulti L (n + 1) x) =

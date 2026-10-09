@@ -4,7 +4,14 @@ import AlternatingAnalytic.Analysis.DeterminantPairAllAlternating
 import AlternatingAnalytic.Analysis.SplitAlternatingPairs
 import Mathlib.GroupTheory.Perm.Fin
 
-/-! Concrete division-free split retractions on the literal padded determinant sources. -/
+/-!
+# A split retraction for the padded determinant source
+
+A bounded retraction `Mult^{p+n}(D_k; G) → Alt^{p+n}(D_k; G)`, built without division: fix the
+auxiliary arguments at the standard basis, apply the degree-`p` retraction (every `p`-linear map
+on `D` is alternating, Lemma H.6), then wedge with the auxiliary coordinates one at a time. Here
+the auxiliary arguments come first; `PaddedSplitCanonical` puts them last, as in Appendix H.
+-/
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 open scoped BigOperators NNReal
@@ -17,7 +24,7 @@ local instance splitFieldK : Field (K p r) :=
 local instance splitFieldL : Field (L p r) :=
   (inferInstance : NontriviallyNormedField (L p r)).toField
 
-/-- Append the new rational coordinate to the literal maximum-norm product. -/
+/-- `D_n × K ≃ D_{n+1}`, appending the new coordinate last. -/
 def appendEquiv (n : ℕ) : (D p r n × K p r) ≃L[K p r] D p r (n+1) where
   toFun x := (x.1.1, Fin.snoc x.1.2 x.2)
   invFun x := ((x.1, Fin.init x.2), x.2 (Fin.last n))
@@ -40,8 +47,7 @@ def appendEquiv (n : ℕ) : (D p r n × K p r) ≃L[K p r] D p r (n+1) where
 @[simp] theorem appendEquiv_symm_apply (n : ℕ) (x : D p r (n+1)) :
     (appendEquiv p r n).symm x = ((x.1, Fin.init x.2), x.2 (Fin.last n)) := rfl
 
-/-- Curry and boundedly evaluate the first auxiliary argument, then restrict the
-remaining arguments to the first factor. This is defined on arbitrary multilinear maps. -/
+/-- Fix the first argument at `(0, 1)` and restrict the others to `V`. -/
 def freezeFirst {V F : Type*} [NormedAddCommGroup V] [NormedSpace (K p r) V]
     [NormedAddCommGroup F] [NormedSpace (K p r) F] (k : ℕ) :
     ((V × K p r) [×(k+1)]→L[K p r] F) →L[K p r] (V [×k]→L[K p r] F) :=
@@ -57,7 +63,7 @@ def freezeFirst {V F : Type*} [NormedAddCommGroup V] [NormedSpace (K p r) V]
     (k : ℕ) (m : (V × K p r) [×(k+1)]→L[K p r] F) (x : Fin k → V) :
     freezeFirst p r k m x = m (Fin.cons (0,1) (fun i => (x i,0))) := rfl
 
-/-- The alternating restriction associated to the actual curry/evaluation map. -/
+/-- Fix the first argument of an alternating map at the new auxiliary basis vector. -/
 def restrictSucc (n : ℕ) :
     (D p r (n+1) [⋀^Fin (p+(n+1))]→L[K p r] G p r) →L[K p r]
       (D p r n [⋀^Fin (p+n)]→L[K p r] G p r) :=
@@ -69,7 +75,7 @@ def restrictSucc (n : ℕ) :
     restrictSucc p r n m x =
       m (fun i => appendEquiv p r n (@Fin.cons (p+n) (fun _ => D p r n × K p r) (0,1) (fun j => (x j,0)) i)) := rfl
 
-/-- Actual local division-free padding, transported to the literal product. -/
+/-- Wedge with the new auxiliary coordinate (`Smap`), transported to `D_{n+1}`. -/
 def wedgeSucc (n : ℕ) :
     (D p r n [⋀^Fin (p+n)]→L[K p r] G p r) →L[K p r]
       (D p r (n+1) [⋀^Fin (p+(n+1))]→L[K p r] G p r) :=
@@ -90,7 +96,8 @@ def wedgeSucc (n : ℕ) :
   simp
 
 
-/-- Top-degree uniqueness is proved only after extension into the complete Laurent field. -/
+/-- A top-degree alternating map on `D_k` is determined by its value on the standard basis.
+The proof extends to the completion over `L`. -/
 theorem alternating_ext_standard (n : ℕ)
     {a b : D p r n [⋀^Fin (p+n)]→L[K p r] G p r}
     (h : a (standardD p r n) = b (standardD p r n)) : a = b := by
@@ -141,8 +148,7 @@ theorem alternating_ext_standard (n : ℕ)
   refine Fin.lastCases ?_ (fun k => ?_) j <;>
     simp [appendEquiv_apply]
 
-/-- The auxiliary-first convention differs from the manuscript's auxiliary-last
-standard basis by the displayed cyclic sign. -/
+/-- Moving the auxiliary argument from first to last costs the sign `(-1)^(p+n)`. -/
 theorem standard_restrictSucc (n : ℕ)
     (m : D p r (n+1) [⋀^Fin (p+(n+1))]→L[K p r] G p r) :
     m (standardD p r (n+1)) =
@@ -178,8 +184,7 @@ theorem standard_restrictSucc (n : ℕ)
       funext i
       refine Fin.cases ?_ (fun j => ?_) i <;> simp
 
-/-- This is the reconstruction direction, proved by dense top-form uniqueness;
-`Rmap_Smap` by itself does not imply it. -/
+/-- `restrictSucc` is injective, by uniqueness of top-degree forms. -/
 theorem restrictSucc_injective (n : ℕ) : Function.Injective (restrictSucc p r n) := by
   intro a b hab
   apply alternating_ext_standard p r (n+1)
@@ -190,8 +195,7 @@ theorem restrictSucc_injective (n : ℕ) : Function.Injective (restrictSucc p r 
     wedgeSucc p r n (restrictSucc p r n m) = m :=
   restrictSucc_injective p r n (restrictSucc_wedgeSucc p r n _)
 
-/-- Freeze all the actual auxiliary standard arguments, in the auxiliary-first
-order of the iterated local wedge construction. -/
+/-- Fix all auxiliary arguments at the standard basis, auxiliary arguments first. -/
 def freezeAuxiliary : (n : ℕ) →
     (D p r n [×(p+n)]→L[K p r] G p r) →L[K p r]
       (DeterminantPair.D p r [×p]→L[K p r] G p r)
@@ -201,7 +205,7 @@ def freezeAuxiliary : (n : ℕ) →
       (ContinuousMultilinearMap.compContinuousLinearMapL
         (fun _ => (appendEquiv p r n).toContinuousLinearMap)))
 
-/-- Iterated local `Smap`, with the literal product equivalences at every step. -/
+/-- Iterated `wedgeSucc`. -/
 def iteratedWedge : (n : ℕ) →
     (DeterminantPair.D p r [⋀^Fin p]→L[K p r] G p r) →L[K p r]
       (D p r n [⋀^Fin (p+n)]→L[K p r] G p r)
@@ -209,8 +213,8 @@ def iteratedWedge : (n : ℕ) →
       (ContinuousLinearMap.fst (K p r) (DeterminantPair.D p r) (Fin 0 → K p r))
   | n+1 => (wedgeSucc p r n).comp (iteratedWedge n)
 
-/-- The actual bounded retraction: freeze, use the degree-p all-alternating
-inverse, and perform the iterated division-free local padding. -/
+/-- The retraction: fix the auxiliary arguments, apply the degree-`p` retraction, and wedge
+back. -/
 def paddedRetraction (n : ℕ) :
     (D p r n [×(p+n)]→L[K p r] G p r) →L[K p r]
       (D p r n [⋀^Fin (p+n)]→L[K p r] G p r) :=
@@ -223,8 +227,7 @@ def paddedRetraction (n : ℕ) :
       (paddedRetraction p r n (freezeFirst p r (p+n)
         (m.compContinuousLinearMap fun _ => (appendEquiv p r n).toContinuousLinearMap))) := rfl
 
-/-- It fixes every alternating top form. No surjectivity of the padded
-alternating inclusion and no norm-one assertion is used. -/
+/-- The retraction fixes every alternating map. -/
 @[simp] theorem paddedRetraction_fix (n : ℕ)
     (m : D p r n [⋀^Fin (p+n)]→L[K p r] G p r) :
     paddedRetraction p r n m.toContinuousMultilinearMap = m := by
@@ -248,12 +251,12 @@ alternating inclusion and no norm-one assertion is used. -/
           (restrictSucc p r n m).toContinuousMultilinearMap := rfl
       rw [hfreeze, ih, wedgeSucc_restrictSucc]
 
-/-- The source's actual split certificate for every amount of padding. -/
+/-- `(D_k, G)` is split in degree `p + n`. -/
 theorem isSplitAlternatingPair_D (n : ℕ) :
     IsSplitAlternatingPair (K p r) (p+n) (D p r n) (G p r) :=
   ⟨paddedRetraction p r n, paddedRetraction_fix p r n⟩
 
-/-- Global joint self-action analyticity follows from this concrete split retraction. -/
+/-- The joint self-action of `(D_k, G)` is analytic (Lemma H.3). -/
 theorem analyticAt_selfActionD (n : ℕ)
     (a : (D p r n →L[K p r] D p r n) × (G p r →L[K p r] G p r)) :
     AnalyticAt (K p r) (alternatingMapAction (K := K p r)
@@ -261,8 +264,7 @@ theorem analyticAt_selfActionD (n : ℕ)
   analyticAt_alternatingMapAction_of_split_destination (p+n)
     (isSplitAlternatingPair_D p r n) a
 
-/-- The padded split statement, with the actual retraction, its construction and
-reconstruction identities, and analytic joint self-action. -/
+/-- Summary: the retraction, its fixing property, splitness and analytic self-action. -/
 theorem padded_split_pair (n : ℕ) :
     paddedRetraction p r n = (iteratedWedge p r n).comp
       ((DeterminantPair.retractionR p r).comp (freezeAuxiliary p r n)) ∧

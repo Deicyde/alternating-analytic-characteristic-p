@@ -2,13 +2,11 @@ import AlternatingAnalytic.Analysis.LaurentTruncation
 import AlternatingAnalytic.Analysis.LaurentEvaluation
 
 /-!
-# The Laurent expansion converges in the Laurent field
+# The Laurent expansion converges
 
-Every element `x` of `LaurentField κ r` is the unconditional sum over `ℤ` of its monomials
-`coeff i x • X^i`: once a finite set of indices contains `[order x, N]`, the remainder has
-vanishing coefficients below `N + 1` and hence norm at most `r ^ (N + 1)`. Mapping by a
-continuous ring homomorphism `g` gives the evaluation formula `g x = ∑ f(coeff i x) t^i`
-with `f = g ∘ algebraMap` and `t = g X`.
+Every `x : LaurentField κ r` is the sum over `ℤ` of its monomials `coeff i x • X^i`. Applying
+a continuous ring homomorphism `g` gives `g x = ∑ f (coeff i x) t^i` with `f = g ∘ algebraMap`
+and `t = g X`. This is the evaluation formula of Lemma D.2(3).
 -/
 
 noncomputable section
@@ -69,8 +67,7 @@ theorem hasSum_laurentSingle (x : LaurentField κ r) :
   rw [zpow_add_one₀ hr0.ne', zpow_natCast]
   exact (mul_le_of_le_one_right (pow_nonneg hr0.le N) hr1.le)
 
-/-- A continuous ring homomorphism out of the Laurent field evaluates every Laurent series
-termwise at the image of `X`. -/
+/-- A continuous ring homomorphism out of `κ((X))` evaluates each series termwise at the image of `X`. -/
 theorem hasSum_eval_of_continuous {K : Type*} [NormedField K] (g : LaurentField κ r →+* K)
     (hg : Continuous g) (f : κ →+* K) (t : K)
     (hf : ∀ c : κ, g (algebraMap κ (LaurentField κ r) c) = f c)

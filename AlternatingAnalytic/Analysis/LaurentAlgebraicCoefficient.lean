@@ -1,6 +1,14 @@
 import AlternatingAnalytic.Analysis.LaurentWedgeCoefficient
 
-/-! The coefficient-field exterior vector associated to an algebraic Laurent exterior vector. -/
+/-!
+# The coefficient map on the algebraic exterior power
+
+For `ω` in the uncompleted projective exterior power `Λ^k` of `ℓ^∞(S, κ((X)))`, there is a
+unique `η(ω) ∈ Λ^k_κ (S → κ)` whose determinant array is the constant coefficient of the
+determinant array of `ω`, and `sdim η(ω) ≤ k M_r ‖ω‖`. This is Proposition C.3 before
+completion (`M_r` is `geometricWeightMaximum r`). The argument `α : Fin k` only records
+that `k ≥ 1`.
+-/
 
 noncomputable section
 
@@ -14,7 +22,7 @@ namespace AlternatingAnalytic
 variable (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 variable (S : Type*) [TopologicalSpace S] (k : ℕ)
 
-/-- The coefficient field acts on the projective exterior power through constant Laurent series. -/
+/-- `κ` acts on the projective exterior power through constant Laurent series. -/
 instance laurentProjectiveExteriorModule : Module κ (ProjectiveExterior (LaurentField κ r) S k) :=
   Module.compHom _ (algebraMap κ (LaurentField κ r))
 
@@ -22,7 +30,7 @@ instance laurentProjectiveExteriorScalarTower :
     IsScalarTower κ (LaurentField κ r) (ProjectiveExterior (LaurentField κ r) S k) :=
   IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl
 
-/-- The coefficient field acts on the completion through the same constant-field embedding. -/
+/-- `κ` acts on the completed projective exterior power through constant Laurent series. -/
 instance laurentCompletedExteriorModule :
     Module κ (ProjectiveExteriorCompletion (LaurentField κ r) S k) :=
   Module.compHom _ (algebraMap κ (LaurentField κ r))
@@ -33,7 +41,7 @@ instance laurentCompletedExteriorScalarTower :
 
 variable [DiscreteTopology S]
 
-/-- The actual constant coefficient of the bounded determinant array. -/
+/-- The constant coefficient `coeff₀` of the determinant array, as a `κ`-linear map. -/
 def algebraicLaurentCoefficientArray :
     ProjectiveExterior (LaurentField κ r) S k →ₗ[κ] ((Fin k → S) → κ) where
   toFun ω := boundedLaurentCoeff κ r 0 (projectiveExteriorArray (LaurentField κ r) S k ω)
@@ -45,20 +53,20 @@ def algebraicLaurentCoefficientArray :
       boundedLaurentCoeff_smul_const]
     rfl
 
-/-- Pure wedges have the determinant coefficient computed in the single-wedge construction. -/
+/-- On a pure wedge, the coefficient array is `coeff₀` of the determinant form. -/
 theorem algebraicLaurentCoefficientArray_wedge (x : Fin k → (S →ᵇ LaurentField κ r)) :
     algebraicLaurentCoefficientArray κ r S k (exteriorPower.ιMulti (LaurentField κ r) k x) =
       boundedLaurentCoeff κ r 0 (laurentDeterminantForm κ r k x) := rfl
 
 omit [DiscreteTopology S] in
-/-- Positive exterior degree allows scalar coefficients to be absorbed into a wedge factor. -/
+/-- In positive degree, every `ω` is a finite sum of pure wedges with no scalar weights. -/
 theorem exists_unweighted_exterior_decomposition (α : Fin k)
     (ω : ProjectiveExterior (LaurentField κ r) S k) :
     ∃ q : FreeAddMonoid (Fin k → (S →ᵇ LaurentField κ r)), exteriorWedgeSum q = ω := by
   obtain ⟨p, hp⟩ := exists_exterior_decomposition (show ⋀[LaurentField κ r]^k _ from ω)
   exact ⟨_, (exteriorWedgeSum_absorb α p).trans hp⟩
 
-/-- The coefficient array of any finite sum of pure wedges belongs to the exterior determinant image. -/
+/-- The coefficient array of a finite sum of pure wedges is a determinant array over `κ`. -/
 theorem exists_coefficient_of_wedgeSum
     (q : FreeAddMonoid (Fin k → (S →ᵇ LaurentField κ r))) :
     ∃ β : ⋀[κ]^k (S → κ), determinantArray β =
@@ -73,14 +81,15 @@ theorem exists_coefficient_of_wedgeSum
     obtain ⟨γ, hγ⟩ := hq
     exact ⟨β + γ, by rw [map_add, hβ, hγ, map_add, map_add]⟩
 
-/-- Existence of the algebraic coefficient exterior vector in positive degree. -/
+/-- Every coefficient array is the determinant array of some `β ∈ Λ^k_κ (S → κ)`. -/
 theorem exists_algebraicLaurentCoefficient (α : Fin k)
     (ω : ProjectiveExterior (LaurentField κ r) S k) :
     ∃ β : ⋀[κ]^k (S → κ), determinantArray β = algebraicLaurentCoefficientArray κ r S k ω := by
   obtain ⟨q, rfl⟩ := exists_unweighted_exterior_decomposition κ r S k α ω
   exact exists_coefficient_of_wedgeSum κ r S k q
 
-/-- The unique exterior vector whose determinant array is the constant Laurent coefficient. -/
+/-- The coefficient map `η`: the unique exterior vector over `κ` whose determinant array
+is `coeff₀` of the determinant array of `ω`. -/
 def algebraicLaurentCoefficient (α : Fin k) :
     ProjectiveExterior (LaurentField κ r) S k →ₗ[κ] (⋀[κ]^k (S → κ)) where
   toFun ω := Classical.choose (exists_algebraicLaurentCoefficient κ r S k α ω)
@@ -109,14 +118,14 @@ def algebraicLaurentCoefficient (α : Fin k) :
           (Classical.choose_spec (exists_algebraicLaurentCoefficient κ r S k α ω)).symm
       _ = _ := (map_smul determinantArray a _).symm
 
-/-- The coefficient lift represents the actual coefficient array. -/
+/-- The determinant array of `η ω` is the coefficient array of `ω`. -/
 theorem algebraicLaurentCoefficient_array (α : Fin k)
     (ω : ProjectiveExterior (LaurentField κ r) S k) :
     determinantArray (algebraicLaurentCoefficient κ r S k α ω) =
       boundedLaurentCoeff κ r 0 (projectiveExteriorArray (LaurentField κ r) S k ω) :=
   Classical.choose_spec (exists_algebraicLaurentCoefficient κ r S k α ω)
 
-/-- Injectivity of determinant coordinates makes the coefficient lift unique. -/
+/-- `η ω` is the only exterior vector with this determinant array. -/
 theorem algebraicLaurentCoefficient_unique (α : Fin k)
     (ω : ProjectiveExterior (LaurentField κ r) S k) (β : ⋀[κ]^k (S → κ))
     (hβ : determinantArray β =
@@ -124,7 +133,7 @@ theorem algebraicLaurentCoefficient_unique (α : Fin k)
     β = algebraicLaurentCoefficient κ r S k α ω :=
   determinantArray_injective (hβ.trans (algebraicLaurentCoefficient_array κ r S k α ω).symm)
 
-/-- Embedded coefficient-field inputs recover their original pure exterior wedge. -/
+/-- `η` sends a wedge of constant arrays to the same wedge over `κ`. -/
 theorem algebraicLaurentCoefficient_constant_wedge (α : Fin k) (x : Fin k → (S → κ)) :
     algebraicLaurentCoefficient κ r S k α
       (projectiveExteriorWedge (LaurentField κ r) S k (fun i ↦ constantLaurentArray κ r (x i))) =
@@ -135,7 +144,7 @@ theorem algebraicLaurentCoefficient_constant_wedge (α : Fin k) (x : Fin k → (
     (laurentDeterminantForm κ r k (fun i ↦ constantLaurentArray κ r (x i))) = _
   rw [laurentDeterminantForm_constant, boundedLaurentCoeff_constantLaurentArray]
 
-/-- The pure-wedge support estimate is independent of the chosen representation. -/
+/-- The support estimate for a pure wedge. -/
 theorem algebraicLaurentCoefficient_wedge_support_le (α : Fin k)
     (x : Fin k → (S →ᵇ LaurentField κ r)) :
     (exteriorSupportDim (algebraicLaurentCoefficient κ r S k α
@@ -147,7 +156,7 @@ theorem algebraicLaurentCoefficient_wedge_support_le (α : Fin k)
     algebraicLaurentCoefficient_unique κ r S k α _ β hβ
   rwa [← heq]
 
-/-- Finite wedge decompositions bound the support by their ordinary sum of products of norms. -/
+/-- The support estimate for a finite sum of pure wedges, with its decomposition cost. -/
 theorem algebraicLaurentCoefficient_wedgeSum_support_le (α : Fin k)
     (q : FreeAddMonoid (Fin k → (S →ᵇ LaurentField κ r))) :
     (exteriorSupportDim (algebraicLaurentCoefficient κ r S k α (exteriorWedgeSum q)) : ℝ) ≤
@@ -171,7 +180,7 @@ theorem algebraicLaurentCoefficient_wedgeSum_support_le (α : Fin k)
       _ = _ := by simp only [exteriorWedgeCost, FreeAddMonoid.toList_add,
         List.map_append, List.sum_append, mul_add]
 
-/-- Taking the exact ordinary-sum projective infimum gives the sharp algebraic support bound. -/
+/-- The support estimate `sdim (η ω) ≤ k M_r ‖ω‖` on the algebraic exterior power. -/
 theorem algebraicLaurentCoefficient_support_le (α : Fin k)
     (ω : ProjectiveExterior (LaurentField κ r) S k) :
     (exteriorSupportDim (algebraicLaurentCoefficient κ r S k α ω) : ℝ) ≤
@@ -192,8 +201,8 @@ theorem algebraicLaurentCoefficient_support_le (α : Fin k)
       algebraicLaurentCoefficient_wedgeSum_support_le κ r S k α q.val
   simpa only [mul_comm] using (div_le_iff₀ hC).1 h
 
-/-- The algebraic constant-coefficient lift, its unique determinant characterization,
-constant-input recovery, and projective support estimate. -/
+/-- The properties of `η` on the algebraic exterior power: determinant array, uniqueness,
+constant wedges, support estimate. -/
 theorem algebraicLaurentCoefficient_properties (α : Fin k) :
     (∀ ω : ProjectiveExterior (LaurentField κ r) S k,
       determinantArray (algebraicLaurentCoefficient κ r S k α ω) =

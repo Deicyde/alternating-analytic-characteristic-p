@@ -4,11 +4,10 @@ import AlternatingAnalytic.Analysis.LiftCriterion
 /-!
 # Descent of bounded lifts along a dense scalar inclusion
 
-The actual scalar-restriction isometries intertwine precomposition on
-alternating maps. Conjugating a continuous multilinear lift through these
-isometries and extending its scalar structure gives a lift over the larger
-field, with exactly the same norm. The bounded-lift criterion then transfers
-nowhere-analyticity to the smaller field.
+Let `K` be dense in `L`. A bounded lift of `Q` over `K` transports to a bounded lift
+over `L` with the same norm, through the scalar-restriction isometries of
+`DenseScalarRestriction`. With the bounded-lift criterion, failure of analyticity
+over `L` implies failure over `K`. This is the lift part of Lemma D.11.
 -/
 
 noncomputable section
@@ -25,8 +24,8 @@ variable {L A A' B B' : Type*} [NontriviallyNormedField L]
   [NormedAddCommGroup B] [NormedSpace L B]
   [NormedAddCommGroup B'] [NormedSpace L B']
 
-/-- Conjugation by linear isometric equivalences identifies the actual spaces
-of continuous linear maps isometrically. -/
+/-- Conjugation by linear isometric equivalences, as an isometry of spaces of
+continuous linear maps. -/
 def continuousLinearMapCongrIsometry (eA : A ≃ₗᵢ[L] A') (eB : B ≃ₗᵢ[L] B') :
     (A →L[L] B) ≃ₗᵢ[L] (A' →L[L] B') where
   toLinearEquiv := (eA.toContinuousLinearEquiv.arrowCongr eB.toContinuousLinearEquiv).toLinearEquiv
@@ -60,8 +59,8 @@ variable {K L A A' B B' : Type*} [NontriviallyNormedField K] [NontriviallyNormed
   [NormedAddCommGroup B] [NormedSpace K B] [NormedSpace L B] [IsScalarTower K L B]
   [NormedAddCommGroup B'] [NormedSpace L B']
 
-/-- Scalar extension and isometric changes of domain and codomain preserve
-an arbitrary continuous multilinear map's norm. -/
+/-- Scalar extension and isometric changes of domain and codomain preserve the norm
+of a continuous multilinear map. -/
 theorem norm_denseScalarMultilinear_congr (hd : DenseRange (algebraMap K L)) {n : ℕ}
     (eA : A ≃ₗᵢ[L] A') (eB : B ≃ₗᵢ[L] B') (P : A [×n]→L[K] B) :
     ‖eB.toLinearIsometry.toContinuousLinearMap.compContinuousMultilinearMap
@@ -73,8 +72,8 @@ theorem norm_denseScalarMultilinear_congr (hd : DenseRange (algebraMap K L)) {n 
 
 end MultilinearTransportNorm
 
-/-- The standard operator norm on a nested lift space, exposed directly to
-avoid a typeclass unification ambiguity through the alternating-map norm. -/
+/-- The operator norm on the lift space, stated directly to avoid an instance
+ambiguity through the alternating-map norm. -/
 local instance liftSpaceNorm {R A B C : Type*} [NontriviallyNormedField R]
     [NormedAddCommGroup A] [NormedSpace R A]
     [NormedAddCommGroup B] [NormedSpace R B]
@@ -92,7 +91,7 @@ variable {K L E E' F : Type*} [NontriviallyNormedField K] [NontriviallyNormedFie
   [NormedAddCommGroup E'] [NormedSpace K E'] [NormedSpace L E'] [IsScalarTower K L E']
   [NormedAddCommGroup F] [NormedSpace K F] [NormedSpace L F] [IsScalarTower K L F]
 
-/-- Isometric identification of the genuine target spaces of the two Q maps. -/
+/-- Isometric identification of the target spaces of `Q` over `K` and over `L`. -/
 def denseScalarQTargetEquiv (hd : DenseRange (algebraMap K L)) (k : ℕ) :
     ((E' [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F)) ≃ₗᵢ[L]
       ((E' [⋀^Fin k]→L[L] F) →L[L] (E [⋀^Fin k]→L[L] F)) :=
@@ -106,7 +105,7 @@ theorem denseScalarQTargetEquiv_apply (hd : DenseRange (algebraMap K L)) (k : �
     (m : E' [⋀^Fin k]→L[L] F) (x : Fin k → E) :
     denseScalarQTargetEquiv (E := E) (E' := E') (F := F) hd k T m x = T (m.restrictScalars K) x := rfl
 
-/-- The actual precomposition formula is identical under scalar restriction. -/
+/-- The identification carries `Q` over `K` to `Q` over `L`. -/
 theorem denseScalarQTargetEquiv_Q (hd : DenseRange (algebraMap K L)) (k : ℕ)
     (f : E →L[K] E') :
     denseScalarQTargetEquiv (E := E) (E' := E') (F := F) hd k (Q K (Fin k) E E' F f) =
@@ -114,9 +113,8 @@ theorem denseScalarQTargetEquiv_Q (hd : DenseRange (algebraMap K L)) (k : ℕ)
   ext m x
   rfl
 
-/-- Transport an actual bounded multilinear map between the Q source and
-target spaces. Its arity may be any `n`; a degree-k lift is the corresponding
-special case. -/
+/-- Transport of a continuous `n`-linear map between the source and target spaces
+of `Q` from `K` to `L`. -/
 def denseScalarLiftTransport (hd : DenseRange (algebraMap K L)) {k n : ℕ}
     (P : ContinuousMultilinearMap K (fun _ : Fin n => E →L[K] E')
       ((E' [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F))) :
@@ -136,7 +134,7 @@ theorem denseScalarLiftTransport_apply (hd : DenseRange (algebraMap K L)) {k n :
       P (fun j => (f j).restrictScalars K) (m.restrictScalars K) x := rfl
 
 set_option maxHeartbeats 800000 in
-/-- Transport preserves the operator norm exactly. -/
+/-- Transport preserves the operator norm. -/
 theorem norm_denseScalarLiftTransport (hd : DenseRange (algebraMap K L)) {k n : ℕ}
     (P : ContinuousMultilinearMap K (fun _ : Fin n => E →L[K] E')
       ((E' [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F))) :
@@ -166,8 +164,7 @@ theorem norm_denseScalarLiftTransport (hd : DenseRange (algebraMap K L)) {k n : 
     rw [B.norm_map]
     simpa only [ContinuousLinearMap.norm_restrictScalars] using hh
 
-/-- The transported map is a lift of the genuine Q map when the original
-diagonal is Q over the smaller field. -/
+/-- The transport of a lift of `Q` over `K` is a lift of `Q` over `L`. -/
 theorem denseScalarLiftTransport_diagonal (hd : DenseRange (algebraMap K L)) {k n : ℕ}
     (P : ContinuousMultilinearMap K (fun _ : Fin n => E →L[K] E')
       ((E' [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F)))
@@ -177,15 +174,13 @@ theorem denseScalarLiftTransport_diagonal (hd : DenseRange (algebraMap K L)) {k 
   rw [denseScalarLiftTransport_apply, hP]
   rfl
 
-/-- A bounded lift over a dense subfield gives a bounded lift over the larger
-field, on the same spaces and in the same degree. -/
+/-- A bounded lift over `K` gives one over `L`, on the same spaces and in the same degree. -/
 theorem hasBoundedLift_fin_of_denseScalars (hd : DenseRange (algebraMap K L)) (k : ℕ)
     (h : HasBoundedLift K (Fin k) E E' F) : HasBoundedLift L (Fin k) E E' F := by
   obtain ⟨P, hP⟩ := h
   exact ⟨denseScalarLiftTransport hd P, denseScalarLiftTransport_diagonal hd P hP⟩
 
-/-- The bounded-lift implication also holds for an arbitrary finite index
-type, by the already proved genuine reindexing of alternating maps. -/
+/-- A bounded lift over `K` gives one over `L`, for any finite index type. -/
 theorem hasBoundedLift_of_denseScalars {I : Type*} [Fintype I]
     (hd : DenseRange (algebraMap K L)) (h : HasBoundedLift K I E E' F) :
     HasBoundedLift L I E E' F :=
@@ -193,20 +188,18 @@ theorem hasBoundedLift_of_denseScalars {I : Type*} [Fintype I]
     (hasBoundedLift_fin_of_denseScalars hd (Fintype.card I)
       (hasBoundedLift_reindex (Fintype.equivFin I) h))
 
-/-- A larger-field obstruction excludes smaller-field bounded lifts. -/
+/-- If there is no bounded lift over `L`, there is none over `K`. -/
 theorem not_hasBoundedLift_of_denseScalars {I : Type*} [Fintype I]
     (hd : DenseRange (algebraMap K L)) (h : ¬ HasBoundedLift L I E E' F) :
     ¬ HasBoundedLift K I E E' F := fun hK => h (hasBoundedLift_of_denseScalars hd hK)
 
-/-- The actual lift criterion transfers a larger-field obstruction to
-nowhere-analyticity over the dense subfield. -/
+/-- If `Q` has no bounded lift over `L`, then `Q` over `K` is analytic nowhere. -/
 theorem not_analyticAt_of_denseScalars_noLift {I : Type*} [Fintype I]
     (hd : DenseRange (algebraMap K L)) (h : ¬ HasBoundedLift L I E E' F)
     (f : E →L[K] E') : ¬ AnalyticAt K (Q K I E E' F) f :=
   fun ha => not_hasBoundedLift_of_denseScalars hd h (hasBoundedLift_of_analyticAt ha)
 
-/-- Failure of analyticity at a single larger-field point implies failure at
-every smaller-field point, through the genuine bounded-lift criterion. -/
+/-- If `Q` over `L` is not analytic at one point, then `Q` over `K` is analytic nowhere. -/
 theorem not_analyticAt_of_denseScalars {I : Type*} [Fintype I]
     (hd : DenseRange (algebraMap K L)) {g : E →L[L] E'}
     (h : ¬ AnalyticAt L (Q L I E E' F) g) (f : E →L[K] E') :
@@ -227,7 +220,7 @@ variable {K E E' F : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup F] [NormedSpace K F] [NormedSpace (UniformSpace.Completion K) F]
   [IsScalarTower K (UniformSpace.Completion K) F]
 
-/-- Transport to the actual field completion, preserving the given map. -/
+/-- Transport of lifts to the completion of `K`. -/
 def completionScalarLiftTransport {k n : ℕ}
     (P : ContinuousMultilinearMap K (fun _ : Fin n => E →L[K] E')
       ((E' [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F))) :
@@ -252,13 +245,13 @@ theorem completionScalarLiftTransport_diagonal {k n : ℕ}
       Q (UniformSpace.Completion K) (Fin k) E E' F f :=
   denseScalarLiftTransport_diagonal (denseRange_algebraMap_completion K) P hP f
 
-/-- The paper's lift-descent implication, for any finite alternating index type. -/
+/-- A bounded lift over `K` gives one over its completion. -/
 theorem hasBoundedLift_completion_of_base {I : Type*} [Fintype I]
     (h : HasBoundedLift K I E E' F) : HasBoundedLift (UniformSpace.Completion K) I E E' F :=
   hasBoundedLift_of_denseScalars (denseRange_algebraMap_completion K) h
 
-/-- A completion obstruction proves nowhere-analyticity over the original,
-possibly incomplete field. -/
+/-- If `Q` has no bounded lift over the completion, then `Q` over `K` is analytic
+nowhere. -/
 theorem not_analyticAt_of_completion_noLift {I : Type*} [Fintype I]
     (h : ¬ HasBoundedLift (UniformSpace.Completion K) I E E' F) (f : E →L[K] E') :
     ¬ AnalyticAt K (Q K I E E' F) f :=

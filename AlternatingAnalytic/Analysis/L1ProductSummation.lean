@@ -2,20 +2,26 @@ import Mathlib.Analysis.Normed.Lp.lpSpace
 import Mathlib.Analysis.Normed.Ring.InfiniteSum
 import Mathlib.Data.Fin.Tuple.Basic
 
+/-!
+# Norm sums in ℓ¹
+
+The coordinate norms of `x ∈ ℓ¹(J, K)` sum to `‖x‖`, and for a tuple `x₁, …, x_d` the
+products `∏ r, ‖x r (a r)‖` over words `a : Fin d → J` sum to `∏ r, ‖x r‖`.
+-/
+
 open scoped lp BigOperators
 
 namespace L1Coordinates
 
 variable {K J : Type*} [NontriviallyNormedField K]
 
-/-- In ordinary `ℓ¹`, the coordinate norms sum to the norm, with no completeness
-assumption on the scalar field. -/
+/-- The coordinate norms of an element of `ℓ¹` sum to its norm. -/
 theorem hasSum_norm (x : lp (fun _ : J => K) 1) :
     HasSum (fun j => ‖x j‖) ‖x‖ := by
   simpa using lp.hasSum_norm (p := 1) (by simp) x
 
-/-- The arbitrary-index product of the real coordinate-norm series.  The
-induction includes the unique empty tuple in degree zero. -/
+/-- The products of coordinate norms over all words `a : Fin d → J` sum to the product of
+the norms. -/
 theorem hasSum_prod_norm (d : ℕ) (x : Fin d → lp (fun _ : J => K) 1) :
     HasSum (fun a : Fin d → J => ∏ r, ‖x r (a r)‖) (∏ r, ‖x r‖) := by
   induction d with

@@ -22,24 +22,15 @@ Paper statement: "Let Ψ be a lift of D in degree k over a field L.
 (3) If L = F_q and k ≥ q + 1, then (Pw) does not imply (Pol) in general.
 (4) If k! = 0 in L, then (Pol1) does not imply (Pw) in general."
 
-Formalization notes:
-* Definitions introduced (identical in challenge and solution): `Lift L A V k` is
-  `MultilinearMap L (fun _ : Fin k => A) (V [⋀^Fin k]→ₗ[L] ⋀[L]^k V)`, i.e. a map multilinear in
-  the `k` operator slots with values in Mathlib alternating maps of the `k` vector slots into
-  Mathlib's exterior power `⋀[L]^k V` (in which a wedge with two equal factors vanishes, as in
-  the paper). `typeOf f` is the multiplicity vector `type f`. `Pw`, `Pol`, `Pol1` are the three
-  identities, with the wedge `exteriorPower.ιMulti L k`.
-* `D : A → End_L(V)` is a linear map `A →ₗ[L] (V →ₗ[L] V)`.
-* Index sets: `[k] = Fin k`, `[m] = Fin m`, `S_k = Equiv.Perm (Fin k)`; the paper's
-  1-based labels become 0-based.
-* "k ≥ 1" is the standing hypothesis `hk : 1 ≤ k` (in parts (3) and (4) it is implied by the
-  other hypotheses and is still listed for uniformity).
-* "L = F_q" is `[Finite L]` with `q = Nat.card L`; in part (2) the hypothesis "L infinite, or
-  L = F_q and k ≤ q" is the disjunction `Infinite L ∨ (Finite L ∧ k ≤ Nat.card L)`.
-* "Does not imply in general" (parts 3, 4) is formalized as the existence of `A`, `V`, `D` and a
-  lift `Ψ` for which the first identity holds and the second fails. The witnesses `A`, `V` are
-  required to live in the universe of `L`.
-* No library module is imported: all notions are defined here from Mathlib.
+## Formalization notes
+* `Lift L A V k` is `MultilinearMap L (fun _ : Fin k => A) (V [⋀^Fin k]→ₗ[L] ⋀[L]^k V)`:
+  multilinear in the `A`-slots, with values in alternating maps into Mathlib's `⋀[L]^k V`.
+* `typeOf f` is `type f`; `Pw`, `Pol`, `Pol1` use the wedge `exteriorPower.ιMulti L k`.
+* `D` is a linear map `A →ₗ[L] (V →ₗ[L] V)`.
+* `[k] = Fin k`, `[m] = Fin m`, `S_k = Equiv.Perm (Fin k)`; labels are 0-based.
+* "L = F_q" is `[Finite L]` with `q = Nat.card L`.
+* "Does not imply in general" (parts 3, 4) is the existence of `A`, `V`, `D`, `Ψ` in the
+  universe of `L` for which the first identity holds and the second fails.
 -/
 
 namespace AlternatingAnalyticChallenge.PropB_8
@@ -84,7 +75,7 @@ def Pol1 (D : A →ₗ[L] (V →ₗ[L] V)) (Ψ : Lift L A V k) : Prop :=
 
 end
 
-/-- **Proposition B.8 (1).** Over every field, (Pol) ⇒ (Pw) ⇒ (Pol1). -/
+/-- Part (1): over every field, (Pol) ⇒ (Pw) ⇒ (Pol1). -/
 theorem pol_imp_pw_and_pw_imp_pol1
     {L : Type u} [Field L] {A : Type v} [AddCommGroup A] [Module L A]
     {V : Type w} [AddCommGroup V] [Module L V] {k : ℕ} (hk : 1 ≤ k)
@@ -92,7 +83,7 @@ theorem pol_imp_pw_and_pw_imp_pol1
     (Pol D Ψ → Pw D Ψ) ∧ (Pw D Ψ → Pol1 D Ψ) := by
   sorry
 
-/-- **Proposition B.8 (2).** If `L` is infinite, or `L = F_q` with `k ≤ q`, then (Pw) ⇒ (Pol). -/
+/-- Part (2): if `L` is infinite, or `L = F_q` with `k ≤ q`, then (Pw) ⇒ (Pol). -/
 theorem pw_imp_pol
     {L : Type u} [Field L] {A : Type v} [AddCommGroup A] [Module L A]
     {V : Type w} [AddCommGroup V] [Module L V] {k : ℕ} (hk : 1 ≤ k)
@@ -101,8 +92,7 @@ theorem pw_imp_pol
     Pw D Ψ → Pol D Ψ := by
   sorry
 
-/-- **Proposition B.8 (3).** If `L = F_q` and `k ≥ q + 1`, then (Pw) does not imply (Pol) in
-general: some lift satisfies (Pw) but not (Pol). -/
+/-- Part (3): if `L = F_q` and `k ≥ q + 1`, some lift satisfies (Pw) but not (Pol). -/
 theorem exists_pw_not_pol
     {L : Type u} [Field L] [Finite L] {k : ℕ} (hk : 1 ≤ k) (hkq : Nat.card L + 1 ≤ k) :
     ∃ (A : Type u) (_ : AddCommGroup A) (_ : Module L A)
@@ -110,8 +100,7 @@ theorem exists_pw_not_pol
       (D : A →ₗ[L] (V →ₗ[L] V)) (Ψ : Lift L A V k), Pw D Ψ ∧ ¬ Pol D Ψ := by
   sorry
 
-/-- **Proposition B.8 (4).** If `k! = 0` in `L`, then (Pol1) does not imply (Pw) in general:
-some lift satisfies (Pol1) but not (Pw). -/
+/-- Part (4): if `k! = 0` in `L`, some lift satisfies (Pol1) but not (Pw). -/
 theorem exists_pol1_not_pw
     {L : Type u} [Field L] {k : ℕ} (hk : 1 ≤ k) (hfact : (k.factorial : L) = 0) :
     ∃ (A : Type u) (_ : AddCommGroup A) (_ : Module L A)

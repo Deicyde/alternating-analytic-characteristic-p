@@ -6,7 +6,7 @@ import Mathlib.Analysis.Normed.Module.Multilinear.Curry
 # Chain decay of the fibre values
 
 Fix a label `j`, a `j`-chain sequence `s`, maps `g¹, …, gᵏ : V → V'` sending `ker (ρ j)` into
-`ker (ρ' j)` and vectors `ξ₁, …, ξ_k ∈ ker (ρ j)`. From a bounded `k`-linear `P` we build the
+`ker (ρ' j)` and vectors `ξ₁, …, ξ_k ∈ ker (ρ j)`. A bounded `k`-linear `P` gives the
 bounded `(2k+1)`-linear scalar form on `ℓ^∞(List L, K)`
 `Φ(t¹, …, tᵏ, c, r¹, …, rᵏ) = P(u_{t¹}, …, u_{tᵏ})(m_c)(r¹x¹, …, rᵏxᵏ)` (`chainTestForm`),
 where `u_t = chainOp`, `m_c = chainForm`, `r ↦ r x = chainVec`. At the coordinate vector of a
@@ -134,7 +134,7 @@ theorem chainTestForm_single (n : ℕ) :
   rw [chainTestForm_diag, fibreVal, chainForm_single]
   simp only [chainOp_single, chainVec_single]
 
-/-- **(F.10) Chain decay.** Given the multilinear tail property of `ℓ^∞(List L, K)` in degree
+/-- Chain decay (F.10): given the multilinear tail property of `ℓ^∞(List L, K)` in degree
 `k + (k + 1)`, the fibre values `π_{s n}(g)(ξ)` tend to zero along the chain. -/
 theorem tendsto_fibreVal (hs : IsChainSeq j s) (hidem : ∀ v, ρ j (ρ j v) = ρ j v)
     (hidem' : ∀ v, ρ' j (ρ' j v) = ρ' j v)

@@ -5,16 +5,10 @@ import Mathlib.Data.List.TFAE
 import AlternatingAnalytic.Descent.OneLift
 
 /-!
-# Proposition 3.3 (one lift, every base point), p. 8
+# Proof of Proposition 3.3
 
-Solution: the statements of `Challenges/Prop3_3.lean`, proved from the library:
-* `tfae`: `AlternatingAnalytic.OneLift.tfae` (`Descent/OneLift.lean`), applied to the injective
-  bounded linear map underlying `j`; the `k`-th coefficient of any power series of `a` is
-  identified through the ambient line expansion of `B` (`Round24Transfer.coeff_eq_of_ambient`,
-  `Round24Transfer.map_diag_add_smul`); closedness of the range of `j` and `1 ≤ k` are not used;
-* `precomposition_dichotomy`:
-  `AlternatingAnalytic.OneLift.precomposition_polynomial_or_nowhereAnalytic`
-  (`Descent/OneLift.lean`), from `Round24Transfer.hasBoundedLift_of_analyticAt`.
+The two theorems are `AlternatingAnalytic.OneLift.tfae` and
+`OneLift.precomposition_polynomial_or_nowhereAnalytic` (`Descent/OneLift.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.Prop3_3
@@ -26,7 +20,7 @@ def IsContinuousPolynomial (K : Type*) [NontriviallyNormedField K]
   ∃ (p : FormalMultilinearSeries K X Y) (N : ℕ),
     ∀ x, g x = ∑ n ∈ Finset.range N, p n (fun _ => x)
 
-/-- **Proposition 3.3, equivalence (1) ⇔ (2) ⇔ (3).** -/
+/-- Conditions (1), (2) and (3) are equivalent. -/
 theorem tfae
     {K : Type*} [NontriviallyNormedField K]
     {H W Z : Type*} [NormedAddCommGroup H] [NormedSpace K H]
@@ -41,7 +35,7 @@ theorem tfae
          HasFiniteFPowerSeriesOnBall a p h₀ N ⊤] := by
   exact AlternatingAnalytic.OneLift.tfae j.toContinuousLinearMap j.injective k B a ha
 
-/-- **Proposition 3.3, consequence.** Each precomposition action is either a continuous
+/-- Each precomposition action is either a continuous
 polynomial on its whole domain or analytic nowhere. -/
 theorem precomposition_dichotomy
     {K : Type*} [NontriviallyNormedField K]

@@ -6,9 +6,17 @@ import AlternatingAnalytic.Analysis.DeterminantCoefficientPadding
 /-!
 # Determinant coefficient spaces and auxiliary specialization
 
-The coefficient spaces use the inherited Laurent-field norm. All forms are
-extended only after inclusion into the complete Laurent field. The polynomial
-models and specialization remain algebraic.
+The isometric identifications `Alt^p(E; G) = C det` (equation (H.2)) and
+`Alt^k(E_k; G) = C det_k` (equation (H.4)) used in the proof of Theorem H.4, together with
+the algebraic specialization `C → C_0` that sets every `τ_w` to zero. `C` carries the norm
+of `L = F_p((t))`.
+
+## Main results
+
+* `coefficientEquiv`: `Alt^p(E; G) ≃ₗᵢ C`, evaluation on the standard basis.
+* `paddedCoefficientEquiv`: `Alt^k(E_k; G) ≃ₗᵢ C` for `k = p + n`.
+* `specializeCoefficient`: the specialization `C → C_0`.
+* `coefficient_spaces`, `padded_coefficient_spaces`: the collected statements.
 -/
 
 noncomputable section
@@ -20,11 +28,11 @@ namespace AlternatingAnalytic.DeterminantPair
 variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 attribute [local instance] preferredNormedFieldK preferredFieldK preferredFieldL
 
-/-- The normalized determinant belongs to the coefficient space. -/
+/-- `1` belongs to the coefficient space `C`. -/
 theorem one_mem_C : (1 : L p r) ∈ C p r := by
   exact (mem_C p r).mpr ⟨one_mem_G p r, fun i => by simpa using primary_mem_G p r i⟩
 
-/-- A determinant-value span determines the actual coefficient membership conditions. -/
+/-- If determinant values span `span_K {1, a_0, ..., a_{p-1}}`, the coefficient submodule is `C`. -/
 theorem coefficientSubmodule_eq_C_of_span
     {V H I : Type*} [NormedAddCommGroup V] [NormedSpace (K p r) V]
     [NormedAddCommGroup H] [NormedSpace (K p r) H] [NormedSpace (L p r) H]
@@ -64,7 +72,7 @@ theorem coefficientSubmodule_eq_C_of_span
     rw [← hspan]
     exact Submodule.subset_span ⟨x, rfl⟩
 
-/-- The local ultrametric determinant estimate has constant one. -/
+/-- The determinant on `A` is bounded by the product of the norms. -/
 theorem norm_delta_le (x : Fin p → A p r) :
     ‖delta p r x‖ ≤ ∏ i, ‖x i‖ := by
   have h := norm_det_mul_prod_le
@@ -73,7 +81,7 @@ theorem norm_delta_le (x : Fin p → A p r) :
     (fun i j => by simpa using TruncatedPolynomial.norm_coefficient_le (L p r) p (x j) i)
   simpa [delta] using h
 
-/-- The concrete basis is represented by the original norm-one vectors of E. -/
+/-- The standard vectors of `E` map to the standard basis of `A`. -/
 theorem subtype_standard (i : Fin p) :
     (E p r).subtypeₗᵢ (RigidDenseSource.Concrete.standard p r i) =
       TruncatedPolynomial.basis (L p r) p i := by
@@ -86,7 +94,7 @@ theorem coefficientSubmodule_eq_C :
       (TruncatedPolynomial.basis (L p r) p) (G p r) = C p r :=
   coefficientSubmodule_eq_C_of_span p r _ _ (delta_span_E p r)
 
-/-- Extraction of the normalized standard-basis value as an exact K-linear isometry. -/
+/-- `Alt^p(E; G) ≃ₗᵢ C`, given by evaluation on the standard basis. -/
 def coefficientEquiv : ((E p r) [⋀^Fin p]→L[K p r] (G p r)) ≃ₗᵢ[K p r] C p r :=
   (determinantCoefficientEquiv
     (RationalField.denseRange_algebraMap (ZMod p) r) (E p r).subtypeₗᵢ
@@ -101,7 +109,7 @@ def coefficientEquiv : ((E p r) [⋀^Fin p]→L[K p r] (G p r)) ≃ₗᵢ[K p r]
     (coefficientEquiv p r m : L p r) =
       (m (RigidDenseSource.Concrete.standard p r) : L p r) := rfl
 
-/-- The actual pointwise scalar formula on the original incomplete source and target. -/
+/-- Every `m ∈ Alt^p(E; G)` is its coefficient times the determinant. -/
 theorem coefficientEquiv_pointwise (m : (E p r) [⋀^Fin p]→L[K p r] (G p r))
     (x : Fin p → E p r) :
     (m x : L p r) = (coefficientEquiv p r m : L p r) *
@@ -123,7 +131,7 @@ theorem coefficientEquiv_pointwise (m : (E p r) [⋀^Fin p]→L[K p r] (G p r))
 @[simp] theorem norm_coefficientEquiv_symm (c : C p r) :
     ‖(coefficientEquiv p r).symm c‖ = ‖c‖ := (coefficientEquiv p r).symm.norm_map c
 
-/-- The actual L-valued extension, after including G into its complete ambient field. -/
+/-- The extension of `m ∈ Alt^p(E; G)` to an `L`-alternating map `A^p → L`. -/
 def scalarExtension (m : (E p r) [⋀^Fin p]→L[K p r] (G p r)) :
     (A p r) [⋀^Fin p]→L[L p r] (L p r) :=
   denseAlternatingScalarExtension
@@ -148,7 +156,7 @@ theorem scalarExtension_pointwise
     (TruncatedPolynomial.basis (L p r) p) (G p r)
     (RigidDenseSource.Concrete.standard p r) (subtype_standard p r) m x
 
-/-- Literal algebraic specialization of a coefficient through its unique polynomial representative. -/
+/-- Specialization `C → C_0`, through the unique polynomial representative of a coefficient. -/
 def specializeCoefficient : C p r →ₗ[K p r] C0poly p r :=
   (coefficientSpecialization p r).comp (polynomialEquivC p r).symm.toLinearMap
 
@@ -156,7 +164,7 @@ def specializeCoefficient : C p r →ₗ[K p r] C0poly p r :=
     (specializeCoefficient p r c : Poly0 p r) =
       specialization p r ((polynomialEquivC p r).symm c : Poly p r) := rfl
 
-/-- Constants survive both polynomial representation and auxiliary specialization. -/
+/-- Specialization sends `1` to `1`. -/
 theorem specializeCoefficient_one :
     (specializeCoefficient p r ⟨1, one_mem_C p r⟩ : Poly0 p r) = 1 := by
   rw [specializeCoefficient_apply]
@@ -173,13 +181,13 @@ theorem one_mem_C0poly : (1 : Poly0 p r) ∈ C0poly p r := by
 
 variable (n : ℕ)
 
-/-- Every padding has exactly the same inherited scalar coefficient submodule. -/
+/-- The coefficient submodule of every padding `E_k` is `C`. -/
 theorem paddedCoefficientSubmodule_eq_C :
     determinantCoefficientSubmodule (Padding.inclusionE p r n).toLinearMap
       (Padding.basis p r n) (G p r) = C p r :=
   coefficientSubmodule_eq_C_of_span p r _ _ (Padding.span_delta_E p r n)
 
-/-- The actual top-degree coefficient isometry on the literal maximum-norm product. -/
+/-- `Alt^k(E_k; G) ≃ₗᵢ C` for `k = p + n`, given by evaluation on the standard basis. -/
 def paddedCoefficientEquiv :
     (Padding.E p r n [⋀^Fin (p+n)]→L[K p r] G p r) ≃ₗᵢ[K p r] C p r :=
   (determinantCoefficientEquiv
@@ -218,7 +226,7 @@ theorem paddedCoefficientEquiv_pointwise
     ‖(paddedCoefficientEquiv p r n).symm c‖ = ‖c‖ :=
   (paddedCoefficientEquiv p r n).symm.norm_map c
 
-/-- The strongly alternating extension on the actual padded ambient L-space. -/
+/-- The extension of `m ∈ Alt^k(E_k; G)` to an `L`-alternating map on `A ⊕ L^n`. -/
 def paddedScalarExtension (m : Padding.E p r n [⋀^Fin (p+n)]→L[K p r] G p r) :
     Padding.H p r n [⋀^Fin (p+n)]→L[L p r] L p r :=
   denseAlternatingScalarExtension
@@ -246,8 +254,7 @@ theorem paddedScalarExtension_pointwise
     (Padding.denseRange_inclusionE p r n) (Padding.basis p r n) (G p r)
     (Padding.standardE p r n) (Padding.inclusionE_standardE p r n) m x
 
-/-- The complete `dom:coefficient-space` statement, including its algebraic
-auxiliary specialization. Every map and norm is on the actual t-adic carriers. -/
+/-- Equation (H.2) and the specialization `C → C_0`, collected. -/
 theorem coefficient_spaces :
     (∀ c : L p r, c ∈ C p r ↔
       c ∈ G p r ∧ ∀ i : Fin p, z p r (Sum.inl i) * c ∈ G p r) ∧
@@ -298,12 +305,11 @@ theorem coefficient_spaces :
     specialization_mul p r, map_specialization_Gpoly p r, map_specialization_Cpoly_le p r,
     one_mem_Cpoly p r, one_mem_C0poly p r, specializeCoefficient_one p r⟩
 
-/-- The complete padded ambient space has the required top degree. -/
+/-- `A ⊕ L^n` has dimension `p + n` over `L`. -/
 theorem finrank_paddedAmbient : Module.finrank (L p r) (Padding.H p r n) = p + n := by
   simpa using Module.finrank_eq_card_basis (Padding.basis p r n)
 
-/-- The complete `dom:padded-coefficients` statement for every auxiliary size,
-including zero, with the literal product norms and normalized G-valued determinant. -/
+/-- Equation (H.4) for every `n`, including `n = 0`, collected. -/
 theorem padded_coefficient_spaces :
     CompleteSpace (Padding.H p r n) ∧
     Module.finrank (L p r) (Padding.H p r n) = p + n ∧

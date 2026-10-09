@@ -20,22 +20,19 @@ equivalent nonarchimedean norm (for `k ≥ p`).
 
 ## Formalization notes
 
-* Part 1 (`K₁ = K'`): for a field `K` satisfying (H1) and (H2) used as both `K₁` and `K'`
-  (`NormedAlgebra.id`), and a complete normed `K`-space `V` (this generalizes the remark, which concerns only `V = E₁` and `V = B`, to every complete `V`;
-  the paper's argument, Lemma D.6(3) and `x ⊗ λ = λx ⊗ 1`, works for any complete `V`),
-  the canonical isometry `ι_V = completedBaseChangeEmbedding K V K : V → V ⊗̂_π K` is surjective,
-  i.e. a linear isometric equivalence. `CompletedBaseChange` and the embedding are imported from
-  the library as definitions.
+* Part 1 (`K₁ = K'`, where the paper's `K̂` plays the role of the field `K'` of Appendix D): `K`
+  satisfies (H1) and (H2) and serves as both `K₁` and `K'` (`NormedAlgebra.id`). The statement is for every complete normed `K`-space `V`, not only
+  `V = E₁` and `V = B`; the paper's argument works in that generality. The conclusion is that the
+  isometry `completedBaseChangeEmbedding K V K : V → V ⊗̂_π K` is surjective.
 * Part 2: in this case `E = ℓ^∞(ℕ, K₁) ⊗̂_π K₁` is nonarchimedean.
-* Part 3: `F_q((u))` with its `u`-adic absolute value is `LaurentField κ r` for a finite field
-  `κ` of characteristic `p` (`q = card κ`) and some `r ∈ (0, 1)`; `E = ℓ^∞(ℕ, K) = ℕ →ᵇ K` and
-  `F = B = ProjectiveExteriorCompletion K ℕ k`. The conclusion is that of Theorem 6.1(1) for these
-  spaces, for `k ≥ p`: precomposition `A^k` (`compContinuousLinearMapCLM`, index `Fin k`) is
-  analytic at no point and `B` admits no equivalent nonarchimedean norm
-  (`HasEquivalentUltrametricNorm`). Both spaces are Banach by their library instances.
-* The last sentence of the remark is a non-claim and is not formalized.
-* `set_option backward.isDefEq.respectTransparency false` (as in the library's Laurent files) is
-  needed for instance search to find the `LaurentField κ r`-module structure on `ℕ →ᵇ LaurentField κ r`.
+* Part 3: `F_q((u))` with its `u`-adic absolute value is `LaurentField κ r` with `κ` finite of
+  characteristic `p` and `r ∈ (0, 1)`; `E = ℕ →ᵇ K` and `F = B = ProjectiveExteriorCompletion K ℕ k`.
+  The conclusion is Theorem 6.1(1) for these spaces and `k ≥ p`: `A^k`
+  (`compContinuousLinearMapCLM`, index `Fin k`) is analytic at no point, and `B` admits no
+  equivalent nonarchimedean norm (`HasEquivalentUltrametricNorm`).
+* The last sentence of the remark makes no claim and is not formalized.
+* `set_option backward.isDefEq.respectTransparency false` lets instance search find the
+  `LaurentField κ r`-module structure on `ℕ →ᵇ LaurentField κ r`.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -48,8 +45,8 @@ open AlternatingAnalytic
 
 universe u
 
-/-- Remark E.2, part 1: when `K₁ = K'`, the completed projective base change of a Banach space
-`V` is identified isometrically with `V` by `ι_V`. -/
+/-- Remark E.2, part 1: when `K₁ = K'`, the canonical isometry `V → V ⊗̂_π K` is surjective for
+every Banach space `V`. -/
 theorem completedBaseChangeEmbedding_surjective_self
     (K V : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K]
     [SphericallyCompleteSpace K] [NormedAddCommGroup V] [NormedSpace K V] [CompleteSpace V] :
@@ -63,8 +60,8 @@ theorem isUltrametricDist_completedBaseChange_self
     IsUltrametricDist (CompletedBaseChange K (ℕ →ᵇ K) K) := by
   sorry
 
-/-- Remark E.2, part 3: over `K = F_q((u))` (here `LaurentField κ r`, `κ` finite of
-characteristic `p`), Theorem 6.1(1) holds with `E = ℓ^∞(ℕ, K)` and `F = B` for every `k ≥ p`. -/
+/-- Remark E.2, part 3: over `K = F_q((u))`, Theorem 6.1(1) holds with `E = ℓ^∞(ℕ, K)` and
+`F = B` for every `k ≥ p`. -/
 theorem laurent_direct_counterexample
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]
     (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hpk : p ≤ k) :

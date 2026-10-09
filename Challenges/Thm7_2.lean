@@ -26,51 +26,37 @@ manifold. Analytic maps induce pullbacks, and there is an exterior derivative
 `h^*η = (η ∘ h) ∘ (Dh, …, Dh)`.
 
 ## Formalization notes
-* **Chart level only.** Mathlib has no differential forms on manifolds, so the theorem is stated
-  on open subsets `U` of a normed model space `P` (one chart), with pullbacks along analytic
-  maps between open subsets `V ⊆ P'` and `U ⊆ P`. The manifold-level statement (gluing along
-  chart changes) is not formalized; the chart-change compatibility is the special case
-  "pullback commutes with `d` and `∧`" stated here.
-* Degree: index type `Fin k`. `[CompleteSpace K]` is assumed, as in Section 7.
-* A form on `U` is a map `η : P → Alt^k(P; K) = P [⋀^Fin k]→L[K] K` (values outside `U` are
-  irrelevant). `IsAmbientAnalyticOn η U` (introduced here) is
-  `AnalyticOnNhd K (j ∘ η) U` with `j = ContinuousAlternatingMap.toContinuousMultilinearMap`.
-* `wedge` (introduced here) is the shuffle product: Mathlib's `AlternatingMap.domCoprod` (a
-  signed sum over shuffles `Perm.ModSumCongr`, which is the paper's sum over `|S| = k` with sign
-  `ε(S)`), followed by multiplication `K ⊗ K → K` (`LinearMap.mul'`) and reindexing along
-  `finSumFinEquiv : Fin k ⊕ Fin l ≃ Fin (k + l)` (first block = first `k` slots), exactly as
-  Mathlib's docstring of `domCoprod` prescribes; `continuous_wedgeAlg` makes it a continuous
-  alternating map. Identities between forms of
-  definitionally different degrees (`(k+l)+m` vs `k+(l+m)`, `k+l` vs `l+k`, `(k+1)+l` vs
-  `(k+l)+1`, …) are stated pointwise on argument tuples, reindexing the tuple by
-  `finCongr` (order-preserving identification `Fin a ≃ Fin b` for `a = b`).
-* `extDeriv` (introduced here) is formula (7.1):
-  `ContinuousAlternatingMap.alternatizeUncurryFin (fderiv K η y)`, whose value is
-  `∑ i, (-1)^i • fderiv K η y (v i) (Fin.removeNth i v)` (`alternatizeUncurryFin_apply`). This
-  is verbatim Mathlib's `extDeriv` (`Mathlib/Analysis/Calculus/DifferentialForm/Basic.lean`,
-  not compiled in this export, hence re-declared). For an ambient analytic `η`, the derivative of
-  the `Alt`-valued map exists and agrees with that of `j ∘ η`, because `j` is an isometric
-  embedding with closed range; so this is the paper's `Dη`.
-* `pullback h η y = (η (h y)).compContinuousLinearMap (fderiv K h y)` (introduced here).
-* Analytic maps `h` (along which forms are pulled back) are `ContDiffOn K ω h V`, following
-  the paper's convention "we use `C^ω` analytic charts and maps, so their derivatives are
-  analytic also for incomplete models". Coefficient maps `j ∘ η` take values in the Banach space
-  `Mult^k(P; K)`, where `AnalyticOnNhd` is the paper's notion ("coefficient spaces of scalar
-  multilinear forms are Banach, where this agrees with power-series analyticity").
-* "Sheaf": `sheaf_local` (ambient analyticity is local) and `sheaf_glue` (compatible local
-  forms glue). "Graded algebra": `zero_mem`, `add_mem`, `smul_mem`, `wedge_mem`, unit laws
-  `one_wedge`/`wedge_one` with the constant `0`-form `1`, `wedge_assoc`; multiplication by an
-  analytic function is `∧` with a `0`-form. "Graded commutative": `wedge_comm`.
-  Pullbacks: `pullback_mem`, `pullback_id`, `pullback_comp`, `pullback_wedge`,
+* Chart level only. Mathlib has no differential forms on manifolds, so the theorem is stated on
+  open subsets `U` of a normed model space `P`, with pullbacks along analytic maps between open
+  subsets `V ⊆ P'` and `U ⊆ P`. Gluing along chart changes is not formalized; chart-change
+  compatibility is the special case "pullback commutes with `d` and `∧`".
+* The degree is `Fin k`. `[CompleteSpace K]` is assumed, as in Section 7.
+* A form on `U` is a map `η : P → P [⋀^Fin k]→L[K] K` (values outside `U` are irrelevant).
+  `IsAmbientAnalyticOn η U` is `AnalyticOnNhd K (j ∘ η) U` with
+  `j = ContinuousAlternatingMap.toContinuousMultilinearMap`.
+* `wedge` is the shuffle product: Mathlib's `AlternatingMap.domCoprod` (a signed sum over
+  shuffles, matching the paper's sum over `|S| = k` with sign `ε(S)`), followed by
+  multiplication `K ⊗ K → K` and reindexing along `finSumFinEquiv` (first block = first `k`
+  slots). Identities between forms of definitionally different degrees (`(k+l)+m` vs
+  `k+(l+m)`, `k+l` vs `l+k`, ...) are stated on argument tuples reindexed by `finCongr`.
+* `extDeriv` is formula (7.1), `ContinuousAlternatingMap.alternatizeUncurryFin (fderiv K η y)`;
+  this is the body of Mathlib's `extDeriv`. For ambient analytic `η` the derivative of the
+  `Alt`-valued map agrees with that of `j ∘ η`, since `j` is an isometric embedding with closed
+  range, so this is the paper's `Dη`.
+* `pullback h η y = (η (h y)).compContinuousLinearMap (fderiv K h y)`.
+* Analytic maps `h` are `ContDiffOn K ω h V`, following the paper's use of `C^ω` maps for
+  possibly incomplete models. Coefficient maps `j ∘ η` take values in the Banach space
+  `Mult^k(P; K)`, where `AnalyticOnNhd` is the paper's notion.
+* "Sheaf" is `sheaf_local` and `sheaf_glue`. "Graded algebra" is `zero_mem`, `add_mem`,
+  `smul_mem`, `wedge_mem`, `one_wedge`, `wedge_one`, `wedge_assoc` (multiplication by an
+  analytic function is `∧` with a `0`-form); "graded commutative" is `wedge_comm`. Pullbacks: `pullback_mem`, `pullback_id`, `pullback_comp`, `pullback_wedge`,
   `pullback_extDeriv`. Exterior derivative: `extDeriv_mem`, `extDeriv_extDeriv`, `leibniz`.
-* Not stated separately: bilinearity of `∧` (distributivity over `+`, compatibility with
-  scalars) and restriction to smaller opens (analytic on `U` implies analytic on `V ⊆ U`); they
-  hold definitionally or by `AnalyticOnNhd.mono`. The algebra identities `one_wedge`,
-  `wedge_one`, `wedge_assoc`, `wedge_comm` are stated for fixed continuous alternating maps;
-  the identities for forms follow pointwise, since `∧` on forms is defined pointwise.
-* Mathlib's `extDeriv_extDeriv` / `extDeriv_pullback` do not apply: they need `ContDiff` of the
-  `Alt`-valued map at order `minSmoothness K 2` (`= ω` off `RCLike`), which is exactly what can
-  fail for ambient forms in the obstructed range.
+* Bilinearity of `∧` and restriction to smaller opens are not stated separately. The identities
+  `one_wedge`, `wedge_one`, `wedge_assoc`, `wedge_comm` are stated for fixed continuous
+  alternating maps; `∧` on forms is pointwise.
+* Mathlib's `extDeriv_extDeriv` and `extDeriv_pullback` do not apply: they need `ContDiff` of
+  the `Alt`-valued map at order `minSmoothness K 2` (`= ω` off `RCLike`), which can fail for
+  ambient forms.
 -/
 
 open scoped ContDiff

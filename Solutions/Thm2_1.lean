@@ -8,20 +8,13 @@ import AlternatingAnalytic.Geometry.AnalyticAlternatingBundle
 import AlternatingAnalytic.Bundle.FunctorLifting.Morphisms
 
 /-!
-# Theorem 2.1 (lifting linear constructions to bundles), pp. 4–5
+# Proof of Theorem 2.1
 
-Solution: the statements of `Challenges/Thm2_1.lean`, proved from the library
-(`AlternatingAnalytic/Bundle/FunctorLifting/`):
-* `alternating_object_familywise`: `AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family`
-  (`Geometry/AnalyticAlternatingBundle.lean`);
-* `preservesFamilies_of_contDiffOnHoms`, `liftContinuous`, `liftCore_isContMDiff`:
-  `FunctorLifting.preservesFamilies_of_contDiffOnHoms`,
-  `FunctorLifting.continuousOn_liftCoordChange`, `FunctorLifting.liftCore_isContMDiff`
-  (`Cocycle.lean`), applied to the families of model fibers and fibers of the bundle tuple;
-* `bundleLifting`, `bundleLifting_familywise`: the functor `liftFunctorOf` below, assembled from
-  `FunctorLifting.contMDiff_liftHom`, `FunctorLifting.contMDiff_liftApp`,
-  `FunctorLifting.homOfCoords_localTuple_id` and `FunctorLifting.homOfCoords_localTuple_comp`
-  (`Morphisms.lean`).
+The functor is `liftFunctorOf` below, built from `FunctorLifting.liftCore_isContMDiff`,
+`FunctorLifting.contMDiff_liftHom` and `FunctorLifting.contMDiff_liftApp`
+(`Bundle/FunctorLifting/`); the special case is
+`AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family`
+(`Geometry/AnalyticAlternatingBundle.lean`).
 -/
 
 open Bundle
@@ -29,9 +22,8 @@ open scoped Bundle Manifold ContDiff
 
 namespace AlternatingAnalyticChallenge.Thm2_1
 
-/-- **Theorem 2.1, alternating special case (objects, familywise form).** If the joint
-alternating action preserves `Cⁿ` families on open subsets of the base, the bundle of continuous
-alternating maps between two `Cⁿ` vector bundles is a `Cⁿ` vector bundle. -/
+/-- If the joint action on `Alt^k` preserves `Cⁿ` families on open subsets of the base, the
+bundle of continuous alternating maps between two `Cⁿ` vector bundles is a `Cⁿ` vector bundle. -/
 theorem alternating_object_familywise
     {K M F₁ F₂ : Type*} [NontriviallyNormedField K] [TopologicalSpace M]
     [NormedAddCommGroup F₁] [NormedSpace K F₁]
@@ -289,16 +281,16 @@ theorem preservesFamilies_of_contDiffOnHoms {F : VarCat K p q ⥤ NormedSpaceCat
     (hF : ContDiffOnHoms n F) : PreservesFamilies n P F :=
   FunctorLifting.preservesFamilies_of_contDiffOnHoms P hF
 
-/-- **Theorem 2.1, transition functions.** For a functor preserving `Cⁿ` families, the
-transition functions `F(g_zw)` of `F_M(V)` are continuous. -/
+/-- For a functor preserving `Cⁿ` families, the transition functions `F(g_zw)` of `F_M(V)` are
+continuous. -/
 theorem liftContinuous [IsManifold 𝓘(K, P) n M] {F : VarCat K p q ⥤ NormedSpaceCat K}
     (hF : PreservesFamilies n P F) (V : BundleVarCat K P M n p q) : LiftContinuous F V :=
   fun z w ↦ FunctorLifting.continuousOn_liftCoordChange
     (A := fun a ↦ (V.1 a).unop.Model) (EA := fun a ↦ (V.1 a).unop.Fiber)
     (B := fun b ↦ (V.2 b).Model) (EB := fun b ↦ (V.2 b).Fiber) hF z w
 
-/-- **Theorem 2.1, objects.** For a functor preserving `Cⁿ` families, the glued bundle `F_M(V)`
-has `Cⁿ` transition functions `F(g_zw)`, so it is a `Cⁿ` vector bundle. -/
+/-- For a functor preserving `Cⁿ` families, the glued bundle `F_M(V)` has `Cⁿ` transition
+functions, so it is a `Cⁿ` vector bundle. -/
 theorem liftCore_isContMDiff [IsManifold 𝓘(K, P) n M] {F : VarCat K p q ⥤ NormedSpaceCat K}
     (hF : PreservesFamilies n P F) (V : BundleVarCat K P M n p q) (hV : LiftContinuous F V) :
     (liftCore F V hV).IsContMDiff 𝓘(K, P) n ∧
@@ -359,10 +351,9 @@ def liftFunctorOf [IsManifold 𝓘(K, P) n M]
   map_id _ := NatTrans.ext (funext fun _ ↦ ContMDiffSection.ext fun _ ↦ rfl)
   map_comp _ _ := NatTrans.ext (funext fun _ ↦ ContMDiffSection.ext fun _ ↦ rfl)
 
-/-- **Theorem 2.1.** Fiberwise application defines a functor
-`Bⁿ_M : Fun^{Cⁿ}(C^ε, Vec_K) ⥤ Fun(B^ε_M, VBⁿ_K(M))`: its object at `(F, V)` is the bundle glued
-from the transition functions `F(g_zw)`, and the fibers of `F_M(T)` and of `η_M` at `x` are
-`F(T(x))` and `η_{(E₁, …, E_r)}`. -/
+/-- Fiberwise application defines a functor `Bⁿ_M : Fun^{Cⁿ}(C^ε, Vec_K) ⥤ Fun(B^ε_M, VBⁿ_K(M))`.
+Its object at `(F, V)` is the bundle glued from `F(g_zw)`, and the fibers of `F_M(T)` and `η_M`
+at `x` are `F(T(x))` and `η_{(E₁, …, E_r)}`. -/
 theorem bundleLifting [IsManifold 𝓘(K, P) n M] :
     ∃ 𝓑 : CnFunctorCat K n p q ⥤ (BundleVarCat K P M n p q ⥤ VB K P M n),
       (∀ (F : CnFunctorCat K n p q) (V : BundleVarCat K P M n p q),
@@ -377,8 +368,8 @@ theorem bundleLifting [IsManifold 𝓘(K, P) n M] :
   ⟨liftFunctorOf _ fun _ hF ↦ preservesFamilies_of_contDiffOnHoms hF,
     fun _ _ ↦ ⟨_, _, rfl⟩, fun _ _ _ _ _ ↦ HEq.rfl, fun _ _ _ ↦ HEq.rfl⟩
 
-/-- **Theorem 2.1, familywise form.** The same conclusion for functors that preserve `Cⁿ`
-families parametrized by open subsets of the model space `P`. -/
+/-- The same conclusion for functors that preserve `Cⁿ` families parametrized by open subsets of
+the model space `P`. -/
 theorem bundleLifting_familywise [IsManifold 𝓘(K, P) n M] :
     ∃ 𝓑 : FamilyFunctorCat K n P p q ⥤ (BundleVarCat K P M n p q ⥤ VB K P M n),
       (∀ (F : FamilyFunctorCat K n P p q) (V : BundleVarCat K P M n p q),

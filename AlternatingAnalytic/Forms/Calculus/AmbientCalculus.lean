@@ -4,14 +4,10 @@ import AlternatingAnalytic.Forms.Calculus.UncurryShuffle
 /-!
 # Ambient differential calculus (Theorem 7.2, chart level)
 
-Ambient analytic forms on open subsets of a normed space over a complete nontrivially normed
-field form a sheaf of graded algebras: the wedge product is unital, associative and graded
-commutative (`wedge_assoc`, `wedge_comm`); analytic maps induce pullbacks compatible with `∧` and
-`d`; `d` preserves ambient analyticity, `d² = 0`, and the graded Leibniz rule holds. The algebraic
-identities come from `ShuffleIdentities.lean` and `UncurryShuffle.lean`; the analytic ones from
-`AmbientDeriv.lean`, `AmbientBasic.lean` and `WedgeAnalytic.lean`. The Leibniz rule combines the
-product rule `fderiv_wedge_apply` with the two algebraic Leibniz identities. No characteristic or
-degree restriction is needed.
+Collects the laws of Theorem 7.2 for ambient analytic forms on an open subset of a normed
+space: the wedge product is unital, associative and graded commutative (`wedge_assoc`,
+`wedge_comm`), `d` preserves ambient analyticity, `d² = 0`, and the graded Leibniz rule holds.
+As in the paper, there is no restriction on the characteristic or the degree. Pullbacks are in `AmbientBasic.lean`.
 -/
 
 set_option maxSynthPendingDepth 3

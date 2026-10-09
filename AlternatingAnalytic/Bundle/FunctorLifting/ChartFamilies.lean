@@ -7,7 +7,7 @@ On a manifold modelled on a normed space `P` without boundary, a map into a norm
 on an open set exactly when all its expressions in extended charts are `Cⁿ` on the corresponding
 open subsets of `P`. Consequently, a map between normed spaces that preserves `Cⁿ` families
 parametrized by open subsets of `P` also preserves `Cⁿ` families parametrized by open subsets of
-the manifold. This is the chart step in the familywise form of the bundle-lifting theorem.
+the manifold. This is the chart step in the familywise form of Theorem 2.1.
 -/
 
 open Set

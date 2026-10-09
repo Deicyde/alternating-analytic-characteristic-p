@@ -1,7 +1,12 @@
 import AlternatingAnalytic.Analysis.LaurentSubfield
 import Mathlib.Algebra.Field.Subfield.Basic
 
-/-! Completeness and spherical completeness of the actual embedded Laurent subfield. -/
+/-!
+# The image of a Laurent subfield
+
+The image of an isometric embedding `κ((X)) → K` is closed, complete, spherically complete and
+nontrivially normed. Used for Lemma D.2(4).
+-/
 
 noncomputable section
 
@@ -14,8 +19,8 @@ namespace AlternatingAnalytic
 variable (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
   {K : Type*} [NormedField K] [IsUltrametricDist K]
 
-/-- The actual image of an isometric Laurent embedding has all the completeness
-properties used in the scalar-extension argument. -/
+/-- The image of an isometric embedding of `κ((X))` is closed, complete, spherically complete,
+and contains an element of norm greater than one. -/
 theorem laurentField_range_properties (g : LaurentField κ r →+* K) (hg : Isometry g) :
     IsClosed (g.fieldRange : Set K) ∧ CompleteSpace g.fieldRange ∧
       SphericallyCompleteSpace g.fieldRange ∧ ∃ x : g.fieldRange, 1 < ‖x‖ := by

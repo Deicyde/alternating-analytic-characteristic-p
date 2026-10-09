@@ -5,8 +5,9 @@ import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
 /-!
 # Analytic domains relative to finite-dimensional ultrametric pairs
 
-The ambient restriction retains the given norms. Isomorphism closure is taken
-inside the restricted full category, so it cannot introduce a non-ultrametric norm.
+Analytic domains inside a fixed full ambient category `Ω` of pairs, used for the
+finite-dimensional nonarchimedean variant of Theorem H.4. Objects keep their given norms, and
+isomorphism closure is taken inside `Ω`.
 -/
 
 noncomputable section
@@ -19,20 +20,20 @@ namespace AlternatingAnalytic
 
 variable (K : Type u) [NontriviallyNormedField K] (k : ℕ)
 
-/-- The actual finite-dimensional, nonarchimedean ambient object property. -/
+/-- Pairs of finite-dimensional ultrametric normed spaces. -/
 def finiteUltrametricPairs :
     ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K) :=
   fun X => FiniteDimensional K X.1.unop ∧ FiniteDimensional K X.2 ∧
     IsUltrametricDist X.1.unop ∧ IsUltrametricDist X.2
 
-/-- The full category retaining the fixed ultrametric norms. -/
+/-- The full subcategory of finite-dimensional ultrametric pairs. -/
 abbrev FiniteUltrametricPairCat := (finiteUltrametricPairs K).FullSubcategory
 
 namespace NormedSpaceCat
 
 variable {K}
 
-/-- Coordinate equivalence after two actual full-subcategory restrictions. -/
+/-- Operator coordinates of a hom in a full subcategory of a full subcategory of pairs. -/
 def relativePairHomEquiv
     (Ω : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     (S : ObjectProperty Ω.FullSubcategory) (X Y : S.FullSubcategory) :
@@ -56,7 +57,7 @@ instance relativePairHomNormedSpace
       ‖c‖ * ‖relativePairHomEquiv Ω S X Y f‖
     exact norm_smul_le c (relativePairHomEquiv Ω S X Y f)
 
-/-- Canonical hom norms after both full restrictions. -/
+/-- `relativePairHomEquiv` as a linear isometry, with the max of the operator norms. -/
 def relativePairHomCoordinates
     (Ω : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     (S : ObjectProperty Ω.FullSubcategory) (X Y : S.FullSubcategory) :
@@ -67,13 +68,13 @@ def relativePairHomCoordinates
 
 end NormedSpaceCat
 
-/-- Analyticity of the actual restricted functor in a prescribed full ambient category. -/
+/-- `S` is an analytic domain inside the ambient full subcategory `Ω`. -/
 def IsRelativeAlternatingAnalyticDomain
     (Ω : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     (S : ObjectProperty Ω.FullSubcategory) : Prop :=
   FunctorAnalyticOnHoms K (S.ι ⋙ Ω.ι ⋙ alternatingFunctor K k)
 
-/-- Removing both full-subcategory wrappers gives the actual joint action. -/
+/-- In operator coordinates, the hom map of the restricted functor is `alternatingMapAction`. -/
 theorem relativeAlternatingFunctor_mapInCoordinates
     (Ω : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     (S : ObjectProperty Ω.FullSubcategory) (X Y : S.FullSubcategory) :
@@ -103,7 +104,7 @@ theorem isRelativeAlternatingAnalyticDomain_iff_coordinates
   · intro h X Y
     exact h X.obj Y.obj X.property Y.property
 
-/-- A singleton tests exactly its actual self-action, also in a restricted ambient category. -/
+/-- A singleton is a relative analytic domain iff its endomorphism action is analytic. -/
 theorem isRelativeAlternatingAnalyticDomain_singleton_iff
     (Ω : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     (X : Ω.FullSubcategory) :
@@ -118,7 +119,8 @@ theorem isRelativeAlternatingAnalyticDomain_singleton_iff
   · rintro h Y Z rfl rfl
     exact h
 
-/-- Two analytic singletons and one bad directed hom exclude a greatest full domain. -/
+/-- Two analytic singletons with a nonanalytic action from `Y` to `X` rule out a largest
+relative analytic domain. -/
 theorem no_greatest_relative_analytic_domain
     (Ω : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     (X Y : Ω.FullSubcategory)
@@ -141,8 +143,7 @@ theorem no_greatest_relative_analytic_domain
   exact hYX ((isRelativeAlternatingAnalyticDomain_iff_coordinates K k Ω S).1
     hS Y X hSY hSX)
 
-/-- Taking isomorphism closure inside the restricted ambient category preserves
-analyticity. No invariance of the ambient norm property is required. -/
+/-- The isomorphism closure inside `Ω` of a relative analytic domain is again one. -/
 theorem IsRelativeAlternatingAnalyticDomain.isoClosure
     (Ω : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     {S : ObjectProperty Ω.FullSubcategory}
@@ -155,8 +156,7 @@ theorem IsRelativeAlternatingAnalyticDomain.isoClosure
     ((isRelativeAlternatingAnalyticDomain_iff_coordinates K k Ω S).1 hS
       X₀ Y₀ hX₀ hY₀)
 
-/-- Two relative replete singleton domains exclude a greatest replete full domain.
-Both closures below live in `Ω.FullSubcategory`. -/
+/-- The same conclusion among relative analytic domains closed under isomorphisms in `Ω`. -/
 theorem no_greatest_replete_relative_analytic_domain
     (Ω : ObjectProperty ((NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K))
     (X Y : Ω.FullSubcategory)
@@ -184,7 +184,7 @@ theorem no_greatest_replete_relative_analytic_domain
   exact hYX ((isRelativeAlternatingAnalyticDomain_iff_coordinates K k Ω S).1
     hS Y X hYmem hXmem)
 
-/-- Analytic full domains within the finite-dimensional ultrametric category. -/
+/-- Analytic domains inside the finite-dimensional ultrametric pairs. -/
 abbrev IsFiniteUltrametricAnalyticDomain
     (S : ObjectProperty (FiniteUltrametricPairCat K)) : Prop :=
   IsRelativeAlternatingAnalyticDomain K k (finiteUltrametricPairs K) S

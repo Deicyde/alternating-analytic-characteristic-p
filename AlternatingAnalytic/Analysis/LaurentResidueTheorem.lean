@@ -1,6 +1,11 @@
 import AlternatingAnalytic.Analysis.LaurentResiduePolarization
 
-/-! All four properties of the paper's actual Laurent residue construction. -/
+/-!
+# Lemma C.4
+
+Collects (Ψ2), (Ψ3) and (Ψ4) of Lemma C.4 for the coefficient lift `Ψ` in one statement.
+(Ψ1) holds by the type of `laurentResidueLift`.
+-/
 
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
@@ -11,10 +16,8 @@ namespace AlternatingAnalytic
 
 universe v
 
-/-- The complete residue lemma: the actual doubly multilinear map is strongly
-alternating in its vector inputs, has uniformly bounded exterior support, and
-satisfies every grouped polarized identity. Multilinearity is part of the map's
-type. All assertions concern the same explicitly constructed residue. -/
+/-- Lemma C.4: `Ψ` is alternating in its last `k` slots, has uniformly bounded support
+dimension, and satisfies the grouped polarization identity (Ψ4). -/
 theorem laurentResidueLift_full_properties
     (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
     (k : ℕ) (α : Fin k) (P : LaurentLiftCandidate κ r k)

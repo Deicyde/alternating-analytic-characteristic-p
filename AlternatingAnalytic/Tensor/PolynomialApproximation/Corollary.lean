@@ -11,10 +11,9 @@ import Mathlib.Analysis.Normed.Group.Ultra
 
 The statement of Corollary G.5 for `P = ℓ¹(ℕ,K)`, with the witness `Z` the dependent `c₀` sum of
 tensor powers, `W` its closed diagonal subspace, `f` the tensor test map and the truncations as
-approximating polynomials. The only input not yet in the library is the lower bound of
-Proposition G.4: every projection `T_n(P) → Δ_n(P)` with `1 ≤ n` has norm at least `n!`. It is a
-hypothesis here; `factorial_le_norm_of_sInf_eq` derives it from the infimum form of
-Proposition G.4.
+approximating polynomials. The lower bound of Proposition G.4 (every projection
+`T_n(P) → Δ_n(P)` with `1 ≤ n` has norm at least `n!`) is a hypothesis here; `Unconditional.lean`
+discharges it.
 -/
 
 open Filter
@@ -24,7 +23,7 @@ namespace AlternatingAnalytic.PolynomialApproximation
 
 universe uK
 
-/-- **Corollary G.5**, assuming the factorial lower bound on projection norms of
+/-- Corollary G.5, assuming the factorial lower bound on projection norms of
 Proposition G.4 for `ℓ¹(ℕ,K)`. -/
 theorem exists_smooth_nonanalytic_polynomial_limit_of_factorial_le
     (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K]

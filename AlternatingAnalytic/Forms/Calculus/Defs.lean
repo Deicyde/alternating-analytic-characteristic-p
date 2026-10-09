@@ -8,12 +8,12 @@ import AlternatingAnalytic.Forms.Calculus.Shuffle
 /-!
 # Ambient analytic forms on an open subset of a normed space
 
-Chart-level definitions for the ambient differential calculus of the paper, Section 7. A
-`k`-form on a normed space `P` is a map `η : P → Alt^k(P; K)`; it is *ambient analytic* on `U`
-when `j ∘ η` is analytic on `U`, where `j : Alt^k(P; K) → Mult^k(P; K)` forgets alternation. The
-wedge product is the shuffle product `shuffle` on values, the exterior derivative is
-`alternatizeUncurryFin` applied to the derivative (formula (7.1)), and the pullback along `h` is
-`(η ∘ h) ∘ (Dh, …, Dh)`. The definitions repeat those of the ledger statement `Thm7_2`.
+Chart-level definitions for the ambient differential calculus of Theorem 7.2. A `k`-form on a
+normed space `P` is a map `η : P → Alt^k(P; K)`; it is *ambient analytic* on `U` when `j ∘ η` is
+analytic on `U`, where `j : Alt^k(P; K) → Mult^k(P; K)` forgets alternation. The wedge product is
+`shuffle` on values, the exterior derivative is `alternatizeUncurryFin` applied to the derivative
+(formula (7.1)), and the pullback along `h` is `(η ∘ h) ∘ (Dh, …, Dh)`. These are the definitions
+used in `Challenges/Thm7_2.lean`.
 -/
 
 namespace AlternatingAnalytic.Forms

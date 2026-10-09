@@ -1,7 +1,13 @@
 import Mathlib.Analysis.Normed.Operator.LinearIsometry
 import Mathlib.Topology.MetricSpace.Pseudo.Defs
 
-/-! Extension of locally constant algebraic coefficient maps across a dense isometry. -/
+/-!
+# Extending coefficient maps across a dense isometry
+
+A linear coefficient map on a dense subspace, determined by a map `L` that is
+constant on balls of radius one, extends to the whole space, keeping its
+defining identity and its linear norm bound. This is used in Proposition C.3.
+-/
 
 noncomputable section
 
@@ -12,8 +18,8 @@ variable {κ E B V W : Type*} [Field κ]
   [NormedAddCommGroup B] [Module κ B]
   [AddCommGroup V] [Module κ V] [AddCommGroup W] [Module κ W]
 
-/-- A coefficient map that is constant on balls of radius one retains its algebraic
-range and every nonnegative linear norm bound after passing to a dense completion. -/
+/-- If `L` is constant on balls of radius one and `Ω ∘ η = L ∘ i` on the dense
+subspace, then `η` extends to `ηB` with `Ω ∘ ηB = L` and the same bound on `cost`. -/
 theorem exists_denseCoefficientExtension
     (i : E →ₗ[κ] B) (hi : Isometry i) (hd : DenseRange i)
     (Ω : V →ₗ[κ] W) (hΩ : Function.Injective Ω)

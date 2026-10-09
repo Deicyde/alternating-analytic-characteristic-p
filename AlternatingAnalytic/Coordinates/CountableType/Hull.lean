@@ -8,11 +8,10 @@ import Mathlib.Analysis.Normed.Group.Ultra
 For a normed space `V` over a nontrivially normed field `K`, let `j : V → V**` be evaluation.
 Every scalar `k`-linear form satisfies `‖g v‖ ≤ ‖g‖ ∏ₐ ‖j (v a)‖`
 (`norm_le_mul_prod_bidualEval`), so scalar forms only see the seminorm `x ↦ ‖j x‖`. When `K` is
-nonarchimedean, `V**` is ultrametric, and the image of `j` plays the role of the paper's
-ultrametric hull `V^u` (Proposition I.1, `prop:scalar-countable`) without a separation quotient
-or a completion. Along any surjection `p : V → M` that dominates scalar forms in this way,
-scalar multilinear and alternating forms descend to `M` with norm at most one (`descend`,
-`descendAlt`).
+nonarchimedean, `V**` is ultrametric, and the image of `j` plays the role of the ultrametric
+hull `V^u` in the proof of Proposition I.1, without a separation quotient or a completion.
+Along any surjection `p : V → M` that dominates scalar forms in this way, scalar multilinear and
+alternating forms descend to `M` with norm at most one (`descend`, `descendAlt`).
 -/
 
 noncomputable section

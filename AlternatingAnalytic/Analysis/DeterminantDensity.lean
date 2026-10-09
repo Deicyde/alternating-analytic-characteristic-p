@@ -4,16 +4,20 @@ import Mathlib.Analysis.Normed.Operator.Extend
 import Mathlib.Topology.Algebra.LinearMapCompletion
 import Mathlib.Topology.MetricSpace.Completion
 
-/-! Density of the determinant construction's subspaces, without completeness
-of the scalar field. All inclusions carry their actual inherited norms. -/
+/-!
+# Density of subspaces over a dense subfield
+
+Criteria for a `K`-subspace of a normed `L`-space to be dense, where `K` is dense in `L`,
+and the identification of the completion of a dense subspace with the ambient space. These
+give the completions `A` and `L` of the spaces `E`, `D`, `G` in Appendix H.
+-/
 
 noncomputable section
 open scoped BigOperators
 
 namespace AlternatingAnalytic
 
-/-- A subspace containing the coordinate basis is dense when its coefficient
-field has dense image in the ambient coefficient field. -/
+/-- A `K`-subspace containing a coordinate basis of `A ≅ L^n` is dense, if `K` is dense in `L`. -/
 theorem denseRange_subtype_of_coordinate_basis
     {K L A : Type*} [Field K] [NontriviallyNormedField L] [Algebra K L]
     [NormedAddCommGroup A] [NormedSpace L A] [Module K A] [IsScalarTower K L A]
@@ -38,8 +42,7 @@ theorem denseRange_subtype_of_coordinate_basis
   have hall := c.symm.surjective.denseRange.comp hpi c.symm.continuous
   exact DenseRange.of_comp (g := f) hall
 
-/-- A scalar subspace containing one contains the dense image of the
-coefficient field. No completeness of the smaller field is needed. -/
+/-- A `K`-subspace of `L` containing `1` is dense, if `K` is dense in `L`. -/
 theorem denseRange_subtype_of_one
     {K L : Type*} [Field K] [NontriviallyNormedField L] [Algebra K L]
     (S : Submodule K L) (hd : DenseRange (algebraMap K L)) (h1 : (1 : L) ∈ S) :
@@ -48,8 +51,7 @@ theorem denseRange_subtype_of_one
     simpa only [Algebra.smul_def, mul_one] using S.smul_mem a h1⟩
   exact DenseRange.of_comp (g := f) hd
 
-/-- The completion of an actual dense subspace is linearly isometric to the
-complete ambient space, even when the scalar field is incomplete. -/
+/-- The completion of a dense subspace of a complete space is linearly isometric to it. -/
 def denseSubmoduleCompletionEquiv
     {K A : Type*} [NontriviallyNormedField K] [NormedAddCommGroup A]
     [NormedSpace K A] [CompleteSpace A]

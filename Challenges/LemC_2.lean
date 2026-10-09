@@ -16,29 +16,20 @@ array, `Ω^{K₁}(x₁ ∧ ⋯ ∧ x_k)(i₁,…,i_k) = det(x_b(i_a))_{a,b}`. Th
 `J(W_B(x)) = Ω^{K₁}(x₁ ∧ ⋯ ∧ x_k)`.
 
 ## Formalization notes
-* Degree: the index type is `Fin k`; `k ≥ 1` is the hypothesis `hk : 1 ≤ k` (the paper's
-  standing assumption of §C.1).
-* `K₁` is the library's `AlternatingAnalytic.LaurentField κ r` (Mathlib's `LaurentSeries κ`
-  with the `r`-adic norm; `r : ℝ≥0`, `0 < r < 1` as `Fact` instances), `E₁ = ℕ →ᵇ K₁`,
-  `Λ = ⋀[K₁]^k E₁` (Mathlib's exterior power).
-* `projNorm` (introduced here) is `‖·‖_π`, with finite decompositions encoded as lists of
-  `k`-tuples. "`K₁`-norm" is spelled out: triangle inequality, `‖aω‖_π = |a| ‖ω‖_π`, and
-  `‖ω‖_π = 0 ↔ ω = 0` (part 1).
-* Part 2 asserts the existence of a `K₁`-linear `Ω : Λ → ((Fin k → ℕ) → K₁)` with the
-  determinant formula on pure wedges (which determines it), injective, with every array entry
-  bounded by `‖ω‖_π` (equivalently `‖Ω(ω)‖_∞ ≤ ‖ω‖_π`).
-* Part 3 uses the library's `AlternatingAnalytic.ProjectiveExteriorCompletion K₁ ℕ k`
-  (`UniformSpace.Completion` of `⋀[K₁]^k E₁` with the library's projective norm) as `B`,
-  imported for this definition only, and states that it IS the completion of `(Λ, ‖·‖_π)`:
-  `B` is complete, the canonical map `toB : Λ → B` is `K₁`-linear, isometric for `projNorm`, and
-  has dense range. It then asserts the existence of `J : B →L[K₁] ℓ^∞(ℕ^k, K₁)`
-  (`(Fin k → ℕ) →ᵇ K₁`) with `‖J‖ ≤ 1` extending `Ω` (determinant formula on `toB` of pure
-  wedges, which with linearity, continuity and density determines `J`), and of
-  `W_B : E₁ [⋀^Fin k]→L[K₁] B` with `W_B x = toB (x₁ ∧ ⋯ ∧ x_k)`, `‖W_B‖ ≤ 1` and
-  `J (W_B x) = Ω(x₁ ∧ ⋯ ∧ x_k)` entrywise.
-* `set_option backward.isDefEq.respectTransparency false` (as in the library) is needed for
-  instance search on `ℕ →ᵇ K₁`; it does not change any statement.
-* Universe: `κ : Type u`.
+* The degree index type is `Fin k`; `k ≥ 1` is the hypothesis `hk`.
+* `K₁` is the library's `LaurentField κ r` (`LaurentSeries κ` with the `r`-adic norm,
+  `0 < r < 1` as `Fact` instances), `E₁ = ℕ →ᵇ K₁` and `Λ = ⋀[K₁]^k E₁`.
+* `projNorm` is `‖·‖_π`, with finite decompositions encoded as lists of `k`-tuples. "`K₁`-norm"
+  is spelled out as the triangle inequality, homogeneity and definiteness (part 1).
+* Part 2 asserts that some `K₁`-linear `Ω : Λ → ((Fin k → ℕ) → K₁)` satisfies the determinant
+  formula on pure wedges (which determines it), is injective, and has every entry bounded by
+  `‖ω‖_π`.
+* Part 3 takes `B` to be the library's `ProjectiveExteriorCompletion K₁ ℕ k` and states that it
+  is the completion of `(Λ, ‖·‖_π)`: `B` is complete and `toB : Λ → B` is linear, isometric and
+  has dense range. `J` and `W_B` are asserted to exist with the stated formulas, `J` landing in
+  `(Fin k → ℕ) →ᵇ K₁`.
+* `set_option backward.isDefEq.respectTransparency false` is needed for instance search on
+  `ℕ →ᵇ K₁`; it does not change any statement.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -66,7 +57,7 @@ noncomputable def toB (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fac
     ProjectiveExterior (LaurentField κ r) ℕ k) :
       ProjectiveExteriorCompletion (LaurentField κ r) ℕ k)
 
-/-- **Lemma C.2, part 1.** `‖·‖_π` is a `K₁`-norm on `Λ` with the pure-wedge bound. -/
+/-- `‖·‖_π` is a `K₁`-norm on `Λ`, and `‖x₁ ∧ ⋯ ∧ x_k‖_π ≤ ∏ i, ‖x i‖`. -/
 theorem part1_projNorm_isNorm
     (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hk : 1 ≤ k) :
     (∀ ω η : ⋀[LaurentField κ r]^k (ℕ →ᵇ LaurentField κ r),
@@ -83,7 +74,7 @@ theorem part1_projNorm_isNorm
         (exteriorPower.ιMulti (LaurentField κ r) k x) ≤ ∏ i, ‖x i‖) := by
   sorry
 
-/-- **Lemma C.2, part 2.** The determinant array `Ω^{K₁}` is `K₁`-linear and injective, with
+/-- The determinant array `Ω^{K₁}` is `K₁`-linear and injective, with
 `‖Ω^{K₁}(ω)‖_∞ ≤ ‖ω‖_π`. -/
 theorem part2_determinantArray
     (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hk : 1 ≤ k) :
@@ -97,9 +88,9 @@ theorem part2_determinantArray
         ‖Ω ω c‖ ≤ projNorm (LaurentField κ r) (ℕ →ᵇ LaurentField κ r) k ω) := by
   sorry
 
-/-- **Lemma C.2, part 3.** `B` is the Banach completion of `(Λ, ‖·‖_π)`; the continuous
-extension `J` of `Ω^{K₁}` has norm at most one; `W_B(x) = x₁ ∧ ⋯ ∧ x_k` is a continuous
-alternating map of norm at most one with `J ∘ W_B = Ω^{K₁}(x₁ ∧ ⋯ ∧ x_k)`. -/
+/-- `B` is the completion of `(Λ, ‖·‖_π)`, the extension `J` of `Ω^{K₁}` has norm at most one,
+and `W_B(x) = x₁ ∧ ⋯ ∧ x_k` is a continuous alternating map of norm at most one with
+`J (W_B x) = Ω^{K₁}(x₁ ∧ ⋯ ∧ x_k)`. -/
 theorem part3_completion
     (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hk : 1 ≤ k) :
     CompleteSpace (ProjectiveExteriorCompletion (LaurentField κ r) ℕ k) ∧

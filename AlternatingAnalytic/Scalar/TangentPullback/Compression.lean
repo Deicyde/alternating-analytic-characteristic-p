@@ -11,7 +11,7 @@ the pullback by `g` on `Alt(X; F)` to the pullback by `P ∘ g ∘ I`. Hence, if
 operators `g(y)` on `X` satisfies `P ∘ g(σ u) ∘ I = u` along an analytic slice `σ`, then
 analyticity of `y ↦ g(y)^*` at `σ u₀` forces analyticity of the operator obstruction
 `A(u) = u^*` at `u₀`. This is the common step of both parts of Proposition 6.5.
-We also record that bounded bilinear maps and pairs of polynomial maps are polynomial.
+Bounded bilinear maps and pairs of polynomial maps are polynomial.
 -/
 
 noncomputable section

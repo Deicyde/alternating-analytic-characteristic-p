@@ -5,16 +5,15 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 /-!
 # Operators between chain-limit spaces
 
-For residual maps `ρ`, `ρ'` on `V`, `V'` we build the operators of the global contradiction in
-Appendix F of the paper, between the chain-limit spaces `E = chainSpace ρ` and
-`E' = chainSpace ρ'`:
+The operators used in the proof of Theorem F.1, for residual maps `ρ`, `ρ'` on `V`,
+`V'`, between the chain-limit spaces `E = chainSpace ρ` and `E' = chainSpace ρ'`:
 * `singleVec ρ i v = v_{[i]}` (the family equal to `v` at the word `i`), `evalAt ρ i x = x_i`;
 * `singleOp ρ ρ' i g = g_{[i]}`, the operator `x ↦ (g x_i)_{[i]}`;
 * `evalForm ρ' δ i = δ'_i`, the alternating form `z ↦ δ(z_{1,i}, …, z_{k,i})` on `E'`;
 * along a `j`-chain sequence `s`: `chainVec` (`t ↦ t · x`, where `x` equals a vector of
   `ker (ρ j)` on the chain) and `chainOp` (`t ↦ u_t`, with `(u_t x)_w = t_w g(x_w)` on the chain),
   both continuous linear in `t ∈ ℓ^∞(List L, K)`.
-The key membership criterion is `mem_chainSpace_of_supported_tendsto`: a family supported on a
+The membership criterion is `mem_chainSpace_of_supported_tendsto`: a family supported on a
 `j`-chain whose `j`-residual tends to zero along the chain lies in the chain-limit space.
 -/
 
@@ -59,7 +58,7 @@ theorem tendsto_cofinite_of_supported {f : List L → V} {s : ℕ → List L}
     exact ⟨n, hw, rfl⟩
   · exact absurd (show f w ∈ U by rw [hsupp w hw']; exact mem_of_mem_nhds hU) hw
 
-/-- **Membership criterion.** If `ρ j` is idempotent, a bounded family supported on the words of a
+/-- If `ρ j` is idempotent, a bounded family supported on the words of a
 `j`-chain sequence `s` whose `j`-residual tends to zero along `s` lies in the chain-limit space. -/
 theorem mem_chainSpace_of_supported_tendsto (ρ : L → V →L[K] V) {j : L} {s : ℕ → List L}
     (hs : IsChainSeq j s) (hidem : ∀ v, ρ j (ρ j v) = ρ j v) {y : lp (fun _ : List L => V) ∞}

@@ -11,28 +11,21 @@ complete, and (H2) `K' ⊇ K₁` is nonarchimedean. Let `E₁` be a normed `K₁
 
 "For `m ∈ Alt^k_{K₁}(E₁; F₁)` there is `m_{K'} ∈ Alt^k_{K'}(E; F)` with `‖m_{K'}‖ ≤ ‖m‖` and
 `m_{K'}(ι_E x₁, …, ι_E x_k) = ι_F(m(x₁, …, x_k))` (`xᵢ ∈ E₁`), and `m ↦ m_{K'}` is
-`K₁`-linear."  The proof also establishes strong alternation of `m_{K'}` (vanishing whenever two
-arguments coincide), which is part of membership in `Alt^k_{K'}(E; F)`.
+`K₁`-linear."
 
 ## Formalization notes
 
-* `Alt^k` is Mathlib's `ContinuousAlternatingMap` with index type `Fin k`; it is strongly
-  alternating by definition (vanishes on any input with two equal entries), so "strong
-  alternation" is built into the codomain type.
-* The completed projective base change `CompletedBaseChange K₁ V K'` and the embedding
-  `ι_V = completedBaseChangeEmbedding K₁ V K'` are the library's construction, imported as
-  definitions from `AlternatingAnalytic.Analysis.CompletedBaseChange`. The proving modules
-  (`BaseChangeAlternatingForms.lean`, `BaseChangeAlternatingCriterion.lean`) are not imported.
-* `K₁ ⊆ K'` isometrically is `[NormedAlgebra K₁ K']`; (H1) is `[CompleteSpace K₁]
-  [SphericallyCompleteSpace K₁]`; (H2) is `[IsUltrametricDist K']`. `[IsUltrametricDist K₁]` is
-  required by the library construction and follows from (H2).
-* `K'` is taken `NontriviallyNormedField` (automatic: it contains the nontrivially normed `K₁`
-  isometrically).
-* `E₁`, `F₁`, `K'` live in one universe `u` (library construction).
-* `m_{K'}` is uniquely determined by the stated embedding identity (the `K'`-span of `ι_E E₁` is
-  dense in `E` and `m_{K'}` is continuous `K'`-multilinear), so the existential statement is not
-  weaker than the paper's construction.
-* `K₁`-linearity of `m ↦ m_{K'}` is expressed by asking for a `K₁`-linear map `Φ`.
+* `Alt^k` is Mathlib's `ContinuousAlternatingMap` indexed by `Fin k`; it vanishes whenever two
+  arguments coincide.
+* `CompletedBaseChange K₁ V K'` and `ι_V = completedBaseChangeEmbedding K₁ V K'` are library
+  definitions from `AlternatingAnalytic/Analysis/CompletedBaseChange.lean`.
+* `K₁ ⊆ K'` is `[NormedAlgebra K₁ K']`; (H1) is `[CompleteSpace K₁] [SphericallyCompleteSpace K₁]`;
+  (H2) is `[IsUltrametricDist K']`. The library also needs `[IsUltrametricDist K₁]`, which
+  follows from (H2).
+* `K'` is a `NontriviallyNormedField`; this follows from containing `K₁` isometrically.
+* `E₁`, `F₁` and `K'` lie in one universe.
+* `m_{K'}` is determined by the embedding identity, so stating only existence loses nothing.
+* `K₁`-linearity of `m ↦ m_{K'}` is expressed by a `K₁`-linear map `Φ`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemD_8
@@ -41,9 +34,8 @@ open AlternatingAnalytic
 
 universe u
 
-/-- Lemma D.8: every continuous alternating `K₁`-form extends `K₁`-linearly to a continuous
-alternating `K'`-form on the completed base change, without increasing its norm and compatibly
-with the embeddings `ι_E`, `ι_F`. -/
+/-- Every continuous alternating `K₁`-form `m` extends to a continuous alternating `K'`-form
+`m_{K'}` on the completed base changes, with `‖m_{K'}‖ ≤ ‖m‖`, `K₁`-linearly in `m`. -/
 theorem exists_baseChangeAlternatingForms
     (K₁ : Type*) (E₁ F₁ K' : Type u) [NontriviallyNormedField K₁] [CompleteSpace K₁]
     [IsUltrametricDist K₁] [SphericallyCompleteSpace K₁]

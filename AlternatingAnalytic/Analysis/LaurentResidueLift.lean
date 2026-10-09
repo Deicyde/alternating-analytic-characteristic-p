@@ -6,7 +6,22 @@ import AlternatingAnalytic.Algebra.FiniteFieldObstruction
 import AlternatingAnalytic.Algebra.MultiplierObstruction
 import AlternatingAnalytic.Algebra.Polarization
 
-/-! The actual coefficient-field residue of a bounded precomposition lift. -/
+/-!
+# The coefficient lift `Ψ` and Theorem C.1
+
+Given a bounded `k`-linear lift `P` of `A^k` over `K₁ = κ((X))`, with `E₁ = ℓ^∞(ℕ, K₁)` and
+`B` the completed projective exterior power, we evaluate `P` at multiplication operators and
+the universal wedge `W_B`, restrict to `κ`-valued arrays and take constant coefficients. This
+gives the map `Ψ` of Appendix C. Its properties (Lemma C.4) contradict the finite-field
+multiplier theorem when `κ` is finite and `k ≥ p`, which proves Theorem C.1.
+
+## Main results
+
+* `laurentResidueLift`: the map `Ψ`.
+* `laurentResidueLift_properties`: (Ψ2), (Ψ3), the diagonal identity and (Pol1).
+* `laurent_not_hasBoundedLift`: Theorem C.1, no bounded lift.
+* `laurent_not_analyticAt`: Theorem C.1, `A^k` is analytic at no point.
+-/
 
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
@@ -22,27 +37,25 @@ local notation "B" => ProjectiveExteriorCompletion (LaurentField κ r) ℕ k
 local notation "A" => ((ℕ →ᵇ LaurentField κ r) [⋀^Fin k]→L[LaurentField κ r]
   ProjectiveExteriorCompletion (LaurentField κ r) ℕ k)
 
-/-- The type of continuous multilinear lifts of alternating precomposition in a fixed degree. -/
+/-- Candidates for a bounded `n`-linear lift of `A^n : L(V, V) → L(Alt^n(V; W))`. -/
 abbrev BoundedPrecompositionLiftCandidate (F : Type*) [NontriviallyNormedField F]
     (V : Type*) [NormedAddCommGroup V] [NormedSpace F V]
     (W : Type*) [NormedAddCommGroup W] [NormedSpace F W] (n : ℕ) : Type _ :=
   ContinuousMultilinearMap F (fun _ : Fin n => V →L[F] V)
     ((V [⋀^Fin n]→L[F] W) →L[F] (V [⋀^Fin n]→L[F] W))
 
-/-- The actual type of a bounded lift candidate in the prescribed Laurent degree. -/
+/-- Lift candidates for `E₁ = ℓ^∞(ℕ, K₁)` and the completed exterior power `B`. -/
 abbrev LaurentLiftCandidate : Type _ := BoundedPrecompositionLiftCandidate K E B k
 
-/-- The standard seminormed-group structure, exposed for the nested lift space. -/
 local instance laurentLiftSeminormedAddCommGroup : SeminormedAddCommGroup (LaurentLiftCandidate κ r k) :=
   ContinuousMultilinearMap.seminormedAddCommGroup (𝕜 := K)
     («E» := fun _ : Fin k => E →L[K] E) (G := A →L[K] A)
 
-/-- The usual multilinear operator norm, with the nested target made explicit. -/
 local instance laurentLiftNorm : Norm (LaurentLiftCandidate κ r k) :=
   ContinuousMultilinearMap.hasOpNorm (𝕜 := K)
     («E» := fun _ : Fin k => E →L[K] E) (G := A →L[K] A)
 
-/-- Evaluating a lift on a bounded linear operator family and a fixed alternating form. -/
+/-- `(a₁, …, aₙ) ↦ P(D a₁, …, D aₙ)(w)` for an operator family `D` and a form `w`. -/
 def evaluateBoundedPrecompositionLift (F : Type*) [NontriviallyNormedField F]
     (V : Type*) [NormedAddCommGroup V] [NormedSpace F V]
     (W : Type*) [NormedAddCommGroup W] [NormedSpace F W] (n : ℕ)
@@ -52,12 +65,12 @@ def evaluateBoundedPrecompositionLift (F : Type*) [NontriviallyNormedField F]
   (ContinuousLinearMap.apply F (V [⋀^Fin n]→L[F] W) w).compContinuousMultilinearMap
     (P.compContinuousLinearMap fun _ => D)
 
-/-- Evaluate the lift at pointwise multipliers and the universal completed wedge. -/
+/-- The map `Φ(a; ·) = P(D_{a₁}, …, D_{a_k})(W_B)` of Appendix C. -/
 def laurentLiftAlternating (P : LaurentLiftCandidate κ r k) :=
   evaluateBoundedPrecompositionLift K E B k P (boundedSequenceMultiplier K ℕ)
     (completedExteriorWedge K ℕ k)
 
-/-- Restrict the vector inputs to constant arrays and take their actual exterior coefficient. -/
+/-- Restrict an alternating map to `κ`-valued inputs and apply the coefficient map `η`. -/
 def laurentResiduePost (α : Fin k) :
     A →ₗ[κ] MultilinearMap κ (fun _ : Fin k => ℕ → κ) (⋀[κ]^k (ℕ → κ)) where
   toFun f := (completedLaurentCoefficient κ r ℕ k α).compMultilinearMap
@@ -72,7 +85,7 @@ def laurentResiduePost (α : Fin k) :
     intro x
     exact map_smul (completedLaurentCoefficient κ r ℕ k α) c _
 
-/-- The paper's genuine doubly multilinear coefficient-field residue map. -/
+/-- The coefficient lift `Ψ = η ∘ Φ` restricted to `κ`-valued arrays. -/
 def laurentResidueLift (α : Fin k) (P : LaurentLiftCandidate κ r k) :
     MultiplierMap κ k (ℕ → κ) :=
   (laurentResiduePost κ r k α).compMultilinearMap
@@ -86,7 +99,7 @@ theorem laurentResidueLift_apply (α : Fin k) (P : LaurentLiftCandidate κ r k)
       (P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
         (completedExteriorWedge K ℕ k) (fun i => constantLaurentArray κ r (x i))) := rfl
 
-/-- The residue is alternating in its vector slots. -/
+/-- (Ψ2) `Ψ` is alternating in its last `k` slots. -/
 theorem laurentResidueLift_alternating (α : Fin k) (P : LaurentLiftCandidate κ r k)
     (u x : Fin k → ℕ → κ) {i j : Fin k} (hij : i ≠ j) (hx : x i = x j) :
     laurentResidueLift κ r k α P u x = 0 := by
@@ -96,7 +109,7 @@ theorem laurentResidueLift_alternating (α : Fin k) (P : LaurentLiftCandidate κ
       (fun i => constantLaurentArray κ r (x i)) (congrArg (constantLaurentArray κ r) hx) hij
   rw [hz, map_zero]
 
-/-- Alternation gives the exact permutation-sign identity in every characteristic. -/
+/-- `Ψ` is antisymmetric in its last `k` slots. -/
 theorem laurentResidueLift_antisymmetric (α : Fin k) (P : LaurentLiftCandidate κ r k)
     (u x : Fin k → ℕ → κ) (σ : Equiv.Perm (Fin k)) :
     laurentResidueLift κ r k α P u (x ∘ σ) =
@@ -108,7 +121,7 @@ theorem laurentResidueLift_antisymmetric (α : Fin k) (P : LaurentLiftCandidate 
   simpa only [laurentResidueLift_apply, Function.comp_def, ContinuousAlternatingMap.coe_toAlternatingMap,
     Units.smul_def, map_zsmul] using h'
 
-/-- The actual lift evaluation is uniformly bounded on coefficient-field inputs. -/
+/-- On `κ`-valued inputs, `‖Φ(a; x)‖ ≤ ‖P‖`. -/
 theorem norm_laurentLift_constant_le (P : LaurentLiftCandidate κ r k)
     (u x : Fin k → ℕ → κ) :
     ‖P (fun i => boundedSequenceMultiplier K ℕ (constantLaurentArray κ r (u i)))
@@ -145,7 +158,7 @@ theorem norm_laurentLift_constant_le (P : LaurentLiftCandidate κ r k)
       (fun i => norm_constantLaurentArray_le_one κ r (x i))
   exact hx.trans hPW
 
-/-- A single natural support bound works for every coefficient-field input tuple. -/
+/-- (Ψ3) `sdim Ψ(a; x) ≤ ⌊k M_r ‖P‖⌋`. -/
 theorem laurentResidueLift_support_le (α : Fin k) (P : LaurentLiftCandidate κ r k)
     (u x : Fin k → ℕ → κ) :
     exteriorSupportDim (laurentResidueLift κ r k α P u x) ≤
@@ -156,7 +169,7 @@ theorem laurentResidueLift_support_le (α : Fin k) (P : LaurentLiftCandidate κ 
     (mul_le_mul_of_nonneg_left (norm_laurentLift_constant_le κ r k P u x)
       (mul_nonneg (Nat.cast_nonneg k) (zero_le_one.trans (one_le_geometricWeightMaximum r))))
 
-/-- The diagonal lift identity descends to the coefficient-field wedge identity. -/
+/-- On the diagonal, `Ψ(a, …, a; x) = (a x₁) ∧ … ∧ (a x_k)`. -/
 theorem laurentResidueLift_diagonal (α : Fin k) (P : LaurentLiftCandidate κ r k)
     (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f)
     (a : ℕ → κ) (x : Fin k → ℕ → κ) :
@@ -170,7 +183,7 @@ theorem laurentResidueLift_diagonal (α : Fin k) (P : LaurentLiftCandidate κ r 
   simp only [boundedSequenceMultiplier_constant]
   exact completedLaurentCoefficient_constant_wedge κ r ℕ k α _
 
-/-- Fixing vector arguments in the doubly multilinear residue gives a multiplier multilinear map. -/
+/-- `Ψ` with its last `k` arguments fixed, as a multilinear map in the first `k`. -/
 def laurentResidueFixedVectors (α : Fin k) (P : LaurentLiftCandidate κ r k)
     (x : Fin k → ℕ → κ) : MultilinearMap κ (fun _ : Fin k => ℕ → κ) (⋀[κ]^k (ℕ → κ)) where
   toFun u := laurentResidueLift κ r k α P u x
@@ -179,7 +192,7 @@ def laurentResidueFixedVectors (α : Fin k) (P : LaurentLiftCandidate κ r k)
   map_update_smul' u i c a := congrArg (fun f => f x)
     ((laurentResidueLift κ r k α P).map_update_smul u i c a)
 
-/-- Universal squarefree polarization yields the required polarized multiplier identity. -/
+/-- (Pol1) for `Ψ`. -/
 theorem laurentResidueLift_pol1 (α : Fin k) (P : LaurentLiftCandidate κ r k)
     (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f)
     (u x : Fin k → ℕ → κ) :
@@ -189,8 +202,8 @@ theorem laurentResidueLift_pol1 (α : Fin k) (P : LaurentLiftCandidate κ r k)
     (laurentResidueFixedVectors κ r k α P x) (exteriorPower.ιMulti κ k).toMultilinearMap
     (sequenceMultiplier κ) x (fun a => laurentResidueLift_diagonal κ r k α P hP a x) u
 
-/-- The actual residue map is doubly multilinear by construction, alternating in its
-vector slots, uniformly bounded in support, and satisfies the diagonal and polarized identities. -/
+/-- `Ψ` is alternating and antisymmetric in its last `k` slots, has support dimension at most
+`⌊k M_r ‖P‖⌋`, and satisfies the diagonal identity and (Pol1). Multilinearity is in its type. -/
 theorem laurentResidueLift_properties (α : Fin k) (P : LaurentLiftCandidate κ r k)
     (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f) :
     (∀ (u x : Fin k → ℕ → κ) (i j : Fin k), i ≠ j → x i = x j →
@@ -213,7 +226,7 @@ theorem laurentResidueLift_properties (α : Fin k) (P : LaurentLiftCandidate κ 
     laurentResidueLift_diagonal κ r k α P hP,
     laurentResidueLift_pol1 κ r k α P hP⟩
 
-/-- Over a finite coefficient field with vanishing degree factorial, no bounded Laurent lift exists. -/
+/-- If `κ` is finite and `k! = 0` in `κ`, then `A^k` has no bounded lift over `κ((X))`. -/
 theorem laurent_not_hasBoundedLift_of_factorial [Finite κ] (hk : 0 < k)
     (hfactorial : (k.factorial : κ) = 0) :
     ¬ Round24Transfer.HasBoundedLift K (Fin k) E E B := by
@@ -229,14 +242,14 @@ theorem laurent_not_hasBoundedLift_of_factorial [Finite κ] (hk : 0 < k)
     ⌊(k : ℝ) * geometricWeightMaximum r * ‖P‖⌋₊
     (laurentResidueLift_support_le κ r k α P)
 
-/-- The Laurent counterexample in every degree at least the positive characteristic. -/
+/-- Theorem C.1: if `κ` is finite of characteristic `p` and `k ≥ p`, then `A^k` has no bounded lift. -/
 theorem laurent_not_hasBoundedLift [Finite κ] (p : ℕ) [Fact p.Prime] [CharP κ p]
     (hpk : p ≤ k) : ¬ Round24Transfer.HasBoundedLift K (Fin k) E E B := by
   apply laurent_not_hasBoundedLift_of_factorial κ r k ((Fact.out : p.Prime).pos.trans_le hpk)
   exact (CharP.cast_eq_zero_iff κ p k.factorial).2
     (Nat.dvd_factorial (Fact.out : p.Prime).pos hpk)
 
-/-- The precomposition map on the actual Laurent spaces is analytic at no base point. -/
+/-- Theorem C.1: under the same hypotheses, `A^k` is analytic at no point. -/
 theorem laurent_not_analyticAt [Finite κ] (p : ℕ) [Fact p.Prime] [CharP κ p]
     (hpk : p ≤ k) (f₀ : E →L[K] E) :
     ¬ AnalyticAt K (Round24Transfer.Q K (Fin k) E E B) f₀ := by

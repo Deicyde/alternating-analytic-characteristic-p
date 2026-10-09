@@ -1,11 +1,12 @@
 import AlternatingAnalytic.Analysis.L1Coordinates
 
 /-!
-# Ordinary ℓ¹ multilinear word blocks
+# Word blocks in ℓ¹
 
-These blocks are constructed in the uncompleted scalar-valued ℓ¹ space. Their
-membership follows from sums of real coordinate norms, so the scalar field
-need not be complete.
+For words `Words I = Σ n, Fin n → I`, the degree `n` word block is the `n`-linear map
+ℓ¹(I, K)ⁿ → ℓ¹(Words I, K) with coordinates `(s⁻¹)^n * ∏ i, x i (a i)` on words of length
+`n` and zero elsewhere. These are the multilinear coefficients of the map `g` in the proof
+of Theorem 4.5(2). The scalar field need not be complete.
 -/
 
 open scoped lp BigOperators
@@ -52,7 +53,7 @@ theorem wordCoordinateMap_ne (n : ℕ) {m : ℕ} (a : Fin m → I)
   · rintro ⟨b, hb⟩
     exact h (congrArg Sigma.fst hb).symm
 
-/-- The real coordinate mass of a degree block is the product of the input norms. -/
+/-- The coordinate norms of a degree `n` block sum to the product of the input norms. -/
 theorem hasSum_norm_wordCoordinateMap (n : ℕ) (x : Fin n → L1 K I) :
     HasSum (fun w : Words I => ‖wordCoordinateMap (K := K) n w x‖) (∏ i, ‖x i‖) := by
   apply ((word_mk_injective n).hasSum_iff ?_).mp
@@ -61,7 +62,7 @@ theorem hasSum_norm_wordCoordinateMap (n : ℕ) (x : Fin n → L1 K I) :
     rw [wordCoordinateMap_of_not_mem n w hw]
     simp
 
-/-- The unscaled block, explicitly restricted to ordinary ℓ¹. -/
+/-- The unscaled degree `n` word block. -/
 noncomputable def wordBlockMultilinear (n : ℕ) :
     MultilinearMap K (fun _ : Fin n => L1 K I) (L1 K (Words I)) where
   toFun x := ⟨fun w => wordCoordinateMap (K := K) n w x, by
@@ -109,7 +110,7 @@ theorem norm_wordBlock_le (s : K) (n : ℕ) :
       (by norm_num : (0 : ℝ) ≤ 1) (fun x => by simp [norm_wordBlockMultilinear]))
     (norm_nonneg ((s⁻¹)^n))
 
-/-- On coordinate vectors a word block is precisely the corresponding coordinate vector. -/
+/-- On basis vectors, a word block gives the scaled basis vector of the word. -/
 @[simp]
 theorem wordBlock_single (s : K) (n : ℕ) (a : Fin n → I) :
     wordBlock s n (fun i => lp.single 1 (a i) (1 : K)) =

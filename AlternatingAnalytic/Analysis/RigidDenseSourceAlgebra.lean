@@ -2,8 +2,14 @@ import Mathlib.RingTheory.AlgebraicIndependent.Basic
 import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.LinearAlgebra.Pi
 
-/-! Polynomial coefficient comparison for rigid sources, over arbitrary fields.
-The degree-two cancellation takes place in the polynomial ring. -/
+/-!
+# Coefficient comparison for rigid sources
+
+The algebraic core of Lemma H.5: if an `L`-linear endomorphism of `L^I` has columns in `K^I + K a`
+and sends `a` into `K^I + K a`, then comparing homogeneous degrees in the independent `a_i`
+shows it is a scalar in `K`. Similarly a functional with values in `K` on the `e_i` and on `a`
+is zero.
+-/
 
 noncomputable section
 open scoped BigOperators
@@ -36,7 +42,7 @@ private theorem linearPolynomial_aeval (c : I → K) (a : I → L) :
     aeval a (linearPolynomial c) = ∑ j, algebraMap K L (c j) * a j := by
   simp [linearPolynomial]
 
-/-- Coefficient comparison for the polynomial relation forced by preservation of the source. -/
+/-- If `M a + a (c ⬝ a) = b + s a` with `a` independent, then `c = 0`, `b = 0` and `M = s I`. -/
 theorem polynomial_coordinate_rigidity [Nonempty I] [DecidableEq I] (a : I → L)
     (ha : AlgebraicIndependent K a) (M : I → I → K) (c b : I → K) (s : K)
     (h : ∀ i, (∑ j, algebraMap K L (M i j) * a j) +
@@ -82,7 +88,8 @@ private theorem pi_apply_eq_sum_single {V : Type*} [AddCommGroup V] [Module L V]
     simp [Pi.single_apply, eq_comm]
   simpa only [hs] using S.pi_apply_eq_sum_univ x
 
-/-- An ambient endomorphism with the prescribed source columns is scalar. -/
+/-- An endomorphism of `L^I` with columns in `K^I + K a` that maps `a` into `K^I + K a` is
+multiplication by a scalar of `K`. -/
 theorem ambient_endomorphism_eq_scalar [Nonempty I] [DecidableEq I]
     (a : I → L) (ha : AlgebraicIndependent K a)
     (S : (I → L) →ₗ[L] (I → L)) (M : I → I → K) (c b : I → K) (s : K)
@@ -107,7 +114,7 @@ theorem ambient_endomorphism_eq_scalar [Nonempty I] [DecidableEq I]
   rw [hex]
   simp [hc, hM, apply_ite, mul_comm]
 
-/-- A functional taking standard vectors and the independent tuple into the ground field vanishes. -/
+/-- A functional on `L^I` taking the standard vectors and `a` into `K` is zero. -/
 theorem ambient_functional_eq_zero [DecidableEq I]
     (a : I → L) (ha : AlgebraicIndependent K a)
     (ell : (I → L) →ₗ[L] L) (c : I → K) (b : K)

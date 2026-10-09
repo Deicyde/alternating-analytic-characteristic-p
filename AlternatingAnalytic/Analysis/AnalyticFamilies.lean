@@ -4,20 +4,14 @@ import Mathlib.Analysis.Analytic.Constructions
 /-!
 # Analytic families of alternating-map morphisms
 
-This file proves the family structure of `paper/charp.tex`, Proposition
-`fam:prop:category`: constants, analytic reparameterization, local gluing,
-composition with common or independent parameters, and the largest-collection
-property. It also gives the equivalent analytic graph-lift characterization.
-The theorem `admissible_family_structure` collects these laws and functoriality
-in a single statement.
+A family of morphisms is admissible on a set if it is analytic and its action on
+alternating maps is analytic. Admissible families contain the constants and are
+closed under analytic reparameterization, local gluing and composition; they are
+the largest such collection, and admissibility is analyticity of the graph lift.
+`admissible_family_structure` collects these facts.
 
-A morphism from `(E, F)` to `(E', F')` is a pair in
-`(E' →L[K] E) × (F →L[K] F')`, with the usual maximum product norm.
-Families are represented by ambient functions and `AnalyticOnNhd` on their
-parameter domains. On open domains the predicate depends only on the restriction.
-No completeness, characteristic, or finite-dimensionality assumptions are needed.
-The subsequent scalar-family, addition-obstruction, ambient-polynomial, and
-reflection results in the manuscript are outside this file's scope.
+A morphism from `(E, F)` to `(E', F')` is a pair in `(E' →L[K] E) × (F →L[K] F')`,
+with the maximum product norm.
 -/
 
 noncomputable section
@@ -67,8 +61,8 @@ theorem alternatingMapAction_id (k : ℕ) :
   ext m x
   rfl
 
-/-- An admissible family is analytic both as a morphism pair and in its induced
-action on alternating maps (Definition `fam:def:admissible`). -/
+/-- A family is admissible if it is analytic and its action on alternating maps
+is analytic. -/
 def IsAdmissibleOn (k : ℕ) (γ : P → (E' →L[K] E) × (F →L[K] F')) (s : Set P) : Prop :=
   AnalyticOnNhd K γ s ∧ AnalyticOnNhd K (alternatingMapAction k ∘ γ) s
 
@@ -106,8 +100,7 @@ theorem reparam (hγ : IsAdmissibleOn k γ s) {f : Q → P}
     IsAdmissibleOn k (γ ∘ f) t :=
   ⟨hγ.1.comp hf hfs, hγ.2.comp hf hfs⟩
 
-/-- Local gluing: a family agreeing locally with admissible families is admissible.
-In particular, this applies to a glued function on any open cover. -/
+/-- A family that agrees locally with admissible families is admissible. -/
 theorem of_locally
     (h : ∀ x ∈ s, ∃ u : Set P, IsOpen u ∧ x ∈ u ∧
       ∃ δ : P → (E' →L[K] E) × (F →L[K] F'),
@@ -133,7 +126,7 @@ theorem comp {η : P → (E'' →L[K] E') × (F' →L[K] F'')}
   · simpa only [Function.comp_def, alternatingMapAction_comp] using
       analyticOnNhd_clm_comp hη.2 hγ.2
 
-/-- Categorical composition also allows independent parameter spaces. -/
+/-- Composition of admissible families with independent parameters. -/
 theorem comp_prod {η : Q → (E'' →L[K] E') × (F' →L[K] F'')}
     (hη : IsAdmissibleOn k η t) (hγ : IsAdmissibleOn k γ s) :
     IsAdmissibleOn k
@@ -143,8 +136,7 @@ theorem comp_prod {η : Q → (E'' →L[K] E') × (F' →L[K] F'')}
 
 end IsAdmissibleOn
 
-/-- A family is admissible exactly when its lift to the ambient graph product is
-analytic. This places no manifold or normed-space structure on the graph itself. -/
+/-- A family is admissible iff its lift `x ↦ (γ x, action (γ x))` is analytic. -/
 theorem isAdmissibleOn_iff_graph (k : ℕ)
     (γ : P → (E' →L[K] E) × (F →L[K] F')) (s : Set P) :
     IsAdmissibleOn k γ s ↔
@@ -156,9 +148,8 @@ theorem isAdmissibleOn_iff_graph (k : ℕ)
     exact ⟨fun x hx => analyticAt_fst.comp (h x hx),
       fun x hx => analyticAt_snd.comp (h x hx)⟩
 
-/-- Every collection of ordinary analytic families whose alternating-map actions
-are analytic is contained in the admissible families. Together with the two
-defining projections, this is the largest-collection assertion. -/
+/-- Admissible families form the largest collection of analytic families with
+analytic action. -/
 theorem isAdmissibleOn_largest (k : ℕ) (s : Set P)
     (C : Set (P → (E' →L[K] E) × (F →L[K] F')))
     (hC : ∀ γ ∈ C, AnalyticOnNhd K γ s)
@@ -166,10 +157,7 @@ theorem isAdmissibleOn_largest (k : ℕ) (s : Set P)
     C ⊆ {γ | IsAdmissibleOn k γ s} :=
   fun γ hγ => ⟨hC γ hγ, hA γ hγ⟩
 
-/-- The analytic family structure of the alternating-map action: functoriality,
-constants, analytic reparameterization, local gluing, composition with common or
-independent parameters, the ambient graph characterization, and maximality among
-ordinary analytic families with analytic action. -/
+/-- Functoriality of the action and the closure properties of admissible families. -/
 theorem admissible_family_structure (k : ℕ) (s : Set P) (t : Set Q) :
     (∀ (g : (E'' →L[K] E') × (F' →L[K] F''))
         (h : (E' →L[K] E) × (F →L[K] F')),

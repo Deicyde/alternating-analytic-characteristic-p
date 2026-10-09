@@ -9,9 +9,8 @@ import AlternatingAnalytic.Coordinates.WeightedNorm.Basic
 # Normed models of the weighted norm
 
 A model of `(C₀(ℕ, β), ‖·‖_w)` is a normed space `G` with a linear isomorphism
-`e : G ≃ₗ C₀(ℕ, β)` such that `‖g‖ = ‖e g‖_w` for all `g`. We show that the supremum norm and the
-norm of a model compare with constants `1` and `3/2`, that a model is ultrametric when `β` is,
-and that it is complete when `β` is.
+`e : G ≃ₗ C₀(ℕ, β)` such that `‖g‖ = ‖e g‖_w` for all `g`. The norm of a model is between the
+supremum norm and `3/2` times it, and a model is ultrametric, resp. complete, when `β` is.
 -/
 
 set_option backward.isDefEq.respectTransparency false

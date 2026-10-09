@@ -2,16 +2,12 @@ import AlternatingAnalytic.Algebra.FiniteWordGrouping
 import AlternatingAnalytic.Analysis.CZeroCoordinates
 
 /-!
-# Homogeneous diagonal lifting on discrete c₀
+# Lifting homogeneous diagonals on c₀
 
-The distinct-word orbit coefficients from `FiniteWord` belong to the submodule
-containing the full diagonal. Their nonarchimedean bound defines a continuous
-multilinear map by the bounded-array construction. Finite diagonal regrouping
-and convergence of finite truncations identify its diagonal with the original.
-
-The index type and degree are arbitrary, including an empty index type and degree
-zero. Only the submodule is complete; neither the scalar field nor the ambient
-target needs to be complete.
+Let `p` be a continuous multilinear map on `C₀(I, K)`, `I` discrete, with values in an
+ultrametric space `Z`, whose diagonal lies in a complete submodule `W`. Then some continuous
+multilinear map into `W` has the same diagonal and norm at most `‖p‖`. Its coefficients are
+the grouped coefficients of `FiniteWord`. This is the coefficient lift of Theorem 4.5(1).
 -/
 
 noncomputable section
@@ -40,7 +36,7 @@ theorem norm_groupedCoefficient_le
   · rw [FiniteWord.groupedCoefficient_of_not_representative _ _ ha, norm_zero]
     exact norm_nonneg p
 
-/-- The actual grouped coefficient, valued in the submodule containing the diagonal. -/
+/-- The grouped coefficient, as an element of the submodule `W` containing the diagonal. -/
 def groupedCoefficientInSubmodule (W : Submodule K Z)
     (p : ContinuousMultilinearMap K (fun _ : Fin n => C₀(I, K)) Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) (a : Fin n → I) : W :=
@@ -55,7 +51,7 @@ theorem coe_groupedCoefficientInSubmodule (W : Submodule K Z)
     (groupedCoefficientInSubmodule W p hp a : Z) =
       FiniteWord.groupedCoefficient p.toMultilinearMap (coordinate (K := K)) a := rfl
 
-/-- The submodule norm is the ambient norm, so the same sharp bound applies. -/
+/-- The grouped coefficients in `W` are bounded by `‖p‖`. -/
 theorem norm_groupedCoefficientInSubmodule_le (W : Submodule K Z)
     (p : ContinuousMultilinearMap K (fun _ : Fin n => C₀(I, K)) Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) (a : Fin n → I) :
@@ -64,7 +60,7 @@ theorem norm_groupedCoefficientInSubmodule_le (W : Submodule K Z)
 
 variable (W : Submodule K Z) [CompleteSpace W]
 
-/-- Lift a homogeneous diagonal using the bounded array of grouped coefficients. -/
+/-- The lift of `p` into `W`, built from the bounded array of grouped coefficients. -/
 def homogeneousLift
     (p : ContinuousMultilinearMap K (fun _ : Fin n => C₀(I, K)) Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) :
@@ -85,7 +81,7 @@ theorem norm_homogeneousLift_le
     (hp : ∀ x, p (fun _ => x) ∈ W) : ‖homogeneousLift W p hp‖ ≤ ‖p‖ :=
   norm_boundedArrayMultilinearMap_le _ _ _ _
 
-/-- Evaluation on coordinate tuples recovers the actual grouped coefficient array. -/
+/-- On coordinate tuples the lift returns the grouped coefficients. -/
 @[simp]
 theorem homogeneousLift_coordinate
     (p : ContinuousMultilinearMap K (fun _ : Fin n => C₀(I, K)) Z)
@@ -94,7 +90,7 @@ theorem homogeneousLift_coordinate
       groupedCoefficientInSubmodule W p hp a :=
   boundedArrayMultilinearMap_coordinate _ _ _ _ a
 
-/-- The shared finite regrouping identity identifies the diagonals on truncations. -/
+/-- The lift and `p` agree on the diagonal at finite truncations. -/
 theorem homogeneousLift_diagonal_truncation
     (p : ContinuousMultilinearMap K (fun _ : Fin n => C₀(I, K)) Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) (s : Finset I) (x : C₀(I, K)) :
@@ -119,7 +115,7 @@ theorem homogeneousLift_diagonal_truncation
   rw [← truncation_eq_sum, ht] at h
   simpa only [ContinuousMultilinearMap.coe_coe] using h.symm
 
-/-- Continuity extends finite diagonal regrouping to every vector of c₀. -/
+/-- The lift and `p` have the same diagonal. -/
 theorem homogeneousLift_diagonal
     (p : ContinuousMultilinearMap K (fun _ : Fin n => C₀(I, K)) Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) (x : C₀(I, K)) :
@@ -133,7 +129,7 @@ theorem homogeneousLift_diagonal
   exact tendsto_nhds_unique hq
     (hpx.congr (fun s => (homogeneousLift_diagonal_truncation W p hp s x).symm))
 
-/-- Degree zero is included: the lift has the same constant value. -/
+/-- In degree zero the lift equals `p`. -/
 theorem homogeneousLift_zero
     (p : ContinuousMultilinearMap K (fun _ : Fin 0 => C₀(I, K)) Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) (x : Fin 0 → C₀(I, K)) :
@@ -142,7 +138,7 @@ theorem homogeneousLift_zero
   rw [hx]
   exact homogeneousLift_diagonal W p hp 0
 
-/-- With an empty index type every input tuple is diagonal, in every degree. -/
+/-- For empty `I` the lift equals `p`. -/
 theorem homogeneousLift_apply_of_isEmpty [IsEmpty I]
     (p : ContinuousMultilinearMap K (fun _ : Fin n => C₀(I, K)) Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) (x : Fin n → C₀(I, K)) :
@@ -154,10 +150,8 @@ theorem homogeneousLift_apply_of_isEmpty [IsEmpty I]
   rw [hx]
   exact homogeneousLift_diagonal W p hp 0
 
-/-- A homogeneous diagonal in a complete submodule has a continuous multilinear
-lift with exactly the same diagonal and no larger operator norm. The witness is
-the bounded-array map of the actual distinct-word grouped coefficients. This
-holds for every degree and every discrete index type, without complete scalars. -/
+/-- A diagonal in a complete submodule `W` lifts to a continuous multilinear map into `W`
+with the same diagonal and no larger norm. -/
 theorem homogeneous_diagonal_lifting
     (p : ContinuousMultilinearMap K (fun _ : Fin n => C₀(I, K)) Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) :

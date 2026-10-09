@@ -1,7 +1,14 @@
 import AlternatingAnalytic.Analysis.SortedBasisAnalytic
 import AlternatingAnalytic.Analysis.SortedBasisExpansion
 
-/-! The explicit convergent determinant formula for the sorted norm-one lift. -/
+/-!
+# Determinant formula for the sorted lift
+
+For an unconditional Schauder basis with `‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖` and a complete
+ultrametric target, the sorted lift `sortedSchauderLift` is given by a convergent sum over
+increasing index tuples of determinants of coordinates. This is the infinite analogue of the
+finite-coordinate formula in the proof of Proposition 4.1.
+-/
 
 noncomputable section
 
@@ -14,8 +21,7 @@ variable {K I E E' F : Type*} [NontriviallyNormedField K] [IsUltrametricDist K]
   [NormedAddCommGroup E'] [NormedSpace K E']
   [NormedAddCommGroup F] [NormedSpace K F] [IsUltrametricDist F] [CompleteSpace F]
 
-/-- The paper's sorted family converges to the constructed lift, for arbitrary
-inputs of the original topological space. -/
+/-- The sorted determinant family sums to the sorted lift. -/
 theorem hasSum_sortedSchauderLift (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (n : ℕ)
     (f : Fin n → E →L[K] E') (m : E' [⋀^Fin n]→L[K] F) (x : Fin n → E) :
@@ -29,8 +35,7 @@ theorem hasSum_sortedSchauderLift (b : UnconditionalSchauderBasis I K E)
   simp only [sortedBasisTerm, ContinuousAlternatingMap.coe_toContinuousMultilinearMap,
     sortedSchauderLift_basis]
 
-/-- Equality with the infinite ordered determinant sum; summability is supplied
-by `hasSum_sortedSchauderLift`, rather than assumed. -/
+/-- The sorted lift equals the sum of the sorted determinant family. -/
 theorem sortedSchauderLift_eq_tsum (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (n : ℕ)
     (f : Fin n → E →L[K] E') (m : E' [⋀^Fin n]→L[K] F) (x : Fin n → E) :
@@ -47,8 +52,8 @@ noncomputable local instance sortedFormulaLiftNorm (n : ℕ) :
     (𝕜 := K) (E := fun _ : Fin n => E →L[K] E')
     (G := (E' [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F))
 
-/-- The full sorted-lift statement: an actual contracting multilinear lift,
-its precomposition diagonal, and its convergent ordered determinant formula. -/
+/-- There is a multilinear lift of norm at most one of the precomposition action `Q`,
+given by the sorted determinant formula. -/
 theorem exists_sortedSchauderLift (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (n : ℕ) :
     ∃ P : (E →L[K] E') [×n]→L[K]

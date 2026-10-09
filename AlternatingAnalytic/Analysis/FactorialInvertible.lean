@@ -12,44 +12,20 @@ import Mathlib.Data.Nat.Prime.Factorial
 /-!
 # Precomposition on continuous alternating maps when `(card ι)!` is invertible
 
-Source: round24/charp/lean/FactorialInvertible.lean, integrated on 2026-09-23.
-Provenance and verification: planning/charp-paper/planning/integration-manifest.json.
+Alternatization `A μ = ∑_σ sgn σ • (μ ∘ σ)` is a continuous linear map from multilinear to
+alternating maps of norm at most `(card ι)!`, and it multiplies an alternating map by
+`(card ι)!`. So when `(card ι)! ≠ 0` in `𝕜`, `altProj = ((card ι)!)⁻¹ • A` is a continuous
+linear retraction (Proposition 4.1(1)), and precomposition `f ↦ (m ↦ m ∘ f)` is continuously
+polynomial, hence `C^n` for every `n` including `ω` (Corollary 6.2).
 
-Alternatization `A μ = ∑_σ sgn σ • (μ ∘ σ)` is a bounded linear map from continuous multilinear
-maps to continuous alternating maps, of norm at most `(Fintype.card ι)!`
-(`ContinuousMultilinearMap.norm_alternatization_le`,
-`ContinuousMultilinearMap.alternatizationCLM`), and it multiplies an already alternating map by
-`(Fintype.card ι)!`. Hence, as soon as `((Fintype.card ι)! : 𝕜) ≠ 0`, the normalised
-alternatization `altProj = ((Fintype.card ι)! : 𝕜)⁻¹ • A` is a continuous linear **retraction**
-of the inclusion of alternating maps into multilinear maps, and precomposition
-`f ↦ (m ↦ m ∘ (f, …, f))` is continuously polynomial, hence `C^n` for every `n : WithTop ℕ∞` —
-including the analytic case `n = ω`.
+The polynomial core `cpolynomialAt_nsmul_compContinuousLinearMapCLM` is the argument of
+Sébastien Gouëzel's mathlib#43338, which assumes `CharZero 𝕜` but only divides by `(card ι)!`.
 
-Main results:
+## Main results
 
+* `ContinuousAlternatingMap.altProj_toContinuousMultilinearMap`
 * `ContinuousAlternatingMap.cpolynomialAt_compContinuousLinearMapCLM`
 * `ContinuousAlternatingMap.contDiff_compContinuousLinearMapCLM_of_factorial_ne_zero`
-* corollaries under `[Invertible ((Fintype.card ι)! : 𝕜)]`, under `[CharP 𝕜 p]` with
-  `¬ p ∣ (Fintype.card ι)!`, and under `[CharP 𝕜 p]` with `p` prime and `Fintype.card ι < p`.
-
-## Scope
-
-The hypothesis `((Fintype.card ι)! : 𝕜) ≠ 0` means characteristic `0`, or characteristic `p`
-prime with `p > Fintype.card ι`. It is **not** "characteristic `≠ 2`": for `Fintype.card ι = 3`
-and characteristic `3` it does not apply. This module proves only the factorial-invertible
-positive direction; no negative result or complete-target counterexample is asserted here.
-
-## Relation to mathlib#43338
-
-Sébastien Gouëzel's PR #43338 proves the same continuous-polynomiality under `[CharZero 𝕜]`.
-His argument only ever uses `((Fintype.card ι)! : 𝕜) ≠ 0` (it divides by that one scalar), so it
-generalises verbatim; the polynomial core below,
-`ContinuousAlternatingMap.cpolynomialAt_nsmul_compContinuousLinearMapCLM`, is his argument, and
-only the final normalisation changes. When transcribing his script in the PR #43548 checkout it
-was necessary to supply explicit type arguments to `ContinuousLinearMap.comp_cpolynomialAt`
-(see the `(𝕜 := _) (E := _) (F := _) (G := _)` annotations below): the elaborator otherwise picks
-the wrong `ContinuousLinearMap` module instance — an instance-diamond workaround recorded in
-research-notes §11.1.
 -/
 
 open scoped Nat ContDiff
@@ -122,9 +98,8 @@ variable {𝕜 ι E E' F : Type*} [NontriviallyNormedField 𝕜] [Fintype ι] [D
   [NormedAddCommGroup F] [NormedSpace 𝕜 F]
 
 variable (𝕜 E F) in
-/-- The normalised alternatization: a continuous linear retraction of the inclusion of continuous
-alternating maps into continuous multilinear maps, available whenever `(Fintype.card ι)!` is
-invertible in `𝕜`. -/
+/-- The normalised alternatization `((card ι)!)⁻¹ • A`. It is a retraction of the inclusion
+of alternating maps when `(card ι)! ≠ 0` in `𝕜`. -/
 noncomputable def altProj :
     ContinuousMultilinearMap 𝕜 (fun _ : ι ↦ E) F →L[𝕜] (E [⋀^ι]→L[𝕜] F) :=
   ((Fintype.card ι)! : 𝕜)⁻¹ • alternatizationCLM 𝕜 E F
@@ -154,8 +129,8 @@ theorem compAlternatizationCLM_apply
       alternatization (u m.toContinuousMultilinearMap) := by
   simp [compAlternatizationCLM]
 
-/-- `(Fintype.card ι)!` times precomposition on continuous alternating maps is continuously
-polynomial. This is the argument of mathlib#43338 (Gouëzel), with no hypothesis on `𝕜`. -/
+/-- `(card ι)!` times precomposition on continuous alternating maps is continuously
+polynomial, over any `𝕜` (Gouëzel's argument from mathlib#43338). -/
 theorem cpolynomialAt_nsmul_compContinuousLinearMapCLM (f₀ : E →L[𝕜] E') :
     CPolynomialAt 𝕜 ((Fintype.card ι)! •
       compContinuousLinearMapCLM :
@@ -191,9 +166,8 @@ private theorem cpolynomialAt_const_smul {X Y : Type*} [NormedAddCommGroup X] [N
     (hf : CPolynomialAt 𝕜 f x) (c : 𝕜) : CPolynomialAt 𝕜 (c • f) x :=
   ContinuousLinearMap.comp_cpolynomialAt (ContinuousLinearMap.lsmul 𝕜 𝕜 c) hf
 
-/-- **F1.** If `(Fintype.card ι)!` is invertible in `𝕜` — characteristic `0`, or characteristic
-`p` prime with `p > Fintype.card ι` — then precomposition on spaces of continuous alternating
-maps is continuously polynomial. No completeness, arbitrary normed spaces. -/
+/-- If `(card ι)! ≠ 0` in `𝕜`, precomposition on continuous alternating maps is continuously
+polynomial, for arbitrary normed spaces. -/
 theorem cpolynomialAt_compContinuousLinearMapCLM (h : ((Fintype.card ι)! : 𝕜) ≠ 0)
     (f₀ : E →L[𝕜] E') :
     CPolynomialAt 𝕜 (compContinuousLinearMapCLM :
@@ -217,27 +191,22 @@ theorem analyticOnNhd_compContinuousLinearMapCLM (h : ((Fintype.card ι)! : 𝕜
       (E →L[𝕜] E') → (E' [⋀^ι]→L[𝕜] F) →L[𝕜] (E [⋀^ι]→L[𝕜] F)) s :=
   (cpolynomialOn_compContinuousLinearMapCLM h s).analyticOnNhd
 
-/-- **F1, smoothness form.** With `(Fintype.card ι)!` invertible in `𝕜`, precomposition on
-continuous alternating maps is `C^n` for every `n : WithTop ℕ∞`, including the analytic case
-`n = ω`.
-
-Some hypothesis is needed at `n = ω`: the statement is false in characteristic `2` over a
-complete, non-spherically-complete field. -/
+/-- If `(card ι)! ≠ 0` in `𝕜`, precomposition on continuous alternating maps is `C^n` for
+every `n`, including `ω`. -/
 theorem contDiff_compContinuousLinearMapCLM_of_factorial_ne_zero
     (h : ((Fintype.card ι)! : 𝕜) ≠ 0) {n : WithTop ℕ∞} :
     ContDiff 𝕜 n (compContinuousLinearMapCLM :
       (E →L[𝕜] E') → (E' [⋀^ι]→L[𝕜] F) →L[𝕜] (E [⋀^ι]→L[𝕜] F)) :=
   contDiff_iff_contDiffAt.2 fun f₀ ↦ (cpolynomialAt_compContinuousLinearMapCLM h f₀).contDiffAt
 
-/-- `Invertible`-flavoured restatement of F1. -/
+/-- The same, with `(card ι)!` given as `Invertible`. -/
 theorem contDiff_compContinuousLinearMapCLM_of_invertible
     [Invertible ((Fintype.card ι)! : 𝕜)] {n : WithTop ℕ∞} :
     ContDiff 𝕜 n (compContinuousLinearMapCLM :
       (E →L[𝕜] E') → (E' [⋀^ι]→L[𝕜] F) →L[𝕜] (E [⋀^ι]→L[𝕜] F)) :=
   contDiff_compContinuousLinearMapCLM_of_factorial_ne_zero (isUnit_of_invertible _).ne_zero
 
-/-- Characteristic form of F1: if the characteristic does not divide `(Fintype.card ι)!`, then
-precomposition is `C^n` for every `n`, including `n = ω`. -/
+/-- If the characteristic does not divide `(card ι)!`, precomposition is `C^n` for every `n`. -/
 theorem contDiff_compContinuousLinearMapCLM_of_charP (p : ℕ) [CharP 𝕜 p]
     (hp : ¬ p ∣ (Fintype.card ι)!) {n : WithTop ℕ∞} :
     ContDiff 𝕜 n (compContinuousLinearMapCLM :
@@ -245,8 +214,7 @@ theorem contDiff_compContinuousLinearMapCLM_of_charP (p : ℕ) [CharP 𝕜 p]
   contDiff_compContinuousLinearMapCLM_of_factorial_ne_zero
     (by rw [Ne, CharP.cast_eq_zero_iff 𝕜 p]; exact hp)
 
-/-- In characteristic `p` prime with `p > Fintype.card ι` (for instance `Fintype.card ι = 2` and
-`p ≥ 3`), precomposition on continuous alternating maps is analytic. -/
+/-- In prime characteristic `p > card ι`, precomposition is `C^n` for every `n`. -/
 theorem contDiff_compContinuousLinearMapCLM_of_card_lt_charP (p : ℕ) [hp : Fact p.Prime]
     [CharP 𝕜 p] (h : Fintype.card ι < p) {n : WithTop ℕ∞} :
     ContDiff 𝕜 n (compContinuousLinearMapCLM :

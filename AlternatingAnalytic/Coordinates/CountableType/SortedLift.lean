@@ -8,12 +8,12 @@ import Mathlib.LinearAlgebra.Multilinear.Basis
 
 Let `b` be a Hamel basis of a normed space `M` over a nonarchimedean field `K`, indexed by a
 linear order, whose coordinates satisfy `‖b.coord i y‖ * ‖b i‖ ≤ C * ‖y‖`. For a scalar
-`k`-linear form `g` on `M`, the paper's sorted lift
+`k`-linear form `g` on `M`, the sorted lift
 `S g (y₁, …, y_k) = ∑_{i₁ < ⋯ < i_k} g (b_{i₁}, …, b_{i_k}) ∏ₐ b.coord iₐ yₐ`
 is a finitely supported sum. It defines a bounded linear operator `sortedLift` of norm at most
 `C ^ k`, and unnormalized alternatization is a left inverse of `S` on alternating forms
-(`alternatization_sortedLift`), in every characteristic. This is the sorted-lift step of
-Proposition I.1 (`prop:scalar-countable`).
+(`alternatization_sortedLift`), in every characteristic. This is the sorted-lift step in the
+proof of Proposition I.1.
 -/
 
 noncomputable section

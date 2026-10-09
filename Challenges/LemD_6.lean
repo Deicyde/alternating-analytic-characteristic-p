@@ -6,7 +6,7 @@ import Mathlib.Algebra.Algebra.Bilinear
 /-!
 # Lemma D.6 (projective base change), p. 44
 
-Setting (§D.2–D.3): fields K₁ ⊆ K′ with "(H1) K₁, with the restricted absolute value, is
+Setting (Appendix D): fields K₁ ⊆ K′ with "(H1) K₁, with the restricted absolute value, is
 nontrivially normed, complete and spherically complete. (H2) K′ is nonarchimedean." For a
 normed K₁-space V, V_{K′} := V ⊗_{K₁} K′ (a K′-vector space through the second factor) with
 ‖u‖_π := inf{∑ⱼ ‖xⱼ‖ |λⱼ| : u = ∑ⱼ xⱼ ⊗ λⱼ}, the infimum over finite decompositions, with an
@@ -21,29 +21,21 @@ Paper statement: "Let V be a normed K₁-space; no nonarchimedean hypothesis is 
 in Corollary D.4, extends to a K₁-linear map Π_V : V ⊗̂_π K′ → V with ‖Π_V‖ ≤ 1 and
 Π_V ∘ ι_V = id_V."
 
-Formalization notes:
-* `K₁ ⊆ K′` with the restricted absolute value is `NormedAlgebra K₁ K′`. (H1) is
-  `NontriviallyNormedField K₁`, `CompleteSpace K₁`, `SphericallyCompleteSpace K₁` (library
-  class from `AlternatingAnalytic/Analysis/SphericalCompleteness.lean`, imported for this
-  definition only); (H2) is `NormedField K′` with `IsUltrametricDist K′`. The standing
-  hypotheses are assumed in all four parts (part (1) does not need them).
-* `V_{K′}` is Mathlib's algebraic tensor product `V ⊗[K₁] K′`. The definitions `projNorm`
-  (the ordinary-sum projective norm as an infimum over lists of pairs), `contraction` (`T_ψ`,
-  defined as `rid ∘ (ψ ⊗ id)`, i.e. `x ⊗ λ ↦ ψ(λ) • x`) and `scaleRight` (the `K′`-action
-  `x ⊗ λ ↦ x ⊗ μλ` through the second factor) are introduced in this file. `ι_V x` is written
-  `x ⊗ₜ 1`.
-* (1): ψ is a continuous `K₁`-linear map `K′ →L[K₁] K₁` with operator norm `‖ψ‖`.
-* (2): "a K′-norm" is spelled out as nonnegativity, definiteness (`= 0 ↔ u = 0`), the
-  triangle inequality and `‖μ u‖_π = |μ| ‖u‖_π` for the second-factor action.
-* (4): ϖ is "as in Corollary D.4": a `K₁`-linear map with `ϖ|K₁ = id` and `|ϖ λ| ≤ |λ|`.
-  The completion `V ⊗̂_π K′` is not constructed (the file has no normed-group structure on
-  `V ⊗[K₁] K′`, which would need (2)); instead the statement quantifies over every completion
-  in the universal sense: a complete normed `K₁`-space `W` with a `K₁`-linear `j` that is
-  `‖·‖_π`-isometric with dense range. "Π_V extends T_ϖ" is `Π (j u) = T_ϖ u`, and
-  "Π_V ∘ ι_V = id" is `Π (j (x ⊗ 1)) = x`. Only the `K₁`-structure of the completion is used;
-  its `K′`-structure is not part of the statement.
-* `V` and `K′` lie in the same universe `u` (the library's base-change construction requires
-  this); `K₁` and `W` have independent universes.
+## Formalization notes
+
+* `K₁ ⊆ K′` is `NormedAlgebra K₁ K′`. (H1) is `NontriviallyNormedField K₁`, `CompleteSpace K₁`,
+  `SphericallyCompleteSpace K₁`; (H2) is `IsUltrametricDist K′`. Both are assumed in all four
+  parts.
+* `V_{K′}` is `V ⊗[K₁] K′`. The statement defines `projNorm` (an infimum over lists of pairs),
+  `contraction` (`T_ψ`) and `scaleRight` (the `K′`-action through the second factor).
+  `ι_V x` is `x ⊗ₜ 1`.
+* (1): `ψ` is a continuous linear map `K′ →L[K₁] K₁`.
+* (2): "a K′-norm" is spelled out: nonnegative, zero only at zero, subadditive, and
+  `‖μ u‖_π = |μ| ‖u‖_π`.
+* (4): `ϖ` is given by the properties of Corollary D.4. The completion is not constructed: the
+  statement quantifies over every complete normed `K₁`-space `W` with a `K₁`-linear
+  `‖·‖_π`-isometry `j : V_{K′} → W` of dense range. Only the `K₁`-structure of `W` is used.
+* `V` and `K′` lie in one universe.
 -/
 
 open scoped TensorProduct
@@ -57,8 +49,8 @@ section Definitions
 variable (K₁ : Type u₁) (V K' : Type u) [NontriviallyNormedField K₁]
   [NormedAddCommGroup V] [NormedSpace K₁ V] [NormedField K'] [NormedAlgebra K₁ K']
 
-/-- The projective norm `‖u‖_π = inf { ∑ⱼ ‖xⱼ‖ |λⱼ| : u = ∑ⱼ xⱼ ⊗ λⱼ }` on `V_{K′} = V ⊗_{K₁} K′`,
-the infimum over finite decompositions (lists of pairs), with an ordinary sum. -/
+/-- The projective norm `‖u‖_π = inf ∑ⱼ ‖xⱼ‖ ‖λⱼ‖` over finite decompositions
+`u = ∑ⱼ xⱼ ⊗ λⱼ`. -/
 noncomputable def projNorm (u : V ⊗[K₁] K') : ℝ :=
   ⨅ s : {s : List (V × K') // (s.map fun z => z.1 ⊗ₜ[K₁] z.2).sum = u},
     (s.val.map fun z => ‖z.1‖ * ‖z.2‖).sum
@@ -71,8 +63,7 @@ noncomputable def contraction (ψ : K' →ₗ[K₁] K₁) : V ⊗[K₁] K' →�
 
 variable (V)
 
-/-- Multiplication by `μ ∈ K′` on `V_{K′}` through the second factor:
-`x ⊗ λ ↦ x ⊗ μλ`. This is the `K′`-vector space structure of `V_{K′}`. -/
+/-- Multiplication by `μ ∈ K′` on `V_{K′}` through the second factor, `x ⊗ λ ↦ x ⊗ μλ`. -/
 noncomputable def scaleRight (μ : K') : V ⊗[K₁] K' →ₗ[K₁] V ⊗[K₁] K' :=
   (LinearMap.mulLeft K₁ μ).lTensor V
 
@@ -82,13 +73,13 @@ variable {K₁ : Type u₁} {V K' : Type u} [NontriviallyNormedField K₁] [Comp
   [SphericallyCompleteSpace K₁] [NormedAddCommGroup V] [NormedSpace K₁ V]
   [NormedField K'] [NormedAlgebra K₁ K'] [IsUltrametricDist K']
 
-/-- **Lemma D.6(1).** `‖T_ψ u‖ ≤ ‖ψ‖ ‖u‖_π` for every bounded `K₁`-linear `ψ : K′ → K₁`. -/
+/-- `‖T_ψ u‖ ≤ ‖ψ‖ ‖u‖_π` for every bounded `K₁`-linear `ψ : K′ → K₁`. -/
 theorem part1 (ψ : K' →L[K₁] K₁) (u : V ⊗[K₁] K') :
     ‖contraction ψ.toLinearMap u‖ ≤ ‖ψ‖ * projNorm K₁ V K' u := by
   sorry
 
-/-- **Lemma D.6(2).** `‖·‖_π` is a `K′`-norm on `V_{K′}`: nonnegative, zero only at zero,
-subadditive, and absolutely homogeneous for the `K′`-action through the second factor. -/
+/-- `‖·‖_π` is a `K′`-norm on `V_{K′}`: nonnegative, zero only at zero, subadditive, and
+homogeneous for the `K′`-action through the second factor. -/
 theorem part2 :
     (∀ u : V ⊗[K₁] K', 0 ≤ projNorm K₁ V K' u) ∧
       (∀ u : V ⊗[K₁] K', projNorm K₁ V K' u = 0 ↔ u = 0) ∧
@@ -97,14 +88,12 @@ theorem part2 :
         projNorm K₁ V K' (scaleRight V μ u) = ‖μ‖ * projNorm K₁ V K' u := by
   sorry
 
-/-- **Lemma D.6(3).** `ι_V : x ↦ x ⊗ 1` is isometric. -/
+/-- The map `x ↦ x ⊗ 1` is an isometry for `‖·‖_π`. -/
 theorem part3 (x : V) : projNorm K₁ V K' (x ⊗ₜ[K₁] (1 : K')) = ‖x‖ := by
   sorry
 
-/-- **Lemma D.6(4).** If `V` is complete and `ϖ` is as in Corollary D.4, then `T_ϖ` extends to
-a `K₁`-linear map `Π_V` on the completion `V ⊗̂_π K′` with `‖Π_V‖ ≤ 1` and `Π_V ∘ ι_V = id`.
-The completion is given by its universal description: a complete normed `K₁`-space `W` with a
-`K₁`-linear map `j : V_{K′} → W` that is isometric for `‖·‖_π` and has dense range. -/
+/-- If `V` is complete, `T_ϖ` extends to `Π_V` on the completion with `‖Π_V‖ ≤ 1` and
+`Π_V ∘ ι_V = id`. The completion is any complete `W` with a dense-range `‖·‖_π`-isometry `j`. -/
 theorem part4 [CompleteSpace V]
     (ϖ : K' →ₗ[K₁] K₁) (hϖfix : ∀ c : K₁, ϖ (algebraMap K₁ K' c) = c)
     (hϖle : ∀ l : K', ‖ϖ l‖ ≤ ‖l‖)

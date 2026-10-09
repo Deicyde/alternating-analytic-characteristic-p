@@ -2,9 +2,10 @@ import Mathlib.Topology.ContinuousMap.ZeroAtInfty
 import Mathlib.Analysis.Normed.Module.Multilinear.Basic
 
 /-!
-# Multilinear coordinate summands on spaces of functions vanishing at infinity
+# Coordinate summands of multilinear maps on c₀
 
-These algebraic summands and their supremum-norm estimates do not require completeness.
+For an array of coefficients `c`, the summand at a tuple `a` is the multilinear map
+`x ↦ (∏ r, x r (a r)) • c a` on `C₀(I, K)`, with its sup-norm bound.
 -/
 
 open scoped BigOperators ZeroAtInfty
@@ -19,7 +20,7 @@ private def coordinateLinearMap (i : I) : C₀(I, K) →ₗ[K] K where
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
-/-- The multilinear summand belonging to one coefficient of an array. -/
+/-- The multilinear map `x ↦ (∏ r, x r (a r)) • c a`. -/
 noncomputable def arraySummand (c : (Fin n → I) → W) (a : Fin n → I) :
     MultilinearMap K (fun _ : Fin n => C₀(I, K)) W :=
   ((MultilinearMap.mkPiAlgebra K (Fin n) K).compLinearMap
@@ -31,7 +32,7 @@ theorem arraySummand_apply (c : (Fin n → I) → W) (a : Fin n → I)
     arraySummand c a x = (∏ r, x r (a r)) • c a :=
   rfl
 
-/-- A bounded coefficient gives the product of the input supremum norms as a bound. -/
+/-- If `‖c a‖ ≤ C` for all `a`, each summand is bounded by `C * ∏ r, ‖x r‖`. -/
 theorem norm_arraySummand_le (c : (Fin n → I) → W) (C : ℝ) (hC : 0 ≤ C)
     (hc : ∀ a, ‖c a‖ ≤ C) (x : Fin n → C₀(I, K)) (a : Fin n → I) :
     ‖arraySummand c a x‖ ≤ C * ∏ r, ‖x r‖ := by

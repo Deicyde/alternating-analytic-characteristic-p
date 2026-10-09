@@ -2,7 +2,14 @@ import AlternatingAnalytic.Analysis.DeterminantCoefficientSpan
 import Mathlib.Analysis.Normed.Operator.Mul
 import Mathlib.LinearAlgebra.Matrix.Block
 
-/-! The actual bounded multiplication family from the rigid source to the determinant source. -/
+/-!
+# The multiplication family `x ↦ M_x`
+
+For `x ∈ E`, multiplication by `x` in `A` restricts to a bounded map `M_x : E → D`, and
+`x ↦ M_x` is a bounded linear family of norm at most one. The matrix of `M_x` is lower
+triangular with diagonal `x_0`, so `det M_x = x_0^p`. These facts are used in the
+nonanalytic cross-action of Theorem H.4.
+-/
 
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
@@ -28,7 +35,7 @@ private theorem sourceGen_mul_mem_D (i j : Fin p ⊕ Unit) :
   · simpa [sourceGen, gen, mul_comm] using gen_mem_D p r (Sum.inr (Sum.inl j))
   · exact gen_mem_D p r (Sum.inr (Sum.inr (Sum.inl ())))
 
-/-- Products of two actual source vectors lie in the displayed determinant source. -/
+/-- The product of two elements of `E` lies in `D`. -/
 theorem mul_mem_D (x y : E p r) : (x : A p r) * (y : A p r) ∈ D p r := by
   have hx : (x : A p r) ∈ Submodule.span (K p r) (Set.range (sourceGen p r)) := by
     rw [← E_eq_span_sourceGen]; exact x.property
@@ -50,7 +57,7 @@ theorem mul_mem_D (x y : E p r) : (x : A p r) * (y : A p r) ∈ D p r := by
   | add z w hz hw iz iw => simpa [add_mul] using (D p r).add_mem iz iw
   | smul s z hz iz => simpa [smul_mul_assoc] using (D p r).smul_mem s iz
 
-/-- Multiplication with fixed left input, restricted to its actual small codomain. -/
+/-- Multiplication by `x`, as a bounded map `E → D`. -/
 def multiplicationAt (x : E p r) : E p r →L[K p r] D p r :=
   (((ContinuousLinearMap.mul (K p r) (A p r)) (x : A p r)).comp
     (E p r).subtypeL).codRestrict (D p r) (mul_mem_D p r x)
@@ -63,7 +70,7 @@ theorem norm_multiplicationAt_le (x : E p r) : ‖multiplicationAt p r x‖ ≤ 
   intro y
   exact TruncatedPolynomial.norm_mul_le (L p r) p x y
 
-/-- The bounded linear family comes from submultiplicativity and codomain restriction. -/
+/-- The bounded linear family `x ↦ M_x`. -/
 def multiplication : E p r →L[K p r] E p r →L[K p r] D p r :=
   ({ toFun := multiplicationAt p r
      map_add' := fun x y => by ext z; simp [add_mul]
@@ -77,7 +84,7 @@ def multiplication : E p r →L[K p r] E p r →L[K p r] D p r :=
 theorem norm_multiplication_apply_le (x : E p r) : ‖multiplication p r x‖ ≤ ‖x‖ :=
   norm_multiplicationAt_le p r x
 
-/-- The continuous L-linear extension to the actual complete ambient algebra. -/
+/-- Multiplication by `x` on `A`, as an `L`-linear map. -/
 def completedMultiplication (x : A p r) : A p r →L[L p r] A p r :=
   ContinuousLinearMap.mul (L p r) (A p r) x
 
@@ -88,7 +95,7 @@ def completedMultiplication (x : A p r) : A p r →L[L p r] A p r :=
     completedMultiplication p r (x : A p r) (y : A p r) =
       (multiplication p r x y : A p r) := rfl
 
-/-- The ambient multiplication matrix in the actual power basis. -/
+/-- The matrix of multiplication by `x` in the basis `e_i = ε^i`. -/
 def multiplicationMatrix (x : A p r) : Matrix (Fin p) (Fin p) (L p r) :=
   fun i j => TruncatedPolynomial.coeff (L p r) p
     (completedMultiplication p r x (e p r j)) i
@@ -109,7 +116,7 @@ theorem multiplicationMatrix_apply (x : A p r) (i j : Fin p) :
     simp [Ne.symm hb]
   · simp
 
-/-- Entries above the diagonal vanish because quotient multiplication is truncated convolution. -/
+/-- The multiplication matrix is lower triangular. -/
 theorem multiplicationMatrix_isLowerTriangular (x : A p r) :
     (multiplicationMatrix p r x).IsLowerTriangular := by
   intro i j hij
@@ -129,14 +136,14 @@ theorem multiplicationMatrix_isLowerTriangular (x : A p r) :
     simp [hb]
   · simp
 
-/-- The completed multiplication determinant is the prime power of the constant coefficient. -/
+/-- The multiplication matrix has determinant `x_0^p`. -/
 theorem det_multiplicationMatrix (x : A p r) :
     (multiplicationMatrix p r x).det =
       TruncatedPolynomial.coeff (L p r) p x 0 ^ p := by
   rw [Matrix.det_of_isLowerTriangular _ (multiplicationMatrix_isLowerTriangular p r x)]
   simp
 
-/-- The same formula expressed using the actual normalized determinant. -/
+/-- `det (x e_0, ..., x e_{p-1}) = x_0^p`. -/
 theorem delta_mul_e (x : A p r) :
     delta p r (fun i => x * e p r i) = TruncatedPolynomial.coeff (L p r) p x 0 ^ p :=
   det_multiplicationMatrix p r x

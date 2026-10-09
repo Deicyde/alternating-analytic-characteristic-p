@@ -15,40 +15,24 @@ Paper statement: "Let τ ∈ S_k, let α ≠ β be slots with τ(α) = ℓ and �
 τ with these two positions exchanged, so τ′(α) = ℓ + 1, τ′(β) = ℓ and τ′(γ) = τ(γ) otherwise.
 Then χ(τ) = χ(τ′)."
 
-Formalization notes:
-* Definitions introduced (identical in challenge and solution), mirroring Appendix B.3-B.5:
-  `ClusterMap L k` (the curried `2k`-linear maps `V_fin^k × V_fin^k → Λ^k V`, `V = ℕ → L`,
-  `V_fin = ℕ →₀ L`), `coeff` (the coefficients `T(a; y; c) = Ω_{Ψ(e_a; e_y)}(c)`),
-  `PatternHomogeneous Ψ H` (the conclusion of Lemma B.10 for `T` with `N = 3k`, the 3k-tuple
-  indexed by `Fin 3 × Fin k`, "same pattern" via the paper's comparison characterization),
-  `IsCluster H C` (four consecutive elements of `H`), `HasOrderPattern C τ`, the weights
-  `opWeight = s = (1,0,-1,0)`, `vecWeight = w = (1,-1,1,-1)`, the vectors `sC`, `wC`, and the
-  cluster value `clusterValue = χ`.
-* The determinant array `Ω : Λ^k (ℕ → L) → L^(ℕ^k)`, `Ω_{y₁∧⋯∧y_k}(c) = det(y_b(c_a))`, is the
-  library definition `AlternatingAnalytic.determinantArray`
-  (`AlternatingAnalytic/Algebra/DeterminantArray.lean`, with `determinantArray_ιMulti` giving
-  the determinant formula); that module is imported only for this definition.
-* Paper labels are 1-based, Lean's are 0-based: the cluster point `C(1)` is `C 0`, and the
-  rank `τ(j) ∈ {1, …, k}` is `τ j : Fin k`.
-* Context hypotheses. The lemma sits inside the proof of Theorem B.9, under the standing
-  assumption that `Ψ` satisfies all hypotheses of Theorem B.9(1) with `k! = 0` in the finite
-  field `L`. Taken literally that context is contradictory (Theorem B.9), which would make the
-  statement vacuous. The challenge therefore keeps only the hypotheses the paper's proof uses
-  (the standing objects `L` finite, `H` infinite with pattern homogeneity of `T`), and lists
-  exactly which of Theorem B.9's hypotheses (a)-(c) are assumed; `k! = 0` is not assumed
-  (Remark B.15 applies the same lemmas when `k! ≠ 0`).
-* Hypotheses used here: multilinearity of `Ψ`, pattern homogeneity on the infinite set `H`, and
-  hypothesis (c) of Theorem B.9(1) (`hbound`, with `exteriorSupportDim` the library definition
-  of `sdim`, Definition B.1, from `Algebra/ExteriorSupportDimension.lean`, imported through
-  `DeterminantArray.lean`). Hypotheses (a), (b) and `k! = 0` are not assumed. `[Finite L]` is
-  the standing context.
-* `χ(τ) = χ(τ′)` is stated for arbitrary representatives: any tuple `C` of clusters in `H` with
-  order pattern `τ` and any tuple `D` of clusters in `H` with order pattern `τ′` have the same
-  cluster value. (This also contains the well-definedness of `χ(τ)`, discussed before
-  Lemma B.11.) "Order pattern τ" is `HasOrderPattern C τ`, which also forces the clusters to be
-  pairwise disjoint.
-* `τ(α) = ℓ, τ(β) = ℓ + 1` is `(τ β).val = (τ α).val + 1`; `τ′` is given with the three
-  defining equations of the paper.
+## Formalization notes
+* The definitions below follow Appendix B.3-B.5: `ClusterMap` (curried `2k`-linear maps, with
+  `V = ℕ → L`, `V_fin = ℕ →₀ L`), `coeff` (= `T`), `PatternHomogeneous` (Lemma B.10 for `T`,
+  with the `3k`-tuple indexed by `Fin 3 × Fin k`), `IsCluster`, `HasOrderPattern`, `opWeight`
+  (= `s`), `vecWeight` (= `w`), `sC`, `wC` and `clusterValue` (= `χ`).
+* `Ω` is `AlternatingAnalytic.determinantArray` (`Algebra/DeterminantArray.lean`), imported only
+  for this definition.
+* Labels are 0-based: `C(1)` is `C 0`, and the rank `τ(j)` is `τ j : Fin k`.
+* The lemma sits inside the proof by contradiction of Theorem B.9, whose hypotheses with
+  `k! = 0` are inconsistent. The statement keeps only what the proof uses: multilinearity of `Ψ`,
+  pattern homogeneity on the infinite set `H`, and hypothesis (c) of Theorem B.9 (1) as `hbound`.
+  Hypotheses (a), (b) and `k! = 0` are not assumed.
+* `sdim` is `AlternatingAnalytic.exteriorSupportDim`, imported through `DeterminantArray.lean`.
+* `χ(τ) = χ(τ′)` is stated for arbitrary representatives: any cluster tuples `C` with pattern
+  `τ` and `D` with pattern `τ′` have the same value. This includes the well-definedness of
+  `χ(τ)`. `HasOrderPattern` forces the clusters to be pairwise disjoint.
+* `τ(α) = ℓ, τ(β) = ℓ + 1` is `(τ β).val = (τ α).val + 1`; `τ′` is given by the paper's three
+  equations.
 -/
 
 namespace AlternatingAnalyticChallenge.LemB_12
@@ -113,8 +97,8 @@ noncomputable def clusterValue (Ψ : ClusterMap L k) (C : Fin k → Fin 4 → �
 
 end ClusterDefinitions
 
-/-- **Lemma B.12 (staircase).** Exchanging two adjacent ranks `ℓ, ℓ + 1` of an order pattern does
-not change the cluster value: `χ(τ) = χ(τ′)`. -/
+/-- Exchanging two adjacent ranks `ℓ, ℓ + 1` of an order pattern does not change the cluster
+value: `χ(τ) = χ(τ′)`. -/
 theorem clusterValue_eq_of_adjacent_exchange
     {L : Type u} [Field L] [Finite L] {k : ℕ} (Ψ : ClusterMap L k)
     (H : Set ℕ) (hH : H.Infinite) (hhom : PatternHomogeneous Ψ H)

@@ -6,11 +6,9 @@ import AlternatingAnalytic.Scalar.Tails.LpTails
 Let `K` be complete, nonarchimedean and not spherically complete, and `I` countably infinite.
 For a continuous `d`-linear form `μ` on `ℓ^∞(I, K)` and `x ∈ ℓ^∞(I, K)^d`,
 `μ x` is the unconditional sum over `i ∈ I^d` of `μ (e_{i_1}, …, e_{i_d}) x^1_{i_1} ⋯ x^d_{i_d}`
-(`multilinear_hasSum`; formula (F.1) of the paper). Given the finite set `S` of the tail property,
-the partial sum over `S^d` is `μ` evaluated at the restrictions of the `x^r` to `S`
-(`restrictLp`); the difference from `μ x` expands into terms with one slot vanishing on `S`, and
-the remaining terms of the sum also have one slot vanishing on `S`, so the ultrametric inequality
-bounds everything by the tail bound.
+(`multilinear_hasSum`, formula (F.1)). Together with the null coefficient array this is
+Lemma F.2(1) (`multilinear_expansion`). The proof compares the partial sum over `S^d`, for `S`
+from the tail property, with `μ` at the restrictions of the `x^r` to `S` (`restrictLp`).
 -/
 
 namespace AlternatingAnalytic.Tails
@@ -52,7 +50,7 @@ lemma sub_restrictLp_apply_of_mem {S : Finset I} (x : lp (fun _ : I => K) ∞) {
     (hi : i ∈ S) : (x - restrictLp S x) i = 0 := by
   rw [lp.coeFn_sub, Pi.sub_apply, restrictLp_apply, ite_eq_left hi, sub_self]
 
-/-- **Expansion (F.1).** `μ x` is the unconditional sum of
+/-- Expansion (F.1): `μ x` is the unconditional sum of
 `μ (e_{i_1}, …, e_{i_d}) x^1_{i_1} ⋯ x^d_{i_d}` over `i ∈ I^d`. -/
 theorem multilinear_hasSum [IsUltrametricDist K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) [Countable I] [Infinite I] {d : ℕ}
@@ -134,7 +132,7 @@ theorem multilinear_hasSum [IsUltrametricDist K] [CompleteSpace K]
   · exact IsUltrametricDist.norm_sum_le_of_forall_le_of_nonneg (half_pos hδ).le hout
   · rw [norm_neg]; exact hdiff
 
-/-- **Lemma F.2, part 1.** The coefficient array is null and gives the expansion (F.1). -/
+/-- Lemma F.2(1): the coefficient array is null and gives the expansion (F.1). -/
 theorem multilinear_expansion [IsUltrametricDist K] [CompleteSpace K]
     (hK : ¬ SphericallyCompleteSpace K) [Countable I] [Infinite I] {d : ℕ}
     (μ : ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : I => K) ∞) K) :

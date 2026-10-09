@@ -5,10 +5,10 @@ import Mathlib.Analysis.Normed.Module.Multilinear.Curry
 /-!
 # Split alternating pairs
 
-A split pair has a bounded linear retraction from continuous multilinear maps onto
-continuous alternating maps. A split destination gives a polynomial incoming joint
-action, with an explicit lift indexed by `Option (Fin k)`, including degree zero.
-All spaces carry their ordinary norms; no norm bound on the retraction is imposed.
+A pair `(E, F)` is split in degree `k` if the inclusion of alternating maps into multilinear
+maps `E^k → F` has a bounded linear retraction. If the destination pair is split, the joint
+action `(u, g) ↦ (m ↦ g ∘ m ∘ (u, …, u))` on morphisms is a continuous polynomial, hence
+analytic. This is the first part of Lemma H.3.
 -/
 
 noncomputable section
@@ -19,7 +19,8 @@ namespace AlternatingAnalytic
 
 variable (K : Type*) [NontriviallyNormedField K]
 
-/-- The actual alternating inclusion has a bounded linear retraction. -/
+/-- The pair `(E, F)` is split in degree `k`: the inclusion of alternating maps into
+multilinear maps has a bounded linear retraction. -/
 def IsSplitAlternatingPair (k : ℕ) (E F : Type*)
     [NormedAddCommGroup E] [NormedSpace K E]
     [NormedAddCommGroup F] [NormedSpace K F] : Prop :=
@@ -32,7 +33,8 @@ variable {K} {E E' F F' : Type*}
   [NormedAddCommGroup F] [NormedSpace K F]
   [NormedAddCommGroup F'] [NormedSpace K F']
 
-/-- The destination retraction lift, depending linearly on the pushforward operator. -/
+/-- The lift built from the retraction `r` at the destination, as a linear function of the
+operator `g : F →L[K] F'`. -/
 def splitDestinationPushforwardLift (k : ℕ)
     (r : (E' [×k]→L[K] F') →L[K] (E' [⋀^Fin k]→L[K] F')) :
     (F →L[K] F') →L[K] ContinuousMultilinearMap K (fun _ : Fin k => E' →L[K] E)
@@ -50,7 +52,7 @@ def splitDestinationPushforwardLift (k : ℕ)
       (G := F →L[K] F')
       (G' := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F'))
 
-/-- The bounded `(k + 1)`-linear incoming lift with one pushforward slot. -/
+/-- The bounded `(k + 1)`-linear lift of the joint action; the slot `none` carries `g`. -/
 def splitDestinationLift (k : ℕ)
     (r : (E' [×k]→L[K] F') →L[K] (E' [⋀^Fin k]→L[K] F')) :
     ContinuousMultilinearMap K
@@ -72,7 +74,7 @@ theorem splitDestinationLift_apply (k : ℕ)
       r (((z none).2.compContinuousMultilinearMap m.toContinuousMultilinearMap).compContinuousLinearMap
         fun i => (z (some i)).1) := rfl
 
-/-- The retraction property identifies the diagonal with the actual incoming action. -/
+/-- The diagonal of `splitDestinationLift` is the joint action. -/
 theorem splitDestinationLift_diag (k : ℕ)
     (r : (E' [×k]→L[K] F') →L[K] (E' [⋀^Fin k]→L[K] F'))
     (hr : ∀ m : E' [⋀^Fin k]→L[K] F', r m.toContinuousMultilinearMap = m)
@@ -83,7 +85,8 @@ theorem splitDestinationLift_diag (k : ℕ)
   rw [contractingRetractionLift_diag k r hr]
   exact (alternatingMapAction_eq_target_precomposition k a).symm
 
-/-- A split destination gives polynomial target-valued precomposition. -/
+/-- If `(E', F')` is split, precomposition into `F'`-valued alternating maps is a
+continuous polynomial. -/
 theorem cpolynomialAt_precomposition_of_split_destination
     (k : ℕ) (h : IsSplitAlternatingPair K k E' F') (u : E' →L[K] E) :
     CPolynomialAt K
@@ -95,7 +98,7 @@ theorem cpolynomialAt_precomposition_of_split_destination
     (contractingRetractionLift (E' := E) k r)
     (contractingRetractionLift_diag k r hr) u
 
-/-- The actual alternating action into a split pair is jointly polynomial. -/
+/-- The joint action into a split pair is a continuous polynomial. -/
 theorem cpolynomialAt_alternatingMapAction_of_split_destination
     (k : ℕ) (h : IsSplitAlternatingPair K k E' F')
     (a₀ : (E' →L[K] E) × (F →L[K] F')) :
@@ -104,7 +107,7 @@ theorem cpolynomialAt_alternatingMapAction_of_split_destination
   exact cpolynomialAt_alternatingMapAction_of_target_precomposition k a₀
     (cpolynomialAt_precomposition_of_split_destination k h a₀.1)
 
-/-- The actual alternating action into a split pair is jointly analytic. -/
+/-- The joint action into a split pair is analytic. -/
 theorem analyticAt_alternatingMapAction_of_split_destination
     (k : ℕ) (h : IsSplitAlternatingPair K k E' F')
     (a₀ : (E' →L[K] E) × (F →L[K] F')) :
@@ -112,7 +115,7 @@ theorem analyticAt_alternatingMapAction_of_split_destination
       (F := F) (F' := F') k) a₀ :=
   (cpolynomialAt_alternatingMapAction_of_split_destination k h a₀).analyticAt
 
-/-- The incoming alternating action into a split pair is analytic everywhere. -/
+/-- The joint action into a split pair is analytic everywhere. -/
 theorem analyticOnNhd_alternatingMapAction_of_split_destination
     (k : ℕ) (h : IsSplitAlternatingPair K k E' F') :
     AnalyticOnNhd K (alternatingMapAction (K := K) (E := E) (E' := E')
@@ -120,8 +123,8 @@ theorem analyticOnNhd_alternatingMapAction_of_split_destination
   intro a₀ _
   exact analyticAt_alternatingMapAction_of_split_destination k h a₀
 
-/-- A split destination admits the concrete incoming lift with its prescribed formula,
-exact diagonal, polynomial regularity at every operator pair, and global analyticity. -/
+/-- Summary for a split destination: the lift `splitDestinationLift`, its formula and
+diagonal, and polynomiality and analyticity of the joint action. -/
 theorem split_destination_polynomial_action
     (k : ℕ) (h : IsSplitAlternatingPair K k E' F') :
     ∃ r : (E' [×k]→L[K] F') →L[K] (E' [⋀^Fin k]→L[K] F'),

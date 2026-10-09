@@ -6,18 +6,14 @@ import Mathlib.Analysis.Calculus.FDeriv.Comp
 import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
-# Failure of descent through ordinary ℓ¹ quotient parameters
+# Analyticity does not descend through ℓ¹ quotient parameters
 
-The actual closed-unit-ball quotient makes alternating precomposition analytic upstairs,
-while the Banach counterexample from `Main` remains nowhere analytic downstairs.
-A section differentiable at even one point would split the quotient by its derivative.
-Separately, analyticity along every bounded map out of ordinary ℓ¹ rules out every
-bounded linear ℓ¹ retract, with an index universe independent of the field universe.
+Let `q : ℓ¹(J) → H` be the closed-unit-ball quotient onto `H = E →L[K] E`. Alternating
+precomposition `Q` composed with `q` is analytic, but for the Banach counterexample of
+Theorem 6.1(1) (`AlternatingAnalytic.Main`), `Q` is nowhere analytic. Hence no local section of `q` is differentiable at any point
+(its derivative would split `q`), and `H` is not a bounded linear retract of any `ℓ¹(I)`.
 
-A total map `s : H → ℓ¹` with the section equation on an open `U` encodes a section
-on `U` (extend it by zero outside `U`). At a point of `U`, differentiability depends
-only on this restriction. The conclusions concern differentiable sections.
-The original ordinary operator norm on `H` and sum norm on `lp` are retained.
+A section on an open `U` is encoded as a total map `s : H → ℓ¹` satisfying `q (s h) = h` on `U`.
 -/
 
 noncomputable section
@@ -61,8 +57,8 @@ theorem analyticOnNhd_of_comp_rightInverse
   rw [← hcomp]
   exact (hf (r h) (Set.mem_univ _)).comp (r.analyticAt h)
 
-/-- If an analytic pullback has a nonanalytic value downstairs, no local section is
-differentiable even at its base point. -/
+/-- If `f ∘ q` is analytic but `f` is not analytic somewhere, no local section of `q` is
+differentiable at its base point. -/
 theorem not_differentiableAt_of_local_section
     (q : X →L[K] H) {f : H → Y}
     (hf : AnalyticOnNhd K (f ∘ q) Set.univ)
@@ -75,8 +71,7 @@ theorem not_differentiableAt_of_local_section
   exact hnot (analyticOnNhd_of_comp_rightInverse q (fderiv K s h₀) hqr hf h
     (Set.mem_univ _))
 
-/-- Total maps encode sections on an open domain: values outside the domain do not
-affect differentiability at a point of the domain. -/
+/-- The same for a section on an open set `U`, encoded as a total map. -/
 theorem not_differentiableAt_section_of_isOpen
     (q : X →L[K] H) {f : H → Y}
     (hf : AnalyticOnNhd K (f ∘ q) Set.univ)
@@ -87,7 +82,7 @@ theorem not_differentiableAt_section_of_isOpen
   apply not_differentiableAt_of_local_section q hf hnot
   exact Filter.eventually_of_mem (hU.mem_nhds hh₀) hsection
 
-/-- The corresponding relative differentiability statement on the open domain. -/
+/-- The same with differentiability within `U`. -/
 theorem not_differentiableWithinAt_section_of_isOpen
     (q : X →L[K] H) {f : H → Y}
     (hf : AnalyticOnNhd K (f ∘ q) Set.univ)
@@ -108,8 +103,7 @@ variable {K : Type uK} [NontriviallyNormedField K]
   {E : Type uE} [NormedAddCommGroup E] [NormedSpace K E]
   {F : Type uF} [NormedAddCommGroup F] [NormedSpace K F]
 
-/-- The action of a morphism with identity second component is actual alternating
-precomposition. -/
+/-- The action of `(u, id)` is alternating precomposition by `u`. -/
 @[simp]
 theorem alternatingMapAction_pair_id_eq_Q (k : ℕ) (u : E →L[K] E) :
     alternatingMapAction k (u, ContinuousLinearMap.id K F) =
@@ -117,23 +111,21 @@ theorem alternatingMapAction_pair_id_eq_Q (k : ℕ) (u : E →L[K] E) :
   ext m x
   rfl
 
-/-- Every bounded map from arbitrary ordinary ℓ¹ parameters gives an admissible
-precomposition family. The index universe is independent of all space universes. -/
+/-- A bounded linear map from `ℓ¹(I)` gives an admissible precomposition family, for an
+index type `I` in any universe. -/
 theorem isAdmissibleOn_l1_precomposition [CompleteSpace F] (k : ℕ) {I : Type v}
     (r : L1 K I →L[K] (E →L[K] E)) :
     IsAdmissibleOn k (fun a => (r a, ContinuousLinearMap.id K F)) Set.univ := by
   exact isAdmissibleOn_of_l1 k ((r.analyticOnNhd Set.univ).prod analyticOnNhd_const)
 
-/-- Alternating precomposition is analytic after every bounded map from ordinary
-ℓ¹, on the whole parameter space. -/
+/-- Alternating precomposition composed with a bounded linear map from `ℓ¹(I)` is analytic. -/
 theorem analyticOnNhd_Q_comp_l1 [CompleteSpace F] (k : ℕ) {I : Type v}
     (r : L1 K I →L[K] (E →L[K] E)) :
     AnalyticOnNhd K (Round24Transfer.Q K (Fin k) E E F ∘ r) Set.univ := by
   simpa only [Function.comp_def, alternatingMapAction_pair_id_eq_Q] using
     (isAdmissibleOn_l1_precomposition (F := F) k r).2
 
-/-- A nowhere analytic alternating-precomposition map rules out every bounded
-linear retract through ordinary ℓ¹, with arbitrary independent index universe. -/
+/-- If `Q` is nowhere analytic, `E →L[K] E` is not a bounded linear retract of any `ℓ¹(I)`. -/
 theorem no_l1_retract_of_nowhere_analytic_Q [CompleteSpace F] (k : ℕ)
     (hQ : ∀ h : E →L[K] E, ¬AnalyticAt K (Round24Transfer.Q K (Fin k) E E F) h)
     (I : Type v) (i : (E →L[K] E) →L[K] L1 K I)
@@ -159,9 +151,8 @@ variable (K E F : Type*) [NontriviallyNormedField K]
   [NormedAddCommGroup E] [NormedSpace K E] [CompleteSpace E]
   [NormedAddCommGroup F] [NormedSpace K F] [CompleteSpace F]
 
-/-- For fixed Banach counterexample spaces, the actual unit-ball quotient has analytic
-pullback, no local section differentiable at any point, and no bounded ℓ¹ retract
-through any index type in the independent universe `v`. -/
+/-- If `Q` is nowhere analytic, the unit-ball quotient `q` has analytic pullback `Q ∘ q`, no
+local section differentiable at any point, and `H` is not a retract of any `ℓ¹(I)`. -/
 theorem quotient_parameter_counterexample_of_nowhereAnalytic (k : ℕ)
     (hQ : ∀ h : E →L[K] E, ¬AnalyticAt K (Round24Transfer.Q K (Fin k) E E F) h) :
     let H := E →L[K] E
@@ -187,10 +178,9 @@ theorem quotient_parameter_counterexample_of_nowhereAnalytic (k : ℕ)
 
 end Counterexample
 
-/-- Failure of descent through quotient parameters and the all-ℓ¹ non-retract consequence
-of `fam:cor:quotient-parameters`, for the same Banach spaces and the actual unit-ball
-quotient. Positive characteristic supplies primality; no additional norm hypotheses
-are imposed on the spaces. The arbitrary ℓ¹ index lives in the independent universe `v`. -/
+/-- Over a complete field of characteristic `p > 0` with `p ≤ k`, there are Banach spaces for
+which analyticity fails to descend through the unit-ball quotient, and `E →L[K] E` is not a
+retract of any `ℓ¹(I)`. -/
 theorem exists_quotient_parameter_counterexample
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K]
     (p k : ℕ) [CharP K p] (hp : 0 < p) (hpk : p ≤ k) :

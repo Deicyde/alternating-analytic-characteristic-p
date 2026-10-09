@@ -8,10 +8,9 @@ import Mathlib.Algebra.Order.Archimedean.Real.Basic
 # Diagonal norms of continuous algebraic homogeneous polynomials
 
 The diagonal `p x = b (x, …, x)` of an `n`-linear map `b` (not assumed continuous) vanishes at
-zero when `n ≥ 1` and is homogeneous of degree `n`. If `p` is continuous at zero, rescaling into a
-shell shows `‖p x‖ ≤ D ‖x‖ ^ n` for some `D`, so the diagonal norm
-`sInf {D ≥ 0 | ∀ x, ‖p x‖ ≤ D ‖x‖ ^ n}` is the true infimum and is itself an admissible constant.
-This is the first step of the proof of Proposition I.2 of the paper.
+zero when `n ≥ 1` and is homogeneous of degree `n`. If `p` is continuous at zero, then
+`‖p x‖ ≤ D ‖x‖ ^ n` for some `D`, and the diagonal norm `sInf {D ≥ 0 | ∀ x, ‖p x‖ ≤ D ‖x‖ ^ n}`
+is itself such a constant. Used in the proof of Proposition I.2.
 -/
 
 namespace AlgebraicPolynomialCZero

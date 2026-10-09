@@ -2,12 +2,11 @@ import AlternatingAnalytic.Analysis.DeterminantCoefficientSpaces
 import Mathlib.Analysis.Normed.Operator.Extend
 
 /-!
-# The actual padded carriers and their concrete completions
+# Padded sources and their completions
 
-The original carriers retain their inherited maximum norms over the incomplete
-rational field. The complete models have their explicit Laurent-field vector
-space structures. Every completion identification preserves the original dense
-isometric inclusion.
+`E p r n = E × Kⁿ` and `D p r n = D × Kⁿ` are the spaces `E_k`, `D_k` of Appendix H, with
+`k = p + n` and maximum norms over `K = F_p(t)`. Both complete to `H = A × Lⁿ`, of dimension `k`
+over `L = F_p((t))`, and the coefficient space `C` completes to `L`.
 -/
 
 noncomputable section
@@ -20,10 +19,10 @@ variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (n
 attribute [local instance] DeterminantPair.preferredNormedFieldK
   DeterminantPair.preferredFieldK DeterminantPair.preferredFieldL
 
-/-- The padded source remains finite-dimensional algebraically over K. -/
+/-- `E_k` is finite-dimensional over `K`. -/
 theorem finiteDimensional_E : FiniteDimensional (K p r) (E p r n) := inferInstance
 
-/-- The padded determinant carrier remains finite-dimensional algebraically over K. -/
+/-- `D_k` is finite-dimensional over `K`. -/
 theorem finiteDimensional_D : FiniteDimensional (K p r) (D p r n) := inferInstance
 
 theorem finrank_E : Module.finrank (K p r) (E p r n) = p + 1 + n := by
@@ -32,7 +31,7 @@ theorem finrank_E : Module.finrank (K p r) (E p r n) = p + 1 + n := by
   rw [Module.finrank_prod, RigidDenseSource.Concrete.finrank_source, Module.finrank_pi]
   simp
 
-/-- The complete ambient product has its literal L-module and normed-space structures. -/
+/-- `H` as a normed space over `L`. -/
 abbrev ambientNormedSpace : NormedSpace (L p r) (H p r n) := inferInstance
 
 instance finiteDimensional_H : FiniteDimensional (L p r) (H p r n) :=
@@ -69,16 +68,16 @@ instance isUltrametric_E : IsUltrametricDist (E p r n) := ultrametric_prod
 instance isUltrametric_D : IsUltrametricDist (D p r n) := ultrametric_prod
 instance isUltrametric_H : IsUltrametricDist (H p r n) := ultrametric_prod
 
-/-- The coefficient space is dense: it contains 1, hence the dense rational field. -/
+/-- `C` is dense in `L`, since it contains `1` and hence `K`. -/
 theorem denseRange_inclusionC : DenseRange (C p r).subtypeₗᵢ :=
   denseRange_subtype_of_one (C p r)
     (RationalField.denseRange_algebraMap (ZMod p) r) (one_mem_C p r)
 
-/-- The rational scalar field is actually contained in the coefficient space. -/
+/-- `K ⊆ C`. -/
 theorem algebraMap_mem_C (a : K p r) : algebraMap (K p r) (L p r) a ∈ C p r := by
   simpa only [Algebra.smul_def, mul_one] using (C p r).smul_mem a (one_mem_C p r)
 
-/-- Completion of the padded rigid source is its concrete ambient product. -/
+/-- The completion of `E_k` is `H`. -/
 def completionE : UniformSpace.Completion (E p r n) ≃ₗᵢ[K p r] H p r n :=
   LinearIsometryEquiv.ofSurjective (inclusionE p r n).fromCompletion (by
     intro x
@@ -86,7 +85,7 @@ def completionE : UniformSpace.Completion (E p r n) ≃ₗᵢ[K p r] H p r n :=
       (inclusionE p r n).fromCompletion.isometry.isClosedEmbedding.isClosed_range
       (fun e => ⟨e, (inclusionE p r n).fromCompletion_apply_coe e⟩))
 
-/-- Completion of the padded determinant source is the same ambient product. -/
+/-- The completion of `D_k` is `H`. -/
 def completionD : UniformSpace.Completion (D p r n) ≃ₗᵢ[K p r] H p r n :=
   LinearIsometryEquiv.ofSurjective (inclusionD p r n).fromCompletion (by
     intro x
@@ -94,7 +93,7 @@ def completionD : UniformSpace.Completion (D p r n) ≃ₗᵢ[K p r] H p r n :=
       (inclusionD p r n).fromCompletion.isometry.isClosedEmbedding.isClosed_range
       (fun d => ⟨d, (inclusionD p r n).fromCompletion_apply_coe d⟩))
 
-/-- Completion of the actual small coefficient target is the Laurent field. -/
+/-- The completion of `C` is `L`. -/
 def completionC : UniformSpace.Completion (C p r) ≃ₗᵢ[K p r] L p r :=
   denseSubmoduleCompletionEquiv (C p r) (denseRange_inclusionC p r)
 
@@ -110,8 +109,8 @@ def completionC : UniformSpace.Completion (C p r) ≃ₗᵢ[K p r] L p r :=
     completionC p r (x : UniformSpace.Completion (C p r)) = (x : L p r) :=
   denseSubmoduleCompletionEquiv_apply_coe _ _ x
 
-/-- The original examples have finite algebraic dimension and the stated
-inherited/max ultrametric norms; no completeness of K or G is asserted. -/
+/-- `E_k`, `D_k` and `G` are finite-dimensional over `K` and nonarchimedean, with maximum
+norms. -/
 theorem finite_ultrametric_carriers :
     FiniteDimensional (K p r) (E p r n) ∧
     FiniteDimensional (K p r) (D p r n) ∧
@@ -126,8 +125,7 @@ theorem finite_ultrametric_carriers :
     finrank_E p r n, inferInstance, inferInstance, inferInstance,
     norm_E p r n, norm_D p r n, DeterminantPair.norm_G p r⟩
 
-/-- All concrete completion identifications needed for `dom:limits`, with the
-original inclusions and explicit complete finite-dimensional L-space model. -/
+/-- Summary of the completions of `E_k`, `D_k`, `G` and `C`. -/
 theorem concrete_completions :
     Isometry (inclusionE p r n) ∧ DenseRange (inclusionE p r n) ∧
     Isometry (inclusionD p r n) ∧ DenseRange (inclusionD p r n) ∧

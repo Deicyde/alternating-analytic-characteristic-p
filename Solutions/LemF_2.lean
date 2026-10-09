@@ -6,17 +6,10 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Scalar.Tails.Expansion
 
 /-!
-# Lemma F.2 (multilinear tails), pp. 49-50
+# Proof of Lemma F.2
 
-Solution: the three statements of `Challenges/LemF_2.lean`, proved from the library
-(`AlternatingAnalytic/Scalar/Tails/`):
-* part 1: `AlternatingAnalytic.Tails.multilinear_expansion` (`Expansion.lean`): the null array is
-  `multilinear_coeff_tendsto_zero` and the expansion is `multilinear_hasSum` (`LpTails.lean`,
-  `Expansion.lean`);
-* part 2: `AlternatingAnalytic.Tails.multilinear_tail` (`LpTails.lean`), transported along an
-  enumeration of `I` from `tail_multilinear` on `ℓ^∞(ℕ)` (`Multilinear.lean`) under `NSC`, which
-  follows from the failure of spherical completeness (`NestedBalls.lean`);
-* part 3: `AlternatingAnalytic.Tails.multilinear_diagonal_tendsto_zero` (`LpTails.lean`).
+Uses `Tails.multilinear_expansion`, `Tails.multilinear_tail` and
+`Tails.multilinear_diagonal_tendsto_zero` from `AlternatingAnalytic/Scalar/Tails/`.
 -/
 
 open Filter Topology
@@ -26,9 +19,8 @@ namespace AlternatingAnalyticChallenge.LemF_2
 
 universe u v
 
-/-- **Lemma F.2, part 1 (null coefficient array and expansion (F.1)).** The coefficient array
-`a_i = λ(e_{i_1}, …, e_{i_d})` is null on `I^d`, and `λ(x^1, …, x^d)` is the unconditional sum of
-`a_i x^1_{i_1} ⋯ x^d_{i_d}` over `i ∈ I^d`. -/
+/-- Lemma F.2, part 1: the coefficients `a_i = λ(e_{i_1}, …, e_{i_d})` tend to zero on `I^d`, and
+`λ(x^1, …, x^d)` is the unconditional sum of `a_i x^1_{i_1} ⋯ x^d_{i_d}` (F.1). -/
 theorem multilinear_expansion
     {K : Type u} [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K]
     (hK : ¬ SphericallyCompleteSpace K)
@@ -42,8 +34,8 @@ theorem multilinear_expansion
           (μ x) :=
   AlternatingAnalytic.Tails.multilinear_expansion hK μ
 
-/-- **Lemma F.2, part 2 (tail property).** For every `ε > 0` there is a finite `S ⊆ I` such that
-`|λ(x^1, …, x^d)| ≤ ε` whenever all `‖x^r‖ ≤ 1` and at least one `x^r` vanishes on `S`. -/
+/-- Lemma F.2, part 2: for every `ε > 0` there is a finite `S ⊆ I` such that
+`|λ(x^1, …, x^d)| ≤ ε` whenever all `‖x^r‖ ≤ 1` and some `x^r` vanishes on `S`. -/
 theorem multilinear_tail
     {K : Type u} [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K]
     (hK : ¬ SphericallyCompleteSpace K)
@@ -54,8 +46,7 @@ theorem multilinear_tail
       (∃ r, ∀ i ∈ S, (x r : I → K) i = 0) → ‖μ x‖ ≤ ε :=
   AlternatingAnalytic.Tails.multilinear_tail hK μ ε hε
 
-/-- **Lemma F.2, part 3.** The diagonal values `λ(e_i, …, e_i)` tend to `0` outside finite subsets
-of `I`. -/
+/-- Lemma F.2, part 3: `λ(e_i, …, e_i)` tends to `0` outside finite subsets of `I`. -/
 theorem multilinear_diagonal_tendsto_zero
     {K : Type u} [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K]
     (hK : ¬ SphericallyCompleteSpace K)

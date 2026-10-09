@@ -3,12 +3,12 @@ import AlternatingAnalytic.Analysis.DependentCZero
 import Mathlib.Analysis.Analytic.ChangeOrigin
 
 /-!
-# The analytic dependent c₀ tensor test family
+# The tensor test family
 
-The necessity test family from `fam:thm:tensor-analytic`. Coordinate `m` has tensor
-degree `m + 1`. The pure-power family is defined on the open unit ball and extended
-by zero outside it. Its ambient expansion has zero constant coefficient, and Mathlib's
-change-of-origin theorem gives analyticity throughout the whole open ball.
+The map `f(x) = (x^{⊗n})_{n ≥ 1}` from the open unit ball of `P` into
+`Z = c₀(T_n(P))`, with values in the closed subspace `W = c₀(Δ_n(P))`. It is used in the
+"only if" direction of Theorem G.3. As a `Z`-valued map, `f` is analytic on the open unit ball.
+Coordinate `m` has tensor degree `m + 1`, and `f` is extended by zero outside the ball.
 -/
 
 noncomputable section
@@ -23,12 +23,12 @@ universe u
 variable {K P : Type u} [NontriviallyNormedField K]
   [NormedAddCommGroup P] [NormedSpace K P]
 
-/-- The dependent c₀ sum of the positive-degree completed tensor powers. -/
+/-- The space `Z`: the c₀ sum of the completed tensor powers of positive degree. -/
 abbrev tensorTestSpace (K P : Type u) [NontriviallyNormedField K]
     [NormedAddCommGroup P] [NormedSpace K P] :=
   DependentCZero K (fun m : ℕ => TensorPower K P (m + 1))
 
-/-- The actual coordinatewise closed diagonal submodule of the test space. -/
+/-- The subspace `W` of families whose coordinates lie in the diagonal spans. -/
 def tensorTestSubmodule : Submodule K (tensorTestSpace K P) :=
   DependentCZero.coordinateSubmodule (fun m => DiagonalSpan K P (m + 1))
 
@@ -47,13 +47,13 @@ theorem isClosed_tensorTestSubmodule :
 instance : CompleteSpace (tensorTestSubmodule (K := K) (P := P)) :=
   isClosed_tensorTestSubmodule.completeSpace_coe
 
-/-- Identification with the dependent c₀ sum of the diagonal spans, preserving norms. -/
+/-- `W` is isometric to the c₀ sum of the diagonal spans. -/
 def tensorTestCoordinateEquiv :
     DependentCZero K (fun m : ℕ => DiagonalSpan K P (m + 1)) ≃ₗᵢ[K]
       tensorTestSubmodule (K := K) (P := P) :=
   DependentCZero.coordinateEquiv _
 
-/-- Ambient tensor coordinate, indexed from zero. -/
+/-- The coordinate of `Z` in degree `m + 1`. -/
 def tensorTestCoordinate (m : ℕ) : tensorTestSpace K P →L[K] TensorPower K P (m + 1) :=
   DependentCZero.eval m
 
@@ -61,7 +61,7 @@ theorem norm_tensorTestCoordinate_le (m : ℕ) :
     ‖tensorTestCoordinate (K := K) (P := P) m‖ ≤ 1 :=
   DependentCZero.norm_eval_le m
 
-/-- The diagonal-span-valued coordinate projection on the closed test submodule. -/
+/-- The coordinate of `W` in degree `m + 1`, with values in the diagonal span. -/
 def tensorTestDeltaCoordinate (m : ℕ) :
     tensorTestSubmodule (K := K) (P := P) →L[K] DiagonalSpan K P (m + 1) :=
   DependentCZero.coordinateEval _ m
@@ -88,7 +88,7 @@ theorem norm_diagonalTensor_le (n : ℕ) (x : P) :
       (norm_completedProjectiveTensorTprod_le _) (pow_nonneg (norm_nonneg x) _)
     _ = ‖x‖ ^ n := one_mul _
 
-/-- Pure powers on the unit ball, extended by zero elsewhere. -/
+/-- The map `x ↦ (x^{⊗n})_{n ≥ 1}` on the open unit ball, extended by zero elsewhere. -/
 def tensorTestMap (x : P) : tensorTestSubmodule (K := K) (P := P) := by
   classical
   exact if hx : ‖x‖ < 1 then
@@ -114,8 +114,8 @@ theorem tensorTestMap_deltaCoordinate (x : P) (hx : ‖x‖ < 1) (m : ℕ) :
   apply Subtype.ext
   exact tensorTestMap_coordinate x hx m
 
-/-- The explicit ambient series: no constant term, and the canonical tensor map in
-coordinate `m` at degree `m + 1`. -/
+/-- The `Z`-valued power series of the test map: its degree-`n` coefficient is the canonical
+tensor map placed in coordinate `n`. -/
 def tensorTestSeries : FormalMultilinearSeries K P (tensorTestSpace K P)
   | 0 => 0
   | m + 1 => (DependentCZero.single m).compContinuousMultilinearMap
@@ -162,8 +162,7 @@ theorem one_le_tensorTestSeries_radius :
   exact (tensorTestSeries (K := K) (P := P)).le_radius_of_bound (r := 1) 1
     (fun n => by simpa using norm_tensorTestSeries_le (K := K) (P := P) n)
 
-/-- The coefficient diagonals sum to the concrete pure-power vector, by convergence
-of dependent c₀ truncations. The index shift accounts for the zero constant term. -/
+/-- On the open unit ball, the series sums to the test map. -/
 theorem tensorTestSeries_hasSum (x : P) (hx : ‖x‖ < 1) :
     HasSum (fun n => tensorTestSeries (K := K) n (fun _ => x))
       (tensorTestMap (K := K) x : tensorTestSpace K P) := by
@@ -186,7 +185,7 @@ theorem tensorTestSeries_hasSum (x : P) (hx : ‖x‖ < 1) :
       zero_apply, sub_zero] using h
   exact (hasSum_nat_add_iff' 1).mp h'
 
-/-- The actual ambient expansion on the ball of radius one. -/
+/-- The test map has its power series on the ball of radius one at zero. -/
 theorem tensorTestMap_hasFPowerSeriesOnBall :
     HasFPowerSeriesOnBall
       (fun x : P => (tensorTestMap (K := K) x : tensorTestSpace K P)) tensorTestSeries 0 1 := by
@@ -197,8 +196,7 @@ theorem tensorTestMap_hasFPowerSeriesOnBall :
   have hnorm : ‖x‖ < 1 := by simpa [hball, Metric.mem_ball, dist_zero_right] using hx
   simpa only [zero_add] using tensorTestSeries_hasSum (K := K) x hnorm
 
-/-- Ambient analyticity at every point of the open unit ball, supplied by Mathlib's
-complete-output change-of-origin theorem. -/
+/-- The test map is analytic into `Z` on the open unit ball. -/
 theorem tensorTestMap_analyticOnNhd :
     AnalyticOnNhd K (fun x : P => (tensorTestMap (K := K) x : tensorTestSpace K P))
       (Metric.ball 0 1) := by
@@ -207,9 +205,8 @@ theorem tensorTestMap_analyticOnNhd :
   rw [← hball]
   exact tensorTestMap_hasFPowerSeriesOnBall.analyticOnNhd
 
-/-- The complete test-family statement: the concrete diagonal subspace is closed,
-the map has exact pure-power coordinates, its coefficients are contractions, and its
-ambient expansion is analytic throughout the open unit ball. -/
+/-- Summary: `W` is closed, the test map has coordinates `x^{⊗(m+1)}`, its coefficients have
+norm at most one, and it is analytic into `Z` on the open unit ball. -/
 theorem tensor_test_family [CompleteSpace K] [CompleteSpace P] :
     IsClosed (tensorTestSubmodule (K := K) (P := P) : Set (tensorTestSpace K P)) ∧
     (∀ x : P, ‖x‖ < 1 → ∀ m,

@@ -10,9 +10,16 @@ import AlternatingAnalytic.Analysis.DeterminantPolynomialDegree
 /-!
 # Determinant-generated spaces and the auxiliary scalar gap
 
-The source and target are genuine rational-field submodules of the maximum-norm
-truncated polynomial algebra and the Laurent field, respectively. Polynomial
-representatives concern scalar coordinates, never evaluation into the nilpotent algebra.
+The construction of Appendix H. Over `K = F_p(t)` with completion `L = F_p((t))`, with
+`A = L[ε]/(ε^p)` in the maximum norm, this defines the scalars `a_i` and `τ_w` (one
+algebraically independent family `z`), the vector `a = ∑ a_i e_i`, the `K`-subspaces
+`D₀ ⊆ D ⊆ A` and `G ⊆ L`, and the polynomial model of `G`. It proves the gap (H.1):
+`τ_w² G ∩ G = {0}`.
+
+## Main results
+
+* `determinant_spaces_properties`: the spaces, their norms, density and polynomial model.
+* `tau_gap`: equation (H.1).
 -/
 
 noncomputable section
@@ -45,7 +52,7 @@ instance instNormedSpaceK : NormedSpace (K p r) (A p r) :=
       exact (norm_smul_le (algebraMap (K p r) (L p r) c) x).trans_eq
         (by rw [norm_algebraMap']) }
 
-/-- A single jointly independent family supplies both kinds of scalars. -/
+/-- The algebraically independent family of scalars: `a_i` at `inl i`, `τ_w` at `inr w`. -/
 def z : Fin p ⊕ Tau p → L p r := RationalLaurentScalars.jointFamily p r (Tau p)
 
 theorem algebraicIndependent_z : AlgebraicIndependent (K p r) (z p r) :=
@@ -67,21 +74,21 @@ theorem a_expansion : a p r = ∑ i : Fin p, z p r (Sum.inl i) • e p r i :=
     TruncatedPolynomial.coeff (L p r) p (a p r) i = z p r (Sum.inl i) := by
   simp [a]
 
-/-- The tagged vectors in the manuscript's auxiliary family. -/
+/-- The vectors `w ∈ 𝒲`: `e_i`, and `e_i + e_j` for `i < j`. -/
 def w : Tau p → A p r
   | Sum.inl i => e p r i
   | Sum.inr ij => e p r ij.val.1 + e p r ij.val.2
 
-/-- The displayed generators before adjoining the auxiliary multiples. -/
+/-- `D₀ = span_K {e_i, ε^i a} + K a²`. -/
 def D₀ : Submodule (K p r) (A p r) :=
   Submodule.span (K p r) (Set.range (Sum.elim (e p r) (fun i => e p r i * a p r))) ⊔
     (K p r) ∙ (a p r * a p r)
 
-/-- The actual source, with its inherited ordinary norm. -/
+/-- `D = D₀ + ∑_w K τ_w w`, with the norm of `A`. -/
 def D : Submodule (K p r) (A p r) :=
   D₀ p r ⊔ Submodule.span (K p r) (Set.range (fun t => tau p r t • w p r t))
 
-/-- Tags keep even accidentally equal generators distinct. -/
+/-- Indices of the generators of `D`. Equal generators with different indices stay distinct. -/
 abbrev GeneratorIndex := Fin p ⊕ (Fin p ⊕ (Unit ⊕ Tau p))
 
 def gen : GeneratorIndex p → A p r
@@ -123,15 +130,15 @@ instance finiteDimensional_D : FiniteDimensional (K p r) (D p r) := by
   rw [D_eq_span_gen]
   exact FiniteDimensional.span_of_finite _ (Set.finite_range _)
 
-/-- Determinants use coordinate columns in the power basis. -/
+/-- The determinant in the basis `e_i = ε^i`. -/
 def delta (v : Fin p → A p r) : L p r :=
   Matrix.det (Matrix.of (fun i j => TruncatedPolynomial.coeff (L p r) p (v j) i))
 
-/-- The actual determinant-generated rational subspace of the Laurent field. -/
+/-- `G`, the `K`-span of determinants of tuples from `D`. -/
 def G : Submodule (K p r) (L p r) :=
   Submodule.span (K p r) (Set.range (fun d : Fin p → D p r => delta p r (fun i => d i)))
 
-/-- Register the inherited norm on this concrete subtype. -/
+/-- `G` carries the norm of `L`. -/
 instance instNormedAddCommGroupG : NormedAddCommGroup (G p r) := inferInstance
 
 instance instNormedSpaceG : NormedSpace (K p r) (G p r) := inferInstance
@@ -181,11 +188,11 @@ theorem norm_D (d : D p r) :
 
 theorem norm_G (c : G p r) : ‖c‖ = ‖(c : L p r)‖ := rfl
 
-/-- The source completion is the actual truncated algebra with its maximum norm. -/
+/-- The completion of `D` is `A`. -/
 def completionD : UniformSpace.Completion (D p r) ≃ₗᵢ[K p r] A p r :=
   denseSubmoduleCompletionEquiv (D p r) (denseRange_D_subtype p r)
 
-/-- The determinant-space completion is the actual Laurent field. -/
+/-- The completion of `G` is `L`. -/
 def completionG : UniformSpace.Completion (G p r) ≃ₗᵢ[K p r] L p r :=
   denseSubmoduleCompletionEquiv (G p r) (denseRange_G_subtype p r)
 
@@ -199,7 +206,7 @@ def completionG : UniformSpace.Completion (G p r) ≃ₗᵢ[K p r] L p r :=
 
 abbrev Poly := MvPolynomial (Fin p ⊕ Tau p) (K p r)
 
-/-- Evaluation takes place in the scalar field. -/
+/-- Evaluation of polynomials at the family `z`, in `L`. -/
 def evaluation : Poly p r →ₐ[K p r] L p r := MvPolynomial.aeval (z p r)
 
 theorem evaluation_injective : Function.Injective (evaluation p r) :=
@@ -211,7 +218,7 @@ def wPoly : Tau p → Fin p → Poly p r
   | Sum.inl i => ePoly p r i
   | Sum.inr ij => fun k => ePoly p r ij.val.1 k + ePoly p r ij.val.2 k
 
-/-- Coordinate lifts of the literal generators, using truncated convolution. -/
+/-- Coordinate polynomials of the generators of `D`. -/
 def genPoly : GeneratorIndex p → Fin p → Poly p r
   | Sum.inl i => ePoly p r i
   | Sum.inr (Sum.inl i) => fun k =>
@@ -255,7 +262,7 @@ theorem evaluation_genPoly (j : GeneratorIndex p) (k : Fin p) :
   · simp [genPoly, gen, evaluation, tau, map_smul, smul_eq_mul,
       ← evaluation_wPoly]
 
-/-- Symbolic determinants of tuples of the displayed finite generators. -/
+/-- The polynomial determinant of a tuple of generators of `D`. -/
 def detPoly (s : Fin p → GeneratorIndex p) : Poly p r :=
   Matrix.det (Matrix.of (fun i j => genPoly p r (s j) i))
 
@@ -337,9 +344,9 @@ theorem degreeOf_mem_Gpoly (P : Poly p r) (hP : P ∈ Gpoly p r) (t : Tau p) :
     (genPoly p r) (Sum.inr (Sum.inr (Sum.inr t))) (Sum.inr t)
     (genPoly_degree_auxiliary_bound p r t) hP
 
-/-- The complete finite-space statement preceding `dom:tau-gap`, for the actual
-prime-characteristic fields, quotient algebra, inclusions, and ordinary norms.
-Polynomial representatives and their degree bounds are entirely algebraic. -/
+/-- The properties of `D` and `G` stated before (H.1), collected: definitions, finite
+dimension, norms, density, completions, and the polynomial model with degree at most one
+in each `τ_w`. -/
 theorem determinant_spaces_properties :
     AlgebraicIndependent (K p r) (z p r) ∧
     ¬ CompleteSpace (K p r) ∧ CompleteSpace (A p r) ∧ CompleteSpace (L p r) ∧
@@ -386,14 +393,14 @@ theorem determinant_spaces_properties :
     evaluation_genPoly p r, rfl, inferInstance, map_Gpoly p r, evaluation_injective p r,
     fun _ => existsUnique_polynomial_representative p r, degreeOf_mem_Gpoly p r⟩
 
-/-- The auxiliary square cannot carry a nonzero element of G back into G. -/
+/-- If `c ∈ G` and `τ_w² c ∈ G`, then `c = 0`. -/
 theorem eq_zero_of_tau_sq_mul_mem (t : Tau p) {c : L p r}
     (hc : c ∈ G p r) (htc : tau p r t ^ 2 * c ∈ G p r) : c = 0 := by
   rw [← map_Gpoly] at hc htc
   exact aeval_square_scalar_gap (z p r) (algebraicIndependent_z p r) (Gpoly p r)
     (Sum.inr t) (fun P hP => degreeOf_mem_Gpoly p r P hP t) hc htc
 
-/-- The literal image-intersection equality in `dom:tau-gap`. -/
+/-- Equation (H.1): `τ_w² G ∩ G = {0}`. -/
 theorem tau_sq_image_intersection (t : Tau p) :
     (fun c : L p r => tau p r t ^ 2 * c) '' (G p r : Set (L p r)) ∩
       (G p r : Set (L p r)) = {0} := by
@@ -401,7 +408,7 @@ theorem tau_sq_image_intersection (t : Tau p) :
   exact aeval_square_scalar_image_intersection (z p r) (algebraicIndependent_z p r)
     (Gpoly p r) (Sum.inr t) (fun P hP => degreeOf_mem_Gpoly p r P hP t)
 
-/-- The two equivalent formulations of the source's auxiliary scalar gap. -/
+/-- Both forms of the gap (H.1). -/
 theorem tau_gap :
     (∀ (t : Tau p) (c : L p r), c ∈ G p r → tau p r t ^ 2 * c ∈ G p r → c = 0) ∧
     (∀ t : Tau p, (fun c : L p r => tau p r t ^ 2 * c) '' (G p r : Set (L p r)) ∩

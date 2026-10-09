@@ -4,11 +4,10 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateRadius
 /-!
 # Analytic reflection from discrete c₀ with unchanged radius
 
-An ambient power series with values in a complete linearly isometric subspace of
-an ultrametric normed space lifts coefficient by coefficient on arbitrary discrete
-c₀ parameter spaces. The lifted coefficients have the same diagonals and no larger
-norms, and the series represents the map on the original ball, even if its radius
-is infinite. Neither the scalar field nor the ambient target must be complete.
+Let `j : W → Z` be a linear isometry from a complete space into an ultrametric
+space. If `j ∘ f` has a power series on a ball in `C₀(I, K)`, then so does `f`,
+with coefficients of no larger norm and the same diagonals, on the same ball.
+This is Theorem 4.5(1). The scalar field and `Z` need not be complete.
 -/
 
 noncomputable section
@@ -23,9 +22,9 @@ variable {I K Z W E : Type*} [TopologicalSpace I] [DiscreteTopology I]
   [NormedAddCommGroup W] [NormedSpace K W] [CompleteSpace W]
   [NormedAddCommGroup E] [NormedSpace K E]
 
-/-- A represented series on c₀ with values in a complete subspace of an ultrametric
-space lifts on its original ball with the same diagonals and no larger coefficient
-norms. The lifted radius is at least the original radius. -/
+/-- A power series on c₀ for a map into a complete subspace of an ultrametric space
+lifts to the subspace on the same ball, with the same diagonals and no larger
+coefficient norms. -/
 theorem c0_exists_hasFPowerSeriesOnBall_subtype
     (S : Submodule K Z) [CompleteSpace S]
     {f : C₀(I, K) → S} {x : C₀(I, K)} {r : ℝ≥0∞}
@@ -47,8 +46,7 @@ theorem c0_exists_hasFPowerSeriesOnBall_subtype
     hasFPowerSeriesOnBall_subtype_of_diagonal_of_norm_le S hp q hnorm hdiag⟩
 
 /-- Analytic reflection on c₀ through a linear isometry from a complete space into
-an ultrametric target preserves all coefficient bounds and the specified ball.
-The index type, degrees and radius are unrestricted. -/
+an ultrametric space, keeping the ball and the coefficient bounds. -/
 theorem c0_exists_hasFPowerSeriesOnBall_linearIsometry
     (j : W →ₗᵢ[K] Z) {f : C₀(I, K) → W} {x : C₀(I, K)} {r : ℝ≥0∞}
     {p : FormalMultilinearSeries K C₀(I, K) Z}
@@ -123,16 +121,15 @@ theorem c0_analyticOn_linearIsometry_of_equiv
     (c0_analyticOnNhd_linearIsometry_of_equiv e j
       (hU.analyticOn_iff_analyticOnNhd.mp hf))
 
-/-- The manuscript's subtype-domain formulation: a map defined only on an open
-subset of c₀ is expressed using its zero extension for Mathlib's `AnalyticOn`. -/
+/-- Reflection for a map defined only on an open subset `U` of c₀, stated for its
+zero extension. -/
 theorem c0_analyticOn_extend_linearIsometry
     (j : W →ₗᵢ[K] Z) {U : Set C₀(I, K)} (hU : IsOpen U) (f : U → W)
     (hf : AnalyticOn K (j ∘ Function.extend Subtype.val f 0) U) :
     AnalyticOn K (Function.extend Subtype.val f 0) U :=
   c0_analyticOn_linearIsometry j hU hf
 
-/-- The subtype-domain reflection theorem also transports along any supplied
-continuous linear equivalence of the parameter space with c₀. -/
+/-- Reflection for a map defined only on an open subset of a space isomorphic to c₀. -/
 theorem c0_analyticOn_extend_linearIsometry_of_equiv
     (e : E ≃L[K] C₀(I, K)) (j : W →ₗᵢ[K] Z) {U : Set E}
     (hU : IsOpen U) (f : U → W)

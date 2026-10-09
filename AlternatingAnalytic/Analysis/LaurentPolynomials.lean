@@ -1,7 +1,11 @@
 import AlternatingAnalytic.Analysis.LaurentField
 import Mathlib.Algebra.Polynomial.Laurent
 
-/-! The coefficient-preserving Laurent-polynomial inclusion into Laurent series. -/
+/-!
+# Laurent polynomials inside Laurent series
+
+The inclusion `κ[X, X⁻¹] → κ((X))` as a `κ`-algebra map, with its coefficients and injectivity.
+-/
 
 noncomputable section
 
@@ -11,7 +15,7 @@ namespace AlternatingAnalytic
 
 variable (κ : Type*) [Field κ]
 
-/-- The monomial homomorphism used to include Laurent polynomials. -/
+/-- The monomials `n ↦ X^n`, as a monoid homomorphism. -/
 def laurentMonomialHom : Multiplicative ℤ →* LaurentSeries κ where
   toFun n := HahnSeries.single n.toAdd 1
   map_one' := rfl
@@ -20,7 +24,7 @@ def laurentMonomialHom : Multiplicative ℤ →* LaurentSeries κ where
       HahnSeries.single a.toAdd 1 * HahnSeries.single b.toAdd 1
     rw [HahnSeries.single_mul_single, one_mul]
 
-/-- The coefficient-preserving inclusion of Laurent polynomials into Laurent series. -/
+/-- The inclusion of Laurent polynomials into Laurent series. -/
 def laurentPolynomialMap : LaurentPolynomial κ →ₐ[κ] LaurentSeries κ :=
   AddMonoidAlgebra.lift κ (LaurentSeries κ) ℤ (laurentMonomialHom κ)
 

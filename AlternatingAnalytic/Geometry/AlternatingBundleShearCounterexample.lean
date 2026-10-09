@@ -3,22 +3,17 @@ import AlternatingAnalytic.Geometry.AnalyticAlternatingBundle
 import AlternatingAnalytic.Analysis.AlternatingActionRegularity
 
 /-!
-# The analytic alternating bundle over a Banach base can fail to be analytic
+# The alternating bundle over a Banach base can fail to be analytic
 
-This is the bundle form of Proposition `fam:prop:shear` of `paper/charp.tex`
-(Corollary `fam:cor:banach-base-failure`). The base is the operator space
-`E →L[K] D`, a manifold with one chart. Over it, the shear family defines a
-vector bundle core with fiber `D × E` and two global trivializations whose
-transition is `shear u`. This bundle is analytic, as is the trivial bundle with
-fiber `F`. The coordinate change between the two induced trivializations of the
-alternating-map bundle is pullback by the shear. If it were analytic at the
-zero parameter, the compression of `fam:prop:shear` would make the original
-pullback analytic there.
-
-In characteristic `p` and degree `k ≥ p`, the Banach counterexample therefore
-shows that the actual alternating bundle of two analytic bundles, with
-Mathlib's existing topology, need not be analytic. The hypothesis of
-`contMDiffVectorBundle_alternating_of_finiteCoordinates` cannot be removed.
+The bundle paragraph after Proposition 6.4, at the zero parameter. The base is the
+operator space `E →L[K] D`. The shear family defines a vector bundle core with fiber
+`D × E` and two global charts whose transition is `shear u`. This bundle and the
+trivial bundle with fiber `F` are analytic, but the transition of the induced
+alternating-map bundle is pullback by the shear, which by the compression identity of
+Proposition 6.4 is not analytic when `A^k` is not. With the Banach counterexample of
+Theorem 6.1, this shows that the finite-coordinate hypothesis of
+`contMDiffVectorBundle_alternating_of_finiteCoordinates` cannot be dropped.
+`ShearBundleGeneral.lean` treats a general base point.
 -/
 
 noncomputable section
@@ -44,12 +39,13 @@ theorem shear_shear_apply (u v : E →L[K] D) (z : D × E) :
     abel
   · simp
 
-/-- The parameter weight of the two charts of the shear bundle. -/
+/-- The weight of each of the two charts of the shear bundle: `0` for `false`, `1` for
+`true`. -/
 def shearChartWeight (i : Bool) : K := if i then 1 else 0
 
-/-- The shear vector bundle core over the operator space `E →L[K] D`. Both charts
-are global, and the transition from chart `i` to chart `j` is
-`shear ((w j - w i) • u)`, where `w false = 0` and `w true = 1`. -/
+/-- The shear vector bundle core over `E →L[K] D`. Both charts are global, and the
+transition from chart `i` to chart `j` is `shear ((w j - w i) • u)`, where `w` is
+`shearChartWeight`. -/
 def shearBundleCore : VectorBundleCore K (E →L[K] D) (D × E) Bool where
   baseSet _ := univ
   isOpen_baseSet _ := isOpen_univ
@@ -112,10 +108,8 @@ abbrev ShearTargetBundle : (E →L[K] D) → Type _ := Bundle.Trivial (E →L[K]
 
 end Bundle
 
-/-- **Bundle form of the shear obstruction.** The alternating bundle of the shear
-bundle and the trivial bundle has the shear pullback as a coordinate change. If the
-original pullback is not analytic at the zero parameter, this bundle is not
-analytic. The source bundle and the target bundle are both analytic. -/
+/-- If shear pullback on `Alt^k(D × D; F)` is not analytic at `0`, the alternating
+bundle of the shear bundle and the trivial bundle with fiber `F` is not analytic. -/
 theorem not_contMDiffVectorBundle_alternating_shearBundle (k : ℕ)
     (hbad : ¬ AnalyticAt K
       (fun v : D →L[K] D =>

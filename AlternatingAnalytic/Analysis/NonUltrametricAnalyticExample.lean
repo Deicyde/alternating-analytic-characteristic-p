@@ -3,7 +3,13 @@ import AlternatingAnalytic.Analysis.LaurentCompletedCoefficient
 import AlternatingAnalytic.Analysis.FactorialInvertible
 import AlternatingAnalytic.Analysis.LiftCriterion
 
-/-! The absence of an equivalent ultrametric norm is not sufficient for nonanalyticity. -/
+/-!
+# A target without a nonarchimedean norm, with analytic precomposition
+
+The Laurent exterior target `B` of Appendix C has no equivalent nonarchimedean norm when `k ≥ 2`
+(Proposition E.1), yet precomposition into it is analytic whenever `k! ≠ 0` (Proposition 4.1). So
+the absence of such a norm does not by itself force nonanalyticity.
+-/
 
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
@@ -13,8 +19,8 @@ namespace AlternatingAnalytic
 
 open Round24Transfer
 
-/-- The very same Laurent Banach targets with growing unit sums can have analytic
-precomposition whenever the degree factorial is nonzero. -/
+/-- For `k ≥ 2` with `k! ≠ 0`, the Laurent exterior target has no equivalent nonarchimedean norm
+and precomposition into it is analytic everywhere. -/
 theorem laurent_analytic_without_equivalentUltrametricNorm
     (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
     (k : ℕ) (hk : 2 ≤ k) (hfact : (k.factorial : LaurentField κ r) ≠ 0) :
@@ -30,7 +36,7 @@ theorem laurent_analytic_without_equivalentUltrametricNorm
 
 local instance : Fact (Nat.Prime 5) := ⟨by decide⟩
 
-/-- The paper's explicit degree-three, characteristic-five example. -/
+/-- The case `k = 3` over `F_5((X))`. -/
 theorem degree_three_char_five_analytic_without_equivalentUltrametricNorm
     (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
     ¬ HasEquivalentUltrametricNorm (LaurentField (ZMod 5) r)

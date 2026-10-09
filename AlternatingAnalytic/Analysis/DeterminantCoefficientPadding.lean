@@ -6,7 +6,15 @@ import Mathlib.LinearAlgebra.Determinant
 import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import AlternatingAnalytic.Analysis.DeterminantCoefficientSpan
 
-/-! Literal maximum-norm padding of the determinant pair, including zero auxiliary coordinates. -/
+/-!
+# Padding the determinant pair
+
+The padded spaces `E_k = E ⊕ K^n` and `D_k = D ⊕ K^n` with maximum norms, their dense
+inclusions into `A ⊕ L^n`, and the determinant `det_k` in the standard basis, as in the
+higher-degree step of the proof of Theorem H.4 (`k = p + n`). Padding leaves the span of
+determinant values unchanged, and `det_k` restricts to a `G`-valued alternating map of
+norm one on `D_k`. The case `n = 0` is included.
+-/
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 open scoped BigOperators NNReal
@@ -25,7 +33,7 @@ abbrev E := RigidDenseSource.Concrete.source p r × (Fin n → K p r)
 abbrev D := DeterminantPair.D p r × (Fin n → K p r)
 abbrev H := A p r × (Fin n → L p r)
 
-/-- Coordinatewise inclusion, valid also for the empty function space. -/
+/-- The coordinatewise inclusion `K^n → L^n`. -/
 def auxiliaryInclusion : (Fin n → K p r) →ₗᵢ[K p r] (Fin n → L p r) where
   __ := RigidDenseSource.coordinateMap (K p r) (L p r) (Fin n)
   norm_map' x := by
@@ -44,7 +52,7 @@ def auxiliaryInclusion : (Fin n → K p r) →ₗᵢ[K p r] (Fin n → L p r) wh
 theorem denseRange_auxiliaryInclusion : DenseRange (auxiliaryInclusion p r n) :=
   DenseRange.piMap fun _ => RationalField.denseRange_algebraMap (ZMod p) r
 
-/-- The literal dense isometric inclusion of the padded rigid source. -/
+/-- The dense isometric inclusion `E_k → A ⊕ L^n`. -/
 def inclusionE : E p r n →ₗᵢ[K p r] H p r n where
   __ := (RigidDenseSource.Concrete.source p r).subtype.prodMap
     (auxiliaryInclusion p r n).toLinearMap
@@ -53,7 +61,7 @@ def inclusionE : E p r n →ₗᵢ[K p r] H p r n where
     rw [(auxiliaryInclusion p r n).norm_map]
     rfl
 
-/-- The literal dense isometric inclusion of the padded determinant source. -/
+/-- The dense isometric inclusion `D_k → A ⊕ L^n`. -/
 def inclusionD : D p r n →ₗᵢ[K p r] H p r n where
   __ := (DeterminantPair.D p r).subtype.prodMap (auxiliaryInclusion p r n).toLinearMap
   norm_map' x := by
@@ -74,7 +82,7 @@ theorem denseRange_inclusionE : DenseRange (inclusionE p r n) :=
 theorem denseRange_inclusionD : DenseRange (inclusionD p r n) :=
   (DeterminantPair.denseRange_D_subtype p r).prodMap (denseRange_auxiliaryInclusion p r n)
 
-/-- The ordered standard basis has the original p coordinates first. -/
+/-- The standard basis of `A ⊕ L^n`, with the `p` coordinates of `A` first. -/
 def basis : Module.Basis (Fin (p + n)) (L p r) (H p r n) :=
   ((TruncatedPolynomial.basis (L p r) p).prod (Pi.basisFun (L p r) (Fin n))).reindex
     finSumFinEquiv
@@ -121,7 +129,7 @@ def standardD (i : Fin (p + n)) : D p r n :=
 @[simp] theorem norm_standardD (i : Fin (p + n)) : ‖standardD p r n i‖ = 1 := by
   rw [← (inclusionD p r n).norm_map, inclusionD_standardD, norm_basis]
 
-/-- The actual normalized ordered determinant on the complete ambient product. -/
+/-- The determinant on `A ⊕ L^n` in the standard basis. -/
 def delta : (Fin (p + n) → H p r n) → L p r := (basis p r n).det
 
 @[simp] theorem delta_basis : delta p r n (basis p r n) = 1 :=
@@ -147,7 +155,7 @@ theorem norm_repr_le (x : H p r n) (i : Fin (p + n)) :
         Module.Basis.prod_repr_inr, Pi.basisFun_repr]
       exact (norm_le_pi_norm x.2 i).trans (le_max_right _ _)
 
-/-- The ambient determinant has no factorial loss in the literal maximum norm. -/
+/-- The determinant is bounded by the product of the maximum norms. -/
 theorem norm_delta_le (x : Fin (p + n) → H p r n) :
     ‖delta p r n x‖ ≤ ∏ i, ‖x i‖ := by
   simpa [delta, Module.Basis.det_apply] using
@@ -187,7 +195,7 @@ theorem repr_castSucc (x : H p r (n + 1)) (i : Fin (p + n)) :
   change (basis p r (n + 1)).repr x (Fin.natAdd p (Fin.last n)) = _
   exact repr_natAdd p r (n+1) x (Fin.last n)
 
-/-- Laplace expansion along the last auxiliary coordinate reduces padding by one. -/
+/-- Laplace expansion along the last auxiliary coordinate. -/
 theorem delta_succ (x : Fin (p + (n + 1)) → H p r (n + 1)) :
     delta p r (n + 1) x = ∑ j : Fin (p + n + 1),
       (-1 : L p r) ^ ((p + n) + (j : ℕ)) * (x j).2 (Fin.last n) *
@@ -205,8 +213,7 @@ theorem delta_succ (x : Fin (p + (n + 1)) → H p r (n + 1)) :
   simp only [Matrix.submatrix_apply, Module.Basis.toMatrix_apply,
     Fin.succAbove_last, repr_castSucc]
 
-/-- Algebraic padding preserves every scalar submodule containing the original
-p-fold determinant values. No completeness or L-module structure is used. -/
+/-- If `T` contains all unpadded determinants of tuples from `S`, it contains all padded ones. -/
 theorem delta_mem_of_unpadded (S : Submodule (K p r) (A p r))
     (T : Submodule (K p r) (L p r))
     (h : ∀ x : Fin p → S, DeterminantPair.delta p r (fun i => x i) ∈ T)
@@ -235,14 +242,14 @@ theorem delta_mem_of_unpadded (S : Submodule (K p r) (A p r))
         (x j).2 (Fin.last n)) hminor using 1;
         simp only [Algebra.smul_def, map_mul, map_pow, map_neg, map_one]
 
-/-- The padded determinant on the literal D product takes values in the original G. -/
+/-- The padded determinant of a tuple from `D_k` lies in `G`. -/
 theorem delta_inclusionD_mem (x : Fin (p+n) → D p r n) :
     delta p r n (fun i => inclusionD p r n (x i)) ∈ G p r := by
   apply delta_mem_of_unpadded p r n (DeterminantPair.D p r) (G p r)
   intro y
   exact Submodule.subset_span ⟨y, rfl⟩
 
-/-- Adjoin the auxiliary standard vectors after an arbitrary original tuple. -/
+/-- Append the auxiliary standard basis vectors to a `p`-tuple. -/
 def padTuple (S : Submodule (K p r) (A p r)) (x : Fin p → S) :
     Fin (p+n) → S × (Fin n → K p r) :=
   fun i => Sum.elim (fun j => (x j, 0)) (fun j => (0, Pi.single j 1))
@@ -256,7 +263,7 @@ def padTuple (S : Submodule (K p r) (A p r)) (x : Fin p → S) :
     (x : Fin p → S) (i : Fin n) : padTuple p r n S x (Fin.natAdd p i) = (0, Pi.single i 1) := by
   simp [padTuple]
 
-/-- The block diagonal determinant identity includes the empty auxiliary block. -/
+/-- The padded determinant of a padded tuple is the unpadded determinant. -/
 theorem delta_padTuple (S : Submodule (K p r) (A p r)) (x : Fin p → S) :
     delta p r n (fun i => ((padTuple p r n S x i).1,
       fun j => algebraMap (K p r) (L p r) ((padTuple p r n S x i).2 j))) =
@@ -276,8 +283,7 @@ theorem delta_padTuple (S : Submodule (K p r) (A p r)) (x : Fin p → S) :
   rw [hmat, Matrix.det_fromBlocks_zero₂₁, Matrix.det_one, mul_one]
   rfl
 
-/-- Adjoining finitely many rational coordinates leaves the determinant-value
-span unchanged, even for zero auxiliary coordinates. -/
+/-- Padding leaves the span of determinant values unchanged. -/
 theorem span_delta_eq_unpadded (S : Submodule (K p r) (A p r)) :
     Submodule.span (K p r) (Set.range (fun x : Fin (p+n) → S × (Fin n → K p r) =>
       delta p r n (fun i => ((x i).1,
@@ -295,7 +301,7 @@ theorem span_delta_eq_unpadded (S : Submodule (K p r) (A p r)) :
     rw [← delta_padTuple p r n S x]
     exact Submodule.subset_span ⟨padTuple p r n S x, rfl⟩
 
-/-- The padded scalar determinant-value space is exactly the original primary span. -/
+/-- Determinants of tuples from `E_k` span `span_K {1, a_0, ..., a_{p-1}}`. -/
 theorem span_delta_E :
     Submodule.span (K p r) (Set.range (fun x : Fin (p+n) → E p r n =>
       delta p r n (fun i => inclusionE p r n (x i)))) = primarySpan p r := by
@@ -305,12 +311,12 @@ theorem span_delta_E :
         fun j => algebraMap (K p r) (L p r) ((x i).2 j)))) from rfl]
   rw [span_delta_eq_unpadded, delta_span_E]
 
-/-- Restriction of the actual ambient determinant to rational scalars. -/
+/-- The determinant on `A ⊕ L^n`, as a `K`-alternating map. -/
 def determinantK : H p r n [⋀^Fin (p+n)]→ₗ[K p r] L p r where
   __ := ((basis p r n).det.toMultilinearMap).restrictScalars (K p r)
   map_eq_zero_of_eq' v _i _j hv hij := (basis p r n).det.map_eq_zero_of_eq v hv hij
 
-/-- The actual G-valued normalized determinant on the padded D carrier. -/
+/-- The determinant `det_k` as a bounded `G`-valued alternating map on `D_k`. -/
 def determinantD : D p r n [⋀^Fin (p+n)]→L[K p r] G p r :=
   (((determinantK p r n).compLinearMap (inclusionD p r n).toLinearMap).codRestrict
     (G p r) (delta_inclusionD_mem p r n)).mkContinuous 1

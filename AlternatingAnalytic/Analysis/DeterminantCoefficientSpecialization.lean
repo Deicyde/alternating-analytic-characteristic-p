@@ -3,8 +3,10 @@ import AlternatingAnalytic.Analysis.DeterminantPairScalars
 /-!
 # Algebraic models and specialization of determinant coefficients
 
-The coefficient subspaces carry their inherited norms. Polynomial representatives
-and substitution in the auxiliary variables are purely algebraic constructions.
+The coefficient space `C = {λ ∈ G : a_i λ ∈ G for all i}` of Appendix H, its polynomial
+model `Cpoly`, and the specialization that sets every auxiliary variable `τ_w` to zero,
+which sends `C` into `C_0`. Evaluation and specialization are used only as algebraic maps;
+no continuity is asserted.
 -/
 
 noncomputable section
@@ -22,7 +24,7 @@ local instance specializationFieldK : Field (K p r) :=
 local instance specializationFieldL : Field (L p r) :=
   (inferInstance : NontriviallyNormedField (L p r)).toField
 
-/-- The actual scalar coefficient space, with its subtype norm. -/
+/-- The coefficient space `C = {λ ∈ G : a_i λ ∈ G for all i}`, with the norm of `L`. -/
 def C : Submodule (K p r) (L p r) :=
   G p r ⊓ ⨅ i : Fin p,
     (G p r).comap (LinearMap.mulLeft (K p r) (z p r (Sum.inl i)))
@@ -31,7 +33,7 @@ def C : Submodule (K p r) (L p r) :=
     c ∈ C p r ↔ c ∈ G p r ∧ ∀ i : Fin p, z p r (Sum.inl i) * c ∈ G p r := by
   simp [C]
 
-/-- The polynomial coefficient space in the jointly independent coordinates. -/
+/-- The polynomial model of `C`, in the variables `a_i` and `τ_w`. -/
 def Cpoly : Submodule (K p r) (Poly p r) :=
   Gpoly p r ⊓ ⨅ i : Fin p,
     (Gpoly p r).comap (LinearMap.mulLeft (K p r) (MvPolynomial.X (Sum.inl i)))
@@ -66,7 +68,7 @@ def Cpoly : Submodule (K p r) (Poly p r) :=
   exact forall_congr' fun i => by
     rw [← evaluation_X p r i, ← map_mul, evaluation_mem_G_iff]
 
-/-- Evaluation identifies exactly the polynomial and scalar coefficient spaces. -/
+/-- Evaluation maps `Cpoly` onto `C`. -/
 theorem map_Cpoly : (Cpoly p r).map (evaluation p r).toLinearMap = C p r := by
   ext c
   constructor
@@ -80,7 +82,7 @@ theorem map_Cpoly : (Cpoly p r).map (evaluation p r).toLinearMap = C p r := by
     change evaluation p r P = c at hPc
     rwa [hPc]
 
-/-- Coefficients have unique polynomial representatives without any continuity claim. -/
+/-- Every element of `C` has a unique polynomial representative in `Cpoly`. -/
 theorem existsUnique_coefficient_polynomial_representative {c : L p r}
     (hc : c ∈ C p r) :
     ∃! P : Poly p r, P ∈ Cpoly p r ∧ evaluation p r P = c := by
@@ -88,10 +90,10 @@ theorem existsUnique_coefficient_polynomial_representative {c : L p r}
     (Cpoly p r)
   rwa [← map_Cpoly] at hc
 
-/-- Polynomials in the non-auxiliary coordinates alone. -/
+/-- Polynomials in the variables `a_i` alone. -/
 abbrev Poly0 := MvPolynomial (Fin p) (K p r)
 
-/-- The literal substitution `Xᵢ ↦ Xᵢ`, `Y_w ↦ 0`. -/
+/-- The substitution `Xᵢ ↦ Xᵢ`, `Y_w ↦ 0`. -/
 def specialization : Poly p r →ₐ[K p r] Poly0 p r :=
   MvPolynomial.aeval (Sum.elim MvPolynomial.X fun _ => 0)
 
@@ -111,7 +113,7 @@ def specialization : Poly p r →ₐ[K p r] Poly0 p r :=
     specialization p r (P * Q) = specialization p r P * specialization p r Q :=
   map_mul _ _ _
 
-/-- Tags of the actual symbolic generators of `D₀`. -/
+/-- Indices of the generators `e_i`, `ε^i a`, `a²` of `D₀`. -/
 abbrev Generator0Index := Fin p ⊕ (Fin p ⊕ Unit)
 
 def includeGenerator0 : Generator0Index p → GeneratorIndex p
@@ -119,7 +121,7 @@ def includeGenerator0 : Generator0Index p → GeneratorIndex p
   | Sum.inr (Sum.inl i) => Sum.inr (Sum.inl i)
   | Sum.inr (Sum.inr u) => Sum.inr (Sum.inr (Sum.inl u))
 
-/-- Literal coordinate polynomials of the `D₀` generators. -/
+/-- Coordinate polynomials of the `D₀` generators. -/
 def gen0Poly : Generator0Index p → Fin p → Poly0 p r
   | Sum.inl i => fun k => if i = k then 1 else 0
   | Sum.inr (Sum.inl i) => fun k =>
@@ -128,11 +130,11 @@ def gen0Poly : Generator0Index p → Fin p → Poly0 p r
       ∑ i : Fin p, ∑ j : Fin p, if (i : ℕ) + (j : ℕ) = (k : ℕ)
         then MvPolynomial.X i * MvPolynomial.X j else 0
 
-/-- The non-auxiliary symbolic determinant generators. -/
+/-- The polynomial determinant of a tuple of `D₀` generators. -/
 def det0Poly (s : Fin p → Generator0Index p) : Poly0 p r :=
   Matrix.det (Matrix.of (fun i j => gen0Poly p r (s j) i))
 
-/-- The manuscript's polynomial model before adjoining the auxiliary scalars. -/
+/-- The polynomial model of `G₀`, spanned by determinants of `D₀` generators. -/
 def G0poly : Submodule (K p r) (Poly0 p r) :=
   Submodule.span (K p r) (Set.range (det0Poly p r))
 
@@ -162,8 +164,7 @@ def C0poly : Submodule (K p r) (Poly0 p r) :=
   intro i j
   exact specialization_genPoly_include p r (s j) i
 
-/-- Each auxiliary generator specializes to a zero column; the other tuples are
-exactly the symbolic `D₀` tuples. -/
+/-- Specialization sends each generator determinant into `G0poly`. -/
 theorem specialization_detPoly_mem (s : Fin p → GeneratorIndex p) :
     specialization p r (detPoly p r s) ∈ G0poly p r := by
   classical
@@ -200,8 +201,7 @@ theorem specialization_mem_Gpoly {P : Poly p r} (hP : P ∈ Gpoly p r) :
   | add P Q hP hQ ihP ihQ => simpa using (G0poly p r).add_mem ihP ihQ
   | smul c P hP ihP => simpa using (G0poly p r).smul_mem c ihP
 
-/-- Algebraic specialization maps the whole determinant space onto the original
-non-auxiliary determinant space. -/
+/-- Specialization maps `Gpoly` onto `G0poly`. -/
 theorem map_specialization_Gpoly :
     (Gpoly p r).map (specialization p r).toLinearMap = G0poly p r := by
   apply le_antisymm
@@ -213,7 +213,7 @@ theorem map_specialization_Gpoly :
       Submodule.subset_span ⟨includeGenerator0 p ∘ s, rfl⟩,
       specialization_detPoly_include p r s⟩
 
-/-- Coefficient membership is preserved by the algebraic substitution. -/
+/-- Specialization maps `Cpoly` into `C0poly`. -/
 theorem specialization_mem_Cpoly {P : Poly p r} (hP : P ∈ Cpoly p r) :
     specialization p r P ∈ C0poly p r := by
   obtain ⟨hP, hX⟩ := (mem_Cpoly p r).mp hP
@@ -226,7 +226,7 @@ theorem map_specialization_Cpoly_le :
   rintro P ⟨Q, hQ, rfl⟩
   exact specialization_mem_Cpoly p r hQ
 
-/-- The inherited coefficient norm is exactly the Laurent-field norm. -/
+/-- The norm on `C` is the norm of `L`. -/
 theorem norm_C (c : C p r) : ‖c‖ = ‖(c : L p r)‖ := rfl
 
 /-- Polynomial evaluation gives an algebraic linear equivalence onto `G`. -/
@@ -237,8 +237,7 @@ def polynomialEquivG : Gpoly p r ≃ₗ[K p r] G p r :=
 @[simp] theorem polynomialEquivG_apply (P : Gpoly p r) :
     (polynomialEquivG p r P : L p r) = evaluation p r P := rfl
 
-/-- Polynomial evaluation gives an algebraic linear equivalence onto `C`.
-No continuity of this map or of its inverse is asserted. -/
+/-- Polynomial evaluation gives an algebraic linear equivalence onto `C`. -/
 def polynomialEquivC : Cpoly p r ≃ₗ[K p r] C p r :=
   (Submodule.equivMapOfInjective (evaluation p r).toLinearMap
     (evaluation_injective p r) (Cpoly p r)).trans (LinearEquiv.ofEq _ _ (map_Cpoly p r))
@@ -250,7 +249,7 @@ def polynomialEquivC : Cpoly p r ≃ₗ[K p r] C p r :=
     evaluation p r ((polynomialEquivC p r).symm c : Poly p r) = (c : L p r) := by
   rw [← polynomialEquivC_apply, LinearEquiv.apply_symm_apply]
 
-/-- Algebraic specialization restricted to the coefficient space. -/
+/-- Specialization restricted to `Cpoly`. -/
 def coefficientSpecialization : Cpoly p r →ₗ[K p r] C0poly p r :=
   ((specialization p r).toLinearMap.comp (Cpoly p r).subtype).codRestrict
     (C0poly p r) (fun P => specialization_mem_Cpoly p r P.property)
@@ -258,8 +257,7 @@ def coefficientSpecialization : Cpoly p r →ₗ[K p r] C0poly p r :=
 @[simp] theorem coefficientSpecialization_apply (P : Cpoly p r) :
     (coefficientSpecialization p r P : Poly0 p r) = specialization p r P := rfl
 
-/-- The full algebraic specialization statement for the actual scalar and
-polynomial models. All maps displayed here are algebraic. -/
+/-- The polynomial models of `G` and `C` and the specialization `C → C_0`, collected. -/
 theorem coefficient_polynomial_specialization :
     (∀ c : L p r, c ∈ C p r ↔
       c ∈ G p r ∧ ∀ i : Fin p, z p r (Sum.inl i) * c ∈ G p r) ∧

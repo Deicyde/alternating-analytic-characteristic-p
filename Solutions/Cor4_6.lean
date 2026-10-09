@@ -9,23 +9,11 @@ import Mathlib.Analysis.Normed.Module.Seminorm.Basic
 import AlternatingAnalytic.Geometry.BundleRows.ActionFamilies
 
 /-!
-# Corollary 4.6 (the bundle theorem), p. 12
+# Proof of Corollary 4.6
 
-Solution: the 14 statements of `Challenges/Cor4_6.lean`, proved from the library. Each object
-part is `AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family` and each morphism part
-is `AlternatingAnalytic.alternatingBundleHom_of_family` (`Geometry/AnalyticAlternatingBundle.lean`,
-`Geometry/AnalyticAlternatingBundleMorphism.lean`), fed with the family-preservation input of its
-setting from `Geometry/BundleRows/ActionFamilies.lean`:
-* row 1, `k! ≠ 0`: `BundleRows.hloc_factorial`;
-* row 1, equivalent spherically complete ultrametric target norm:
-  `BundleRows.hloc_equivalentSphericalNorm`, from the transfer
-  `EquivalentSphericalNorm.hasBoundedLift_of_equivalentSphericalNorm`
-  (`Geometry/BundleRows/EquivalentSphericalNorm.lean`);
-* row 1, finite-coordinate source: `BundleRows.hloc_finiteSource`;
-* row 2: `contMDiffVectorBundle_alternating_of_finiteCoordinates`,
-  `alternatingBundleHom_of_finiteCoordinates`;
-* row 3: `BundleRows.hloc_c0_retract`; row 4: `isAdmissibleOn_of_l1_retract`;
-* `C^n`, `C^∞`: `BundleRows.smooth_family`.
+Each object part is `contMDiffVectorBundle_alternating_of_family` and each morphism part is
+`alternatingBundleHom_of_family` (`Geometry/AnalyticAlternatingBundle*.lean`), fed with the input
+for its setting from `Geometry/BundleRows/ActionFamilies.lean`.
 -/
 
 open Bundle
@@ -50,8 +38,7 @@ def HasEquivalentSphericallyCompleteUltrametricNorm
       (∀ p ∈ S, ∀ p' ∈ S, ∃ z, q (z - p.1) ≤ p.2 ∧ q (z - p'.1) ≤ p'.2) →
       ∃ z, ∀ p ∈ S, q (z - p.1) ≤ p.2)
 
-/-- **Corollary 4.6, Row 1, first alternative: arbitrary model `P`, `k! ≠ 0` in `K`.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 1, `k! ≠ 0` in `K`: the alternating bundle is analytic. -/
 theorem row1_factorial_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -78,8 +65,7 @@ theorem row1_factorial_bundle
     (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_factorial k hk hV hγ') hU hγ)
 
-/-- **Corollary 4.6, Row 1, first alternative: arbitrary model `P`, `k! ≠ 0` in `K`.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 1, `k! ≠ 0` in `K`: analytic morphisms induce an analytic morphism. -/
 theorem row1_factorial_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -125,9 +111,8 @@ theorem row1_factorial_morphism
     (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_factorial k hk hV hγ') hU hγ) u v, fun _ _ ↦ rfl⟩
 
-/-- **Corollary 4.6, Row 1, second alternative: arbitrary model `P`, `K` nonarchimedean and the target
-fibers admit equivalent nonarchimedean spherically complete norms.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 1, `K` nonarchimedean and target fibers with an equivalent
+spherically complete ultrametric norm: the alternating bundle is analytic. -/
 theorem row1_spherical_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -156,9 +141,8 @@ theorem row1_spherical_bundle
       (fun {_} {_} hV hγ' ↦
         AlternatingAnalytic.BundleRows.hloc_equivalentSphericalNorm k hF₂ hV hγ') hU hγ)
 
-/-- **Corollary 4.6, Row 1, second alternative: arbitrary model `P`, `K` nonarchimedean and the target
-fibers admit equivalent nonarchimedean spherically complete norms.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 1, `K` nonarchimedean and target fibers with an equivalent
+spherically complete ultrametric norm: analytic morphisms induce an analytic morphism. -/
 theorem row1_spherical_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -210,9 +194,8 @@ theorem row1_spherical_morphism
         AlternatingAnalytic.BundleRows.hloc_equivalentSphericalNorm k hB hV hγ') hU hγ) u v,
     fun _ _ ↦ rfl⟩
 
-/-- **Corollary 4.6, Row 1, third alternative: arbitrary model `P`, the source fibers have finite continuous
-coordinates.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 1, source fibers with finite continuous coordinates: the alternating
+bundle is analytic. -/
 theorem row1_finiteSourceCoordinates_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -239,9 +222,8 @@ theorem row1_finiteSourceCoordinates_bundle
     (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_finiteSource k c₁ hV hγ') hU hγ)
 
-/-- **Corollary 4.6, Row 1, third alternative: arbitrary model `P`, the source fibers have finite continuous
-coordinates.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 1, source fibers with finite continuous coordinates: analytic
+morphisms induce an analytic morphism. -/
 theorem row1_finiteSourceCoordinates_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -287,8 +269,8 @@ theorem row1_finiteSourceCoordinates_morphism
     (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_finiteSource k cA' hV hγ') hU hγ) u v, fun _ _ ↦ rfl⟩
 
-/-- **Corollary 4.6, Row 2: the base model `P` has finite continuous coordinates; arbitrary normed fibers.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 2, model `P` with finite continuous coordinates: the alternating
+bundle is analytic. -/
 theorem row2_finiteCoordinateBase_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -313,8 +295,8 @@ theorem row2_finiteCoordinateBase_bundle
       (fun x ↦ E₁ x [⋀^Fin k]→L[K] E₂ x) 𝓘(K, P) := by
   exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_finiteCoordinates c k
 
-/-- **Corollary 4.6, Row 2: the base model `P` has finite continuous coordinates; arbitrary normed fibers.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 2, model `P` with finite continuous coordinates: analytic morphisms
+induce an analytic morphism. -/
 theorem row2_finiteCoordinateBase_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -352,9 +334,8 @@ theorem row2_finiteCoordinateBase_morphism
         T b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b)) := by
   exact ⟨AlternatingAnalytic.alternatingBundleHom_of_finiteCoordinates c k u v, fun _ _ ↦ rfl⟩
 
-/-- **Corollary 4.6, Row 3: the base model `P` is `c₀(I, K)` or a bounded linear retract of it; `K`
-nonarchimedean; complete nonarchimedean target fibers.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 3, model a retract of `c₀(I, K)`, `K` nonarchimedean, complete
+nonarchimedean target fibers: the alternating bundle is analytic. -/
 theorem row3_c0Retract_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -385,9 +366,8 @@ theorem row3_c0Retract_bundle
     (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_c0_retract k i r hri hV hγ') hU hγ)
 
-/-- **Corollary 4.6, Row 3: the base model `P` is `c₀(I, K)` or a bounded linear retract of it; `K`
-nonarchimedean; complete nonarchimedean target fibers.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 3, model a retract of `c₀(I, K)`, `K` nonarchimedean, complete
+nonarchimedean target fibers: analytic morphisms induce an analytic morphism. -/
 theorem row3_c0Retract_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -437,9 +417,8 @@ theorem row3_c0Retract_morphism
     (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ AlternatingAnalytic.BundleRows.hloc_c0_retract k i r hri hV hγ') hU hγ) u v, fun _ _ ↦ rfl⟩
 
-/-- **Corollary 4.6, Row 4: the base model `P` is `ℓ¹(I, K)` or a bounded linear retract of it; complete
-target fibers.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, row 4, model a retract of `ℓ¹(I, K)`, complete target fibers: the
+alternating bundle is analytic. -/
 theorem row4_l1Retract_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -469,9 +448,8 @@ theorem row4_l1Retract_bundle
     (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ (AlternatingAnalytic.isAdmissibleOn_of_l1_retract k i r hri hγ').2) hU hγ)
 
-/-- **Corollary 4.6, Row 4: the base model `P` is `ℓ¹(I, K)` or a bounded linear retract of it; complete
-target fibers.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, row 4, model a retract of `ℓ¹(I, K)`, complete target fibers: analytic
+morphisms induce an analytic morphism. -/
 theorem row4_l1Retract_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -520,9 +498,8 @@ theorem row4_l1Retract_morphism
     (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.glue_contMDiffOn_alternatingMapAction k
       (fun {_} {_} hV hγ' ↦ (AlternatingAnalytic.isAdmissibleOn_of_l1_retract k i r hri hγ').2) hU hγ) u v, fun _ _ ↦ rfl⟩
 
-/-- **Corollary 4.6, Final sentence: at every finite smoothness order and at `C^∞` (`n : ℕ∞`), no hypothesis
-on `K`, `P` or the fibers.**
-Object part (analytic alternating bundle). -/
+/-- Corollary 4.6, last sentence: for `n : ℕ∞`, the alternating bundle of `C^n` bundles
+is `C^n`. -/
 theorem smooth_bundle
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]
@@ -548,9 +525,7 @@ theorem smooth_bundle
   exact AlternatingAnalytic.contMDiffVectorBundle_alternating_of_family (I := 𝓘(K, P)) (n := (n : WithTop ℕ∞)) k
     (fun {_} hU {_} hγ ↦ AlternatingAnalytic.BundleRows.smooth_family k n hU hγ)
 
-/-- **Corollary 4.6, Final sentence: at every finite smoothness order and at `C^∞` (`n : ℕ∞`), no hypothesis
-on `K`, `P` or the fibers.**
-Morphism part (operator-valued morphisms). -/
+/-- Corollary 4.6, last sentence: for `n : ℕ∞`, `C^n` morphisms induce a `C^n` morphism. -/
 theorem smooth_morphism
     {K : Type uK} [NontriviallyNormedField K]
     {M : Type uM} [TopologicalSpace M]

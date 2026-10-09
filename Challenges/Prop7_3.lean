@@ -19,23 +19,19 @@ the natural alternating cotangent atlas is analytic and its analytic sections ar
 ambient analytic forms. The same conclusion holds when `P` has finite continuous coordinates.
 
 ## Formalization notes
-* Degree: index type `Fin k`; `[CompleteSpace K]` as in Section 7.
-* **Chart level.** A coefficient map on an open `U ⊆ P` is `η : P → Alt^k(P; K)`;
-  "intrinsically analytic" is `AnalyticOnNhd K η U`, "ambient analytic" is
-  `IsAmbientAnalyticOn η U := AnalyticOnNhd K (j ∘ η) U` (introduced here, the same definition
-  as in `Challenges/Thm7_2.lean`), `j = ContinuousAlternatingMap.toContinuousMultilinearMap`.
-* "The natural alternating cotangent atlas is analytic" is stated at chart level as: for every
-  `C^ω` chart change `ψ` on an open `U ⊆ P` (`ContDiffOn K ω ψ U`), the induced transition
-  `y ↦ (Dψ(y))^*` on `Alt^k(P; K)` is analytic on `U`. (This quantifies over all `C^ω` maps,
-  not only those with `C^ω` inverse; the paper's proof gives this.) "Its analytic sections are
-  precisely the ambient analytic forms" is, in a chart, `AnalyticOnNhd K η U ↔
-  IsAmbientAnalyticOn η U`.
-* **Manifold level.** In addition, `part2_manifold` / `part3_manifold` state the atlas claim for
-  an actual analytic manifold `M` modeled on `P` (`IsManifold 𝓘(K, P) ω M`): Mathlib's bundle
-  `x ↦ Alt^k(T_x M; K)` (continuous alternating maps from the tangent bundle to the trivial
-  bundle `Bundle.Trivial M K`, with Mathlib's induced trivializations) is
-  `ContMDiffVectorBundle ω`. The manifold-level section statement is not formalized (Mathlib has
-  no bundle of continuous multilinear maps to express ambient forms on `M`).
+* The degree is `Fin k`; `[CompleteSpace K]` as in Section 7.
+* Chart level: a coefficient map on an open `U ⊆ P` is `η : P → Alt^k(P; K)`. "Intrinsically
+  analytic" is `AnalyticOnNhd K η U`; "ambient analytic" is `IsAmbientAnalyticOn η U`, i.e.
+  `AnalyticOnNhd K (j ∘ η) U` with `j = ContinuousAlternatingMap.toContinuousMultilinearMap`
+  (as in `Challenges/Thm7_2.lean`).
+* "The alternating cotangent atlas is analytic" is stated in a chart: for every `C^ω` map `ψ`
+  on an open `U ⊆ P`, the transition `y ↦ (Dψ(y))^*` on `Alt^k(P; K)` is analytic on `U`. This
+  covers all `C^ω` maps, not only invertible ones. "Its analytic sections are the ambient
+  analytic forms" is `AnalyticOnNhd K η U ↔ IsAmbientAnalyticOn η U`.
+* Manifold level: `part2_manifold` and `part3_manifold` state the atlas claim for an analytic
+  manifold `M` modeled on `P`: Mathlib's bundle `x ↦ Alt^k(T_x M; K)` is
+  `ContMDiffVectorBundle ω`. The section statement on `M` is not formalized (Mathlib has no
+  bundle of continuous multilinear maps to express ambient forms on `M`).
 * A bounded linear retraction of `j` is `R : Mult^k(P; K) →L[K] Alt^k(P; K)` with
   `R (j a) = a`. Finite continuous coordinates are `c : P ≃L[K] (Fin d → K)`.
 -/
@@ -55,12 +51,12 @@ def IsAmbientAnalyticOn {K : Type uK} [NontriviallyNormedField K]
 variable (K : Type uK) [NontriviallyNormedField K] [CompleteSpace K]
   (P : Type uP) [NormedAddCommGroup P] [NormedSpace K P]
 
-/-- **Proposition 7.3, part 1.** Intrinsically analytic coefficient maps are ambient analytic. -/
+/-- Proposition 7.3, part 1: intrinsically analytic coefficient maps are ambient analytic. -/
 theorem part1 (k : ℕ) (U : Set P) (η : P → P [⋀^Fin k]→L[K] K) (hη : AnalyticOnNhd K η U) :
     IsAmbientAnalyticOn η U := by
   sorry
 
-/-- **Proposition 7.3, part 2 (chart level).** If `j` has a bounded linear retraction, then the
+/-- Proposition 7.3, part 2, in a chart: if `j` has a bounded linear retraction, then the
 induced alternating transitions of `C^ω` chart changes are analytic, and intrinsic and ambient
 analyticity of coefficient maps coincide. -/
 theorem part2 (k : ℕ)
@@ -74,7 +70,7 @@ theorem part2 (k : ℕ)
       (AnalyticOnNhd K η U ↔ IsAmbientAnalyticOn η U)) := by
   sorry
 
-/-- **Proposition 7.3, part 3 (chart level).** The same conclusions when `P` has finite
+/-- Proposition 7.3, part 3, in a chart: the same conclusions when `P` has finite
 continuous coordinates. -/
 theorem part3 (k : ℕ) {d : ℕ} (c : P ≃L[K] (Fin d → K)) :
     (∀ (U : Set P) (ψ : P → P), IsOpen U → ContDiffOn K ω ψ U →
@@ -85,7 +81,7 @@ theorem part3 (k : ℕ) {d : ℕ} (c : P ≃L[K] (Fin d → K)) :
       (AnalyticOnNhd K η U ↔ IsAmbientAnalyticOn η U)) := by
   sorry
 
-/-- **Proposition 7.3, part 2 (manifold level, atlas).** If `j` has a bounded linear retraction,
+/-- Proposition 7.3, part 2, atlas on a manifold: if `j` has a bounded linear retraction,
 the alternating cotangent bundle `x ↦ Alt^k(T_x M; K)` of an analytic manifold modeled on `P`
 is an analytic vector bundle. -/
 theorem part2_manifold (k : ℕ)
@@ -96,7 +92,7 @@ theorem part2_manifold (k : ℕ)
       (fun x : M => TangentSpace 𝓘(K, P) x [⋀^Fin k]→L[K] Bundle.Trivial M K x) 𝓘(K, P) := by
   sorry
 
-/-- **Proposition 7.3, part 3 (manifold level, atlas).** With finite continuous coordinates on
+/-- Proposition 7.3, part 3, atlas on a manifold: with finite continuous coordinates on
 `P`, the alternating cotangent bundle of an analytic manifold modeled on `P` is analytic. -/
 theorem part3_manifold (k : ℕ) {d : ℕ} (c : P ≃L[K] (Fin d → K))
     (M : Type uM) [TopologicalSpace M] [ChartedSpace P M] [IsManifold 𝓘(K, P) ω M] :

@@ -2,7 +2,13 @@ import AlternatingAnalytic.Analysis.RigidDenseSourceGeneric
 import AlternatingAnalytic.Analysis.RationalLaurentScalars
 import AlternatingAnalytic.Analysis.TruncatedPolynomialMaxNorm
 
-/-! The literal rigid source in the maximum-norm truncated polynomial algebra. -/
+/-!
+# The rigid source in `L[ε]/(ε^p)`
+
+With `K = F_p(t)`, `L = F_p((t))` and `A = L[ε]/(ε^p)` with the maximum norm in the basis `ε^i`,
+the source `E = K^p + K a ⊆ A`, `a = ∑ a_i ε^i`. Transporting the general results along the
+coefficient isometry `A ≃ L^p` gives Lemma H.5 for this `E`.
+-/
 noncomputable section
 open scoped BigOperators NNReal
 namespace AlternatingAnalytic.RigidDenseSource.Concrete
@@ -33,11 +39,12 @@ instance instNormedSpaceK : NormedSpace (K p r) (A p r) :=
 instance instCompleteSpace : CompleteSpace (A p r) :=
   TruncatedPolynomial.instCompleteSpace (L p r) p
 
-/-- The primary coordinates and all auxiliary scalars come from one independent family. -/
+/-- The coordinates `a_i` of `a`, taken from the independent family of
+`RationalLaurentScalars`. -/
 def a : Fin p → L p r :=
   RationalLaurentScalars.a p r (RationalLaurentScalars.AuxiliaryIndex p)
 
-/-- The actual coefficient isometry, restricted to the rational scalar field. -/
+/-- The coefficient isometry `A ≃ L^p`, as a `K`-linear map. -/
 def coordinates : A p r ≃ₗᵢ[K p r] (Fin p → L p r) :=
   { (TruncatedPolynomial.coefficientIsometry (L p r) p).toEquiv with
     map_add' := (TruncatedPolynomial.coefficientIsometry (L p r) p).map_add
@@ -50,18 +57,18 @@ def coordinates : A p r ≃ₗᵢ[K p r] (Fin p → L p r) :=
 theorem coordinates_apply (x : A p r) :
     coordinates p r x = TruncatedPolynomial.coefficientIsometry (L p r) p x := rfl
 
-/-- The vector called `a` in the manuscript's truncated algebra. -/
+/-- The vector `a = ∑ a_i ε^i` in `A`. -/
 def vector : A p r := (coordinates p r).symm (a p r)
 
 theorem vector_expansion : vector p r =
     ∑ i : Fin p, a p r i • TruncatedPolynomial.epsilon (L p r) p ^ (i : ℕ) :=
   TruncatedPolynomial.coefficientIsometry_symm_apply (L p r) p (a p r)
 
-/-- The literal source in `A`, carrying its inherited maximum norm. -/
+/-- The source `E = K^p + K a ⊆ A`, with the norm of `A`. -/
 def source : Submodule (K p r) (A p r) :=
   (RigidDenseSource.source (K p r) (a p r)).comap (coordinates p r).toLinearMap
 
-/-- Exact coefficient coordinates identify the two actual subspaces. -/
+/-- Coefficients identify `E ⊆ A` isometrically with the source in `L^p`. -/
 def sourceEquiv : source p r ≃ₗᵢ[K p r] RigidDenseSource.source (K p r) (a p r) where
   toFun x := ⟨coordinates p r x, x.property⟩
   invFun y := ⟨(coordinates p r).symm y, by
@@ -136,7 +143,7 @@ instance finiteDimensional_source : Module.Finite (K p r) (source p r) :=
 instance nontrivial_source : Nontrivial (source p r) :=
   (sourceEquiv p r).toEquiv.nontrivial
 
-/-- The actual quotient powers belong to the literal source. -/
+/-- The basis vector `ε^i` as an element of `E`. -/
 def standard (i : Fin p) : source p r :=
   (sourceEquiv p r).symm (RigidDenseSource.standard (K p r) (a p r) i)
 
@@ -169,7 +176,7 @@ theorem norm_source (x : source p r) :
     ‖x‖ = (Finset.univ.sup fun i : Fin p =>
       ‖TruncatedPolynomial.coeff (L p r) p x i‖₊ : ℝ≥0) := rfl
 
-/-- Rigidity transports along the same exact coefficient isometry. -/
+/-- Every bounded endomorphism of `E` is multiplication by a unique scalar. -/
 theorem existsUnique_scalar (T : source p r →L[K p r] source p r) :
     ∃! s : K p r, ∀ x, T x = s • x := by
   let e := (sourceEquiv p r).toContinuousLinearEquiv
@@ -189,7 +196,7 @@ theorem exists_scalar (T : source p r →L[K p r] source p r) :
     ∃ s : K p r, ∀ x, T x = s • x :=
   (existsUnique_scalar p r T).exists
 
-/-- Every bounded functional to the actual incomplete rational field vanishes. -/
+/-- Every bounded functional `E → K` is zero. -/
 theorem dual_eq_zero (f : source p r →L[K p r] K p r) : f = 0 := by
   have h := RigidDenseSource.dual_eq_zero
     (RationalField.denseRange_algebraMap (ZMod p) r) (algebraicIndependent_a p r)
@@ -198,7 +205,7 @@ theorem dual_eq_zero (f : source p r →L[K p r] K p r) : f = 0 := by
   have hx := congrArg (fun f => f (sourceEquiv p r x)) h
   simpa using hx
 
-/-- Isometric scalar coordinates on the literal source's bounded endomorphisms. -/
+/-- The isometry `End(E) ≃ K` sending an endomorphism to its scalar. -/
 def endScalarEquiv : (source p r →L[K p r] source p r) ≃ₗᵢ[K p r] K p r :=
   endScalarEquivOfRigidity (exists_scalar p r)
 

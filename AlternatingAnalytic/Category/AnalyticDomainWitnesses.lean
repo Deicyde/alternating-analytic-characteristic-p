@@ -3,9 +3,10 @@ import AlternatingAnalytic.Category.AnalyticDomainIsoClosure
 /-!
 # Incompatible analytic singleton domains
 
-A greatest full analytic domain must contain every analytic singleton. Thus two
-analytic self-actions and one nonanalytic directed cross-action exclude a greatest
-domain. This does not exclude maximal domains.
+A largest analytic domain would contain every analytic singleton. So two objects with
+analytic endomorphism actions and a nonanalytic action between them rule out a largest domain,
+with or without isomorphism closure. This is the reduction used in Theorem H.4; it says nothing
+about maximal domains.
 -/
 
 noncomputable section
@@ -18,7 +19,7 @@ namespace AlternatingAnalytic
 
 variable (K : Type u) [NontriviallyNormedField K] (k : ℕ)
 
-/-- The actual singleton full restriction is analytic exactly when its self-action is. -/
+/-- A singleton is an analytic domain iff its endomorphism action is analytic. -/
 theorem isAlternatingAnalyticDomain_singleton_iff
     (X : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K) :
     IsAlternatingAnalyticDomain K k (fun Z => Z = X) ↔
@@ -31,7 +32,8 @@ theorem isAlternatingAnalyticDomain_singleton_iff
   · rintro h _ _ rfl rfl
     exact h
 
-/-- The bad arrow is from `Y` to `X`, with first coordinate `X.1 →L Y.1`. -/
+/-- Two analytic singletons with a nonanalytic action from `Y` to `X` rule out a largest
+analytic domain. The first coordinate of an arrow `Y ⟶ X` is a map `X.1 →L Y.1`. -/
 theorem no_greatest_analyticDomain_of_incompatible
     (X Y : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K)
     (hX : AnalyticOnNhd K (alternatingMapAction (K := K)
@@ -48,8 +50,7 @@ theorem no_greatest_analyticDomain_of_incompatible
     ((isAlternatingAnalyticDomain_singleton_iff K k Y).2 hY) Y rfl
   exact hYX ((isAlternatingAnalyticDomain_iff_coordinates K k S).1 hS Y X hYS hXS)
 
-/-- The two full isomorphism closures are analytic witnesses in the class of
-replete domains. The ordering is still inclusion of actual object properties. -/
+/-- The same conclusion among isomorphism-closed analytic domains, ordered by inclusion. -/
 theorem no_greatest_repleteAnalyticDomain_of_incompatible
     (X Y : (NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K)
     (hX : AnalyticOnNhd K (alternatingMapAction (K := K)

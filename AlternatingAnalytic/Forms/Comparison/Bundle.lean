@@ -3,10 +3,9 @@ import AlternatingAnalytic.Forms.Comparison.Basic
 /-!
 # Alternating bundles from a bounded retraction
 
-If the inclusion `j : Alt^k(F₁; F₂) → Mult^k(F₁; F₂)` has a bounded linear retraction, then
-precomposition is `C^ω`, so the joint alternating-map action is analytic everywhere and preserves
-`C^n` families. The alternating bundle `x ↦ Alt^k(E₁ x; E₂ x)` of two `C^n` vector bundles is
-therefore `C^n` (`paper/charp.tex`, Proposition 7.3, part 2, at manifold level).
+If the inclusion `j : Alt^k(F₁; F₂) → Mult^k(F₁; F₂)` has a bounded linear retraction, the
+joint alternating-map action is analytic, so the alternating bundle `x ↦ Alt^k(E₁ x; E₂ x)` of
+two `C^n` vector bundles is `C^n`. This is the atlas statement of Proposition 7.3 for manifolds.
 -/
 
 noncomputable section

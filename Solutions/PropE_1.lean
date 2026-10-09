@@ -6,16 +6,11 @@ import AlternatingAnalytic.Analysis.EquivalentUltrametric
 import AlternatingAnalytic.Analysis.CompletedBaseChange
 
 /-!
-# Proposition E.1 (the target has no equivalent nonarchimedean norm), pp. 47-48
+# Proof of Proposition E.1
 
-Solution: the statements of `Challenges/PropE_1.lean`, proved from
-`AlternatingAnalytic/Analysis/LaurentBlockNorms.lean` (`norm_laurentBlockWedge`,
-`le_norm_sum_laurentBlockWedge`, `norm_sum_laurentBlockWedge_le`),
-`AlternatingAnalytic/Analysis/LaurentCompletedCoefficient.lean`
-(`laurentExterior_hasLinearUnitSumGrowth`, `laurentExterior_not_hasEquivalentUltrametricNorm`),
-`AlternatingAnalytic/Analysis/UnitSumGrowth.lean` (`HasLinearUnitSumGrowth.map`,
-`HasLinearUnitSumGrowth.not_hasEquivalentUltrametricNorm`) and
-`AlternatingAnalytic/Analysis/LaurentWedgeCoefficient.lean` (`geometricWeight_le_maximum`).
+Uses the block-norm estimates of `AlternatingAnalytic/Analysis/LaurentBlockNorms.lean`,
+`laurentExterior_hasLinearUnitSumGrowth` and `laurentExterior_not_hasEquivalentUltrametricNorm`
+from `LaurentCompletedCoefficient.lean`, and `HasLinearUnitSumGrowth` from `UnitSumGrowth.lean`.
 -/
 
 noncomputable section
@@ -30,19 +25,17 @@ universe u
 
 variable (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ)
 
-/-- The unit vector `e_n ∈ E₀ = κ^ℕ ⊆ E₁ = ℓ^∞(ℕ, K₁)` (entries in `κ`, embedded as constant
-Laurent series). -/
+/-- The unit vector `e_n ∈ E₀ = κ^ℕ ⊆ E₁ = ℓ^∞(ℕ, K₁)`, with entries embedded as constant
+Laurent series. -/
 def unitVector (n : ℕ) : ℕ →ᵇ LaurentField κ r :=
   constantLaurentArray κ r (Pi.single n (1 : κ))
 
-/-- The block wedge `ω_j = e_{kj+1} ∧ ⋯ ∧ e_{kj+k}` in the Banach exterior target
-`B = ProjectiveExteriorCompletion K₁ ℕ k`. -/
+/-- The block wedge `ω_j = e_{kj+1} ∧ ⋯ ∧ e_{kj+k}` in `B`. -/
 def blockWedge (j : ℕ) : ProjectiveExteriorCompletion (LaurentField κ r) ℕ k :=
   completedExteriorWedge (LaurentField κ r) ℕ k
     (fun i : Fin k => unitVector κ r (k * j + i.val + 1))
 
-/-- The constant `M_r = max_{l ∈ ℕ} (l + 1) r^l` (the maximum exists, so it equals the
-supremum). -/
+/-- The constant `M_r = max_{l ∈ ℕ} (l + 1) r^l`, written as a supremum. -/
 def weightMax : ℝ := ⨆ l : ℕ, ((l : ℝ) + 1) * (r : ℝ) ^ l
 
 /-- Proposition E.1: every block wedge has norm one. -/
@@ -96,8 +89,7 @@ theorem not_isUltrametricDist_F (hk : 2 ≤ k)
       ⟨1, one_pos, fun x => by simp⟩, ⟨1, one_pos, fun x => by simp⟩⟩
 
 /-- Proposition E.1: for `K' ⊇ K₁` satisfying (H1) and (H2), `F = B ⊗̂_π K'` admits no
-equivalent nonarchimedean norm, whether regarded as a normed space over `K'` or over any
-subfield `K₀` of `K'`. -/
+equivalent nonarchimedean norm over `K'` or over any subfield `K₀` of `K'`. -/
 theorem not_hasEquivalentUltrametricNorm_F (hk : 2 ≤ k)
     (K' : Type u) [NontriviallyNormedField K'] [NormedAlgebra (LaurentField κ r) K']
     [IsUltrametricDist K']

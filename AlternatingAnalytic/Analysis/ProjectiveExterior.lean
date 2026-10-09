@@ -6,12 +6,17 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.Analysis.Normed.Module.Completion
 
 /-!
-# The ordinary-sum projective exterior norm and completion
+# The projective norm on exterior powers of bounded functions
 
-Finite wedge decompositions define the ordinary-sum projective norm on exterior powers
-of bounded functions. Determinant coordinates prove positivity and give a contraction.
-The Banach completion carries the canonical continuous alternating wedge map and the
-continuous extension of the determinant map.
+The projective seminorm on `⋀^k V` is the infimum of `∑ ∏ ‖x_i‖` over decompositions into
+pure wedges, with ordinary sums. On `⋀^k (S →ᵇ K)` over an ultrametric field, the determinant
+array `Ω` is injective with `‖Ω‖ ≤ 1`, so the seminorm is a norm. We also build the
+completion `B` with its wedge map `J` and the extension `W_B` of `Ω`. This is Lemma C.2.
+
+## Main results
+
+- `projectiveExterior_properties`: Lemma C.2 for the normed exterior power.
+- `projectiveExteriorCompletion_properties`: the statements about the completion.
 -/
 
 namespace AlternatingAnalytic
@@ -53,7 +58,7 @@ theorem exists_exterior_decomposition (ω : ⋀[K]^k V) :
     obtain ⟨p, rfl⟩ := hω
     exact ⟨_, exteriorDecompositionValue_smul p a⟩
 
-/-- The admissible finite weighted decompositions of an exterior vector. -/
+/-- The weighted wedge decompositions of an exterior vector. -/
 def exteriorDecompositions (ω : ⋀[K]^k V) :
     Set (FreeAddMonoid (K × (Fin k → V))) :=
   {p | exteriorDecompositionValue p = ω}
@@ -61,7 +66,7 @@ def exteriorDecompositions (ω : ⋀[K]^k V) :
 instance (ω : ⋀[K]^k V) : Nonempty (exteriorDecompositions ω) :=
   nonempty_subtype.mpr (exists_exterior_decomposition ω)
 
-/-- The ordinary sum of the products of norms in a weighted wedge decomposition. -/
+/-- The cost `∑ ‖a_j‖ ∏ ‖x_{j,i}‖` of a weighted wedge decomposition. -/
 def exteriorDecompositionCost (p : FreeAddMonoid (K × (Fin k → V))) : ℝ :=
   PiTensorProduct.projectiveSeminormAux p
 
@@ -73,7 +78,7 @@ theorem exteriorDecompositionCost_bddBelow (ω : ⋀[K]^k V) :
     BddBelow (Set.range fun p : exteriorDecompositions ω ↦ exteriorDecompositionCost p.val) :=
   ⟨0, by rintro _ ⟨p, rfl⟩; exact exteriorDecompositionCost_nonneg p.val⟩
 
-/-- The infimum of the ordinary-sum costs of all finite weighted wedge decompositions. -/
+/-- The infimum of the costs of all weighted wedge decompositions. -/
 noncomputable def projectiveExteriorSeminormFun (ω : ⋀[K]^k V) : ℝ :=
   ⨅ p : exteriorDecompositions ω, exteriorDecompositionCost p.val
 
@@ -104,7 +109,7 @@ theorem projectiveExteriorSeminormFun_smul_le (a : K) (ω : ⋀[K]^k V) :
     rw [exteriorDecompositionValue_smul, p.property]
   · exact (PiTensorProduct.projectiveSeminormAux_smul p.val a).le
 
-/-- The projective exterior seminorm, using ordinary sums rather than maxima. -/
+/-- The projective seminorm on `⋀^k V`, using ordinary sums rather than maxima. -/
 noncomputable def projectiveExteriorSeminorm : Seminorm K (⋀[K]^k V) :=
   Seminorm.ofSMulLE projectiveExteriorSeminormFun projectiveExteriorSeminormFun_zero
     projectiveExteriorSeminormFun_add_le projectiveExteriorSeminormFun_smul_le
@@ -125,7 +130,7 @@ theorem projectiveExteriorSeminorm_ιMulti_le (x : Fin k → V) :
 noncomputable def exteriorWedgeSum : FreeAddMonoid (Fin k → V) →+ (⋀[K]^k V) :=
   FreeAddMonoid.lift (exteriorPower.ιMulti K k)
 
-/-- The ordinary sum of the products of the factor norms. -/
+/-- The cost `∑ ∏ ‖x_i‖` of an unweighted sum of pure wedges. -/
 def exteriorWedgeCost (q : FreeAddMonoid (Fin k → V)) : ℝ :=
   (q.toList.map fun x ↦ ∏ i, ‖x i‖).sum
 
@@ -155,8 +160,8 @@ theorem exteriorWedgeCost_absorb (α : Fin k) (p : FreeAddMonoid (K × (Fin k �
   simp [exteriorWedgeCost, exteriorDecompositionCost, PiTensorProduct.projectiveSeminormAux,
     Function.comp_def, prod_norm_update_smul]
 
-/-- In positive degree the seminorm is exactly the infimum over finite unweighted
-sums of pure wedges, with the ordinary sum of products as cost. -/
+/-- In positive degree the seminorm is the infimum of `exteriorWedgeCost` over unweighted
+sums of pure wedges. -/
 theorem projectiveExteriorSeminorm_eq_iInf_wedgeCost (α : Fin k) (ω : ⋀[K]^k V) :
     projectiveExteriorSeminorm ω =
       ⨅ q : {q : FreeAddMonoid (Fin k → V) // exteriorWedgeSum q = ω},
@@ -202,8 +207,8 @@ theorem coordinateExteriorArray_injective (e : V →ₗ[K] (S → K))
 
 variable [IsUltrametricDist K]
 
-/-- Over an ultrametric field, every pure-wedge determinant coordinate is bounded by
-the product of the factor norms, with no factorial factor. -/
+/-- Over an ultrametric field, each determinant coordinate of a pure wedge is at most the
+product of the factor norms. -/
 theorem norm_coordinateExteriorArray_ιMulti_le (e : V →ₗ[K] (S → K))
     (he : ∀ v s, ‖e v s‖ ≤ ‖v‖) (x : Fin k → V) (c : Fin k → S) :
     ‖coordinateExteriorArray e (exteriorPower.ιMulti K k x) c‖ ≤ ∏ i, ‖x i‖ := by
@@ -246,7 +251,7 @@ theorem norm_coordinateExteriorArray_le (e : V →ₗ[K] (S → K))
   have hp : exteriorDecompositionValue p.val = ω := p.property
   simpa only [hp] using norm_coordinateExteriorArray_decomposition_le e he p.val c
 
-/-- Injective bounded coordinates make the projective exterior seminorm a genuine norm. -/
+/-- Injective coordinates bounded by the norm make the projective seminorm a norm. -/
 theorem projectiveExteriorSeminorm_eq_zero_iff (e : V →ₗ[K] (S → K))
     (hinj : Function.Injective e) (he : ∀ v s, ‖e v s‖ ≤ ‖v‖) (ω : ⋀[K]^k V) :
     projectiveExteriorSeminorm ω = 0 ↔ ω = 0 := by
@@ -260,14 +265,14 @@ theorem projectiveExteriorSeminorm_eq_zero_iff (e : V →ₗ[K] (S → K))
   · rintro rfl
     exact map_zero _
 
-/-- The genuine projective exterior group norm, certified by injective bounded coordinates. -/
+/-- The projective norm on `⋀^k V`, given injective coordinates bounded by the norm. -/
 noncomputable def projectiveExteriorAddGroupNorm (e : V →ₗ[K] (S → K))
     (hinj : Function.Injective e) (he : ∀ v s, ‖e v s‖ ≤ ‖v‖) :
     AddGroupNorm (⋀[K]^k V) where
   __ := projectiveExteriorSeminorm.toAddGroupSeminorm
   eq_zero_of_map_eq_zero' ω h := (projectiveExteriorSeminorm_eq_zero_iff e hinj he ω).mp h
 
-/-- Bounded continuous functions have their ordinary injective coordinate representation. -/
+/-- Bounded continuous functions as functions `S → K`. -/
 def boundedFunctionCoordinates [TopologicalSpace S] : (S →ᵇ K) →ₗ[K] (S → K) where
   toFun f := f
   map_add' _ _ := rfl
@@ -284,7 +289,7 @@ theorem boundedFunctionCoordinates_injective [TopologicalSpace S] :
   intro f g h
   exact DFunLike.coe_injective h
 
-/-- For bounded functions, the projective exterior seminorm is a genuine norm. -/
+/-- On `⋀^k (S →ᵇ K)` the projective seminorm is a norm. -/
 theorem boundedFunction_projectiveExteriorSeminorm_eq_zero_iff [TopologicalSpace S]
     (ω : ⋀[K]^k (S →ᵇ K)) : projectiveExteriorSeminorm ω = 0 ↔ ω = 0 :=
   projectiveExteriorSeminorm_eq_zero_iff boundedFunctionCoordinates
@@ -294,7 +299,7 @@ section DiscreteCoordinates
 
 variable [TopologicalSpace S] [DiscreteTopology S]
 
-/-- The bounded determinant array, with the ordinary supremum norm in its target. -/
+/-- The determinant array as a map into bounded functions with the supremum norm. -/
 noncomputable def boundedExteriorArray (e : V →ₗ[K] (S → K))
     (he : ∀ v s, ‖e v s‖ ≤ ‖v‖) :
     (⋀[K]^k V) →ₗ[K] ((Fin k → S) →ᵇ K) where
@@ -317,8 +322,8 @@ theorem boundedExteriorArray_injective (e : V →ₗ[K] (S → K))
   apply coordinateExteriorArray_injective e hinj
   exact congrArg (fun f : (Fin k → S) →ᵇ K ↦ (f : (Fin k → S) → K)) h
 
-/-- The exact infimum formula, wedge estimate, bounded determinant estimate, and
-positivity for exterior powers of the bounded-function space. -/
+/-- The infimum formula, the wedge bound, `‖Ω ω‖ ≤ ‖ω‖`, injectivity of `Ω`, and
+positivity, on `⋀^k (S →ᵇ K)`. -/
 theorem boundedFunction_projectiveExterior_properties (α : Fin k) :
     (∀ ω : ⋀[K]^k (S →ᵇ K), projectiveExteriorSeminorm ω =
       ⨅ q : {q : FreeAddMonoid (Fin k → (S →ᵇ K)) // exteriorWedgeSum q = ω},
@@ -347,7 +352,7 @@ open scoped BoundedContinuousFunction
 
 variable (K : Type*) [NontriviallyNormedField K] (S : Type*) [TopologicalSpace S] (k : ℕ)
 
-/-- The exterior power of bounded functions, carrying the ordinary-sum projective norm. -/
+/-- `⋀^k (S →ᵇ K)` with the projective norm. -/
 def ProjectiveExterior : Type _ := ⋀[K]^k (S →ᵇ K)
 
 namespace ProjectiveExterior
@@ -372,7 +377,7 @@ end ProjectiveExterior
 
 variable [IsUltrametricDist K]
 
-/-- The canonical alternating wedge map into the normed exterior power. -/
+/-- The wedge map into the normed exterior power. -/
 noncomputable def projectiveExteriorWedge : (S →ᵇ K) [⋀^Fin k]→L[K] ProjectiveExterior K S k :=
   (show AlternatingMap K (S →ᵇ K) (ProjectiveExterior K S k) (Fin k) from
     exteriorPower.ιMulti K k).mkContinuous 1
@@ -391,7 +396,7 @@ theorem projectiveExteriorWedge_norm_le : ‖projectiveExteriorWedge K S k‖ �
 variable [DiscreteTopology S]
 
 set_option maxHeartbeats 800000 in
-/-- The determinant array as a bounded linear map on the projective exterior power. -/
+/-- The determinant array `Ω` as a bounded linear map. -/
 noncomputable def projectiveExteriorArray :
     ProjectiveExterior K S k →L[K] ((Fin k → S) →ᵇ K) :=
   (show ProjectiveExterior K S k →ₗ[K] ((Fin k → S) →ᵇ K) from
@@ -425,10 +430,10 @@ theorem projectiveExteriorArray_wedge (x : Fin k → (S →ᵇ K)) (c : Fin k �
   simpa only [boundedFunctionCoordinates_apply] using
     coordinateExteriorArray_ιMulti (boundedFunctionCoordinates (K := K) (S := S)) x c
 
-/-- The Banach completion of the projective exterior power. -/
+/-- The completion `B` of the projective exterior power. -/
 abbrev ProjectiveExteriorCompletion := UniformSpace.Completion (ProjectiveExterior K S k)
 
-/-- The canonical continuous alternating wedge map into the Banach completion. -/
+/-- The wedge map `J` into the completion. -/
 noncomputable def completedExteriorWedge :
     (S →ᵇ K) [⋀^Fin k]→L[K] ProjectiveExteriorCompletion K S k :=
   (UniformSpace.Completion.toComplL : ProjectiveExterior K S k →L[K] _).compContinuousAlternatingMap
@@ -446,7 +451,7 @@ theorem completedExteriorWedge_norm_le : ‖completedExteriorWedge K S k‖ ≤ 
 
 variable [CompleteSpace K]
 
-/-- The continuous extension of the determinant array to the projective completion. -/
+/-- The extension `W_B` of the determinant array to the completion. -/
 noncomputable def completedExteriorArray :
     ProjectiveExteriorCompletion K S k →L[K] ((Fin k → S) →ᵇ K) :=
   (projectiveExteriorArray K S k).fromCompletion
@@ -466,7 +471,7 @@ theorem completedExteriorArray_norm_le : ‖completedExteriorArray K S k‖ ≤ 
   intro ω
   simpa only [one_mul] using norm_completedExteriorArray_le K S k ω
 
-/-- The completed determinant map has the original determinant values on pure wedges. -/
+/-- `W_B (J x) c = det (x_j (c_i))`. -/
 theorem completedExteriorArray_wedge (x : Fin k → (S →ᵇ K)) (c : Fin k → S) :
     completedExteriorArray K S k (completedExteriorWedge K S k x) c =
       Matrix.det (fun i j ↦ x j (c i)) := by
@@ -476,7 +481,8 @@ theorem completedExteriorArray_wedge (x : Fin k → (S →ᵇ K)) (c : Fin k →
   rw [ContinuousLinearMap.fromCompletion_apply_coe]
   exact projectiveExteriorArray_wedge K S k x c
 
-/-- The bounded determinant embedding and the completed continuous alternating wedge map. -/
+/-- `Ω` is injective with `‖Ω‖ ≤ 1`, `‖J‖ ≤ 1`, `‖W_B‖ ≤ 1`, and `W_B ∘ J` is the
+determinant. -/
 theorem projectiveExteriorCompletion_properties :
     Function.Injective (projectiveExteriorArray K S k) ∧
     ‖projectiveExteriorArray K S k‖ ≤ 1 ∧
@@ -489,8 +495,8 @@ theorem projectiveExteriorCompletion_properties :
     completedExteriorWedge_norm_le K S k, completedExteriorArray_norm_le K S k,
     completedExteriorArray_wedge K S k⟩
 
-/-- The ordinary-sum projective norm formula, its determinant embedding, and the Banach
-completion with the canonical continuous alternating wedge map. -/
+/-- Lemma C.2: the norm formula, the wedge bound, positivity, the determinant embedding, and
+the completion with `J` and `W_B`. -/
 theorem projectiveExterior_properties (α : Fin k) :
     (∀ ω : ProjectiveExterior K S k, ‖ω‖ =
       ⨅ q : {q : FreeAddMonoid (Fin k → (S →ᵇ K)) //

@@ -10,9 +10,10 @@ import Mathlib.Analysis.Normed.Module.Seminorm.Basic
 /-!
 # Rounding an ultrametric seminorm to a discrete value group
 
-This is the rounding step in `sources/charp.tex`, proposition `discrete`.
-For `e > 1`, a positive number is rounded upwards to the least integral power of `e`
-above it. The rounded seminorm remains homogeneous when nonzero scalar norms are powers of `e`.
+For `e > 1`, round a positive number up to the least integral power of `e` above it.
+Applied to an ultrametric seminorm, this gives an equivalent ultrametric seminorm with
+values in `e ^ ℤ`, homogeneous when nonzero scalar norms are powers of `e`. This is the
+first step in the proof of Corollary 4.3.
 -/
 
 namespace AlternatingAnalytic
@@ -91,7 +92,7 @@ section Seminorm
 
 variable {K F : Type*} [NormedField K] [AddCommGroup F] [Module K F]
 
-/-- The rounded ultrametric seminorm, with exact scalar homogeneity. -/
+/-- The rounded ultrametric seminorm. -/
 noncomputable def roundedSeminorm (p : Seminorm K F)
     (hp : ∀ x y, p (x + y) ≤ max (p x) (p y)) {e : ℝ} (he : 1 < e)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = e ^ n) : Seminorm K F :=
@@ -138,8 +139,8 @@ theorem roundedSeminorm_le_mul (p : Seminorm K F)
 
 end Seminorm
 
-/-- Every equivalent ultrametric norm can be rounded to the scalar field's discrete value group,
-retaining positive bounds in both directions against the original norm. -/
+/-- If nonzero scalar norms lie in `e ^ ℤ`, an equivalent ultrametric norm can be chosen
+with nonzero values in `e ^ ℤ`. -/
 theorem HasEquivalentUltrametricNorm.exists_discrete
     {K F : Type*} [NormedField K] [NormedAddCommGroup F] [NormedSpace K F]
     (h : HasEquivalentUltrametricNorm K F) {e : ℝ} (he : 1 < e)

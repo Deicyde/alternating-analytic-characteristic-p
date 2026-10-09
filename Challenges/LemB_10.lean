@@ -12,23 +12,18 @@ and z_i = z_j ⇔ z′_i = z′_j for all i, j."
 Paper statement: "For every N ≥ 1 and every function T : ℕ^N → L there is an infinite H ⊆ ℕ
 such that T(z) = T(z′) whenever z, z′ ∈ H^N have the same pattern."
 
-Formalization notes:
-* `ℕ^N` is `Fin N → ℕ`; `H ⊆ ℕ` is a `Set ℕ`, "infinite" is `Set.Infinite`; `z ∈ H^N` is
-  `∀ i, z i ∈ H`.
-* "Same pattern" is stated through the paper's own equivalent characterization: all strict
-  comparisons and all equalities between coordinates agree. The rank-map definition of the
-  pattern is not introduced separately.
-* `L` is a finite field (`[Field L] [Finite L]`), the standing assumption of Appendix B.3; the
-  proof only uses that `L` is finite. `N ≥ 1` is `hN : 1 ≤ N`.
-* No library module is imported and no definitions are introduced.
+## Formalization notes
+* `ℕ^N` is `Fin N → ℕ`, `H` is a `Set ℕ` with `H.Infinite`, and `z ∈ H^N` is `∀ i, z i ∈ H`.
+* "Same pattern" is the paper's comparison characterization above; the rank map is not defined.
+* `L` is a finite field as in Appendix B.3; the proof uses only that `L` is finite.
 -/
 
 namespace AlternatingAnalyticChallenge.LemB_10
 
 universe u
 
-/-- **Lemma B.10 (pattern homogeneity).** For every `N ≥ 1` and every `T : ℕ^N → L` (`L` a finite
-field) there is an infinite `H ⊆ ℕ` on which `T` depends only on the pattern of its argument. -/
+/-- For every `T : ℕ^N → L` there is an infinite `H ⊆ ℕ` on which `T` depends only on the
+pattern of its argument. -/
 theorem exists_infinite_pattern_homogeneous
     {L : Type u} [Field L] [Finite L] (N : ℕ) (hN : 1 ≤ N) (T : (Fin N → ℕ) → L) :
     ∃ H : Set ℕ, H.Infinite ∧

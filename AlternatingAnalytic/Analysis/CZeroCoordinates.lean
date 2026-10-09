@@ -5,11 +5,12 @@ import Mathlib.Data.Fintype.Pi
 import Mathlib.Topology.Algebra.InfiniteSum.Module
 
 /-!
-# Coordinate calculus and bounded coefficient arrays on discrete c₀
+# Bounded coefficient arrays on discrete c₀
 
-The parameter space is Mathlib's genuine supremum-norm `C₀(I, K)`. The scalar
-field need not be complete. Only the value space of the bounded-array sum is
-assumed complete.
+A bounded array `c : (Fin n → I) → W` with values in a complete ultrametric
+space defines a continuous `n`-linear map on `C₀(I, K)` (supremum norm) by
+`x ↦ ∑' a, (∏ r, x r (a r)) • c a`, of norm at most the bound on `c`. This is
+the coefficient lifting step in the proof of Theorem 4.5(1).
 -/
 
 noncomputable section
@@ -57,7 +58,7 @@ theorem boundedArrayMultilinear_apply (c : (Fin n → I) → W) (C : ℝ) (hC : 
     (hc : ∀ a, ‖c a‖ ≤ C) (x : Fin n → C₀(I, K)) :
     boundedArrayMultilinear c C hC hc x = ∑' a, (∏ r, x r (a r)) • c a := rfl
 
-/-- The nonarchimedean estimate gives the sharp product-norm bound. -/
+/-- The value at `x` has norm at most `C * ∏ r, ‖x r‖`. -/
 theorem norm_boundedArrayMultilinear_apply_le (c : (Fin n → I) → W) (C : ℝ)
     (hC : 0 ≤ C) (hc : ∀ a, ‖c a‖ ≤ C) (x : Fin n → C₀(I, K)) :
     ‖boundedArrayMultilinear c C hC hc x‖ ≤ C * ∏ r, ‖x r‖ :=
@@ -65,8 +66,7 @@ theorem norm_boundedArrayMultilinear_apply_le (c : (Fin n → I) → W) (C : ℝ
     (mul_nonneg hC (Finset.prod_nonneg (fun _ _ => norm_nonneg _)))
     (norm_arraySummand_le c C hC hc x)
 
-/-- A bounded coefficient array defines a continuous multilinear map on discrete c₀.
-Only the value space is required to be complete. -/
+/-- A bounded coefficient array defines a continuous multilinear map on discrete c₀. -/
 def boundedArrayMultilinearMap (c : (Fin n → I) → W) (C : ℝ) (hC : 0 ≤ C)
     (hc : ∀ a, ‖c a‖ ≤ C) : ContinuousMultilinearMap K (fun _ : Fin n => C₀(I, K)) W :=
   (boundedArrayMultilinear c C hC hc).mkContinuous C
@@ -82,7 +82,7 @@ theorem norm_boundedArrayMultilinearMap_le (c : (Fin n → I) → W) (C : ℝ) (
     (hc : ∀ a, ‖c a‖ ≤ C) : ‖boundedArrayMultilinearMap (K := K) c C hC hc‖ ≤ C :=
   MultilinearMap.mkContinuous_norm_le _ hC _
 
-/-- Compatibility of the actual continuous map with finite coordinate supports. -/
+/-- On inputs with finite coordinate supports, the map is a finite sum. -/
 theorem boundedArrayMultilinearMap_finiteSupport (c : (Fin n → I) → W) (C : ℝ)
     (hC : 0 ≤ C) (hc : ∀ a, ‖c a‖ ≤ C) (x : Fin n → C₀(I, K))
     (s : Fin n → Finset I) (hx : ∀ r i, i ∉ s r → x r i = 0) :
@@ -133,10 +133,9 @@ theorem boundedArrayMultilinearMap_zero (c : (Fin 0 → I) → W) (C : ℝ)
     exact Fin.elim0 r
   rw [hx, boundedArrayMultilinearMap_coordinate]
 
-/-- All guarantees of the bounded-array construction, in every degree and over
-an arbitrary discrete index type: cofinite decay, unconditional summability, the
-sum formula, the sharp operator-norm bound, recovery of the coefficients, and
-compatibility with finite supports and finite truncations. -/
+/-- Summary of the bounded-array construction: cofinite decay, summability, the
+sum formula, the norm bounds, recovery of the coefficients, and the finite-support
+and truncation formulas. -/
 theorem boundedArrayMultilinearMap_spec (c : (Fin n → I) → W) (C : ℝ)
     (hC : 0 ≤ C) (hc : ∀ a, ‖c a‖ ≤ C) :
     let Q := boundedArrayMultilinearMap (K := K) c C hC hc

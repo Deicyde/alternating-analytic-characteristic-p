@@ -8,20 +8,12 @@ import Mathlib.Topology.VectorBundle.ContinuousAlternatingMap
 import AlternatingAnalytic.Forms.Comparison.Bundle
 
 /-!
-# Proposition 7.3 (comparison with alternating-bundle sections), p. 19
+# Proof of Proposition 7.3
 
-Solution: the statements of `Challenges/Prop7_3.lean`, proved from the library:
-* part 1: `AlternatingAnalytic.analyticOnNhd_toContinuousMultilinearMap`
-  (`Forms/Comparison/Basic.lean`), composition with `j`;
-* part 2 (chart level): `analyticOnNhd_compContinuousLinearMapCLM_fderiv_of_retraction` and
-  `analyticOnNhd_iff_toContinuousMultilinearMap_of_retraction` (`Forms/Comparison/Basic.lean`);
-* part 3 (chart level): `analyticOnNhd_compContinuousLinearMapCLM_fderiv_of_finiteCoordinates` and
-  `analyticOnNhd_iff_toContinuousMultilinearMap_of_finiteCoordinates`
-  (`Forms/Comparison/Basic.lean`, via the finite-coordinate reflection theorem);
-* part 2 (manifold level): `contMDiffVectorBundle_alternating_of_retraction`
-  (`Forms/Comparison/Bundle.lean`);
-* part 3 (manifold level): `contMDiffVectorBundle_alternating_of_finiteCoordinates`
-  (`Geometry/AnalyticAlternatingBundle.lean`).
+Uses `analyticOnNhd_toContinuousMultilinearMap` and the `_of_retraction` and
+`_of_finiteCoordinates` lemmas of `Forms/Comparison/Basic.lean`, with
+`contMDiffVectorBundle_alternating_of_retraction` (`Forms/Comparison/Bundle.lean`) and
+`contMDiffVectorBundle_alternating_of_finiteCoordinates` (`Geometry/AnalyticAlternatingBundle.lean`).
 -/
 
 open scoped ContDiff Manifold
@@ -39,12 +31,12 @@ def IsAmbientAnalyticOn {K : Type uK} [NontriviallyNormedField K]
 variable (K : Type uK) [NontriviallyNormedField K] [CompleteSpace K]
   (P : Type uP) [NormedAddCommGroup P] [NormedSpace K P]
 
-/-- **Proposition 7.3, part 1.** Intrinsically analytic coefficient maps are ambient analytic. -/
+/-- Proposition 7.3, part 1: intrinsically analytic coefficient maps are ambient analytic. -/
 theorem part1 (k : ℕ) (U : Set P) (η : P → P [⋀^Fin k]→L[K] K) (hη : AnalyticOnNhd K η U) :
     IsAmbientAnalyticOn η U :=
   AlternatingAnalytic.analyticOnNhd_toContinuousMultilinearMap hη
 
-/-- **Proposition 7.3, part 2 (chart level).** If `j` has a bounded linear retraction, then the
+/-- Proposition 7.3, part 2, in a chart: if `j` has a bounded linear retraction, then the
 induced alternating transitions of `C^ω` chart changes are analytic, and intrinsic and ambient
 analyticity of coefficient maps coincide. -/
 theorem part2 (k : ℕ)
@@ -61,7 +53,7 @@ theorem part2 (k : ℕ)
     fun U η _ =>
       AlternatingAnalytic.analyticOnNhd_iff_toContinuousMultilinearMap_of_retraction R hR U η⟩
 
-/-- **Proposition 7.3, part 3 (chart level).** The same conclusions when `P` has finite
+/-- Proposition 7.3, part 3, in a chart: the same conclusions when `P` has finite
 continuous coordinates. -/
 theorem part3 (k : ℕ) {d : ℕ} (c : P ≃L[K] (Fin d → K)) :
     (∀ (U : Set P) (ψ : P → P), IsOpen U → ContDiffOn K ω ψ U →
@@ -76,7 +68,7 @@ theorem part3 (k : ℕ) {d : ℕ} (c : P ≃L[K] (Fin d → K)) :
     fun U η _ =>
       AlternatingAnalytic.analyticOnNhd_iff_toContinuousMultilinearMap_of_finiteCoordinates c U η⟩
 
-/-- **Proposition 7.3, part 2 (manifold level, atlas).** If `j` has a bounded linear retraction,
+/-- Proposition 7.3, part 2, atlas on a manifold: if `j` has a bounded linear retraction,
 the alternating cotangent bundle `x ↦ Alt^k(T_x M; K)` of an analytic manifold modeled on `P`
 is an analytic vector bundle. -/
 theorem part2_manifold (k : ℕ)
@@ -87,7 +79,7 @@ theorem part2_manifold (k : ℕ)
       (fun x : M => TangentSpace 𝓘(K, P) x [⋀^Fin k]→L[K] Bundle.Trivial M K x) 𝓘(K, P) :=
   AlternatingAnalytic.contMDiffVectorBundle_alternating_of_retraction k R hR
 
-/-- **Proposition 7.3, part 3 (manifold level, atlas).** With finite continuous coordinates on
+/-- Proposition 7.3, part 3, atlas on a manifold: with finite continuous coordinates on
 `P`, the alternating cotangent bundle of an analytic manifold modeled on `P` is analytic. -/
 theorem part3_manifold (k : ℕ) {d : ℕ} (c : P ≃L[K] (Fin d → K))
     (M : Type uM) [TopologicalSpace M] [ChartedSpace P M] [IsManifold 𝓘(K, P) ω M] :

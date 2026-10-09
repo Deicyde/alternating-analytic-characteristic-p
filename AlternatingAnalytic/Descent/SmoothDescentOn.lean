@@ -4,11 +4,10 @@ import Mathlib.Analysis.Calculus.ContDiff.LinearIsometry
 # Smooth descent on an open set
 
 Let `j : W →ₗᵢ[K] Z` be a linear isometry with closed range and `U ⊆ P` open. For `n : ℕ∞`, a map
-`f : P → W` is `C^n` on `U` iff `j ∘ f` is (Lemma 3.2 of the paper). This is the open-set version
-of `LinearIsometry.comp_contDiff_iff`. Since bump functions are not available over a general
-nontrivially normed field, the local statement is not deduced from the global one; instead the
-induction on the order is redone with `contDiffOn_succ_iff_fderiv_of_isOpen`, passing from `j` to
-the postcomposition isometry `j.postcomp`, whose range is again closed.
+`f : P → W` is `C^n` on `U` iff `j ∘ f` is (Lemma 3.2). This is the open-set version of
+`LinearIsometry.comp_contDiff_iff`. Bump functions are not available over a general field, so the
+induction on the order is redone on `U`, passing from `j` to `j.postcomp`, whose range is again
+closed.
 -/
 
 open Set Function
@@ -41,8 +40,8 @@ private theorem contDiffOn_of_comp_natCast.{uK, u, v} {K : Type uK} [Nontriviall
     exact ⟨fun x hx ↦ (hf x hx).differentiableWithinAt, fun h ↦ absurd h (by simp),
       ih _ (j.isClosed_range_postcomp hj) (hfderiv.congr hchain)⟩
 
-/-- **Lemma 3.2 (smooth descent).** On an open set, `f` is `C^n` (`n ≤ ∞`) iff `j ∘ f` is, for a
-linear isometry `j` with closed range. -/
+/-- Lemma 3.2: on an open set, `f` is `C^n` (`n ≤ ∞`) iff `j ∘ f` is, for a linear isometry `j`
+with closed range. -/
 theorem contDiffOn_iff_comp_linearIsometry.{uK, uP, uW, uZ} {K : Type uK}
     [NontriviallyNormedField K] {P : Type uP} [NormedAddCommGroup P]
     [NormedSpace K P] {W : Type uW} [NormedAddCommGroup W] [NormedSpace K W]

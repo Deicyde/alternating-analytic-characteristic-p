@@ -5,14 +5,11 @@ import AlternatingAnalytic.Algebra.ExteriorSupportDimension
 import AlternatingAnalytic.Analysis.LaurentResidueTheorem
 
 /-!
-# Lemma C.4 (the coefficient lift `Ψ`), pp. 38-39
+# Proof of Lemma C.4
 
-Solution: `Ψ := AlternatingAnalytic.laurentResidueLift κ r k ⟨0, _⟩ P`
-(`Analysis/LaurentResidueLift.lean`) with `laurentResidueLift_apply`,
-`laurentResidueLift_alternating`, `laurentResidueLift_support_le`, `laurentResidueLift_pol1`
-(same file) and `laurentResidueLift_pol` (`Analysis/LaurentResiduePolarization.lean`); bundled
-as `laurentResidueLift_full_properties` in `Analysis/LaurentResidueTheorem.lean`. The given `η`
-equals `completedLaurentCoefficient` by `completedLaurentCoefficient_unique`.
+`Ψ` is `laurentResidueLift κ r k 0 P` (`Analysis/LaurentResidueLift.lean`), with (Pol) from
+`laurentResidueLift_pol` (`Analysis/LaurentResiduePolarization.lean`); the given `η` equals
+`completedLaurentCoefficient` by `completedLaurentCoefficient_unique`.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -53,7 +50,7 @@ noncomputable def liftNorm {K : Type*} [NontriviallyNormedField K]
   @Norm.norm _ (ContinuousMultilinearMap.hasOpNorm (𝕜 := K) (E := fun _ : Fin k => E →L[K] E)
     (G := (E [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F))) P
 
-/-- The hypotheses of Lemma C.4, and its four conclusions. -/
+/-- A bounded `k`-linear lift `P` yields a coefficient lift `Ψ` with (Ψ1)-(Ψ4) and (Pol1). -/
 theorem coefficient_lift
     (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hk : 1 ≤ k)
     (P : LiftCandidate (LaurentField κ r) (ℕ →ᵇ LaurentField κ r)
@@ -68,7 +65,7 @@ theorem coefficient_lift
       Ωκ (η b) = coeff0 κ r (completedExteriorArray (LaurentField κ r) ℕ k b)) :
     ∃ Ψ : MultilinearMap κ (fun _ : Fin k => ℕ → κ)
         (MultilinearMap κ (fun _ : Fin k => ℕ → κ) (⋀[κ]^k (ℕ → κ))),
-      -- (Ψ1): `Ψ = η ∘ Φ` on `E₀^{2k}`, and `Ψ` is `2k`-linear over `κ` (by its type)
+      -- (Ψ1): `Ψ = η ∘ Φ` on `E₀^{2k}`; `2k`-linearity is in the type
       (∀ u x : Fin k → ℕ → κ,
         Ψ u x = η (P (fun i => ContinuousLinearMap.mul (LaurentField κ r)
             (ℕ →ᵇ LaurentField κ r) (constantLaurentArray κ r (u i)))

@@ -3,13 +3,11 @@ import Mathlib.Analysis.Analytic.Constructions
 import AlternatingAnalytic.Analysis.ShearCounterexample
 
 /-!
-# Proposition 6.4 (shear realization), p. 16
+# Proof of Proposition 6.4
 
-Solution: the statements of `Challenges/Prop6_4.lean`, proved from the library
-(`AlternatingAnalytic/Analysis/ShearCounterexample.lean`): `shear_apply`, `analyticAt_shear`,
-`shear_neg_apply`, `shear_apply_neg`, `analyticAt_shear_inverse` and
-`not_analyticAt_shear_pullback` (the operator part of `invertible_shear_counterexample`).
-The local `shearLinear`/`shear` are definitionally the library's.
+Uses `shear_apply`, `analyticAt_shear`, `shear_neg_apply`, `shear_apply_neg`,
+`analyticAt_shear_inverse` and `not_analyticAt_shear_pullback`
+(`Analysis/ShearCounterexample.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.Prop6_4
@@ -32,7 +30,7 @@ noncomputable def shear {K : Type uK} [NontriviallyNormedField K]
     (u : E →L[K] D) : D × E →L[K] D × E :=
   ContinuousLinearMap.id K (D × E) + shearLinear K D E u
 
-/-- **Proposition 6.4, part 1.** The shear family `g` is affine analytic. -/
+/-- Proposition 6.4, part 1: the shear family `g` is affine analytic. -/
 theorem part1 (K : Type uK) [NontriviallyNormedField K]
     (D : Type uD) (E : Type uE)
     [NormedAddCommGroup D] [NormedSpace K D] [NormedAddCommGroup E] [NormedSpace K E] :
@@ -43,7 +41,7 @@ theorem part1 (K : Type uK) [NontriviallyNormedField K]
   refine ⟨fun u z => AlternatingAnalytic.shear_apply u z, ⟨shearLinear K D E, fun u => rfl⟩,
     fun u _ => AlternatingAnalytic.analyticAt_shear u⟩
 
-/-- **Proposition 6.4, part 2.** The inverse family of `g` is affine analytic. -/
+/-- Proposition 6.4, part 2: the inverse family of `g` is affine analytic. -/
 theorem part2 (K : Type uK) [NontriviallyNormedField K]
     (D : Type uD) (E : Type uE)
     [NormedAddCommGroup D] [NormedSpace K D] [NormedAddCommGroup E] [NormedSpace K E] :
@@ -60,7 +58,7 @@ theorem part2 (K : Type uK) [NontriviallyNormedField K]
   · exact ContinuousLinearMap.ext fun z => AlternatingAnalytic.shear_apply_neg u z
   · simp [shear]
 
-/-- **Proposition 6.4, part 3.** If `A^k_{E,D;F}` is not analytic at `u₀`, then the family of
+/-- Proposition 6.4, part 3: if `A^k_{E,D;F}` is not analytic at `u₀`, then the family of
 pullback operators `g(u)^*` on `Alt^k(D × E; F)` is not analytic at `u₀`. -/
 theorem part3 (K : Type uK) [NontriviallyNormedField K]
     (D : Type uD) (E : Type uE) (F : Type uF)

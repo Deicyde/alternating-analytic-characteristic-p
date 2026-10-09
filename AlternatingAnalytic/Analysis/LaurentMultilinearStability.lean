@@ -1,7 +1,14 @@
 import AlternatingAnalytic.Analysis.LaurentCoefficients
 import Mathlib.Analysis.Normed.Module.Multilinear.Basic
 
-/-! Finite Laurent truncations preserve the constant coefficient of contracting multilinear maps. -/
+/-!
+# Stability of constant coefficients under multilinear maps
+
+If `A` is a multilinear map into bounded Laurent arrays with `‖A z‖ ≤ ∏ ‖z i‖`, and `x`, `y`
+agree to high enough order, then `A x` and `A y` have the same constant coefficient, since
+their difference has norm less than one. It is used in the proof of the support estimate,
+Proposition C.3.
+-/
 
 noncomputable section
 
@@ -16,8 +23,8 @@ variable (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 variable {E T : Type*} [NormedAddCommGroup E] [NormedSpace (LaurentField κ r) E]
   [TopologicalSpace T] {k : ℕ}
 
-/-- If each input is known through the required finite Laurent interval, the
-constant coefficient of a contracting multilinear output is unchanged. -/
+/-- If `‖x i‖, ‖y i‖ ≤ r ^ ν i`, `‖x i - y i‖ ≤ r ^ (ν i + l + 1)` and `∑ ν i = -l`, then
+`A x` and `A y` have the same constant coefficient. -/
 theorem boundedLaurentCoeff_multilinear_stable
     (A : MultilinearMap (LaurentField κ r) (fun _ : Fin k => E) (T →ᵇ LaurentField κ r))
     (hA : ∀ z, ‖A z‖ ≤ ∏ i, ‖z i‖)

@@ -11,7 +11,8 @@ For an ultrametric normed group `K`, the supremum norm on `C₀(α, K)` is ultra
 attains its norm, so all nonzero distances lie in `e ^ ℤ` and `C₀(ℕ, K)` is spherically complete
 (`sphericallyCompleteSpace_of_discreteDist`). Ingleton's extension theorem
 (`exists_extension_of_sphericallyComplete`) then gives a contracting left inverse to every linear
-isometry of a spherically complete space into an ultrametric normed space.
+isometry of a spherically complete space into an ultrametric normed space. Both are used for
+Corollary C.8.
 -/
 
 open scoped ZeroAtInfty BoundedContinuousFunction

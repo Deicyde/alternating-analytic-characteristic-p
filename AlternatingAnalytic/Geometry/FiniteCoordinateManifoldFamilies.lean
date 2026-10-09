@@ -2,20 +2,13 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateFamilies
 import Mathlib.Geometry.Manifold.ContMDiff.NormedSpace
 
 /-!
-# Finite-coordinate manifold families of alternating-map actions
+# The alternating action on analytic families over finite-coordinate manifolds
 
-On an open subset of an analytic manifold with specified continuous linear
-coordinates in `K^d`, an analytic operator family induces an analytic family
-of operators on continuous alternating maps. The first input is contravariant.
-
-The proof works on whole open chart domains: it converts `C^ω` to ordinary
-analyticity, applies finite-coordinate admissibility, and converts back using
-unique differentiability of the open domain. Neither the field nor the fibers
-are assumed complete; the dimensions and the alternating degree may be zero.
-
-This is the local manifold-family prerequisite in the proof of
-`paper/charp.tex`, `fam:thm:finite-bundles`, not the bundle construction or the
-category-theoretic bifunctor assertion itself.
+On an open subset of an analytic manifold whose model has continuous linear coordinates
+`P ≃L[K] K^d`, the model action `alternatingMapAction` takes analytic families
+`γ = (u, v)` to analytic families. This is the finite-coordinate input to Corollary 4.6,
+from Theorem 4.4 via `isAdmissibleOn_of_finite_coordinates`. Neither the field nor the fibers
+need be complete.
 -/
 
 noncomputable section
@@ -32,8 +25,8 @@ variable {K P M E E' F F' : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup F] [NormedSpace K F]
   [NormedAddCommGroup F'] [NormedSpace K F']
 
-/-- On an open finite-coordinate parameter domain, the alternating action
-preserves `C^ω` without completeness assumptions. -/
+/-- On an open subset of a finite-coordinate space, the alternating action preserves
+`C^ω` families. -/
 theorem contDiffOn_alternatingMapAction_of_finiteCoordinates {d : ℕ}
     (c : P ≃L[K] (Fin d → K)) (k : ℕ)
     {U : Set P} (hU : IsOpen U)
@@ -47,8 +40,7 @@ theorem contDiffOn_alternatingMapAction_of_finiteCoordinates {d : ℕ}
 
 variable [TopologicalSpace M] [ChartedSpace P M] [IsManifold 𝓘(K, P) ω M]
 
-/-- In every base chart, an analytic manifold family is admissible on the
-entire open chart domain lying over `U`. -/
+/-- In every chart, an analytic family on `U` is admissible on the chart domain over `U`. -/
 theorem isAdmissibleOn_extChartAt_of_finiteCoordinates {d : ℕ}
     (c : P ≃L[K] (Fin d → K)) (k : ℕ)
     {U : Set M} (hU : IsOpen U)
@@ -68,8 +60,8 @@ theorem isAdmissibleOn_extChartAt_of_finiteCoordinates {d : ℕ}
     (hV.analyticOn_iff_analyticOnNhd.mp
       ((contDiffOn_omega_iff_analyticOn hV.uniqueDiffOn).mp hγc))
 
-/-- The alternating action preserves analytic operator-valued families on
-open subsets of manifolds with supplied finite continuous linear coordinates. -/
+/-- Over a finite-coordinate analytic manifold, the alternating action preserves analytic
+families on open sets. -/
 theorem contMDiffOn_alternatingMapAction_of_finiteCoordinates {d : ℕ}
     (c : P ≃L[K] (Fin d → K)) (k : ℕ)
     {U : Set M} (hU : IsOpen U)
@@ -97,7 +89,8 @@ theorem contMDiffOn_alternatingMapAction_of_finiteCoordinates {d : ℕ}
   apply contMDiffAt_iff_source.mpr
   exact (hc.contMDiffAt (hV.mem_nhds hxV)).contMDiffWithinAt
 
-/-- Global analytic families induce global analytic alternating-map actions. -/
+/-- Over a finite-coordinate analytic manifold, the alternating action preserves analytic
+families. -/
 theorem contMDiff_alternatingMapAction_of_finiteCoordinates {d : ℕ}
     (c : P ≃L[K] (Fin d → K)) (k : ℕ)
     {γ : M → (E' →L[K] E) × (F →L[K] F')}

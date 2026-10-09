@@ -5,9 +5,9 @@ import Mathlib.Analysis.Analytic.CPolynomialDef
 /-!
 # Multilinear lifts of analytic homogeneous maps
 
-An analytic map homogeneous of degree `k` is the diagonal of a continuous `k`-linear map.
-The proof uses uniqueness of one-variable power series and works in every characteristic,
-without completeness assumptions, including in degree zero.
+A map that is analytic at `0` and homogeneous of degree `k` is the diagonal of a
+continuous `k`-linear map, namely its degree-`k` Taylor coefficient. The proof restricts
+to lines and uses uniqueness of one-variable power series (Lemma A.1).
 -/
 
 namespace AlternatingAnalytic
@@ -33,8 +33,8 @@ private lemma hasFPowerSeriesAt_monomialSeries (k : ℕ) (v : Y) :
       simp [monomialSeries, ContinuousMultilinearMap.mkPiRing_apply, smul_ite]
   exact h.hasFiniteFPowerSeriesAt.hasFPowerSeriesAt
 
-/-- Every analytic homogeneous map is the diagonal of a continuous multilinear map,
-without any completeness or characteristic assumptions. -/
+/-- A map analytic at `0` and homogeneous of degree `k` is the diagonal of a continuous
+`k`-linear map. -/
 theorem AnalyticAt.exists_multilinearMap_eq_of_homogeneous
     (k : ℕ) (f : X → Y) (hf : AnalyticAt K f 0)
     (hhom : ∀ (c : K) (x : X), f (c • x) = c ^ k • f x) :

@@ -1,7 +1,12 @@
 import Mathlib.Analysis.Normed.Operator.Mul
 import Mathlib.Analysis.Normed.Operator.LinearIsometry
 
-/-! Isometric scalar coordinates for a normed space whose bounded endomorphisms are scalar. -/
+/-!
+# Scalar coordinates on rigid endomorphism algebras
+
+If every bounded endomorphism of a nontrivial normed space `E` is a scalar, then `T ↦ s` is a
+multiplicative linear isometry `(E →L[K] E) ≃ K`.
+-/
 
 noncomputable section
 
@@ -10,7 +15,7 @@ namespace AlternatingAnalytic.RigidDenseSource
 variable {K E : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup E] [NormedSpace K E] [Nontrivial E]
 
-/-- Scalar multiplication, with its exact operator norm. -/
+/-- `s ↦ s • id` is a linear isometry `K → (E →L[K] E)`. -/
 def scalarActionIsometry : K →ₗᵢ[K] (E →L[K] E) where
   toLinearMap := (ContinuousLinearMap.lsmul K K).toLinearMap
   norm_map' s := ContinuousLinearMap.opNorm_lsmul_apply K K (a := s)
@@ -23,7 +28,7 @@ theorem scalarActionIsometry_apply (s : K) :
 
 variable (hr : ∀ T : E →L[K] E, ∃ s : K, ∀ x, T x = s • x)
 
-/-- The inverse of the surjective scalar-action isometry. -/
+/-- The isometry `(E →L[K] E) ≃ K` when every endomorphism is a scalar. -/
 def endScalarEquivOfRigidity : (E →L[K] E) ≃ₗᵢ[K] K :=
   (LinearIsometryEquiv.ofSurjective (scalarActionIsometry (K := K) (E := E))
     (fun T => by

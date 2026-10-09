@@ -5,11 +5,10 @@ import Mathlib.Algebra.Module.BigOperators
 /-!
 # Full polarization over an infinite field
 
-The coefficients of the diagonal of a multilinear map are the actual sums
-of its values over coordinate selections with fixed fiber cardinalities.
-The vector-valued polynomial identity principle therefore recovers every
-such sum from the diagonal over an infinite field. No factorial is divided
-out, and no symmetry or alternation is assumed.
+The coefficients of the diagonal of a multilinear map are the sums of its values over
+coordinate selections with fixed multiplicities. Over an infinite field the identity
+principle for vector polynomials (Lemma B.6) recovers every such sum from the diagonal.
+No factorial is divided out, and the map need not be symmetric.
 -/
 
 noncomputable section
@@ -23,7 +22,7 @@ def selectionType (f : Fin k → J) (j : J) : ℕ := by
   classical
   exact (Finset.univ.filter (fun i => f i = j)).card
 
-/-- The same actual multiplicities as a finitely supported polynomial exponent. -/
+/-- The multiplicities of a selection map as a multi-index. -/
 def selectionMultiIndex (f : Fin k → J) : J →₀ ℕ :=
   Finsupp.equivFunOnFinite.symm (selectionType f)
 
@@ -37,7 +36,7 @@ theorem selectionMultiIndex_eq_iff (f : Fin k → J) (α : J → ℕ) :
     selectionMultiIndex f = Finsupp.equivFunOnFinite.symm α ↔ selectionType f = α := by
   exact Finsupp.equivFunOnFinite.symm.injective.eq_iff
 
-/-- Every coordinate is counted exactly once. -/
+/-- The multiplicities of a selection map sum to `k`. -/
 theorem sum_selectionType (f : Fin k → J) : ∑ j, selectionType f j = k := by
   classical
   simpa [selectionType] using
@@ -62,23 +61,22 @@ variable {K A Y J : Type*} [Field K]
 
 open scoped Classical
 
-/-- The genuine filtered sum over coordinate selections of the prescribed type. -/
+/-- The sum of `M (b ∘ f)` over selection maps `f` with multiplicities `α`. -/
 def sumOfType (M : MultilinearMap K (fun _ : Fin k => A) Y)
     (b : J → A) (α : J → ℕ) : Y := by
   classical
   exact ∑ f ∈ Finset.univ.filter (fun f : Fin k → J => Polarization.selectionType f = α),
     M (fun i => b (f i))
 
-/-- The actual finitely supported coefficients obtained by grouping all
-multilinear expansion terms by their multiplicity multi-index. -/
+/-- The coefficients of `t ↦ M (fun _ => ∑ j, t j • b j)`, obtained by grouping the
+multilinear expansion by multiplicity. -/
 def diagonalCoefficients (M : MultilinearMap K (fun _ : Fin k => A) Y)
     (b : J → A) : (J →₀ ℕ) →₀ Y := by
   classical
   exact ∑ f : Fin k → J,
     Finsupp.single (Polarization.selectionMultiIndex f) (M (fun i => b (f i)))
 
-/-- A coefficient is exactly its fixed-type filtered sum, with no assumed
-coefficient identity. -/
+/-- The coefficient at `α` is `sumOfType M b α`. -/
 theorem diagonalCoefficients_apply (M : MultilinearMap K (fun _ : Fin k => A) Y)
     (b : J → A) (α : J → ℕ) :
     M.diagonalCoefficients b (Finsupp.equivFunOnFinite.symm α) = M.sumOfType b α := by
@@ -86,8 +84,7 @@ theorem diagonalCoefficients_apply (M : MultilinearMap K (fun _ : Fin k => A) Y)
   simp only [diagonalCoefficients, Finsupp.finsetSum_apply, Finsupp.single_apply,
     Polarization.selectionMultiIndex_eq_iff, sumOfType, Finset.sum_filter]
 
-/-- Evaluation of the constructed coefficient family is the original multilinear
-diagonal at the genuine weighted sum of the supplied vectors. -/
+/-- Evaluating the coefficient family at `t` gives the diagonal at `∑ j, t j • b j`. -/
 theorem eval_diagonalCoefficients (M : MultilinearMap K (fun _ : Fin k => A) Y)
     (b : J → A) (t : J → K) :
     VectorPolynomial.eval (M.diagonalCoefficients b) t = M (fun _ => ∑ j, t j • b j) := by
@@ -99,7 +96,7 @@ theorem eval_diagonalCoefficients (M : MultilinearMap K (fun _ : Fin k => A) Y)
   rw [M.map_sum]
   exact Finset.sum_congr rfl fun f _ => (M.map_smul_univ _ _).symm
 
-/-- Multilinearity makes the coefficient family homogeneous of degree k. -/
+/-- Grouped sums vanish unless the multiplicities sum to `k`. -/
 theorem sumOfType_eq_zero_of_sum_ne (M : MultilinearMap K (fun _ : Fin k => A) Y)
     (b : J → A) (α : J → ℕ) (hα : ∑ j, α j ≠ k) : M.sumOfType b α = 0 := by
   classical
@@ -108,9 +105,8 @@ theorem sumOfType_eq_zero_of_sum_ne (M : MultilinearMap K (fun _ : Fin k => A) Y
   have h := (Finset.mem_filter.mp hf).2
   exact False.elim (hα (h ▸ Polarization.sum_selectionType f))
 
-/-- Full polarization over an infinite field: equality of diagonals forces equality
-of every grouped coefficient. The label type may be any finite type, and the
-requested multiplicity function need not be pre-assumed to sum to k. -/
+/-- Over an infinite field, two multilinear maps with the same diagonal have the same
+grouped sums `sumOfType`. -/
 theorem sumOfType_eq_of_diagonal_eq [Infinite K]
     (M N : MultilinearMap K (fun _ : Fin k => A) Y)
     (h : ∀ a : A, M (fun _ => a) = N (fun _ => a))
@@ -134,16 +130,14 @@ theorem sumOfType_unit (M : MultilinearMap K (fun _ : Fin k => A) Y) (a : A) :
     simp [Polarization.selectionType]
   simp [sumOfType, htype]
 
-/-- The one-label case of the full polarized identity gives the pointwise diagonal,
-over every field. -/
+/-- Over any field, equal one-label grouped sums give equal diagonals. -/
 theorem diagonal_eq_of_sumOfType_eq
     (M N : MultilinearMap K (fun _ : Fin k => A) Y)
     (h : ∀ (b : Unit → A) (α : Unit → ℕ), M.sumOfType b α = N.sumOfType b α)
     (a : A) : M (fun _ => a) = N (fun _ => a) := by
   simpa only [sumOfType_unit] using h (fun _ => a) (fun _ => k)
 
-/-- Apply an additive map only after full polarization over the infinite field.
-In particular, the map need not be linear over that infinite field. -/
+/-- Grouped sums agree after applying an additive map `η`, which need not be `K`-linear. -/
 theorem map_sumOfType_eq_of_diagonal_eq [Infinite K]
     {Z : Type*} [AddCommMonoid Z] (η : Y →+ Z)
     (M N : MultilinearMap K (fun _ : Fin k => A) Y)
@@ -156,8 +150,8 @@ theorem map_sumOfType_eq_of_diagonal_eq [Infinite K]
   classical
   simpa only [sumOfType, _root_.map_sum] using congrArg η (sumOfType_eq_of_diagonal_eq M N h b α)
 
-/-- Specialization to the actual multilinear wedge expression for a linear
-family of operators. Fixing vector arguments requires no alternation hypothesis. -/
+/-- If the diagonal of `M` is `a ↦ W (fun i => D a (x i))`, then each grouped sum of `M` is
+the corresponding grouped sum of `W`. -/
 theorem sumOfType_eq_of_multiplier_diagonal [Infinite K]
     {V : Type*} [AddCommGroup V] [Module K V]
     (M : MultilinearMap K (fun _ : Fin k => A) Y)

@@ -6,11 +6,12 @@ import Mathlib.LinearAlgebra.Multilinear.Basic
 /-!
 # Coefficient expansions and cluster values
 
-The coefficients and cluster values below come from an actual doubly multilinear map
-into the exterior power of the space of sequences. An infinite set homogeneous for
-the coefficient order patterns makes the cluster value depend only on the order of
-the labeled blocks. This comparison needs separated increasing blocks; consecutiveness
-is reserved for the subsequent cancellation argument.
+Setup for the proof of Theorem B.9. For a map Ψ, multilinear in operator inputs `u`
+and vector inputs `v`, with values in `Λ^k` of the sequence space, define the
+coefficients `Ω_{Ψ(e_a; e_y)}(c)` and the cluster value χ. By Ramsey's theorem
+(Lemma B.10) the coefficients depend only on the order pattern of their indices on an
+infinite set `H`; then χ depends only on the order of the clusters. This step needs
+increasing, separated blocks but not consecutive ones.
 -/
 
 open Finset
@@ -57,22 +58,23 @@ open Module
 
 variable {L : Type*} [Field L] {k : ℕ}
 
-/-- A doubly multilinear map on finitely supported scalar sequences. -/
+/-- A map multilinear in `k` operator inputs and `k` vector inputs, with values in
+`Λ^k (ℕ → L)`. -/
 abbrev ClusterMap (L : Type*) [Field L] (k : ℕ) :=
   MultilinearMap L (fun _ : Fin k => ℕ →₀ L)
     (MultilinearMap L (fun _ : Fin k => ℕ →₀ L) (⋀[L]^k (ℕ → L)))
 
-/-- The coefficient obtained from unit inputs and coordinate determinant evaluation. -/
+/-- The coefficient `Ω_{Ψ(e_a; e_y)}(c)`. -/
 noncomputable def clusterCoefficient (Ψ : ClusterMap L k) (a y c : Fin k → ℕ) : L :=
   determinantArray (Ψ (fun j => Finsupp.single (a j) 1)
     (fun j => Finsupp.single (y j) 1)) c
 
-/-- The three coordinate groups of a coefficient, for applying finite-index Ramsey. -/
+/-- The coefficient as a function of one tuple indexed by `Fin 3 × Fin k`, for Ramsey. -/
 noncomputable def clusterCoefficientTuple (Ψ : ClusterMap L k)
     (z : Fin 3 × Fin k → ℕ) : L :=
   clusterCoefficient Ψ (fun j => z (0, j)) (fun j => z (1, j)) (fun j => z (2, j))
 
-/-- The actual unit-vector coefficients are order homogeneous on an infinite set. -/
+/-- Lemma B.10 for the coefficients: they are order homogeneous on an infinite set. -/
 theorem exists_infinite_clusterCoefficient_homogeneous [Finite L] (Ψ : ClusterMap L k) :
     ∃ H : Set ℕ, H.Infinite ∧ ∀ (z z' : Fin 3 × Fin k → ℕ),
       (∀ i, z i ∈ H) → (∀ i, z' i ∈ H) →
@@ -84,12 +86,13 @@ theorem exists_infinite_clusterCoefficient_homogeneous [Finite L] (Ψ : ClusterM
 noncomputable def clusterInput (w : Fin 4 → L) (C : Fin 4 → ℕ) : ℕ →₀ L :=
   ∑ i, w i • Finsupp.single (C i) 1
 
-/-- The actual determinant evaluation on the cluster operator and vector inputs. -/
+/-- The cluster value χ: the determinant array of Ψ on the cluster inputs, evaluated
+at the first point of each cluster. -/
 noncomputable def clusterValue (Ψ : ClusterMap L k) (C : Fin k → Fin 4 → ℕ) : L :=
   determinantArray (Ψ (fun j => clusterInput clusterOperatorWeight (C j))
     (fun j => clusterInput clusterVectorWeight (C j))) (fun j => C j 0)
 
-/-- Expansion of an actual determinant evaluation on weighted unit-vector sums. -/
+/-- Expansion of a determinant array evaluation on weighted sums of unit vectors. -/
 theorem determinantArray_weighted_expansion {I J : Type*} [Fintype I] [Fintype J]
     (Ψ : ClusterMap L k) (u : Fin k → I → L) (v : Fin k → J → L)
     (a : Fin k → I → ℕ) (y : Fin k → J → ℕ) (c : Fin k → ℕ) :
@@ -158,8 +161,8 @@ theorem cluster_block_comparisons (C D : Fin k → Fin 4 → ℕ)
     exact ⟨iff_of_false (not_lt_of_gt hc) (not_lt_of_gt hd),
       iff_of_false (ne_of_gt hc) (ne_of_gt hd)⟩
 
-/-- Coefficient order homogeneity implies equality of the actual cluster values
-for any two families having the same order of labeled blocks. -/
+/-- If the coefficients are order homogeneous on `H`, two cluster families in `H` with
+the same block order have the same cluster value. -/
 theorem clusterValue_eq_of_order (Ψ : ClusterMap L k) (H : Set ℕ)
     (hpattern : ∀ (z z' : Fin 3 × Fin k → ℕ),
       (∀ i, z i ∈ H) → (∀ i, z' i ∈ H) →
@@ -187,8 +190,8 @@ theorem clusterValue_eq_of_order (Ψ : ClusterMap L k) (H : Set ℕ)
       i.2 j.2 (pos i.1 i.2) (pos j.1 j.2))
   simpa [clusterCoefficientTuple, pos] using h
 
-/-- Over a finite field there is an infinite set of indices on which the actual
-cluster value depends only on the order of the labeled blocks. -/
+/-- Over a finite field there is an infinite set on which the cluster value depends only
+on the order of the clusters. -/
 theorem exists_infinite_clusterValue_order_invariant [Finite L] (Ψ : ClusterMap L k) :
     ∃ H : Set ℕ, H.Infinite ∧ ∀ (C D : Fin k → Fin 4 → ℕ),
       (∀ j, StrictMono (C j)) → (∀ j, StrictMono (D j)) →

@@ -2,10 +2,12 @@ import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Algebra.Polynomial.RingDivision
 
-/-! # Algebraic determinant generators over an arbitrary coefficient field
+/-! # Determinant generators over an arbitrary field
 
-These formulas are the scalar-independent versions of the literal `gen0Poly`,
-`det0Poly`, `G0poly`, and `C0poly` in `DeterminantCoefficientSpecialization`.
+Polynomial models, over any field `K`, of the spaces `G_0` and `C_0` from the
+section "A missing coefficient" of Appendix H, and of the Toeplitz minors used in
+the proof of Lemma H.7. The definitions of the same names in
+`Analysis/DeterminantCoefficientSpecialization.lean` are these at a specific field.
 -/
 
 noncomputable section
@@ -46,7 +48,7 @@ def generatorDegree : GeneratorIndex p → ℕ
   | Sum.inr (Sum.inl _) => 1
   | Sum.inr (Sum.inr _) => 2
 
-/-- The literal lower triangular Toeplitz multiplication matrix. -/
+/-- The lower triangular Toeplitz matrix of multiplication by `a`. -/
 def toeplitz (r i : Fin p) : Poly K p :=
   if h : i.val ≤ r.val then MvPolynomial.X ⟨r.val - i.val, by omega⟩ else 0
 

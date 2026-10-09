@@ -6,9 +6,9 @@ import AlternatingAnalytic.Analysis.UniversalAlternatingTargets
 If a universal target `F` of `Alt^k(−; F)` carries a nonzero bounded functional `λ`, choose
 `v` with `λ v = 1`; then `c ↦ c • v` and `λ` exhibit the scalar field `K` as a bounded
 retract of `F`, so `K` is itself a universal target
-(`UniversalAlternatingTarget.of_retract`). Hence, whenever scalar precomposition fails to be
-analytic at some point for some pair of spaces (Theorem 6.1(2) of the paper), every universal
-target has zero continuous dual (Section 9). The scalar counterexample enters as a hypothesis.
+(`UniversalAlternatingTarget.of_retract`). Hence, if scalar precomposition fails to be analytic
+at some point for some pair of spaces (Theorem 6.1(2)), every universal target has zero
+continuous dual, as stated in Section 9. The scalar counterexample enters as a hypothesis.
 -/
 
 noncomputable section
@@ -48,8 +48,8 @@ theorem not_universalAlternatingTarget_scalar_of_not_analyticAt {k : ℕ} {E D :
     ¬ UniversalAlternatingTarget K k K :=
   fun hK => h (hK E D u₀ (Set.mem_univ u₀))
 
-/-- **Section 9, conditional form.** Given the conclusion of Theorem 6.1(2) (abstract form) for
-`K` and `k`, every universal target of `Alt^k(−; F)` has zero continuous dual. -/
+/-- Section 9: given the conclusion of Theorem 6.1(2) for `K` and `k`, every universal target of
+`Alt^k(−; F)` has zero continuous dual. -/
 theorem UniversalAlternatingTarget.dual_eq_zero_of_scalar_obstruction {k : ℕ}
     (hscalar : ∃ (E D : Type u) (_ : NormedAddCommGroup E) (_ : NormedSpace K E)
       (_ : CompleteSpace E) (_ : IsUltrametricDist E)

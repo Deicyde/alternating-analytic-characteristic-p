@@ -3,9 +3,10 @@ import AlternatingAnalytic.Analysis.RigidDenseSourceConcrete
 /-!
 # Rigid dense finite-dimensional sources
 
-The collected generic source statement and the literal rational/Laurent realization of
-`dom:rigid`. The helper modules construct the source, compare polynomial coefficients, extend
-maps only into complete ambient spaces, and construct the scalar-action isometry.
+Collected statements about the source `E = K^I + K a` inside `L^I`, for `a` algebraically
+independent over a dense subfield `K` of `L`: every bounded endomorphism is a scalar and every
+bounded functional is zero. This is Lemma H.5, stated both for a general `K ⊆ L` and for
+`K = F_p(t)`, `L = F_p((t))` acting on `L[ε]/(ε^p)`.
 -/
 
 noncomputable section
@@ -14,7 +15,7 @@ open scoped BigOperators NNReal
 
 namespace AlternatingAnalytic.RigidDenseSource
 
-/-- All conclusions for the generic source, with its actual inherited norm and scalar coordinates. -/
+/-- Lemma H.5 and the basic properties of the source, for a general dense `K ⊆ L`. -/
 theorem rigid_source_properties
     {K L I : Type*} [NontriviallyNormedField K] [NontriviallyNormedField L]
     [NormedAlgebra K L] [CompleteSpace L] [Fintype I] [Nonempty I]
@@ -56,8 +57,8 @@ attribute [local instance] preferredNormedFieldK preferredFieldK preferredFieldL
 
 variable (p : ℕ) [Fact p.Prime] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
 
-/-- The collected concrete setup and both conclusions of `dom:rigid`, on the
-actual truncated polynomial algebra and the common chosen independent family. -/
+/-- Lemma H.5 for `K = F_p(t)` and `E = K^p + K a ⊆ L[ε]/(ε^p)`, with the setup of
+Appendix H. -/
 theorem rigid_source_properties :
     Countable (K p r) ∧ Uncountable (L p r) ∧ CompleteSpace (L p r) ∧
     Isometry (algebraMap (K p r) (L p r)) ∧

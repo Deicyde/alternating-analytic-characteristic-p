@@ -8,11 +8,10 @@ import Mathlib.Analysis.Calculus.ContDiff.LinearIsometry
 /-!
 # Smoothness reflects along a closed isometric embedding on open sets
 
-The fork lemma `LinearIsometry.comp_contDiff_iff` reflects global `C^n`-smoothness along a
-linear isometry with closed range. This file gives the version on an open set: if `Φ ∘ f` is
-`C^n` on an open set `s`, then so is `f`. The proof is the same induction on the order, with
-`contDiffOn_succ_iff_fderiv_of_isOpen` in place of `contDiff_succ_iff_fderiv`; it passes from
-`Φ` to `Φ.postcomp`, so all three spaces live in one universe.
+`LinearIsometry.comp_contDiff_iff` (from the Mathlib fork) reflects global `C^n`-smoothness
+along a linear isometry with closed range. This is the version on an open set: if `Φ ∘ f` is
+`C^n` on an open set `s`, then so is `f`. The proof is the same induction on the order, passing
+from `Φ` to `Φ.postcomp`, so all three spaces live in one universe. Used for Corollary G.5.
 -/
 
 open Set Function Filter

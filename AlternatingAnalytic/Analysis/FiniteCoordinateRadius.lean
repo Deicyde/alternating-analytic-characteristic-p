@@ -2,12 +2,12 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateReflection
 import Mathlib.Analysis.Normed.Group.Ultra
 
 /-!
-# Finite coordinate reflection preserves the coefficient radius
+# Finite-coordinate reflection into an ultrametric target
 
-For an ultrametric target, the grouped coordinate coefficients and their lifts
-are bounded by the original multilinear coefficient norm. A specified ambient
-expansion therefore reflects through a closed linear isometry on its original
-ball, with at least its original radius. No completeness is required.
+If the target `Z` is ultrametric, the grouped coordinate coefficients of a multilinear
+map on `Fin d → K`, and their lifts, are bounded by the norm of the map. So an expansion
+of `j ∘ f` through a closed linear isometry `j` lifts to an expansion of `f` with no
+larger coefficients, on the same ball. This is the nonarchimedean case of Theorem 4.4.
 -/
 
 noncomputable section
@@ -19,8 +19,7 @@ open scoped BigOperators
 variable {K Z : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup Z] [NormedSpace K Z] [IsUltrametricDist Z] {d n : ℕ}
 
-/-- In an ultrametric target, every grouped coordinate coefficient is bounded by
-the norm of the original multilinear map. -/
+/-- In an ultrametric target, each grouped coordinate coefficient has norm at most `‖p‖`. -/
 theorem norm_sumOfType_le_of_isUltrametricDist
     (p : (Fin d → K) [×n]→L[K] Z) (α : Fin d → ℕ) :
     ‖p.toMultilinearMap.sumOfType (fun j => Pi.single j 1) α‖ ≤ ‖p‖ := by
@@ -35,8 +34,7 @@ theorem norm_sumOfType_le_of_isUltrametricDist
   intro j
   by_cases h : j = f i <;> simp [h]
 
-/-- Grouped coefficients in a subspace of an ultrametric target lift with no
-increase in norm. -/
+/-- If the grouped coefficients lie in `W`, they lift with no increase in norm. -/
 theorem exists_lift_of_sumOfType_mem_of_isUltrametricDist (W : Submodule K Z)
     (p : ContinuousMultilinearMap K (fun _ : Fin n => Fin d → K) Z)
     (hc : ∀ α : Fin d → ℕ,
@@ -114,8 +112,8 @@ theorem exists_lift_of_sumOfType_mem_of_isUltrametricDist (W : Submodule K Z)
         gcongr
         exact norm_sumOfType_le_of_isUltrametricDist p t.val
 
-/-- A finite-coordinate diagonal in a subspace of an ultrametric target has a
-subspace-valued multilinear representative without any increase in norm. -/
+/-- A multilinear map on `Fin d → K` whose diagonal lies in `W` has a `W`-valued
+representative with the same diagonal and no larger norm. -/
 theorem exists_lift_of_isUltrametricDist (W : Submodule K Z)
     (p : (Fin d → K) [×n]→L[K] Z)
     (hp : ∀ x, p (fun _ => x) ∈ W) :
@@ -134,8 +132,8 @@ variable {K Z W E : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup W] [NormedSpace K W]
   [NormedAddCommGroup E] [NormedSpace K E]
 
-/-- Coefficientwise norm bounds and equal diagonals reflect a represented series
-into a subspace on the original ball, without completeness or closedness. -/
+/-- A subspace-valued series with the same diagonals and no larger coefficients
+represents `f` on the same ball. -/
 theorem hasFPowerSeriesOnBall_subtype_of_diagonal_of_norm_le
     (S : Submodule K Z) {f : E → S} {x : E} {r : ℝ≥0∞}
     {p : FormalMultilinearSeries K E Z}
@@ -151,9 +149,8 @@ theorem hasFPowerSeriesOnBall_subtype_of_diagonal_of_norm_le
   change HasSum (fun n => (q n (fun _ => y) : Z)) (f (x + y) : Z)
   simpa only [hdiag] using hp.hasSum hy
 
-/-- In finite maximum-norm coordinates, an expansion valued in a closed subspace
-of an ultrametric target lifts with no increase in coefficient norms and no loss
-of radius. It represents the given map on the original ball. -/
+/-- An expansion of a map into a closed subspace of an ultrametric target lifts to the
+subspace with no larger coefficients, on the same ball. -/
 theorem exists_hasFPowerSeriesOnBall_subtype_of_isUltrametricDist
     [IsUltrametricDist Z] {d : ℕ}
     (S : Submodule K Z) (hS : IsClosed (S : Set Z))
@@ -173,9 +170,8 @@ theorem exists_hasFPowerSeriesOnBall_subtype_of_isUltrametricDist
   exact ⟨q, hnorm, hdiag, FormalMultilinearSeries.radius_le_of_le hnorm,
     hasFPowerSeriesOnBall_subtype_of_diagonal_of_norm_le S hp q hnorm hdiag⟩
 
-/-- Finite coordinate reflection through a closed linear isometry into an
-ultrametric target preserves the coefficient bounds and the original ball of a
-specified expansion, without completeness assumptions on the field or spaces. -/
+/-- Theorem 4.4, ultrametric case: an expansion of `j ∘ f` lifts to an expansion of `f`
+with no larger coefficients, on the same ball. -/
 theorem exists_hasFPowerSeriesOnBall_of_closed_linearIsometry_of_isUltrametricDist
     [IsUltrametricDist Z] {d : ℕ}
     (j : W →ₗᵢ[K] Z) (hj : IsClosed (Set.range j))
@@ -203,10 +199,7 @@ theorem exists_hasFPowerSeriesOnBall_of_closed_linearIsometry_of_isUltrametricDi
       (fun y => j.equivRange.symm (j.equivRange (f y))) q' x r at h
     simpa only [LinearIsometryEquiv.symm_apply_apply] using h
 
-/-- The full finite-coordinate radius preservation statement for a closed subspace:
-every grouped coefficient satisfies the sharp bound, and a single lifted series
-has the same diagonals, no larger coefficient norms, at least the ambient radius,
-and represents the given map on the original ball. -/
+/-- The subspace version of `finite_coordinate_radius_preservation_full`. -/
 theorem finite_coordinate_radius_preservation_full_subtype
     [IsUltrametricDist Z] {d : ℕ}
     (S : Submodule K Z) (hS : IsClosed (S : Set Z))
@@ -223,10 +216,8 @@ theorem finite_coordinate_radius_preservation_full_subtype
   exact ⟨q, fun n α =>
     FiniteCoordinateReflection.norm_sumOfType_le_of_isUltrametricDist (p n) α, hq⟩
 
-/-- The full finite-coordinate radius preservation statement through a closed
-linear isometry into an ultrametric target, including both the grouped coefficient
-bounds and all bounds, identities, and convergence properties of one reflected
-series. The dimension, degree, and original radius are unrestricted. -/
+/-- The grouped coefficient bounds together with the conclusions of
+`exists_hasFPowerSeriesOnBall_of_closed_linearIsometry_of_isUltrametricDist`. -/
 theorem finite_coordinate_radius_preservation_full
     [IsUltrametricDist Z] {d : ℕ}
     (j : W →ₗᵢ[K] Z) (hj : IsClosed (Set.range j))

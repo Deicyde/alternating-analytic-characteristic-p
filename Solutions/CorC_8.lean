@@ -8,22 +8,12 @@ import AlternatingAnalytic.Laurent.FiniteDimSharp.IfHalf
 import AlternatingAnalytic.Laurent.FiniteDimSharp.OnlyIf
 
 /-!
-# Corollary C.8 (finite dimension is sharp for nonarchimedean bases), p. 41
+# Proof of Corollary C.8
 
-Solution: the statements of `Challenges/CorC_8.lean`, proved from the library
-(`Laurent/FiniteDimSharp/`; the two predicates are copies of
-`AlternatingAnalytic.FiniteDimSharp.PreservesAnalyticBundles` and `PreservesAnalyticMorphisms`):
-* "if": `AlternatingAnalytic.FiniteDimSharp.preserves_of_finiteDimensional` (`IfHalf.lean`):
-  continuous coordinates `ContinuousLinearEquiv.ofFinrankEq`, then the finite-coordinate theorems
-  `contMDiffVectorBundle_alternating_of_finiteCoordinates` and
-  `alternatingBundleHom_of_finiteCoordinates`;
-* "only if": `AlternatingAnalytic.FiniteDimSharp.finiteDimensional_of_preserves` (`OnlyIf.lean`),
-  using only morphism preservation: an infinite-dimensional `P` contains a complemented copy of
-  `c₀(ℕ, K)` (`exists_cZero_retraction_of_discrete`, `Renorm.lean`: rounded norm, orthonormal
-  sequence, Ingleton extension onto the spherically complete `c₀(ℕ, K)`); on trivial bundles over
-  `P` the family `x ↦ D_{π x}` is an analytic section whose induced section has coordinates
-  `x ↦ A(D_{π x})` (`TrivialBundleAction.lean`), contradicting Proposition C.6 at `u₀ = 0`
-  (`czero_not_analyticAt_precomp`).
+The two halves are `FiniteDimSharp.preserves_of_finiteDimensional`
+(`Laurent/FiniteDimSharp/IfHalf.lean`) and `FiniteDimSharp.finiteDimensional_of_preserves`
+(`Laurent/FiniteDimSharp/OnlyIf.lean`); the second reduces to Proposition C.6 through a
+complemented copy of `c₀(ℕ, K)` in an infinite-dimensional `P`.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -90,8 +80,8 @@ def PreservesAnalyticMorphisms (K : Type u) [NontriviallyNormedField K]
       ∀ (b : M) (m : E b [⋀^Fin k]→L[K] F b),
         s b m = (v b).compContinuousAlternatingMap (m.compContinuousLinearMap (u b))
 
-/-- **Corollary C.8, "if".** Over `K = 𝔽_q((u))`, a finite-dimensional `P` admits preservation of
-analytic bundles and of operator-valued analytic morphisms. -/
+/-- Over `K = 𝔽_q((u))`, if `P` is finite-dimensional then the alternating construction preserves
+analytic bundles and operator-valued analytic morphisms over manifolds modeled on `P`. -/
 theorem part1_of_finiteDimensional
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]
     (k : ℕ) (hpk : p ≤ k) (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
@@ -102,9 +92,8 @@ theorem part1_of_finiteDimensional
       PreservesAnalyticMorphisms (LaurentField κ r) P k :=
   FiniteDimSharp.preserves_of_finiteDimensional (LaurentField κ r) P k
 
-/-- **Corollary C.8, "only if".** Over `K = 𝔽_q((u))` with `k ≥ p`, if the alternating construction
-preserves analytic bundles and operator-valued analytic morphisms over every analytic manifold
-modeled on the Banach space `P` (with an equivalent nonarchimedean norm), then `P` is
+/-- Over `K = 𝔽_q((u))` with `k ≥ p`, if the alternating construction preserves analytic bundles
+and operator-valued analytic morphisms over manifolds modeled on `P`, then `P` is
 finite-dimensional. -/
 theorem part2_finiteDimensional_of_preserves
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]

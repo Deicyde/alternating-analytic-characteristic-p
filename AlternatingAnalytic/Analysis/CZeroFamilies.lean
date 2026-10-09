@@ -5,16 +5,11 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 /-!
 # Analytic alternating morphism families with discrete c₀ parameters
 
-This file proves `paper/charp.tex`, `fam:cor:c0-families`, including transport
-along any supplied continuous linear equivalence of parameter spaces. Only the
-final value space must be complete and ultrametric. The scalar field and the
-other normed spaces need not be complete; all degrees and discrete index types
-are allowed. In fact, the proofs do not need the scalar norm to be ultrametric.
-
-The existing ambient polynomial and isometric inclusion from
-`FiniteCoordinateFamilies` reduce the result to `CZeroReflection`. The generic
-operator ultrametric instance below supplies the missing strong triangle
-inequality, without spherical completeness.
+If `γ` is an analytic family of morphisms parametrized by `C₀(I, K)` (or a space
+isomorphic to it), then `alternatingMapAction k ∘ γ` is analytic, provided the
+final target `F'` is complete and ultrametric. This is the c₀ case of
+Corollary 4.6. The proof applies the reflection theorem of `CZeroReflection` to
+the ambient action and isometric inclusion from `FiniteCoordinateFamilies`.
 -/
 
 namespace ContinuousLinearMap
@@ -53,8 +48,8 @@ variable {K I E E' F F' P : Type*} [NontriviallyNormedField K]
   [NormedAddCommGroup F'] [NormedSpace K F'] [CompleteSpace F'] [IsUltrametricDist F']
   [NormedAddCommGroup P] [NormedSpace K P]
 
-/-- Completeness and the strong triangle inequality for the actual alternating
-target, action-operator target, and ambient multilinear-operator target. -/
+/-- The alternating target, the action-operator target and the ambient
+multilinear-operator target are complete and ultrametric. -/
 theorem alternatingMapAction_target_properties (k : ℕ) :
     let W := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F')
     let Z := (E [⋀^Fin k]→L[K] F) →L[K]
@@ -63,7 +58,7 @@ theorem alternatingMapAction_target_properties (k : ℕ) :
       CompleteSpace W ∧ IsUltrametricDist W ∧ CompleteSpace Z ∧ IsUltrametricDist Z := by
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, inferInstance⟩
 
-/-- Pointwise action analyticity after any bounded linear change of c₀ parameters. -/
+/-- The alternating action of an analytic family on a space isomorphic to c₀ is analytic. -/
 theorem analyticAt_alternatingMapAction_comp_of_c0_equiv
     (e : P ≃L[K] C₀(I, K)) (k : ℕ)
     {γ : P → (E' →L[K] E) × (F →L[K] F')} {x : P}
@@ -81,8 +76,7 @@ theorem analyticAt_alternatingMapAction_comp_of_c0 (k : ℕ)
   analyticAt_alternatingMapAction_comp_of_c0_equiv
     (ContinuousLinearEquiv.refl K C₀(I, K)) k hγ
 
-/-- Analytic families on spaces with supplied c₀ coordinates are admissible on
-arbitrary parameter sets. -/
+/-- Analytic families on a space isomorphic to c₀ are admissible. -/
 theorem isAdmissibleOn_of_c0_equiv (e : P ≃L[K] C₀(I, K)) (k : ℕ)
     {γ : P → (E' →L[K] E) × (F →L[K] F')} {U : Set P}
     (hγ : AnalyticOnNhd K γ U) : IsAdmissibleOn k γ U :=
@@ -94,7 +88,7 @@ theorem isAdmissibleOn_of_c0 (k : ℕ)
     (hγ : AnalyticOnNhd K γ U) : IsAdmissibleOn k γ U :=
   isAdmissibleOn_of_c0_equiv (ContinuousLinearEquiv.refl K C₀(I, K)) k hγ
 
-/-- The open-domain corollary after a bounded linear isomorphism of parameters. -/
+/-- Analytic families on an open subset of a space isomorphic to c₀ are admissible. -/
 theorem isAdmissibleOn_of_c0_equiv_of_isOpen (e : P ≃L[K] C₀(I, K)) (k : ℕ)
     {γ : P → (E' →L[K] E) × (F →L[K] F')} {U : Set P}
     (hU : IsOpen U) (hγ : AnalyticOn K γ U) : IsAdmissibleOn k γ U :=
@@ -106,12 +100,9 @@ theorem isAdmissibleOn_of_c0_of_isOpen (k : ℕ)
     (hU : IsOpen U) (hγ : AnalyticOn K γ U) : IsAdmissibleOn k γ U :=
   isAdmissibleOn_of_c0 k (hU.analyticOn_iff_analyticOnNhd.mp hγ)
 
-/-- All conclusions of `fam:cor:c0-families`: the actual target spaces are complete
-and ultrametric; the action is analytic pointwise, analytic families are admissible
-on arbitrary sets, and the open-domain formulation holds. All analytic conclusions
-also hold after any supplied bounded linear isomorphism of parameter spaces.
-Only `F'` is assumed complete and ultrametric, with no restriction on degree or
-characteristic and no completeness assumption on the field or other fibers. -/
+/-- The c₀ case of Corollary 4.6: the target spaces are complete and ultrametric,
+the action of an analytic family is analytic, and analytic families are admissible,
+also after a continuous linear isomorphism of the parameter space with c₀. -/
 theorem c0_analytic_family_admissibility (k : ℕ) :
     let W := (E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F')
     let Z := (E [⋀^Fin k]→L[K] F) →L[K]

@@ -10,34 +10,22 @@ Paper statement: "For every nontrivially normed field K, the bifunctor
 Alt^k : Vec_K^op × Vec_K → Vec_K is C^∞, and is analytic if and only if k! ≠ 0 in K. Both
 assertions remain true on the full subcategory of Banach spaces."
 
-Here `Vec_K` is the category of normed `K`-spaces and bounded linear maps (no completeness),
-and a functor is `C^n` / analytic when all its maps on (products of) hom spaces are jointly
-`C^n` / analytic; products carry the maximum norm (paper, §1–2). An arrow
-`(E, F) → (E', F')` of `Vec^op × Vec` is a pair `(u, v) ∈ L(E', E) × L(F, F')`, and it acts
-by `m ↦ v ∘ m ∘ (u, …, u)`.
+Here `Vec_K` is the category of normed `K`-spaces and bounded linear maps, and a functor is
+`C^n` or analytic when its maps on hom spaces are jointly `C^n` or analytic; products carry the
+maximum norm. An arrow `(E, F) → (E', F')` of `Vec^op × Vec` is a pair
+`(u, v) ∈ L(E', E) × L(F, F')`, acting by `m ↦ v ∘ m ∘ (u, …, u)`.
 
 ## Formalization notes
-* The bifunctor is stated in hom coordinates: the joint hom map is `alternatingAction k`,
-  defined below as `(u, v) ↦ (m ↦ v ∘ m ∘ (u, …, u))` on
-  `L(E', E) × L(F, F')` (Mathlib's product norm is the maximum norm, as in the paper).
-  Functoriality itself is not restated. This definition coincides with the library's
-  `AlternatingAnalytic.alternatingMapAction`, but is written here directly in Mathlib terms.
-* The degree is `Fin k`.
-* "C^∞" is `ContDiff K ∞` on the whole hom space. The smoothness statements are made for spaces
-  in arbitrary universes (this is stronger than a statement about one category `Vec_K`).
-* "Analytic" is power-series analyticity on the whole hom space: `AnalyticOnNhd K _ Set.univ`
-  for all objects. Because the equivalence quantifies over all objects, these objects are taken
-  in the universe of `K` (the categories `Vec_K`, `Ban_K` of `K`-spaces in `Type u`).
-* The Banach subcategory is expressed by adding `CompleteSpace` for all four objects.
-  `alternatingAction_contDiff_banach` is a special case of `alternatingAction_contDiff`; it is
-  kept only to mirror the paper's sentence about the Banach subcategory.
-* The paper's §2 convention reads "analytic" for a functor as the `C^ω` class, which it does
-  not identify with having a power series at each point in general. The power-series form
-  (`AnalyticOnNhd`) is stated here. In this case the two readings agree: when `k! ≠ 0` the hom
-  maps are `CPolynomialAt`, hence `ContDiff K ω`; when `k! = 0` the failure is `¬ AnalyticAt`,
-  which rules out `ContDiffAt K ω` (in Mathlib `ContDiffAt ω` implies `AnalyticAt`). The `C^ω`
-  form is not stated.
-* `k! ≠ 0 in K` is `(k.factorial : K) ≠ 0`.
+* The bifunctor is stated in hom coordinates: its joint hom map is `alternatingAction k`,
+  `(u, v) ↦ (m ↦ v ∘ m ∘ (u, …, u))` on `L(E', E) × L(F, F')`. Functoriality is not restated.
+* The degree is `Fin k`; `k! ≠ 0 in K` is `(k.factorial : K) ≠ 0`.
+* "C^∞" is `ContDiff K ∞`, stated for spaces in arbitrary universes.
+* "Analytic" is `AnalyticOnNhd K _ Set.univ`; the equivalence quantifies over all spaces in the
+  universe of `K`.
+* The Banach subcategory is modelled by `CompleteSpace` on all four spaces.
+* The paper's "analytic" means the class `C^ω`; the power-series form is stated here. The two
+  agree in this case: when `k! ≠ 0` the maps are `CPolynomialAt`, and when `k! = 0` the failure
+  of `AnalyticAt` rules out `C^ω`.
 -/
 
 open scoped ContDiff
@@ -58,7 +46,7 @@ noncomputable def alternatingAction (K : Type*) [NontriviallyNormedField K]
   (ContinuousLinearMap.compContinuousAlternatingMapCLM K E' F F' (Fin k) h.2).comp
     (ContinuousAlternatingMap.compContinuousLinearMapCLM h.1)
 
-/-- **Corollary 6.2, smoothness on `Vec_K`.** Every joint hom map of `Alt^k` is `C^∞`. -/
+/-- Corollary 6.2, smoothness: every joint hom map of `Alt^k` is `C^∞`. -/
 theorem alternatingAction_contDiff (K : Type u) [NontriviallyNormedField K] (k : ℕ)
     (E : Type uE) (E' : Type uE') (F : Type uF) (F' : Type uF')
     [NormedAddCommGroup E] [NormedSpace K E] [NormedAddCommGroup E'] [NormedSpace K E']
@@ -66,7 +54,7 @@ theorem alternatingAction_contDiff (K : Type u) [NontriviallyNormedField K] (k :
     ContDiff K ∞ (alternatingAction K (E := E) (E' := E') (F := F) (F' := F') k) := by
   sorry
 
-/-- **Corollary 6.2, smoothness on Banach spaces.** -/
+/-- Corollary 6.2, smoothness on Banach spaces. -/
 theorem alternatingAction_contDiff_banach (K : Type u) [NontriviallyNormedField K] (k : ℕ)
     (E : Type uE) (E' : Type uE') (F : Type uF) (F' : Type uF')
     [NormedAddCommGroup E] [NormedSpace K E] [NormedAddCommGroup E'] [NormedSpace K E']
@@ -75,8 +63,8 @@ theorem alternatingAction_contDiff_banach (K : Type u) [NontriviallyNormedField 
     ContDiff K ∞ (alternatingAction K (E := E) (E' := E') (F := F) (F' := F') k) := by
   sorry
 
-/-- **Corollary 6.2, analyticity on `Vec_K`.** The bifunctor `Alt^k` is analytic on every hom
-space of `Vec_K^op × Vec_K` if and only if `k! ≠ 0` in `K`. -/
+/-- Corollary 6.2, analyticity: `Alt^k` is analytic on every hom space of `Vec_K^op × Vec_K`
+if and only if `k! ≠ 0` in `K`. -/
 theorem alternatingAction_analytic_iff (K : Type u) [NontriviallyNormedField K] (k : ℕ) :
     (∀ (E E' F F' : Type u)
       [NormedAddCommGroup E] [NormedSpace K E] [NormedAddCommGroup E'] [NormedSpace K E']
@@ -86,8 +74,7 @@ theorem alternatingAction_analytic_iff (K : Type u) [NontriviallyNormedField K] 
     (k.factorial : K) ≠ 0 := by
   sorry
 
-/-- **Corollary 6.2, analyticity on Banach spaces.** The same equivalence on the full
-subcategory of Banach spaces. -/
+/-- Corollary 6.2, analyticity on Banach spaces: the same equivalence for Banach spaces. -/
 theorem alternatingAction_analytic_iff_banach (K : Type u) [NontriviallyNormedField K] (k : ℕ) :
     (∀ (E E' F F' : Type u)
       [NormedAddCommGroup E] [NormedSpace K E] [NormedAddCommGroup E'] [NormedSpace K E']

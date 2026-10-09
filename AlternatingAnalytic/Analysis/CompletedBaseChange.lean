@@ -10,9 +10,11 @@ import Mathlib.Analysis.Normed.Module.Completion
 /-!
 # Completed projective scalar extension
 
-The canonical map into algebraic scalar extension is isometric. Its completion is a
-Banach space over the extension field, and a complete original space is a contracting
-linear retract over the original field. This is `sources/charp.tex`, lemma `bc` (3)–(4).
+For a spherically complete field `K` and an extension `L`, the map `v ↦ v ⊗ 1`
+from `V` into `V ⊗[K] L` with the projective norm is isometric. The completion of
+`V ⊗[K] L` is a Banach space over `L`, and a complete `V` is a `K`-linear retract
+of it with a retraction of norm at most one. These are parts (3) and (4) of
+Lemma D.6.
 -/
 
 open scoped TensorProduct
@@ -41,7 +43,7 @@ theorem baseChangeSeminorm_tmul_one (v : V) :
     simp only [scalarContraction_tmul, ContinuousLinearMap.coe_coe, hone, one_smul] at h
     exact h.trans ((mul_le_mul_of_nonneg_right hπ (apply_nonneg _ _)).trans_eq (one_mul _))
 
-/-- The actual map `v ↦ v ⊗ 1` as a linear isometry over the original field. -/
+/-- The map `v ↦ v ⊗ 1` as a `K`-linear isometry. -/
 noncomputable def baseChangeEmbedding : V →ₗᵢ[K] V ⊗[K] L where
   toLinearMap := (TensorProduct.mk K V L).flip 1
   norm_map' := baseChangeSeminorm_tmul_one K V L
@@ -50,7 +52,7 @@ noncomputable def baseChangeEmbedding : V →ₗᵢ[K] V ⊗[K] L where
 theorem baseChangeEmbedding_apply (v : V) :
     baseChangeEmbedding K V L v = v ⊗ₜ[K] (1 : L) := rfl
 
-/-- The actual uniform completion of the projectively normed algebraic tensor product. -/
+/-- The completion of `V ⊗[K] L` with the projective norm. -/
 def CompletedBaseChange := UniformSpace.Completion (V ⊗[K] L)
 
 noncomputable instance completedBaseChangeNormedAddCommGroup :
@@ -71,11 +73,11 @@ instance completedBaseChangeCompleteSpace : CompleteSpace (CompletedBaseChange K
 instance completedBaseChangeIsScalarTower : IsScalarTower K L (CompletedBaseChange K V L) :=
   inferInstanceAs (IsScalarTower K L (UniformSpace.Completion (V ⊗[K] L)))
 
-/-- The dense algebraic tensor inclusion, linear and isometric over the extension field. -/
+/-- The dense inclusion of `V ⊗[K] L` into its completion, as an `L`-linear isometry. -/
 noncomputable def baseChangeToCompletion : V ⊗[K] L →ₗᵢ[L] CompletedBaseChange K V L :=
   UniformSpace.Completion.toComplₗᵢ
 
-/-- The same dense inclusion with its original-field linear structure. -/
+/-- The same inclusion as a `K`-linear isometry. -/
 noncomputable def baseChangeToCompletionK : V ⊗[K] L →ₗᵢ[K] CompletedBaseChange K V L :=
   UniformSpace.Completion.toComplₗᵢ
 
@@ -85,7 +87,7 @@ theorem denseRange_baseChangeToCompletion : DenseRange (baseChangeToCompletion K
 theorem denseRange_baseChangeToCompletionK : DenseRange (baseChangeToCompletionK K V L) :=
   UniformSpace.Completion.denseRange_coe
 
-/-- The canonical isometric embedding of the original space into completed scalar extension. -/
+/-- The isometric embedding of `V` into the completed scalar extension. -/
 noncomputable def completedBaseChangeEmbedding : V →ₗᵢ[K] CompletedBaseChange K V L :=
   (baseChangeToCompletionK K V L).comp (baseChangeEmbedding K V L)
 
@@ -94,7 +96,7 @@ theorem completedBaseChangeEmbedding_apply (v : V) :
     completedBaseChangeEmbedding K V L v =
       baseChangeToCompletionK K V L (v ⊗ₜ[K] (1 : L)) := rfl
 
-/-- A scalar functional induces a bounded linear map on algebraic scalar extension. -/
+/-- A bounded `K`-linear functional on `L` induces a bounded map `V ⊗[K] L → V`. -/
 noncomputable def scalarContractionContinuous (ψ : L →L[K] K) : V ⊗[K] L →L[K] V :=
   (scalarContraction ψ.toLinearMap).mkContinuous ‖ψ‖ (norm_scalarContraction_le ψ)
 
@@ -104,7 +106,7 @@ theorem scalarContractionContinuous_apply (ψ : L →L[K] K) (u : V ⊗[K] L) :
 
 variable [CompleteSpace V]
 
-/-- Extension of a scalar contraction to the actual completed tensor product. -/
+/-- The extension of a scalar contraction to the completed tensor product. -/
 noncomputable def completedScalarContraction (ψ : L →L[K] K) :
     CompletedBaseChange K V L →L[K] V :=
   (scalarContractionContinuous K V L ψ).fromCompletion
@@ -133,7 +135,8 @@ theorem norm_completedScalarContraction_le (ψ : L →L[K] K) :
   ContinuousLinearMap.opNorm_le_bound _ (norm_nonneg ψ)
     (norm_completedScalarContraction_apply_le K V L ψ)
 
-/-- A complete original space is a norm-one retract of its completed scalar extension. -/
+/-- A complete `V` is a retract of its completed scalar extension, with a retraction
+of norm at most one. -/
 theorem exists_completedBaseChange_retraction :
     ∃ P : CompletedBaseChange K V L →L[K] V,
       ‖P‖ ≤ 1 ∧ ∀ v : V, P (completedBaseChangeEmbedding K V L v) = v := by

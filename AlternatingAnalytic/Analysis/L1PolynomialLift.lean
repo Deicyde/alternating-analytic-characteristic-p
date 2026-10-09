@@ -2,17 +2,13 @@ import AlternatingAnalytic.Analysis.L1Coordinates
 import AlternatingAnalytic.Algebra.FiniteWordGrouping
 
 /-!
-# Homogeneous diagonal lifting on ordinary ℓ¹
+# Lifting homogeneous diagonals on ℓ¹
 
-The distinct-word coefficients from `FiniteWord` belong to the submodule containing
-all diagonal values. Each coefficient has norm at most `d! * ‖B‖`, and the ordinary
-ℓ¹ array constructor realizes them in the complete submodule. The shared finite
-regrouping identity extends to every input by `lp.hasSum_single` and continuity.
-
-Only the output submodule needs to be complete. The public closed-subspace theorem
-obtains this from completeness of the ambient space, without completeness of the
-scalar field. The real factorial counts distinct words and is never inverted.
-The construction and all identities include degree zero and empty label types.
+If a bounded `d`-linear map `B` on ℓ¹(J, K) has its diagonal in a closed subspace `W` of a
+Banach space, there is a `W`-valued `d`-linear map with the same diagonal and norm at most
+`d! * ‖B‖`. This is the sorting bound in the proof of Theorem 4.5(2). The coefficients are
+the sums of `B` over permutations of sorted words (`FiniteWord.groupedCoefficient`); the
+factorial counts terms and is never inverted, so any characteristic is allowed.
 -/
 
 open scoped lp BigOperators
@@ -25,7 +21,7 @@ variable {K J Z : Type*} [NontriviallyNormedField K]
 
 noncomputable local instance : DecidableEq J := Classical.decEq J
 
-/-- The ordinary triangle inequality bounds each selected orbit coefficient by `d! * ‖B‖`. -/
+/-- Each grouped coefficient has norm at most `d! * ‖B‖`. -/
 theorem norm_groupedCoefficient_le {d : ℕ}
     (B : ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) Z)
     (a : Fin d → J) :
@@ -68,7 +64,7 @@ private theorem sum_piFinset_eq_sum_subtype
   · intro a ha
     rfl
 
-/-- The shared algebraic regrouping identity gives equality on finite coordinate diagonals. -/
+/-- `D` and `B` agree on the diagonal at finitely supported inputs. -/
 theorem diagonal_eq_sum_single
     (B D : ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) Z)
     (hD : ∀ a : Fin d → J,
@@ -91,7 +87,7 @@ theorem diagonal_eq_sum_single
     (FiniteWord.finite_diagonal_grouping B.toMultilinearMap
       (fun j => lp.single 1 j (1 : K)) s x).symm
 
-/-- Continuity extends equality from the canonical finite coordinate truncations. -/
+/-- Diagonal equality at finitely supported inputs extends to all of ℓ¹. -/
 theorem diagonal_eq_of_sum_single_eq
     (D B : ContinuousMultilinearMap K (fun _ : Fin d => lp (fun _ : J => K) 1) Z)
     (h : ∀ (s : Finset J) (x : J → K),
@@ -102,8 +98,7 @@ theorem diagonal_eq_of_sum_single_eq
   apply tendsto_nhds_unique (L1Coordinates.tendsto_map_sum_single D (fun _ => x))
   simpa only [h] using L1Coordinates.tendsto_map_sum_single B (fun _ => x)
 
-/-- A complete submodule suffices for ordinary ℓ¹ diagonal lifting. The witness is
-constructed from the actual selected coefficients of `FiniteWord.groupedCoefficient`. -/
+/-- Diagonal lifting into a complete submodule `W`. -/
 theorem exists_l1_diagonal_lift_of_completeSpace
     (W : Submodule K Z) [CompleteSpace W] (d : ℕ)
     (B : ContinuousMultilinearMap K
@@ -134,9 +129,8 @@ theorem exists_l1_diagonal_lift_of_completeSpace
     rw [L1Coordinates.continuousMultilinearOfBounded_single]
   exact diagonal_eq_of_sum_single_eq D B (diagonal_eq_sum_single B D hD)
 
-/-- A homogeneous diagonal in a closed subspace of a Banach space admits one
-continuous multilinear representative with the same diagonal and norm at most
-`d! * ‖B‖`, for the original induced norm on the subspace. -/
+/-- A diagonal in a closed subspace `W` of a Banach space has a `W`-valued
+multilinear representative of norm at most `d! * ‖B‖`. -/
 theorem exists_l1_diagonal_lift [CompleteSpace Z]
     (W : Submodule K Z) (hW : IsClosed (W : Set Z)) (d : ℕ)
     (B : ContinuousMultilinearMap K

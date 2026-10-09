@@ -4,48 +4,9 @@ import Mathlib.GroupTheory.Perm.Sign
 import AlternatingAnalytic.Algebra.ClusterDiagonal
 
 /-!
-# Lemma B.13 (the diagonal), p. 34
+# Proof of Lemma B.13
 
-Solution file: unlike the challenge, it additionally imports the library modules that prove
-the claim. Remarks below about imports describe the challenge file.
-
-Setting (Appendix B.3-B.6): as for Lemma B.11. `L` is a finite field, `Ψ : V_fin^k × V_fin^k →
-Λ^k V` is `2k`-linear, antisymmetric in the last `k` slots (hypothesis (a) of Theorem B.9(1)) and
-satisfies (Pol1) for the multipliers `D_u x = ux` (hypothesis (b)); `H` is an infinite set on
-which `T(a; y; c) = Ω_{Ψ(e_a; e_y)}(c)` depends only on the pattern; `χ(τ)` is the common value
-of `χ(C₁, …, C_k)` over clusters `C₁, …, C_k` in `H` with order pattern `τ ∈ S_k`.
-
-Paper statement: "∑_{τ ∈ S_k} χ(τ) = 1."
-
-Formalization notes:
-* Definitions introduced (identical in challenge and solution), mirroring Appendix B.3-B.5:
-  `ClusterMap L k` (the curried `2k`-linear maps `V_fin^k × V_fin^k → Λ^k V`, `V = ℕ → L`,
-  `V_fin = ℕ →₀ L`), `coeff` (the coefficients `T(a; y; c) = Ω_{Ψ(e_a; e_y)}(c)`),
-  `PatternHomogeneous Ψ H` (the conclusion of Lemma B.10 for `T` with `N = 3k`, the 3k-tuple
-  indexed by `Fin 3 × Fin k`, "same pattern" via the paper's comparison characterization),
-  `IsCluster H C` (four consecutive elements of `H`), `HasOrderPattern C τ`, the weights
-  `opWeight = s = (1,0,-1,0)`, `vecWeight = w = (1,-1,1,-1)`, the vectors `sC`, `wC`, and the
-  cluster value `clusterValue = χ`.
-* The determinant array `Ω : Λ^k (ℕ → L) → L^(ℕ^k)`, `Ω_{y₁∧⋯∧y_k}(c) = det(y_b(c_a))`, is the
-  library definition `AlternatingAnalytic.determinantArray`
-  (`AlternatingAnalytic/Algebra/DeterminantArray.lean`, with `determinantArray_ιMulti` giving
-  the determinant formula); that module is imported only for this definition.
-* Paper labels are 1-based, Lean's are 0-based: the cluster point `C(1)` is `C 0`, and the
-  rank `τ(j) ∈ {1, …, k}` is `τ j : Fin k`.
-* Context hypotheses. The lemma sits inside the proof of Theorem B.9, under the standing
-  assumption that `Ψ` satisfies all hypotheses of Theorem B.9(1) with `k! = 0` in the finite
-  field `L`. Taken literally that context is contradictory (Theorem B.9), which would make the
-  statement vacuous. The challenge therefore keeps only the hypotheses the paper's proof uses
-  (the standing objects `L` finite, `H` infinite with pattern homogeneity of `T`), and lists
-  exactly which of Theorem B.9's hypotheses (a)-(c) are assumed; `k! = 0` is not assumed
-  (Remark B.15 applies the same lemmas when `k! ≠ 0`).
-* Hypotheses used here: multilinearity, (a) antisymmetry in the vector slots
-  (`Ψ u (x ∘ σ) = sign σ • Ψ u x`), (b) (Pol1) for the multipliers (as in Theorem B.9(1)), and
-  pattern homogeneity on `H`. The support bound (c) and `k! = 0` are not assumed (the paper
-  notes the lemma "does not use that bound"). `[Finite L]` and `H.Infinite` are the standing
-  context.
-* `∑_τ χ(τ)` is formalized with an arbitrary choice of representatives: `R τ` is any `k`-tuple of
-  clusters in `H` with order pattern `τ`, and the claim is `∑_τ χ(R τ) = 1`.
+Uses `AlternatingAnalytic.sum_clusterValue_order_eq_one` (`Algebra/ClusterDiagonal.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.LemB_13
@@ -110,8 +71,8 @@ noncomputable def clusterValue (Ψ : ClusterMap L k) (C : Fin k → Fin 4 → �
 
 end ClusterDefinitions
 
-/-- **Lemma B.13 (the diagonal).** Under antisymmetry and (Pol1), `∑_{τ ∈ S_k} χ(τ) = 1`, where
-`χ(τ)` is evaluated on any clusters in `H` with order pattern `τ`. -/
+/-- Under antisymmetry and (Pol1), `∑_{τ ∈ S_k} χ(τ) = 1`, where `χ(τ)` is evaluated on any
+clusters in `H` with order pattern `τ`. -/
 theorem sum_clusterValue_eq_one
     {L : Type u} [Field L] [Finite L] {k : ℕ} (Ψ : ClusterMap L k)
     (H : Set ℕ) (hH : H.Infinite) (hhom : PatternHomogeneous Ψ H)

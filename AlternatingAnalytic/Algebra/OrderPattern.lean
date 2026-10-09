@@ -5,10 +5,10 @@ import Mathlib.Basic.Finite.Prod
 /-!
 # Order-pattern homogeneity
 
-A finite coloring of tuples is constant on order patterns after restriction to
-an infinite subset of `ℕ`. The finite Ramsey coloring records all coordinate
-selections from an increasing finite set. Padding tuple values above their maximum
-preserves their ranks in this set.
+A finite coloring of `N`-tuples of natural numbers is constant on each order pattern
+after restriction to some infinite subset of `ℕ` (Lemma B.10). The proof colors each
+`N`-element set by the colors of all tuples drawn from it and applies the infinite
+Ramsey theorem.
 -/
 
 namespace OrderPattern
@@ -82,7 +82,8 @@ theorem card_values_below_eq {N : ℕ} {z z' : Fin N → ℕ}
     refine ⟨z j, hx, ?_⟩
     exact ((h _ j).2.mp (hpick (z j) (Finset.mem_filter.mp hx).1)).trans hj
 
-/-- Pad the distinct tuple values to `N` elements using points above all its values. -/
+/-- Pad the distinct values of a tuple to an `N`-element subset of `H` using points above all
+of them. -/
 theorem exists_padded_finset {N : ℕ} (H : Set ℕ) (hH : H.Infinite)
     (z : Fin N → ℕ) (hz : ∀ i, z i ∈ H) :
     ∃ s : Finset ℕ, (↑s : Set ℕ) ⊆ H ∧ s.card = N ∧
@@ -132,7 +133,7 @@ theorem exists_padded_finset {N : ℕ} (H : Set ℕ) (hH : H.Infinite)
     · rintro ⟨hx, hxi⟩
       exact ⟨Or.inl hx, hxi⟩
 
-/-- A finite coloring of tuples becomes constant on each order pattern on an infinite set. -/
+/-- A finite coloring of tuples is constant on each order pattern on some infinite set. -/
 theorem exists_infinite_order_homogeneous {C : Type*} [Finite C] (N : ℕ)
     (T : (Fin N → ℕ) → C) :
     ∃ H : Set ℕ, H.Infinite ∧

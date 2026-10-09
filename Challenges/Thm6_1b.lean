@@ -20,26 +20,18 @@ analyticity (`AnalyticAt`).
 
 ## Formalization notes
 * The degree is `Fin k`. "Characteristic p > 0" is `[CharP K p]` with `0 < p`.
-* "Complete" is `[CompleteSpace K]`; "not spherically complete" is
-  `¬ SphericallyCompleteSpace K`, using the library class `SphericallyCompleteSpace`
-  (every nonempty family of pairwise-meeting closed balls has a common point), imported from
-  `AlternatingAnalytic.Analysis.SphericalCompleteness`, which defines the class and proves
-  positive (extension) results only. No nonarchimedean hypothesis on `K` is added: every
-  normed field of positive characteristic is nonarchimedean (paper, Conventions).
-* `ℓ^∞(Λ, K^n)` is Mathlib's `lp (fun _ : Λ => Fin n → K) ∞`, where `Fin n → K` carries the
-  maximum norm. The corresponding `c_0` space is the set of its elements tending to `0` along
-  the cofinite filter; "containing c_0" is stated as membership of all such elements.
-* `E`, `D` are closed `K`-submodules of the sequence spaces, with the induced norms. That they
-  are complete and nonarchimedean (`IsUltrametricDist`) is stated explicitly, as in the paper's
-  wording, although it follows from closedness in `ℓ^∞`.
-* `set_option maxSynthPendingDepth 2` is needed so that Lean finds the operator-norm instance
-  on `L(Alt^k(D; K), Alt^k(E; K))` for these submodules; it changes no definition.
-* `Λ` is a countable type in `Type`; `E`, `D` lie in the universe of `K`.
-  `Countable Λ` also allows a finite `Λ`, while the paper's construction uses an infinite tree.
-  This does not weaken the claim: a finite `Λ` gives finite-dimensional `E`, `D`, where the
-  action is analytic by the finite-coordinate results, so any witness has `Λ` infinite. The first theorem is
-  the main existence statement; the second adds the paper's sequence-space realisation and
-  implies the first. Both are listed so that the main claim can be checked on its own.
+* "Not spherically complete" is `¬ SphericallyCompleteSpace K`, a class defined in
+  `Analysis/SphericalCompleteness.lean`. `K` is nonarchimedean automatically in positive
+  characteristic, so no such hypothesis is added.
+* `ℓ^∞(Λ, K^n)` is `lp (fun _ : Λ => Fin n → K) ∞` with the maximum norm on `Fin n → K`;
+  "containing `c_0`" means every element tending to `0` along the cofinite filter lies in it.
+* `E`, `D` are closed submodules with the induced norms; completeness and `IsUltrametricDist`
+  are stated explicitly, though they follow.
+* `set_option maxSynthPendingDepth 2` lets Lean find the norm instance on
+  `L(Alt^k(D; K), Alt^k(E; K))`.
+* `Λ : Type` is countable, possibly finite; a finite `Λ` cannot give a witness, since the
+  action is then analytic.
+* The first theorem is the existence statement; the second adds the sequence-space form.
 -/
 
 open Filter Topology
@@ -51,9 +43,8 @@ namespace AlternatingAnalyticChallenge.Thm6_1b
 
 universe u
 
-/-- **Theorem 6.1(2), abstract form.** Over a complete, not spherically complete normed field of
-characteristic `p > 0`, in every degree `k ≥ p`, there are nonarchimedean Banach spaces `E`, `D`
-such that scalar precomposition `A^k_{E,D;K}` is analytic at no point of `L(E, D)`. -/
+/-- Theorem 6.1(2): over a complete, not spherically complete `K` of characteristic `p > 0`,
+with `k ≥ p`, there are nonarchimedean Banach `E`, `D` with `A^k_{E,D;K}` analytic at no point. -/
 theorem exists_nonarchimedean_banach_nowhere_analytic_scalar
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] (p k : ℕ) [CharP K p]
     (hp : 0 < p) (hpk : p ≤ k) (hK : ¬ SphericallyCompleteSpace K) :
@@ -68,9 +59,8 @@ theorem exists_nonarchimedean_banach_nowhere_analytic_scalar
               (D [⋀^Fin k]→L[K] K) →L[K] (E [⋀^Fin k]→L[K] K))) u₀ := by
   sorry
 
-/-- **Theorem 6.1(2), sequence-space form.** The witnesses can be chosen as closed subspaces
-`E ⊆ ℓ^∞(Λ, K^{k+1})` and `D ⊆ ℓ^∞(Λ, K^k)` containing the corresponding `c_0` spaces, with `Λ`
-countable; they are nonarchimedean Banach spaces and `A^k_{E,D;K}` is analytic at no point. -/
+/-- Theorem 6.1(2), sequence-space form: the witnesses can be chosen as closed subspaces of
+`ℓ^∞(Λ, K^{k+1})` and `ℓ^∞(Λ, K^k)` containing the `c_0` spaces, with `Λ` countable. -/
 theorem exists_nowhere_analytic_scalar_in_bounded_sequences
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] (p k : ℕ) [CharP K p]
     (hp : 0 < p) (hpk : p ≤ k) (hK : ¬ SphericallyCompleteSpace K) :

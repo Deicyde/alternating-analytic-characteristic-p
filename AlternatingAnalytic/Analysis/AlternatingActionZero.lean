@@ -3,9 +3,9 @@ import AlternatingAnalytic.Analysis.AnalyticFamilies
 /-!
 # Degree-zero alternating-map action
 
-The canonical isometry `constOfIsEmptyLIE` identifies a degree-zero alternating
-map with its constant value. Under this identification, the joint action is
-exactly the covariant continuous linear map; the contravariant map has no effect.
+The isometry `constOfIsEmptyLIE` identifies a degree-zero alternating map with
+its constant value. Under this identification the action of `(u, v)` is `v`,
+and `u` has no effect.
 -/
 
 noncomputable section
@@ -29,7 +29,7 @@ theorem alternatingMapAction_zero_const (u : E' →L[K] E) (v : F →L[K] F') (y
   ext x
   rfl
 
-/-- Evaluating after the zero-degree identification gives exactly `v`. -/
+/-- After the degree-zero identification, the action sends `y` to `v y`. -/
 @[simp]
 theorem alternatingMapAction_zero_conjugate_apply
     (u : E' →L[K] E) (v : F →L[K] F') (y : F) :
@@ -39,8 +39,7 @@ theorem alternatingMapAction_zero_conjugate_apply
   rw [alternatingMapAction_zero_const]
   exact (ContinuousAlternatingMap.constOfIsEmptyLIE K E' F' (Fin 0)).symm_apply_apply _
 
-/-- The zero-degree action, conjugated by the canonical linear isometries, is
-the covariant map as an equality of continuous linear maps. -/
+/-- The degree-zero action, conjugated by `constOfIsEmptyLIE`, is `v`. -/
 theorem alternatingMapAction_zero_conjugate (u : E' →L[K] E) (v : F →L[K] F') :
     ((ContinuousAlternatingMap.constOfIsEmptyLIE K E' F' (Fin 0)).symm :
       (E' [⋀^Fin 0]→L[K] F') →L[K] F').comp
@@ -51,8 +50,7 @@ theorem alternatingMapAction_zero_conjugate (u : E' →L[K] E) (v : F →L[K] F'
   ext y
   exact alternatingMapAction_zero_conjugate_apply u v y
 
-/-- An explicit formula for the zero-degree action in the original alternating
-map spaces. -/
+/-- A formula for the degree-zero action. -/
 theorem alternatingMapAction_zero_eq (u : E' →L[K] E) (v : F →L[K] F') :
     alternatingMapAction 0 (u, v) =
       (ContinuousAlternatingMap.constOfIsEmptyLIE K E' F' (Fin 0) :
@@ -69,7 +67,7 @@ theorem alternatingMapAction_zero_independent (u₁ u₂ : E' →L[K] E) (v : F 
     alternatingMapAction 0 (u₁, v) = alternatingMapAction 0 (u₂, v) := by
   rw [alternatingMapAction_zero_eq u₁ v, alternatingMapAction_zero_eq u₂ v]
 
-/-- The zero-degree action has exactly the operator norm of the covariant map. -/
+/-- The degree-zero action has the same norm as `v`. -/
 @[simp]
 theorem norm_alternatingMapAction_zero (u : E' →L[K] E) (v : F →L[K] F') :
     ‖alternatingMapAction 0 (u, v)‖ = ‖v‖ := by
@@ -77,8 +75,7 @@ theorem norm_alternatingMapAction_zero (u : E' →L[K] E) (v : F →L[K] F') :
   exact (ContinuousLinearMap.opNorm_linearIsometryEquiv_comp _ _).trans
     (ContinuousLinearMap.opNorm_comp_linearIsometryEquiv _ _)
 
-/-- The degree-zero identification, its action formula and independence from
-the contravariant map, together with the exact norm, collected in one public theorem. -/
+/-- Summary of the degree-zero action: the formula, independence from `u`, and the norm. -/
 theorem alternatingMapAction_zero (u : E' →L[K] E) (v : F →L[K] F') :
     (∀ y : F, alternatingMapAction 0 (u, v)
         (ContinuousAlternatingMap.constOfIsEmptyLIE K E F (Fin 0) y) =

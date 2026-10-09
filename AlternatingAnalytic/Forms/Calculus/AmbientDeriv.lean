@@ -6,15 +6,11 @@ import AlternatingAnalytic.Forms.Calculus.Defs
 /-!
 # Derivatives of ambient analytic forms
 
-Let `η : P → Alt^k(P; K)` be ambient analytic on an open set `U`, i.e. `j ∘ η` is analytic,
-where `j : Alt^k(P; K) → Mult^k(P; K)` is the inclusion. The inclusion is a linear isometry with
-closed range, so every derivative of `j ∘ η` factors through `j`
-(`LinearIsometry.exists_hasFDerivAt_of_comp`): `η` and `Dη` are differentiable on `U` as
-`Alt`-valued maps, with `j ∘ Dη = D(j ∘ η)` and similarly in second order. Consequently the
-second derivative of `η` is symmetric (that of the analytic map `j ∘ η` is, in every
-characteristic), `d(dη) = 0`, and `dη` is again ambient analytic: `j ∘ dη` is a bounded linear
-expression in `D(j ∘ η)`, given by the multilinear version `multAlternatizeUncurryFin` of
-`alternatizeUncurryFin`.
+Let `η : P → Alt^k(P; F)` be ambient analytic on an open set `U`. The inclusion
+`j : Alt^k(P; F) → Mult^k(P; F)` is a linear isometry with closed range, so the first and second
+derivatives of `j ∘ η` factor through `j` (`LinearIsometry.exists_hasFDerivAt_of_comp`). Hence the
+second derivative of `η` is symmetric, `d(dη) = 0`, and `dη` is ambient analytic, as in the proof
+of Theorem 7.2.
 -/
 
 set_option maxSynthPendingDepth 3

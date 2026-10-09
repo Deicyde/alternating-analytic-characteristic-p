@@ -3,11 +3,11 @@ import AlternatingAnalytic.Analysis.ProjectiveExterior
 import AlternatingAnalytic.Analysis.LaurentResidueLift
 
 /-!
-# Theorem C.1 (no bounded lift over a Laurent series field), p. 36
+# Proof of Theorem C.1
 
-Solution: both parts are `AlternatingAnalytic.laurent_not_hasBoundedLift` and
-`AlternatingAnalytic.laurent_not_analyticAt` (`Analysis/LaurentResidueLift.lean`), with the lift
-re-indexed by `Round24Transfer.hasBoundedLift_iff_exists_ι`.
+The two parts are `laurent_not_hasBoundedLift` and `laurent_not_analyticAt`
+(`Analysis/LaurentResidueLift.lean`), with the lift re-indexed by
+`Round24Transfer.hasBoundedLift_iff_exists_ι`.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -20,7 +20,7 @@ open AlternatingAnalytic
 
 universe u
 
-/-- Precomposition `A^k_{E,E;F} : f ↦ (m ↦ m ∘ (f, …, f))` admits a bounded `k`-linear lift:
+/-- Precomposition `A : f ↦ (m ↦ m ∘ (f, …, f))` on `Alt^k(E; F)` has a bounded `k`-linear lift:
 a continuous `k`-linear map on `L(E,E)` whose diagonal is `A`. -/
 def HasBoundedKLinearLift (K : Type*) [NontriviallyNormedField K]
     (E F : Type*) [NormedAddCommGroup E] [NormedSpace K E]
@@ -29,8 +29,8 @@ def HasBoundedKLinearLift (K : Type*) [NontriviallyNormedField K]
       ((E [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F)),
     ∀ f : E →L[K] E, P (fun _ => f) = ContinuousAlternatingMap.compContinuousLinearMapCLM f
 
-/-- **Theorem C.1, main part.** Over `K₁ = κ((X))` with `κ` finite of characteristic `p ≤ k`,
-precomposition on `Alt^k(ℓ^∞(ℕ,K₁); B)` has no bounded `k`-linear lift. -/
+/-- Over `K₁ = κ((X))` with `κ` finite of characteristic `p ≤ k`, precomposition on
+`Alt^k(ℓ^∞(ℕ,K₁); B)` has no bounded `k`-linear lift. -/
 theorem part1_not_hasBoundedKLinearLift
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]
     (k : ℕ) (hpk : p ≤ k) (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] :
@@ -41,8 +41,7 @@ theorem part1_not_hasBoundedKLinearLift
   exact laurent_not_hasBoundedLift κ r k p hpk
     (Round24Transfer.hasBoundedLift_iff_exists_ι.2 ⟨P, hP⟩)
 
-/-- **Theorem C.1, consequence.** The same precomposition map is analytic at no point of
-`L(E₁, E₁)`. -/
+/-- The same precomposition map is analytic at no point of `L(E₁, E₁)`. -/
 theorem part2_not_analyticAt
     (κ : Type u) [Field κ] [Finite κ] (p : ℕ) (hp : p.Prime) [CharP κ p]
     (k : ℕ) (hpk : p ≤ k) (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]

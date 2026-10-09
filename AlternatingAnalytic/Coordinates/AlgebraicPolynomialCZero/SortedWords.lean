@@ -8,10 +8,9 @@ import AlternatingAnalytic.Coordinates.AlgebraicPolynomialCZero.Interpolation
 
 For a linearly ordered index type `I`, every word `a : Fin n → I` has a sorted rearrangement
 `sortWord a`. Given values `B a'` on words, `coeff B a` sums `B` over all words whose sorted
-rearrangement is `a`; it vanishes unless `a` is sorted. Regrouping a finite multilinear expansion
-by sorted rearrangement turns the coefficients `B` of an algebraic polynomial into the
-"nondecreasing word" coefficients used in Proposition I.2. We also identify `coeff B a` with the
-multiplicity-filtered sum produced by the interpolation identity.
+rearrangement is `a`; it vanishes unless `a` is sorted. These are the coefficients on
+nondecreasing words used in the proof of Proposition I.2. The file also identifies `coeff B a`
+with the multiplicity-filtered sum produced by the interpolation identity.
 -/
 
 open Finset

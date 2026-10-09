@@ -41,7 +41,7 @@ theorem finiteDimensional_of_preservesAnalyticMorphisms_of_discrete {K : Type u}
     exists_not_analyticAt_of_not_finiteDimensional he hval hK B k hC6 P hP hinf
   exact hU (analyticAt_compContinuousLinearMapCLM_of_preserves (ℕ →ᵇ K) B h U x₀)
 
-/-- **Corollary C.8, "only if", conditional on Proposition C.6.** Over `K = κ((X))`, if the
+/-- Corollary C.8, "only if" half, assuming Proposition C.6: over `K = κ((X))`, if the
 alternating construction preserves operator-valued analytic morphisms over every analytic
 manifold modeled on the Banach space `P` (with an equivalent ultrametric norm), then `P` is
 finite-dimensional. -/
@@ -56,7 +56,7 @@ theorem finiteDimensional_of_preservesAnalyticMorphisms
     (laurent_norm_mem_zpowers κ r) (laurent_exists_norm_eq_zpow κ r)
     (ProjectiveExteriorCompletion (LaurentField κ r) ℕ k) k hC6 P hP h
 
-/-- **Corollary C.8, "only if".** Over `K = 𝔽_q((u))` with `k ≥ p`, if the alternating
+/-- Corollary C.8, "only if" half: over `K = 𝔽_q((u))` with `k ≥ p`, if the alternating
 construction preserves analytic bundles and operator-valued analytic morphisms over every analytic
 manifold modeled on the Banach space `P` (with an equivalent ultrametric norm), then `P` is
 finite-dimensional. Only morphism preservation is used. -/

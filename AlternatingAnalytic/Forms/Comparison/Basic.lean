@@ -6,13 +6,11 @@ import AlternatingAnalytic.Analysis.FiniteCoordinateReflection
 /-!
 # Intrinsic and ambient analytic forms
 
-This file proves the comparison of `paper/charp.tex`, Proposition 7.3. A coefficient map
-`η : P → Alt^k(P; F)` is ambient analytic when `j ∘ η` is analytic, where
-`j : Alt^k(P; F) → Mult^k(P; F)` forgets alternation. Intrinsic analyticity implies ambient
-analyticity. If `j` has a bounded linear retraction, or if `P` has finitely many continuous
-coordinates, the converse holds, the alternating transitions `y ↦ (Dψ(y))^*` of `C^ω` maps are
-analytic, and (for a retraction) the alternating bundle over a `C^n` manifold is `C^n`. No
-completeness of the field and no ultrametric hypothesis is needed.
+Proposition 7.3 at chart level. A coefficient map `η : P → Alt^k(P; F)` is ambient analytic
+when `j ∘ η` is analytic, where `j : Alt^k(P; F) → Mult^k(P; F)` forgets alternation. Intrinsic
+analyticity implies ambient analyticity. If `j` has a bounded linear retraction, or `P` has finite
+continuous coordinates, the converse holds and the alternating transitions `y ↦ (Dψ(y))^*` of
+`C^ω` maps are analytic. Unlike Section 7 of the paper, the field need not be complete.
 -/
 
 noncomputable section

@@ -25,20 +25,17 @@ satisfying both
     g^r(Σ) ⊆ Σ' for every r."
 
 ## Formalization notes
-* `κ` is any field (`[Field κ]`), `k : ℕ` with `(k ! : κ) = 0`; no other hypothesis on `k`
-  (the factorial hypothesis already forces `k ≥ 2`).
-* `V = Fin (k + 1) → κ`, `V' = Fin k → κ`; indices are 0-based (`Fin`), so "c < d", "a < b" and
-  "the first k coordinates" are read in `Fin`. `Hom_κ(V, V')` is `V →ₗ[κ] V'` and
-  `Alt^k_κ(V; κ)` is `V [⋀^Fin k]→ₗ[κ] κ` (purely algebraic, as in the paper). A `k`-linear `τ` is a
-  `MultilinearMap κ (fun _ : Fin k => V →ₗ[κ] V') (V [⋀^Fin k]→ₗ[κ] κ)`.
-* `δ'` is `(Pi.basisFun κ (Fin k)).det`; `δ' ∘ (g_0, …, g_0)` is `δ'.compLinearMap g₀`, where
-  `g₀ = LinearMap.funLeft κ κ Fin.castSucc` (keep coordinates `0, …, k-1`).
-* Definitions introduced: `coordForms` (the set `N`), `colEq` (`H'_{cd}`), `colZero` (`C'_s`),
-  `pairFamily` (the family `F` as a set of pairs of submodules), `firstCoords` (`g₀`), `detV'`
-  (`δ'`), and the two conditions `FibreCondition1`, `FibreCondition2`.
-* Condition (2) "g^r(Σ) ⊆ Σ'" is `Σ.map (g r) ≤ Σ'`; "the restriction to Σ^k is zero" is
-  `τ g ξ = 0` for all `ξ : Fin k → V` with every `ξ r ∈ Σ`.
-* Not formalized in the library: there is no proof to compare against.
+
+* `κ` is any field and `(k ! : κ) = 0`, which forces `k ≥ 2`.
+* `V = Fin (k + 1) → κ` and `V' = Fin k → κ`. Indices are 0-based, so "c < d", "a < b" and "the
+  first k coordinates" are read in `Fin`.
+* `Hom_κ(V, V')` is `V →ₗ[κ] V'` and `Alt^k_κ(V; κ)` is `V [⋀^Fin k]→ₗ[κ] κ`, both algebraic as in
+  the paper; `τ` is a `MultilinearMap`.
+* `δ'` is `(Pi.basisFun κ (Fin k)).det`, and `g₀` is `LinearMap.funLeft κ κ Fin.castSucc`.
+* Defined here: `coordForms` (`N`), `colEq` (`H'_{cd}`), `colZero` (`C'_s`), `pairFamily` (`F`),
+  `firstCoords` (`g₀`), `detV'` (`δ'`), and the conditions `FibreCondition1`, `FibreCondition2`.
+* In condition (2), "g^r(Σ) ⊆ Σ'" is `Σ.map (g r) ≤ Σ'`, and "the restriction to Σ^k is zero" is
+  `τ g ξ = 0` whenever every `ξ r ∈ Σ`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemF_4
@@ -91,7 +88,7 @@ def FibreCondition2
     (∀ r, P.1.map (g r) ≤ P.2) →
       ∀ ξ : Fin k → (Fin (k + 1) → κ), (∀ r, ξ r ∈ P.1) → τ g ξ = 0
 
-/-- **Lemma F.4 (finite fibre obstruction).** If `k! = 0` in `κ`, no `k`-linear map
+/-- Lemma F.4: if `k! = 0` in `κ`, no `k`-linear map
 `τ : Hom_κ(κ^{k+1}, κ^k)^k → Alt^k_κ(κ^{k+1}; κ)` satisfies both conditions (1) and (2). -/
 theorem not_exists_fibre_map (hk : (k.factorial : κ) = 0) :
     ¬ ∃ τ : MultilinearMap κ (fun _ : Fin k => (Fin (k + 1) → κ) →ₗ[κ] (Fin k → κ))

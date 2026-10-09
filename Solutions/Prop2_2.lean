@@ -5,17 +5,12 @@ import Mathlib.Analysis.Analytic.Basic
 import AlternatingAnalytic.Descent.AmbientAction
 
 /-!
-# Proposition 2.2 (ambient polynomial action), p. 6
+# Proof of Proposition 2.2
 
-Solution: the statements of `Challenges/Prop2_2.lean`, proved from
-`AlternatingAnalytic/Descent/AmbientAction.lean`:
-* part 1: `AlternatingAnalytic.exists_ambientMultilinearAction_rep` (the representative is built
-  from `ContinuousMultilinearMap.compContinuousLinearMapContinuousMultilinear`);
-* part 2: `AlternatingAnalytic.contDiff_ambientMultilinearAction`;
-* part 3: `AlternatingAnalytic.analyticOnNhd_ambientMultilinearAction_comp`;
-* part 4: `AlternatingAnalytic.ambientMultilinearAction_alternating` and
-  `AlternatingAnalytic.isClosed_setOf_forall_mem_range_toContinuousMultilinearMap`.
-`multilinearAction` is definitionally `AlternatingAnalytic.ambientMultilinearAction`.
+The four parts are `AlternatingAnalytic.exists_ambientMultilinearAction_rep`,
+`contDiff_ambientMultilinearAction`, `analyticOnNhd_ambientMultilinearAction_comp` and
+`ambientMultilinearAction_alternating` with
+`isClosed_setOf_forall_mem_range_toContinuousMultilinearMap` (`Descent/AmbientAction.lean`).
 -/
 
 open scoped ContDiff
@@ -34,7 +29,7 @@ noncomputable def multilinearAction (k : ℕ) (v : (E →L[K] E') × (F →L[K] 
   (ContinuousLinearMap.compContinuousMultilinearMapL K (fun _ : Fin k => E) F F' v.2).comp
     (ContinuousMultilinearMap.compContinuousLinearMapL (fun _ : Fin k => v.1))
 
-/-- **Proposition 2.2, part 1.** The joint action on multilinear maps is the diagonal of a
+/-- The joint action on multilinear maps is the diagonal of a
 bounded `(k + 1)`-linear map. -/
 theorem part1 (k : ℕ) :
     ∃ H : ContinuousMultilinearMap K (fun _ : Fin (k + 1) => (E →L[K] E') × (F →L[K] F'))
@@ -43,12 +38,12 @@ theorem part1 (k : ℕ) :
       ∀ v, H (fun _ => v) = multilinearAction k v := by
   exact AlternatingAnalytic.exists_ambientMultilinearAction_rep k
 
-/-- **Proposition 2.2, part 2.** The joint action on multilinear maps is `C^ω`. -/
+/-- The joint action on multilinear maps is `C^ω`. -/
 theorem part2 (k : ℕ) :
     ContDiff K ω (multilinearAction (K := K) (E := E) (E' := E') (F := F) (F' := F') k) := by
   exact AlternatingAnalytic.contDiff_ambientMultilinearAction k
 
-/-- **Proposition 2.2, part 3.** The restriction of the joint action to alternating inputs is
+/-- The restriction of the joint action to alternating inputs is
 analytic as a map into `L(Alt^k(E'; F), Mult^k(E; F'))`. -/
 theorem part3 (k : ℕ) :
     AnalyticOnNhd K
@@ -59,7 +54,7 @@ theorem part3 (k : ℕ) :
       Set.univ := by
   exact AlternatingAnalytic.analyticOnNhd_ambientMultilinearAction_comp k
 
-/-- **Proposition 2.2, part 4.** Every value of the restricted action takes values in
+/-- Every value of the restricted action takes values in
 `Alt^k(E; F')`, and the operators taking values in `Alt^k(E; F')` form a closed subset of
 `L(Alt^k(E'; F), Mult^k(E; F'))`. -/
 theorem part4 (k : ℕ) :

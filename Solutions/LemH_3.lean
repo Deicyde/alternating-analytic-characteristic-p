@@ -2,16 +2,12 @@ import AlternatingAnalytic.Category.AnalyticDomains
 import AlternatingAnalytic.Analysis.SplitAlternatingPairs
 
 /-!
-# Lemma H.3 (split destinations give analytic actions), p. 58
+# Proof of Lemma H.3
 
-Solution: the statements of `Challenges/LemH_3.lean`, from
-`AlternatingAnalytic.alternatingFunctor_analyticOnNhd_hom_of_split_destination`,
-`AlternatingAnalytic.splitPairs_isAnalyticDomain`
-(`AlternatingAnalytic/Category/AnalyticDomains.lean`) and
-`AlternatingAnalytic.analyticOnNhd_alternatingMapAction_of_split_destination`
-(`AlternatingAnalytic/Analysis/SplitAlternatingPairs.lean`). The file's `IsSplitInDegree` is the
-library's `IsSplitAlternatingPair` and `jointAction` the library's `alternatingMapAction`, both
-definitionally.
+Uses `alternatingFunctor_analyticOnNhd_hom_of_split_destination` and
+`splitPairs_isAnalyticDomain` (`AlternatingAnalytic/Category/AnalyticDomains.lean`) and
+`analyticOnNhd_alternatingMapAction_of_split_destination`
+(`AlternatingAnalytic/Analysis/SplitAlternatingPairs.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.LemH_3
@@ -37,8 +33,8 @@ noncomputable def jointAction (K : Type*) [NontriviallyNormedField K] (k : ℕ)
   (ContinuousLinearMap.compContinuousAlternatingMapCLM K E G F (Fin k) a.2).comp
     (ContinuousAlternatingMap.compContinuousLinearMapCLM a.1)
 
-/-- **Lemma H.3, first assertion.** Every morphism-space action of `Alt^k` whose destination is
-a split pair is analytic on the whole hom space; the source object is arbitrary. -/
+/-- Lemma H.3, first assertion: every morphism-space action of `Alt^k` whose destination is
+a split pair is analytic. -/
 theorem part1 (K : Type u) [NontriviallyNormedField K] (k : ℕ)
     (X Y : (AlternatingAnalytic.NormedSpaceCat K)ᵒᵖ × AlternatingAnalytic.NormedSpaceCat K)
     (hY : IsSplitInDegree K k Y.1.unop Y.2) :
@@ -46,9 +42,8 @@ theorem part1 (K : Type u) [NontriviallyNormedField K] (k : ℕ)
       Set.univ := by
   exact AlternatingAnalytic.alternatingFunctor_analyticOnNhd_hom_of_split_destination K k X Y hY
 
-/-- **Lemma H.3, first assertion, operator form.** For arbitrary normed spaces `D, G` and a
-pair `(E, F)` split in degree `k`, the joint action `(u, v) ↦ (m ↦ v ∘ m ∘ (u, …, u))` on
-`L(E, D) × L(G, F)` is analytic everywhere. -/
+/-- Lemma H.3, first assertion, without the category: if `(E, F)` is split in degree `k`,
+then `(u, v) ↦ (m ↦ v ∘ m ∘ (u, …, u))` is analytic on `L(E, D) × L(G, F)`. -/
 theorem part1_operator (K : Type u) [NontriviallyNormedField K] (k : ℕ)
     (D : Type uD) (E : Type uE) (F : Type uF) (G : Type uG)
     [NormedAddCommGroup D] [NormedSpace K D] [NormedAddCommGroup E] [NormedSpace K E]
@@ -58,7 +53,7 @@ theorem part1_operator (K : Type u) [NontriviallyNormedField K] (k : ℕ)
   exact AlternatingAnalytic.analyticOnNhd_alternatingMapAction_of_split_destination
     (K := K) (E := D) (E' := E) (F := G) (F' := F) k h
 
-/-- **Lemma H.3, second assertion.** The full subcategory of pairs split in degree `k` is an
+/-- Lemma H.3, second assertion: the full subcategory of pairs split in degree `k` is an
 analytic domain for `Alt^k`. -/
 theorem part2 (K : Type u) [NontriviallyNormedField K] (k : ℕ) :
     AlternatingAnalytic.IsAlternatingAnalyticDomain K k

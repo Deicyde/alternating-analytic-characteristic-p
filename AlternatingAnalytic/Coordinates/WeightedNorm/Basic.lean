@@ -8,11 +8,9 @@ import AlternatingAnalytic.Coordinates.WeightedNorm.SupNorm
 /-!
 # The weighted norm on null sequences
 
-For the weights `w_j = 1 + 1/(j+2)` we study `‖x‖_w = sup_j w_j ‖x_j‖` on `C₀(ℕ, β)`
-(Remark I.3 of the paper). It satisfies `‖x‖_∞ ≤ ‖x‖_w ≤ (3/2)‖x‖_∞`, it is a norm, and it is
-ultrametric when `β` is. We install it on a type synonym `WeightedC0 β` of `C₀(ℕ, β)`, and show
-that every normed space whose norm is the weighted norm transported along a linear isomorphism
-is complete (when `β` is) and ultrametric (when `β` is).
+The weighted norm `‖x‖_w = sup_j w_j ‖x_j‖` on `C₀(ℕ, β)`, with weights `w_j = 1 + 1/(j+2)`,
+from Remark I.3. It is a norm with `‖x‖_∞ ≤ ‖x‖_w ≤ (3/2)‖x‖_∞`, ultrametric when `β` is.
+`WeightedC0 β` is a type synonym of `C₀(ℕ, β)` carrying this norm.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -113,7 +111,7 @@ theorem wNorm_smul {𝕜 : Type*} [NormedField 𝕜] [NormedSpace 𝕜 β] (c : 
 
 end Norm
 
-/-- A copy of `C₀(ℕ, β)` that will carry the weighted norm. -/
+/-- A copy of `C₀(ℕ, β)` that carries the weighted norm. -/
 def WeightedC0 (β : Type*) [NormedAddCommGroup β] : Type _ := C₀(ℕ, β)
 
 namespace WeightedC0

@@ -4,22 +4,19 @@ import AlternatingAnalytic.Analysis.SphericalCompleteness
 import AlternatingAnalytic.Analysis.SphericalAnalytic
 
 /-!
-# Theorem 4.2 (spherically complete targets), pp. 9-10
+# Proof of Theorem 4.2
 
-Solution: the statements of `Challenges/Thm4_2.lean`, proved from the library
-(`SphericalCompleteness.lean`, `SphericalAnalytic.lean`, `LiftCriterion.lean`):
-* ultrametric: the library `IsUltrametricDist` instance on `E [⋀^ι]→L[𝕜] F`;
-* spherical completeness: instance `sphericallyCompleteSpace_continuousAlternatingMap`;
-* retraction: `ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap`;
-* polynomiality: `ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete` with
-  `Round24Transfer.hasBoundedLift_iff_exists_ι` (a single homogeneous diagonal).
+The parts are the instances on `E [⋀^ι]→L[𝕜] F` (`SphericalCompleteness.lean`,
+`sphericallyCompleteSpace_continuousAlternatingMap`),
+`ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap` and
+`ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete` (`SphericalAnalytic.lean`).
 -/
 
 namespace AlternatingAnalyticChallenge.Thm4_2
 
 universe uK uE uE' uF uX uY
 
-/-- A map is a *continuous polynomial* if it is a finite sum of diagonals of bounded
+/-- A map is a continuous polynomial if it is a finite sum of diagonals of bounded
 multilinear maps. -/
 def IsContinuousPolynomial (K : Type uK) [NontriviallyNormedField K]
     {X : Type uX} {Y : Type uY} [NormedAddCommGroup X] [NormedSpace K X]
@@ -28,7 +25,7 @@ def IsContinuousPolynomial (K : Type uK) [NontriviallyNormedField K]
     (P : ∀ i : Fin N, ContinuousMultilinearMap K (fun _ : Fin (deg i) => X) Y),
     ∀ x, f x = ∑ i, P i (fun _ => x)
 
-/-- **Theorem 4.2, nonarchimedean part.** `Alt^k(E;F)` is nonarchimedean. -/
+/-- `Alt^k(E;F)` is nonarchimedean. -/
 theorem part1_ultrametric
     (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K]
     (E : Type uE) (F : Type uF)
@@ -38,7 +35,7 @@ theorem part1_ultrametric
     IsUltrametricDist (E [⋀^Fin k]→L[K] F) := by
   infer_instance
 
-/-- **Theorem 4.2, spherical completeness.** `Alt^k(E;F)` is spherically complete. -/
+/-- `Alt^k(E;F)` is spherically complete. -/
 theorem part1_sphericallyComplete
     (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K]
     (E : Type uE) (F : Type uF)
@@ -48,7 +45,7 @@ theorem part1_sphericallyComplete
     SphericallyCompleteSpace (E [⋀^Fin k]→L[K] F) := by
   infer_instance
 
-/-- **Theorem 4.2, retraction.** The inclusion `Alt^k(E;F) ↪ Mult^k(E;F)` has a contractive
+/-- The inclusion `Alt^k(E;F) ↪ Mult^k(E;F)` has a contractive
 continuous linear retraction. -/
 theorem part2_retraction
     (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K]
@@ -60,7 +57,7 @@ theorem part2_retraction
       ‖r‖ ≤ 1 ∧ ∀ m : E [⋀^Fin k]→L[K] F, r m.toContinuousMultilinearMap = m := by
   exact ContinuousAlternatingMap.exists_contracting_retraction_toContinuousMultilinearMap
 
-/-- **Theorem 4.2, polynomiality.** Precomposition `A^k_{E,E';F}` is a continuous polynomial,
+/-- Precomposition `A^k_{E,E';F}` is a continuous polynomial,
 for all normed `E, E'` and every `k`. -/
 theorem part3_continuousPolynomial
     (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K]

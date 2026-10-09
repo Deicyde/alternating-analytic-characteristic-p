@@ -1,6 +1,10 @@
 import AlternatingAnalytic.Algebra.DeterminantQuadraticBasic
 
-/-! # Homogeneous components of the determinant coefficient spaces -/
+/-! # Homogeneous components of the determinant coefficient spaces
+
+The spaces `G_0` and `C_0` are graded: they contain the homogeneous components of
+their elements. This is used in the proof of Lemma H.7.
+-/
 
 noncomputable section
 open scoped BigOperators

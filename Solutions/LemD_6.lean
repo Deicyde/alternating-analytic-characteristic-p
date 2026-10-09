@@ -7,17 +7,11 @@ import AlternatingAnalytic.Analysis.CompletedBaseChange
 import AlternatingAnalytic.Analysis.DenseMultilinearExtension
 
 /-!
-# Lemma D.6 (projective base change), p. 44
+# Proof of Lemma D.6
 
-Solution: the statements of `Challenges/LemD_6.lean`, from the library's binary projective
-base change (`AlternatingAnalytic/Analysis/ProjectiveBaseChange.lean`,
-`AlternatingAnalytic/Analysis/CompletedBaseChange.lean`). The file's `projNorm` is the
-library's `baseChangeSeminorm` by `baseChangeSeminorm_eq_iInf`; `contraction` is the library's
-`scalarContraction` and `scaleRight` its `baseChangeScalarMap` (both definitionally).
-(1) `norm_scalarContraction_le`; (2) `baseChangeSeminorm_eq_zero_iff`, `map_add_le_add`,
-`baseChangeScalarMap_apply` and `baseChangeSeminorm_smul`; (3) `baseChangeSeminorm_tmul_one`;
-(4) `denseLinearExtension` of `scalarContractionContinuous ϖ` along the isometry `j`. The
-library's `IsUltrametricDist K₁` hypothesis is derived from (H2) through `algebraMap`.
+Uses the projective base change of `AlternatingAnalytic/Analysis/ProjectiveBaseChange.lean`
+(`projNorm` is `baseChangeSeminorm` by `baseChangeSeminorm_eq_iInf`) and, for part (4),
+`denseLinearExtension` of `scalarContractionContinuous ϖ`.
 -/
 
 open scoped TensorProduct
@@ -31,8 +25,8 @@ section Definitions
 variable (K₁ : Type u₁) (V K' : Type u) [NontriviallyNormedField K₁]
   [NormedAddCommGroup V] [NormedSpace K₁ V] [NormedField K'] [NormedAlgebra K₁ K']
 
-/-- The projective norm `‖u‖_π = inf { ∑ⱼ ‖xⱼ‖ |λⱼ| : u = ∑ⱼ xⱼ ⊗ λⱼ }` on `V_{K′} = V ⊗_{K₁} K′`,
-the infimum over finite decompositions (lists of pairs), with an ordinary sum. -/
+/-- The projective norm `‖u‖_π = inf ∑ⱼ ‖xⱼ‖ ‖λⱼ‖` over finite decompositions
+`u = ∑ⱼ xⱼ ⊗ λⱼ`. -/
 noncomputable def projNorm (u : V ⊗[K₁] K') : ℝ :=
   ⨅ s : {s : List (V × K') // (s.map fun z => z.1 ⊗ₜ[K₁] z.2).sum = u},
     (s.val.map fun z => ‖z.1‖ * ‖z.2‖).sum
@@ -45,8 +39,7 @@ noncomputable def contraction (ψ : K' →ₗ[K₁] K₁) : V ⊗[K₁] K' →�
 
 variable (V)
 
-/-- Multiplication by `μ ∈ K′` on `V_{K′}` through the second factor:
-`x ⊗ λ ↦ x ⊗ μλ`. This is the `K′`-vector space structure of `V_{K′}`. -/
+/-- Multiplication by `μ ∈ K′` on `V_{K′}` through the second factor, `x ⊗ λ ↦ x ⊗ μλ`. -/
 noncomputable def scaleRight (μ : K') : V ⊗[K₁] K' →ₗ[K₁] V ⊗[K₁] K' :=
   (LinearMap.mulLeft K₁ μ).lTensor V
 
@@ -68,14 +61,14 @@ private theorem projNorm_eq (u : V ⊗[K₁] K') :
     projNorm K₁ V K' u = AlternatingAnalytic.baseChangeSeminorm K₁ V K' u :=
   (AlternatingAnalytic.baseChangeSeminorm_eq_iInf K₁ V K' u).symm
 
-/-- **Lemma D.6(1).** `‖T_ψ u‖ ≤ ‖ψ‖ ‖u‖_π` for every bounded `K₁`-linear `ψ : K′ → K₁`. -/
+/-- `‖T_ψ u‖ ≤ ‖ψ‖ ‖u‖_π` for every bounded `K₁`-linear `ψ : K′ → K₁`. -/
 theorem part1 (ψ : K' →L[K₁] K₁) (u : V ⊗[K₁] K') :
     ‖contraction ψ.toLinearMap u‖ ≤ ‖ψ‖ * projNorm K₁ V K' u := by
   rw [projNorm_eq]
   exact AlternatingAnalytic.norm_scalarContraction_le ψ u
 
-/-- **Lemma D.6(2).** `‖·‖_π` is a `K′`-norm on `V_{K′}`: nonnegative, zero only at zero,
-subadditive, and absolutely homogeneous for the `K′`-action through the second factor. -/
+/-- `‖·‖_π` is a `K′`-norm on `V_{K′}`: nonnegative, zero only at zero, subadditive, and
+homogeneous for the `K′`-action through the second factor. -/
 theorem part2 :
     (∀ u : V ⊗[K₁] K', 0 ≤ projNorm K₁ V K' u) ∧
       (∀ u : V ⊗[K₁] K', projNorm K₁ V K' u = 0 ↔ u = 0) ∧
@@ -94,16 +87,14 @@ theorem part2 :
     rw [AlternatingAnalytic.baseChangeScalarMap_apply,
       AlternatingAnalytic.baseChangeSeminorm_smul]
 
-/-- **Lemma D.6(3).** `ι_V : x ↦ x ⊗ 1` is isometric. -/
+/-- The map `x ↦ x ⊗ 1` is an isometry for `‖·‖_π`. -/
 theorem part3 (x : V) : projNorm K₁ V K' (x ⊗ₜ[K₁] (1 : K')) = ‖x‖ := by
   have := ultrametric_of_normedAlgebra K₁ K'
   rw [projNorm_eq]
   exact AlternatingAnalytic.baseChangeSeminorm_tmul_one K₁ V K' x
 
-/-- **Lemma D.6(4).** If `V` is complete and `ϖ` is as in Corollary D.4, then `T_ϖ` extends to
-a `K₁`-linear map `Π_V` on the completion `V ⊗̂_π K′` with `‖Π_V‖ ≤ 1` and `Π_V ∘ ι_V = id`.
-The completion is given by its universal description: a complete normed `K₁`-space `W` with a
-`K₁`-linear map `j : V_{K′} → W` that is isometric for `‖·‖_π` and has dense range. -/
+/-- If `V` is complete, `T_ϖ` extends to `Π_V` on the completion with `‖Π_V‖ ≤ 1` and
+`Π_V ∘ ι_V = id`. The completion is any complete `W` with a dense-range `‖·‖_π`-isometry `j`. -/
 theorem part4 [CompleteSpace V]
     (ϖ : K' →ₗ[K₁] K₁) (hϖfix : ∀ c : K₁, ϖ (algebraMap K₁ K' c) = c)
     (hϖle : ∀ l : K', ‖ϖ l‖ ≤ ‖l‖)

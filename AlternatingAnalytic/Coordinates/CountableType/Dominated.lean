@@ -10,7 +10,7 @@ whose scalar `k`-linear forms are dominated by a continuous linear map `j` into 
 normed space: `‖g v‖ ≤ ‖g‖ ∏ₐ ‖j (v a)‖`. Descending to the image of `j`, applying the sorted lift
 for a van der Put basis there, and pulling back gives a bounded linear operator `S` on scalar
 forms with `alternatization (S g) = g` for alternating `g` (`exists_sortedLift_of_dominated`).
-This is the core of Proposition I.1 (`prop:scalar-countable`); the bidual supplies `j`.
+This is the core of the proof of Proposition I.1, where the bidual supplies `j`.
 -/
 
 noncomputable section
@@ -21,10 +21,9 @@ namespace AlternatingAnalytic.CountableType
 
 variable {K : Type*} [NontriviallyNormedField K]
 
-/-- **Sorted lift on a countably spanned space.** If `V₀` is spanned by a countable set and
-scalar forms on `V₀` are dominated by a continuous linear map into an ultrametric space, there is
-a bounded linear operator on scalar `k`-linear forms whose alternatization is the identity on
-alternating forms. -/
+/-- If `V₀` is spanned by a countable set and scalar forms on `V₀` are dominated by a continuous
+linear map into an ultrametric space, some bounded linear operator on scalar `k`-linear forms
+has alternatization equal to the identity on alternating forms. -/
 theorem exists_sortedLift_of_dominated [CompleteSpace K] {V₀ Z : Type*}
     [NormedAddCommGroup V₀] [NormedSpace K V₀] [NormedAddCommGroup Z] [NormedSpace K Z]
     [IsUltrametricDist K] [IsUltrametricDist Z] (j : V₀ →L[K] Z) (S₀ : Set V₀)

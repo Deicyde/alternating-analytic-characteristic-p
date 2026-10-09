@@ -4,16 +4,17 @@ import AlternatingAnalytic.Analysis.FactorialClassification
 import AlternatingAnalytic.Analysis.PositiveCharacteristic
 
 /-!
-# Regularity and classification of the alternating bifunctors
+# Regularity of the functor Alt^k
 
-These are categorical statements about the actual functor maps, using their
-canonical linear isometric hom coordinates. The converse uses the identity
-pushforward slice and the universal Banach-space factorial classification.
+The hom maps of `Alt^k` are C^∞, and they are analytic iff `k! ≠ 0` in `K`, on normed
+and on Banach spaces (Corollary 6.2). With spherically complete targets over an ultrametric
+field they are continuous polynomials in every degree (Theorem 4.2).
 
-`alternatingFunctor_main` collects Main Theorem (1), including the finite-power-
-series strengthening. `alternatingSphericalFunctor_main` gives the stronger
-ultrametric version of Main Theorem (2), and its positive-characteristic
-specialization is `alternatingSphericalFunctor_main_of_charP`.
+## Main results
+
+- `alternatingFunctor_main`: Corollary 6.2 in functor form.
+- `alternatingSphericalFunctor_main`: the spherical-target functor is a continuous polynomial.
+- `alternatingSphericalFunctor_main_of_charP`: the same in characteristic `p`.
 -/
 
 noncomputable section
@@ -26,7 +27,7 @@ namespace AlternatingAnalytic
 
 variable (K : Type u) [NontriviallyNormedField K] (k : ℕ)
 
-/-- Every joint hom map of the normed-space alternating bifunctor is smooth. -/
+/-- Every hom map of `alternatingFunctor` is `C^n`. -/
 theorem alternatingFunctor_contDiffOnHoms (n : ℕ∞) :
     FunctorContDiffOnHoms K n (alternatingFunctor K k) := by
   apply (functorContDiffOnHoms_iff_mapInCoordinates
@@ -36,7 +37,7 @@ theorem alternatingFunctor_contDiffOnHoms (n : ℕ∞) :
   rw [alternatingFunctor_mapInCoordinates]
   exact contDiff_alternatingMapAction k n
 
-/-- Banach closure imposes no completeness assumption on the field. -/
+/-- Every hom map of `alternatingBanachFunctor` is `C^n`. -/
 theorem alternatingBanachFunctor_contDiffOnHoms (n : ℕ∞) :
     FunctorContDiffOnHoms K n (alternatingBanachFunctor K k) := by
   apply (functorContDiffOnHoms_iff_mapInCoordinates
@@ -46,7 +47,7 @@ theorem alternatingBanachFunctor_contDiffOnHoms (n : ℕ∞) :
   rw [alternatingBanachFunctor_mapInCoordinates]
   exact contDiff_alternatingMapAction k n
 
-/-- Nonvanishing factorial gives finite power series on every joint Vec hom map. -/
+/-- If `k! ≠ 0`, every hom map of `alternatingFunctor` is a continuous polynomial. -/
 theorem alternatingFunctor_cpolynomialOnHoms (hk : (k.factorial : K) ≠ 0) :
     FunctorCPolynomialOnHoms K (alternatingFunctor K k) := by
   apply (functorCPolynomialOnHoms_iff_mapInCoordinates
@@ -56,7 +57,7 @@ theorem alternatingFunctor_cpolynomialOnHoms (hk : (k.factorial : K) ≠ 0) :
   rw [alternatingFunctor_mapInCoordinates]
   exact cpolynomialAt_alternatingMapAction_of_factorial_ne_zero k hk z
 
-/-- The finite-power-series conclusion also holds on the actual Banach hom maps. -/
+/-- If `k! ≠ 0`, every hom map of `alternatingBanachFunctor` is a continuous polynomial. -/
 theorem alternatingBanachFunctor_cpolynomialOnHoms (hk : (k.factorial : K) ≠ 0) :
     FunctorCPolynomialOnHoms K (alternatingBanachFunctor K k) := by
   apply (functorCPolynomialOnHoms_iff_mapInCoordinates
@@ -66,7 +67,7 @@ theorem alternatingBanachFunctor_cpolynomialOnHoms (hk : (k.factorial : K) ≠ 0
   rw [alternatingBanachFunctor_mapInCoordinates]
   exact cpolynomialAt_alternatingMapAction_of_factorial_ne_zero k hk z
 
-/-- Exact analyticity classification of the normed-space bifunctor. -/
+/-- `alternatingFunctor` is analytic on hom spaces iff `k! ≠ 0`. -/
 theorem alternatingFunctor_analyticOnHoms_iff :
     FunctorAnalyticOnHoms K (alternatingFunctor K k) ↔ (k.factorial : K) ≠ 0 := by
   constructor
@@ -86,7 +87,7 @@ theorem alternatingFunctor_analyticOnHoms_iff :
   · intro hk
     exact (alternatingFunctor_cpolynomialOnHoms K k hk).analyticOnHoms
 
-/-- Exact analyticity classification on the full Banach subcategories. -/
+/-- `alternatingBanachFunctor` is analytic on hom spaces iff `k! ≠ 0`. -/
 theorem alternatingBanachFunctor_analyticOnHoms_iff :
     FunctorAnalyticOnHoms K (alternatingBanachFunctor K k) ↔ (k.factorial : K) ≠ 0 := by
   constructor
@@ -106,8 +107,8 @@ theorem alternatingBanachFunctor_analyticOnHoms_iff :
   · intro hk
     exact (alternatingBanachFunctor_cpolynomialOnHoms K k hk).analyticOnHoms
 
-/-- Main Theorem (1): universal smoothness, both exact analytic classifications,
-and finite power series in the analytic range, in every degree including zero. -/
+/-- Corollary 6.2: `Alt^k` is C^∞ on hom spaces, analytic iff `k! ≠ 0`, and then a continuous
+polynomial; on normed and on Banach spaces. -/
 theorem alternatingFunctor_main :
     (∀ n : ℕ∞, FunctorContDiffOnHoms K n (alternatingFunctor K k)) ∧
     (∀ n : ℕ∞, FunctorContDiffOnHoms K n (alternatingBanachFunctor K k)) ∧
@@ -125,8 +126,8 @@ section Spherical
 
 variable [IsUltrametricDist K]
 
-/-- Spherical targets give finite power series for joint hom maps in every degree.
-The contravariant source spaces are arbitrary normed spaces. -/
+/-- With spherically complete targets, every hom map is a continuous polynomial.
+The source spaces are arbitrary normed spaces. -/
 theorem alternatingSphericalFunctor_cpolynomialOnHoms :
     FunctorCPolynomialOnHoms K (alternatingSphericalFunctor K k) := by
   apply (functorCPolynomialOnHoms_iff_mapInCoordinates
@@ -136,13 +137,13 @@ theorem alternatingSphericalFunctor_cpolynomialOnHoms :
   rw [alternatingSphericalFunctor_mapInCoordinates]
   exact cpolynomialAt_alternatingMapAction_of_sphericallyComplete k z
 
-/-- The spherical bifunctor is jointly analytic in every degree. -/
+/-- With spherically complete targets, every hom map is analytic. -/
 theorem alternatingSphericalFunctor_analyticOnHoms :
     FunctorAnalyticOnHoms K (alternatingSphericalFunctor K k) :=
   (alternatingSphericalFunctor_cpolynomialOnHoms K k).analyticOnHoms
 
-/-- Main Theorem (2), strengthened to every ultrametric base field and finite
-power series. The functor's codomain includes spherical closure. -/
+/-- Over an ultrametric field, spherically complete targets give spherically complete
+`Alt^k(E; F)` and hom maps that are continuous polynomials. -/
 theorem alternatingSphericalFunctor_main :
     (∀ (E : NormedSpaceCat K) (F : SphericalNormedSpaceCat K),
       IsUltrametricDist (E [⋀^Fin k]→L[K] F) ∧
@@ -154,8 +155,8 @@ theorem alternatingSphericalFunctor_main :
 
 end Spherical
 
-/-- The manuscript's positive-characteristic specialization of Main Theorem (2).
-No completeness assumption on the field is introduced. -/
+/-- `alternatingSphericalFunctor_main` in characteristic `p`, where `K` is automatically
+ultrametric. -/
 theorem alternatingSphericalFunctor_main_of_charP (p : ℕ) [Fact p.Prime] [CharP K p] :
     letI : IsUltrametricDist K := charP_isUltrametricDist p
     (∀ (E : NormedSpaceCat K) (F : SphericalNormedSpaceCat K),

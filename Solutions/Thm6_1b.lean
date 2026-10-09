@@ -8,15 +8,13 @@ import AlternatingAnalytic.Scalar.ScalarObstruction
 import AlternatingAnalytic.Scalar.ChainSpaces.Unconditional
 
 /-!
-# Theorem 6.1(2) (operator obstructions, scalar target), p. 15
+# Proof of Theorem 6.1(2)
 
-Solution: Theorem 6.1(2) is Theorem F.1 with "characteristic `p > 0`, `k ≥ p`" in place of
-"`k ≥ 1`, `k! = 0`". The reduction is
-`AlternatingAnalytic.ScalarObstruction.exists_nonarchimedean_banach_nowhere_analytic_scalar_of_thmF`
-and `..._in_bounded_sequences_of_thmF` (`Scalar/ScalarObstruction.lean`, using
-`factorial_eq_zero_of_charP`: `p ∣ k!`); the Theorem F.1 inputs are
-`AlternatingAnalytic.ChainSpaces.abstractConclusion` and `sequenceConclusion`
-(`Scalar/ChainSpaces/Unconditional.lean`).
+Reduces to Theorem F.1 (`k! = 0` since `p ∣ k!`) through
+`ScalarObstruction.exists_nonarchimedean_banach_nowhere_analytic_scalar_of_thmF` and
+`ScalarObstruction.exists_nowhere_analytic_scalar_in_bounded_sequences_of_thmF`
+(`Scalar/ScalarObstruction.lean`), with `ChainSpaces.abstractConclusion` and
+`ChainSpaces.sequenceConclusion` (`Scalar/ChainSpaces/Unconditional.lean`).
 -/
 
 open Filter Topology
@@ -28,9 +26,8 @@ namespace AlternatingAnalyticChallenge.Thm6_1b
 
 universe u
 
-/-- **Theorem 6.1(2), abstract form.** Over a complete, not spherically complete normed field of
-characteristic `p > 0`, in every degree `k ≥ p`, there are nonarchimedean Banach spaces `E`, `D`
-such that scalar precomposition `A^k_{E,D;K}` is analytic at no point of `L(E, D)`. -/
+/-- Theorem 6.1(2): over a complete, not spherically complete `K` of characteristic `p > 0`,
+with `k ≥ p`, there are nonarchimedean Banach `E`, `D` with `A^k_{E,D;K}` analytic at no point. -/
 theorem exists_nonarchimedean_banach_nowhere_analytic_scalar
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] (p k : ℕ) [CharP K p]
     (hp : 0 < p) (hpk : p ≤ k) (hK : ¬ SphericallyCompleteSpace K) :
@@ -46,9 +43,8 @@ theorem exists_nonarchimedean_banach_nowhere_analytic_scalar
   exact AlternatingAnalytic.ScalarObstruction.exists_nonarchimedean_banach_nowhere_analytic_scalar_of_thmF
     K p k hp hpk hK (fun hK _ hk => AlternatingAnalytic.ChainSpaces.abstractConclusion K hK k hk)
 
-/-- **Theorem 6.1(2), sequence-space form.** The witnesses can be chosen as closed subspaces
-`E ⊆ ℓ^∞(Λ, K^{k+1})` and `D ⊆ ℓ^∞(Λ, K^k)` containing the corresponding `c_0` spaces, with `Λ`
-countable; they are nonarchimedean Banach spaces and `A^k_{E,D;K}` is analytic at no point. -/
+/-- Theorem 6.1(2), sequence-space form: the witnesses can be chosen as closed subspaces of
+`ℓ^∞(Λ, K^{k+1})` and `ℓ^∞(Λ, K^k)` containing the `c_0` spaces, with `Λ` countable. -/
 theorem exists_nowhere_analytic_scalar_in_bounded_sequences
     (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] (p k : ℕ) [CharP K p]
     (hp : 0 < p) (hpk : p ≤ k) (hK : ¬ SphericallyCompleteSpace K) :

@@ -6,9 +6,10 @@ import Mathlib.Tactic.Ring
 /-!
 # Four-position cluster weights
 
-The operator weights `(1, 0, -1, 0)` and vector weights `(1, -1, 1, -1)` cancel
-separately on the three relative-order patterns of two positions. The identities hold
-over every commutative ring, including characteristic two.
+The operator weights `s = (1, 0, -1, 0)` and vector weights `w = (1, -1, 1, -1)` on a
+four-point cluster, from Appendix B before Lemma B.11. Each has total zero, and the
+products `s_i w_j` sum to zero over each of the patterns `i < j`, `i = j`, `i > j`.
+The identities hold over every commutative ring.
 -/
 
 namespace AlternatingAnalytic
@@ -48,12 +49,12 @@ theorem sum_cluster_weights_mul_gt :
   simp only [Finset.sum_filter, Fin.sum_univ_four, Fin.lt_def, Fin.coe_ofNat_eq_mod]
   norm_num [clusterOperatorWeight, clusterVectorWeight, Matrix.cons_val_two, Matrix.cons_val_three]
 
-/-- The distinguished first-position product is one. -/
+/-- The product of the first weights is one. -/
 @[simp] theorem cluster_weights_mul_zero :
     clusterOperatorWeight (R := R) 0 * clusterVectorWeight 0 = 1 := by
   simp [clusterOperatorWeight, clusterVectorWeight]
 
-/-- All six identities for the four-position cancellation weights. -/
+/-- The six weight identities, collected. -/
 theorem cluster_weight_identities :
     (∑ i : Fin 4, clusterOperatorWeight (R := R) i) = 0 ∧
     (∑ i : Fin 4, clusterVectorWeight (R := R) i) = 0 ∧

@@ -3,11 +3,12 @@ import Mathlib.Analysis.Normed.Module.Multilinear.Curry
 import Mathlib.Algebra.Order.Archimedean.Basic
 
 /-!
-# The ordinary ℓ¹ quotient indexed by the closed unit ball
+# Every Banach space is a quotient of ℓ¹
 
-The quotient is the degree-one bounded-array construction. Scalar integer powers give
-single-coordinate lifts with an explicit norm bound, which also proves openness directly.
-The original sum norm on `lp` and the original norm on the output are used throughout.
+For a Banach space `H`, the map `ℓ¹(B_H, K) → H`, `a ↦ ∑_v a_v v`, indexed by the closed
+unit ball `B_H`, has norm at most one, is surjective, and is open. Each `h` lifts to a
+single coordinate of norm at most `‖c‖ ‖h‖`, for any `c` with `1 < ‖c‖`. This is used in
+`QuotientParameterCounterexample.lean`.
 -/
 
 open scoped lp BigOperators
@@ -16,7 +17,7 @@ noncomputable section
 
 namespace AlternatingAnalytic
 
-/-- The closed unit ball, used as the coordinate index of the ordinary ℓ¹ quotient. -/
+/-- The closed unit ball of `H`, used as the index set. -/
 abbrev L1UnitBallIndex (H : Type*) [NormedAddCommGroup H] := {h : H // ‖h‖ ≤ 1}
 
 variable (K H : Type*) [NontriviallyNormedField K]
@@ -24,7 +25,7 @@ variable (K H : Type*) [NontriviallyNormedField K]
 
 local instance : DecidableEq (L1UnitBallIndex H) := Classical.decEq _
 
-/-- Synthesis of the closed-unit-ball coefficients by the degree-one bounded-array map. -/
+/-- The quotient map `a ↦ ∑_v a_v v` from `ℓ¹` over the closed unit ball. -/
 def unitBallL1Quotient : lp (fun _ : L1UnitBallIndex H => K) 1 →L[K] H :=
   continuousMultilinearCurryFin1 K (lp (fun _ : L1UnitBallIndex H => K) 1) H
     (L1Coordinates.continuousMultilinearOfBounded
@@ -32,7 +33,7 @@ def unitBallL1Quotient : lp (fun _ : L1UnitBallIndex H => K) 1 →L[K] H :=
 
 variable {K H}
 
-/-- The quotient is the actual unconditional sum of its coordinate contributions. -/
+/-- The quotient map is the unconditional sum `∑_v a_v v`. -/
 theorem unitBallL1Quotient_hasSum (a : lp (fun _ : L1UnitBallIndex H => K) 1) :
     HasSum (fun v : L1UnitBallIndex H => a v • (v : H)) (unitBallL1Quotient K H a) := by
   have hs := L1Coordinates.continuousMultilinearOfBounded_hasSum
@@ -45,12 +46,12 @@ theorem unitBallL1Quotient_apply (a : lp (fun _ : L1UnitBallIndex H => K) 1) :
     unitBallL1Quotient K H a = ∑' v : L1UnitBallIndex H, a v • (v : H) :=
   (unitBallL1Quotient_hasSum a).tsum_eq.symm
 
-/-- The synthesis map has operator norm at most one. -/
+/-- The quotient map has operator norm at most one. -/
 theorem norm_unitBallL1Quotient_le : ‖unitBallL1Quotient K H‖ ≤ 1 := by
   rw [unitBallL1Quotient, LinearIsometryEquiv.norm_map]
   exact L1Coordinates.continuousMultilinearOfBounded_norm_le _ 1 zero_le_one _
 
-/-- A single coordinate maps to the indicated scalar multiple of its unit-ball index. -/
+/-- The quotient map sends `a e_v` to `a v`. -/
 @[simp]
 theorem unitBallL1Quotient_single (v : L1UnitBallIndex H) (a : K) :
     unitBallL1Quotient K H (lp.single 1 v a) = a • (v : H) := by
@@ -60,7 +61,7 @@ theorem unitBallL1Quotient_single (v : L1UnitBallIndex H) (a : K) :
   · intro w hw
     rw [lp.single_apply_ne _ _ _ hw, zero_smul]
 
-/-- Every nonzero output has a single-coordinate lift with the strict scalar bound. -/
+/-- Each nonzero `h` lifts to a single coordinate of norm less than `‖c‖ ‖h‖`. -/
 theorem unitBallL1Quotient_exists_single_lt (c : K) (hc : 1 < ‖c‖)
     (h : H) (hh : h ≠ 0) :
     ∃ v : L1UnitBallIndex H, ∃ a : K,
@@ -87,7 +88,7 @@ theorem unitBallL1Quotient_exists_single_lt (c : K) (hc : 1 < ‖c‖)
         rw [zpow_add₀ hcpos.ne', zpow_one, mul_comm]
       _ < ‖c‖ * ‖h‖ := mul_lt_mul_of_pos_left hnlt hcpos
 
-/-- The non-strict single-coordinate estimate also includes the zero output. -/
+/-- Each `h` lifts to a single coordinate of norm at most `‖c‖ ‖h‖`. -/
 theorem unitBallL1Quotient_exists_single_le (c : K) (hc : 1 < ‖c‖) (h : H) :
     ∃ v : L1UnitBallIndex H, ∃ a : K,
       unitBallL1Quotient K H (lp.single 1 v a) = h ∧
@@ -98,14 +99,14 @@ theorem unitBallL1Quotient_exists_single_le (c : K) (hc : 1 < ‖c‖) (h : H) :
   · obtain ⟨v, a, hqa, ha⟩ := unitBallL1Quotient_exists_single_lt c hc h hh
     exact ⟨v, a, hqa, ha.le⟩
 
-/-- The unit-ball synthesis map is onto, including when the output space is trivial. -/
+/-- The quotient map is surjective. -/
 theorem unitBallL1Quotient_surjective : Function.Surjective (unitBallL1Quotient K H) := by
   obtain ⟨c, hc⟩ := NormedField.exists_one_lt_norm K
   intro h
   obtain ⟨v, a, hqa, _⟩ := unitBallL1Quotient_exists_single_le c hc h
   exact ⟨lp.single 1 v a, hqa⟩
 
-/-- The lifting estimate gives an explicit ball contained in each ball image. -/
+/-- The image of the ball of radius `ε` contains the ball of radius `ε / ‖c‖`. -/
 theorem unitBallL1Quotient_ball_subset (c : K) (hc : 1 < ‖c‖)
     (x : lp (fun _ : L1UnitBallIndex H => K) 1) (ε : ℝ) (_hε : 0 < ε) :
     Metric.ball (unitBallL1Quotient K H x) (ε / ‖c‖) ⊆
@@ -122,7 +123,7 @@ theorem unitBallL1Quotient_ball_subset (c : K) (hc : 1 < ‖c‖)
   · simpa only [Metric.mem_ball, dist_eq_norm, add_sub_cancel_left] using hsmall
   · rw [map_add, hqa, add_sub_cancel]
 
-/-- Openness follows directly from the explicit ball inclusion. -/
+/-- The quotient map is open. -/
 theorem unitBallL1Quotient_isOpenMap : IsOpenMap (unitBallL1Quotient K H) := by
   obtain ⟨c, hc⟩ := NormedField.exists_one_lt_norm K
   intro U hU
@@ -132,9 +133,7 @@ theorem unitBallL1Quotient_isOpenMap : IsOpenMap (unitBallL1Quotient K H) := by
   refine ⟨ε / ‖c‖, div_pos hε (zero_lt_one.trans hc), ?_⟩
   exact (unitBallL1Quotient_ball_subset c hc x ε hε).trans (Set.image_mono hball)
 
-/-- The ordinary ℓ¹ closed-unit-ball quotient of a Banach space, with its sum formula,
-coordinate values, contractive norm, single-coordinate lifts, and quantitative openness.
-Completeness of the domain is supplied by the ordinary `lp` completeness instance. -/
+/-- The properties of the quotient map `ℓ¹(B_H, K) → H` collected in one statement. -/
 theorem unitBall_l1_quotient [CompleteSpace K] (c : K) (hc : 1 < ‖c‖) :
     (∀ a, HasSum (fun v : L1UnitBallIndex H => a v • (v : H))
       (unitBallL1Quotient K H a)) ∧

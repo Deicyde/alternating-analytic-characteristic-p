@@ -9,9 +9,11 @@ import Mathlib.LinearAlgebra.TensorPower.Basic
 /-!
 # Partial tensor contractions and mode supports
 
-Contracting all factors except a selected one defines a linear map from a finite tensor
-product to the selected factor. The covector at that factor is unused.
-The mode support is the span of all such contraction values, using all algebraic covectors.
+Contracting all factors of a finite tensor product except the `i`-th against covectors gives a
+vector in the `i`-th factor. The mode support in factor `i` is the span of all these
+contractions. It is finite-dimensional, and a tensor lies in `⨂ W_i` exactly when each mode
+support lies in `W_i`. These facts are used for the canonical exterior support
+(Proposition B.5).
 -/
 
 open scoped TensorProduct
@@ -175,8 +177,7 @@ variable (L : Type*) [Field L]
   {ι : Type*} [Fintype ι] (M : ι → Type*)
   [∀ j, AddCommGroup (M j)] [∀ j, Module L (M j)]
 
-/-- Every mode support of an algebraic tensor is finite-dimensional, even when its
-ambient factor spaces are infinite-dimensional. -/
+/-- Every mode support of a tensor is finite-dimensional, even when the factors are not. -/
 theorem tensorModeSupportFamily_finite (τ : ⨂[L] j, M j) (i : ι) :
     Module.Finite L (tensorModeSupportFamily L M τ i) := by
   induction τ using PiTensorProduct.induction_on with
@@ -212,7 +213,7 @@ theorem tensorModeSupportFamily_le_iff
     refine ⟨PiTensorProduct.tprod L (fun i ↦ ⟨b i (p i), hbp i⟩), ?_⟩
     simp [B]
 
-/-- Every algebraic tensor is realized in the tensor product of its mode supports. -/
+/-- Every tensor lies in the tensor product of its mode supports. -/
 theorem mem_range_tensorModeSupportFamily (τ : ⨂[L] j, M j) :
     τ ∈ LinearMap.range (PiTensorProduct.mapIncl (tensorModeSupportFamily L M τ)) :=
   (tensorModeSupportFamily_le_iff L M _ τ).2 fun _ ↦ le_rfl
@@ -238,8 +239,8 @@ theorem tensorContraction_tprod (i : Fin k) (φ : Fin k → Module.Dual L V)
 
 variable {L}
 
-/-- The intrinsic support of a tensor power in its `i`-th factor: the span of all
-partial contractions against algebraic covectors. -/
+/-- The support of an element of a tensor power in its `i`-th factor: the span of all partial
+contractions. -/
 noncomputable def tensorModeSupport (τ : ⨂[L]^k V) (i : Fin k) : Submodule L V :=
   tensorModeSupportFamily L (fun _ : Fin k ↦ V) τ i
 
@@ -254,7 +255,7 @@ theorem tensorContraction_mem_tensorModeSupport
     tensorContraction L i φ τ ∈ tensorModeSupport τ i :=
   tensorContractionFamily_mem_tensorModeSupportFamily L (fun _ : Fin k ↦ V) τ i φ
 
-/-- Every mode support of an algebraic tensor power is finite-dimensional. -/
+/-- Every mode support of an element of a tensor power is finite-dimensional. -/
 theorem tensorModeSupport_finite (τ : ⨂[L]^k V) (i : Fin k) :
     Module.Finite L (tensorModeSupport τ i) :=
   tensorModeSupportFamily_finite L (fun _ : Fin k ↦ V) τ i

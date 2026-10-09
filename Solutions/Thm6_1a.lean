@@ -5,20 +5,17 @@ import AlternatingAnalytic.Analysis.EquivalentUltrametric
 import AlternatingAnalytic.MainTheorem
 
 /-!
-# Theorem 6.1(1) (operator obstructions, Banach target), p. 15
+# Proof of Theorem 6.1(1)
 
-Solution: derived from `AlternatingAnalytic.exists_banach_counterexample_full`
-(`AlternatingAnalytic/MainTheorem.lean`), specialised to the index type `Fin k`.
+Specializes `exists_banach_counterexample_full` (`MainTheorem.lean`) to the index type `Fin k`.
 -/
 
 namespace AlternatingAnalyticChallenge.Thm6_1a
 
 universe u
 
-/-- **Theorem 6.1(1).** Over a nontrivially normed field of characteristic `p > 0`, in every
-degree `k ≥ p`, there are Banach spaces `E`, `F` such that precomposition
-`u ↦ (m ↦ m ∘ (u, …, u))` on `Alt^k(E; F)` is analytic at no point of `L(E, E)`, and `F`
-has no equivalent nonarchimedean norm. -/
+/-- Theorem 6.1(1): in characteristic `p > 0` and degree `k ≥ p` there are Banach `E`, `F`
+with `A^k_{E,E;F}` analytic at no point and `F` without an equivalent nonarchimedean norm. -/
 theorem exists_banach_nowhere_analytic_precomposition
     (K : Type u) [NontriviallyNormedField K] (p k : ℕ) [CharP K p] (hp : 0 < p)
     (hpk : p ≤ k) :

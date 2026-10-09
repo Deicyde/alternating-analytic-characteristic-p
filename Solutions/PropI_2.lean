@@ -4,15 +4,11 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import AlternatingAnalytic.Coordinates.AlgebraicPolynomialCZero.BoundedLift
 
 /-!
-# Proposition I.2 (continuous algebraic polynomials on c₀), pp. 63-64
+# Proof of Proposition I.2
 
-Solution: the statement of `Challenges/PropI_2.lean`, proved by
-`AlgebraicPolynomialCZero.exists_boundedLift_of_continuous_algebraicPolynomial`
-(`Coordinates/AlgebraicPolynomialCZero/BoundedLift.lean`) with the constant `L ^ n`, where `L`
-bounds the inverse Vandermonde matrix of the nodes `1, t, …, tⁿ` (`0 < |t| < 1`). Ingredients:
-`sum_interpolation` (`Interpolation.lean`), `sum_smul_coeff` and
-`sum_filter_wordCount_eq_coeff` (`SortedWords.lean`), `exists_diag_bound` (`DiagonalNorm.lean`)
-and `CZero.boundedArrayMultilinearMap` (`Analysis/CZeroCoordinates.lean`).
+The statement is `AlgebraicPolynomialCZero.exists_boundedLift_of_continuous_algebraicPolynomial`
+(`Coordinates/AlgebraicPolynomialCZero/BoundedLift.lean`), with constant `L ^ n` where `L` bounds
+the inverse Vandermonde matrix of the nodes `1, t, …, tⁿ` (`0 < |t| < 1`).
 -/
 
 open scoped ZeroAtInfty
@@ -21,16 +17,14 @@ namespace AlternatingAnalyticChallenge.PropI_2
 
 universe uK uI uZ
 
-/-- The diagonal norm `‖p‖_diag = inf {D ≥ 0 : ‖p x‖ ≤ D ‖x‖^n for all x}` of a map on a
-normed space (a real `sInf`; it is the true infimum when the set is nonempty). -/
+/-- The diagonal norm `‖p‖_diag = inf {D ≥ 0 : ‖p x‖ ≤ D ‖x‖^n for all x}`, as a real `sInf`. -/
 noncomputable def diagNorm {X : Type uI} {Z : Type uZ} [Norm X] [Norm Z] (n : ℕ)
     (p : X → Z) : ℝ :=
   sInf {D : ℝ | 0 ≤ D ∧ ∀ x, ‖p x‖ ≤ D * ‖x‖ ^ n}
 
-/-- **Proposition I.2.** Over a nonarchimedean field `K` (not necessarily complete) and for
-`n ≥ 1`, there is a constant `C` depending only on `K, n` such that every continuous algebraic
-homogeneous polynomial `p : c₀(I,K) → Z` of degree `n`, into a complete nonarchimedean `Z`, has
-finite diagonal norm and a bounded `n`-linear lift `q` with `‖q‖ ≤ C ‖p‖_diag`. -/
+/-- For `n ≥ 1` there is `C` depending only on `K, n` such that every continuous algebraic
+homogeneous polynomial `p : c₀(I,K) → Z` of degree `n` has finite diagonal norm and a bounded
+`n`-linear lift `q` with `‖q‖ ≤ C ‖p‖_diag`. -/
 theorem exists_boundedLift_of_continuous_algebraicPolynomial
     (K : Type uK) [NontriviallyNormedField K] [IsUltrametricDist K] (n : ℕ) (hn : 1 ≤ n) :
     ∃ C : ℝ, 0 ≤ C ∧

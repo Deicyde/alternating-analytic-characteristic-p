@@ -3,15 +3,12 @@ import Mathlib.Analysis.Normed.Operator.LinearIsometry
 import AlternatingAnalytic.Analysis.ClosedSubspaceCoefficients
 
 /-!
-# The coefficient descent criterion
+# The coefficient descent criterion (Theorem 3.1)
 
-Let `j : W → Z` be a linear isometry and suppose `j ∘ f` has an ambient expansion
-`j (f (x₀ + h)) = ∑ b_n(h, …, h)` on the ball `‖h‖ < R` with `sup ‖b_n‖ Rⁿ < ∞`. We show that
-every diagonal `b_n(h, …, h)` lies in `j(W)` when the range of `j` is closed, and that `f` is
-analytic at `x₀` if and only if the diagonals of `b` have `W`-valued bounded multilinear
-representatives with a positive radius. No completeness is assumed anywhere: in the backward
-direction the `W`-valued series converges because `j` is an embedding and its image series
-converges to `j ∘ f`.
+Let `j : W → Z` be a linear isometry and suppose `j (f (x₀ + h)) = ∑ b_n(h, …, h)` on the ball
+`‖h‖ < R`, with `sup ‖b_n‖ Rⁿ < ∞`. If the range of `j` is closed, every diagonal `b_n(h, …, h)`
+lies in `j(W)`. In general, `f` is analytic at `x₀` iff the diagonals of `b` have `W`-valued
+bounded multilinear representatives with a positive radius. No completeness is assumed.
 -/
 
 noncomputable section
@@ -46,7 +43,7 @@ theorem hasFPowerSeriesOnBall_comp (j : W →ₗᵢ[K] Z) (f : P → W) (x₀ : 
     rwa [Metric.mem_eball, edist_zero_right, ← ofReal_norm,
       ENNReal.ofReal_lt_ofReal_iff hR] at hy
 
-/-- **Theorem 3.1, part 1.** Every diagonal of an ambient expansion lies in `j(W)`. -/
+/-- Theorem 3.1(1): every diagonal of an ambient expansion lies in `j(W)`. -/
 theorem diagonal_mem_range (j : W →ₗᵢ[K] Z) (hj : IsClosed (Set.range j))
     (f : P → W) (x₀ : P) (b : FormalMultilinearSeries K P Z) (R : ℝ) (hR : 0 < R)
     (hbound : BddAbove (Set.range fun n => ‖b n‖ * R ^ n))
@@ -74,7 +71,7 @@ theorem diagonal_eq_of_hasFPowerSeriesAt (j : W →ₗᵢ[K] Z) {f : P → W} {x
     ContinuousLinearMap.compFormalMultilinearSeries_apply] at h0
   exact h0.symm
 
-/-- **Theorem 3.1, part 2.** `f` is analytic at `x₀` if and only if the ambient diagonals have
+/-- Theorem 3.1(2): `f` is analytic at `x₀` if and only if the ambient diagonals have
 `W`-valued bounded multilinear representatives with a positive common radius. -/
 theorem analyticAt_iff (j : W →ₗᵢ[K] Z)
     (f : P → W) (x₀ : P) (b : FormalMultilinearSeries K P Z) (R : ℝ) (hR : 0 < R)

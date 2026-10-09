@@ -6,19 +6,16 @@ import Mathlib.Algebra.Order.Archimedean.Basic
 /-!
 # A criterion excluding equivalent ultrametric norms
 
-An equivalent ultrametric norm uniformly bounds all finite sums of vectors in
-the original unit ball. Consequently a sequence of unit vectors with unbounded
-partial sums rules out every equivalent ultrametric norm. This is the analytic
-last step of the paper's disjoint-block-wedge argument; constructing those
-wedges and proving their growth are separate tasks.
+An equivalent ultrametric norm bounds all finite sums of vectors in the unit ball
+uniformly, so unit vectors with unbounded partial sums rule it out. This is the last
+step of the block-wedge argument of Proposition E.1.
 -/
 
 namespace AlternatingAnalytic
 
 variable (K F : Type*) [NormedField K] [NormedAddCommGroup F] [NormedSpace K F]
 
-/-- An ultrametric seminorm with positive two-sided bounds against the given norm.
-The lower bound makes the seminorm nondegenerate. -/
+/-- `F` has an ultrametric seminorm equivalent to its norm (hence a norm). -/
 def HasEquivalentUltrametricNorm : Prop :=
   ∃ q : Seminorm K F,
     (∀ x y, q (x + y) ≤ max (q x) (q y)) ∧
@@ -57,7 +54,8 @@ theorem not_hasEquivalentUltrametricNorm_of_unbounded_partial_sums
   obtain ⟨N, hN⟩ := hgrowth C
   exact (not_lt_of_ge (hC (Finset.range N) v (fun i _ => hv i))) hN
 
-/-- The quantitative growth estimate used for the paper's disjoint block wedges. -/
+/-- Partial sums of unit vectors growing at least linearly exclude an equivalent
+ultrametric norm. -/
 theorem not_hasEquivalentUltrametricNorm_of_linear_growth
     (v : ℕ → F) (hv : ∀ n, ‖v n‖ ≤ 1) {M : ℝ} (hM : 0 < M)
     (hgrowth : ∀ N : ℕ, (N : ℝ) / M ≤ ‖∑ i ∈ Finset.range N, v i‖) :

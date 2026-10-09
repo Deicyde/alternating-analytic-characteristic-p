@@ -6,13 +6,19 @@ import Mathlib.LinearAlgebra.Dual.Basis
 /-!
 # Canonical exterior support
 
-Over any field, the span of the algebraic contractions of an exterior vector is
-its smallest supporting subspace. Antisymmetrization places the vector in the
-tensor product of its contraction span; an algebraic retraction and injectivity
-of antisymmetrization then recover exterior support, without dividing by a
-factorial. The positive-degree statements include degree one. Degree zero is
-handled separately, and finite coordinate contraction matrices compute the
-support dimension.
+Proposition B.5: over any field, the span S(ω) of the contractions of an exterior
+vector ω of positive degree is the smallest subspace supporting ω, and its dimension
+is the support dimension sdim(ω). The proof embeds ω in the tensor power of S(ω)
+by antisymmetrization, which is injective, so no factorial is inverted. The file
+also treats degrees zero and one, and computes sdim(ω) as the rank of a matrix of
+coordinate contractions.
+
+## Main results
+
+- `mem_exteriorPowerSubmodule_iff_contractionSpan_le`: `W` supports ω iff `S(ω) ≤ W`.
+- `exteriorSupportDim_eq_finrank_contractionSpan`: `sdim ω = dim S(ω)`.
+- `rank_exteriorContractionMatrix`: `sdim ω` is the rank of the coordinate
+  contraction matrix.
 -/
 
 namespace AlternatingAnalytic
@@ -101,7 +107,7 @@ theorem mem_exteriorPowerSubmodule_zero (ω : ⋀[L]^0 V) :
       (exteriorPower.zeroEquiv L V ω))
   simpa using h
 
-/-- Scalars have support dimension zero, including nonzero scalars. -/
+/-- Every degree-zero exterior vector has support dimension zero. -/
 theorem exteriorSupportDim_degree_zero (ω : ⋀[L]^0 V) :
     exteriorSupportDim ω = 0 := by
   apply Nat.eq_zero_of_le_zero
@@ -136,7 +142,7 @@ theorem mem_exteriorPowerSubmodule_contractionSpan
   rw [toTensorPower_map]
   exact hfix
 
-/-- A subspace supports an exterior vector exactly when it contains its contraction span. -/
+/-- A subspace supports an exterior vector iff it contains its contraction span. -/
 theorem mem_exteriorPowerSubmodule_iff_contractionSpan_le
     (W : Submodule L V) (ω : ⋀[L]^(n + 1) V) :
     ω ∈ exteriorPowerSubmodule (n + 1) W ↔
@@ -146,7 +152,7 @@ theorem mem_exteriorPowerSubmodule_iff_contractionSpan_le
   · intro h
     exact exteriorPowerSubmodule_mono h (mem_exteriorPowerSubmodule_contractionSpan ω)
 
-/-- Exterior support dimension is the dimension of the actual contraction span. -/
+/-- The support dimension is the dimension of the contraction span. -/
 theorem exteriorSupportDim_eq_finrank_contractionSpan
     (ω : ⋀[L]^(n + 1) V) :
     exteriorSupportDim ω = finrank L (exteriorContractionSpan ω) := by
@@ -155,8 +161,8 @@ theorem exteriorSupportDim_eq_finrank_contractionSpan
     (exteriorSupportDim_le_finrank _ (mem_exteriorPowerSubmodule_contractionSpan ω))
     (exteriorContractionSpan_finrank_le ω)
 
-/-- The contraction span is the smallest supporting subspace, and its dimension
-is the exterior support dimension, over any field and in every positive degree. -/
+/-- Proposition B.5 in positive degree: the contraction span is the smallest supporting
+subspace, and its dimension is the support dimension. -/
 theorem canonical_exterior_support_full (ω : ⋀[L]^(n + 1) V) :
     ω ∈ exteriorPowerSubmodule (n + 1) (exteriorContractionSpan ω) ∧
       (∀ W : Submodule L V,
@@ -195,7 +201,7 @@ theorem exteriorLastContraction_eq_sum_basis {d : ℕ} (b : Basis (Fin d) L V)
   simp only [MultilinearMap.map_smul_univ, LinearMap.sum_apply, LinearMap.smul_apply,
     map_sum, map_smul, smul_eq_mul, heval]
 
-/-- Coordinate covectors already generate the entire contraction span. -/
+/-- Contractions against coordinate covectors span the contraction span. -/
 theorem exteriorContractionSpan_eq_span_basis {d : ℕ} (b : Basis (Fin d) L V)
     (ω : ⋀[L]^(n + 1) V) :
     exteriorContractionSpan ω = Submodule.span L
@@ -236,7 +242,7 @@ theorem rank_exteriorContractionMatrix_eq_finrank {d : ℕ} (b : Basis (Fin d) L
   rw [hspan]
   exact b.equivFun.finrank_map_eq _
 
-/-- A finite coordinate contraction matrix computes exterior support dimension. -/
+/-- The rank of the coordinate contraction matrix is the support dimension. -/
 theorem rank_exteriorContractionMatrix
     {d : ℕ} (b : Basis (Fin d) L V) (ω : ⋀[L]^(n + 1) V) :
     Matrix.rank (Matrix.of (fun (i : Fin d) (a : Fin n → Fin d) ↦

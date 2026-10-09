@@ -15,44 +15,38 @@ c_φ(x₁ ∧ ⋯ ∧ x_k) = ∑_{i=1}^k (−1)^{k+i} det (φ_a(x_b))_{1≤a≤k
 and c_φ(Λ^k W) ⊆ W for every subspace W. Consequently
 sdim(ω) ≥ dim span{c_φ(ω) : φ ∈ (V*)^{k−1}}."
 
-Formalization notes:
-* The degree is written `k = n + 1` with hypothesis `1 ≤ n` (that is, `k ≥ 2`); slots are
-  0-indexed (`Fin (n + 1)`), and `V*` is the algebraic dual `Module.Dual L V`.
-* `IsContraction φ c` (defined in this file) says that the linear map `c` satisfies the
-  displayed formula on pure wedges `exteriorPower.ιMulti`; such a map is unique because
-  pure wedges span `Λ^k V`.
-* The lemma is split into `part1` (existence of `c_φ`), `part2` (`c_φ(Λ^k W) ⊆ W` for any
-  map with the formula) and `part3` (the dimension bound, for any choice of maps `c φ` with
-  the formula). Part 3 also asserts that the span is finite-dimensional: the paper's
-  inequality implies this, and without it the `Module.finrank` bound would be vacuous on an
-  infinite-dimensional span (where `finrank = 0`).
-* The library proves the lemma for every `n`, including `n = 0`; the hypothesis `1 ≤ n` is
-  kept for faithfulness to the paper and is unused.
-* `supportedBy k W` (the image of `Λ^k W → Λ^k V`) and `sdim` (Definition B.1, as an
-  `sInf` over dimensions of finite-dimensional supporting subspaces) are defined in this
-  file in Mathlib terms. `sInf ∅ = 0` cannot occur, since every exterior vector has a
-  finite-dimensional supporting subspace.
+## Formalization notes
+* The degree is `k = n + 1` with `1 ≤ n`; slots are 0-indexed (`Fin (n + 1)`), and `V*` is
+  the algebraic dual `Module.Dual L V`.
+* `IsContraction φ c` (defined here) says that `c` satisfies the displayed formula on pure
+  wedges `exteriorPower.ιMulti`. Such a map is unique.
+* The lemma is split into `part1` (`c_φ` exists), `part2` (`c_φ(Λ^k W) ⊆ W`) and `part3`
+  (the dimension bound, for any family `c φ` satisfying the formula).
+* `part3` also asserts that the span is finite-dimensional, since `Module.finrank` is `0` on
+  infinite-dimensional spaces.
+* The hypothesis `1 ≤ n` is kept but not used.
+* `supportedBy k W` (the image of `Λ^k W → Λ^k V`) and `sdim` (Definition B.1) are defined
+  here. `sdim` is an `sInf` over a set that is never empty.
 -/
 
 namespace AlternatingAnalyticChallenge.LemB_4
 
 variable {L : Type*} [Field L] {V : Type*} [AddCommGroup V] [Module L V]
 
-/-- `Λ^k W`, regarded as a subspace of `Λ^k V`: the image of the map induced by the
-inclusion `W → V` (Section B.1). Membership of `ω` means that `W` supports `ω`. -/
+/-- The image of `Λ^k W` in `Λ^k V` (Section B.1); `ω` lies in it when `W` supports `ω`. -/
 noncomputable def supportedBy (k : ℕ) (W : Submodule L V) : Submodule L (⋀[L]^k V) :=
   LinearMap.range (exteriorPower.map k W.subtype)
 
-/-- **Definition B.1.** The support dimension
+/-- The support dimension of Definition B.1:
 `sdim ω = min {dim W : W ⊆ V finite-dimensional, ω ∈ Λ^k W}`. -/
 noncomputable def sdim {k : ℕ} (ω : ⋀[L]^k V) : ℕ :=
   sInf {n : ℕ | ∃ W : Submodule L V, FiniteDimensional L W ∧ ω ∈ supportedBy k W ∧
     Module.finrank L W = n}
 
-/-- `c` is the contraction `c_φ : Λ^k V → V` of Lemma B.4 for `k = n + 1`: on pure wedges
-`c_φ(x₁ ∧ ⋯ ∧ x_k) = ∑ᵢ (-1)^(k+i) det (φ_a(x_b))_{1 ≤ a ≤ k-1, b ≠ i} xᵢ`.
-With 0-indexed `i : Fin (n + 1)` the sign `(-1)^(k + (i+1))` is `(-1)^(n + i)`, and the
-columns `b ≠ i`, in increasing order, are `i.succAbove b` for `b : Fin n`. -/
+/-- `c` is the contraction `c_φ : Λ^k V → V` of Lemma B.4 for `k = n + 1`:
+`c_φ(x₁ ∧ ⋯ ∧ x_k) = ∑ᵢ (-1)^(k+i) det (φ_a(x_b))_{1 ≤ a ≤ k-1, b ≠ i} xᵢ` on pure wedges.
+With 0-indexed `i : Fin (n + 1)` the sign is `(-1)^(n + i)`, and the columns `b ≠ i`, in
+increasing order, are `i.succAbove b` for `b : Fin n`. -/
 def IsContraction {n : ℕ} (φ : Fin n → Module.Dual L V) (c : (⋀[L]^(n + 1) V) →ₗ[L] V) :
     Prop :=
   ∀ x : Fin (n + 1) → V,
@@ -60,14 +54,14 @@ def IsContraction {n : ℕ} (φ : Fin n → Module.Dual L V) (c : (⋀[L]^(n + 1
       ∑ i : Fin (n + 1),
         ((-1 : L) ^ (n + i.val) * Matrix.det (fun a b : Fin n => φ a (x (i.succAbove b)))) • x i
 
-/-- **Lemma B.4, part 1.** The contraction `c_φ` exists. -/
+/-- The contraction `c_φ` exists. -/
 theorem part1_contraction_exists
     (L : Type*) [Field L] (V : Type*) [AddCommGroup V] [Module L V] (n : ℕ) (hn : 1 ≤ n)
     (φ : Fin n → Module.Dual L V) :
     ∃ c : (⋀[L]^(n + 1) V) →ₗ[L] V, IsContraction φ c := by
   sorry
 
-/-- **Lemma B.4, part 2.** `c_φ(Λ^k W) ⊆ W` for every subspace `W`. -/
+/-- `c_φ(Λ^k W) ⊆ W` for every subspace `W`. -/
 theorem part2_contraction_mem
     (L : Type*) [Field L] (V : Type*) [AddCommGroup V] [Module L V] (n : ℕ) (hn : 1 ≤ n)
     (φ : Fin n → Module.Dual L V) (c : (⋀[L]^(n + 1) V) →ₗ[L] V) (hc : IsContraction φ c)
@@ -75,9 +69,8 @@ theorem part2_contraction_mem
     c ω ∈ W := by
   sorry
 
-/-- **Lemma B.4, part 3.** `sdim ω ≥ dim span {c_φ(ω) : φ ∈ (V*)^{k-1}}`; in particular the
-span is finite-dimensional, which is stated explicitly because `Module.finrank` is `0` on an
-infinite-dimensional space. -/
+/-- The span of `{c_φ(ω) : φ ∈ (V*)^{k-1}}` is finite-dimensional, of dimension at most
+`sdim ω`. -/
 theorem part3_finrank_span_le_sdim
     (L : Type*) [Field L] (V : Type*) [AddCommGroup V] [Module L V] (n : ℕ) (hn : 1 ≤ n)
     (c : (Fin n → Module.Dual L V) → ((⋀[L]^(n + 1) V) →ₗ[L] V))

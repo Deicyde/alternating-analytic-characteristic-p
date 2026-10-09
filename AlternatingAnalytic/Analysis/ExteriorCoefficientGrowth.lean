@@ -3,7 +3,13 @@ import AlternatingAnalytic.Analysis.EquivalentUltrametric
 import AlternatingAnalytic.Analysis.ProjectiveExterior
 import AlternatingAnalytic.Analysis.LaurentCoefficients
 
-/-! Growth of disjoint unit wedges detected by their coefficient support. -/
+/-!
+# Growth of disjoint block wedges
+
+A coefficient map into the algebraic exterior power that recovers disjoint coordinate
+wedges, with support dimension bounded by the norm, forces the partial sums of those
+wedges to grow linearly. This excludes an equivalent ultrametric norm (Proposition E.1).
+-/
 
 noncomputable section
 
@@ -37,8 +43,8 @@ theorem exteriorCoefficient_block_growth {k : ℕ} (hk : 2 ≤ k)
   apply (div_le_iff₀ hM).mpr
   nlinarith
 
-/-- A bounded exterior coefficient map with full disjoint-block recovery excludes
-every equivalent ultrametric norm on the actual target space. -/
+/-- A bounded exterior coefficient map that recovers disjoint coordinate wedges excludes
+an equivalent ultrametric norm on `F`. -/
 theorem not_hasEquivalentUltrametricNorm_of_exteriorCoefficient {k : ℕ} (hk : 2 ≤ k)
     (η : F →ₗ[κ] ⋀[κ]^k (ℕ → κ)) (v : ℕ → F)
     (hvnorm : ∀ j, ‖v j‖ ≤ 1)
@@ -52,7 +58,8 @@ theorem not_hasEquivalentUltrametricNorm_of_exteriorCoefficient {k : ℕ} (hk : 
 
 variable (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ)
 
-/-- The paper's actual consecutive coordinate block wedges in the Banach exterior target. -/
+/-- The wedge of the `j`-th block of `k` consecutive coordinates, in the completed
+exterior power. -/
 def laurentBlockWedge (j : ℕ) : ProjectiveExteriorCompletion (LaurentField κ r) ℕ k :=
   completedExteriorWedge (LaurentField κ r) ℕ k
     (fun i : Fin k => constantLaurentArray κ r

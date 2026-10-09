@@ -5,8 +5,9 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 /-!
 # Finite generators for determinant spaces
 
-Multilinearity expands determinants of vectors in a finite span into determinants
-of tuples of the displayed generators. All spans below are over the smaller field.
+By multilinearity, determinants of vectors in the span of a finite family are
+spanned by determinants of tuples from that family. All spans are over the smaller
+field `K`. Used for the determinant pairs of Appendix H.
 -/
 
 namespace AlternatingAnalytic
@@ -18,8 +19,8 @@ section Multilinear
 variable {K A B J ι : Type*} [Field K] [AddCommGroup A] [Module K A]
   [AddCommGroup B] [Module K B] [Fintype J] [Fintype ι] [DecidableEq ι]
 
-/-- Expanding every input in a finite generating family expands the output into
-the span of the generator tuples. -/
+/-- If every input lies in the span of `gen`, the output lies in the span of the
+values on tuples of generators. -/
 theorem multilinear_mem_span_generator_tuples
     (f : MultilinearMap K (fun _ : ι => A) B) (gen : J → A) (v : ι → A)
     (hv : ∀ i, v i ∈ Submodule.span K (Set.range gen)) :
@@ -69,7 +70,7 @@ theorem coordinateColumnDeterminant_apply (coord : A →ₗ[L] (Fin p → L))
   exact Matrix.det_transpose _ |>.symm
 
 /-- Determinants of tuples from the span of a finite family are spanned by the
-determinants of tuples of that same family, with columns in the source convention. -/
+determinants of tuples from the family. The vectors are the columns. -/
 theorem determinant_span_generator_tuples (coord : A →ₗ[L] (Fin p → L)) (gen : J → A) :
     Submodule.span K (Set.range (fun v : Fin p → Submodule.span K (Set.range gen) =>
       Matrix.det (fun i j => coord (v j : A) i))) =
@@ -79,7 +80,7 @@ theorem determinant_span_generator_tuples (coord : A →ₗ[L] (Fin p → L)) (g
     multilinear_span_generator_tuples (coordinateColumnDeterminant (K := K) coord) gen
 
 /-- The determinant space of a finitely generated input space is finite dimensional
-over K; neither field nor the input space is required to be complete. -/
+over `K`. -/
 theorem finiteDimensional_determinant_span (coord : A →ₗ[L] (Fin p → L)) (gen : J → A) :
     FiniteDimensional K (Submodule.span K (Set.range
       (fun v : Fin p → Submodule.span K (Set.range gen) =>

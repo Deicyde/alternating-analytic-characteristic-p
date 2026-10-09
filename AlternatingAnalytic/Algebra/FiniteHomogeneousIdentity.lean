@@ -2,7 +2,13 @@ import AlternatingAnalytic.Algebra.FullPolarization
 import Mathlib.FieldTheory.Finite.Polynomial
 import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
-/-! The sharp homogeneous polynomial identity principle through the field cardinality. -/
+/-!
+# Homogeneous identity principle over a finite field
+
+A homogeneous form of degree `e ≤ q` that vanishes on `F_q^m` is zero (Lemma B.7), also for
+coefficients in an extension field or in a vector space. As a consequence, two `k`-linear maps
+over `F_q` with `k ≤ q` and the same diagonal have the same grouped polarization sums.
+-/
 
 namespace AlternatingAnalytic
 
@@ -48,7 +54,7 @@ theorem homogeneous_eval_coordinate (p : MvPolynomial σ R) {e : ℕ}
   · intro h
     simp [MvPolynomial.notMem_support_iff.mp h]
 
-/-- If all mass of a nonnegative multi-index is in one coordinate, it is a pure power. -/
+/-- A multi-index whose degree equals one of its entries is a pure power. -/
 theorem finsupp_eq_single_of_degree_eq {d : σ →₀ ℕ} {i : σ} (h : d.degree = d i) :
     d = Finsupp.single i (d i) := by
   classical
@@ -64,8 +70,8 @@ theorem finsupp_eq_single_of_degree_eq {d : σ →₀ ℕ} {i : σ} (h : d.degre
     have hj : d j = 0 := by omega
     simp [hji, hj]
 
-/-- A homogeneous form of degree at most the finite field's cardinality is determined
-by its values. The boundary degree is included, unlike arbitrary inhomogeneous polynomials. -/
+/-- A homogeneous form of degree `e ≤ q` vanishing on all points is zero. The case `e = q`
+is allowed; it fails for inhomogeneous polynomials. -/
 theorem finiteField_homogeneous_eq_zero_sameUniverse {σ : Type u} [Fintype σ] [Fintype R]
     (p : MvPolynomial σ R) {e : ℕ} (hp : p.IsHomogeneous e)
     (he : e ≤ Fintype.card R) (hvanish : ∀ x : σ → R, MvPolynomial.eval x p = 0) :
@@ -89,8 +95,7 @@ theorem finiteField_homogeneous_eq_zero_sameUniverse {σ : Type u} [Fintype σ] 
   rw [hdform]
   exact hpure
 
-/-- The homogeneous identity principle with independent universes for variables
-and coefficients. -/
+/-- The homogeneous identity principle, with variables and coefficients in any universes. -/
 theorem finiteField_homogeneous_eq_zero [Fintype R]
     (p : MvPolynomial σ R) {e : ℕ} (hp : p.IsHomogeneous e)
     (he : e ≤ Fintype.card R) (hvanish : ∀ x : σ → R, MvPolynomial.eval x p = 0) :
@@ -112,8 +117,8 @@ namespace VectorPolynomial
 variable {R Y σ : Type*} [Field R] [Fintype R] [Fintype σ]
   [AddCommGroup Y] [Module R Y]
 
-/-- Vector-valued homogeneous polynomial coefficients through degree card(R)
-are determined by evaluations at R-points, without finite-dimensionality. -/
+/-- A vector-valued homogeneous polynomial of degree `e ≤ card R` vanishing at all `R`-points
+has zero coefficients. `Y` need not be finite-dimensional. -/
 theorem coeff_eq_zero_of_homogeneous_eval_eq_zero
     (c : (σ →₀ ℕ) →₀ Y) {e : ℕ}
     (hc : ∀ α, c α ≠ 0 → α.degree = e) (he : e ≤ Fintype.card R)
@@ -134,8 +139,8 @@ theorem coeff_eq_zero_of_homogeneous_eval_eq_zero
   simpa only [scalarPolynomial_coeff, AddMonoidAlgebra.coeff_zero,
     Finsupp.zero_apply] using hcoeff
 
-/-- Equality to the zero vector coefficient family in the finite-field homogeneous
-identity principle. -/
+/-- A vector-valued homogeneous polynomial of degree `e ≤ card R` vanishing at all `R`-points
+is zero. -/
 theorem eq_zero_of_homogeneous_eval_eq_zero
     (c : (σ →₀ ℕ) →₀ Y) {e : ℕ}
     (hc : ∀ α, c α ≠ 0 → α.degree = e) (he : e ≤ Fintype.card R)
@@ -149,8 +154,8 @@ namespace AlternatingAnalytic
 
 variable {R L σ : Type*} [Field R] [Fintype R] [Field L] [Algebra R L] [Fintype σ]
 
-/-- The paper's homogeneous identity lemma permits coefficients in any extension
-field. Evaluation is required only at points of the original finite field. -/
+/-- Lemma B.7: a homogeneous form over an extension `L` of `F_q`, of degree `e ≤ q`, that
+vanishes at all `F_q`-points is zero. -/
 theorem finiteField_homogeneous_extension_eq_zero
     (p : MvPolynomial σ L) {e : ℕ} (hp : p.IsHomogeneous e)
     (he : e ≤ Fintype.card R)
@@ -177,8 +182,7 @@ namespace MultilinearMap
 variable {K A Y J : Type*} [Field K] [AddCommGroup A] [Module K A]
   [AddCommGroup Y] [Module K Y] [Fintype J] {k : ℕ}
 
-/-- The actual grouped coefficient construction is homogeneous of the multilinear
-arity, in the precise support formulation needed by the identity principle. -/
+/-- Every nonzero diagonal coefficient of a `k`-linear map has degree `k`. -/
 theorem diagonalCoefficients_degree
     (M : MultilinearMap K (fun _ : Fin k => A) Y) (b : J → A)
     (α : J →₀ ℕ) (hα : M.diagonalCoefficients b α ≠ 0) : α.degree = k := by
@@ -190,8 +194,8 @@ theorem diagonalCoefficients_degree
   have heq := M.diagonalCoefficients_apply b (fun j => α j)
   simpa using heq.trans hz
 
-/-- Full grouped polarization over a finite field through degree card(K),
-including the boundary degree. -/
+/-- Over a finite field `K` with `k ≤ card K`, two `k`-linear maps with the same diagonal
+have the same grouped sums `sumOfType`. -/
 theorem sumOfType_eq_of_diagonal_eq_of_card [Fintype K]
     (M N : MultilinearMap K (fun _ : Fin k => A) Y)
     (hk : k ≤ Fintype.card K)

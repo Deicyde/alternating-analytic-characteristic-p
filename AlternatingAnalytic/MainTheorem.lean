@@ -1,8 +1,11 @@
 import AlternatingAnalytic.Main
 
-/-! The complete bundled main theorem: the Banach counterexample has no bounded
-lift, is nowhere analytic, and is nowhere `C^ω`, for every finite index type of
-the prescribed degree. The witnesses are the existing explicit construction. -/
+/-!
+# Theorem 6.1(1), full form
+
+The Banach counterexample of `Main.lean` has no bounded lift, and `A^k` is analytic nowhere and
+`C^ω` nowhere, for every finite index type of cardinality `k`.
+-/
 
 open scoped ContDiff
 
@@ -10,9 +13,8 @@ namespace AlternatingAnalytic
 
 universe u v
 
-/-- The full main theorem of `charp.tex`, including its bounded-lift and `C^ω`
-formulations. The prescribed field need not be complete, and the same Banach
-spaces work for every finite index type of cardinality `k`. -/
+/-- Theorem 6.1(1) with its bounded-lift and `C^ω` forms. The field need not be complete, and the
+same Banach spaces work for every finite index type of cardinality `k`. -/
 theorem exists_banach_counterexample_full
     (K : Type u) [NontriviallyNormedField K] (p k : ℕ) (hp : p.Prime)
     [CharP K p] (hpk : p ≤ k) :

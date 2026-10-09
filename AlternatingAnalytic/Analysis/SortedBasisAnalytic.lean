@@ -2,8 +2,15 @@ import AlternatingAnalytic.Analysis.SortedBasisRetraction
 import AlternatingAnalytic.Analysis.SortedBasisLift
 import AlternatingAnalytic.Analysis.DenseMultilinearExtension
 
-/-! The sorted lift for an arbitrary orthogonal unconditional Schauder basis.
-The ambient source need not be complete and the basis index may be uncountable. -/
+/-!
+# Sorted lifts for orthogonal Schauder bases
+
+Over an ultrametric field, let `E` have an unconditional Schauder basis `b` with
+`‖b.coord i x‖ ‖b i‖ ≤ ‖x‖`, and let `F` be complete and ultrametric. Sorting basis indices
+gives a contractive retraction `Mult^n(E; F) → Alt^n(E; F)`, hence a lift of norm at most one
+(Proposition 4.1), so precomposition `Q` is a continuous polynomial. `E` need not be complete
+and the index set may be uncountable.
+-/
 
 noncomputable section
 
@@ -17,7 +24,8 @@ variable {K I E E' F : Type*} [NontriviallyNormedField K] [IsUltrametricDist K]
   [NormedAddCommGroup E'] [NormedSpace K E']
   [NormedAddCommGroup F] [NormedSpace K F] [IsUltrametricDist F] [CompleteSpace F]
 
-/-- Sort on the finite coordinate span, then extend along its dense isometric inclusion. -/
+/-- The sorted retraction `Mult^n(E; F) → Alt^n(E; F)`: sort on the span of the basis, then
+extend by density. -/
 def sortedSchauderRetraction (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (n : ℕ) :
     (E [×n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F) :=
@@ -81,7 +89,7 @@ theorem sortedSchauderRetraction_retract (b : UnconditionalSchauderBasis I K E)
     (sortedAlternatingMap_retract (Basis.span b.linearIndependent) n
       (g.compContinuousLinearMap (Submodule.span K (Set.range b)).subtypeL)) x
 
-/-- The actual sorted multilinear lift on the original topological source. -/
+/-- The lift of `Q` given by the sorted retraction. -/
 def sortedSchauderLift (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (n : ℕ) :
     (E →L[K] E') [×n]→L[K]
@@ -132,7 +140,7 @@ theorem analyticAt_of_orthogonalSchauderBasis (b : UnconditionalSchauderBasis I 
     AnalyticAt K (Round24Transfer.Q K (Fin n) E E' F) f :=
   (cpolynomialAt_of_orthogonalSchauderBasis b hb n f).analyticAt
 
-/-- The bounded-lift conclusion for any finite indexing type. -/
+/-- `Q` has a bounded lift for every finite index type. -/
 theorem hasBoundedLift_of_orthogonalSchauderBasis {ι : Type*} [Fintype ι]
     (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) :

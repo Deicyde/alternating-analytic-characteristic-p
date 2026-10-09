@@ -3,40 +3,30 @@ import AlternatingAnalytic.Category.AnalyticDomains
 /-!
 # Lemma H.3 (split destinations give analytic actions), p. 58
 
-Setting (Appendix H): `Vec_K` is the category of normed `K`-spaces and bounded linear maps over a
-nontrivially normed field `K`; `Alt^k : Vec_K^op × Vec_K → Vec_K` sends `(E, F)` to the bounded
-alternating `k`-linear maps `E^k → F`, and a morphism `(D, G) → (E, F)` of
-`Vec_K^op × Vec_K` (that is, `u : E → D`, `v : G → F`) acts by `m ↦ v ∘ m ∘ (u, …, u)`.
-Hom spaces carry the operator norm, products the maximum norm. "A full subcategory
-`𝒟 ⊆ Vec_K^op × Vec_K` is an analytic domain for `Alt^k` if the restriction of `Alt^k` to `𝒟` is
-analytic on every hom space." (Definition before Lemma H.3.) "A pair `(E, F)` is split in degree `k`
+Setting (Appendix H): `Vec_K` is the category of normed `K`-spaces and bounded linear maps.
+`Alt^k : Vec_K^op × Vec_K → Vec_K` sends `(E, F)` to the bounded alternating `k`-linear maps
+`E^k → F`, and a morphism `(u, v)` with `u : E → D`, `v : G → F` acts by
+`m ↦ v ∘ m ∘ (u, …, u)`. Hom spaces carry the operator norm, products the maximum norm.
+"A full subcategory `𝒟 ⊆ Vec_K^op × Vec_K` is an analytic domain for `Alt^k` if the restriction
+of `Alt^k` to `𝒟` is analytic on every hom space." "A pair `(E, F)` is split in degree `k`
 if the isometric inclusion `j_{E,F} : Alt^k(E;F) → Mult^k(E;F)` has a bounded linear retraction."
 
 Paper statement: "Every morphism-space action whose destination is a split pair is analytic. In
 particular, the full subcategory of split pairs is an analytic domain."
 
-Formalization notes:
-* `IsSplitInDegree K k E F` (defined here) is the existence of a continuous linear
-  `R : Mult^k(E;F) → Alt^k(E;F)` with `R ∘ j = id`, where `j` is
-  `ContinuousAlternatingMap.toContinuousMultilinearMap`. No norm bound on `R` is required,
-  as in the paper. The degree is indexed by `Fin k`.
-* `jointAction K k (u, v)` (defined here) is `m ↦ v ∘ m ∘ (u, …, u)` as a continuous linear map
-  `Alt^k(D;G) →L Alt^k(E;F)`, built from Mathlib's `compContinuousLinearMapCLM` and
-  `compContinuousAlternatingMapCLM`.
-* "Analytic" is Mathlib's `AnalyticOnNhd K _ Set.univ` on the whole hom space (power series at
-  every point). The paper's convention for `ω` on incomplete ranges also asks for derivative
-  regularity; the library's notion of analytic domain uses `AnalyticOnNhd`, and so does this file.
-* `part1` and `part2` are categorical, using the library's category `NormedSpaceCat K`
-  (carriers in the universe of `K`), the library's bifunctor `alternatingFunctor K k`
-  (its action on a morphism is `jointAction`), the library's operator norms on hom spaces of
-  `(NormedSpaceCat K)ᵒᵖ × NormedSpaceCat K` (maximum norm on pairs), and the library predicate
-  `IsAlternatingAnalyticDomain K k S` (`FunctorAnalyticOnHoms` of the restriction of
-  `alternatingFunctor` to the full subcategory `S`, i.e. analytic on every hom space).
-  These are imported from `AlternatingAnalytic/Category/AnalyticDomains.lean`, which is also the
-  file proving the lemma; it is imported only for these definitions. A full subcategory is an
-  `ObjectProperty`.
-* `part1_operator` is the same first assertion without the category wrapper, for arbitrary normed
-  spaces in independent universes; the other object `(D, G)` is arbitrary.
+## Formalization notes
+
+* `IsSplitInDegree K k E F` asks for a continuous linear retraction of
+  `ContinuousAlternatingMap.toContinuousMultilinearMap`, with no norm bound, as in the paper.
+* `jointAction K k (u, v)` is `m ↦ v ∘ m ∘ (u, …, u)` as a continuous linear map.
+* "Analytic" is `AnalyticOnNhd K _ Set.univ` on the whole hom space: a power series at every
+  point. For incomplete ranges the paper's `C^ω` convention also asks for derivative regularity.
+* `part1` and `part2` use the library's `NormedSpaceCat K` (carriers in the universe of `K`),
+  `alternatingFunctor K k` and `IsAlternatingAnalyticDomain K k`, imported from
+  `AlternatingAnalytic/Category/AnalyticDomains.lean`, the file that also proves the lemma.
+  A full subcategory is an `ObjectProperty`.
+* `part1_operator` is the first assertion for normed spaces in independent universes, without
+  the category.
 -/
 
 namespace AlternatingAnalyticChallenge.LemH_3
@@ -62,8 +52,8 @@ noncomputable def jointAction (K : Type*) [NontriviallyNormedField K] (k : ℕ)
   (ContinuousLinearMap.compContinuousAlternatingMapCLM K E G F (Fin k) a.2).comp
     (ContinuousAlternatingMap.compContinuousLinearMapCLM a.1)
 
-/-- **Lemma H.3, first assertion.** Every morphism-space action of `Alt^k` whose destination is
-a split pair is analytic on the whole hom space; the source object is arbitrary. -/
+/-- Lemma H.3, first assertion: every morphism-space action of `Alt^k` whose destination is
+a split pair is analytic. -/
 theorem part1 (K : Type u) [NontriviallyNormedField K] (k : ℕ)
     (X Y : (AlternatingAnalytic.NormedSpaceCat K)ᵒᵖ × AlternatingAnalytic.NormedSpaceCat K)
     (hY : IsSplitInDegree K k Y.1.unop Y.2) :
@@ -71,9 +61,8 @@ theorem part1 (K : Type u) [NontriviallyNormedField K] (k : ℕ)
       Set.univ := by
   sorry
 
-/-- **Lemma H.3, first assertion, operator form.** For arbitrary normed spaces `D, G` and a
-pair `(E, F)` split in degree `k`, the joint action `(u, v) ↦ (m ↦ v ∘ m ∘ (u, …, u))` on
-`L(E, D) × L(G, F)` is analytic everywhere. -/
+/-- Lemma H.3, first assertion, without the category: if `(E, F)` is split in degree `k`,
+then `(u, v) ↦ (m ↦ v ∘ m ∘ (u, …, u))` is analytic on `L(E, D) × L(G, F)`. -/
 theorem part1_operator (K : Type u) [NontriviallyNormedField K] (k : ℕ)
     (D : Type uD) (E : Type uE) (F : Type uF) (G : Type uG)
     [NormedAddCommGroup D] [NormedSpace K D] [NormedAddCommGroup E] [NormedSpace K E]
@@ -82,7 +71,7 @@ theorem part1_operator (K : Type u) [NontriviallyNormedField K] (k : ℕ)
     AnalyticOnNhd K (fun a : (E →L[K] D) × (G →L[K] F) => jointAction K k a) Set.univ := by
   sorry
 
-/-- **Lemma H.3, second assertion.** The full subcategory of pairs split in degree `k` is an
+/-- Lemma H.3, second assertion: the full subcategory of pairs split in degree `k` is an
 analytic domain for `Alt^k`. -/
 theorem part2 (K : Type u) [NontriviallyNormedField K] (k : ℕ) :
     AlternatingAnalytic.IsAlternatingAnalyticDomain K k

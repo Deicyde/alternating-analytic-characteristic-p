@@ -2,15 +2,11 @@ import AlternatingAnalytic.Analysis.LaurentField
 import AlternatingAnalytic.Analysis.ProjectiveExterior
 
 /-!
-# Lemma C.2 (the projective exterior norm), pp. 36-37
+# Proof of Lemma C.2
 
-Solution: from `AlternatingAnalytic.projectiveExteriorSeminorm_eq_iInf_wedgeCost`,
-`projectiveExteriorSeminorm_ιMulti_le`, `boundedFunction_projectiveExteriorSeminorm_eq_zero_iff`,
-`coordinateExteriorArray_ιMulti`, `coordinateExteriorArray_injective`,
-`norm_coordinateExteriorArray_le`, `completedExteriorArray_norm_le`,
-`completedExteriorArray_wedge`, `completedExteriorWedge_norm_le`
-(`Analysis/ProjectiveExterior.lean`; these are bundled there as `projectiveExterior_properties`
-and `projectiveExteriorCompletion_properties`).
+Uses `projectiveExteriorSeminorm_eq_iInf_wedgeCost` to identify `projNorm` with the library
+seminorm, then `coordinateExteriorArray`, `completedExteriorArray` and `completedExteriorWedge`
+and their lemmas in `Analysis/ProjectiveExterior.lean`.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -38,7 +34,7 @@ noncomputable def toB (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fac
     ProjectiveExterior (LaurentField κ r) ℕ k) :
       ProjectiveExteriorCompletion (LaurentField κ r) ℕ k)
 
-/-- **Lemma C.2, part 1.** `‖·‖_π` is a `K₁`-norm on `Λ` with the pure-wedge bound. -/
+/-- `‖·‖_π` is a `K₁`-norm on `Λ`, and `‖x₁ ∧ ⋯ ∧ x_k‖_π ≤ ∏ i, ‖x i‖`. -/
 theorem part1_projNorm_isNorm
     (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hk : 1 ≤ k) :
     (∀ ω η : ⋀[LaurentField κ r]^k (ℕ →ᵇ LaurentField κ r),
@@ -66,7 +62,7 @@ theorem part1_projNorm_isNorm
   · rw [key]; exact boundedFunction_projectiveExteriorSeminorm_eq_zero_iff ω
   · rw [key]; exact projectiveExteriorSeminorm_ιMulti_le x
 
-/-- **Lemma C.2, part 2.** The determinant array `Ω^{K₁}` is `K₁`-linear and injective, with
+/-- The determinant array `Ω^{K₁}` is `K₁`-linear and injective, with
 `‖Ω^{K₁}(ω)‖_∞ ≤ ‖ω‖_π`. -/
 theorem part2_determinantArray
     (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hk : 1 ≤ k) :
@@ -91,9 +87,9 @@ theorem part2_determinantArray
       (boundedFunctionCoordinates (K := LaurentField κ r) (S := ℕ)) x c
   · rw [key]; exact norm_coordinateExteriorArray_le _ (fun f s => f.norm_coe_le_norm s) ω c
 
-/-- **Lemma C.2, part 3.** `B` is the Banach completion of `(Λ, ‖·‖_π)`; the continuous
-extension `J` of `Ω^{K₁}` has norm at most one; `W_B(x) = x₁ ∧ ⋯ ∧ x_k` is a continuous
-alternating map of norm at most one with `J ∘ W_B = Ω^{K₁}(x₁ ∧ ⋯ ∧ x_k)`. -/
+/-- `B` is the completion of `(Λ, ‖·‖_π)`, the extension `J` of `Ω^{K₁}` has norm at most one,
+and `W_B(x) = x₁ ∧ ⋯ ∧ x_k` is a continuous alternating map of norm at most one with
+`J (W_B x) = Ω^{K₁}(x₁ ∧ ⋯ ∧ x_k)`. -/
 theorem part3_completion
     (κ : Type u) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)] (k : ℕ) (hk : 1 ≤ k) :
     CompleteSpace (ProjectiveExteriorCompletion (LaurentField κ r) ℕ k) ∧

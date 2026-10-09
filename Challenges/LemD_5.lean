@@ -12,29 +12,23 @@ T : V → Y, which is K-linear with ‖T x‖ ≤ C‖x‖.
 M : ∏ᵢ V_i⁰ → Y a K′-multilinear map with ‖M(d)‖ ≤ C ∏ᵢ ‖dᵢ‖. Then M extends uniquely to a
 continuous K′-multilinear map M : ∏ᵢ Vᵢ → Y with ‖M‖ ≤ C."
 
-Formalization notes:
-* The field is an arbitrary `NontriviallyNormedField K`, in both parts. The paper only needs
-  `K ∈ {K₁, K′}` (fields satisfying (H1)/(H2) of §D.2), and part (2) only `K = K′`; the Lean
-  statements are therefore more general (no completeness or ultrametric hypothesis on `K`).
-* "Dense K-subspace" is a `Submodule K V` whose carrier is `Dense`; a "K-Banach space" is a
-  normed space with `CompleteSpace`.
-* (1): the extension `T` is returned as a continuous linear map `V →L[K] Y` agreeing with
-  `T₀` on `V₀` and bounded by `C‖x‖`; uniqueness is among all continuous maps `V → Y`
-  agreeing with `T₀` on `V₀`, as in the paper ("extends uniquely to a continuous map").
-* (2): the index set `{1, …, k}` is `Fin k`; all `Vᵢ` lie in one universe. The extension is a
-  `ContinuousMultilinearMap K V Y` with operator norm `≤ C`; uniqueness is among continuous
-  multilinear maps agreeing with `M` on `∏ Vᵢ⁰`.
-* Universes of `K`, the `Vᵢ` and `Y` are independent.
-* No definitions are introduced.
+## Formalization notes
+
+* The field is any `NontriviallyNormedField K` in both parts; the paper needs only
+  `K ∈ {K₁, K′}`.
+* A dense subspace is a `Submodule K V` with `Dense` carrier; a Banach space is a normed space
+  with `CompleteSpace`.
+* (1): uniqueness is among all continuous maps `V → Y` that agree with `T₀` on `V₀`.
+* (2): the index set is `Fin k`; uniqueness is among continuous multilinear maps that agree
+  with `M` on `∏ Vᵢ⁰`.
 -/
 
 namespace AlternatingAnalyticChallenge.LemD_5
 
 universe uK uV uY
 
-/-- **Lemma D.5(1).** A linear map `T₀ : V₀ → Y` from a dense subspace into a Banach space with
-`‖T₀ x‖ ≤ C ‖x‖` extends uniquely to a continuous map `T : V → Y`; this extension is linear and
-satisfies `‖T x‖ ≤ C ‖x‖`. -/
+/-- A linear map `T₀ : V₀ → Y` on a dense subspace with `‖T₀ x‖ ≤ C ‖x‖` extends uniquely to
+a continuous map `V → Y`, which is linear and satisfies the same bound. -/
 theorem part1
     (K : Type uK) [NontriviallyNormedField K]
     {V : Type uV} [NormedAddCommGroup V] [NormedSpace K V]
@@ -45,9 +39,8 @@ theorem part1
       ∀ T' : V → Y, Continuous T' → (∀ x : V₀, T' x = T₀ x) → T' = T := by
   sorry
 
-/-- **Lemma D.5(2).** A multilinear map `M : ∏ Vᵢ⁰ → Y` on dense subspaces, with
-`‖M d‖ ≤ C ∏ ‖dᵢ‖`, extends uniquely to a continuous multilinear map `∏ Vᵢ → Y` of norm
-at most `C`. -/
+/-- A multilinear map on dense subspaces with `‖M d‖ ≤ C ∏ ‖dᵢ‖` extends uniquely to a
+continuous multilinear map of norm at most `C`. -/
 theorem part2
     (K : Type uK) [NontriviallyNormedField K] (k : ℕ)
     {V : Fin k → Type uV} [∀ i, NormedAddCommGroup (V i)] [∀ i, NormedSpace K (V i)]
