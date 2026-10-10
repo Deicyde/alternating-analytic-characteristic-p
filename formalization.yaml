@@ -31,7 +31,7 @@ related_formalizations:
 - id: https://github.com/Deicyde/alternating-analytic-counterexample
   relationship: other
   note: >-
-    Earlier characteristic-two counterexample (a private repository). Its multilinear tail lemma
+    Earlier characteristic-two counterexample. Its multilinear tail lemma
     was ported here for Lemma F.2.
 classification:
   arxiv:
