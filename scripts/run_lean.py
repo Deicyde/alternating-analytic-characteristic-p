@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 -I
+#!/usr/bin/env -S python3 -I
 """Run Lean on this repository without exceeding the machine's memory.
 
 Each `lake env lean` of a file that imports the library needs about 2.4 GB, so at most

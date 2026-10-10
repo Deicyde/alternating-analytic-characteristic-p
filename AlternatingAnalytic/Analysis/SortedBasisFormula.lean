@@ -59,7 +59,7 @@ theorem exists_sortedSchauderLift (b : UnconditionalSchauderBasis I K E)
     ∃ P : (E →L[K] E') [×n]→L[K]
         ((E' [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F)),
       ‖P‖ ≤ 1 ∧
-      (∀ f, P (fun _ => f) = Round24Transfer.Q K (Fin n) E E' F f) ∧
+      (∀ f, P (fun _ => f) = LiftCriterion.Q K (Fin n) E E' F f) ∧
       ∀ (f : Fin n → E →L[K] E') (m : E' [⋀^Fin n]→L[K] F) (x : Fin n → E),
         HasSum (fun s : Set.powersetCard I n =>
           (Matrix.of fun i j => b.coord (Set.powersetCard.ofFinEmbEquiv.symm s i) (x j)).det •

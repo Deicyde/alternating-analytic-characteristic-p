@@ -17,7 +17,7 @@ open scoped NNReal BoundedContinuousFunction
 
 namespace AlternatingAnalytic
 
-open Round24Transfer
+open LiftCriterion
 
 /-- For `k ≥ 2` with `k! ≠ 0`, the Laurent exterior target has no equivalent nonarchimedean norm
 and precomposition into it is analytic everywhere. -/

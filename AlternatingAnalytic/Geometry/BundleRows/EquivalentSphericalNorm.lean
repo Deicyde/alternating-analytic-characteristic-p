@@ -60,7 +60,7 @@ theorem hasBoundedLift_of_equivalentSphericalNorm {ι : Type*} [Fintype ι]
     (hsph : ∀ S : Set (F × ℝ), S.Nonempty →
       (∀ p ∈ S, ∀ p' ∈ S, ∃ z, q (z - p.1) ≤ p.2 ∧ q (z - p'.1) ≤ p'.2) →
       ∃ z, ∀ p ∈ S, q (z - p.1) ≤ p.2) :
-    Round24Transfer.HasBoundedLift K ι E E' F := by
+    LiftCriterion.HasBoundedLift K ι E E' F := by
   obtain ⟨C₁, hC₁, hlow⟩ := hlow
   obtain ⟨C₂, hC₂, hup⟩ := hup
   have hq := eq_zero_of_seminorm_eq_zero q hlow
@@ -80,7 +80,7 @@ theorem hasBoundedLift_of_equivalentSphericalNorm {ι : Type*} [Fintype ι]
   let l : F ≃ₗ[K] WithSeminorm q := LinearEquiv.refl K F
   let e : F ≃L[K] WithSeminorm q :=
     l.toContinuousLinearEquivOfBounds C₂ C₁ (fun x => hup x) (fun x => hlow x)
-  exact Round24Transfer.hasBoundedLift_of_retract (e : F →L[K] WithSeminorm q)
+  exact LiftCriterion.hasBoundedLift_of_retract (e : F →L[K] WithSeminorm q)
     (e.symm : WithSeminorm q →L[K] F) (fun y => e.symm_apply_apply y)
     ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete
 

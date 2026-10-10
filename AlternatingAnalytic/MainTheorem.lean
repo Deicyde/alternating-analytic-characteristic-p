@@ -28,7 +28,7 @@ theorem exists_banach_counterexample_full
         ∃ (_ : CompleteSpace E) (_ : CompleteSpace F),
           ¬ HasEquivalentUltrametricNorm K F ∧
           ∀ (ι : Type v) [Fintype ι], Fintype.card ι = k →
-            ¬ Round24Transfer.HasBoundedLift K ι E E F ∧
+            ¬ LiftCriterion.HasBoundedLift K ι E E F ∧
             ∀ f₀ : E →L[K] E,
               (¬ AnalyticAt K
                 (fun f : E →L[K] E =>
@@ -52,6 +52,6 @@ theorem exists_banach_counterexample_full
   intro ι _ hι
   refine ⟨?_, fun f₀ => ⟨hA ι hι f₀, fun h => hA ι hι f₀ h.analyticAt⟩⟩
   rintro ⟨P, hP⟩
-  exact hA ι hι 0 (Round24Transfer.cpolynomialAt_of_lift P hP 0).analyticAt
+  exact hA ι hι 0 (LiftCriterion.cpolynomialAt_of_lift P hP 0).analyticAt
 
 end AlternatingAnalytic

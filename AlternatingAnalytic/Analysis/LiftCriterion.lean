@@ -25,7 +25,7 @@ hypothesis on the characteristic is used.
 
 open scoped ContDiff
 
-namespace Round24Transfer
+namespace LiftCriterion
 
 /-! ## The top coefficient of a power series along lines -/
 
@@ -669,4 +669,4 @@ theorem hasBoundedLift_of_card_eq_succ (hcard : Fintype.card ι₁ = Fintype.car
 
 end Reindex
 
-end Round24Transfer
+end LiftCriterion

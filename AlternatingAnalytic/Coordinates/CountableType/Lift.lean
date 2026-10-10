@@ -93,7 +93,7 @@ theorem analyticAt_compContinuousLinearMapCLM_of_countableType_source
           (D [⋀^Fin k]→L[K] K) →L[K] (E [⋀^Fin k]→L[K] K))) u₀ := by
   obtain ⟨L, hL⟩ := exists_sortedLift_of_countableType hE k
   let r := (ContinuousMultilinearMap.alternatizationCLM K E K).comp L
-  exact (Round24Transfer.cpolynomialAt_of_lift (contractingRetractionLift (E' := D) k r)
+  exact (LiftCriterion.cpolynomialAt_of_lift (contractingRetractionLift (E' := D) k r)
     (contractingRetractionLift_diag k r hL) u₀).analyticAt
 
 /-- The target-side lift `(u₁, …, u_k) ↦ (m ↦ alternatization (S m ∘ (u₁, …, u_k)))`. -/
@@ -124,7 +124,7 @@ theorem targetLift_diag (k : ℕ)
     (hL : ∀ g : D [⋀^Fin k]→L[K] K,
       ContinuousMultilinearMap.alternatization (L g.toContinuousMultilinearMap) = g)
     (u : E →L[K] D) :
-    targetLift k L (fun _ => u) = Round24Transfer.Q K (Fin k) E D K u := by
+    targetLift k L (fun _ => u) = LiftCriterion.Q K (Fin k) E D K u := by
   ext m x
   rw [targetLift_apply, ContinuousMultilinearMap.alternatization_apply_apply]
   change _ = m (fun i => u (x i))
@@ -143,7 +143,7 @@ theorem analyticAt_compContinuousLinearMapCLM_of_countableType_target
         (ContinuousAlternatingMap.compContinuousLinearMapCLM u :
           (D [⋀^Fin k]→L[K] K) →L[K] (E [⋀^Fin k]→L[K] K))) u₀ := by
   obtain ⟨L, hL⟩ := exists_sortedLift_of_countableType hD k
-  exact (Round24Transfer.cpolynomialAt_of_lift (targetLift (E := E) k L)
+  exact (LiftCriterion.cpolynomialAt_of_lift (targetLift (E := E) k L)
     (targetLift_diag k L hL) u₀).analyticAt
 
 end AlternatingAnalytic.CountableType

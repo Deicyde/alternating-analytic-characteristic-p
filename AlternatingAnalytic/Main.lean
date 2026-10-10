@@ -21,7 +21,7 @@ open scoped NNReal BoundedContinuousFunction
 
 namespace AlternatingAnalytic
 
-open Round24Transfer
+open LiftCriterion
 
 universe u v
 

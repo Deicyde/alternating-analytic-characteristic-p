@@ -74,7 +74,7 @@ ultrametric norm has bounded precomposition lifts. -/
 theorem hasBoundedLift_of_equivalentUltrametricNorm_discreteField
     (hF : HasEquivalentUltrametricNorm K F) {e : ℝ} (he : 1 < e)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = e ^ n) :
-    Round24Transfer.HasBoundedLift K ι E E' F := by
+    LiftCriterion.HasBoundedLift K ι E E' F := by
   obtain ⟨q, hq, ⟨A, hA, hlower⟩, ⟨B, hB, hupper⟩, hqval⟩ :=
     hF.exists_discrete he hval
   let G := DiscreteRenormedTarget F
@@ -107,32 +107,32 @@ theorem hasBoundedLift_of_equivalentUltrametricNorm_discreteField
     rw [dist_eq_norm]
     change ∃ n : ℤ, q (x - y) = e ^ n
     exact hqval _ (sub_ne_zero.mpr (fun hh => hxy hh))
-  have hG : Round24Transfer.HasBoundedLift K ι E E' G :=
+  have hG : LiftCriterion.HasBoundedLift K ι E E' G :=
     ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete
-  exact Round24Transfer.hasBoundedLift_of_retract ψ.symm.toContinuousLinearMap
+  exact LiftCriterion.hasBoundedLift_of_retract ψ.symm.toContinuousLinearMap
     ψ.toContinuousLinearMap (fun x => ψ.apply_symm_apply x) hG
 
 /-- Under the same hypotheses, precomposition is continuously polynomial everywhere. -/
 theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteField
     (hF : HasEquivalentUltrametricNorm K F) {e : ℝ} (he : 1 < e)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = e ^ n) (f₀ : E →L[K] E') :
-    CPolynomialAt K (Round24Transfer.Q K ι E E' F) f₀ := by
+    CPolynomialAt K (LiftCriterion.Q K ι E E' F) f₀ := by
   obtain ⟨P, hP⟩ := hasBoundedLift_of_equivalentUltrametricNorm_discreteField
     (ι := ι) (E := E) (E' := E') hF he hval
-  exact Round24Transfer.cpolynomialAt_of_lift P hP f₀
+  exact LiftCriterion.cpolynomialAt_of_lift P hP f₀
 
 /-- Under the same hypotheses, precomposition is analytic everywhere. -/
 theorem analyticAt_of_equivalentUltrametricNorm_discreteField
     (hF : HasEquivalentUltrametricNorm K F) {e : ℝ} (he : 1 < e)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = e ^ n) (f₀ : E →L[K] E') :
-    AnalyticAt K (Round24Transfer.Q K ι E E' F) f₀ :=
+    AnalyticAt K (LiftCriterion.Q K ι E E' F) f₀ :=
   (cpolynomialAt_of_equivalentUltrametricNorm_discreteField hF he hval f₀).analyticAt
 
 /-- Continuous polynomiality with scalar norms in `r ^ ℤ`, `0 < r < 1`. -/
 theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteField_radius
     (hF : HasEquivalentUltrametricNorm K F) {r : ℝ} (hr0 : 0 < r) (hr1 : r < 1)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = r ^ n) (f₀ : E →L[K] E') :
-    CPolynomialAt K (Round24Transfer.Q K ι E E' F) f₀ := by
+    CPolynomialAt K (LiftCriterion.Q K ι E E' F) f₀ := by
   apply cpolynomialAt_of_equivalentUltrametricNorm_discreteField hF
     ((one_lt_inv₀ hr0).mpr hr1) ?_ f₀
   intro c hc
@@ -143,14 +143,14 @@ theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteField_radius
 theorem analyticAt_of_equivalentUltrametricNorm_discreteField_radius
     (hF : HasEquivalentUltrametricNorm K F) {r : ℝ} (hr0 : 0 < r) (hr1 : r < 1)
     (hval : ∀ c : K, c ≠ 0 → ∃ n : ℤ, ‖c‖ = r ^ n) (f₀ : E →L[K] E') :
-    AnalyticAt K (Round24Transfer.Q K ι E E' F) f₀ :=
+    AnalyticAt K (LiftCriterion.Q K ι E E' F) f₀ :=
   (cpolynomialAt_of_equivalentUltrametricNorm_discreteField_radius hF hr0 hr1 hval f₀).analyticAt
 
 /-- Continuous polynomiality when the value group of `K` is `r ^ ℤ`. -/
 theorem cpolynomialAt_of_equivalentUltrametricNorm_discreteValueGroup
     (hF : HasEquivalentUltrametricNorm K F) {r : ℝ} (hr0 : 0 < r) (hr1 : r < 1)
     (hvalue : Set.range (fun c : Kˣ => ‖(c : K)‖) = Set.range (fun n : ℤ => r ^ n))
-    (f₀ : E →L[K] E') : CPolynomialAt K (Round24Transfer.Q K ι E E' F) f₀ :=
+    (f₀ : E →L[K] E') : CPolynomialAt K (LiftCriterion.Q K ι E E' F) f₀ :=
   cpolynomialAt_of_equivalentUltrametricNorm_discreteField_radius hF hr0 hr1
     (norm_mem_zpowers_of_discreteValueGroup hvalue) f₀
 
@@ -159,7 +159,7 @@ equivalent ultrametric norm, precomposition is analytic everywhere. -/
 theorem analyticAt_of_equivalentUltrametricNorm_discreteValueGroup
     (hF : HasEquivalentUltrametricNorm K F) {r : ℝ} (hr0 : 0 < r) (hr1 : r < 1)
     (hvalue : Set.range (fun c : Kˣ => ‖(c : K)‖) = Set.range (fun n : ℤ => r ^ n))
-    (f₀ : E →L[K] E') : AnalyticAt K (Round24Transfer.Q K ι E E' F) f₀ :=
+    (f₀ : E →L[K] E') : AnalyticAt K (LiftCriterion.Q K ι E E' F) f₀ :=
   (cpolynomialAt_of_equivalentUltrametricNorm_discreteValueGroup hF hr0 hr1 hvalue f₀).analyticAt
 
 end AlternatingAnalytic

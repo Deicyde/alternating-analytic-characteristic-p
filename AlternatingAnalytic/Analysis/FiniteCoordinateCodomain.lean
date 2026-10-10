@@ -140,26 +140,26 @@ theorem norm_finiteCoordinateCodomainLift_le (b : Basis (Fin d) K E')
 theorem finiteCoordinateCodomainLift_diag (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) (f : E →L[K] E') :
     finiteCoordinateCodomainLift (F := F) b hb k (fun _ => f) =
-      Round24Transfer.Q K (Fin k) E E' F f := by
+      LiftCriterion.Q K (Fin k) E E' F f := by
   ext m x
   rw [finiteCoordinateCodomainLift_apply]
   exact finiteCoordinate_expansion b k m (fun j => f (x j))
 
 theorem hasBoundedLift_of_finiteCoordinateCodomain (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) :
-    Round24Transfer.HasBoundedLift K (Fin k) E E' F := by
-  rw [Round24Transfer.HasBoundedLift, Fintype.card_fin]
+    LiftCriterion.HasBoundedLift K (Fin k) E E' F := by
+  rw [LiftCriterion.HasBoundedLift, Fintype.card_fin]
   exact ⟨finiteCoordinateCodomainLift b hb k, finiteCoordinateCodomainLift_diag b hb k⟩
 
 theorem cpolynomialAt_Q_of_finiteCoordinateCodomain (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) (f₀ : E →L[K] E') :
-    CPolynomialAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ :=
-  Round24Transfer.cpolynomialAt_of_lift (finiteCoordinateCodomainLift b hb k)
+    CPolynomialAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ :=
+  LiftCriterion.cpolynomialAt_of_lift (finiteCoordinateCodomainLift b hb k)
     (finiteCoordinateCodomainLift_diag b hb k) f₀
 
 theorem analyticAt_Q_of_finiteCoordinateCodomain (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) (f₀ : E →L[K] E') :
-    AnalyticAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ :=
+    AnalyticAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ :=
   (cpolynomialAt_Q_of_finiteCoordinateCodomain b hb k f₀).analyticAt
 
 /-- The lift is zero above the dimension `d`. -/
@@ -172,7 +172,7 @@ theorem finiteCoordinateCodomainLift_eq_zero_of_lt (b : Basis (Fin d) K E')
 
 theorem Q_eq_zero_of_finiteCoordinateCodomain_lt (b : Basis (Fin d) K E')
     (hb : ∀ i, Continuous (b.coord i)) {k : ℕ} (h : d < k) (f : E →L[K] E') :
-    Round24Transfer.Q K (Fin k) E E' F f = 0 := by
+    LiftCriterion.Q K (Fin k) E E' F f = 0 := by
   rw [← finiteCoordinateCodomainLift_diag b hb k f,
     finiteCoordinateCodomainLift_eq_zero_of_lt b hb h]
   rfl
@@ -188,8 +188,8 @@ theorem finiteCoordinateCodomainLift_zero_apply (b : Basis (Fin d) K E')
   exact congrArg m (Subsingleton.elim _ _)
 
 theorem Q_zero_constant_of_finiteCoordinateCodomain (f g : E →L[K] E') :
-    Round24Transfer.Q K (Fin 0) E E' F f =
-      Round24Transfer.Q K (Fin 0) E E' F g := by
+    LiftCriterion.Q K (Fin 0) E E' F f =
+      LiftCriterion.Q K (Fin 0) E E' F g := by
   ext m x
   exact congrArg m (Subsingleton.elim _ _)
 
@@ -235,18 +235,18 @@ theorem finiteCoordinateCodomain (b : Basis (Fin d) K E')
     (∀ (f : Fin k → E →L[K] E') (m : E' [⋀^Fin k]→L[K] F) (x : Fin k → E),
       ‖P f m x‖ ≤ C * ‖m‖ * (∏ a, ‖f a‖) * ∏ j, ‖x j‖) ∧
     ‖P‖ ≤ C ∧
-    (∀ f : E →L[K] E', P (fun _ => f) = Round24Transfer.Q K (Fin k) E E' F f) ∧
-    Round24Transfer.HasBoundedLift K (Fin k) E E' F ∧
-    (∀ f₀ : E →L[K] E', CPolynomialAt K (Round24Transfer.Q K (Fin k) E E' F) f₀) ∧
-    (∀ f₀ : E →L[K] E', AnalyticAt K (Round24Transfer.Q K (Fin k) E E' F) f₀) ∧
+    (∀ f : E →L[K] E', P (fun _ => f) = LiftCriterion.Q K (Fin k) E E' F f) ∧
+    LiftCriterion.HasBoundedLift K (Fin k) E E' F ∧
+    (∀ f₀ : E →L[K] E', CPolynomialAt K (LiftCriterion.Q K (Fin k) E E' F) f₀) ∧
+    (∀ f₀ : E →L[K] E', AnalyticAt K (LiftCriterion.Q K (Fin k) E E' F) f₀) ∧
     (d < k → C = 0 ∧ P = 0 ∧
       (∀ m : E' [⋀^Fin k]→L[K] F, m = 0) ∧
-      ∀ f : E →L[K] E', Round24Transfer.Q K (Fin k) E E' F f = 0) ∧
+      ∀ f : E →L[K] E', LiftCriterion.Q K (Fin k) E E' F f = 0) ∧
     (k = 0 → C = 1 ∧
       (∀ (f : Fin k → E →L[K] E') (m : E' [⋀^Fin k]→L[K] F)
         (x : Fin k → E) (y : Fin k → E'), P f m x = m y) ∧
-      ∀ f g : E →L[K] E', Round24Transfer.Q K (Fin k) E E' F f =
-        Round24Transfer.Q K (Fin k) E E' F g) := by
+      ∀ f g : E →L[K] E', LiftCriterion.Q K (Fin k) E E' F f =
+        LiftCriterion.Q K (Fin k) E E' F g) := by
   dsimp only
   refine ⟨finiteCoordinateCodomainBound_nonneg b hb k,
     finiteCoordinateCodomainLift_apply b hb k,

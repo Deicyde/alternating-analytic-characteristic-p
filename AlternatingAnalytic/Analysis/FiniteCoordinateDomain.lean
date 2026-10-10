@@ -10,7 +10,7 @@ formula over increasing basis tuples gives a bounded retraction from multilinear
 alternating maps on `E`, and hence a bounded lift of `A^k`. This is the source case
 of Proposition 4.1(2). The norm bound `k! ∑_s ∏_a ‖ε_{s_a}‖ ‖e_{s_a}‖` uses the real
 factorial, and all degrees, including zero, are allowed. In Lean, `A^k` is
-`Round24Transfer.Q`, the map `f ↦ (m ↦ m ∘ (f, …, f))`.
+`LiftCriterion.Q`, the map `f ↦ (m ↦ m ∘ (f, …, f))`.
 -/
 
 noncomputable section
@@ -208,24 +208,24 @@ theorem norm_finiteCoordinateDomainLift_apply_le (b : Basis (Fin d) K E)
 theorem finiteCoordinateDomainLift_diag (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) (f : E →L[K] E') :
     finiteCoordinateDomainLift (F := F) b hb k (fun _ => f) =
-      Round24Transfer.Q K (Fin k) E E' F f :=
+      LiftCriterion.Q K (Fin k) E E' F f :=
   contractingRetractionLift_diag k _ (finiteCoordinateRetraction_retract b hb k) f
 
 theorem hasBoundedLift_of_finiteCoordinateDomain (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) :
-    Round24Transfer.HasBoundedLift K (Fin k) E E' F := by
-  rw [Round24Transfer.HasBoundedLift, Fintype.card_fin]
+    LiftCriterion.HasBoundedLift K (Fin k) E E' F := by
+  rw [LiftCriterion.HasBoundedLift, Fintype.card_fin]
   exact ⟨finiteCoordinateDomainLift b hb k, finiteCoordinateDomainLift_diag b hb k⟩
 
 theorem cpolynomialAt_Q_of_finiteCoordinateDomain (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) (f₀ : E →L[K] E') :
-    CPolynomialAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ :=
-  Round24Transfer.cpolynomialAt_of_lift (finiteCoordinateDomainLift b hb k)
+    CPolynomialAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ :=
+  LiftCriterion.cpolynomialAt_of_lift (finiteCoordinateDomainLift b hb k)
     (finiteCoordinateDomainLift_diag b hb k) f₀
 
 theorem analyticAt_Q_of_finiteCoordinateDomain (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) (k : ℕ) (f₀ : E →L[K] E') :
-    AnalyticAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ :=
+    AnalyticAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ :=
   (cpolynomialAt_Q_of_finiteCoordinateDomain b hb k f₀).analyticAt
 
 private theorem finiteCoordinateIndices_isEmpty {d k : ℕ} (h : d < k) :
@@ -259,7 +259,7 @@ theorem finiteCoordinateDomainLift_eq_zero_of_lt (b : Basis (Fin d) K E)
 
 theorem Q_eq_zero_of_finiteCoordinateDomain_lt (b : Basis (Fin d) K E)
     (hb : ∀ i, Continuous (b.coord i)) {k : ℕ} (h : d < k) (f : E →L[K] E') :
-    Round24Transfer.Q K (Fin k) E E' F f = 0 := by
+    LiftCriterion.Q K (Fin k) E E' F f = 0 := by
   rw [← finiteCoordinateDomainLift_diag b hb k f,
     finiteCoordinateDomainLift_eq_zero_of_lt b hb h]
   rfl
@@ -290,8 +290,8 @@ theorem finiteCoordinateDomainLift_zero_apply (b : Basis (Fin d) K E)
   exact congrArg m (Subsingleton.elim _ _)
 
 theorem Q_zero_constant_of_finiteCoordinateDomain (f f' : E →L[K] E') :
-    Round24Transfer.Q K (Fin 0) E E' F f =
-      Round24Transfer.Q K (Fin 0) E E' F f' := by
+    LiftCriterion.Q K (Fin 0) E E' F f =
+      LiftCriterion.Q K (Fin 0) E E' F f' := by
   ext m x
   exact congrArg m (Subsingleton.elim _ _)
 
@@ -321,16 +321,16 @@ theorem finiteCoordinateDomain (b : Basis (Fin d) K E)
     (∀ (f : Fin k → E →L[K] E') (m : E' [⋀^Fin k]→L[K] F) (x : Fin k → E),
       ‖P f m x‖ ≤ C * ‖m‖ * (∏ a, ‖f a‖) * ∏ j, ‖x j‖) ∧
     ‖P‖ ≤ C ∧
-    (∀ f : E →L[K] E', P (fun _ => f) = Round24Transfer.Q K (Fin k) E E' F f) ∧
-    Round24Transfer.HasBoundedLift K (Fin k) E E' F ∧
-    (∀ f₀ : E →L[K] E', CPolynomialAt K (Round24Transfer.Q K (Fin k) E E' F) f₀) ∧
-    (∀ f₀ : E →L[K] E', AnalyticAt K (Round24Transfer.Q K (Fin k) E E' F) f₀) ∧
+    (∀ f : E →L[K] E', P (fun _ => f) = LiftCriterion.Q K (Fin k) E E' F f) ∧
+    LiftCriterion.HasBoundedLift K (Fin k) E E' F ∧
+    (∀ f₀ : E →L[K] E', CPolynomialAt K (LiftCriterion.Q K (Fin k) E E' F) f₀) ∧
+    (∀ f₀ : E →L[K] E', AnalyticAt K (LiftCriterion.Q K (Fin k) E E' F) f₀) ∧
     (d < k → C = 0 ∧ r = 0 ∧ P = 0 ∧
-      ∀ f : E →L[K] E', Round24Transfer.Q K (Fin k) E E' F f = 0) ∧
+      ∀ f : E →L[K] E', LiftCriterion.Q K (Fin k) E E' F f = 0) ∧
     (k = 0 → C = 1 ∧
       (∀ (g : E [×k]→L[K] F) (x : Fin k → E), r g x = g x) ∧
-      ∀ f f' : E →L[K] E', Round24Transfer.Q K (Fin k) E E' F f =
-        Round24Transfer.Q K (Fin k) E E' F f') := by
+      ∀ f f' : E →L[K] E', LiftCriterion.Q K (Fin k) E E' F f =
+        LiftCriterion.Q K (Fin k) E E' F f') := by
   dsimp only
   refine ⟨finiteCoordinateBound_nonneg b hb k,
     finiteCoordinateRetraction_apply b hb k,

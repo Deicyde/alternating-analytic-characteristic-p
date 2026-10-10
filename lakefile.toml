@@ -1,4 +1,4 @@
-name = "AlternatingAnalyticCounterexample"
+name = "AlternatingAnalytic"
 version = "0.1.0"
 defaultTargets = ["AlternatingAnalytic", "challenge", "solution", "Challenges", "Solutions"]
 

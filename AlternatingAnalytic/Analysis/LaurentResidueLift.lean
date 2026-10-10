@@ -171,7 +171,7 @@ theorem laurentResidueLift_support_le (α : Fin k) (P : LaurentLiftCandidate κ 
 
 /-- On the diagonal, `Ψ(a, …, a; x) = (a x₁) ∧ … ∧ (a x_k)`. -/
 theorem laurentResidueLift_diagonal (α : Fin k) (P : LaurentLiftCandidate κ r k)
-    (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f)
+    (hP : ∀ f : E →L[K] E, P (fun _ => f) = LiftCriterion.Q K (Fin k) E E B f)
     (a : ℕ → κ) (x : Fin k → ℕ → κ) :
     laurentResidueLift κ r k α P (fun _ => a) x =
       exteriorPower.ιMulti κ k (fun i => a * x i) := by
@@ -194,7 +194,7 @@ def laurentResidueFixedVectors (α : Fin k) (P : LaurentLiftCandidate κ r k)
 
 /-- (Pol1) for `Ψ`. -/
 theorem laurentResidueLift_pol1 (α : Fin k) (P : LaurentLiftCandidate κ r k)
-    (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f)
+    (hP : ∀ f : E →L[K] E, P (fun _ => f) = LiftCriterion.Q K (Fin k) E E B f)
     (u x : Fin k → ℕ → κ) :
     (∑ σ : Equiv.Perm (Fin k), laurentResidueLift κ r k α P (u ∘ σ) x) =
       ∑ σ : Equiv.Perm (Fin k), exteriorPower.ιMulti κ k (fun i => u (σ i) * x i) := by
@@ -205,7 +205,7 @@ theorem laurentResidueLift_pol1 (α : Fin k) (P : LaurentLiftCandidate κ r k)
 /-- `Ψ` is alternating and antisymmetric in its last `k` slots, has support dimension at most
 `⌊k M_r ‖P‖⌋`, and satisfies the diagonal identity and (Pol1). Multilinearity is in its type. -/
 theorem laurentResidueLift_properties (α : Fin k) (P : LaurentLiftCandidate κ r k)
-    (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f) :
+    (hP : ∀ f : E →L[K] E, P (fun _ => f) = LiftCriterion.Q K (Fin k) E E B f) :
     (∀ (u x : Fin k → ℕ → κ) (i j : Fin k), i ≠ j → x i = x j →
       laurentResidueLift κ r k α P u x = 0) ∧
     (∀ (u x : Fin k → ℕ → κ) (σ : Equiv.Perm (Fin k)),
@@ -229,11 +229,11 @@ theorem laurentResidueLift_properties (α : Fin k) (P : LaurentLiftCandidate κ 
 /-- If `κ` is finite and `k! = 0` in `κ`, then `A^k` has no bounded lift over `κ((X))`. -/
 theorem laurent_not_hasBoundedLift_of_factorial [Finite κ] (hk : 0 < k)
     (hfactorial : (k.factorial : κ) = 0) :
-    ¬ Round24Transfer.HasBoundedLift K (Fin k) E E B := by
+    ¬ LiftCriterion.HasBoundedLift K (Fin k) E E B := by
   intro h
   obtain ⟨P, hP⟩ : ∃ P : LaurentLiftCandidate κ r k,
-      ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f := by
-    exact Round24Transfer.hasBoundedLift_iff_exists_ι.mp h
+      ∀ f : E →L[K] E, P (fun _ => f) = LiftCriterion.Q K (Fin k) E E B f := by
+    exact LiftCriterion.hasBoundedLift_iff_exists_ι.mp h
   let α : Fin k := ⟨0, hk⟩
   exact finiteField_multiplier_obstruction_full hfactorial (laurentResidueLift κ r k α P)
     (laurentResidueLift_antisymmetric κ r k α P)
@@ -244,7 +244,7 @@ theorem laurent_not_hasBoundedLift_of_factorial [Finite κ] (hk : 0 < k)
 
 /-- Theorem C.1: if `κ` is finite of characteristic `p` and `k ≥ p`, then `A^k` has no bounded lift. -/
 theorem laurent_not_hasBoundedLift [Finite κ] (p : ℕ) [Fact p.Prime] [CharP κ p]
-    (hpk : p ≤ k) : ¬ Round24Transfer.HasBoundedLift K (Fin k) E E B := by
+    (hpk : p ≤ k) : ¬ LiftCriterion.HasBoundedLift K (Fin k) E E B := by
   apply laurent_not_hasBoundedLift_of_factorial κ r k ((Fact.out : p.Prime).pos.trans_le hpk)
   exact (CharP.cast_eq_zero_iff κ p k.factorial).2
     (Nat.dvd_factorial (Fact.out : p.Prime).pos hpk)
@@ -252,8 +252,8 @@ theorem laurent_not_hasBoundedLift [Finite κ] (p : ℕ) [Fact p.Prime] [CharP �
 /-- Theorem C.1: under the same hypotheses, `A^k` is analytic at no point. -/
 theorem laurent_not_analyticAt [Finite κ] (p : ℕ) [Fact p.Prime] [CharP κ p]
     (hpk : p ≤ k) (f₀ : E →L[K] E) :
-    ¬ AnalyticAt K (Round24Transfer.Q K (Fin k) E E B) f₀ := by
+    ¬ AnalyticAt K (LiftCriterion.Q K (Fin k) E E B) f₀ := by
   intro h
-  exact laurent_not_hasBoundedLift κ r k p hpk (Round24Transfer.hasBoundedLift_of_analyticAt h)
+  exact laurent_not_hasBoundedLift κ r k p hpk (LiftCriterion.hasBoundedLift_of_analyticAt h)
 
 end AlternatingAnalytic

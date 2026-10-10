@@ -104,7 +104,7 @@ theorem hasBoundedLift_of_equiv {K E E' F : Type*} [NontriviallyNormedField K]
     [NormedAddCommGroup E'] [NormedSpace K E']
     [NormedAddCommGroup F] [NormedSpace K F]
     {d : ℕ} (c : E ≃L[K] (Fin d → K)) (k : ℕ) :
-    Round24Transfer.HasBoundedLift K (Fin k) E E' F := by
+    LiftCriterion.HasBoundedLift K (Fin k) E E' F := by
   let b : Module.Basis (Fin d) K E := (Pi.basisFun K (Fin d)).map c.symm.toLinearEquiv
   have hb : ∀ i, Continuous (b.coord i) := by
     intro i

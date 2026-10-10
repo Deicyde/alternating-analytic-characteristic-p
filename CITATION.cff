@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite the paper."
+title: "Alternating bundles and analytic descent: paper and Lean formalization"
+type: software
+authors:
+  - family-names: McCarthy
+    given-names: Jack
+repository-code: "https://github.com/Deicyde/alternating-analytic-characteristic-p"
+license: Apache-2.0
+date-released: "2026-10-09"
+preferred-citation:
+  type: unpublished
+  title: "Alternating bundles and analytic descent"
+  authors:
+    - family-names: McCarthy
+      given-names: Jack
+  year: 2026
+  month: 10
+  url: "https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/main/paper/charp.pdf"

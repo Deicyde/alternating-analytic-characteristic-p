@@ -2,6 +2,9 @@
 Copyright (c) 2026 Jack McCarthy. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jack McCarthy
+
+The proof of `cpolynomialAt_nsmul_compContinuousLinearMapCLM` is adapted from Mathlib pull
+request #43338 by Sébastien Gouëzel, which is released under the Apache 2.0 license.
 -/
 import Mathlib.Analysis.Calculus.ContDiff.ContinuousAlternatingMap
 import Mathlib.Analysis.Analytic.CPolynomial

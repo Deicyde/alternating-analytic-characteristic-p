@@ -14,7 +14,7 @@ nowhere. No completeness is assumed.
 
 namespace AlternatingAnalytic.OneLift
 
-open Round24Transfer
+open LiftCriterion
 
 variable {K : Type*} [NontriviallyNormedField K]
   {H W Z : Type*} [NormedAddCommGroup H] [NormedSpace K H]

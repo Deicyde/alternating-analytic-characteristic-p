@@ -456,8 +456,8 @@ theorem contDiff_compContinuousLinearMapCLM_of_sphericallyComplete {n : WithTop 
 
 /-- Precomposition has a bounded multilinear lift. -/
 theorem hasBoundedLift_of_sphericallyComplete :
-    Round24Transfer.HasBoundedLift 𝕜 ι E E' F :=
-  Round24Transfer.contDiff_omega_iff_hasBoundedLift.mp
+    LiftCriterion.HasBoundedLift 𝕜 ι E E' F :=
+  LiftCriterion.contDiff_omega_iff_hasBoundedLift.mp
     contDiff_compContinuousLinearMapCLM_of_sphericallyComplete
 
 /-- Precomposition is a continuous polynomial at every point. -/
@@ -467,7 +467,7 @@ theorem cpolynomialAt_compContinuousLinearMapCLM_of_sphericallyComplete
       (E →L[𝕜] E') → (E' [⋀^ι]→L[𝕜] F) →L[𝕜] (E [⋀^ι]→L[𝕜] F)) f₀ := by
   obtain ⟨P, hP⟩ := hasBoundedLift_of_sphericallyComplete
     (𝕜 := 𝕜) (ι := ι) (E := E) (E' := E') (F := F)
-  exact Round24Transfer.cpolynomialAt_of_lift P hP f₀
+  exact LiftCriterion.cpolynomialAt_of_lift P hP f₀
 
 /-- Precomposition is analytic at every point. -/
 theorem analyticAt_compContinuousLinearMapCLM_of_sphericallyComplete

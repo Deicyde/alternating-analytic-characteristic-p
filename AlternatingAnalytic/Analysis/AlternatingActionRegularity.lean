@@ -137,7 +137,7 @@ theorem analyticAt_precomposition_of_analyticAt_alternatingMapAction
     (k : ℕ) (u₀ : E' →L[K] E)
     (h : AnalyticAt K (alternatingMapAction (F := F) (F' := F) k)
       (u₀, ContinuousLinearMap.id K F)) :
-    AnalyticAt K (Round24Transfer.Q K (Fin k) E' E F) u₀ := by
+    AnalyticAt K (LiftCriterion.Q K (Fin k) E' E F) u₀ := by
   simpa only [Function.comp_def, alternatingMapAction_id_right] using
     h.comp (f := fun u : E' →L[K] E => (u, ContinuousLinearMap.id K F))
       (analyticAt_id.prod analyticAt_const)
@@ -243,7 +243,7 @@ theorem alternatingMapActionLift_diag (k : ℕ)
   rfl
 
 theorem boundedLift_to_fin (k : ℕ)
-    (h : Round24Transfer.HasBoundedLift K (Fin k) E' E F) :
+    (h : LiftCriterion.HasBoundedLift K (Fin k) E' E F) :
     ∃ P : ContinuousMultilinearMap K (fun _ : Fin k => E' →L[K] E)
       ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)),
       ∀ u, P (fun _ => u) = ContinuousAlternatingMap.compContinuousLinearMapCLM u := by
@@ -254,12 +254,12 @@ theorem boundedLift_of_fin (k : ℕ)
     (P : ContinuousMultilinearMap K (fun _ : Fin k => E' →L[K] E)
       ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)))
     (hP : ∀ u, P (fun _ => u) = ContinuousAlternatingMap.compContinuousLinearMapCLM u) :
-    Round24Transfer.HasBoundedLift K (Fin k) E' E F := by
+    LiftCriterion.HasBoundedLift K (Fin k) E' E F := by
   exact ⟨P.domDomCongr (Fintype.equivFin (Fin k)), hP⟩
 
 /-- A bounded lift of the pullback gives a joint lift with its formula, bound and diagonal. -/
 theorem exists_alternatingMapActionLift (k : ℕ)
-    (h : Round24Transfer.HasBoundedLift K (Fin k) E' E F) :
+    (h : LiftCriterion.HasBoundedLift K (Fin k) E' E F) :
     ∃ P : ContinuousMultilinearMap K (fun _ : Fin k => E' →L[K] E)
         ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)),
       (∀ u, P (fun _ => u) = ContinuousAlternatingMap.compContinuousLinearMapCLM u) ∧
@@ -276,7 +276,7 @@ theorem exists_alternatingMapActionLift (k : ℕ)
 
 /-- A bounded lift of the pullback makes the joint action a continuous polynomial. -/
 theorem cpolynomialAt_alternatingMapAction_of_boundedLift (k : ℕ)
-    (h : Round24Transfer.HasBoundedLift K (Fin k) E' E F)
+    (h : LiftCriterion.HasBoundedLift K (Fin k) E' E F)
     (z₀ : (E' →L[K] E) × (F →L[K] F')) :
     CPolynomialAt K (alternatingMapAction k) z₀ := by
   obtain ⟨P, hP, L, hL, hnorm, hdiag⟩ := exists_alternatingMapActionLift (F' := F') k h
@@ -291,17 +291,17 @@ theorem cpolynomialAt_alternatingMapAction_of_boundedLift (k : ℕ)
 /-- If the pullback is analytic at `z.1`, the joint action is analytic at `z`. -/
 theorem analyticAt_alternatingMapAction_of_precomposition (k : ℕ)
     (z : (E' →L[K] E) × (F →L[K] F'))
-    (hQ : AnalyticAt K (Round24Transfer.Q K (Fin k) E' E F) z.1) :
+    (hQ : AnalyticAt K (LiftCriterion.Q K (Fin k) E' E F) z.1) :
     AnalyticAt K (alternatingMapAction k) z :=
   (cpolynomialAt_alternatingMapAction_of_boundedLift k
-    (Round24Transfer.hasBoundedLift_of_analyticAt hQ) z).analyticAt
+    (LiftCriterion.hasBoundedLift_of_analyticAt hQ) z).analyticAt
 
 /-- If `k! ≠ 0` in `K`, the joint action is a continuous polynomial. -/
 theorem cpolynomialAt_alternatingMapAction_of_factorial_ne_zero (k : ℕ)
     (hk : (k.factorial : K) ≠ 0) (z₀ : (E' →L[K] E) × (F →L[K] F')) :
     CPolynomialAt K (alternatingMapAction k) z₀ := by
   apply cpolynomialAt_alternatingMapAction_of_boundedLift k
-  apply Round24Transfer.hasBoundedLift_of_analyticAt (f₀ := (0 : E' →L[K] E))
+  apply LiftCriterion.hasBoundedLift_of_analyticAt (f₀ := (0 : E' →L[K] E))
   exact (ContinuousAlternatingMap.cpolynomialAt_compContinuousLinearMapCLM
     (by simpa using hk) _).analyticAt
 
@@ -335,9 +335,9 @@ theorem alternatingMapAction_operator_bridge (k : ℕ) :
     (∀ u₀ : E' →L[K] E,
       AnalyticAt K (alternatingMapAction (F := F) (F' := F) k)
         (u₀, ContinuousLinearMap.id K F) →
-      AnalyticAt K (Round24Transfer.Q K (Fin k) E' E F) u₀) ∧
+      AnalyticAt K (LiftCriterion.Q K (Fin k) E' E F) u₀) ∧
     (∀ z : (E' →L[K] E) × (F →L[K] F'),
-      AnalyticAt K (Round24Transfer.Q K (Fin k) E' E F) z.1 →
+      AnalyticAt K (LiftCriterion.Q K (Fin k) E' E F) z.1 →
       AnalyticAt K (alternatingMapAction k) z) ∧
     (∀ P : ContinuousMultilinearMap K (fun _ : Fin k => E' →L[K] E)
         ((E [⋀^Fin k]→L[K] F) →L[K] (E' [⋀^Fin k]→L[K] F)),
@@ -352,7 +352,7 @@ theorem alternatingMapAction_operator_bridge (k : ℕ) :
         alternatingMapActionLift k P (fun _ => z) = alternatingMapAction k z) ∧
       (∀ z₀ : (E' →L[K] E) × (F →L[K] F'),
         CPolynomialAt K (alternatingMapAction k) z₀)) ∧
-    (Round24Transfer.HasBoundedLift K (Fin k) E' E F →
+    (LiftCriterion.HasBoundedLift K (Fin k) E' E F →
       ∀ z₀ : (E' →L[K] E) × (F →L[K] F'),
         CPolynomialAt K (alternatingMapAction k) z₀) ∧
     ((k.factorial : K) ≠ 0 →

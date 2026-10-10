@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 -I
+#!/usr/bin/env -S python3 -I
 """Check that a ledger claim is proved.
 
 Usage: python3 -I scripts/check_claim.py ID

@@ -15,7 +15,7 @@ ring. This mirrors the last step of the proof of Theorem B.9. The rest of the li
 the Möbius identity `sum_superset_neg_one_pow` from this file.
 -/
 
-namespace R24
+namespace SymmetricDiagonal
 
 open Finset
 
@@ -191,4 +191,4 @@ theorem no_adjacent_symmetric_diagonal_lift [Nontrivial R] {n : ℕ}
     False :=
   no_symmetric_diagonal_lift hk q hdiag (perm_invariant_of_adjacent q hswap)
 
-end R24
+end SymmetricDiagonal

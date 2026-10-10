@@ -22,7 +22,7 @@ theorem laurentResidueLift_full_properties
     (κ : Type*) [Field κ] (r : ℝ≥0) [Fact (0 < r)] [Fact (r < 1)]
     (k : ℕ) (α : Fin k) (P : LaurentLiftCandidate κ r k)
     (hP : ∀ f : (ℕ →ᵇ LaurentField κ r) →L[LaurentField κ r] (ℕ →ᵇ LaurentField κ r),
-      P (fun _ => f) = Round24Transfer.Q (LaurentField κ r) (Fin k)
+      P (fun _ => f) = LiftCriterion.Q (LaurentField κ r) (Fin k)
         (ℕ →ᵇ LaurentField κ r) (ℕ →ᵇ LaurentField κ r)
         (ProjectiveExteriorCompletion (LaurentField κ r) ℕ k) f) :
     (∀ (u x : Fin k → ℕ → κ) {i j : Fin k}, i ≠ j → x i = x j →

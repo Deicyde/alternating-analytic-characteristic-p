@@ -7,7 +7,7 @@ import AlternatingAnalytic.Analysis.LaurentResidueLift
 
 The two parts are `laurent_not_hasBoundedLift` and `laurent_not_analyticAt`
 (`Analysis/LaurentResidueLift.lean`), with the lift re-indexed by
-`Round24Transfer.hasBoundedLift_iff_exists_ι`.
+`LiftCriterion.hasBoundedLift_iff_exists_ι`.
 -/
 
 set_option backward.isDefEq.respectTransparency false
@@ -39,7 +39,7 @@ theorem part1_not_hasBoundedKLinearLift
   have : Fact p.Prime := ⟨hp⟩
   rintro ⟨P, hP⟩
   exact laurent_not_hasBoundedLift κ r k p hpk
-    (Round24Transfer.hasBoundedLift_iff_exists_ι.2 ⟨P, hP⟩)
+    (LiftCriterion.hasBoundedLift_iff_exists_ι.2 ⟨P, hP⟩)
 
 /-- The same precomposition map is analytic at no point of `L(E₁, E₁)`. -/
 theorem part2_not_analyticAt

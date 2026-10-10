@@ -69,7 +69,7 @@ theorem part3_continuousPolynomial
       (fun f : E →L[K] E' =>
         (ContinuousAlternatingMap.compContinuousLinearMapCLM f :
           (E' [⋀^Fin k]→L[K] F) →L[K] (E [⋀^Fin k]→L[K] F))) := by
-  obtain ⟨P, hP⟩ := (Round24Transfer.hasBoundedLift_iff_exists_ι).1
+  obtain ⟨P, hP⟩ := (LiftCriterion.hasBoundedLift_iff_exists_ι).1
     (ContinuousAlternatingMap.hasBoundedLift_of_sphericallyComplete
       (𝕜 := K) (ι := Fin k) (E := E) (E' := E') (F := F))
   exact ⟨1, fun _ => k, fun _ => P, fun f => by simp [hP]⟩

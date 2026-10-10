@@ -67,7 +67,7 @@ def freezeFirst {V F : Type*} [NormedAddCommGroup V] [NormedSpace (K p r) V]
 def restrictSucc (n : ℕ) :
     (D p r (n+1) [⋀^Fin (p+(n+1))]→L[K p r] G p r) →L[K p r]
       (D p r n [⋀^Fin (p+n)]→L[K p r] G p r) :=
-  (Round24Transfer.Rmap (K p r) (D p r n) (G p r) (p+n)).comp
+  (LiftCriterion.Rmap (K p r) (D p r n) (G p r) (p+n)).comp
     (ContinuousAlternatingMap.compContinuousLinearMapCLM (appendEquiv p r n).toContinuousLinearMap)
 
 @[simp] theorem restrictSucc_apply (n : ℕ)
@@ -81,18 +81,18 @@ def wedgeSucc (n : ℕ) :
       (D p r (n+1) [⋀^Fin (p+(n+1))]→L[K p r] G p r) :=
   (ContinuousAlternatingMap.compContinuousLinearMapCLM
       (appendEquiv p r n).symm.toContinuousLinearMap).comp
-    (Round24Transfer.Smap (K p r) (D p r n) (G p r) (p+n))
+    (LiftCriterion.Smap (K p r) (D p r n) (G p r) (p+n))
 
 @[simp] theorem restrictSucc_wedgeSucc (n : ℕ)
     (m : D p r n [⋀^Fin (p+n)]→L[K p r] G p r) :
     restrictSucc p r n (wedgeSucc p r n m) = m := by
   apply ContinuousAlternatingMap.ext
   intro x
-  change (Round24Transfer.Smap (K p r) (D p r n) (G p r) (p+n) m)
+  change (LiftCriterion.Smap (K p r) (D p r n) (G p r) (p+n) m)
     (fun i => (appendEquiv p r n).symm (appendEquiv p r n
       (@Fin.cons (p+n) (fun _ => D p r n × K p r) (0,1) (fun j => (x j,0)) i))) = m x
   simp only [ContinuousLinearEquiv.symm_apply_apply]
-  rw [Round24Transfer.Smap_apply, Fin.sum_univ_succ]
+  rw [LiftCriterion.Smap_apply, Fin.sum_univ_succ]
   simp
 
 

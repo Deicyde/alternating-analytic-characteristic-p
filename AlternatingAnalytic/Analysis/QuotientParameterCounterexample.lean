@@ -107,7 +107,7 @@ variable {K : Type uK} [NontriviallyNormedField K]
 @[simp]
 theorem alternatingMapAction_pair_id_eq_Q (k : ℕ) (u : E →L[K] E) :
     alternatingMapAction k (u, ContinuousLinearMap.id K F) =
-      Round24Transfer.Q K (Fin k) E E F u := by
+      LiftCriterion.Q K (Fin k) E E F u := by
   ext m x
   rfl
 
@@ -121,22 +121,22 @@ theorem isAdmissibleOn_l1_precomposition [CompleteSpace F] (k : ℕ) {I : Type v
 /-- Alternating precomposition composed with a bounded linear map from `ℓ¹(I)` is analytic. -/
 theorem analyticOnNhd_Q_comp_l1 [CompleteSpace F] (k : ℕ) {I : Type v}
     (r : L1 K I →L[K] (E →L[K] E)) :
-    AnalyticOnNhd K (Round24Transfer.Q K (Fin k) E E F ∘ r) Set.univ := by
+    AnalyticOnNhd K (LiftCriterion.Q K (Fin k) E E F ∘ r) Set.univ := by
   simpa only [Function.comp_def, alternatingMapAction_pair_id_eq_Q] using
     (isAdmissibleOn_l1_precomposition (F := F) k r).2
 
 /-- If `Q` is nowhere analytic, `E →L[K] E` is not a bounded linear retract of any `ℓ¹(I)`. -/
 theorem no_l1_retract_of_nowhere_analytic_Q [CompleteSpace F] (k : ℕ)
-    (hQ : ∀ h : E →L[K] E, ¬AnalyticAt K (Round24Transfer.Q K (Fin k) E E F) h)
+    (hQ : ∀ h : E →L[K] E, ¬AnalyticAt K (LiftCriterion.Q K (Fin k) E E F) h)
     (I : Type v) (i : (E →L[K] E) →L[K] L1 K I)
     (r : L1 K I →L[K] (E →L[K] E)) :
     r.comp i ≠ ContinuousLinearMap.id K (E →L[K] E) := by
   intro hri
   have hri_apply (h : E →L[K] E) : r (i h) = h := DFunLike.congr_fun hri h
-  have hcomp : (Round24Transfer.Q K (Fin k) E E F ∘ r) ∘ i =
-      Round24Transfer.Q K (Fin k) E E F := by
+  have hcomp : (LiftCriterion.Q K (Fin k) E E F ∘ r) ∘ i =
+      LiftCriterion.Q K (Fin k) E E F := by
     funext h
-    exact congrArg (Round24Transfer.Q K (Fin k) E E F) (hri_apply h)
+    exact congrArg (LiftCriterion.Q K (Fin k) E E F) (hri_apply h)
   have h := ((analyticOnNhd_Q_comp_l1 (F := F) k r) (i 0) (Set.mem_univ _)).comp
     (i.analyticAt 0)
   rw [hcomp] at h
@@ -154,11 +154,11 @@ variable (K E F : Type*) [NontriviallyNormedField K]
 /-- If `Q` is nowhere analytic, the unit-ball quotient `q` has analytic pullback `Q ∘ q`, no
 local section differentiable at any point, and `H` is not a retract of any `ℓ¹(I)`. -/
 theorem quotient_parameter_counterexample_of_nowhereAnalytic (k : ℕ)
-    (hQ : ∀ h : E →L[K] E, ¬AnalyticAt K (Round24Transfer.Q K (Fin k) E E F) h) :
+    (hQ : ∀ h : E →L[K] E, ¬AnalyticAt K (LiftCriterion.Q K (Fin k) E E F) h) :
     let H := E →L[K] E
     let J := L1UnitBallIndex H
     let q := unitBallL1Quotient K H
-    let Q := Round24Transfer.Q K (Fin k) E E F
+    let Q := LiftCriterion.Q K (Fin k) E E F
     ‖q‖ ≤ 1 ∧ Function.Surjective q ∧ IsOpenMap q ∧
     AnalyticOnNhd K (Q ∘ q) Set.univ ∧
     (∀ h : H, ¬AnalyticAt K Q h) ∧
@@ -195,7 +195,7 @@ theorem exists_quotient_parameter_counterexample
           let H := E →L[K] E
           let J := L1UnitBallIndex H
           let q := unitBallL1Quotient K H
-          let Q := Round24Transfer.Q K (Fin k) E E F
+          let Q := LiftCriterion.Q K (Fin k) E E F
           ‖q‖ ≤ 1 ∧ Function.Surjective q ∧ IsOpenMap q ∧
           AnalyticOnNhd K (Q ∘ q) Set.univ ∧
           (∀ h : H, ¬AnalyticAt K Q h) ∧

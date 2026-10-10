@@ -9,7 +9,7 @@ project:
   - Jack McCarthy
   responsible_maintainers:
   - Jack McCarthy
-  license: No license chosen yet (all rights reserved)
+  license: Apache-2.0
 repository:
   role: substantive-development
 sources:
@@ -49,7 +49,9 @@ status:
     corollary of the paper other than Proposition 6.6, together with three remarks and two unnumbered
     statements.
     Proposition 6.6 has a written proof only. Each challenge file lists how its Lean statement
-    differs from the paper. Theorem 7.2 and Proposition 7.3 are stated at chart level,
+    differs from the paper. The comparator was run on comparator.json only; the per-claim
+    configs in Challenges/ were checked by scripts/check_claim.py. Theorem 7.2 and Proposition 7.3
+    are stated at chart level,
     because Mathlib has no differential forms on manifolds.
   sorry_count: 0
   sorry_in_definitions: 0

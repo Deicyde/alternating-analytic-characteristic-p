@@ -33,7 +33,7 @@ def laurentLiftFixedVectors (P : LaurentLiftCandidate κ r k) (x : Fin k → E) 
 
 /-- The grouped polarization identity for `Φ` in `B`, before applying `η`. -/
 theorem laurentLift_grouped (P : LaurentLiftCandidate κ r k)
-    (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f)
+    (hP : ∀ f : E →L[K] E, P (fun _ => f) = LiftCriterion.Q K (Fin k) E E B f)
     {J : Type*} [Fintype J] (b : J → E) (ν : J → ℕ) (x : Fin k → E) :
     (∑ f ∈ Finset.univ.filter (fun f : Fin k → J => Polarization.selectionType f = ν),
       P (fun i => boundedSequenceMultiplier K ℕ (b (f i)))
@@ -53,7 +53,7 @@ theorem laurentLift_grouped (P : LaurentLiftCandidate κ r k)
 
 /-- (Ψ4) The grouped polarization identity for `Ψ`. -/
 theorem laurentResidueLift_pol (α : Fin k) (P : LaurentLiftCandidate κ r k)
-    (hP : ∀ f : E →L[K] E, P (fun _ => f) = Round24Transfer.Q K (Fin k) E E B f)
+    (hP : ∀ f : E →L[K] E, P (fun _ => f) = LiftCriterion.Q K (Fin k) E E B f)
     {J : Type*} [Fintype J] (b : J → ℕ → κ) (ν : J → ℕ) (x : Fin k → ℕ → κ) :
     (∑ f ∈ Finset.univ.filter (fun f : Fin k → J => Polarization.selectionType f = ν),
       laurentResidueLift κ r k α P (fun i => b (f i)) x) =

@@ -126,41 +126,41 @@ theorem norm_sortedSchauderLift_le (b : UnconditionalSchauderBasis I K E)
 theorem sortedSchauderLift_diag (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (n : ℕ) (f : E →L[K] E') :
     sortedSchauderLift (F := F) b hb n (fun _ => f) =
-      Round24Transfer.Q K (Fin n) E E' F f :=
+      LiftCriterion.Q K (Fin n) E E' F f :=
   contractingRetractionLift_diag n _ (sortedSchauderRetraction_retract b hb n) f
 
 theorem cpolynomialAt_of_orthogonalSchauderBasis (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (n : ℕ) (f : E →L[K] E') :
-    CPolynomialAt K (Round24Transfer.Q K (Fin n) E E' F) f := by
-  exact Round24Transfer.cpolynomialAt_of_lift (sortedSchauderLift b hb n)
+    CPolynomialAt K (LiftCriterion.Q K (Fin n) E E' F) f := by
+  exact LiftCriterion.cpolynomialAt_of_lift (sortedSchauderLift b hb n)
     (sortedSchauderLift_diag b hb n) f
 
 theorem analyticAt_of_orthogonalSchauderBasis (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (n : ℕ) (f : E →L[K] E') :
-    AnalyticAt K (Round24Transfer.Q K (Fin n) E E' F) f :=
+    AnalyticAt K (LiftCriterion.Q K (Fin n) E E' F) f :=
   (cpolynomialAt_of_orthogonalSchauderBasis b hb n f).analyticAt
 
 /-- `Q` has a bounded lift for every finite index type. -/
 theorem hasBoundedLift_of_orthogonalSchauderBasis {ι : Type*} [Fintype ι]
     (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) :
-    Round24Transfer.HasBoundedLift K ι E E' F := by
-  apply Round24Transfer.hasBoundedLift_reindex (Fintype.equivFin ι).symm
-  exact Round24Transfer.hasBoundedLift_of_analyticAt
+    LiftCriterion.HasBoundedLift K ι E E' F := by
+  apply LiftCriterion.hasBoundedLift_reindex (Fintype.equivFin ι).symm
+  exact LiftCriterion.hasBoundedLift_of_analyticAt
     (analyticAt_of_orthogonalSchauderBasis b hb (Fintype.card ι) (0 : E →L[K] E'))
 
 theorem cpolynomialAt_of_orthogonalSchauderBasis_fintype {ι : Type*} [Fintype ι]
     (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (f : E →L[K] E') :
-    CPolynomialAt K (Round24Transfer.Q K ι E E' F) f := by
+    CPolynomialAt K (LiftCriterion.Q K ι E E' F) f := by
   obtain ⟨P, hP⟩ := hasBoundedLift_of_orthogonalSchauderBasis
     (ι := ι) (E' := E') (F := F) b hb
-  exact Round24Transfer.cpolynomialAt_of_lift P hP f
+  exact LiftCriterion.cpolynomialAt_of_lift P hP f
 
 theorem analyticAt_of_orthogonalSchauderBasis_fintype {ι : Type*} [Fintype ι]
     (b : UnconditionalSchauderBasis I K E)
     (hb : ∀ i x, ‖b.coord i x‖ * ‖b i‖ ≤ ‖x‖) (f : E →L[K] E') :
-    AnalyticAt K (Round24Transfer.Q K ι E E' F) f :=
+    AnalyticAt K (LiftCriterion.Q K ι E E' F) f :=
   (cpolynomialAt_of_orthogonalSchauderBasis_fintype b hb f).analyticAt
 
 end AlternatingAnalytic

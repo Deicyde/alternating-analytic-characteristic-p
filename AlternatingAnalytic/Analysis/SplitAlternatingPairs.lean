@@ -94,7 +94,7 @@ theorem cpolynomialAt_precomposition_of_split_destination
         (E' →L[K] E) →
           (E [⋀^Fin k]→L[K] F') →L[K] (E' [⋀^Fin k]→L[K] F')) u := by
   obtain ⟨r, hr⟩ := h
-  exact Round24Transfer.cpolynomialAt_of_lift
+  exact LiftCriterion.cpolynomialAt_of_lift
     (contractingRetractionLift (E' := E) k r)
     (contractingRetractionLift_diag k r hr) u
 

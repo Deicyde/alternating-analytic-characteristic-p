@@ -201,12 +201,12 @@ theorem baseChangeLiftDescent_diag
     (P : (CompletedBaseChange K E L →L[L] CompletedBaseChange K E L) [×n]→L[L]
       ((CompletedBaseChange K E L [⋀^Fin n]→L[L] CompletedBaseChange K F L) →L[L]
         (CompletedBaseChange K E L [⋀^Fin n]→L[L] CompletedBaseChange K F L)))
-    (hP : ∀ f, P (fun _ => f) = Round24Transfer.Q L (Fin n)
+    (hP : ∀ f, P (fun _ => f) = LiftCriterion.Q L (Fin n)
       (CompletedBaseChange K E L) (CompletedBaseChange K E L) (CompletedBaseChange K F L) f)
     (f : E →L[K] E) :
-    baseChangeLiftDescent K E F L r n P (fun _ => f) = Round24Transfer.Q K (Fin n) E E F f := by
+    baseChangeLiftDescent K E F L r n P (fun _ => f) = LiftCriterion.Q K (Fin n) E E F f := by
   ext m x
-  simp only [baseChangeLiftDescent_apply, hP, Round24Transfer.Q,
+  simp only [baseChangeLiftDescent_apply, hP, LiftCriterion.Q,
     ContinuousAlternatingMap.compContinuousLinearMapCLM_apply,
     ContinuousAlternatingMap.compContinuousLinearMap_apply]
   change r ((baseChangeAlternatingForms K E F L n m)
@@ -223,11 +223,11 @@ theorem exists_baseChangeLiftDescent (n : ℕ)
     (P : (CompletedBaseChange K E L →L[L] CompletedBaseChange K E L) [×n]→L[L]
       ((CompletedBaseChange K E L [⋀^Fin n]→L[L] CompletedBaseChange K F L) →L[L]
         (CompletedBaseChange K E L [⋀^Fin n]→L[L] CompletedBaseChange K F L)))
-    (hP : ∀ f, P (fun _ => f) = Round24Transfer.Q L (Fin n)
+    (hP : ∀ f, P (fun _ => f) = LiftCriterion.Q L (Fin n)
       (CompletedBaseChange K E L) (CompletedBaseChange K E L) (CompletedBaseChange K F L) f) :
     ∃ P₁ : (E →L[K] E) [×n]→L[K]
         ((E [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F)),
-      ‖P₁‖ ≤ ‖P‖ ∧ ∀ f, P₁ (fun _ => f) = Round24Transfer.Q K (Fin n) E E F f := by
+      ‖P₁‖ ≤ ‖P‖ ∧ ∀ f, P₁ (fun _ => f) = LiftCriterion.Q K (Fin n) E E F f := by
   obtain ⟨r, hr, hfix⟩ := exists_completedBaseChange_retraction K F L
   refine ⟨baseChangeLiftDescent K E F L r n P, ?_, baseChangeLiftDescent_diag K E F L r hfix n P hP⟩
   apply (norm_baseChangeLiftDescent_le K E F L r n P).trans
@@ -235,10 +235,10 @@ theorem exists_baseChangeLiftDescent (n : ℕ)
 
 /-- A bounded lift over the completed base change gives one over `K`. -/
 theorem hasBoundedLift_of_completedBaseChange (n : ℕ)
-    (h : Round24Transfer.HasBoundedLift L (Fin n) (CompletedBaseChange K E L)
+    (h : LiftCriterion.HasBoundedLift L (Fin n) (CompletedBaseChange K E L)
       (CompletedBaseChange K E L) (CompletedBaseChange K F L)) :
-    Round24Transfer.HasBoundedLift K (Fin n) E E F := by
-  unfold Round24Transfer.HasBoundedLift at h ⊢
+    LiftCriterion.HasBoundedLift K (Fin n) E E F := by
+  unfold LiftCriterion.HasBoundedLift at h ⊢
   rw [Fintype.card_fin] at h ⊢
   obtain ⟨P, hP⟩ := h
   obtain ⟨P₁, _, hP₁⟩ := exists_baseChangeLiftDescent K E F L n P hP
@@ -246,21 +246,21 @@ theorem hasBoundedLift_of_completedBaseChange (n : ℕ)
 
 /-- If there is no bounded lift over `K`, there is none over the completed base change. -/
 theorem not_hasBoundedLift_completedBaseChange (n : ℕ)
-    (h : ¬ Round24Transfer.HasBoundedLift K (Fin n) E E F) :
-    ¬ Round24Transfer.HasBoundedLift L (Fin n) (CompletedBaseChange K E L)
+    (h : ¬ LiftCriterion.HasBoundedLift K (Fin n) E E F) :
+    ¬ LiftCriterion.HasBoundedLift L (Fin n) (CompletedBaseChange K E L)
       (CompletedBaseChange K E L) (CompletedBaseChange K F L) :=
   fun hL => h (hasBoundedLift_of_completedBaseChange K E F L n hL)
 
 /-- If the pullback is not analytic at some point over `K`, then over the completed base
 change it is analytic nowhere (Proposition D.9). -/
 theorem not_analyticAt_completedBaseChange_of_not_analyticAt (n : ℕ) {f₀ : E →L[K] E}
-    (h : ¬ AnalyticAt K (Round24Transfer.Q K (Fin n) E E F) f₀)
+    (h : ¬ AnalyticAt K (LiftCriterion.Q K (Fin n) E E F) f₀)
     (g₀ : CompletedBaseChange K E L →L[L] CompletedBaseChange K E L) :
-    ¬ AnalyticAt L (Round24Transfer.Q L (Fin n) (CompletedBaseChange K E L)
+    ¬ AnalyticAt L (LiftCriterion.Q L (Fin n) (CompletedBaseChange K E L)
       (CompletedBaseChange K E L) (CompletedBaseChange K F L)) g₀ := by
   intro hg
   obtain ⟨P, hP⟩ := hasBoundedLift_of_completedBaseChange K E F L n
-    (Round24Transfer.hasBoundedLift_of_analyticAt hg)
-  exact h (Round24Transfer.cpolynomialAt_of_lift P hP f₀).analyticAt
+    (LiftCriterion.hasBoundedLift_of_analyticAt hg)
+  exact h (LiftCriterion.cpolynomialAt_of_lift P hP f₀).analyticAt
 
 end AlternatingAnalytic

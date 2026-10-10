@@ -70,7 +70,7 @@ def ambientAlternatingMapAction (k : ℕ) :
       (((E' →L[K] E) × (F →L[K] F')) →L[K]
         ((E [⋀^Fin k]→L[K] F) →L[K] ContinuousMultilinearMap K (fun _ : Fin k => E') F')) :=
     postOp.flip.compContinuousMultilinearMap
-      ((Round24Transfer.ambLift K (Fin k) E' E F).compContinuousLinearMap
+      ((LiftCriterion.ambLift K (Fin k) E' E F).compContinuousLinearMap
         (fun _ => ContinuousLinearMap.fst K (E' →L[K] E) (F →L[K] F')))
   exact ContinuousMultilinearMap.uncurryRight
     (𝕜 := K) (G := (E [⋀^Fin k]→L[K] F) →L[K]

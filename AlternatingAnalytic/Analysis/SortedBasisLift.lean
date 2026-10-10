@@ -32,7 +32,7 @@ def contractingRetractionLift (n : ℕ)
     (E →L[K] E') [×n]→L[K]
       ((E' [⋀^Fin n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F)) :=
   (r.postcomp (E' [⋀^Fin n]→L[K] F)).compContinuousMultilinearMap
-    (Round24Transfer.ambLift K (Fin n) E E' F)
+    (LiftCriterion.ambLift K (Fin n) E E' F)
 
 theorem contractingRetractionLift_apply (n : ℕ)
     (r : (E [×n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F))
@@ -44,7 +44,7 @@ theorem contractingRetractionLift_diag (n : ℕ)
     (r : (E [×n]→L[K] F) →L[K] (E [⋀^Fin n]→L[K] F))
     (hr : ∀ m : E [⋀^Fin n]→L[K] F, r m.toContinuousMultilinearMap = m)
     (f : E →L[K] E') :
-    contractingRetractionLift n r (fun _ => f) = Round24Transfer.Q K (Fin n) E E' F f := by
+    contractingRetractionLift n r (fun _ => f) = LiftCriterion.Q K (Fin n) E E' F f := by
   ext m v
   exact congrArg (fun a : E [⋀^Fin n]→L[K] F => a v) (hr (m.compContinuousLinearMap f))
 

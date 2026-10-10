@@ -93,7 +93,7 @@ theorem squarefree_polarization (P : MultilinearMap R (fun _ : Fin k => A) M)
           refine Finset.sum_congr rfl fun S _ => ?_
           split_ifs <;> simp
         _ = _ := by
-          rw [R24.sum_superset_neg_one_pow]
+          rw [SymmetricDiagonal.sum_superset_neg_one_pow]
           split_ifs <;> simp
     _ = _ := Polarization.sum_full_range_eq_sum_perm _
 

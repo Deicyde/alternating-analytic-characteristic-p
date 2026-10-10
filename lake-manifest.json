@@ -111,7 +111,7 @@
       "configFile": "lakefile.toml"
     }
   ],
-  "name": "AlternatingAnalyticCounterexample",
+  "name": "AlternatingAnalytic",
   "lakeDir": ".lake",
   "fixedToolchain": true
 }

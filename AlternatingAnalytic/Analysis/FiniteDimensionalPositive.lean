@@ -9,7 +9,7 @@ Over a complete field, linear functionals on a finite-dimensional space are boun
 the space is complete (Lemma A.3). So the coordinates of `Module.finBasis` are
 continuous, and Proposition 4.1(2) makes `A^k` continuously polynomial whenever `E` or
 `E'` is finite-dimensional, as remarked after Proposition 4.1. Here `A^k` is
-`Round24Transfer.Q`.
+`LiftCriterion.Q`.
 -/
 
 namespace AlternatingAnalytic
@@ -43,27 +43,27 @@ theorem continuous_finBasis_coord [FiniteDimensional K E]
 /-- If `E` is finite-dimensional, `A^k` is continuously polynomial. -/
 theorem cpolynomialAt_Q_of_finiteDimensionalDomain [FiniteDimensional K E]
     (k : ℕ) (f₀ : E →L[K] E') :
-    CPolynomialAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ :=
+    CPolynomialAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ :=
   cpolynomialAt_Q_of_finiteCoordinateDomain (Module.finBasis K E)
     continuous_finBasis_coord k f₀
 
 /-- If `E` is finite-dimensional, `A^k` is analytic. -/
 theorem analyticAt_Q_of_finiteDimensionalDomain [FiniteDimensional K E]
     (k : ℕ) (f₀ : E →L[K] E') :
-    AnalyticAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ :=
+    AnalyticAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ :=
   (cpolynomialAt_Q_of_finiteDimensionalDomain k f₀).analyticAt
 
 /-- If `E'` is finite-dimensional, `A^k` is continuously polynomial. -/
 theorem cpolynomialAt_Q_of_finiteDimensionalCodomain [FiniteDimensional K E']
     (k : ℕ) (f₀ : E →L[K] E') :
-    CPolynomialAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ :=
+    CPolynomialAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ :=
   cpolynomialAt_Q_of_finiteCoordinateCodomain (Module.finBasis K E')
     continuous_finBasis_coord k f₀
 
 /-- If `E'` is finite-dimensional, `A^k` is analytic. -/
 theorem analyticAt_Q_of_finiteDimensionalCodomain [FiniteDimensional K E']
     (k : ℕ) (f₀ : E →L[K] E') :
-    AnalyticAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ :=
+    AnalyticAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ :=
   (cpolynomialAt_Q_of_finiteDimensionalCodomain k f₀).analyticAt
 
 /-- If `E` or `E'` is finite-dimensional, `A^k` is continuously polynomial and
@@ -71,8 +71,8 @@ analytic at every point, in every degree. -/
 theorem finiteDimensional_positive
     (h : FiniteDimensional K E ∨ FiniteDimensional K E') :
     ∀ (k : ℕ) (f₀ : E →L[K] E'),
-      CPolynomialAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ ∧
-        AnalyticAt K (Round24Transfer.Q K (Fin k) E E' F) f₀ := by
+      CPolynomialAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ ∧
+        AnalyticAt K (LiftCriterion.Q K (Fin k) E E' F) f₀ := by
   intro k f₀
   rcases h with h | h
   · let := h

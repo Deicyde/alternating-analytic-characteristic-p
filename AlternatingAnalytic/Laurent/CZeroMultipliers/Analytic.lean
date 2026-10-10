@@ -46,18 +46,18 @@ theorem precompAffine_coeff_eq_of_hasFPowerSeriesAt (n : ℕ) (hn : Fintype.card
   let j : (E [⋀^ι]→L[𝕜] F) →L[𝕜] ContinuousMultilinearMap 𝕜 (fun _ : ι => E) F :=
     ContinuousAlternatingMap.toContinuousMultilinearMapCLM 𝕜
   have hj : Function.Injective j := ContinuousAlternatingMap.toContinuousMultilinearMap_injective
-  refine Round24Transfer.coeff_eq_of_ambient (𝕜 := 𝕜)
+  refine LiftCriterion.coeff_eq_of_ambient (𝕜 := 𝕜)
     (fun x => w.compContinuousLinearMap (u₀ + D x)) x₀ (Fintype.card ι)
-    (fun r x => Round24Transfer.lineCoeff Amb (u₀ + D x₀) r (D x)) j hj
+    (fun r x => LiftCriterion.lineCoeff Amb (u₀ + D x₀) r (D x)) j hj
     (fun x => w.compContinuousLinearMap (D x)) ?_ ?_ p hp h
   · intro t x
     have hline : u₀ + D (x₀ + t • x) = (u₀ + D x₀) + t • D x := by
       rw [map_add, map_smul, add_assoc]
     change (w.compContinuousLinearMap (u₀ + D (x₀ + t • x))).toContinuousMultilinearMap = _
     rw [hline, ← hAmb]
-    exact Round24Transfer.map_diag_add_smul Amb (u₀ + D x₀) (D x) t
+    exact LiftCriterion.map_diag_add_smul Amb (u₀ + D x₀) (D x) t
   · intro x
-    rw [Round24Transfer.lineCoeff_card, hAmb]
+    rw [LiftCriterion.lineCoeff_card, hAmb]
     rfl
 
 /-- Evaluating an analytic family of operators on forms at a fixed form is analytic. -/

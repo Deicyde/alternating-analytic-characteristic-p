@@ -14,7 +14,7 @@ noncomputable section
 
 namespace AlternatingAnalytic
 
-open Round24Transfer
+open LiftCriterion
 
 section IsometricConjugation
 

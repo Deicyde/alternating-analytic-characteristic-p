@@ -92,8 +92,8 @@ theorem not_analyticAt_compContinuousLinearMapCLM (hidem : ∀ j v, ρ j (ρ j v
         (ContinuousAlternatingMap.compContinuousLinearMapCLM u :
           (chainSpace ρ' [⋀^Fin k]→L[K] K) →L[K] (chainSpace ρ [⋀^Fin k]→L[K] K))) u₀ := by
   intro h
-  obtain ⟨P, hP⟩ := Round24Transfer.hasBoundedLift_iff_exists_ι.1
-    (Round24Transfer.hasBoundedLift_of_analyticAt (𝕜 := K) (ι := Fin k) (E := chainSpace ρ)
+  obtain ⟨P, hP⟩ := LiftCriterion.hasBoundedLift_iff_exists_ι.1
+    (LiftCriterion.hasBoundedLift_of_analyticAt (𝕜 := K) (ι := Fin k) (E := chainSpace ρ)
       (E' := chainSpace ρ') (F := K) h)
   exact no_bounded_lift ρ ρ' hidem hidem' δ hδ g₀ hcert hdiag P hP
 
