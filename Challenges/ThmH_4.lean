@@ -2,7 +2,7 @@ import AlternatingAnalytic.Analysis.RationalLaurentScalars
 import AlternatingAnalytic.Category.FiniteUltrametricDomains
 
 /-!
-# Theorem H.4 (no largest full analytic domain), p. 60
+# Theorem H.4 (no largest full analytic domain), p. 62
 
 Setting (Appendix H): `Vec_K` is the category of normed `K`-spaces and bounded linear maps;
 `Alt^k : Vec_K^op × Vec_K → Vec_K` acts on a morphism `(u, v)` by `m ↦ v ∘ m ∘ (u, …, u)`.

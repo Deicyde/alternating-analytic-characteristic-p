@@ -5,7 +5,7 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import Mathlib.Topology.UniformSpace.UniformConvergence
 
 /-!
-# Corollary G.5 (entire polynomial approximation of a nonanalytic smooth map), pp. 58-59
+# Corollary G.5 (entire polynomial approximation of a nonanalytic smooth map), pp. 60-61
 
 Paper statement: "Let K be a complete nonarchimedean nontrivially normed field and put
 P = ℓ¹(ℕ,K), with the ordinary sum norm. There are Banach spaces W ⊆ Z, with W closed, and a

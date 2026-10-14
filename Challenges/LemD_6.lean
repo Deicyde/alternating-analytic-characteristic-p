@@ -4,7 +4,7 @@ import Mathlib.Analysis.Normed.Operator.Basic
 import Mathlib.Algebra.Algebra.Bilinear
 
 /-!
-# Lemma D.6 (projective base change), pp. 45-46
+# Lemma D.6 (projective base change), pp. 47-48
 
 Setting (Appendix D): fields K₁ ⊆ K′ with "(H1) K₁, with the restricted absolute value, is
 nontrivially normed, complete and spherically complete. (H2) K′ is nonarchimedean." For a

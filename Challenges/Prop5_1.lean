@@ -3,7 +3,7 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basic
 import AlternatingAnalytic.Analysis.ProjectiveExterior
 
 /-!
-# Proposition 5.1 (representation), p. 13
+# Proposition 5.1 (representation), p. 14
 
 Setting (Section 5): for `k ≥ 1` give the algebraic exterior power `Λ^k_K E` the seminorm
 `‖z‖_π = inf { Σ_j Π_{a=1}^k ‖x_{ja}‖ : z = Σ_j x_{j1} ∧ ⋯ ∧ x_{jk} }`. "Its quotient by the

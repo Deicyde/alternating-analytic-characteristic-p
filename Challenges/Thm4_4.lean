@@ -3,7 +3,7 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import Mathlib.Analysis.Normed.Operator.LinearIsometry
 
 /-!
-# Theorem 4.4 (finite-coordinate parameters), pp. 10-11
+# Theorem 4.4 (finite-coordinate parameters), p. 11
 
 Paper statement (Section 4.2): Let `j : W → Z` be a closed linear
 isometry. If `P` is boundedly linearly isomorphic to `K^d` and `U ⊆ P` is open, then

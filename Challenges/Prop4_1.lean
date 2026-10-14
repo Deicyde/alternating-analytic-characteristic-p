@@ -2,7 +2,7 @@ import Mathlib.Analysis.Normed.Module.Alternating.Basic
 import Mathlib.LinearAlgebra.Basis.Defs
 
 /-!
-# Proposition 4.1 (splitting the alternating inclusion), pp. 8-9
+# Proposition 4.1 (splitting the alternating inclusion), p. 9
 
 Setting: `K` is a nontrivially normed field and `E, E', F` are normed `K`-spaces.
 

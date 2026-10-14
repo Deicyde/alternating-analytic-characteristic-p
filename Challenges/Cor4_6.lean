@@ -8,7 +8,7 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import Mathlib.Analysis.Normed.Module.Seminorm.Basic
 
 /-!
-# Corollary 4.6 (the bundle theorem), p. 12
+# Corollary 4.6 (the bundle theorem), pp. 12-13
 
 Paper statement (Section 4.3): Let `M` be an analytic manifold over `K`, with
 normed model space `P`. Fiberwise alternating maps give an analytic bifunctor on analytic normed

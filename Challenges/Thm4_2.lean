@@ -3,7 +3,7 @@ import Mathlib.Analysis.Normed.Group.Ultra
 import AlternatingAnalytic.Analysis.SphericalCompleteness
 
 /-!
-# Theorem 4.2 (spherically complete targets), pp. 9-10
+# Theorem 4.2 (spherically complete targets), p. 10
 
 Paper statement (Section 4.1): "Suppose `K` is nonarchimedean and `F` is nonarchimedean and
 spherically complete. Then, for every normed `E`, the space `Alt^k(E;F)` is nonarchimedean and
@@ -12,7 +12,7 @@ Thus `A^k_{E,E';F}` is a continuous polynomial for every normed `E, E'` and ever
 the field nor the source spaces need be complete."
 
 A normed space is spherically complete if every nonempty family of pairwise-intersecting closed
-balls has a common point (p. 9). A continuous polynomial is a finite sum of diagonals of
+balls has a common point (p. 10). A continuous polynomial is a finite sum of diagonals of
 bounded multilinear maps (p. 8). `A^k_{E,E';F}(f)(m) = m ∘ (f, …, f)` is precomposition.
 
 ## Formalization notes
