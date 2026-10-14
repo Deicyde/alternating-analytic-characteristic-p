@@ -2,6 +2,7 @@
 \usepackage[margin=1.15in]{geometry}
 \usepackage{amssymb,amsmath,amsthm,mathtools}
 \usepackage{needspace,microtype,etoolbox}
+\usepackage{tikz-cd}
 \usepackage{listings,xcolor,textcomp}
 \definecolor{LeanKeyword}{HTML}{254E91}
 \definecolor{LeanType}{HTML}{006B65}
@@ -223,12 +224,16 @@ maps with arbitrary normed targets; the nonarchimedean projective exterior power
 nonarchimedean targets. Their analyticity properties can differ. Completeness assumptions below are
 attached to the arguments that need them, rather than imposed on the category at the outset.
 
-Our bundle construction follows Lang's functors of class $C^n$~\cite[Ch.~III, \S4]{La}.
+Our bundle construction follows Lang's functors of class $C^n$~\cite[Ch.~III, \S4]{La} and Bourbaki's vector
+functors~\cite[n\textsuperscript{o}~7.6]{Bou}.
 Gou\"ezel's characteristic-zero alternating-map construction~\cite{G1,G2} provides the factorial case,
 and closed-range reflection of smoothness is the argument formalized in~\cite{PR}.
-Bourbaki states the alternating bundle under the hypothesis that the field has characteristic zero or that
-the vector bundles have finite dimension~\cite[7.8]{Bou}, as quoted in~\cite{G1}; Gou\"ezel notes there that the
-finite-dimensional case works in positive characteristic, which over a complete field is Proposition~\ref{prop:split-lift}(2).
+Bourbaki introduces the alternating bifunctor in~\cite[n\textsuperscript{o}~7.8]{Bou}, as the functor $\alpha_k$ of continuous
+alternating $k$-linear maps with $\alpha_k(f_0,f_1)(m)=f_0\circ m\circ(f_1,\ldots,f_1)$, under the assumption that $K$ has
+characteristic $0$ or that the bundles have finite rank, and states that it is not known whether this definition can be
+made without any restriction. The paragraph \emph{Bourbaki's question} in Section~\ref{sec:sharpness} says what our results give for this question.
+Gou\"ezel notes in~\cite{G1} that the finite-dimensional case works in positive characteristic; over a complete field
+this is Proposition~\ref{prop:split-lift}(2).
 The nonarchimedean extension mechanism belongs to the functional analysis of spherical completeness;
 we use its norm-controlled form and relate it to~\cite{In,Schi,Sch,Yuan}.
 
@@ -334,7 +339,7 @@ The familywise hypothesis is a condition on $\mathcal F$ for \emph{all} families
 \]
 the operator family $\mathcal F\circ\gamma$ must be $C^n$. It is weaker than regularity on whole hom spaces. In particular, preserving finite-coordinate analytic families can suffice for bundles on a finite-coordinate base even when the functor fails to be analytic on an infinite-dimensional hom space. The distinction between these two requirements is central to this paper.
 
-The theorem also applies to restricted categories of fibers, provided the prescribed bundle morphisms take values in their hom spaces. It is the familiar transport of a linear construction to bundles, expressed so that both mixed variance and the required operator regularity are explicit; compare \cite{G2,La}.
+The theorem also applies to restricted categories of fibers, provided the prescribed bundle morphisms take values in their hom spaces. It is the familiar transport of a linear construction to bundles, expressed so that both mixed variance and the required operator regularity are explicit; compare \cite{G2,La} and Bourbaki's vector functors~\cite[n\textsuperscript{os}~7.6.1--7.6.4]{Bou}.
 
 \subsection{Alternating maps inside multilinear maps}
 
@@ -398,7 +403,7 @@ Throughout this section, $K$ is nontrivially normed, $P,W,Z$ are normed $K$-spac
  jf(x_0+h)=\sum_{n\ge0}b_n(h,\ldots,h),\qquad
  \sup_n\norm{b_n}R^n<\infty
 \end{equation}
-for some $R>0$, with bounded $n$-linear $b_n\colon P^n\to Z$ and convergence to the displayed value for $\norm h<R$. Degree zero denotes a constant. Shrinking $R$ when necessary gives the usual local definition of analyticity. For nonarchimedean normed spaces over a complete nonarchimedean field, this use of multilinear representatives agrees with the homogeneous-polynomial lifting norms of Bertram--Gl\"ockner--Neeb~\cite[\S\S7.14--7.19]{BGN}; mere continuity of an algebraic polynomial is a different condition.
+for some $R>0$, with bounded $n$-linear $b_n\colon P^n\to Z$ and convergence to the displayed value for $\norm h<R$. Degree zero denotes a constant. Shrinking $R$ when necessary gives the usual local definition of analyticity. For nonarchimedean normed spaces over a complete nonarchimedean field, this use of multilinear representatives agrees with the homogeneous-polynomial lifting norms of Bertram--Gl\"ockner--Neeb~\cite[7.14--7.19]{BGN}; mere continuity of an algebraic polynomial is a different condition.
 
 \begin{theorem}[the coefficient descent criterion]\label{thm:coefficient-descent}
 Suppose \eqref{eq:ambient-series} holds. Then every diagonal $b_n(h,\ldots,h)$ belongs to $j(W)$. The map $f$ is analytic at $x_0$ if and only if there are bounded $n$-linear maps $q_n\colon P^n\to W$ and $r>0$ such that
@@ -435,7 +440,15 @@ Thus $T=jS$ for a unique bounded linear $S\colon P\to W$, with the same norm. Th
 $\cL(P,W)\to\cL(P,Z)$: its image consists exactly of operators whose values lie in $j(W)$, a closed condition under each evaluation. Applying the same argument to derivative maps proves every finite order by induction, and hence $C^\infty$.
 \end{proof}
 
-In particular, the full alternating bifunctor is $C^\infty$ on its operator spaces: its ambient action is a bounded polynomial, and the inclusion of alternating maps is closed and isometric. This is the smooth descent argument used in~\cite{PR}. Theorem~\ref{thm:bundle-lifting} therefore constructs alternating bundles and their morphisms at every finite regularity and at $C^\infty$, over arbitrary normed model spaces and fields. Analyticity is the additional coefficient problem.
+In particular, the full alternating bifunctor is $C^\infty$ on its operator spaces: its ambient action is a bounded polynomial, and the inclusion of alternating maps is closed and isometric. For the precomposition action $A=A^k_{E,E';F}$, the argument is the commutative triangle
+\[
+\begin{tikzcd}[column sep=2.6em,row sep=3.6em]
+& \cL(E,E') \arrow[dl,"A"'] \arrow[dr,"{u\,\mapsto\,(m\,\mapsto\,m\circ(u,\ldots,u))}","\text{polynomial}"'] & \\
+\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr) \arrow[rr,hook,"\text{closed linear isometry}","{j_{E,F}\circ{-}}"'] & &
+\cL\bigl(\Alt^k(E';F),\Mult^k(E;F)\bigr)
+\end{tikzcd}
+\]
+in which the right-hand arrow is the diagonal of a bounded $k$-linear map (Proposition~\ref{prop:ambient-polynomial} with $g=\id_F$), and Lemma~\ref{lem:closed-smooth} is applied with the bottom arrow as $j$. This is the smooth descent argument used in~\cite{PR}. Theorem~\ref{thm:bundle-lifting} therefore constructs alternating bundles and their morphisms at every finite regularity and at $C^\infty$, over arbitrary normed model spaces and fields. Analyticity is the additional coefficient problem.
 
 We call a finite sum of diagonals of bounded multilinear maps a \emph{continuous polynomial}.
 For a homogeneous ambient polynomial, the descent problem has a particularly economical form.
@@ -497,7 +510,7 @@ $k!\sum_s\prod_a\norm{\varepsilon_{s_a}}\norm{e_{s_a}}$.
 If $k>d$, the relevant alternating space is zero and the sum is empty.
 \end{proof}
 
-Over a complete field, every finite-dimensional normed space has continuous coordinates. One can prove this by induction on dimension: a codimension-one kernel is complete and hence closed; its positive distance from a fixed vector outside it bounds the corresponding coordinate functional. The coordinate map and its inverse are then bounded, giving completeness for the induction. Over an incomplete field this condition must be retained: if $a\in\widehat K\setminus K$, the $a$-coordinate on $K+Ka\subseteq\widehat K$ is discontinuous. Finite dimension of $F$ alone does not provide a substitute; scalar-valued forms already exhibit the obstruction of Section~\ref{sec:sharpness}.
+Over a complete field, every finite-dimensional normed space has continuous coordinates. One can prove this by induction on dimension: a codimension-one kernel is complete and hence closed; its positive distance from a fixed vector outside it bounds the corresponding coordinate functional. The coordinate map and its inverse are then bounded, giving completeness for the induction. Over an incomplete field this condition must be retained: if $a\in\widehat K\setminus K$, the $a$-coordinate on $K+Ka\subseteq\widehat K$ is discontinuous. Finite dimension of $F$ alone does not provide a substitute; scalar-valued forms already exhibit the obstruction of Section~\ref{sec:sharpness}. Over a complete field, cases~(1) and~(2) contain the two hypotheses under which Bourbaki defines the bundle of alternating maps: characteristic zero, and finite rank~\cite[n\textsuperscript{o}~7.8]{Bou}.
 
 A nonarchimedean normed space is \emph{spherically complete} if every nonempty family of pairwise-intersecting
 closed balls has a common point. In a nonarchimedean metric, intersecting balls are nested.
@@ -938,6 +951,71 @@ For~(2), take $E,F$ from Theorem~\ref{thm:operator-obstructions}(1) and $D=E$. T
 For $\Alt^k(TM;F)$ the source fiber is the model space $P$. Finite coordinates on the base are therefore finite coordinates on the source fiber, and Proposition~\ref{prop:split-lift}(2) already makes the action analytic on whole hom spaces. This is the last case of the first row of Corollary~\ref{cor:bundle-cases}. Over a finite-coordinate base, Theorem~\ref{thm:finite-parameters} and the second row add cases only when the source fibers lack finite coordinates. Examples are source bundles of infinite rank, and pulled-back tangent bundles $f^*TN$ along analytic maps $f\colon M\to N$ from a finite-coordinate manifold $M$ into an infinite-dimensional manifold $N$.
 
 Over a discretely valued field, Corollary~\ref{cor:discrete-targets} makes $\Alt^k(TM;F)$ analytic on every analytic manifold for every Banach $F$ with an equivalent nonarchimedean norm, as noted after Corollary~\ref{lau:cor:dichotomy}. It also makes tangent-valued forms analytic when the model is such a space. So over $\F_q((u))$ the target in Proposition~\ref{prop:tangent-values}(1) cannot have an equivalent nonarchimedean norm, while the manifold can be modeled on a nonarchimedean Banach space. This is consistent with~(3): a complete discretely valued field is spherically complete (Lemma~\ref{lem:discdist}).
+
+\paragraph{\textit{Bourbaki's question.}}
+In the terms of~\cite{Bou}, $\Alt^k$ on Banach spaces is the functor $\alpha_k$ of~\cite[n\textsuperscript{o}~7.8.1]{Bou} for $k\ge1$, and
+$A^k_{E,D;F}(u)=\alpha_k(\id_F,u)$. There the field is $\mathbb R$, $\mathbb C$ or a complete nonarchimedean field, the spaces are
+Banach spaces, norms over a nonarchimedean field are required to be nonarchimedean, and class $C^r$ means analytic when
+$K\ne\mathbb R$, in a sense that agrees with ours for maps between Banach spaces. In that setting $\alpha_k$ is a vector functor
+of class $C^r$ if $k!\ne0$ in $K$ (Corollary~\ref{cor:classification}), and for every $k$ if $K$ is discretely valued
+(Corollary~\ref{cor:discrete-targets} and the proof of Corollary~\ref{cor:bundle-cases}). It is not one if $k!=0$ in $K$ and $K$ is
+not spherically complete: Theorem~\ref{thm:operator-obstructions}(2) gives nonarchimedean Banach spaces $E,D$ for which
+$A^k_{E,D;K}$ is analytic at no point. So the definition in~\cite[n\textsuperscript{o}~7.8.1]{Bou} cannot be made without any restriction.
+Propositions~\ref{prop:shear} and~\ref{prop:tangent-obstruction} show that over such a field the restriction is needed for the bundles
+themselves: the alternating atlas induced from an analytic bundle, or from the tangent bundle of an analytic manifold, need
+not be analytic. Our results do not decide whether $\alpha_k$ is a vector functor of class $C^r$ over a densely valued,
+spherically complete field with $k!=0$; compare Section~\ref{sec:verification}.
+
+\paragraph{\textit{A derivative adapted to positive characteristic.}}
+Ya\"el Dillies asked whether $A=A^k_{E,E';F}$ becomes analytic in a differential calculus that keeps Taylor coefficients in every
+characteristic. Such a calculus exists. Let $f$ be a map from an open subset of a Hausdorff topological vector space to
+another, over a Hausdorff nondiscrete topological field. Bertram, Gl\"ockner and Neeb~\cite{BGN} call $f$ of class $C^1$
+if the difference quotient $t^{-1}\bigl(f(x+th)-f(x)\bigr)$ extends continuously to $t=0$ as a function of $(x,h,t)$, and of
+class $C^n$, $n\ge2$, if the extended quotient is of class $C^{n-1}$; the characteristic is arbitrary. A map of class $C^k$
+has a unique expansion~\cite[Theorem~5.1]{BGN}
+\[
+ f(x+th)=\sum_{n=0}^{k}t^n a_n(x,h)+t^k\vartheta(x,h,t)
+\]
+with $\vartheta$ continuous and $\vartheta(x,h,0)=0$. Here $a_n(x,\cdot)$ is homogeneous of degree $n$, and the $n$th
+differential $d^nf(x)$, an iterated directional derivative, satisfies~\cite[Definition~4.7 and Theorem~5.4]{BGN}
+\begin{equation}\label{eq:bgn-taylor}
+ n!\,a_n(x,h)=d^nf(x)(h,\ldots,h).
+\end{equation}
+The usual coefficient $d^nf(x)(h,\ldots,h)/n!$ requires $2,\ldots,k$ to be invertible in the field; see
+also~\cite[Chapter~1]{Be}.
+
+The map $A$ is smooth in this calculus, over every $K$. The difference quotient of a finite sum of diagonals of
+continuous multilinear maps is again such a sum, so the ambient map $u\mapsto\bigl(m\mapsto m\circ(u,\ldots,u)\bigr)$ is
+smooth~\cite[3.4 and Remark~4.2]{BGN}, and so is $A$ by~\cite[Lemma~10.1]{BGN}, the counterpart of
+Lemma~\ref{lem:closed-smooth}. The expansion of $A$ at $u_0$ has no remainder:
+\[
+ A(u_0+tu)=\sum_{n=0}^{k}t^n a_n(u_0,u),\qquad
+ a_n(u_0,u)(m)=\sum_{\substack{S\subseteq\{1,\ldots,k\}\\ \abs S=n}}m\circ(u^S_1,\ldots,u^S_k),
+\]
+where $u^S_i=u$ for $i\in S$ and $u^S_i=u_0$ for $i\notin S$. By Theorem~\ref{thm:coefficient-descent}, each
+$a_n(u_0,u)$ maps $\Alt^k(E';F)$ into $\Alt^k(E;F)$, and $a_k(u_0,u)=A(u)$. By~\eqref{eq:bgn-taylor},
+$d^kA(u_0)(u,\ldots,u)=k!\,A(u)$, which is zero when $k!=0$ in $K$. The coefficient $a_k$ keeps the map that the diagonal
+of the $k$th differential loses.
+
+Analyticity is not restored, because it is not a condition on derivatives. In this paper, and for the analytic maps
+of~\cite[7.14--7.18]{BGN}, each homogeneous term of the series must be the diagonal of a continuous multilinear map, and
+convergence is measured by the norms of such maps. Bertram, Gl\"ockner and Neeb note that in positive characteristic,
+where no polarization formula is available, this requirement ``might very well be stronger than the mere continuity'' of
+the term~\cite[footnote to~7.14]{BGN}. For the term $A$ it can be stronger. By Proposition~\ref{prop:homogeneous-lift},
+$A$ is analytic at a point if and only if it is the diagonal of a bounded $k$-linear map into
+$\cL\bigl(\Alt^k(E';F),\Alt^k(E;F)\bigr)$, and when $k!=0$ in $K$, Theorem~\ref{thm:operator-obstructions} gives spaces
+for which no such map exists. In part~(2) of that theorem the field is complete and nonarchimedean, and the domain and
+the target of $A$ are nonarchimedean normed spaces, as in~\cite[7.13]{BGN}. There $A$ is continuous, and it is the
+diagonal of a $k$-linear map into the alternating operator space (compose the ambient $k$-linear map with a linear
+projection onto that space), but of no continuous one.
+
+If the terms of a series were required only to be continuous algebraic homogeneous polynomials, as in
+Proposition~\ref{fam:prop:c0-algebraic}, $A$ would be a polynomial in every characteristic. We do not know whether maps
+given by such series are closed under composition. In the generality of~\cite{Be,BGN} there are no bundles of forms:
+dual bundles are not constructed, and a differential form is a map on a fiber product of the tangent bundle, alternating
+and multilinear on each fiber, rather than a section of a bundle~\cite[\S8.3]{BGN}, \cite[4.5, 22.1 and
+Appendix~L.1]{Be}. The ambient forms of Section~\ref{sec:forms} avoid only the bundle of alternating maps: they are
+sections of the bundle of multilinear maps.
 
 \section{Analytic differential forms}\label{sec:forms}
 
@@ -3917,13 +3995,17 @@ spherically complete norm: this target has exactly such a norm.
 
 
 \begin{thebibliography}{99}
+\bibitem{Be} W.~Bertram, \emph{Differential geometry, Lie groups and symmetric spaces over general base fields and rings},
+Mem.\ Amer.\ Math.\ Soc.\ \textbf{192} (2008), no.~900; arXiv:math/0502168,\\
+{\small\url{https://arxiv.org/abs/math/0502168}}. We cite the numbering of the arXiv version.
+
 \bibitem{BGN} W.~Bertram, H.~Gl\"ockner and K.-H.~Neeb,
 \emph{Differential calculus, manifolds and Lie groups over arbitrary infinite fields},
 arXiv:math/0303300 (2003); published as \emph{Differential calculus over general base fields and rings}, Expo.\ Math.\ \textbf{22} (2004), 213--282,\\
-{\small\url{https://arxiv.org/abs/math/0303300}}.
+{\small\url{https://arxiv.org/abs/math/0303300}}. We cite the numbering of the arXiv version.
 
 \bibitem{Bou} N.~Bourbaki, \emph{Vari\'et\'es diff\'erentielles et analytiques. Fascicule de r\'esultats}, Hermann, Paris,
-1967 (\S\S1--7) and 1971 (\S\S8--15); reprinted by Springer, 2007.
+1967 (\S\S1--7) and 1971 (\S\S8--15); reprinted by Springer, 2007. We cite the reprint.
 
 \bibitem{G1} S.~Gou\"ezel, \emph{In characteristic $0$, precomposition by a linear map is analytic on the space of
 alternating maps}, pull request \#43338 to Mathlib, merged 30 September 2026,\\ {\small\url{https://github.com/leanprover-community/mathlib4/pull/43338}}.
@@ -3944,7 +4026,7 @@ Soc.\ \textbf{48} (1952), 41--45.
 {\footnotesize\url{https://leanprover-community.github.io/mathlib4_docs/find/?pattern=ContDiffWithinAt#doc}}.
 
 \bibitem{LeanP} J.~McCarthy, \emph{Lean formalization of alternating precomposition in positive characteristic},
-commit \texttt{ca36ba5},\\
+commit \texttt{863fa6b},\\
 {\small\url{https://github.com/Deicyde/alternating-analytic-characteristic-p}}.
 
 \bibitem{PR} J.~McCarthy, \emph{Smoothness reflects along a linear isometry with closed range},\\ draft pull request \#43548
