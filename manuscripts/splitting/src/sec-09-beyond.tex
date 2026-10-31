@@ -1,0 +1,77 @@
+\section{Goodness without splitting decompositions}\label{sec:beyond}
+The good pairs of Remark~\ref{cls:rem:mechanisms} all have splitting decompositions; this section shows that goodness
+does not require one.
+
+\subsection{One-dimensional operator spaces}
+
+\begin{proposition}\label{bey:prop:one-dim}
+Let $E$ and $D$ be normed spaces with $\cL(E,D)=K\,u_0$ for some nonzero $u_0\in\cL(E,D)$.
+\begin{enumerate}
+\item For every $k\ge1$ the pair $(E,D)$ is good in degree $k$, and the map
+\[
+Q(\lambda_1u_0,\dots,\lambda_ku_0)=\lambda_1\cdots\lambda_k\,\Lambda^k_\pi u_0
+\]
+is a lift as in Lemma~\ref{fib:lem:test}.
+\item If $D$ is complete, then for every $k\ge1$ the pair $(E,D)$ has a splitting decomposition of degree $k$ if and
+only if $u_0$ is $\mathrm S^k$-split or $\mathrm R^k$-split.
+\item If $\dim D\ge2$, then every bounded linear functional on $E$ is zero.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\subsection{Rigid Banach spaces}
+
+The next theorem transfers the rigid subspace of $L_0$ of Kalton and Roberts~\cite{KR} to separable complete
+nonarchimedean fields.
+
+\begin{theorem}\label{bey:thm:rigid}
+Let $K$ be a complete nonarchimedean field with nontrivial absolute value that is separable as a metric space. There
+are infinite-dimensional Banach spaces $\fX_1,\fX_2,\dots$ over $K$ such that, for all $\alpha,\beta\ge1$,
+\[
+\cL(\fX_\alpha,\fX_\beta)=
+\begin{cases}
+K\,\id_{\fX_\alpha},&\alpha=\beta,\\
+0,&\alpha\ne\beta.
+\end{cases}
+\]
+\end{theorem}
+
+The proof is in Appendix~\ref{app:rigid}. By Proposition~\ref{bey:prop:one-dim}(3) with $E=D=\fX_\alpha$ and
+$u_0=\id_{\fX_\alpha}$, every bounded linear functional on $\fX_\alpha$ is zero.
+
+\begin{theorem}\label{bey:thm:rigid-good}
+Let $\kappa$ be a finite field of characteristic $p$ and $K=\kappa((X))$, with the absolute value of condition~(L) of
+Section~\ref{sec:sharpness}. For suitable choices in the construction of Theorem~\ref{bey:thm:rigid}, the Banach space
+$\fX=\fX_1$ has the following properties.
+\begin{enumerate}
+\item $\cL(\fX,\fX)=K\,\id_{\fX}$.
+\item The pair $(\fX,\fX)$ is good in every degree, hence good for Banach values in every degree.
+\item For every $k\ge p$, neither $(\mathrm S^k_{\fX})$ nor $(\mathrm R^k_{\fX})$ holds.
+\item For every $k\ge p$, the pair $(\fX,\fX)$ has no splitting decomposition of degree $k$.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:rigid}. Since $\fX$ has no nonzero bounded functional, item~(3) is proved by
+forcing through $L^r$-valued readouts (Corollary~\ref{rig:cor:readout}) instead of the coordinates of
+Section~\ref{sec:sharpness}.
+
+\begin{theorem}\label{bey:thm:rigid-sum}
+Let $\kappa$ be a finite field of characteristic $p$ and $K=\kappa((X))$, with the absolute value of condition~(L).
+Let $\fX_1,\fX_2,\dots$ be the spaces of Theorem~\ref{bey:thm:rigid}, built with the choices of
+Theorem~\ref{bey:thm:rigid-good}, and let $E$ be the completed $\ell^1$-sum of the $\fX_\alpha$, with the norm
+$\norm x=\sum_\alpha\norm{x_\alpha}$ for $x=(x_\alpha)_{\alpha\ge1}$.
+\begin{enumerate}
+\item For a bounded sequence $\lambda=(\lambda_\alpha)_{\alpha\ge1}$ in $K$ put $u_\lambda x=(\lambda_\alpha x_\alpha)_\alpha$.
+Every bounded operator on $E$ is some $u_\lambda$, and $\norm{u_\lambda}=\sup_\alpha\abs{\lambda_\alpha}$.
+\item The pair $(E,E)$ is good for Banach values in every degree.
+\item For every $k\ge p$, the pair $(E,E)$ has no generalized decomposition of degree $k$, that is, no decomposition
+into finitely many source, target and parameter pieces (Definition~\ref{cmb:def:parameter-piece}).
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:rigid}. In Theorem~\ref{bey:thm:rigid-good} the lift $Q$ of
+Proposition~\ref{bey:prop:one-dim}(1) is that of one parameter piece through $K$; in Theorem~\ref{bey:thm:rigid-sum}
+the lift is a block assembly (Proposition~\ref{cmb:prop:blocks}) of infinitely many such lifts, which no finite family
+of pieces replaces. Question~\ref{q:quest:generation} asks whether these mechanisms and the operations of
+Section~\ref{sec:combining} yield every pair good for Banach values.

@@ -1,0 +1,56 @@
+\section{Preliminaries for the obstruction proofs}\label{app:obstruction-preliminaries}
+The constructions below use three elementary facts about valued fields and power series. We record their proofs to make explicit the scope of the coefficient argument, including incomplete base fields.
+
+\begin{lemma}[one-variable uniqueness]\label{lem:unique}
+Let $K$ be nontrivially normed and $Z$ a normed $K$\nobreakdash-space, not necessarily complete. Let $z_0,z_1,\ldots\in Z$, $\rho>0$
+and $M\ge0$ with $\norm{z_n}\rho^n\le M$ for all $n$. If $\sum_nt^nz_n$ converges to $0$ for every $t\in K$ with
+$\abs t<\rho$, then $z_n=0$ for all $n$.
+\end{lemma}
+
+\begin{proof}
+Otherwise let $N$ be least with $z_N\neq0$. For $0<\abs t<\rho/2$ the series $\sum_{n>N}t^{n-N}z_n$ converges, being
+$t^{-N}$ times the convergent tail $\sum_{n>N}t^nz_n$, and $t^N\bigl(z_N+\sum_{n>N}t^{n-N}z_n\bigr)=0$. Hence
+\[
+\norm{z_N}=\Bigl\lVert\sum_{n>N}t^{n-N}z_n\Bigr\rVert\le\sum_{n>N}M\rho^{-n}\abs t^{n-N}
+=M\rho^{-N}\frac{\abs t/\rho}{1-\abs t/\rho},
+\]
+where the norm of a convergent series is bounded by the sum of the norms by continuity of the norm on partial sums.
+Since $K$ is nontrivially normed, there are $t\ne0$ with $\abs t$ arbitrarily small, so $\norm{z_N}=0$, a
+contradiction.
+\end{proof}
+
+\begin{lemma}\label{lem:ultra}
+A normed field of characteristic $p>0$ is nonarchimedean.
+\end{lemma}
+
+\begin{proof}
+Frobenius and the triangle inequality give, for every $m\ge0$,
+\[
+ \abs{x+y}^{p^m}=\abs{x^{p^m}+y^{p^m}}
+ \le2\max(\abs x,\abs y)^{p^m}.
+\]
+Taking $p^m$\nobreakdash-th roots and letting $m\to\infty$ proves the assertion.
+\end{proof}
+
+\begin{lemma}\label{lem:findim}
+Let $\mathbb K$ be a complete nontrivially normed field and $U$ a finite-dimensional normed $\mathbb K$\nobreakdash-space. Then every
+linear functional on $U$ is bounded, and $U$ is complete.
+\end{lemma}
+
+\begin{proof}
+We prove both assertions by induction on $n=\dim U$, the case $n=0$ being immediate. Suppose $n\ge1$ and let $g\ne0$
+be a linear functional on $U$. Its kernel $H$ has dimension $n-1$, so the induction hypothesis makes $H$ complete
+and therefore closed in $U$. Choose $v$ with $g(v)=1$. Since $v\notin H$,
+$\delta:=\inf_{h\in H}\norm{v-h}>0$. Write $x=g(x)v+h$ with $h\in H$. If $g(x)\ne0$, then
+\[
+\norm x=\abs{g(x)}\,\norm{v+g(x)^{-1}h}\ge\abs{g(x)}\delta.
+\]
+Thus $\abs{g(x)}\le\delta^{-1}\norm x$ for every $x$, proving boundedness.
+
+Choose a basis of $U$. Its coordinate functionals are now bounded, so the coordinate map
+$U\to\mathbb K^n$, with the max norm on $\mathbb K^n$, is bounded. The inverse map
+$(c_i)\mapsto\sum_ic_ie_i$ is bounded by $\sum_i\norm{e_i}$. Hence $U$ is bi-Lipschitz equivalent to the complete
+space $\mathbb K^n$, and is itself complete.
+\end{proof}
+
+When the scalar field needs to be displayed, $A^{k,L}$ denotes the degree-$k$ precomposition action formed over $L$. For the precomposition action $A$, a \emph{bounded lift} means a bounded $k$\nobreakdash-linear map on its operator domain whose diagonal is $A$, as in Proposition~\ref{prop:homogeneous-lift}. That proposition applies at every base point; Lemma~\ref{lem:unique} provides the one-variable coefficient comparison used in its proof.

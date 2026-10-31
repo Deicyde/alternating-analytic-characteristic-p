@@ -1,0 +1,92 @@
+\section{Proof of the operator obstruction theorem}\label{app:assembly}\label{sec:proofs}
+
+We show that the target spaces $F_1$ and $F$ admit no equivalent nonarchimedean norm (Proposition~\ref{prop:nonultra}) and prove Theorem~\ref{thm:operator-obstructions}(1), which with Proposition~\ref{prop:split-lift}(1) gives Corollary~\ref{cor:classification}.
+
+\subsection{The target has no equivalent nonarchimedean norm}
+
+\begin{proposition}\label{prop:nonultra}
+Let $\kappa$ be any field, $k\ge2$, $\varrho\in(0,1)$, and let $K_1=\kappa((X))$, $E_1$, $E_0$ and $F_1$ be as in
+Appendix~\ref{sec:laurent}. Let $e_i\in E_0$ be the unit vectors and $\omega_j:=e_{kj+1}\wedge\dots\wedge e_{kj+k}\in F_1$
+($j\ge0$), wedges on pairwise disjoint blocks of indices. Then $\norm{\omega_j}_{F_1}=1$ and
+\[
+\frac N{M_\varrho}\ \le\ \Bigl\lVert\sum_{j<N}\omega_j\Bigr\rVert_{F_1}\ \le\ N\qquad(N\ge1).
+\]
+Hence the norm of $F_1$ is not nonarchimedean, and $F_1$ admits no equivalent nonarchimedean norm. The same holds for
+$F=F_1\widehat\otimes_\pi K'$ as in Appendix~\ref{sec:ascent}, for any $K'\supseteq K_1$ satisfying \textup{(H1)} and \textup{(H2)},
+regarded as a normed space over $K'$ or over any subfield of $K'$.
+\end{proposition}
+
+\begin{proof}
+Each $\omega_j$ is a wedge of unit vectors, so $\norm{\omega_j}_{F_1}\le1$ by the defining projective norm. Evaluation
+of its determinant array at the block indices gives $\det I=1$, hence
+$\norm{\omega_j}_{F_1}\ge\norm{J\omega_j}_\infty\ge1$. The triangle inequality now gives the upper bound $N$.
+
+For the lower bound, write $\xi_N$ for the sum of the same block wedges in $\Lambda^k_\kappa E_0$, and put
+$\omega:=\sum_{j<N}\omega_j\in F_1$. Its array $J\omega$ is the constant Laurent array $\Omega^\kappa(\xi_N)$.
+Thus $\coeff_0(J\omega)=\Omega^\kappa(\xi_N)$, and uniqueness in Proposition~\ref{prop:supp} gives
+$\eta(\omega)=\xi_N$.
+
+We apply Lemma~\ref{lem:contr} to $\xi_N$. Fix one of the first $N$ blocks and an index $i_0$ in it. Take for
+$\varphi$ the $k-1$ coordinate functionals corresponding to the other indices of that block. On every other
+block all these functionals vanish, so its contraction is zero; here $k\ge2$ ensures that the minors have
+positive size. On the chosen block, the coefficient of $e_{i_0}$ is $\pm1$, while every other cofactor contains
+the zero column obtained by evaluating the functionals at $e_{i_0}$. Consequently
+$c_\varphi(\xi_N)=\pm e_{i_0}$. These contractions span all $kN$ unit vectors in the first $N$ blocks, so
+\[
+kN\le\sdim(\xi_N)=\sdim(\eta(\omega))\le kM_\varrho\norm\omega_{F_1}
+\]
+by~\eqref{eq:suppest}. This proves the lower bound.
+
+If $\norm\cdot_u$ were an equivalent nonarchimedean norm, choose positive constants $c,c'$ with
+$\norm\cdot_{F_1}\le c\norm\cdot_u\le c'\norm\cdot_{F_1}$. Then
+\[
+\frac{N}{M_\varrho}\le\Bigl\lVert\sum_{j<N}\omega_j\Bigr\rVert_{F_1}
+\le c\max_{j<N}\norm{\omega_j}_u\le c'
+\]
+for every $N\ge1$, a contradiction. In particular, the original norm is not nonarchimedean. This argument uses
+only the nonarchimedean inequality for $\norm\cdot_u$, not its scalar homogeneity.
+
+Finally, $\iota_F\colon F_1\to F$ is a $K_1$\nobreakdash-linear isometry by Lemma~\ref{lem:bc}(3). The images
+$\iota_F\omega_j$ satisfy the same unit-norm and sum-growth estimates, so the argument applies to $F$ as well.
+Restriction to a subfield leaves these estimates unchanged.
+\end{proof}
+
+If $\varrho\le\frac12$, then $M_\varrho=1$ and $\norm{\sum_{j<N}\omega_j}_{F_1}=N$ exactly.
+
+\subsection{Proof of Theorem~\ref{thm:operator-obstructions}(1)}
+\begin{proof}
+Let $K$ be a nontrivially normed field of characteristic $p>0$, and let $k\ge p$.
+\begin{enumerate}
+\item \emph{Choose a Laurent subfield.} By Lemma~\ref{lem:ultra}, $K$ is nonarchimedean. Its completion $\Kh$ is
+a complete, nontrivially normed, nonarchimedean field of characteristic $p$. Choose $t\in K$ with
+$0<\abs t=\varrho<1$, and let $K_1$ be the closure of $\F_p(t)$ in $\Kh$. Lemma~\ref{lem:laurentsub} identifies $K_1$
+isometrically with $\F_p((X))$, with $\abs X=\varrho$, by $\mathrm{ev}_t$. In particular, $K_1$ is complete and
+spherically complete.
+\item \emph{Obtain the obstruction over $K_1$.} Put $E_1:=\linf(\N,K_1)$, and let $F_1$ be the completion of
+$\Lambda^k_{K_1}E_1$ under the projective exterior norm. Transport of scalars along $\mathrm{ev}_t$ preserves
+the norms, exterior powers and completions in this construction. It also identifies the operator and
+alternating-map spaces, their precomposition maps, and bounded lifts. Theorem~\ref{thm:laurent}, with
+$\kappa=\F_p$, therefore shows that $A^{k,K_1}_{E_1,E_1;F_1}$ has no bounded $k$\nobreakdash-linear lift.
+\item \emph{Ascend to $\Kh$.} The inclusion $K_1\subseteq\Kh$ satisfies (H1) and (H2), and $F_1$ is complete.
+Proposition~\ref{prop:ascent}, with $K'=\Kh$, gives Banach spaces
+\[
+E:=E_1\widehat\otimes_\pi\Kh,\qquad F:=F_1\widehat\otimes_\pi\Kh
+\]
+for which $A^{k,\Kh}_{E,E;F}$ has no bounded $k$\nobreakdash-linear lift.
+\item \emph{Descend to $K$.} Regard the same $E$ and $F$ as $K$\nobreakdash-Banach spaces. By
+Lemma~\ref{lem:descent}, a bounded lift of $A^{k,K}_{E,E;F}$ would extend to a bounded lift of
+$A^{k,\Kh}_{E,E;F}$, which is impossible. Proposition~\ref{prop:homogeneous-lift} applies over the possibly incomplete
+field $K$: $A^{k,K}_{E,E;F}$ is analytic at no point. Reindexing the arguments by a bijection gives the same conclusion, with the same spaces $E,F$, for every finite index set with $k$ elements.
+\item \emph{Exclude an equivalent nonarchimedean target norm.} Since $k\ge p\ge2$, Proposition~\ref{prop:nonultra}
+applies to $F_1$ and $F$, after the scalar identification in step~(2). Its conclusion persists when $F$ is
+regarded over $K$.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{remark}\label{rem:spaces}
+If $K_1=\Kh$, as when $K=\F_p((X))$ and $t=X$, the completed tensor products identify isometrically with
+$E_1$ and $F_1$: use Lemma~\ref{lem:bc}(3) and $x\otimes\lambda=\lambda x\otimes1$. Thus $E$ is nonarchimedean in
+this case. For $K=\F_q((X))$, $q=p^n$, with its $X$\nobreakdash-adic absolute value, one can instead apply
+Theorem~\ref{thm:laurent} directly with $\kappa=\F_q$, obtaining $E=\linf(\N,K)$ and $F=F_1$.
+The proof over a general base field does not require, or assert, that $E$ is nonarchimedean.
+\end{remark}

@@ -1,0 +1,389 @@
+\section{Bundles, tangent bundles and differential forms}\label{sec:geometry}
+
+\subsection{From a bad operator family to changes of frame}
+
+Transition functions take values in invertible operators; for a single Banach fiber, invertible families impose the same condition as all operator families (Proposition~\ref{fam2:prop:reductions}(1)).
+
+\begin{proposition}[shear realization]\label{prop:shear}
+Suppose $A=A^k_{E,D;F}$ is not analytic at $u_0\in\cL(E,D)$. Set $H=D\oplus E$, with the maximum norm, and
+\[
+ g(u)(d,e)=(d+ue,e).
+\]
+Both $g$ and its inverse family are affine analytic. Nevertheless, the family of pullback operators $g(u)^*$ on $\Alt^k(H;F)$ is not analytic at $u_0$.
+\end{proposition}
+
+\begin{proof}
+The inverse family is $g(-u)$. Let $\pi_D\colon H\to D$ be the projection and $i_E(e)=(0,e)$. Define bounded linear maps $J\colon\Alt^k(D;F)\to\Alt^k(H;F)$ by $Jm=m\circ\pi_D^{\times k}$ and $R\colon\Alt^k(H;F)\to\Alt^k(E;F)$ by restriction along $i_E$. Since $\pi_Dg(u)i_E=u$,
+\begin{equation}\label{eq:shear-compression}
+ R\circ g(u)^*\circ J=A(u).
+\end{equation}
+Bounded linear compression preserves analyticity, so $u\mapsto g(u)^*$ is not analytic at $u_0$.
+\end{proof}
+
+\begin{corollary}[shear bundle]\label{cor:shear-bundle}
+Suppose $A=A^k_{E,D;F}$ is not analytic at $u_0\in\cL(E,D)$, and let $H$ and $g$ be as in Proposition~\ref{prop:shear}. Take the base $M=\cL(E,D)$ and the trivial bundle $M\times H$. Its product trivialization and the trivialization $(u,z)\mapsto(u,g(u)z)$ form an analytic bundle atlas, and the induced alternating atlas on the trivial bundle with fiber $\Alt^k(H;F)$ is not analytic. Equivalently, the analytic bundle automorphism $(u,z)\mapsto(u,g(u)z)$ does not induce an analytic morphism on the alternating product bundle.
+\end{corollary}
+
+\begin{proof}
+The transitions are $g(u)$ and $g(-u)$, affine analytic by Proposition~\ref{prop:shear}. The induced alternating transitions are pullback by $g(u)$ and $g(-u)$, and the induced morphism is locally pullback by $g(u)$; by Proposition~\ref{prop:shear}, $u\mapsto g(u)^*$ is not analytic at $u_0$.
+\end{proof}
+
+Thus every failure of the hom-space criterion has a bundle realization, and Theorem~\ref{thm:operator-obstructions} gives fibers for which it occurs at every point of the base. Applied to analytic families $x\mapsto u(x)$, the shear also makes the familywise hypothesis of Theorem~\ref{thm:bundle-lifting} necessary for all fibers and frames; Section~\ref{sec:families} studies it (Corollary~\ref{fam2:cor:bundles}, Theorems~\ref{fam2:thm:polarizable} and~\ref{fam2:thm:bases}).
+
+\subsection{Tangent bundles and individual forms}
+
+\begin{proposition}[tangent and pullback obstructions]\label{prop:tangent-obstruction}
+Suppose $K$ is complete, has characteristic $p>0$, is not spherically complete, and $k\ge p$.
+\begin{enumerate}
+\item There is an analytic Banach manifold with two global analytic charts whose induced transition on scalar alternating $k$\nobreakdash-forms is analytic at no point.
+\item There are Banach spaces $N,Y$, a polynomial analytic map $h\colon N\to Y$, and an analytic map $\omega_0\colon Y\to\Alt^k(Y;K)$ such that $h^*\omega_0$, expressed in the product coordinates on $N$, is analytic at no point as an $\Alt^k(N;K)$\nobreakdash-valued map. After inclusion in $\Mult^k(N;K)$ it is analytic everywhere.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+Assertion~(2) separates intrinsic analyticity of individual forms from analyticity of bundle transitions; Section~\ref{sec:forms} builds a calculus on the ambient notion.
+
+The chart $\psi$ of the proof of Proposition~\ref{prop:tangent-obstruction} realizes any nowhere analytic action $A^k_{E,D;F}$; with Theorem~\ref{thm:operator-obstructions}(1) it works over every field of characteristic $p$.
+\begin{proposition}[tangent obstructions with other values]\label{prop:tangent-values}
+Let $K$ be a nontrivially normed field of characteristic $p>0$, complete or not, and let $k\ge p$.
+\begin{enumerate}
+\item There are a Banach space $F$ and an analytic Banach manifold with two global analytic charts whose induced transition on $F$\nobreakdash-valued alternating $k$\nobreakdash-forms is analytic at no point.
+\item There is an analytic Banach manifold with two global analytic charts whose induced transition on tangent-valued alternating $k$\nobreakdash-forms is analytic at no point.
+\item If $K$ is complete and not spherically complete, a manifold as in~(2) exists with a nonarchimedean Banach model.
+\end{enumerate}
+The target $F$ constructed for~(1) admits no equivalent nonarchimedean norm; for $K=\F_q((X))$ as in Corollary~\ref{lau:cor:dichotomy}, the model space can be chosen nonarchimedean. The model space constructed for~(2) admits no equivalent nonarchimedean norm.
+\end{proposition}
+The proof is in Appendix~\ref{app:deferred}.
+
+\paragraph{\textit{Bourbaki's question.}}
+For $k\ge1$, $\Alt^k$ on Banach spaces is the functor $\alpha_k$ of~\cite[n\textsuperscript{o}~7.8.1]{Bou}, and $A^k_{E,D;F}(u)=\alpha_k(\id_F,u)$. There $K$ is $\mathbb R$, $\mathbb C$ or complete nonarchimedean, norms over a nonarchimedean $K$ are nonarchimedean, and class $C^r$ means analytic if $K\ne\mathbb R$, in a sense that agrees with ours between Banach spaces. In that setting $\alpha_k$ is a vector functor of class $C^r$ if $k!\ne0$ in $K$ (Corollary~\ref{cor:classification}), and for every $k$ if $K$ is discretely valued (Corollary~\ref{cor:discrete-targets} and the proof of Corollary~\ref{cor:bundle-cases}). It is not one if $k!=0$ in $K$ and $K$ is not spherically complete, since Theorem~\ref{thm:operator-obstructions}(2) gives nonarchimedean Banach spaces $E,D$ with $A^k_{E,D;K}$ analytic at no point; so the definition in~\cite[n\textsuperscript{o}~7.8.1]{Bou} needs a restriction. By Corollary~\ref{cor:shear-bundle} and Proposition~\ref{prop:tangent-obstruction}, it is needed for the bundles themselves. Source spaces of countable type suffice in every degree, by the following corollary of Theorem~\ref{fib:thm:ultra}.
+
+\begin{corollary}[countable type and Bourbaki's $\alpha_k$]\label{fib:cor:bourbaki}
+Let $K$ be complete and nonarchimedean, let $E,D$ be normed spaces, at least one of them of countable type, and let
+$F$ be a nonarchimedean Banach space. For every normed $F'$, the joint action $B$ of
+Proposition~\ref{prop:ambient-polynomial} on $\cL(E,D)\times\cL(F,F')$ has a bounded $(k+1)$\nobreakdash-linear lift.
+In the setting of the paragraph \emph{Bourbaki's question}, $\alpha_k$ is therefore a
+vector functor of the class considered there on source spaces of countable type, in every degree.
+\end{corollary}
+
+\begin{proof}
+If $Q$ lifts $A^k_{E,D;F}$ (Theorem~\ref{fib:thm:ultra}), then $(u_1,\dots,u_k,g)\mapsto(m\mapsto g\circ Q(u_1,\dots,u_k)(m))$
+lifts $B$, as in the proof of Corollary~\ref{cor:bundle-cases}.
+\end{proof}
+
+Our results do not decide the case of a densely valued, spherically complete field with $k!=0$ (Section~\ref{sec:questions}).
+
+\paragraph{\textit{A derivative adapted to positive characteristic.}}
+Ya\"el Dillies asked whether $A=A^k_{E,D;F}$ is analytic in the calculus of~\cite[Definition~4.7 and Theorem~5.4]{BGN}, where a $C^k$ map $f$ has Taylor coefficients $a_n(x,h)$ with $n!\,a_n(x,h)=d^nf(x)(h,\ldots,h)$. There $A$ is smooth~\cite[Remark~4.2 and Lemma~10.1]{BGN} and $a_k(u_0,u)=A(u)$, while $d^kA(u_0)(u,\ldots,u)=k!\,A(u)$ vanishes if $k!=0$. Analyticity is not restored: it asks for a bounded $k$-linear lift (Proposition~\ref{prop:homogeneous-lift}), and Theorem~\ref{thm:operator-obstructions} gives spaces with none when $k!=0$ in $K$. Section~\ref{sec:dp} changes the coefficients instead: over every nonarchimedean field, with bounded polynomial laws as Taylor coefficients, $A$ is divided-power analytic on $\cL(E,D)$ in every characteristic.
+
+\subsection{Analytic differential forms}\label{sec:forms}
+
+Throughout this subsection $K$ is complete and nontrivially normed, manifold models are normed spaces, and charts and maps are $C^\omega$, so that their derivatives are analytic; on the Banach coefficient spaces this is power-series analyticity.
+
+\begin{definition}
+An \emph{ambient analytic scalar $k$\nobreakdash-form} on $M$ is a family $\eta_x\in\Alt^k(T_xM;K)$ whose representative in each chart is analytic after the inclusion
+\[
+ j\colon\Alt^k(P;K)\hookrightarrow\Mult^k(P;K).
+\]
+Write $\Omega^k_{\mathrm{amb}}(M)$ for the space of such forms. In degree zero this is the space of analytic scalar functions.
+\end{definition}
+
+Under a coordinate change $\psi=\phi'\circ\phi^{-1}$ the representatives satisfy $j\eta_\phi(y)=(j\eta_{\phi'}(\psi(y)))\circ(D\psi(y),\ldots,D\psi(y))$, which is analytic by bounded multilinear composition; so any analytic atlas may be used.
+
+For an ambient $k$\nobreakdash-form $\eta$, an ambient $l$\nobreakdash-form $\zeta$ and $S\subseteq\{1,\ldots,k+l\}$, let $v_S$ list the arguments $v_i$, $i\in S$, in increasing order of $i$, and let $\epsilon(S)$ be the shuffle sign of Section~\ref{cmb:ssec:degrees}. The product is the shuffle formula
+\begin{equation}\label{eq:form-shuffle}
+ (\eta\wedge\zeta)(v_1,\ldots,v_{k+l})
+ =\sum_{\abs{S}=k}\epsilon(S)\eta(v_S)\zeta(v_{S^c}),
+\end{equation}
+a bounded bilinear operation on multilinear coefficient spaces, of norm at most $\binom{k+l}{k}$, which is alternating on alternating inputs. On an open subset of a model space $P$, the exterior derivative of an ambient coefficient map $\eta$ of degree $k$ is
+\begin{equation}\label{eq:exterior-derivative}
+ (d\eta)_y(v_0,\ldots,v_k)
+ =\sum_{i=0}^k(-1)^iD\eta(y)(v_i)
+       (v_0,\ldots,\widehat v_i,\ldots,v_k).
+\end{equation}
+
+\begin{theorem}[ambient differential calculus]\label{thm:ambient-forms}
+Ambient analytic forms define a sheaf of graded algebras on every analytic manifold. Analytic maps induce pullbacks, and there is an exterior derivative
+\[
+ d\colon\Omega^k_{\mathrm{amb}}(M)\longrightarrow\Omega^{k+1}_{\mathrm{amb}}(M).
+\]
+The product is associative and graded commutative, $d^2=0$, pullback commutes with both product and exterior derivative, and
+\[
+ d(\eta\wedge\zeta)=d\eta\wedge\zeta+(-1)^k\eta\wedge d\zeta
+ \qquad(\eta\in\Omega^k_{\mathrm{amb}}(M)).
+\]
+Thus $\Omega^\bullet_{\mathrm{amb}}$ is a contravariant differential graded algebra construction in every characteristic.
+\end{theorem}
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{proposition}[comparison with alternating-bundle sections]\label{prop:ambient-agreement}
+Every intrinsically analytic alternating-valued coefficient map is ambient analytic. If, for the model space $P$, the inclusion $j$ has a bounded linear retraction, then the natural alternating cotangent atlas is analytic and its analytic sections are precisely the ambient analytic forms. The same conclusion holds when $P$ has finite continuous coordinates.
+\end{proposition}
+
+\begin{proof}
+The first statement follows by composition with $j$. For a bounded retraction $R$, the identity $\eta=R(j\eta)$ gives the converse. Moreover, $(u_1,\ldots,u_k)\mapsto\bigl[m\mapsto R\bigl(m\circ(u_1,\ldots,u_k)\bigr)\bigr]$ is a bounded multilinear lift of the precomposition action, so the induced alternating cotangent transitions are analytic. For finite continuous coordinates, analytic descent through closed subspaces applies to the coefficient map itself, and Corollary~\ref{cor:bundle-cases} supplies the analytic bundle atlas.
+\end{proof}
+
+The retraction exists if $k!$ is invertible, by normalized antisymmetrization, and if $K$ is spherically complete and nonarchimedean, by Theorem~\ref{thm:spherical}.
+
+\paragraph{\textit{Exact constant forms in degree $p$.}}
+Here $K$ is any nontrivially normed field of characteristic $p>0$, $Y$ and $F$ are normed, and $\mathcal A_Y\colon\Mult^p(Y;F)\to\Alt^p(Y;F)$ is unnormalized antisymmetrization (Lemma~\ref{ob:lem:target}). Define $(d\eta)_y\in\Alt^p(Y;F)$ by~\eqref{eq:exterior-derivative} for every map $\eta$ from an open subset of $Y$ to $\Alt^{p-1}(Y;F)$ differentiable at $y$. Constant forms are closed, and $(\mathrm R^p_Y)$ is the exactness of one of them.
+\begin{proposition}[exact constant forms]\label{fib:prop:derham}
+For $\omega\in\Alt^p(Y;F)$ the following are equivalent:
+\begin{enumerate}
+\item there are a map $\eta$ from an open subset of $Y$ to $\Alt^{p-1}(Y;F)$ and a point $y$ at which $\eta$ is
+differentiable with $(d\eta)_y=\omega$;
+\item $\omega=d\eta$ on $Y$ for a bounded linear map $\eta\colon Y\to\Alt^{p-1}(Y;F)$;
+\item $\omega=\mathcal A_Y\beta$ for some $\beta\in\Mult^p(Y;F)$.
+\end{enumerate}
+For $F=\Lambda^p_\pi Y$ and $\omega=\omega_Y$ they hold if and only if $\operatorname{alt}^p_Y$ has a bounded linear left
+inverse, and then $(E,Y)$ is good in degree $p$ for every normed $E$. For $F=\widehat\Lambda^p_\pi Y$ and
+$\omega=\omega_Y$ they hold if and only if $(\mathrm R^p_Y)$ holds, and then $(E,Y)$ is good for Banach values in degree
+$p$ for every normed $E$.
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+Under condition~\textup{(L)} of Section~\ref{obs:ssec:field}, for $Y=c_0(\N,K)$ the closed constant form $\omega_Y$ with values in $\widehat\Lambda^p_\pi Y$ has no primitive near any point, by Theorem~\ref{fib:thm:ell2}.
+
+\subsection{Divided-power analyticity}\label{sec:dp}
+
+Throughout this subsection $K$ is nonarchimedean, $\varpi\in K$ satisfies $0<\abs\varpi<1$, and $P$, $W$ and $Y$ are
+normed spaces, not necessarily complete or nonarchimedean.
+
+\begin{definition}\label{dp:def:laws}
+Let $n\ge0$.
+\begin{enumerate}
+\item A map $a\colon P\to W$ is a \emph{bounded polynomial law of degree $n$} if, for all $h_1,\dots,h_r\in P$, the map
+$s\mapsto a(s_1h_1+\dots+s_rh_r)$ on $K^r$ is a homogeneous polynomial of degree $n$ with coefficients in $W$, and
+$\norm a=\sup_{h\ne0}\norm{a(h)}/\norm h^n$ is finite. For $\alpha=(\alpha_1,\dots,\alpha_r)$ with integers
+$\alpha_i\ge0$ and $\abs\alpha=\alpha_1+\dots+\alpha_r=n$, $a^{[\alpha]}(h_1,\dots,h_r)\in W$ is the coefficient of
+$s_1^{\alpha_1}\cdots s_r^{\alpha_r}$, unique since $K$ is infinite.
+\item A map $a\colon P\to W$ is \emph{ambient of degree $n$} if $ja(h)=\beta(h,\dots,h)$ for all $h\in P$, for a linear
+isometry $j$ of $W$ into a normed space $Z$ and a bounded $n$\nobreakdash-linear map $\beta\colon P^n\to Z$.
+\item A map $f$ from an open subset $U$ of $P$ to $W$ is \emph{divided-power analytic}, or \emph{DP}, at $x_0\in U$ if
+there are $R>0$ and bounded polynomial laws $a_n\colon P\to W$ of degree $n$, $n\ge0$, with $\sup_n\norm{a_n}R^n<\infty$
+and $f(x_0+h)=\sum_na_n(h)$ for $\norm h<R$. It is \emph{DP on $U$} if it is DP at every point of $U$.
+\end{enumerate}
+\end{definition}
+
+Without the bound on $\norm a$, the maps in Definition~\ref{dp:def:laws}(1) are the maps $P\to W$ induced by the
+polynomial laws on $(P,W)$ in the sense of Roby~\cite{Ro} that are homogeneous of degree $n$, and each of these maps
+determines its law, since $K$ is an infinite field and the linear forms on the vector space $W$ separate its
+points~\cite[Theorem~I.1 and Propositions~I.1, I.8 and~IV.6]{Ro}.
+
+\begin{theorem}[divided-power calculus]\label{dp:thm:calculus}
+\leavevmode
+\begin{enumerate}
+\item \textup{(Mixed terms.)} If $b\colon W\to Y$ is a bounded polynomial law of degree $m$, then
+\[
+ \norm{b^{[\alpha]}(w_1,\dots,w_r)}\le(8/\abs\varpi)^m\norm b\,(\norm{w_1}+\dots+\norm{w_r})^m
+ \qquad(w_1,\dots,w_r\in W,\ \abs\alpha=m).
+\]
+Every bounded polynomial law is continuous and DP on its whole domain.
+\item \textup{(Composition.)} Let $f$ map an open subset of $P$ to $W$ and $g$ an open subset of $W$ to $Y$. If $f$ is
+DP at $x_0$ and $g$ is DP at $f(x_0)$, then $g\circ f$, which is defined near $x_0$, is DP at $x_0$.
+\item \textup{(Comparison.)} A map ambient of degree $n$, for instance the diagonal of a bounded $n$\nobreakdash-linear
+map, is a bounded polynomial law of degree $n$, and a map analytic at a point is DP there. If $P$ has finite
+coordinates, a map DP at a point is analytic there.
+\item \textup{(Alternating maps.)} Let $E$, $D$, $F$ and $F'$ be normed spaces and $k\ge1$. The maps
+$A^k_{E,D;F}\colon\cL(E,D)\to\cL(\Alt^k(D;F),\Alt^k(E;F))$, $\cL(E,D)\to\cL(\Lambda^k_\pi E,\Lambda^k_\pi D)$,
+$u\mapsto\Lambda^k_\pi u$, and $\cL(E,D)\to\cL(\widehat\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$,
+$u\mapsto\widehat\Lambda^k_\pi u$, are ambient of degree $k$, and the joint action $B$ of
+Proposition~\ref{prop:ambient-polynomial}, restricted to alternating maps, is ambient of degree $k+1$ as a map from
+$\cL(E,D)\times\cL(F,F')$ to $\cL(\Alt^k(D;F),\Alt^k(E;F'))$. As bounded polynomial laws, all four have norm at most $1$.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{corollary}[divided-power bundles]\label{dp:cor:bundles}
+Theorem~\ref{thm:bundle-lifting} holds with $C^n$ replaced by DP on open sets, for manifolds and vector bundles whose
+transition maps are DP on open sets. The alternating bifunctor $(E,F)\mapsto\Alt^k(E;F)$ and the functors
+$E\mapsto\Lambda^k_\pi E$ and $E\mapsto\widehat\Lambda^k_\pi E$ satisfy its hypothesis. So in every characteristic and for
+all normed fibers, the alternating and the projective exterior power bundles of a DP vector bundle are DP vector
+bundles, with DP induced morphisms.
+\end{corollary}
+
+\begin{proof}
+\emph{Step 1 (the calculus).} By Theorem~\ref{dp:thm:calculus}(2), maps that are DP on open sets compose; by~(3) and~(1),
+bounded multilinear maps, in particular bounded linear maps and evaluation of operators, and constants are DP on their
+whole domains. A map into a product, with the maximum norm, is DP at a point when its components are, since a pair of
+bounded polynomial laws of degree $n$ is a bounded polynomial law of degree $n$. Being DP at a point depends only on the
+map near that point.
+
+\emph{Step 2 (the theorem).} The proof of Theorem~\ref{thm:bundle-lifting} uses of the class $C^n$ only these
+properties: Step~1 there composes the transitions with the maps of the functor on hom spaces and evaluates operators,
+Step~2 composes local operator families, Step~3 uses constants and Step~4 restricts to open subsets of $P$.
+
+\emph{Step 3 (the functors).} By Theorem~\ref{dp:thm:calculus}(4) and~(1), the maps of the three functors on hom spaces
+are bounded polynomial laws and DP on their whole domains.
+\end{proof}
+
+The two notions differ: if $\operatorname{char}K=p>0$ and $k\ge p$, then $A^k_{E,D;F}$ is DP on $\cL(E,D)$ by
+Theorem~\ref{dp:thm:calculus}(4) and~(1), and for the spaces of Theorem~\ref{thm:operator-obstructions} it is analytic at
+no point.
+
+Bounded polynomial laws need not be ambient. Let $p=\operatorname{char}K>0$ and $c_0=c_0(\N,K)$, and identify $K^m$
+with the span of the first $m$ unit vectors, $m\ge1$. Let $\Gamma^p(K^m)\subseteq(K^m)^{\otimes p}$ be the space of
+symmetric tensors, put $Q_m=(K^m)^{\otimes p}/\Gamma^p(K^m)$, and let $\bar z\in Q_m$ be the image of
+$z\in(K^m)^{\otimes p}$. Let $I_m$ be the set of the $p^{pm}$ tuples $l=(y_l^1,\dots,y_l^p)$ of vectors in $K^m$ with
+entries in the prime field $\F_p$, and put $y_l=y_l^1\otimes\dots\otimes y_l^p$. Let $N_m\subseteq\ell^1(I_m,K)$ consist
+of the vectors $(\phi(\bar y_l))_{l\in I_m}$, $\phi$ a linear form on $Q_m$, let $G_m=\ell^1(I_m,K)/N_m$ with the
+quotient norm, and let $\varepsilon_l\in G_m$ be the image of the unit vector at $l$. Let $G$ be the $\ell^1$-sum of the
+spaces $G_m$, $m\ge1$: its elements are the sequences whose $m$-th term lies in $G_m$ and whose norm, the sum of the
+norms of the terms, is finite; we read $G_m$ as the $m$-th summand of $G$. Let $H=K\oplus c_0\oplus G$, with the
+maximum norm; it is a Banach space if $K$ is complete. Let $V$ be the span of the tensors $u^{\otimes p}\otimes g$, $u\in c_0$, $g\in G$, in $c_0^{\otimes p}\otimes G$,
+with the norm
+\[
+ \nu(t)=\inf\Bigl\{\sum_i\abs{c_i}\norm{u_i}^p\norm{g_i}:t=\sum_ic_i\,u_i^{\otimes p}\otimes g_i\Bigr\},
+\]
+which dominates the projective norm $\pi$ of $c_0^{\otimes p}\otimes G$. Both are norms, since the coordinate forms
+of $c_0$, and the linear forms on the spaces $G_m$ composed with the projections of $G$ onto $G_m$, are bounded and
+separate points.
+
+\begin{proposition}[laws that are not ambient]\label{dp:prop:nonambient}
+Assume that either (a) $K$ is discretely valued, that is, $\abs{K^\times}=\abs\vartheta^{\Z}$ for some $\vartheta\in K$
+with $0<\abs\vartheta<1$, or (b) $p=2$. Put $t_m=\sum_{l\in I_m}y_l\otimes\varepsilon_l$.
+\begin{enumerate}
+\item $t_m\in V$ and $\pi(t_m)\le p^{pm}$; under~(a),
+$\nu(t_m)\ge mp^{pm}/\bigl(2^pM_{\abs\vartheta}(1+\lfloor\log_pm\rfloor)\bigr)$ with
+$M_{\abs\vartheta}=\max_{j\ge0}(j+1)\abs\vartheta^{\,j}$, and under~(b), $\nu(t_m)\ge m4^{m-1}$.
+\item For $n\ge p+1$, $R_n(\lambda,x,g)=\lambda^{n-p-1}\,x^{\otimes p}\otimes g$, with $\lambda^0=1$, defines a bounded polynomial law
+$R_n\colon H\to V$ of degree $n$ and norm at most $1$ that is not ambient of degree $n$, also as a map into the
+completion of $V$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}. Under~(a) it rests on Lemma~\ref{dp:lem:projections}, by which every
+projection of $(\kappa^m)^{\otimes p}$ onto the symmetric tensors, $\kappa$ the residue field of $K$, takes, on average
+over the tensors $y_l$, which have entries in $\F_p$, values whose $m\times m^{p-1}$ matrices of entries have large rank.
+Under~(b) it rests on Proposition~\ref{ocl:prop:sections}, by which every projection $\Psi$ of $(K^m)^{\otimes2}$ onto
+the symmetric tensors has some $\Psi(y_l)$ whose determinant has absolute value at least $1$, and on
+Lemma~\ref{ocl:lem:pfaffian-bound}(2), which turns this into a lower bound for its projective norm. Condition~(a) holds
+under~\textup{(L)}, with the element $\vartheta$ of Section~\ref{obs:ssec:field}, and then $M_{\abs\vartheta}\le M_\varrho$.
+In degrees below $p$ every bounded polynomial
+law is ambient: a bounded polynomial law $a$ of degree $n<p$ is the diagonal of
+$(h_1,\dots,h_n)\mapsto a^{[(1,\dots,1)]}(h_1,\dots,h_n)/n!$. This map is $n$\nobreakdash-linear, as comparing
+coefficients in $a(s_1h_1+s_1'h_1'+s_2h_2+\dots+s_nh_n)$ after the substitutions $s_1'=s_1$, $s_1'=0$ and $s_1=0$, and
+scaling $s_1$, shows, and likewise in every slot; it has diagonal $a$, since $a((s_1+\dots+s_n)h)=(s_1+\dots+s_n)^na(h)$
+gives $a^{[(1,\dots,1)]}(h,\dots,h)=n!\,a(h)$; and it is bounded by Theorem~\ref{dp:thm:calculus}(1). A bounded
+polynomial law $a\colon P\to W$ of degree $n$ whose composite $ja$ with a linear isometry $j$ of $W$ into a normed space
+is analytic at one point $h_0$ is ambient of degree $n$: if $ja(h_0+h)=\sum_ib_i(h,\dots,h)$ near $h=0$,
+Lemma~\ref{lem:unique} on the line $s\mapsto h_0+sh$ gives $b_n(h,\dots,h)=ja(h)$, the coefficient of $s^n$ in the
+polynomial $ja(h_0+sh)$. So $R_n$ is DP on $H$ by Theorem~\ref{dp:thm:calculus}(1), while by
+Proposition~\ref{dp:prop:nonambient}(2) $jR_n$ is analytic at no point for every linear isometry $j$ of $V$, or of its
+completion, into a normed space.
+
+In degree $p$ itself, with $p=\operatorname{char}K>0$ as above, bounded polynomial laws need not be ambient either,
+over every such $K$. For a normed space $P$ let $\Gamma^p(P)\subseteq P^{\otimes p}$ be the span of the powers
+$h^{\otimes p}$, $h\in P$; for $P=K^m$ it is the space of symmetric tensors, by the paragraph at the beginning of
+Section~\ref{dgr:ssec:polarizable}, as $K$ is infinite. Give $\Gamma^p(P)$ the seminorm
+\begin{equation}\label{dp:eq:gamma-norm}
+ \norm t_\Gamma=\inf\Bigl\{\sum_i\abs{c_i}\norm{h_i}^p:t=\sum_ic_i\,h_i^{\otimes p}\Bigr\},
+\end{equation}
+which dominates the projective seminorm $\pi$ of $P^{\otimes p}$; both are norms if the bounded linear forms on $P$
+separate points. For integers $m\ge1$ and $d\ge0$ let $\N^m_d$ be the set
+of $\alpha\in\N^m$ with $\abs\alpha=d$, and let $e_1,\dots,e_m$ be the unit vectors of $K^m$. For a symmetric tensor
+$T\in(\F_p^m)^{\otimes p}$ and $\alpha\in\N^m_p$ let $T_\alpha$ be its coefficient at
+$e_{i_1}\otimes\dots\otimes e_{i_p}$ for any $(i_1,\dots,i_p)$ in which each $i$ occurs $\alpha_i$ times. For
+$\gamma\in\N^m_{p-1}$ let the \emph{slice} $\partial^\gamma T\in\F_p^m$ be the vector whose $i$-th entry is
+$T_{\gamma+e_i}$, where $\gamma+e_i\in\N^m_p$ is $\gamma$ with its $i$-th entry raised by $1$. For a real number
+$\tau\ge1$ let $\mathcal E_{T,\tau}$ be $K^m$ with the norm
+\begin{equation}\label{dp:eq:weighted-norm}
+ \norm h_{T,\tau}=\inf\Bigl\{\sum_{i=1}^m\abs{z_i}+\tau\sum_{\gamma\in\N^m_{p-1}}\abs{z_\gamma}:
+ h=\sum_{i=1}^mz_ie_i+\sum_{\gamma\in\N^m_{p-1}}z_\gamma\,\partial^\gamma T\Bigr\},
+\end{equation}
+the infimum over the scalars $z_i,z_\gamma\in K$. It is a norm, and the coordinate forms of $\mathcal E_{T,\tau}$ are bounded:
+as the entries of $T$ lie in $\F_p$ and $\tau\ge1$, no entry of $h$ has absolute value above $\norm h_{T,\tau}$. The
+tensor $T$ lies in $\Gamma^p(\mathcal E_{T,\tau})$.
+
+\begin{proposition}[laws that are not ambient, over every $K$]\label{dp:prop:degree-p}
+\leavevmode
+\begin{enumerate}
+\item For every $m\ge1$ there are a nonzero symmetric tensor $T\in(\F_p^m)^{\otimes p}$ and a real number $\tau\ge1$
+such that, in $\Gamma^p(\mathcal E_{T,\tau})$,
+\begin{equation}\label{dp:eq:degree-p-ratio}
+ \norm T_\Gamma\ge\frac{(p-1)!}{3p^{3/2}(2p-1)!}\Bigl(\frac m{1+\log_pm}\Bigr)^{1/2}\pi(T).
+\end{equation}
+\item Choose such $T^{(m)}$ and $\tau^{(m)}$ for every $m\ge1$, and let $\mathcal E$ be the $\ell^1$-sum of the spaces
+$\mathcal E_m=\mathcal E_{T^{(m)},\tau^{(m)}}$, $m\ge1$, defined as for $G$; it is a Banach space if $K$ is complete. For $n\ge p$, the
+map $(\lambda,h)\mapsto\lambda^{n-p}h^{\otimes p}$, with $\lambda^0=1$, from $K\oplus\mathcal E$, with the maximum norm, to
+$\Gamma^p(\mathcal E)$, with the norm $\norm\cdot_\Gamma$ of~\eqref{dp:eq:gamma-norm}, is a bounded polynomial law of degree
+$n$ and norm at most $1$ that is not ambient of degree $n$, also as a map into the completion of $\Gamma^p(\mathcal E)$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}. A representation of $T$ in $\Gamma^p(\mathcal E_{T,\tau})$ gives a symmetric tensor
+over $\F_p$ in $m+\binom{m+p-2}{p-1}$ symbols, which stand for the vectors $e_i$ and $\partial^\gamma T$, that maps to
+$T$ and whose nonzero coefficients have total weight at most the cost $\sum_i\abs{c_i}\norm{h_i}^p$ of the
+representation; a coefficient at two or more slices weighs at least $\tau^2$, the others at least $1$. The coefficients
+at exactly one slice act on $T$ through a linear map $\mathsf L^\sharp$ of Lemma~\ref{dp:lem:linear}, an identity for
+symmetric tensors in characteristic $p$ by which $\id-\mathsf L^\sharp$ has rank at least $(p-1)!\,m^p/(2p-1)!$. So
+for most $T$ every such tensor has many nonzero coefficients, or many at two or more slices. By
+Theorem~\ref{dp:thm:calculus}(1) the law of~(2) is DP on $K\oplus\mathcal E$, while, as for $R_n$, its composite with a linear
+isometry of $\Gamma^p(\mathcal E)$, or of its completion, into a normed space is analytic at no point. For $n\ge p+1$ this gives
+laws with the properties of Proposition~\ref{dp:prop:nonambient}(2) over every $K$, on another space.
+
+For $h_1,\dots,h_p\in P$ the tensor $\sum_{\sigma\in S_p}h_{\sigma(1)}\otimes\dots\otimes h_{\sigma(p)}$ lies in
+$\Gamma^p(P)$, by~\eqref{can:eq:polarization}; the elements of the span of these tensors are \emph{hollow}. For
+$t\in\Gamma^p(P)$ let
+\[
+ \norm t_{\mathrm F}=\inf\{\norm{t'}_\Gamma:t'\in\Gamma^p(P),\ t-t'\text{ hollow}\},
+\]
+the quotient seminorm of the seminorm $\norm\cdot_\Gamma$ of~\eqref{dp:eq:gamma-norm} modulo the hollow tensors. For
+$C\ge0$, $P$ satisfies \emph{$(\mathrm N_P)$ with constant $C$} if $\norm t_\Gamma\le C\pi(t)$ for every hollow $t$,
+and \emph{$(\mathrm F_P)$ with constant $C$} if $\norm t_{\mathrm F}\le C\pi(t)$ for every $t\in\Gamma^p(P)$. A
+\emph{Frobenius law} is a map $a\colon P\to W$ with $a(h+h')=a(h)+a(h')$ and $a(\lambda h)=\lambda^pa(h)$ for
+$h,h'\in P$ and $\lambda\in K$, and with $\norm a=\sup_{h\ne0}\norm{a(h)}/\norm h^p$ finite; it is a bounded
+polynomial law of degree $p$, as $a(s_1h_1+\dots+s_rh_r)=s_1^pa(h_1)+\dots+s_r^pa(h_r)$.
+
+\begin{theorem}[laws of degree $p$]\label{dp:thm:frobenius}
+Let $p=\operatorname{char}K>0$.
+\begin{enumerate}
+\item $P$ satisfies $(\mathrm F_P)$ with constant $p$, and with constant $\dim P$ if $\dim P<p$.
+\item Every Frobenius law $a\colon P\to W$ is ambient of degree $p$, with a $p$\nobreakdash-linear map $\beta$ of norm
+at most $p\norm a$ in Definition~\ref{dp:def:laws}(2).
+\item If $P$ satisfies $(\mathrm N_P)$ with constant $C$, then $\norm t_\Gamma\le(p+(p+1)C)\pi(t)$ for every
+$t\in\Gamma^p(P)$, and every bounded polynomial law $a\colon P\to W$ of degree $p$ is ambient of degree $p$, with a
+$p$\nobreakdash-linear map $\beta$ of norm at most $(p+(p+1)C)\norm a$. Conversely, if every bounded polynomial law of
+degree $p$ on $P$, with values in any normed space, is ambient of degree $p$, then $P$ satisfies $(\mathrm N_P)$ with
+some constant.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:deferred}. It rests on Lemma~\ref{dp:lem:bases}: if
+$t\in\Gamma^p(P)$ is a sum of elementary tensors with nonzero factors, some of these factors form a basis of the span
+of all of them for which $t$ is congruent, modulo the hollow tensors, to a combination of the $p$-th powers of the basis
+vectors in which the power of each basis vector $h$, taken as a factor of a term $h_1\otimes\dots\otimes h_p$, has a
+coefficient of absolute value at most $\norm{h_1}\cdots\norm{h_p}/\norm h^p$. By~(3), the space $K\oplus\mathcal E$ of
+Proposition~\ref{dp:prop:degree-p}(2) does not satisfy $(\mathrm N_{K\oplus\mathcal E})$ with any constant, as the law there
+with $n=p$ is not ambient of degree $p$.
+
+For $n\ge1$ let $\Gamma^n(P)\subseteq P^{\otimes n}$ be the span of the powers $h^{\otimes n}$, $h\in P$, with the
+seminorm $\norm\cdot_\Gamma$ of~\eqref{dp:eq:gamma-norm} with $n$ in place of $p$, and let $\pi$ be the projective
+seminorm of $P^{\otimes n}$; for $n=p$ these are the space and the seminorms above. Let $\mathfrak a_n(P)\in[0,\infty]$
+be the infimum of the $C\ge0$ with $\norm t_\Gamma\le C\pi(t)$ for all $t\in\Gamma^n(P)$; if it is finite, it is the
+least such $C$. For $m\ge1$ let $[m]=\{1,\dots,m\}$, and let $c_0([m],K)$ be $K^m$ with the maximum norm, read as the span of the first $m$ unit
+vectors of $c_0(\N,K)$. Put $\mathfrak c_K=\abs\vartheta$ if $K$ is discretely valued, with $\vartheta$ as in
+Proposition~\ref{dp:prop:nonambient}(a), and $\mathfrak c_K=1$ otherwise.
+
+\begin{proposition}[ambience constants]\label{dp:prop:ultrametric}
+Let $n\ge1$.
+\begin{enumerate}
+\item If $\mathfrak a_n(P)<\infty$, then every bounded polynomial law $a\colon P\to W$ of degree $n$ is ambient of degree
+$n$, with an $n$\nobreakdash-linear map $\beta$ of norm at most $\mathfrak a_n(P)\norm a$ in
+Definition~\ref{dp:def:laws}(2). Conversely, if every bounded polynomial law of degree $n$ on $P$, with values in any
+normed space, is ambient of degree $n$, then $\mathfrak a_n(P)<\infty$.
+\item $\mathfrak a_n(P)\le(n+1)\,\mathfrak a_{n+1}(K\oplus P)$, with the maximum norm on $K\oplus P$.
+\item If $P$ is nonarchimedean, then
+$\mathfrak a_n(P)\le\mathfrak c_K^{-n}\sup_{m\ge1}\mathfrak a_n(c_0([m],K))\le\mathfrak c_K^{-n}\,\mathfrak a_n(c_0(\N,K))$.
+\item If $P$ is nonarchimedean, then $\mathfrak a_2(P)\le\frac32\,\mathfrak c_K^{-2}$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}. By~(1) and~(3), if every bounded polynomial law of degree $n$ on
+$c_0(\N,K)$ is ambient of degree $n$, then so is every bounded polynomial law of degree $n$ on every nonarchimedean
+normed space; by~(1) and~(4), every bounded polynomial law of degree $2$ on a nonarchimedean normed space is ambient of
+degree $2$.

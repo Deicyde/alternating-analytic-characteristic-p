@@ -1,0 +1,313 @@
+\section{Why a largest full analytic domain need not exist}\label{app:no-largest}\label{dom:section}\label{sec:domains}
+In this appendix a pair $(E,F)$ consists of a source space and a value space. It is split in degree $k$
+(Definition~\ref{dom:split-pair}) when $j_{E,F}$ has a bounded linear retraction, a splitting for the single
+value space $F$. Split pairs form an analytic domain (Definition~\ref{dom:definition}), since a splitting at
+the destination of a morphism suffices, with no compatibility between pairs (Lemma~\ref{dom:split-incoming}).
+
+There need not be a largest analytic domain: the endomorphism actions at two objects can each be
+analytic while their cross-action is not.
+As in Proposition~\ref{prop:homogeneous-lift}, a bounded $d$-linear \emph{lift} of a
+homogeneous map $f$ is a bounded multilinear map $B$ with $B(x,\ldots,x)=f(x)$.
+
+\begin{definition}\label{dom:definition}
+A full subcategory $\mathcal D\subseteq\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K$ is an
+\emph{analytic domain} for $\Alt^k$ if the restriction of $\Alt^k$ to $\mathcal D$ is analytic on every
+hom space.
+\end{definition}
+
+\Needspace{5\baselineskip}
+\begin{definition}\label{dom:split-pair}
+A pair $(E,F)$ is \emph{split in degree $k$} if the isometric inclusion
+\[
+j_{E,F}\colon\Alt^k(E;F)\longrightarrow\Mult^k(E;F)
+\]
+has a bounded linear retraction.
+\end{definition}
+
+\begin{lemma}\label{dom:split-incoming}
+Every morphism-space action whose destination is a split pair is analytic. In particular, the full
+subcategory of split pairs is an analytic domain.
+\end{lemma}
+
+\begin{proof}
+Let $(E,F)$ be split, with retraction $R$, and let the other object be $(D,G)$. For $u\colon E\to D$
+and $v\colon G\to F$, the action is
+\[
+m\longmapsto R\bigl(v\circ m\circ(u,\ldots,u)\bigr).
+\]
+Before applying $R$, replace the $k$ copies of $u$ by independent variables. This gives a bounded
+$(k+1)$\nobreakdash-linear lift of the joint action, with values in
+$\cL(\Alt^k(D;G),\Mult^k(E;F))$. Postcomposition with $R$ gives a lift with the required alternating
+codomain. No compatibility between the retractions chosen for different objects is needed.
+\end{proof}
+
+\begin{theorem}[no largest full analytic domain]\label{dom:no-largest}
+Let $p$ be prime, let $k\ge p$, and equip $K=\F_p(t)$ with its $t$\nobreakdash-adic absolute value.
+There is no largest full analytic domain for
+\[
+\Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\longrightarrow\mathsf{Vec}_K.
+\]
+The assertion remains true if the domains must be closed under isomorphisms, and if their objects are
+restricted to pairs of finite-dimensional, nonarchimedean normed $K$\nobreakdash-spaces. In the latter case,
+isomorphism closure is understood inside that restricted ambient category.
+
+More precisely, there are objects $X_k=(E_k,G)$ and $Y_k=(D_k,G)$ whose singleton full subcategories
+are analytic, such that $Y_k$ is split and the action on morphisms from $Y_k$ to $X_k$ is not analytic.
+\end{theorem}
+
+Here finite-dimensional means finite \emph{algebraic} dimension over the incomplete field $K$. These spaces
+need not admit continuous coordinates over $K$. The theorem does not give a counterexample over a complete
+field, or a counterexample with Banach objects.
+
+
+We give the entire construction. Put $L=\F_p((t))$, the completion of $K$.
+We first work in degree $p$, then extend to every $k\ge p$ by adjoining coordinate summands.
+
+\subsection{The rigid source and the split pair}
+
+We use the following elementary completion principle. Let $K$ be dense in a complete valued extension $L$,
+let $(E_i)$ be a finite family of dense $K$\nobreakdash-subspaces of Banach $L$\nobreakdash-spaces $H_i$,
+and let $Z$ be Banach over $L$.
+A bounded $K$\nobreakdash-multilinear map $\prod_iE_i\to Z$ extends uniquely to a bounded
+$L$\nobreakdash-multilinear map $\prod_iH_i\to Z$, with the same norm. Indeed, approximate each input by
+vectors in $E_i$. A telescoping expansion and the multilinear bound make the resulting values Cauchy,
+independently of the approximations. The bound persists in the limit, and density of $K$ in $L$ gives
+$L$\nobreakdash-linearity in each slot. In the applications below the extended codomain is the complete
+space $L$ or $A$, while membership of values on the original inputs in the smaller spaces is retained.
+
+Put $L=\F_p((t))$, the completion of $K$, and consider the normed $L$\nobreakdash-algebra
+\[
+A=L[\epsilon]/(\epsilon^p),\qquad e_i=\epsilon^i\quad(0\le i<p),
+\]
+with the maximum norm in this basis. Multiplication satisfies $\norm{xy}\le\norm x\,\norm y$.
+Choose elements $a_0,\ldots,a_{p-1}\in L$, together with the finitely many auxiliary scalars
+$\tau_w$ introduced below, algebraically independent over $K$. Such a choice is possible because $K$ is
+countable and $L$ is uncountable: the elements of $L$ algebraic over any finitely generated extension of
+$K$ form a countable set. Set
+\[
+a=\sum_{i=0}^{p-1}a_i e_i,\qquad E=K^p+Ka\subseteq A.
+\]
+Every subspace used below carries the norm induced by $A$ or $L$. In particular, $E$ has $K$\nobreakdash-dimension
+$p+1$ and completion $A$.
+
+\begin{lemma}\label{dom:rigid}
+Every bounded endomorphism of $E$ is multiplication by a scalar in $K$, and every bounded linear map
+$E\to K$ is zero.
+\end{lemma}
+
+\begin{proof}
+A bounded $K$\nobreakdash-linear map extends to completions, and the extension is $L$\nobreakdash-linear
+by density of $K$ in $L$. If it preserves $E$, its columns, the images of the $e_i$, give a matrix
+$M+ac^{\mathsf T}$, with $M\in M_p(K)$ and $c\in K^p$. Its value at $a$ lies in $K^p+Ka$.
+Comparison of homogeneous degrees in the algebraically independent $a_i$ shows first that
+$a(c^{\mathsf T}a)=0$, hence $c=0$, and then that $M=sI$ for some $s\in K$.
+
+Similarly, the extension of a bounded map $E\to K$ is an $L$\nobreakdash-linear functional on $A$.
+Its coefficients belong to $K$, since its values on the $e_i$ do. Its value on $a$ also lies in $K$,
+so algebraic independence makes all its coefficients zero.
+\end{proof}
+
+Multiplication by $a$ has lower triangular Toeplitz matrix
+\[
+(M_a)_{ij}=\begin{cases}a_{i-j},&i\ge j,\\0,&i<j.\end{cases}
+\]
+Define
+\[
+D_0=\spn_K\{e_i,\epsilon^i a:0\le i<p\}+Ka^2,
+\qquad
+\mathcal W=\{e_i:0\le i<p\}\cup\{e_i+e_j:0\le i<j<p\},
+\]
+and put
+\[
+D=D_0+\sum_{w\in\mathcal W}K\tau_w w,\qquad
+G=\spn_K\{\det(d_1,\ldots,d_p):d_i\in D\}\subseteq L.
+\]
+The determinant is taken in the basis $(e_0,\ldots,e_{p-1})$. These are finite-dimensional
+$K$\nobreakdash-spaces, with completions $A$ and $L$: $D$ contains $K^p$, and $G$ contains $1$.
+By multilinearity, $G$ is spanned by determinants of the displayed finite generating set for $D$.
+We may therefore identify $G$ with a finite-dimensional subspace of
+$K[a_0,\ldots,a_{p-1},(\tau_w)_w]$. Every element has degree at most one in each individual $\tau_w$,
+since a nonzero determinant cannot repeat the generator $\tau_w w$. Algebraic independence gives
+\begin{equation}\label{dom:tau-gap}
+\tau_w^2G\cap G=\{0\}\qquad(w\in\mathcal W).
+\end{equation}
+
+\begin{lemma}\label{dom:all-alt}
+Every bounded $p$\nobreakdash-linear map $D^p\to G$ is alternating. Thus $(D,G)$ is split in degree $p$.
+\end{lemma}
+
+\begin{proof}
+Compose such a map $m$ with $G\hookrightarrow L$ and extend to a bounded $L$\nobreakdash-multilinear map
+on $A^p$. Fix two argument positions. Put the same $w\in\mathcal W$ in those positions and arbitrary
+standard basis vectors in the others, and call the value $c\in G$. Replacing both copies of $w$ by
+$\tau_w w\in D$ shows that $\tau_w^2c\in G$, so~\eqref{dom:tau-gap} gives $c=0$.
+Taking $w=e_i$ gives vanishing on repeated basis vectors. Taking $w=e_i+e_j$ then gives the signed
+interchange identity in the two positions. Expanding two equal arbitrary arguments in the basis proves
+that the completed map, and hence $m$, is alternating, including when $p=2$. The inclusion of alternating
+maps into multilinear maps is therefore an isometric bijection, whose inverse is the desired retraction.
+\end{proof}
+
+\subsection{A missing coefficient}
+
+The coefficient space of alternating maps on $E$ is
+\[
+C=\{\lambda\in G:a_i\lambda\in G\text{ for every }i\}.
+\]
+Indeed, an alternating map extends to $\lambda\det$ on the $p$\nobreakdash-dimensional completion $A$.
+Determinants of tuples from $E$ span $\spn_K\{1,a_0,\ldots,a_{p-1}\}$: a determinant can contain at
+most one copy of $a$, and replacing one basis vector by $a$ realizes each $a_i$ up to sign. Consequently
+\begin{equation}\label{dom:coefficient-space}
+\Alt^p(E;G)=C\det.
+\end{equation}
+This identification is isometric, since the determinant bound gives one inequality and evaluation on the
+standard basis gives the reverse inequality.
+
+Algebraically set every $\tau_w$ to zero. The image of $G$ is
+\[
+G_0=\spn_K\{\det(d_1,\ldots,d_p):d_i\in D_0\}.
+\]
+Put $C_0=\{\lambda\in G_0:a_i\lambda\in G_0\text{ for every }i\}$. Specialization sends $C$ into $C_0$;
+no continuity of specialization is asserted. The displayed generators of $D_0$ are homogeneous polynomial
+vectors of degrees zero, one, and two. Their determinants are homogeneous, so $G_0$ is graded, and the
+defining conditions show that $C_0$ is graded as well.
+
+\begin{lemma}\label{dom:degree-gap}
+The homogeneous degree-one part of $C_0$ is zero.
+\end{lemma}
+
+\begin{proof}
+The degree-two part of $G_0$ is spanned by the $2\times2$ minors of $M_a$ and the coordinates of $a^2$.
+These correspond respectively to choosing two degree-one columns, or one degree-two column, in a
+determinant of generators. On homogeneous quadratic polynomials define the $K$\nobreakdash-linear map
+$\Phi\colon K[a_0,\ldots,a_{p-1}]_2\to K[T]$ by
+\[
+\Phi(a_i a_j)=
+\begin{cases}
+T^{i+j},&i+j\ge p-1,\\
+0,&i+j<p-1.
+\end{cases}
+\]
+Every $2\times2$ minor of $M_a$ is killed by $\Phi$. When both product terms are nonzero, their index
+sums coincide. If only one is nonzero, write the rows as $r<s$ and columns as $i<j$. The surviving term
+has index sum $r+s-i-j$, and the missing term implies $r<j$. Hence
+$r+s-i-j\le s-i-1\le p-2$, so its image is again zero.
+
+The coefficient of $\epsilon^r$ in $a^2$ is $\sum_{i+j=r}a_i a_j$. Its image is zero for $r<p-1$;
+for $r=p-1$ there are exactly $p$ summands and its image is $pT^{p-1}=0$. Thus $\Phi$ kills the entire
+degree-two part of $G_0$. If $\ell=\sum_jc_j a_j$ lies in the degree-one part of $C_0$, then
+$a_{p-1}\ell\in G_0$, whereas
+\[
+\Phi(a_{p-1}\ell)=\sum_jc_jT^{p-1+j}.
+\]
+The powers are distinct, so all $c_j$ vanish.
+\end{proof}
+
+\subsection{The nonanalytic cross-action}
+
+Set $X=(E,G)$ and $Y=(D,G)$. Lemma~\ref{dom:rigid} identifies $\cL(E,E)$ isometrically with $K$,
+and the self-action of $X$ is
+\[
+(s,v)\longmapsto s^p v_*.
+\]
+This is a bounded polynomial, so the singleton full subcategory on $X$ is analytic. The singleton on $Y$
+is analytic by Lemmas~\ref{dom:all-alt} and~\ref{dom:split-incoming}.
+
+For $x\in E$, multiplication by $x$ in $A$ restricts to a bounded map $M_x\colon E\to D$.
+Indeed, writing $x=b+ha$ with $b\in K^p$ and $h\in K$, its values on the generators $e_j,a$ lie in
+\[
+K^p+\sum_iK\epsilon^ia+Ka^2\subseteq D.
+\]
+Submultiplicativity gives a bounded linear family $x\mapsto M_x$ from $E$ to $\cL(E,D)$.
+Its matrix is lower triangular with diagonal entry $x_0$, the $e_0$\nobreakdash-coordinate of $x$ in $A$, so $\det M_x=x_0^p$. In the cross-action from
+$Y$ to $X$, fix the target morphism to $\id_G$, evaluate at $\det\in\Alt^p(D;G)$, and use
+\eqref{dom:coefficient-space}. The resulting map is
+\begin{equation}\label{dom:bad-coordinate}
+f\colon E\longrightarrow C,\qquad f(x)=x_0^p.
+\end{equation}
+Its values lie in $C$ because it was obtained by pulling back an alternating $G$\nobreakdash-valued map.
+
+Suppose that $f$ were analytic at zero. Since $f(sx)=s^pf(x)$, uniqueness of power-series coefficients
+on scalar lines gives a bounded $p$\nobreakdash-linear map $B\colon E^p\to C$ with diagonal $f$.
+This is the homogeneous coefficient argument used in Proposition~\ref{prop:homogeneous-lift}; it requires no factorial
+division or completeness. Compose $B$ with $C\hookrightarrow L$ and extend to an $L$\nobreakdash-multilinear
+map on $A^p$. Put
+\[
+b_i=B(e_0,\ldots,e_0,e_i)\in C.
+\]
+There are $p-1$ initial copies of $e_0$, and $b_0=f(e_0)=1$. Evaluation at $a$ in the last position gives
+$\sum_i a_i b_i\in C$. Specializing all $\tau_w$ to zero yields elements $d_i\in C_0$ with
+\[
+d_0=1,\qquad \sum_i a_i d_i\in C_0.
+\]
+The degree-one part of this last expression is $\sum_i a_i(d_i)_0$, where $(d_i)_0\in K$ is the
+constant term. Its $a_0$\nobreakdash-coefficient equals one. This contradicts Lemma~\ref{dom:degree-gap}.
+Thus~\eqref{dom:bad-coordinate}, and therefore the cross-action from $Y$ to $X$, is not analytic.
+
+\subsection{Higher degrees and the categorical conclusion}
+
+For $k=p+r$, let
+\[
+E_k=E\oplus K^r,\qquad D_k=D\oplus K^r
+\]
+with maximum norms. Their completions have dimension $k$ over $L$. Determinants of tuples from $E_k$
+still span $\spn_K\{1,a_0,\ldots,a_{p-1}\}$, so extraction of the top-degree coefficient identifies
+\begin{equation}\label{dom:padded-coefficients}
+\Alt^k(E_k;G)=C\det_k
+\end{equation}
+isometrically. In particular, the coefficient takes values in $C$, a fact needed to retain the preceding
+obstruction after increasing the degree.
+
+By Lemma~\ref{dom:rigid}, the extension of every bounded endomorphism of $E_k$ to its
+$L$\nobreakdash-completion $A\oplus L^r$ has block form
+\[
+\begin{pmatrix}sI_p&B\\0&T\end{pmatrix},\qquad s\in K,\quad T\in M_r(K).
+\]
+The scalar $s$ and entries of $T$ are bounded linear functions of the endomorphism, as is seen by
+evaluation on the standard basis. Its determinant is $s^p\det T$, so its action on
+\eqref{dom:padded-coefficients} is multiplication by this bounded polynomial. Including postcomposition
+shows that the singleton full subcategory on $X_k=(E_k,G)$ is analytic.
+
+The pair $Y_k=(D_k,G)$ is split. Given $m\in\Mult^k(D_k;G)$, restrict the first $p$ arguments to
+$D$ and fix the last $r$ arguments at the standard auxiliary basis $e'_1,\ldots,e'_r$ of $K^r$.
+The resulting $p$-linear map $\alpha_m$ is alternating by Lemma~\ref{dom:all-alt}. Write
+$\pi_D\colon D_k\to D$ and $\pi_r\colon D_k\to K^r$ for the two projections. Explicitly, set
+\[
+ (\mathcal Rm)(v_1,\ldots,v_k)=
+ \sum_{\substack{S\subseteq\{1,\ldots,k\}\\|S|=p}}
+ \varepsilon(S)\,
+ \alpha_m(\pi_Dv_{s_1},\ldots,\pi_Dv_{s_p})
+ \det(\pi_rv_{t_1},\ldots,\pi_rv_{t_r}),
+\]
+where $s_1<\cdots<s_p$ list $S$, $t_1<\cdots<t_r$ list its complement, and $\varepsilon(S)$
+is the sign of the permutation $(s_1,\ldots,s_p,t_1,\ldots,t_r)$. The determinant and the sign
+are scalars multiplying the $G$-valued factor. In degree $r=0$ the determinant is $1$.
+This shuffle expression is alternating by the same repeated-argument cancellation as the wedge
+product, involves no factorial division, and gives a bounded linear map
+$\mathcal R\colon\Mult^k(D_k;G)\to\Alt^k(D_k;G)$ with norm at most $\binom{k}{p}$.
+It fixes every alternating map: after extension to the $k$\nobreakdash-dimensional completion, both maps
+are determined by their value on the standard basis, where the shuffle formula has exactly one nonzero
+term. This is the required retraction. For $r>0$, we do not need or assert that every $k$\nobreakdash-linear
+map on $D_k$ is alternating.
+
+Finally, restrict the cross-action along the bounded affine family
+\[
+E\longrightarrow\cL(E_k,D_k),\qquad x\longmapsto M_x\oplus I_r.
+\]
+Evaluation at $\det_k$, which is $G$\nobreakdash-valued on $D_k$ by Laplace expansion along the first $p$ rows, and coefficient extraction through~\eqref{dom:padded-coefficients} give exactly
+the nonanalytic map~\eqref{dom:bad-coordinate}. Thus the cross-action from $Y_k$ to $X_k$ is not analytic.
+
+A largest analytic full subcategory would have to contain both individually analytic singleton
+subcategories, and fullness would then require this cross-action to be analytic. This is impossible.
+If closure under isomorphisms is required, replace each singleton by its full isomorphism closure.
+Every action between two copies is transported from the self-action by bounded linear changes of
+coordinates, so both closures remain analytic. The same contradiction proves Theorem~\ref{dom:no-largest}.
+
+\paragraph{\textit{Finite-dimensional bases.}}
+The same spaces show that Theorem~\ref{thm:finite-parameters} needs continuous coordinates on the base,
+not only finite algebraic dimension. Regard $E$ as an analytic manifold with one chart; by Lemma~\ref{dom:rigid} it has no
+continuous coordinates. Over it take the trivial bundle with fiber $D_k\oplus E_k$ and the two frames
+$\id$ and $S_x(d,e)=\bigl(d+(M_x\oplus I_r)e,e\bigr)$, together with the trivial bundle with fiber $G$;
+$S_x$ and its inverse $(d,e)\mapsto\bigl(d-(M_x\oplus I_r)e,e\bigr)$ are affine in $x$, so these bundles
+are analytic. By~\eqref{eq:shear-compression}, evaluation at $\det_k$
+and~\eqref{dom:padded-coefficients}, analyticity of the induced alternating atlas at $x=0$ would
+make~\eqref{dom:bad-coordinate} analytic at zero, which was excluded above.

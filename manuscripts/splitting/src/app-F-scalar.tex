@@ -1,0 +1,391 @@
+\section{A counterexample with scalar values}\label{app:scalar}
+
+We prove Theorem~\ref{thm:operator-obstructions}(2) in the form below: Lemma~\ref{scalar:fibre} rules out $k$\nobreakdash-linear
+lifts of the determinant vanishing on prescribed subspace pairs, and the chain spaces of~\eqref{scalar:spaces} carry
+these conditions to Banach spaces. Its spaces $E,E'$ are the pair $(E,D)$ of Theorem~\ref{thm:operator-obstructions}(2).
+
+\begin{theorem}[scalar counterexample]\label{thm:scalar-counter}
+Let $K$ be a complete, nontrivially normed field that is not spherically complete, and let $k\ge1$ satisfy
+$k! = 0$ in $K$. There are nonarchimedean Banach spaces $E,E'$ for which
+\[
+ A^k_{E,E';K}\colon\cL(E,E')\longrightarrow
+ \cL\bigl(\Alt^k(E';K),\Alt^k(E;K)\bigr)
+\]
+is analytic at no point. The spaces may be taken to be closed subspaces of
+$\linf(\Lambda;K^{k+1})$ and $\linf(\Lambda;K^k)$, respectively, containing the corresponding $c_0$ spaces,
+where $\Lambda$ is countable. Both spaces are nonseparable.
+\end{theorem}
+
+The factorial hypothesis says precisely that $K$ has characteristic $p>0$ and $k\ge p$. In particular
+$k\ge2$, and $K$ is nonarchimedean by Lemma~\ref{lem:ultra}. We first establish the three ingredients
+of the construction.
+
+\subsection{The countable multilinear tail property}
+
+For a set $I$, a family $(a_i)_{i\in I}$ is \emph{null} if, for every $\varepsilon>0$, only finitely many
+indices satisfy $\abs{a_i}\ge\varepsilon$. Over a complete nonarchimedean field, every null scalar family
+is unconditionally summable: its finite partial sums form a Cauchy net, since the norm of a difference is
+at most the largest omitted term. Its sum has norm at most $\sup_i\abs{a_i}$, and such sums may be regrouped.
+
+We derive the multilinear tail property from van der Put's description of the dual of countable $\linf$. The induction is independent of the characteristic.
+
+\begin{lemma}[multilinear tails]\label{scalar:tail}
+Let $K$ be complete, nonarchimedean and not spherically complete, let $I$ be countably infinite, and let
+$d\ge1$. Every bounded $d$\nobreakdash-linear map $\lambda\colon\linf(I,K)^d\to K$ has an expansion
+\begin{equation}\label{scalar:array}
+ \lambda(x^1,\dots,x^d)
+ =\sum_{(i_1,\dots,i_d)\in I^d}a_{i_1,\dots,i_d}x^1_{i_1}\cdots x^d_{i_d},
+ \qquad a_{i_1,\dots,i_d}=\lambda(e_{i_1},\dots,e_{i_d}),
+\end{equation}
+where $a\in c_0(I^d,K)$. Consequently, for every $\varepsilon>0$, there is a finite $S\subseteq I$ such that
+$\abs{\lambda(x^1,\dots,x^d)}\le\varepsilon$ whenever all $\norm{x^r}\le1$ and at least one $x^r$ vanishes
+on $S$. In particular $\lambda(e_i,\dots,e_i)\to0$ outside finite subsets of $I$.
+\end{lemma}
+
+\begin{proof}
+After reindexing, take $I=\N$. Van der Put's theorem~\cite[Th\'eor\`eme~4.1]{VdP}, applied to countably
+many copies of $K$ (a countable index set satisfies its nonmeasurability hypothesis), gives
+\[
+ \varphi(x)=\sum_i x_i\varphi(e_i),\qquad (\varphi(e_i))_i\in c_0(\N,K)
+ \quad\bigl(\varphi\in\cL(\linf,K)\bigr).
+\]
+This is the case $d=1$. Suppose the assertion about the array and expansion holds in smaller degrees.
+Fixing a coordinate vector in any slot of $\lambda$ gives a form of degree $d-1$. Hence, for every
+$\varepsilon>0$, each slice of the set
+\[
+ W=\{(i_1,\dots,i_d):\abs{a_{i_1,\dots,i_d}}\ge\varepsilon\}
+\]
+obtained by fixing one coordinate is finite.
+
+If $W$ were infinite, we could choose $w^{(0)},w^{(1)},\ldots\in W$ with the coordinates
+$w^{(n)}_r$ distinct as $n$ varies, for each $r$: a finite list of forbidden coordinates excludes only
+finitely many elements of $W$. Define an isometric embedding $T_r\colon\linf(\N,K)\to\linf(\N,K)$
+by putting $(T_rx)_{w^{(n)}_r}=x_n$ and zero elsewhere. The pulled-back form
+$\mu=\lambda\circ(T_1,\dots,T_d)$ has array $b$ with $\abs{b_{n,\dots,n}}\ge\varepsilon$ for all $n$.
+Its slices are null by induction. Thus
+\[
+ F_n=\{v\in\N^d:\abs{b_v}\ge\varepsilon,\ v_r=n\text{ for some }r\}
+\]
+is finite. Choose $n_1<n_2<\cdots$ so that $n_s$ exceeds every coordinate occurring in
+$F_{n_1}\cup\cdots\cup F_{n_{s-1}}$. Every nonconstant tuple in $\{n_s:s\ge1\}^d$ then has coefficient
+of norm $<\varepsilon$: its least coordinate puts a large tuple in the corresponding $F_{n_r}$,
+whereas its greatest coordinate violates the choice of the subsequence.
+
+Let $y$ be the indicator of $\{n_s:s\ge1\}$ and set $\psi(x)=\mu(x,y,\dots,y)$. The expansion of each
+fixed-coordinate slice gives
+\[
+ \psi(e_{n_s})
+ =b_{n_s,\dots,n_s}
+   +\sum_{v'\in\{n_r:r\ge1\}^{d-1},\ v'\ne(n_s,\dots,n_s)}b_{n_s,v'}.
+\]
+The summands in the last sum form a null family and all have norm $<\varepsilon$. Their supremum is
+also $<\varepsilon$: outside a finite set they have norm $<\varepsilon/2$, and the remaining finite
+maximum is $<\varepsilon$. The nonarchimedean inequality therefore gives
+$\abs{\psi(e_{n_s})}\ge\varepsilon$ for every $s$, contradicting the displayed dual formula.
+Thus $a$ is null. Applying that formula in the first slot and the inductive expansion in the remaining
+slots gives~\eqref{scalar:array}; the null full array permits regrouping the iterated sums.
+
+Finally choose a finite $S$ containing all coordinates occurring in tuples with $\abs{a_{i_1,\dots,i_d}}
+>\varepsilon$. If one input vanishes on $S$, all these terms vanish. Every remaining term has norm at
+most $\varepsilon$ on the product of unit balls, so the same holds for the sum. Apply this conclusion to
+coordinate vectors outside $S$ to obtain the last assertion.
+\end{proof}
+
+\subsection{Chains and a finite-dimensional incompatibility}
+
+Let $L$ be a nonempty finite set and $\Lambda=L^{<\omega}$ the set of finite words in $L$, including the
+empty word. Write $s\preceq t$ when $t$ extends $s$, and write $sj$ for the word obtained by appending
+$j\in L$. A \emph{$j$-chain} is a set $T=\{s_0,s_1,\dots\}$ with $s_rj\preceq s_{r+1}$ for every $r$.
+Let $\Gamma_j$ denote all such chains.
+
+\begin{lemma}[chain gap]\label{scalar:gap}
+Chains with different labels have at most one common word. If sets $a_j\subseteq\Lambda$, $j\in L$,
+contain all but finitely many words of every chain in $\Gamma_j$, then $\bigcap_{j\in L}a_j\ne\varnothing$.
+\end{lemma}
+
+\begin{proof}
+If distinct words $s,t$ belong to both a $j$-chain and an $h$-chain, take $s$ shorter than $t$.
+Then $t$ extends both $sj$ and $sh$, forcing $j=h$.
+
+For each word $r$ and label $j$, there is an extension $s\succeq r$ such that every extension of $sj$
+belongs to $a_j$. Otherwise start with $s_0=r$ and choose successively an extension
+$s_{m+1}\succeq s_mj$ outside $a_j$. This is a $j$-chain with infinitely many words outside $a_j$,
+a contradiction. Enumerate $L=\{j_1,\dots,j_q\}$ and start at the empty word $r_0$. Choose $s_m\succeq
+r_{m-1}$ with the asserted property for $j_m$, and put $r_m=s_mj_m$. The word $r_q$ extends every
+$s_mj_m$ and hence belongs to every $a_j$.
+\end{proof}
+
+The next lemma is purely algebraic; the alternating maps in its statement need no topology.
+Over a field $\kappa$, put $V=\kappa^{k+1}$ and $V'=\kappa^k$. Write $e_1,\dots,e_{k+1}$ and
+$e'_1,\dots,e'_k$ for their bases, $\varepsilon^a$ for the coordinate forms on $V$, and $\delta'$ for the
+determinant on $V'$. Set
+\begin{align*}
+ N&=\{\varepsilon^a:1\le a\le k+1\}
+       \cup\{\varepsilon^a+\varepsilon^b:1\le a<b\le k+1\},\\
+ \Sigma_\nu&=\ker\nu,\qquad C'_s=\{z:z_s=0\},\qquad H'_{cd}=\{z:z_c=z_d\},
+\end{align*}
+and consider the finite family of pairs
+\begin{equation}\label{scalar:family}
+ \mathcal F=\{(V,H'_{cd}):c<d\}
+ \cup\{(\Sigma_\nu,C'_s):\nu\in N,\ 1\le s\le k\}.
+\end{equation}
+Let $g_0\colon V\to V'$ be the coordinate projection onto the first $k$ coordinates.
+
+\begin{lemma}[finite fiber obstruction]\label{scalar:fibre}
+Suppose $k! = 0$ in $\kappa$. There is no $k$\nobreakdash-linear map
+\[
+ \tau\colon\operatorname{Hom}_\kappa(V,V')^k\longrightarrow\Alt^k_\kappa(V;\kappa)
+\]
+satisfying both
+\begin{enumerate}
+\item $\tau(g_0,\dots,g_0)=\delta'\circ(g_0,\dots,g_0)$;
+\item for every $(\Sigma,\Sigma')\in\mathcal F$, the restriction
+$\tau(g^1,\dots,g^k)|_{\Sigma^k}$ is zero whenever $g^r(\Sigma)\subseteq\Sigma'$ for every $r$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $\delta$ be the determinant on $V$. Every alternating $k$\nobreakdash-form $\alpha$ has a unique expression
+$\alpha=\delta(w_\alpha,\cdot,\dots,\cdot)$: its evaluations on the basis tuples omitting one vector give
+\[
+ (w_\alpha)_a=(-1)^{a-1}\alpha(e_1,\dots,\widehat e_a,\dots,e_{k+1}).
+\]
+For a nonzero $\nu$, this description also gives
+\begin{equation}\label{scalar:restriction}
+ \alpha|_{(\ker\nu)^k}=0\quad\Longleftrightarrow\quad\nu(w_\alpha)=0.
+\end{equation}
+Indeed choose $\zeta$ with $\nu(\zeta)=1$ and a basis $y_1,\dots,y_k$ of $\ker\nu$. Writing
+$w_\alpha=\nu(w_\alpha)\zeta+z$ with $z\in\ker\nu$ gives
+$\delta(w_\alpha,y_1,\dots,y_k)=\nu(w_\alpha)\delta(\zeta,y_1,\dots,y_k)$, whose last factor is nonzero.
+
+Suppose $\tau$ exists. For a function $a\colon\{1,\dots,k\}\to\{1,\dots,k\}$ define
+\[
+ B_a(\varphi_1,\dots,\varphi_k)
+ =\tau(\varphi_1\otimes e'_{a(1)},\dots,\varphi_k\otimes e'_{a(k)}),
+ \qquad (\varphi\otimes e'_c)(x)=\varphi(x)e'_c.
+\]
+If $a$ omits $s$, every input map takes $V$ into $C'_s$. Applying condition (2) to
+$(\ker\varepsilon^b,C'_s)$ for each $b$ and using~\eqref{scalar:restriction} makes every coordinate of
+$w_{B_a(\varphi)}$ zero. Hence $B_a=0$ unless $a$ is a permutation.
+
+For a permutation $a$ and distinct $c,d$, replace the target vector in slots $a^{-1}(c)$ and $a^{-1}(d)$
+by $e'_c+e'_d$. All input maps then take $V$ into $H'_{cd}$, so their image under $\tau$ is zero.
+Expansion in these two slots gives $B_a+B_{(c\ d)\circ a}$ and two terms with a missing target coordinate.
+The latter vanish by the preceding paragraph. Thus, with $B=B_{\id}$,
+\begin{equation}\label{scalar:target-sign}
+ B_a=\sgn(a)B\qquad(a\in S_k).
+\end{equation}
+
+Define the $(k+1)$\nobreakdash-linear form
+\[
+ \beta(\varphi_1,\dots,\varphi_k;\chi)
+   =\chi\bigl(w_{B(\varphi_1,\dots,\varphi_k)}\bigr).
+\]
+If the $s$th argument is $\nu\in N$, its rank-one input vanishes on $\Sigma_\nu$, and every other
+rank-one input takes values in $C'_s$. Conditions (2) and~\eqref{scalar:restriction} give
+$\beta(\varphi_1,\dots,\nu,\dots,\varphi_k;\nu)=0$. Use this identity successively for
+$\varepsilon^a$, $\varepsilon^b$ and $\varepsilon^a+\varepsilon^b$ to obtain
+\[
+ \beta(\dots,\varepsilon^a,\dots;\varepsilon^b)
+ =-\beta(\dots,\varepsilon^b,\dots;\varepsilon^a).
+\]
+Consequently
+$t(\sigma)=\beta(\varepsilon^{\sigma(1)},\dots,\varepsilon^{\sigma(k)};
+\varepsilon^{\sigma(k+1)})$ changes sign under every transposition of a slot with the last slot.
+These transpositions generate $S_{k+1}$, so $t(\sigma)=\sgn(\sigma)t(\id)$.
+
+Expand $g_0=\sum_{c=1}^k\varepsilon^c\otimes e'_c$ in condition (1). The missing-coordinate terms vanish,
+and~\eqref{scalar:target-sign} gives
+\[
+ \varepsilon^1\wedge\cdots\wedge\varepsilon^k
+ =\sum_{a\in S_k}\sgn(a)B(\varepsilon^{a(1)},\dots,\varepsilon^{a(k)}).
+\]
+Apply $\alpha\mapsto\varepsilon^{k+1}(w_\alpha)$. Its value on the left is $(-1)^k$; on the right it is
+$\sum_{a\in S_k}\sgn(a)^2t(\id)=k!t(\id)=0$. This is a contradiction. All identities remain valid in
+characteristic $2$: repeated arguments vanish by alternation, and no step divides by $2$ or by a factorial.
+\end{proof}
+
+We will need a quantitative consequence of this finite incompatibility. Give $K^{k+1}$ and $K^k$ their
+maximum norms and use the same family~\eqref{scalar:family} over $K$.
+
+\begin{lemma}[finite test certificate]\label{scalar:certificate}
+Assume $k!=0$ in $K$, as in Theorem~\ref{thm:scalar-counter}. There are finite sets of tests $\mathcal T_j$, one for each $j=(\Sigma^j,\Sigma'^j)\in\mathcal F$, consisting of
+tuples $(g^1,\dots,g^k;\xi_1,\dots,\xi_k)$ with $g^r\Sigma^j\subseteq\Sigma'^j$ and $\xi_r\in\Sigma^j$,
+such that every $K$\nobreakdash-multilinear $\tau$ satisfying condition (1) of Lemma~\ref{scalar:fibre} obeys
+\begin{equation}\label{scalar:threshold}
+ \max_{j\in\mathcal F}\max_{(g;\xi)\in\mathcal T_j}
+ \abs{\tau(g^1,\dots,g^k)(\xi_1,\dots,\xi_k)}\ge1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $\operatorname{char}K=p$. All spaces in~\eqref{scalar:family} are defined over $\F_p$.
+For each $j$, choose an $\F_p$\nobreakdash-basis of the subspace $\Sigma^j$ defined over $\F_p$, and one of
+\[
+ \{g\in\operatorname{Hom}_{\F_p}(\F_p^{k+1},\F_p^k):g\Sigma^j\subseteq\Sigma'^j\}.
+\]
+Their scalar extensions are bases of the corresponding $K$\nobreakdash-spaces: row reduction of the
+defining prime-field matrices has the same pivot positions over $K$. Take all $k$\nobreakdash-tuples from
+each basis to form $\mathcal T_j$. Multilinearity in the maps and the vectors makes these tests equivalent
+to condition (2).
+
+Choose coordinates $\theta$ for the finite-dimensional space of possible $\tau$. Condition (1) is a
+system $A\theta=b$, and the tests for condition (2) form a system $C\theta=0$, with all matrices and
+constants over $\F_p$. Lemma~\ref{scalar:fibre} over $\F_p$ makes the combined system inconsistent.
+Row reduction of its augmented matrix therefore gives row vectors $\lambda,\mu$ over $\F_p$ with
+\[
+ \lambda A+\mu C=0,\qquad \lambda b=1.
+\]
+For every $K$\nobreakdash-valued solution of $A\theta=b$ it follows that $\mu C\theta=-1$.
+Every nonzero coefficient of $\mu$ has absolute value $1$, since $\F_p^\times$ is finite.
+The nonarchimedean inequality now gives~\eqref{scalar:threshold}.
+\end{proof}
+
+\subsection{The Banach spaces defined by chain limits}
+
+Set $L=\mathcal F$ and $\Lambda=L^{<\omega}$. Write $\Sigma^j\subseteq V=K^{k+1}$ and
+$\Sigma'^j\subseteq V'=K^k$ for the pair indexed by $j\in L$. Define
+\begin{equation}\label{scalar:spaces}
+ \begin{split}
+ E&=\{x\in\linf(\Lambda;V):
+       \operatorname{dist}(x_i,\Sigma^j)\longrightarrow0
+       \text{ along every }T\in\Gamma_j,\ j\in L\},\\
+ E'&=\{z\in\linf(\Lambda;V'):
+       \operatorname{dist}(z_i,\Sigma'^j)\longrightarrow0
+       \text{ along every }T\in\Gamma_j,\ j\in L\}.
+ \end{split}
+\end{equation}
+Limits along a chain are taken outside its finite subsets. We verify the properties of these full
+solution spaces that will enter the proof.
+
+Each subspace in the definition admits a projection $R$ with $\norm R\le1$ and $\norm{1-R}\le1$.
+For $\ker\varepsilon^a$, delete coordinate $a$; for $\ker(\varepsilon^a+\varepsilon^b)$, replace coordinate
+$a$ by the negative of coordinate $b$; for $V$, use the identity. On $V'$, delete coordinate $s$ for
+$C'_s$, and replace coordinate $c$ by coordinate $d$ for $H'_{cd}$. These formulas are projections onto
+the stated spaces. Their norm bounds follow directly from the maximum norm and the nonarchimedean
+inequality. Moreover
+\begin{equation}\label{scalar:distance}
+ \operatorname{dist}(v,\Sigma)=\norm{(1-R)v}.
+\end{equation}
+Indeed $Rv\in\Sigma$ gives one inequality, and $(1-R)(v-y)=(1-R)v$ for every $y\in\Sigma$ gives the other.
+
+For fixed $j$ and $T\in\Gamma_j$, the corresponding condition in~\eqref{scalar:spaces} is thus the inverse
+image of $c_0(T;V)$ under the bounded linear map $x\mapsto((1-R_j)x_i)_{i\in T}$, and similarly for $V'$.
+The space $c_0$ is closed in the sup norm: a uniform approximation within $\varepsilon/2$ by a null family
+leaves only finitely many coordinates of norm at least $\varepsilon$. Each condition is therefore closed
+and linear. Their intersection is a closed subspace of the Banach space $\linf(\Lambda;V)$, respectively
+$\linf(\Lambda;V')$, so $E$ and $E'$ are nonarchimedean Banach spaces.
+
+Both contain their corresponding $c_0$ spaces. They are also modules over $\linf(\Lambda,K)$ under
+coordinatewise multiplication, with $\norm{tx}\le\norm t\norm x$: each residual family in
+\eqref{scalar:distance} is multiplied by the same bounded scalar family and remains null.
+Finally, if $T\in\Gamma_j$, every bounded $\Sigma^j$\nobreakdash-valued family supported on $T$ belongs
+to $E$. For chains with label $j$ its residual is zero; for a chain with another label, its support meets
+that chain in at most one word by Lemma~\ref{scalar:gap}. The identical assertion holds for $E'$ and
+$\Sigma'^j$.
+
+Since $k\ge2$, the label $j=(V,H'_{12})$ occurs and both its spaces contain a vector of norm $1$.
+Fix a $j$-chain $T$. Multiplying either such vector by arbitrary bounded scalar families on $T$ gives
+an isometric embedding of $\linf(\N,K)$ into $E$, respectively $E'$. The binary-valued sequences form
+an uncountable set at pairwise distance $1$, so both spaces are nonseparable.
+
+\subsection{The global contradiction}
+
+\begin{proof}[Proof of Theorem~\ref{thm:scalar-counter}]
+Use the spaces~\eqref{scalar:spaces}. Suppose that $A=A^k_{E,E';K}$ has a bounded $k$\nobreakdash-linear
+lift $P$. For $i\in\Lambda$, let $\xi_{[i]}\in E$ denote the family equal to $\xi\in V$ at $i$ and zero
+elsewhere. Single-coordinate families belong to $c_0\subseteq E$, and likewise in $E'$. For
+$g\in\operatorname{Hom}_K(V,V')$ let $g_{[i]}\in\cL(E,E')$ send $x$ to the family equal to $g(x_i)$ at
+$i$ and zero elsewhere. Its norm is at most $\norm g$. Set
+\[
+ \delta'_i(z_1,\dots,z_k)=\delta'(z_{1,i},\dots,z_{k,i})\in\Alt^k(E';K).
+\]
+The determinant estimate for the maximum norm gives $\norm{\delta'_i}\le1$. Define the fiber map
+\begin{equation}\label{scalar:fibre-map}
+ \pi_i(g^1,\dots,g^k)(\xi_1,\dots,\xi_k)
+ =P(g^1_{[i]},\dots,g^k_{[i]})(\delta'_i)
+       (\xi_{1[i]},\dots,\xi_{k[i]}).
+\end{equation}
+It is $k$\nobreakdash-linear in the maps and alternating in the vectors, and the lift identity gives
+\begin{equation}\label{scalar:fibre-diagonal}
+ \pi_i(g,\dots,g)=\delta'\circ(g,\dots,g)
+ \qquad\text{for every }g.
+\end{equation}
+In particular every $\pi_i$ satisfies condition (1) of Lemma~\ref{scalar:fibre}.
+
+Fix $j=(\Sigma,\Sigma')\in L$, a chain $T\in\Gamma_j$, maps $g^1,\dots,g^k$ with
+$g^r\Sigma\subseteq\Sigma'$, and vectors $\xi_1,\dots,\xi_k\in\Sigma$. We claim that
+\begin{equation}\label{scalar:chain-decay}
+ \pi_i(g^1,\dots,g^k)(\xi_1,\dots,\xi_k)\longrightarrow0
+ \qquad(i\in T).
+\end{equation}
+For $t\in\linf(\Lambda,K)$ define $u^r_t$ by
+\[
+ (u^r_t x)_i=\begin{cases}t_i g^r(x_i),&i\in T,\\0,&i\notin T.\end{cases}
+\]
+This is a bounded map from $E$ to $E'$. To see that its values lie in $E'$, let $R$ be the projection
+onto $\Sigma$ above and decompose, on $T$,
+\[
+ t_i g^r(x_i)=t_i g^r(Rx_i)+t_i g^r((1-R)x_i).
+\]
+The first term is a bounded $\Sigma'$\nobreakdash-valued family supported on $T$, hence belongs to $E'$.
+The second is null on $T$ by~\eqref{scalar:distance}, hence its zero extension belongs to $c_0\subseteq E'$.
+The coordinate formula gives $\norm{u^r_t}\le\norm t\norm{g^r}$, so $t\mapsto u^r_t$ is bounded linear
+with values in $\cL(E,E')$.
+
+For $c\in\linf(\Lambda,K)$ put
+\begin{equation}\label{scalar:chain-form}
+ m_c(z_1,\dots,z_k)=\sum_{i\in T}c_i\delta'(z_{1,i},\dots,z_{k,i}).
+\end{equation}
+This sum converges. In fact, if $R'$ projects onto $\Sigma'$, write
+$z_{r,i}=a_{r,i}+b_{r,i}$ with $a_{r,i}=R'z_{r,i}$ and $b_{r,i}=(1-R')z_{r,i}$. Both families are bounded
+by $\norm{z_r}$, and $b_{r,i}\to0$ along $T$. Expanding the determinant, the term with only $a$'s is
+zero because $\dim\Sigma'=k-1$. Every remaining term contains an error factor, giving
+\[
+ \abs{\delta'(z_{1,i},\dots,z_{k,i})}
+ \le\max_{1\le r\le k}\left(\norm{b_{r,i}}\prod_{q\ne r}\norm{z_q}\right)
+ \longrightarrow0.
+\]
+Multiplication by bounded $c$ preserves this limit. Completeness of $K$ now gives the unconditional
+scalar sum in~\eqref{scalar:chain-form}. Linearity in each argument and in $c$ follows by taking limits
+of finite partial sums; repeated arguments make every summand zero. Moreover the determinant estimate gives
+\[
+ \abs{m_c(z_1,\dots,z_k)}\le\norm c\prod_{r=1}^k\norm{z_r}.
+\]
+Thus $c\mapsto m_c$ is a bounded linear map into $\Alt^k(E';K)$, of norm at most $1$.
+
+Let $x^r$ be the family equal to $\xi_r$ on $T$ and zero elsewhere; it belongs to $E$ by the
+chain-generator inclusion already proved. Coordinatewise multiplication defines a bounded linear map
+$\rho\mapsto\rho x^r$ from $\linf(\Lambda,K)$ to $E$. Consequently
+\[
+ \begin{split}
+ \Phi(t^1,\dots,t^k,c,r^1,\dots,r^k)
+   =P(u^1_{t^1},\dots,u^k_{t^k})(m_c)(r^1x^1,\dots,r^kx^k)
+ \end{split}
+\]
+is a bounded $(2k+1)$\nobreakdash-linear scalar form on $\linf(\Lambda,K)$, with bound
+\[
+ \norm P\prod_{s=1}^k\bigl(\norm{g^s}\norm{\xi_s}\bigr)
+       \prod_{s=1}^k\norm{t^s}\,\norm c\,\prod_{s=1}^k\norm{r^s}.
+\]
+The set $\Lambda$ is countably infinite, so Lemma~\ref{scalar:tail} gives
+$\Phi(e_i,\dots,e_i)\to0$ outside finite sets. For $i\in T$ we have
+$u^s_{e_i}=g^s_{[i]}$, $m_{e_i}=\delta'_i$ and $e_i x^s=\xi_{s[i]}$.
+Equation~\eqref{scalar:fibre-map} therefore identifies this diagonal value with the expression in
+\eqref{scalar:chain-decay}, proving the claim.
+
+Choose the finite tests of Lemma~\ref{scalar:certificate}, and define
+\[
+ G_j(i)=\max_{(g;\xi)\in\mathcal T_j}
+       \abs{\pi_i(g^1,\dots,g^k)(\xi_1,\dots,\xi_k)},
+ \qquad a_j=\{i\in\Lambda:G_j(i)<1\}.
+\]
+For fixed $j$ and $T\in\Gamma_j$, equation~\eqref{scalar:chain-decay} applies to every test in the finite
+set $\mathcal T_j$. Hence $G_j(i)\to0$ along $T$, and $T\setminus a_j$ is finite. Lemma~\ref{scalar:gap}
+supplies an $i$ belonging to every $a_j$. But~\eqref{scalar:fibre-diagonal} and
+Lemma~\ref{scalar:certificate} force $G_j(i)\ge1$ for some $j$, a contradiction.
+
+There is therefore no bounded $k$\nobreakdash-linear lift of $A$. Proposition~\ref{prop:homogeneous-lift} applies in
+this degree without dividing by $k!$: analyticity at any point would make the degree-$k$ Taylor coefficient
+such a lift. Thus $A$ is analytic at no point, as claimed.
+\end{proof}

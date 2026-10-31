@@ -1,0 +1,1048 @@
+\subsection{Proofs for Section~\ref{sec:geometry}}\label{dfr:ssec:geometry}
+
+\begin{proof}[Proof of Proposition~\ref{prop:tangent-obstruction}]
+Choose $E,D$ from Theorem~\ref{thm:operator-obstructions}(2), so that $A=A^k_{E,D;K}$ is analytic at no point.
+
+\emph{Step 1 (assertion~(1)).} Put $P=\cL(E,D)\times D\times E$ and use the charts $\id_P$ and $\psi(u,d,e)=(u,d+ue,e)$. Operator evaluation is bounded bilinear, so $\psi$ and $\psi^{-1}(u,d,e)=(u,d-ue,e)$ are polynomial analytic, with $D\psi(u,d,e)(v,a,b)=(v,a+ve+ub,b)$. Let $J$ extend forms from $D$ along the projection $\pi_D\colon P\to D$, and let $R$ restrict forms on $P$ along $i_E(b)=(0,0,b)$. These bounded linear maps give
+\[
+ R\circ A^k_{P,P;K}(D\psi(u,d,e))\circ J=A(u).
+\]
+If the transition were analytic at $(u_0,d_0,e_0)$, restriction to the affine slice $u\mapsto(u,d_0,e_0)$ would make $A$ analytic at $u_0$. The reverse transition is treated in the same way with $-u$.
+
+\emph{Step 2 (assertion~(2)).} Let $U=\Alt^k(D;K)$, $Y=U\times D$ and $N=\cL(E,D)\times U\times E$. Define the bounded linear map $\omega_0(m,d)=m\circ\pi_D^{\times k}$, with $\pi_D\colon Y\to D$ the projection, and the polynomial map $h(u,m,e)=(m,ue)$. Since $Dh(u,m,e)(v,a,b)=(a,ve+ub)$, restricting the values of $h^*\omega_0$ to the $E$\nobreakdash-directions gives $f(u,m)=A(u)(m)$. If $h^*\omega_0$ were analytic as an $\Alt^k(N;K)$\nobreakdash-valued map at $(u_0,m_0,e_0)$, fixing $e=e_0$ would make $f$ analytic near $(u_0,m_0)$; since Banach-valued power series differentiate termwise on a smaller ball, $\partial_mf(u,m)=A(u)$ would be analytic near $u_0$, a contradiction. In $\Mult^k(N;K)$ the pullback is a bounded multilinear expression in $Dh$ and $\omega_0\circ h$, hence analytic.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:tangent-values}]
+Throughout, for Banach spaces $E$ and $D'$ put $P=\cL(E,D')\times D'\times E$, with the maximum norm, and use the charts $\id_P$ and $\psi(u,d,e)=(u,d+ue,e)$ of Step~1 of the proof of Proposition~\ref{prop:tangent-obstruction}. Both charts are polynomial analytic, and $g=D\psi(u,d,e)$ is $g(v,a,b)=(v,a+ve+ub,b)$, with $g^{-1}(v,a,b)=(v,a-ve-ub,b)$.
+
+\emph{Step 1 (values in $F$).} For~(1), take $E,F$ from Theorem~\ref{thm:operator-obstructions}(1) and $D'=E$. The maps $J,R$ of Step~1 of the proof of Proposition~\ref{prop:tangent-obstruction}, with values in $F$, give
+\[
+ R\circ A^k_{P,P;F}(D\psi(w,d,e))\circ J=A^k_{E,E;F}(w)\qquad(w\in\cL(E,E)),
+\]
+which is analytic at no point; restriction to affine slices, as in that step, shows that neither transition is analytic at any point. Only bounded linear compression and affine slices are used, so $K$ need not be complete, and $F$ has no equivalent nonarchimedean norm by Theorem~\ref{thm:operator-obstructions}(1). For $K=\F_q((X))$ with its $X$\nobreakdash-adic absolute value, Remark~\ref{rem:spaces} allows $E=\linf(\N,K)$ and $F=F_1$, which has no equivalent nonarchimedean norm by Proposition~\ref{prop:nonultra}. Then $P$ is nonarchimedean, since operator norms into a nonarchimedean space and maximum norms of products are nonarchimedean.
+
+\emph{Step 2 (tangent values).} Suppose that $A^k_{E,D;F}$ is analytic at no point, and put $D'=D\times F$. As functions of the point $(u,d,e)$, the induced transitions on tangent-valued forms are $m\mapsto g\circ m\circ(g^{-1},\ldots,g^{-1})$ and $m\mapsto g^{-1}\circ m\circ(g,\ldots,g)$. Let $\pi_D\colon P\to D$ and $\pi_F\colon P\to F$ be the components of the middle factor, and put $i_F(y)=(0,(0,y),0)$ and $i_E(b)=(0,0,b)$. The bounded linear map
+\[
+ \Phi(T)(m)=\pi_F\circ T\bigl(i_F\circ m\circ\pi_D^{\times k}\bigr)\circ i_E^{\times k}
+\]
+sends operators $T$ on $\Alt^k(P;P)$ to operators $\Alt^k(D;F)\to\Alt^k(E;F)$, and it sends $m\mapsto h\circ m\circ(f,\ldots,f)$, for $f,h\in\cL(P,P)$, to $m\mapsto(\pi_Fhi_F)\circ m\circ(\pi_Dfi_E,\ldots,\pi_Dfi_E)$. Since $\pi_Fg^{\pm1}i_F=\id_F$ and $\pi_Dg^{\pm1}i_E=\pm u_D$, where $u_D\in\cL(E,D)$ is the $D$\nobreakdash-component of $u$, $\Phi$ sends the two transitions to $A^k_{E,D;F}(\mp u_D)=(\mp1)^kA^k_{E,D;F}(u_D)$. If either transition were analytic at $(u_0,d_0,e_0)$, restriction to the affine slice $w\mapsto(u_0+(w,0),d_0,e_0)$, $w\in\cL(E,D)$, would make $A^k_{E,D;F}$ analytic at the $D$\nobreakdash-component of $u_0$.
+
+\emph{Step 3 (the models).} For~(2), apply Step~2 with $E,F$ from Theorem~\ref{thm:operator-obstructions}(1) and $D=E$; then $P$ contains the isometric copy $i_F(F)$ of $F$, so it admits no equivalent nonarchimedean norm. For~(3), apply Step~2 with $E,D$ from Theorem~\ref{thm:operator-obstructions}(2) and $F=K$; then $P$ is a nonarchimedean Banach space, as in Step~1.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:ambient-forms}]
+\emph{Step 1 (sheaf and pullback).} Locality of analytic coefficient maps gives the sheaf property. Addition and multiplication by an analytic function are bounded multilinear operations on the coefficient spaces. For an analytic map $h$, the formula
+\[
+ h^*\eta=(\eta\circ h)\circ(Dh,\ldots,Dh)
+\]
+is analytic in the ambient space and has alternating values. The chain rule gives identity and composition laws for pullback.
+
+\emph{Step 2 (the product).} The shuffle formula~\eqref{eq:form-shuffle} has $\binom{k+l}{k}$ terms, each of norm at most $\norm\eta\norm\zeta$, so it is a bounded bilinear operation on multilinear coefficient spaces, of norm at most $\binom{k+l}{k}$. For alternating inputs it is alternating: terms with two repeated arguments in one block vanish, and the remaining terms cancel in pairs by exchanging those arguments between blocks; this argument includes characteristic two. Formula~\eqref{eq:form-shuffle} commutes with simultaneous precomposition, hence glues in charts and commutes with pullback. Complementing $S$ proves graded commutativity. Expanding either bracketing of a triple product yields the same signed sum over ordered three-block partitions, proving associativity.
+
+\emph{Step 3 ($d\eta$ is a form).} On an open subset of a model space $P$, the operation~\eqref{eq:exterior-derivative} applied to $D\eta$ is bounded linear with norm at most $k+1$, so $d\eta$ is ambient analytic. Each $D\eta(y)(v_i)$ is alternating: difference quotients have alternating values, and that subspace is closed. If $v_a=v_b$ with $a<b$, the summands other than $i=a,b$ vanish; alternation moves the remaining repeated argument across $b-a-1$ positions, making those two terms cancel. Hence $d\eta$ is a form.
+
+\emph{Step 4 ($d^2=0$).} The second derivative of an analytic map is symmetric in every characteristic: if $c_2$ is the bilinear coefficient of degree two of a power series, the second derivative at its center is $(v,w)\mapsto c_2(v,w)+c_2(w,v)$. In the expansion of $d(d\eta)$, pair the terms differentiated in directions $(v_a,v_b)$ and $(v_b,v_a)$ for $a<b$. Their values agree and their signs are $(-1)^{a+b-1}$ and $(-1)^{a+b}$, so $d^2\eta=0$.
+
+\emph{Step 5 (naturality and gluing of $d$).} Differentiate the pullback formula. Terms differentiating $\eta$ give $h^*(d\eta)$ after the signed sum~\eqref{eq:exterior-derivative}. The other terms insert $D^2h(v_a,v_b)$ into one argument of $\eta$, and symmetry of $D^2h$ and alternation of $\eta$ cancel them in pairs. Therefore $d(h^*\eta)=h^*(d\eta)$; applied to chart changes, this identity shows that the local derivatives glue to $d\colon\Omega^k_{\mathrm{amb}}(M)\to\Omega^{k+1}_{\mathrm{amb}}(M)$.
+
+\emph{Step 6 (Leibniz rule).} Differentiating the shuffle formula~\eqref{eq:form-shuffle} gives the Leibniz rule: placing the derivative index in the second block moves it past the first $k$ arguments and contributes $(-1)^k$. Every identity in Steps~1--6 uses finite sums and cancellation, with no division by a factorial.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{fib:prop:derham}]
+Clearly (2) implies (1). If (1) holds, put $T=D\eta(y)$ and $\beta(v_0,\dots,v_{p-1})=T(v_0)(v_1,\dots,v_{p-1})$. Grouping the permutations by the image of $0$ and using alternation of each $T(v_i)$,
+\[
+ \mathcal A_Y\beta(v_0,\dots,v_{p-1})=(p-1)!\sum_{i=0}^{p-1}(-1)^iT(v_i)(v_0,\dots,\widehat{v_i},\dots,v_{p-1})
+ =(p-1)!\,\omega(v_0,\dots,v_{p-1}),
+\]
+and $(p-1)!=-1$ in $K$ by Wilson's theorem, so $\omega=\mathcal A_Y(-\beta)$. If (3) holds, the bounded linear map $\eta(y)(v_1,\dots,v_{p-1})=\sum_\sigma\sgn(\sigma)\,\beta(y,v_{\sigma(1)},\dots,v_{\sigma(p-1)})$, summed over the permutations $\sigma$ of $\{1,\dots,p-1\}$, satisfies $D\eta(y)=\eta$, and the same grouping gives $d\eta=\mathcal A_Y\beta=\omega$. For $F=\widehat\Lambda^p_\pi Y$ the equivalence with $(\mathrm R^p_Y)$ is Lemma~\ref{ob:lem:target}, whose proof also gives the uncompleted case, and Proposition~\ref{fib:prop:split} gives goodness.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{dp:thm:calculus}]
+\emph{Step 1 (nodes).} For an integer $a\ge0$ with binary digits $a_l\in\{0,1\}$, so that $a=\sum_la_l2^l$, put
+$\xi_a=\sum_la_l\varpi^l\in K$. Then $\abs{\xi_a}\le1$, and for $a\ne b$ the least $l$ with $a_l\ne b_l$ is the exponent
+$v(a-b)$ of $2$ in $a-b$, so $\abs{\xi_a-\xi_b}=\abs\varpi^{v(a-b)}$ by the ultrametric inequality. For $0\le a\le i$ the
+numbers $\abs{a-b}$, $b\le i$, $b\ne a$, are $1,\dots,a$ and $1,\dots,i-a$, and the exponent of $2$ in a factorial is at
+most its argument; so
+\[
+ \prod_{b\le i,\ b\ne a}\abs{\xi_a-\xi_b}^{-1}=\abs\varpi^{-v(a!)-v((i-a)!)}\le\abs\varpi^{-i}.
+\]
+Hence the divided difference $\sum_{a\le i}\psi(\xi_a)\prod_{b\le i,\,b\ne a}(\xi_a-\xi_b)^{-1}$ of order $i$ of a map
+$\psi$ from $K$ to a normed space is a combination of the $i+1$ values $\psi(\xi_a)$, $a\le i$, with coefficients of
+absolute value at most $\abs\varpi^{-i}$.
+
+\emph{Step 2 (item (1): the bound).} If $m=0$, $b$ is constant and the bound is clear. Arguments $w_c$ with $\alpha_c=0$ do
+not change $b^{[\alpha]}(w)$, so we may assume $\alpha_c\ge1$ for all $c$; then $r\le m$. If $r=1$, then
+$b^{[\alpha]}(w_1)=b(w_1)$. Let $r\ge2$ and $N=r-1$. The map $\Phi(s)=b(s_1w_1+\dots+s_Nw_N+w_r)$ on $K^N$ is a polynomial
+of total degree at most $m$ with coefficients in $Y$, and $b^{[\alpha]}(w)$ is its coefficient of
+$s_1^{\alpha_1}\cdots s_N^{\alpha_N}$. Newton's interpolation formula on the nodes $\xi_0,\dots,\xi_m$ in each variable gives
+\[
+ \Phi(s)=\sum_{i\in\{0,\dots,m\}^N}\delta_i\prod_{c=1}^Nq_{i_c}(s_c),\qquad q_i(s)=\prod_{b<i}(s-\xi_b),
+\]
+where $\delta_i\in Y$ is the divided difference of $\Phi$ of order $i_c$ in the variable $s_c$, on the nodes
+$\xi_0,\dots,\xi_{i_c}$, for $c=1,\dots,N$. A divided difference of order $i$ of a polynomial of degree less than $i$
+vanishes, and the monomials of $\Phi$ have total degree at most $m$, so $\delta_i=0$ unless $\abs i\le m$. By Step~1,
+$\delta_i$ is a combination of at most $\prod_c(i_c+1)\le2^{\abs i}$ values of $\Phi$ at points with coordinates $\xi_a$,
+with coefficients of absolute value at most $\abs\varpi^{-\abs i}$, and each of these values has norm at most
+$\norm b(\norm{w_1}+\dots+\norm{w_r})^m$, since $\abs{\xi_a}\le1$. The polynomials $q_i$ have coefficients of absolute
+value at most $1$. So the coefficient of $s_1^{\alpha_1}\cdots s_N^{\alpha_N}$ is a sum of at most
+$\binom{m+N}N\le4^m$ terms, one for each $i$ with $\abs i\le m$, each of norm at most
+$(2/\abs\varpi)^m\norm b(\norm{w_1}+\dots+\norm{w_r})^m$.
+
+\emph{Step 3 (item (1): expansions).} Let $x,y\in W$ and $0\le i\le m$. If $x,y\ne0$, choose $\lambda,\mu\in K$ with
+$\abs\varpi<\abs\lambda\norm x\le1$ and $\abs\varpi<\abs\mu\norm y\le1$. As
+$b^{[(m-i,i)]}(\lambda x,\mu y)=\lambda^{m-i}\mu^ib^{[(m-i,i)]}(x,y)$, Step~2 gives
+\begin{equation}\label{dp:eq:binomial}
+ \norm{b^{[(m-i,i)]}(x,y)}\le(16/\abs\varpi^2)^m\norm b\,\norm x^{m-i}\norm y^i,
+\end{equation}
+which holds trivially if $x=0$ or $y=0$. Since $b(x+y)=\sum_{i\le m}b^{[(m-i,i)]}(x,y)$, $b$ is continuous. For fixed
+$x$, the map $y\mapsto b^{[(m-i,i)]}(x,y)$ is a bounded polynomial law of degree $i$: on the span of finitely many
+vectors it is a coefficient of a polynomial with coefficients in $Y$, and~\eqref{dp:eq:binomial} bounds it. So
+$b(x+y)=\sum_{i\le m}b^{[(m-i,i)]}(x,y)$ is a finite expansion at $x$, and $b$ is DP on $W$.
+
+\emph{Step 4 (item (2)).} Let $f(x_0+h)=\sum_na_n(h)$ for $\norm h<R$ and $g(f(x_0)+w)=\sum_mb_m(w)$ for $\norm w<R'$, with
+$\norm{a_n}\le MR^{-n}$ and $\norm{b_m}\le M'R'^{-m}$, where $M,M'>0$. Put
+$\sigma=\min(R/2,\abs\varpi RR'/(32M))$ and $\Delta(h)=\sum_{n\ge1}a_n(h)=f(x_0+h)-f(x_0)$. For $\norm h\le\sigma$,
+$\sum_{n\ge1}\norm{a_n(h)}\le2M\sigma/R\le\abs\varpi R'/16$. For a finitely supported sequence $\alpha=(\alpha_n)_{n\ge1}$
+of nonnegative integers put $\abs\alpha=\sum_n\alpha_n$, $\deg\alpha=\sum_nn\alpha_n$ and
+$\phi_\alpha(h)=b_{\abs\alpha}^{[\alpha]}(a_1(h),a_2(h),\dots)$, computed with $a_1(h),\dots,a_L(h)$ for any $L$ at least
+the largest index in the support of $\alpha$. On the span of finitely many vectors the $a_n$ are polynomials whose
+coefficients span a finite-dimensional subspace of $W$, on which $b_{\abs\alpha}^{[\alpha]}$ is a polynomial in the
+coordinates of its arguments with coefficients in $Y$; and $\phi_\alpha(\lambda h)=\lambda^{\deg\alpha}\phi_\alpha(h)$. With~(1),
+$\phi_\alpha$ is a bounded polynomial law of degree $\deg\alpha$, and for $\norm h\le\sigma$
+\[
+ \norm{\phi_\alpha(h)}\le(8/\abs\varpi)^{\abs\alpha}M'R'^{-\abs\alpha}(2M\sigma/R)^{\abs\alpha}\le M'2^{-\abs\alpha}.
+\]
+By homogeneity, $\norm{\phi_\alpha(h)}\le M'(\norm h/(\abs\varpi\sigma))^{\deg\alpha}$ for all $h$. At most $2^{d-1}$ sequences
+$\alpha$ have $\deg\alpha=d\ge1$, one for each partition of $d$. So for $\norm h\le\tau=\abs\varpi\sigma/4$ the family
+$(\phi_\alpha(h))_\alpha$ is absolutely summable in the completion $\widehat Y$. For each $L$,
+$b_m(\sum_{n\le L}a_n(h))$ is the sum of the $\phi_\alpha(h)$ with $\abs\alpha=m$ and support in $\{1,\dots,L\}$; as
+$L\to\infty$ the left side tends to $b_m(\Delta(h))$, by continuity of $b_m$. Summing over $m$, the family has sum
+$\sum_mb_m(\Delta(h))=g(f(x_0+h))$, since $\norm{\Delta(h)}<R'$. Grouped by degree instead, it has the finite sums
+$\theta_d(h)=\sum_{\deg\alpha=d}\phi_\alpha(h)$, bounded polynomial laws of degree $d$ with values in $Y$ and
+$\norm{\theta_d}\le2^{d-1}M'(\abs\varpi\sigma)^{-d}$ for $d\ge1$. So $\sum_d\theta_d(h)$ converges in $\widehat Y$ to
+$g(f(x_0+h))\in Y$ for $\norm h\le\tau$; its partial sums lie in $Y$, so it converges in $Y$, and $g\circ f$ is DP at
+$x_0$.
+
+\emph{Step 5 (item (3)).} Let $ja(h)=\beta(h,\dots,h)$ as in Definition~\ref{dp:def:laws}(2). For $h_1,\dots,h_r\in P$,
+the map $s\mapsto\beta(\sum_cs_ch_c,\dots,\sum_cs_ch_c)$ is a homogeneous polynomial of degree $n$ with coefficients in
+$Z$. As $K$ is infinite, its coefficients are linear combinations of its values, by interpolation in each variable, and
+these values lie in $j(W)$. So $a$ is a bounded polynomial law of degree $n$, with $\norm a\le\norm\beta$; in particular
+analytic maps are DP. Now let $T\colon K^r\to P$ be a bounded linear isomorphism, $K^r$ with the maximum norm and unit
+vectors $e_1,\dots,e_r$, and let $a\colon P\to W$ be a bounded polynomial law of degree $n$. Then
+$a(Tz)=\sum_{\abs\gamma=n}v_\gamma z^\gamma$ with $v_\gamma=(a\circ T)^{[\gamma]}(e_1,\dots,e_r)$, and
+$\norm{v_\gamma}\le(8r/\abs\varpi)^n\norm T^n\norm a$ by~(1). The $n$\nobreakdash-linear map
+\[
+ \beta_a(h^1,\dots,h^n)=\sum_{t_1\le\dots\le t_n}v_{\gamma(t)}\prod_{c=1}^n(T^{-1}h^c)_{t_c},
+\]
+summed over the nondecreasing words $t$ in $\{1,\dots,r\}$, where $\gamma(t)$ counts the letters of $t$, has diagonal
+$a$, since each monomial $z^\gamma$ comes from exactly one such word, and
+$\norm{\beta_a}\le\binom{n+r-1}n(8r\norm T\norm{T^{-1}}/\abs\varpi)^n\norm a\le2^{r-1}(16r\norm T\norm{T^{-1}}/\abs\varpi)^n\norm a$.
+Applied to the coefficients of a DP expansion, this bound, geometric in $n$, gives an analytic expansion with a
+smaller positive radius.
+
+\emph{Step 6 (item (4)).} By Proposition~\ref{prop:ambient-polynomial} and its proof, the restriction of $B$ to
+alternating maps is the diagonal of a bounded $(k+1)$\nobreakdash-linear map of norm at most $1$ with values in
+$\cL(\Alt^k(D;F),\Mult^k(E;F'))$, and its values lie in $\cL(\Alt^k(D;F),\Alt^k(E;F'))$, which postcomposition by
+$j_{E,F'}$ embeds isometrically; the same holds for $A^k_{E,D;F}(u)=B(u,\id_F)$ in degree $k$. By
+Lemma~\ref{ob:lem:metric-surjection}, $\Theta\mapsto\Theta\circ\wedge^k_E$ is a linear isometry of
+$\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ into $\cL(\otimes^k_\pi E,\widehat\Lambda^k_\pi D)$, and restriction to the dense
+subspace $\Lambda^k_\pi E$ is an isometric isomorphism of $\cL(\widehat\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ onto
+$\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$, as $\widehat\Lambda^k_\pi D$ is complete. These isometries map
+$\Lambda^k_\pi u$ and $\widehat\Lambda^k_\pi u$ to $\wedge^k_D\circ(u\otimes\dots\otimes u)$, the diagonal of the
+$k$\nobreakdash-linear map $(u_1,\dots,u_k)\mapsto\wedge^k_D\circ(u_1\otimes\dots\otimes u_k)$ of norm at most $1$. Item~(3)
+bounds the four norms by $1$.
+\end{proof}
+
+For the proof of Proposition~\ref{dp:prop:nonambient} we use the following notation. For a field $\Bbbk$ and integers
+$m,n\ge1$, read a tensor $t\in(\Bbbk^m)^{\otimes n}$ as the function
+$t(i_1,\dots,i_n)$ on $[m]^n$, where $[m]=\{1,\dots,m\}$, and for linear forms $\phi_1,\dots,\phi_n$ on $\Bbbk^m$ let $t(\phi_1,\dots,\phi_n)$ be
+the value of $\phi_1\otimes\dots\otimes\phi_n$ at $t$. Let $\Gamma^n(\Bbbk^m)$ be the space of symmetric tensors, let
+$\operatorname{diag}(t)\in\Bbbk^m$ have the entries $t(i,\dots,i)$, and let the \emph{flattening rank}
+$\operatorname{frk}(t)$ be the rank of the $m\times m^{n-1}$ matrix of the entries $t(i_1,\dots,i_n)$, with rows indexed by
+$i_1$; it is subadditive and does not change under extension of scalars. A \emph{projection onto the symmetric tensors}
+is a linear map $\Psi$ of $(\Bbbk^m)^{\otimes n}$ into $\Gamma^n(\Bbbk^m)$ with $\Psi(t)=t$ for $t\in\Gamma^n(\Bbbk^m)$.
+Symmetric tensors with entries in a commutative $\Bbbk$\nobreakdash-algebra are combinations of symmetric tensors over
+$\Bbbk$, so the linear extension of $\Psi$ to such entries maps tensors with these entries to symmetric ones and fixes
+the symmetric ones.
+
+\begin{lemma}[projections onto symmetric tensors]\label{dp:lem:projections}
+Let $m\ge1$.
+\begin{enumerate}
+\item Let $\Bbbk$ be a field, $a\ge1$, $x=(x_1,\dots,x_m)^{\mathsf T}$ a column of indeterminates, and $\mathsf M(x)$
+an $m\times m$ matrix over $\Bbbk[x_1,\dots,x_m]$ with $\mathsf M(x)x=(x_1^a,\dots,x_m^a)^{\mathsf T}$. Then $\det\mathsf M(x)$ has the coefficient $1$ at
+$x_1^{a-1}\cdots x_m^{a-1}$.
+\item Let $\Bbbk$ have characteristic $p>0$, let $C\ge0$ be an integer with $\abs\Bbbk\ge2C+2$, and let
+$\mathcal X\subseteq\Gamma^p(\Bbbk^m)$ be a linear space whose elements have flattening rank at most $C$. Then
+$\dim\operatorname{diag}(\mathcal X)\le C$.
+\item Let $f$ be a function from an abelian group into $[0,\infty)$ with $f(z+z')\le f(z)+f(z')$, and let $\Phi$ be a
+map from $(\F_p^m)^p$ into this group that is additive in each argument. Then the average of $f\circ\Phi$ over
+$(\F_p^m)^p$ is at least $2^{-p}$ times its value at every point.
+\item Let $\Bbbk$ be a field of characteristic $p>0$, and let $\Psi$ be a projection of $(\Bbbk^m)^{\otimes p}$ onto
+$\Gamma^p(\Bbbk^m)$. Then the average of $\operatorname{frk}\Psi(y^1\otimes\dots\otimes y^p)$ over
+$(y^1,\dots,y^p)\in(\F_p^m)^p$ is at least $m/\bigl(2^p(1+\lfloor\log_pm\rfloor)\bigr)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Let $\mathsf D$ be the diagonal matrix with the entries $x_1^{a-1},\dots,x_m^{a-1}$, and put
+$\mathsf N=\mathsf M-\mathsf D$, so $\mathsf Nx=0$. As the determinant is linear in each row,
+$\det\mathsf M=\sum_{S\subseteq[m]}\det\mathsf M_S$, where $\mathsf M_S$ has the rows of $\mathsf N$ in the positions in
+$S$ and those of $\mathsf D$ elsewhere, and $\det\mathsf M_\emptyset=x_1^{a-1}\cdots x_m^{a-1}$. Let $S\ne\emptyset$, and
+let $J_S$ be the ideal generated by the $x_i^a$, $i\notin S$. The vector $\mathsf M_Sx$ has the entries $0$ in the
+positions in $S$ and $x_i^a$ elsewhere, so multiplication by the adjugate of $\mathsf M_S$ gives
+$\det(\mathsf M_S)x_j\in J_S$ for every $j$. For $j\in S$, $x_j$ is a nonzerodivisor modulo $J_S$, which is generated
+by monomials in the other variables; so $\det\mathsf M_S\in J_S$. Every monomial of an element of $J_S$ is divisible by
+some $x_i^a$, so $x_1^{a-1}\cdots x_m^{a-1}$ does not occur in $\det\mathsf M_S$.
+
+\emph{Step 2 (item (2): a common kernel).} For $t\in\Gamma^p(\Bbbk^m)$ and a linear form $\phi$ on $\Bbbk^m$ let
+$t^\flat(\phi)\in(\Bbbk^m)^{\otimes(p-1)}$ have the entries $\sum_i\phi(e_i)\,t(i,i_2,\dots,i_p)$, $e_i$ the unit
+vectors; the linear map $t^\flat$ has rank $\operatorname{frk}(t)$, and $t^\flat(\phi)(\phi,\dots,\phi)=t(\phi,\dots,\phi)$.
+Let $t_0\in\mathcal X$ have the largest flattening rank $r_0\le C$, let $\mathcal U$ be the kernel of $t_0^\flat$, of
+codimension $r_0$, with a complement $\mathcal U'$, and let $\mathcal I$ be the image of $t_0^\flat$, with a complement
+$\mathcal I'$. For $t\in\mathcal X$ write $t^\flat$ in blocks $\mathsf B_{11}(t)\colon\mathcal U'\to\mathcal I$,
+$\mathsf B_{12}(t)\colon\mathcal U\to\mathcal I$, $\mathsf B_{21}(t)\colon\mathcal U'\to\mathcal I'$ and
+$\mathsf B_{22}(t)\colon\mathcal U\to\mathcal I'$; then $\mathsf B_{11}(t_0)$ is invertible and the other blocks of
+$t_0^\flat$ vanish. Put $\mathsf A_\mu=\mathsf B_{11}(t_0)+\mu\mathsf B_{11}(t)$ for $\mu\in\Bbbk$. If $\mu\ne0$ and
+$\det\mathsf A_\mu\ne0$, the Schur complement of $\mathsf A_\mu$ in $(t_0+\mu t)^\flat$ vanishes, since
+$\operatorname{frk}(t_0+\mu t)\le r_0$; that is,
+\begin{equation}\label{dp:eq:schur}
+ \det(\mathsf A_\mu)\,\mathsf B_{22}(t)=\mu\,\mathsf B_{21}(t)\operatorname{adj}(\mathsf A_\mu)\mathsf B_{12}(t).
+\end{equation}
+Both sides are polynomials in $\mu$ of degree at most $r_0$, and $\det\mathsf A_\mu$ has at most $r_0$ roots, since it is
+nonzero at $\mu=0$. So~\eqref{dp:eq:schur} holds for all $\mu$ outside a set of at most $r_0+1$ elements, hence, as
+$\abs\Bbbk\ge2r_0+2$, for at least $r_0+1$ values of $\mu$, and so identically. At $\mu=0$, \eqref{dp:eq:schur} gives
+$\mathsf B_{22}(t)=0$: $t^\flat(\phi)\in\mathcal I$ for $\phi\in\mathcal U$.
+
+\emph{Step 3 (item (2): diagonal forms).} The elements of $\mathcal I$ vanish when one of their arguments lies in
+$\mathcal U$, as $t_0$ is symmetric. So $\delta_t(\phi)=t(\phi,\dots,\phi)=t^\flat(\phi)(\phi,\dots,\phi)$
+vanishes for $\phi\in\mathcal U$ and $t\in\mathcal X$. As $t$ is symmetric and the binomial coefficients
+$\binom p1,\dots,\binom p{p-1}$ vanish in $\Bbbk$, $\delta_t$ is additive, and $\delta_t(c\phi)=c^p\delta_t(\phi)$ for
+$c\in\Bbbk$. Let $\phi_1,\dots,\phi_{r_0}$ be a basis of $\mathcal U'$, and write the coordinate forms as
+$e_i^*=\psi_i+\sum_jc_{ij}\phi_j$ with $\psi_i\in\mathcal U$. Then $\operatorname{diag}(t)$ has the entries
+$\delta_t(e_i^*)=\sum_jc_{ij}^p\delta_t(\phi_j)$, so it is the image of the vector $(\delta_t(\phi_j))_j\in\Bbbk^{r_0}$,
+which depends linearly on $t$, under a matrix that does not depend on $t$. Hence
+$\dim\operatorname{diag}(\mathcal X)\le r_0\le C$.
+
+\emph{Step 4 (item (3)).} For $z$ in a finite subgroup $B$ of the group, the average of $f$ over $B$ is at least
+$f(z)/2$, since $f(b)+f(z-b)\ge f(z)$ and $b\mapsto z-b$ permutes $B$. For fixed other arguments,
+$y^j\mapsto\Phi(y^1,\dots,y^p)$ is additive on $\F_p^m$, so as $y^j$ runs through $\F_p^m$ its value runs equally often
+through each element of its image, a finite subgroup. Hence the average of $f\circ\Phi$ over $y^j$ is at least half its
+value at any fixed $y^j$. Applying this in the slots $j=1,\dots,p$ in turn gives~(3).
+
+\emph{Step 5 (item (4): an invertible diagonal).} Let $x=(x_1,\dots,x_m)$ be a vector of indeterminates, extend $\Psi$
+linearly to entries in $\Bbbk[x_1,\dots,x_m]$, and let $\mathsf M(x)$ be the matrix over $\Bbbk[x_1,\dots,x_m]$ of the
+linear map $v\mapsto\operatorname{diag}\Psi(x^{\otimes(p-1)}\otimes v)$, whose columns are
+$\operatorname{diag}\Psi(x^{\otimes(p-1)}\otimes e_i)$. Its value at a point $\xi\in\Bbbk^m$ is the matrix of the same
+map with $\xi$ in place of $x$. As $\Psi$ fixes the symmetric tensor $x^{\otimes p}$,
+$\mathsf M(x)x=\operatorname{diag}(x^{\otimes p})=(x_1^p,\dots,x_m^p)^{\mathsf T}$. By~(1), the form
+$\det\mathsf M(x)$ of degree $m(p-1)$ has the coefficient $1$ at $x_1^{p-1}\cdots x_m^{p-1}$. The sum
+$\sum_{c\in\F_p}c^b$ is $-1$ if $b>0$ and $p-1$ divides $b$, and $0$ otherwise, and $x_1^{p-1}\cdots x_m^{p-1}$ is the
+only monomial of degree $m(p-1)$ whose exponents are positive multiples of $p-1$; so
+$\sum_{\xi\in\F_p^m}\det\mathsf M(\xi)=(-1)^m$, and $\mathsf M(\xi_0)$ is invertible for some $\xi_0\in\F_p^m$.
+
+\emph{Step 6 (item (4): a value of large rank).} Let $\Bbbk''\supseteq\Bbbk$ be a field with $\abs{\Bbbk''}\ge2m$,
+with $\Bbbk''=\Bbbk$ if $\Bbbk$ is infinite, and let $\Psi''$ be the linear extension of $\Psi$ to entries in $\Bbbk''$.
+The tensors $\Psi''(\xi_0^{\otimes(p-1)}\otimes u)$, $u\in\Bbbk''^m$, form a linear space whose diagonals form
+$\mathsf M(\xi_0)\Bbbk''^m=\Bbbk''^m$, so by~(2) with $C=m-1$ one of them has flattening rank $m$. Hence some $m\times m$
+minor $\mathsf P(u)$ of the matrix of entries of $\Psi''(\xi_0^{\otimes(p-1)}\otimes u)$, a polynomial of degree at most
+$m$ in each coordinate of $u$, is not the zero polynomial. Let $d=1+\lfloor\log_pm\rfloor$, the least integer with
+$p^d>m$. As $\abs{\Bbbk''}>m$, and $\abs{\Bbbk''}$ is a power of $p$ if $\Bbbk''$ is finite, $\Bbbk''$ contains an
+$\F_p$\nobreakdash-subspace $\mathcal W$ of dimension $d$, so $\abs{\mathcal W}=p^d>m$. A nonzero polynomial in $r$
+variables of degree at most $m$ in each variable does not vanish on all of $\mathcal W^r$: for $r=1$ it has at most
+$m$ roots, and for $r>1$ write it as $\sum_{e=0}^m\mathsf P_eu_r^e$ with polynomials $\mathsf P_e$ in the other variables;
+some $\mathsf P_e$ is nonzero, by induction it does not vanish at some point of $\mathcal W^{r-1}$, and there the
+polynomial is a nonzero polynomial in $u_r$ of degree at most $m$. With $r=m$ and the minor $\mathsf P$, there is
+$v\in\mathcal W^m$ with $\operatorname{frk}\Psi''(\xi_0^{\otimes(p-1)}\otimes v)=m$. Write
+$v=\sum_{i=1}^d\omega_iv_i$ with an $\F_p$\nobreakdash-basis $\omega_1,\dots,\omega_d$ of $\mathcal W$ and $v_i\in\F_p^m$.
+Then $\Psi''(\xi_0^{\otimes(p-1)}\otimes v)=\sum_i\omega_i\Psi(\xi_0^{\otimes(p-1)}\otimes v_i)$, and subadditivity gives
+$\operatorname{frk}\Psi(\xi_0^{\otimes(p-1)}\otimes v_{i_0})\ge m/d$ for some $i_0$.
+
+\emph{Step 7 (item (4): averaging).} The flattening rank is subadditive, and
+$(y^1,\dots,y^p)\mapsto\Psi(y^1\otimes\dots\otimes y^p)$ is additive in each argument, so by~(3) the average in~(4) is
+at least $2^{-p}$ times the flattening rank of the value at $(\xi_0,\dots,\xi_0,v_{i_0})$, hence at least $m/(2^pd)$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{dp:prop:nonambient}]
+\emph{Step 0 (the field under (a)).} Assume~(a). The completion $\Kh$ has characteristic $p$, so its valuation ring is a
+complete discrete valuation ring containing the prime field $\F_p$, with $\vartheta$ as a uniformizer. By Cohen's
+structure theorem for complete regular local rings containing a field~\cite{Co}, this ring is isomorphic to the power
+series ring $\kappa[[X]]$ over its residue field $\kappa$, by an isomorphism taking $\vartheta$ to $X$; it extends to an
+isomorphism of $\Kh$ onto $\kappa((X))$, which is isometric for the absolute value $\abs a=\abs\vartheta^{\ord a}$ on
+$\kappa((X))$. All objects in Proposition~\ref{dp:prop:nonambient} are defined from $K$ as a normed field, so under~(a)
+we may assume that $K$ is a subfield of $\kappa((X))$ with this absolute value.
+
+\emph{Step 1 (item (1): $t_m$).} Let $(f_k)$ be a basis of $Q_m$ with dual basis $(f_k^*)$, and let $e_l$ be the unit
+vector of $\ell^1(I_m,K)$ at $l$, so that $\varepsilon_l$ is its image in $G_m$. Then $\sum_l\bar y_l\otimes e_l=\sum_kf_k\otimes(f_k^*(\bar y_l))_l$ lies in
+$Q_m\otimes N_m$, so $\sum_l\bar y_l\otimes\varepsilon_l=0$ in $Q_m\otimes G_m$. Hence $t_m$ lies in the kernel of the
+map $z\otimes g\mapsto\bar z\otimes g$ of $(K^m)^{\otimes p}\otimes G_m$ onto $Q_m\otimes G_m$, which is
+$\Gamma^p(K^m)\otimes G_m$. As $K$ is infinite, $\Gamma^p(K^m)$ is spanned by the powers $u^{\otimes p}$, so $t_m\in V$.
+The vectors $y_l^1,\dots,y_l^p$ have entries in $\F_p$, hence norm at most $1$, and $\norm{\varepsilon_l}\le1$, so
+$\pi(t_m)\le\abs{I_m}=p^{pm}$.
+
+\emph{Step 2 (a representation gives a projection).} Let $t_m=\sum_ic_iu_i^{\otimes p}\otimes g_i$ with $c_i\in K$,
+$u_i\in c_0$, $g_i\in G$, and let $\delta>0$. The coordinate projection of $c_0$ onto $K^m$ and the projection of $G$
+onto $G_m$ are contractive; the $p$-th tensor power of the first, tensored with the second, fixes $t_m$ and does not
+increase $\sum_i\abs{c_i}\norm{u_i}^p\norm{g_i}$, so we may assume $u_i\in K^m$ and $g_i\in G_m$. Choose
+$\hat g_i\in\ell^1(I_m,K)$ with image $g_i$ and $\norm{\hat g_i}\le(1+\delta)\norm{g_i}$, and put
+$\sigma_l=\sum_ic_i\hat g_i(l)\,u_i^{\otimes p}\in\Gamma^p(K^m)$ for $l\in I_m$. With $\pi_m$ the projective norm of the
+$p$\nobreakdash-fold tensor power of $K^m$ with the maximum norm,
+\begin{equation}\label{dp:eq:norm-sum}
+ \sum_{l\in I_m}\pi_m(\sigma_l)\le\sum_i\abs{c_i}\norm{u_i}^p\norm{\hat g_i}\le(1+\delta)\sum_i\abs{c_i}\norm{u_i}^p\norm{g_i}.
+\end{equation}
+The tensors $\sum_l\sigma_l\otimes e_l=\sum_ic_iu_i^{\otimes p}\otimes\hat g_i$ and $\sum_ly_l\otimes e_l$ both map to
+$t_m$ in $(K^m)^{\otimes p}\otimes G_m$, so their difference lies in $(K^m)^{\otimes p}\otimes N_m$. The vectors
+$(f_k^*(\bar y_l))_l$ span $N_m$, so the difference is $\sum_k\tau_k\otimes(f_k^*(\bar y_l))_l$ for some
+$\tau_k\in(K^m)^{\otimes p}$. So $\sigma_l=y_l+\sum_kf_k^*(\bar y_l)\tau_k$ for $l\in I_m$. Put
+$\Psi_K(z)=z+\sum_kf_k^*(\bar z)\tau_k$ for $z\in(K^m)^{\otimes p}$; then $\Psi_K(y_l)=\sigma_l$. The linear map
+$\Theta(q)=q+\sum_kf_k^*(q)\bar\tau_k$ of $Q_m$
+vanishes at every $\bar y_l$, since $\bar\sigma_l=0$, and these span $Q_m$, as $I_m$ contains the tuples of unit
+vectors; so $\Theta=0$, and the image of $\Psi_K(z)$ in $Q_m$ is $\Theta(\bar z)=0$. As $\Psi_K(z)=z$ when $\bar z=0$,
+$\Psi_K$ is a projection of $(K^m)^{\otimes p}$ onto $\Gamma^p(K^m)$.
+
+\emph{Step 3 (item (1) under (a): constant coefficients).} Let $K\subseteq\kappa((X))$ be as in Step~0. By the
+paragraph before Lemma~\ref{dp:lem:projections}, with $\Bbbk=K$, the
+linear extension $\widetilde\Psi$ of $\Psi_K$ to entries in $\kappa((X))$ is a projection of
+$(\kappa((X))^m)^{\otimes p}$ onto $\Gamma^p(\kappa((X))^m)$. For $z\in(\kappa^m)^{\otimes p}$ put
+$\Psi(z)=\coeff_0\widetilde\Psi(z)$. Then $\Psi$ is $\kappa$\nobreakdash-linear with symmetric values and fixes the symmetric
+tensors over $\kappa$, so it is a projection of $(\kappa^m)^{\otimes p}$ onto $\Gamma^p(\kappa^m)$. As the $y_l$ have entries in $\F_p\subseteq K\cap\kappa$, $\widetilde\Psi(y_l)=\Psi_K(y_l)=\sigma_l$, and
+$\Psi(y_l)=\coeff_0\sigma_l$. The matrix of the entries of
+$\sigma_l$, with rows indexed by the first index, read in the completion of
+$\linf([m],K)\otimes_\pi\linf([m]^{p-1},K)$, has norm at most $\pi_m(\sigma_l)$, since an elementary tensor of $p-1$ vectors
+of $K^m$, read as a function on $[m]^{p-1}$, has as maximum norm the product of their maximum norms. So
+Lemma~\ref{fib:lem:coeff}(2), which holds for every field $\kappa$ of characteristic $p$ (see the beginning of
+Appendix~\ref{app:forcing}), with $\abs\vartheta$ in place of $\varrho$ and the index sets $[m]$ and $[m]^{p-1}$, gives
+$\operatorname{frk}\Psi(y_l)\le M_{\abs\vartheta}\pi_m(\sigma_l)$, and by~\eqref{dp:eq:norm-sum}
+\begin{equation}\label{dp:eq:rank-sum}
+ \sum_{l\in I_m}\operatorname{frk}\Psi(y_l)\le(1+\delta)M_{\abs\vartheta}\sum_i\abs{c_i}\norm{u_i}^p\norm{g_i}.
+\end{equation}
+
+\emph{Step 4 (item (1) under (a)).} The tensors $y_l$, $l\in I_m$, are the $y^1\otimes\dots\otimes y^p$ with
+$(y^1,\dots,y^p)\in(\F_p^m)^p$, so by Lemma~\ref{dp:lem:projections}(4) the left side of~\eqref{dp:eq:rank-sum} is at
+least $mp^{pm}/\bigl(2^p(1+\lfloor\log_pm\rfloor)\bigr)$. As the representation of $t_m$ and $\delta>0$ are arbitrary,
+$\nu(t_m)\ge mp^{pm}/\bigl(2^pM_{\abs\vartheta}(1+\lfloor\log_pm\rfloor)\bigr)$. With Step~1 this is~(1) under~(a).
+
+\emph{Step 5 (item (1) under (b)).} Let $p=2$. For $S\subseteq[m]$ let $1_S\in\F_2^m$ have the entries $1$ at the
+elements of $S$ and $0$ elsewhere, so that $I_m$ consists of the pairs $l=(1_S,1_T)$, $S,T\subseteq[m]$. Identify
+$(K^m)^{\otimes2}$ with $K^{m\times m}$ by $a\otimes b\mapsto ab^{\mathsf T}$; then $\Gamma^2(K^m)$ is the space of
+symmetric matrices and $y_l=1_S1_T^{\mathsf T}$ for $l=(1_S,1_T)$. First, $\abs{\det\sigma_{l_0}}\ge1$ for some
+$l_0\in I_m$. If $m=1$, then $\Psi_K=\id$ and $\sigma_{l_0}=1$ for $l_0=(1_{\{1\}},1_{\{1\}})$. Let $m\ge2$, and let
+$\wedge\colon K^{m\times m}\to\Lambda^2K^m$ be the linear map of Theorem~\ref{obs:thm:char-two}(1), with $m$ in place of
+its $n$; by its formula there, it is onto, its kernel is the space of symmetric matrices, and
+$\wedge(ab^{\mathsf T})=a\wedge b$. As $\Psi_K-\id$ vanishes on the symmetric matrices, it is $\chi\circ\wedge$ for a
+linear map $\chi\colon\Lambda^2K^m\to K^{m\times m}$, and $\wedge\circ\chi=\id$, since $\Psi_K$ takes symmetric values
+and $-1=1$ in $K$. So $\Psi_K(ab^{\mathsf T})=\chi(a\wedge b)+ab^{\mathsf T}$, and Proposition~\ref{ocl:prop:sections},
+applied over the field $K$ to $\chi$, with $m$ in place of its $n$, gives
+$\sum_{S,T\subseteq[m]}\det\Psi_K(1_S1_T^{\mathsf T})=1$. As $K$ is nonarchimedean, some term has absolute value at
+least $1$.
+
+By Lemma~\ref{ocl:lem:pfaffian-bound}(2), $\pi_m(\sigma_{l_0})\ge m$. By Lemma~\ref{dp:lem:projections}(3), applied to the
+norm $\pi_m$ and to the map $(y^1,y^2)\mapsto\Psi_K(y^1\otimes y^2)$, the average of $\pi_m(\sigma_l)$ over the $4^m$
+elements $l\in I_m$ is at least $\pi_m(\sigma_{l_0})/4$, so $\sum_{l\in I_m}\pi_m(\sigma_l)\ge m4^{m-1}$. As the representation of $t_m$ and $\delta>0$ are arbitrary,
+\eqref{dp:eq:norm-sum} gives $\nu(t_m)\ge m4^{m-1}$. With Step~1 this is~(1) under~(b).
+
+\emph{Step 6 (item (2)).} On the span of finitely many vectors of $H$, $R_n$ is a homogeneous polynomial of degree $n$
+with coefficients in $V$: the coefficients of $x^{\otimes p}$, as a polynomial in the coordinates of $x$ in a
+finite-dimensional subspace of $c_0$, are symmetric tensors, and symmetric tensors in $c_0^{\otimes p}$ are combinations
+of powers, as $K$ is infinite. Moreover
+$\nu(R_n(\lambda,x,g))\le\abs\lambda^{n-p-1}\norm x^p\norm g\le\norm{(\lambda,x,g)}^n$. So $R_n$ is a bounded polynomial
+law of degree $n$ with $\norm{R_n}\le1$. Suppose $jR_n(h)=\beta(h,\dots,h)$ for a linear isometry $j$ of $V$, or of its
+completion, into a normed space $Z$ and a bounded $n$\nobreakdash-linear $\beta\colon H^n\to Z$, and let
+$\beta_\otimes\colon\otimes^n_\pi H\to Z$ be the linear map with $\beta_\otimes(h_1\otimes\dots\otimes
+h_n)=\beta(h_1,\dots,h_n)$, of norm $\norm\beta$. Put $\mathbf 1=(1,0,0)\in H$ and $d_n=n!/(p!\,(n-p-1)!)$. For
+$t\in(K^m)^{\otimes p}\otimes G$, read in $\otimes^{p+1}H$, let $\iota(t)\in\otimes^nH$ be the sum, over the $d_n$ words
+$w\in\{1,2,3\}^n$ with $p$ letters $1$ and one letter $2$, of the tensor obtained from
+$t\otimes\mathbf 1^{\otimes(n-p-1)}$ by moving the first $p$ factors, in order, to the positions of the letters $1$ of
+$w$, the $(p+1)$-st factor to the position of the letter $2$, and the factors $\mathbf 1$ to the positions of the
+letters $3$. Since the inclusions of $c_0$ and $G$ into $H$ are isometric, permutations of the factors are isometries of
+$\otimes^n_\pi H$ and $\norm{\mathbf 1}=1$, $\iota(t)$ has norm at most $d_n\pi(t)$ in $\otimes^n_\pi H$, with $\pi(t)$ the
+projective norm of $t$ in $c_0^{\otimes p}\otimes G$. For $x\in K^m$, $g\in G$ and $s=(s_1,s_2,s_3)\in K^3$ put
+$h_s=(s_3,s_1x,s_2g)$. Then $\beta_\otimes(h_s^{\otimes n})=\beta(h_s,\dots,h_s)=jR_n(h_s)=s_1^ps_2s_3^{n-p-1}\,
+j(x^{\otimes p}\otimes g)$, and $\iota(x^{\otimes p}\otimes g)$ is the coefficient of $s_1^ps_2s_3^{n-p-1}$ in the
+polynomial $h_s^{\otimes n}$. As $K$ is infinite, comparing coefficients gives
+$\beta_\otimes(\iota(x^{\otimes p}\otimes g))=j(x^{\otimes p}\otimes g)$. So $\beta_\otimes(\iota(t))=j(t)$ for $t$ in the span of the
+$x^{\otimes p}\otimes g$, $x\in K^m$, $g\in G$, which contains $t_m$ by Step~1. Hence
+$\nu(t_m)=\norm{j(t_m)}\le d_n\norm\beta\pi(t_m)\le d_n\norm\beta p^{pm}$, and~(1) gives
+$m\le2^pd_nM_{\abs\vartheta}\norm\beta(1+\lfloor\log_pm\rfloor)$ under~(a) and $m\le4d_n\norm\beta$ under~(b), for every $m$,
+which is impossible.
+\end{proof}
+
+For the proof of Proposition~\ref{dp:prop:degree-p} we extend the notation before Lemma~\ref{dp:lem:projections} from
+$\Bbbk^m$ to $\Bbbk^{\mathcal J}$, for a field $\Bbbk$ and a finite set $\mathcal J$. A tensor
+$t\in(\Bbbk^{\mathcal J})^{\otimes d}$ is read as a function on the words $w=(w_1,\dots,w_d)\in\mathcal J^d$, and
+$\Gamma^d(\Bbbk^{\mathcal J})$ is the space of symmetric tensors, with $\Gamma^0(\Bbbk^{\mathcal J})=\Bbbk$. Let
+$\N^{\mathcal J}_d$ be the set of $\alpha\in\N^{\mathcal J}$ with $\abs\alpha=d$; for $\mathcal J=[m]$ it is the set
+$\N^m_d$ of Section~\ref{sec:dp}. The \emph{content} of a word $w\in\mathcal J^d$ is the $\alpha\in\N^{\mathcal J}_d$
+whose entry at each element of $\mathcal J$ is the number of letters of $w$ equal to it. Let
+$O_\alpha\in\Gamma^d(\Bbbk^{\mathcal J})$ be the sum, over the words $w$ of content $\alpha$, of the tensor product of
+the unit vectors of $\Bbbk^{\mathcal J}$ at the letters $w_1,\dots,w_d$. The $O_\alpha$, $\alpha\in\N^{\mathcal J}_d$,
+form a basis of $\Gamma^d(\Bbbk^{\mathcal J})$, and $t=\sum_\alpha t_\alpha O_\alpha$, where $t_\alpha$ is the value of
+$t$ at any word of content $\alpha$.
+
+The \emph{product} of $t\in\Gamma^d(\Bbbk^{\mathcal J})$ and $t'\in\Gamma^{d'}(\Bbbk^{\mathcal J})$ is the sum
+$t\cdot t'\in\Gamma^{d+d'}(\Bbbk^{\mathcal J})$ of the $\binom{d+d'}d$ tensors obtained from $t\otimes t'$ by the
+permutations of the $d+d'$ factors that keep the order of the first $d$ factors and the order of the last $d'$; a
+scalar in $\Gamma^0(\Bbbk^{\mathcal J})$ multiplies. For $\Bbbk=K$ this is the shuffle product of
+Section~\ref{dgr:ssec:polarizable}. As tensor powers of linear maps commute with permutations of the
+factors, $q^{\otimes(d+d')}(t\cdot t')=q^{\otimes d}(t)\cdot q^{\otimes d'}(t')$ for every linear map $q$ of
+$\Bbbk^{\mathcal J}$ into some $\Bbbk^{\mathcal J'}$. Let $\mathcal J=[m]$, $\alpha\in\N^m_d$ and $\alpha'\in\N^m_{d'}$.
+The coefficient of $O_\alpha\cdot O_{\alpha'}$ at a word of content $\alpha+\alpha'$ is the number of ways to choose
+the $d$ of its letters that come from the first factor, which must contain $\alpha_i$ of the $\alpha_i+\alpha'_i$
+letters equal to $i$, for each $i$; so
+\begin{equation}\label{dp:eq:orbit-product}
+ O_\alpha\cdot O_{\alpha'}=\prod_{i=1}^m\binom{\alpha_i+\alpha'_i}{\alpha_i}\,O_{\alpha+\alpha'},
+\end{equation}
+and the product is commutative and associative on the spaces $\Gamma^d(\Bbbk^m)$, $d\ge0$. For
+$t\in\Gamma^{d+d'}(\Bbbk^m)$ and $\gamma\in\N^m_d$ let $\partial^\gamma t\in\Gamma^{d'}(\Bbbk^m)$ have the coefficients
+$(\partial^\gamma t)_\alpha=t_{\alpha+\gamma}$, $\alpha\in\N^m_{d'}$; for $d=p-1$ and $d'=1$ this is the slice of
+Section~\ref{sec:dp}. Then $\partial^\gamma\partial^{\gamma'}=\partial^{\gamma+\gamma'}$, and $\partial^\gamma O_\alpha$
+is $O_{\alpha-\gamma}$ if $\gamma\le\alpha$ entrywise and $0$ otherwise. With~\eqref{dp:eq:orbit-product} and
+Vandermonde's identity $\sum_\gamma\prod_i\binom{\alpha_i}{\gamma_i}=\binom{d+d'}d$ for $\alpha\in\N^m_{d+d'}$, the sum
+over the $\gamma\in\N^m_d$ with $\gamma\le\alpha$, this gives
+\begin{equation}\label{dp:eq:contraction-sum}
+ \sum_{\gamma\in\N^m_d}(\partial^\gamma t)\cdot O_\gamma=\binom{d+d'}d\,t\qquad(t\in\Gamma^{d+d'}(\Bbbk^m)).
+\end{equation}
+
+\begin{lemma}[an identity for symmetric tensors]\label{dp:lem:linear}
+Let $\Bbbk$ be a field of characteristic $p>0$ and $m\ge1$, let $\mathsf L$ be a matrix over $\Bbbk$ with rows and
+columns indexed by $\N^m_{p-1}$, and let $\mathsf L^\sharp$ be the linear map of $\Gamma^p(\Bbbk^m)$ with
+\[
+ \mathsf L^\sharp(t)=\sum_{\gamma,\gamma'\in\N^m_{p-1}}\mathsf L_{\gamma\gamma'}\,(\partial^\gamma t)\cdot O_{\gamma'}.
+\]
+\begin{enumerate}
+\item $t=\sum_{\gamma\in\N^m_{p-1}}\bigl((\id-\mathsf L^\sharp)(\partial^\gamma t)\bigr)\cdot O_\gamma$ for every
+$t\in\Gamma^{2p-1}(\Bbbk^m)$.
+\item $\rank(\id-\mathsf L^\sharp)\ge\binom{m+2p-2}{2p-1}\big/\binom{m+p-2}{p-1}\ge(p-1)!\,m^p/(2p-1)!$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (the identity part).} By~\eqref{dp:eq:contraction-sum} with $d=p-1$ and $d'=p$,
+$\sum_\gamma(\partial^\gamma t)\cdot O_\gamma=\binom{2p-1}{p-1}t$, the sum over $\N^m_{p-1}$. The integer
+$\binom{2p-1}{p-1}(p-1)!$ is the product $(p+1)(p+2)\cdots(2p-1)$, which is congruent to $(p-1)!$ modulo $p$, and
+$(p-1)!$ is prime to $p$; so $\binom{2p-1}{p-1}=1$ in $\Bbbk$, and $\sum_\gamma(\partial^\gamma t)\cdot O_\gamma=t$.
+
+\emph{Step 2 (the part of $\mathsf L^\sharp$).} For $\gamma\in\N^m_{p-1}$,
+$\mathsf L^\sharp(\partial^\gamma t)=\sum_{\gamma',\gamma''}\mathsf L_{\gamma'\gamma''}\,
+(\partial^{\gamma'}\partial^\gamma t)\cdot O_{\gamma''}$. As the product is commutative and associative and
+$\partial^{\gamma'}\partial^\gamma=\partial^\gamma\partial^{\gamma'}$,
+\[
+ \sum_\gamma\mathsf L^\sharp(\partial^\gamma t)\cdot O_\gamma
+ =\sum_{\gamma',\gamma''}\mathsf L_{\gamma'\gamma''}\,O_{\gamma''}\cdot
+ \sum_\gamma\bigl(\partial^\gamma(\partial^{\gamma'}t)\bigr)\cdot O_\gamma,
+\]
+all sums over $\N^m_{p-1}$. By~\eqref{dp:eq:contraction-sum} with $d=p-1$ and $d'=1$, applied to
+$\partial^{\gamma'}t\in\Gamma^p(\Bbbk^m)$, the inner sum is $p\,\partial^{\gamma'}t=0$. With Step~1 this is~(1).
+
+\emph{Step 3 (item (2)).} By~(1), the linear map
+$t\mapsto\bigl((\id-\mathsf L^\sharp)(\partial^\gamma t)\bigr)_{\gamma\in\N^m_{p-1}}$ from $\Gamma^{2p-1}(\Bbbk^m)$ into
+the product of $\abs{\N^m_{p-1}}$ copies of the image of $\id-\mathsf L^\sharp$ is injective. As
+$\dim\Gamma^d(\Bbbk^m)=\abs{\N^m_d}=\binom{m+d-1}d$, this gives
+$\binom{m+2p-2}{2p-1}\le\binom{m+p-2}{p-1}\rank(\id-\mathsf L^\sharp)$. The quotient of the two binomial coefficients is
+$(p-1)!/(2p-1)!$ times the product of the $p$ numbers $m+p-1,\dots,m+2p-2$, hence at least $(p-1)!\,m^p/(2p-1)!$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{dp:prop:degree-p}]
+Let $m\ge1$, and let $\mathcal J_m$ be the disjoint union of $[m]$ and $\N^m_{p-1}$. For a field $\Bbbk$ containing
+$\F_p$ write $e_i$, $i\in[m]$, and $e_\gamma$, $\gamma\in\N^m_{p-1}$, for the unit vectors of $\Bbbk^{\mathcal J_m}$,
+and read $\Bbbk^m$ as the span of the $e_i$. For $T\in\Gamma^p(\F_p^m)$ let
+$q_T\colon\Bbbk^{\mathcal J_m}\to\Bbbk^m$ be the linear map with $q_T(e_i)=e_i$ and $q_T(e_\gamma)=\partial^\gamma T$;
+its matrix has entries in $\F_p$. For a real number $\tau\ge1$ and $z=\sum_iz_ie_i+\sum_\gamma z_\gamma e_\gamma$ in
+$K^{\mathcal J_m}$ put $\norm z_\tau=\sum_i\abs{z_i}+\tau\sum_\gamma\abs{z_\gamma}$; by~\eqref{dp:eq:weighted-norm},
+$\norm h_{T,\tau}=\inf\{\norm z_\tau:q_T(z)=h\}$. Call the elements $\mathbf a$ of $\N^{\mathcal J_m}_p$
+\emph{positions}, let $\abs{\mathbf a}_\partial$ be the sum of the entries of $\mathbf a$ at the elements of
+$\N^m_{p-1}$, and call $\mathbf a$ \emph{nonlinear} if $\abs{\mathbf a}_\partial\ge2$. For a word $w\in\mathcal J_m^p$
+let $\abs w_\partial$ be the number of its letters in $\N^m_{p-1}$, and for $S\in\Gamma^p(\Bbbk^{\mathcal J_m})$ let
+$\operatorname{supp}S$ be the set of positions $\mathbf a$ with $S_{\mathbf a}\ne0$. Put
+$\mathfrak b_m=(p-1)!\,m^p/(2p-1)!$.
+
+\emph{Step 1 (norms).} If $h=q_T(z)$, the $i$-th entry of $h$ is $z_i+\sum_\gamma z_\gamma T_{\gamma+e_i}$, of absolute
+value at most $\norm z_\tau$, as $\abs{T_\alpha}\le1$ and $\tau\ge1$. So no entry of $h\in \mathcal E_{T,\tau}$ has absolute
+value above $\norm h_{T,\tau}$: the coordinate forms of $\mathcal E_{T,\tau}$ are bounded and separate points, so $\pi$ is a norm
+on $\mathcal E_{T,\tau}^{\otimes p}$, and so is $\norm\cdot_\Gamma$ on $\Gamma^p(\mathcal E_{T,\tau})$. A representation
+$t=\sum_lc_lh_l^{\otimes p}$ in $\Gamma^p(P)$, for a normed space $P$, gives $\pi(t)\le\sum_l\abs{c_l}\norm{h_l}^p$;
+so $\norm t_\Gamma\ge\pi(t)$, by~\eqref{dp:eq:gamma-norm}.
+
+\emph{Step 2 (the projective norm).} In $\mathcal E_{T,\tau}$, $\norm{e_i}\le1$ and $\norm{\partial^\gamma T}\le\tau$,
+by~\eqref{dp:eq:weighted-norm}. For a word $(i_1,\dots,i_{p-1})\in[m]^{p-1}$ let $\gamma(i_1,\dots,i_{p-1})$ be its
+content. The value of $T$ at $(i_1,\dots,i_{p-1},i)$ is the $i$-th entry of $\partial^{\gamma(i_1,\dots,i_{p-1})}T$, so
+\[
+ T=\sum_{(i_1,\dots,i_{p-1})\in[m]^{p-1}}e_{i_1}\otimes\dots\otimes e_{i_{p-1}}\otimes\partial^{\gamma(i_1,\dots,i_{p-1})}T,
+\]
+a sum of $m^{p-1}$ elementary tensors whose factors have norms with product at most $\tau$. Hence
+$\pi(T)\le\tau m^{p-1}$ in $\mathcal E_{T,\tau}^{\otimes p}$.
+
+\emph{Step 3 (a representation gives a symmetric tensor over $\F_p$).} The elements of $K$ of absolute value below $1$
+form an $\F_p$\nobreakdash-linear subspace that does not contain $1$, so there is an $\F_p$\nobreakdash-linear map
+$\rho\colon K\to\F_p$ with $\rho(1)=1$ that vanishes on it; then $\rho$ fixes $\F_p$, and $\abs x\ge1$ for every
+$x\in K$ with $\rho(x)\ne0$. Let $\delta>0$ and $T=\sum_lc_lh_l^{\otimes p}$ with $c_l\in K$, $h_l\in \mathcal E_{T,\tau}$ and
+$\sum_l\abs{c_l}\norm{h_l}_{T,\tau}^p\le\norm T_\Gamma+\delta$. Choose $\hat h_l\in K^{\mathcal J_m}$ with
+$q_T(\hat h_l)=h_l$ and $\norm{\hat h_l}_\tau\le(1+\delta)\norm{h_l}_{T,\tau}$. The tensor
+$\widetilde S=\sum_lc_l\hat h_l^{\otimes p}$ is symmetric, and $q_T^{\otimes p}(\widetilde S)=T$. For
+$z\in K^{\mathcal J_m}$ the sum of the numbers $\tau^{\abs w_\partial}\abs{z^{\otimes p}(w)}$, $w\in\mathcal J_m^p$, is
+$\norm z_\tau^p$; so, by the triangle inequality,
+\begin{equation}\label{dp:eq:weighted-lift}
+ \sum_{w\in\mathcal J_m^p}\tau^{\abs w_\partial}\abs{\widetilde S(w)}\le\sum_l\abs{c_l}\norm{\hat h_l}_\tau^p
+ \le(1+\delta)^p(\norm T_\Gamma+\delta).
+\end{equation}
+Let $S\in\Gamma^p(\F_p^{\mathcal J_m})$ have the values $S(w)=\rho(\widetilde S(w))$. As the matrix of $q_T$ has
+entries in $\F_p$, each value of $q_T^{\otimes p}(S)$ is the image under $\rho$ of the corresponding value of
+$q_T^{\otimes p}(\widetilde S)=T$, which lies in $\F_p$; so $q_T^{\otimes p}(S)=T$. For $\mathbf a\in\operatorname{supp}S$
+and a word $w$ of content $\mathbf a$, $\rho(\widetilde S(w))=S_{\mathbf a}\ne0$, so $\abs{\widetilde S(w)}\ge1$; and
+$\abs w_\partial=\abs{\mathbf a}_\partial$. Taking one such word for each $\mathbf a\in\operatorname{supp}S$,
+\eqref{dp:eq:weighted-lift} gives
+$\sum_{\mathbf a\in\operatorname{supp}S}\tau^{\abs{\mathbf a}_\partial}\le(1+\delta)^p(\norm T_\Gamma+\delta)$. As
+$\Gamma^p(\F_p^{\mathcal J_m})$ is finite, one $S$ occurs for arbitrarily small $\delta$; so
+\begin{equation}\label{dp:eq:support-bound}
+ \norm T_\Gamma\ge\sum_{\mathbf a\in\operatorname{supp}S}\tau^{\abs{\mathbf a}_\partial}\quad\text{for some }
+ S\in\Gamma^p(\F_p^{\mathcal J_m})\text{ with }q_T^{\otimes p}(S)=T.
+\end{equation}
+
+\emph{Step 4 (supports with few nonlinear positions).} Let $S\in\Gamma^p(\F_p^{\mathcal J_m})$, and let
+$\mathcal K_S\subseteq\N^m_p$ be the set of the $\gamma+e_i$, $i\in[m]$, for the $\gamma\in\N^m_{p-1}$ at which some
+nonlinear $\mathbf a\in\operatorname{supp}S$ has a nonzero entry. A position has nonzero entries at no more than $p$
+elements of $\N^m_{p-1}$, so $\abs{\mathcal K_S}$ is at most $pm$ times the number of nonlinear positions in
+$\operatorname{supp}S$. We show that at most $p^{\abs{\mathcal K_S}+\binom{m+p-1}p-\mathfrak b_m}$ tensors
+$T'\in\Gamma^p(\F_p^m)$ satisfy $q_{T'}^{\otimes p}(S)=T'$. Write $S=S^{(0)}+S^{(1)}+S^{(2)}$, where $S^{(0)}$,
+$S^{(1)}$ and $S^{(2)}$ are supported in the positions $\mathbf a$ with $\abs{\mathbf a}_\partial=0$,
+$\abs{\mathbf a}_\partial=1$ and $\abs{\mathbf a}_\partial\ge2$. The positions with $\abs{\mathbf a}_\partial=0$ are the
+$\alpha\in\N^m_p$, and $q_{T'}$ fixes the $e_i$, so $q_{T'}^{\otimes p}(S^{(0)})=\sum_{\alpha\in\N^m_p}S_\alpha O_\alpha$
+does not depend on $T'$. For $\gamma,\gamma'\in\N^m_{p-1}$ let $\mathbf a(\gamma,\gamma')$ be the position with the
+entry $1$ at $\gamma$, the entries of $\gamma'$ on $[m]$ and $0$ elsewhere. These are the positions with
+$\abs{\mathbf a}_\partial=1$, and $O_{\mathbf a(\gamma,\gamma')}=e_\gamma\cdot O_{\gamma'}$, as each word of content
+$\mathbf a(\gamma,\gamma')$ arises from exactly one of the $p$ permutations that define this product, applied to
+exactly one tensor $e_\gamma\otimes e_{i_1}\otimes\dots\otimes e_{i_{p-1}}$ with $(i_1,\dots,i_{p-1})$ of content
+$\gamma'$. As the product commutes with $q_{T'}$,
+\[
+ q_{T'}^{\otimes p}(S^{(1)})=\sum_{\gamma,\gamma'\in\N^m_{p-1}}S_{\mathbf a(\gamma,\gamma')}\,
+ (\partial^\gamma T')\cdot O_{\gamma'}=\mathsf L^\sharp(T'),
+\]
+with $\mathsf L_{\gamma\gamma'}=S_{\mathbf a(\gamma,\gamma')}$ in Lemma~\ref{dp:lem:linear}. Finally,
+$q_{T'}^{\otimes p}(S^{(2)})$ depends only on the vectors $q_{T'}(e_\gamma)=\partial^\gamma T'$ for the $\gamma$ at which
+some $\mathbf a\in\operatorname{supp}S^{(2)}$ has a nonzero entry, that is, on the coefficients $T'_\alpha$,
+$\alpha\in\mathcal K_S$. So if $q_{T'}^{\otimes p}(S)=T'$, then $(\id-\mathsf L^\sharp)(T')$ equals
+$q_{T'}^{\otimes p}(S^{(0)})+q_{T'}^{\otimes p}(S^{(2)})$, which depends only on $(T'_\alpha)_{\alpha\in\mathcal K_S}$.
+For each of the $p^{\abs{\mathcal K_S}}$ choices of these coefficients the solutions $T'$ lie in one coset of the kernel
+of $\id-\mathsf L^\sharp$, which has at most $p^{\binom{m+p-1}p-\mathfrak b_m}$ elements by
+Lemma~\ref{dp:lem:linear}(2), as $\dim\Gamma^p(\F_p^m)=\binom{m+p-1}p$.
+
+\emph{Step 5 (item (1)).} Put $\mathfrak n_1=\mathfrak b_m/(3p^2(1+\log_pm))$, $\mathfrak n_2=\mathfrak b_m/(3pm)$ and
+$\tau=\max\{1,(m/(p(1+\log_pm)))^{1/2}\}$. There are $\binom{\abs{\mathcal J_m}+p-1}p\le\abs{\mathcal J_m}^p$
+positions, and $\abs{\mathcal J_m}=m+\binom{m+p-2}{p-1}\le m+m^{p-1}\le2m^{p-1}$; so $p$ times the number of positions
+is at most $p\,2^pm^{p(p-1)}\le p^{p^2}m^{p^2}=p^{p^2(1+\log_pm)}$, as $p\,2^p\le p^{p^2}$. Every
+$S\in\Gamma^p(\F_p^{\mathcal J_m})$ that is nonzero at fewer than $\mathfrak n_1$ positions is the sum of
+$\lceil\mathfrak n_1\rceil-1$ tensors $O_{\mathbf a}$, $\mathbf a$ a position, each multiplied by an element of $\F_p$;
+so there are at most $p^{\mathfrak n_1p^2(1+\log_pm)}=p^{\mathfrak b_m/3}$ of them. If moreover fewer than
+$\mathfrak n_2$ of its positions are nonlinear, then $\abs{\mathcal K_S}\le pm\mathfrak n_2=\mathfrak b_m/3$, and by
+Step~4 at most $p^{\binom{m+p-1}p-2\mathfrak b_m/3}$ tensors $T'$ satisfy $q_{T'}^{\otimes p}(S)=T'$. So at most
+$p^{\binom{m+p-1}p-\mathfrak b_m/3}$ of the $p^{\binom{m+p-1}p}$ elements $T'$ of $\Gamma^p(\F_p^m)$ satisfy
+$q_{T'}^{\otimes p}(S)=T'$ for such an $S$. Choose $T\in\Gamma^p(\F_p^m)$ outside them: every $S$ with
+$q_T^{\otimes p}(S)=T$ is nonzero at no fewer than $\mathfrak n_1$ positions, or at no fewer than $\mathfrak n_2$
+nonlinear positions. The weights $\tau^{\abs{\mathbf a}_\partial}$ in~\eqref{dp:eq:support-bound} are at least $1$, and
+at least $\tau^2$ for nonlinear $\mathbf a$, and $\tau^2\mathfrak n_2\ge\mathfrak n_1$, as
+$\tau^2\ge m/(p(1+\log_pm))$; so $\norm T_\Gamma\ge\mathfrak n_1>0$ in $\Gamma^p(\mathcal E_{T,\tau})$, and $T\ne0$. If $\tau>1$,
+Step~2 gives
+\[
+ \frac{\norm T_\Gamma}{\pi(T)}\ge\frac{\mathfrak n_1}{\tau m^{p-1}}
+ =\frac{(p-1)!}{3p^{3/2}(2p-1)!}\Bigl(\frac m{1+\log_pm}\Bigr)^{1/2}.
+\]
+If $\tau=1$, then $m\le p(1+\log_pm)$, so the right side of~\eqref{dp:eq:degree-p-ratio} is at most
+$(p-1)!\,\pi(T)/(3p(2p-1)!)<\pi(T)\le\norm T_\Gamma$, by Step~1.
+
+\emph{Step 6 (item (2): the law).} If $K$ is complete, the finite-dimensional spaces $\mathcal E_m$ are complete, and so is
+their $\ell^1$-sum $\mathcal E$. By Step~1 the coordinate forms of the spaces $\mathcal E_m$, composed with the projections of $\mathcal E$ onto
+them, are bounded; they separate points, so $\pi$ is a norm on $\mathcal E^{\otimes p}$ and $\norm\cdot_\Gamma\ge\pi$ is a norm
+on $\Gamma^p(\mathcal E)$. For finitely many vectors $(\lambda_l,h_l)$ of $K\oplus \mathcal E$ and scalars $s_l$, the value of the map at
+$\sum_ls_l(\lambda_l,h_l)$ is $(\sum_ls_l\lambda_l)^{n-p}(\sum_ls_lh_l)^{\otimes p}$, a homogeneous polynomial of degree
+$n$ in the $s_l$ whose coefficients are combinations of symmetric tensors of the span of the $h_l$, which lie in
+$\Gamma^p(\mathcal E)$ as $K$ is infinite. Moreover
+$\norm{\lambda^{n-p}h^{\otimes p}}_\Gamma\le\abs\lambda^{n-p}\norm h^p\le\norm{(\lambda,h)}^n$. So the map is a bounded
+polynomial law of degree $n$ and norm at most $1$.
+
+\emph{Step 7 (item (2): the ratio on $\Gamma^p(\mathcal E)$).} The inclusion of $\mathcal E_m$ in $\mathcal E$ is isometric, and the projection of
+$\mathcal E$ onto $\mathcal E_m$ is a contractive left inverse. So, for $t\in\Gamma^p(\mathcal E_m)$, $\pi(t)$ computed in $\mathcal E^{\otimes p}$ is at
+most $\pi(t)$ computed in $\mathcal E_m^{\otimes p}$, and $\norm t_\Gamma$ computed in $\Gamma^p(\mathcal E)$ is at least
+$\norm t_\Gamma$ computed in $\Gamma^p(\mathcal E_m)$, as the $p$-th tensor power of the projection fixes $t$ and does not
+increase the cost $\sum_l\abs{c_l}\norm{h_l}^p$ of a representation. By~(1), applied to $t=T^{(m)}\ne0$,
+$\norm\cdot_\Gamma/\pi$ is unbounded on the nonzero elements of $\Gamma^p(\mathcal E)$.
+
+\emph{Step 8 (item (2): comparing coefficients).} Suppose that $j(\lambda^{n-p}h^{\otimes p})=\beta((\lambda,h),\dots,(\lambda,h))$ for all
+$(\lambda,h)\in K\oplus \mathcal E$, for a linear isometry $j$ of $\Gamma^p(\mathcal E)$, or of its completion, into a normed space $Z$
+and a bounded $n$\nobreakdash-linear map $\beta\colon(K\oplus \mathcal E)^n\to Z$. Put $\mathbf 1=(1,0)$ and $h^+=(0,h)$ for
+$h\in \mathcal E$. For $h_1,\dots,h_p\in \mathcal E$ let $\beta'(h_1,\dots,h_p)$ be the sum, over the $\binom np$ sets of $p$ of the $n$
+slots, of the value of $\beta$ at the $n$-tuple with $h_1^+,\dots,h_p^+$ in these slots, in this order, and
+$\mathbf 1$ in the others. Then $\beta'$ is $p$\nobreakdash-linear, and $\norm{\beta'}\le\binom np\norm\beta$, as
+$\norm{\mathbf 1}=1$ and $\norm{h^+}=\norm h$. For $h\in \mathcal E$ and $s=(s_1,s_2)\in K^2$, the value $\beta((s_2,s_1h),\dots,(s_2,s_1h))$, with
+$(s_2,s_1h)=s_2\mathbf 1+s_1h^+$, is a homogeneous polynomial of degree $n$ in $s$ whose
+coefficient of $s_1^ps_2^{n-p}$ is $\beta'(h,\dots,h)$, while $j(s_2^{n-p}(s_1h)^{\otimes p})=s_1^ps_2^{n-p}j(h^{\otimes p})$.
+As $K$ is infinite, comparing coefficients, as in Step~6 of the proof of Proposition~\ref{dp:prop:nonambient}, gives
+$j(h^{\otimes p})=\beta'(h,\dots,h)$. Let $\beta'_\otimes\colon\otimes^p_\pi \mathcal E\to Z$ be the linear map with
+$\beta'_\otimes(h_1\otimes\dots\otimes h_p)=\beta'(h_1,\dots,h_p)$, of norm $\norm{\beta'}$. As $\Gamma^p(\mathcal E)$ is spanned
+by powers, $j(t)=\beta'_\otimes(t)$ for $t\in\Gamma^p(\mathcal E)$, so
+$\norm t_\Gamma=\norm{j(t)}\le\binom np\norm\beta\,\pi(t)$ for $t\in\Gamma^p(\mathcal E)$, against Step~7.
+\end{proof}
+
+For the proof of Theorem~\ref{dp:thm:frobenius} let $p=\operatorname{char}K>0$, with $\Gamma^p(P)$,
+$\norm\cdot_\Gamma$, $\norm\cdot_{\mathrm F}$, $\pi$, the hollow tensors and the sets $\N^r_p$ as in
+Section~\ref{sec:dp}. For a subspace $P_0$ of $P$ we read $P_0^{\otimes p}$ as a subspace of $P^{\otimes p}$, as over
+every field. For vectors $h_1,\dots,h_r\in P$ and $\alpha\in\N^r_p$ let $O_\alpha(h_1,\dots,h_r)$ be the sum of the
+tensors $h_{w_1}\otimes\dots\otimes h_{w_p}$ over the words $w\in[r]^p$ whose content, defined before
+Lemma~\ref{dp:lem:linear}, is $\alpha$; the same sum with the unit vectors of $K^r$ in place of $h_1,\dots,h_r$ is the
+tensor $O_\alpha$ there, for $\Bbbk=K$ and $\mathcal J=[r]$. Expanding the power gives
+\begin{equation}\label{dp:eq:orbit}
+ (s_1h_1+\dots+s_rh_r)^{\otimes p}=\sum_{\alpha\in\N^r_p}s_1^{\alpha_1}\cdots s_r^{\alpha_r}\,O_\alpha(h_1,\dots,h_r)
+ \qquad(s_1,\dots,s_r\in K),
+\end{equation}
+and $O_\alpha(h_1,\dots,h_r)$ lies in $\Gamma^p(P)$, since the coefficients of this polynomial are linear combinations
+of its values, by interpolation in each variable, as in Step~5 of the proof of Theorem~\ref{dp:thm:calculus}.
+
+\begin{lemma}[linearization]\label{dp:lem:linearization}
+Let $a\colon P\to W$ be a bounded polynomial law of degree $p$.
+\begin{enumerate}
+\item There is a unique linear map $L_a\colon\Gamma^p(P)\to W$ with $L_a(h^{\otimes p})=a(h)$ for $h\in P$, and
+$\norm{L_a(t)}\le\norm a\norm t_\Gamma$ for $t\in\Gamma^p(P)$. If $a$ is a Frobenius law, $L_a$ vanishes on the
+hollow tensors, and $\norm{L_a(t)}\le\norm a\norm t_{\mathrm F}$.
+\item If $M\ge0$ and $\norm{L_a(t)}\le M\pi(t)$ for $t\in\Gamma^p(P)$, then $a$ is ambient of degree $p$, with a
+$p$\nobreakdash-linear map $\beta$ of norm at most $M$ in Definition~\ref{dp:def:laws}(2).
+\item If $P$ satisfies $(\mathrm F_P)$ with constant $C_{\mathrm F}$ and $(\mathrm N_P)$ with constant $C_{\mathrm N}$,
+then $\norm t_\Gamma\le\bigl(C_{\mathrm F}+(1+C_{\mathrm F})C_{\mathrm N}\bigr)\pi(t)$ for $t\in\Gamma^p(P)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1): the map $L_a$).} Let $\sum_i\lambda_ih_i^{\otimes p}=0$, a finite sum with $\lambda_i\in K$
+and $h_i\in P$. Let $b_1,\dots,b_m$ be a basis of the span of the $h_i$, write $h_i=\sum_ls_{i,l}b_l$, and put
+$s_i^\alpha=s_{i,1}^{\alpha_1}\cdots s_{i,m}^{\alpha_m}$ for $\alpha\in\N^m_p$. By~\eqref{dp:eq:orbit} and
+Definition~\ref{dp:def:laws}(1), $h_i^{\otimes p}=\sum_\alpha s_i^\alpha O_\alpha(b_1,\dots,b_m)$ and
+$a(h_i)=\sum_\alpha s_i^\alpha a^{[\alpha]}(b_1,\dots,b_m)$, the sums over $\N^m_p$. The tensors
+$O_\alpha(b_1,\dots,b_m)$ are sums over disjoint sets of words of the linearly independent tensors
+$b_{w_1}\otimes\dots\otimes b_{w_p}$, hence linearly independent, so $\sum_i\lambda_is_i^\alpha=0$ for every $\alpha$,
+and $\sum_i\lambda_ia(h_i)=0$. As the powers span $\Gamma^p(P)$,
+$L_a(\sum_i\lambda_ih_i^{\otimes p})=\sum_i\lambda_ia(h_i)$ defines the unique such linear map, and
+$\norm{L_a(t)}\le\sum_i\abs{\lambda_i}\norm{a(h_i)}\le\norm a\sum_i\abs{\lambda_i}\norm{h_i}^p$ for every
+representation $t=\sum_i\lambda_ih_i^{\otimes p}$; the infimum over these is the bound, by~\eqref{dp:eq:gamma-norm}.
+
+\emph{Step 2 (item (1): Frobenius laws).} Let $a$ be a Frobenius law and $h_1,\dots,h_p\in P$.
+By~\eqref{dp:eq:orbit}, for $s_1,\dots,s_p\in K$,
+\[
+ \sum_{\alpha\in\N^p_p}s_1^{\alpha_1}\cdots s_p^{\alpha_p}L_a\bigl(O_\alpha(h_1,\dots,h_p)\bigr)
+ =a(s_1h_1+\dots+s_ph_p)=s_1^pa(h_1)+\dots+s_p^pa(h_p).
+\]
+As $K$ is infinite and $p\ge2$, comparing the coefficients of $s_1\cdots s_p$ gives
+$L_a(O_{(1,\dots,1)}(h_1,\dots,h_p))=0$. The words of content $(1,\dots,1)$ are the orderings of $[p]$, so
+$O_{(1,\dots,1)}(h_1,\dots,h_p)$ is one of the tensors that span the hollow tensors, and $L_a$ vanishes on the hollow
+tensors. If $t-t'$ is hollow, then $\norm{L_a(t)}=\norm{L_a(t')}\le\norm a\norm{t'}_\Gamma$; the infimum over $t'$ is
+the bound.
+
+\emph{Step 3 (item (2)).} For $v\in W$ and $y\in P^{\otimes p}$ let $\norm{(v,y)}_Z$ be the infimum of
+$\norm{v+L_a(t)}+M\pi(y-t)$ over $t\in\Gamma^p(P)$, the quotient seminorm of $\norm v+M\pi(y)$ on
+$W\oplus P^{\otimes p}$ modulo the subspace of the pairs $(L_a(t),-t)$. Let $Z$ be the quotient of
+$W\oplus P^{\otimes p}$ by the kernel of $\norm\cdot_Z$, with the norm $\norm\cdot_Z$, and $[v,y]$ the class of
+$(v,y)$. The linear map $j(v)=[v,0]$ is an isometry: $t=0$ gives $\norm{[v,0]}_Z\le\norm v$, and
+$\norm{v+L_a(t)}+M\pi(-t)\ge\norm v-\norm{L_a(t)}+M\pi(t)\ge\norm v$ for every $t$, by the hypothesis on $L_a$. The
+map $\beta(h_1,\dots,h_p)=[0,h_1\otimes\dots\otimes h_p]$ is $p$\nobreakdash-linear with
+$\norm{\beta(h_1,\dots,h_p)}_Z\le M\pi(h_1\otimes\dots\otimes h_p)\le M\norm{h_1}\cdots\norm{h_p}$, and
+$\beta(h,\dots,h)-ja(h)=[-a(h),h^{\otimes p}]=0$, as $t=h^{\otimes p}$ shows.
+
+\emph{Step 4 (item (3)).} Let $t\in\Gamma^p(P)$ and $\delta>0$. By $(\mathrm F_P)$ there is $t'\in\Gamma^p(P)$ with
+$t-t'$ hollow and $\norm{t'}_\Gamma\le C_{\mathrm F}\pi(t)+\delta$. Then
+$\pi(t-t')\le\pi(t)+\norm{t'}_\Gamma\le(1+C_{\mathrm F})\pi(t)+\delta$, as $\pi\le\norm\cdot_\Gamma$, and by
+$(\mathrm N_P)$, $\norm t_\Gamma\le\norm{t'}_\Gamma+C_{\mathrm N}\pi(t-t')\le C_{\mathrm F}\pi(t)+\delta
++C_{\mathrm N}\bigl((1+C_{\mathrm F})\pi(t)+\delta\bigr)$. Let $\delta\to0$.
+\end{proof}
+
+\begin{lemma}[bases of representations]\label{dp:lem:bases}
+Let $P_0$ be a finite-dimensional subspace of $P$ and $t\in\Gamma^p(P)\cap P_0^{\otimes p}$, and for linear forms
+$\phi_1,\dots,\phi_p$ on $P_0$ let $t(\phi_1,\dots,\phi_p)$ be the value of $\phi_1\otimes\dots\otimes\phi_p$ at $t$,
+as before Lemma~\ref{dp:lem:projections}.
+\begin{enumerate}
+\item Let $b_1,\dots,b_m$ be a basis of $P_0$, with dual basis $b_1^*,\dots,b_m^*$. Then
+$t-\sum_{i=1}^mt(b_i^*,\dots,b_i^*)\,b_i^{\otimes p}$ is hollow.
+\item Let $t=\sum_{k=1}^rx_{k,1}\otimes\dots\otimes x_{k,p}$ with nonzero vectors $x_{k,c}$ that span $P_0$. There
+is a set $\mathcal B\subseteq[r]\times[p]$ such that the vectors $x_{k,c}$, $(k,c)\in\mathcal B$, form a basis of
+$P_0$ whose dual basis $(x_{k,c}^*)_{(k,c)\in\mathcal B}$ satisfies
+$\abs{t(x_{k,c}^*,\dots,x_{k,c}^*)}\,\norm{x_{k,c}}^p\le\norm{x_{k,1}}\cdots\norm{x_{k,p}}$ for every
+$(k,c)\in\mathcal B$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Let $q$ be a linear projection of $P$ onto $P_0$. As $q^{\otimes p}$ fixes
+$P_0^{\otimes p}$ and maps powers to powers, $t=q^{\otimes p}(t)$ is a combination of powers $h^{\otimes p}$,
+$h\in P_0$. For a word $w\in[m]^p$ put $b_w=b_{w_1}\otimes\dots\otimes b_{w_p}$; these tensors form a basis of
+$P_0^{\otimes p}$, and $t=\sum_wt(b_{w_1}^*,\dots,b_{w_p}^*)\,b_w$. For a power $h^{\otimes p}$, $h\in P_0$, the
+coefficient $b_{w_1}^*(h)\cdots b_{w_p}^*(h)$ of $b_w$ depends only on the content $\alpha\in\N^m_p$ of $w$; hence so
+does that of $t$, and $t$ is a combination of the tensors $O_\alpha(b_1,\dots,b_m)$. If every $\alpha_i<p$, then
+$\alpha_1!\cdots\alpha_m!$ is invertible in $K$, and for a word $w$ of content $\alpha$ the tensor
+$O_{(1,\dots,1)}(b_{w_1},\dots,b_{w_p})$, hollow as in Step~2 of the proof of Lemma~\ref{dp:lem:linearization}, is
+$\alpha_1!\cdots\alpha_m!\,O_\alpha(b_1,\dots,b_m)$, as the reorderings of the letters of $w$ give each word of content
+$\alpha$ exactly $\alpha_1!\cdots\alpha_m!$ times; so $O_\alpha(b_1,\dots,b_m)$ is hollow. Otherwise $\alpha_i=p$ for
+one $i$, the tensor $O_\alpha(b_1,\dots,b_m)$ is $b_i^{\otimes p}$, and its coefficient is $t(b_i^*,\dots,b_i^*)$.
+
+\emph{Step 2 (item (2): the choice of $\mathcal B$).} Call $\mathcal B\subseteq[r]\times[p]$ a \emph{basis set} if the
+vectors $x_{k,c}$, $(k,c)\in\mathcal B$, form a basis of $P_0$; basis sets exist, as these vectors span $P_0$. Fix a
+basis of $P_0$, and for a basis set $\mathcal B$ let $\det_{\mathcal B}$ be the determinant of the coordinates of the
+vectors $x_{k,c}$, $(k,c)\in\mathcal B$, in a fixed order of $[r]\times[p]$. Put
+$\upsilon_{k,c}=(\norm{x_{k,1}}\cdots\norm{x_{k,p}})^{1/p}/\norm{x_{k,c}}>0$, so that
+$\upsilon_{k,1}\cdots\upsilon_{k,p}=1$ for each $k$, and choose, among the finitely many basis sets, a basis set
+$\mathcal B$ with the largest value of $\abs{\det_{\mathcal B}}\prod_{(k,c)\in\mathcal B}\upsilon_{k,c}$. Then
+\begin{equation}\label{dp:eq:exchange}
+ \abs{x_{k,c}^*(x_{k',c'})}\,\upsilon_{k',c'}\le\upsilon_{k,c}\qquad
+ \bigl((k,c)\in\mathcal B,\ (k',c')\in[r]\times[p]\bigr).
+\end{equation}
+This is clear if $(k',c')\in\mathcal B$ or $x_{k,c}^*(x_{k',c'})=0$. Otherwise
+$x_{k',c'}=\sum_{(k'',c'')\in\mathcal B}x_{k'',c''}^*(x_{k',c'})\,x_{k'',c''}$, whose coefficient at $(k,c)$ is
+$x_{k,c}^*(x_{k',c'})\ne0$, so replacing $(k,c)$ by $(k',c')$ gives a basis set $\mathcal B'$, and
+$\det_{\mathcal B'}=\pm x_{k,c}^*(x_{k',c'})\det_{\mathcal B}$ by multilinearity and alternation of the determinant,
+the sign coming from the order of $[r]\times[p]$. The choice of $\mathcal B$ gives
+$\abs{x_{k,c}^*(x_{k',c'})}\,\upsilon_{k',c'}/\upsilon_{k,c}\le1$.
+
+\emph{Step 3 (item (2): the bound).} Let $(k,c)\in\mathcal B$. Then
+$t(x_{k,c}^*,\dots,x_{k,c}^*)=\sum_{k'=1}^r\prod_{c'=1}^px_{k,c}^*(x_{k',c'})$, so by the ultrametric inequality
+and~\eqref{dp:eq:exchange}
+\[
+ \abs{t(x_{k,c}^*,\dots,x_{k,c}^*)}\le\max_{k'}\prod_{c'=1}^p\frac{\upsilon_{k,c}}{\upsilon_{k',c'}}=\upsilon_{k,c}^p
+ =\frac{\norm{x_{k,1}}\cdots\norm{x_{k,p}}}{\norm{x_{k,c}}^p}.
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{dp:thm:frobenius}]
+\emph{Step 1 (item (1)).} Let $t\in\Gamma^p(P)$ and $\delta>0$; we may assume $t\ne0$. Choose a representation
+$t=\sum_{k=1}^rx_{k,1}\otimes\dots\otimes x_{k,p}$ with $\sum_k\norm{x_{k,1}}\cdots\norm{x_{k,p}}\le\pi(t)+\delta$;
+dropping the terms with a zero factor, all $x_{k,c}$ are nonzero. Let $P_0$ be their span, so $\dim P_0\le\dim P$ and
+$t\in P_0^{\otimes p}$, and take $\mathcal B$ from Lemma~\ref{dp:lem:bases}(2). By Lemma~\ref{dp:lem:bases}(1),
+$t-t'$ is hollow for $t'=\sum_{(k,c)\in\mathcal B}t(x_{k,c}^*,\dots,x_{k,c}^*)\,x_{k,c}^{\otimes p}$, so
+\begin{align*}
+ \norm t_{\mathrm F}\le\norm{t'}_\Gamma
+ &\le\sum_{(k,c)\in\mathcal B}\abs{t(x_{k,c}^*,\dots,x_{k,c}^*)}\,\norm{x_{k,c}}^p\\
+ &\le\sum_{k=1}^r\abs{\mathcal B\cap(\{k\}\times[p])}\,\norm{x_{k,1}}\cdots\norm{x_{k,p}}
+ \le\min(p,\dim P_0)\,(\pi(t)+\delta),
+\end{align*}
+since $\mathcal B$ has $\dim P_0$ elements. Let $\delta\to0$.
+
+\emph{Step 2 (item (2)).} By Lemma~\ref{dp:lem:linearization}(1) and item~(1),
+$\norm{L_a(t)}\le\norm a\norm t_{\mathrm F}\le p\norm a\,\pi(t)$ for $t\in\Gamma^p(P)$; apply
+Lemma~\ref{dp:lem:linearization}(2) with $M=p\norm a$.
+
+\emph{Step 3 (item (3): the bound).} By item~(1) and Lemma~\ref{dp:lem:linearization}(3) with $C_{\mathrm F}=p$ and
+$C_{\mathrm N}=C$, $\norm t_\Gamma\le(p+(p+1)C)\pi(t)$ for $t\in\Gamma^p(P)$. So
+$\norm{L_a(t)}\le(p+(p+1)C)\norm a\,\pi(t)$ by Lemma~\ref{dp:lem:linearization}(1); apply
+Lemma~\ref{dp:lem:linearization}(2) with $M=(p+(p+1)C)\norm a$.
+
+\emph{Step 4 (item (3): the converse).} Let $W_0$ be the quotient of $\Gamma^p(P)$ by the kernel of
+$\norm\cdot_\Gamma$, normed by $\norm\cdot_\Gamma$, and $a_\Gamma(h)\in W_0$ the class of $h^{\otimes p}$.
+By~\eqref{dp:eq:orbit} and~\eqref{dp:eq:gamma-norm}, $a_\Gamma$ is a bounded polynomial law of degree $p$ with
+$\norm{a_\Gamma}\le1$; by hypothesis $ja_\Gamma(h)=\beta(h,\dots,h)$ for a linear isometry $j$ of $W_0$ into a normed
+space $Z$ and a bounded $p$\nobreakdash-linear $\beta\colon P^p\to Z$. Let $\beta_\otimes\colon P^{\otimes p}\to Z$ be
+the linear map with $\beta_\otimes(h_1\otimes\dots\otimes h_p)=\beta(h_1,\dots,h_p)$; then
+$\norm{\beta_\otimes(y)}\le\norm\beta\pi(y)$ for $y\in P^{\otimes p}$. As $\beta_\otimes(h^{\otimes p})=ja_\Gamma(h)$
+and the powers span $\Gamma^p(P)$, $\beta_\otimes$ agrees on $\Gamma^p(P)$ with $j$ composed with the quotient map, so
+$\norm t_\Gamma\le\norm\beta\pi(t)$ for $t\in\Gamma^p(P)$, in particular for hollow $t$.
+\end{proof}
+
+For the proof of Proposition~\ref{dp:prop:ultrametric} let $n\ge1$, with $\Gamma^n(P)$, $\norm\cdot_\Gamma$, $\pi$,
+$\mathfrak a_n(P)$, $[m]$, $c_0([m],K)$ and $\mathfrak c_K$ as in Section~\ref{sec:dp}. The statements of the
+paragraph before Lemma~\ref{dp:lem:linearization}, the first assertion of Lemma~\ref{dp:lem:linearization}(1) and
+Lemma~\ref{dp:lem:linearization}(2) hold with $n$ in place of $p$, with the same proofs, which do not use that $p$ is the
+characteristic of $K$. In
+particular~\eqref{dp:eq:orbit} holds with $n$ in place of $p$, with $O_\alpha(h_1,\dots,h_r)\in\Gamma^n(P)$ for
+$\alpha\in\N^r_n$. As in Step~4 of the proof of Theorem~\ref{dp:thm:frobenius}, let $W_0$ be the quotient of
+$\Gamma^n(P)$ by the kernel of $\norm\cdot_\Gamma$, normed by $\norm\cdot_\Gamma$, and let $a_\Gamma(h)\in W_0$ be the
+class of $h^{\otimes n}$. As after~\eqref{dp:eq:gamma-norm}, $\pi\le\norm\cdot_\Gamma$ on $\Gamma^n(P)$.
+When two spaces or two fields occur, we say in which space and over which field $\pi$, $\norm\cdot_\Gamma$ and $\mathfrak a_n$ are computed. The completion $\widehat P$ of $P$ is a normed space
+over $\Kh$, the scalar multiplication extending by continuity, and it is nonarchimedean if $P$ is.
+
+\begin{lemma}[properties of the ambience constants]\label{dp:lem:constants}
+Let $P'$ be a normed space.
+\begin{enumerate}
+\item $a_\Gamma$ is a bounded polynomial law of degree $n$ with $\norm{a_\Gamma}\le1$. If $ja_\Gamma(h)=\beta(h,\dots,h)$
+for all $h\in P$, for a linear isometry $j$ of $W_0$ into a normed space and a bounded $n$\nobreakdash-linear map
+$\beta$ on $P^n$, then $\mathfrak a_n(P)\le\norm\beta$.
+\item If $\Xi$ is a bounded linear bijection of $P$ onto $P'$ with bounded inverse, then
+$\mathfrak a_n(P')\le(\norm\Xi\norm{\Xi^{-1}})^n\mathfrak a_n(P)$.
+\item If $P'$ is a subspace of $P$, with the restricted norm, and some linear projection of $P$ onto $P'$ has norm at
+most $1$, then $\mathfrak a_n(P')\le\mathfrak a_n(P)$.
+\item $\mathfrak a_n(P)$ is at most the supremum of $\mathfrak a_n(P_0)$ over the finite-dimensional subspaces $P_0$ of
+$P$, with the restricted norm.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} This is Step~4 of the proof of Theorem~\ref{dp:thm:frobenius}, with $n$ in place of $p$; it
+does not use that $p$ is the characteristic of $K$.
+
+\emph{Step 2 (item (2)).} We may assume that $\mathfrak a_n(P)$ is finite. Let $t'\in\Gamma^n(P')$ and $t=(\Xi^{-1})^{\otimes n}(t')$. The maps $\Xi^{\otimes n}$ and
+$(\Xi^{-1})^{\otimes n}$ carry powers to powers and elementary tensors to elementary tensors, so $t\in\Gamma^n(P)$, and
+they multiply the cost of a representation by at most $\norm\Xi^n$ and $\norm{\Xi^{-1}}^n$, respectively. Hence
+$\norm{t'}_\Gamma\le\norm\Xi^n\norm t_\Gamma\le\norm\Xi^n\mathfrak a_n(P)\pi(t)
+\le(\norm\Xi\norm{\Xi^{-1}})^n\mathfrak a_n(P)\pi(t')$.
+
+\emph{Step 3 (item (3)).} We may assume that $\mathfrak a_n(P)$ is finite. Let $\Pi$ be such a projection and $t\in\Gamma^n(P')$. Then $\Pi^{\otimes n}$ fixes $t$ and
+carries a representation of $t$ in $\Gamma^n(P)$ to one in $\Gamma^n(P')$ of no larger cost, and representations of $t$
+in $P'^{\otimes n}$ are representations in $P^{\otimes n}$. So $\norm t_\Gamma$ computed in $\Gamma^n(P')$ is at most
+$\norm t_\Gamma$ computed in $\Gamma^n(P)$, which is at most $\mathfrak a_n(P)\pi(t)$ with $\pi(t)$ computed in
+$P^{\otimes n}$, hence at most $\mathfrak a_n(P)\pi(t)$ with $\pi(t)$ computed in $P'^{\otimes n}$.
+
+\emph{Step 4 (item (4)).} Let $t\in\Gamma^n(P)$ and $\delta>0$, and let $t=\sum_kx_{k,1}\otimes\dots\otimes x_{k,n}$ with
+$\sum_k\norm{x_{k,1}}\cdots\norm{x_{k,n}}\le\pi(t)+\delta$. Let $P_0$ be the span of the $x_{k,c}$. As in Step~1 of
+the proof of Lemma~\ref{dp:lem:bases}, $t=q^{\otimes n}(t)\in\Gamma^n(P_0)$ for a linear projection $q$ of $P$ onto
+$P_0$. Then $\norm t_\Gamma$ computed in $\Gamma^n(P)$ is at most $\norm t_\Gamma$ computed in $\Gamma^n(P_0)$, hence
+at most $\mathfrak a_n(P_0)(\pi(t)+\delta)$. Let $\delta\to0$.
+\end{proof}
+
+\begin{lemma}[orthogonal bases]\label{dp:lem:orthogonal}
+Let $K$ be complete, and let $P$ be nonarchimedean, of finite dimension $m\ge1$. Then
+$\mathfrak a_n(P)\le\mathfrak c_K^{-n}\mathfrak a_n(c_0([m],K))$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (distances).} Let $P_1$ be a subspace of $P$, $x\in P\setminus P_1$ and
+$\operatorname{dist}(x,P_1)=\inf_{y\in P_1}\norm{x-y}$. By Lemma~\ref{lem:findim}, $P_1$ is complete, hence closed in $P$,
+so $\operatorname{dist}(x,P_1)>0$. Let $K$ be discretely valued. If nonzero vectors $u_1,\dots,u_k\in P$ have norms in
+distinct cosets of the subgroup $\abs\vartheta^{\Z}$ of the multiplicative group $(0,\infty)$, then the nonzero numbers
+among $\abs{\lambda_i}\norm{u_i}$, for $\lambda_1,\dots,\lambda_k\in K$, are distinct, so the nonarchimedean norm gives
+$\norm{\lambda_1u_1+\dots+\lambda_ku_k}=\max_i\abs{\lambda_i}\norm{u_i}$; hence the $u_i$ are linearly independent, and $k\le m$. So the
+nonzero values of the norm of $P$ lie in at most $m$ cosets of $\abs\vartheta^{\Z}$, and only finitely many of them lie
+in the interval $[\operatorname{dist}(x,P_1),\norm x]$. Hence $\norm{x-y}=\operatorname{dist}(x,P_1)$ for some $y\in P_1$.
+
+\emph{Step 2 (orthogonal bases).} Let $0<\mathfrak o\le1$, with $\mathfrak o<1$ unless $K$ is discretely valued. We show
+by induction on $m$ that $P$ has a basis $b_1,\dots,b_m$ with
+\begin{equation}\label{dp:eq:orthogonal}
+ \norm{\lambda_1b_1+\dots+\lambda_mb_m}\ge\mathfrak o\max_i\abs{\lambda_i}\norm{b_i}\qquad(\lambda_1,\dots,\lambda_m\in K).
+\end{equation}
+For $m=1$ every nonzero vector will do. Let $m\ge2$, let $P_1$ be a hyperplane of $P$, and let $b_1,\dots,b_{m-1}$ be a
+basis of $P_1$ with~\eqref{dp:eq:orthogonal} for $\mathfrak o^{1/2}$ in place of $\mathfrak o$. Let $x\in P\setminus P_1$.
+By Step~1 there is $y\in P_1$ with $\norm{x-y}\le\mathfrak o^{-1/2}\operatorname{dist}(x,P_1)$: if $\mathfrak o<1$ since
+$\operatorname{dist}(x,P_1)>0$, and if $\mathfrak o=1$ by its last sentence. Put $b_m=x-y$, so that
+$\operatorname{dist}(b_m,P_1)=\operatorname{dist}(x,P_1)\ge\mathfrak o^{1/2}\norm{b_m}$. Let $v=v'+\lambda_mb_m$ with
+$v'=\sum_{i<m}\lambda_ib_i$. As $-v'\in P_1$,
+$\norm v\ge\abs{\lambda_m}\operatorname{dist}(b_m,P_1)\ge\mathfrak o^{1/2}\abs{\lambda_m}\norm{b_m}$, and so
+$\norm{v'}\le\max(\norm v,\abs{\lambda_m}\norm{b_m})\le\mathfrak o^{-1/2}\norm v$. Hence
+$\mathfrak o\max_{i<m}\abs{\lambda_i}\norm{b_i}\le\mathfrak o^{1/2}\norm{v'}\le\norm v$ and
+$\mathfrak o\abs{\lambda_m}\norm{b_m}\le\norm v$, which is~\eqref{dp:eq:orthogonal}.
+
+\emph{Step 3 (the bound).} Multiplying the $b_i$ by nonzero scalars keeps~\eqref{dp:eq:orthogonal}. If $K$ is discretely
+valued, take $\mathfrak o=1$ in Step~2 and scale the $b_i$ by powers of $\vartheta$ so that $\abs\vartheta<\norm{b_i}\le1$,
+and put $\mathfrak o'=\abs\vartheta$. Otherwise $\abs{K^\times}$ is a subgroup of $(0,\infty)$ that contains
+$\abs\varpi$ and is not of the form $\abs\vartheta^{\Z}$, hence dense, since a subgroup of $(0,\infty)$ that contains a
+number other than $1$ and is not dense is generated by its largest element below $1$; for $0<\mathfrak o<1$ take the
+$b_i$ of Step~2 and scale them so that $\mathfrak o<\norm{b_i}\le1$, and put $\mathfrak o'=\mathfrak o$. The linear bijection
+$\Xi(\lambda)=\sum_i\lambda_ib_i$, $\lambda=(\lambda_1,\dots,\lambda_m)$, of $c_0([m],K)$ onto $P$ satisfies
+$\norm{\Xi(\lambda)}\le\max_i\abs{\lambda_i}\norm{b_i}\le\norm\lambda$, as $P$ is nonarchimedean, and
+$\norm{\Xi(\lambda)}\ge\mathfrak o\max_i\abs{\lambda_i}\norm{b_i}\ge\mathfrak o\mathfrak o'\norm\lambda$,
+by~\eqref{dp:eq:orthogonal}. Lemma~\ref{dp:lem:constants}(2) gives
+$\mathfrak a_n(P)\le(\mathfrak o\mathfrak o')^{-n}\mathfrak a_n(c_0([m],K))$. This is the claim if $K$ is discretely
+valued; otherwise let $\mathfrak o\to1$.
+\end{proof}
+
+\begin{lemma}[completion]\label{dp:lem:completion}
+\leavevmode
+\begin{enumerate}
+\item $\mathfrak a_n(P)$ is at most $\mathfrak a_n(\widehat P)$ computed over $\Kh$.
+\item For $m\ge1$, $\mathfrak a_n(c_0([m],\Kh))$ computed over $\Kh$ is at most $\mathfrak a_n(c_0([m],K))$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (continuity).} Let $a\colon P\to W$ be a bounded polynomial law of degree $n$, and let $R>0$. For
+$x,y\in P$ with $\norm x,\norm y\le R$, $a(x+y)-a(x)=\sum_{i=1}^na^{[(n-i,i)]}(x,y)$, and~\eqref{dp:eq:binomial} gives
+\begin{equation}\label{dp:eq:lipschitz}
+ \norm{a(x+y)-a(x)}\le n(16/\abs\varpi^2)^n\norm a\,R^{n-1}\norm y.
+\end{equation}
+If $\norm x\le R/2$ and $\norm{x+y}\le R/2$, then $\norm y\le R$; so, by~\eqref{dp:eq:lipschitz}, $a$ is Lipschitz on
+the set of vectors of $P$ of norm at most $R/2$, for every $R>0$. Hence $a$ is uniformly continuous on every bounded
+subset of $P$, and it extends uniquely to a continuous map $\hat a\colon\widehat P\to\widehat W$, which satisfies
+$\norm{\hat a(x)}\le\norm a\norm x^n$ by continuity.
+
+\emph{Step 2 (laws extend).} Let $a$ and $\hat a$ be as in Step~1, $r\ge1$ and $\alpha\in\N^r_n$. By interpolation in each variable on $n+1$ distinct elements of $K$, as in Step~5 of the proof of
+Theorem~\ref{dp:thm:calculus}, there are finitely many scalars $\lambda_l$ and $\xi_{l,1},\dots,\xi_{l,r}$ in $K$,
+depending only on $r$ and $\alpha$, with $a^{[\alpha]}(h_1,\dots,h_r)=\sum_l\lambda_la(\xi_{l,1}h_1+\dots+\xi_{l,r}h_r)$
+for all $h_1,\dots,h_r\in P$. Define
+$\hat a^{[\alpha]}(h_1,\dots,h_r)=\sum_l\lambda_l\hat a(\xi_{l,1}h_1+\dots+\xi_{l,r}h_r)$ for $h_1,\dots,h_r\in\widehat P$.
+The identity
+\[
+ \hat a(s_1h_1+\dots+s_rh_r)=\sum_{\alpha\in\N^r_n}s_1^{\alpha_1}\cdots s_r^{\alpha_r}\,\hat a^{[\alpha]}(h_1,\dots,h_r)
+\]
+holds for $s\in K^r$ and $h_1,\dots,h_r\in P$, by Definition~\ref{dp:def:laws}(1) and the choice of the $\lambda_l$
+and $\xi_{l,i}$; both sides are continuous in
+$(s,h_1,\dots,h_r)\in\Kh^r\times\widehat P^r$, so it holds there. Hence $\hat a\colon\widehat P\to\widehat W$ is a bounded
+polynomial law of degree $n$ over $\Kh$, with $\norm{\hat a}\le\norm a$.
+
+\emph{Step 3 (item (1)).} Let $C=\mathfrak a_n(\widehat P)$, computed over $\Kh$, be finite. By Step~2, $a_\Gamma$
+extends to a bounded polynomial law $\hat a_\Gamma\colon\widehat P\to\widehat W_0$ of degree $n$ over $\Kh$, of norm at
+most $1$. As $\norm{\hat a_\Gamma}\le1$ and $\norm t_\Gamma\le C\pi(t)$ on $\Gamma^n(\widehat P)$, the first assertion of
+Lemma~\ref{dp:lem:linearization}(1) and Lemma~\ref{dp:lem:linearization}(2), with $n$ in place of $p$, over $\Kh$ and
+with $M=C$, give a $\Kh$\nobreakdash-linear isometry $\hat\jmath$ of
+$\widehat W_0$ into a normed space $Z$ over $\Kh$ and a bounded $n$\nobreakdash-linear map $\hat\beta$ on $\widehat P^n$
+over $\Kh$, of norm at most $C$, with $\hat\jmath\hat a_\Gamma(h)=\hat\beta(h,\dots,h)$ for $h\in\widehat P$. The
+restrictions of $\hat\jmath$ to $W_0$ and of $\hat\beta$ to $P^n$ are a linear isometry of $W_0$ into $Z$, read as a
+normed space over $K$, and a bounded $n$\nobreakdash-linear map of norm at most $C$, and
+$\hat\jmath(a_\Gamma(h))=\hat\beta(h,\dots,h)$ for $h\in P$. Lemma~\ref{dp:lem:constants}(1) gives $\mathfrak a_n(P)\le C$.
+
+\emph{Step 4 (projective norms in $c_0([m],K)$).} Read $K^m\subseteq\Kh^m$, so that the tensors
+$e_{w_1}\otimes\dots\otimes e_{w_n}$, $w\in[m]^n$, are a basis of $(K^m)^{\otimes n}$ over $K$ and of
+$(\Kh^m)^{\otimes n}$ over $\Kh$; call the coefficients of a tensor in this basis its coefficients. For
+$z\in(K^m)^{\otimes n}$ we show that $\pi(z)$ is the same over $K$ and over $\Kh$, the spaces being $c_0([m],K)$ and
+$c_0([m],\Kh)$. Over $\Kh$ it is at most its value over $K$. Over $K$, $\pi(z)$ is at most the sum of the absolute
+values of the coefficients of $z$. Let $z=\sum_kx_{k,1}\otimes\dots\otimes x_{k,n}$ with $x_{k,c}\in\Kh^m$, let
+$\mathfrak r=\sum_k\norm{x_{k,1}}\cdots\norm{x_{k,n}}$, and let $0<\delta\le1$. Choose $x'_{k,c}\in K^m$ with
+$\norm{x'_{k,c}-x_{k,c}}\le\delta\norm{x_{k,c}}$; then $\norm{x'_{k,c}}\le\norm{x_{k,c}}$. Every coefficient of
+\[
+ x_{k,1}\otimes\dots\otimes x_{k,n}-x'_{k,1}\otimes\dots\otimes x'_{k,n}
+ =\sum_{c=1}^nx'_{k,1}\otimes\dots\otimes x'_{k,c-1}\otimes(x_{k,c}-x'_{k,c})\otimes x_{k,c+1}\otimes\dots\otimes x_{k,n}
+\]
+has absolute value at most $\delta\norm{x_{k,1}}\cdots\norm{x_{k,n}}$. So
+$z'=\sum_kx'_{k,1}\otimes\dots\otimes x'_{k,n}$ lies in $(K^m)^{\otimes n}$, $\pi(z')\le\mathfrak r$ over $K$, and
+$z-z'$ has coefficients of absolute value at most $\delta\mathfrak r$. Over $K$ this gives
+$\pi(z)\le\mathfrak r+m^n\delta\mathfrak r$. Let $\delta\to0$ and
+take the infimum over the representations of $z$ over $\Kh$.
+
+\emph{Step 5 (item (2)).} Let $C=\mathfrak a_n(c_0([m],K))$ be finite, let $t\in\Gamma^n(c_0([m],\Kh))$, computed over
+$\Kh$, and let $\delta>0$. Write $O_\alpha=O_\alpha(e_1,\dots,e_m)$ for $\alpha\in\N^m_n$. By the paragraph before
+Lemma~\ref{dp:lem:linear}, with $\Bbbk=\Kh$ and $\mathcal J=[m]$, $t=\sum_\alpha t_\alpha O_\alpha$ with
+$t_\alpha\in\Kh$, as $t$ is symmetric. As noted before Lemma~\ref{dp:lem:constants}, the $O_\alpha$ lie in $\Gamma^n(c_0([m],K))$, computed over $K$; let $M_0$ be the
+sum of their seminorms $\norm{O_\alpha}_\Gamma$ there. Choose $t'_\alpha\in K$ with $\abs{t_\alpha-t'_\alpha}\le\delta$
+and put $t'=\sum_\alpha t'_\alpha O_\alpha$. Representations over $K$ are representations over $\Kh$, so, over $\Kh$,
+$\norm{t-t'}_\Gamma\le\delta M_0$, hence $\pi(t-t')\le\delta M_0$ and $\pi(t')\le\pi(t)+\delta M_0$. With Step~4,
+\[
+ \norm t_\Gamma\le\norm{t'}_\Gamma+\delta M_0\le C\pi(t')+\delta M_0\le C(\pi(t)+\delta M_0)+\delta M_0,
+\]
+where $\norm t_\Gamma$ and $\pi(t)$ are computed over $\Kh$, $\norm{t'}_\Gamma$ over $K$, which is at least its value
+over $\Kh$, and $\pi(t')$ over either field. Let $\delta\to0$.
+\end{proof}
+
+\begin{lemma}[degree two]\label{dp:lem:degree-two}
+For every $m\ge1$, $\mathfrak a_2(c_0([m],K))\le3/2$.
+\end{lemma}
+
+\begin{proof}
+Identify $(K^m)^{\otimes2}$ with $K^{m\times m}$ by $x\otimes x'\mapsto xx'^{\mathsf T}$, as in Step~5 of the proof of
+Proposition~\ref{dp:prop:nonambient}. Then the elements of $\Gamma^2(c_0([m],K))$ are symmetric matrices,
+$\norm{\mathsf S}_\Gamma$ is the infimum of $\sum_l\abs{c_l}\norm{u_l}^2$ over the representations
+$\mathsf S=\sum_lc_lu_lu_l^{\mathsf T}$, and $\pi(\mathsf S)$ is the infimum of $\sum_l\norm{x_l}\norm{x'_l}$ over the
+representations $\mathsf S=\sum_lx_lx_l'^{\mathsf T}$. A matrix is \emph{integral} if its entries have absolute value at
+most $1$. For a matrix $\mathsf X$ and $k\ge1$ let $\mathfrak d_k(\mathsf X)$ be the largest absolute value of a
+$k\times k$ minor of $\mathsf X$, or $0$ if there is none, and $\mathfrak d_0(\mathsf X)=1$. A determinant is a sum of
+products with one entry from each column, so by the ultrametric inequality the minors of an integral matrix have
+absolute value at most $1$, and by the Cauchy--Binet formula $\mathfrak d_k(\mathsf X)$ does not increase when
+$\mathsf X$ is multiplied on either side by an integral matrix.
+
+\emph{Step 1 (a pivot).} Let $\mathsf S\in K^{m\times m}$ be symmetric and nonzero, with entries $\mathsf S_{ij}$, and
+let $\mathfrak f$ be the largest absolute value of an entry. If $\abs{\mathsf S_{ii}}=\mathfrak f$ for some $i$, put
+$\mathcal V=\{i\}$; otherwise put $\mathcal V=\{i,j\}$ for some $i\ne j$ with $\abs{\mathsf S_{ij}}=\mathfrak f$. Let
+$\mathsf S_{\mathcal V}$ be the submatrix of $\mathsf S$ with rows and columns in $\mathcal V$, and $\mathsf S_{[m]\mathcal
+V}$ the one with columns in $\mathcal V$. Then $\abs{\det\mathsf S_{\mathcal V}}=\mathfrak f^{\abs{\mathcal V}}$; in the
+second case $\det\mathsf S_{\mathcal V}=\mathsf S_{ii}\mathsf S_{jj}-\mathsf S_{ij}^2$ with
+$\abs{\mathsf S_{ii}\mathsf S_{jj}}<\mathfrak f^2$. So $\mathsf S_{\mathcal V}^{-1}$, its adjugate divided by its
+determinant, has entries of absolute value at most $\mathfrak f^{-1}$, and
+$\mathsf G=\mathsf S_{[m]\mathcal V}\mathsf S_{\mathcal V}^{-1}$ is integral, with the identity matrix as its rows in
+$\mathcal V$. Put $\mathsf S'=\mathsf S-\mathsf G\mathsf S_{\mathcal V}\mathsf G^{\mathsf T}$. It is symmetric with
+entries of absolute value at most $\mathfrak f$, and its rows and columns in $\mathcal V$ vanish, as the rows in
+$\mathcal V$ of $\mathsf G\mathsf S_{\mathcal V}\mathsf G^{\mathsf T}$ form $\mathsf S_{\mathcal V}\mathsf G^{\mathsf T}=
+\mathsf S_{[m]\mathcal V}^{\mathsf T}$. If $\mathcal V=\{i\}$, then
+$\mathsf G\mathsf S_{\mathcal V}\mathsf G^{\mathsf T}=\mathsf S_{ii}uu^{\mathsf T}$ for the column $u$ of $\mathsf G$. If
+$\mathcal V=\{i,j\}$ and $u_1$, $u_2$ are the columns of $\mathsf G$ at $i$ and $j$, then
+\[
+ \mathsf G\mathsf S_{\mathcal V}\mathsf G^{\mathsf T}=(\mathsf S_{ii}-\mathsf S_{ij})u_1u_1^{\mathsf T}
+ +(\mathsf S_{jj}-\mathsf S_{ij})u_2u_2^{\mathsf T}+\mathsf S_{ij}(u_1+u_2)(u_1+u_2)^{\mathsf T},
+\]
+three terms with coefficients of absolute value at most $\mathfrak f$ and vectors of norm at most $1$. In both cases
+\begin{equation}\label{dp:eq:pivot-cost}
+ \norm{\mathsf G\mathsf S_{\mathcal V}\mathsf G^{\mathsf T}}_\Gamma\le\tfrac32\abs{\mathcal V}\mathfrak f.
+\end{equation}
+Let $\mathsf U\in K^{m\times m}$ have the columns of $\mathsf G$ at the indices in $\mathcal V$ and the columns of the
+identity matrix $\id$ elsewhere, and let $\mathsf E\in K^{m\times m}$ agree with $\mathsf S$ at the positions in
+$\mathcal V\times\mathcal V$ and vanish elsewhere. The nonzero columns of $\mathsf U-\id$ lie at indices in
+$\mathcal V$, and its rows in $\mathcal V$ vanish; so $(\mathsf U-\id)^2=0$, $\mathsf U^{-1}=2\id-\mathsf U$ is
+integral, and $\mathsf U\mathsf S'=\mathsf S'=\mathsf S'\mathsf U^{\mathsf T}$, since the rows and columns of
+$\mathsf S'$ in $\mathcal V$ vanish. As $\mathsf U\mathsf E\mathsf U^{\mathsf T}=\mathsf G\mathsf S_{\mathcal
+V}\mathsf G^{\mathsf T}$, this gives $\mathsf S=\mathsf U(\mathsf E+\mathsf S')\mathsf U^{\mathsf T}$, so
+$\mathfrak d_k(\mathsf S)\ge\mathfrak d_k(\mathsf E+\mathsf S')$. For $0\le k_1\le\min(k,\abs{\mathcal V})$, a
+$k_1\times k_1$ minor of $\mathsf S_{\mathcal V}$ and a $(k-k_1)\times(k-k_1)$ minor of $\mathsf S'$ with rows and
+columns outside $\mathcal V$ together form a $k\times k$ minor of $\mathsf E+\mathsf S'$ whose matrix is, after
+reordering its rows and columns, block diagonal. As the nonzero minors of $\mathsf S'$ have rows and columns outside
+$\mathcal V$, $\mathfrak d_k(\mathsf S)\ge\mathfrak d_{k_1}(\mathsf S_{\mathcal V})\,\mathfrak d_{k-k_1}(\mathsf S')$;
+here $\mathfrak d_1(\mathsf S_{\mathcal V})=\mathfrak f$, and $\mathfrak d_2(\mathsf S_{\mathcal V})=\mathfrak f^2$ if
+$\abs{\mathcal V}=2$.
+
+\emph{Step 2 (the pivot sequence).} Apply Step~1 to $\mathsf S$, then to $\mathsf S'$ if it is nonzero, and so on. A row
+that vanishes stays zero, as the row of $\mathsf G$ at its index, and so that of
+$\mathsf G\mathsf S_{\mathcal V}\mathsf G^{\mathsf T}$, vanishes; and the rows in $\mathcal V$, which contain an entry
+of absolute value $\mathfrak f$, vanish after the step. So after at most $m$ steps the matrix is zero, and $\mathsf S$
+is the sum of the matrices $\mathsf G\mathsf S_{\mathcal V}\mathsf G^{\mathsf T}$ of the steps. List the numbers
+$\mathfrak f$ of the steps, each once if $\abs{\mathcal V}=1$ and twice if $\abs{\mathcal V}=2$, as
+$\mathfrak f_1,\dots,\mathfrak f_r$. As the entries of $\mathsf S'$ have absolute value at most $\mathfrak f$,
+$\mathfrak f_1\ge\dots\ge\mathfrak f_r>0$. By~\eqref{dp:eq:pivot-cost},
+$\norm{\mathsf S}_\Gamma\le\frac32(\mathfrak f_1+\dots+\mathfrak f_r)$. By the last sentence of Step~1 and induction on
+the number of steps, applied to $\mathsf S'$, whose sequence is $\mathfrak f_{\abs{\mathcal V}+1},\dots,\mathfrak f_r$,
+\begin{equation}\label{dp:eq:minor-lower}
+ \mathfrak d_k(\mathsf S)\ge\mathfrak f_1\cdots\mathfrak f_k\qquad(1\le k\le r):
+\end{equation}
+for $k\le\abs{\mathcal V}$ take $k_1=k$, and for $k>\abs{\mathcal V}$ take $k_1=\abs{\mathcal V}$.
+
+\emph{Step 3 (products and sums).} Let $\mathfrak s_1,\dots,\mathfrak s_r>0$ with
+$\mathfrak f_1\cdots\mathfrak f_k\le\mathfrak s_1\cdots\mathfrak s_k$ for $1\le k\le r$. Then
+$\mathfrak f_1+\dots+\mathfrak f_r\le\mathfrak s_1+\dots+\mathfrak s_r$. Indeed,
+$\log(\mathfrak s_k/\mathfrak f_k)\le\mathfrak s_k/\mathfrak f_k-1$, so
+$\mathfrak s_k-\mathfrak f_k\ge\mathfrak f_k\log(\mathfrak s_k/\mathfrak f_k)$. Put
+$\mathfrak l_k=\sum_{i\le k}\log(\mathfrak s_i/\mathfrak f_i)\ge0$, $\mathfrak l_0=0$ and $\mathfrak f_{r+1}=0$;
+summation by parts gives
+\[
+ \sum_{k=1}^r\mathfrak f_k\log(\mathfrak s_k/\mathfrak f_k)=\sum_{k=1}^r\mathfrak f_k(\mathfrak l_k-\mathfrak l_{k-1})
+ =\sum_{k=1}^r(\mathfrak f_k-\mathfrak f_{k+1})\mathfrak l_k\ge0.
+\]
+
+\emph{Step 4 (the projective norm).} Let $\mathsf S=\sum_{l=1}^{r'}x_lx_l'^{\mathsf T}$, and let
+$\mathfrak s_1\ge\mathfrak s_2\ge\dots\ge\mathfrak s_{r'}$ be the numbers $\norm{x_l}\norm{x'_l}$ in nonincreasing
+order. By the Cauchy--Binet formula, a $k\times k$ minor of $\mathsf S$ is the sum, over the sets of $k$ indices $l$, of
+the products of the corresponding $k\times k$ minors of the matrices with the columns $x_l$ and $x'_l$, $l$ in the set;
+by the ultrametric inequality such a minor of the first matrix has absolute value at most the product of the
+$\norm{x_l}$, and likewise for the second. So $\mathfrak d_k(\mathsf S)\le\mathfrak s_1\cdots\mathfrak s_k$ if
+$k\le r'$, and $\mathfrak d_k(\mathsf S)=0$ if $k>r'$. By~\eqref{dp:eq:minor-lower}, $r'\ge r$ and
+$\mathfrak f_1\cdots\mathfrak f_k\le\mathfrak s_1\cdots\mathfrak s_k$ for $k\le r$, so
+$\mathfrak s_1,\dots,\mathfrak s_r>0$, and Step~3 gives
+$\mathfrak f_1+\dots+\mathfrak f_r\le\mathfrak s_1+\dots+\mathfrak s_r\le\sum_l\norm{x_l}\norm{x'_l}$. Taking the
+infimum over the representations, $\mathfrak f_1+\dots+\mathfrak f_r\le\pi(\mathsf S)$, and Step~2 gives
+$\norm{\mathsf S}_\Gamma\le\frac32\pi(\mathsf S)$, also for $\mathsf S=0$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{dp:prop:ultrametric}]
+\emph{Step 1 (item (1)).} Let $\mathfrak a_n(P)<\infty$ and $a\colon P\to W$ be a bounded polynomial law of degree $n$.
+By the first assertion of Lemma~\ref{dp:lem:linearization}(1), with $n$ in place of $p$,
+$\norm{L_a(t)}\le\norm a\norm t_\Gamma\le\mathfrak a_n(P)\norm a\,\pi(t)$ for $t\in\Gamma^n(P)$; apply
+Lemma~\ref{dp:lem:linearization}(2), with $n$ in place of $p$ and $M=\mathfrak a_n(P)\norm a$. Conversely, if every
+bounded polynomial law of degree $n$ on $P$ is ambient of degree $n$, so is $a_\Gamma$, and
+Lemma~\ref{dp:lem:constants}(1) gives $\mathfrak a_n(P)<\infty$.
+
+\emph{Step 2 (item (2)).} We may assume that $C=\mathfrak a_{n+1}(K\oplus P)$ is finite. The map $a_+(\lambda,h)=\lambda
+a_\Gamma(h)$ from $K\oplus P$ to $W_0$ is a bounded polynomial law of degree $n+1$ with $\norm{a_+}\le1$: for finitely
+many $(\lambda_l,h_l)\in K\oplus P$ and scalars $s_l$,
+$a_+(\sum_ls_l(\lambda_l,h_l))=(\sum_ls_l\lambda_l)\,a_\Gamma(\sum_ls_lh_l)$, and $\norm{a_+(\lambda,h)}\le\abs\lambda\norm
+h^n\le\norm{(\lambda,h)}^{n+1}$. By~(1), $ja_+(\lambda,h)=\beta((\lambda,h),\dots,(\lambda,h))$ for a linear isometry $j$
+of $W_0$ into a normed space $Z$ and a bounded $(n+1)$\nobreakdash-linear map $\beta\colon(K\oplus P)^{n+1}\to Z$ with
+$\norm\beta\le C$. Put $\mathbf 1=(1,0)$ and $h^+=(0,h)$ for $h\in P$. For $h_1,\dots,h_n\in P$ let
+$\beta'(h_1,\dots,h_n)$ be the sum, over the $n+1$ slots, of the value of $\beta$ at the
+$(n+1)$\nobreakdash-tuple with $\mathbf 1$ in this slot and $h_1^+,\dots,h_n^+$ in the others, in this order. Then
+$\beta'$ is $n$\nobreakdash-linear, and $\norm{\beta'}\le(n+1)\norm\beta$, as $\norm{\mathbf 1}=1$ and
+$\norm{h^+}=\norm h$. For $h\in P$ and $s\in K$, $\beta((1,sh),\dots,(1,sh))$, with $(1,sh)=\mathbf 1+sh^+$, is a
+polynomial in $s$ whose coefficient of $s^n$ is $\beta'(h,\dots,h)$, while $ja_+(1,sh)=s^nja_\Gamma(h)$. As $K$ is infinite,
+comparing coefficients gives $ja_\Gamma(h)=\beta'(h,\dots,h)$, and Lemma~\ref{dp:lem:constants}(1) gives
+$\mathfrak a_n(P)\le\norm{\beta'}\le(n+1)C$.
+
+\emph{Step 3 (item (3)).} The second inequality follows from Lemma~\ref{dp:lem:constants}(3), applied to the coordinate
+projection of $c_0(\N,K)$ onto $c_0([m],K)$. For the first, by Lemma~\ref{dp:lem:constants}(4), and as
+$\mathfrak a_n(\{0\})=0$, it suffices to show
+$\mathfrak a_n(P_0)\le\mathfrak c_K^{-n}\sup_{m\ge1}\mathfrak a_n(c_0([m],K))$ for every finite-dimensional subspace
+$P_0\ne\{0\}$ of $P$. Its completion $\widehat P_0$ is a nonarchimedean normed space over $\Kh$. The $\Kh$\nobreakdash-span of
+a basis of $P_0$ in $\widehat P_0$ is complete by Lemma~\ref{lem:findim}, hence closed, and it contains the dense subspace $P_0$;
+so it is $\widehat P_0$, whose dimension $m'$ over $\Kh$ satisfies $1\le m'<\infty$. If $\lambda_k\to\lambda$ in $\Kh$ with
+$\lambda_k\in K$ and $\lambda\ne0$, then $\abs{\lambda_k-\lambda}<\abs\lambda$ and so $\abs{\lambda_k}=\abs\lambda$ for large $k$; hence $\abs{\Kh^\times}=\abs{K^\times}$,
+and $\mathfrak c_{\Kh}=\mathfrak c_K$. Lemma~\ref{dp:lem:completion}(1), Lemma~\ref{dp:lem:orthogonal} over $\Kh$ and
+Lemma~\ref{dp:lem:completion}(2) give
+\[
+ \mathfrak a_n(P_0)\le\mathfrak a_n(\widehat P_0)\le\mathfrak c_K^{-n}\,\mathfrak a_n(c_0([m'],\Kh))
+ \le\mathfrak c_K^{-n}\,\mathfrak a_n(c_0([m'],K)),
+\]
+where the second and third constants are computed over $\Kh$.
+
+\emph{Step 4 (item (4)).} Apply item~(3) with $n=2$ and Lemma~\ref{dp:lem:degree-two}.
+\end{proof}

@@ -1,0 +1,137 @@
+\section{Alternating bundles and analytic descent}\label{sec:bundles}
+
+Throughout, $\mathsf{Vec}_K$ is the category of normed $K$-spaces, not necessarily complete, and bounded linear maps, with hom spaces $\cL(E,D)$. For $n\in\N\cup\{\infty,\omega\}$, $C^n$ is as in the conventions of Section~\ref{sec:intro}, and $C^0$ means continuous.
+
+\subsection{The bundle construction}
+
+Fix a $C^n$ manifold $M$ modeled on a normed space $P$. Write $\mathsf{VB}^n_K(M)$ for the category of $C^n$ normed vector bundles over $M$, with morphisms over $\id_M$ whose local \emph{operator-valued} expressions, not merely the maps of total spaces, are $C^n$. Thus a morphism from a bundle with fiber $E$ to one with fiber $F$ is locally a $C^n$ map $x\mapsto T(x)\in\cL(E,F)$. This condition is independent of the trivializations, since composition is bounded bilinear.
+
+Let $\epsilon=(\epsilon_1,\ldots,\epsilon_r)$ specify a variance in each variable, and put $\mathbf C^\epsilon=\mathsf C_1\times\cdots\times\mathsf C_r$ with $\mathsf C_a=\mathsf{Vec}_K$ or $\mathsf{Vec}_K^{\mathrm{op}}$. A functor $\mathcal F\colon\mathbf C^\epsilon\to\mathsf{Vec}_K$ is $C^n$ if all its maps on products of hom spaces are jointly $C^n$. Let $\mathbf B^\epsilon_M$ denote the corresponding product of bundle categories, with the same variances. Natural transformations between such functors have bounded linear components, since their codomain is $\mathsf{Vec}_K$.
+
+\begin{theorem}[lifting linear constructions to bundles]\label{thm:bundle-lifting}
+For a fixed $C^n$ manifold $M$, fiberwise application defines, up to canonical natural isomorphism, a functor
+\[
+\begin{aligned}
+ \mathcal B_M^n\colon
+ \operatorname{Fun}^{C^n}(\mathbf C^\epsilon,\mathsf{Vec}_K)
+ &\longrightarrow
+ \operatorname{Fun}(\mathbf B^\epsilon_M,\mathsf{VB}^n_K(M)),\\
+ \mathcal F&\longmapsto\mathcal F_M,\qquad
+ \eta\longmapsto\eta_M.
+\end{aligned}
+\]
+Here the category on the left is the full subcategory of the ordinary functor category on the functors regular on hom spaces. The resulting bundles, bundle morphisms, and natural transformations are given fiberwise by $\mathcal F$, its action on maps, and the components of $\eta$, respectively.
+
+The same conclusion holds if regularity on whole hom spaces is replaced by preservation of $C^n$ families parametrized by open subsets of the model space $P$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (transitions).} Over a common trivializing cover of the input bundles, let the $C^n$ operator-valued maps $g^a_{ij}$ convert coordinates of the $a$th bundle from chart $j$ to chart $i$, so that $g^a_{ij}g^a_{j\ell}=g^a_{i\ell}$ and $g^a_{ii}=\id$. Let $\mathbf g_{ij}(x)$ be the tuple of arrows in $\mathbf C^\epsilon$ with entry $g^a_{ij}(x)$ in a covariant variable and $g^a_{ji}(x)$ in a contravariant one. By functoriality, $\theta_{ij}(x)=\mathcal F(\mathbf g_{ij}(x))$ satisfies $\theta_{ij}\theta_{j\ell}=\theta_{i\ell}$. The maps $\theta_{ij}$ are $C^n$ by composition, so they glue the products with typical fiber $\mathcal F(E_1,\ldots,E_r)$ into a $C^n$ vector bundle; its coordinate changes are $C^n$ because operator evaluation is bounded bilinear.
+
+\emph{Step 2 (morphisms).} Applied to the local operator families of a tuple of bundle morphisms, reversed in the contravariant variables, $\mathcal F$ gives families compatible with the $\theta_{ij}$ by functoriality and $C^n$ by composition; this defines $\mathcal F_M$. The same argument for changes of trivialization identifies different choices canonically and preserves identities and composition.
+
+\emph{Step 3 (natural transformations).} For $\eta\colon\mathcal F\Rightarrow\mathcal G$ and $\mathbf E=(E_1,\ldots,E_r)$, let $\eta_M$ be locally the constant operator $\eta_{\mathbf E}$. Naturality gives $\eta_{\mathbf E}\,\mathcal F(\mathbf g_{ij}(x))=\mathcal G(\mathbf g_{ij}(x))\,\eta_{\mathbf E}$, so $\eta_M$ is a bundle morphism, $C^n$ because its local expression is constant. The same identity for arbitrary input morphisms proves naturality of $\eta_M$, and identities and compositions of transformations are preserved fiberwise.
+
+\emph{Step 4 (familywise version).} In a base chart, every transition and local morphism family is a $C^n$ family on an open subset of $P$, so preservation of such families gives the regularity used in Steps~1 and~2; Step~3 uses none.
+\end{proof}
+
+The familywise hypothesis, that $\mathcal F\circ\gamma$ be $C^n$ for each $C^n$ map $\gamma$ on an open subset of $P$ into $\prod_a\operatorname{Hom}_{\mathsf C_a}(E_a,D_a)$, is weaker than regularity on whole hom spaces. The theorem also holds for restricted categories of fibers containing the bundle morphisms; compare~\cite{G2,La} and~\cite[n\textsuperscript{os}~7.6.1--7.6.4]{Bou}.
+
+\subsection{Alternating maps inside multilinear maps}
+
+For normed spaces $E,F$, let $\Mult^k(E;F)$ be the normed space of bounded $k$-linear maps $E^k\to F$, and $\Alt^k(E;F)$ its subspace of alternating maps, those vanishing whenever two arguments agree. The inclusion
+\[
+ j_{E,F}\colon\Alt^k(E;F)\longrightarrow\Mult^k(E;F)
+\]
+is a linear isometry with closed range, since alternation is an intersection of closed conditions under evaluation at fixed tuples. Both constructions are contravariant in $E$ and covariant in $F$, and the inclusions form a natural transformation. If $F$ is complete, so are both spaces, since operator-norm Cauchy families have bounded pointwise limits satisfying the same identities; so the alternating bifunctor restricts to Banach spaces.
+
+For $f\in\cL(E,D)$ and $g\in\cL(F,F')$, their joint action is
+\[
+ B(f,g)(m)(x_1,\ldots,x_k)
+ =g\bigl(m(fx_1,\ldots,fx_k)\bigr).
+\]
+On alternating maps, write
+\[
+ A=A^k_{E,D;F}\colon\cL(E,D)\longrightarrow
+ \cL(\Alt^k(D;F),\Alt^k(E;F)),\qquad A(f)=B(f,\id_F),
+\]
+for precomposition. Since $\norm{B(f,g)(m)}\le\norm g\,\norm m\,\norm f^k$, these actions are bounded operators.
+
+\begin{proposition}[ambient polynomial action]\label{prop:ambient-polynomial}
+The joint action on multilinear maps
+\[
+ B\colon\cL(E,D)\times\cL(F,F')
+ \longrightarrow\cL\bigl(\Mult^k(D;F),\Mult^k(E;F')\bigr)
+\]
+is the diagonal of a bounded $(k+1)$-linear map, and hence is $C^\omega$. Its restriction to alternating inputs is analytic as a map into
+\[
+ \cL\bigl(\Alt^k(D;F),\Mult^k(E;F')\bigr),
+\]
+and all its values belong to the closed subspace of operators taking values in $\Alt^k(E;F')$.
+\end{proposition}
+
+\begin{proof}
+For $v_i=(f_i,g_i)$ in the product of hom spaces, define
+\[
+ \Phi(v_0,\ldots,v_k)(m)(x_1,\ldots,x_k)
+ =g_0\bigl(m(f_1x_1,\ldots,f_kx_k)\bigr).
+\]
+This map is multilinear in the $v_i$, has norm at most $1$, and has diagonal $B$. A diagonal of a bounded multilinear map has finite polynomial derivatives of every order, so it is $C^\omega$ even with incomplete range. Restricting $m$ to alternating maps is bounded linear and preserves analyticity. On the diagonal, two equal $x_i$ give two equal $fx_i$, so the output is alternating; the operator subspace is closed because $j_{E,F'}$ has closed range, applied pointwise. For $k=0$, the formula is postcomposition by $g_0$.
+\end{proof}
+
+For bundles with analytic transition families $g_{ij}$ and $h_{ij}$, the induced alternating transitions $m\mapsto h_{ij}(x)\circ m\circ(g_{ji}(x),\ldots,g_{ji}(x))$ are therefore analytic as maps into the multilinear operator space. Whether their power-series coefficients can be chosen in the alternating operator space is the descent problem of Section~\ref{sec:descent}.
+
+\subsection{Analytic descent through closed subspaces}\label{sec:descent}
+
+Throughout this subsection, $P,W,Z$ are normed $K$-spaces, not necessarily complete, and $j\colon W\to Z$ is a linear isometry with closed range; we identify $W$ with its image when convenient. If $U\subseteq P$ is open and $f\colon U\to W$, an ambient expansion at $x_0\in U$ means
+\begin{equation}\label{eq:ambient-series}
+ jf(x_0+h)=\sum_{n\ge0}b_n(h,\ldots,h),\qquad
+ \sup_n\norm{b_n}R^n<\infty
+\end{equation}
+for some $R>0$, with bounded $n$-linear $b_n\colon P^n\to Z$ ($b_0$ a constant) and convergence for $\norm h<R$. For $j=\id_W$ this is, after shrinking $R$, the usual local definition of analyticity. For nonarchimedean spaces over a complete nonarchimedean field, this use of multilinear representatives agrees with the polynomial lifting norms of~\cite[7.14--7.19]{BGN}.
+
+\begin{theorem}[the coefficient descent criterion]\label{thm:coefficient-descent}
+Suppose \eqref{eq:ambient-series} holds. Then every diagonal $b_n(h,\ldots,h)$ belongs to $j(W)$. The map $f$ is analytic at $x_0$ if and only if there are bounded $n$-linear maps $q_n\colon P^n\to W$ and $r>0$ such that
+\[
+ jq_n(h,\ldots,h)=b_n(h,\ldots,h)\quad(n\ge0,\ h\in P),
+ \qquad \sup_n\norm{q_n}r^n<\infty.
+\]
+Only the diagonals must agree; the original mixed values of $b_n$ need not lie in $j(W)$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (diagonals in $j(W)$).} Fix $h\in P$. On the scalar line $x_0+th$, the coefficients $b_n(h,\ldots,h)$ of \eqref{eq:ambient-series} satisfy a geometric bound, and $b_0=jf(x_0)$. If the diagonals of degree below $n$ lie in $j(W)$, then for small nonzero $t$
+\[
+ t^{-n}\Bigl(jf(x_0+th)-\sum_{m<n}t^m b_m(h,\ldots,h)\Bigr)\in j(W),
+\]
+and this vector tends to $b_n(h,\ldots,h)$ as $t\to0$, by the tail estimate in the proof of Lemma~\ref{lem:unique}; since $j(W)$ is closed, $b_n(h,\ldots,h)\in j(W)$.
+
+\emph{Step 2 (the criterion).} If $f$ is analytic, apply $j$ to one of its expansions; on every scalar line, Lemma~\ref{lem:unique}, applied to the difference of the two series, gives the diagonal identities. Conversely, shrink $r$ below $R$ and let $\norm h<r$. The partial sums of $\sum_nq_n(h,\ldots,h)$ in $W$ have images converging to $jf(x_0+h)$, so they converge to $f(x_0+h)$ because $j$ is an isometry, and the bound on $\norm{q_n}r^n$ gives a positive radius.
+\end{proof}
+
+\begin{lemma}[smooth descent]\label{lem:closed-smooth}
+For $n\in\mathbb N\cup\{\infty\}$, a map $f\colon U\to W$ is $C^n$ if and only if $jf$ is $C^n$.
+\end{lemma}
+\begin{proof}
+Continuity reflects through an isometry. If $jf$ has Fr\'echet derivative $T$ at $x$, then $Th=\lim_{t\to0,\,t\ne0}t^{-1}(jf(x+th)-jf(x))\in j(W)$, so $T=jS$ for a unique bounded linear $S\colon P\to W$ of the same norm; the isometry transfers the remainder estimate, so $Df(x)=S$. Postcomposition by $j$ is a closed linear isometry $\cL(P,W)\to\cL(P,Z)$, since its image consists of the operators with values in $j(W)$, a closed condition under each evaluation. The same argument applied to the derivative maps proves every finite order by induction, hence $C^\infty$.
+\end{proof}
+
+By Proposition~\ref{prop:ambient-polynomial} and Lemma~\ref{lem:closed-smooth} with postcomposition by $j_{E,F'}$ as $j$, the joint action on alternating maps is $C^\infty$, and so is its case $g=\id_F$, the precomposition action $A^k_{E,D;F}$; this is the argument formalized in~\cite{PR}. With Theorem~\ref{thm:bundle-lifting}, this constructs alternating bundles and their morphisms at every finite order and at $C^\infty$; analyticity is the additional coefficient problem.
+
+We call a finite sum of diagonals of bounded multilinear maps a \emph{continuous polynomial}.
+\begin{proposition}[one lift, every base point]\label{prop:homogeneous-lift}
+Let $k\ge1$, and suppose $a\colon H\to W$ satisfies
+$ja(h)=\beta(h,\ldots,h)$ for a bounded $k$-linear map $\beta\colon H^k\to Z$. The following are equivalent:
+\begin{enumerate}
+\item $a$ is analytic at some point of $H$;
+\item there is a bounded $k$-linear $Q\colon H^k\to W$ with $Q(h,\ldots,h)=a(h)$;
+\item $a$ has a finite power-series expansion at every point, of infinite radius.
+\end{enumerate}
+Consequently each precomposition action $A^k_{E,D;F}$ is either a continuous polynomial on its whole domain or analytic nowhere.
+\end{proposition}
+\begin{proof}
+An expansion at $h_0$, compared along $h_0+th$ with the polynomial $\beta(h_0+th,\ldots,h_0+th)$, has degree-$k$ diagonal $\beta(h,\ldots,h)$ by Lemma~\ref{lem:unique}; its degree-$k$ coefficient is the required $Q$. Conversely, expanding $Q(h_0+h,\ldots,h_0+h)$ by multilinearity gives a finite expansion whose degree-$i$ coefficient, the sum over the $i$ occupied slots, has norm at most $\binom ki\norm Q\norm{h_0}^{k-i}$. The last assertion follows from Proposition~\ref{prop:ambient-polynomial}.
+\end{proof}
+
+\paragraph{\textit{Retractions are splittings.}}
+A bounded linear retraction $\rho$ of $j_{E,F}$ turns the representative $\beta(u_1,\ldots,u_k)(m)=m\circ(u_1,\ldots,u_k)$ of $j_{E,F}\circ A^k_{E,D;F}$ into the lift $\rho\circ\beta$ (Proposition~\ref{prop:split-lift}). Section~\ref{sec:duality} treats all Banach $F$ at once by one exact sequence and one class (Theorem~\ref{ob:thm:obstruction}).

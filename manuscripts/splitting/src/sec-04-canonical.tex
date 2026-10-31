@@ -1,0 +1,182 @@
+\section{Canonical splittings and forced asymmetry}\label{sec:canonical}
+
+Throughout this section $K$ is a nontrivially normed field and $[n]:=\{1,\dots,n\}$. For $\sigma\in S_n$ let
+$\tau_\sigma$ be the isometry of the $n$\nobreakdash-th projective tensor power of a normed space, and of its completion,
+with $\tau_\sigma(x_1\otimes\dots\otimes x_n)=x_{\sigma^{-1}(1)}\otimes\dots\otimes x_{\sigma^{-1}(n)}$; it commutes with
+$u^{\otimes n}$ for every bounded operator $u$, and $\tau_\sigma\tau_{\sigma'}=\tau_{\sigma\sigma'}$. Evaluation on pure
+tensors gives
+\begin{equation}\label{can:eq:signs}
+ \operatorname{alt}^k_E\circ\wedge^k_E=\sum_{\sigma\in S_k}\sgn(\sigma)\,\tau_\sigma,\qquad
+ \tau_\sigma\circ\operatorname{alt}^k_E=\sgn(\sigma)\operatorname{alt}^k_E,\qquad
+ \wedge^k_E\circ\tau_\sigma=\sgn(\sigma)\,\wedge^k_E ,
+\end{equation}
+and the first identity extends to $\widehat\otimes^k_\pi E$ by continuity. For vectors $x_1,\dots,x_n$ and
+$S\subseteq[n]$ put $v_S:=\sum_{i\in S}x_i$. Expanding $v_S^{\otimes n}$ over the maps $f\colon[n]\to S$, and using that
+$\sum_{S\supseteq f([n])}(-1)^{n-\abs S}$ is $1$ if $f$ is onto and $0$ otherwise, gives in every characteristic
+\begin{equation}\label{can:eq:polarization}
+ \sum_{S\subseteq[n]}(-1)^{n-\abs S}\,v_S^{\otimes n}=\sum_{\sigma\in S_n}x_{\sigma(1)}\otimes\dots\otimes x_{\sigma(n)} .
+\end{equation}
+
+\begin{proposition}[natural splittings]\label{can:prop:natural}
+Let $E$, $D$ and $P$ be normed spaces.
+\begin{enumerate}
+\item If $k!\ne0$ in $K$, then $\operatorname{alt}^k_E/k!$ is a section of $\wedge^k_E$ of norm at most $k!/\abs{k!}$ and
+$\wedge^k_D/k!$ is a retraction of $\operatorname{alt}^k_D$ of norm at most $1/\abs{k!}$; both are natural with respect
+to every $u\in\cL(E,D)$ and satisfy the sign rules of \eqref{can:eq:signs}.
+\item If $n!\ne0$ in $K$, then $R_n:=\frac1{n!}\sum_{\sigma\in S_n}\tau_\sigma$ is a projection of
+$\widehat\otimes^n_\pi P$ onto $\widehat\Gamma^n_\pi P$ of norm at most $n!/\abs{n!}$; it commutes with $u^{\otimes n}$ for
+bounded operators $u$ and satisfies $\tau_\sigma R_n=R_n\tau_\sigma=R_n$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) holds by the properties of $\wedge^k_E$ and $\operatorname{alt}^k_E$ in Section~\ref{sec:duality}.
+(2) The norm bound and the commutation rules hold since each $\tau_\sigma$ is an isometry commuting with $u^{\otimes n}$
+and $\tau_\sigma\tau_{\sigma'}=\tau_{\sigma\sigma'}$. $R_n$ fixes every pure power, hence $\widehat\Gamma^n_\pi P$
+pointwise, and by~\eqref{can:eq:polarization} and continuity it maps $\widehat\otimes^n_\pi P$ into
+$\widehat\Gamma^n_\pi P$.
+\end{proof}
+
+So every pair is good in degree $k$ when $k!\ne0$ (Propositions~\ref{fib:prop:split}(3) and~\ref{prop:split-lift}(1)).
+A matrix in $GL_k(K)$ is \emph{monomial} if each row and each column has exactly one nonzero entry.
+
+\begin{theorem}[no equivariant splitting]\label{can:thm:monomial}
+Let $k\ge2$ with $k!=0$ in $K$, and let $E_0$ be $K^k$ with a norm for which the coordinate functionals
+$e^*_1,\dots,e^*_k$ of the standard basis $e_1,\dots,e_k$ are bounded; by Lemma~\ref{lem:findim} every norm
+qualifies if $K$ is complete. For a monomial $g$, extend $g^{\otimes k}$ and $\Lambda^k_\pi g$ to the completions.
+\begin{enumerate}
+\item No linear $s\colon\Lambda^k_\pi E_0\to\widehat\otimes^k_\pi E_0$ with $\widehat\wedge^k_{E_0}\circ s=\id$ satisfies
+$s\circ\Lambda^k_\pi g=g^{\otimes k}\circ s$ for all monomial $g$.
+\item No linear $\rho\colon\otimes^k_\pi E_0\to\widehat\Lambda^k_\pi E_0$ with $\rho\circ\operatorname{alt}^k_{E_0}=\id$
+satisfies $\rho\circ g^{\otimes k}=\Lambda^k_\pi g\circ\rho$ for all monomial $g$.
+\item No linear projection $R$ of $\widehat\otimes^k_\pi E_0$ onto $\widehat\Gamma^k_\pi E_0$ satisfies
+$R\circ g^{\otimes k}=g^{\otimes k}\circ R$ for all monomial $g$.
+\end{enumerate}
+Statements (1)--(3) also hold for the algebraic powers $\otimes^k_KK^k$ and $\Lambda^k_KK^k$.
+\end{theorem}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+Let a group $\mathsf H$ act on a set $I$, and let $V=K^{(I)}$ be the space of finitely supported functions $I\to K$, with
+unit vectors $e_i$. Each $h\in\mathsf H$ acts on $V$ by $he_i=e_{h(i)}$, on $\otimes^k_KV$ by $h^{\otimes k}$ and on
+$\Lambda^k_KV$ by $\Lambda^k_Kh$; a linear map between two of these spaces is \emph{$\mathsf H$\nobreakdash-equivariant}
+if it intertwines the actions of every $h\in\mathsf H$. The maps $\wedge^k\colon\otimes^k_KV\to\Lambda^k_KV$,
+$\operatorname{alt}^k\colon\Lambda^k_KV\to\otimes^k_KV$ and $\tau_\sigma$ are given by the formulas of
+Section~\ref{ob:ssec:powers} and of this section. A \emph{$k$\nobreakdash-subset} is a subset with $k$ elements; for a
+finite $T\subseteq I$, $\mathsf H_T$ is its setwise stabilizer and $\bar{\mathsf H}_T\subseteq\operatorname{Sym}(T)$ is
+the group of permutations of $T$ induced by $\mathsf H_T$. A \emph{$k$\nobreakdash-multiset} is a finitely supported
+$\mathbf m\colon I\to\N$ with $\sum_i\mathbf m(i)=k$; $\mathsf H$ acts on these by
+$(h\mathbf m)(i)=\mathbf m(h^{-1}(i))$, $\mathsf H_{\mathbf m}$ is the stabilizer of $\mathbf m$, and
+$\bar{\mathsf H}_{\mathbf m}\subseteq\operatorname{Sym}(\operatorname{supp}\mathbf m)$ is the group induced by
+$\mathsf H_{\mathbf m}$.
+Let $\Gamma^k_KV\subseteq\otimes^k_KV$ be the span of the pure powers $x^{\otimes k}$, $x\in V$; since $K$ is infinite,
+it is the space of tensors fixed by every $\tau_\sigma$, by the paragraph at the beginning of
+Section~\ref{dgr:ssec:polarizable}.
+
+\begin{theorem}[permutation groups]\label{can:thm:permutation}
+Let $\mathsf H$ act on $I$, and let $k\ge1$.
+\begin{enumerate}
+\item There is an $\mathsf H$\nobreakdash-equivariant linear $s\colon\Lambda^k_KV\to\otimes^k_KV$ with
+$\wedge^k\circ s=\id$ if and only if $\abs{\bar{\mathsf H}_T}\ne0$ in $K$ for every $k$\nobreakdash-subset $T$ of $I$.
+\item There is an $\mathsf H$\nobreakdash-equivariant linear $\rho\colon\otimes^k_KV\to\Lambda^k_KV$ with
+$\rho\circ\operatorname{alt}^k=\id$ if and only if the condition in~(1) holds.
+\item There is an $\mathsf H$\nobreakdash-equivariant linear projection of $\otimes^k_KV$ onto $\Gamma^k_KV$ if and only
+if $\abs{\bar{\mathsf H}_{\mathbf m}}\ne0$ in $K$ for every $k$\nobreakdash-multiset $\mathbf m$ on $I$.
+\end{enumerate}
+When the condition in (1), (2) or (3) holds, the corresponding map can be chosen to commute also with the operator
+$e_i\mapsto\lambda_ie_i$ of $V$ for every $\lambda\in(K^\times)^I$.
+\begin{enumerate}\setcounter{enumi}{3}
+\item Let $E$ be a normed space with vectors $e_i\in E$ and bounded linear functionals $e^*_i$ on $E$, $i\in I$, with
+$e^*_i(e_j)=\delta_{ij}$, and let $\mathsf H$ act on $I$ and on $E$ by bounded linear maps with
+\begin{equation}\label{can:eq:compatible}
+ he_i=e_{h(i)},\qquad e^*_i\circ h=e^*_{h^{-1}(i)}\qquad(h\in\mathsf H,\ i\in I);
+\end{equation}
+extend $h^{\otimes k}$ and $\Lambda^k_\pi h$ to the completions. If $\abs{\bar{\mathsf H}_T}=0$ in $K$ for some
+$k$\nobreakdash-subset $T$, no linear $s\colon\Lambda^k_\pi E\to\widehat\otimes^k_\pi E$ with
+$\widehat\wedge^k_E\circ s=\id$ satisfies $s\circ\Lambda^k_\pi h=h^{\otimes k}\circ s$ for all $h\in\mathsf H_T$, and no
+linear $\rho\colon\otimes^k_\pi E\to\widehat\Lambda^k_\pi E$ with $\rho\circ\operatorname{alt}^k_E=\id$ satisfies
+$\rho\circ h^{\otimes k}=\Lambda^k_\pi h\circ\rho$ for all $h\in\mathsf H_T$. If $\abs{\bar{\mathsf H}_{\mathbf m}}=0$ in
+$K$ for some $k$\nobreakdash-multiset $\mathbf m$, no linear projection $R$ of $\widehat\otimes^k_\pi E$ onto
+$\widehat\Gamma^k_\pi E$ satisfies $R\circ h^{\otimes k}=h^{\otimes k}\circ R$ for all $h\in\mathsf H_{\mathbf m}$.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:obstruction-class}.
+
+\begin{corollary}[one element]\label{can:cor:p-cycle}
+\begin{enumerate}
+\item In each of (1)--(3) of Theorem~\ref{can:thm:permutation}, the following are equivalent: the
+$\mathsf H$\nobreakdash-equivariant map exists; for every $h\in\mathsf H$, the map equivariant for the cyclic group
+generated by $h$ exists; no $h\in\mathsf H$ maps a $k$\nobreakdash-subset $T$ onto itself, in (1) and (2), or fixes a
+$k$\nobreakdash-multiset $\mathbf m$, in (3), and induces on $T$, respectively on $\operatorname{supp}\mathbf m$, a
+permutation of order $\operatorname{char}K$. If $\operatorname{char}K=0$, the three statements hold.
+\item Let $k!=0$ in $K$, so that $p=\operatorname{char}K$ satisfies $2\le p\le k$. Let $E_0$ be as in
+Theorem~\ref{can:thm:monomial}, let $\nu\in S_k$ be a cycle of length $p$, and let $g$ be the permutation matrix with
+$ge_i=e_{\nu(i)}$. No map $s$, $\rho$ or $R$ as in (1), (2) or (3) of Theorem~\ref{can:thm:monomial} satisfies the
+corresponding equivariance identity for this single $g$.
+\end{enumerate}
+\end{corollary}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+For a finite group $\mathsf G$ acting trivially on $K$, the zeroth Tate cohomology group is
+$\widehat H^0(\mathsf G;K)=K/\abs{\mathsf G}K$~\cite[Ch.~VI]{Br}; it is $K$ if $\abs{\mathsf G}=0$ in $K$ and $0$
+otherwise.
+
+\begin{proposition}[Tate classes]\label{can:prop:tate}
+Let $\mathsf H$ act on $I$, let $k\ge1$, and let $T\subseteq I$ be a $k$\nobreakdash-subset. For a bijection
+$f\colon[k]\to T$ put $e_f:=e_{f(1)}\otimes\dots\otimes e_{f(k)}$. Fix a bijection $f_T\colon[k]\to T$, put
+$\eta_T:=e_{f_T(1)}\wedge\dots\wedge e_{f_T(k)}$, let $U_T\subseteq\otimes^k_KV$ be the span of the tensors $e_f$ over the
+bijections $f\colon[k]\to T$, put $\cN_T:=U_T\cap\ker\wedge^k$, and let $\chi_T\colon\mathsf H_T\to\{1,-1\}$ be the
+homomorphism with $\Lambda^k_Kh(\eta_T)=\chi_T(h)\eta_T$. Let $\mathsf H_T$ act on $U_T$ by
+$h\cdot z:=\chi_T(h)h^{\otimes k}z$. Write $H^1(\mathsf H_T;\cN_T)$ for the space of maps $c\colon\mathsf H_T\to\cN_T$
+with $c(hh')=c(h)+h\cdot c(h')$ for $h,h'\in\mathsf H_T$, modulo the maps $h\mapsto h\cdot n-n$ with $n\in\cN_T$, and for
+$a\in K$ let $\delta_T(a)\in H^1(\mathsf H_T;\cN_T)$ be the class of $h\mapsto a(h\cdot e_{f_T}-e_{f_T})$.
+\begin{enumerate}
+\item $\delta_T(1)=0$ if and only if some $z\in U_T$ satisfies $\wedge^kz=\eta_T$ and $h^{\otimes k}z=\chi_T(h)z$ for
+every $h\in\mathsf H_T$.
+\item $\ker\delta_T=\abs{\bar{\mathsf H}_T}K$. Hence $\delta_T$ induces an injective linear map from
+$\widehat H^0(\bar{\mathsf H}_T;K)=K/\abs{\bar{\mathsf H}_T}K$ into $H^1(\mathsf H_T;\cN_T)$ that sends the class of $1$
+to $\delta_T(1)$.
+\item An $\mathsf H$\nobreakdash-equivariant linear section of $\wedge^k\colon\otimes^k_KV\to\Lambda^k_KV$ exists if and
+only if $\delta_T(1)=0$ for every $k$\nobreakdash-subset $T$ of $I$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:obstruction-class}. By~(2) and~(3), an $\mathsf H$\nobreakdash-equivariant section
+exists if and only if the Tate classes $[1]\in\widehat H^0(\bar{\mathsf H}_T;K)$ vanish for all $k$\nobreakdash-subsets $T$.
+
+A \emph{lift} is, as in Lemma~\ref{fib:lem:test}, a bounded $k$\nobreakdash-linear map
+$Q\colon\cL(E,D)^k\to\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ with $Q(u,\dots,u)=\Lambda^k_\pi u$. For
+$u_1,\dots,u_k\in\cL(E,D)$ define $\Lsym(u_1,\dots,u_k)\in\cL(\Lambda^k_\pi E,\Lambda^k_\pi D)$ by
+\begin{equation}\label{can:eq:sym}
+ \Lsym(u_1,\dots,u_k)(x_1\wedge\dots\wedge x_k):=\sum_{\sigma\in S_k}u_{\sigma(1)}x_1\wedge\dots\wedge u_{\sigma(k)}x_k .
+\end{equation}
+The right side is alternating in $(x_b)$, since the terms for $\sigma$ and $\sigma\circ(a\ b)$ cancel when $x_a=x_b$; by
+Proposition~\ref{prop:exterior}, $\Lsym$ is a bounded symmetric $k$\nobreakdash-linear map with
+$\Lsym(u,\dots,u)=k!\,\Lambda^k_\pi u$. If $k!\ne0$, $\Lsym/k!$ is a symmetric lift, the normalized alternatization of
+Remark~\ref{rem:FFunit}.
+
+\begin{proposition}[forced asymmetry]\label{can:prop:asymmetry}
+Let $E$ and $D$ be normed spaces.
+\begin{enumerate}
+\item Every lift $Q$ satisfies $\sum_{\sigma\in S_k}Q(u_{\sigma(1)},\dots,u_{\sigma(k)})=\Lsym(u_1,\dots,u_k)$.
+\end{enumerate}
+Suppose now that $k!=0$ in $K$.
+\begin{enumerate}\setcounter{enumi}{1}
+\item If $E$ has $k$ linearly independent bounded functionals and $\widehat\Lambda^k_\pi D\ne0$, no lift is symmetric.
+\item No linear retraction $\rho\colon\otimes^k_\pi D\to\widehat\Lambda^k_\pi D$ of $\operatorname{alt}^k_D$ satisfies
+$\rho\circ\tau_\sigma=\sgn(\sigma)\rho$ for all $\sigma\in S_k$, unless $\Lambda^k_\pi D=0$.
+\item If $E$ has $k$ linearly independent bounded functionals, no linear section
+$s\colon\Lambda^k_\pi E\to\widehat\otimes^k_\pi E$ of $\widehat\wedge^k_E$ takes values in the sign-isotypic tensors
+$\{y:\tau_\sigma y=\sgn(\sigma)y\text{ for all }\sigma\}$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+The functional hypothesis in~(2) is needed: for $k=p$, $K=\F_p(t)$ and the space
+$E\subseteq A=\F_p((t))[\epsilon]/(\epsilon^p)$ of Lemma~\ref{dom:rigid}, every bounded functional on $E$ is zero and
+$\cL(E,E)=K\cdot\id$, while $\Lambda^p_\pi E\ne0$ by Proposition~\ref{prop:exterior}, since the determinant in the basis
+$(\epsilon^i)_{0\le i<p}$ of $A$ is a bounded alternating map on $E^p$ with value $1$ at that basis. So
+$Q(c_1\id,\dots,c_p\id)=c_1\cdots c_p\,\id$ is a symmetric lift.

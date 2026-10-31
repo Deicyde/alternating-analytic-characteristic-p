@@ -1,0 +1,104 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amssymb,amsmath,amsthm,mathtools}
+\usepackage{needspace,microtype,etoolbox}
+\usepackage{tikz-cd}
+\usepackage{listings,xcolor,textcomp}
+\definecolor{LeanKeyword}{HTML}{254E91}
+\definecolor{LeanType}{HTML}{006B65}
+\definecolor{LeanComment}{HTML}{526B46}
+\definecolor{LeanString}{HTML}{8A4727}
+\lstdefinelanguage{Lean}{
+  sensitive=true,
+  morekeywords={abbrev,by,class,def,end,exact,fun,import,in,instance,let,
+    namespace,noncomputable,open,scoped,section,theorem,variable,where},
+  morekeywords=[2]{Prop,Type,Set,NontriviallyNormedField,NormedAddCommGroup,
+    NormedSpace,TopologicalSpace,ChartedSpace,ModelWithCorners,IsOpen,
+    ContMDiffOn,ContMDiffVectorBundle},
+  morecomment=[l]{--},morecomment=[s]{/-}{-/},morestring=[b]"
+}
+% Render Lean's Unicode notation with both the editor and PDF export engines.
+\lstnewenvironment{leancode}{\lstset{
+  language=Lean,
+  basicstyle=\small\ttfamily,columns=fullflexible,keepspaces=true,
+  keywordstyle=\color{LeanKeyword}\bfseries,
+  keywordstyle=[2]\color{LeanType},
+  commentstyle=\color{LeanComment}\itshape,
+  stringstyle=\color{LeanString},
+  showstringspaces=false,upquote=true,
+  literate={∀}{{\ensuremath{\forall}}}1
+           {γ}{{\ensuremath{\gamma}}}1
+           {→}{{\ensuremath{\to}}}1
+           {↦}{{\ensuremath{\mapsto}}}1
+           {ℕ}{{\ensuremath{\mathbb N}}}1
+           {∞}{{\ensuremath{\infty}}}1
+           {ω}{{\ensuremath{\omega}}}1
+           {×}{{\ensuremath{\times}}}1
+           {⋀}{{\ensuremath{\bigwedge}}}1
+           {𝓘}{{\ensuremath{\mathcal I}}}1
+           {₁}{{\ensuremath{{}_1}}}1
+           {₂}{{\ensuremath{{}_2}}}1
+}}{}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\hypersetup{pdftitle={Alternating bundles and the splitting of exterior powers},
+ pdfauthor={Jack McCarthy},pdfsubject={Alternating bundles over nontrivially normed fields},
+ pdfkeywords={alternating maps, vector bundles, analytic descent, splitting, exterior powers, nonarchimedean analysis, Lean}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\F}{\mathbb F}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\Alt}{\operatorname{Alt}}
+\newcommand{\Mult}{\operatorname{Mult}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\linf}{\ell^\infty}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\spn}{\operatorname{span}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\coeff}{\operatorname{coeff}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\sdim}{\operatorname{sdim}}
+\newcommand{\incl}{\mathrm{incl}}
+\newcommand{\Cop}{C^{\mathrm{op}}}
+\newcommand{\Cvec}{C^{\mathrm{vec}}}
+\newcommand{\Kh}{\widehat K}
+\theoremstyle{plain}
+\newtheorem{introtheorem}{Theorem}
+\renewcommand{\theintrotheorem}{\Alph{introtheorem}}
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{plain}
+\newcommand{\alt}{\operatorname{alt}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\ob}{\operatorname{ob}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\Poly}{\operatorname{Poly}}
+\newcommand{\hot}{\mathbin{\widehat\otimes}}
+\newcommand{\hLambda}{\widehat\Lambda}
+\newcommand{\hGamma}{\widehat\Gamma}
+\newcommand{\cN}{\mathcal N}
+\newcommand{\cS}{\mathcal S}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\cM}{\mathcal M}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\fD}{\mathfrak D}
+\newcommand{\fX}{\mathfrak X}
+\newcommand{\Lsym}{\Lambda_{\mathrm{sym}}}

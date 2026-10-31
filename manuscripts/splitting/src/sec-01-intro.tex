@@ -1,0 +1,290 @@
+\section{Introduction}\label{sec:intro}
+
+A functor on normed spaces extends fiberwise to $C^n$ vector bundles, with its natural transformations, when $C^n$
+families of linear maps induce $C^n$ families (Theorem~\ref{thm:bundle-lifting}). We ask when the bifunctor
+$(E,F)\mapsto\Alt^k(E;F)$ of alternating $k$-linear maps over a nontrivially normed field $K$ carries analytic bundles
+to analytic bundles. For normed spaces $E$, $D$ and $F$ this concerns
+$A^k_{E,D;F}\colon\cL(E,D)\to\cL(\Alt^k(D;F),\Alt^k(E;F))$, $A^k_{E,D;F}(u)(m)=m\circ(u,\dots,u)$. Let
+$j_{E,F}\colon\Alt^k(E;F)\to\Mult^k(E;F)$ be the isometric inclusion. Composed with the induced isometric inclusion
+$j_{E,F}\circ{-}\colon\cL(\Alt^k(D;F),\Alt^k(E;F))\to\cL(\Alt^k(D;F),\Mult^k(E;F))$, the map $A^k_{E,D;F}$ is the
+diagonal of a bounded $k$-linear map (Proposition~\ref{prop:ambient-polynomial} with $g=\id_F$), and
+Theorem~\ref{thm:coefficient-descent} decides when such a diagonal descends analytically through $j_{E,F}\circ{-}$. By Proposition~\ref{prop:homogeneous-lift}, $A^k_{E,D;F}$ is analytic at some
+point if and only if it has a \emph{lift}: a bounded $k$-linear map $Q\colon\cL(E,D)^k\to\cL(\Alt^k(D;F),\Alt^k(E;F))$
+with $Q(u,\dots,u)=A^k_{E,D;F}(u)$.
+
+\subsection*{The splitting question}
+Let $\cN^k_E$ be the kernel of the quotient map $\widehat\wedge^k_E$ from the completed projective tensor power of $E$
+onto its completed projective exterior power (Section~\ref{sec:duality}):
+\begin{equation}\label{intro:eq:source}
+ 0\longrightarrow\cN^k_E\longrightarrow\widehat\otimes^k_\pi E\xrightarrow{\ \widehat\wedge^k_E\ }
+ \widehat\Lambda^k_\pi E\longrightarrow0.
+\end{equation}
+If $k!\ne0$ in $K$, antisymmetrization divided by $k!$ splits~\eqref{intro:eq:source} naturally in $E$ and solves every
+lift problem (Propositions~\ref{can:prop:natural} and~\ref{prop:split-lift}(1)). If $k!=0$ in $K$, one $p$-cycle of
+the coordinates of $K^k$, $p=\operatorname{char}K$, already forbids natural splittings (Theorem~\ref{can:thm:monomial},
+Corollary~\ref{can:cor:p-cycle}). The question becomes when
+the class $\ob_k(E,D)$ obtained from~\eqref{intro:eq:source} vanishes. It vanishes exactly when $(E,D)$ is \emph{good
+for Banach values in degree $k$}: $A^k_{E,D;F}$ is analytic for every Banach space $F$; the pair is \emph{good in
+degree $k$} if this holds for every normed space $F$ (Definition~\ref{fib:def:good}, Theorem~\ref{intro:thm:A}).
+
+The class vanishes under a \emph{source splitting} $(\mathrm S^k_E)$, a bounded section of $\widehat\wedge^k_E$; a
+\emph{target splitting} $(\mathrm R^k_D)$, a bounded retraction of the antisymmetrization $\alt^k_D$; or a
+\emph{parameter splitting}, a bounded projection of $\widehat\otimes^k_\pi\cL(E,D)$ onto the closed span of the powers
+$u^{\otimes k}$, which makes $\cL(E,D)$ \emph{polarizable in degree $k$}. Relative splittings, decompositions and
+block assemblies combine them. The class can be nonzero: \emph{forced asymmetry} makes lifts asymmetric
+(Section~\ref{sec:canonical}), and over a finite residue field \emph{Ramsey forcing} turns this asymmetry into a
+triangular pattern of coefficients that norm estimates forbid (Section~\ref{sec:sharpness}).
+
+\subsection*{Main results}
+
+
+\begin{introtheorem}[descent and one obstruction class]\label{intro:thm:A}
+Let $E$ and $D$ be normed spaces and $k\ge1$.
+\begin{enumerate}
+\item For every normed space $F$, $A^k_{E,D;F}$ is $C^\infty$ on $\cL(E,D)$; it is analytic at one point if and only if
+it has a lift, and then it is a continuous polynomial.
+\item The following are equivalent: \textup{(a)} $(E,D)$ is good for Banach values in degree $k$; \textup{(b)}
+$u\mapsto\Lambda^k_\pi u$ has a bounded $k$-linear lift $\cL(E,D)^k\to\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$;
+\textup{(c)} $\ob_k(E,D)=0$, where $\ob_k(E,D)$ is the pushout of the class of~\eqref{intro:eq:source} along the
+restriction $\ev^k_{E,D}|_{\cN^k_E}\colon\cN^k_E\to\Mult^k_0(\cL(E,D);\widehat\Lambda^k_\pi D)$ of the evaluation map
+$\ev^k_{E,D}(x_1\otimes\dots\otimes x_k)(u_1,\dots,u_k)=u_1x_1\wedge\dots\wedge u_kx_k$, with $\Mult^k_0$ the bounded
+$k$-linear maps with zero diagonal; \textup{(d)} some bounded $k$-linear map
+$\Psi\colon E^k\to\Mult^k_0(\cL(E,D);\widehat\Lambda^k_\pi D)$ satisfies
+$\Psi(x_1,\dots,x_k)=\ev^k_{E,D}(x_1\otimes\dots\otimes x_k)$ whenever two of the $x_a$ coincide.
+\item Let $(e_t)_{t\in\Sigma}$ be a linearly independent family in $E$ with dense span $V$, indexed by a totally ordered
+set $\Sigma$; every normed space has one. The \emph{ordering lift} $Q_<(u)$, for $u\in\cL(E,D)^k$, is the linear map
+$\Lambda^k_KV\to\widehat\Lambda^k_\pi D$ sending $e_{t_1}\wedge\dots\wedge e_{t_k}$, $t_1<\dots<t_k$, to
+$u_1e_{t_1}\wedge\dots\wedge u_ke_{t_k}$. Composed with the canonical map $\Lambda^k_KV\to\Lambda^k_\pi E$, every lift
+$Q$ as in \textup{(b)} is $Q_<+\Phi$ for a correction $\Phi$, $k$-linear in $u$ with $\Phi(v,\dots,v)=0$ for
+$v\in\cL(E,D)$ (Theorem~\ref{ob:thm:ordering}). The pair $(E,D)$ is good for Banach values in degree $k$ if and only
+if, for some such $\Phi$ and some $C$, $\norm{Q_<(u)y+\Phi(u)y}\le C\norm{u_1}\cdots\norm{u_k}\norm y_\pi$ for all $u$
+and $y\in\Lambda^k_KV$, where $\norm y_\pi$ is the projective seminorm.
+\end{enumerate}
+\end{introtheorem}
+
+Theorem~\ref{intro:thm:A} collects Lemma~\ref{lem:closed-smooth}, Propositions~\ref{prop:ambient-polynomial}
+and~\ref{prop:homogeneous-lift}, Lemma~\ref{fib:lem:test}, Theorem~\ref{ob:thm:obstruction},
+Corollary~\ref{ob:cor:adjacent} and Theorem~\ref{ob:thm:ordering}.
+
+\begin{introtheorem}[canonical splittings exist exactly when $k!\ne0$]\label{intro:thm:B}
+Let $k\ge2$.
+\begin{enumerate}
+\item If $k!\ne0$ in $K$, then $\alt^k_E/k!$, $\wedge^k_D/k!$ and the symmetrizer $(1/k!)\sum_{\sigma\in S_k}\sigma$ on
+$\widehat\otimes^k_\pi P$ split the source, target and parameter sequences naturally in $E$, $D$ and $P$. Every pair is
+good in degree $k$, and $\Alt^k$ is analytic on every hom space.
+\item Suppose $k!=0$ in $K$. For every norm on $K^k$ with bounded coordinate functionals, no section of
+$\wedge^k_{K^k}$, retraction of $\alt^k_{K^k}$ or projection onto the symmetric tensors commutes with the permutation
+matrix of one $p$-cycle of the coordinates. If $E$ has $k$ linearly independent bounded functionals and
+$\widehat\Lambda^k_\pi D\ne0$, no lift of $u\mapsto\Lambda^k_\pi u$ is symmetric, no section of $\widehat\wedge^k_E$
+takes sign-isotypic values and no retraction of $\alt^k_D$ is sign-equivariant.
+\item If $k!=0$ in $K$, then $A^k_{E,E;F}$ is analytic at no point for some Banach spaces $E$ and $F$, so $\Alt^k$ is
+analytic on all hom spaces, or on those of Banach spaces, if and only if $k!\ne0$. If $K$ is moreover complete and not
+spherically complete, $A^k_{E,D;K}$ is analytic at no point for some nonarchimedean Banach spaces $E$ and $D$.
+\item If $K$ is complete and nonarchimedean, $\Alt^k(-;K)$ is analytic on all hom spaces of normed spaces if and only
+if $k!\ne0$ in $K$ or $K$ is spherically complete.
+\item Let a group act on a set $I$, and on $K^{(I)}$ by permuting the unit vectors. On the algebraic powers of
+$K^{(I)}$, $\wedge^k$ has an equivariant section and $\alt^k$ an equivariant retraction if and only if the stabilizer of
+each $k$-subset of $I$ induces on it a group of order nonzero in $K$; an equivariant projection onto the span of the
+pure powers exists if and only if the stabilizer of each $k$-multiset on $I$ induces on its support a group of order
+nonzero in $K$. The obstruction to an equivariant section is a family of Tate classes. One element inducing a
+permutation of order $p$ on some $k$-subset forbids all three equivariant splittings, also on completed powers of normed
+spaces with a compatible biorthogonal system of vectors and bounded functionals.
+\end{enumerate}
+\end{introtheorem}
+
+Theorem~\ref{intro:thm:B} collects Propositions~\ref{can:prop:natural} and~\ref{prop:split-lift},
+Theorem~\ref{can:thm:monomial}, Proposition~\ref{can:prop:asymmetry}, Theorem~\ref{thm:operator-obstructions},
+Corollary~\ref{cor:classification}, Theorems~\ref{thm:scalar-classification} and~\ref{can:thm:permutation},
+Corollary~\ref{can:cor:p-cycle} and Proposition~\ref{can:prop:tate}. Corollary~\ref{cor:bundle-cases} lists the bundle
+settings in which fiberwise alternating maps form an analytic bifunctor; Proposition~\ref{prop:shear},
+Corollary~\ref{cor:shear-bundle} and Proposition~\ref{prop:tangent-obstruction} give analytic atlases with nonanalytic
+induced alternating or cotangent atlases, the latter over complete fields of characteristic $p>0$ that are not
+spherically complete, in degrees $k\ge p$; over complete fields, ambient analytic forms keep pullback, wedge products
+and exterior derivatives (Theorem~\ref{thm:ambient-forms}). Over nonarchimedean fields, with bounded polynomial laws
+in place of bounded multilinear maps as Taylor coefficients, divided-power analytic maps compose
+(Theorem~\ref{dp:thm:calculus}(2)), and in every characteristic the alternating and projective exterior power bundles of
+divided-power analytic vector bundles are divided-power analytic (Corollary~\ref{dp:cor:bundles}). If $K$ has characteristic $p>0$, then in every degree at least $p$ there are bounded polynomial laws that are not
+diagonals of bounded multilinear maps, even after an isometric embedding of their target
+(Propositions~\ref{dp:prop:nonambient} and~\ref{dp:prop:degree-p}).
+
+\begin{introtheorem}[how the class vanishes]\label{intro:thm:C}
+Let $E$ and $D$ be normed spaces and $k\ge1$.
+\begin{enumerate}
+\item The pair $(E,D)$ is good for Banach values in degree $k$ if $(\mathrm S^k_E)$ or $(\mathrm R^k_D)$ holds, if
+$\cL(E,D)$ is polarizable in degree $k$, if $(E,D)$ has a splitting decomposition of degree $k$, or if $(E,D)$ is an
+$\ell^1$ block assembly of pairs with uniformly bounded lifts in all degrees $j\le k$. For decompositions into
+$\mathrm S^{\le k}$-split and $\mathrm R^{\le k}$-split pieces, two pieces suffice.
+\item If $E$ has a linearly independent family, indexed by a totally ordered set, with dense span $V$ such that the
+strict triangle projection $\cP_<$ is bounded on $V\otimes_\pi V$, for instance one with a lower $r$-estimate for some
+$r<2$, then $(\mathrm S^n_E)$ and $(\mathrm R^n_E)$ hold and $E$ is polarizable in degree $n$, for every $n\ge1$.
+\item If $K$ is nonarchimedean, $E$ has a bounded linearly independent family indexed by a totally ordered set, with
+dense span on which $E$ is $\ell^2$-dominated, and $D$ has an equivalent $r$-norm, $r\in(2,\infty)$, or an
+equivalent nonarchimedean norm, then $(E,D)$ is good for Banach values in every degree.
+\item Suppose $\operatorname{char}K=p>0$. The least degree, if any, in which $(E,D)$ is not good, or not good for
+Banach values, is a power of $p$. If $E^*$ and $D^*$ are infinite-dimensional, the set of degrees in which $(E,D)$ is
+good, or good for Banach values, is $\{1,\dots,p^h-1\}$ for some $h\ge1$ or $\{1,2,\dots\}$. For every normed space
+$G$, each of $(\mathrm S^p_G)$, $(\mathrm R^p_G)$ and polarizability in degree $p$ implies the same condition in every
+degree.
+\item If $K$ is nonarchimedean and $E$ has a bounded linearly independent family $(e_t)_{t\in\Sigma}$, indexed by a
+totally ordered set, with dense span $V$ and coordinate functionals $x\mapsto x(t)$ uniformly bounded on $V$, then the
+class of~\eqref{intro:eq:source} pushes out to zero along every bounded linear map from $\cN^k_E$ to a Banach space with
+an equivalent nonarchimedean norm. In particular $\ob_k(E,D)=0$ if $\widehat\Lambda^k_\pi D$ has such a norm.
+\end{enumerate}
+\end{introtheorem}
+
+Theorem~\ref{intro:thm:C} collects Proposition~\ref{fib:prop:split}, Corollary~\ref{ob:cor:mechanisms},
+Theorem~\ref{cmb:thm:decomposition}, Propositions~\ref{cmb:prop:normal-form} and~\ref{cmb:prop:blocks},
+Theorem~\ref{fib:thm:lower}, Proposition~\ref{spl:prop:ordering}, Theorem~\ref{spl:thm:relative-ordering},
+Corollaries~\ref{spl:cor:relative-ordering-na} and~\ref{fib:cor:degrees}, and Theorems~\ref{cmb:thm:initial-segments},
+\ref{cmb:thm:column}, \ref{cmb:thm:polarizable-height} and~\ref{ob:thm:ultrametric}. A bounded retraction of $j_{E,F}$
+gives analyticity for that value space $F$ only (Proposition~\ref{prop:split-lift}, Theorems~\ref{thm:spherical}
+and~\ref{fib:thm:ultra}).
+
+\begin{introtheorem}[forcing]\label{intro:thm:D}
+Assume condition~\textup{(L)}: $\kappa$ is a finite field of characteristic $p$, $K$ is a subfield of $\kappa((X))$ on
+which the absolute value $\abs a=\varrho^{\ord a}$, $0<\varrho<1$, is nontrivial, and $k\ge p$.
+\begin{enumerate}
+\item For $2\le r\le\infty$, the pair $(\ell^r(\N,K),\ell^r(\N,K))$, with $c_0(\N,K)$ for $r=\infty$, is not good for
+Banach values in degree $k$.
+\item If symmetric sequence spaces $E$ and $D$ form a pair good for Banach values in degree $k$, then for some $C$, the
+\emph{product triangle bound} \textup{(PTB)}
+\[
+ \norm{\cP_<\bigl((ax)\otimes(by)\bigr)}_{D\otimes_\pi D}
+ \le C\norm{\mu_a}_{E\to D}\norm x_E\norm{\mu_b}_{E\to D}\norm y_E
+\]
+holds for all finitely supported $a,x,b,y$, where $\mu_a$ is multiplication by $a$. If moreover
+$\norm\xi_D\le C'\norm\xi_r$ for all finitely supported $\xi$ and some $r\in(2,\infty]$, then $E$ is $\ell^2$-dominated.
+\item If $E$ has an equivalent nonarchimedean norm with $\dim_{\Kh}\widehat E=\infty$, then the pairs
+$(E,c_0(\N,\Kh))$ and $(c_0(\N,K),E)$ are not good for Banach values in degree $k$.
+\end{enumerate}
+\end{introtheorem}
+
+Theorem~\ref{intro:thm:D} collects Theorems~\ref{fib:thm:ell2} and~\ref{obs:thm:ptb},
+Proposition~\ref{obs:prop:l2-domination}, and Theorem~\ref{fib:thm:local} with its proof, all proved in
+Appendix~\ref{app:forcing}; Lemma~\ref{obs:lem:normalization} reduces condition~\textup{(L)} to fields dense in a
+Laurent series field. Over every nontrivially normed field $K$ of characteristic~$2$, polynomial identities replace
+Ramsey's theorem: for $E=c_0(\N,K)$, $\linf(\N,K)$ and $\ell^r(\N,K)$, $2<r<\infty$, the pair $(E,E)$ is not good for
+Banach values in any degree $k\ge2$, and neither $(\mathrm S^k_E)$ nor $(\mathrm R^k_E)$ holds
+(Theorem~\ref{obs:thm:char-two}). Over Laurent series fields over infinite fields and over densely valued fields, the
+case $E=c_0(\N,K)$ for odd $p$ and the case $E=\ell^2(\N,K)$ for $p=2$ are open (Question~\ref{q:quest:residue}). In
+characteristic~$2$, Proposition~\ref{fam2:prop:char-two} removes condition~\textup{(L)} from
+Theorems~\ref{fam2:thm:staircase} and~\ref{fam2:thm:groups}(4), from Theorem~\ref{fam2:thm:tangent}(3) except its last
+sentence, and from Corollary~\ref{fam2:cor:table}(2) for $E=c_0(\N,K)$ and for $E=\ell^{r_2}(\N,K)$, $r_2>2$.
+
+\begin{introtheorem}[good pairs in classes]\label{intro:thm:E}
+Let $\kappa$, $\varrho$ and $K$ be as in condition~\textup{(L)}, and let good mean good for Banach values.
+\begin{enumerate}
+\item Let $E$ be a symmetric sequence space in which $c_{00}$ is dense. The following are equivalent: $(E,E)$ is good
+in some degree $k\ge p$; $(c_0,E)$ is good in some degree $k\ge p$; $\cP_<$ is bounded on $E\otimes_\pi E$;
+$(\mathrm S^k_E)$ holds for some $k\ge p$; $(\mathrm R^k_E)$ holds for some $k\ge p$; $E$ is polarizable in some degree $k\ge p$; $(E,D)$ and $(D,E)$ are good in every
+degree for every normed space $D$. If they hold, $E$ is $\ell^2$-dominated and $\varphi_E(m)^2\ge c\,m\ln m$ for some
+$c>0$ and all $m\ge1$, with $\varphi_E(m)$ the norm of the indicator of $\{1,\dots,m\}$.
+\item Let $E$ be as in \textup{(1)} and $D$ a symmetric sequence space with an equivalent $r$-norm, $r\in(2,\infty)$,
+or an equivalent nonarchimedean norm. Then $(E,D)$ is good in some degree $k\ge p$ if and only if \textup{(PTB)}
+holds, if and only if $E$ is $\ell^2$-dominated, if and only if $(E,D)$ is good in every degree.
+\item For $1\le r_1,r_2\le\infty$, with $c_0$ in place of $\ell^\infty$, the pair $(\ell^{r_1},\ell^{r_2})$ is good in
+some degree $k\ge p$ if and only if it is good in every degree, if and only if $\min(r_1,r_2)<2$ or $r_1=2<r_2$.
+\item If $E$ has an equivalent nonarchimedean norm and $k\ge p$, then $(E,D)$ is good in degree $k$ for every normed
+space $D$ if and only if $(D,E)$ is good in degree $k$ for every normed space $D$, if and only if $\dim_{\Kh}\widehat E<\infty$. If $K$ is complete and $k\ge p$, two
+spaces with equivalent nonarchimedean norms form a pair good in degree $k$ if and only if one of them is
+finite-dimensional.
+\end{enumerate}
+For the pairs in \textup{(1)}--\textup{(3)} and in the last sentence of \textup{(4)}, the good degrees form
+$\{1,\dots,p-1\}$ or $\{1,2,\dots\}$, and every good pair has a splitting decomposition by absolute or relative
+ordering splittings or by finite-coordinate splittings.
+\end{introtheorem}
+
+Theorem~\ref{intro:thm:E} collects Theorems~\ref{cls:thm:symmetric}, \ref{cls:thm:rnorm} and~\ref{fib:thm:local},
+Corollaries~\ref{cls:cor:lr-table} and~\ref{cls:cor:dichotomy}, and Remark~\ref{cls:rem:mechanisms}. Items~(1)
+and~(2), the last sentence for the pairs in them, and Theorem~\ref{intro:thm:D}(2) hold for spreading sequence spaces,
+whose norms need only be invariant under increasing relabelings of the unit vectors (Theorem~\ref{cls:thm:spreading});
+this class contains spaces with no equivalent symmetric norm (Example~\ref{cls:ex:garling}).
+
+\begin{introtheorem}[goodness without splitting decompositions]\label{intro:thm:F}
+\begin{enumerate}
+\item Over every separable complete nonarchimedean field $K$ there are nonzero infinite-dimensional Banach spaces
+$\fX_1,\fX_2,\dots$ with $\cL(\fX_\alpha,\fX_\alpha)=K\,\id$ and $\cL(\fX_\alpha,\fX_\beta)=0$ for $\alpha\ne\beta$.
+\item Over $\kappa((X))$ with $\kappa$ finite, suitable choices in \textup{(1)} give $\fX=\fX_1$ with
+$(\fX,\fX)$ good in every degree, while for every $k\ge p$ neither $(\mathrm S^k_{\fX})$ nor $(\mathrm R^k_{\fX})$
+holds and $(\fX,\fX)$ has no splitting decomposition of degree $k$.
+\item Over $\kappa((X))$ with $\kappa$ finite and these choices, the completed $\ell^1$-sum $E$ of the spaces $\fX_\alpha$
+gives an $\ell^1$ block assembly $(E,E)$ that is good for Banach values in every degree and has no splitting
+decomposition of any degree $k\ge p$, even with parameter pieces.
+\end{enumerate}
+\end{introtheorem}
+
+Theorem~\ref{intro:thm:F} collects Theorems~\ref{bey:thm:rigid}, \ref{bey:thm:rigid-good} and~\ref{bey:thm:rigid-sum},
+proved in Appendix~\ref{app:rigid}.
+
+Bundles need goodness only for triples $(P;E,D)$, along analytic operator families on open subsets of the base model
+$P$ (Section~\ref{sec:families}). Goodness of a triple reduces to homogeneous polynomial families and to familywise classes
+(Theorems~\ref{fam2:thm:reduction} and~\ref{fam2:thm:class}). Under~\textup{(L)}, $(\ell^2(\N,K);E,E)$ with
+$E=\ell^r(\N,K)$, $2<r<\infty$, is good in every degree, although neither is $\ell^2(\N,K)$ polarizable nor $(E,E)$
+good for Banach values in degree $k$ (Theorems~\ref{fam2:thm:polarizable} and~\ref{fam2:thm:gamma-split},
+Proposition~\ref{fam2:prop:fibers}, Corollary~\ref{cls:cor:symmetric-examples}, Theorem~\ref{fib:thm:ell2}). For a
+structure group with an open subgroup that lies in a linear space of operators and contains a ball of it around the
+identity, goodness is that of the linear space, not that of the closed linear span of the group
+(Theorem~\ref{fam2:thm:groups}, Proposition~\ref{fam2:prop:span}).
+
+\begin{introtheorem}[what bundles need]\label{intro:thm:G}
+Let $P$ be a normed space and $k\ge1$.
+\begin{enumerate}
+\item Let $\cC$ be a class of Banach spaces closed under finite direct sums. Fiberwise alternating maps with Banach value
+fibers preserve the analyticity of bundles with typical fibers in $\cC$ over every analytic manifold modeled on $P$ if
+and only if $x\mapsto\Lambda^k_\pi u(x)$ is analytic for every analytic family $u$ of operators between spaces of $\cC$
+on an open subset of $P$. For a single Banach fiber, families of invertible operators give the same condition.
+\item The condition holds for all normed fibers if $P$ is polarizable in every degree $n\le k$, and over every $P$ for
+fibers $E,D$ with $(E,\widehat D)$ good for Banach values in degree $k$. In characteristic $p$, the condition in all
+degrees $j\le k$ is decided by the lifting constants of homogeneous polynomial families in the degrees $p^i\le k$.
+Under~\textup{(L)}, it holds for all normed fibers over $P=\ell^r(\N,K)$, $1\le r<\infty$, if and only if $r<2$, and it
+fails for some normed fibers over every $P$ with an equivalent nonarchimedean norm and $\dim_{\Kh}\widehat P=\infty$,
+such as $c_0(\N,K)$.
+\item Let $K$ be complete and $P$ a Banach space with $P\cong P^3$. The bundles $\widehat\Lambda^k_\pi TM$ are analytic
+for every analytic manifold $M$ modeled on $P$ if and only if the condition holds for $E=D=P$. Under~\textup{(L)},
+$c_0(\N,K)$ and $\ell^r(\N,K)$, $4<r<\infty$, model manifolds $M$ with a nonanalytic bundle $\widehat\Lambda^k_\pi TM$.
+\end{enumerate}
+\end{introtheorem}
+
+Theorem~\ref{intro:thm:G} collects Proposition~\ref{fam2:prop:reductions}, Corollary~\ref{fam2:cor:bundles},
+Theorems~\ref{fam2:thm:reduction}, \ref{fam2:thm:polarizable} and~\ref{fam2:thm:bases},
+Proposition~\ref{fam2:prop:fibers} and Theorem~\ref{fam2:thm:tangent}.
+
+Section~\ref{sec:questions} collects questions. Every theorem, proposition, lemma and corollary of the paper is proved
+in the text, except Theorem~\ref{thm:ingleton} and Lemma~\ref{rig:lem:ramsey}, which are cited;
+Section~\ref{sec:verification} lists the statements that also have Lean proofs of corresponding statements. Proofs
+that would interrupt the text are collected in Appendix~\ref{app:deferred}.
+
+\subsection*{Related work}
+The bundle construction follows Lang's functors of class $C^n$~\cite[Ch.~III, \S4]{La} and Bourbaki's vector
+functors~\cite[n\textsuperscript{o}~7.6]{Bou}. Bourbaki defines the alternating bifunctor when $K$ has characteristic
+$0$ or the bundles have finite rank, and states that it is not known whether this restriction can be
+removed~\cite[n\textsuperscript{o}~7.8]{Bou}; the paragraph \emph{Bourbaki's question} in Section~\ref{sec:geometry}
+shows that it cannot over complete fields of characteristic $p>0$ that are not spherically complete. Gou\"ezel's
+construction~\cite{G1,G2} covers characteristic zero; the finite-dimensional case in positive characteristic, noted
+in~\cite{G1}, is Proposition~\ref{prop:split-lift}(2) over complete fields. Closed-range reflection of smoothness is
+formalized in~\cite{PR}. The nonarchimedean extension mechanism is a norm-controlled form of spherical
+completeness~\cite{In,Schi,Sch,Yuan}. Completed nonarchimedean exterior powers go back to Serre~\cite{Se} and
+Gruson~\cite{Gr}, who do not study sections of the quotient map; we know no source on these splittings in positive
+characteristic. The rigid spaces of Section~\ref{sec:beyond} transfer a construction of Kalton and Roberts~\cite{KR}.
+Corollary~\ref{ob:cor:z-linear} detects the class by the distance of a $z$-linear map from the linear maps, as for
+twisted sums~\cite{Ka,KP,CSC}.
+
+\subsection*{Conventions}
+$\cL(E,F)$ denotes bounded linear maps with the operator norm, $\Mult^k(E;F)$ bounded $k$-linear maps, and
+$\Alt^k(E;F)$ those vanishing whenever two arguments coincide; this condition, not antisymmetry, defines alternation
+in characteristic two. The degree-zero space is $F$. Products carry the maximum norm. $E$ denotes a source fiber, $D$
+a target fiber, $F$ a value space (a \emph{target fiber} in Corollary~\ref{cor:bundle-cases} and
+Appendix~\ref{app:laurent}), $G$ an intermediate space, and $P$ a base model or parameter space. \emph{Finite
+coordinates} means a bounded linear isomorphism with $K^d$; over a complete field this is finite dimension. Hats
+denote completions (Section~\ref{sec:duality}). Exponents are written $r$; $\ell^r$, lower $r$-estimates, $r$-norms
+and $\ell^2$-domination of a family are defined in Section~\ref{sec:positive}, symmetric sequence spaces in
+Definition~\ref{obs:def:sequence-spaces}. A finite field $\kappa$ has $\abs\kappa$ elements. Condition~\textup{(L)} is
+fixed in Section~\ref{sec:sharpness}. A norm is \emph{nonarchimedean} if $\norm{x+y}\le\max(\norm x,\norm y)$. Every
+normed field of characteristic $p>0$ is nonarchimedean: Frobenius gives $\abs{x+y}^{p^m}\le2\max(\abs x,\abs y)^{p^m}$; take roots
+and let $m\to\infty$.
+
+$C^n$ ($n\le\infty$) means iterated Fr\'echet differentiability; analyticity means local expansion in bounded
+multilinear coefficients with a positive norm-controlled radius. On manifolds, $C^\omega$ also requires analytic
+iterated derivatives, as in Mathlib~\cite{docs}. On open sets the two agree, even for incomplete ranges: the
+derivative series converges in the completion to the Fr\'echet derivative, which exists in the operator space since
+nearby points are points of analyticity.

@@ -1,0 +1,372 @@
+\section{Ordering splittings}\label{app:ordering}
+
+Throughout, $K$ is a nontrivially normed field, $\Sigma$ is a totally ordered set, and $\vartheta\in K$ is the fixed
+element with $0<\abs\vartheta<1$.
+
+\subsection{Lower estimates}\label{ord:ssec:lower}
+
+\begin{proof}[Proof of Theorem~\ref{fib:thm:lower}]
+(1) \emph{Step 1 (the weight $\nu$).} Let $x,y\in V$ be nonzero and $\Sigma_0\subseteq\Sigma$ a finite set containing
+their supports. In this proof an interval is a set of consecutive elements of $\Sigma_0$; disjoint ones lie in disjoint
+intervals of $\Sigma$, so~\eqref{fib:eq:lower} applies to them. For an interval $I$ let $\nu_x(I)$ be the supremum of
+$\sum_i\norm{\cP_{I_i}x}^r$ over the families of pairwise disjoint intervals $I_i\subseteq I$. Then $\nu_x$ is monotone
+and superadditive on disjoint intervals, $\norm{\cP_Ix}^r\le\nu_x(I)$ and $\nu_x(\Sigma_0)\le C^r\norm x^r$. Put
+$a_I=\nu_x(I)/\nu_x(\Sigma_0)$, $b_I=\nu_y(I)/\nu_y(\Sigma_0)$ and $\nu(I)=a_I+b_I$, so that $\nu(\Sigma_0)=2$.
+
+\emph{Step 2 (the binary tree).} Build a binary tree of intervals with root $\Sigma_0$ of depth $0$. A node $I$ is a leaf
+if it has at most one element or $\nu(I)=0$. Otherwise let $t_I$ be the least $t\in I$ with
+$\nu(\{t'\in I:t'\le t\})\ge\nu(I)/2$; the children of $I$, of depth one more, are $I_<=\{t\in I:t<t_I\}$ and
+$I_>=\{t\in I:t>t_I\}$. Then $\nu(I_<)<\nu(I)/2$ by minimality of $t_I$ and $\nu(I_>)\le\nu(I)/2$ by superadditivity,
+so the nodes of depth $d$ are pairwise disjoint and satisfy $\nu\le2^{1-d}$.
+
+\emph{Step 3 (the sum over the nodes).} For an interval $I$ let $z_I$ be the sum of $x(t)y(t')\,e_t\otimes e_{t'}$ over
+$t<t'$ in $I$, so that $\cP_<(x\otimes y)=z_{\Sigma_0}$. At an internal node
+\[
+ z_I=z_{I_<}+z_{I_>}+\cP_{I_<}x\otimes\cP_{I\setminus I_<}y+\cP_{\{t_I\}}x\otimes\cP_{I_>}y,
+\]
+and $z_I=0$ at a leaf $I$: it has at most one element, or $\nu(I)=0$ and $x$ vanishes on $I$. So
+$\cP_<(x\otimes y)$ is the sum of the last two terms over the internal nodes. At a node $I$ they have projective norm
+at most
+\[
+ 2\nu_x(I)^{1/r}\nu_y(I)^{1/r}\le2C^2(a_Ib_I)^{1/r}\norm x\norm y.
+\]
+At depth $d$, $a_Ib_I\le(\nu(I)/2)^2\le4^{-d}$, and $\sum_I(a_Ib_I)^{1/2}\le1$ by the Cauchy--Schwarz inequality, as
+$\sum_Ia_I\le1$ and $\sum_Ib_I\le1$; so $\sum_I(a_Ib_I)^{1/r}\le2^{-d(2/r-1)}$. Summing over $d$ gives
+$\norm{\cP_<(x\otimes y)}\le C_\sharp\norm x\norm y$. The bounded bilinear map $(x,y)\mapsto\cP_<(x\otimes y)$ extends
+from $V\times V$ to $E\times E$ with values in $E\widehat\otimes_\pi E$; its linearization is the asserted extension.
+
+(2) For $1\le a<k$ let $\cP_<^{(a)}=\id^{\otimes(a-1)}\otimes\cP_<\otimes\id^{\otimes(k-a-1)}$, a map
+$\otimes^k_\pi E\to\widehat\otimes^k_\pi E$ of norm at most $C_\sharp$, extended to the completion, and
+$\cP^{(k)}=\cP_<^{(k-1)}\circ\dots\circ\cP_<^{(1)}$. Then $\norm{\cP^{(k)}}\le C_\sharp^{k-1}$, and $\cP^{(k)}$ fixes
+$e_{t_1}\otimes\dots\otimes e_{t_k}$ if $t_1<\dots<t_k$ and maps it to $0$ otherwise. Put
+$s=\cP^{(k)}\circ\operatorname{alt}^k_E$ and $\rho=\widehat\wedge^k_E\circ\cP^{(k)}$. For $x_1,\dots,x_k\in V$,
+\[
+ s(x_1\wedge\dots\wedge x_k)=\sum_{t_1<\dots<t_k}\det\bigl(x_b(t_a)\bigr)_{a,b}\,e_{t_1}\otimes\dots\otimes e_{t_k},
+\]
+whose image under $\widehat\wedge^k_E$ is $x_1\wedge\dots\wedge x_k$. Such wedges span a dense subspace of
+$\Lambda^k_\pi E$, as $V$ is dense and $\norm{x_1\wedge\dots\wedge x_k}\le\prod_i\norm{x_i}$. Hence
+$\widehat\wedge^k_E\circ s=\id$ and $\rho\circ\operatorname{alt}^k_E=\widehat\wedge^k_E\circ s=\id$. If $E=V$, then
+$\cP_<$ preserves $V\otimes V$, so $s$ and $\rho$ take values in the uncompleted spaces.
+
+(3) follows from~(2) and Proposition~\ref{fib:prop:split}.
+\end{proof}
+
+\subsection{Ordering splittings in every degree}\label{ord:ssec:ordering}
+
+\begin{proof}[Proof of Proposition~\ref{spl:prop:ordering}]
+\emph{Step 1 (source and target).} As at the end of part~(1) of the proof of Theorem~\ref{fib:thm:lower}, $\cP_<$
+extends to a map $E\otimes_\pi E\to E\widehat\otimes_\pi E$ of norm at most $C$, and part~(2) of that proof, with $C$ in
+place of $C_\sharp$ and $n$ in place of $k$, proves~(1) and~(2).
+
+\emph{Step 2 (diagonal operators).} For $n=1$ take $R_1=\id$; let $n\ge2$. Let $(1\,2)$ be the isometry exchanging the
+factors of $E\otimes_\pi E$, $\cP_>=(1\,2)\circ\cP_<\circ(1\,2)$ and $\Delta=\id-\cP_<-\cP_>$, so that
+$\norm\Delta\le1+2C$. For $T\in\{\cP_<,\Delta\}$ and $1\le a<n$ let
+$T^{(a)}=\id^{\otimes(a-1)}\otimes T\otimes\id^{\otimes(n-a-1)}$, extended to $\widehat\otimes^n_\pi E$, of norm at most
+$\norm T$. For $\mathbf t\in\Sigma^n$ and $e_{\mathbf t}=e_{t_1}\otimes\dots\otimes e_{t_n}$, the vector
+$\cP_<^{(a)}e_{\mathbf t}$, respectively $\Delta^{(a)}e_{\mathbf t}$, is $e_{\mathbf t}$ if $t_a<t_{a+1}$, respectively
+$t_a=t_{a+1}$, and $0$ otherwise. So these operators preserve $\otimes^nV$ and commute on it, hence on
+$\widehat\otimes^n_\pi E$.
+
+\emph{Step 3 (the projection).} For a composition $c=(c_1,\dots,c_m)$ of $n$ let $J(c)$ be the set of partial sums
+$c_1+\dots+c_i$, $i<m$, and $\Pi_c=\prod_{a\in J(c)}\cP_<^{(a)}\prod_{a\notin J(c)}\Delta^{(a)}$, with $a$ ranging over
+$\{1,\dots,n-1\}$. Then $\Pi_ce_{\mathbf t}=e_{\mathbf t}$ if $\mathbf t$ is nondecreasing with constant blocks of
+lengths $c_1,\dots,c_m$, and $\Pi_ce_{\mathbf t}=0$ otherwise. The stabilizer of such a $\mathbf t$ in $S_n$, acting by
+isometric permutations of the factors, is $S_{c_1}\times\dots\times S_{c_m}$; if $\Omega_c$ is a set of representatives
+of its left cosets, then $O_{\mathbf t}=\sum_{\sigma\in\Omega_c}\sigma e_{\mathbf t}$. Hence
+$R_n=\sum_c\sum_{\sigma\in\Omega_c}\sigma\circ\Pi_c$, the first sum over all compositions of $n$, satisfies
+$R_ne_{\mathbf t}=O_{\mathbf t}$ for nondecreasing $\mathbf t$ and $R_ne_{\mathbf t}=0$ otherwise, and
+$\norm{R_n}\le\sum_cn!\,(c_1!\cdots c_m!)^{-1}C^{m-1}(1+2C)^{n-m}$.
+
+\emph{Step 4 (the image).} Let $\Gamma_V$ be the span of the $O_{\mathbf t}$ with $\mathbf t$ nondecreasing. Then
+$R_n(\otimes^nV)=\Gamma_V$ and $R_n$ fixes $\Gamma_V$, so by continuity $R_n$ is a projection of
+$\widehat\otimes^n_\pi E$ onto $\overline{\Gamma_V}$. For $h\in V$,
+$h^{\otimes n}=\sum_{\mathbf t\text{ nondecreasing}}h(t_1)\cdots h(t_n)O_{\mathbf t}\in\Gamma_V$; as
+$h\mapsto h^{\otimes n}$ is continuous and $V$ is dense, $\hGamma^n_\pi E\subseteq\overline{\Gamma_V}$. Conversely, by
+the argument of Step~1 of the proof of Proposition~\ref{spl:prop:gamma-l1}, with the vectors $e_t$ in place of the unit
+vectors, $O_{\mathbf t}$ is a linear combination of pure powers. Hence $\overline{\Gamma_V}=\hGamma^n_\pi E$, and
+$(\Gamma^n_E)$ holds.
+\end{proof}
+
+\subsection{Boxes in chain sets}\label{ord:ssec:boxes}
+
+Throughout this subsection and the next, $2<r<\infty$ is fixed. For finite $T_1,\dots,T_k\subseteq\Sigma$ the
+\emph{chain set} is $\Xi(T_1,\dots,T_k)=\{t\in T_1\times\dots\times T_k:t_1<\dots<t_k\}$, with $\Xi()=\{()\}$. A
+\emph{box} is a product $J_1\times\dots\times J_k$ with $J_a\subseteq T_a$, of \emph{cost} $\prod_a\abs{J_a}^{1/r}$;
+$\chi(T_1,\dots,T_k)$ is the least total cost of a partition of $\Xi(T_1,\dots,T_k)$ into boxes contained in it. So
+$\chi=0$ if the chain set is empty, $\chi()=1$, and $\chi(T_1)=\abs{T_1}^{1/r}$, as $y\mapsto y^{1/r}$ is subadditive.
+
+For $y,y'>0$ let $\psi(y,y')=\min(y,y')^{1-1/r}\max(y,y')^{1/r}$. A \emph{matching} of a finite set $S$ is a set
+$\mathfrak m$ of pairwise disjoint two-element subsets of $S$, \emph{near-perfect} if it has $\lfloor\abs S/2\rfloor$
+pairs. Let $\operatorname{Mat}(S)$ be the set of near-perfect matchings of $S$ and
+$\operatorname{Mat}_q=\operatorname{Mat}(\{1,\dots,q\})$. For positive reals $y=(y_a)_{a\in S}$ put
+\[
+ \langle y\rangle=\max_{\mathfrak m}\prod_{\{a,b\}\in\mathfrak m}\min(y_a,y_b),\qquad
+ \Psi(y)=\prod_{a\in S}y_a^{1/r}\,\langle y\rangle^{1-2/r},
+\]
+the maximum over all matchings of $S$, empty products being $1$. For a matching $\mathfrak m$ let
+$\Psi_{\mathfrak m}(y)$ be the product of $\psi(y_a,y_b)$ over the pairs $\{a,b\}\in\mathfrak m$ and of $y_a^{1/r}$ over
+the unmatched $a$; as $\psi(y,y')=(yy')^{1/r}\min(y,y')^{1-2/r}$, it is $\Psi(y)$ with $\langle y\rangle$ replaced by the
+product of the minima over $\mathfrak m$. Write $y_{S'}=(y_a)_{a\in S'}$ for $S'\subseteq S$. Let
+$\lambda_1=1+(1-2^{-1/r})^{-1}$, $\lambda_2=1+2^{1-2/r}(2^{1-2/r}-1)^{-1}$ and $\lambda=\max(\lambda_1,\lambda_2)$. Four
+elementary facts are used.
+\begin{enumerate}
+\item[(F1)] $\psi(y,y')\le y^{1-1/r}y'^{1/r}$ and $\psi(y,y')\le y^{1/r}y'^{1-1/r}$, with equality in the first if
+$y\le y'$: one bound equals $\psi(y,y')$, the other is $(\max/\min)^{1-2/r}$ times larger.
+\item[(F2)] $\Psi_{\mathfrak m}(y)\le\Psi(y)$ for every matching $\mathfrak m$ of $S$, as $1-2/r>0$. If all $y_a\ge1$, then
+$\Psi(y)=\Psi_{\mathfrak m}(y)$ for some $\mathfrak m\in\operatorname{Mat}(S)$, as every matching extends to a
+near-perfect one and the added minima are $\ge1$; so $\Psi(y)\le\sum_{\mathfrak m\in\operatorname{Mat}(S)}\Psi_{\mathfrak m}(y)$.
+\item[(F3)] $\Psi$ is nondecreasing in each variable.
+\item[(F4)] Let $N\ge1$, $y_{b,i}\ge0$ for $b$ in a finite set $S$ and $1\le i\le N$, $\alpha_b\ge0$ and
+$\Theta=\sum_b\alpha_b$. Then, with $0^0=1$,
+$\sum_{i=1}^N\prod_by_{b,i}^{\alpha_b}\le N^{(1-\Theta)_+}\prod_b(\sum_{i=1}^Ny_{b,i})^{\alpha_b}$. For $\Theta\le1$ this
+is H\"older's inequality, with the constant function $1$ if $\Theta<1$; for $\Theta>1$, apply the case $\Theta=1$ to
+the exponents $\alpha_b/\Theta$ and use $\sum_iz_i^\Theta\le(\sum_iz_i)^\Theta$ for $z_i=\prod_by_{b,i}^{\alpha_b/\Theta}$.
+\end{enumerate}
+The \emph{hull} of a finite nonempty $Y\subseteq\Sigma$ is $\operatorname{hull}(Y)=\{t\in\Sigma:\min Y\le t\le\max Y\}$.
+
+\begin{lemma}[pair tree]\label{ord:lem:pair-tree}
+Let $T',T''\subseteq\Sigma$ be finite and nonempty, $m=\min(\abs{T'},\abs{T''})$ and $h=\lceil\log_2m\rceil$; call $T'$
+the \emph{tree side} if $\abs{T'}\le\abs{T''}$, and $T''$ otherwise. There are a finite set $\mathcal T$ with a partition
+$\mathcal T=\mathcal T_0\sqcup\dots\sqcup\mathcal T_{h-1}\sqcup\mathcal T_\ast$ into \emph{levels}, and nonempty sets
+$T'_i\subseteq T'$, $T''_i\subseteq T''$ with $\max T'_i<\min T''_i$ for $i\in\mathcal T$, such that
+\begin{equation}\label{ord:eq:pair-partition}
+ \{(t',t'')\in T'\times T'':t'<t''\}=\bigsqcup_{i\in\mathcal T}T'_i\times T''_i
+\end{equation}
+and, if $Y_i$ denotes the one of $T'_i,T''_i$ that lies in the tree side:
+\textup{(T1)} $\abs{\mathcal T_d}\le2^d$ for $d<h$, and $\abs{\mathcal T_\ast}\le m$;
+\textup{(T2)} $\abs{Y_i}\le m2^{-d}$ for $i\in\mathcal T_d$, and $\abs{Y_i}=1$ for $i\in\mathcal T_\ast$;
+\textup{(T3)} within each level, the sets $T'_i$ have pairwise disjoint hulls, and so have the sets $T''_i$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (the tree).} Assume first $\abs{T'}\le\abs{T''}$. The nodes are pairs $(U,I)$ of a nonempty set $U$ of
+consecutive elements of $T'$ and an interval $I$ of $\Sigma$; the root $(T',\Sigma)$ has depth $0$. If $\abs U\ge2$, let
+$U_L$ consist of the first $\lceil\abs U/2\rceil$ elements of $U$ and $U_R$ of the others, $t_U=\max U_L$,
+$I_L=\{t\in I:t\le t_U\}$ and $I_R=\{t\in I:t>t_U\}$; the node has the children $(U_L,I_L)$ and $(U_R,I_R)$, of depth
+one more, and contributes the pair $(U_L,T''\cap I_R)$ to $\mathcal T_d$, $d$ its depth, if $T''\cap I_R\ne\emptyset$. A
+node $(\{t_0\},I)$ is a leaf and contributes $(\{t_0\},\{t\in T''\cap I:t>t_0\})$ to $\mathcal T_\ast$ if this set is
+nonempty. Each pair satisfies $\max T'_i<\min T''_i$.
+
+\emph{Step 2 (partition).} Put $\Upsilon(U,I)=\{(t',t'')\in U\times(T''\cap I):t'<t''\}$. If $\abs U\ge2$, then
+$\Upsilon(U,I)=U_L\times(T''\cap I_R)\sqcup\Upsilon(U_L,I_L)\sqcup\Upsilon(U_R,I_R)$: for $t'\in U_L$ the cases $t''>t_U$
+and $t''\le t_U$ give the first two pieces, and every $t'\in U_R$ exceeds $t_U$. At a leaf, $\Upsilon$ is the contributed
+pair or empty. Unwinding from $\Upsilon(T',\Sigma)$ gives~\eqref{ord:eq:pair-partition}.
+
+\emph{Step 3 (counting and hulls).} By induction a node of depth $d$ has $\abs U\le\lceil m/2^d\rceil$, as children
+have at most $\lceil\abs U/2\rceil$ elements and $\lceil\lceil y\rceil/2\rceil=\lceil y/2\rceil$; there are at most
+$2^d$ such nodes. If $\abs U\ge2$, then $m>2^d$, so $d<h$, and $\abs{U_L}\le\lceil m/2^{d+1}\rceil\le m/2^d$, as
+$\lceil y\rceil\le2y$ for $y>1/2$. The leaves have distinct singletons $U\subseteq T'$. This proves~(T1) and~(T2).
+Children split the block $U$ and the interval $I$ of their parent into disjoint parts, so two nodes neither of which
+descends from the other, such as two nodes of one depth or two leaves, have disjoint blocks $U$, one before the
+other, and disjoint intervals $I$. A pair contributed by a node has its first member in $U$ and its second in $I$; this
+proves~(T3).
+
+\emph{Step 4 (the other case).} If $\abs{T''}<\abs{T'}$, apply Steps~1--3 to $T''$, $T'$ and the reversed order of
+$\Sigma$, which changes no hull.
+\end{proof}
+
+\begin{lemma}[level summation]\label{ord:lem:level-sum}
+Let $m\ge1$, $h=\lceil\log_2m\rceil$, and let $\mathcal T=\mathcal T_0\sqcup\dots\sqcup\mathcal T_{h-1}\sqcup\mathcal T_\ast$
+be a finite set with $\abs{\mathcal T_d}\le2^d$ and $\abs{\mathcal T_\ast}\le m$. Let $g\colon\mathcal T\to[0,\infty)$
+satisfy $g\le m2^{-d}$ on $\mathcal T_d$ and $g\le1$ on $\mathcal T_\ast$. For $b$ in a finite set $S$ let
+$y_b\colon\mathcal T\to[0,\infty)$ have sum at most $Y_b$ over each $\mathcal T_d$ and over $\mathcal T_\ast$. Let
+$\alpha_0\ge1/r$, $\alpha_b\ge0$, $\Theta=\sum_{b\in S}\alpha_b$, $Y=\prod_bY_b^{\alpha_b}$ and
+$\Phi=\sum_{i\in\mathcal T}g(i)^{\alpha_0}\prod_by_b(i)^{\alpha_b}$.
+\textup{(1)} If $\Theta+\alpha_0\ge1+1/r$, then $\Phi\le\lambda_1m^{\alpha_0}Y$.
+\textup{(2)} If $\alpha_0=\Theta=1/r$, then $\Phi\le\lambda_2m^{1-1/r}Y$.
+\end{lemma}
+
+\begin{proof}
+Put $\zeta=(1-\Theta)_+-\alpha_0$. By~(F4), the part of $\Phi$ over $\mathcal T_d$ is at most
+$(m2^{-d})^{\alpha_0}2^{d(1-\Theta)_+}Y=m^{\alpha_0}2^{d\zeta}Y$, and the part over $\mathcal T_\ast$ at most
+$m^{(1-\Theta)_+}Y$. (1) Here $\zeta\le-1/r$ and $(1-\Theta)_+\le\alpha_0$, as $(1-\Theta)_+=0$ if $\Theta\ge1$ and
+$1-\Theta\le\alpha_0-1/r$ if $\Theta<1$; so $\Phi\le m^{\alpha_0}(\sum_{d\ge0}2^{-d/r}+1)Y=\lambda_1m^{\alpha_0}Y$.
+(2) Here $(1-\Theta)_+=1-1/r$ and $\zeta=1-2/r>0$. For $m\ge2$, $2^h<2m$ gives
+$\sum_{d<h}2^{d\zeta}\le2^\zeta m^\zeta/(2^\zeta-1)$, and $1/r+\zeta=1-1/r$; for $m=1$ there are no levels
+$\mathcal T_d$. Adding the two parts gives $\Phi\le\lambda_2m^{1-1/r}Y$.
+\end{proof}
+
+\begin{theorem}[weighted boxes]\label{ord:thm:weighted-box}
+Let $\eta_0=\eta_1=1$ and $\eta_k=\lambda\sum_{l=2}^k\abs{\operatorname{Mat}_{l-1}}\,\eta_{l-1}\eta_{k-l}$ for $k\ge2$.
+For every $k\ge1$ and all finite nonempty $T_1,\dots,T_k\subseteq\Sigma$ with $m_a=\abs{T_a}$ elements,
+\[
+ \chi(T_1,\dots,T_k)\le\eta_k\Psi(m_1,\dots,m_k)=\eta_k\prod_{a=1}^km_a^{1/r}\,\langle m\rangle^{1-2/r}.
+\]
+\end{theorem}
+
+\begin{proof}
+We induct on $k$; the cases $k\le1$ are the values of $\chi()$ and $\chi(T_1)$ computed after the definition of $\chi$.
+Let $k\ge2$ and $m=(m_1,\dots,m_k)$.
+
+\emph{Step 1 (decomposition).} Apply Lemma~\ref{ord:lem:pair-tree} to $T'=T_1$ and $T''=T_2$. For $i\in\mathcal T$ and
+$T\subseteq\Sigma$ let $I_i=\operatorname{hull}(T''_i)$ and $T^{>i}=\{t\in T:t>\max T''_i\}$, and for $2\le l\le k$ let
+\[
+ \Xi_{i,l}=T'_i\times\Xi(T''_i,T_3\cap I_i,\dots,T_l\cap I_i)\times\Xi(T_{l+1}^{>i},\dots,T_k^{>i}).
+\]
+These sets partition $\Xi(T_1,\dots,T_k)$: for a chain $t$, $(t_1,t_2)$ lies in exactly one $T'_i\times T''_i$
+by~\eqref{ord:eq:pair-partition}, and if $l$ is the largest $a$ with $t_a\le\max T''_i$, then $t_a\in T_a\cap I_i$ for
+$3\le a\le l$ and $t_a\in T_a^{>i}$ for $a>l$; conversely, elements of $\Xi_{i,l}$ are chains, as
+$\max T'_i<\min T''_i$ and $t_l\le\max T''_i<t_{l+1}$. Products of box partitions of the three factors are box
+partitions of $\Xi_{i,l}$ with the product cost, so
+\begin{equation}\label{ord:eq:box-split}
+ \chi(T_1,\dots,T_k)\le\sum_{l=2}^k\sum_{i\in\mathcal T}\abs{T'_i}^{1/r}\,
+ \chi(T''_i,T_3\cap I_i,\dots,T_l\cap I_i)\,\chi(T_{l+1}^{>i},\dots,T_k^{>i}).
+\end{equation}
+
+\emph{Step 2 (exponents).} Fix $l$, and let $S_l=\{3,\dots,l\}$ and $S_l^+=\{l+1,\dots,k\}$. By induction and~(F3) the
+last factor in~\eqref{ord:eq:box-split} is at most $\eta_{k-l}\Psi(m_{S_l^+})$. Put $m_{2,i}=\abs{T''_i}$ and
+$m_{a,i}=\abs{T_a\cap I_i}$ for $a\in S_l$. By induction and~(F2), the middle factor is at most
+$\eta_{l-1}\sum_{\mathfrak m}\Psi_{\mathfrak m}(m_{2,i},(m_{a,i})_{a\in S_l})$, the sum over
+$\mathfrak m\in\operatorname{Mat}(\{2\}\cup S_l)$, or zero if some $m_{a,i}=0$. Fix $\mathfrak m$. For a pair
+$\{a,b\}\in\mathfrak m$ with $m_a\le m_b$, ties broken by the index, let $\alpha_a=1-1/r$ and $\alpha_b=1/r$; let
+$\alpha_a=1/r$ for an unmatched $a$. By~(F1),
+\begin{equation}\label{ord:eq:box-exponents}
+ \Psi_{\mathfrak m}\bigl(m_{2,i},(m_{a,i})_{a\in S_l}\bigr)\le\prod_{a\in\{2\}\cup S_l}m_{a,i}^{\alpha_a},\qquad
+ \prod_{a\in\{2\}\cup S_l}m_a^{\alpha_a}=\Psi_{\mathfrak m}(m_{\{2\}\cup S_l}).
+\end{equation}
+The sum $\Theta_{\mathfrak m}$ of the $\alpha_a$ is at least $1$ if $S_l\ne\emptyset$, since $\mathfrak m$ then has a
+pair, and is $1/r$ if $S_l=\emptyset$.
+
+\emph{Step 3 (level sums).} Let $\Phi_{\mathfrak m}=\sum_{i\in\mathcal T}\abs{T'_i}^{1/r}\prod_{a\in\{2\}\cup S_l}m_{a,i}^{\alpha_a}$.
+By~(T3) the sums of $\abs{T'_i}$, $m_{2,i}$ and $m_{a,i}$ over each level are at most $m_1$, $m_2$ and $m_a$. Apply
+Lemma~\ref{ord:lem:level-sum} with $\min(m_1,m_2)$ in the role of $m$, with $g(i)=\abs{Y_i}$ for the set $Y_i$ of
+Lemma~\ref{ord:lem:pair-tree} and $\alpha_0$ its exponent in $\Phi_{\mathfrak m}$, which is $1/r$ or $\alpha_2\ge1/r$,
+and with the other factors of $\Phi_{\mathfrak m}$ as the functions $y_b$; (T2) gives the bounds on $g$, and the
+exponents add up to $1/r+\Theta_{\mathfrak m}$. If $S_l\ne\emptyset$, part~(1) and~\eqref{ord:eq:box-exponents} give
+$\Phi_{\mathfrak m}\le\lambda m_1^{1/r}\Psi_{\mathfrak m}(m_{\{2\}\cup S_l})$; if $S_l=\emptyset$, part~(2) gives
+$\Phi_{\mathfrak m}\le\lambda\psi(m_1,m_2)$.
+
+\emph{Step 4 (assembly).} By~(F2), $\Psi(m_{S_l^+})=\Psi_{\mathfrak m^+}(m_{S_l^+})$ for some
+$\mathfrak m^+\in\operatorname{Mat}(S_l^+)$. Then $m_1^{1/r}\Psi_{\mathfrak m}(m_{\{2\}\cup S_l})\Psi_{\mathfrak m^+}(m_{S_l^+})$
+is $\Psi_{\mathfrak m\cup\mathfrak m^+}(m)$, and $\psi(m_1,m_2)\Psi_{\mathfrak m^+}(m_{S_l^+})$ is
+$\Psi_{\{\{1,2\}\}\cup\mathfrak m^+}(m)$; both are at most $\Psi(m)$ by~(F2). As $\{2\}\cup S_l$ has $l-1$ elements, the
+$l$-th term of~\eqref{ord:eq:box-split} is at most $\lambda\abs{\operatorname{Mat}_{l-1}}\eta_{l-1}\eta_{k-l}\Psi(m)$;
+summing over $l$ proves the claim.
+\end{proof}
+
+\subsection{Triangular truncation from \texorpdfstring{$\ell^2$}{l\textasciicircum2} into \texorpdfstring{$\ell^r$}{l\textasciicircum r}}\label{ord:ssec:triangle}
+
+Let $G_r$ be $c_{00}(\Sigma,K)$ with the norm $\norm\cdot_r$; its completion is $\ell^r(\Sigma,\Kh)$. Let $\delta_t$ be the
+unit vectors, and for $g_1,\dots,g_k\in c_{00}(\Sigma,K)$ let
+$\cP^{(k)}(g_1\otimes\dots\otimes g_k)=\sum_{t_1<\dots<t_k}g_1(t_1)\cdots g_k(t_k)\,\delta_{t_1}\otimes\dots\otimes\delta_{t_k}$,
+the $k$\nobreakdash-fold triangular truncation for the family $(\delta_t)$.
+
+\begin{lemma}[flat vectors]\label{ord:lem:flat}
+If $g_1,\dots,g_k\in c_{00}(\Sigma,K)$ satisfy $\norm{g_a}_\infty\le1$ and have nonempty supports $T_a$ with $m_a$
+elements, then
+$\norm{\cP^{(k)}(g_1\otimes\dots\otimes g_k)}_{\otimes^k_\pi G_r}\le\chi(T_1,\dots,T_k)\le\eta_k\Psi(m_1,\dots,m_k)$.
+\end{lemma}
+
+\begin{proof}
+If boxes $J^i_1\times\dots\times J^i_k$ partition $\Xi(T_1,\dots,T_k)$, then
+$\cP^{(k)}(g_1\otimes\dots\otimes g_k)=\sum_i(g_11_{J^i_1})\otimes\dots\otimes(g_k1_{J^i_k})$, as both sides have the
+coefficient $g_1(t_1)\cdots g_k(t_k)$ at each chain $t$ and no other terms, and $\norm{g_a1_J}_r\le\abs J^{1/r}$.
+Theorem~\ref{ord:thm:weighted-box} gives the second inequality.
+\end{proof}
+
+\begin{theorem}[triangular truncation]\label{ord:thm:triangle}
+Let $k\ge1$, $\tau=\abs\vartheta$, $\gamma=1/2-1/r$ and
+\[
+ C_{k,r}=\eta_k\abs{\operatorname{Mat}_k}\Bigl(\frac{2\tau^{-2}}{1-\tau^\gamma}\Bigr)^{\lfloor k/2\rfloor}
+ \Bigl(\frac{\tau^{-2/r}}{1-\tau^{2\gamma}}\Bigr)^{k-2\lfloor k/2\rfloor}.
+\]
+For $x_1,\dots,x_k\in c_{00}(\Sigma,K)$,
+\begin{equation}\label{ord:eq:triangle}
+ \norm{\cP^{(k)}(x_1\otimes\dots\otimes x_k)}_{\otimes^k_\pi G_r}\le C_{k,r}\tau^{-k}\prod_{a=1}^k\norm{x_a}_2 .
+\end{equation}
+Consequently $\cP^{(k)}$ extends to a bounded linear map from $\otimes^k_\pi\ell^2(\Sigma,K)$ into
+$\widehat\otimes^k_\pi\ell^r(\Sigma,\Kh)$ of norm at most $C_{k,r}\tau^{-k}$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (bands).} For $x\in c_{00}(\Sigma,K)$ and $i\in\Z$ let $\Sigma_i(x)=\{t:\tau^{i+1}<\abs{x(t)}\le\tau^i\}$,
+$m_i(x)=\abs{\Sigma_i(x)}$ and $x^{(i)}=x1_{\Sigma_i(x)}$. Then $x=\sum_ix^{(i)}$ is a finite sum,
+$x^{(i)}=\vartheta^ig$ with $\norm g_\infty\le1$, and $\sum_i\tau^{2i}m_i(x)\le\tau^{-2}\norm x_2^2$. Expanding each $x_a$
+in bands and applying Lemma~\ref{ord:lem:flat} and~(F2), the left side of~\eqref{ord:eq:triangle} is at most
+\[
+ \eta_k\sum_{\mathfrak m\in\operatorname{Mat}_k}\,\prod_{\{a,b\}\in\mathfrak m}\Phi_2(x_a,x_b)\prod_{a\text{ unmatched}}\Phi_1(x_a),
+\]
+where $\Phi_1(x)=\sum_i\tau^im_i(x)^{1/r}$ and $\Phi_2(x,y)=\sum_{i,l}\tau^{i+l}\psi(m_i(x),m_l(y))$, summed over the
+indices with $m_i(x),m_l(y)\ge1$; for fixed $\mathfrak m$ the sum over the bands factors, as each slot occurs in one
+factor of $\Psi_{\mathfrak m}$.
+
+\emph{Step 2 (single sums).} If some $x_a=0$ there is nothing to prove. Replacing $x_a$ by $\vartheta^cx_a$, $c\in\Z$,
+multiplies both sides of~\eqref{ord:eq:triangle} by $\tau^c$, so we may assume $\tau<\norm{x_a}_2\le1$ for every $a$.
+If $\norm x_2\le1$, then $m_i(x)\ge1$ forces $\tau^{i+1}<1$, so $i\ge0$, and $\tau^{2i}m_i(x)\le\tau^{-2}$; hence
+$\tau^im_i(x)^{1/r}=(\tau^{2i}m_i(x))^{1/r}\tau^{2\gamma i}\le\tau^{-2/r}\tau^{2\gamma i}$ and
+$\Phi_1(x)\le\tau^{-2/r}/(1-\tau^{2\gamma})$.
+
+\emph{Step 3 (pair sums).} Let $\norm x_2,\norm y_2\le1$, $\alpha_i=\tau^im_i(x)^{1/2}$ and $\alpha'_l=\tau^lm_l(y)^{1/2}$,
+so that $\sum_i\alpha_i^2$ and $\sum_l\alpha_l'^2$ are at most $\tau^{-2}$. For $b',b''>0$,
+$\psi(b',b'')=(b'b'')^{1/2}\min(b'/b'',b''/b')^\gamma\le(b'b'')^{1/2}\min(b'/b'',b''/b')^{\gamma/2}$, as the minimum is
+at most~$1$. With $m_i(x)/m_l(y)=(\alpha_i/\alpha'_l)^2\tau^{2(l-i)}$, the term of $\Phi_2(x,y)$ at $(i,l)$ is at most
+$\alpha_i^{1+\gamma}\alpha_l'^{1-\gamma}\tau^{\gamma(l-i)}$ if $l\ge i$ and at most
+$\alpha_i^{1-\gamma}\alpha_l'^{1+\gamma}\tau^{\gamma(i-l)}$ if $l<i$. For fixed $l-i$, H\"older's inequality with
+exponents $2/(1\pm\gamma)$ bounds the sum of these terms by $\tau^{-2}\tau^{\gamma\abs{l-i}}$, so
+$\Phi_2(x,y)\le\tau^{-2}(1+\tau^\gamma)/(1-\tau^\gamma)\le2\tau^{-2}/(1-\tau^\gamma)$.
+
+\emph{Step 4 (conclusion).} Each $\mathfrak m\in\operatorname{Mat}_k$ has $\lfloor k/2\rfloor$ pairs and
+$k-2\lfloor k/2\rfloor$ unmatched slots, so the left side of~\eqref{ord:eq:triangle} is at most
+$C_{k,r}<C_{k,r}\tau^{-k}\prod_a\norm{x_a}_2$. As $c_{00}(\Sigma,K)$ is dense in $\ell^2(\Sigma,K)$, the bounded
+$k$\nobreakdash-linear map $(x_1,\dots,x_k)\mapsto\cP^{(k)}(x_1\otimes\dots\otimes x_k)$ extends to $\ell^2(\Sigma,K)^k$
+with values in $\widehat\otimes^k_\pi G_r$; its linearization, followed by the contraction induced by the isometry
+$G_r\to\ell^r(\Sigma,\Kh)$, is the asserted extension.
+\end{proof}
+
+\subsection{Relative ordering splittings}\label{ord:ssec:relative}
+
+\begin{proof}[Proof of Proposition~\ref{spl:prop:r-norm}]
+Let $\nu$ be an $r$\nobreakdash-norm on $D$ with $a\nu\le\norm\cdot\le b\nu$, $0<a\le b$. As
+$\nu(\sum_tz_t)^r\le\sum_t\nu(z_t)^r$ for finite families, the left side of~\eqref{spl:eq:r-norm} is at most
+$b(\sum_t\abs{\xi_t}^r\nu(y_t)^r)^{1/r}\le(b/a)(\sum_t\abs{\xi_t}^r)^{1/r}\max_t\norm{y_t}$. Conversely,
+assume~\eqref{spl:eq:r-norm} with constant $C$, and let $\nu(y)$ be the infimum of $(\sum_i\norm{y_i}^r)^{1/r}$ over
+the finite decompositions $y=\sum_iy_i$. Then $\nu\le\norm\cdot$;
+$\nu(\xi y)=\abs\xi\nu(y)$ for $\xi\in K^\times$, as $y_i\mapsto\xi y_i$ matches the decompositions of $y$ and $\xi y$;
+and $\nu(y+z)^r\le\nu(y)^r+\nu(z)^r$, by concatenating decompositions. Let $y=\sum_iy_i$ with all $y_i\ne0$, and
+$\xi_i=\vartheta^{c_i}$ with $c_i$ the largest integer such that $\abs\vartheta^{c_i}\ge\norm{y_i}$. Then
+$\norm{\xi_i^{-1}y_i}\le1$ and $\abs{\xi_i}<\norm{y_i}/\abs\vartheta$, so~\eqref{spl:eq:r-norm} gives
+$\norm y\le C(\sum_i\abs{\xi_i}^r)^{1/r}\le(C/\abs\vartheta)(\sum_i\norm{y_i}^r)^{1/r}$, hence
+$\norm y\le(C/\abs\vartheta)\nu(y)$. So $\nu$ vanishes only at $0$; it is a norm, since $r\ge1$, and an equivalent
+$r$\nobreakdash-norm.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{spl:thm:relative-ordering}]
+Let $C_e=\sup_t\norm{e_t}$, let $C_2$ be the constant of $\ell^2$\nobreakdash-domination, fix a degree $k\ge1$ and
+$r\in(2,\infty)$, and let $G_r$, $\delta_t$, $\tau$ and $C_{k,r}$ be as in Subsection~\ref{ord:ssec:triangle}. In
+Steps~1 and~3 we assume, as in~(2), that $D$ has an $r$\nobreakdash-norm $\nu$ with $c\nu\le\norm\cdot\le c'\nu$.
+
+\emph{Step 1 (factorization).} For $u\in\cL(E,D)$ let $\tilde u\colon G_r\to D$, $\tilde u(\xi)=\sum_t\xi(t)\,ue_t$. Then
+$\nu(\tilde u\xi)^r\le\sum_t\abs{\xi(t)}^r\nu(ue_t)^r\le(C_e\norm u/c)^r\norm\xi_r^r$, so
+$\norm{\tilde u}\le(c'/c)C_e\norm u$; $\tilde u$ is linear in $u$, and $\tilde u\delta_t=ue_t$. For $x\in V$,
+$\tilde u(wx)=\sum_tx(t)\,ue_t=ux$, so the extension $\tilde u\colon\ell^r(\Sigma,\Kh)\to\widehat D$ satisfies
+$\tilde u\circ w=u$, as $V$ is dense; with Step~2, $(\ell^r(\Sigma,\Kh),w,u\mapsto\tilde u)$ is a source-side relative
+splitting of degree $k$ (Definition~\ref{cmb:def:decomposition}).
+
+\emph{Step 2 (relative section).} For $x\in V$ the coordinate vector $wx=(x(t))_t$ satisfies
+$\norm{wx}_r\le\norm{wx}_2\le C_2\norm x$, so $w$ extends to a bounded map $w\colon E\to\ell^r(\Sigma,\Kh)$. By
+Theorem~\ref{ord:thm:triangle} the $k$\nobreakdash-linear map $(x_1,\dots,x_k)\mapsto\cP^{(k)}(wx_1\otimes\dots\otimes wx_k)$
+from $V^k$ to $\otimes^k_\pi G_r$ has norm at most $C_{k,r}\tau^{-k}C_2^k$, so it extends to $E^k$ with values in
+$\widehat\otimes^k_\pi G_r$. Let $L$ be its linearization and $s=L\circ\alt^k_E$; then
+$\norm s\le k!\,C_{k,r}\tau^{-k}C_2^k$ and, for $x_1,\dots,x_k\in V$,
+\begin{equation}\label{ord:eq:relative-section}
+ s(x_1\wedge\dots\wedge x_k)=\sum_{t_1<\dots<t_k}\det\bigl(x_b(t_a)\bigr)_{a,b}\,\delta_{t_1}\otimes\dots\otimes\delta_{t_k}.
+\end{equation}
+Expanding $wx_b=\sum_tx_b(t)\delta_t$, dropping repeated indices and sorting shows that $\widehat\wedge^k$ maps the
+right side to $wx_1\wedge\dots\wedge wx_k$. The wedges $x_1\wedge\dots\wedge x_k$ with $x_a\in V$ span a dense
+subspace of $\Lambda^k_\pi E$, so $\widehat\wedge^k\circ s=\Lambda^k_\pi w$, with $s$ read in
+$\widehat\otimes^k_\pi\ell^r(\Sigma,\Kh)$. Hence $w$ is $\mathrm S^k$\nobreakdash-split, which proves~(1). If $E=V$, $s$ takes values in
+$\otimes^k_\pi G_r$.
+
+\emph{Step 3 (lift).} Put $Q(u_1,\dots,u_k)=\widehat\wedge^k_D\circ(\tilde u_1\otimes\dots\otimes\tilde u_k)\circ s$, with
+$\tilde u_1\otimes\dots\otimes\tilde u_k$ extended to $\widehat\otimes^k_\pi G_r$. Then $Q$ is $k$\nobreakdash-linear,
+$\norm{Q(u_1,\dots,u_k)}\le\norm s\,((c'/c)C_e)^k\prod_a\norm{u_a}$, and by~\eqref{ord:eq:relative-section}, for
+$x_1,\dots,x_k\in V$, $Q$ is given by the \emph{canonical lift formula}
+\begin{equation}\label{ord:eq:canonical-lift}
+ Q(u_1,\dots,u_k)(x_1\wedge\dots\wedge x_k)=\sum_{t_1<\dots<t_k}\det\bigl(x_b(t_a)\bigr)_{a,b}\,
+ u_1e_{t_1}\wedge\dots\wedge u_ke_{t_k}.
+\end{equation}
+For $u_1=\dots=u_k=u$ the right side of~\eqref{ord:eq:canonical-lift} is $ux_1\wedge\dots\wedge ux_k$, by expanding
+$ux_b=\sum_tx_b(t)\,ue_t$; by density, $Q(u,\dots,u)=\Lambda^k_\pi u$ as maps into $\widehat\Lambda^k_\pi D$. So
+$(E,D)$ is good for Banach values in degree $k$ by Lemma~\ref{fib:lem:test}. If $E=V$, then $Q$ takes values in
+$\cL(\Lambda^k_\pi E,\Lambda^k_\pi D)$ by Step~2, and $(E,D)$ is good in degree $k$ by the same lemma.
+\end{proof}

@@ -1,0 +1,159 @@
+\section{Further coordinate methods}\label{app:coordinate-methods}
+The proof of Proposition~\ref{prop:scalar-countable} gives a splitting for scalar values: it writes down an explicit section of unnormalized antisymmetrization.
+
+\subsection{Countable-type scalar sources}
+The scalar obstruction of Theorem~\ref{thm:operator-obstructions}(2) requires large source spaces in a stronger sense than infinite dimension.
+A normed space is \emph{of countable type} if a countable subset has dense linear span.
+
+\begin{proposition}[countable-type scalar sources]\label{prop:scalar-countable}
+Let $K$ be complete and nonarchimedean. If either $E$ or $D$ is of countable type, then
+$A^k_{E,D;K}$ is analytic in every degree. Neither completeness nor a nonarchimedean norm
+is required of $E,D$. In particular, the two spaces in
+Theorem~\ref{thm:operator-obstructions}(2) must both fail to be of countable type.
+\end{proposition}
+
+\begin{proof}
+The case $k=0$ is constant. For a normed space $V$, set
+\[
+ q_V(x)=\inf_{x=\sum_i x_i}\max_i\norm{x_i},
+\]
+where the decompositions use nonempty finite families, allowing a zero term. Scaling and concatenating them show that
+$q_V$ is a nonarchimedean seminorm. Let $V^u$ be the completion of its separated quotient;
+the canonical map $j_V\colon V\to V^u$ is contractive and has dense range.
+Expanding a bounded scalar multilinear form $m$ along decompositions of each argument gives
+\[
+ \abs{m(x_1,\ldots,x_k)}\le\norm m\prod_a q_V(x_a).
+\]
+Thus scalar multilinear forms extend uniquely and isometrically to $V^u$, as do
+alternating forms. Extension preserves alternation by density of tuples with repeated
+entries, and commutes with permutations. Every bounded $u\colon V\to W$ induces
+$u^u\colon V^u\to W^u$ with $\norm{u^u}\le\norm u$. Uniqueness on the dense image makes
+$u\mapsto u^u$ bounded linear, and extension of forms intertwines precomposition by $u$ and $u^u$.
+
+If $V$ is of countable type, so is $V^u$. By van der Put's basis theorem
+\cite[Proposition~1.4]{VdP}, it has a $t$\nobreakdash-orthogonal basis $(b_i)$ for any
+fixed $0<t<1$. Writing $f_i$ for its coordinate functionals, define
+\[
+ S(m)(x_1,\ldots,x_k)
+ =\sum_{i_1<\cdots<i_k}m(b_{i_1},\ldots,b_{i_k})
+                        \prod_{a=1}^k f_{i_a}(x_a).
+\]
+The weighted coordinates $\abs{f_i(x)}\norm{b_i}$ form a null family bounded by
+$t^{-1}\norm x$. Products of finitely many bounded null families are null, so the
+displayed sum converges unconditionally in $K$ and $\norm{S(m)}\le t^{-k}\norm m$.
+Let $\mathcal A_V$ be unnormalized antisymmetrization, the signed sum over permutations
+of the arguments. It is bounded and alternating-valued in every characteristic.
+On finite-coordinate vectors, sorting distinct indices shows
+$\mathcal A_V S(m)=m$ for alternating $m$; repeated indices contribute zero.
+Density proves the same identity everywhere. Hence $R=\mathcal A_V S$ retracts all
+multilinear forms onto alternating forms, while $S|_{\Alt}$ is a bounded right inverse
+of $\mathcal A_V$. Transport through $j_V$ gives both operators on the original $V$.
+
+If $E$ is of countable type, a lift of $A$ is
+$R_E\bigl(m\circ(u_1,\ldots,u_k)\bigr)$.
+If $D$ is of countable type, use instead
+$\mathcal A_E\bigl(S_D(m)\circ(u_1,\ldots,u_k)\bigr)$.
+Both are bounded multilinear in the $u_i$, linear in $m$, and have diagonal $A(u)(m)$;
+the second identity uses that antisymmetrization commutes with simultaneous precomposition.
+Proposition~\ref{prop:homogeneous-lift} concludes the proof.
+\end{proof}
+
+
+\subsection{Continuous algebraic polynomials on \texorpdfstring{$c_0$}{c0}}
+Theorem~\ref{thm:summable-parameters}(1) starts with bounded multilinear coefficients in an ambient space. For one
+homogeneous polynomial, interpolation supplies a lift even when only the diagonal is known to be
+continuous. The resulting bound is degreewise; it gives no assertion about a common radius across
+an infinite sequence of degrees.
+
+\begin{proposition}[continuous algebraic polynomials on $c_0$]\label{fam:prop:c0-algebraic}
+Let $K$ be nontrivially normed and nonarchimedean, let $Z$ be complete and nonarchimedean, and let
+$n\ge1$. Suppose $p\colon c_0(I,K)\to Z$ is continuous and is an algebraic homogeneous polynomial:
+there exists a $K$\nobreakdash-multilinear map $b\colon c_0(I,K)^n\to Z$, not assumed continuous,
+with $p(x)=b(x,\ldots,x)$. Then $p$ has a bounded $n$\nobreakdash-linear lift $q$. More precisely,
+there is $C_{K,n}<\infty$, independent of $I,Z,p$, such that
+\[
+ \norm q\le C_{K,n}\norm p_{\mathrm{diag}},\qquad
+ \norm p_{\mathrm{diag}}:=\inf\{D\ge0:\norm{p(x)}\le D\norm x^n\text{ for all }x\}.
+\]
+No completeness assumption on $K$ is needed.
+\end{proposition}
+\begin{proof}
+Continuity at zero and $p(ax)=a^np(x)$ imply $\norm p_{\mathrm{diag}}<\infty$.
+Explicitly, choose $t\in K$ with $0<\abs t<1$ and $\delta>0$ such that $\norm{p(x)}\le1$
+when $\norm x<\delta$. For $x\ne0$, choose an integer $m$ with
+$\abs t\delta\le\abs{t^m}\norm x<\delta$. Homogeneity gives
+$\norm{p(x)}\le(\abs t\delta)^{-n}\norm x^n$.
+
+Fix a total order on $I$. On each finite coordinate subspace, the algebraic formula for $p$ is an
+ordinary homogeneous polynomial of degree $n$. Polynomial uniqueness over the infinite field $K$
+makes its coefficients compatible as the finite coordinate set varies. Denote the coefficient of
+$x^\alpha$ by $c_\alpha$, where $\alpha\colon I\to\N$ is finitely supported and $\sum_i\alpha_i=n$.
+Its support has at most $n$ elements.
+
+Choose distinct $a_0,\ldots,a_n$ in the valuation ring of $K$, and let $L_n\ge1$ bound the absolute
+values of all entries of the inverse Vandermonde matrix $(a_i^j)_{0\le i,j\le n}$.
+If the support of $\alpha$ has $d\le n$ elements, interpolate the restriction of $p$ to those
+coordinates on the grid $\{a_0,\ldots,a_n\}^d$. Each grid vector has norm at most one. Applying the
+inverse Vandermonde matrix in each coordinate and using the nonarchimedean inequality in $Z$ yields
+\[
+ \norm{c_\alpha}\le L_n^d\norm p_{\mathrm{diag}}
+ \le L_n^n\norm p_{\mathrm{diag}}.
+\]
+For a nondecreasing word $i_1\le\cdots\le i_n$, write $c_{i_1,\ldots,i_n}$ for the coefficient
+with those multiplicities. Define
+\[
+ q(x_1,\ldots,x_n)=
+ \sum_{i_1\le\cdots\le i_n}
+ c_{i_1,\ldots,i_n}(x_1)_{i_1}\cdots(x_n)_{i_n}.
+\]
+The coefficients are uniformly bounded and each input is a null family, so the summands tend to zero
+outside finite sets of words. Completeness and the nonarchimedean inequality give convergence,
+multilinearity, and the bound $\norm q\le L_n^n\norm p_{\mathrm{diag}}$.
+On finite supports its diagonal is $p$; density and continuity extend the identity to all of $c_0(I,K)$.
+Thus $C_{K,n}=L_n^n$ suffices.
+\end{proof}
+
+This bound is uniform in the number of coordinates, but the interpolation nodes and $L_n$ depend on
+the degree. No exponential growth bound for $C_{K,n}$ is asserted. Consequently this proposition does
+not justify replacing lifting norms by diagonal norms in an arbitrary infinite analytic expansion.
+Theorem~\ref{thm:summable-parameters}(1) obtains its stronger, radius-preserving conclusion from the
+already bounded ambient coefficients.
+
+
+\subsection{A nonspherical target norm with analytic precomposition}
+\begin{remark}\label{rem:nonspherical-analytic-target}
+Spherical completeness of the given target norm is not necessary for analyticity, even in degrees
+at least the characteristic. Let $K=\F_p((t))$ with $\abs t=1/2$ and let $F=c_0(\N,K)$, the space
+of sequences tending to zero. Define
+\[
+ w_j=1+\frac1{j+2},\qquad \norm{x}_w=\sup_{j\ge0}w_j\abs{x_j}.
+\]
+This is a nonarchimedean norm satisfying
+\[
+ \norm{x}_\infty\le\norm{x}_w\le\frac32\norm{x}_\infty.
+\]
+Thus $F$ is Banach for either norm. The usual supremum norm has nonzero values in $2^\Z$,
+since every nonzero null sequence attains its maximum absolute value. The discrete-distance
+argument in the proof of Corollary~\ref{cor:discrete-targets} therefore makes the supremum norm
+spherically complete. Theorem~\ref{thm:spherical} gives analytic precomposition in every finite
+degree for that norm, for all normed $E,E'$. Equivalent norms preserve the bounded maps and their
+analytic power-series expansions: the norms of coefficients change by a fixed factor and convergence
+is unchanged. Thus precomposition remains analytic for $\norm\cdot_w$, also directly by
+Corollary~\ref{cor:discrete-targets}.
+
+Nevertheless, the weighted norm is not spherically complete. Write $e_j$ for the coordinate vectors,
+set $a_n=\sum_{j<n}e_j$, and consider the closed balls
+\[
+ B_n=\overline B_w(a_n,w_n).
+\]
+They are nested because $w_{n+1}<w_n$ and $\norm{a_{n+1}-a_n}_w=w_n$; the nonarchimedean
+inequality gives $B_{n+1}\subseteq B_n$. If $x$ belonged to all of them, then, for each $j$ and
+any $n>j$,
+\[
+ \abs{x_j-1}\le\frac{w_n}{w_j}<1.
+\]
+Hence $\abs{x_j}=1$ for every $j$, contradicting $x_j\to0$. Their intersection is empty.
+This example separates spherical completeness of a particular norm from analyticity, which is
+invariant under equivalent norms. It does not exclude a characterization using an equivalent
+spherically complete norm: this target has exactly such a norm.
+\end{remark}

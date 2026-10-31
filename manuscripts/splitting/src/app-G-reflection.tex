@@ -1,0 +1,176 @@
+\section{Parameter splittings and universal analytic reflection}\label{app:reflection}\label{fam:sec:tensors}
+A normed space $P$ is polarizable in degree $n$ (condition $(\Gamma^n_P)$, Definition~\ref{ob:def:sequences}) if a bounded
+projection $R_n$ of $\widehat\otimes^n_\pi P$ onto $\widehat\Gamma^n_\pi P$ exists; for Banach $P$ over complete $K$ this is
+reflection in degree $n$ (Proposition~\ref{fam:prop:tensor-homogeneous}). Analytic descent (Section~\ref{sec:descent}) of every
+Banach-valued analytic map through every closed inclusion is stronger; we characterize it and separate the two by an example.
+
+Throughout this appendix, $K$ is complete and nontrivially normed, and $P$ is Banach.
+For $n\ge1$, let $\widehat\otimes^n_\pi P$ be the completed projective tensor power as in
+Section~\ref{ob:ssec:powers}; it represents bounded $n$\nobreakdash-linear maps from $P^n$ to Banach spaces.
+Recall from Definition~\ref{ob:def:sequences} the closed subspace
+\[
+ \widehat\Gamma^n_\pi P=\overline{\spn\{x^{\otimes n}:x\in P\}}\subseteq \widehat\otimes^n_\pi P.
+\]
+
+\begin{proposition}[homogeneous reflection]\label{fam:prop:tensor-homogeneous}
+For a fixed $n\ge1$, the following conditions are equivalent.
+\begin{enumerate}
+\item For every Banach space $Z$, closed subspace $W\subseteq Z$, and bounded $n$\nobreakdash-linear map
+$B\colon P^n\to Z$ with diagonal values in $W$, there is a bounded $W$\nobreakdash-valued
+$n$\nobreakdash-linear map with the same diagonal.
+\item The subspace $\widehat\Gamma^n_\pi P$ is the range of a bounded projection in $\widehat\otimes^n_\pi P$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Suppose first that a projection $R_n$ exists. Linearize $B$ to a bounded map
+$\widetilde B\colon \widehat\otimes^n_\pi P\to Z$. The diagonal hypothesis and closedness of $W$ imply
+$\widetilde B(\widehat\Gamma^n_\pi P)\subseteq W$.
+Composing $\widetilde B|_{\widehat\Gamma^n_\pi P}$ with $R_n$ and the canonical tensor map gives the required
+multilinear representative, of norm at most $\norm B\norm{R_n}$.
+Conversely, take $Z=\widehat\otimes^n_\pi P$, $W=\widehat\Gamma^n_\pi P$, and $B$ equal to the canonical tensor map.
+Linearizing the representative supplied by the first condition gives a bounded map into $\widehat\Gamma^n_\pi P$
+fixing every pure power. It fixes their linear span and, by continuity, their closed span, so it is a projection.
+\end{proof}
+
+\begin{definition}\label{fam:def:universal-reflection}
+The Banach parameter space $P$ has \emph{universal analytic reflection} if, for every Banach space $Z$, closed
+subspace $W\subseteq Z$, every open $U\subseteq P$, and every map $f\colon U\to W$, analyticity of
+the composite $U\to W\hookrightarrow Z$ implies analyticity of $f$.
+\end{definition}
+
+\begin{theorem}[analytic tensor criterion]\label{fam:thm:tensor-analytic}
+A Banach space $P$ has universal analytic reflection if and only if there are projections
+$R_n\colon \widehat\otimes^n_\pi P\to\widehat\Gamma^n_\pi P$ for all $n\ge1$ such that
+\begin{equation}\label{fam:eq:exponential-projections}
+ \limsup_{n\to\infty}\norm{R_n}^{1/n}<\infty.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Assume first that the projections exist. Expand an ambient analytic map with values in $W$ at a point.
+The scalar-line uniqueness argument in Theorem~\ref{thm:coefficient-descent} puts every homogeneous diagonal in $W$.
+The construction in Proposition~\ref{fam:prop:tensor-homogeneous} replaces its coefficient $p_n$ by a
+$W$\nobreakdash-valued coefficient of norm at most $\norm{p_n}\norm{R_n}$ and with the same diagonal.
+The exponential bound preserves a positive radius of convergence. The degree-zero coefficient is
+already in $W$, and the resulting expansion represents the given map.
+
+Conversely, form the Banach spaces with supremum norms
+\[
+ Z=c_0\bigl(\{\widehat\otimes^n_\pi P\}_{n\ge1}\bigr),\qquad
+ W=c_0\bigl(\{\widehat\Gamma^n_\pi P\}_{n\ge1}\bigr)\subseteq Z.
+\]
+Here $c_0$ denotes families tending to zero in their respective Banach coordinate spaces; $W$ is closed.
+On the open unit ball of $P$, define
+\[
+ f(x)=(x^{\otimes n})_{n\ge1}.
+\]
+Since $\norm{x^{\otimes n}}\le\norm x^n$, this vector lies in $W$.
+As a $Z$\nobreakdash-valued map it is analytic: its degree-$n$ coefficient is the canonical tensor map
+placed in coordinate $n$, and has norm at most one. This gives an expansion at zero. To re-expand
+at $a$ with $\norm a<1$, choose $r>0$ with $\norm a+r<1$. Expanding each tensor power in $a+h$
+gives translated coefficients, and the sum of all term bounds is at most
+$\sum_{n\ge1}(\norm a+r)^n<\infty$. Completeness of $Z$ supplies the coefficients and the
+rearranged sum, proving analyticity throughout the unit ball. Universal reflection gives a $W$\nobreakdash-valued
+expansion $\sum_mq_m(x,\ldots,x)$ near zero with $\norm{q_m}\le C\rho^{-m}$ for some $C,\rho>0$.
+Compose this expansion with the projection $\pi_n\colon W\to\widehat\Gamma^n_\pi P$ and compare on scalar lines
+with $x\mapsto x^{\otimes n}$. Uniqueness of scalar power-series coefficients gives
+\[
+ \pi_nq_n(x,\ldots,x)=x^{\otimes n}\qquad(x\in P).
+\]
+Linearizing $\pi_nq_n$ therefore gives a projection $R_n$ onto $\widehat\Gamma^n_\pi P$ with
+$\norm{R_n}\le\norm{q_n}\le C\rho^{-n}$, proving~\eqref{fam:eq:exponential-projections}.
+\end{proof}
+
+\subsection{Projection bounds and the special role of fixed degree}
+For $P=K^d$ with the maximum norm, the coordinate construction in
+Theorem~\ref{thm:finite-parameters}, applied to the canonical tensor map, gives
+$\norm{R_n}\le d^n$ for $d\ge1$. A bounded linear change of coordinates introduces only a fixed
+distortion factor to the $n$\nobreakdash-th power, so it does not change the exponential-growth condition.
+
+For $P=\ell^1(I,K)$, the proof of Proposition~\ref{spl:prop:gamma-l1}(1) identifies $\widehat\otimes^n_\pi P$
+isometrically with $\ell^1(I^n,K)$, with unit vectors $e_w$ for $w\in I^n$, puts the sum of the $e_w$ over each
+permutation orbit in $I^n$ into $\widehat\Gamma^n_\pi P$, and gives a projection onto $\widehat\Gamma^n_\pi P$ of norm
+at most $n!$. In these coordinates every element of $\widehat\Gamma^n_\pi P$ is constant on each permutation orbit,
+since every pure power is.
+Over a nonarchimedean field and for infinite $I$, the bound $n!$ is optimal even among projections that
+do not preserve the individual orbit blocks.
+
+\begin{proposition}\label{fam:prop:l1-optimal}
+If $K$ is nonarchimedean and complete, and $I$ is infinite, then
+\[
+ \inf\{\norm R:R\colon \widehat\otimes^n_\pi\ell^1(I,K)\to\widehat\Gamma^n_\pi\ell^1(I,K)
+                  \text{ is a bounded projection}\}=n!.
+\]
+Consequently $\ell^1(I,K)$ does not have universal analytic reflection.
+\end{proposition}
+
+\begin{proof}
+Proposition~\ref{spl:prop:gamma-l1}(1) gives the upper bound. For the lower bound, take an orbit $\mathcal O$
+of a tuple with $n$ distinct indices; it has $n!$ elements. For each $w\in\mathcal O$, let $\lambda_w$
+be the common coefficient on $\mathcal O$ of $R(e_w)$.
+The orbit sum $\sum_{w\in\mathcal O}e_w$ belongs to $\widehat\Gamma^n_\pi P$ and is fixed by $R$, hence
+\[
+ \sum_{w\in\mathcal O}\lambda_w=1.
+\]
+The nonarchimedean inequality implies that some $\abs{\lambda_w}\ge1$.
+For this $w$, the ordinary sum norm satisfies
+$\norm{R(e_w)}_1\ge n!\abs{\lambda_w}\ge n!$.
+Thus $\norm R\ge n!$. Finally, $(n!)^{1/n}$ is unbounded, so
+Theorem~\ref{fam:thm:tensor-analytic} excludes universal analytic reflection.
+\end{proof}
+
+\begin{corollary}[entire polynomial approximation of a nonanalytic smooth map]
+\label{fam:cor:no-common-radius}
+Let $K$ be a complete nonarchimedean nontrivially normed field and put
+$P=\ell^1(\N,K)$, with the ordinary sum norm. There are Banach spaces
+$W\subseteq Z$, with $W$ closed, and a map $f$ on the open unit ball of $P$
+such that $f$ is analytic into $Z$ and $C^\infty$ into $W$, but is not analytic
+into $W$ at zero. Moreover, $f$ is a uniform limit on every smaller ball of
+entire $W$\nobreakdash-valued polynomials.
+\end{corollary}
+
+\begin{proof}
+Take
+\[
+ Z=c_0\bigl(\{\widehat\otimes^n_\pi P\}_{n\ge1}\bigr),\qquad
+ W=c_0\bigl(\{\widehat\Gamma^n_\pi P\}_{n\ge1}\bigr),\qquad
+ f(x)=(x^{\otimes n})_{n\ge1}.
+\]
+The spaces are Banach and $W$ is closed in $Z$. As in the proof of
+Theorem~\ref{fam:thm:tensor-analytic}, the ambient expansion has coefficient
+norms at most one and defines an analytic map on the open unit ball.
+Smooth reflection through the closed isometric inclusion makes $f$
+$C^\infty$ as a map into $W$.
+
+Suppose a $W$\nobreakdash-valued expansion at zero has coefficients $q_n$.
+Uniqueness on scalar lines gives
+\[
+ \pi_nq_n(x,\ldots,x)=x^{\otimes n},
+\]
+where $\pi_n\colon W\to\widehat\Gamma^n_\pi P$ is the coordinate projection.
+Linearizing $\pi_nq_n$ gives a projection
+$\widehat\otimes^n_\pi P\to\widehat\Gamma^n_\pi P$ of norm at most $\norm{q_n}$.
+Proposition~\ref{fam:prop:l1-optimal} therefore gives
+$\norm{q_n}\ge n!$. Since $(n!)^{1/n}$ is unbounded, these coefficients
+give a formal multilinear series of radius zero, contradicting the assumed analytic expansion.
+
+For each $n$, choose the sorted-orbit projection
+$R_n\colon \widehat\otimes^n_\pi P\to\widehat\Gamma^n_\pi P$. Its composition with the canonical
+tensor map is a bounded multilinear representative of $x\mapsto x^{\otimes n}$
+with values in $\widehat\Gamma^n_\pi P$. Consequently the truncation
+\[
+ f_N(x)=(x,x^{\otimes2},\ldots,x^{\otimes N},0,\ldots)
+\]
+is an entire $W$\nobreakdash-valued polynomial. For $0<r<1$ and $\norm x\le r$,
+\[
+ \norm{f(x)-f_N(x)}_W\le r^{N+1},
+\]
+which proves the asserted uniform convergence.
+\end{proof}
+
+
+There is no conflict with Theorem~\ref{thm:summable-parameters}(2): the ambient representation there has one fixed
+degree $d$, so factoring a general analytic parameter map through a free $\ell^1$ space incurs a single factorial
+bound $d!$, rather than a sequence of factorial bounds across Taylor degrees.
+Over $\mathbb R$ and $\mathbb C$ every Banach space has universal analytic reflection, by Theorem~\ref{fam:thm:tensor-analytic}: the symmetrization $\frac1{n!}\sum_{\sigma\in S_n}\sigma$ has norm at most one on $\widehat\otimes^n_\pi P$ and, by polarization, is a projection onto $\widehat\Gamma^n_\pi P$.

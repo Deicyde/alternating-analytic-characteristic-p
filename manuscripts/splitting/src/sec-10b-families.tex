@@ -1,0 +1,406 @@
+\section{Familywise analyticity and bundles}\label{sec:families}
+
+Throughout, $P$, $E$, $D$ are normed spaces and $k\ge1$; $P$ is the model space of a base, since
+Theorem~\ref{thm:bundle-lifting} needs only operator families on open subsets of $P$.
+
+\subsection{Families of operators}\label{fam2:ssec:framework}
+
+\begin{definition}\label{fam2:def:good}
+The triple $(P;E,D)$ is \emph{good in degree $k$} if for every open $U\subseteq P$ and every analytic
+$u\colon U\to\cL(E,\widehat D)$ the map $x\mapsto\Lambda^k_\pi u(x)\in\cL(\Lambda^k_\pi E,\hLambda^k_\pi D)$ is analytic on
+$U$. We write $(P;E)$ for $(P;E,E)$. For a Banach space $H$ and an open $U\subseteq P$, an \emph{invertible family} on $U$
+is an analytic $g\colon U\to\cL(H)$ whose values are invertible and for which $x\mapsto g(x)^{-1}$ is analytic.
+\end{definition}
+
+Here $\Lambda^k_\pi u(x)$ maps $\Lambda^k_\pi E$ into $\Lambda^k_\pi\widehat D\subseteq\hLambda^k_\pi D$ (paragraph before
+Theorem~\ref{ob:thm:mechanisms}). By Theorem~\ref{thm:duality}(1) with $X=\Lambda^k_\pi E$, $Y=\hLambda^k_\pi D$, and the
+completed form of Proposition~\ref{prop:exterior}, $x\mapsto\Lambda^k_\pi u(x)$ is analytic at a point, or on $U$, if and
+only if $x\mapsto A^k_{E,\widehat D;F}(u(x))$ is analytic there for every Banach space $F$. For a linear family
+$\theta\colon P\to\cL(E,\widehat D)$ (defined before Theorem~\ref{cmb:thm:decomposition}), $h\mapsto\Lambda^k_\pi\theta(h)$ is analytic at some
+point if and only if $\theta$ is liftable in degree $k$, and then it is a continuous polynomial
+(Proposition~\ref{prop:homogeneous-lift}, as in the proof of Lemma~\ref{fib:lem:test}).
+
+\begin{proposition}[reductions]\label{fam2:prop:reductions}
+\begin{enumerate}
+\item Let $H$ be a Banach space. If $x\mapsto\Lambda^k_\pi g(x)$ is analytic for every invertible family $g$ on every open
+subset of $P$, then $(P;H)$ is good in degree $k$. More precisely, for an analytic $u\colon U\to\cL(H)$ and $x_0\in U$ there
+are distinct $\lambda_0,\dots,\lambda_k\in K$ and a neighborhood $U_0\subseteq U$ of $x_0$ such that every $1+\lambda_iu$,
+with $1=\id_H$, is an invertible family on $U_0$ and $\Lambda^k_\pi u$ is a fixed linear combination of the maps
+$\Lambda^k_\pi(1+\lambda_iu)$ on $U_0$.
+\item If $(P;E,D)$ is good in degree $k$, so is every triple of bounded linear retracts of $P$, $E$ and $D$, respectively.
+The triple $(P;E\oplus E',D)$ is good in every degree $j\le k$ if and only if $(P;E,D)$ and $(P;E',D)$ are; the same holds
+in the target slot.
+\item Let $E$ and $D$ be Banach spaces and $H=D\oplus E$ with the maximum norm. Then $x\mapsto\Lambda^j_\pi g(x)$ is analytic
+for every invertible family $g$ into $\cL(H)$ over every open subset of $P$ and every $j\le k$ if and only if
+the four triples $(P;E,E)$, $(P;E,D)$, $(P;D,E)$, $(P;D,D)$ are good in every degree $j\le k$. If $\cC$ is a class of Banach spaces closed
+under finite direct sums, then, in the single degree $k$, $x\mapsto\Lambda^k_\pi g(x)$ is analytic for every $G\in\cC$ and
+every invertible family $g$ into $\cL(G)$ over an open subset of $P$ if and only if $(P;E,D)$ is good in degree $k$ for
+all $E,D\in\cC$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:families}.
+
+\begin{corollary}[what bundles need]\label{fam2:cor:bundles}
+Let $\cC$ be a class of Banach spaces closed under finite direct sums. The following are equivalent.
+\begin{enumerate}
+\item For every analytic manifold $M$ modeled on $P$, every analytic vector bundle over $M$ with typical fiber $E\in\cC$ and
+every Banach space $F$, the atlas induced on the bundle with typical fiber $\Alt^k(E;F)$ is analytic.
+\item The triple $(P;E,D)$ is good in degree $k$ for all $E,D\in\cC$.
+\end{enumerate}
+If they hold, Theorem~\ref{thm:bundle-lifting} applies to fiberwise alternating maps on analytic bundles with typical
+fibers in $\cC$ and analytic bundles with Banach typical fibers, and to their operator-valued analytic morphisms, over every
+analytic manifold modeled on $P$.
+\end{corollary}
+
+The proof is in Appendix~\ref{app:families}.
+
+\subsection{Homogeneous families}\label{fam2:ssec:reduction}
+
+\begin{definition}\label{fam2:def:lifting}
+For $n\ge0$ and $\beta\in\Mult^n(P;\cL(E,\widehat D))$ put $u_\beta(h)=\beta(h,\dots,h)$; for $n=0$, $\beta$ is a constant
+operator. For $j\ge1$, a \emph{lift of $u_\beta$ in degree $j$} is a bounded $jn$-linear map
+$q\colon P^{jn}\to\cL(\Lambda^j_\pi E,\hLambda^j_\pi D)$ with $q(h,\dots,h)=\Lambda^j_\pi u_\beta(h)$ for $h\in P$, and
+$c_j(\beta)\in[0,\infty]$ is the infimum of their norms.
+\end{definition}
+
+For $n\ge1$, $c_j(\beta)<\infty$ if and only if $h\mapsto\Lambda^j_\pi u_\beta(h)$ is analytic at some point of $P$
+(Lemma~\ref{fmo:lem:homogeneous}). For $j\ge1$ consider the condition
+\begin{equation}\label{fam2:eq:G}
+\begin{aligned}
+ (\mathrm G_j)\colon\ &\text{for every sequence $(\beta_n)_{n\ge1}$ with $\beta_n\in\Mult^n(P;\cL(E,\widehat D))$ and
+ $\norm{\beta_n}\le1$,}\\
+ &\text{every $c_j(\beta_n)$ is finite and $\limsup_{n\to\infty}c_j(\beta_n)^{1/n}<\infty$.}
+\end{aligned}
+\end{equation}
+
+\begin{theorem}[reduction to homogeneous families]\label{fam2:thm:reduction}
+\begin{enumerate}
+\item If $(P;E,D)$ is good in degree $j$, then $(\mathrm G_j)$ holds.
+\item If $(\mathrm G_j)$ holds for every $j\le k$, then $(P;E,D)$ is good in degree $k$.
+\item Condition $(\mathrm G_j)$ holds whenever $j!\ne0$ in $K$. If $\operatorname{char}K=p>0$, then $(P;E,D)$ is good in
+every degree $j\le k$ if and only if $(\mathrm G_{p^i})$ holds for every $i\ge1$ with $p^i\le k$.
+\item Let $Y_n$ be the completed projective tensor product of $n$ copies of $P$ and one copy of $E$, and let
+$\beta^{\mathrm u}_n\in\Mult^n(P;\cL(E,Y_n))$ be given by
+$\beta^{\mathrm u}_n(h_1,\dots,h_n)y=h_1\otimes\dots\otimes h_n\otimes y$. For every normed $D$, $n\ge1$ and
+$\beta\in\Mult^n(P;\cL(E,\widehat D))$, $c_j(\beta)\le c_j(\beta^{\mathrm u}_n)\norm\beta^j$. Consequently $(P;E,D)$ is good
+in every degree $j\le k$ for every normed $D$ if and only if, for every $j\le k$, every $c_j(\beta^{\mathrm u}_n)$ is finite
+and $\limsup_nc_j(\beta^{\mathrm u}_n)^{1/n}<\infty$; if $\operatorname{char}K=p>0$, the degrees $j=p^i\le k$ suffice.
+Equivalently, $(P;E,D_{\mathrm u})$ is good in every degree $j\le k$ for the $\ell^1$-sum $D_{\mathrm u}$ of the spaces
+$Y_n$.
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}[degrees of triples]\label{fam2:cor:degrees}
+Let $\operatorname{char}K=p>0$, and let $\fD(P;E,D)$ be the set of $k\ge1$ in which $(P;E,D)$ is good.
+\begin{enumerate}
+\item $\{1,\dots,p-1\}\subseteq\fD(P;E,D)$, and $a+b\in\fD(P;E,D)$ whenever $a,b\in\fD(P;E,D)$ and the addition of $a$ and
+$b$ in base $p$ has no carry. If $\fD(P;E,D)\ne\{1,2,\dots\}$, its least missing element is a power of $p$.
+\item If $E\cong E\oplus K$ and $D\cong D\oplus K$ by bounded linear isomorphisms, then $\fD(P;E,D)$ is
+$\{1,\dots,p^i-1\}$ for some $i\ge1$ or $\{1,2,\dots\}$.
+\item $\fD(P;E,D)\supseteq\fD_B(E,\widehat D)$, with equality for $P=\cL(E,\widehat D)$.
+\item The set of $k$ for which $(P;E,D)$ is good in degree $k$ for all normed $E$ and $D$ is $\{1,\dots,p^i-1\}$ for some
+$i\ge1$, or $\{1,2,\dots\}$.
+\end{enumerate}
+\end{corollary}
+
+The proofs are in Appendix~\ref{app:families}.
+
+\subsection{The familywise class}\label{fam2:ssec:class}
+
+The tensor algebra $\mathcal T(P)$ is the Banach space of sequences $(w_n)_{n\ge0}$, $w_n\in\widehat\otimes^n_\pi P$,
+$\widehat\otimes^0_\pi P=\Kh$, with norm $\sum_n\norm{w_n}<\infty$. The map $\operatorname{ver}_n\in\Mult^n(P;\mathcal T(P))$
+places $h_1\otimes\dots\otimes h_n$ in slot $n$, with $\operatorname{ver}_0$ the unit of slot $0$, and
+$\operatorname{ver}(h)=\sum_n\operatorname{ver}_n(h,\dots,h)=(h^{\otimes n})_{n\ge0}$ is analytic for $\norm h<1$
+(Lemma~\ref{fmo:lem:series}). Every analytic germ factors through $\operatorname{ver}$: if $u$ is analytic at $x_0$ with
+values in $\cL(E,\widehat D)$, then $u(x_0+\lambda h)=\theta(\operatorname{ver}(h))$ for $\norm h<1$, for some
+$\lambda\in K^\times$ and a linear family $\theta\colon\mathcal T(P)\to\cL(E,\widehat D)$ (Lemma~\ref{fmo:lem:germs}).
+
+For a Banach space $Y$ and $0<R<1$, $\Mult^\omega_R(P;Y)$ is the Banach space of sequences $(b_N)_{N\ge0}$,
+$b_N\in\Mult^N(P;Y)$, with norm $\sup_NR^N\norm{b_N}<\infty$; $\Mult^\omega_{R,0}(P;Y)$ is its closed subspace where every
+$b_N$ has zero diagonal, so that $b_0=0$; for $R'\le R$, $\iota_{R'R}$ is the contractive inclusion into
+$\Mult^\omega_{R'}(P;Y)$. With $I_1,\dots,I_k$ the consecutive blocks of $\{1,\dots,N\}$ of sizes $n_1,\dots,n_k$ and $h_I$
+the tuple of the $h_i$ with $i\in I$, the map $\operatorname{ver}^\sharp\colon\Mult^k(\mathcal T(P);Y)\to\Mult^\omega_R(P;Y)$,
+\[
+ (\operatorname{ver}^\sharp\Phi)_N(h_1,\dots,h_N)=\sum_{n_1+\dots+n_k=N}
+ \Phi\bigl(\operatorname{ver}_{n_1}(h_{I_1}),\dots,\operatorname{ver}_{n_k}(h_{I_k})\bigr),
+\]
+is bounded and maps $\Mult^k_0(\mathcal T(P);Y)$ into $\Mult^\omega_{R,0}(P;Y)$ (Lemma~\ref{fmo:lem:veronese}). For a linear
+family $\theta\colon\mathcal T(P)\to\cL(E,\widehat D)$, with $\ev_\theta$ and $\ob_k(\theta)$ as in
+Section~\ref{cmb:ssec:families}, put
+\begin{equation}\label{fam2:eq:class}
+\begin{split}
+ \ob^\omega_k(\theta;R)&=\bigl(\operatorname{ver}^\sharp\ev_\theta|_{\cN^k_E}\bigr)_*[\cS^k_E]
+ =(\operatorname{ver}^\sharp)_*\ob_k(\theta)\\
+ &\in\Ext\bigl(\hLambda^k_\pi E,\Mult^\omega_{R,0}(P;\hLambda^k_\pi D)\bigr),
+\end{split}
+\end{equation}
+the second equality by Corollary~\ref{ocl:cor:functorial}(b), and
+$\ob_{k,N}(\theta)=((\operatorname{pr}_N\operatorname{ver}^\sharp\ev_\theta)|_{\cN^k_E})_*[\cS^k_E]
+\in\Ext(\hLambda^k_\pi E,\allowbreak\Mult^N_0(P;\hLambda^k_\pi D))$, with $\operatorname{pr}_N$ the $N$th term. The class
+$\ob^\omega_k(\theta)$ \emph{vanishes after shrinking} if $(\iota_{R'R})_*\ob^\omega_k(\theta;R)=0$ for some
+$R'\in(0,R]$; this does not depend on $R$.
+
+\begin{theorem}[the familywise class]\label{fam2:thm:class}
+\begin{enumerate}
+\item For a linear family $\theta\colon\mathcal T(P)\to\cL(E,\widehat D)$ the following are equivalent:
+$x\mapsto\Lambda^k_\pi\theta(\operatorname{ver}(x))$ is analytic at $0$; $\ob^\omega_k(\theta)$ vanishes after shrinking;
+there are $C,R'>0$ such that for every $N$ the map $(\operatorname{pr}_N\operatorname{ver}^\sharp\ev_\theta)|_{\cN^k_E}$
+extends to a bounded linear map $\widehat\otimes^k_\pi E\to\Mult^N_0(P;\hLambda^k_\pi D)$ of norm at most $CR'^{-N}$.
+\item $(P;E,D)$ is good in degree $k$ if and only if $\ob^\omega_k(\theta)$ vanishes after shrinking for every linear family
+$\theta\colon\mathcal T(P)\to\cL(E,\widehat D)$.
+\item Let $\theta_{\mathrm u}\colon\mathcal T(P)\to\cL(E,\mathcal T(P)\widehat\otimes_\pi E)$ be given by
+$\theta_{\mathrm u}(w)y=w\otimes y$. For $\theta$ as in~(1), let $\tau_\theta\colon\mathcal T(P)\widehat\otimes_\pi E\to\widehat D$
+be the linearization of $(w,y)\mapsto\theta(w)y$, and let $(\hLambda^k_\pi\tau_\theta)_\flat$ apply $\hLambda^k_\pi\tau_\theta$
+to every term. Then $\ob^\omega_k(\theta;R)=((\hLambda^k_\pi\tau_\theta)_\flat)_*\ob^\omega_k(\theta_{\mathrm u};R)$. Hence
+$(P;E,D)$ is good in degree $k$ for every normed $D$ if and only if $\ob^\omega_k(\theta_{\mathrm u})$ vanishes after
+shrinking, and if and only if $x\mapsto\Lambda^k_\pi\mathcal U(x)$ is analytic at $0$ for the universal germ
+$\mathcal U(x)y=\operatorname{ver}(x)\otimes y$.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:families}.
+
+\subsection{Base models good for all fibers}\label{fam2:ssec:bases}
+
+\begin{definition}\label{fam2:def:reflection}
+The space $P$ is \emph{universally good in degree $k$}, written $(\mathrm U^k_P)$, if $(P;E,D)$ is good in degree $k$ for
+all normed $E$ and $D$. It has \emph{fixed-degree reflection in degree $k$}, written $(\mathrm{FR}^k_P)$, if for all Banach
+spaces $G$ and $Z$, every closed subspace $W\subseteq Z$, every bounded $k$-linear $\Phi\colon G^k\to Z$ with
+$\Phi(y,\dots,y)\in W$ for $y\in G$, every open $U\subseteq P$ and every analytic $\gamma\colon U\to G$, the map
+$x\mapsto\Phi(\gamma(x),\dots,\gamma(x))$ is analytic as a $W$-valued map on $U$.
+\end{definition}
+
+Recall $g_n(P)$ from Definition~\ref{ob:def:sequences}(3).
+
+\begin{theorem}[polarizable base models]\label{fam2:thm:polarizable}
+\begin{enumerate}
+\item The following are equivalent: $(\mathrm{FR}^k_P)$; $(\mathrm{FR}^k_P)$ restricted to affine maps
+$\gamma(x)=y_0+Tx$ on $U=P$, with $T$ bounded linear; $P$ is polarizable in every degree $n\le k$.
+\item If $P$ is polarizable in every degree $n\le k$, then $(\mathrm U^k_P)$ holds. Quantitatively, let
+$\bar g\ge\max(1,g_1(P),\dots,g_k(P))$, with $\bar g>g_n(P)$ when no projection of norm $g_n(P)$ exists. If
+$u\colon U\to\cL(E,\widehat D)$ satisfies $u(x_0+h)=\sum_n\beta_n(h,\dots,h)$ for $\norm h<R$, with
+$\norm{\beta_n}\le CR^{-n}$, then $\Lambda^k_\pi u$ has at $x_0$ an expansion of radius at least $R/\bar g$ whose $N$th
+coefficient has norm at most $k!\,C^k\binom{N+k-1}{k-1}(\bar g/R)^N$. In particular, Theorem~\ref{thm:bundle-lifting}
+applies to fiberwise alternating maps on analytic bundles with arbitrary normed typical fibers and analytic bundles with
+Banach typical fibers over every analytic manifold modeled on $P$.
+\item If $\operatorname{char}K=0$, or $\operatorname{char}K=p$ and $k<p$, then $(\mathrm U^k_P)$ holds for every $P$. If
+$\operatorname{char}K=p$ and $P$ is polarizable in degree $p$, then $(\mathrm U^n_P)$ holds for every $n\ge1$. Every normed
+space $P$ with a lower $r$-estimate for some $r<2$ (Section~\ref{spl:ssec:source-target}) satisfies $(\mathrm U^n_P)$ for
+every $n\ge1$, over every $K$.
+\item Let $K$ be complete and $P$ a Banach space. Then $P$ has universal analytic reflection
+(Definition~\ref{fam:def:universal-reflection}) if and only if $\sup_ng_n(P)^{1/n}<\infty$, and $(\mathrm{FR}^k_P)$ holds
+for every $k$ if and only if $g_n(P)<\infty$ for every $n$. If $K$ is nonarchimedean and $P=\ell^1(\N,K)$, then
+$(\mathrm{FR}^k_P)$ and $(\mathrm U^k_P)$ hold for every $k$, but $P$ does not have universal analytic reflection.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[base models under (L)]\label{fam2:thm:bases}
+Assume~\textup{(L)}.
+\begin{enumerate}
+\item Let $P$ be a symmetric sequence space in which $c_{00}(\N,K)$ is dense, let $E_0$ be $c_{00}(\N,K)$ with the supremum
+norm, and let $\theta_0\colon P\to\cL(E_0,P)$ be given by $\theta_0(a)y=ay$. The following are equivalent:
+$(\mathrm U^k_P)$; $a\mapsto\Lambda^k_\pi\theta_0(a)$ is analytic at some point of $P$; $\cP_<$ is bounded on $P\otimes_\pi P$;
+$P$ is polarizable in degree $p$; $(\mathrm U^n_P)$ holds for every $n\ge1$. They are equivalent to the conditions of
+Theorem~\ref{cls:thm:symmetric}. In particular, for $P=\ell^r(\N,K)$ with $1\le r<\infty$, $(\mathrm U^k_P)$ holds if and
+only if $r<2$; and for $P=\ell^r(\N,K)$ with $2\le r<\infty$, for $P=c_0(\N,K)$, and for every symmetric sequence space $P$
+in which $c_{00}(\N,K)$ is dense and $\varphi_P(m)^2\le Cm$ for some $C$, $(\mathrm U^n_P)$ holds exactly for $n\le p-1$.
+\item Let $P$ be normed, and suppose there are bounded linear maps $i\colon c_{00}(\N,K)\to P$, with the supremum norm on
+$c_{00}(\N,K)$, and $w\colon P\to\linf(\N,\Kh)$ with $w\circ i$ the inclusion. Then for the linear family
+$x\mapsto\mu_{w(x)}\in\cL(c_{00}(\N,K),\linf(\N,\Kh))$, with $\linf(\N,\Kh)$ regarded over $K$, the map
+$x\mapsto\Lambda^k_\pi\mu_{w(x)}$ is analytic at no point, so $(\mathrm U^k_P)$ fails. Such maps exist for $c_0(\Sigma,K)$ and
+$\linf(\Sigma,K)$ with $\Sigma$ infinite, and for every $P$ with an equivalent nonarchimedean norm and infinite-dimensional
+completion, $\dim_{\Kh}\widehat P=\infty$. For $P$ with an equivalent nonarchimedean norm, $(\mathrm U^k_P)$ holds if and
+only if $P$ is polarizable in degree $p$, and if and only if $\dim_{\Kh}\widehat P<\infty$.
+\end{enumerate}
+\end{theorem}
+
+The proofs are in Appendix~\ref{app:families}.
+
+\subsection{Fibers and mixed mechanisms}\label{fam2:ssec:mixed}
+
+\begin{proposition}[fibers good over every base]\label{fam2:prop:fibers}
+\begin{enumerate}
+\item If $(E,\widehat D)$ is good for Banach values in degree $k$, with a lift $Q$ as in Lemma~\ref{fib:lem:test}, then
+$(P;E,D)$ is good in degree $k$ for every normed $P$, and $c_k(\beta)\le\norm Q\norm\beta^k$ for every $n$ and
+$\beta\in\Mult^n(P;\cL(E,\widehat D))$.
+\item $(\cL(E,\widehat D);E,D)$ is good in degree $k$ if and only if $(E,\widehat D)$ is good for Banach values in degree
+$k$. Hence $(P;E,D)$ is good in degree $k$ for every normed $P$ if and only if $(E,\widehat D)$ is good for Banach values
+in degree $k$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:families}.
+
+\begin{definition}\label{fam2:def:gamma-split}
+A bounded linear map $T\colon P\to P'$ is \emph{$\Gamma^k$-split} if there is a bounded $k$-linear
+$\Pi\colon P^k\to\hGamma^k_\pi P'$ with $\Pi(a,\dots,a)=(Ta)^{\otimes k}$ for $a\in P$.
+\end{definition}
+
+By Lemma~\ref{ob:lem:parameter}, $P$ is polarizable in degree $k$ if and only if $\id_P$ is $\Gamma^k$-split, and $T$ is
+$\Gamma^k$-split if $P$ or $P'$ is polarizable in degree $k$: compose $T^{\otimes k}$ with a projection onto
+$\hGamma^k_\pi P'$, or a projection onto $\hGamma^k_\pi P$ with the extension of $T^{\otimes k}$.
+
+\begin{theorem}[parameter-relative ordering]\label{fam2:thm:gamma-split}
+Let $2<r<\infty$.
+\begin{enumerate}
+\item For every totally ordered set $\Sigma$ and every $k\ge1$, the inclusion $\ell^2(\Sigma,\Kh)\to\ell^r(\Sigma,\Kh)$,
+over $K$, is $\Gamma^k$-split.
+\item Let $K$ be nonarchimedean, and let $P$ have an $\ell^2$-dominated linearly independent family $(e_t)_{t\in\Sigma}$ with dense span $V$ and
+$\sup_t\norm{e_t}<\infty$. Let $G$ be a normed space with an equivalent $r$-norm, $Z$ a Banach space, $W\subseteq Z$ a
+closed subspace and $\Phi\colon G^k\to Z$ a bounded $k$-linear map with $\Phi(y,\dots,y)\in W$ for $y\in G$. For every
+bounded linear $T\colon P\to G$ there is a bounded $k$-linear $Q\colon P^k\to W$ with $Q(a,\dots,a)=\Phi(Ta,\dots,Ta)$ for
+$a\in P$; and for every open $U\subseteq P$ and every analytic $\gamma\colon U\to G$, the map
+$x\mapsto\Phi(\gamma(x),\dots,\gamma(x))$ is analytic into $W$.
+\item For $K$ and $P$ as in~(2), and for $D$ with an equivalent $r$-norm or an equivalent nonarchimedean norm, $(P;E,D)$ is good in every degree for every normed $E$.
+\end{enumerate}
+\end{theorem}
+
+Under~\textup{(L)} and for $2<r<\infty$, (3) makes $(\ell^2(\N,K);\ell^r(\N,K))$ good in every degree, although neither
+space is polarizable in degree $k$ (Corollary~\ref{cls:cor:symmetric-examples}).
+
+\begin{theorem}[weighted staircase]\label{fam2:thm:staircase}
+Assume~\textup{(L)}. Let $E$ be a sequence space with $\norm y_\infty\le\norm y_E$ for $y\in E$, and let $P$ be a normed
+space containing $c_{00}(\N,K)$ as a linear subspace. For $G\in\{E,P\}$ let
+\[
+ \varphi^\pm_G(n)=\sup\bigl\{\norm y_G:y\in c_{00}(\N,K),\ y(t)\in\{0,1,-1\}\text{ for all }t,\
+ \abs{\operatorname{supp}y}\le n\bigr\}.
+\]
+If $\liminf_{m\to\infty}\varphi^\pm_P(2m)^2\varphi^\pm_E(4m)^2/m=0$, then no $k$-linear
+$Q\colon c_{00}(\N,K)^k\to\cL(\Lambda^k_\pi E,\hLambda^k_\pi E)$ that is bounded for the norm of $P$ satisfies
+$Q(a,\dots,a)=\Lambda^k_\pi\mu_a$ for $a\in c_{00}(\N,K)$. Consequently, if $T\colon P\to\cL(E,\widehat E)$ is bounded
+linear with $T(a)=\mu_a$ for $a\in c_{00}(\N,K)$, then $x\mapsto\Lambda^k_\pi T(x)$ is analytic at no point of $P$. For a
+symmetric sequence space $G$, $\varphi^\pm_G=\varphi_G$.
+\end{theorem}
+
+\begin{corollary}[the table]\label{fam2:cor:table}
+Assume~\textup{(L)}. Let $P$ be $\ell^{r_1}(\N,K)$ with $1\le r_1<\infty$, or $c_0(\N,K)$. In~(1) and~(2), let $E$ be
+$\ell^{r_2}(\N,K)$ with $1\le r_2<\infty$, or $c_0(\N,K)$, or, if $K$ is complete, an infinite-dimensional Banach space with
+an equivalent nonarchimedean norm.
+\begin{enumerate}
+\item $(P;E)$ is good in every degree if $r_1<2$; if $E=\ell^{r_2}(\N,K)$ with $r_2<2$; or if $r_1=2$ and $E$ is
+$\ell^{r_2}(\N,K)$ with $r_2>2$, or $c_0(\N,K)$, or has an equivalent nonarchimedean norm.
+\item There is a linear family $P\to\cL(E,\widehat E)$ along which $\Lambda^k_\pi$ is analytic at no point, so $(P;E)$ is
+not good in degree $k$, if $P=c_0(\N,K)$ and $E$ is not $\ell^{r_2}(\N,K)$ with $r_2<2$; or if $2<r_1<\infty$ and $E$ is
+$c_0(\N,K)$, or has an equivalent nonarchimedean norm, or is $\ell^{r_2}(\N,K)$ with $1/r_1+1/r_2<1/2$.
+\item Let $E$ be a symmetric sequence space in which $c_{00}(\N,K)$ is dense. The multiplier family
+$c_0(\N,K)\to\cL(E,\widehat E)$, $a\mapsto\mu_a$, is liftable in some degree $k\ge p$ if and only if $(E,E)$ is good for
+Banach values in every degree, and if and only if $(c_0(\N,K);E)$ is good in every degree.
+\end{enumerate}
+\end{corollary}
+
+The proofs are in Appendix~\ref{app:families}.
+
+\subsection{Tangent bundles}\label{fam2:ssec:tangent}
+
+\begin{definition}\label{fam2:def:tangent}
+A normed space $P_0$ is \emph{tangent-good in degree $k$} if for every open $U\subseteq P_0$ and every analytic
+$f\colon U\to P_0$ whose derivative $Df\colon U\to\cL(P_0,P_0)$ is analytic, the map
+$x\mapsto\Lambda^k_\pi Df(x)\in\cL(\Lambda^k_\pi P_0,\hLambda^k_\pi P_0)$ is analytic on $U$.
+\end{definition}
+
+Let $K$ be complete and $P_0$ a Banach space, so that analytic maps between open subsets of $P_0$ have analytic
+derivatives~\cite{Bou}. For a manifold $M$ modeled on $P_0$ with chart transitions $f_{ij}$, the transitions of
+$\hLambda^k_\pi TM$ and $\Alt^k(TM;F)$ are $\Lambda^k_\pi Df_{ij}$ and $A^k_{P_0,P_0;F}(Df_{ji})$; so if $P_0$ is
+tangent-good in degree $k$, these bundles are analytic for every Banach space $F$, by the paragraph after
+Definition~\ref{fam2:def:good}.
+
+\begin{theorem}[shear charts]\label{fam2:thm:tangent}
+\begin{enumerate}
+\item Let $K$ be complete, let $P_0$ be a Banach space with a bounded linear isomorphism $J\colon P_1\times D\times E\to P_0$,
+let $U\subseteq P_1$ be open and let $u\colon U\to\cL(E,D)$ be analytic. Then $\psi(x,d,e)=(x,d+u(x)e,e)$ is an analytic
+diffeomorphism of $U\times D\times E$ onto itself, with inverse $(x,d,e)\mapsto(x,d-u(x)e,e)$, and with $i_E(e)=(0,0,e)$
+and $\pi_D(x,d,e)=d$,
+\[
+ \Lambda^k_\pi u(x)=\hLambda^k_\pi\pi_D\circ\Lambda^k_\pi D\psi(x,d,e)\circ\Lambda^k_\pi i_E.
+\]
+If $\Lambda^k_\pi u$ is not analytic at $x_0$, then neither $(x,d,e)\mapsto\Lambda^k_\pi D\psi(x,d,e)$ nor
+$(x,d,e)\mapsto\Lambda^k_\pi D(\psi^{-1})(x,d,e)$ is analytic at any point $(x_0,d,e)$, and the manifold
+$M=J(U\times D\times E)$ with the charts $\id_M$ and $J\circ\psi\circ J^{-1}$ has bundles $\hLambda^k_\pi TM$ and
+$\Alt^k(TM;\hLambda^k_\pi D)$ whose induced atlases are not analytic.
+\item Let $K$ be complete and $P_0$ a Banach space with $P_0\cong P_0\times P_0\times P_0$. The following are equivalent:
+$P_0$ is tangent-good in degree $k$; for every analytic manifold $M$ modeled on $P_0$ the induced atlases of
+$\hLambda^k_\pi TM$ and of $\Alt^k(TM;F)$, for every Banach space $F$, are analytic; $(P_0;P_0)$ is good in degree $k$.
+\item Assume~\textup{(L)}. For $E=c_0(\N,K)$ and for $E=\ell^r(\N,K)$ with $4<r<\infty$, the polynomial map
+$\psi(a,d,e)=(a,d+a\cdot e,e)$ on $E^3$, with $a\cdot e$ the pointwise product, has the polynomial inverse
+$(a,d,e)\mapsto(a,d-a\cdot e,e)$, and $x\mapsto\Lambda^k_\pi D\psi(x)$ and $x\mapsto\Lambda^k_\pi D(\psi^{-1})(x)$ are
+analytic at no point of $E^3$; since $E\cong E^3$, $E$ is not tangent-good in degree $k$. If $K$ is complete, no
+infinite-dimensional Banach space with an equivalent nonarchimedean norm is tangent-good in degree $k$.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:families}.
+
+\subsection{Structure groups}\label{fam2:ssec:groups}
+
+\begin{definition}\label{fam2:def:groups}
+Let $E$ be a normed space and $\operatorname{GL}(E)$ the group of invertible elements of $\cL(E)$. For a subset
+$\mathsf S\subseteq\cL(E)$, an \emph{$\mathsf S$-family} over $P$ is an analytic map $u\colon U\to\cL(E)$, with $U\subseteq P$
+open, such that $u(U)\subseteq\mathsf S$; and $\mathsf S$ is \emph{good over $P$ in degree $k$} if $x\mapsto\Lambda^k_\pi u(x)$
+is analytic on $U$ for every $\mathsf S$-family $u$ over $P$. For a linear subspace $\mathsf V\subseteq\cL(E)$ and
+$\varepsilon>0$ put $\mathsf V(\varepsilon)=\{v\in\mathsf V:\norm v<\varepsilon\}$ and
+$1+\mathsf V(\varepsilon)=\{1+v:v\in\mathsf V(\varepsilon)\}$, with $1=\id_E$.
+\end{definition}
+
+By Theorem~\ref{thm:bundle-lifting}, a bundle with transitions in a subgroup $\mathsf H\subseteq\operatorname{GL}(E)$ needs
+only $\mathsf H$-families.
+
+\begin{theorem}[structure groups]\label{fam2:thm:groups}
+\begin{enumerate}
+\item Let $\mathsf H\subseteq\operatorname{GL}(E)$ be a subgroup, $\mathsf H_0\subseteq\mathsf H$ a subgroup that is open in
+$\mathsf H$ for the operator norm, and $\mathsf V_0\subseteq\cL(E)$ a linear subspace with $\mathsf H_0\subseteq\mathsf V_0$
+and $1+\mathsf V_0(\varepsilon)\subseteq\mathsf H_0$ for some $\varepsilon>0$. Then $\mathsf H$ is good over $P$ in degree
+$k$ if and only if $\mathsf V_0$ is. Neither $E$ nor $K$ need be complete. If $E$ is a Banach space, $\operatorname{GL}(E)$ is
+good over $P$ in degree $k$ if and only if $(P;E)$ is good in degree $k$.
+\item If $E$ is a Banach space with a nonarchimedean norm, the group $\operatorname{Isom}(E)$ of surjective
+linear isometries of $E$ is good over $P$ in degree $k$ if and only if $(P;E)$ is good in degree $k$.
+\item Let $K$ be nonarchimedean and $E=c_0(\N,K)$ or $E=\ell^r(\N,K)$ with $1\le r<\infty$. Let
+$\mathsf V_{\mathrm d}=\{\mu_a:a\in\linf(\N,K)\}$, let
+$\mathsf H_{\mathrm d}=\{\mu_a:a\in\linf(\N,K),\ \inf_t\abs{a(t)}>0\}$ be the diagonal group and
+$\mathsf H_{\mathrm m}=\{\sigma_\sharp\mu_a:\mu_a\in\mathsf H_{\mathrm d},\ \sigma\text{ a bijection of }\N\}$ the monomial
+group, where $\sigma_\sharp e_t=e_{\sigma(t)}$. Then $\mathsf H_{\mathrm m}$ is good over $P$ in degree $k$ if and only if
+$\mathsf H_{\mathrm d}$ is, and if and only if $\mathsf V_{\mathrm d}$ is.
+\item Under~\textup{(L)}, the commutative group $\mathsf H_{\mathrm d}$ of $E=c_0(\N,K)$ is not good over $P=c_0(\N,K)$ in
+degree $k$.
+\end{enumerate}
+\end{theorem}
+
+Corollary~\ref{lau:cor:diagonal-bundle} gives isometric diagonal transitions with the same behavior over Laurent series
+fields.
+
+\begin{proposition}[the closed span does not decide]\label{fam2:prop:span}
+Assume~\textup{(L)} with $K$ complete, and let $\kappa'$ and $\vartheta$ be as in Lemma~\ref{obs:lem:normalization}, with
+$\kappa'$ identified with its image in $K$, so that the nonzero elements of $\kappa'$ have absolute value $1$ and every
+element of $K$ is a convergent series $\sum_{n\ge n_0}\xi_n\vartheta^n$ with $\xi_n\in\kappa'$. Let $E=D=c_0(\N,K)$, let
+$e^*_i$ be the $i$th coordinate functional, let $\mathsf U\subseteq\cL(E)$ be the additive group of the operators $u$ with
+$e^*_i(ue_j)\in\kappa'$ for all $i,j$, and let $\mathsf H=\{g(u):u\in\mathsf U\}\subseteq\operatorname{GL}(D\oplus E)$, with
+$g$ as in Proposition~\ref{prop:shear}. Then $\mathsf H$ is a discrete subgroup, every $\mathsf H$-family over every $P$ is
+locally constant, and $\mathsf H$ is good over every $P$ in every degree. But the closed linear span of $\mathsf H$
+contains $g(\mu_x)$ for every $x\in c_0(\N,K)$, and $x\mapsto\Lambda^k_\pi g(\mu_x)$ is analytic at no point of
+$c_0(\N,K)$.
+\end{proposition}
+
+The proofs are in Appendix~\ref{app:families}.
+
+\subsection{Characteristic two}\label{fam2:ssec:char-two}
+
+\begin{proposition}[families in characteristic two]\label{fam2:prop:char-two}
+Let $K$ be a nontrivially normed field of characteristic~$2$, not necessarily satisfying~\textup{(L)}, and let $k\ge2$.
+\begin{enumerate}
+\item Let $E$, $P$, $\varphi^\pm_E$ and $\varphi^\pm_P$ be as in Theorem~\ref{fam2:thm:staircase}. If
+$\sup_nn/(\varphi^\pm_P(n)^2\varphi^\pm_E(n)^2)=\infty$, the conclusions of Theorem~\ref{fam2:thm:staircase} hold.
+\item The conclusion of Corollary~\ref{fam2:cor:table}(2) holds for $P=c_0(\N,K)$ and $E$ equal to $c_0(\N,K)$ or to
+$\ell^{r_2}(\N,K)$ with $2<r_2<\infty$, and for $P=\ell^{r_1}(\N,K)$ with $2<r_1<\infty$ and $E$ equal to $c_0(\N,K)$ or
+to $\ell^{r_2}(\N,K)$ with $1/r_1+1/r_2<1/2$.
+\item For $E=c_0(\N,K)$ and for $E=\ell^r(\N,K)$ with $4<r<\infty$, the maps $x\mapsto\Lambda^k_\pi D\psi(x)$ and
+$x\mapsto\Lambda^k_\pi D(\psi^{-1})(x)$ of Theorem~\ref{fam2:thm:tangent}(3) are analytic at no point of $E^3$, and $E$
+is not tangent-good in degree $k$.
+\item The commutative group $\mathsf H_{\mathrm d}$ of Theorem~\ref{fam2:thm:groups}(3), for $E=c_0(\N,K)$, is not good
+over $P=c_0(\N,K)$ in degree $k$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:families}. Item~(2) does not cover the pair $P=c_0(\N,K)$, $E=\ell^2(\N,K)$ of
+Corollary~\ref{fam2:cor:table}(2). Items~(2) and~(3) do not cover the spaces with an equivalent nonarchimedean norm in
+Corollary~\ref{fam2:cor:table}(2) and in the last sentence of Theorem~\ref{fam2:thm:tangent}(3), whose proofs use
+Lemma~\ref{fib:lem:marking}, which assumes~\textup{(L)}.

@@ -1,0 +1,293 @@
+\section{Splittings that exist}\label{sec:positive}
+
+\subsection{Splittings for one value space}\label{spl:ssec:one-value}
+
+\begin{proposition}[splitting the alternating inclusion]\label{prop:split-lift}
+If the inclusion $j_{E,F}\colon\Alt^k(E;F)\hookrightarrow\Mult^k(E;F)$ has a bounded linear retraction $\rho$, then $A^k_{E,D;F}$ has a bounded $k$-linear lift of norm at most $\norm\rho$, for every normed $D$. Such a lift also exists in each of the following cases:
+\begin{enumerate}
+\item $k!\ne0$ in $K$;
+\item either $E$ or $D$ has a finite algebraic basis with continuous coordinate functionals.
+\end{enumerate}
+No completeness hypothesis is required.
+\end{proposition}
+\begin{proof}
+For a retraction, $Q(u_1,\ldots,u_k)(m)=\rho\bigl(m\circ(u_1,\ldots,u_k)\bigr)$ is a lift: the mixed composition has
+norm at most $\norm m\prod_i\norm{u_i}$, and its diagonal is already alternating.
+
+If $k!\ne0$, the lift
+\[
+ Q(u_1,\ldots,u_k)(m)(x)
+ =\frac1{k!}\sum_{\sigma\in S_k}
+ m(u_{\sigma(1)}x_1,\ldots,u_{\sigma(k)}x_k)
+\]
+vanishes when two $x$-arguments agree, by pairing the permutations that exchange their positions; on the diagonal all
+$k!$ summands coincide; and its norm is at most $k!/\abs{k!}$, the numerator counting summands.
+
+For continuous coordinates $(e_i,e^*_i)_{1\le i\le d}$ on $E$, sum over increasing words $i_1<\cdots<i_k$:
+\[
+ Q(u_1,\ldots,u_k)(m)(x)
+ =\sum_{i_1<\cdots<i_k}\det\bigl(e^*_{i_a}(x_b)\bigr)_{a,b}
+       m(u_1e_{i_1},\ldots,u_ke_{i_k}).
+\]
+If the coordinates are on $D$, replace the summand by $\det(e^*_{i_a}(u_ax_b))_{a,b}\,m(e_{i_1},\ldots,e_{i_k})$. Equal
+columns give alternation, and the exterior-basis expansion gives the diagonal identity. Each is a finite sum of norm at
+most $k!\sum_{i_1<\cdots<i_k}\prod_a\norm{e^*_{i_a}}\norm{e_{i_a}}$, empty if $k>d$.
+\end{proof}
+
+Over a complete field, finite-dimensional spaces have continuous coordinates (Lemma~\ref{lem:findim}), so cases~(1)
+and~(2) contain Bourbaki's hypotheses, characteristic zero and finite rank~\cite[n\textsuperscript{o}~7.8]{Bou}; over
+incomplete $K$ finite rank does not suffice, since the $a$-coordinate on $K+Ka\subseteq\widehat K$,
+$a\in\widehat K\setminus K$, is discontinuous.
+
+A nonarchimedean normed space is \emph{spherically complete} if every nonempty family of pairwise-intersecting
+closed balls has a common point. In a nonarchimedean metric, intersecting balls are nested.
+
+\begin{theorem}[spherically complete targets]\label{thm:spherical}
+Suppose $K$ is nonarchimedean and $F$ is nonarchimedean and spherically complete. Then, for every normed $E$, the space $\Alt^k(E;F)$ is nonarchimedean and spherically complete, and its inclusion into $\Mult^k(E;F)$ has a contractive linear retraction. Thus $A^k_{E,D;F}$ is a continuous polynomial for every normed $E,D$ and every $k$. Neither the field nor the source spaces need be complete.
+\end{theorem}
+The proof is in Appendix~\ref{app:deferred}. An equivalent nonarchimedean spherically complete norm on $F$ suffices,
+since equivalent norms preserve analyticity.
+
+\begin{corollary}[discretely valued fields]\label{cor:discrete-targets}
+Suppose $K$ is nonarchimedean with $\abs{K^\times}=r^\Z$ for some $0<r<1$.
+Every Banach target $F$ admitting an equivalent nonarchimedean norm makes $A^k_{E,D;F}$
+analytic in every degree and for all normed $E,D$. The field itself need not be complete.
+\end{corollary}
+\begin{proof}
+Round the equivalent nonarchimedean norm upwards to $r^\Z$, with value zero at zero. The new norm lies between the old
+one and $r^{-1}$ times it, and satisfies the norm axioms, since rounding is monotone and commutes with multiplication by
+$r^\Z$. It is complete with nonzero distances in $r^\Z$, hence spherically complete by Lemma~\ref{lem:discdist}. Apply
+Theorem~\ref{thm:spherical} and transport the resulting lift back through the equivalent norms.
+\end{proof}
+
+\paragraph{\textit{Changing the target category.}}
+Over nonarchimedean $K$, the maximum in place of the sum in the projective seminorm gives a completed exterior power
+$\widehat\Lambda^k_{\pi,\mathrm{na}}E$ representing $\Alt^k(E;F)$ for complete nonarchimedean $F$ (the universal-property
+proof of Proposition~\ref{prop:exterior};~\cite[\S4]{Se}). Over a discretely valued field,
+$u\mapsto\widehat\Lambda^k_{\pi,\mathrm{na}}u$ is analytic: it is $A^k_{E,D;F}$ for $F=\widehat\Lambda^k_{\pi,\mathrm{na}}D$,
+evaluated at the universal alternating map, so Corollary~\ref{cor:discrete-targets} applies. The obstructions of
+Section~\ref{sec:sharpness} concern the sum construction, whose target has no equivalent nonarchimedean norm.
+
+In the next theorem and its proof, $K$ is complete and nonarchimedean, and $q_Y$, $Y^u$ and $j_Y\colon Y\to Y^u$ are the
+seminorm, the ultrametric envelope and its canonical map of a normed space $Y$, constructed in the proof of
+Proposition~\ref{prop:scalar-countable}.
+
+\begin{theorem}[ultrametric values]\label{fib:thm:ultra}
+Let $F$ be a Banach space with a nonarchimedean norm, and suppose that $E^u$ or $D^u$ is a bounded linear retract of
+$c_0(I,K)$ for some set $I$: there are bounded linear maps $\iota$ into $c_0(I,K)$ and $\iota'$ out of it with
+$\iota'\iota=\id$. Then $A^k_{E,D;F}$ has a bounded lift of norm at most $(\norm\iota\norm{\iota'})^k$, and is therefore a continuous
+polynomial. If $E$ or $D$ is of countable type (Appendix~\ref{app:coordinate-methods}), there are such lifts of norm at most $t^{-k}$ for every $0<t<1$.
+\end{theorem}
+
+The proof is in Appendix~\ref{app:deferred}. If $\operatorname{char}K=p>0$ and $k\ge p$, both hypotheses matter:
+Theorem~\ref{thm:operator-obstructions}(2) gives a failure with $F=K$ if $K$ is not spherically complete; for
+$K=\kappa((X))$ and $E=D=\linf(\N,K)\cong c_0(I,K)$~\cite[\S1, Proposition~1]{Se}, Theorem~\ref{thm:laurent} gives one
+with the target $F_1$, which has no equivalent nonarchimedean norm, so this pair is not good for Banach values
+(Corollary~\ref{obs:cor:linf}).
+
+\subsection{Source and target splittings}\label{spl:ssec:source-target}
+
+By Proposition~\ref{fib:prop:split}, a source splitting $(\mathrm S^k_E)$ or a target splitting $(\mathrm R^k_D)$ makes
+$(E,D)$ good for Banach values in degree $k$. A Banach space $Y$ is \emph{projective} if, for every bounded linear
+surjection $\psi\colon Y_1\to Y_2$ of Banach spaces, every bounded linear $T\colon Y\to Y_2$ equals $\psi\circ T'$ for a bounded
+linear $T'\colon Y\to Y_1$. For a totally ordered set $J$, let $J^k_<$ be the set of $i\in J^k$ with $i_1<\dots<i_k$, and
+let $(e_i)_{i\in J}$ and $(\delta_i)_{i\in J^k_<}$ be the unit vectors of $\ell^1(J,K)$ and of $\ell^1(J^k_<,\widehat K)$.
+
+\begin{proposition}[projective sources]\label{spl:prop:projective}
+Let $E$ be a normed space and $k\ge1$.
+\begin{enumerate}
+\item For every totally ordered set $J$, the map $\delta_i\mapsto e_{i_1}\wedge\dots\wedge e_{i_k}$ extends to an isometric
+isomorphism of $\ell^1(J^k_<,\widehat K)$ onto $\widehat\Lambda^k_\pi\ell^1(J,K)$.
+\item If $\widehat\Lambda^k_\pi E$ is projective, then $(\mathrm S^k_E)$ holds.
+\item If $E$ is a bounded linear retract of $\ell^1(J,K)$ for some set $J$, then $(\mathrm S^n_E)$ holds for every $n\ge1$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+Let $\Sigma$ be a totally ordered set. An \emph{interval} of $\Sigma$ is a subset $I$ containing every $t$ with
+$t_1<t<t_2$ for some $t_1,t_2\in I$. For a linearly independent family $(e_t)_{t\in\Sigma}$ in $E$ with span $V$, write
+$x(t)$ for the coefficients of $x\in V$ and $\cP_Ix=\sum_{t\in I}x(t)e_t$.
+
+\begin{theorem}[lower estimates]\label{fib:thm:lower}
+Let $K$ be any nontrivially normed field and $E$ a normed space with a linearly independent family $(e_t)_{t\in\Sigma}$
+whose span $V$ is dense. Suppose that for some $0<r<2$ and $C\ge1$,
+\begin{equation}\label{fib:eq:lower}
+ \Bigl(\sum_{i=1}^N\norm{\cP_{I_i}x}^r\Bigr)^{1/r}\le C\norm x
+ \qquad(x\in V,\ I_1,\dots,I_N\text{ pairwise disjoint intervals}).
+\end{equation}
+Put $C_\sharp=2C^2/(1-2^{1-2/r})$.
+\begin{enumerate}
+\item The linear map $\cP_<$ on $V\otimes V$ with $\cP_<(e_t\otimes e_{t'})=e_t\otimes e_{t'}$ for $t<t'$ and
+$\cP_<(e_t\otimes e_{t'})=0$ otherwise satisfies $\norm{\cP_<(x\otimes y)}\le C_\sharp\norm x\norm y$ for $x,y\in V$. It
+therefore extends to a bounded linear map $E\otimes_\pi E\to E\widehat\otimes_\pi E$ of norm at most $C_\sharp$.
+\item For every $k\ge1$, $(\mathrm S^k_E)$ and $(\mathrm R^k_E)$ hold, with $\norm s\le k!\,C_\sharp^{k-1}$ and
+$\norm\rho\le C_\sharp^{k-1}$. If $E=V$, they hold without completion.
+\item For every normed $D$ and every $k$, the pairs $(E,D)$ and $(D,E)$ are good for Banach values, and they are good
+if $E=V$.
+\end{enumerate}
+\end{theorem}
+The proof is in Appendix~\ref{app:ordering}.
+
+A normed space $E$ has a \emph{lower $r$\nobreakdash-estimate} if it has a family $(e_t)_{t\in\Sigma}$ as in
+Theorem~\ref{fib:thm:lower} satisfying~\eqref{fib:eq:lower} for some $C\ge1$. Examples with $C=1$ are $\ell^r(\Sigma,K)$,
+$1\le r<2$, with its unit vectors, its subspace of finitely supported vectors, and, for $r_1,r_2\ge1$ with
+$r=\max(r_1,r_2)<2$, the space $\ell^{r_1}(\N;\ell^{r_2}(\N,K))$ ordered lexicographically, by Minkowski's inequality if
+$r_1\le r_2$ and by $\ell^{r_2}\subseteq\ell^{r_1}$ otherwise. Conclusions~(2), with norms multiplied by
+$(\norm\iota\norm{\iota'})^k$, and~(3) pass to every $Y$ with bounded $\iota\colon Y\to E$ and $\iota'\colon E\to Y$,
+$\iota'\iota=\id_Y$: the maps $\iota'^{\otimes k}\circ s\circ\Lambda^k_\pi\iota$ and
+$\widehat\Lambda^k_\pi\iota'\circ\rho\circ\iota^{\otimes k}$ satisfy $(\mathrm S^k_Y)$ and $(\mathrm R^k_Y)$, by naturality.
+
+\begin{proposition}[ordering splittings]\label{spl:prop:ordering}
+Let $E$ be a normed space with a linearly independent family $(e_t)_{t\in\Sigma}$ whose span $V$ is dense, and suppose
+that the map $\cP_<$ of Theorem~\ref{fib:thm:lower}(1) satisfies $\norm{\cP_<(x\otimes y)}\le C\norm x\norm y$ for
+$x,y\in V$. Let $n\ge1$, and let $\cP^{(n)}$ and $R_n$ be the linear maps on $\otimes^nV$ that send
+$e_{t_1}\otimes\dots\otimes e_{t_n}$ to itself if $t_1<\dots<t_n$, respectively to the sum $O_t$ of the tensors
+$e_{\tilde t_1}\otimes\dots\otimes e_{\tilde t_n}$ over the distinct rearrangements $\tilde t$ of $t$ if $t_1\le\dots\le t_n$, and to $0$
+otherwise.
+\begin{enumerate}
+\item $\cP^{(n)}$ extends to a bounded linear map $\otimes^n_\pi E\to\widehat\otimes^n_\pi E$ of norm at most $C^{n-1}$.
+\item $s=\cP^{(n)}\circ\operatorname{alt}^n_E$ and $\rho=\widehat\wedge^n_E\circ\cP^{(n)}$ satisfy $(\mathrm S^n_E)$ and
+$(\mathrm R^n_E)$, with $\norm s\le n!\,C^{n-1}$ and $\norm\rho\le C^{n-1}$. If $E=V$, both hold without completion.
+\item $R_n$ extends to a projection of $\widehat\otimes^n_\pi E$ onto $\widehat\Gamma^n_\pi E$, so $(\Gamma^n_E)$ holds.
+Its norm is at most the sum of $n!\,(c_1!\cdots c_m!)^{-1}C^{m-1}(1+2C)^{n-m}$ over the compositions
+$c=(c_1,\dots,c_m)$ of $n$ into positive parts.
+\end{enumerate}
+The proof is in Appendix~\ref{app:ordering}.
+\end{proposition}
+
+By Theorem~\ref{fib:thm:lower}(1), the hypothesis holds with $C=C_\sharp$ for every family satisfying~\eqref{fib:eq:lower}.
+
+In the rest of this subsection $K$ is nonarchimedean. A linearly independent family $(e_t)_{t\in\Sigma}$ in $E$ whose span
+$V$ is dense is \emph{$\ell^2$-dominated} if $(\sum_t\abs{x(t)}^2)^{1/2}\le C_2\norm x$ for $x\in V$ and some constant
+$C_2$. For $1\le r<\infty$, an \emph{$r$-norm} is a norm $\nu$ with $\nu(y+z)^r\le\nu(y)^r+\nu(z)^r$; a normed space $D$ has an \emph{equivalent
+$r$-norm} if it carries an $r$-norm $\nu$ with $a\nu(y)\le\norm y\le b\nu(y)$ for constants $0<a\le b$.
+
+\begin{proposition}[$r$-norms]\label{spl:prop:r-norm}
+Let $1\le r<\infty$. A normed space $D$ has an equivalent $r$-norm if and only if there is a constant $C$ with
+\begin{equation}\label{spl:eq:r-norm}
+ \Bigl\lVert\sum_t\xi_ty_t\Bigr\rVert\le C\Bigl(\sum_t\abs{\xi_t}^r\Bigr)^{1/r}\max_t\norm{y_t}
+\end{equation}
+for all finite families $(\xi_t)$ in $K$ and $(y_t)$ in $D$ with a common index set. The proof is in
+Appendix~\ref{app:ordering}.
+\end{proposition}
+
+\begin{theorem}[relative ordering splittings]\label{spl:thm:relative-ordering}
+Let $E$ be a normed space with an $\ell^2$-dominated linearly independent family $(e_t)_{t\in\Sigma}$ whose span $V$ is
+dense and with $\sup_t\norm{e_t}<\infty$.
+\begin{enumerate}
+\item For every $r\in(2,\infty)$, the coordinate map $V\to\ell^r(\Sigma,\widehat K)$, $x\mapsto(x(t))_{t\in\Sigma}$,
+extends to a bounded linear map $w\colon E\to\ell^r(\Sigma,\widehat K)$, which is $\mathrm S^n$-split
+(Definition~\ref{ob:def:split-operators}) for every $n\ge1$.
+\item If $D$ has an equivalent $r$-norm for some $r\in(2,\infty)$, then $(E,D)$ is good for Banach values in every degree,
+and good in every degree if $E=V$.
+\end{enumerate}
+The proof is in Appendix~\ref{app:ordering}.
+\end{theorem}
+
+\begin{corollary}\label{spl:cor:relative-ordering-na}
+Let $E$ be as in Theorem~\ref{spl:thm:relative-ordering}, and let $D$ have an equivalent nonarchimedean norm. Then
+$(E,D)$ is good for Banach values in every degree, and good in every degree if $E=V$. The extension
+$E\to c_0(\Sigma,\widehat K)$ of the coordinate map is $\mathrm S^n$-split for every $n\ge1$.
+\end{corollary}
+
+The proof is in Appendix~\ref{app:deferred}. For example, the sources $\ell^r(\Sigma,K)$, $1\le r\le2$, are covered, with the targets $c_0$, $\linf$, spaces with an
+equivalent nonarchimedean norm, and $\ell^r$, $r>2$, which is $r$-normed by its own norm, since
+$\abs{\alpha+\beta}^r\le\max(\abs\alpha,\abs\beta)^r\le\abs\alpha^r+\abs\beta^r$.
+
+\subsection{Parameter splittings}\label{spl:ssec:parameter}
+
+A \emph{parameter splitting} in degree $n$, a bounded projection of $\widehat\otimes^n_\pi P$ onto $\widehat\Gamma^n_\pi P$,
+exists if and only if $P$ is polarizable in degree $n$ (Definition~\ref{ob:def:sequences}).
+
+\begin{theorem}[finite-coordinate parameters]\label{thm:finite-parameters}
+Let $j\colon W\to Z$ be a closed linear isometry. If $P$ is boundedly linearly isomorphic to $K^d$ and $U\subseteq P$ is open, then $f\colon U\to W$ is analytic if and only if $jf$ is analytic. For the maximum norm on $K^d$, ambient coefficients $b_n$ can be replaced by $W$-valued coefficients $q_n$ with
+\[
+ \norm{q_n}\le d^n\norm{b_n}\quad(n\ge1).
+\]
+If $Z$ is nonarchimedean, the factor $d^n$ can be replaced by $1$.
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:coefficient-descent} puts every homogeneous diagonal in $W$. Expand it in coordinates as
+$b_n(h,\ldots,h)=\sum_{|\alpha|=n}c_\alpha h^\alpha$. Every $c_\alpha$ lies in $W$, by polynomial uniqueness over the
+infinite field $K$ in the algebraic quotient $Z/W$. For each $\alpha$, let $i_1(\alpha)\le\dots\le i_n(\alpha)$ be the coordinate word with
+these multiplicities, and set
+\[
+ q_n(h_1,\ldots,h_n)
+ =\sum_{|\alpha|=n}c_\alpha\prod_{a=1}^n(h_a)_{i_a(\alpha)}.
+\]
+Before grouping there are exactly $d^n$ ordered terms, so the triangle inequality gives the bound, and two maximum
+estimates give the nonarchimedean refinement. The diagonals agree, and the exponential bounds preserve a positive radius
+in Theorem~\ref{thm:coefficient-descent}. The case $d=0$ is immediate.
+\end{proof}
+
+Over an incomplete field, finite dimension of the base does not suffice: for $K=\F_p(t)$ and $k\ge p$, the end of
+Appendix~\ref{app:no-largest} gives a base of dimension $p+1$ without continuous coordinates and a nonanalytic alternating atlas.
+
+\begin{theorem}[summable parameter spaces]\label{thm:summable-parameters}
+Let $j\colon W\to Z$ be a closed linear isometry.
+\begin{enumerate}
+\item Suppose $K$ and $Z$ are nonarchimedean and $W$ is complete. For $U\subseteq c_0(I,K)$ open, analyticity of $jf$ implies analyticity of $f\colon U\to W$. Coefficients can be lifted without increasing their norms.
+\item Suppose $Z$ is complete. Let $a\colon H\to W$ have an ambient bounded homogeneous polynomial representation of fixed degree $d$, that is, $ja(h)=B(h,\ldots,h)$ for a bounded $d$-linear $B\colon H^d\to Z$ on a normed space $H$. For every analytic $\gamma\colon U\to H$, with $U\subseteq\ell^1(I,K)$ open, the composite $a\gamma$ is analytic.
+\end{enumerate}
+Here $c_0$ carries the supremum norm and $\ell^1$ the ordinary sum norm. The field need not be complete. Each analyticity assertion remains valid for a parameter space $P$ that is a bounded linear retract of the indicated space $V$, with bounded linear $i\colon P\to V$, $r\colon V\to P$ and $ri=\id_P$; in~(1) the lifted coefficients then satisfy $\norm{q_n}\le(\norm r\norm i)^n\norm{b_n}$.
+\end{theorem}
+The proof is in Appendix~\ref{app:deferred}. Theorems~\ref{thm:finite-parameters} and~\ref{thm:summable-parameters} give
+analyticity at every point of an open set, hence the $C^\omega$ conclusion (see Conventions).
+
+\begin{proposition}[parameter splittings of $\ell^1$]\label{spl:prop:gamma-l1}
+Let $n\ge1$.
+\begin{enumerate}
+\item For every set $J$, $\ell^1(J,K)$ is polarizable in degree $n$, by a projection of norm at most $n!$.
+\item Every normed space with finite continuous coordinates is polarizable in degree $n$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{proposition}[degree two]\label{spl:prop:degree-two}
+For every normed space $P$, $\cN^2_P=\widehat\Gamma^2_\pi P$. Hence $\cS^2_P$ and $\cG^2_P$ coincide up to the isometry
+$\widehat\Lambda^2_\pi P\cong\widehat\otimes^2_\pi P/\cN^2_P$, and $(\mathrm S^2_P)$ holds if and only if $P$ is
+polarizable in degree $2$. A section $s$ gives a projection onto $\widehat\Gamma^2_\pi P$ of norm at most $1+\norm s$, and
+a projection $R_2$ onto $\widehat\Gamma^2_\pi P$ gives a section of norm at most $1+\norm{R_2}$.
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\subsection{The bundle theorem}\label{spl:ssec:bundle}
+
+\begin{corollary}\label{cor:bundle-cases}
+Let $M$ be an analytic manifold over $K$, with normed model space $P$. Fiberwise alternating maps give an analytic bifunctor on analytic normed vector bundles and their operator-valued analytic morphisms in each of the following settings:
+\begin{center}
+\begin{tabular}{p{0.26\linewidth}p{0.63\linewidth}}
+\hline
+Base model & Hypotheses on the typical fibers\\
+\hline
+Arbitrary $P$ & $k!\ne0$ in $K$; or $K$ is nonarchimedean and the target fibers admit equivalent nonarchimedean spherically complete norms; or the source fibers have finite continuous coordinates.\\[3pt]
+Finite continuous coordinates & Arbitrary normed fibers.\\[3pt]
+$c_0(I,K)$, or a bounded linear retract & $K$ nonarchimedean; complete nonarchimedean target fibers.\\[3pt]
+$\ell^1(I,K)$, or a bounded linear retract & Complete target fibers.\\
+\hline
+\end{tabular}
+\end{center}
+The fiber hypotheses apply to both pairs of bundles at the endpoints of a morphism. Each alternative in the first row specifies a separate setting. At every finite smoothness order and at $C^\infty$, no additional hypothesis on $K,P$ or the fibers is needed.
+\end{corollary}
+\begin{proof}
+The fiber results give a bounded $k$-linear lift $Q$ of $A$, and
+$(u_1,\ldots,u_k,g)\mapsto\bigl(m\mapsto g\circ Q(u_1,\ldots,u_k)(m)\bigr)$ is a bounded $(k+1)$-linear lift of the joint
+action $B$, which is therefore analytic. The parameter results apply directly to the ambient polynomial along transition
+families and local morphism families; the ambient multilinear and operator spaces are complete when the final
+value-space fiber is complete, and nonarchimedean when it is nonarchimedean. Theorem~\ref{thm:bundle-lifting} supplies the
+bundle construction in every case, and Lemma~\ref{lem:closed-smooth} the smooth assertion.
+\end{proof}
+
+Fields of characteristic zero, spherically complete or not, belong to the first row in every finite degree.
+
+\paragraph{\textit{Good pairs of fibers.}}
+If $(E,D)$ is good for Banach values in degree $k$ for all $E,D$ in a class $\cC$, then Theorem~\ref{thm:bundle-lifting}
+applies over every analytic manifold to bundles with source fibers in $\cC$ and Banach value fibers: the joint action is
+polynomial in the precomposition variable (Lemma~\ref{fib:lem:test}, Proposition~\ref{prop:homogeneous-lift}) and linear
+in the other. Such classes are the spaces with a lower $r$-estimate, $r<2$ (Theorem~\ref{fib:thm:lower}), and the
+symmetric spaces with $c_{00}$ dense and $\cP_<$ bounded (Propositions~\ref{spl:prop:ordering}(2), \ref{fib:prop:split}(1);
+under \textup{(L)}, Theorem~\ref{cls:thm:symmetric}). Over complete nonarchimedean $K$, Theorem~\ref{fib:thm:ultra} gives
+the same for source fibers of countable type and nonarchimedean Banach value fibers.

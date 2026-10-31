@@ -1,0 +1,504 @@
+\section{Rigid Banach spaces}\label{app:rigid}
+
+This appendix proves Theorems~\ref{bey:thm:rigid}, \ref{bey:thm:rigid-good} and~\ref{bey:thm:rigid-sum}. It transfers
+the rigid subspace of $L_0$ of Kalton and Roberts~\cite[\S3]{KR}: their quasi-norms become $r$\nobreakdash-norms, their
+exponents increasing to $1$ become exponents $r_i\uparrow\infty$, and forcing goes through $L^r$ readouts.
+
+\subsection{Blocks and the Nakano sum}\label{rig:ssec:nakano}
+
+Throughout Subsections~\ref{rig:ssec:nakano}--\ref{rig:ssec:spaces}, $K$ is a complete nonarchimedean field with
+nontrivial absolute value that is separable as a metric space, and $\vartheta\in K$ is fixed with $0<\abs\vartheta<1$.
+
+For a finite-dimensional normed space $Y$ and $1\le r<\infty$, $L^r((0,1);Y)$ is the completion of the step functions
+$f\colon(0,1)\to Y$ modulo null functions for $\norm f_r=(\int_0^1\norm{f(t)}^r\,dt)^{1/r}$, and $1\otimes y$ is the
+constant function with value $y$. By the Riesz--Fischer argument, $Y$ being complete (Lemma~\ref{lem:findim}), each
+element is a measurable function, unique up to null sets, with the same formula for the norm. If the norm of $Y$ is
+nonarchimedean, $\norm\cdot_r$ is an $r$\nobreakdash-norm (Section~\ref{sec:positive}), since
+$\norm{f(t)+g(t)}^r\le\max(\norm{f(t)},\norm{g(t)})^r\le\norm{f(t)}^r+\norm{g(t)}^r$. An $r$\nobreakdash-norm is an
+$r'$\nobreakdash-norm for $1\le r'\le r$, since $(c^r+c'^r)^{1/r}\le(c^{r'}+c'^{r'})^{1/r'}$ for reals $c,c'\ge0$. The
+space $K^{1+N}$ carries the maximum norm, with unit vectors $e_1,\dots,e_{1+N}$.
+
+Let $1\le r_0\le r_1\le\cdots$ be real numbers. For a sequence $a=(a_i)_{i\ge0}$ of reals $a_i\ge0$ put
+\[
+ \nu(a)=\inf\Bigl\{\varsigma>0:\sum_{i\ge0}(a_i/\varsigma)^{r_i}\le1\Bigr\}\in[0,\infty].
+\]
+Convexity of $\varsigma\mapsto\varsigma^{r_i}$, with the weights $\varsigma/(\varsigma+\varsigma')$ and
+$\varsigma'/(\varsigma+\varsigma')$, gives $\nu(a+a')\le\nu(a)+\nu(a')$. Moreover $\nu$ is positively homogeneous and monotone, $\nu(a)=0$ only for $a=0$,
+$\nu(a)=a_i$ if $a_i$ is the only nonzero entry, and $\nu(a)=\sup_h\nu(a^{\le h})$, where $a^{\le h}$ replaces the
+entries with index above $h$ by zero. For finitely supported $a$ the sum is continuous and decreasing in $\varsigma$, so
+\begin{equation}\label{rig:eq:modular}
+ \nu(a)\le\varsigma\iff\textstyle\sum_i(a_i/\varsigma)^{r_i}\le1\qquad(\varsigma>0).
+\end{equation}
+
+Given Banach spaces $L_i$, $i\ge0$, the \emph{Nakano sum} $\mathcal Z$ is the normed space of the sequences
+$f=(f_i)_{i\ge0}$, $f_i\in L_i$, with $\norm f:=\nu((\norm{f_i})_{i\ge0})<\infty$. It is complete: a Cauchy sequence
+converges in each $L_i$, since $\norm{f_i}\le\norm f$, and to its coordinatewise limit in $\mathcal Z$, since
+$\nu(a)=\sup_h\nu(a^{\le h})$. We identify $L_i$ isometrically with the $i$\nobreakdash-th block of $\mathcal Z$. The
+projections $\Pi_i$, $\Pi_{<i}$, $\Pi_{\le i}$ and $\Pi_{>i}$ keep the coordinates with index equal to, less than, at
+most and greater than $i$ and replace the others by zero; they are contractive, since $\nu$ is monotone, and
+$\id=\Pi_{<i}+\Pi_i+\Pi_{>i}$. Let $\mathcal Z_{<i}$, $\mathcal Z_{\le i}$ and $\mathcal Z_{>i}$ be the ranges of the
+last three.
+
+\begin{lemma}\label{rig:lem:nakano}
+If the norm of every $L_m$ is an $r_m$\nobreakdash-norm and $i\ge0$, then
+$\norm{f^{(1)}+\dots+f^{(d)}}^{r_{i+1}}\le\norm{f^{(1)}}^{r_{i+1}}+\dots+\norm{f^{(d)}}^{r_{i+1}}$ for
+$f^{(1)},\dots,f^{(d)}\in\mathcal Z_{>i}$.
+\end{lemma}
+
+\begin{proof}
+By induction it suffices to take $d=2$, $f=f^{(1)}$ and $g=f^{(2)}$. Put $r=r_{i+1}$ and, for $m>i$, $a_m=\norm{f_m}$,
+$a'_m=\norm{g_m}$ and $a''_m=\norm{f_m+g_m}$; then $a''^r_m\le a^r_m+a'^r_m$, since the norm of $L_m$ is an
+$r_m$\nobreakdash-norm and $r_m\ge r$. Let $\nu'$ be defined like $\nu$ on sequences indexed by $m>i$, with the
+exponents $r_m/r\ge1$; like $\nu$, it is monotone and subadditive. With $a^r=(a^r_m)_{m>i}$, the substitution
+$\varsigma=\varsigma'^r$ gives $\nu'(a^r)=\inf\{\varsigma'^r:\sum_{m>i}(a_m/\varsigma')^{r_m}\le1\}=\nu(a)^r$. Hence
+\[
+ \norm{f+g}^r=\nu'(a''^r)\le\nu'(a^r+a'^r)\le\nu'(a^r)+\nu'(a'^r)=\norm f^r+\norm g^r.
+\]
+\end{proof}
+
+\subsection{Operators between blocks}\label{rig:ssec:operators}
+
+\begin{lemma}[compare~{\cite[Lemma~2.2]{KR}}]\label{rig:lem:rolewicz}
+Let $1\le r\le r'$, let $Y$ be a finite-dimensional normed space, $N'\ge0$ an integer and $h\in L^r((0,1);Y)$ a step
+function. There is a bounded linear map $\Phi\colon L^{r'}((0,1);K^{1+N'})\to L^r((0,1);Y)$ with
+$\Phi(1\otimes e_1)=h$ and $\norm{\Phi g}_r\le\norm h_r\norm g_{r'}$ for every $g$.
+\end{lemma}
+
+\begin{proof}
+If $h=0$, take $\Phi=0$. Otherwise let $e^*_1\colon K^{1+N'}\to K$ be the first coordinate, so $e^*_1(e_1)=1$ and
+$\abs{e^*_1(y)}\le\norm y$. The function $\xi(t)=\norm h_r^{-r}\int_0^t\norm{h(t')}^r\,dt'$ maps $[0,1]$ onto $[0,1]$
+and is continuous, nondecreasing and piecewise affine, with positive slope exactly where $h\ne0$. For a step function
+$g$ the step function $(\Phi g)(t)=e^*_1(g(\xi(t)))\,h(t)$ depends only on the class of $g$, since $\Phi g=0$ where
+$h=0$ and preimages of null sets under $\xi$ are null where $h\ne0$. On the intervals where $h\ne0$, which $\xi$ maps
+onto $(0,1)$ up to finitely many points, the substitution $t''=\xi(t)$ has $\norm{h(t)}^r\,dt=\norm h_r^r\,dt''$. Hence
+\[
+ \norm{\Phi g}_r^r=\norm h_r^r\int_0^1\abs{e^*_1(g(t''))}^r\,dt''\le\norm h_r^r\norm g_r^r\le\norm h_r^r\norm g_{r'}^r,
+\]
+the last step by Jensen's inequality on the probability space $(0,1)$, since $r\le r'$. Extend $\Phi$ by continuity;
+then $\Phi(1\otimes e_1)=e^*_1(e_1)\,h=h$.
+\end{proof}
+
+From here to the end of Subsection~\ref{rig:ssec:spaces}, $N_i\ge i$ are integers, $L_i=L^{r_i}((0,1);K^{1+N_i})$ and
+$\mathbf e_i=1\otimes e_1\in L_i$ for $i\ge0$, and $\mathcal Z$ is the Nakano sum of the $L_i$.
+
+\begin{lemma}[compare~{\cite[Lemma~3.2]{KR}}]\label{rig:lem:onto-earlier}
+Let $i\ge1$, and let $f\in\mathcal Z_{<i}$ have step functions as coordinates and $\norm f\le1$. There is a bounded
+linear map $\Phi\colon L_i\to\mathcal Z_{<i}$ with $\Phi\mathbf e_i=f$ and $\norm\Phi\le1$.
+\end{lemma}
+
+\begin{proof}
+By~\eqref{rig:eq:modular}, $\sum_{m<i}\norm{\Pi_mf}^{r_m}\le1$. For $m<i$, since $r_m\le r_i$,
+Lemma~\ref{rig:lem:rolewicz} gives $\Phi_m\colon L_i\to L_m$ with $\Phi_m\mathbf e_i=\Pi_mf$ and
+$\norm{\Phi_mg}\le\norm{\Pi_mf}\norm g$. Put $\Phi g=\sum_{m<i}\Phi_mg$, with $\Phi_mg$ in block $m$. Then
+$\Phi\mathbf e_i=f$, and for $g\ne0$, $\sum_{m<i}(\norm{\Phi_mg}/\norm g)^{r_m}\le\sum_{m<i}\norm{\Pi_mf}^{r_m}\le1$, so
+$\norm{\Phi g}\le\norm g$ by~\eqref{rig:eq:modular}.
+\end{proof}
+
+\subsection{The inductive choices}\label{rig:ssec:choices}
+
+Fix an integer $h_0\ge0$ with $\sum_{h\ge0}\abs\vartheta^{h+h_0}\le1/4$ and put $\zeta_h=\vartheta^{h+h_0}$ for $h\ge0$.
+Given reals $\eta_i>0$ and integers $d_i\ge1$, let $\mathbf e_{i,l}\in L_i$, $1\le l\le d_i$,
+equal $e_1$ on $[(l-1)/d_i,l/d_i)$ and $0$ elsewhere; then $\sum_l\mathbf e_{i,l}=\mathbf e_i$ and
+$\norm{\mathbf e_{i,l}}=d_i^{-1/r_i}$. Let $Y_i=\spn(e_2,\dots,e_{1+N_i})\subseteq K^{1+N_i}$ and
+\[
+ \mathcal U_i=\spn\{\mathbf e_{i,1},\dots,\mathbf e_{i,d_i}\}+\{1\otimes y:y\in Y_i\}\subseteq L_i,\qquad
+ \mathcal U_{<i}=\mathcal U_0+\dots+\mathcal U_{i-1}\subseteq\mathcal Z_{<i},
+\]
+finite-dimensional spaces of step functions. For $i\ge1$ let $C_i\ge1$ satisfy $\norm{\sum_lx_l}\le C_i\max_l\norm{x_l}$
+for every finite family $(x_l)$ in $\mathcal U_{<i}$; it exists because the norm of $\mathcal U_{<i}$ is equivalent to
+the maximum of the coordinates in a basis (Lemma~\ref{lem:findim}).
+
+\begin{lemma}[compare~{\cite[Lemma~3.1]{KR}}]\label{rig:lem:choices}
+Let real numbers $\underline r_i\ge1$, $i\ge0$, be given. One can choose $r_i$, $\eta_i$ and $d_i$ inductively so that
+for every $i\ge0$:
+\begin{enumerate}
+\item $r_i\ge\max(r_{i-1},\underline r_i,i)$, where $r_{-1}=1$;
+\item $d_i^{-1/r_i}<\eta_i$, that is, $\norm{\mathbf e_{i,l}}<\eta_i$ for every $l$;
+\item $(\sum_{l=1}^{d_i}\norm{\mathbf e_{i,l}}^{r_{i+1}})^{1/r_{i+1}}<\eta_i$;
+\item $iC_i\eta_i<\abs{\zeta_i}$ if $i\ge1$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+At stage $i$ the data with indices below $i$ are fixed. If $i\ge1$, then $(\sum_l\norm{\mathbf e_{i-1,l}}^r)^{1/r}$, a
+finite sum, tends to $\max_l\norm{\mathbf e_{i-1,l}}<\eta_{i-1}$ as $r\to\infty$, by~(2) for $i-1$; choose $r_i$
+satisfying~(1) and so large that~(3) holds for $i-1$. This determines $\mathcal U_{<i}$ and its norm, which involves
+only $r_0,\dots,r_{i-1}$, hence $C_i$.
+Choose $\eta_i>0$ satisfying~(4), and then $d_i$ satisfying~(2).
+\end{proof}
+
+\subsection{The spaces \texorpdfstring{$\fX_\alpha$}{X\_alpha}}\label{rig:ssec:spaces}
+
+Throughout this subsection the data of Subsection~\ref{rig:ssec:choices} are chosen by Lemma~\ref{rig:lem:choices} for
+some lower bounds $\underline r_i$. The norm of each $L_m$ is an $r_m$\nobreakdash-norm, since $K^{1+N_m}$ is
+nonarchimedean, so Lemma~\ref{rig:lem:nakano} applies.
+
+\emph{Index sets.} Partition $\{0,1,2,\dots\}=\bigsqcup_{\alpha\ge1}\mathcal I_\alpha$ into infinite sets, enumerate
+$\mathcal I_\alpha$ as $i_\alpha(0)<i_\alpha(1)<\cdots$, and put $\mathcal J_{i_\alpha(a)}=\{i_\alpha(2^a(2a'+1)):a'\ge0\}$
+for $a\ge0$. Since every positive integer is $2^a(2a'+1)$ for exactly one pair $(a,a')$ and $2^a>a$, the sets
+$\mathcal J_i$, $i\in\mathcal I_\alpha$, are pairwise disjoint infinite subsets of $\mathcal I_\alpha$ with union
+$\mathcal I_\alpha\setminus\{\min\mathcal I_\alpha\}$, and $\min\mathcal J_i>i$.
+
+\emph{Dense sequences.} For $i\in\mathcal I_\alpha$, the set $\mathcal F_i$ of the
+$f\in\sum_{m\in\mathcal I_\alpha,\,m\le i}\mathcal U_m$ with $\abs\vartheta<\norm f\le1$ contains $\mathbf e_i$ and lies
+in a finite-dimensional space over the separable field $K$; let $\mathcal F^0_i\ni\mathbf e_i$ be a countable dense
+subset. Through a bijection of $\mathcal J_i$ onto $\mathcal F^0_i\times\N$, choose $\gamma_h\in\mathcal F^0_i$,
+$h\in\mathcal J_i$, such that every element of $\mathcal F^0_i$ equals $\gamma_h$ for infinitely many $h$. Since
+$\gamma_h\in\mathcal Z_{\le i}\subseteq\mathcal Z_{<h}$ has step functions as coordinates and norm at most $1$,
+Lemma~\ref{rig:lem:onto-earlier} gives $\Phi_h\colon L_h\to\mathcal Z_{<h}$ with $\Phi_h\mathbf e_h=\gamma_h$ and
+$\norm{\Phi_h}\le1$. For $h=\min\mathcal I_\alpha$ put $\Phi_h=0$.
+
+\emph{The construction.} For $\alpha\ge1$ put $\Delta_\alpha=\sum_{h\in\mathcal I_\alpha}\zeta_h\Phi_h\Pi_h$; let
+$\mathcal E_\alpha$ and $\mathcal Y_\alpha$ be the closed spans of $\{\mathbf e_i:i\in\mathcal I_\alpha\}$ and of
+$\bigcup_{i\in\mathcal I_\alpha}\mathcal U_i$; put $\mathcal Q_\alpha=(\id-\Delta_\alpha)(\mathcal E_\alpha)$ and
+$\fX_\alpha=\mathcal Y_\alpha/\mathcal Q_\alpha$; and let $[f]_\alpha$ be the class of $f\in\mathcal Z$ in
+$\mathcal Z/\mathcal Q_\alpha$. The series $\Delta_\alpha$ converges absolutely, with norm at most
+$\sum_h\abs{\zeta_h}\le1/4$, so the Neumann series inverts $\id-\Delta_\alpha$, with
+$\norm{(\id-\Delta_\alpha)^{-1}}\le4/3$. Since $\Phi_h$ maps into $\mathcal Z_{<h}$, $\Delta_\alpha$ maps
+$\mathcal Z_{\le i}$ into $\mathcal Z_{<i}$, so $\Pi_i\Delta_\alpha\Pi_{\le i}=\Pi_{>i}\Delta_\alpha\Pi_{\le i}=0$, for
+every $i$. For $h\in\mathcal I_\alpha$ the vector $(\id-\Delta_\alpha)\mathbf e_h$ is $\mathbf e_h-\zeta_h\gamma_h$, or
+$\mathbf e_h$ if $h=\min\mathcal I_\alpha$, and lies in $\mathcal Y_\alpha$. So $\mathcal Q_\alpha$, closed as the image
+of a closed subspace under an isomorphism, lies in $\mathcal Y_\alpha$, and the Banach space $\fX_\alpha$ is the closed
+subspace of $\mathcal Z/\mathcal Q_\alpha$ of the classes $[f]_\alpha$, $f\in\mathcal Y_\alpha$. For $i\in\mathcal I_\alpha$ and $h\in\mathcal J_i$,
+\begin{equation}\label{rig:eq:quotient}
+ [\mathbf e_h]_\alpha=\zeta_h[\gamma_h]_\alpha ,
+\end{equation}
+and $\Pi_i\mathcal E_\alpha$ lies in the line $K\mathbf e_i$, which is closed by Lemma~\ref{lem:findim}.
+
+\begin{lemma}[compare~{\cite[Lemma~3.3]{KR}}]\label{rig:lem:projection}
+If $i\in\mathcal I_\alpha$ and $f\in\mathcal Z_{\le i}$, then
+$\inf_{\lambda\in K}\norm{\Pi_if-\lambda\mathbf e_i}\le\frac43\norm{[f]_\alpha}$.
+\end{lemma}
+
+\begin{proof}
+Let $t>\norm{[f]_\alpha}$, choose $g\in\mathcal E_\alpha$ with $\norm{f-(\id-\Delta_\alpha)g}<t$, and let
+$\Pi_ig=\lambda\mathbf e_i$. Since $\Pi_i\Delta_\alpha\Pi_{\le i}=0$, the vector
+$\Pi_if-\lambda\mathbf e_i=\Pi_i(f-(\id-\Delta_\alpha)g)-\Pi_i\Delta_\alpha\Pi_{>i}g$ has norm less than
+$t+\frac14\norm{\Pi_{>i}g}$. Since $\Pi_{>i}f=0$ and $\Pi_{>i}\Delta_\alpha\Pi_{\le i}=0$, the vector
+$\Pi_{>i}((\id-\Delta_\alpha)g-f)=\Pi_{>i}g-\Pi_{>i}\Delta_\alpha\Pi_{>i}g$ has norm less than $t$, so
+$\norm{\Pi_{>i}g}<t+\frac14\norm{\Pi_{>i}g}$, that is, $\norm{\Pi_{>i}g}<\frac43t$. Hence
+$\norm{\Pi_if-\lambda\mathbf e_i}<\frac43t$; let $t$ decrease to $\norm{[f]_\alpha}$.
+\end{proof}
+
+\begin{lemma}[compare~{\cite[Lemma~3.5]{KR}}]\label{rig:lem:dense}
+The set $\bigcup_{i\in\mathcal I_\alpha}K[\mathbf e_i]_\alpha$ is dense in $\fX_\alpha$.
+\end{lemma}
+
+\begin{proof}
+Let $\mathcal C$ be the closure of this set; it is closed under scalar multiplication. Let $i\in\mathcal I_\alpha$. Each
+$g\in\mathcal F^0_i$ equals $\gamma_h$ for some $h\in\mathcal J_i$, so $[g]_\alpha=\zeta_h^{-1}[\mathbf e_h]_\alpha\in\mathcal C$
+by~\eqref{rig:eq:quotient}; by density, $[f]_\alpha\in\mathcal C$ for every $f\in\mathcal F_i$. A nonzero $f$ in the span
+of $\bigcup_{m\in\mathcal I_\alpha}\mathcal U_m$, which is dense in $\mathcal Y_\alpha$, lies in
+$\sum_{m\in\mathcal I_\alpha,\,m\le i}\mathcal U_m$ for some $i\in\mathcal I_\alpha$, and a power of $\vartheta$ times $f$
+lies in $\mathcal F_i$; so $[f]_\alpha\in\mathcal C$.
+\end{proof}
+
+\begin{lemma}\label{rig:lem:readouts}
+Let $i\in\mathcal I_\alpha$, and let $\iota_i\colon Y_i\to L^{r_i}((0,1);Y_i)$, $y\mapsto1\otimes y$, be the constant
+embedding, which is isometric. There are bounded linear maps $J_i\colon Y_i\to\fX_\alpha$ and
+$\Xi_i\colon\fX_\alpha\to L^{r_i}((0,1);Y_i)$ with $\norm{J_i}\le1$, $\norm{\Xi_i}\le4/3$ and $\Xi_iJ_i=\iota_i$.
+\end{lemma}
+
+\begin{proof}
+Put $J_iy=[1\otimes y]_\alpha$, where $1\otimes y\in\mathcal U_i\subseteq\mathcal Y_\alpha$ has norm $\norm y$. The
+pointwise coordinate projection $\operatorname{pr}_{Y_i}\colon L_i\to L^{r_i}((0,1);Y_i)$ of $K^{1+N_i}$ onto $Y_i$ along
+$Ke_1$ is contractive and kills $\mathbf e_i$. So the map $z\mapsto\operatorname{pr}_{Y_i}(\Pi_i(\id-\Delta_\alpha)^{-1}z)$
+on $\mathcal Z$, of norm at most $4/3$, vanishes on $\mathcal Q_\alpha$, since
+$(\id-\Delta_\alpha)^{-1}\mathcal Q_\alpha=\mathcal E_\alpha$ and $\Pi_i\mathcal E_\alpha\subseteq K\mathbf e_i$; let
+$\Xi_i$ be the restriction to $\fX_\alpha$ of the induced map on $\mathcal Z/\mathcal Q_\alpha$. For $y\in Y_i$,
+$(\id-\Delta_\alpha)^{-1}(1\otimes y)-1\otimes y=\sum_{c\ge1}\Delta_\alpha^c(1\otimes y)$ lies in $\mathcal Z_{<i}$,
+since $\Delta_\alpha$ maps $\mathcal Z_{\le i}$ into $\mathcal Z_{<i}$. Hence
+$\Xi_iJ_iy=\operatorname{pr}_{Y_i}(1\otimes y)=1\otimes y$.
+\end{proof}
+
+\begin{lemma}\label{rig:lem:nonzero}
+Each $\fX_\alpha$ is nonzero and infinite-dimensional.
+\end{lemma}
+
+\begin{proof}
+For $i\in\mathcal I_\alpha$ and $y\in Y_i$, Lemma~\ref{rig:lem:readouts} gives
+$\norm y=\norm{\Xi_iJ_iy}\le\frac43\norm{J_iy}$. So $\fX_\alpha$ contains the subspaces $J_i(Y_i)$ of dimension
+$N_i\ge i$, for the infinitely many $i\in\mathcal I_\alpha$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{bey:thm:rigid}}]
+The argument follows~\cite[Theorem~3.6]{KR}. Make the construction with any integers $N_i\ge i$ and any lower bounds
+$\underline r_i$; the Banach spaces $\fX_\alpha$ are infinite-dimensional by Lemma~\ref{rig:lem:nonzero}. Let
+$u\in\cL(\fX_\alpha,\fX_\beta)$; multiplying $u$ by a power of $\vartheta$, we may assume $\norm u<1$.
+
+\emph{Step 1 (approximation).} Fix $i\in\mathcal I_\alpha$; the set $\mathcal J'_i=\{h\in\mathcal J_i:\gamma_h=\mathbf e_i\}$
+is infinite. Let $h\in\mathcal J'_i$; then $h>i\ge0$ and $[\mathbf e_h]_\alpha=\zeta_h[\mathbf e_i]_\alpha$
+by~\eqref{rig:eq:quotient}. Since $\norm{u[\mathbf e_{h,l}]_\alpha}\le\norm u\norm{\mathbf e_{h,l}}<\norm{\mathbf e_{h,l}}$, there are
+$g_{h,l}\in\mathcal Y_\beta$, $1\le l\le d_h$, with $[g_{h,l}]_\beta=u[\mathbf e_{h,l}]_\alpha$ and
+$\norm{g_{h,l}}<\norm{\mathbf e_{h,l}}<\eta_h$ (Lemma~\ref{rig:lem:choices}(2)); put $g_h=\sum_lg_{h,l}$, so that
+$[g_h]_\beta=u[\mathbf e_h]_\alpha$. Since $\Pi_m$ maps $\mathcal Y_\beta$ into the closed space $\mathcal U_m$ if
+$m\in\mathcal I_\beta$ and to zero otherwise, $\Pi_{<h}g_{h,l}\in\mathcal U_{<h}$ and
+$\norm{\Pi_{<h}g_h}\le C_h\max_l\norm{\Pi_{<h}g_{h,l}}<C_h\eta_h$. Lemmas~\ref{rig:lem:nakano}
+and~\ref{rig:lem:choices}(3) give $\norm{\Pi_{>h}g_h}\le(\sum_l\norm{\mathbf e_{h,l}}^{r_{h+1}})^{1/r_{h+1}}<\eta_h$. So
+$\norm{g_h-\Pi_hg_h}<(C_h+1)\eta_h\le2C_h\eta_h<2\abs{\zeta_h}/h$ by Lemma~\ref{rig:lem:choices}(4), and
+\begin{equation}\label{rig:eq:approx}
+ \bigl\lVert u[\mathbf e_i]_\alpha-\zeta_h^{-1}[\Pi_hg_h]_\beta\bigr\rVert
+ =\abs{\zeta_h}^{-1}\norm{[g_h-\Pi_hg_h]_\beta}<2/h\qquad(h\in\mathcal J'_i).
+\end{equation}
+
+\emph{Step 2 (the case $\alpha\ne\beta$).} Then $h\notin\mathcal I_\beta$, so $\Pi_hg_h=0$ and
+$\norm{u[\mathbf e_i]_\alpha}<2/h$ for infinitely many $h$. Hence $u[\mathbf e_i]_\alpha=0$ for every
+$i\in\mathcal I_\alpha$, and $u=0$ by Lemma~\ref{rig:lem:dense}.
+
+\emph{Step 3 (the case $\alpha=\beta$: eigenvectors).} Let $h'<h$ be elements of $\mathcal J'_i$. The vector
+$f=\zeta_h^{-1}\Pi_hg_h-\zeta_{h'}^{-1}\Pi_{h'}g_{h'}\in\mathcal Z_{\le h}$ has $\Pi_hf=\zeta_h^{-1}\Pi_hg_h$ and, by~\eqref{rig:eq:approx}
+for $h$ and $h'$, $\norm{[f]_\alpha}<2/h+2/h'$. Lemma~\ref{rig:lem:projection} gives $\xi\in K$ with
+$\norm{\zeta_h^{-1}\Pi_hg_h-\xi\mathbf e_h}<\frac43(2/h+2/h')$. Passing to classes and using
+$[\mathbf e_h]_\alpha=\zeta_h[\mathbf e_i]_\alpha$ and~\eqref{rig:eq:approx}, we get
+$\operatorname{dist}(u[\mathbf e_i]_\alpha,K[\mathbf e_i]_\alpha)<2/h+\frac43(2/h+2/h')$. Letting $h\to\infty$ and then
+$h'\to\infty$ gives $u[\mathbf e_i]_\alpha=\lambda_i[\mathbf e_i]_\alpha$ for some $\lambda_i\in K$, since
+$K[\mathbf e_i]_\alpha$ is closed (Lemma~\ref{lem:findim}). If $[\mathbf e_i]_\alpha\ne0$, then $\lambda_i$ is unique
+and $\abs{\lambda_i}\le\norm u$.
+
+\emph{Step 4 (one eigenvalue).} Let $[\mathbf e_i]_\alpha$ and $[\mathbf e_{i'}]_\alpha$ be linearly independent and
+$x=[\mathbf e_i]_\alpha+[\mathbf e_{i'}]_\alpha$. By Lemma~\ref{rig:lem:dense}, nonzero
+$y_\ell\in K[\mathbf e_{i_\ell}]_\alpha$, $i_\ell\in\mathcal I_\alpha$, converge to $x$. Since
+$uy_\ell=\lambda_{i_\ell}y_\ell$ and $\abs{\lambda_{i_\ell}}\le\norm u$,
+$\norm{\lambda_{i_\ell}x-ux}\le\abs{\lambda_{i_\ell}}\norm{x-y_\ell}+\norm u\norm{y_\ell-x}\to0$. So $ux$ lies in the
+closed line $Kx$, say $ux=\lambda x$, and comparing coefficients gives $\lambda_i=\lambda=\lambda_{i'}$. Nonzero
+dependent $[\mathbf e_i]_\alpha$, $[\mathbf e_{i'}]_\alpha$ have equal eigenvalues directly. So $u$ is a scalar
+multiple of the identity on $\bigcup_iK[\mathbf e_i]_\alpha$, hence on $\fX_\alpha$ by Lemma~\ref{rig:lem:dense}.
+\end{proof}
+
+\subsection{Forcing through an \texorpdfstring{$L^r$}{L\textasciicircum r} readout}\label{rig:ssec:forcing}
+
+Throughout this subsection condition~\textup{(L)} holds with $K=\kappa((X))$; so $K$ is complete, and separable since
+the Laurent polynomials over $\kappa$ are dense. Let $c_0(N)=K^N$, $N\ge1$, carry the maximum norm, with unit vectors
+$e_1,\dots,e_N$, and let $\mu_a x=ax$ be the coordinatewise product of $a\in K^N$ and $x\in K^N$; then
+$\norm{\mu_a}=\norm a_\infty$. For $r\ge k$ put $G_{N,r}=L^r((0,1);c_0(N))$, with the constant embedding
+$\iota_{N,r}\colon c_0(N)\to G_{N,r}$, $x\mapsto1\otimes x$. A \emph{readout lift} for $\iota_{N,r}$ is a $k$\nobreakdash-linear
+map $Q\colon(K^N)^k\to\cL(\Lambda^k_\pi c_0(N),\widehat\Lambda^k_\pi G_{N,r})$ with
+$Q(a,\dots,a)=\Lambda^k_\pi(\iota_{N,r}\mu_a)$ for $a\in K^N$; its norm is
+$\norm Q=\sup\{\norm{Q(a_1,\dots,a_k)}:\norm{a_j}_\infty\le1\}$.
+
+\begin{lemma}[Ramsey~{\cite[Theorem~B]{Ra}}]\label{rig:lem:ramsey}
+For integers $g,h,C\ge1$ there is an integer $\operatorname{Ram}(g,h,C)$ such that for every coloring of the
+$g$\nobreakdash-element subsets of $\{1,\dots,\operatorname{Ram}(g,h,C)\}$ with $C$ colors there is an
+$h$\nobreakdash-element set all of whose $g$\nobreakdash-element subsets have the same color.
+\end{lemma}
+
+\begin{lemma}\label{rig:lem:wedge-readout}
+Let $Y$ be a finite-dimensional normed space and $r\ge k$. The map sending $(g_1,\dots,g_k)$ to the function
+$t\mapsto g_1(t)\wedge\dots\wedge g_k(t)$ is a $k$\nobreakdash-linear alternating map from $L^r((0,1);Y)^k$ to
+$L^{r/k}((0,1);\Lambda^k_\pi Y)$ of norm at most $1$. It induces a contraction
+\[
+ \operatorname{pw}\colon\widehat\Lambda^k_\pi L^r((0,1);Y)\to L^{r/k}((0,1);\Lambda^k_\pi Y)
+\]
+with $\operatorname{pw}(\Lambda^k_\pi\iota(\xi))=1\otimes\xi$ for $\xi\in\Lambda^k_\pi Y$, where $\iota$ is the constant
+embedding of $Y$ into $L^r((0,1);Y)$.
+\end{lemma}
+
+\begin{proof}
+For step functions on a common partition the value is a step function with
+$\norm{g_1(t)\wedge\dots\wedge g_k(t)}\le\prod_j\norm{g_j(t)}$, so its $L^{r/k}$\nobreakdash-norm is at most
+$\prod_j\norm{g_j}_r$, by H\"older's inequality with $k$ exponents equal to $k$; it vanishes if two of the $g_j$
+coincide. Since step functions are dense and $r/k\ge1$, the map extends to a $k$\nobreakdash-linear alternating map of
+norm at most $1$ into the Banach space $L^{r/k}((0,1);\Lambda^k_\pi Y)$, and Proposition~\ref{prop:exterior}, in its
+form for complete targets, gives $\operatorname{pw}$. On constant functions $g_j=1\otimes x_j$ the value is
+$1\otimes(x_1\wedge\dots\wedge x_k)$.
+\end{proof}
+
+\begin{lemma}[test lemma]\label{rig:lem:test}
+For every $m\ge1$ there are an integer $N(m)\ge m$ and a real number $r^*(m)\ge k$, depending only on $m$, $k$ and
+$\abs\kappa$, such that for all $N\ge N(m)$ and $r\ge r^*(m)$ every readout lift $Q$ for $\iota_{N,r}$ satisfies
+$\norm Q\ge m/(2M_\varrho\,k(k-1))$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 0 (parameters and reduction).} Put $h=4(2m+2+k)+3k$ and
+$N(m)=\operatorname{Ram}(3k,h,\abs\kappa^{(3k)^{3k}})\ge h\ge m$, and choose $r^*(m)\ge k$ with
+$\binom{N(m)}h\,k!\,(k-1)\,2^{-r^*(m)/k}<1$. Let $N\ge N(m)$, $r\ge r^*(m)$, and $Q$ a readout lift for $\iota_{N,r}$.
+The extension by zero $\operatorname{ext}\colon c_0(N(m))\to c_0(N)$ and the pointwise restriction
+$\operatorname{res}\colon G_{N,r}\to G_{N(m),r}$ to the first $N(m)$ coordinates are contractive, and $\operatorname{res}\,\iota_{N,r}\,\mu_{\operatorname{ext}a}\operatorname{ext}=\iota_{N(m),r}\,\mu_a$. So
+$(a_1,\dots,a_k)\mapsto\widehat\Lambda^k_\pi\operatorname{res}\circ Q(\operatorname{ext}a_1,\dots,\operatorname{ext}a_k)
+\circ\Lambda^k_\pi\operatorname{ext}$ is a readout lift for $\iota_{N(m),r}$ of norm at most $\norm Q$, and we may
+assume $N=N(m)$.
+
+\emph{Step 1 (readout).} For $a\in(K^N)^k$ and $\xi\in\Lambda^k_\pi c_0(N)$, Lemma~\ref{rig:lem:wedge-readout} gives an element
+$\widetilde Q(a;\xi)=\operatorname{pw}(Q(a)(\xi))$ of $L^{r/k}((0,1);\Lambda^k_\pi c_0(N))$, $k$\nobreakdash-linear in $a$,
+linear in $\xi$, with $\norm{\widetilde Q(a;\xi)}_{r/k}\le\norm Q\prod_j\norm{a_j}_\infty\norm\xi$. The
+$k$\nobreakdash-linear maps $a\mapsto Q(a)(x_1\wedge\dots\wedge x_k)$ and
+$a\mapsto\iota_{N,r}(a_1x_1)\wedge\dots\wedge\iota_{N,r}(a_kx_k)$ agree on the diagonal, so the inclusion--exclusion
+computation in the proof of Proposition~\ref{prop:diag}(1), followed by $\operatorname{pw}$, gives for all
+$a_1,\dots,a_k,x_1,\dots,x_k\in K^N$
+\begin{equation}\label{rig:eq:pol}
+ \sum_{\sigma\in S_k}\widetilde Q(a_{\sigma(1)},\dots,a_{\sigma(k)};x_1\wedge\dots\wedge x_k)
+ =1\otimes\sum_{\sigma\in S_k}(a_{\sigma(1)}x_1)\wedge\dots\wedge(a_{\sigma(k)}x_k).
+\end{equation}
+
+\emph{Step 2 (representatives).} For $i\in\{1,\dots,N\}^k$ write $e_i=(e_{i_1},\dots,e_{i_k})$. For each $i$ and each
+strictly increasing $y\in\{1,\dots,N\}^k$ fix an everywhere defined representative
+$f_{i,y}\colon(0,1)\to\Lambda^k_\pi c_0(N)$ of $\widetilde Q(e_i;e_{y_1}\wedge\dots\wedge e_{y_k})$
+(Subsection~\ref{rig:ssec:nakano}); put $f_{i,y}=\sgn(\sigma)f_{i,y\circ\sigma}$ if $y$ has distinct entries and
+$y\circ\sigma$ is increasing, and $f_{i,y}=0$ if $y$ has a repeated entry. Then $f_{i,y}$ represents
+$\widetilde Q(e_i;e_{y_1}\wedge\dots\wedge e_{y_k})$ for every $y$. For $t\in(0,1)$ and $a,x\in(\F_p^N)^k$ put
+\[
+ \Psi_t(a;x)=\sum_{i,y\in\{1,\dots,N\}^k}\ \prod_ja_j(i_j)\prod_jx_j(y_j)\,f_{i,y}(t)\in\Lambda^k_\pi c_0(N).
+\]
+Then $t\mapsto\Psi_t(a;x)$ represents $\widetilde Q(a;x_1\wedge\dots\wedge x_k)$, and each $\Psi_t$ is
+$\F_p$\nobreakdash-multilinear and alternating in $x$: if $x_\gamma=x_{\gamma'}$ with $\gamma\ne\gamma'$, the terms of $y$
+and of $y\circ(\gamma\ \gamma')$ have equal weights and $f_{i,y\circ(\gamma\,\gamma')}=-f_{i,y}$, and the terms with
+$y_\gamma=y_{\gamma'}$ vanish.
+
+\emph{Step 3 (test inputs and the point $t_0$).} For an $h$\nobreakdash-element set $\mathcal H\subseteq\{1,\dots,N\}$
+let $\mathcal H'$ consist of its $h-3k$ smallest elements; clusters of $\mathcal H'$ are sets of four consecutive
+elements of $\mathcal H'$, as in Appendix~\ref{app:FF}. Let $(a^{\mathcal H};x^{\mathcal H})$ be the inputs of the proof
+of Lemma~\ref{lem:D} for the first $k$ clusters of $\mathcal H'$; by~\eqref{rig:eq:pol} and Step~2, the set
+$O_{\mathcal H}$ of the $t$ with
+$\sum_\sigma\Psi_t(a^{\mathcal H}_{\sigma(1)},\dots,a^{\mathcal H}_{\sigma(k)};x^{\mathcal H})
+\ne\sum_\sigma(a^{\mathcal H}_{\sigma(1)}x^{\mathcal H}_1)\wedge\dots\wedge(a^{\mathcal H}_{\sigma(k)}x^{\mathcal H}_k)$ is
+null. For $\tau\in S_k$ and $1\le\ell<k$, let $(a^{\mathcal H,\tau,\ell};x^{\mathcal H,\tau,\ell})$, with entries in
+$\{0,\pm1\}$, be the inputs of the proof of Lemma~\ref{lem:S} for $\tau$ and $\ell$, with $m+1$ pairs of clusters, all
+clusters taken consecutively from the smallest element of $\mathcal H'$; there are enough, since $4(2m+k)\le h-3k$. For
+these inputs $(a;x)$, the set $O_{\mathcal H,\tau,\ell}$ of the $t$ with
+$\norm{\Psi_t(a;x)}>2\norm{\widetilde Q(a;x_1\wedge\dots\wedge x_k)}_{r/k}$ has measure at most $2^{-r/k}$, by
+Chebyshev's inequality for $t\mapsto\norm{\Psi_t(a;x)}^{r/k}$, and is null if
+$\widetilde Q(a;x_1\wedge\dots\wedge x_k)=0$. There are at most $\binom Nh\,k!\,(k-1)$ sets $O_{\mathcal H,\tau,\ell}$, so
+the union of all of them and of the $O_{\mathcal H}$ has measure at most $\binom Nh\,k!\,(k-1)\,2^{-r/k}<1$. Fix
+$t_0\in(0,1)$ outside this union, and write $\Psi=\Psi_{t_0}$.
+
+\emph{Step 4 (Ramsey at $t_0$).} Let $\Omega$ be the determinant array of~\S\ref{ssec:ext} on $\Lambda^k_\pi c_0(N)$,
+with $S=\{1,\dots,N\}$, and put $T(i;y;c)=\coeff_0\Omega_{\Psi(e_i;e_y)}(c)\in\kappa$ for $i,y,c\in\{1,\dots,N\}^k$.
+Color each $3k$\nobreakdash-element set $\{d_1<\dots<d_{3k}\}\subseteq\{1,\dots,N\}$ by the family
+$(T(d_{\eta(1)},\dots,d_{\eta(3k)}))_\eta$ over all maps $\eta\colon\{1,\dots,3k\}\to\{1,\dots,3k\}$, with at most
+$\abs\kappa^{(3k)^{3k}}$ colors. Lemma~\ref{rig:lem:ramsey} gives a homogeneous $h$\nobreakdash-element set
+$\mathcal H$. Padding with the $3k$ elements of $\mathcal H\setminus\mathcal H'$, which lie above $\mathcal H'$, as in
+the proof of Lemma~\ref{lem:H}, shows that $T(i;y;c)$ depends only on the pattern of $(i,y,c)$ when all its entries lie
+in $\mathcal H'$.
+
+\emph{Step 5 (the argument of Appendix~\ref{app:FF} at $t_0$).} For inputs supported in $\mathcal H'$ with entries in
+$\{0,\pm1\}$,
+$\coeff_0\Omega_{\Psi(a;x)}(c)=\sum_{i,y\in\mathcal H'^k}\prod_ja_j(i_j)\prod_jx_j(y_j)\,T(i;y;c)$, as
+in~\eqref{eq:expand}, since $\Psi$ is $\F_p$\nobreakdash-multilinear, $\Omega$ is linear and $\coeff_0$ is
+$\F_p$\nobreakdash-linear. Define the cluster values $\chi(\tau)\in\kappa$ for clusters of $\mathcal H'$ as in
+Appendix~\ref{app:FF}, with $\coeff_0\Omega_{\Psi(\cdot)}$ in place of $\Omega_{\Psi(\cdot)}$. The proofs of
+Lemmas~\ref{lem:C} and~\ref{lem:D} use only this expansion, pattern homogeneity of $T$, that clusters are intervals of
+the set on which $T$ is homogeneous, \eqref{eq:W}, alternation of $\Psi$ in its vector slots and of $\Omega_z$ in its
+arguments, and~\eqref{eq:Pol1} at $(a^{\mathcal H};x^{\mathcal H})$; the last holds since $t_0\notin O_{\mathcal H}$ and
+the determinants on the right of~\eqref{eq:Pol1} lie in $\F_p$. So both lemmas hold, and $\sum_\tau\chi(\tau)=1$ in
+$\kappa$. Since $k!=0$ in $\kappa$, $\chi$ is not constant; since exchanges of adjacent ranks generate $S_k$, some $\tau$
+and $\ell$ have $\delta=\chi(\tau)-\chi(\tau')\ne0$, where $\tau'=(\ell\ \ell{+}1)\circ\tau$.
+
+Let $(a;x)=(a^{\mathcal H,\tau,\ell};x^{\mathcal H,\tau,\ell})$, let $\gamma_1=\tau^{-1}(\ell)$ and
+$\gamma_2=\tau^{-1}(\ell+1)$ be the exchanged slots, let $I_1$ and $I_2$ be the sets of first elements of the $m+1$
+clusters given to $\gamma_1$ and $\gamma_2$ in the proof of Lemma~\ref{lem:S}, and let $c_\gamma$ be the first element
+of the cluster given to any other slot $\gamma$. By Lemma~\ref{lem:C}, as in that proof, the $(m+1)\times(m+1)$ matrix
+$\mathrm{St}$ of the values $\coeff_0\Omega_{\Psi(a;x)}(c)$, with an element of $I_1$ in slot $\gamma_1$, an element of
+$I_2$ in slot $\gamma_2$ and $c_\gamma$ in each other slot $\gamma$ of $c$, is
+$\chi(\tau')\mathbf 1\mathbf 1^{\mathsf T}+\delta U$ with $U$ upper unitriangular, so $\rank\mathrm{St}\ge m$. The
+extension by zero $\operatorname{ext}_\infty\colon c_0(N)\to c_0(\N,K)$ makes $\Lambda^k_\pi\operatorname{ext}_\infty$
+a contraction that keeps the determinant array on $\{1,\dots,N\}^k$. Let $\Upsilon$ be the slice of
+Lemma~\ref{fib:lem:slice} for $c_0(\N,K)$, the slots $\gamma_1,\gamma_2$ and the entries $c_\gamma$, and obtain $z$
+from $\Upsilon\Lambda^k_\pi\operatorname{ext}_\infty(\Psi(a;x))$ by restricting its two tensor factors to the
+coordinates in $I_1$ and in $I_2$. Then $\coeff_0z=\mathrm{St}$ and $\norm z\le k(k-1)\norm{\Psi(a;x)}$, so
+Lemma~\ref{fib:lem:coeff}(2) gives $m\le\rank\mathrm{St}\le M_\varrho k(k-1)\norm{\Psi(a;x)}$. Since
+$t_0\notin O_{\mathcal H,\tau,\ell}$ and the entries of $a$ and $x$ lie in $\{0,\pm1\}$,
+$\norm{\Psi(a;x)}\le2\norm{\widetilde Q(a;x_1\wedge\dots\wedge x_k)}_{r/k}\le2\norm Q$, and $m\le2M_\varrho k(k-1)\norm Q$.
+\end{proof}
+
+\begin{corollary}\label{rig:cor:readout}
+Let $m\ge1$, $N\ge N(m)$ and $r\ge r^*(m)$. Let $E$ be a normed space, and $J\colon c_0(N)\to E$ and
+$\Xi\colon E\to G_{N,r}$ bounded linear maps with $\Xi J=\iota_{N,r}$. Then every $s$ as in $(\mathrm S^k_E)$ satisfies
+$\norm s\ge m/(2M_\varrho k(k-1)(\norm\Xi\norm J)^k)$, and every $\rho$ as in $(\mathrm R^k_E)$ satisfies
+$\norm\rho\ge m/(2M_\varrho k(k-1)k!\,(\norm\Xi\norm J)^k)$.
+\end{corollary}
+
+\begin{proof}
+Let $v_a$ be pointwise multiplication by $a\in K^N$ on $G_{N,r}$; then $\norm{v_a}\le\norm a_\infty$ and
+$v_a\iota_{N,r}=\iota_{N,r}\mu_a$. Given $s$, the $k$\nobreakdash-linear map
+$Q(a_1,\dots,a_k)=\widehat\wedge^k_{G_{N,r}}\circ((v_{a_1}\Xi)\otimes\dots\otimes(v_{a_k}\Xi))\circ s\circ\Lambda^k_\pi J$
+has norm at most $(\norm\Xi\norm J)^k\norm s$ and, by naturality of $\wedge^k$, diagonal
+$\widehat\Lambda^k_\pi(v_a\Xi)\circ\widehat\wedge^k_E\circ s\circ\Lambda^k_\pi J=\Lambda^k_\pi(v_a\Xi J)=\Lambda^k_\pi(\iota_{N,r}\mu_a)$.
+Given $\rho$, the $k$\nobreakdash-linear map
+$Q(a_1,\dots,a_k)=\widehat\Lambda^k_\pi\Xi\circ\rho\circ((J\mu_{a_1})\otimes\dots\otimes(J\mu_{a_k}))\circ\alt^k_{c_0(N)}$
+has norm at most $k!\,(\norm\Xi\norm J)^k\norm\rho$, since $\norm{\alt^k_{c_0(N)}}\le k!$, and, by naturality of
+$\alt^k$, diagonal
+$\widehat\Lambda^k_\pi\Xi\circ\rho\circ\alt^k_E\circ\Lambda^k_\pi(J\mu_a)=\Lambda^k_\pi(\Xi J\mu_a)=\Lambda^k_\pi(\iota_{N,r}\mu_a)$.
+Lemma~\ref{rig:lem:test} applies to both.
+\end{proof}
+
+\subsection{Proofs of the goodness theorems}\label{rig:ssec:proofs}
+
+Throughout this subsection $\kappa$, $K$ and $\varrho$ are as in Subsection~\ref{rig:ssec:forcing}. For $k'\ge p$ and
+$m\ge1$ let $N_{k'}(m)$ and $r^*_{k'}(m)$ be the numbers of Lemma~\ref{rig:lem:test} in degree $k'$, and make the
+construction of Subsections~\ref{rig:ssec:choices} and~\ref{rig:ssec:spaces} with
+\begin{equation}\label{rig:eq:choices}
+ N_i=\max_{p\le k'\le p+i}N_{k'}(i+1),\qquad\underline r_i=\max_{p\le k'\le p+i}r^*_{k'}(i+1)\qquad(i\ge0);
+\end{equation}
+then $N_i\ge i+1$, as Subsection~\ref{rig:ssec:operators} requires.
+
+\begin{proof}[Proof of Theorem~\textup{\ref{bey:thm:rigid-good}}]
+\emph{Step 1 (no splitting).} Let $\alpha\ge1$, $k\ge p$, and $i\in\mathcal I_\alpha$ with $i\ge k-p$. Identifying $Y_i$
+with $c_0(N_i)$ through the basis $e_2,\dots,e_{1+N_i}$ turns the map $\iota_i$ of Lemma~\ref{rig:lem:readouts} into
+$\iota_{N_i,r_i}$. By~\eqref{rig:eq:choices} and Lemma~\ref{rig:lem:choices}(1), $N_i\ge N_k(i+1)$ and
+$r_i\ge r^*_k(i+1)$. Corollary~\ref{rig:cor:readout}, with $m=i+1$, $J=J_i$ and $\Xi=\Xi_i$, shows that every $s$ as in
+$(\mathrm S^k_{\fX_\alpha})$ and every $\rho$ as in $(\mathrm R^k_{\fX_\alpha})$ have norm at least
+$(3/4)^k(i+1)/(2M_\varrho k(k-1)k!)$. Since $\mathcal I_\alpha$ is infinite, neither $(\mathrm S^k_{\fX_\alpha})$ nor
+$(\mathrm R^k_{\fX_\alpha})$ holds.
+
+\emph{Step 2 (the four items).} Let $\fX=\fX_1$. Item~(1) is Theorem~\ref{bey:thm:rigid}. Since $\id_\fX\ne0$
+(Lemma~\ref{rig:lem:nonzero}), Proposition~\ref{bey:prop:one-dim}(1) with $E=D=\fX$ and $u_0=\id_\fX$ makes $(\fX,\fX)$
+good in every degree, hence good for Banach values by Lemma~\ref{fib:lem:test}; this is~(2). Item~(3) is Step~1 for
+$\alpha=1$. Since $\fX$ is complete, by Proposition~\ref{bey:prop:one-dim}(2) a splitting decomposition of degree $k$
+would make $\id_\fX$ $\mathrm S^k$-split or $\mathrm R^k$-split, that is, give $(\mathrm S^k_\fX)$ or
+$(\mathrm R^k_\fX)$, contrary to~(3). This proves~(4).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{bey:thm:rigid-sum}}]
+The inclusion $\mathrm{in}_\alpha\colon\fX_\alpha\to E$ of the $\alpha$\nobreakdash-th summand and the coordinate
+projection $\mathrm{pr}_\alpha\colon E\to\fX_\alpha$ are contractive, and $x=\sum_\alpha\mathrm{in}_\alpha\mathrm{pr}_\alpha x$
+for $x\in E$.
+
+\emph{Step 1 (item~(1)).} Let $u\in\cL(E,E)$. By Theorem~\ref{bey:thm:rigid}, $\mathrm{pr}_\beta u\,\mathrm{in}_\alpha=0$
+for $\beta\ne\alpha$ and $\mathrm{pr}_\alpha u\,\mathrm{in}_\alpha=\lambda_\alpha\id_{\fX_\alpha}$ for some
+$\lambda_\alpha\in K$, with $\abs{\lambda_\alpha}\le\norm u$ since $\fX_\alpha\ne0$ (Lemma~\ref{rig:lem:nonzero}). Hence
+$u\,\mathrm{in}_\alpha=\sum_\beta\mathrm{in}_\beta\mathrm{pr}_\beta u\,\mathrm{in}_\alpha=\lambda_\alpha\mathrm{in}_\alpha$
+and $ux=\sum_\alpha\lambda_\alpha\mathrm{in}_\alpha\mathrm{pr}_\alpha x=u_\lambda x$. Conversely $\norm{u_\lambda x}=\sum_\alpha\abs{\lambda_\alpha}\norm{\mathrm{pr}_\alpha x}\le\sup_\alpha\abs{\lambda_\alpha}\norm x$,
+with $\norm{u_\lambda x}=\abs{\lambda_\alpha}\norm x$ on the summand $\fX_\alpha\ne0$. So $\lambda\mapsto u_\lambda$ is an
+isometric isomorphism onto $\cL(E,E)$ from the space $\linf$ of bounded sequences $(\lambda_\alpha)_{\alpha\ge1}$ in~$K$.
+
+\emph{Step 2 (item~(2)).} Let $k\ge1$. Proposition~\ref{cmb:prop:blocks} applies with $I=\{1,2,\dots\}$ in its natural
+order, $E_\alpha=D_\alpha=\fX_\alpha$, $D=E$, inclusions $\mathrm{in}_\alpha$, block projections $\mathrm{pr}_\alpha$,
+$J'_\alpha=\mathrm{in}_\alpha$, $\mathcal U=\cL(E,E)$, $u_\alpha=\mathrm{pr}_\alpha u\,\mathrm{in}_\alpha$ and $c=C=1$:
+$\norm{u_\alpha}\le\norm u$ and $ux=\sum_\alpha\mathrm{in}_\alpha u_\alpha\mathrm{pr}_\alpha x$ by Step~1, and for
+$n\le k$, since $\cL(\fX_\alpha,\fX_\alpha)=K\id_{\fX_\alpha}$ with $\id_{\fX_\alpha}\ne0$,
+Proposition~\ref{bey:prop:one-dim}(1) with $u_0=\id_{\fX_\alpha}$ gives the lift
+$Q^\alpha_n(\theta_1\id_{\fX_\alpha},\dots,\theta_n\id_{\fX_\alpha})=\theta_1\cdots\theta_n\Lambda^n_\pi\id_{\fX_\alpha}$,
+$\theta_j\in K$, which satisfies $Q^\alpha_n(v,\dots,v)=\Lambda^n_\pi v$ and $\norm{Q^\alpha_n}\le1$. So $(E,E)$ is good
+for Banach values in degree $k$.
+
+\emph{Step 3 (item~(3)).} Suppose that $(E,E)$ has a generalized decomposition of degree $k\ge p$
+(Definition~\ref{cmb:def:parameter-piece}) with pieces $(G_l,G'_l,w_l,w'_l,\varepsilon_l)$, so that
+$u=\sum_lw'_l\varepsilon_l(u)w_l$ for $u\in\cL(E,E)$; the maps $w'_l$ take values in the complete space $E$. Fix $\alpha$
+and $u$; the compression $\mathrm{pr}_\alpha w'_l\varepsilon_l(u)w_l\mathrm{in}_\alpha$ lies in
+$\cL(\fX_\alpha,\fX_\alpha)=K\id_{\fX_\alpha}$. For a piece of source or target type, and for the single piece of a
+relative splitting, $w_l$ is $\mathrm S^k$-split or $w'_l$ is $\mathrm R^k$-split, so the compression is
+$\mathrm S^k$-split or $\mathrm R^k$-split by the ideal property (Proposition~\ref{ob:prop:split-operators}(2)). If it
+were a nonzero multiple of $\id_{\fX_\alpha}$, the ideal property would make $\id_{\fX_\alpha}$ $\mathrm S^k$-split or
+$\mathrm R^k$-split, contrary to Step~1 of the proof of Theorem~\ref{bey:thm:rigid-good}; so it is zero.
+
+For a parameter piece, $\varepsilon_l=\varepsilon'_l\circ\psi_l$ with bounded linear $\psi_l\colon\cL(E,E)\to P_l$ and
+$\varepsilon'_l\colon P_l\to\cL(G_l,G'_l)$, where $P_l$ is polarizable in degrees $\le k$. The linear maps
+$g_{l,\alpha}\colon P_l\to K$ given by
+$\mathrm{pr}_\alpha w'_l\varepsilon'_l(y)w_l\mathrm{in}_\alpha=g_{l,\alpha}(y)\id_{\fX_\alpha}$ satisfy
+$\abs{g_{l,\alpha}(y)}\le\norm{w'_l}\norm{\varepsilon'_l}\norm{w_l}\norm y$ for every $\alpha$, since $\fX_\alpha\ne0$.
+Compressing $u_\lambda=\sum_lw'_l\varepsilon_l(u_\lambda)w_l$ to the summand $\alpha$ gives
+$\lambda_\alpha=\sum_lg_{l,\alpha}(\psi_l(u_\lambda))$ for every $\lambda\in\linf$ and every $\alpha$, the sum over the
+parameter pieces. Let $P$ be the direct sum of their spaces $P_l$ with the maximum norm. By Step~1 and the uniform
+bound, $\mathcal A\colon\linf\to P$, $\mathcal A\lambda=(\psi_l(u_\lambda))_l$, and $\mathcal A'\colon P\to\linf$,
+$\mathcal A'(y_l)_l=(\sum_lg_{l,\alpha}(y_l))_{\alpha\ge1}$, are bounded linear, and $\mathcal A'\mathcal A=\id_{\linf}$.
+
+The subspace $c_0\subseteq\linf$ of null sequences, a copy of $c_0(\N,K)$, is complete with distances in
+$\varrho^\Z\cup\{0\}$, hence spherically complete by Lemma~\ref{lem:discdist}. The extension argument behind Ingleton's
+Theorem~\ref{thm:ingleton}, in the form for spherically complete values given in the proof of
+Theorem~\ref{thm:spherical}, extends $\id_{c_0}$ to a contractive linear map $\mathcal B\colon\linf\to c_0$ on the
+nonarchimedean space $\linf$. Then $\mathcal B\mathcal A'\circ\mathcal A|_{c_0}=\id_{c_0}$, so $c_0$ is a retract of
+$P$, which is polarizable in degrees $\le k$ by Proposition~\ref{cmb:prop:parameter-pieces}(2). By
+Proposition~\ref{cmb:prop:parameter-pieces}(3), $c_0$ is polarizable in degree $k$, contrary to
+Corollary~\ref{cls:cor:c0-not-polarizable}, since $K$ satisfies~\textup{(L)} and $k\ge p$.
+\end{proof}

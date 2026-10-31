@@ -1,0 +1,30 @@
+\subsection{Proofs for Section~\ref{sec:beyond}}\label{dfr:ssec:beyond}
+
+\begin{proof}[Proof of Proposition~\ref{bey:prop:one-dim}]
+\emph{Step 1 (the lift).} Each $u\in\cL(E,D)$ is $\lambda u_0$ for a unique $\lambda\in K$, and
+$\abs\lambda=\norm u/\norm{u_0}$. Hence $Q$ is a well-defined $k$\nobreakdash-linear map
+$\cL(E,D)^k\to\cL(\Lambda^k_\pi E,\Lambda^k_\pi D)$ of norm at most $\norm{\Lambda^k_\pi u_0}/\norm{u_0}^k\le1$. Its
+diagonal is $\lambda^k\Lambda^k_\pi u_0=\Lambda^k_\pi(\lambda u_0)$, so Lemma~\ref{fib:lem:test} gives~(1).
+
+\emph{Step 2 (sufficiency in~(2)).} Put $\varepsilon(\lambda u_0)=\lambda\,\id_D$ and
+$\varepsilon'(\lambda u_0)=\lambda\,\id_E$. Then $\varepsilon(u)\circ u_0=u=u_0\circ\varepsilon'(u)$ for every
+$u\in\cL(E,D)$. If $u_0$ is $\mathrm S^k$-split, $(D,u_0,\varepsilon)$ is a source-side relative splitting; if $u_0$ is
+$\mathrm R^k$-split, $(E,u_0,\varepsilon')$ is a target-side relative splitting. Either is a splitting decomposition of
+degree $k$ (Definition~\ref{cmb:def:decomposition}).
+
+\emph{Step 3 (necessity in~(2), one piece).} A splitting decomposition with one piece writes $u_0$ as a composite of
+bounded operators one of which is $\mathrm S^k$-split or $\mathrm R^k$-split (Definition~\ref{cmb:def:decomposition}).
+By Proposition~\ref{ob:prop:split-operators}(2), $u_0$ is $\mathrm S^k$-split or $\mathrm R^k$-split.
+
+\emph{Step 4 (necessity in~(2), several pieces).} For a decomposition into at least two pieces of source and target
+type, Proposition~\ref{cmb:prop:normal-form} gives, in its notation, bounded bilinear maps $b_S,b_R$ with
+$b_S(u,x)+b_R(u,x)=ux$, $w_{b_S}$ $\mathrm S^{\le k}$-split and $w'_{b_R}$ $\mathrm R^{\le k}$-split; their values lie in
+$D$, since $D$ is complete. Put $u_S=b_S(u_0,\cdot)$ and $u_R=b_R(u_0,\cdot)$. Since $u_S$ is $w_{b_S}$ followed by
+evaluation at $u_0$, and $u_R$ is $x\mapsto u_0\otimes x$ followed by $w'_{b_R}$,
+Proposition~\ref{ob:prop:split-operators}(2) makes $u_S$ $\mathrm S^k$-split and $u_R$ $\mathrm R^k$-split. Both
+lie in $K\,u_0$ and $u_S+u_R=u_0$, so there is $a\in K$ with $u_S=a\,u_0$ and $u_R=(1-a)\,u_0$. If $a\ne0$, then
+$u_0=a^{-1}u_S$ is $\mathrm S^k$-split; otherwise $u_0=u_R$ is $\mathrm R^k$-split.
+
+\emph{Step 5 (the dual).} If $f$ is a nonzero bounded linear functional on $E$, the operators $x\mapsto f(x)\,d$ with
+$d\in D$ form a subspace of $\cL(E,D)$ of dimension $\dim D\ge2$, contrary to $\cL(E,D)=K\,u_0$.
+\end{proof}

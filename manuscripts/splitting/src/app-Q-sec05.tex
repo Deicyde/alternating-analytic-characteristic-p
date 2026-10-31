@@ -1,0 +1,191 @@
+\subsection{Proofs for Section~\ref{sec:positive}}\label{dfr:ssec:positive}
+
+\begin{proof}[Proof of Theorem~\ref{thm:spherical}]
+\emph{Step 1 (simultaneous extension).} Let $Y$ be a nonarchimedean seminormed space, $G$ a nonarchimedean
+spherically complete space, $T_\alpha\colon Y\to G$ a nonempty family of bounded operators and $r_\alpha\ge0$ radii with
+$\norm{T_\alpha-T_\beta}\le\max(r_\alpha,r_\beta)$, and $T_0$ a linear map on a subspace $Y_0$ with
+$\norm{T_0d-T_\alpha d}\le r_\alpha\norm d$ for all $d\in Y_0$ and all $\alpha$. We extend $T_0$ to $Y$ with all
+these bounds. For $x\notin Y_0$, the balls
+\[
+ \overline B\bigl(T_\alpha(d+x)-T_0d,\ r_\alpha\norm{d+x}\bigr),
+ \qquad \alpha,\ d\in Y_0,
+\]
+meet pairwise: for $r_\alpha\le r_\beta$, the centers for $(\alpha,d)$ and $(\beta,e)$ differ by at most
+$\max(r_\alpha\norm{d+x},r_\beta\norm{e+x})$, by the hypotheses and the nonarchimedean inequality. A common point, given
+by spherical completeness, is a value at $x$ extending $T_0$ to $Y_0+Kx$ with all bounds, and Zorn's lemma extends $T_0$
+to $Y$. With the single operator $0$ and radius one, contractions extend to contractions: this is the extension
+mechanism of Ingleton's theorem~\cite{In}.
+
+\emph{Step 2 ($\Alt^k(E;F)$ is spherically complete).} Let $Y$ be the free vector space on the symbols
+$[x_1,\ldots,x_k]$, $x\in E^k$, with the seminorm $\norm{\sum_x c_x[x]}=\max_x\abs{c_x}\prod_i\norm{x_i}$, and let $Y_0$
+be the span of the multilinearity and repeated-input relations. Alternating maps $E^k\to F$ correspond isometrically to
+bounded linear maps $Y\to F$ vanishing on $Y_0$: one direction uses the nonarchimedean inequality in $F$, the other
+evaluates on generators. Pairwise-meeting balls $\overline B(m_\alpha,r_\alpha)$ in $\Alt^k(E;F)$ satisfy
+$\norm{m_\alpha-m_\beta}\le\max(r_\alpha,r_\beta)$, since this operator norm is nonarchimedean. So the maps $T_\alpha$
+corresponding to the $m_\alpha$, and $T_0=0$ on $Y_0$, satisfy the hypotheses of Step~1 with $G=F$; the extension of
+$T_0$ vanishes on $Y_0$, and its alternating map lies in every ball.
+
+\emph{Step 3 (the retraction).} The operator norm of $\Mult^k(E;F)$ is nonarchimedean. By Step~1 with
+$G=\Alt^k(E;F)$, spherically complete by Step~2, the inverse of the isometric inclusion $j_{E,F}$ extends to a contraction
+of $\Mult^k(E;F)$ onto $\Alt^k(E;F)$, which is the required retraction. Proposition~\ref{prop:split-lift} finishes the
+proof. In degree zero the alternating space is $F$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fib:thm:ultra}]
+\emph{Step 1 (ultrametric envelopes).} As in the proof of Proposition~\ref{prop:scalar-countable}, with the
+nonarchimedean inequality of $F$ in place of that of $K$, every bounded $k$\nobreakdash-linear map $m$ into $F$ satisfies
+$\norm{m(x_1,\dots,x_k)}\le\norm m\prod_aq_Y(x_a)$. Hence $m\mapsto m\circ j_Y^{\times k}$ is an isometry of
+$\Alt^k(Y^u;F)$ onto $\Alt^k(Y;F)$, every $u\in\cL(E,D)$ induces $u^u\in\cL(E^u,D^u)$ with $\norm{u^u}\le\norm u$,
+linearly in $u$, and $A^k_{E,D;F}(u)$ corresponds to $A^k_{E^u,D^u;F}(u^u)$. A lift for $(E^u,D^u)$ therefore gives one
+for $(E,D)$ of no larger norm. Since $(Y^u)^u=Y^u$, we may assume $E=E^u$ and $D=D^u$.
+
+\emph{Step 2 (the expansion on $c_0(I,K)$).} Order $I$, and let $(e_i)$ and $(e^*_i)$ be the unit vectors and
+coordinate functionals of $c_0(I,K)$. For $m\in\Alt^k(c_0(I,K);F)$ and $x_1,\dots,x_k\in c_0(I,K)$, the family
+$\det(e^*_{i_a}(x_b))_{a,b}\,m(e_{i_1},\dots,e_{i_k})$, $i_1<\dots<i_k$, is null: if a determinant has absolute value at
+least $\delta>0$, every $i_a$ lies in the finite set where some $\abs{e^*_i(x_b)}\ge\delta/\max_b\norm{x_b}^{k-1}$. Its
+sum is
+\begin{equation}\label{fib:eq:c0-expansion}
+ m(x_1,\dots,x_k)=\sum_{i_1<\dots<i_k}\det\bigl(e^*_{i_a}(x_b)\bigr)_{a,b}\,m(e_{i_1},\dots,e_{i_k}),
+\end{equation}
+by sorting the multilinear expansion for finitely supported $x_b$, and by density in general, both sides being bounded
+and multilinear.
+
+\emph{Step 3 (lifts).} The maps
+\[
+ Q(u_1,\dots,u_k)(m)(x)=\sum_{i_1<\dots<i_k}\det\bigl(e^*_{i_a}(x_b)\bigr)_{a,b}\,m(u_1e_{i_1},\dots,u_ke_{i_k}),
+\]
+for $u_a\in\cL(c_0(I,K),D)$, and
+\[
+ Q'(u_1,\dots,u_k)(m)(x)=\sum_{i_1<\dots<i_k}\det\bigl(e^*_{i_a}(u_ax_b)\bigr)_{a,b}\,m(e_{i_1},\dots,e_{i_k}),
+\]
+for $u_a\in\cL(E,c_0(I,K))$, are well defined by Step~2, with $u_ax_b$ in place of $x_b$ in row $a$ for $Q'$. They are
+alternating in $x$, of norm at most one, and have diagonal $A^k(u)(m)$ by~\eqref{fib:eq:c0-expansion}. If $Q_0$ lifts
+$A^k_{c_0(I,K),D;F}$ and $\iota'\iota=\id_E$, then $Q_0(u_1\iota',\dots,u_k\iota')(m)\circ\iota^{\times k}$ lifts
+$A^k_{E,D;F}$; if $Q_0$ lifts $A^k_{E,c_0(I,K);F}$ and $\iota'\iota=\id_D$, then
+$Q_0(\iota u_1,\dots,\iota u_k)(m\circ\iota'^{\times k})$ does. Both have norm at most
+$(\norm\iota\norm{\iota'})^k\norm{Q_0}$.
+
+\emph{Step 4 (countable type).} If $E$ is of countable type, so is $E^u$, which then has a $t$\nobreakdash-orthogonal
+basis for every $0<t<1$ \cite[Proposition~1.4]{VdP}: nonzero vectors $b_i$ with dense span and
+$\norm{\sum_i\lambda_ib_i}\ge t\max_i\abs{\lambda_i}\norm{b_i}$ for finitely many scalars $\lambda_i$. The formulas for
+$Q$ and~\eqref{fib:eq:c0-expansion}, with this basis and its coordinate functionals in place of $(e_i)$ and $(e^*_i)$,
+give a lift of norm at most $t^{-k}$, as in the proof of Proposition~\ref{prop:scalar-countable}; similarly for $D$
+with $Q'$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{spl:prop:projective}]
+(1) The map $\Phi\colon\delta_i\mapsto e_{i_1}\wedge\dots\wedge e_{i_k}$ is contractive on finitely supported vectors.
+The alternating map $\Omega(x_1,\dots,x_k)=(\det(x_b(i_a))_{a,b})_{i\in J^k_<}$ satisfies
+$\norm{\Omega(x_1,\dots,x_k)}_1\le\sum_{i\in J^k_<}\sum_{\sigma\in S_k}\prod_a\abs{x_{\sigma(a)}(i_a)}\le\prod_b\norm{x_b}_1$,
+since $(i,\sigma)\mapsto i\circ\sigma^{-1}$ is injective into $J^k$, tuples being maps $\{1,\dots,k\}\to J$. By
+Proposition~\ref{prop:exterior}, $\Omega$ induces a contraction
+$\widetilde\Omega\colon\Lambda^k_\pi\ell^1(J,K)\to\ell^1(J^k_<,\widehat K)$ with $\widetilde\Omega\Phi\delta_i=\delta_i$,
+because $(e_{i_b}(i'_a))_{a,b}$ is the identity for $i'=i$ and has a zero row for every other $i'\in J^k_<$. So $\Phi$ is
+isometric. Its range is dense, since wedges of finitely supported vectors span a dense subspace and expand into the
+$e_{i_1}\wedge\dots\wedge e_{i_k}$, $i\in J^k_<$. Completion gives~(1).
+
+(2) By Lemma~\ref{ob:lem:metric-surjection}, $\widehat\wedge^k_E\colon\widehat\otimes^k_\pi E\to\widehat\Lambda^k_\pi E$
+is a bounded linear surjection of Banach spaces. Projectivity gives a bounded linear $s'$ with
+$\widehat\wedge^k_E\circ s'=\id$, whose restriction to $\Lambda^k_\pi E$ satisfies $(\mathrm S^k_E)$.
+
+(3) Order $J$, and let $\iota\colon E\to\ell^1(J,K)$ and $\iota'\colon\ell^1(J,K)\to E$ be bounded linear with
+$\iota'\iota=\id_E$. The inverse of the isomorphism of~(1), followed by $\delta_i\mapsto e_{i_1}\otimes\dots\otimes
+e_{i_n}$, restricts to a contraction $s_0\colon\Lambda^n_\pi\ell^1(J,K)\to\widehat\otimes^n_\pi\ell^1(J,K)$ with
+$\widehat\wedge^n\circ s_0=\id$, by the density shown in~(1). By naturality of $\wedge^n$, the map
+$s=\iota'^{\otimes n}\circ s_0\circ\Lambda^n_\pi\iota$ satisfies $\widehat\wedge^n_E\circ s=\widehat\Lambda^n_\pi\iota'
+\circ\Lambda^n_\pi\iota=\id$, and $\norm s\le(\norm\iota\norm{\iota'})^n$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{spl:cor:relative-ordering-na}]
+Let $\nu$ be a nonarchimedean norm on $D$ with $a\nu(y)\le\norm y\le b\nu(y)$. Then
+$\norm{\sum_t\xi_ty_t}\le b\max_t\abs{\xi_t}\nu(y_t)\le(b/a)(\sum_t\abs{\xi_t}^3)^{1/3}\max_t\norm{y_t}$, so
+\eqref{spl:eq:r-norm} holds with $r=3$, $D$ has an equivalent $3$-norm by Proposition~\ref{spl:prop:r-norm}, and
+Theorem~\ref{spl:thm:relative-ordering}(2) gives the first assertion. The extension of the coordinate map is the map $w$ of
+Theorem~\ref{spl:thm:relative-ordering}(1) for $r=3$ followed by the contractive inclusion
+$\ell^3(\Sigma,\widehat K)\to c_0(\Sigma,\widehat K)$, hence $\mathrm S^n$-split by the ideal property in
+Proposition~\ref{ob:prop:split-operators}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:summable-parameters}]
+\emph{Step 1 (the space $c_0$).} Order $I$ and group the coordinate coefficients of each ambient $b_n$ into
+nondecreasing words. Finite-coordinate uniqueness, as in the proof of Theorem~\ref{thm:finite-parameters}, puts the
+grouped coefficients $c_{i_1,\ldots,i_n}$ in $W$, and the nonarchimedean inequality bounds their norms by $\norm{b_n}$.
+The formula
+\[
+ q_n(x_1,\ldots,x_n)
+ =\sum_{i_1\le\cdots\le i_n}
+ c_{i_1,\ldots,i_n}(x_1)_{i_1}\cdots(x_n)_{i_n}
+\]
+converges, since outside finite sets of words some coordinate factor is arbitrarily small while the others are bounded;
+completeness of $W$ supplies the sum, of norm at most $\norm{b_n}\prod_a\norm{x_a}$. The diagonals of $q_n$ and $b_n$
+agree on finite supports, hence by density. Theorem~\ref{thm:coefficient-descent} gives~(1).
+
+\emph{Step 2 (sorting in $\ell^1$).} For every set $J$, the sorting of Step~1 in degree $d$ gives each bounded
+$d$-linear $B'\colon\ell^1(J,K)^d\to Z$ whose diagonal lies in $W$ a lift into $W$ with the same diagonal and of norm at
+most $d!\norm{B'}$: $W$ is complete, being closed in $Z$, each grouped coefficient has at most $d!$ terms, and the
+resulting series is absolutely summable, bounded by $d!\norm{B'}\prod_a\norm{x_a}_1$.
+
+\emph{Step 3 (factorization of $\gamma$).} Fix $x_0\in U$, write $\gamma(x_0+x)=\sum_na_n(x,\ldots,x)$, and choose
+$\lambda\in K$ with $0<\abs\lambda$ within the radius of this expansion. Set $J=\coprod_{n\ge0}I^n$ and
+\[
+ T(e_{n,i_1,\ldots,i_n})=\lambda^na_n(e_{i_1},\ldots,e_{i_n}),
+ \qquad
+ g(x)_{n,i_1,\ldots,i_n}=\lambda^{-n}x_{i_1}\cdots x_{i_n}.
+\]
+The values of $T$ on unit vectors are uniformly bounded, so $T$ extends by absolute summation to a bounded linear map
+$\ell^1(J,K)\to\widehat H$. The degree-$n$ multilinear coefficient of $g$ has entries
+$\lambda^{-n}(x_1)_{i_1}\cdots(x_n)_{i_n}$ in its $n$th block and zero elsewhere, so its norm is at most
+$\abs\lambda^{-n}$; its diagonal block has sum norm $(\norm{x}_1/\abs\lambda)^n$. So $g$ has a convergent multilinear
+expansion for $\norm{x}_1<\abs\lambda$, without completeness of $K$, and $T(g(x))=\gamma(x_0+x)$ there.
+
+\emph{Step 4 (conclusion of~(2)).} Extend $B$ to $\widehat H^d$ by completeness of $Z$; its diagonal still lies in $W$,
+by closedness. By Step~2, the composite of this extension with $T^{\times d}$ has a bounded $d$-linear lift $q$ into $W$
+with the same diagonal. Then $ja(\gamma(x_0+x))=jq(g(x),\ldots,g(x))$ for $\norm{x}_1<\abs\lambda$, so near $x_0$ the
+map $a\gamma$ is the diagonal of $q$, a bounded polynomial, composed with the analytic map $g$. Hence $a\gamma$ is
+analytic at every point $x_0$.
+
+\emph{Step 5 (retracts).} If $ri=\id_P$ for bounded linear $i\colon P\to V$ and $r\colon V\to P$, apply~(1) or~(2) to
+the family composed with $r$ on $r^{-1}(U)$, and restrict along $i$; in~(1) this multiplies the norms of the lifted
+coefficients by at most $(\norm r\norm i)^n$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{spl:prop:gamma-l1}]
+\emph{Step 1 (orbit sums).} Let $L=\ell^1(J,K)$ with its unit vectors $e_i$, and order $J$. For nondecreasing
+$t\in J^n$, let $O_t$ be the sum of the tensors $e_{\tilde t_1}\otimes\dots\otimes e_{\tilde t_n}$ over the distinct
+rearrangements $\tilde t$ of $t$, let $b_1,\dots,b_m$ be the distinct entries of $t$, and for $\alpha\in\N^m$ with
+$\alpha_1+\dots+\alpha_m=n$ let $t(\alpha)$ be the nondecreasing tuple with $\alpha_i$ entries $b_i$. For $\lambda\in K^m$,
+expanding the tensor power gives $(\sum_i\lambda_ie_{b_i})^{\otimes n}=\sum_\alpha\lambda^\alpha O_{t(\alpha)}$. A linear
+functional $\varphi$ on the span of the $O_{t(\alpha)}$ that vanishes on these pure powers makes the polynomial function
+$\lambda\mapsto\sum_\alpha\lambda^\alpha\varphi(O_{t(\alpha)})$ vanish on $K^m$, so $\varphi(O_{t(\alpha)})=0$ for all
+$\alpha$, since $K$ is infinite. Hence $O_t$ lies in the span of the pure powers, and in $\widehat\Gamma^n_\pi L$. This
+argument is algebraic: it holds for arbitrary vectors $e_{b_1},\dots,e_{b_m}$ of a vector space over $K$ in place of
+the unit vectors.
+
+\emph{Step 2 (the projection).} As in the proof of Proposition~\ref{spl:prop:projective}(1), with the coordinate map
+$(x_1,\dots,x_n)\mapsto(x_1(t_1)\cdots x_n(t_n))_{t\in J^n}$ in place of $\Omega$, the map
+$e_{t_1}\otimes\dots\otimes e_{t_n}\mapsto\delta_t$ onto the unit vectors $\delta_t$ of $\ell^1(J^n,\widehat K)$ extends
+to an isometric isomorphism $\widehat\otimes^n_\pi L\cong\ell^1(J^n,\widehat K)$. Let $R_n\delta_t=O_t$ for
+nondecreasing $t$ and $R_n\delta_t=0$ otherwise. Then $\norm{R_n}\le n!$, since $O_t$ is a sum of at most $n!$ unit
+vectors, and $R_n$ maps into the closed subspace $\widehat\Gamma^n_\pi L$ by Step~1. For finitely supported $h\in L$, the
+coefficients of $h^{\otimes n}=\sum_th(t_1)\cdots h(t_n)\delta_t$ are constant on rearrangements of $t$, so
+$R_nh^{\otimes n}=h^{\otimes n}$. By continuity $R_n$ fixes every pure power, hence $\widehat\Gamma^n_\pi L$. This
+proves~(1).
+
+\emph{Step 3 (finite coordinates).} A normed space $P$ with finite continuous coordinates has a bounded linear
+isomorphism $T$ onto $\ell^1(\{1,\dots,d\},K)$. The extension of $T^{\otimes n}$ to the completions is an isomorphism
+mapping $\widehat\Gamma^n_\pi P$ onto $\widehat\Gamma^n_\pi\ell^1(\{1,\dots,d\},K)$, since
+$T^{\otimes n}h^{\otimes n}=(Th)^{\otimes n}$. So $(T^{-1})^{\otimes n}\circ R_n\circ T^{\otimes n}$, with $R_n$ from
+Step~2 for $J=\{1,\dots,d\}$, is a projection onto $\widehat\Gamma^n_\pi P$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{spl:prop:degree-two}]
+Alternation is vanishing on repeated arguments, so $\Lambda^2_KP$ is the quotient of $P\otimes_KP$ by the span of the
+tensors $h\otimes h$. Hence $\widehat\wedge^2_P(h\otimes h)=0$, and $\widehat\Gamma^2_\pi P\subseteq\cN^2_P$ because
+$\cN^2_P$ is closed. Conversely, let $z\in\otimes^2_\pi P$ with $\wedge^2_Pz=0$, represented by $\tilde z\in P\otimes_KP$.
+The image of $\tilde z$ in $\Lambda^2_KP$ has seminorm zero, so for $\epsilon>0$ it equals $\sum_jx_j\wedge y_j$ with
+$\sum_j\norm{x_j}\norm{y_j}<\epsilon$; then $\tilde z-\sum_jx_j\otimes y_j$ lies in the span of the tensors $h\otimes h$,
+so $z$ lies within $\epsilon$ of that span, and $z\in\widehat\Gamma^2_\pi P$. For $z\in\cN^2_P$ choose $z_m\in\otimes^2_\pi P$ with $z_m\to z$. Then
+$\wedge^2_Pz_m\to0$, Lemma~\ref{ob:lem:metric-surjection} gives $w_m\in\otimes^2_\pi P$ with $\wedge^2_Pw_m=\wedge^2_Pz_m$
+and $\norm{w_m}\le2\norm{\wedge^2_Pz_m}$, and $z_m-w_m\in\widehat\Gamma^2_\pi P$ converges to $z$. The norm bounds are
+those of Lemma~\ref{ob:lem:source}.
+\end{proof}

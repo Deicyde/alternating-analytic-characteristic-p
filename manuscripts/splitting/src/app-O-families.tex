@@ -1,0 +1,681 @@
+\section{Proofs for familywise analyticity}\label{app:families}
+
+This appendix proves the results of Section~\ref{sec:families} not proved there, in its notation. We write
+$h^{\times n}=(h,\dots,h)\in P^n$, $h_I$ for the tuple of the $h_i$ with $i\in I$, and $\Mult^0(P;Y)=Y$.
+
+\subsection{Power series and mixed exterior powers}\label{fmo:ssec:tools}
+
+\begin{lemma}\label{fmo:lem:series}
+\begin{enumerate}
+\item If $Y$ is a Banach space and $b_n\in\Mult^n(P;Y)$, $\norm{b_n}\le CR^{-n}$, then $x\mapsto\sum_nb_n(x^{\times n})$ is
+analytic on the open ball of radius $R$ about $0$.
+\item Let $\Phi\colon Y_1\times\dots\times Y_m\to Y$ be bounded $m$-linear, the spaces normed, and $f_a\colon U\to Y_a$ with
+$f_a(x_0+h)=\sum_nb^a_n(h^{\times n})$ for $\norm h<R$, $\norm{b^a_n}\le CR^{-n}$. Then
+$\Phi(f_1(x_0+h),\allowbreak\dots,f_m(x_0+h))=
+\sum_N\Phi_N(h^{\times N})$ for $\norm h<R$, where
+$\Phi_N(h_1,\dots,h_N)=\sum_{n_1+\dots+n_m=N}\Phi(b^1_{n_1}(h_{I_1}),\allowbreak\dots,
+b^m_{n_m}(h_{I_m}))$, $I_a$ consecutive of sizes $n_a$, has norm at most $\norm\Phi\binom{N+m-1}{m-1}C^mR^{-N}$. So the
+composite is analytic at $x_0$, and on $U$ if the $f_a$ are.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) For $\norm{x_1}<R$, the sum $b'_j$ over $n\ge j$ and $j$-element $S\subseteq\{1,\dots,n\}$ of $b_n$ with
+$h_1,\dots,h_j$ in the slots of $S$ and $x_1$ elsewhere converges in $\Mult^j(P;Y)$ with a geometric bound, as
+$\sum_{n\ge j}\binom njR^{-n}\norm{x_1}^{n-j}=R(R-\norm{x_1})^{-j-1}$; for $\norm h<R-\norm{x_1}$ the majorant
+$\sum_n\norm{b_n}(\norm{x_1}+\norm h)^n$ of the multilinear expansion gives $\sum_nb_n((x_1+h)^{\times n})=
+\sum_jb'_j(h^{\times j})$.
+(2) The bound counts compositions of $N$. For $\norm h<R$ the terms $\Phi(b^1_{n_1}(h^{\times n_1}),\dots,b^m_{n_m}(h^{\times
+n_m}))$ have the majorant $\norm\Phi\prod_a\sum_nC(\norm h/R)^n$; their sums over $\max_an_a\le L$ are values of $\Phi$ at
+partial sums of the $f_a$, and differ from their sums over $n_1+\dots+n_m\le L$ by terms with $\max_an_a>L/m$, whose
+majorant tends to $0$.
+\end{proof}
+
+\begin{lemma}\label{fmo:lem:multishuffle}
+Let $G$ be a Banach space, $v_1,\dots,v_m\in\cL(E,G)$, and $\mathbf i\in\N_0^m$ a \emph{type}, $i_1+\dots+i_m=k\ge1$; a map
+$\sigma\colon\{1,\dots,k\}\to\{1,\dots,m\}$ has type $\mathbf i$ if $\abs{\sigma^{-1}(l)}=i_l$ for all $l$, and there are
+$\binom k{\mathbf i}=k!/(i_1!\cdots i_m!)$ of them. Entries $i_l=0$ use $\Lambda^0_\pi v=\id_K$ and the conventions stated
+with~\eqref{cmb:eq:binomial}.
+\begin{enumerate}
+\item There is a unique $\Lambda^{\mathbf i}_\pi(v_1,\dots,v_m)\in\cL(\Lambda^k_\pi E,\hLambda^k_\pi G)$ sending
+$x_1\wedge\dots\wedge x_k$ to $\sum_\sigma v_{\sigma(1)}x_1\wedge\dots\wedge v_{\sigma(k)}x_k$, over the $\sigma$ of type
+$\mathbf i$; its norm is at most $\binom k{\mathbf i}\prod_l\norm{v_l}^{i_l}$.
+\item The iterated shuffle $\sh^{\mathbf i}_E=(\id\otimes\sh^{(i_2,\dots,i_m)}_E)\circ\sh^{i_1,k-i_1}_E$, $\sh^{(k)}_E=\id$, into
+$\Lambda^{i_1}_\pi E\otimes_\pi\dots\otimes_\pi\Lambda^{i_m}_\pi E$ has norm at most $\binom k{\mathbf i}$, the iterated wedge
+product $\wedge^{\mathbf i}_G$ from $\hLambda^{i_1}_\pi G\hot_\pi\dots\hot_\pi\hLambda^{i_m}_\pi G$ to $\hLambda^k_\pi G$ is
+contractive, and $\Lambda^{\mathbf i}_\pi(v_1,\dots,v_m)=\wedge^{\mathbf i}_G\circ(\Lambda^{i_1}_\pi v_1\otimes\dots\otimes
+\Lambda^{i_m}_\pi v_m)\circ\sh^{\mathbf i}_E$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma~\ref{fib:lem:hopf}, iterated and extended to completions, and $\norm{\id\otimes T}\le\norm T$ give the norm bounds
+of~(2). By induction on $m$ and~\eqref{fib:eq:shuffle}, $\sh^{\mathbf i}_E(x_1\wedge\dots\wedge x_k)$ is the sum of the
+$\epsilon(S_1,\dots,S_m)\,x_{S_1}\otimes\dots\otimes x_{S_m}$ over the ordered partitions with $\abs{S_l}=i_l$, where
+$\epsilon(S_1,\dots,S_m)$, the sign of the listing of $S_1,\dots,S_m$ in turn, each increasingly, is $\epsilon(S_1)$ times
+the sign of the listing of $S_2,\dots,S_m$ relative to the increasing listing of the complement of $S_1$. With
+$\sigma(c)=l$ for $c\in S_l$ and $y_c=v_{\sigma(c)}x_c$, the composite in~(2) sends $x_1\wedge\dots\wedge x_k$ to the sum of
+the $\epsilon(S_1,\dots,S_m)\,y_{S_1}\wedge\dots\wedge y_{S_m}=y_1\wedge\dots\wedge y_k$, and ordered partitions correspond
+bijectively to maps of type $\mathbf i$. So the composite is the operator of~(1), unique as pure wedges span, and
+$\norm{\Lambda^{i_l}_\pi v_l}\le\norm{v_l}^{i_l}$ gives its bound.
+\end{proof}
+
+\begin{lemma}\label{fmo:lem:vandermonde}\emergencystretch=3em
+Let $G$ be a Banach space and $a,b\in\cL(E,G)$. Then $\Lambda^k_\pi(a+\lambda b)=\sum_{j=0}^k\lambda^j\Lambda^{(k-j,j)}_\pi
+(a,b)$ for $\lambda\in K$, where $\Lambda^{(k-j,j)}_\pi(a,b)=\wedge^{k-j,j}_G\circ(\Lambda^{k-j}_\pi a\otimes\Lambda^j_\pi b)
+\circ\sh^{k-j,j}_E$ has norm at most $\binom kj\norm a^{k-j}\norm b^j$, and $\Lambda^{(0,k)}_\pi(a,b)=\Lambda^k_\pi b$. If
+$\lambda_0,\dots,\lambda_k\in K$ are distinct and $(\chi_{ji})$ is the inverse of $(\lambda_i^j)_{0\le i,j\le k}$, then
+$\Lambda^k_\pi b=\sum_i\chi_{ki}\Lambda^k_\pi(a+\lambda_ib)$.
+\end{lemma}
+
+\begin{proof}
+Equation~\eqref{cmb:eq:binomial} with $w_1=a$, $w_2=\lambda b$ and $\Lambda^j_\pi(\lambda b)=\lambda^j\Lambda^j_\pi b$ gives
+the expansion, and Lemma~\ref{fib:lem:hopf} the bound. The Vandermonde matrix being invertible, the identities
+$\Lambda^k_\pi(a+\lambda_ib)=\sum_j\lambda_i^j\Lambda^{(k-j,j)}_\pi(a,b)$ give $\Lambda^{(k-j,j)}_\pi(a,b)=
+\sum_i\chi_{ji}\Lambda^k_\pi(a+\lambda_ib)$; take $j=k$.
+\end{proof}
+
+\begin{lemma}\label{fmo:lem:neumann}
+Let $H$ be a Banach space, $U'\subseteq P$ open and $w\colon U'\to\cL(H)$ analytic with $\sup_{U'}\norm w<1$. Then $1+w$ is
+an invertible family on $U'$.
+\end{lemma}
+
+\begin{proof}
+Fix $x_1\in U'$ and let $g_1=1+w(x_1)$, so $\norm{g_1^{-1}}\le(1-\sup_{U'}\norm w)^{-1}$ by the Neumann series. Write
+$w(x_1+h)-w(x_1)=\delta(h)=\sum_{n\ge1}b_n(h^{\times n})$, $\norm{b_n}\le CR^{-n}$. With $C'=\norm{g_1^{-1}}C$ and
+$t=\norm h/R<1/(1+C')$, $\norm{g_1^{-1}\delta(h)}\le C't/(1-t)<1$, so $(1+w(x_1+h))^{-1}=\sum_l(-g_1^{-1}\delta(h))^l
+g_1^{-1}$, whose multilinear expansion has the majorant $\norm{g_1^{-1}}\sum_l(C't/(1-t))^l$; its degree-$N$
+coefficient, the sum over the compositions $(n_1,\dots,n_l)$ of $N$ of
+$(-1)^lg_1^{-1}b_{n_1}(h_{I_1})g_1^{-1}\cdots b_{n_l}(h_{I_l})g_1^{-1}$, has norm at most $\norm{g_1^{-1}}(1+C')^NR^{-N}$.
+\end{proof}
+
+\subsection{Reductions and what bundles need}\label{fmo:ssec:reductions}
+
+\begin{proof}[Proof of Proposition~\ref{fam2:prop:reductions}]
+\emph{Step 1 (item~(1)).} Let $u\colon U\to\cL(H)$ be analytic and $x_0\in U$. Choose an open $U_0\subseteq U$
+containing $x_0$ with $\norm u\le C=\norm{u(x_0)}+1$ on $U_0$, an integer $m\ge0$ with $\abs\vartheta^mC<1$, and the
+distinct $\lambda_i=\vartheta^{m+i}$, $0\le i\le k$. By Lemma~\ref{fmo:lem:neumann} every $1+\lambda_iu$ is an invertible
+family on $U_0$, and Lemma~\ref{fmo:lem:vandermonde} with $G=H$, $a=1$, $b=u(x)$ gives
+$\Lambda^k_\pi u=\sum_i\chi_{ki}\Lambda^k_\pi(1+\lambda_iu)$ on $U_0$.
+
+\emph{Step 2 (item~(2)).} Let $\alpha_1\colon E_0\to E$, $\alpha_2\colon D_0\to D$, $\psi\colon P_0\to P$ have bounded linear
+left inverses $\alpha'_1$, $\alpha'_2$, $\psi'$. For analytic $u_0\colon U'\to\cL(E_0,\widehat D_0)$, $U'\subseteq P_0$
+open, $u=\hat\alpha_2u_0(\psi'\cdot)\alpha'_1$ is analytic on $\psi'^{-1}(U')$, hats denoting extensions to completions;
+hence so is $\Lambda^k_\pi u$, and $\Lambda^k_\pi u_0(y)=\hLambda^k_\pi\hat\alpha'_2\circ\Lambda^k_\pi u(\psi y)\circ
+\Lambda^k_\pi\alpha_1$ (Proposition~\ref{prop:exterior}). For $E\oplus E'$, ``only if'' is the retract case; conversely,
+for analytic $u\colon U\to\cL(E\oplus E',\widehat D)$, the injections $\iota_l$ and projections $\pi_l$ of $E\oplus E'$,
+$u_l=u\iota_l$ and $k'\le k$, $u=u_1\pi_1+u_2\pi_2$, \eqref{cmb:eq:binomial} and Proposition~\ref{prop:exterior} give
+\[\Lambda^{k'}_\pi u=\sum_{j=0}^{k'}\wedge^{j,k'-j}_{\widehat D}\circ\bigl((\Lambda^j_\pi u_1\circ\Lambda^j_\pi\pi_1)\otimes
+(\Lambda^{k'-j}_\pi u_2\circ\Lambda^{k'-j}_\pi\pi_2)\bigr)\circ\sh^{j,k'-j}_{E\oplus E'},\]
+bounded bilinear (linear for $j\in\{0,k'\}$) in analytic maps; apply Lemma~\ref{fmo:lem:series}(2). The target slot is the
+same, with $u=\sum_l\iota'_l\pi'_lu$ for the injections $\iota'_l$ and projections $\pi'_l$ of
+$\widehat D\oplus\widehat{D'}$ and $\Lambda^j_\pi(\iota'_l\pi'_lu)=\hLambda^j_\pi\iota'_l\circ\Lambda^j_\pi(\pi'_lu)$.
+
+\emph{Step 3 (item~(3)).} Let $g$ be as in Proposition~\ref{prop:shear}, with $H=D\oplus E$, $\pi_D$ the projection onto
+$D$ and $i_E$ the injection of $E$. For analytic $u\colon U\to\cL(E,D)$, $x\mapsto g(u(x))$ is an invertible family, with
+inverse $g(-u(x))$, and $\pi_Dg(u(x))i_E=u(x)$ and Proposition~\ref{prop:exterior} give
+\begin{equation}\label{fmo:eq:shear}
+ \Lambda^k_\pi u(x)=\hLambda^k_\pi\pi_D\circ\Lambda^k_\pi g(u(x))\circ\Lambda^k_\pi i_E .
+\end{equation}
+In degrees $j\le k$, analyticity along invertible families into $\cL(H)$ gives goodness of $(P;H)$ by~(1), hence of the
+four triples by~(2); conversely, goodness of the four triples gives that of $(P;H)$ by~(2) in both slots, and invertible
+families are analytic. For $\cC$, goodness of $(P;G,G)$ for $G\in\cC$ covers invertible families into $\cL(G)$;
+conversely, for $E,D\in\cC$, $D\oplus E\in\cC$ and~\eqref{fmo:eq:shear} applies.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{fam2:cor:bundles}]
+\emph{Step 1 ((2) implies the last assertion and (1)).} Let $E,D\in\cC$, let $F,F'$ be Banach spaces, and let
+$u\colon U\to\cL(E,D)$ and $v\colon U\to\cL(F,F')$ be analytic on an open $U\subseteq P$. By~(2) and the paragraph after
+Definition~\ref{fam2:def:good}, $x\mapsto A^k_{E,D;F}(u(x))$ is analytic. The joint action $B(u(x),v(x))$, which is
+$A^k_{E,D;F}(u(x))$ followed by postcomposition with $v(x)$, is bounded bilinear in the two families, hence analytic
+(Lemma~\ref{fmo:lem:series}(2)). The last assertion of Theorem~\ref{thm:bundle-lifting}, for restricted categories of
+fibers as in the paragraph after it, gives the last assertion; (1) is its case of a trivial bundle with fiber $F$.
+
+\emph{Step 2 ((1) implies (2)).} Let $E,D\in\cC$, let $u\colon U\to\cL(E,D)$ be analytic on an open $U\subseteq P$, and let
+$H=D\oplus E\in\cC$ and $g$ be as in Proposition~\ref{prop:shear}. The trivial bundle $U\times H$ with the trivializations
+$\id$ and $(x,z)\mapsto(x,g(u(x))z)$ is analytic, since its transitions $g(\pm u(x))$ are affine in $u(x)$. By~(1), the
+induced transition $x\mapsto g(u(x))^*$ on $\Alt^k(H;F)$ is analytic for every Banach space $F$. The
+compression~\eqref{eq:shear-compression} makes $x\mapsto A^k_{E,D;F}(u(x))$ analytic, so $\Lambda^k_\pi u$ is analytic on
+$U$ by Theorem~\ref{thm:duality}(1) with $Y=\hLambda^k_\pi D$; as $D$ is complete, this is~(2).
+\end{proof}
+
+\subsection{Homogeneous families}\label{fmo:ssec:reduction}
+
+A \emph{content} is a finitely supported $\mathbf m\colon\N_0\to\N_0$ with $\sum_n\mathbf m(n)=k$; its degree is
+$N(\mathbf m)=\sum_nn\mathbf m(n)$, and its type is $(\mathbf m(n_1),\dots,\mathbf m(n_m))$ for its support $n_1<\dots<n_m$.
+The content of $(n'_1,\dots,n'_k)\in\N_0^k$ counts repeated values, so at most $\binom{N+k-1}{k-1}$ contents have degree $N$.
+
+\begin{lemma}\label{fmo:lem:homogeneous}
+Let $n\ge0$, $j\ge1$ and $\beta\in\Mult^n(P;\cL(E,\widehat D))$.
+\begin{enumerate}
+\item $c_j(\beta)$ depends only on $u_\beta$, and $c_j(\lambda\beta)=\abs\lambda^jc_j(\beta)$ for $\lambda\in K^\times$.
+\item $c_1(\beta)\le\norm\beta$, and $c_j(\beta)\le(j!/\abs{j!})\norm\beta^j$ if $j!\ne0$ in $K$, the integer $j!$ in the
+numerator.
+\item For $n\ge1$, $h\mapsto\Lambda^j_\pi u_\beta(h)$ is analytic at some point of $P$ if and only if $c_j(\beta)<\infty$,
+and it is then a continuous polynomial.
+\item $c_j(b\beta a)\le\norm b^j\norm a^jc_j(\beta)$ for bounded linear $a\colon E'\to E$, $b\colon\widehat D\to\widehat{D'}$,
+with $(b\beta a)(h_1,\allowbreak\dots,h_n)=b\,\beta(h_1,\allowbreak\dots,h_n)\,a$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) The definition involves only $\Lambda^j_\pi u_\beta$, and $\lambda^jq$ lifts $u_{\lambda\beta}$ if $q$ lifts $u_\beta$;
+apply this also to $\lambda^{-1}$. (2) $\beta$ lifts $u_\beta$ in degree $1$. If $j!\ne0$, the section $s=\alt^j_E/j!$
+of $\wedge^j_E$ has norm at most
+$j!/\abs{j!}$ (Proposition~\ref{can:prop:natural}(1)), and $q(h_1,\dots,h_{jn})=\widehat\wedge^j_D\circ(\beta(h_{I_1})\otimes
+\dots\otimes\beta(h_{I_j}))\circ s$, blocks of size $n$, has diagonal $\Lambda^j_\pi u_\beta(h)\wedge^j_Es=
+\Lambda^j_\pi u_\beta(h)$ by naturality of the wedge, and norm at most $(j!/\abs{j!})\norm\beta^j$. (3) $T\mapsto
+T\circ\wedge^j_E$ is an isometry of
+$\cL(\Lambda^j_\pi E,\hLambda^j_\pi D)$ onto the operators in $\cL(\otimes^j_\pi E,\hLambda^j_\pi D)$ vanishing on
+$\ker\wedge^j_E$ (Lemma~\ref{ob:lem:metric-surjection}), a closed subspace, and $(h_1,\dots,h_{jn})\mapsto
+\widehat\wedge^j_D\circ(\beta(h_{I_1})\otimes\dots\otimes\beta(h_{I_j}))$ is an ambient representative of degree $jn\ge1$;
+apply Proposition~\ref{prop:homogeneous-lift}. (4) If $q$ lifts $u_\beta$, then $\hLambda^j_\pi b\circ q\circ\Lambda^j_\pi a$
+lifts $u_{b\beta a}$ (Proposition~\ref{prop:exterior}).
+\end{proof}
+
+\begin{lemma}\label{fmo:lem:assembly}
+Let $u(x_0+h)=\sum_{n\ge0}\beta_n(h^{\times n})$ for $\norm h<R$, $\beta_n\in\Mult^n(P;\cL(E,\widehat D))$,
+$\norm{\beta_n}\le CR^{-n}$, $a=\beta_0$, and let $C_0,C_1\ge1$ and lifts $q_{n,j}$ of $u_{\beta_n}$ in degree $j$ with
+$\norm{q_{n,j}}\le C_0C_1^n$ be given for $j\le k$, $n\ge1$. Then $\Lambda^k_\pi u$ is analytic at $x_0$, with $N$th
+coefficient of norm at most $k!\binom{N+k-1}{k-1}\max(1,\norm a)^kC_0^kC_1^N$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (one content).} For a content $\mathbf m$ of support $n_1<\dots<n_m$ and type $\mathbf i$ let
+$Q_l=q_{n_l,i_l}$ if $n_l\ge1$, $Q_l=\Lambda^{i_l}_\pi a$ if $n_l=0$, and, with consecutive blocks $I_l$ of sizes $n_li_l$,
+$q_{\mathbf m}(h_1,\dots,h_{N(\mathbf m)})=\wedge^{\mathbf i}_{\widehat D}\circ(Q_1(h_{I_1})\otimes\dots\otimes Q_m(h_{I_m}))
+\circ\sh^{\mathbf i}_E$. By Lemma~\ref{fmo:lem:multishuffle}(2), $q_{\mathbf m}(h^{\times N(\mathbf m)})=\Lambda^{\mathbf i}_\pi
+(u_{\beta_{n_1}}(h),\dots,u_{\beta_{n_m}}(h))$ and $\norm{q_{\mathbf m}}\le\binom k{\mathbf i}\prod_l\norm{Q_l}\le
+k!\max(1,\norm a)^kC_0^kC_1^{N(\mathbf m)}$, as $m\le k$ and $C_0,C_1\ge1$. The sum $q_N$ of the $q_{\mathbf m}$ of degree
+$N$ obeys the stated bound, and $\sum_N\norm{q_N}\norm h^N<\infty$ for $\norm h<1/(2C_1)$.
+
+\emph{Step 2 (the expansion).} For $\norm h<R$ and $y=x_1\wedge\dots\wedge x_k$, as in Lemma~\ref{fmo:lem:series}(2),
+$\Lambda^k_\pi u(x_0+h)y=\omega_{\widehat D}(\sum_nu_{\beta_n}(h)x_1,\dots,\sum_nu_{\beta_n}(h)x_k)$ is the absolutely
+convergent sum of the $u_{\beta_{\sigma(1)}}(h)x_1\wedge\dots\wedge u_{\beta_{\sigma(k)}}(h)x_k$, $\sigma\colon\{1,\dots,k\}
+\to\N_0$. Grouped by the content of $(\sigma(1),\dots,\sigma(k))$ and then by degree, they give $\sum_Nq_N(h^{\times N})y$
+(Lemma~\ref{fmo:lem:multishuffle}(1)); as pure wedges span, $\Lambda^k_\pi u(x_0+h)=\sum_Nq_N(h^{\times N})$ for
+$\norm h<\min(R,1/(2C_1))$.
+\end{proof}
+
+\begin{lemma}\label{fmo:lem:steps}
+\begin{enumerate}
+\item If $(P;E,D)$ is good in degrees $a,b\ge1$ and $\binom{a+b}a\ne0$ in $K$, it is good in degree $a+b$.
+\item Let $k\ge2$, with maximum norms on $E\oplus K$, $D\oplus K$. If $(P;E\oplus K,D\oplus K)$ is good in degree $k$, then
+$(P;E,D)$ is good in degree $k-1$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Let $n=a+b$. For $v\in\cL(E,\widehat D)$, naturality of the wedge product and~\eqref{fib:eq:hopf}, extended to
+completions, give $\Lambda^n_\pi v=\binom na^{-1}\wedge^{a,b}_{\widehat D}\circ(\Lambda^a_\pi v\otimes\Lambda^b_\pi v)\circ
+\sh^{a,b}_E$, bounded bilinear in $(\Lambda^a_\pi v,\Lambda^b_\pi v)$; apply Lemma~\ref{fmo:lem:series}(2).
+(2) Let $u\colon U\to\cL(E,\widehat D)$ be analytic and $F$ a Banach space. As $u\oplus1$ is analytic into
+$\cL(E\oplus K,\widehat D\oplus\Kh)$ and $\widehat D\oplus\Kh$ completes $D\oplus K$, goodness and the prose after
+Definition~\ref{fam2:def:good} make $x\mapsto A^k_{E\oplus K,\widehat D\oplus\Kh;F}(u(x)\oplus1)$ analytic, hence also
+$x\mapsto A^k_{E\oplus K,\widehat D\oplus K;F}(u(x)\oplus1)$, restriction $\Alt^k(\widehat D\oplus\Kh;F)\to
+\Alt^k(\widehat D\oplus K;F)$ being an isometric isomorphism by density. The proof of Theorem~\ref{fib:thm:hyperplane},
+with $\widehat D$ for $D$, gives
+fixed bounded linear $R_h$, $J_h$ with $A^{k-1}_{E,\widehat D;F}(v)=R_h\circ A^k_{E\oplus K,\widehat D\oplus K;F}(v\oplus1)
+\circ J_h$; so $x\mapsto A^{k-1}_{E,\widehat D;F}(u(x))$ is analytic for every Banach $F$, and the paragraph after
+Definition~\ref{fam2:def:good} applies.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fam2:thm:reduction}]
+\emph{Step 1 (item~(1)).} Let $(\beta_n)$ be as in~\eqref{fam2:eq:G}. Each $u_{\beta_n}$ is analytic
+(Proposition~\ref{prop:homogeneous-lift}), so $c_j(\beta_n)<\infty$ by goodness and Lemma~\ref{fmo:lem:homogeneous}(3). If
+$\limsup_nc_j(\beta_n)^{1/n}=\infty$, choose $n_1<n_2<\dots$ with $n_{i+1}>jn_i$ and $c_j(\beta_{n_i})^{1/n_i}\ge i$. By
+Lemma~\ref{fmo:lem:series}(1) and goodness, $u(h)=\sum_i\beta_{n_i}(h^{\times n_i})$ is analytic on the open unit ball and
+$\Lambda^j_\pi u(h)=\sum_Nq_N(h^{\times N})$ for $\norm h<R'$, $\norm{q_N}\le C'R'^{-N}$. As in Step~2 of the proof of
+Lemma~\ref{fmo:lem:assembly}, $\Lambda^j_\pi u(h)(x_1\wedge\dots\wedge x_j)=\sum_Ns_N(h)$, with $s_N(h)$ the sum of the
+$u_{\beta_{\sigma(1)}}(h)x_1\wedge\dots\wedge u_{\beta_{\sigma(j)}}(h)x_j$ over the $\sigma\colon\{1,\dots,j\}\to
+\{n_1,n_2,\dots\}$ with $\sum_a\sigma(a)=N$, and Lemma~\ref{lem:unique} on the lines $t\mapsto th$ gives
+$s_N(h)=q_N(h^{\times N})(x_1\wedge\dots\wedge x_j)$. For $N=jn_i$ only $\sigma\equiv n_i$ qualifies, as $n_{i+1}>jn_i$
+and $jn_{i-1}<n_i$; so $q_{jn_i}$ lifts $u_{\beta_{n_i}}$, and $c_j(\beta_{n_i})^{1/n_i}\le C'^{1/n_i}R'^{-j}$ stays
+bounded, a contradiction.
+
+\emph{Step 2 (item~(2)).} Let $u\colon U\to\cL(E,\widehat D)$ be analytic, $u(x_0+h)=\sum_n\beta_n(h^{\times n})$,
+$\norm{\beta_n}\le CR^{-n}$. For integers $m,m'\ge0$ with $\abs\vartheta^{m'}<R$ and $\abs\vartheta^{-m}\ge\max(C,1)$ and for
+$\lambda=\vartheta^{m'}$, $\norm{\vartheta^m\lambda^n\beta_n}\le1$, so~\eqref{fam2:eq:G} gives $C'_j,C''_j\ge1$ with
+$c_j(\vartheta^m\lambda^n\beta_n)<C'_jC''^n_j$ for $n\ge1$, $j\le k$, and Lemma~\ref{fmo:lem:homogeneous}(1) gives lifts of
+$u_{\beta_n}$ in degree $j$ of norm at most $\abs\vartheta^{-mj}C'_j(C''_j\abs\lambda^{-j})^n$; apply
+Lemma~\ref{fmo:lem:assembly} with $C_0=\max_j\abs\vartheta^{-mj}C'_j$ and $C_1=\max_jC''_j\abs\lambda^{-j}$.
+
+\emph{Step 3 (item~(3)).} The first assertion is Lemma~\ref{fmo:lem:homogeneous}(2). In the second, ``only if'' is~(1);
+conversely, we show goodness in degree $n\le k$ by induction. If $n<p$, apply~(2) and the first assertion. If $n>p$ is not
+a power of $p$ and $p^l$ is the largest power of $p$ below $n$, then $n=p^l+(n-p^l)$ is carry-free, so $\binom n{p^l}\ne0$
+in $K$ by Lucas's theorem (proof of Corollary~\ref{fib:cor:degrees}); apply Lemma~\ref{fmo:lem:steps}(1). If $n=p^i$,
+$(\mathrm G_j)$ holds for $j<n$ by induction and~(1), and for $j=n$ by hypothesis; apply~(2).
+
+\emph{Step 4 (item~(4)).} The linearization $\tau_\beta\colon Y_n\to\widehat D$ of $(h_1,\dots,h_n,y)\mapsto
+\beta(h_1,\dots,h_n)y$ has norm $\norm\beta$ and $\beta=\tau_\beta\circ\beta^{\mathrm u}_n$; apply
+Lemma~\ref{fmo:lem:homogeneous}(4). If $(P;E,D_{\mathrm u})$ is good in degrees $j\le k$, then, with $J_n$ the $n$th
+injection of $D_{\mathrm u}$, $(\mathrm G_j)$ for $\beta_n=J_n\circ\beta^{\mathrm u}_n$, of norm at most $1$, and $c_j(\beta^{\mathrm u}_n)\le
+c_j(\beta_n)$, by Lemma~\ref{fmo:lem:homogeneous}(4) with the $n$th projection, make every $c_j(\beta^{\mathrm u}_n)$ finite
+with geometric growth; with the inequality, this gives $(\mathrm G_j)$ for every normed $D$, hence goodness in degrees
+$j\le k$ by~(2). In characteristic $p$ the degrees $p^i\le k$ give $(\mathrm G_{p^i})$ for every $D$, and~(3) applies.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{fam2:cor:degrees}]
+(1) Degrees below $p$ are good by Theorem~\ref{fam2:thm:reduction}(2),(3), carry-free sums by Lemma~\ref{fmo:lem:steps}(1)
+and Lucas's theorem; a least missing $N$ that is not a power of $p$ would be the carry-free sum $p^l+(N-p^l)$ of smaller
+elements, $p^l$ the largest power of $p$ below $N$. (2) By Proposition~\ref{fam2:prop:reductions}(2), $(P;E,D)$ and
+$(P;E\oplus K,D\oplus K)$ are good in the same degrees, so Lemma~\ref{fmo:lem:steps}(2) makes $\fD(P;E,D)$ closed under
+$k\mapsto k-1$, $k\ge2$; apply~(1). (3) is Proposition~\ref{fam2:prop:fibers}. (4) Lemma~\ref{fmo:lem:steps}(2), for all
+normed $E$, $D$ at once, gives closure under $k\mapsto k-1$; by~(1) the set contains $1,\dots,p-1$ and is closed under
+carry-free sums, so its least missing element is a power of $p$.
+\end{proof}
+
+\subsection{The familywise class}\label{fmo:ssec:class}
+
+\begin{lemma}\label{fmo:lem:germs}
+Let $u(x_0+h)=\sum_n\beta_n(h^{\times n})$ for $\norm h<R$, $\beta_n\in\Mult^n(P;\cL(E,\widehat D))$,
+$\norm{\beta_n}\le CR^{-n}$, and $\lambda\in K$, $0<\abs\lambda<R$. Let $\beta^\otimes_n\colon\hot^n_\pi P\to\cL(E,\widehat D)$
+be the linearization of $\beta_n$ for $n\ge1$, and $\beta^\otimes_0(c)=c\beta_0$ for $c$ in slot $0$, $\Kh$, by the
+$\Kh$-vector space structure of $\cL(E,\widehat D)$. Then $\theta((w_n)_n)=\sum_n\lambda^n\beta^\otimes_n(w_n)$ is a linear
+family on $\mathcal T(P)$, $\norm\theta\le C$, and $u(x_0+\lambda h)=\theta(\operatorname{ver}(h))$ for $\norm h<1$.
+Conversely, $\theta\circ\operatorname{ver}$ is analytic on the open unit ball for every linear family $\theta$ on
+$\mathcal T(P)$.
+\end{lemma}
+
+\begin{proof}
+$\norm{\lambda^n\beta^\otimes_n(w_n)}\le C(\abs\lambda/R)^n\norm{w_n}$, and $\theta(\operatorname{ver}(h))=\sum_n\beta_n
+((\lambda h)^{\times n})$. The converse is Lemma~\ref{fmo:lem:series}(1), as $\norm{\theta\circ\operatorname{ver}_n}\le
+\norm\theta$.
+\end{proof}
+
+\begin{lemma}\label{fmo:lem:veronese}\emergencystretch=3em
+Let $Y$ be a Banach space, $0<R'\le R<1$, and $C_{k,R}=\sup_N\binom{N+k-1}{k-1}R^N<\infty$. For
+$\Phi\in\Mult^k(\mathcal T(P);Y)$, $\norm{\operatorname{ver}^\sharp\Phi}_R\le C_{k,R}\norm\Phi$ and
+$\Phi(\operatorname{ver}(h),\dots,\operatorname{ver}(h))=\sum_N(\operatorname{ver}^\sharp\Phi)_N(h^{\times N})$ for
+$\norm h<1$; if $\Phi$ has zero diagonal, $\operatorname{ver}^\sharp\Phi\in\Mult^\omega_{R,0}(P;Y)$; and
+$\iota_{R'R}\circ\operatorname{ver}^\sharp$ is $\operatorname{ver}^\sharp$ with values in $\Mult^\omega_{R'}(P;Y)$. Hence
+vanishing after shrinking does not depend on $R$.
+\end{lemma}
+
+\begin{proof}
+There are at most $\binom{N+k-1}{k-1}$ compositions of $N$ into $k$ parts, and $\norm{\operatorname{ver}_n}\le1$; the identity
+is Lemma~\ref{fmo:lem:series}(2) with radius $1$. For zero diagonal, $\sum_Nt^N(\operatorname{ver}^\sharp\Phi)_N(h^{\times N})=0$
+for $\abs t<1/\norm h$; apply Lemma~\ref{lem:unique}. The inclusion keeps components, so $(\iota_{R'R})_*\ob^\omega_k(\theta;R)=
+\ob^\omega_k(\theta;R')$ by~\eqref{fam2:eq:class} and Corollary~\ref{ocl:cor:functorial}(b), and pushouts of $0$ vanish.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fam2:thm:class}]
+\emph{Step 1 (item~(1)).} The second and third conditions are equivalent: bounded linear maps into
+$\Mult^\omega_{R',0}(P;\hLambda^k_\pi D)$ are sequences of maps into the $\Mult^N_0(P;\hLambda^k_\pi D)$ with
+$\sup_NR'^N\norm\cdot<\infty$, $\iota_{R'R}$ keeps components, and a pushout vanishes if and only if the map extends
+(Lemma~\ref{ob:lem:split-criteria}(3)). Each $q_N\in\Mult^N(P;\cL(\Lambda^k_\pi E,\hLambda^k_\pi D))$ gives
+$q_N^\sharp\colon\hLambda^k_\pi E\to\Mult^N(P;\hLambda^k_\pi D)$, $q_N^\sharp(y)(h_1,\dots,h_N)=q_N(h_1,\dots,h_N)y$, of the
+same norm, and conversely. If $\Lambda^k_\pi\theta(\operatorname{ver}(h))=\sum_Nq_N(h^{\times N})$ for $\norm h<R_0$,
+$\norm{q_N}\le C'R_0^{-N}$, then for $z\in\hot^k_\pi E$ the $N$th terms of $\operatorname{ver}^\sharp\ev_\theta(z)$ and
+$q_N^\sharp\widehat\wedge^k_Ez$ have the same diagonal, both giving the $t^N$-coefficient of
+$\ev_\theta(z)(\operatorname{ver}(th),\dots,\operatorname{ver}(th))=\hLambda^k_\pi\theta(\operatorname{ver}(th))
+(\widehat\wedge^k_Ez)$ (Lemmas~\ref{fmo:lem:veronese} and~\ref{lem:unique}). So
+$\xi_N=\operatorname{pr}_N\operatorname{ver}^\sharp\ev_\theta-q_N^\sharp\widehat\wedge^k_E$ takes values in
+$\Mult^N_0$, extends $(\operatorname{pr}_N\operatorname{ver}^\sharp
+\ev_\theta)|_{\cN^k_E}$ and has norm at most $C_{k,R}\norm\theta^kR^{-N}+C'R_0^{-N}$. Conversely, extensions $\xi_N$ of norm
+at most $CR'^{-N}$ make $\operatorname{pr}_N\operatorname{ver}^\sharp\ev_\theta-\xi_N$ vanish on $\cN^k_E$, so it is
+$q_N^\sharp\widehat\wedge^k_E$ with $\norm{q_N^\sharp}\le(C_{k,R}\norm\theta^k+C)\min(R,R')^{-N}$
+(Lemma~\ref{ob:lem:metric-surjection}), and $\sum_Nq_N(h^{\times N})=\Lambda^k_\pi\theta(\operatorname{ver}(h))$ for
+$\norm h<\min(R,R')$ by Lemma~\ref{fmo:lem:veronese}.
+
+\emph{Step 2 (item~(2)).} For analytic $u$ and $x_0$, Lemma~\ref{fmo:lem:germs} gives $\lambda$, $\theta$ with
+$u(x_0+\lambda h)=\theta(\operatorname{ver}(h))$, and~(1), with $h=\lambda^{-1}(x-x_0)$, gives analyticity of
+$\Lambda^k_\pi u$ at $x_0$. Conversely, $\theta\circ\operatorname{ver}$ is analytic on the open unit ball
+(Lemma~\ref{fmo:lem:germs}); apply goodness and~(1).
+
+\emph{Step 3 (item~(3)).} As $\theta(w)=\tau_\theta\circ\theta_{\mathrm u}(w)$, $\ev_\theta=(\hLambda^k_\pi\tau_\theta)_\flat
+\ev_{\theta_{\mathrm u}}$ on pure tensors. The map $(\hLambda^k_\pi\tau_\theta)_\flat$ commutes with
+$\operatorname{ver}^\sharp$ and $\iota_{R'R}$, preserves zero diagonals and has norm at most $\norm{\tau_\theta}^k$; so
+Corollary~\ref{ocl:cor:functorial}(b) gives the identity, vanishing after shrinking passes from $\theta_{\mathrm u}$ to every
+$\theta$, and~(2) gives goodness for every $D$. Conversely, (2) for the Banach space $D=\mathcal T(P)\hot_\pi E$ gives
+vanishing for $\theta_{\mathrm u}$. Finally $\theta_{\mathrm u}\circ\operatorname{ver}=\mathcal U$; apply~(1).
+\end{proof}
+
+\subsection{Polarizable base models}\label{fmo:ssec:polarizable}
+
+\begin{lemma}\label{fmo:lem:regroup}
+Let $n,i\ge1$ and $R_i$ a bounded projection of $\hot^i_\pi P$ onto $\hGamma^i_\pi P$. Identify $\hot^{ni}_\pi P$ with
+$(\hot^i_\pi P)^{\hot n}$ by grouping the positions $(a,1),\dots,(a,i)$ into the $a$th factor, and let $\operatorname{reg}$ be
+the isometry of $\hot^{ni}_\pi P$ moving position $(a,b)$ to $(b,a)$, with target $(\hot^n_\pi P)^{\hot i}$. Then
+$q_{n,i}(h_1,\dots,h_{ni})=\operatorname{reg}\circ R_i^{\otimes n}(h_1\otimes\dots\otimes h_{ni})$ is bounded $ni$-linear,
+$\norm{q_{n,i}}\le\norm{R_i}^n$, with values in $\hGamma^i_\pi(\hot^n_\pi P)$, and $q_{n,i}(h^{\times ni})=
+(h^{\otimes n})^{\otimes i}$.
+\end{lemma}
+
+\begin{proof}
+$R_i^{\otimes n}$ has norm at most $\norm{R_i}^n$, takes values in the closed span of the $y_1^{\otimes i}\otimes\dots\otimes
+y_n^{\otimes i}$, which $\operatorname{reg}$ sends to $(y_1\otimes\dots\otimes y_n)^{\otimes i}$, and fixes
+$(h^{\otimes i})^{\otimes n}$, which $\operatorname{reg}$ sends to $(h^{\otimes n})^{\otimes i}$.
+\end{proof}
+
+\begin{lemma}\label{fmo:lem:per}
+Let $G$ be a Banach space and $\mathbf m$ a content of type $\mathbf i=(i_1,\dots,i_m)$, let $\Omega_{\mathbf m}$ represent
+the left cosets in $S_k$ of the subgroup preserving the consecutive blocks of sizes $i_1,\dots,i_m$, acting on
+$\hot^k_\pi G$ by permuting factors, and $\operatorname{per}_{\mathbf m}=\sum_{\sigma\in\Omega_{\mathbf m}}\sigma$. Then
+$\norm{\operatorname{per}_{\mathbf m}}\le\binom k{\mathbf i}$; on tensors invariant under that subgroup,
+$\operatorname{per}_{\mathbf m}$ does not depend on $\Omega_{\mathbf m}$; for $y_1,\dots,y_m\in G$,
+$\operatorname{per}_{\mathbf m}(y_1^{\otimes i_1}\otimes\dots\otimes y_m^{\otimes i_m})$ is the coefficient of
+$t_1^{i_1}\cdots t_m^{i_m}$ in $(\sum_lt_ly_l)^{\otimes k}$ and lies in the span of the powers $y^{\otimes k}$, $y\in G$;
+and $\operatorname{per}_{\mathbf m}$ maps the closed span of such tensors into $\hGamma^k_\pi G$.
+\end{lemma}
+
+\begin{proof}
+The bound is the triangle inequality; on invariant tensors $\sigma$ and $\sigma\sigma'$, $\sigma'$ in the subgroup, agree.
+The cosets correspond bijectively to the words in which $l$ occurs $i_l$ times, whose sum is the coefficient. A linear
+functional on the span of the coefficients of $(\sum_lt_ly_l)^{\otimes k}$ vanishing on these powers vanishes on every
+coefficient, by Lemma~\ref{lem:idprinc}, as in Step~1 of the proof of Proposition~\ref{spl:prop:gamma-l1}. Continuity gives
+the last claim.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fam2:thm:polarizable}]
+\emph{Step 1 (affine maps suffice).} Affine maps are analytic. Conversely, fix $n\le k$, let $G=\Kh\oplus\widehat P$ with
+the maximum norm, $\gamma(x)=(1,x)$, $Z=\hot^n_\pi P=\hot^n_\pi\widehat P$ and $W=\hGamma^n_\pi P=\hGamma^n_\pi\widehat P$
+(density; paragraph before Theorem~\ref{ob:thm:mechanisms}). Scalar multiplication on $Z$ extends from $K$ to $\Kh$
+by continuity and preserves the closed subspace $W$. The $k$-linear map $\Phi((\lambda_1,x_1),\dots,(\lambda_k,x_k))=
+\lambda_{n+1}\cdots\lambda_k\,x_1\otimes\dots\otimes x_n$ has $\norm\Phi\le1$ and $\Phi((\lambda,x),\dots,(\lambda,x))=
+\lambda^{k-n}x^{\otimes n}\in W$, so
+$x\mapsto x^{\otimes n}=\Phi(\gamma(x),\dots,\gamma(x))$ is analytic at $0$ into $W$; Proposition~\ref{prop:homogeneous-lift},
+with the canonical map $P^n\to Z$, and Lemma~\ref{ob:lem:parameter} give polarizability in degree $n$.
+
+\emph{Step 2 (the ambient sum).} Let $G,Z,W,\Phi,U,\gamma$ be as in Definition~\ref{fam2:def:reflection}, $x_0\in U$ and
+$\gamma(x_0+h)=\sum_n\gamma_n(h^{\times n})$ for $\norm h<R$, $\norm{\gamma_n}\le CR^{-n}$. Let $\gamma^\otimes_n\colon
+\hot^n_\pi P\to G$ and $\Phi^\otimes\colon\hot^k_\pi G\to Z$ be the linearizations, with $\hot^0_\pi P=\Kh$ and
+$\gamma^\otimes_0(c)=c\gamma_0$; as $W$ is closed, $\Phi^\otimes(\hGamma^k_\pi G)\subseteq W$. By
+Lemma~\ref{fmo:lem:series}(2), for $\norm h<R$, $\Phi(\gamma(x_0+h),\dots,\gamma(x_0+h))$ is the absolutely convergent sum of
+the $\Phi(\gamma_{n'_1}(h^{\times n'_1}),\dots,\gamma_{n'_k}(h^{\times n'_k}))$, $(n'_1,\dots,n'_k)\in\N_0^k$, and by
+Lemma~\ref{fmo:lem:per} the terms of content $\mathbf m$, of support $n_1<\dots<n_m$ and type $\mathbf i$, sum to
+$\Phi^\otimes\operatorname{per}_{\mathbf m}(\gamma_{n_1}(h^{\times n_1})^{\otimes i_1}\otimes\dots\otimes
+\gamma_{n_m}(h^{\times n_m})^{\otimes i_m})$.
+
+\emph{Step 3 (lifting each content).} Fix $\bar g$ as in~(2) and projections $R_i$ onto $\hGamma^i_\pi P$ with
+$\norm{R_i}\le\bar g$, $i\le k$. Let $q_l=q_{n_l,i_l}$ (Lemma~\ref{fmo:lem:regroup}) if $n_l\ge1$, $q_l=1\in\Kh$ if $n_l=0$,
+and, with consecutive blocks $I_l$ of sizes $n_li_l$, $Q_{\mathbf m}(h_1,\dots,h_{N(\mathbf m)})=\Phi^\otimes
+\operatorname{per}_{\mathbf m}(\bigotimes_l(\gamma^\otimes_{n_l})^{\otimes i_l}q_l(h_{I_l}))$. Then $\norm{Q_{\mathbf m}}\le
+\norm\Phi\binom k{\mathbf i}\prod_l\norm{\gamma_{n_l}}^{i_l}\bar g^{n_l}\le\norm\Phi k!C^k(\bar g/R)^{N(\mathbf m)}$, as
+$\bar g\ge1$. Its values lie in $W$, as $q_l$ takes values in $\hGamma^{i_l}_\pi(\hot^{n_l}_\pi P)$, which
+$(\gamma^\otimes_{n_l})^{\otimes i_l}$ maps into $\hGamma^{i_l}_\pi G$, and Lemma~\ref{fmo:lem:per} applies. By
+Lemma~\ref{fmo:lem:regroup}, $Q_{\mathbf m}(h^{\times N(\mathbf m)})$ is the content-$\mathbf m$ sum of Step~2.
+
+\emph{Step 4 (item~(1)).} The sum $q_N$ of the $Q_{\mathbf m}$ of degree $N$ is bounded $N$-linear into $W$, with
+\begin{equation}\label{fmo:eq:reflection}
+ \norm{q_N}\le\norm\Phi\,k!\,C^k\tbinom{N+k-1}{k-1}(\bar g/R)^N ,
+\end{equation}
+and for $\norm h<R/\bar g$, $\sum_Nq_N(h^{\times N})$ converges in the Banach space $W$ to $\Phi(\gamma(x_0+h),\dots,
+\gamma(x_0+h))$, by Step~2.
+
+\emph{Step 5 (items~(2)--(4)).} (2) For analytic $u\colon U\to\cL(E,\widehat D)$ take $G=\cL(E,\widehat D)$,
+$Z=\Mult^k(E;\hLambda^k_\pi D)$, $W$ the image of $\cL(\Lambda^k_\pi E,\hLambda^k_\pi D)$ under the closed isometry
+$T\mapsto T\circ\omega_E$ (Proposition~\ref{prop:exterior}), and $\Phi(u_1,\dots,u_k)(x_1,\dots,x_k)=u_1x_1\wedge\dots\wedge
+u_kx_k$, of norm at most $1$, with $\Phi(u,\dots,u)=\Lambda^k_\pi u\circ\omega_E$; apply~(1) and~\eqref{fmo:eq:reflection}.
+For bundles, $x\mapsto A^k_{E,\widehat D;F}(u(x))$ is analytic for Banach $F$ (prose after Definition~\ref{fam2:def:good}),
+and the last assertion of Theorem~\ref{thm:bundle-lifting} applies as in the proof of Corollary~\ref{fam2:cor:bundles}.
+(3) If $n!\ne0$ in $K$, $P$
+is polarizable in degree $n$ (Proposition~\ref{can:prop:natural}(2)); so~(2) applies if $\operatorname{char}K=0$ or
+$k<p$. Polarizability in
+degree $p$ gives it in every degree (Theorem~\ref{cmb:thm:polarizable-height}). A lower $r$-estimate, $r<2$, bounds
+$\cP_<$ (Theorem~\ref{fib:thm:lower}(1)), and Proposition~\ref{spl:prop:ordering}(3) gives polarizability in every degree.
+(4) Projections with $\norm{R_n}\le2g_n(P)$ and Theorem~\ref{fam:thm:tensor-analytic} give the first equivalence, and~(1)
+the second. For nonarchimedean $K$, $g_n(\ell^1(\N,K))=n!$ (Propositions~\ref{spl:prop:gamma-l1}(1)
+and~\ref{fam:prop:l1-optimal}) is finite, while $(n!)^{1/n}$ is unbounded; apply~(1) and~(2).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fam2:thm:bases}]
+\emph{Step 1 (item~(1)).} As the statement depends only on $K$ as a normed field, Lemma~\ref{obs:lem:normalization} lets us
+assume $K$ dense in $\kappa((X))$, as in the proof of Theorem~\ref{obs:thm:ptb}. By Lemma~\ref{obs:lem:multiplier}(1) for
+$P$, $\norm{ay}_P\le\norm y_\infty\norm a_P$ for $a\in P$ and $y\in E_0$, so $\theta_0$ is a linear family, and
+$\norm{\theta_0(a)}=\norm{\mu_a}_{E_0\to P}=\norm a_P$ for $a\in c_{00}(\N,K)$ (Lemma~\ref{obs:lem:multiplier}(2),(4)). The
+fifth condition gives the first, the first the second. If $\Lambda^k_\pi\theta_0$ is analytic at a point, $\theta_0$ has a
+lift $Q$ in degree $k$ (prose after Definition~\ref{fam2:def:good}). Its restriction to $c_{00}(\N,K)^k$ is a multiplier lift for
+$(E_0,P)$ (Section~\ref{frc:ssec:coefficients}) satisfying~\eqref{frc:eq:mult-bound} with $C_Q=\norm Q$, and $E_0$, $P$ are
+symmetric sequence spaces; so Steps~1--5 of the proof of Theorem~\ref{obs:thm:ptb} apply to $(E_0,P)$, as in Step~2 of the
+proof of Proposition~\ref{obs:prop:gamma-ptb}, and $x=1_{\operatorname{supp}a}$, $y=1_{\operatorname{supp}b}$
+in~\eqref{obs:eq:ptb} bound $\cP_<$ on $P\otimes_\pi P$. This bound, item~(3) of Theorem~\ref{cls:thm:symmetric}, gives
+polarizability in degree $p$ (Proposition~\ref{spl:prop:ordering}(3)), hence the fifth condition
+(Theorem~\ref{fam2:thm:polarizable}(3)). The examples follow from Corollary~\ref{cls:cor:symmetric-examples} and
+Theorem~\ref{fam2:thm:polarizable}(3), every $k\ge p$ being admissible in~(L).
+
+\emph{Step 2 (item~(2)).} Apply Theorem~\ref{fib:thm:marking} with $E=c_{00}(\N,K)$, $E'=\linf(\N,\Kh)$, $\psi=\id$,
+$\theta=\id$, $u_a=\mu_a=\mu_{w(i(a))}$, $F=\hLambda^k_\pi E'$, $\nu=\omega_{E'}$, $\theta_F=\id$: no bounded $k$-linear $Q$ on
+$c_{00}(\N,K)^k$ has $Q(a^{\times k})=\omega_{E'}\circ(\mu_a,\dots,\mu_a)$. Analyticity of $x\mapsto\Lambda^k_\pi\mu_{w(x)}$
+at a point would give a lift $Q_P$ of the linear family $x\mapsto\mu_{w(x)}$ (prose after Definition~\ref{fam2:def:good}),
+and $(a_1,\dots,a_k)\mapsto Q_P(ia_1,\dots,ia_k)\circ\omega_E$ would be such a $Q$. For $c_0(\Sigma,K)$ and
+$\linf(\Sigma,K)$ take $\N\subseteq\Sigma$, $i$ extension by zero and $w$ restriction; for $P$
+with an equivalent nonarchimedean norm and $\dim_{\Kh}\widehat P=\infty$, take $i(\xi)=\sum_n\xi_ne_n$ and $w=\theta_P|_P$
+with $e_n$, $\theta_P$ from Lemma~\ref{fib:lem:marking}. Then $(\mathrm U^k_P)$ fails, and with it polarizability in degree
+$p$ (Theorem~\ref{fam2:thm:polarizable}(3)). If $\dim_{\Kh}\widehat P=d<\infty$, a bounded $\Kh$-linear isomorphism
+$T\colon\widehat P\to\ell^1(\{1,\dots,d\},\Kh)$ exists as $\Kh$ is complete, and $(T^{-1})^{\otimes n}R_nT^{\otimes n}$
+transfers projections (Step~3 of the proof of Proposition~\ref{spl:prop:gamma-l1}); as passing to a dense subspace changes
+neither $\hot^n_\pi$ nor $\hGamma^n_\pi$, Proposition~\ref{spl:prop:gamma-l1}(1) for $\ell^1(\{1,\dots,d\},K)$ makes $P$
+polarizable in every degree; apply Theorem~\ref{fam2:thm:polarizable}(2).
+\end{proof}
+
+\subsection{Fibers, parameter-relative ordering and the staircase}\label{fmo:ssec:mixed}
+
+\begin{proof}[Proof of Proposition~\ref{fam2:prop:fibers}]
+(1) For an analytic $u\colon U\to\cL(E,\widehat D)$, $\Lambda^k_\pi u(x)=Q(u(x),\dots,u(x))$ is analytic on $U$ by
+Lemma~\ref{fmo:lem:series}(2). For $\beta$ as stated, $q(h_1,\dots,h_{kn})=Q(\beta(h_{I_1}),\dots,\beta(h_{I_k}))$, with
+$I_1,\dots,I_k$ the consecutive blocks of size $n$, is a lift of $u_\beta$ in degree $k$ of norm at most
+$\norm Q\norm\beta^k$. (2) The ``if'' direction is~(1). Conversely, the identity of the open set $\cL(E,\widehat D)$ is an
+analytic family, so $u\mapsto\Lambda^k_\pi u$ is analytic at some point of $\cL(E,\widehat D)$; since
+$\hLambda^k_\pi\widehat D=\hLambda^k_\pi D$, Lemma~\ref{fib:lem:test} applies to $(E,\widehat D)$. The second assertion
+follows from~(1) and the first.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fam2:thm:gamma-split}]
+\emph{Step 1 (the map $\Pi$).} Let $G_r$ and $\delta_t$ be as in Section~\ref{ord:ssec:triangle}; by density
+$\hot^k_\pi G_r=\hot^k_\pi\ell^r(\Sigma,\Kh)$ and $\hGamma^k_\pi G_r=\hGamma^k_\pi\ell^r(\Sigma,\Kh)$. For a composition
+$\mathbf l=(l_1,\dots,l_m)$ of $k$ let $I_1,\dots,I_m$ be the consecutive blocks of sizes $l_i$ and $\Omega_{\mathbf l}$
+represent the left cosets of $S_{l_1}\times\dots\times S_{l_m}$ in $S_k$, acting by permuting factors. For
+$a_1,\dots,a_k\in c_{00}(\Sigma,K)$ put
+\[\Pi_{\mathbf l}(a_1,\dots,a_k)=\sum_{t_1<\dots<t_m}\prod_{i=1}^m\prod_{j\in I_i}a_j(t_i)\,\delta_{t_1}^{\otimes l_1}
+\otimes\dots\otimes\delta_{t_m}^{\otimes l_m},\qquad\Pi=\sum_{\mathbf l}\sum_{\sigma\in\Omega_{\mathbf l}}\sigma\circ
+\Pi_{\mathbf l}.\]
+As $\sum_{\sigma\in\Omega_{\mathbf l}}\sigma\delta_{\mathbf t}=O_{\mathbf t}$ for nondecreasing $\mathbf t$ with constant
+blocks of sizes $\mathbf l$, $\Pi$ is $R_k$ of Proposition~\ref{spl:prop:ordering}(3), for $(\delta_t)$, applied to
+$a_1\otimes\dots\otimes a_k$. So $\Pi(a,\dots,a)=a^{\otimes k}$, and $\Pi$ takes values in the span of the $O_{\mathbf t}$,
+which lie in the span of the powers by Step~4 of the proof of that proposition in Appendix~\ref{app:ordering}.
+
+\emph{Step 2 (one composition).} Let $\Delta=\{i:l_i\ge2\}$, $j_i$ the element of $I_i$ for $i\notin\Delta$, and
+$b_i=\prod_{j\in I_i}a_j$ for $i\in\Delta$, so $\norm{b_i}_1\le\prod_{j\in I_i}\norm{a_j}_2$ by H\"older's inequality and
+$\norm\cdot_{l_i}\le\norm\cdot_2$. For fixed strictly increasing $(t_i)_{i\in\Delta}$, the $i\notin\Delta$ form maximal runs
+of consecutive indices, and for a run the admissible $t_i$ are the strictly increasing tuples in the open interval $J$ of
+$\Sigma$ between the neighboring fixed values. So $\Pi_{\mathbf l}(a_1,\dots,a_k)$ is the sum over $(t_i)_{i\in\Delta}$ of
+$\prod_{i\in\Delta}b_i(t_i)$ times the tensor product, in block order, of the $\delta_{t_i}^{\otimes l_i}$, $i\in\Delta$, of
+norm $1$, and, for each run of length $n$, of $\cP^{(n)}(\bigotimes_i
+a_{j_i}1_J)$, of norm at most $C'_n\prod_i\norm{a_{j_i}}_2$ with $C'_n=\max(1,C_{n,r}\abs\vartheta^{-n})$
+(Theorem~\ref{ord:thm:triangle}). Hence $\norm{\Pi_{\mathbf l}(a_1,\dots,a_k)}\le C_{\mathbf l}\prod_j\norm{a_j}_2$, with
+$C_{\mathbf l}$ the product of the $C'_n$ of the runs.
+
+\emph{Step 3 (item~(1)).} So $\Pi$ extends from the dense subspace $c_{00}(\Sigma,K)$ of $\ell^2(\Sigma,\Kh)$, with values
+in the closed subspace $\hGamma^k_\pi G_r$, and $\Pi(a,\dots,a)=a^{\otimes k}$ persists by continuity.
+
+\emph{Step 4 (item~(2), linear maps).} Let $T\colon P\to G$ be bounded linear, and extend $\Phi$ to $\widehat G^k$; its
+diagonal stays in $W$. The coordinate map $V\to\ell^2(\Sigma,\Kh)$ extends to $w\colon P\to\ell^2(\Sigma,\Kh)$,
+$\norm w\le C_2$; write $h(t)=(wh)(t)$ and $\iota\colon\ell^2\to\ell^r$ for the inclusion. As in Step~1 of the proof of
+Theorem~\ref{spl:thm:relative-ordering}, with $P$, $G$, $T$ for $E$, $D$, $u$, the map $\xi\mapsto\sum_t\xi(t)T(e_t)$
+extends from $c_{00}(\Sigma,K)$ to $\widetilde T\colon\ell^r(\Sigma,\Kh)\to\widehat G$ with $T=\widetilde T\circ\iota\circ w$.
+The linearization $\Phi_r^\otimes$ of $(\xi_1,\dots,\xi_k)\mapsto\Phi(\widetilde T\xi_1,\dots,\widetilde T\xi_k)$, extended
+to $\hot^k_\pi G_r$, maps $\hGamma^k_\pi G_r$ into $W$, and $Q(a_1,\dots,a_k)=\Phi_r^\otimes\Pi(wa_1,\dots,wa_k)$ satisfies
+$Q(a,\dots,a)=\Phi_r^\otimes((\iota wa)^{\otimes k})=\Phi(Ta,\dots,Ta)$, by continuity from $c_{00}(\Sigma,K)$.
+
+\emph{Step 5 (item~(2), analytic maps).} Let $\gamma(x_0+h)=\sum_n\gamma_n(h^{\times n})$ for $\norm h<R$,
+$\norm{\gamma_n}\le CR^{-n}$, let $\Sigma_*$ be the disjoint union of the $\Sigma^n$, $n\ge0$, totally ordered in any way,
+and $\lambda\in K$ with $0<\abs\lambda\le R/C_e$, $C_e=\sup_t\norm{e_t}$. For $\norm h<\abs\lambda/C_2$ the vector
+$\xi(h)\in\ell^2(\Sigma_*,\Kh)$
+with entries $\xi(h)_{(n,\mathbf t)}=\lambda^{-n}h(t_1)\cdots h(t_n)$ has $n$th block of norm
+$(\norm{wh}_2/\abs\lambda)^n$, and $\xi$ is analytic at $0$ with $n$th coefficient of norm at most $(C_2/\abs\lambda)^n$. As
+$\norm{\lambda^n\gamma_n(e_{t_1},\dots,e_{t_n})}\le C$, \eqref{spl:eq:r-norm} for $\widehat G$
+(Proposition~\ref{spl:prop:r-norm}) extends $\delta_{(n,\mathbf t)}\mapsto
+\lambda^n\gamma_n(e_{t_1},\dots,e_{t_n})$ to $T_*\colon\ell^r(\Sigma_*,\Kh)\to\widehat G$, and $T_*\iota\xi(h)=
+\sum_n\gamma_n(h^{\times n})=\gamma(x_0+h)$ for $\norm h<\min(R,\abs\lambda/C_2)$: first for $h\in V$, where the blocks of
+$\xi(h)$ are finitely supported, then by continuity. Step~4 for
+$\ell^2(\Sigma_*,\Kh)$ with its unit vectors, $\widehat G$ and $T_*\circ\iota$ gives a bounded $k$-linear $Q_{T_*}$ into $W$
+with $Q_{T_*}(\eta,\dots,\eta)=\Phi(T_*\iota\eta,\dots,T_*\iota\eta)$; so $\Phi(\gamma(x_0+h),\dots,\gamma(x_0+h))=
+Q_{T_*}(\xi(h),\dots,\xi(h))$ near $0$, analytic by Lemma~\ref{fmo:lem:series}(2).
+
+\emph{Step 6 (item~(3)).} The space $\widehat D$ satisfies~\eqref{spl:eq:r-norm}: by Proposition~\ref{spl:prop:r-norm} and
+continuity if $D$ has an equivalent $r$-norm, and, if $D$ has an equivalent nonarchimedean norm, as
+$\max_t\abs{\xi_t}\le(\sum_t\abs{\xi_t}^r)^{1/r}$, as in the proof of Corollary~\ref{spl:cor:relative-ordering-na}. Hence
+so does $G=\cL(E,\widehat D)$, as $\norm{\sum_t\xi_tu_t}=\sup_{\norm x\le1}\norm{\sum_t\xi_tu_tx}$, and $G$ has an equivalent
+$r$-norm (Proposition~\ref{spl:prop:r-norm}). Let $Z=\cL(\hot^k_\pi E,\hLambda^k_\pi D)$, $W$ its operators vanishing on
+$\cN^k_E$, and $\Phi(u_1,\dots,u_k)=\widehat\wedge^k_D\circ(u_1\otimes\dots\otimes u_k)$, so $\Phi(u,\dots,u)=
+\hLambda^k_\pi u\circ\widehat\wedge^k_E$. For analytic $u\colon U\to G$, (2) makes $x\mapsto\hLambda^k_\pi u(x)\circ
+\widehat\wedge^k_E$ analytic into $W$; the inverse of the isometry $S\mapsto S\circ\widehat\wedge^k_E$ onto $W$
+(Lemma~\ref{ob:lem:metric-surjection}) and restriction to $\Lambda^k_\pi E$ give analyticity of $\Lambda^k_\pi u$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fam2:thm:staircase}]
+\emph{Step 1 (the input from Theorem~\ref{fib:thm:ell2}).} Suppose such a $Q$ exists. Step~1 of the proof of
+Theorem~\ref{fib:thm:ell2} in Appendix~\ref{app:forcing} uses only that $Q$ is $k$-linear on $c_{00}(\N,K)^k$ with
+$Q(a,\dots,a)=\Lambda^k_\pi\mu_a$, and that $\norm y_\infty\le\norm y_E$, so that the determinant array of
+Section~\ref{frc:ssec:costs} is defined on $\hLambda^k_\pi E$; it gives $\tau$, slots $\gamma_1\ne\gamma_2$ and $\delta\ne0$,
+independent of $m$.
+
+\emph{Step 2 (the norm bound for $\zeta$).} Fix $m\ge1$, and let $a_1,\dots,a_k$ and $x_1,\dots,x_k$ be the inputs of
+Step~2 of that proof: their entries lie in $\{0,\pm1\}$, $a_{\gamma_1}$ and $a_{\gamma_2}$ have $2m$ nonzero entries and the
+other $a_\gamma$ two, and $x_{\gamma_1}$, $x_{\gamma_2}$ have $4m$ and the other $x_\gamma$ four. So
+$\zeta=Q(a_1,\dots,a_k)(x_1\wedge\dots\wedge x_k)$ has
+$\norm\zeta\le\norm Q\varphi^\pm_P(2)^{k-2}\varphi^\pm_E(4)^{k-2}\varphi^\pm_P(2m)^2\varphi^\pm_E(4m)^2$.
+
+\emph{Step 3 (the rank bound).} The slice of Lemma~\ref{fib:lem:slice} for the slots $\gamma_1,\gamma_2$ and
+$c_\gamma=C_\gamma(1)$, followed by restriction to the coordinates $A_n(1)$ and $B_{n'}(1)$, contractive as
+$\norm y_\infty\le\norm y_E$, gives $z$ with $\coeff_0z=\mathsf Z$ and $\norm z\le k(k-1)\norm\zeta$; so
+Lemma~\ref{fib:lem:coeff}(2) and $\rank\mathsf Z\ge m-1$ give $m-1\le M_\varrho k(k-1)\norm\zeta$ for every $m$, contradicting
+the hypothesis by Step~2.
+
+\emph{Step 4 (the linear family and symmetric spaces).} If $\Lambda^k_\pi T$ were analytic at a point,
+$T$ would have a lift (prose after Definition~\ref{fam2:def:good}), whose restriction to $c_{00}(\N,K)^k$ Steps~1--3
+exclude. For a symmetric sequence space $G$ and $y\in c_{00}(\N,K)$ with entries
+in $\{0,\pm1\}$, $\norm y_G=\norm{1_{\operatorname{supp}y}}_G=\varphi_G(\abs{\operatorname{supp}y})$ by permutation
+invariance, and $\varphi_G$ is nondecreasing, so $\varphi^\pm_G=\varphi_G$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{fam2:cor:table}]
+\emph{Step 1 (item~(1)).} For $r_1<2$, $P$ has a lower $r_1$-estimate (example after Theorem~\ref{fib:thm:lower}); apply
+Theorem~\ref{fam2:thm:polarizable}(3). For $E=\ell^{r_2}(\N,K)$, $r_2<2$, $(E,\widehat E)$ is good for Banach values
+(Theorem~\ref{fib:thm:lower}(3)); apply Proposition~\ref{fam2:prop:fibers}. For $r_1=2$ apply
+Theorem~\ref{fam2:thm:gamma-split}(3) with the unit vectors of $\ell^2(\N,K)$, and with $r=r_2$ and the $r_2$-norm
+$\norm\cdot_{r_2}$ of $\ell^{r_2}(\N,K)$ over the nonarchimedean $K$ (paragraph after
+Corollary~\ref{spl:cor:relative-ordering-na}), or with any $r\in(2,\infty)$ and an equivalent nonarchimedean norm of $E$.
+
+\emph{Step 2 (item~(2)).} For $E=\ell^{r_2}(\N,K)$ or $c_0(\N,K)$, $\norm{\mu_a}_{E\to E}\le\norm a_\infty\le\norm a_P$,
+so $a\mapsto\mu_a$ extends from $c_{00}(\N,K)$ to a linear family $T\colon P\to\cL(E,\widehat E)$, and analyticity of
+$\Lambda^k_\pi T$ at a point would give a lift (prose after Definition~\ref{fam2:def:good}). For $P=c_0(\N,K)$ and $E$
+equal to $\ell^{r_2}(\N,K)$, $r_2\ge2$, or $c_0(\N,K)$, its restriction to $c_{00}(\N,K)^k$ is bounded for the supremum
+norm, which Theorem~\ref{fib:thm:ell2} excludes. For $2<r_1<\infty$ and $E$ equal to $c_0(\N,K)$ or $\ell^{r_2}(\N,K)$ with
+$1/r_1+1/r_2<1/2$, Theorem~\ref{fam2:thm:staircase} applies with $\varphi_{\ell^{r_1}}(n)=n^{1/r_1}$ and $\varphi_E(n)=1$
+or $n^{1/r_2}$, as $(2m)^{2/r_1}(4m)^{2/r_2}/m\to0$. If $K$ is complete and $E$ has an equivalent nonarchimedean norm,
+Lemma~\ref{fib:lem:marking} gives bounded linear $\widehat\psi_E\colon c_0(\N,K)\to E$ and $\theta_E\colon E\to c_0(\N,K)$
+with $\theta_E\widehat\psi_E=\id$, and $T_E(a)=\widehat\psi_E\mu_a\theta_E$ is a linear family on $P$; a lift $Q_{T_E}$ of it
+gives the lift $\hLambda^k_\pi\theta_E\circ Q_{T_E}(a_1,\dots,a_k)\circ\Lambda^k_\pi\widehat\psi_E$ of $a\mapsto
+\Lambda^k_\pi\mu_a$ on $c_0(\N,K)$, which the case $E=c_0(\N,K)$ excludes.
+
+\emph{Step 3 (item~(3)).} As $\norm{\mu_a}_{E\to E}=\norm a_\infty$ for $a\in c_{00}(\N,K)$
+(Lemma~\ref{obs:lem:multiplier}(1),(3)), the argument of Step~1 of the proof of Theorem~\ref{fam2:thm:bases}, with $(E,E)$
+for $(E_0,P)$ and with $a=1_{\operatorname{supp}x}$, $b=1_{\operatorname{supp}y}$ in~\eqref{obs:eq:ptb}, shows that a lift in
+a degree $k\ge p$ bounds $\cP_<$ on $E\otimes_\pi E$; Theorem~\ref{cls:thm:symmetric}, (3)$\Rightarrow$(7), then makes
+$(E,E)$ and $(E,\widehat E)$ good for Banach values in every degree. Conversely, if $(E,E)$ is
+good for Banach values in a degree $k\ge p$, (1)$\Rightarrow$(7) of that theorem gives the same; then
+Proposition~\ref{fam2:prop:fibers}(1) makes $(c_0(\N,K);E)$ good in every degree, and the prose after
+Definition~\ref{fam2:def:good} makes the multiplier family liftable in every degree.
+\end{proof}
+
+\subsection{Tangent bundles and structure groups}\label{fmo:ssec:tangent}
+
+\begin{proof}[Proof of Theorem~\ref{fam2:thm:tangent}]
+\emph{Step 1 (item~(1), the shear chart).} The factors $P_1$, $D$, $E$ of $P_0$ are Banach spaces. As $(x,e)\mapsto u(x)e$
+composes $(x,e)\mapsto(u(x),e)$ with the bounded bilinear evaluation, $\psi$ and $(x,d,e)\mapsto(x,d-u(x)e,e)$ are
+analytic (Lemma~\ref{fmo:lem:series}(2)); they map $U\times D\times E$ to itself, are mutually inverse, and have analytic
+derivatives (paragraph after Definition~\ref{fam2:def:tangent}). By the product rule $D\psi(x,d,e)(h,b,c)=(h,b+(Du(x)h)e+
+u(x)c,c)$, so $\pi_DD\psi(x,d,e)i_E=u(x)$, and Proposition~\ref{prop:exterior} gives the identity. Analyticity of
+$\Lambda^k_\pi D\psi$ at $(x_0,d_0,e_0)$, composed with $x\mapsto(x,d_0,e_0)$ and $T\mapsto\hLambda^k_\pi\pi_D\circ T\circ
+\Lambda^k_\pi i_E$, would make $\Lambda^k_\pi u$ analytic at $x_0$; for $\psi^{-1}$ use $\pi_DD(\psi^{-1})i_E=-u$.
+
+\emph{Step 2 (item~(1), the manifold $M$).} The chart change from $\id_M$ to $J\circ\psi\circ J^{-1}$ is
+$J\circ\psi\circ J^{-1}$, with derivative $J\circ D\psi(J^{-1}y)\circ J^{-1}$ at $y\in M$; so the transitions of
+$\hLambda^k_\pi TM$ are $y\mapsto\hLambda^k_\pi J\circ\Lambda^k_\pi D\psi(J^{-1}y)\circ\Lambda^k_\pi J^{-1}$ and the same
+expression with $\psi^{-1}$ (Proposition~\ref{prop:exterior}). They are analytic exactly where $\Lambda^k_\pi D\psi$ and
+$\Lambda^k_\pi D(\psi^{-1})$ are, so not at the points $J(x_0,d,e)$, by Step~1. For $\Alt^k(TM;\hLambda^k_\pi D)$ use
+$A^k_{E,D;F}(u)=A^k(i_E)\circ A^k(D\psi)\circ A^k(\pi_D)$, $A^k(J\circ D\psi\circ J^{-1})=A^k(J^{-1})\circ A^k(D\psi)\circ
+A^k(J)$ and the single target $F=\hLambda^k_\pi D$ of Theorem~\ref{thm:duality}(1).
+
+\emph{Step 3 (item~(2)).} If $(P_0;P_0)$ is good, then for $f$ as in Definition~\ref{fam2:def:tangent}, $Df$ is an
+analytic $\cL(P_0)$-valued family, so $P_0$ is tangent-good; tangent goodness gives the bundle statement (sentence after
+Definition~\ref{fam2:def:tangent}); if the bundles are analytic, (1) with $P_1=D=E=P_0$ and $P_0\cong P_0^3$ makes
+$\Lambda^k_\pi u$ analytic for every analytic $u$ into $\cL(P_0)$.
+
+\emph{Step 4 (item~(3)).} For $E=c_0(\N,K)$ and $E=\ell^r(\N,K)$, $4<r<\infty$, $\norm{a\cdot e}_E\le\norm a_\infty\norm e_E$,
+so $(a,e)\mapsto a\cdot e$ is bounded bilinear, $D\psi(a,d,e)(h,b,c)=(h,b+h\cdot e+a\cdot c,c)$ and, with $i_3(c)=(0,0,c)$
+and $\pi_2(h,b,c)=b$, $\pi_2D(\psi^{\pm1})(a,d,e)i_3=\pm\mu_a$. As in Step~1, analyticity at a point would make
+$a\mapsto\Lambda^k_\pi\mu_a$ analytic at a point of $E$, which Theorem~\ref{fam2:thm:staircase} with $P=E$ excludes, as
+$\varphi_E(n)$ is $1$ or $n^{1/r}$ and $(2m)^{2/r}(4m)^{2/r}/m\to0$; interleaving coordinates gives $E\cong E^3$. If $K$ is
+complete and $P_0$ is an infinite-dimensional Banach space with an equivalent nonarchimedean norm, Lemma~\ref{fib:lem:marking}
+gives $\widehat\psi_{P_0}$, $\theta_{P_0}$ with $\theta_{P_0}\widehat\psi_{P_0}=\id$, so $P_0\cong c_0\oplus P_2$ with
+$c_0=c_0(\N,K)$ and $P_2=\ker\theta_{P_0}$, and $P_0\cong c_0\times c_0\times(c_0\oplus P_2)$; the chart
+$(a,d,e,z)\mapsto(a,d+a\cdot e,e,z)$ again has $\pi_2D\psi i_3=\mu_a$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fam2:thm:groups}]
+\emph{Step 1 (item~(1)).} Let $g$ be an $\mathsf H$-family and $x_0\in U$. Left multiplication by $g(x_0)$ is a
+homeomorphism of $\mathsf H$, so $g(U')\subseteq g(x_0)\mathsf H_0$ for an open $U'\ni x_0$; then
+$x\mapsto g(x_0)^{-1}g(x)$ is a $\mathsf V_0$-family on $U'$, and $\Lambda^k_\pi g(x)=\hLambda^k_\pi g(x_0)\circ
+\Lambda^k_\pi(g(x_0)^{-1}g(x))$ (Proposition~\ref{prop:exterior}). Conversely, for a $\mathsf V_0$-family $u$ and $x_0\in U$
+choose an open $U'\ni x_0$ and $N\ge0$ with $\abs\vartheta^N\norm u<\varepsilon$ on $U'$, and $\lambda_i=\vartheta^{N+i}$,
+$0\le i\le k$. Each $1+\lambda_iu$ is an $\mathsf H$-family on $U'$, with values in $1+\mathsf V_0(\varepsilon)$, and
+Lemma~\ref{fmo:lem:vandermonde} with $G=\widehat E$, $a$ the inclusion of $E$ and $b=u(x)$ gives
+$\Lambda^k_\pi u=\sum_i\chi_{ki}\Lambda^k_\pi(1+\lambda_iu)$. For Banach $E$ take $\mathsf H=\mathsf H_0=\operatorname{GL}(E)$,
+$\mathsf V_0=\cL(E)$ and $\varepsilon=1$ (Neumann series).
+
+\emph{Step 2 (item~(2)).} For $\norm w<1$, $\norm{(1+w)x}=\norm x$ by the nonarchimedean inequality and $1+w$ is
+invertible; apply~(1) with $\mathsf H=\mathsf H_0=\operatorname{Isom}(E)$, $\mathsf V_0=\cL(E)$, $\varepsilon=1$.
+
+\emph{Step 3 (item~(3)).} As $\sigma_\sharp\mu_a\sigma'_\sharp\mu_b=(\sigma\sigma')_\sharp\mu_{(a\circ\sigma')b}$ and
+$(\sigma_\sharp\mu_a)^{-1}=\mu_{1/a}\sigma^{-1}_\sharp$, $\mathsf H_{\mathrm m}$ is a group. If $\sigma(t)\ne t$, the $t$th
+coordinate of $(\sigma_\sharp\mu_a-1)e_t$ is $-1$, so $\norm{\sigma_\sharp\mu_a-1}\ge1$; hence $\{h\in\mathsf H_{\mathrm m}:
+\norm{h-1}<1\}\subseteq\mathsf H_{\mathrm d}$, and its translates show that $\mathsf H_{\mathrm d}$ is open in
+$\mathsf H_{\mathrm m}$. As $\norm{\mu_a}=\norm a_\infty$, the nonarchimedean inequality gives $1+\mathsf V_{\mathrm d}(1)
+\subseteq\mathsf H_{\mathrm d}$; apply~(1) with $\mathsf H_0=\mathsf H_{\mathrm d}$, $\mathsf V_0=\mathsf V_{\mathrm d}$,
+$\varepsilon=1$, and $\mathsf H$ equal to $\mathsf H_{\mathrm m}$ or $\mathsf H_{\mathrm d}$.
+
+\emph{Step 4 (item~(4)).} By~(3) it suffices that $\Lambda^k_\pi\mu_x$ is analytic at no point for the
+$\mathsf V_{\mathrm d}$-family $x\mapsto\mu_x$ on $c_0(\N,K)$, by Proposition~\ref{prop:homogeneous-lift} and
+Theorem~\ref{fib:thm:ell2} with $r=\infty$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{fam2:prop:span}]
+\emph{Step 1 ($\mathsf H$ is a discrete group).} As $g(u)g(u')=g(u+u')$, $\mathsf H$ is a group. For $u\ne u'$ in
+$\mathsf U$ some $e_i^*((u-u')e_j)$ is a nonzero element of $\kappa'$, so
+$\norm{g(u)-g(u')}\ge\norm{u-u'}\ge\abs{e_i^*((u-u')e_j)}=1$; hence $\mathsf H$ is discrete, and $\mathsf H$-families and
+their exterior powers are locally constant.
+
+\emph{Step 2 ($g(\mu_x)$ lies in the closed span).} For $x\in c_0(\N,K)$, the expansions of the coordinates give
+$x=\sum_{n\ge n_0}\vartheta^nx_{[n]}$, $\abs\vartheta^{n_0}\ge\norm x_\infty$, with $x_{[n]}\in\kappa'^{\N}$ finitely supported
+as $x(t)\to0$; so $\mu_{x_{[n]}}\in\mathsf U$, $\norm{\vartheta^n\mu_{x_{[n]}}}\le\abs\vartheta^n$, and $g(\mu_x)-1=
+\sum_n\vartheta^n(g(\mu_{x_{[n]}})-1)$ lies in the closed span of $\mathsf H$.
+
+\emph{Step 3 (no point of analyticity).} By~\eqref{fmo:eq:shear},
+$\Lambda^k_\pi\mu_x=\hLambda^k_\pi\pi_D\circ\Lambda^k_\pi g(\mu_x)\circ\Lambda^k_\pi i_E$, so analyticity of
+$x\mapsto\Lambda^k_\pi g(\mu_x)$ at a point is excluded by Step~4 of the proof of Theorem~\ref{fam2:thm:groups}.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{fam2:prop:char-two}]
+\emph{Step 1 (item~(1)).} Suppose that $Q$ is as in Theorem~\ref{fam2:thm:staircase}, with
+$\norm{Q(a_1,\dots,a_k)}\le\norm Q\prod_i\norm{a_i}_P$. Steps~2 and~3 of the proof of Theorem~\ref{obs:thm:char-two}
+apply to $Q$ with $\norm{a_i}_P$ in place of $\norm{a_i}_\infty$. For $0/1$ vectors $a,b,x,y$ supported in
+$\{1,\dots,n\}$, $\norm a_P,\norm b_P\le\varphi^\pm_P(n)$, $\norm{1_{>n}}_P\le\varphi^\pm_P(k-2)$,
+$\norm x_E,\norm y_E\le\varphi^\pm_E(n)$ and $\norm{e_t}_E\le\varphi^\pm_E(1)$. So for every even $n\ge2$
+\[
+ n\le k(k-1)\,c_k\,\norm Q\,\varphi^\pm_P(n)^2\varphi^\pm_E(n)^2,\qquad
+ c_k=\varphi^\pm_P(k-2)^{k-2}\varphi^\pm_E(1)^{k-2},
+\]
+with $c_2=1$. As $\varphi^\pm_P$ and $\varphi^\pm_E$ are nondecreasing, $n/(\varphi^\pm_P(n)^2\varphi^\pm_E(n)^2)$ is
+unbounded along even $n$, which is a contradiction. The assertion on $T$ follows as in Step~4 of the proof of
+Theorem~\ref{fam2:thm:staircase}.
+
+\emph{Step 2 (items~(2)--(4)).} For $n\ge1$, $\varphi^\pm_{c_0(\N,K)}(n)=1$ and $\varphi^\pm_{\ell^r(\N,K)}(n)=n^{1/r}$.
+Item~(2) follows from item~(1) as in Step~2 of the proof of Corollary~\ref{fam2:cor:table}, since
+$n^{1-2/r_1-2/r_2}\to\infty$ when $1/r_1+1/r_2<1/2$, with $1/r_1=0$ for $P=c_0(\N,K)$ and $1/r_2=0$ for $E=c_0(\N,K)$.
+Item~(3) follows as in Step~4 of the proof of Theorem~\ref{fam2:thm:tangent}, with item~(1) for $P=E$ in place of
+Theorem~\ref{fam2:thm:staircase}, since $n^{1-4/r}\to\infty$ for $r>4$. Item~(4) follows as in Step~4 of the proof of
+Theorem~\ref{fam2:thm:groups}, with item~(1) for $P=E=c_0(\N,K)$ in place of Theorem~\ref{fib:thm:ell2}.
+\end{proof}

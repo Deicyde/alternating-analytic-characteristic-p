@@ -1,0 +1,195 @@
+\section{Questions}\label{sec:questions}
+
+The questions below concern $\operatorname{char}K=p>0$ and $k\ge p$. For $1<r<\infty$ and $1\le b\le\infty$, the
+symmetric sequence space $\ell^{r,b}$ (Definition~\ref{obs:def:sequence-spaces}) is the closure of $c_{00}$ in the space
+of all $x\in\linf(\N,K)$ with $\sup_n\norm{x1_{[n]}}_{r,b}<\infty$, where on $c_{00}$
+$\norm x_{r,b}=c_{r,b}\bigl(\sum_{n\ge1}n^{b/r-1}(x^{**}_n)^b\bigr)^{1/b}$ for $b<\infty$,
+$\norm x_{r,\infty}=c_{r,\infty}\sup_{n\ge1}n^{1/r}x^{**}_n$, $x^{**}_n$ is the average of the $n$ largest values of
+$\abs{x(t)}$, and $c_{r,b}>0$ makes $\norm{e_1}_{r,b}=1$.
+
+\begin{conjecture}[product triangle conjecture]\label{q:conj:pt}
+Let $\kappa$ and $K$ be as in \textup{(L)}, and let $E,D$ be symmetric sequence spaces in which $c_{00}$ is dense. If $(E,D)$
+satisfies \textup{(PTB)} (Definition~\ref{obs:def:ptb}), then $(E,D)$ is good for Banach values in every degree.
+\end{conjecture}
+
+The converse holds (Theorem~\ref{obs:thm:ptb}). The conjecture holds when $D=E$ or $E=c_0$, since indicator functions of
+supports in~\eqref{obs:eq:ptb} bound $\cP_<$ on $D\otimes_\pi D$ (Theorem~\ref{cls:thm:symmetric}), and when $D$ has an
+equivalent $r$\nobreakdash-norm, $2<r<\infty$, or nonarchimedean norm (Theorem~\ref{cls:thm:rnorm}). The same holds for
+spreading sequence spaces (Theorem~\ref{cls:thm:spreading}).
+
+\begin{conjecture}\label{q:conj:g}
+Let $\kappa$ be a finite field of characteristic $p$, $K=\kappa((X))$ with the absolute value of~\textup{(L)}, and $1<r<2\le b\le\infty$. Then $\cP_<$ is unbounded on
+$\ell^{r,b}\otimes_\pi\ell^{r,b}$.
+\end{conjecture}
+
+By Theorem~\ref{cls:thm:symmetric}, the conjecture for given $r,b$ is equivalent to the failure of
+$(\mathrm S^p_{\ell^{r,b}})$, of $(\mathrm R^p_{\ell^{r,b}})$, or of $(\Gamma^p_{\ell^{r,b}})$, and to $(\ell^{r,b},\ell^{r,b})$
+and $(c_0,\ell^{r,b})$ being good for Banach values in no degree $k\ge p$.
+
+\begin{conjecture}[sequence lattices]\label{q:conj:lattice}
+Assume \textup{(L)} with $K$ complete. Let $E$ and $D$ be sequence lattices, that is, each is a Banach space $Y$ with
+$c_{00}(\N,K)\subseteq Y\subseteq\linf(\N,K)$ in which $c_{00}$ is dense, with $\norm{\cdot}_\infty\le\norm{\cdot}_Y$,
+$\sup_t\norm{e_t}_Y<\infty$, and $\norm x_Y\le\norm y_Y$ whenever $\abs{x(t)}\le\abs{y(t)}$ for every $t$. Then $(E,D)$ is good for Banach values in
+degree $k$ if and only if it has a splitting decomposition of degree $k$ (Definition~\ref{cmb:def:decomposition}).
+\end{conjecture}
+
+\begin{question}\label{q:quest:generation}
+Is every pair that is good for Banach values in all degrees $\le k$ obtained from pairs $(E,D)$ with $(\mathrm S^n_E)$
+for all $n\le k$, pairs with $(\mathrm R^n_D)$ for all $n\le k$, relative splittings through $\mathrm S^{\le k}$-split or
+$\mathrm R^{\le k}$-split maps, and parameter pieces, by finite decompositions (Theorem~\ref{cmb:thm:decomposition},
+Proposition~\ref{cmb:prop:parameter-pieces}), transfer (Proposition~\ref{cmb:prop:transfer}) and block assemblies
+(Proposition~\ref{cmb:prop:blocks})?
+\end{question}
+
+\begin{question}\label{q:quest:coincide}
+Let $\kappa$ and $K$ be as in \textup{(L)}. Do $(\mathrm S^k_Y)$, $(\mathrm R^k_Y)$ and $(\Gamma^k_Y)$ coincide for every
+Banach space $Y$ and every $k\ge p$?
+\end{question}
+
+They coincide for spreading, in particular symmetric, sequence spaces in which $c_{00}$ is dense
+(Theorems~\ref{cls:thm:symmetric} and~\ref{cls:thm:spreading}), and
+$(\mathrm S^2_Y)$ is equivalent to $(\Gamma^2_Y)$ for every normed $Y$ (Proposition~\ref{spl:prop:degree-two}).
+
+\begin{question}\label{q:quest:three-space}
+Let $W$ be a closed subspace of a Banach space $Z$. If $W$ and $Z/W$ satisfy $(\mathrm S^k)$, does $Z$? The same question
+for $(\mathrm R^k)$ and for polarizability in degree $k$.
+\end{question}
+
+Under \textup{(L)}, goodness for Banach values with a fixed target has no three-space property in the source slot, even
+with an $\ell^1$ kernel (Theorem~\ref{cmb:thm:three-space}).
+
+\begin{question}\label{q:quest:source-split}
+Let $k\ge p$. If $(E,D)$ is good for Banach values in degree $k$ for every normed $D$, does $(\mathrm S^k_E)$ hold?
+\end{question}
+
+Under \textup{(L)} the answer is yes for spreading, in particular symmetric, sequence spaces $E$ in which $c_{00}$ is
+dense (Theorems~\ref{cls:thm:symmetric} and~\ref{cls:thm:spreading}).
+
+\begin{question}\label{q:quest:factorization}
+Assume \textup{(L)}. Does every $\mathrm S^k$-split operator factor through a normed space $G$ with $(\mathrm S^k_G)$? Does
+the inclusion $\ell^2(\N,K)\to c_0(\N,\Kh)$, which is $\mathrm S^n$-split for every $n$
+(Corollary~\ref{spl:cor:relative-ordering-na}), factor through such a space?
+\end{question}
+
+\begin{question}\label{q:quest:residue}
+Let $K$ be a field of Laurent series in $X$ over an infinite field of characteristic $p$, with an $X$-adic absolute
+value, or a densely valued field of characteristic $p$.
+\begin{enumerate}
+\item If $p$ is odd, is $(c_0(\N,K),c_0(\N,K))$ good for Banach values in degree $p$?
+\item If $p=2$, is $(\ell^2(\N,K),\ell^2(\N,K))$ good for Banach values in degree $2$?
+\end{enumerate}
+\end{question}
+
+For $p=2$, $(c_0(\N,K),c_0(\N,K))$ is good for Banach values in no degree $k\ge2$, over every nontrivially normed field
+of characteristic~$2$ (Theorem~\ref{obs:thm:char-two}(4)); for $E=\ell^2(\N,K)$, $\bar\varphi_E(n)^2=n$ and
+\eqref{obs:eq:multiplier-bound} gives no contradiction. For odd $p$, a positive answer to~(1) needs a zero-diagonal
+correction making the ordering lift bounded (Theorem~\ref{ob:thm:ordering}).
+
+\begin{question}\label{q:quest:height}
+If a pair is good in degree $p$, is it good in every degree? The same question for goodness for Banach values. Is every
+$\mathrm S^p$-split operator $\mathrm S^n$-split for every $n$, and every $\mathrm R^p$-split operator
+$\mathrm R^n$-split for every $n$?
+\end{question}
+
+The least degree in which a pair fails to be good is a power of $p$ (Corollary~\ref{fib:cor:degrees}). For the
+conditions $(\mathrm S^p_Y)$ and $(\mathrm R^p_Y)$ of one normed space $Y$, Theorem~\ref{cmb:thm:column} answers the third question.
+
+\begin{question}\label{q:quest:pairs}
+Let $\operatorname{char}K=p$.
+\begin{enumerate}
+\item If a normed space $P$ satisfies $(\mathrm U^p_P)$ (Definition~\ref{fam2:def:reflection}), is $P$ polarizable in
+degree $p$?
+\item Assume \textup{(L)}. Is $(\ell^{r_1}(\N,K);\ell^{r_2}(\N,K))$ good in degree $k$ when $r_1=r_2=2$, when
+$2<r_1<\infty$ and $r_2=2$, or when $2<r_1,r_2<\infty$ and $1/r_1+1/r_2\ge1/2$?
+\item Do Theorems~\ref{fam2:thm:reduction} and~\ref{fam2:thm:class} hold for one Banach value space $F$, with
+$x\mapsto A^k_{E,\widehat D;F}(u(x))$ in place of $x\mapsto\Lambda^k_\pi u(x)$?
+\end{enumerate}
+\end{question}
+
+Polarizability in the degrees $n\le k$ gives $(\mathrm U^k_P)$ (Theorem~\ref{fam2:thm:polarizable}(2)); under
+\textup{(L)}, $(\mathrm U^k_P)$ gives polarizability in degree $p$ when $P$ is a symmetric sequence space in which
+$c_{00}(\N,K)$ is dense or has an equivalent nonarchimedean norm (Theorem~\ref{fam2:thm:bases}). The cases in~(2) are those left open by
+Corollary~\ref{fam2:cor:table}; for $r_1=r_2=r$ and $K$ complete they ask whether $\ell^r(\N,K)$ is tangent-good in
+degree $k$ (Theorem~\ref{fam2:thm:tangent}(2)).
+
+\begin{question}\label{q:quest:linear-families}
+Let $P$, $E$ and $D$ be normed spaces. If every linear family $P\to\cL(E,\widehat D)$ is liftable in degree $k$, is
+$(P;E,D)$ good in degree $k$?
+\end{question}
+
+The answer is yes for $P=\cL(E,\widehat D)$, whose identity is a linear family (Lemma~\ref{fib:lem:test},
+Proposition~\ref{fam2:prop:fibers}(2)); for fixed-degree reflection, affine families suffice
+(Theorem~\ref{fam2:thm:polarizable}(1)).
+
+\begin{question}\label{q:quest:lower-degrees}
+If $(P;E,D)$ is good in degree $k$, is it good in every degree $j<k$?
+\end{question}
+
+The answer is yes when $E\cong E\oplus K$ and $D\cong D\oplus K$, and for goodness for all normed $E$ and $D$
+(Corollary~\ref{fam2:cor:degrees}(2),~(4)).
+
+\begin{question}\label{q:quest:non-uniform}
+Is there a linear family $\theta\colon\mathcal T(P)\to\cL(E,\widehat D)$ for which every class $\ob_{k,N}(\theta)$ vanishes
+but $\ob^\omega_k(\theta)$ does not vanish after shrinking?
+\end{question}
+
+By Theorem~\ref{fam2:thm:class}(1), $\ob^\omega_k(\theta)$ vanishes after shrinking exactly when the classes
+$\ob_{k,N}(\theta)$ vanish with extension costs growing at most geometrically in $N$. For general closed subspaces, Taylor
+coefficients can have lifts without a common radius (Corollary~\ref{fam:cor:no-common-radius}).
+
+\begin{question}\label{q:quest:composite}
+Let $E$, $D$ and $F$ be normed spaces. If $(E,D)$ and $(D,F)$ are good for Banach values in degree $k$, is the
+composite family $\theta_{D,F}\odot\theta_{E,D}$ of Proposition~\ref{cmb:prop:composition} liftable in degree $k$?
+\end{question}
+
+The composite family is liftable in degree $k$ when $(E,F)$ is good for Banach values in that degree
+(Proposition~\ref{cmb:prop:composition}(2)).
+
+\begin{question}\label{q:quest:garling}
+Let $\kappa$ and $K$ be as in \textup{(L)}, $1\le q<2$ and $0<\alpha<1-q/2$. Is $(E_{\alpha,q},E_{\alpha,q})$
+(Example~\ref{cls:ex:garling}) good for Banach values in some degree $k\ge p$?
+\end{question}
+
+By Theorem~\ref{cls:thm:spreading}, this holds if and only if $\cP_<$ is bounded on $E_{\alpha,q}\otimes_\pi E_{\alpha,q}$,
+and then the pair is good for Banach values in every degree. The necessary conditions of Theorem~\ref{cls:thm:symmetric}
+hold, and Theorem~\ref{fib:thm:lower} does not apply to the unit vectors in their natural order
+(Example~\ref{cls:ex:garling}(2),(4)).
+
+\begin{question}\label{q:quest:polynomial-laws}
+Let $K$ be nonarchimedean of characteristic $p>0$. Is every bounded polynomial law on $c_0(\N,K)$ ambient of its degree?
+\end{question}
+
+Bounded polynomial laws of degree below $p$ are ambient (Section~\ref{sec:dp}), and for $p=2$ so are those of degree
+$2$ on nonarchimedean normed spaces (Proposition~\ref{dp:prop:ultrametric}(1),(4)). By
+Proposition~\ref{dp:prop:ultrametric}(1),(3), every bounded polynomial law of degree $n$ on $c_0(\N,K)$ is ambient of
+degree $n$ if and only if every bounded polynomial law of degree $n$ on every nonarchimedean normed space over $K$ is.
+As $K\oplus c_0(\N,K)$, with the maximum norm, is isometric to $c_0(\N,K)$, Proposition~\ref{dp:prop:ultrametric}(1),(2) shows that the degrees
+with a positive answer form an initial segment of the positive integers: a negative answer in some degree gives a
+negative answer in every higher degree, and a positive answer in infinitely many degrees gives one in all. Frobenius
+laws are ambient, and every bounded polynomial law of degree $p$ on a normed space $P$, with values in any normed space,
+is ambient of degree $p$ if and only if $P$ satisfies $(\mathrm N_P)$ with some constant
+(Theorem~\ref{dp:thm:frobenius}(2),(3)); so for $p\ge3$, in degree $p$ the question asks whether $c_0(\N,K)$ satisfies
+$(\mathrm N_{c_0(\N,K)})$ with some constant. Over every $K$ and in every degree $n\ge p$,
+Proposition~\ref{dp:prop:degree-p}(2) gives a law that is not ambient of degree $n$, on a space that is a Banach space if
+$K$ is complete; if $K$ is discretely valued or $p=2$, Proposition~\ref{dp:prop:nonambient}(2) gives such laws in every
+degree $n\ge p+1$ also on the space $H=K\oplus c_0(\N,K)\oplus G$ of Section~\ref{sec:dp}. These spaces have no
+equivalent nonarchimedean norm: they contain $\ell^1$-sums of finite-dimensional quotients of weighted $\ell^1$-spaces,
+and both proofs obtain their lower bounds, for $\nu$ and for $\norm\cdot_\Gamma$, by adding up contributions of the
+coordinates of these $\ell^1$-spaces.
+
+\paragraph{\textit{Targets, bases and domains.}}
+An equivalent nonarchimedean, spherically complete norm makes a Banach space $F$ a universal target
+(Section~\ref{obs:ssec:counterexamples}, Theorem~\ref{thm:spherical}), but the given norm of $F$ need not be spherically
+complete (Remark~\ref{rem:nonspherical-analytic-target}). Over complete, not spherically complete fields universal targets have
+zero dual (Proposition~\ref{prop:universal-zero-dual}); we do not know whether that suffices, nor whether over densely
+valued, spherically complete fields every nonarchimedean Banach space is one. We do not know which $P$ satisfy
+$(\mathrm U^k_P)$ (Question~\ref{q:quest:pairs}(1)); for Banach $P$ over complete fields universal analytic reflection
+suffices (Theorem~\ref{fam:thm:tensor-analytic}) but, over nonarchimedean fields, is not necessary
+(Theorem~\ref{fam2:thm:polarizable}(4)). We do not know whether compatibility with all analytic coordinate changes forces
+the ambient and intrinsic analytic forms to agree; one product structure does not
+(Proposition~\ref{prop:tangent-obstruction}). Over the $t$-adic field $\F_p(t)$ a largest full analytic domain need not
+exist (Theorem~\ref{dom:no-largest}); we do not know whether this happens over complete fields. Under \textup{(L)} with
+$K$ complete, $\Alt^k(TM;K)$ is analytic on every analytic manifold $M$ (Corollary~\ref{cor:discrete-targets}); we do
+not know this over incomplete fields such as $\kappa(X)$, nor for tangent-valued forms on $\ell^r(\N,K)$, $4<r<\infty$
+(Theorem~\ref{fam2:thm:tangent}(3)). Nor do we know whether Bourbaki's $\alpha_k$ is a vector functor of class $C^r$
+over densely valued, spherically complete fields with $k!=0$.

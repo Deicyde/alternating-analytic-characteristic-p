@@ -1,0 +1,545 @@
+\section{Degrees, decompositions and permanence}\label{sec:combining}
+
+\subsection{The degrees in which goodness can fail}\label{cmb:ssec:degrees}
+For $a,b\ge1$ and $n=a+b$, let $\wedge^{a,b}_E\colon\Lambda^a_\pi E\otimes_\pi\Lambda^b_\pi E\to\Lambda^n_\pi E$ be the
+wedge product, $z\otimes w\mapsto z\wedge w$, and define the shuffle coproduct by
+\begin{equation}\label{fib:eq:shuffle}
+ \operatorname{sh}^{a,b}_E(x_1\wedge\dots\wedge x_n)=\sum_{\abs S=a}\epsilon(S)\,x_S\otimes x_{S^c},
+\end{equation}
+where $S$ runs over the $a$\nobreakdash-element subsets of $\{1,\dots,n\}$, $x_S$ is the wedge of the $x_i$, $i\in S$, in
+increasing order, and $\epsilon(S)$ is the sign of the permutation of $\{1,\dots,n\}$ that lists $S$ in increasing order
+followed by $S^c$ in increasing order. We write $\binom na$ also for its image in $K$.
+
+\begin{lemma}[the Hopf identity]\label{fib:lem:hopf}
+The map $\wedge^{a,b}_E$ is contractive, and $\operatorname{sh}^{a,b}_E$ is a well-defined linear map of norm at most
+$\binom na$, in every characteristic. Both are natural in bounded operators, and
+\begin{equation}\label{fib:eq:hopf}
+ \wedge^{a,b}_E\circ\operatorname{sh}^{a,b}_E=\tbinom na\,\id.
+\end{equation}
+Moreover $\wedge^n_E=\wedge^{a,b}_E\circ(\wedge^a_E\otimes\wedge^b_E)$ and
+$\operatorname{alt}^n_E=(\operatorname{alt}^a_E\otimes\operatorname{alt}^b_E)\circ\operatorname{sh}^{a,b}_E$, where
+$\otimes^n_\pi E$ is identified with $\otimes^a_\pi E\otimes_\pi\otimes^b_\pi E$.
+\end{lemma}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{theorem}[Lucas step]\label{fib:thm:lucas}
+Let $n=a+b$ with $a,b\ge1$ and $\binom na\ne0$ in $K$, let $F$ be normed, and let $G=\Alt^b(D;F)$. If
+$A^a_{E,D;G}$ and $A^b_{E,D;F}$ are analytic, so is $A^n_{E,D;F}$. In particular, if $n\ne0$ in $K$ and
+$A^{n-1}_{E,D;F}$ is analytic, so is $A^n_{E,D;F}$.
+\end{theorem}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{corollary}[the good degrees]\label{fib:cor:degrees}
+Let $\operatorname{char}K=p>0$, and let $\fD$ be one of the following sets of degrees $k\ge1$: the set $\fD(E,D)$ of
+those in which $(E,D)$ is good; the set $\fD_B(E,D)$ of those in which it is good for Banach values; or the set
+$\fD_K(E,D)$ of those for which $A^k_{E,D;K}$ is analytic.
+\begin{enumerate}
+\item $\{1,\dots,p-1\}\subseteq\fD$, and $a+b\in\fD$ whenever $a,b\in\fD$ and the addition of $a$
+and $b$ in base $p$ has no carry.
+\item If $\fD\ne\{1,2,\dots\}$, its least missing element is a power of $p$. Thus
+$\fD=\{1,2,\dots\}$ if and only if $\fD$ contains every power of $p$.
+\item Let $F$ be normed, and suppose that $A^n_{E,D;F}$ is not analytic for some $n$; let $n_F$ be the least such $n$.
+Then $n_F$ is divisible by the least degree in which $(E,D)$ is not good.
+\end{enumerate}
+\end{corollary}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{theorem}[hyperplane step]\label{fib:thm:hyperplane}
+Give $E\oplus K$ and $D\oplus K$ the maximum norms, let $k\ge2$, and let $F$ be normed. If
+$A^k_{E\oplus K,D\oplus K;F}$ is analytic, then so is $A^{k-1}_{E,D;F}$.
+\end{theorem}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{theorem}[no gaps for large duals]\label{cmb:thm:initial-segments}
+Let $\operatorname{char}K=p>0$, and let $E$ and $D$ be normed spaces whose continuous duals $E^*$ and $D^*$ are
+infinite-dimensional. Then each of $\fD(E,D)$ and $\fD_B(E,D)$ equals $\{1,\dots,p^h-1\}$ for a unique $h\ge1$, or
+equals $\{1,2,\dots\}$.
+\end{theorem}
+
+If $E\cong E\oplus K$ and $D\cong D\oplus K$ by bounded linear isomorphisms, the same holds for $\fD_K(E,D)$: composing with
+these isomorphisms on both sides shows that $A^k_{E,D;K}$ and $A^k_{E\oplus K,D\oplus K;K}$ are analytic together, so
+Theorem~\ref{fib:thm:hyperplane} makes $\fD_K(E,D)$ closed under $k\mapsto k-1$ for $k\ge2$, and
+Corollary~\ref{fib:cor:degrees}(2) identifies its first missing element.
+
+\begin{theorem}[degree $p$ for one space]\label{cmb:thm:column}
+Let $\operatorname{char}K=p>0$, and let $Y$ be a normed space. If $(\mathrm S^p_Y)$ holds, then $(\mathrm S^n_Y)$ holds for
+every $n\ge1$. If $(\mathrm R^p_Y)$ holds, then $(\mathrm R^n_Y)$ holds for every $n\ge1$. Both statements also hold
+without completion.
+\end{theorem}
+
+The proofs of Theorems~\ref{cmb:thm:initial-segments} and~\ref{cmb:thm:column} are in Appendix~\ref{app:degrees}.
+
+\begin{corollary}\label{cmb:cor:column}
+Let $\operatorname{char}K=p>0$, and let $E$ and $D$ be normed spaces. If $(\mathrm S^p_E)$ holds, or if
+$(\mathrm R^p_D)$ holds, then $(E,D)$ is good for Banach values in every degree. If that condition holds without
+completion, then $(E,D)$ is good in every degree.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{cmb:thm:column} the condition holds in every degree, and Proposition~\ref{fib:prop:split} turns it into
+goodness in every degree.
+\end{proof}
+
+\paragraph{Split operators.}
+For bounded linear $w\colon E\to G$ and $n\ge1$, a \emph{section for $w$ in degree $n$} is a map $s$ as in
+Definition~\ref{ob:def:split-operators} with $\widehat\wedge^n_G\circ s=\Lambda^n_\pi w$, and a \emph{retraction for $w$
+in degree $n$} is a map $\rho$ with $\rho\circ\alt^n_E=\Lambda^n_\pi w$. In degree $0$ both are $\id_K$,
+$\otimes^0_\pi E=K$, and $\wedge^{0,b}$, $\wedge^{a,0}$, $\operatorname{sh}^{0,b}$, $\operatorname{sh}^{a,0}$ are the
+canonical identifications. For bounded linear $w_1,w_2\colon E\to G$ and $x_1,\dots,x_n\in E$, the term of
+$(w_1+w_2)x_1\wedge\dots\wedge(w_1+w_2)x_n$ with $w_1$ in the positions of $S\subseteq\{1,\dots,n\}$ is
+$\epsilon(S)\,(w_1x)_S\wedge(w_2x)_{S^c}$, with $(w_1x)_S$ formed as $x_S$ from the vectors $w_1x_i$; so
+\eqref{fib:eq:shuffle} gives
+\begin{equation}\label{cmb:eq:binomial}
+ \Lambda^n_\pi(w_1+w_2)=\sum_{a=0}^n\wedge^{a,n-a}_G\circ\bigl(\Lambda^a_\pi w_1\otimes\Lambda^{n-a}_\pi w_2\bigr)\circ
+ \operatorname{sh}^{a,n-a}_E .
+\end{equation}
+By~\eqref{cmb:eq:binomial} and Lemma~\ref{fib:lem:hopf}, sections $s^{(l)}_a$ for $w_l$ in all degrees $a\le n$ give the
+section $\sum_a(s^{(1)}_a\otimes s^{(2)}_{n-a})\circ\operatorname{sh}^{a,n-a}_E$ for $w_1+w_2$ in degree $n$, and
+retractions $\rho^{(l)}_a$ give the retraction $\sum_a\wedge^{a,n-a}_G\circ(\rho^{(1)}_a\otimes\rho^{(2)}_{n-a})$. By
+Lemma~\ref{fib:lem:hopf}, if $a,b\ge1$ and $\binom{a+b}a\ne0$ in $K$, sections $s_a$, $s_b$ for $w$ in degrees $a$, $b$
+give the section $\binom{a+b}a^{-1}(s_a\otimes s_b)\circ\operatorname{sh}^{a,b}_E$ in degree $a+b$, and retractions
+$\rho_a$, $\rho_b$ give the retraction $\binom{a+b}a^{-1}\wedge^{a,b}_G\circ(\rho_a\otimes\rho_b)$; this is the Lucas step
+for split operators. Every operator has sections and retractions in the degrees $n$ with $n!\ne0$ in $K$ (the paragraph
+after Definition~\ref{ob:def:split-operators}); so if $\operatorname{char}K=p>0$, the degrees in which an operator is
+$\mathrm S$-split, or $\mathrm R$-split, contain $1,\dots,p-1$ and are closed under carry-free sums. The
+$\mathrm S^{\le k}$-split maps $E\to G$ form a linear space, as do the $\mathrm R^{\le k}$-split ones, and both are closed
+under composition with bounded linear maps on either side (Proposition~\ref{ob:prop:split-operators}(2)).
+
+\begin{theorem}[composition]\label{cmb:thm:composition}
+Let $q,m\ge1$ and $n=qm$, and suppose that the number $N_{q,m}=(qm)!/\bigl((q!)^m\,m!\bigr)$ of partitions of
+$\{1,\dots,n\}$ into $m$ blocks of size $q$ is nonzero in $K$; this holds, for instance, when $q$ and $m$ are powers of
+$p=\operatorname{char}K>0$. Let $\abs{N_{q,m}}$ be the absolute value of its image in $K$; elsewhere $N_{q,m}$ and $m!$
+are real numbers.
+\begin{enumerate}
+\item If $w_1\colon E\to G_1$ has a section $s_1$ in degree $q$ and $w_2\colon G_1\to G_2$ has a section $s_2$ in degree
+$m$, then $w_2w_1$ has a section $s$ in degree $n$ with $\norm s\le N_{q,m}\norm{s_1}^m\norm{s_2}^q/\abs{N_{q,m}}$.
+\item If $w_1\colon E\to G_1$ has a retraction $\rho_1$ in degree $m$ and $w_2\colon G_1\to G_2$ has a retraction
+$\rho_2$ in degree $q$, then $w_2w_1$ has a retraction $\rho$ in degree $n$ with
+$\norm\rho\le(m!)^{q-1}\norm{\rho_2}^m\norm{\rho_1}^q/\abs{N_{q,m}}$.
+\end{enumerate}
+If the given sections, respectively retractions, are without completion, so is the new one.
+\end{theorem}
+
+\begin{corollary}\label{cmb:cor:composition}
+Let $\operatorname{char}K=p>0$ and $h\ge1$.
+\begin{enumerate}
+\item A composite of $h$ operators that are $\mathrm S^p$-split is $\mathrm S^n$-split for every $n<p^{h+1}$, and a
+composite of $h$ operators that are $\mathrm R^p$-split is $\mathrm R^n$-split for every $n<p^{h+1}$.
+\item An operator that factors through a normed space $Y$ with $(\mathrm S^p_Y)$ is $\mathrm S^n$-split for every $n$,
+and an operator that factors through a normed space $Y$ with $(\mathrm R^p_Y)$ is $\mathrm R^n$-split for every $n$.
+\end{enumerate}
+\end{corollary}
+
+\begin{theorem}[degree $p$ for polarizability]\label{cmb:thm:polarizable-height}
+Let $\operatorname{char}K=p>0$. If a normed space $P$ is polarizable in degree $p$, then $P$ is polarizable in every degree
+$n\ge1$.
+\end{theorem}
+
+The proofs of Theorems~\ref{cmb:thm:composition} and~\ref{cmb:thm:polarizable-height} and of
+Corollary~\ref{cmb:cor:composition} are in Appendix~\ref{app:degrees}.
+
+\subsection{Relative splittings and decompositions}\label{cmb:ssec:decompositions}
+
+Throughout this subsection $E$ and $D$ are normed spaces and $k\ge1$. Since
+$\widehat\Lambda^n_\pi\widehat D=\widehat\Lambda^n_\pi D$ (the paragraph before Theorem~\ref{ob:thm:mechanisms}),
+$\Lambda^n_\pi v$ maps $\Lambda^n_\pi E$ into $\widehat\Lambda^n_\pi D$ for every $v\in\cL(E,\widehat D)$.
+
+\begin{proposition}[relative splittings]\label{cmb:prop:relative}
+Let $G$ be a normed space.
+\begin{enumerate}
+\item Let $w\colon E\to G$ have a section $s$ in degree $k$, and let $\varepsilon\colon\cL(E,D)\to\cL(G,\widehat D)$ be
+bounded linear with $\varepsilon(u)\circ w=u$ for every $u\in\cL(E,D)$. Then $(E,D)$ is good for Banach values in degree
+$k$, with the lift
+\[
+ Q(u_1,\dots,u_k)=\widehat\wedge^k_{\widehat D}\circ\bigl(\varepsilon(u_1)\otimes\dots\otimes\varepsilon(u_k)\bigr)\circ s
+\]
+of norm at most $\norm\varepsilon^k\norm s$.
+\item Let $w'\colon G\to\widehat D$ have a retraction $\rho$ in degree $k$, and let
+$\varepsilon\colon\cL(E,D)\to\cL(E,G)$ be bounded linear with $w'\circ\varepsilon(u)=u$ for every $u\in\cL(E,D)$. Then
+$(E,D)$ is good for Banach values in degree $k$, with the lift
+\[
+ Q(u_1,\dots,u_k)=\rho\circ\bigl(\varepsilon(u_1)\otimes\dots\otimes\varepsilon(u_k)\bigr)\circ\alt^k_E
+\]
+of norm at most $k!\,\norm\varepsilon^k\norm\rho$.
+\item If in~(1) the section $s$ takes values in $\otimes^k_\pi G$ and $\varepsilon$ takes values in $\cL(G,D)$, or if
+in~(2) the retraction $\rho$ takes values in $\Lambda^k_\pi D$, then $(E,D)$ is good in degree $k$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Both maps $Q$ are bounded and $k$-linear, with the stated norms. In~(1), naturality of $\wedge^k$, extended to
+completions, gives $Q(u,\dots,u)=\widehat\Lambda^k_\pi\varepsilon(u)\circ\widehat\wedge^k_G\circ s
+=\Lambda^k_\pi\varepsilon(u)\circ\Lambda^k_\pi w=\Lambda^k_\pi u$. In~(2), naturality of $\alt^k$ gives
+$Q(u,\dots,u)=\rho\circ\alt^k_G\circ\Lambda^k_\pi\varepsilon(u)=\Lambda^k_\pi w'\circ\Lambda^k_\pi\varepsilon(u)
+=\Lambda^k_\pi u$. Under the hypotheses of~(3) both lifts take values in $\cL(\Lambda^k_\pi E,\Lambda^k_\pi D)$.
+Lemma~\ref{fib:lem:test} concludes.
+\end{proof}
+
+\begin{definition}\label{cmb:def:decomposition}
+\begin{enumerate}
+\item A \emph{source-side relative splitting} of degree $k$ for $(E,D)$ is a triple $(G,w,\varepsilon)$ as in
+Proposition~\ref{cmb:prop:relative}(1): $w\colon E\to G$ is $\mathrm S^k$-split and $\varepsilon(u)\circ w=u$. A
+\emph{target-side relative splitting} of degree $k$ is a triple $(G,w',\varepsilon)$ as in
+Proposition~\ref{cmb:prop:relative}(2): $w'\colon G\to\widehat D$ is $\mathrm R^k$-split and $w'\circ\varepsilon(u)=u$.
+\item A \emph{piece} for $(E,D)$ is a tuple $(G,G',w,w',\varepsilon)$ of normed spaces $G$ and $G'$, bounded linear maps
+$w\colon E\to G$ and $w'\colon G'\to\widehat D$, and a bounded linear map $\varepsilon\colon\cL(E,D)\to\cL(G,G')$. It is
+of \emph{source type} in degree $k$ if $w$ is $\mathrm S^{\le k}$-split, and of \emph{target type} in degree $k$ if
+$w'$ is $\mathrm R^{\le k}$-split.
+\item A \emph{splitting decomposition} of degree $k$ is a finite family of pieces $(G_i,G'_i,w_i,w'_i,\varepsilon_i)$,
+$1\le i\le m$, each of source type or of target type in degree $k$, such that
+\begin{equation}\label{cmb:eq:decomposition}
+ u=\sum_{i=1}^mw'_i\,\varepsilon_i(u)\,w_i\qquad\text{for every }u\in\cL(E,D).
+\end{equation}
+A source-side relative splitting $(G,w,\varepsilon)$, respectively a target-side relative splitting
+$(G,w',\varepsilon)$, of degree $k$ also counts as a splitting decomposition of degree $k$ with the single piece
+$(G,\widehat D,w,\id_{\widehat D},\varepsilon)$, respectively $(E,G,\id_E,w',\varepsilon)$.
+\item These structures are \emph{without completion} if their sections take values in the uncompleted tensor powers,
+their retractions take values in the uncompleted exterior powers $\Lambda^n_\pi D$, the maps $\varepsilon(u)$ of a
+source-side relative splitting take values in $D$, and the maps $w'_i$ of a decomposition take values in $D$.
+\end{enumerate}
+\end{definition}
+
+A \emph{linear family} is a bounded linear map $\theta\colon P\to\cL(E,\widehat D)$ on a normed space $P$. It is
+\emph{liftable in degree $n\ge1$} if there is a bounded $n$-linear map
+$Q\colon P^n\to\cL(\Lambda^n_\pi E,\widehat\Lambda^n_\pi D)$ with $Q(h,\dots,h)=\Lambda^n_\pi\theta(h)$ for every $h\in P$.
+For $P=\cL(E,D)$, Lemma~\ref{fib:lem:test} shows that $(E,D)$ is good for Banach values in degree $n$ if and only if the
+inclusion $\theta_{E,D}\colon\cL(E,D)\to\cL(E,\widehat D)$ is liftable in degree $n$. The proofs of
+Theorem~\ref{cmb:thm:decomposition}, Propositions~\ref{cmb:prop:normal-form} and~\ref{cmb:prop:parameter-pieces} and
+Lemma~\ref{cmb:lem:subpair} are in Appendix~\ref{app:deferred}.
+
+\begin{theorem}[decompositions]\label{cmb:thm:decomposition}
+\begin{enumerate}
+\item For a piece $(G,G',w,w',\varepsilon)$ of source type or of target type in degree $k$, the map
+$u\mapsto w'\varepsilon(u)w$ is liftable in every degree $n\le k$.
+\item Suppose that $u=\sum_{i=1}^m\theta_i(u)$ for every $u\in\cL(E,D)$, where each
+$\theta_i\colon\cL(E,D)\to\cL(E,\widehat D)$ is bounded linear and liftable in every degree $n\le k$. Then $(E,D)$ is good
+for Banach values in degree $k$. If every $\theta_i(u)$ takes values in $D$ and every lift can be chosen with values in
+$\cL(\Lambda^n_\pi E,\Lambda^n_\pi D)$, then $(E,D)$ is good in degree $k$.
+\item A splitting decomposition of degree $k$ makes $(E,D)$ good for Banach values in degree $k$, and good in degree $k$
+if it is without completion.
+\end{enumerate}
+\end{theorem}
+
+\begin{proposition}[transfer]\label{cmb:prop:transfer}
+Let $w\colon E\to G$ and $w'\colon G'\to\widehat D$ be bounded linear maps of normed spaces, and let
+$\varepsilon\colon\cL(E,D)\to\cL(G,G')$ be bounded linear with $u=w'\varepsilon(u)w$ for every $u$. If $(G,G')$ is good for
+Banach values in degree $k$, with a lift $Q'$, then so is $(E,D)$, with the lift
+\[
+ Q(u_1,\dots,u_k)=\widehat\Lambda^k_\pi w'\circ Q'\bigl(\varepsilon(u_1),\dots,\varepsilon(u_k)\bigr)\circ\Lambda^k_\pi w .
+\]
+\end{proposition}
+
+\begin{proof}
+The map $Q$ is bounded and $k$-linear, with values in $\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi\widehat D)$ and
+$\widehat\Lambda^k_\pi\widehat D=\widehat\Lambda^k_\pi D$; its diagonal is
+$\widehat\Lambda^k_\pi w'\circ\Lambda^k_\pi\varepsilon(u)\circ\Lambda^k_\pi w=\Lambda^k_\pi u$. Lemma~\ref{fib:lem:test}
+concludes.
+\end{proof}
+
+The same formula makes $u\mapsto w'\varepsilon(u)w$ liftable in degree $n$ for every piece $(G,G',w,w',\varepsilon)$ with
+$(G,G')$ good for Banach values in degree $n$.
+
+\begin{proposition}[two pieces suffice]\label{cmb:prop:normal-form}
+For a bounded bilinear map $b\colon\cL(E,D)\times E\to\widehat D$ let $w_b\colon E\to\cL(\cL(E,D),\widehat D)$ be the
+map $w_b(x)(u)=b(u,x)$, and let $w'_b\colon\cL(E,D)\otimes_\pi E\to\widehat D$ be the linear map with
+$w'_b(u\otimes x)=b(u,x)$. The pair $(E,D)$ has a splitting decomposition of degree $k$ into pieces of source and target
+type if and only if there are bounded bilinear maps $b_S,b_R\colon\cL(E,D)\times E\to\widehat D$ with
+$b_S(u,x)+b_R(u,x)=ux$, $w_{b_S}$ $\mathrm S^{\le k}$-split and $w'_{b_R}$ $\mathrm R^{\le k}$-split. In that case $(E,D)$
+has such a decomposition with at most two pieces.
+\end{proposition}
+
+\begin{lemma}[complemented sub-pairs]\label{cmb:lem:subpair}
+Let $E_0$ and $D_0$ be normed spaces, $J\colon E_0\to E$ and $\Pi\colon\widehat D\to\widehat D_0$ bounded linear maps,
+and $\Phi\colon\cL(E_0,D_0)\to\cL(E,D)$ a bounded linear map with $\Pi\,\Phi(v)\,J=v$ for every $v\in\cL(E_0,D_0)$. This
+holds, for instance, if $\Pi'J=\id_{E_0}$ and $\Pi J'=\id_{D_0}$ for bounded linear maps $\Pi'\colon E\to E_0$ and
+$J'\colon D_0\to D$, and $\Phi(v)=J'v\Pi'$.
+\begin{enumerate}
+\item If $(E,D)$ has a splitting decomposition of degree $k$, so does $(E_0,D_0)$.
+\item If $(E,D)$ is good for Banach values in degree $k$, so is $(E_0,D_0)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{definition}\label{cmb:def:parameter-piece}
+A normed space $P$ is \emph{polarizable in degrees $\le k$} if it is polarizable in degree $n$ for every $n\le k$. A
+\emph{parameter piece} of degree $k$ for $(E,D)$ is a piece $(G,G',w,w',\varepsilon)$ with $\varepsilon=\varepsilon'\circ\psi$
+for bounded linear maps $\psi\colon\cL(E,D)\to P$ and $\varepsilon'\colon P\to\cL(G,G')$, where $P$ is polarizable in
+degrees $\le k$; the maps $w$ and $w'$ are arbitrary. A \emph{generalized decomposition} of degree $k$ is a finite family
+of pieces satisfying~\eqref{cmb:eq:decomposition}, each of source type or of target type in degree $k$, or a parameter
+piece of degree $k$. A source-side or target-side relative splitting of degree $k$ also counts as a generalized
+decomposition of degree $k$, as in Definition~\ref{cmb:def:decomposition}(3).
+\end{definition}
+
+\begin{proposition}[parameter pieces]\label{cmb:prop:parameter-pieces}
+\begin{enumerate}
+\item For every set $I$, the space $\ell^1(I,K)$ is polarizable in every degree, and so is every normed space with finite
+continuous coordinates, for instance every finite-dimensional normed space over a complete field
+(Lemma~\ref{lem:findim}).
+\item If $P_1$ and $P_2$ are polarizable in degrees $\le k$, so is $P_1\oplus P_2$ with the maximum norm.
+\item If $P$ is polarizable in degree $n$ and $P_0$ is a retract of $P$, then $P_0$ is polarizable in degree $n$.
+\item For a parameter piece $(G,G',w,w',\varepsilon)$ of degree $k$, the map $u\mapsto w'\varepsilon(u)w$ is liftable in
+every degree $n\le k$. Hence a generalized decomposition of degree $k$ makes $(E,D)$ good for Banach values in degree
+$k$.
+\end{enumerate}
+\end{proposition}
+
+\begin{corollary}\label{cmb:cor:parameter-degrees}
+Let $\operatorname{char}K=p>0$.
+\begin{enumerate}
+\item A parameter piece of degree $p$ is a parameter piece of every degree, and a generalized decomposition of degree $p$
+into parameter pieces is one of every degree.
+\item If $\cL(E,D)$, with the operator norm, is polarizable in degree $p$, then $(E,D)$ is good for Banach values in every
+degree.
+\end{enumerate}
+\end{corollary}
+
+\begin{theorem}[decompositions of degree $p$]\label{cmb:thm:mixed-degrees}
+Let $\operatorname{char}K=p>0$. A splitting decomposition of degree $p$ is a splitting decomposition of degree $p^2-1$, with
+the same pieces. Hence $(E,D)$ is then good for Banach values in every degree $n<p^2$, and good in every degree $n<p^2$ if
+the decomposition is without completion.
+\end{theorem}
+
+\begin{proposition}[target pieces]\label{cmb:prop:target-pieces}
+Suppose that $E^*\ne0$ and that $(E,D)$ has a splitting decomposition of degree $k$ all of whose pieces are of target type
+in degree $k$. Then $(\mathrm R^k_D)$ holds, without completion if the decomposition is without completion. If moreover
+$\operatorname{char}K=p>0$ and $k=p$, then $(E,D)$ is good for Banach values in every degree, and good in every degree if
+the decomposition is without completion.
+\end{proposition}
+
+The proofs of Corollary~\ref{cmb:cor:parameter-degrees}, Theorem~\ref{cmb:thm:mixed-degrees} and
+Proposition~\ref{cmb:prop:target-pieces} are in Appendix~\ref{app:degrees}.
+
+\subsection{The class of an operator family}\label{cmb:ssec:families}
+
+Throughout this subsection $E$, $D$, $F$, $P$ and $P'$ are normed spaces and $k\ge1$; linear families and liftability
+are as defined before Theorem~\ref{cmb:thm:decomposition}. As in Lemma~\ref{ob:lem:evaluation}, with the same proof, a
+linear family $\theta\colon P\to\cL(E,\widehat D)$ gives a unique bounded linear map
+$\ev_\theta\colon\widehat\otimes^k_\pi E\to\Mult^k(P;\widehat\Lambda^k_\pi D)$ with
+\[
+ \ev_\theta(x_1\otimes\dots\otimes x_k)(h_1,\dots,h_k)=\theta(h_1)x_1\wedge\dots\wedge\theta(h_k)x_k
+ \in\widehat\Lambda^k_\pi\widehat D=\widehat\Lambda^k_\pi D;
+\]
+it has norm at most $\norm\theta^k$, and
+$\ev_\theta(z)(h,\dots,h)=\widehat\Lambda^k_\pi\theta(h)(\widehat\wedge^k_Ez)$ for $z\in\widehat\otimes^k_\pi E$ and $h\in P$,
+so it maps $\cN^k_E$ into $\Mult^k_0(P;\widehat\Lambda^k_\pi D)$. Let $q$ be the quotient map of the \emph{coefficient
+sequence} $\cM^k(P;\widehat\Lambda^k_\pi D)$ of $P$ (Definition~\ref{ob:def:sequences}(4)). Since $q\circ\ev_\theta$
+vanishes on $\cN^k_E$, Lemma~\ref{ob:lem:metric-surjection} gives a bounded linear map
+$\overline{\ev}_\theta\colon\widehat\Lambda^k_\pi E\to\Poly^k(P;\widehat\Lambda^k_\pi D)$ with
+$\overline{\ev}_\theta\circ\widehat\wedge^k_E=q\circ\ev_\theta$. The \emph{class} of $\theta$ in degree $k$ is
+\begin{equation}\label{cmb:eq:family-class}
+ \ob_k(\theta)=(\ev_\theta|_{\cN^k_E})_*[\cS^k_E]\in\Ext\bigl(\widehat\Lambda^k_\pi E,\Mult^k_0(P;\widehat\Lambda^k_\pi D)\bigr),
+\end{equation}
+and $\ob_k(\theta_{E,D})=\ob_k(E,D)$, since $\ev_{\theta_{E,D}}=\ev^k_{E,D}$.
+
+For exact sequences $\mathcal Y\colon0\to Y_1\xrightarrow iY_2\xrightarrow qY_3\to0$ and
+$\mathcal Y'\colon0\to Y'_1\xrightarrow{i'}Y'_2\xrightarrow{q'}Y'_3\to0$, a \emph{morphism} $\mathcal Y\to\mathcal Y'$ is a
+triple of bounded linear maps $\alpha_l\colon Y_l\to Y'_l$, $l=1,2,3$, with $\alpha_2i=i'\alpha_1$ and
+$q'\alpha_2=\alpha_3q$. For a bounded linear $\gamma\colon Y'\to Y_3$ from a Banach space $Y'$, the \emph{pullback}
+$\gamma^*\mathcal Y\colon0\to Y_1\to Y_\gamma\to Y'\to0$ has $Y_\gamma=\{(y,y')\in Y_2\oplus Y':qy=\gamma y'\}$, normed by
+$\norm y+\norm{y'}$, with the maps $y_1\mapsto(iy_1,0)$ and $(y,y')\mapsto y'$. It is exact, its class
+$\gamma^*[\mathcal Y]$ depends only on $[\mathcal Y]$, and $\gamma^*[\mathcal Y]=0$ if and only if $\gamma=q\circ L$
+for a bounded linear $L\colon Y'\to Y_2$ (Lemma~\ref{ocl:lem:pullback}). Pushouts and pullbacks compose and commute, and a morphism
+$(\alpha_1,\alpha_2,\alpha_3)\colon\mathcal Y\to\mathcal Y'$ gives $\alpha_{1*}[\mathcal Y]=\alpha_3^*[\mathcal Y']$
+(Lemma~\ref{ocl:lem:morphism}, Corollary~\ref{ocl:cor:functorial}).
+
+\begin{theorem}[the class of a family]\label{cmb:thm:family}
+Let $\theta\colon P\to\cL(E,\widehat D)$ be a linear family.
+\begin{enumerate}
+\item The following are equivalent: $\theta$ is liftable in degree $k$; the restriction $\ev_\theta|_{\cN^k_E}$ extends to a
+bounded linear map $\widehat\otimes^k_\pi E\to\Mult^k_0(P;\widehat\Lambda^k_\pi D)$; $\ob_k(\theta)=0$
+in~\eqref{cmb:eq:family-class}. A lift $Q$ gives such
+an extension of norm at most $\norm\theta^k+\norm Q$, and such an extension $\xi$ gives a lift of norm at most
+$\norm\theta^k+\norm\xi$.
+\item The triple $(\ev_\theta|_{\cN^k_E},\ev_\theta,\overline{\ev}_\theta)$ is a morphism
+$\cS^k_E\to\cM^k(P;\widehat\Lambda^k_\pi D)$, and $\ob_k(\theta)=\overline{\ev}_\theta^{\,*}[\cM^k(P;\widehat\Lambda^k_\pi D)]$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) Steps~1--3 of the proof of Theorem~\ref{ob:thm:obstruction}, with its correspondence $Q\leftrightarrow Q^\sharp$,
+apply with $P$, $\theta(h)$, $\ev_\theta$ and $\Mult^k(P;\widehat\Lambda^k_\pi D)$ in place of $\cL(E,D)$, $u$, $\ev$ and
+$\Mult^k(\cL(E,D);\widehat\Lambda^k_\pi D)$, using $\ev_\theta(z)(h,\dots,h)=\widehat\Lambda^k_\pi\theta(h)(\widehat\wedge^k_Ez)$;
+the bound $\norm{\ev_\theta}\le\norm\theta^k$ replaces $\norm\ev\le1$ in the constants. The proof of~(2) is in
+Appendix~\ref{app:obstruction-class}.
+\end{proof}
+
+For $\psi\in\cL(P',P)$ and a Banach space $Y$ let $\psi^\sharp\colon\Mult^k(P;Y)\to\Mult^k(P';Y)$ be the map
+$\Phi\mapsto\Phi\circ(\psi\times\dots\times\psi)$, and for a bounded linear map $\chi\colon Y\to Y'$ of Banach spaces let
+$\chi_\flat\colon\Mult^k(P;Y)\to\Mult^k(P;Y')$ be the map $\Phi\mapsto\chi\circ\Phi$. Both preserve zero diagonals, and their
+pushouts are taken along these restrictions.
+
+\begin{proposition}[naturality]\label{cmb:prop:naturality}
+Let $\theta\colon P\to\cL(E,\widehat D)$ be a linear family.
+\begin{enumerate}
+\item[(a)] For $\psi\in\cL(P',P)$, $\ob_k(\theta\circ\psi)=(\psi^\sharp)_*\ob_k(\theta)$.
+\item[(b)] Let $E'$ be a normed space, $w\in\cL(E',E)$, and $\theta_w(h)=\theta(h)\circ w$ for $h\in P$. Then
+$\ob_k(\theta_w)=(\widehat\Lambda^k_\pi w)^*\ob_k(\theta)=(\ev_\theta|_{\cN^k_E})_*\operatorname{sp}_k(w)$, with
+$\operatorname{sp}_k(w)$ as in Proposition~\ref{ob:prop:split-operators}(1).
+\item[(c)] Let $D'$ be a normed space, $w'\colon\widehat D\to\widehat D'$ bounded linear, and $(w'\theta)(h)=w'\circ\theta(h)$
+for $h\in P$. Then $\ob_k(w'\theta)=((\widehat\Lambda^k_\pi w')_\flat)_*\ob_k(\theta)$.
+\item[(d)] $((\alt^k_D)_\flat)_*\ob_k(\theta)=0$, with $\alt^k_D$ extended to $\widehat\Lambda^k_\pi D$. If $G$ is a normed
+space, $w'\colon G\to\widehat D$ is $\mathrm R^k$-split and $\theta_0\colon P\to\cL(E,G)$ is bounded linear, then the family
+$h\mapsto w'\circ\theta_0(h)$ is liftable in degree $k$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:obstruction-class}.
+
+\begin{corollary}[transport]\label{cmb:cor:transport}
+\begin{enumerate}
+\item Let $G$ and $G'$ be normed spaces, and let $w\colon E\to G$, $w'\colon G'\to\widehat D$ and
+$\varepsilon\colon\cL(E,D)\to\cL(G,G')$ be bounded linear maps with $u=w'\varepsilon(u)w$ for every $u\in\cL(E,D)$. Then
+\[
+ \ob_k(E,D)=((\widehat\Lambda^k_\pi w')_\flat)_*(\varepsilon^\sharp)_*(\widehat\Lambda^k_\pi w)^*\ob_k(G,G'),
+\]
+with $w'$ extended to $\widehat G'$.
+\item Let $G$ be a normed space, and let $w\colon E\to G$ and $\varepsilon\colon\cL(E,D)\to\cL(G,\widehat D)$ be bounded linear
+maps with $u=\varepsilon(u)\circ w$ for every $u\in\cL(E,D)$. Then $\ob_k(E,D)=(\ev_\varepsilon|_{\cN^k_G})_*\operatorname{sp}_k(w)$,
+which vanishes if $w$ is $\mathrm S^k$-split.
+\end{enumerate}
+\end{corollary}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{theorem}[sum formula]\label{cmb:thm:cartan}
+Let $P_1$ and $P_2$ be normed spaces, $\theta_1\colon P_1\to\cL(E,\widehat D)$ and $\theta_2\colon P_2\to\cL(E,\widehat D)$
+linear families, $P=P_1\oplus P_2$ with the maximum norm, $\theta_1\boxplus\theta_2\colon P\to\cL(E,\widehat D)$ the family
+$(h_1,h_2)\mapsto\theta_1(h_1)+\theta_2(h_2)$, and $\iota_1\colon P_1\to P$, $\iota_2\colon P_2\to P$ the inclusions. Put
+$Y=\widehat\Lambda^k_\pi D$. For $S\subseteq\{1,\dots,k\}$ and $\Phi\in\Mult^k(P;Y)$ let $\Phi_S(h^1,\dots,h^k)$, where
+$h^j=(h^j_1,h^j_2)\in P$, be the value of $\Phi$ at the tuple whose $j$-th entry is $(h^j_1,0)$ for $j\in S$ and $(0,h^j_2)$
+for $j\notin S$, and let $\Pi^{(a)}\Phi=\sum_{\abs S=a}\Phi_S$. The maps $\Pi^{(a)}$, $0\le a\le k$, are bounded commuting
+idempotents on $\Mult^k(P;Y)$ with sum $\id$ that map $\Mult^k_0(P;Y)$ into itself (Lemma~\ref{ocl:lem:idempotents}). Put
+$\Mult^{(a)}_0=\Pi^{(a)}\Mult^k_0(P;Y)$ and
+$\ob^{(a)}=(\Pi^{(a)}|_{\Mult^k_0(P;Y)})_*\ob_k(\theta_1\boxplus\theta_2)\in\Ext(\widehat\Lambda^k_\pi E,\Mult^{(a)}_0)$.
+\begin{enumerate}
+\item $\ob_k(\theta_1\boxplus\theta_2)=0$ if and only if $\ob^{(a)}=0$ for every $a$. The map $\iota_1^\sharp$ restricts to an
+isomorphism of $\Mult^{(k)}_0$ onto $\Mult^k_0(P_1;Y)$ with $(\iota_1^\sharp)_*\ob^{(k)}=\ob_k(\theta_1)$, and $\iota_2^\sharp$
+restricts to an isomorphism of $\Mult^{(0)}_0$ onto $\Mult^k_0(P_2;Y)$ with $(\iota_2^\sharp)_*\ob^{(0)}=\ob_k(\theta_2)$.
+\item Let $0<a<k$. Then $\ob^{(a)}=0$ if and only if there is a bounded $k$-linear map
+$Q^{(a)}\colon P_1^a\times P_2^{k-a}\to\cL(\widehat\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ with
+\[
+ Q^{(a)}(h_1,\dots,h_1;h_2,\dots,h_2)=\wedge^{a,k-a}_{\widehat D}\circ\bigl(\widehat\Lambda^a_\pi\theta_1(h_1)\otimes
+ \widehat\Lambda^{k-a}_\pi\theta_2(h_2)\bigr)\circ\operatorname{sh}^{a,k-a}_E
+\]
+for $h_1\in P_1$ and $h_2\in P_2$, the maps on the right extended to completions; the right side is the term of index $a$
+in~\eqref{cmb:eq:binomial} for $w_1=\theta_1(h_1)$ and $w_2=\theta_2(h_2)$.
+\item Let $0<a<k$. If $\theta_1$ is liftable in degree $a$ and $\theta_2$ in degree $k-a$, then $\ob^{(a)}=0$.
+\item Suppose that $P_1=P_2$, and let $\Delta_{P_1}\colon P_1\to P$ be the map $h\mapsto(h,h)$. If $\ob^{(a)}=0$ for every
+$a$, then $\theta_1+\theta_2=(\theta_1\boxplus\theta_2)\circ\Delta_{P_1}$ is liftable in degree $k$. In particular,
+$\theta_1+\theta_2$ is liftable in degree $k$ if $\theta_1$ and $\theta_2$ are liftable in every degree at most $k$.
+\item Suppose that $P_1=P_2$ and $\theta_1=\theta_2=\theta$, let $\Delta_{P_1}$ be as in~(4), and let $0<a<k$. Then
+$\Delta_{P_1}^\sharp\circ\Pi^{(a)}\circ\ev_{\theta\boxplus\theta}=\binom ka\ev_\theta$. Hence, if $\binom ka\ne0$ in $K$, then
+$\ob_k(\theta)=0$ if and only if $(\Delta_{P_1}^\sharp|_{\Mult^{(a)}_0})_*\ob^{(a)}=0$, and $\theta$ is liftable in degree $k$
+if it is liftable in degrees $a$ and $k-a$.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:obstruction-class}.
+
+\begin{proposition}[composite families]\label{cmb:prop:composition}
+Let $\theta\colon P\to\cL(E,\widehat D)$ and $\theta'\colon P'\to\cL(D,\widehat F)$ be linear families. Extend each $\theta'(h')$ to
+$\widehat D$, and regard $\theta'$ also as a family $P'\to\cL(\widehat D,\widehat F)$; its class is $\ob_k(\theta')$, since
+$\cS^k_{\widehat D}=\cS^k_D$ (the paragraph before Theorem~\ref{ob:thm:mechanisms}). Let
+$\theta'\odot\theta\colon P'\otimes_\pi P\to\cL(E,\widehat F)$ be the bounded linear map on the uncompleted projective tensor
+product with $(\theta'\odot\theta)(h'\otimes h)=\theta'(h')\circ\theta(h)$.
+\begin{enumerate}
+\item For $h\in P$ let $\psi_h\colon P'\to P'\otimes_\pi P$ be the map $h'\mapsto h'\otimes h$. Then
+$(\psi_h^\sharp)_*\ob_k(\theta'\odot\theta)=(\widehat\Lambda^k_\pi\theta(h))^*\ob_k(\theta')$. For $h'\in P'$ let
+$\psi'_{h'}\colon P\to P'\otimes_\pi P$ be the map $h\mapsto h'\otimes h$. Then
+$((\psi'_{h'})^\sharp)_*\ob_k(\theta'\odot\theta)=((\widehat\Lambda^k_\pi\theta'(h'))_\flat)_*\ob_k(\theta)$.
+\item Let $\operatorname{comp}\colon\cL(D,F)\otimes_\pi\cL(E,D)\to\cL(E,F)$ be the composition map, $v\otimes u\mapsto vu$.
+Then $\ob_k(\theta_{D,F}\odot\theta_{E,D})=(\operatorname{comp}^\sharp)_*\ob_k(E,F)$. In particular, if $(E,F)$ is good for
+Banach values in degree $k$, then $\theta_{D,F}\odot\theta_{E,D}$ is liftable in degree $k$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:obstruction-class}.
+
+\subsection{Block assemblies and permanence}\label{cmb:ssec:blocks}\label{cmb:ssec:permanence}
+
+The proofs of Propositions~\ref{cmb:prop:blocks} and~\ref{cmb:prop:permanence} are in Appendix~\ref{app:deferred}.
+
+\begin{proposition}[block assemblies]\label{cmb:prop:blocks}
+Let $I$ be a totally ordered set, and let $E$ be the $\ell^1$-sum, algebraic or completed, of normed spaces $E_i$,
+$i\in I$, with the norm $\norm x=\sum_i\norm{\Pi_ix}$, inclusions $J_i\colon E_i\to E$ and block projections
+$\Pi_i\colon E\to E_i$. Let $D_i$ be normed spaces and $J'_i\colon D_i\to D$ bounded linear maps with $\norm{J'_i}\le1$.
+Let $\mathcal U\subseteq\cL(E,D)$ be a linear subspace with linear maps $\mathcal U\to\cL(E_i,D_i)$, $u\mapsto u_i$, such
+that $\norm{u_i}\le c\norm u$ for a constant $c$, and $ux=\sum_iJ'_iu_i\Pi_ix$ for every $x\in E$ with finitely many
+nonzero blocks. Suppose that there is a constant $C\ge1$ such that for every $i\in I$ and every $n\le k$ there is a
+bounded $n$-linear map $Q^i_n$ on $\mathcal U_i=\{u_i:u\in\mathcal U\}$ with values in
+$\cL(\Lambda^n_\pi E_i,\widehat\Lambda^n_\pi D_i)$, with $Q^i_n(v,\dots,v)=\Lambda^n_\pi v$ and $\norm{Q^i_n}\le C$. Then
+there is a bounded $k$-linear map $Q\colon\mathcal U^k\to\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ with
+$Q(u,\dots,u)=\Lambda^k_\pi u$ and $\norm Q\le C^kc^k$. In particular, if $\mathcal U=\cL(E,D)$, then $(E,D)$ is good for
+Banach values in degree $k$.
+\end{proposition}
+
+\begin{proposition}[permanence]\label{cmb:prop:permanence}
+Let $k\ge1$, and give finite direct sums the maximum norm.
+\begin{enumerate}
+\item \textup{(Retracts.)} Let $Y_0$ be a retract of a normed space $Y$. If $Y$ satisfies $(\mathrm S^k_Y)$, or
+$(\mathrm R^k_Y)$, or is polarizable in degree $k$, then $Y_0$ satisfies the same condition. If $(E,D)$ is good for Banach
+values in degree $k$ and $E_0$, $D_0$ are retracts of $E$, $D$, then $(E_0,D_0)$ is good for Banach values in degree $k$.
+\item \textup{(Finite sums.)} For normed spaces $Y_1$ and $Y_2$, $(\mathrm S^n_{Y_1\oplus Y_2})$ holds for every $n\le k$ if
+and only if $(\mathrm S^n_{Y_1})$ and $(\mathrm S^n_{Y_2})$ hold for every $n\le k$; the same holds for $(\mathrm R^n)$ and
+for polarizability in degrees $\le k$. If $(E_a,D_b)$ is good for Banach values in every degree $n\le k$ for all
+$a,b\in\{1,2\}$, so is $(E_1\oplus E_2,D_1\oplus D_2)$.
+\item \textup{(Completion of a space.)} Regard the completion $\widehat Y$ of a normed space $Y$ as a normed space over
+$K$. Then $Y$ satisfies $(\mathrm S^k_Y)$, $(\mathrm R^k_Y)$, or polarizability in degree $k$, if and only if $\widehat Y$
+satisfies the same condition.
+\item \textup{(Completion of a pair.)} If $D$ is complete, then $(E,D)$ is good for Banach values in degree $k$ if and only
+if $(\widehat E,D)$ is. If $(E,\widehat D)$ is good for Banach values in degree $k$, so is $(E,D)$.
+\end{enumerate}
+\end{proposition}
+
+Every normed space embeds isometrically in a space with all three splittings, and every Banach space is isomorphic to a
+quotient of such a space.
+
+\begin{theorem}[a space with all splittings]\label{cmb:thm:cantor}
+Let $G$ be a normed space and $\Omega=\{0,1\}^{\N}$. For $m\ge0$ and $\xi\in\{0,1\}^m$ let $C_\xi\subseteq\Omega$ be the
+set of sequences that begin with $\xi$, a dyadic cell of level $m$, of Haar measure $2^{-m}$. A step function of level $m$
+is a function $f=\sum_{\xi\in\{0,1\}^m}1_{C_\xi}g_\xi$ on $\Omega$ with $g_\xi\in G$; its norm
+$\norm f_1=\sum_\xi2^{-m}\norm{g_\xi}$ does not depend on the level used to write it. Let $L^1(\Omega;G)$ be the
+completion of the normed space of step functions. Then for every $k\ge1$ the space $Y=L^1(\Omega;G)$ satisfies
+$(\mathrm S^k_Y)$ with a section of norm at most $1$ and $(\mathrm R^k_Y)$ with a retraction of norm at most $1$, and it is
+polarizable in degree $k$ with a projection of norm at most $k!$.
+\end{theorem}
+
+\begin{corollary}[no hereditary permanence]\label{cmb:cor:no-hereditary}
+Let $E$ and $D$ be Banach spaces, let $\operatorname{Ball}(E)$ be the closed unit ball of $E$, and let
+$\ell^1(\operatorname{Ball}(E),\Kh)\to E$ be the bounded linear map that sends each unit vector $e_x$ to $x$.
+\begin{enumerate}
+\item The map $g\mapsto1_\Omega g$ is an isometry of $E$ onto a closed subspace of $L^1(\Omega;E)$, and
+$(L^1(\Omega;E),D)$ is good for Banach values in every degree. Likewise $D$ is isometric to a closed subspace of
+$L^1(\Omega;D)$, and $(E,L^1(\Omega;D))$ is good for Banach values in every degree.
+\item The map $\ell^1(\operatorname{Ball}(E),\Kh)\to E$ is surjective and open, so $E$ is isomorphic to a quotient of $\ell^1(\operatorname{Ball}(E),\Kh)$, and
+$(\ell^1(\operatorname{Ball}(E),\Kh),D)$ is good for Banach values in every degree. Likewise $D$ is isomorphic to a quotient of
+$\ell^1(\operatorname{Ball}(D),\Kh)$, and $(E,\ell^1(\operatorname{Ball}(D),\Kh))$ is good for Banach values in every degree.
+\item Assume condition~\textup{(L)}. Then $(c_0(\N,\Kh),c_0(\N,\Kh))$ is not good for Banach values in degree $k$, and
+$c_0(\N,\Kh)$ satisfies neither $(\mathrm S^k)$ nor $(\mathrm R^k)$ and is not polarizable in degree $k$
+(Theorem~\ref{fib:thm:ell2}, Corollary~\ref{cls:cor:c0-not-polarizable} and Proposition~\ref{cmb:prop:permanence}). Hence
+goodness for Banach values in degree $k$ passes neither to closed subspaces nor to quotients, in either slot of a pair, and
+none of $(\mathrm S^k)$, $(\mathrm R^k)$ and polarizability in degree $k$ passes to closed subspaces or to quotients.
+\end{enumerate}
+\end{corollary}
+
+The proofs of Theorem~\ref{cmb:thm:cantor} and Corollary~\ref{cmb:cor:no-hereditary} are in Appendix~\ref{app:degrees}.
+
+\begin{theorem}[no three-space property in the source slot]\label{cmb:thm:three-space}
+Assume condition~\textup{(L)}, and let $D$ be a Banach space with an equivalent nonarchimedean norm and $\dim_{\Kh}D=\infty$,
+for example $D=c_0(\N,\Kh)$. Let $Y_1=\ell^1(\operatorname{Ball}(D),\Kh)$, let $\varpi_D\colon Y_1\to D$ be the map
+$e_x\mapsto x$, surjective and open by Corollary~\ref{cmb:cor:no-hereditary}(2), and let
+$\eta\colon Y_1\to L^1(\Omega;Y_1)$ be the isometry $g\mapsto1_\Omega g$ of Corollary~\ref{cmb:cor:no-hereditary}(1). Put
+$Y_2=D\oplus L^1(\Omega;Y_1)$ with the maximum norm and $Y_3=L^1(\Omega;Y_1)/\eta(\ker\varpi_D)$. The maps
+$y\mapsto(-\varpi_Dy,\eta y)$ and $(d,v)\mapsto[v+\eta(y_d)]$, where $y_d\in Y_1$
+is any element with $\varpi_Dy_d=d$, form an exact sequence $0\to Y_1\to Y_2\to Y_3\to0$ such that:
+\begin{enumerate}
+\item $(Y_1,D')$ is good for Banach values in every degree for every normed space $D'$;
+\item $\cL(Y_3,D)=0$, so $(Y_3,D)$ is good in every degree;
+\item $(Y_2,D)$ is not good for Banach values in degree $k$.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:obstruction-class}.

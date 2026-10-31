@@ -1,0 +1,738 @@
+\section{Properties of the obstruction class}\label{app:obstruction-class}
+
+This appendix contains the proofs to which Sections~\ref{sec:canonical}, \ref{sec:combining} and~\ref{sec:sharpness}
+refer. Throughout, $K$ is a nontrivially normed field, hence infinite.
+
+\subsection{Pullbacks and morphisms}\label{ocl:ssec:sequences}
+
+Exact sequences, equivalences, classes and pushouts are as in Section~\ref{ob:ssec:sequences}, morphisms and pullbacks
+as in Section~\ref{cmb:ssec:families}. Throughout this subsection $\mathcal Y\colon0\to Y_1\xrightarrow iY_2\xrightarrow
+qY_3\to0$ and $\mathcal Y'\colon0\to Y'_1\xrightarrow{i'}Y'_2\xrightarrow{q'}Y'_3\to0$ are exact, with a constant $C$
+for $\mathcal Y$ as in Section~\ref{ob:ssec:sequences}.
+
+\begin{lemma}\label{ocl:lem:pullback}
+For a bounded linear map $\gamma\colon Y'\to Y_3$ from a Banach space $Y'$, $\gamma^*\mathcal Y$ is exact, its class
+depends only on $[\mathcal Y]$, and $\gamma^*[\mathcal Y]=0$ if and only if $\gamma=q\circ L$ for a bounded linear
+$L\colon Y'\to Y_2$.
+\end{lemma}
+
+\begin{proof}
+The space $Y_\gamma$ is the kernel of $(y,y')\mapsto qy-\gamma y'$, hence complete. The first map has image
+$\{(y,0):qy=0\}$, the kernel of the second, and $\norm{(iy_1,0)}\ge\norm{y_1}/C$. For $y'\in Y'$ some $y$ with
+$qy=\gamma y'$ has $\norm{(y,y')}\le(1+C\norm\gamma)\norm{y'}$. An equivalence $T$ of $\mathcal Y$ with an exact
+sequence $\mathcal Y''$ induces the equivalence $(y,y')\mapsto(Ty,y')$ of the pullbacks. The splittings of
+$\gamma^*\mathcal Y$, the bounded linear right inverses of $(y,y')\mapsto y'$, are the maps $y'\mapsto(Ly',y')$ with $L$
+bounded linear and $qL=\gamma$.
+\end{proof}
+
+\begin{lemma}\label{ocl:lem:morphism}
+For a morphism $(\alpha_1,\alpha_2,\alpha_3)\colon\mathcal Y\to\mathcal Y'$, $\alpha_{1*}[\mathcal
+Y]=\alpha_3^*[\mathcal Y']$ in $\Ext(Y_3,Y'_1)$.
+\end{lemma}
+
+\begin{proof}
+The map $T[(y'_1,y)]=(i'y'_1+\alpha_2y,qy)$ from the middle space of $\alpha_{1*}\mathcal Y$, the quotient of
+$Y'_1\oplus Y_2$ by the vectors $(\alpha_1y_1,-iy_1)$, to that of $\alpha_3^*\mathcal Y'$ is well defined, since
+$i'\alpha_1=\alpha_2i$ and $qi=0$, bounded, and takes values in the pullback, since $q'(i'y'_1+\alpha_2y)=\alpha_3qy$. It
+sends $[(y'_1,0)]$ to $(i'y'_1,0)$ and has second coordinate $qy$, so it is an equivalence
+(Lemmas~\ref{ob:lem:split-criteria}(3) and~\ref{ocl:lem:pullback}).
+\end{proof}
+
+\begin{corollary}\label{ocl:cor:functorial}
+\begin{enumerate}
+\item[(a)] If $(\alpha_1,\alpha_2,\id)\colon\mathcal Y\to\mathcal Y'$ is a morphism, then $[\mathcal
+Y']=\alpha_{1*}[\mathcal Y]$. If $\mathcal Y''\colon0\to Y_1\xrightarrow{i''}Y''_2\to Y''_3\to0$ is exact and
+$(\id,\alpha_2,\gamma)\colon\mathcal Y''\to\mathcal Y$ is a morphism, then $[\mathcal Y'']=\gamma^*[\mathcal Y]$.
+\item[(b)] For bounded linear maps $\alpha,\alpha',\gamma,\gamma'$ of Banach spaces for which the expressions are defined,
+$(\alpha'\alpha)_*=\alpha'_*\alpha_*$, $(\gamma\gamma')^*=\gamma'^*\gamma^*$, $\id_*=\id^*=\id$ and
+$\alpha_*\gamma^*=\gamma^*\alpha_*$.
+\item[(c)] For a bounded linear $\alpha\colon Y_1\to Y'$ into a Banach space, $\alpha_*0=0$, and $(c\alpha)_*[\mathcal
+Y]=0$ if and only if $\alpha_*[\mathcal Y]=0$, for $c\in K$, $c\ne0$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(a) Lemma~\ref{ocl:lem:morphism} gives $\alpha_{1*}[\mathcal Y]=\id^*[\mathcal Y']$ and $\id_*[\mathcal
+Y'']=\gamma^*[\mathcal Y]$, and $(y,y_3)\mapsto y$ and $[(y_1,y)]\mapsto i''y_1+y$ are equivalences of $\id^*\mathcal
+Y'$ with $\mathcal Y'$ and of $\id_*\mathcal Y''$ with $\mathcal Y''$. (b) The triples
+$(\alpha,y\mapsto[(0,y)],\id)\colon\mathcal Y\to\alpha_*\mathcal Y$ and $(\id,(y,y')\mapsto
+y,\gamma)\colon\gamma^*\mathcal Y\to\mathcal Y$ are morphisms, since $[(0,iy_1)]=[(\alpha y_1,0)]$. Composites of such
+morphisms, the identity morphism and~(a) give the first three identities; the composite $\gamma^*\mathcal Y\to\mathcal
+Y\to\alpha_*\mathcal Y$ and Lemma~\ref{ocl:lem:morphism} give the last. (c) By Lemma~\ref{ob:lem:split-criteria}(3),
+$\alpha_*[\mathcal Y]=0$ if and only if $\alpha=\tilde\alpha i$ for a bounded linear $\tilde\alpha$, that is,
+$c\alpha=(c\tilde\alpha)i$. If $[\mathcal Y]=0$, then $i$ has a bounded linear left inverse $\lambda$
+(Lemma~\ref{ob:lem:split-criteria}(2)), and $\alpha=(\alpha\lambda)i$ gives $\alpha_*0=0$.
+\end{proof}
+
+\subsection{Permutation groups}\label{ocl:ssec:permutations}
+
+The notation is that of Section~\ref{sec:canonical}, before Theorem~\ref{can:thm:permutation} and in
+Proposition~\ref{can:prop:tate}.
+
+\begin{proof}[Proof of Theorem~\ref{can:thm:permutation}]
+\emph{Step 1 (notation).} For a \emph{tuple} $t\colon[k]\to I$ put $e_t=e_{t(1)}\otimes\dots\otimes e_{t(k)}$; these
+form a basis of $\otimes^k_KV$, and $h^{\otimes k}e_t=e_{h\circ t}$. The \emph{type} of $t$ is the $k$-multiset
+$i\mapsto\abs{t^{-1}(i)}$; if $t$ has type $\mathbf m$, then $h\circ t$ has type $h\mathbf m$. For a $k$-subset $T$ let
+$\operatorname{Bij}(T)$ be the set of bijections $[k]\to T$. Then $\wedge^ke_f=\sgn(f_T^{-1}f)\eta_T$ for
+$f\in\operatorname{Bij}(T)$, $\wedge^ke_t=0$ for $t$ not injective, the $\eta_T$ form a basis of $\Lambda^k_KV$, and
+$\chi_T(h)=\sgn(f_T^{-1}hf_T)$ depends only on the permutation that $h$ induces on $T$, so $\chi_T$ is also a
+homomorphism on $\bar{\mathsf H}_T$. Since $f_T^{-1}hf=(f_T^{-1}hf_T)(f_T^{-1}f)$ in $S_k$,
+\begin{equation}\label{ocl:eq:sign}
+ \sgn(f_T^{-1}hf)=\chi_T(h)\sgn(f_T^{-1}f)\qquad(h\in\mathsf H_T,\ f\in\operatorname{Bij}(T)).
+\end{equation}
+The groups $\bar{\mathsf H}_T$ and $\bar{\mathsf H}_{\mathbf m}$ act freely, by $f\mapsto h\circ f$, on
+$\operatorname{Bij}(T)$ and on the tuples of type $\mathbf m$. This gives the \emph{orbit count}: if $c_f\in\Kh$ satisfy
+$c_{h\circ f}=\chi_T(h)c_f$ for $h\in\mathsf H_T$, then by~\eqref{ocl:eq:sign} each orbit contributes $\abs{\bar{\mathsf
+H}_T}c_f\sgn(f_T^{-1}f)$ to $\sum_{f\in\operatorname{Bij}(T)}c_f\sgn(f_T^{-1}f)$, which therefore lies in
+$\abs{\bar{\mathsf H}_T}\Kh$; if $c_t\in\Kh$ satisfy $c_{h\circ t}=c_t$ for the tuples $t$ of type $\mathbf m$ and
+$h\in\mathsf H_{\mathbf m}$, then $\sum_tc_t\in\abs{\bar{\mathsf H}_{\mathbf m}}\Kh$. Let $O_{\mathbf m}$ be the sum of
+the $e_t$ over the tuples of type $\mathbf m$, as in Proposition~\ref{spl:prop:ordering}. Then $h^{\otimes k}O_{\mathbf
+m}=O_{h\mathbf m}$, and the $O_{\mathbf m}$ form a basis of $\Gamma^k_KV$, the space of tensors fixed by every
+$\tau_\sigma$, since $\tau_\sigma e_t=e_{t\circ\sigma^{-1}}$.
+
+\emph{Step 2 (necessity).} Assume the hypotheses of~(4). For a tuple $t$ let $e^*_t$ be the bounded functional on
+$\widehat\otimes^k_\pi E$ linearizing $(x_j)\mapsto\prod_je^*_{t(j)}(x_j)$; then $e^*_t(e_{t'})=\delta_{tt'}$, and
+$e^*_t\circ h^{\otimes k}=e^*_{h^{-1}\circ t}$ by~\eqref{can:eq:compatible}. Let $\ell_T$ be the bounded functional on
+$\widehat\Lambda^k_\pi E$ linearizing $(x_{j'})\mapsto\det(e^*_{f_T(j)}(x_{j'}))_{j,j'}$
+(Proposition~\ref{prop:exterior}). Then $\ell_T(\eta_T)=1$; $\ell_T\circ\widehat\Lambda^k_\pi h=\chi_T(h)\ell_T$ for
+$h\in\mathsf H_T$, since~\eqref{can:eq:compatible} permutes the rows of the determinant by $f_T^{-1}h^{-1}f_T$; and
+$\ell_T\circ\widehat\wedge^k_E=\sum_{f\in\operatorname{Bij}(T)}\sgn(f_T^{-1}f)e^*_f$ by the Leibniz formula.
+
+Let $\abs{\bar{\mathsf H}_T}=0$ in $K$. For $s$ as in~(4), $z=s(\eta_T)$ satisfies $z=\chi_T(h)h^{\otimes k}z$ for
+$h\in\mathsf H_T$, so $c_f=e^*_f(z)$ satisfies $c_{h\circ f}=\chi_T(h)c_f$, and
+$1=\ell_T(\widehat\wedge^k_Ez)=\sum_fc_f\sgn(f_T^{-1}f)=0$ by the orbit count. For $\rho$ as in~(4),
+$a_f=\ell_T(\rho(e_f))$ satisfies $a_{h\circ f}=\chi_T(h)a_f$, and $\alt^k_E\eta_T=\sum_f\sgn(f_T^{-1}f)e_f$ gives
+$1=\ell_T(\rho\alt^k_E\eta_T)=\sum_f\sgn(f_T^{-1}f)a_f=0$.
+
+Let $\abs{\bar{\mathsf H}_{\mathbf m}}=0$ in $K$, $R$ be as in~(4), and $t_{\mathbf m}$ a tuple of type $\mathbf m$. As
+$e^*_t(x^{\otimes k})=\prod_je^*_{t(j)}(x)$ depends only on the type of $t$, every $e^*_t$ with $t$ of type $\mathbf m$
+agrees on $\widehat\Gamma^k_\pi E$ with $\varphi_{\mathbf m}=e^*_{t_{\mathbf m}}$. So for $h\in\mathsf H_{\mathbf m}$,
+$\varphi_{\mathbf m}\circ h^{\otimes k}=\varphi_{\mathbf m}$ on $\widehat\Gamma^k_\pi E$, and $c_t=\varphi_{\mathbf
+m}(Re_t)$ satisfies $c_{h\circ t}=c_t$. By Step~1, $O_{\mathbf m}$ is a combination of pure powers
+of vectors in the span of the $e_i$, so $O_{\mathbf m}\in\widehat\Gamma^k_\pi E$, and $1=\varphi_{\mathbf m}(RO_{\mathbf
+m})=\sum_tc_t=0$ by the orbit count. With the algebraic powers of $V$, its coordinate functionals and the determinant
+functional on $\Lambda^k_KV$, the same argument gives the necessity in (1)--(3).
+
+\emph{Step 3 (sufficiency in (1)).} Let $\abs{\bar{\mathsf H}_T}\ne0$ in $K$ for all $T$, and let $\mathcal T$ be a
+set of representatives of the $\mathsf H$-orbits of $k$-subsets. For $T\in\mathcal T$ put $z_T=\abs{\bar{\mathsf
+H}_T}^{-1}\sum_{g\in\bar{\mathsf H}_T}\chi_T(g)e_{g\circ f_T}\in U_T$; then $\wedge^kz_T=\eta_T$ by~\eqref{ocl:eq:sign},
+and $h'^{\otimes k}z_T=\chi_T(h')z_T$ for $h'\in\mathsf H_T$ by reindexing. The vectors
+$\Lambda^k_Kg\,\eta_T=\pm\eta_{gT}$, one for each $k$-subset $gT$, form a basis of $\Lambda^k_KV$; put
+$s(\Lambda^k_Kg\,\eta_T)=g^{\otimes k}z_T$. If $gT=g'T$, then $h'=g^{-1}g'\in\mathsf H_T$, and $\Lambda^k_Kg'\eta_T$ and
+$g'^{\otimes k}z_T$ are $\chi_T(h')$ times $\Lambda^k_Kg\,\eta_T$ and $g^{\otimes k}z_T$; so $s$ is well defined. It is
+$\mathsf H$-equivariant by construction and a section, since $\wedge^kg^{\otimes k}z_T=\Lambda^k_Kg\,\wedge^kz_T$. For
+$\lambda\in(K^\times)^I$ let $d_\lambda e_i=\lambda_ie_i$. Then $d_\lambda^{\otimes k}$ and $\Lambda^k_Kd_\lambda$ act
+on $U_{T'}$ and on $K\eta_{T'}$ by $\prod_{i\in T'}\lambda_i$, and $s(K\eta_{T'})\subseteq U_{T'}$, so $s$ commutes with
+$d_\lambda$.
+
+\emph{Step 4 (sufficiency in (2) and (3)).} For $T\in\mathcal T$ let $\varphi_T$ be the functional on $U_T$ with
+$\varphi_T(e_{g\circ f_T})=\abs{\bar{\mathsf H}_T}^{-1}\chi_T(g)$ for $g\in\bar{\mathsf H}_T$ that vanishes on the other
+$e_f$. Then $\varphi_T\circ h'^{\otimes k}=\chi_T(h')\varphi_T$ on $U_T$ for $h'\in\mathsf H_T$, and
+$\varphi_T(\alt^k\eta_T)=1$ by~\eqref{ocl:eq:sign}. Put $\rho(e_t)=0$ for $t$ not injective and $\rho(e_{g\circ
+f})=\varphi_T(e_f)\Lambda^k_Kg\,\eta_T$ for $g\in\mathsf H$, $T\in\mathcal T$ and $f\in\operatorname{Bij}(T)$; this is
+well defined, since $g\circ f=g'\circ f'$ implies $h'=g^{-1}g'\in\mathsf H_T$ and $f=h'\circ f'$. The map $\rho$ is
+equivariant, $\rho(\alt^k\Lambda^k_Kg\,\eta_T)=\rho(g^{\otimes k}\alt^k\eta_T)=\Lambda^k_Kg\,\eta_T$, and
+$\rho(U_{T'})\subseteq K\eta_{T'}$. For~(3), choose representatives $\mathbf m$ of the $\mathsf H$-orbits of
+$k$-multisets and tuples $t_{\mathbf m}$ of type $\mathbf m$. Let $\psi_{\mathbf m}(e_t)$ be $\abs{\bar{\mathsf
+H}_{\mathbf m}}^{-1}$ for $t\in\bar{\mathsf H}_{\mathbf m}\circ t_{\mathbf m}$ and $0$ for the other $t$ of type
+$\mathbf m$; then $\psi_{\mathbf m}$ is $\mathsf H_{\mathbf m}$-invariant and $\psi_{\mathbf m}(O_{\mathbf m})=1$. Put
+$R(e_{g\circ t})=\psi_{\mathbf m}(e_t)O_{g\mathbf m}$ for $g\in\mathsf H$ and $t$ of type $\mathbf m$. As for $\rho$,
+$R$ is well defined and equivariant; it maps into $\Gamma^k_KV$, and $R(O_{g\mathbf m})=\psi_{\mathbf m}(O_{\mathbf
+m})O_{g\mathbf m}=O_{g\mathbf m}$, so it is a projection onto $\Gamma^k_KV$. It maps $e_t$ into $KO_{\mathbf m'}$,
+$\mathbf m'$ the type of $t$, on which $d_\lambda^{\otimes k}$ acts by the same factor as on $e_t$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{can:prop:tate}]
+\emph{Step 1 (augmentation).} Let $\operatorname{aug}_T\colon U_T\to K$ be linear with
+$\operatorname{aug}_T(e_f)=\sgn(f_T^{-1}f)$. Then $\wedge^kz=\operatorname{aug}_T(z)\eta_T$ for $z\in U_T$, so
+$\cN_T=\ker\operatorname{aug}_T$; and $\operatorname{aug}_T(h\cdot z)=\operatorname{aug}_T(z)$ by~\eqref{ocl:eq:sign}, so
+$h\cdot e_{f_T}-e_{f_T}\in\cN_T$. As $h\mapsto h\cdot y-y$ satisfies the cocycle identity for every $y\in U_T$,
+$\delta_T$ is a well-defined linear map. Call $z\in U_T$ \emph{invariant} if $h\cdot z=z$ for all $h\in\mathsf H_T$,
+that is, $h^{\otimes k}z=\chi_T(h)z$.
+
+\emph{Step 2 (item (1)).} For $a\in K$, $\delta_T(a)=0$ means that $z=ae_{f_T}-n$ is invariant for some $n\in\cN_T$, and
+then $\operatorname{aug}_T(z)=a$; conversely, for an invariant $z$ with $\operatorname{aug}_T(z)=a$, the vector
+$n=ae_{f_T}-z$ lies in $\cN_T$ and gives $\delta_T(a)=0$. For $a=1$ this is~(1).
+
+\emph{Step 3 (items (2) and (3)).} By Step~2, $\ker\delta_T$ is the image under $\operatorname{aug}_T$ of the invariant
+vectors. A vector $\sum_fc_fe_f$ is invariant if and only if $c_{h\circ f}=\chi_T(h)c_f$, so by the orbit count this
+image lies in $\abs{\bar{\mathsf H}_T}K$; it contains $\abs{\bar{\mathsf H}_T}$, the image of $\sum_{g\in\bar{\mathsf
+H}_T}\chi_T(g)e_{g\circ f_T}$. So $\ker\delta_T=\abs{\bar{\mathsf H}_T}K$, which gives~(2), since $\delta_T$ is linear.
+By~(2), $\delta_T(1)=0$ if and only if $\abs{\bar{\mathsf H}_T}\ne0$ in $K$, and Theorem~\ref{can:thm:permutation}(1)
+gives~(3).
+\end{proof}
+
+\subsection{Operator families}\label{ocl:ssec:families}
+
+The notation is that of Section~\ref{cmb:ssec:families}.
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:family}(2)]
+The squares commute, since $\ev_\theta(\cN^k_E)\subseteq\Mult^k_0(P;\widehat\Lambda^k_\pi D)$ and
+$\overline\ev_\theta\circ\widehat\wedge^k_E=q\circ\ev_\theta$ by the definition of $\overline\ev_\theta$ before
+Theorem~\ref{cmb:thm:family}. Lemma~\ref{ocl:lem:morphism} gives the formula.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{cmb:prop:naturality}]
+\emph{Step 1 (items (a)--(c)).} On pure tensors, hence everywhere, $\ev_{\theta\circ\psi}=\psi^\sharp\circ\ev_\theta$,
+$\ev_{\theta_w}=\ev_\theta\circ w^{\otimes k}$ and $\ev_{w'\theta}=(\widehat\Lambda^k_\pi w')_\flat\circ\ev_\theta$.
+Corollary~\ref{ocl:cor:functorial}(b) gives~(a) and~(c). For~(b), $(w^{\otimes k}|_{\cN^k_{E'}},w^{\otimes
+k},\widehat\Lambda^k_\pi w)$ is a morphism $\cS^k_{E'}\to\cS^k_E$ (proof of Proposition~\ref{ob:prop:split-operators}),
+so Corollary~\ref{ocl:cor:functorial}(b) and Lemma~\ref{ocl:lem:morphism} give
+\begin{align*}
+ \ob_k(\theta_w)&=(\ev_\theta|_{\cN^k_E})_*(w^{\otimes k}|_{\cN^k_{E'}})_*[\cS^k_{E'}]
+ =(\ev_\theta|_{\cN^k_E})_*\operatorname{sp}_k(w)\\
+ &=(\ev_\theta|_{\cN^k_E})_*(\widehat\Lambda^k_\pi w)^*[\cS^k_E]=(\widehat\Lambda^k_\pi w)^*\ob_k(\theta).
+\end{align*}
+
+\emph{Step 2 (item (d)).} The map $(\alt^k_D)_\flat$ preserves zero diagonals, so it induces a bounded linear
+$\overline\alt\colon\Poly^k(P;\widehat\Lambda^k_\pi D)\to\Poly^k(P;\widehat\otimes^k_\pi D)$ and a morphism
+$\cM^k(P;\widehat\Lambda^k_\pi D)\to\cM^k(P;\widehat\otimes^k_\pi D)$. By Theorem~\ref{cmb:thm:family}(2),
+Lemma~\ref{ocl:lem:morphism} and Corollary~\ref{ocl:cor:functorial}(b), the class
+$((\alt^k_D)_\flat)_*\ob_k(\theta)$ equals $(\overline\alt\circ\overline\ev_\theta)^*[\cM^k(P;\widehat\otimes^k_\pi D)]$. The
+bounded linear map $L\colon\widehat\Lambda^k_\pi E\to\Mult^k(P;\widehat\otimes^k_\pi D)$,
+$L(y)(h_1,\dots,h_k)=(\theta(h_1)\otimes\dots\otimes\theta(h_k))\alt^k_Ey$, has the diagonal
+$\theta(h)^{\otimes k}\alt^k_Ey=\alt^k_D\widehat\Lambda^k_\pi\theta(h)y$, by naturality of $\alt^k$; so its composite
+with the quotient map of $\cM^k(P;\widehat\otimes^k_\pi D)$ is $\overline\alt\circ\overline\ev_\theta$, and
+Lemma~\ref{ocl:lem:pullback} gives the first assertion. For the second, extend $w'$ to $\widehat G$, regard $\theta_0$ as
+a family $P\to\cL(E,\widehat G)$, and let $\rho\colon\otimes^k_\pi G\to\widehat\Lambda^k_\pi D$ satisfy
+$\rho\circ\alt^k_G=\Lambda^k_\pi w'$, so that $\widehat\Lambda^k_\pi w'=\rho\circ\alt^k_G$ on the completions. By~(c),
+Corollary~\ref{ocl:cor:functorial}(b),(c) and the first assertion for $\theta_0$,
+$\ob_k(w'\theta_0)=(\rho_\flat)_*((\alt^k_G)_\flat)_*\ob_k(\theta_0)=0$, and Theorem~\ref{cmb:thm:family}(1) concludes.
+\end{proof}
+
+\begin{lemma}\label{ocl:lem:idempotents}
+Let $P_1$ and $P_2$ be normed spaces, $P=P_1\oplus P_2$ with the maximum norm, $Y$ a Banach space, and $\Phi_S$,
+$\Pi^{(a)}$ as in Theorem~\ref{cmb:thm:cartan}. For $\Phi\in\Mult^k(P;Y)$, $\Phi=\sum_{S\subseteq[k]}\Phi_S$,
+$(\Phi_S)_{S'}$ is $\Phi_S$ if $S'=S$ and $0$ otherwise, and $\norm{\Phi_S}\le\norm\Phi$. Hence the $\Pi^{(a)}$ are
+bounded commuting idempotents with sum $\id$. Each maps $\Mult^k_0(P;Y)$ into itself.
+\end{lemma}
+
+\begin{proof}
+Expanding $h^j=(h^j_1,0)+(0,h^j_2)$ multilinearly gives $\Phi=\sum_S\Phi_S$. The map $(\Phi_S)_{S'}$ evaluates $\Phi$ at
+a tuple whose $j$th entry is $0$ for $j$ in exactly one of $S$ and $S'$, and equals $\Phi_S$ if $S'=S$. Since
+$(h^j_1,0)$ and $(0,h^j_2)$ have norm at most $\norm{h^j}$, $\norm{\Phi_S}\le\norm\Phi$. For $\Phi\in\Mult^k_0(P;Y)$,
+$h=(h_1,h_2)\in P$ and $\lambda\in K$,
+\[
+ 0=\Phi((\lambda h_1,h_2),\dots,(\lambda h_1,h_2))=\sum_S\lambda^{\abs S}\Phi_S(h,\dots,h)
+ =\sum_{a=0}^k\lambda^a(\Pi^{(a)}\Phi)(h,\dots,h).
+\]
+Since $K$ is infinite, the Vandermonde determinant for $k+1$ distinct values of $\lambda$ shows that
+$(\Pi^{(a)}\Phi)(h,\dots,h)=0$ for every $a$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:cartan}]
+Put $\Mult^k_0=\Mult^k_0(P;Y)$, $\Mult^{(a)}=\Pi^{(a)}\Mult^k(P;Y)$ and
+$\ev=\ev_{\theta_1\boxplus\theta_2}$. By
+Lemma~\ref{ocl:lem:idempotents}, $\Mult^{(a)}$ and $\Mult^{(a)}_0$ are closed and
+$\Mult^{(a)}\cap\Mult^k_0=\Mult^{(a)}_0$; by Corollary~\ref{ocl:cor:functorial}(b),
+$\ob^{(a)}=(\Pi^{(a)}\circ\ev|_{\cN^k_E})_*[\cS^k_E]$.
+
+\emph{Step 1 (item (1)).} By Lemma~\ref{ob:lem:split-criteria}(3), $\ob_k(\theta_1\boxplus\theta_2)=0$ if and only if
+$\ev|_{\cN^k_E}$ extends to a bounded linear $\xi\colon\widehat\otimes^k_\pi E\to\Mult^k_0$, and $\ob^{(a)}=0$ if and
+only if $\Pi^{(a)}\ev|_{\cN^k_E}$ extends to a bounded linear $\xi_a\colon\widehat\otimes^k_\pi E\to\Mult^{(a)}_0$. An
+extension $\xi$ gives the extensions $\Pi^{(a)}\xi$, and extensions $\xi_a$ give the extension $\sum_a\xi_a$. For
+$S\ne[k]$, $\Phi_S\circ\iota_1^{\times k}$ evaluates $\Phi$ at tuples with a zero entry, so
+$\iota_1^\sharp=\iota_1^\sharp\Pi^{(k)}$. With the projections $\operatorname{pr}_l\colon P\to P_l$, $l=1,2$,
+$\Phi_{[k]}=(\iota_1^\sharp\Phi)\circ\operatorname{pr}_1^{\times k}$, so $\iota_1^\sharp$ is an isometry of $\Mult^{(k)}$
+onto $\Mult^k(P_1;Y)$ with inverse $\operatorname{pr}_1^\sharp$, and both preserve zero diagonals. By
+Corollary~\ref{ocl:cor:functorial}(b) and Proposition~\ref{cmb:prop:naturality}(a),
+$(\iota_1^\sharp)_*\ob^{(k)}=(\iota_1^\sharp)_*\ob_k(\theta_1\boxplus\theta_2)=\ob_k((\theta_1\boxplus\theta_2)\circ\iota_1)=\ob_k(\theta_1)$.
+The case of $\iota_2$, with $S=\emptyset$ and $\operatorname{pr}_2$, is the same.
+
+\emph{Step 2 (item (2)).} Let $\Theta_a(h_1,h_2)$ be the right side of the identity in~(2). By
+Lemma~\ref{ob:lem:metric-surjection}, the relation $\Pi^{(a)}\ev-\xi_a=\Psi\circ\widehat\wedge^k_E$ matches the
+extensions $\xi_a$ of Step~1 with the bounded linear $\Psi\colon\widehat\Lambda^k_\pi E\to\Mult^{(a)}$ such that
+$\Psi(\widehat\wedge^k_Ez)-\Pi^{(a)}\ev(z)\in\Mult^k_0$ for all $z$. For $z=x_1\otimes\dots\otimes x_k$ and
+$h=(h_1,h_2)$, $\ev(z)_S(h,\dots,h)$ is the wedge, in the order of $j$, of the vectors $\theta_1(h_1)x_j$, $j\in S$, and
+$\theta_2(h_2)x_j$, $j\notin S$; by the expansion before~\eqref{cmb:eq:binomial}, the sum over $\abs S=a$ is
+$\Theta_a(h_1,h_2)(x_1\wedge\dots\wedge x_k)$. By continuity, the condition on $\Psi$ says
+$\Psi(y)(h,\dots,h)=\Theta_a(h_1,h_2)y$. Given $Q^{(a)}$, the map
+$\Psi(y)(h^1,\dots,h^k)=Q^{(a)}(h^1_1,\dots,h^a_1;h^{a+1}_2,\dots,h^k_2)y$ satisfies it and lies in $\Mult^{(a)}$, since
+$\Psi(y)=\Psi(y)_{[a]}$ (Lemma~\ref{ocl:lem:idempotents}). Conversely, given $\Psi$, for $g\in P_1^a$, $g'\in
+P_2^{k-a}$ and $\abs S=a$ let $(g;g')_S\in P^k$ have the entries $(g_1,0),\dots,(g_a,0)$ in the slots of $S$ and
+$(0,g'_1),\dots,(0,g'_{k-a})$ in the others, in increasing order, and put $Q^{(a)}(g;g')y=\sum_{\abs
+S=a}\Psi(y)((g;g')_S)$; its diagonal is $(\Pi^{(a)}\Psi(y))(h,\dots,h)=\Theta_a(h_1,h_2)y$.
+
+\emph{Step 3 (items (3)--(5)).} (3) For lifts $Q_a$ of $\theta_1$ and $Q'_{k-a}$ of $\theta_2$, the map
+$\wedge^{a,k-a}_{\widehat D}\circ(Q_a(g)\otimes Q'_{k-a}(g'))\circ\operatorname{sh}^{a,k-a}_E$, extended to completions,
+is bounded and $k$-linear by Lemma~\ref{fib:lem:hopf}, with diagonal $\Theta_a(h_1,h_2)$; apply Step~2. (4) If all
+$\ob^{(a)}$ vanish, then $\ob_k(\theta_1\boxplus\theta_2)=0$ by~(1), so
+$\ob_k(\theta_1+\theta_2)=(\Delta_{P_1}^\sharp)_*\ob_k(\theta_1\boxplus\theta_2)=0$ by
+Proposition~\ref{cmb:prop:naturality}(a) and Corollary~\ref{ocl:cor:functorial}(c), and Theorem~\ref{cmb:thm:family}(1)
+applies. If $\theta_1$ and $\theta_2$ are liftable in every degree at most $k$, then
+$\ob_k(\theta_1)=\ob_k(\theta_2)=0$ by Theorem~\ref{cmb:thm:family}(1); applying $(\operatorname{pr}_1^\sharp)_*$
+and $(\operatorname{pr}_2^\sharp)_*$ to the identities of~(1) gives $\ob^{(k)}=\ob^{(0)}=0$ by
+Corollary~\ref{ocl:cor:functorial}(b),(c), and the other $\ob^{(a)}$ vanish by~(3). (5) For $\abs S=a$,
+$(\ev_{\theta\boxplus\theta}(z))_S\circ\Delta_{P_1}^{\times k}=\ev_\theta(z)$, on pure tensors since
+$(\theta\boxplus\theta)(h,0)=(\theta\boxplus\theta)(0,h)=\theta(h)$, hence everywhere; summing over the $\binom ka$ sets
+$S$ gives the identity. By Corollary~\ref{ocl:cor:functorial}(b),
+$(\Delta_{P_1}^\sharp|_{\Mult^{(a)}_0})_*\ob^{(a)}=(\binom ka\ev_\theta|_{\cN^k_E})_*[\cS^k_E]$, which by
+Corollary~\ref{ocl:cor:functorial}(c) vanishes if and only if $\ob_k(\theta)=0$. If $\theta$ is liftable in degrees $a$
+and $k-a$, then $\ob^{(a)}=0$ by~(3), so $\ob_k(\theta)=0$, and Theorem~\ref{cmb:thm:family}(1) applies.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{cmb:prop:composition}]
+(1) As $(\theta'\odot\theta)(\psi_hh')=\theta'(h')\circ\theta(h)$, the family $(\theta'\odot\theta)\circ\psi_h$ is the
+family $\theta'_w$ of Proposition~\ref{cmb:prop:naturality}(b) for $\theta'$ on $\widehat D$ and
+$w=\theta(h)\in\cL(E,\widehat D)$, with $\widehat\Lambda^k_\pi w$ mapping into $\widehat\Lambda^k_\pi\widehat
+D=\widehat\Lambda^k_\pi D$; items~(a) and~(b) give the first identity. Likewise $(\theta'\odot\theta)\circ\psi'_{h'}$ is
+the family $w'\theta$ of Proposition~\ref{cmb:prop:naturality}(c) for $w'=\theta'(h')\colon\widehat D\to\widehat F$,
+and~(a) and~(c) give the second. (2) On pure tensors $(\theta_{D,F}\odot\theta_{E,D})(v\otimes u)=vu$, so
+$\theta_{D,F}\odot\theta_{E,D}=\theta_{E,F}\circ\operatorname{comp}$, and Proposition~\ref{cmb:prop:naturality}(a)
+gives the identity. If $(E,F)$ is good for Banach values in degree $k$, then $\ob_k(E,F)=0$ by
+Theorem~\ref{ob:thm:obstruction}, so the class of $\theta_{D,F}\odot\theta_{E,D}$ vanishes by
+Corollary~\ref{ocl:cor:functorial}(c), and Theorem~\ref{cmb:thm:family}(1) applies.
+\end{proof}
+
+\subsection{A three-space counterexample}\label{ocl:ssec:three-space}
+
+The Cantor set $\Omega$, its dyadic cells and the spaces $L^1(\Omega;U)$ are as in Theorem~\ref{cmb:thm:cantor}.
+
+\begin{lemma}\label{ocl:lem:no-operators}
+Let $K$ be nonarchimedean, $U$ a Banach space, $U_0$ a closed subspace of $L^1(\Omega;U)$, and $Y$ a normed space with
+an equivalent nonarchimedean norm. Then every bounded linear map $L^1(\Omega;U)/U_0\to Y$ is zero.
+\end{lemma}
+
+\begin{proof}
+Let $\psi$ be such a map, $\psi_0$ its composite with the quotient map, and $\nu$ a nonarchimedean norm on $Y$ with
+$\nu\le c_\nu\norm\cdot$. For a dyadic cell $C_\xi$ of level $m$, $u\in U$ and $j\ge0$, $1_{C_\xi}u$ is the sum of the
+$2^j$ functions $1_{C_{\xi'}}u$, $C_{\xi'}\subseteq C_\xi$ of level $m+j$, each of norm $2^{-m-j}\norm u$. So
+$\nu(\psi_0(1_{C_\xi}u))\le\max_{\xi'}\nu(\psi_0(1_{C_{\xi'}}u))\le c_\nu\norm{\psi_0}2^{-m-j}\norm u$, and $j\to\infty$
+gives $\psi_0(1_{C_\xi}u)=0$. Step functions are dense, so $\psi_0=0$, and $\psi=0$.
+\end{proof}
+
+\begin{lemma}\label{ocl:lem:dilution}
+Let $Y$, $Y'$, $Y''$ be Banach spaces, $T\colon Y\to Y'$ bounded linear such that every $y'\in Y'$ equals $Ty$ for some
+$y$ with $\norm y\le C_T\norm{y'}$, $R=\ker T$, and $\eta\colon Y\to Y''$ bounded linear and bounded below. Give
+$Y'\oplus Y''$ the maximum norm. Then $y\mapsto(-Ty,\eta y)$ and $(y',y'')\mapsto[y''+\eta(y_{y'})]$, where
+$Ty_{y'}=y'$, form an exact sequence $0\to Y\to Y'\oplus Y''\to Y''/\eta(R)\to0$.
+\end{lemma}
+
+\begin{proof}
+The subspace $\eta(R)$ is complete, hence closed. Two choices of $y_{y'}$ differ by an element of $R$, so the second
+map is well defined and linear; it is bounded for the choice $\norm{y_{y'}}\le C_T\norm{y'}$, and it maps $(0,y'')$ to
+$[y'']$, where $y''$ can be chosen with $\norm{y''}\le2\norm{[y'']}$. If $y''+\eta y_{y'}=\eta r$ with $r\in R$, then
+$(y',y'')=(-Tw,\eta w)$ for $w=r-y_{y'}$; conversely $(-Tw,\eta w)$ maps to $[\eta w-\eta w]=0$, with $y_{-Tw}=-w$.
+The first map is bounded below, as $\eta$ is.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:three-space}]
+\emph{Step 1 (exactness).} As $\varpi_D$ is open (Corollary~\ref{cmb:cor:no-hereditary}(2)), for some $\delta>0$ the
+image of the open unit ball contains the open ball of radius $\delta$. For $d\ne0$ and $j\in\Z$ with
+$\abs\vartheta^{j+1}\delta\le\norm d<\abs\vartheta^j\delta$, $\vartheta$ as in Section~\ref{obs:ssec:field}, some $y$ with
+$\norm y<1$ has $\varpi_Dy=\vartheta^{-j}d$, and $y_d=\vartheta^jy$ has $\norm{y_d}<\norm d/(\abs\vartheta\delta)$. As
+$\eta$ is isometric, Lemma~\ref{ocl:lem:dilution} applies with $T=\varpi_D$.
+
+\emph{Step 2 (items (1) and (2)).} By Proposition~\ref{spl:prop:projective}(3), $\ell^1(\operatorname{Ball}(D),K)$
+satisfies $(\mathrm S^n)$ for every $n$, and it is dense in $Y_1$; so Proposition~\ref{cmb:prop:permanence}(3) gives
+$(\mathrm S^n_{Y_1})$, and Proposition~\ref{fib:prop:split}(1) gives~(1). Under~(L), $K$ is nonarchimedean, so
+Lemma~\ref{ocl:lem:no-operators} with $U=Y_1$, the closed subspace $U_0=\eta(\ker\varpi_D)$ and $Y=D$ gives
+$\cL(Y_3,D)=0$; the zero map on $\cL(Y_3,D)^n$ is then a lift as in Lemma~\ref{fib:lem:test} for every $n\ge1$.
+
+\emph{Step 3 (item (3)).} Let $J\colon D\to Y_2$ be $d\mapsto(d,0)$ and $\Pi'\colon Y_2\to D$ the first coordinate. If
+$(Y_2,D)$ were good for Banach values in degree $k$, Lemma~\ref{cmb:lem:subpair}(2), with $J$, $\Pi'$ and
+$J'=\Pi=\id_D$, would make $(D,D)$ good for Banach values in degree $k$, contrary to Theorem~\ref{fib:thm:local}(2),
+since $D$ is complete, has an equivalent nonarchimedean norm and $\dim_{\Kh}D=\infty$.
+\end{proof}
+
+\subsection{Characteristic two}\label{ocl:ssec:char-two}
+
+Throughout this subsection the notation is that of Section~\ref{obs:ssec:char-two}, $\Bbbk$ is a field of
+characteristic~$2$, and $K$ is a nontrivially normed field of characteristic~$2$. By Lemma~\ref{lem:ultra}, $K$ is
+nonarchimedean, and so is its completion $\widehat K$; $K$ is infinite, as a finite field has only the trivial absolute
+value. For $z$ in $\Lambda^kK^{n}$ or in $K^{n}\otimes K^{n}$, with coordinates $z_c$,
+\begin{equation}\label{ocl:eq:coordinates}
+\max_c\abs{z_c}\le\norm z_\pi\le\sum_c\abs{z_c},
+\end{equation}
+since each coordinate of $x_1\wedge\dots\wedge x_k$ is a $k\times k$ minor, of absolute value at most $\prod_a\norm{x_a}$
+by the ultrametric inequality. So the completions of $\Lambda^k_\pi c_0(n)$ and $c_0(n)\otimes_\pi c_0(n)$ are coordinate
+spaces over $\widehat K$ with norms equivalent to the coordinate supremum norm, and their elements are identified with
+their coordinate vectors.
+
+\begin{definition}\label{ocl:def:polarization}
+Let $J\subseteq[n]$, let $x|_J$ be the restriction of $x\in\Bbbk^n$ to $J$, and let $\operatorname{Sym}_J(\Bbbk)$ be the
+space of symmetric $J\times J$ matrices. A \emph{$J$-polarization} is a $\Bbbk$-bilinear map $\mathsf
+N\colon\Bbbk^n\times\Bbbk^n\to\operatorname{Sym}_J(\Bbbk)$ with $\mathsf N(x,x)=x|_J(x|_J)^{\mathsf T}$. Regarding the
+entries of $x$ and $y$ also as indeterminates, $\mathsf N(x,y)=\sum_{t,t'}x_ty_{t'}\mathsf N(e_t,e_{t'})$ is a matrix
+over $\Bbbk[x,y]$. For $L,L'\subseteq[n]$ put $x_Ly_{L'}=\prod_{t\in L}x_t\prod_{t'\in L'}y_{t'}$, and for
+$g\in\Bbbk[x,y]$ let $c_g(L,L')$ be the coefficient of $x_Ly_{L'}$ in $g$.
+\end{definition}
+
+\begin{lemma}\label{ocl:lem:update}
+Let $J$ be finite, $\mathsf M$ a symmetric $J\times J$ matrix over a commutative ring of characteristic $2$, $\lambda$ a
+ring element, and $\mathsf M[J']$ the principal submatrix on $J'\subseteq J$, with $\det\mathsf M[\emptyset]=1$. For
+$a\ne a'$ in $J$,
+\begin{gather*}
+ \det(\mathsf M+\lambda(e_ae_{a'}^{\mathsf T}+e_{a'}e_a^{\mathsf T}))=\det\mathsf M+\lambda^2\det\mathsf
+M[J\setminus\{a,a'\}],\\
+ \det(\mathsf M+\lambda e_ae_a^{\mathsf T})=\det\mathsf M+\lambda\det\mathsf M[J\setminus\{a\}].
+\end{gather*}
+\end{lemma}
+
+\begin{proof}
+The second identity is the expansion along row $a$. For the first, expand multilinearly in the rows $a$ and $a'$, which
+change by $\lambda e_{a'}^{\mathsf T}$ and $\lambda e_a^{\mathsf T}$. The two first-order terms are $\lambda$ times the
+cofactors of $\mathsf M$ at $(a,a')$ and $(a',a)$, which are equal as $\mathsf M$ is symmetric, so they cancel; the
+second-order term is $\pm\lambda^2\det\mathsf M[J\setminus\{a,a'\}]$, and signs do not matter in characteristic $2$.
+\end{proof}
+
+\begin{lemma}\label{ocl:lem:polarizations}
+Let $J\subseteq[n]$, and let $\mathsf N$ and $\mathsf N'$ be $J$-polarizations. Then $c_{\det\mathsf
+N}(L,L')=c_{\det\mathsf N}(L',L)$ and $c_{\det\mathsf N}(L,L)=c_{\det\mathsf N'}(L,L)$ for all $L,L'\subseteq[n]$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (swap symmetry).} Expanding $\mathsf N(x+y,x+y)$ at unit vectors gives $\mathsf N(y,x)=\mathsf
+N(x,y)+x|_J(y|_J)^{\mathsf T}+y|_J(x|_J)^{\mathsf T}$, and $x|_J(y|_J)^{\mathsf T}+y|_J(x|_J)^{\mathsf T}$, whose
+diagonal vanishes, is
+the sum of the matrices $(x_ay_{a'}+x_{a'}y_a)(e_ae_{a'}^{\mathsf T}+e_{a'}e_a^{\mathsf T})$ over $a<a'$ in $J$. Adding
+them one at a time, Lemma~\ref{ocl:lem:update} changes the determinant by terms $(x_a^2y_{a'}^2+x_{a'}^2y_a^2)g$, whose
+monomials contain a squared variable. So the coefficient of $x_Ly_{L'}$ in $\det\mathsf N(x,y)$ equals that in
+$\det\mathsf N(y,x)$, which is $c_{\det\mathsf N}(L',L)$.
+
+\emph{Step 2 (invariance).} The map $\mathsf A=\mathsf N'-\mathsf N$ is bilinear with symmetric values and $\mathsf
+A(x,x)=0$, so $\mathsf A(e_t,e_t)=0$, $\mathsf A(e_{t'},e_t)=\mathsf A(e_t,e_{t'})$ and $\mathsf
+A(x,y)=\sum_{t<t'}(x_ty_{t'}+x_{t'}y_t)\mathsf A(e_t,e_{t'})$. Writing each $\mathsf A(e_t,e_{t'})$ as a combination of
+the matrices $e_ae_a^{\mathsf T}$ and $e_ae_{a'}^{\mathsf T}+e_{a'}e_a^{\mathsf T}$, we pass from $\mathsf N$ to
+$\mathsf N'$ through $J$-polarizations, each obtained from the previous one, $\mathsf N_1$, by adding
+$\lambda(x_ty_{t'}+x_{t'}y_t)\mathsf E$ with $\lambda\in\Bbbk$ and $\mathsf E$ one of these matrices. For $\mathsf
+E=e_ae_{a'}^{\mathsf T}+e_{a'}e_a^{\mathsf T}$, Lemma~\ref{ocl:lem:update} changes the determinant by
+$\lambda^2(x_t^2y_{t'}^2+x_{t'}^2y_t^2)g$, which has no term $x_Ly_L$. For $\mathsf E=e_ae_a^{\mathsf T}$, the change is
+$\lambda(x_ty_{t'}+x_{t'}y_t)g$ with $g=\det\mathsf N_1(x,y)[J\setminus\{a\}]$; its coefficient of $x_Ly_L$ is $0$
+unless $t,t'\in L$, when it is $\lambda(c_g(L\setminus\{t\},L\setminus\{t'\})+c_g(L\setminus\{t'\},L\setminus\{t\}))=0$
+by Step~1 for the $(J\setminus\{a\})$-polarization $\mathsf N_1[J\setminus\{a\}]$.
+\end{proof}
+
+\begin{lemma}\label{ocl:lem:reference}
+The map with $\mathsf N_<(x,y)_{tt'}=x_{\max(t,t')}y_{\min(t,t')}$ is an $[n]$-polarization,
+\[
+ \det\mathsf N_<(x,y)=y_1x_n\prod_{t=1}^{n-1}(x_ty_{t+1}+x_{t+1}y_t),
+\]
+and $c_{\det\mathsf N_<}([n],[n])=1$.
+\end{lemma}
+
+\begin{proof}
+The map is bilinear with symmetric values, and $\mathsf N_<(x,x)_{tt'}=x_tx_{t'}$. For $n=1$ the determinant is
+$x_1y_1$. For $n\ge2$, over the field of rational functions, subtracting $x_n/x_{n-1}$ times row $n-1$ from row $n$
+leaves the last row $(0,\dots,0,(x_n/x_{n-1})(x_{n-1}y_n+x_ny_{n-1}))$ below the matrix $\mathsf N_<$ for $n-1$. By
+induction $\det\mathsf N_<=x_1y_1\prod_{t=2}^n(x_t/x_{t-1})(x_{t-1}y_t+x_ty_{t-1})$, which telescopes
+to the formula. A term of the product equal to $x_{[n]}y_{[n]}$ takes $x_{n-1}y_n$ from the factor of index $n-1$, since
+$x_n$ is used, then $x_{n-2}y_{n-1}$ from the factor of index $n-2$, and so on; so the coefficient is $1$.
+\end{proof}
+
+\begin{lemma}\label{ocl:lem:parity}
+Let $g$ be a polynomial in $x$ and $y$ over a commutative ring of characteristic $2$, of degree at most $n$ in $x$ and
+at most $n$ in $y$. Then $\sum_{S,T\subseteq[n]}g(1_S,1_T)$ is the coefficient of $x_{[n]}y_{[n]}$ in $g$. Likewise, if
+$g$ is a polynomial in $x$ of degree at most $n$, then $\sum_{S\subseteq[n]}g(1_S)$ is the coefficient of $x_1\cdots
+x_n$.
+\end{lemma}
+
+\begin{proof}
+A monomial $x^\alpha y^\beta$ takes the value $1$ at $(1_S,1_T)$ if $\operatorname{supp}\alpha\subseteq S$ and
+$\operatorname{supp}\beta\subseteq T$, and $0$ otherwise, so its sum over $S,T$ is
+$2^{2n-\abs{\operatorname{supp}\alpha}-\abs{\operatorname{supp}\beta}}$. This vanishes unless both supports are $[n]$,
+which under the degree bounds happens only for $x_{[n]}y_{[n]}$. The second statement is proved in the same way.
+\end{proof}
+
+\begin{proposition}\label{ocl:prop:sections}
+Let $n\ge2$ and $\sigma\colon\Lambda^2\Bbbk^n\to\Bbbk^{n\times n}$ be $\Bbbk$-linear with $\wedge\circ\sigma=\id$. Then
+$\mathsf N(x,y)=\sigma(x\wedge y)+xy^{\mathsf T}$ is an $[n]$-polarization, $\sum_{S,T\subseteq[n]}\det\mathsf
+N(1_S,1_T)=1$, and $\rank\sigma(1_S\wedge1_T)\ge n-1$ for some $S,T\subseteq[n]$.
+\end{proposition}
+
+\begin{proof}
+The map $\Phi(x,y)=\sigma(x\wedge y)$ is bilinear, $\Phi(x,x)=0$, and $\Phi(x,y)+\Phi(x,y)^{\mathsf T}=\Omega_{x\wedge
+y}=xy^{\mathsf T}+yx^{\mathsf T}$; so $\mathsf N$ is bilinear, $\mathsf N(x,y)^{\mathsf T}=\mathsf N(x,y)$ and
+$\mathsf N(x,x)=xx^{\mathsf T}$. By Lemmas~\ref{ocl:lem:polarizations}
+and~\ref{ocl:lem:reference}, $c_{\det\mathsf N}([n],[n])=c_{\det\mathsf N_<}([n],[n])=1$, and $\det\mathsf N(x,y)$ has
+degree $n$ in $x$ and in $y$, so Lemma~\ref{ocl:lem:parity} gives the identity. Hence some $\mathsf N(1_S,1_T)$ is
+invertible, and $\sigma(1_S\wedge1_T)=\mathsf N(1_S,1_T)+1_S1_T^{\mathsf T}$ has rank at least $n-1$.
+\end{proof}
+
+\begin{proposition}\label{ocl:prop:retractions}
+Let $n\ge2$ and $\tau\colon\Bbbk^{n\times n}\to\Lambda^2\Bbbk^n$ be $\Bbbk$-linear with $\tau(\Omega_w)=w$ for
+$w\in\Lambda^2\Bbbk^n$. If $n$ is even, $\sum_{S\subseteq[n]}\operatorname{Pf}\Omega_{\tau(1_S1_S^{\mathsf T})}=1$, and
+some $\Omega_{\tau(1_S1_S^{\mathsf T})}$ is invertible. For every $n$, some $S\subseteq[n]$ has
+$\rank\Omega_{\tau(1_S1_S^{\mathsf T})}\ge2\lfloor n/2\rfloor$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (even $n$).} Let $n$ be even and $w_t=\tau(e_te_t^{\mathsf T})$. Since $\tau(e_te_{t'}^{\mathsf
+T})+\tau(e_{t'}e_t^{\mathsf T})=\tau(\Omega_{e_t\wedge e_{t'}})=e_t\wedge e_{t'}$, $q(x)=\tau(xx^{\mathsf T})$ equals
+$\sum_tx_t^2w_t+\sum_{t<t'}x_tx_{t'}e_t\wedge e_{t'}$, and $\Omega_{q(x)}$ has the off-diagonal entries
+$x_tx_{t'}+\sum_{t''}x_{t''}^2(\Omega_{w_{t''}})_{tt'}$. In a product over a partition into pairs, a factor $x_{t''}^2$
+gives a squared variable, so the coefficient of $x_1\cdots x_n$ in $\operatorname{Pf}\Omega_{q(x)}$, a polynomial of
+degree $n$, is the number $(n-1)(n-3)\cdots1$ of these partitions, which is odd. Lemma~\ref{ocl:lem:parity} gives the
+identity, so some $\operatorname{Pf}\Omega_{q(1_S)}$ is nonzero, and $\Omega_{q(1_S)}$ is invertible.
+
+\emph{Step 2 (odd $n$).} For odd $n$ let $\iota'\colon\Bbbk^{n-1}\to\Bbbk^n$ be the inclusion of the first $n-1$
+coordinates and $\tau'(\mathsf Z)=\Lambda^2\iota'^{\mathsf T}\tau(\iota'\mathsf Z\iota'^{\mathsf T})$. As
+$\iota'\Omega_w\iota'^{\mathsf T}=\Omega_{\Lambda^2\iota'w}$ and $\Omega_{\Lambda^2\iota'^{\mathsf T}w}=\iota'^{\mathsf
+T}\Omega_w\iota'$, the map $\tau'$ satisfies the hypothesis for $n-1$, and $\rank\Omega_{\tau'(\mathsf
+Z)}\le\rank\Omega_{\tau(\iota'\mathsf Z\iota'^{\mathsf T})}$; the even case for $\tau'$ and $\iota'1_S1_S^{\mathsf
+T}\iota'^{\mathsf T}=1_S1_S^{\mathsf T}$ give the last assertion.
+\end{proof}
+
+\begin{proposition}[Pfaffian identity]\label{ocl:prop:pfaffian-identity}
+Let $n\ge2$ be even and $\Psi$ a multiplier lift on $\Bbbk^n$. Then \eqref{obs:eq:pfaffian-identity} holds, and
+\begin{equation}\label{ocl:eq:pfaffian-sum}
+\sum_{L}\ \sum_{a,x}\ \sum_{b,y}\operatorname{Pf}\mathsf M_\Psi(a,b,x,y)=1,
+\end{equation}
+the sums over the $L\subseteq[n]$ with $\abs L=n/2$, over the $a,x\in\{0,1\}^n$ supported in $L$, and over the
+$b,y\in\{0,1\}^n$ supported in $L^c$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (decomposition).} For $t\ne t'$ put $\Psi^{\mathrm{cor}}_{tt'}=\Psi_{tt'}-\Psi^<_{tt'}$. By
+\eqref{obs:eq:multiplier-lift}, $\Psi^{\mathrm{cor}}_{tt'}+\Psi^{\mathrm{cor}}_{t't}=\pi_{tt'}-\pi_{tt'}=0$, so
+$\Psi^{\mathrm{cor}}_{tt'}=\Psi^{\mathrm{cor}}_{t't}$; write $\Psi^{\mathrm{cor}}_{\{t,t'\}}$ for it. For a $2$-subset
+$\varepsilon=\{t,t'\}$ of $[n]$ with $t<t'$ put $e_\varepsilon=e_t\wedge e_{t'}$, and write
+$\Psi^{\mathrm{cor}}_{\{t,t'\}}[\varepsilon,\varepsilon']$ for the entry of $\Psi^{\mathrm{cor}}_{\{t,t'\}}$ in the row of
+$e_\varepsilon$ and the column of $e_{\varepsilon'}$. Fix $L$ with $\abs L=n/2$. In the monomial $a_Lb_{L^c}x_Ly_{L^c}$
+every $a$-variable has its index in $L$ and every $b$-variable in $L^c$, so only the $\Psi_{tt'}$ with $t\in L$ and
+$t'\in L^c$, in particular $t\ne t'$, contribute. As the coordinate of $x\wedge y$ at $e_{\{u,u'\}}$ is
+$x_uy_{u'}+x_{u'}y_u$, for $t\ne t'$ and $u\ne u'$ the coefficient of $a_tb_{t'}x_uy_{u'}$ in the entry of
+$\mathsf M_\Psi$ at a $2$-subset $\varepsilon$ is
+\begin{equation}\label{ocl:eq:coefficient}
+O_\varepsilon(t,t',u,u')+\Psi^{\mathrm{cor}}_{\{t,t'\}}[\varepsilon,\{u,u'\}],
+\end{equation}
+where $O_\varepsilon(t,t',u,u')=1$ if $t<t'$ and $\{t,t'\}=\{u,u'\}=\varepsilon$, and $O_\varepsilon(t,t',u,u')=0$
+otherwise.
+
+\emph{Step 2 (configurations).} Expanding the Pfaffian over the perfect matchings $\mathfrak m$ of $[n]$, whose elements
+we call edges, and each entry by \eqref{ocl:eq:coefficient}, the coefficient of $a_Lb_{L^c}x_Ly_{L^c}$ in
+$\operatorname{Pf}\mathsf M_\Psi$ is the sum of the values of the \emph{configurations} for $L$. A configuration
+consists of a perfect matching $\mathfrak m$, an assignment $\varepsilon\mapsto(t_\varepsilon,t'_\varepsilon,
+u_\varepsilon,u'_\varepsilon)$ on its edges such that each element of $L$ occurs once among the $t_\varepsilon$ and once
+among the $u_\varepsilon$, and each element of $L^c$ once among the $t'_\varepsilon$ and once among the
+$u'_\varepsilon$, and a choice at each edge of one of the two summands of \eqref{ocl:eq:coefficient}, where the first
+summand may be chosen only if it equals $1$. Its value is the product of the chosen summands. An edge is an
+\emph{ordering edge} or a \emph{correction edge} according to the chosen summand.
+
+\emph{Step 3 (ordering edges).} An ordering edge $\varepsilon$ has
+$\{t_\varepsilon,t'_\varepsilon\}=\{u_\varepsilon,u'_\varepsilon\}=\varepsilon$ and $t_\varepsilon<t'_\varepsilon$. As
+$t_\varepsilon,u_\varepsilon\in L$ and $t'_\varepsilon,u'_\varepsilon\notin L$, this forces
+$t_\varepsilon=u_\varepsilon=\min\varepsilon\in L$ and $t'_\varepsilon=u'_\varepsilon=\max\varepsilon\notin L$, and its
+summand is $1$.
+
+\emph{Step 4 (correction data).} Let $\varepsilon_1,\dots,\varepsilon_m$ be the correction edges of a configuration, and
+put $J_i=\{t_{\varepsilon_i},t'_{\varepsilon_i}\}$ and $J'_i=\{u_{\varepsilon_i},u'_{\varepsilon_i}\}$. The value of the
+configuration is
+\begin{equation}\label{ocl:eq:value}
+\prod_{i=1}^m\Psi^{\mathrm{cor}}_{J_i}[\varepsilon_i,J'_i],
+\end{equation}
+and the set $\Delta=\{(\varepsilon_i,J_i,J'_i):i\le m\}$ is its \emph{correction data}. Each element of $[n]$ occurs
+exactly once among the $t_\varepsilon,t'_\varepsilon$, once among the $u_\varepsilon,u'_\varepsilon$ and once among the
+edges of $\mathfrak m$, and the ordering edges use the same two elements in all three roles (Step~3). So
+$J_1,\dots,J_m$, the sets $J'_1,\dots,J'_m$ and the edges $\varepsilon_1,\dots,\varepsilon_m$ are three partitions of one
+set $U\subseteq[n]$, and the ordering edges form a perfect matching $\mathfrak m'$ of $[n]\setminus U$. Moreover
+$L\cap U$ meets each $J_i$ and each $J'_i$ in exactly one element.
+
+\emph{Step 5 (counting).} Fix a set $\Delta=\{(\varepsilon_i,J_i,J'_i):i\le m\}$, $m\ge0$, of triples of $2$-subsets in
+which the $\varepsilon_i$, the $J_i$ and the $J'_i$ partition the same set $U$, and call a subset of $U$ meeting each
+$J_i$ and each $J'_i$ in exactly one element a \emph{transversal} of $\Delta$. The configurations, for all $L$
+together, with correction data $\Delta$ correspond bijectively to the pairs of a transversal $L_U$ and a perfect
+matching $\mathfrak m'$ of $[n]\setminus U$: given the pair, put $L=L_U\cup\{\min\varepsilon:\varepsilon\in\mathfrak m'\}$
+and $\mathfrak m=\{\varepsilon_1,\dots,\varepsilon_m\}\cup\mathfrak m'$, let $t_{\varepsilon_i}$ and $u_{\varepsilon_i}$
+be the elements of $J_i$ and $J'_i$ in $L_U$ and $t'_{\varepsilon_i}$, $u'_{\varepsilon_i}$ the other ones, and use
+Step~3 on the edges of $\mathfrak m'$; by Steps 3 and 4 every configuration arises from exactly one pair. All of them
+have the value \eqref{ocl:eq:value}, and $[n]\setminus U$ has $(n-2m-1)(n-2m-3)\cdots1$ perfect matchings (one if
+$U=[n]$), an odd number. The multigraph on $U$ with the edges $J_1,\dots,J_m,J'_1,\dots,J'_m$ has degree $2$ at every
+vertex, with one edge of each kind, so it is a disjoint union of $\gamma$ cycles of even length alternating between the
+kinds ($J_i=J'_j$ gives a cycle of length $2$). A transversal contains exactly one endpoint of each of these edges, so
+on each cycle it is one of the two colour classes of its proper $2$-colouring; there are $2^\gamma$ transversals, and
+$\gamma\ge1$ if $m\ge1$.
+
+\emph{Step 6 (summation).} Summing over $L$ sums the values of all configurations. Grouped by their correction data,
+those with $m\ge1$ contribute $2^\gamma$ times an odd number times \eqref{ocl:eq:value}, which is $0$, and those with
+$m=0$ are the pairs $(\emptyset,\mathfrak m')$, of value $1$, contributing $(n-1)(n-3)\cdots1=1$. This is
+\eqref{obs:eq:pfaffian-identity}.
+
+\emph{Step 7 ($0/1$ inputs).} Fix $L$ and restrict $\operatorname{Pf}\mathsf M_\Psi$ to $a,x$ supported in $L$ and $b,y$
+supported in $L^c$. The result is a polynomial of degree at most $2n$ in the $2n$ variables $a_t,x_t$ ($t\in L$) and
+$b_{t'},y_{t'}$ ($t'\in L^c$). As in the proof of Lemma~\ref{ocl:lem:parity}, the sum of the values of such a polynomial over
+$\{0,1\}^{2n}$ is the coefficient of the product of all its variables, here of $a_Lb_{L^c}x_Ly_{L^c}$. Summing over $L$,
+\eqref{obs:eq:pfaffian-identity} gives \eqref{ocl:eq:pfaffian-sum}.
+\end{proof}
+
+\begin{lemma}[Pfaffian and determinant bounds]\label{ocl:lem:pfaffian-bound}
+\leavevmode
+\begin{enumerate}
+\item Let $n\ge2$ be even. For $z$ in $\Lambda^2_\pi c_0(n)$ or in its completion, $\norm z_\pi\ge\frac n2\,
+\abs{\operatorname{Pf}\Omega_z}^{2/n}$.
+\item Let $n\ge1$. For $\mathsf Z$ in $c_0(n)\otimes_\pi c_0(n)$ or in its completion, $\norm{\mathsf Z}_\pi\ge n\,
+\abs{\det\mathsf Z}^{1/n}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (expansion).} Let $z=\sum_{i\in I_0}x_i\wedge y_i$ with $x_i,y_i\in K^n$ and $I_0$ a finite ordered set.
+Then
+\begin{equation}\label{ocl:eq:pfaffian-expansion}
+\operatorname{Pf}\Omega_z=\sum_{I\subseteq I_0,\ \abs I=n/2}\det(x_{i_1},y_{i_1},\dots,x_{i_{n/2}},y_{i_{n/2}}),
+\qquad I=\{i_1<\dots<i_{n/2}\}.
+\end{equation}
+Indeed, read with the Pfaffian of the alternating matrix of $z$ over $\mathbb Z$, \eqref{ocl:eq:pfaffian-expansion} is
+a polynomial identity with integer coefficients in the entries of the $x_i,y_i$. It holds over $\mathbb Q$: there
+$z^{\wedge n/2}=(n/2)!\operatorname{Pf}(\Omega_z)\,e_1\wedge\dots\wedge e_n$, the $2$-forms $x_i\wedge y_i$ commute and
+have zero square, so $z^{\wedge n/2}=(n/2)!\sum_{\abs I=n/2}\bigwedge_{i\in I}(x_i\wedge y_i)$, and
+$\bigwedge_{i\in I}(x_i\wedge y_i)=\det(x_{i_1},y_{i_1},\dots)\,e_1\wedge\dots\wedge e_n$. Hence it holds over
+$\mathbb Z$, and after reduction mod $2$ over every commutative ring of characteristic $2$.
+
+\emph{Step 2 (bound).} Put $\beta_i=\norm{x_i}\,\norm{y_i}$. A determinant is a sum of products containing one entry from each
+column, so by the ultrametric inequality each determinant in \eqref{ocl:eq:pfaffian-expansion} has absolute value at
+most $\prod_{i\in I}\beta_i$. By the inequality of arithmetic and geometric means,
+$\prod_{i\in I}\beta_i\le\bigl(\frac2n\sum_{i\in I}\beta_i\bigr)^{n/2}\le\bigl(\frac2n\sum_{i\in I_0}\beta_i\bigr)^{n/2}$.
+By the ultrametric inequality again, $\sum_{i\in I_0}\beta_i\ge\frac n2\abs{\operatorname{Pf}\Omega_z}^{2/n}$. Taking the
+infimum over the representations of $z$ gives (1) on $\Lambda^2_\pi c_0(n)$. By \eqref{ocl:eq:coordinates} both
+sides are continuous for the coordinate topology, in which $\Lambda^2K^n$ is dense in the completion, so (1) holds on
+the completion.
+
+\emph{Step 3 (item (2)).} For $\mathsf Z=\sum_{i\in I_0}x_iy_i^{\mathsf T}$, the Cauchy--Binet formula gives
+\begin{equation}\label{ocl:eq:cauchy-binet}
+\det\mathsf Z=\sum_{I\subseteq I_0,\ \abs I=n}\det(x_i:i\in I)\,\det(y_i:i\in I),
+\end{equation}
+and Step~2 applies to \eqref{ocl:eq:cauchy-binet} with $n/2$ replaced by $n$; the parity of $n$ plays no role.
+\end{proof}
+
+\begin{lemma}[contractions]\label{ocl:lem:contraction}
+Let $n'\ge k\ge1$, and let $l\colon K^{n'}\to K$ be linear with $\abs{l(x)}\le\norm x_\infty$ for all $x$. The contraction
+$l\mathbin{\lrcorner}\colon\Lambda^kK^{n'}\to\Lambda^{k-1}K^{n'}$,
+$l\mathbin{\lrcorner}(x_1\wedge\dots\wedge x_k)=\sum_j(-1)^{j-1}l(x_j)\,x_1\wedge\dots\wedge\widehat{x_j}\wedge\dots\wedge x_k$,
+satisfies $\norm{l\mathbin{\lrcorner} z}_\pi\le\norm z_\pi$ for $z\in\Lambda^k_\pi c_0(n')$, and so does its extension to the
+completions.
+\end{lemma}
+
+\begin{proof}
+It suffices to show $\norm{l\mathbin{\lrcorner}\omega}_\pi\le\prod_j\norm{x_j}$ for $\omega=x_1\wedge\dots\wedge x_k$ with all $x_j\ne0$.
+If $l(x_j)=0$ for all $j$, then $l\mathbin{\lrcorner}\omega=0$. Otherwise choose $j_0$ with $\abs{l(x_{j_0})}/\norm{x_{j_0}}$ maximal, so
+that $l(x_{j_0})\ne0$, and put $x'_j=x_j-\bigl(l(x_j)/l(x_{j_0})\bigr)x_{j_0}$ for $j\ne j_0$. Then $l(x'_j)=0$, and by the
+ultrametric inequality and the choice of $j_0$,
+$\norm{x'_j}\le\max\bigl(\norm{x_j},\,\abs{l(x_j)}\,\norm{x_{j_0}}/\abs{l(x_{j_0})}\bigr)=\norm{x_j}$. Replacing $x_j$ by $x'_j$ for $j\ne j_0$
+does not change $\omega$, so $l\mathbin{\lrcorner}\omega=\pm l(x_{j_0})\bigwedge_{j\ne j_0}x'_j$, whose projective norm is at most
+$\abs{l(x_{j_0})}\prod_{j\ne j_0}\norm{x_j}\le\prod_j\norm{x_j}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{obs:thm:char-two}]
+\emph{Step 1 (item (1)).} The first assertion is Proposition~\ref{ocl:prop:pfaffian-identity}, with $\det=\operatorname{Pf}^2$.
+The assertions on $\sigma$ and $\tau$ are Propositions~\ref{ocl:prop:sections} and~\ref{ocl:prop:retractions}. The map $(x,y)\mapsto\cP_<(xy^{\mathsf T}+
+yx^{\mathsf T})$ is bilinear and vanishes for $x=y$, so it induces $\sigma^<$. The matrix $\mathsf Z=\cP_<
+\Omega_{x\wedge y}$ is strictly upper triangular, of rank at most $n-1$, and $\Omega_{\wedge\mathsf Z}=\mathsf Z+
+\mathsf Z^{\mathsf T}=\Omega_{x\wedge y}$, as $\Omega_{x\wedge y}$ has zero diagonal.
+
+\emph{Step 2 (item (2): a multiplier lift on $K^n$).} Let $\iota_n\colon K^n\to E$ be the inclusion of the first $n$
+coordinates, for $n'\ge1$ let $\operatorname{res}_{n'}\colon E\to c_0(n')$ be the restriction to the first $n'$
+coordinates, and for $n\le n'$ let $\operatorname{res}^{n'}_n\colon c_0(n')\to c_0(n)$ be the restriction. The
+restrictions are contractive since $\norm x_\infty\le\norm x_E$, so their exterior powers (Proposition~\ref{prop:exterior})
+and tensor powers are contractive; they extend to the completions, and the extensions are written with the same
+symbols.
+The $0/1$ vectors $1_S$, $S\subseteq[n]$, have $\norm{1_S}_E\le\bar\varphi_E(n)$ and $\norm{1_S}_\infty\le1$.
+
+Let $n'=n+k-2$, let $1_{>n}$ be the indicator of $\{n+1,\dots,n'\}$ and $e_{>n}=e_{n+1}\wedge\dots\wedge e_{n'}$, the
+empty product for $k=2$. Let $\eta_{>n}\colon\Lambda^kK^{n'}\to\Lambda^2K^{n'}$ be the composite of the contractions by
+the coordinate functionals of $n+1,\dots,n'$, in this order, and the identity for $k=2$; then
+$\eta_{>n}(w\wedge e_{>n})=w$ for $w\in\Lambda^2K^n$. Put $\theta(w)=(\Lambda^2_\pi\iota_nw)\wedge
+e_{>n}\in\Lambda^k_\pi E$ for $w\in\Lambda^2K^n$. As $\Lambda^k_\pi\operatorname{res}_{n'}(\theta w)=w\wedge e_{>n}$ in
+$\Lambda^kK^{n'}$,
+\begin{equation}\label{ocl:eq:reduction-identity}
+\Lambda^2_\pi\operatorname{res}^{n'}_n\circ\eta_{>n}\circ\Lambda^k_\pi\operatorname{res}_{n'}\circ\theta=\id
+\qquad\text{on }\Lambda^2K^n.
+\end{equation}
+For $a,b\in K^n$, regarded in $c_{00}(\N,K)$, let $Q_2(a,b)$ be the sum, over the pairs of slots $j<j'$, of $Q$
+evaluated with $a$ in slot $j$, $b$ in slot $j'$ and $1_{>n}$ in the other slots, and put
+\begin{equation}\label{ocl:eq:reduced-lift}
+\Psi(a,b)=\Lambda^2_\pi\operatorname{res}^{n'}_n\circ\eta_{>n}\circ\Lambda^k_\pi\operatorname{res}_{n'}\circ
+Q_2(a,b)\circ\theta .
+\end{equation}
+This is a $K$-linear map $\Lambda^2K^n\to\Lambda^2\widehat K^n$, $K$-bilinear in $(a,b)$; extend it $\widehat K$-linearly
+in $w$ and $\widehat K$-bilinearly in $(a,b)$. For $\lambda\in K$, multilinearity gives
+$Q(a+\lambda1_{>n},\dots,a+\lambda1_{>n})=\sum_{j=0}^k\lambda^{k-j}q_j(a)$, where $q_j(a)$ is the sum, over the
+$j$-element sets of slots, of $Q$ with $a$ in these slots and $1_{>n}$ elsewhere; so $q_2(a)=Q_2(a,a)$. As
+$\mu_{a+\lambda1_{>n}}$ multiplies $e_t$ by $a_t$ for $t\le n$ and by $\lambda$ for $n<t\le n'$,
+$\Lambda^k_\pi\mu_{a+\lambda1_{>n}}(\theta w)=\lambda^{k-2}\theta(\Lambda^2\mu_aw)$. As $K$ is infinite, comparing the
+coefficients of $\lambda^{k-2}$ gives $Q_2(a,a)(\theta w)=\theta(\Lambda^2\mu_aw)$, and
+\eqref{ocl:eq:reduction-identity} gives $\Psi(a,a)=\Lambda^2\mu_a$ for $a\in K^n$. Taking $a=e_t$, $a=e_{t'}$ and
+$a=e_t+e_{t'}$, $t\ne t'$, \eqref{obs:eq:lambda-mu} gives
+$\Psi(e_t,e_{t'})+\Psi(e_{t'},e_t)=\Lambda^2\mu_{e_t+e_{t'}}-\Lambda^2\mu_{e_t}-\Lambda^2\mu_{e_{t'}}=\pi_{tt'}$, so
+$\Psi$ is a multiplier lift on $\widehat K^n$.
+
+\emph{Step 3 (item (2): the bound).} Let $a,b,x,y\in\{0,1\}^n$. Each of the $k(k-1)/2$ terms of $Q_2(a,b)$ has norm at
+most $\norm Q$; $\Lambda^2_\pi\operatorname{res}^{n'}_n$ and $\Lambda^k_\pi\operatorname{res}_{n'}$ are contractive;
+$\eta_{>n}$ is contractive by Lemma~\ref{ocl:lem:contraction}; and $\theta(x\wedge y)$ is a single decomposable vector,
+so $\norm{\theta(x\wedge y)}_\pi\le\norm x_E\norm y_E\prod_{t=n+1}^{n'}\norm{e_t}_E\le\bar\varphi_E(n)^2$. Hence
+\begin{equation}\label{ocl:eq:upper}
+\norm{\Psi(a,b)(x\wedge y)}_\pi\le\tfrac{k(k-1)}2\,\norm Q\,\bar\varphi_E(n)^2 ,
+\end{equation}
+the norm being that of the completion of $\Lambda^2_\pi c_0(n)$. By \eqref{ocl:eq:pfaffian-sum} over $\widehat K$, a
+finite sum of the values $\operatorname{Pf}\mathsf M_\Psi(a,b,x,y)$ at $0/1$ inputs is $1$. As $\widehat K$ is
+nonarchimedean, one of them has absolute value at least $1$, and
+Lemma~\ref{ocl:lem:pfaffian-bound}(1) gives $\norm{\Psi(a,b)(x\wedge y)}_\pi\ge n/2$ for that input. With
+\eqref{ocl:eq:upper} this is \eqref{obs:eq:multiplier-bound}.
+
+\emph{Step 4 (item (3): sections).} Let $\sigma=(\operatorname{res}_n\otimes\operatorname{res}_n)\circ s\circ
+\Lambda^2_\pi\iota_n$, extended $\widehat K$-linearly to $\Lambda^2\widehat K^n\to\widehat K^{n\times n}$. By naturality
+of $\wedge$, $\wedge\circ\sigma=\Lambda^2_\pi\operatorname{res}_n\circ\widehat\wedge{}^2_E\circ s\circ
+\Lambda^2_\pi\iota_n=\id$ on $\Lambda^2K^n$, hence on $\Lambda^2\widehat K^n$ by linearity.
+Proposition~\ref{ocl:prop:sections} over $\widehat K$ gives $\sum_{S,T\subseteq[n]}\det\mathsf N(1_S,1_T)=1$ for
+$\mathsf N(x,y)=\sigma(x\wedge y)+xy^{\mathsf T}$, so some $\abs{\det\mathsf N(1_S,1_T)}\ge1$, and
+Lemma~\ref{ocl:lem:pfaffian-bound}(2) gives $n\le\norm{\mathsf N(1_S,1_T)}_\pi\le\norm s\,\bar\varphi_E(n)^2+1$, so
+$\norm s\ge(n-1)/\bar\varphi_E(n)^2$. For $c_0(n)$ itself take $\iota_n$ and $\operatorname{res}_n$ to be the identity
+here and in Steps 5 and 6.
+
+\emph{Step 5 (item (3): retractions).} Let $n$ be even; for odd $n$ apply the even case to $n-1$, as $\bar\varphi_E$ is
+nondecreasing. Let $\tau=\Lambda^2_\pi\operatorname{res}_n\circ\rho\circ(\iota_n\otimes\iota_n)$, extended
+$\widehat K$-linearly to $\widehat K^{n\times n}\to\Lambda^2\widehat K^n$. For $w\in\Lambda^2K^n$,
+$\alt^2w=\Omega_w$, so $\tau(\Omega_w)=\Lambda^2_\pi\operatorname{res}_n\circ\rho\circ
+\alt^2_E(\Lambda^2_\pi\iota_nw)=w$, and by linearity $\tau(\Omega_w)=w$ for $w\in\Lambda^2\widehat K^n$.
+Proposition~\ref{ocl:prop:retractions} over $\widehat K$ gives
+$\sum_{S\subseteq[n]}\operatorname{Pf}\Omega_{\tau(1_S1_S^{\mathsf T})}=1$, so some
+$\abs{\operatorname{Pf}\Omega_{\tau(1_S1_S^{\mathsf T})}}\ge1$, and Lemma~\ref{ocl:lem:pfaffian-bound}(1) gives
+$n/2\le\norm{\tau(1_S1_S^{\mathsf T})}_\pi\le\norm\rho\,\bar\varphi_E(n)^2$.
+
+\emph{Step 6 (item (3): projections).} Let $\mathsf N(x,y)=(\operatorname{res}_n\otimes\operatorname{res}_n)
+R_2(\iota_nx\otimes\iota_ny)$, extended $\widehat K$-bilinearly. Its values are symmetric matrices, since
+$\widehat\Gamma{}^2_\pi E$ is the closed span of the pure squares and $\operatorname{res}_n\otimes\operatorname{res}_n$
+maps pure squares to symmetric matrices, which form a closed subspace. As $R_2$ fixes pure squares,
+$\mathsf N(e_t,e_t)=e_te_t^{\mathsf T}$ and, polarizing $(e_t+e_{t'})^{\otimes2}$,
+$\mathsf N(e_t,e_{t'})+\mathsf N(e_{t'},e_t)=e_te_{t'}^{\mathsf T}+e_{t'}e_t^{\mathsf T}$; so
+$\mathsf N(x,x)=xx^{\mathsf T}$ for $x\in\widehat K^n$ by bilinear expansion. So $\mathsf N$ is an $[n]$-polarization
+over $\widehat K$ (Definition~\ref{ocl:def:polarization}), and Lemmas~\ref{ocl:lem:polarizations}, \ref{ocl:lem:reference} and~\ref{ocl:lem:parity} give $\sum_{S,T}\det\mathsf N(1_S,1_T)=1$. As in Step~4,
+$n\le\norm{\mathsf N(1_S,1_T)}_\pi\le\norm{R_2}\,\bar\varphi_E(n)^2$.
+
+\emph{Step 7 (item (4): goodness).} Each listed $E$ is a sequence space with $\norm{e_t}_E=1$ and
+$\norm{\mu_a}_{E\to E}\le\norm a_\infty$ for finitely supported $a$, and $\sup_nn/\bar\varphi_E(n)^2=\infty$. For a
+symmetric sequence space, Definition~\ref{obs:def:sequence-spaces} gives a norm that is monotone in $\abs x$ and equal
+to $1$ at the unit vectors; so $\bar\varphi_E=\varphi_E$, $\norm x_\infty\le\norm x_E$, and $\abs{ax}\le\abs{\lambda x}$
+for a coordinate $\lambda$ of $a$ with $\abs\lambda=\norm a_\infty$ gives $\norm{\mu_a}\le\norm a_\infty$. As
+$\bar\varphi_E$ is nondecreasing, $(n-1)/\bar\varphi_E(n-1)^2\ge(n-1)/\bar\varphi_E(n)^2$, so $n/\bar\varphi_E(n)^2$ is
+also unbounded along even $n$. If $(E,E)$ were good for Banach values in degree $k$, Lemma~\ref{fib:lem:test} would give
+a bounded $k$-linear $\widetilde Q\colon\cL(E,E)^k\to\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi E)$ with
+$\widetilde Q(u,\dots,u)=\Lambda^k_\pi u$, and $Q(a_1,\dots,a_k)=\widetilde Q(\mu_{a_1},\dots,\mu_{a_k})$ would satisfy
+the hypotheses of item (2) with $\norm Q\le\norm{\widetilde Q}$, contradicting \eqref{obs:eq:multiplier-bound} for large
+even $n$. Lemma~\ref{fib:lem:test}, Theorem~\ref{thm:duality}(1) and the dichotomy of Proposition~\ref{prop:homogeneous-lift} then give the assertion on $A^k_{E,E;F}$, and
+Proposition~\ref{fib:prop:split}(1),(2) the failure of $(\mathrm S^k_E)$ and $(\mathrm R^k_E)$. Item (3) gives the failure of
+$(\Gamma^2_E)$.
+
+\emph{Step 8 (item (4): nonarchimedean norms).} Let $h\ge1$, $n=2h$, $n'=n+k-2$, and
+$z_h=\sum_{i=1}^he_{2i-1}\wedge e_{2i}\wedge e_{>n}\in\Lambda^k_\pi E$, a sum of $h$ decomposable vectors of norm at
+most $1$.
+The contractive maps $\Lambda^k_\pi\operatorname{res}_{n'}$, $\eta_{>n}$ and $\Lambda^2_\pi\operatorname{res}^{n'}_n$ send
+it to $\sum_{i\le h}e_{2i-1}\wedge e_{2i}$, whose Pfaffian is $1$, so $\norm{z_h}_\pi\ge h$ by
+Lemma~\ref{ocl:lem:pfaffian-bound}(1). If $\norm\cdot'$ were a nonarchimedean norm on $\widehat\Lambda^k_\pi E$ with
+$c\norm\cdot_\pi\le\norm\cdot'\le C\norm\cdot_\pi$, then $ch\le\norm{z_h}'\le C$ for all $h$, which is impossible.
+
+\emph{Step 9 (item (4): pairs).} Let $2<r_1,r_2\le\infty$, write $\ell^{r_i}$ for $\ell^{r_i}(\N,K)$, or for
+$c_0(\N,K)$ if $r_i=\infty$, and put $1/\infty=0$. If $(\ell^{r_1},\ell^{r_2})$ were good for Banach values in degree
+$k$, Lemma~\ref{fib:lem:test} would give a bounded $k$-linear
+$\widetilde Q\colon\cL(\ell^{r_1},\ell^{r_2})^k\to\cL(\Lambda^k_\pi\ell^{r_1},\widehat\Lambda^k_\pi\ell^{r_2})$ with
+$\widetilde Q(u,\dots,u)=\Lambda^k_\pi u$. Run Steps 2 and 3 with
+$Q(a_1,\dots,a_k)=\widetilde Q(\mu_{a_1},\dots,\mu_{a_k})$, where $\mu_a$ is now a map $\ell^{r_1}\to\ell^{r_2}$, with
+$\theta_1(w)=(\Lambda^2_\pi\iota_nw)\wedge e_{>n}$ in $\Lambda^k_\pi\ell^{r_1}$ in place of $\theta$ on the right of
+\eqref{ocl:eq:reduced-lift} and the same expression $\theta_2(w)$ in $\Lambda^k_\pi\ell^{r_2}$ in the identity
+$\Lambda^k_\pi\mu_{a+\lambda1_{>n}}\circ\theta_1=\lambda^{k-2}\theta_2\circ\Lambda^2\mu_a$, and with
+$\operatorname{res}_{n'}$ defined on $\ell^{r_2}$. Put $\delta=\max(0,1/r_2-1/r_1)$. H\"older's inequality gives
+$\norm{\mu_a}\le\abs{\operatorname{supp}a}^\delta$ for $0/1$ vectors $a$, and $\norm{1_S}_{r_1}\le n^{1/r_1}$, so
+$n/2\le\frac{k(k-1)}2\norm{\widetilde Q}(k-2)^{(k-2)\delta}n^{2\delta+2/r_1}$, where $(k-2)^{(k-2)\delta}=1$ for $k=2$.
+As $2\delta+2/r_1=2/\min(r_1,r_2)<1$, this fails for large even $n$.
+\end{proof}
+

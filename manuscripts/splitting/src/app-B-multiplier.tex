@@ -1,0 +1,542 @@
+\section{The multiplier theorem over a finite field}\label{app:FF}\label{sec:FF}
+
+This appendix proves Theorem~\ref{thm:FF}: over a finite field with $k!=0$, coordinatewise multiplication has no lift
+satisfying~\eqref{eq:Pol1} with uniformly bounded support dimension. Ramsey's theorem reduces the coefficients to
+cluster values (Lemmas~\ref{lem:H},~\ref{lem:C}), \eqref{eq:Pol1} makes them nonconstant (Lemma~\ref{lem:D}), and the
+support bound forbids the resulting staircase (Lemma~\ref{lem:S}).
+
+\subsection{Exterior powers, supports and determinant arrays}\label{ssec:ext}
+Let $L$ be a field, $V$ an $L$\nobreakdash-vector space and $k\ge1$. We write $\Lambda^kV=\Lambda^k_LV$ for the algebraic exterior
+power, in which $x_1\wedge\dots\wedge x_k=0$ whenever two $x_i$ coincide. We use the standard facts: for a subspace
+$W\subseteq V$ the map $\Lambda^kW\to\Lambda^kV$ is injective, and we regard $\Lambda^kW$ as a subspace of $\Lambda^kV$;
+if $u_1,\dots,u_d$ is a basis of a finite-dimensional space $U$, the wedges $u_I:=u_{i_1}\wedge\dots\wedge u_{i_k}$,
+$I=\{i_1<\dots<i_k\}$, form a basis of $\Lambda^kU$; and every $\omega\in\Lambda^kV$ lies in $\Lambda^kU$ for some
+finite-dimensional $U\subseteq V$.
+
+\begin{definition}\label{def:supp}
+The \emph{support dimension} of $\omega\in\Lambda^kV$ is
+\[
+\sdim(\omega):=\min\{\dim W:\ W\subseteq V\text{ finite-dimensional},\ \omega\in\Lambda^kW\}.
+\]
+\end{definition}
+
+The definition gives $\sdim(0)=0$, $\sdim(c\omega)=\sdim(\omega)$ for $c\neq0$, $\sdim(\omega+\omega')\le\sdim(\omega)+\sdim(\omega')$
+(use $W+W'$), and $\sdim(\omega)\le\dim\spn S$ if $\omega$ is a sum of wedges of vectors from a finite set $S$. If
+$V\subseteq V'$, then $\sdim$ computed in $V'$ is at most $\sdim$ computed in $V$.
+
+For spaces of functions, exterior vectors can be detected by determinants of coordinate evaluations. These arrays
+also turn bounds on support dimension into ordinary matrix-rank bounds.
+Let $S$ be a set and $V\subseteq L^S$ a space of functions on $S$. The \emph{determinant array} is the linear map
+\[
+\Omega\colon\Lambda^kV\to L^{S^k},\qquad \Omega_{y_1\wedge\dots\wedge y_k}(c_1,\dots,c_k):=\det\bigl(y_b(c_a)\bigr)_{a,b=1}^k .
+\]
+It is well defined because the right side is multilinear and alternating in $(y_1,\dots,y_k)$ (these are the
+columns). For each $\omega$, the function $\Omega_\omega$ is alternating in $(c_1,\dots,c_k)$ (the rows); in particular
+$\Omega_\omega(c_{\sigma(1)},\dots,c_{\sigma(k)})=\sgn(\sigma)\,\Omega_\omega(c_1,\dots,c_k)$.
+
+\begin{lemma}\label{lem:detinj}
+The determinant array $\Omega\colon\Lambda^kV\to L^{S^k}$ is injective.
+\end{lemma}
+
+\begin{proof}
+Let $\Omega_\omega=0$ and choose a finite-dimensional $U\subseteq V$ with $\omega\in\Lambda^kU$. The evaluations
+$\mathrm{ev}_s|_U$, $s\in S$, separate the points of $U$ (a function in $U$ vanishing at every $s$ is $0$), so they span
+the dual space $U^*$. Choose $s_1,\dots,s_d\in S$ such that the $\mathrm{ev}_{s_i}|_U$ form a basis of $U^*$, and let
+$u_1,\dots,u_d$ be the dual basis of $U$, so that $u_j(s_i)=\delta_{ij}$. For increasing $k$\nobreakdash-subsets $I,J$ of
+$\{1,\dots,d\}$ we get $\Omega_{u_I}(s_{j_1},\dots,s_{j_k})=\det(u_{i_b}(s_{j_a}))_{a,b}=\delta_{IJ}$. Writing
+$\omega=\sum_Ic_Iu_I$ therefore gives $0=\Omega_\omega(s_{j_1},\dots,s_{j_k})=c_J$ for every $J$, so $\omega=0$.
+\end{proof}
+
+\begin{lemma}[support bounds flattening rank]\label{lem:flat}
+Let $V\subseteq L^S$, $\omega\in\Lambda^kV$ and $\alpha\in\{1,\dots,k\}$. Let $R\subseteq S$ and
+$R'\subseteq S^{\{1,\dots,k\}\setminus\{\alpha\}}$ be finite. The $R\times R'$ matrix $M$ with entries
+$M(c_\alpha,c'):=\Omega_\omega(c)$, where $c$ has $c_\alpha$ in slot $\alpha$ and the entries of $c'$ in the other
+slots, has rank at most $\sdim(\omega)$.
+\end{lemma}
+
+\begin{proof}
+Write $\omega=\sum_jy_{j,1}\wedge\dots\wedge y_{j,k}$ with all $y_{j,b}$ in a subspace $W$ of dimension $\sdim(\omega)$.
+Expanding each determinant along row $\alpha$,
+$\det(y_{j,b}(c_a))_{a,b}=\sum_b\pm y_{j,b}(c_\alpha)\cdot m_{j,b}(c')$, where the minor $m_{j,b}(c')$ does not
+involve $c_\alpha$. So for fixed $c'$ the column $c_\alpha\mapsto M(c_\alpha,c')$ is a linear combination of the
+restrictions $y_{j,b}|_R$. All columns lie in the restriction of $W$ to $R$, a space of dimension at most
+$\sdim(\omega)$.
+\end{proof}
+
+A second way to obtain lower bounds on support is to contract all but one exterior factor. The resulting vectors
+must lie in every subspace supporting the original exterior vector.
+
+\begin{samepage}
+\begin{lemma}[contraction]\label{lem:contr}
+Let $k\ge2$ and $\varphi=(\varphi_1,\dots,\varphi_{k-1})\in(V^*)^{k-1}$. There is a linear map $c_\varphi\colon\Lambda^kV\to V$
+with
+\[
+c_\varphi(x_1\wedge\dots\wedge x_k)=\sum_{i=1}^k(-1)^{k+i}\det\bigl(\varphi_a(x_b)\bigr)_{1\le a\le k-1,\ b\ne i}\;x_i ,
+\]
+and $c_\varphi(\Lambda^kW)\subseteq W$ for every subspace $W$. Consequently
+$\sdim(\omega)\ge\dim\spn\{c_\varphi(\omega):\varphi\in(V^*)^{k-1}\}$.
+\end{lemma}
+\end{samepage}
+
+\begin{proof}
+The right side is multilinear in $(x_b)$. For $\psi\in V^*$, applying $\psi$ to it gives, by Laplace expansion along the
+last row, the determinant of the $k\times k$ matrix with entries $\varphi_a(x_b)$ in the rows $a<k$ and $\psi(x_b)$ in the last
+row; it vanishes when two columns coincide. Since $V^*$ separates the points of $V$, the right side
+vanishes whenever $x_a=x_b$ for some $a\ne b$, so it factors through $\Lambda^kV$. Each term is a multiple of some $x_i$, which gives
+$c_\varphi(\Lambda^kW)\subseteq W$. If $\omega\in\Lambda^kW$ with $\dim W=\sdim(\omega)$, all $c_\varphi(\omega)$ lie in $W$.
+\end{proof}
+
+\begin{proposition}[canonical exterior support]\label{prop:canonical-support}
+Let $L$ be any field, $V$ an $L$\nobreakdash-vector space, $k\ge2$, and
+$\omega\in\Lambda^kV$. Then
+\[
+S(\omega):=\spn\{c_\varphi(\omega):\varphi\in(V^*)^{k-1}\}
+\]
+is the unique smallest subspace supporting $\omega$. In particular,
+$\omega\in\Lambda^k S(\omega)$ and
+$\sdim(\omega)=\dim S(\omega)$.
+\end{proposition}
+
+\begin{proof}
+Choose a finite-dimensional supporting subspace $U\subseteq V$.
+Lemma~\ref{lem:contr} gives $S(\omega)\subseteq U$, so $S(\omega)$ is
+finite-dimensional. Choose a basis $e_1,\dots,e_d$ of $U$ whose first
+$r$ vectors form a basis of $S(\omega)$, and extend its coordinate
+functionals algebraically to $V$. Write
+$\omega=\sum_{|I|=k}a_Ie_I$ in the exterior basis of $U$.
+If $j\in I$ and $j>r$, contract against the $k-1$ coordinate functionals
+indexed by $I\setminus\{j\}$. The $e_j$\nobreakdash-coordinate of this
+contraction is $\pm a_I$: no other basis wedge contributes to that
+coordinate. The contraction belongs to $S(\omega)$, so this coordinate
+is zero. Hence $a_I=0$ whenever $I$ meets $\{r+1,\dots,d\}$, proving
+$\omega\in\Lambda^k S(\omega)$.
+Every supporting subspace contains all the contractions by
+Lemma~\ref{lem:contr}, and therefore contains $S(\omega)$. This proves
+minimality and the dimension formula. Only unit signs occur, so the
+argument is valid in every characteristic.
+\end{proof}
+
+The same conclusion holds in degree one: under $\Lambda^1V\simeq V$,
+the empty-tuple contraction is the identity and $S(\omega)=L\omega$.
+In degree zero, every element of $\Lambda^0V=L$ is supported by the
+zero subspace, so its support dimension is zero; no contraction to
+$V$ is needed.
+
+For matrix calculations, choose any finite-dimensional supporting
+subspace $U$ and a basis of it. Form the finite matrix whose columns
+are the coordinates of the contractions against $(k-1)$\nobreakdash-tuples
+of coordinate functionals, extended to $V$. Arbitrary functionals
+restrict to linear combinations of these coordinates on $U$;
+multilinearity in the covectors therefore shows that the column span
+is exactly $S(\omega)$. The matrix consequently has rank
+$\sdim(\omega)$. This uses ordinary matrix rank, and entails no
+choice of a rank convention for an infinite matrix.
+
+\subsection{Lifts and three diagonal identities}\label{ssec:diag}
+Fix a field $L$, an integer $k\ge1$, $L$\nobreakdash-vector spaces $A$ and $V$, and a linear map $\mu\colon A\to\End_L(V)$,
+$a\mapsto \mu_a$. A \emph{lift of $\mu$ in degree $k$} is a $2k$\nobreakdash-linear map $\Psi\colon A^k\times V^k\to\Lambda^kV$ over $L$ that is
+alternating in the $V$\nobreakdash-slots; its diagonal identity will be specified separately. For every $n\ge1$ write
+$[n]:=\{1,\dots,n\}$, and for $\alpha\in\N^m$ put $\abs\alpha:=\sum_i\alpha_i$. Given $m\ge1$, a map
+$f\colon[k]\to[m]$, a family $b=(b_1,\dots,b_m)\in A^m$ and $\lambda\in L^m$, put
+\[
+b_f:=(b_{f(1)},\dots,b_{f(k)}),\quad \type f:=\bigl(\abs{f^{-1}(1)},\dots,\abs{f^{-1}(m)}\bigr)\in\N^m,\quad
+\lambda_f:=\prod_{j=1}^k\lambda_{f(j)}=\lambda^{\type f}.
+\]
+The \emph{pointwise identity} is
+\begin{equation*}\tag{Pw}\label{eq:Pw}
+\Psi(a,\dots,a;x_1,\dots,x_k)=\mu_ax_1\wedge\dots\wedge \mu_ax_k\qquad\text{for all }a\in A,\ x\in V^k.
+\end{equation*}
+The \emph{polarized identity} is: for all $m\ge1$, $b\in A^m$, $\alpha\in\N^m$ with $\abs\alpha=k$, and $x\in V^k$,
+\begin{equation*}\tag{Pol}\label{eq:Pol}
+\sum_{\type f=\alpha}\Psi(b_f;x)=\sum_{\type f=\alpha}\mu_{b_{f(1)}}x_1\wedge\dots\wedge \mu_{b_{f(k)}}x_k .
+\end{equation*}
+Its \emph{multilinear instance} is: for all $b_1,\dots,b_k\in A$ and $x\in V^k$,
+\begin{equation*}\tag{Pol1}\label{eq:Pol1}
+\sum_{\sigma\in S_k}\Psi(b_{\sigma(1)},\dots,b_{\sigma(k)};x)
+=\sum_{\sigma\in S_k}\mu_{b_{\sigma(1)}}x_1\wedge\dots\wedge \mu_{b_{\sigma(k)}}x_k .
+\end{equation*}
+Here $\sum_{\type f=\alpha}$ runs over the maps $f\colon[k]\to[m]$ of type $\alpha$. \eqref{eq:Pol1} is the instance $m=k$,
+$\alpha=(1,\dots,1)$ of \eqref{eq:Pol}, since the maps of type $(1,\dots,1)$ are the permutations. For $b\in A^m$ and
+$x\in V^k$ put $a_\lambda:=\sum_i\lambda_ib_i$ and
+\begin{align*}
+\Delta_{b,x}(\lambda)&:=\Psi(a_\lambda,\dots,a_\lambda;x)-\mu_{a_\lambda}x_1\wedge\dots\wedge \mu_{a_\lambda}x_k
+=\sum_{\abs\alpha=k}\lambda^\alpha\,\delta_\alpha(b,x),\\
+\delta_\alpha(b,x)&:=\sum_{\type f=\alpha}\Bigl[\Psi(b_f;x)-\mu_{b_{f(1)}}x_1\wedge\dots\wedge \mu_{b_{f(k)}}x_k\Bigr].
+\end{align*}
+Multilinearity of $\Psi$ in the $A$\nobreakdash-slots, linearity of $\mu$ and multilinearity of the wedge give the displayed
+expansion. Thus $\Delta_{b,x}$ is a homogeneous polynomial of degree $k$ with coefficients in $\Lambda^kV$.
+Identity~\eqref{eq:Pol} says that every coefficient $\delta_\alpha(b,x)$ is zero. Identity~\eqref{eq:Pw} says instead that
+$\Delta_{b,x}$ vanishes at every point of $L^m$; conversely, this pointwise vanishing gives~\eqref{eq:Pw} by taking
+$m=1$ and $\lambda=1$. The following two identity principles identify the cases in which pointwise vanishing forces
+all coefficients to vanish.
+
+\begin{lemma}[identity principle]\label{lem:idprinc}
+Let $\mathbb K$ be an infinite field, $Y$ a $\mathbb K$\nobreakdash-vector space and $g(\lambda)=\sum_\alpha\lambda^\alpha y_\alpha$ a
+polynomial in $\lambda\in\mathbb K^m$ with finitely many nonzero coefficients $y_\alpha\in Y$. If $g(\lambda)=0$ for all
+$\lambda\in\mathbb K^m$, then every $y_\alpha=0$.
+\end{lemma}
+
+\begin{proof}
+The finitely many coefficients $y_\alpha$ span a finite-dimensional subspace of $Y$. Applying its coordinate
+functionals reduces the claim to scalar polynomials. For these, induction on $m$ reduces to the fact that a nonzero
+polynomial in one variable has only finitely many roots.
+\end{proof}
+
+\begin{lemma}[homogeneous forms over a finite field]\label{lem:forms}
+Let $q$ be a prime power, $L'\supseteq\F_q$ a field, $1\le e\le q$, and $g\in L'[\lambda_1,\dots,\lambda_m]$ homogeneous of
+degree $e$ with $g(\lambda)=0$ for every $\lambda\in\F_q^m$. Then $g=0$.
+\end{lemma}
+
+\begin{proof}
+Call a monomial $\lambda^\beta$ \emph{reduced} if every $\beta_i\le q-1$. The indicator function of a point
+$a\in\F_q^m$ is $\prod_i\bigl(1-(\lambda_i-a_i)^{q-1}\bigr)$, which expands into reduced monomials. So the $q^m$ reduced
+monomials span the $q^m$\nobreakdash-dimensional $L'$\nobreakdash-space of functions $\F_q^m\to L'$, and they are linearly independent as
+functions. A monomial of degree $e\le q$ that is not reduced is $\lambda_i^q$ (and then $e=q\ge2$); as a function on
+$\F_q^m$ it agrees with the reduced monomial $\lambda_i$, of degree $1<e$. If $e=q$, replace each $\lambda_i^q$ in $g$ by
+$\lambda_i$. These degree-one images are distinct, and homogeneity separates them from all the remaining monomials,
+which still have degree $q$. The replacement therefore sends the monomials of $g$ injectively to reduced monomials
+without changing the associated function. Linear independence of the reduced monomials forces every coefficient to
+vanish. If $e<q$, no replacement is needed.
+\end{proof}
+
+\begin{proposition}[pointwise versus polarized]\label{prop:diag}
+Let $\Psi$ be a lift of $\mu$ in degree $k$ over a field $L$.
+\begin{enumerate}
+\item \eqref{eq:Pol}$\Rightarrow$\eqref{eq:Pw}$\Rightarrow$\eqref{eq:Pol1}, over every field.
+\item If $L$ is infinite, or if $L=\F_q$ and $k\le q$, then \eqref{eq:Pw}$\Rightarrow$\eqref{eq:Pol}.
+\item If $L=\F_q$ and $k\ge q+1$, then \eqref{eq:Pw} does not imply \eqref{eq:Pol} in general.
+\item If $k!=0$ in $L$, then \eqref{eq:Pol1} does not imply \eqref{eq:Pw} in general.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{(1) Inclusion--exclusion.} The implication \eqref{eq:Pol}$\Rightarrow$\eqref{eq:Pw} is the case $m=1$ and
+$\alpha=(k)$. To prove \eqref{eq:Pw}$\Rightarrow$\eqref{eq:Pol1}, fix $b_1,\dots,b_k\in A$ and $x\in V^k$, and put
+$b_S:=\sum_{i\in S}b_i$ for $S\subseteq[k]$. Multilinearity gives
+\begin{align*}
+\sum_{S\subseteq[k]}(-1)^{k-\abs S}\Psi(b_S,\dots,b_S;x)&=\sum_S(-1)^{k-\abs S}\sum_{f\colon[k]\to S}\Psi(b_f;x)\\
+&=\sum_{f\colon[k]\to[k]}\Psi(b_f;x)\sum_{S\supseteq f([k])}(-1)^{k-\abs S}=\sum_{f\text{ bijective}}\Psi(b_f;x),
+\end{align*}
+because $\sum_{S\supseteq T}(-1)^{k-\abs S}=(1-1)^{k-\abs T}$ is $1$ if $T=[k]$ and $0$ otherwise. The same computation
+applies to the multilinear map $(a_1,\dots,a_k)\mapsto \mu_{a_1}x_1\wedge\dots\wedge \mu_{a_k}x_k$, whose diagonal is the right
+side of \eqref{eq:Pw}. Evaluating \eqref{eq:Pw} at the $2^k$ subset sums $b_S$ therefore gives \eqref{eq:Pol1}.
+The computation is valid in every characteristic and involves no division by $k!$.
+
+\emph{(2) The identity principles.} The coefficients of $\Delta_{b,x}$ span a finite-dimensional subspace of $\Lambda^kV$; in a basis of it each
+coordinate of $\Delta_{b,x}$ is a scalar form of degree $k$ vanishing on $L^m$. It is zero by Lemma~\ref{lem:idprinc}
+if $L$ is infinite, and by Lemma~\ref{lem:forms} if $L=\F_q$ and $k\le q$.
+
+\emph{(3) Pointwise vanishing without full polarization.} Let $\dim A\ge3$, with $b_1,b_2,b_3\in A$ and functionals $g_1,g_2,g_3$ on $A$ such that
+$g_i(b_j)=\delta_{ij}$, and let $y_1,\dots,y_k\in V$ be linearly independent. Put
+\[
+\theta(a_1,\dots,a_k):=\bigl[g_1(a_1)\cdots g_1(a_q)\,g_2(a_{q+1})-g_1(a_1)\,g_2(a_2)\cdots g_2(a_{q+1})\bigr]
+\cdot g_3(a_{q+2})\cdots g_3(a_k)
+\]
+(for $k=q+1$ the $g_3$\nobreakdash-factor is empty and $\dim A\ge2$ suffices), and $\Theta(a;x):=\theta(a)\,x_1\wedge\dots\wedge x_k$.
+Then $\Theta$ is a lift of $\mu=0$. It satisfies \eqref{eq:Pw}, because
+$\theta(a,\dots,a)=(g_1(a)^qg_2(a)-g_1(a)g_2(a)^q)\,g_3(a)^{k-q-1}=0$ since $c^q=c$ for $c\in\F_q$. It
+violates \eqref{eq:Pol} for $\alpha=(q,1,k-q-1)$ and $b=(b_1,b_2,b_3)$: the first product contributes to
+$\sum_{\type f=\alpha}\theta(b_f)$ exactly for $f=(1,\dots,1,2,3,\dots,3)$, with value $1$; the second product would need
+$f(2)=\dots=f(q+1)=2$, that is, at least $q\ge2$ values equal to $2$, which is impossible for type $\alpha$. So the
+coefficient $\delta_\alpha(b,y)$ of $\Theta$ is $y_1\wedge\dots\wedge y_k\neq0$. When $k=q+1$, the third label and its
+functional can be omitted throughout, with $\alpha=(q,1)$.
+
+\emph{(4) The multilinear identity without the pointwise identity.} Take $\bar a\in A$ and a functional $g_1$ with $g_1(\bar a)=1$, and $y_1,\dots,y_k$ linearly independent. The
+lift $\Theta'(a;x):=g_1(a_1)\cdots g_1(a_k)\,x_1\wedge\dots\wedge x_k$ of $\mu=0$ satisfies \eqref{eq:Pol1}, since
+$\sum_\sigma\Theta'(b_\sigma;x)=k!\,g_1(b_1)\cdots g_1(b_k)\,x_1\wedge\dots\wedge x_k=0$ for all
+$b_1,\dots,b_k\in A$ and $x\in V^k$, but $\Theta'(\bar a,\dots,\bar a;y)=y_1\wedge\dots\wedge y_k\neq0$.
+\end{proof}
+
+The finite-field obstruction below requires only~\eqref{eq:Pol1}, which follows from either~\eqref{eq:Pw}
+or~\eqref{eq:Pol}. The distinction between the latter two remains important: over $\F_q$ they need not agree when
+$k>q$. The lift constructed in Appendix~\ref{sec:laurent} nevertheless satisfies the full identity~\eqref{eq:Pol} in every
+degree: the identity is polarized over an infinite Laurent-series field before constant coefficients are taken
+(Lemma~\ref{lem:Psi}).
+
+\subsection{Statement and proof strategy}
+For the proof of the theorem, assume that $L$ is a \emph{finite} field with $k!=0$ in $L$, that is, $\operatorname{char}L=p\le k$; in
+particular $k\ge2$. Put $V:=L^\N$ and let $V_{\mathrm{fin}}:=L^{(\N)}\subseteq V$ be the subspace of finitely supported
+sequences. For $u,x\in V$ we write $ux$ for the coordinatewise product; so $\mu_ux=ux$ is the multiplier family.
+
+\Needspace{16\baselineskip}
+\begin{samepage}
+\begin{theorem}[multipliers over a finite field]\label{thm:FF}
+Let $L$ be a finite field and $k\ge1$ with $k!=0$ in $L$.
+\begin{enumerate}
+\item There is no $2k$\nobreakdash-linear map $\Psi\colon V_{\mathrm{fin}}^k\times V_{\mathrm{fin}}^k\to\Lambda^k_LV$ over $L$ such that
+\begin{enumerate}
+\item $\Psi$ is antisymmetric in the last $k$ slots;
+\item $\Psi$ satisfies \eqref{eq:Pol1} for $\mu_ux=ux$: for all $u_1,\dots,u_k,x_1,\dots,x_k\in V_{\mathrm{fin}}$,
+\[
+\sum_{\sigma\in S_k}\Psi(u_{\sigma(1)},\dots,u_{\sigma(k)};x_1,\dots,x_k)=\sum_{\sigma\in S_k}(u_{\sigma(1)}x_1)\wedge\dots\wedge(u_{\sigma(k)}x_k);
+\]
+\item for some $d\in\N$, $\sdim(\Psi(u;x))\le d$ for all $u,x\in V_{\mathrm{fin}}^k$ with entries in $\{0,\pm1\}$.
+\end{enumerate}
+\item Let $E_0=V$ or $E_0=V_{\mathrm{fin}}$. There is no $2k$\nobreakdash-linear map $\Psi\colon E_0^k\times E_0^k\to\Lambda^k_LE_0$ over $L$
+that is antisymmetric in the last $k$ slots, satisfies \eqref{eq:Pol1} for all finitely supported $u,x$, and has
+$\sdim(\Psi(u;x))\le d$ for all $u,x\in E_0^k$, for some $d$.
+\end{enumerate}
+\end{theorem}
+\end{samepage}
+
+\emph{Reduction to (1).} Given a map as in (2), restrict its inputs to
+$V_{\mathrm{fin}}^k\times V_{\mathrm{fin}}^k$ and compose its output with the injective map
+$\Lambda^kE_0\to\Lambda^kV$. This preserves antisymmetry and~\eqref{eq:Pol1}. Support dimension can only decrease under
+the inclusion of the ambient space (\S\ref{ssec:ext}), so the resulting map satisfies (a)--(c).
+
+We therefore prove (1). Suppose that $\Psi$ satisfies its hypotheses, and fix the bound $d$ in (c). Write
+$e_i\in V_{\mathrm{fin}}$ for the unit vectors, $e_a:=(e_{a_1},\dots,e_{a_k})$ for $a\in\N^k$, and $\Omega$ for the
+determinant array of \S\ref{ssec:ext} with $S=\N$.
+
+The proof has three steps. Ramsey's theorem first makes the coefficients of $\Omega\Psi$ depend only on the relative
+order and equalities among their indices. Special weights on four-point clusters then cancel every contribution
+from an occupied cluster containing no output index. This cancellation produces a two-valued staircase matrix from
+one exterior vector. Its bounded support forces the two values to agree, and hence makes all cluster order patterns
+have a common value. Finally, antisymmetry and~\eqref{eq:Pol1} say that the sum of these $k!$ equal values is $1$,
+contradicting $k!=0$ in $L$.
+
+\subsection{Order-homogeneity from Ramsey's theorem}
+We use Ramsey's theorem~\cite{Ra} in its infinite form: \emph{for every $n\ge1$ and every coloring of the
+$n$\nobreakdash-element subsets of $\N$ with finitely many colors there is an infinite $H\subseteq\N$ all of whose $n$\nobreakdash-element
+subsets have the same color.}
+
+For a tuple $z\in\N^N$ with distinct values $y_1<\dots<y_r$, its \emph{pattern} is the map
+$i\mapsto j$ determined by $z_i=y_j$. In particular, repeated entries are retained in the pattern. Two tuples $z$
+and $z'$ have the same pattern if and only if $z_i<z_j\Leftrightarrow z'_i<z'_j$ and $z_i=z_j\Leftrightarrow z'_i=z'_j$ for
+all $i,j$.
+
+\begin{lemma}[pattern homogeneity]\label{lem:H}
+For every $N\ge1$ and every function $T\colon\N^N\to L$ there is an infinite $H\subseteq\N$ such that $T(z)=T(z')$
+whenever $z,z'\in H^N$ have the same pattern.
+\end{lemma}
+
+\begin{proof}
+Color an $N$\nobreakdash-element set $s=\{s_1<\dots<s_N\}\subseteq\N$ by the vector
+\[
+\bigl(T(s_{\beta(1)},\dots,s_{\beta(N)})\bigr)_{\beta\colon[N]\to[N]}\in L^{N^N}.
+\]
+The coloring records all maps $\beta$, including those that repeat indices. It has finitely many values because
+$L$ is finite; this is the only use of the finiteness of $L$ in the obstruction proof. Ramsey's theorem gives an
+infinite $H$ on which the color is constant, say equal to $(t_\beta)_\beta$. Let $z\in H^N$ have value set
+$\{y_1<\dots<y_r\}$. Since $H$ is unbounded, add $N-r$ elements of $H$ above $y_r$ to obtain an
+$N$\nobreakdash-element set $s\subseteq H$. Padding above the largest value leaves the ranks unchanged: $s_j=y_j$ for
+$j\le r$, and
+$z=(s_{\beta(1)},\dots,s_{\beta(N)})$, where $\beta(i)$ is the rank of $z_i$ in $\{y_1,\dots,y_r\}$. The map $\beta$
+depends only on the pattern of $z$, and $T(z)=t_\beta$.
+\end{proof}
+
+\emph{Coefficients.} For $(a;y;c)\in\N^k\times\N^k\times\N^k$ put
+\[
+T(a;y;c):=\Omega_{\Psi(e_a;e_y)}(c_1,\dots,c_k)\in L .
+\]
+Lemma~\ref{lem:H} with $N=3k$ gives an infinite set $H=\{h_0<h_1<h_2<\cdots\}$ on which $T$ depends only on the pattern.
+For $u_j,v_j\in V_{\mathrm{fin}}$ supported in $H$, multilinearity of $\Psi$ and linearity of $\Omega$ give
+\begin{equation}\label{eq:expand}
+\Omega_{\Psi(u;v)}(c)=\sum_{a,y\in H^k}\ \prod_{j=1}^ku_j(a_j)\prod_{j=1}^kv_j(y_j)\cdot T(a;y;c).
+\end{equation}
+Although the sum is indexed by $H^k\times H^k$, only finitely many summands are nonzero, because all the input
+vectors have finite support. Every output tuple $c$ used below also lies in $H^k$, so pattern homogeneity applies to
+all $3k$ indices in~\eqref{eq:expand}.
+
+\subsection{Clusters and the cluster value}
+A \emph{cluster} is a set $C=\{h_n,h_{n+1},h_{n+2},h_{n+3}\}$ of four
+\emph{consecutive} elements of $H$; we write $C(i):=h_{n+i-1}$ for $i=1,\dots,4$. Since a cluster is an interval of
+$H$, two disjoint clusters are \emph{comparable}: every element of one is smaller than every element of the other; we
+write $C<C'$. Distinct clusters need not be adjacent in $H$.
+
+We choose two weight vectors, one for each kind of input slot:
+\begin{align*}
+s&=(s_1,s_2,s_3,s_4):=(1,0,-1,0)&&\text{on the operator slots},\\
+w&=(w_1,w_2,w_3,w_4):=(1,-1,1,-1)&&\text{on the vector slots}.
+\end{align*}
+Over $\Z$, hence over every field,
+\begin{equation*}\tag{W}\label{eq:W}
+\sum_is_i=\sum_iw_i=\sum_is_iw_i=\sum_{i<i'}s_iw_{i'}=\sum_{i>i'}s_iw_{i'}=0,\qquad s_1w_1=1.
+\end{equation*}
+Indeed $\sum_is_i=1-1$, $\sum_iw_i=1-1+1-1$, $s_1w_1=1$, and
+\begin{align*}
+\sum_is_iw_i&=s_1w_1+s_3w_3=1-1=0,\\
+\sum_{i<i'}s_iw_{i'}&=s_1(w_2+w_3+w_4)+s_3w_4=-1+1=0,\\
+\sum_{i>i'}s_iw_{i'}&=s_3(w_1+w_2)=-(1-1)=0 .
+\end{align*}
+The first two zero sums will cancel a cluster occupied by only one input index. The other three will cancel a
+cluster occupied by an operator index and a vector index, according to their relative order. For a cluster $C$ put
+\[
+s_C:=\sum_{i=1}^4s_ie_{C(i)},\qquad w_C:=\sum_{i=1}^4w_ie_{C(i)} .
+\]
+These are vectors of $V_{\mathrm{fin}}$ with entries in $\{0,\pm1\}$, and $s_Cw_C=e_{C(1)}-e_{C(3)}$.
+
+\emph{The cluster value.} For pairwise disjoint clusters $C_1,\dots,C_k$, one for each slot, define
+\begin{align*}
+\chi(C_1,\dots,C_k)&:=\Omega_{\Psi(s_{C_1},\dots,s_{C_k};\,w_{C_1},\dots,w_{C_k})}\bigl(C_1(1),\dots,C_k(1)\bigr)\\
+&=\sum_{i,i'\in[4]^k}\ \prod_{j=1}^ks_{i_j}w_{i'_j}\cdot
+T\bigl(C_1(i_1),\dots,C_k(i_k);\,C_1(i'_1),\dots,C_k(i'_k);\,C_1(1),\dots,C_k(1)\bigr).
+\end{align*}
+Let $\tau\in S_k$ be the \emph{order pattern} of $(C_1,\dots,C_k)$: $\tau(j)$ is the position of $C_j$ among
+$C_1,\dots,C_k$. The pattern of every $3k$\nobreakdash-tuple in the sum is determined by $(i,i')$ and $\tau$: entries in different
+clusters compare as the clusters do, and the entries $C_j(i_j)$, $C_j(i'_j)$, $C_j(1)$ in the same cluster compare as
+their indices do, including equalities. Pattern homogeneity therefore shows that the displayed sum depends only
+on $\tau$. Every permutation occurs as the order pattern of some disjoint clusters in $H$; we denote the resulting
+scalar by $\chi(\tau)$.
+
+\begin{lemma}[cancellation of output-free clusters]\label{lem:C}
+Let $\cC_1,\dots,\cC_k$ be finite families of clusters that are pairwise disjoint as sets of clusters, such that all
+clusters in $\bigcup_j\cC_j$ are pairwise disjoint. Put $u_j:=\sum_{C\in\cC_j}s_C$ and $v_j:=\sum_{C\in\cC_j}w_C$. Let
+$C_l\in\cC_l$ for $l=1,\dots,k$ and $c:=(C_1(1),\dots,C_k(1))$. Then $\Omega_{\Psi(u;v)}(c)=\chi(C_1,\dots,C_k)$.
+\end{lemma}
+
+\begin{proof}
+We show that every cluster assignment except the one matching the output clusters has total contribution zero.
+Expand by~\eqref{eq:expand}. Since the clusters are disjoint, a nonzero term has, for each slot $j$, an operator index
+$a_j=\Cop_j(i_j)$ and a vector index $y_j=\Cvec_j(i'_j)$ with $\Cop_j,\Cvec_j\in\cC_j$, and weight
+$\prod_js_{i_j}w_{i'_j}$. Group the terms according to the \emph{cluster assignment} $(\Cop_j,\Cvec_j)_{j}$.
+
+Call an occupied cluster \emph{output-free} if it is none of $C_1,\dots,C_k$. Suppose a group has such a cluster
+$\Gamma$. Disjointness of the families assigns $\Gamma$ to exactly one slot $j$, so the only tuple entries it can
+contain are $a_j$ and $y_j$. Disjointness of the clusters excludes every output index from $\Gamma$.
+
+Fix the positions of all indices outside $\Gamma$ and sum over the positions inside it. Since $\Gamma$ consists of
+consecutive elements of $H$, every outside entry lies either below the whole cluster or above it. Moving an index
+within $\Gamma$ cannot change any comparison with an outside entry. By pattern homogeneity, the coefficient $T$
+therefore depends on the internal positions only as follows:
+\begin{enumerate}
+\item[(i)] if only $a_j\in\Gamma$, not at all, and the partial sum is $(\sum_is_i)\cdot T=0$;
+\item[(ii)] if only $y_j\in\Gamma$, not at all, and the partial sum is $(\sum_iw_i)\cdot T=0$;
+\item[(iii)] if both lie in $\Gamma$, only through whether $i_j<i'_j$, $i_j=i'_j$ or $i_j>i'_j$; with the corresponding
+values $T_<,T_=,T_>$ of $T$ the partial sum is
+\[
+T_<\sum_{i<i'}s_iw_{i'}+T_=\sum_is_iw_i+T_>\sum_{i>i'}s_iw_{i'}=0 .
+\]
+\end{enumerate}
+In each case the weights of the other slots are a common factor, and the displayed partial sum vanishes
+by~\eqref{eq:W}. Thus every assignment with an output-free cluster contributes zero. In any surviving assignment,
+every occupied cluster must be an output cluster. The only output cluster belonging to $\cC_j$ is $C_j$, which forces
+$\Cop_j=\Cvec_j=C_j$ for every $j$. The contribution of this one assignment is exactly
+$\chi(C_1,\dots,C_k)$.
+\end{proof}
+
+\subsection{The staircase and the diagonal}
+
+We now use the support bound to compare two order patterns that differ by an adjacent exchange. The key is to
+realize arbitrarily large staircase matrices as flattenings of a single value of $\Psi$.
+
+\begin{lemma}[staircase]\label{lem:S}
+Let $\tau\in S_k$, let $\alpha\neq\beta$ be slots with $\tau(\alpha)=\ell$ and $\tau(\beta)=\ell+1$, and let $\tau'$ be $\tau$
+with these two positions exchanged, so $\tau'(\alpha)=\ell+1$, $\tau'(\beta)=\ell$ and $\tau'(\gamma)=\tau(\gamma)$ otherwise.
+Then $\chi(\tau)=\chi(\tau')$.
+\end{lemma}
+
+\begin{proof}
+Let $m\ge1$. Choose pairwise disjoint clusters, in increasing order in $H$: first a cluster $C_\gamma$ for each slot
+$\gamma$ with $\tau(\gamma)<\ell$, ordered as $\tau$ prescribes; then $2m$ clusters $A_1<B_1<A_2<B_2<\dots<A_m<B_m$; then a
+cluster $C_\gamma$ for each slot $\gamma$ with $\tau(\gamma)>\ell+1$, ordered as $\tau$ prescribes. Put
+$\cC_\alpha:=\{A_1,\dots,A_m\}$, $\cC_\beta:=\{B_1,\dots,B_m\}$ and $\cC_\gamma:=\{C_\gamma\}$ for the other slots, and let
+$u,v$ be as in Lemma~\ref{lem:C} and $\omega:=\Psi(u;v)$. Disjointness of the clusters ensures that the entries of
+$u$ and $v$ still lie in $\{0,\pm1\}$, so $\sdim(\omega)\le d$ by hypothesis~(c) of Theorem~\ref{thm:FF}(1).
+For this fixed $m$, keep $u$, $v$ and hence $\omega$ fixed while varying only the output indices.
+
+Consider the $m\times m$ matrix $M$ with rows indexed by $c_\alpha=A_n(1)$ and columns by $c_\beta=B_{n'}(1)$
+($n,n'=1,\dots,m$), all other output indices being fixed at $c_\gamma=C_\gamma(1)$, and entries $M_{nn'}:=\Omega_\omega(c)$.
+By Lemma~\ref{lem:C}, applied with the output clusters $A_n\in\cC_\alpha$, $B_{n'}\in\cC_\beta$ and $C_\gamma\in\cC_\gamma$,
+$M_{nn'}$ is the cluster value of the tuple with $A_n$ in slot $\alpha$, $B_{n'}$ in slot $\beta$, and $C_\gamma$ in
+every other slot. The interlacing order gives $A_n<B_{n'}$ exactly when $n\le n'$. The tuple therefore has pattern
+$\tau$ on and above the matrix diagonal, and pattern $\tau'$ below it.
+
+Put $\delta:=\chi(\tau)-\chi(\tau')$, let $\mathbf 1\in L^m$ be the all-ones column, and let $U$ be the upper
+unitriangular matrix with $U_{nn'}=1$ for $n\le n'$ and $U_{nn'}=0$ otherwise. Then
+\[
+M=\begin{pmatrix}
+\chi(\tau)&\chi(\tau)&\cdots&\chi(\tau)\\
+\chi(\tau')&\chi(\tau)&\cdots&\chi(\tau)\\
+\vdots&\ddots&\ddots&\vdots\\
+\chi(\tau')&\cdots&\chi(\tau')&\chi(\tau)
+\end{pmatrix}
+=\chi(\tau')\,\mathbf 1\mathbf 1^{\mathsf T}+\delta\,U,
+\]
+The rows vary only slot $\alpha$; each column fixes all the other slots, including the chosen value in slot $\beta$.
+Thus $M$ is a submatrix of the flattening of this one array $\Omega_\omega$ along slot $\alpha$. Lemma~\ref{lem:flat}
+gives $\rank M\le\sdim(\omega)\le d$.
+
+If $\delta\ne0$, the matrix $\delta U$ is invertible, whereas the constant matrix
+$\chi(\tau')\mathbf 1\mathbf 1^{\mathsf T}$ has rank at most one. Applying rank subadditivity to
+$\delta U=M-\chi(\tau')\mathbf 1\mathbf 1^{\mathsf T}$ gives
+\[
+m=\rank(\delta U)\le\rank M+1\le d+1.
+\]
+The construction is available for every $m\ge1$; choosing $m=d+2$ is a contradiction. Hence $\delta=0$, as required.
+\end{proof}
+
+The support bound has now forced equality between adjacent order patterns. The remaining identity comes from
+\eqref{eq:Pol1}; it does not use the support bound.
+
+\begin{lemma}[the diagonal]\label{lem:D}
+$\sum_{\tau\in S_k}\chi(\tau)=1$.
+\end{lemma}
+
+\begin{proof}
+Take clusters $C_1<\dots<C_k$, and put $u_j:=s_{C_j}$, $v_j:=w_{C_j}$ and
+$c:=(C_1(1),\dots,C_k(1))$. Apply $\omega\mapsto\Omega_\omega(c)$ to both sides of~\eqref{eq:Pol1}, with the operator
+vectors $u_1,\dots,u_k$ and the vector arguments $v_1,\dots,v_k$.
+
+\emph{Right side.} If $\sigma\ne\id$, some slot $j$ has $\sigma(j)\ne j$. Disjoint supports then give
+$u_{\sigma(j)}v_j=0$, so the corresponding wedge vanishes. Only $\sigma=\id$ survives. It gives $\Omega_{(u_1v_1)\wedge\dots\wedge(u_kv_k)}(c)=\det\bigl((u_bv_b)(C_a(1))\bigr)_{a,b}$. Since
+$u_bv_b=e_{C_b(1)}-e_{C_b(3)}$ and $C_a(1)\ne C_b(3)$ for all $a,b$, this is the determinant of the identity matrix, so
+the right side is $1$.
+
+\emph{Left side.} Fix $\sigma\in S_k$ and write $u_\sigma:=(u_{\sigma(1)},\dots,u_{\sigma(k)})$ and
+$v_\sigma:=(v_{\sigma(1)},\dots,v_{\sigma(k)})$. To identify the summand with a cluster value, we must permute both the
+vector arguments and the output coordinates to match the operator arguments. Each permutation contributes the same
+sign. More precisely, antisymmetry of $\Psi$ in the vector slots gives
+$\Psi(u_\sigma;v)=\sgn(\sigma)\Psi(u_\sigma;v_\sigma)$. For every $\omega\in\Lambda^kV$ the function $\Omega_\omega$ is
+alternating in its arguments, so $\Omega_\omega(c)=\sgn(\sigma)\,\Omega_\omega(c_{\sigma(1)},\dots,c_{\sigma(k)})$; we
+apply this with $\omega=\Psi(u_\sigma;v_\sigma)$. Since $\sgn(\sigma)^2=1$,
+\begin{align*}
+\Omega_{\Psi(u_\sigma;\,v)}(c)&=\sgn(\sigma)\,\Omega_{\Psi(u_\sigma;\,v_\sigma)}(c)
+=\sgn(\sigma)^2\,\Omega_{\Psi(u_\sigma;\,v_\sigma)}(c_{\sigma(1)},\dots,c_{\sigma(k)})\\
+&=\Omega_{\Psi(u_\sigma;\,v_\sigma)}(c_{\sigma(1)},\dots,c_{\sigma(k)}).
+\end{align*}
+In the last expression slot $j$ has operator $s_{C_{\sigma(j)}}$, vector $w_{C_{\sigma(j)}}$ and output
+$C_{\sigma(j)}(1)$, so it equals $\chi(C_{\sigma(1)},\dots,C_{\sigma(k)})$ by definition. Its order pattern is $\sigma$,
+since $C_{\sigma(j)}$ is the $\sigma(j)$\nobreakdash-th cluster in increasing order. Thus the convention for patterns
+gives $\sigma$, not $\sigma^{-1}$. No cluster cancellation is needed in this calculation.
+
+As $\sigma$ runs over $S_k$, each order pattern occurs exactly once. Comparing the two sides gives
+\[
+\sum_{\sigma\in S_k}\Omega_{\Psi(u_\sigma;\,v)}(c)=\sum_{\tau\in S_k}\chi(\tau)=1 .\qedhere
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:FF}]
+Exchanging adjacent ranks acts on an order pattern by
+$\tau\mapsto(\ell\ \ell{+}1)\circ\tau$, $1\le\ell<k$. These transpositions generate $S_k$, and Lemma~\ref{lem:S}
+makes $\chi$ invariant under each exchange. Hence $\chi$ is constant; write its value as $\chi_0$.
+Lemma~\ref{lem:D} now gives $k!\,\chi_0=1$ in $L$, contradicting $k!=0$. This proves (1), and the preceding reduction
+gives (2).
+\end{proof}
+
+\begin{remark}[where the hypotheses enter]\label{rem:FFhyp}
+Ramsey homogeneity is the only step in the obstruction proof that uses the finiteness of $L$.
+Multilinearity then gives the cluster expansion and cancellation. The support bound is used in Lemma~\ref{lem:S}
+only at the finitely many test inputs obtained by taking $m=d+2$; all have entries in $\{0,\pm1\}$.
+Antisymmetry and~\eqref{eq:Pol1} enter in Lemma~\ref{lem:D}, which does not use that bound. Finally, $k!=0$ is used only
+to turn the diagonal identity into a contradiction.
+
+The inclusion--exclusion argument in Proposition~\ref{prop:diag}(1) uses only multilinearity in the
+operator slots. The theorem therefore remains true with the pointwise identity \eqref{eq:Pw} at $L$\nobreakdash-points in place of
+\eqref{eq:Pol1}, for this family of multipliers. In characteristic $2$ antisymmetry is the same as symmetry, and the two signs in
+Lemma~\ref{lem:D} are trivial.
+\end{remark}
+
+\begin{remark}[when $k!$ is invertible]\label{rem:FFunit}
+The vanishing of $k!$ is essential. If instead $k!\ne0$ in $L$, the \emph{normalized alternatization}
+\[
+\Psi_{\mathrm{alt}}(u;x):=\frac1{k!}\sum_{\sigma\in S_k}(u_{\sigma(1)}x_1)\wedge\dots\wedge(u_{\sigma(k)}x_k)
+\]
+is alternating in $x$ and satisfies~\eqref{eq:Pol1}. Every summand is supported in the span of the $k^2$ vectors
+$u_ix_j$, so $\sdim(\Psi_{\mathrm{alt}}(u;x))\le k^2$. The preceding homogeneity, cancellation, staircase and diagonal
+arguments apply, but now yield $\chi\equiv1/k!$: for pairwise disjoint clusters only $\sigma=\id$
+survives in $\Psi_{\mathrm{alt}}(s_{C_1},\dots,s_{C_k};w_{C_1},\dots,w_{C_k})$, and the determinant at
+$(C_1(1),\dots,C_k(1))$ is that of the identity. The final equation $k!\cdot(1/k!)=1$ is then consistent. So the
+obstruction is exactly the vanishing of $k!$, not positive characteristic as such. For example, at $(p,k)=(5,3)$ every
+step is consistent, since $3!=6=1$ in $\F_5$ and $\chi_0=1$.
+\end{remark}

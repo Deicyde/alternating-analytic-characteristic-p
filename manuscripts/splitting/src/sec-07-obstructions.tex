@@ -1,0 +1,410 @@
+\section{Obstructions}\label{sec:sharpness}
+
+\subsection{The field}\label{obs:ssec:field}
+We say that \emph{condition~\textup{(L)}} holds if $\kappa$ is a finite field of characteristic $p$, $0<\varrho<1$, the
+Laurent series field $\kappa((X))$ carries the absolute value $\abs a=\varrho^{\ord a}$, $K$ is a subfield of
+$\kappa((X))$ on which this absolute value is nontrivial, and $k\ge p$; for example $K=\kappa((X))$ or $K=\kappa(X)$.
+Then $K$ is nonarchimedean, and $\Kh$ is the closure of $K$ in the complete field $\kappa((X))$. For $a\in\kappa((X))$
+and $n\in\Z$, $\coeff_n(a)\in\kappa$ is the $X^n$\nobreakdash-coefficient of $a$, applied entrywise to vectors and
+matrices, and $M_\varrho=\max_{l\ge0}(l+1)\varrho^l$, which exists since $(l+1)\varrho^l\to0$. The group
+$\abs{K^\times}$ is a nontrivial subgroup of $\varrho^\Z$, hence $\abs{K^\times}=\varrho^{n_0\Z}$ for an integer
+$n_0\ge1$; under~\textup{(L)} we fix $\vartheta\in K$ with $\abs\vartheta=\varrho^{n_0}$, so $\abs{K^\times}=\abs\vartheta^\Z$.
+
+\begin{lemma}[normalization of the field]\label{obs:lem:normalization}
+Assume~\textup{(L)}. There are a finite field $\kappa'$ of characteristic $p$ and an isometric field isomorphism
+$\sigma$ from $\kappa'((X))$, with the absolute value $\abs g=\abs\vartheta^{\ord g}$, onto $\Kh$ with $\sigma(X)=\vartheta$.
+Hence $K$ is isometrically isomorphic to a dense subfield of $\kappa'((X))$. Consequently, a statement whose hypotheses
+and conclusion depend only on $K$ as a normed field holds for every $K$ satisfying~\textup{(L)} once it holds for every
+subfield $K$ dense in $\kappa((X))$, for every finite field $\kappa$ of characteristic $p$ and every $\varrho\in(0,1)$.
+\end{lemma}
+
+The proof is in Appendix~\ref{app:deferred}. When $K$ is dense in $\kappa((X))$, we have $\Kh=\kappa((X))$ and
+$\abs{K^\times}=\varrho^\Z$, so $\abs\vartheta=\varrho$.
+
+\subsection{Forcing and the two counterexamples}\label{obs:ssec:counterexamples}
+The factorial hypothesis of Proposition~\ref{prop:split-lift}(1) cannot be removed.
+
+\begin{theorem}[operator obstructions]\label{thm:operator-obstructions}
+Let $K$ be a nontrivially normed field of characteristic $p>0$, and let $k\ge p$.
+\begin{enumerate}
+\item There are Banach $K$\nobreakdash-spaces $E,F$ for which
+\[
+ A^k_{E,E;F}\colon\cL(E,E)\longrightarrow
+ \cL\bigl(\Alt^k(E;F),\Alt^k(E;F)\bigr)
+\]
+is analytic at no point. The target $F$ admits no equivalent nonarchimedean norm.
+\item If $K$ is complete and not spherically complete, there are nonarchimedean Banach spaces $E,D$ for which $A^k_{E,D;K}$ is analytic at no point. They can be chosen as closed subspaces of
+\[
+ \linf(\Lambda,K^{k+1})\quad\text{and}\quad\linf(\Lambda,K^k),
+\]
+respectively, containing the corresponding $c_0$ spaces, with $\Lambda$ countable.
+\end{enumerate}
+\end{theorem}
+
+Part~(1) is assembled in Appendix~\ref{app:assembly}. For $\kappa$ finite of characteristic $p$, Theorem~\ref{thm:laurent}
+excludes a bounded lift over $\kappa((X))$ for $E_1=\linf(\N,\kappa((X)))$ and $F_1=\widehat\Lambda^k_\pi E_1$
+(Lemma~\ref{lem:proj}): through Proposition~\ref{prop:supp} a lift gives the map $\Psi$ of Lemma~\ref{lem:Psi}, which
+Theorem~\ref{thm:FF} excludes by Ramsey's theorem, clusters and a staircase matrix. Proposition~\ref{prop:ascent}, which
+rests on Ingleton's Theorem~\ref{thm:ingleton}, and Lemma~\ref{lem:descent} pass to every $K$; by
+Proposition~\ref{prop:nonultra} the target $F$ has no equivalent nonarchimedean norm. Part~(2) is proved in
+Appendix~\ref{app:scalar} from Lemmas~\ref{scalar:fibre} and~\ref{scalar:tail} and van der Put's description of the
+continuous dual of a bounded sequence space~\cite{VdP}. In both parts, Proposition~\ref{prop:homogeneous-lift} turns the
+absence of a lift into nonanalyticity at every point.
+
+\begin{corollary}[regularity on whole hom spaces]\label{cor:classification}
+For every nontrivially normed field $K$, the bifunctor
+$\Alt^k\colon\mathsf{Vec}_K^{\mathrm{op}}\times\mathsf{Vec}_K\to\mathsf{Vec}_K$
+is $C^\infty$, and is analytic if and only if $k!\ne0$ in $K$.
+Both assertions remain true on the full subcategory of Banach spaces.
+\end{corollary}
+\begin{proof}
+Smooth descent applies to the ambient polynomial action. An invertible factorial gives a finite
+multilinear lift, and bounded bilinear postcomposition supplies the joint bifunctor action.
+If the factorial vanishes, Theorem~\ref{thm:operator-obstructions}(1) excludes analyticity even on
+Banach spaces, after fixing the output morphism to be the identity.
+\end{proof}
+
+\begin{theorem}[universal scalar classification]\label{thm:scalar-classification}
+Let $K$ be a complete nonarchimedean, nontrivially normed field. For any $k\ge0$, the contravariant functor
+\[
+ \Alt^k(-;K)\colon\mathsf{Vec}_K^{\mathrm{op}}\longrightarrow\mathsf{Vec}_K
+\]
+is analytic on every hom space if and only if $k!\ne0$ in $K$ or $K$ is spherically complete. The same equivalence holds when the source category is restricted to Banach spaces, or to nonarchimedean Banach spaces.
+\end{theorem}
+
+\begin{proof}
+An invertible factorial gives a multilinear lift by normalized antisymmetrization. If $K$ is spherically complete, Theorem~\ref{thm:spherical} applies with target $K$. Both arguments permit arbitrary normed sources. If neither condition holds, then $K$ has characteristic $p>0$ with $k\ge p$, and Theorem~\ref{thm:operator-obstructions}(2) supplies nonarchimedean Banach witnesses against all three assertions.
+\end{proof}
+
+By Theorem~\ref{thm:duality}(2), the same criterion holds for every nonzero continuous-dual target, and hence for every
+nonzero finite-dimensional target, which over complete $K$ is isomorphic to a continuous dual (Lemma~\ref{lem:findim}).
+
+Call a normed space $F$ a \emph{universal target} if $\Alt^k(-;F)$ is analytic on every hom space, that is, if
+$A^k_{E,D;F}$ is analytic on $\cL(E,D)$ for all normed spaces $E$ and $D$. Over a nonarchimedean field, every
+nonarchimedean spherically complete $F$ is a universal target, by Theorem~\ref{thm:spherical}.
+
+\begin{proposition}[universal targets]\label{prop:universal-zero-dual}
+If $\operatorname{char}K=p>0$, $k\ge p$, and $K$ is complete and not spherically complete, then every universal target
+has zero continuous dual.
+\end{proposition}
+
+\begin{proof}
+Let $F$ be a normed space with a nonzero $\lambda\in F^*$, and choose $v\in F$ with $\lambda(v)=1$. Let $E$ and $D$ be the
+spaces of Theorem~\ref{thm:operator-obstructions}(2), and for $a\in\Alt^k(D;K)$ let $va\in\Alt^k(D;F)$ be $y\mapsto a(y)v$.
+Then $A^k_{E,D;K}(u)(a)=\lambda\circ A^k_{E,D;F}(u)(va)$ for $u\in\cL(E,D)$. Composing with the bounded linear maps
+$a\mapsto va$ and $m\mapsto\lambda\circ m$ is a bounded linear map
+$\cL(\Alt^k(D;F),\Alt^k(E;F))\to\cL(\Alt^k(D;K),\Alt^k(E;K))$. So if $A^k_{E,D;F}$ were analytic at a point, so would be
+$A^k_{E,D;K}$, which Theorem~\ref{thm:operator-obstructions}(2) excludes. Hence $F$ is not a universal target.
+\end{proof}
+
+\begin{corollary}[bounded sequences]\label{obs:cor:linf}
+Let $\kappa$ be a finite field of characteristic $p$, $K_1=\kappa((X))$ with $\abs X=\varrho$, $k\ge p$, and
+$E_1=\linf(\N,K_1)$. Then $(E_1,E_1)$ is not good for Banach values in degree $k$, and neither $(\mathrm S^k_{E_1})$ nor
+$(\mathrm R^k_{E_1})$ holds, although $E_1$ is isometrically isomorphic to $c_0(I,K_1)$ for a set $I$, and
+$A^k_{E_1,E_1;F}$ is a continuous polynomial for every Banach space $F$ with an equivalent nonarchimedean norm.
+\end{corollary}
+
+\begin{proof}
+The space $F_1=\widehat\Lambda^k_\pi E_1$ is a Banach space (Lemma~\ref{lem:proj}), and $A^k_{E_1,E_1;F_1}$ is analytic
+at no point by Theorem~\ref{thm:laurent}; so $(E_1,E_1)$ is not good for Banach values, and by
+Proposition~\ref{fib:prop:split}(1),(2) neither $(\mathrm S^k_{E_1})$ nor $(\mathrm R^k_{E_1})$ holds. Since
+$\abs{K_1^\times}=\varrho^\Z$, Corollary~\ref{cor:discrete-targets} and Proposition~\ref{prop:homogeneous-lift} give the
+assertion about nonarchimedean $F$. The norm of $E_1$ takes values in $\abs{K_1}$, so $E_1$ has an orthonormal basis and
+is isometrically isomorphic to $c_0(I,K_1)$~\cite[\S1, Prop.~1]{Se}.
+\end{proof}
+
+\subsection{The \texorpdfstring{$\ell^r$}{l\textasciicircum r} threshold}\label{fib:ssec:local}
+Throughout this subsection $K$ satisfies~\textup{(L)}. For a sequence $a$, $\mu_a\colon x\mapsto ax$ denotes
+multiplication by $a$. The proof of the next theorem follows the proof of Theorem~\ref{thm:FF}, with norm bounds on the
+staircase matrix in place of the support bound.
+
+\begin{theorem}[$\ell^r$ with $r\ge2$]\label{fib:thm:ell2}
+Let $2\le r\le\infty$, and let $E$ be a normed space with $c_{00}(\N,K)\subseteq E\subseteq\ell^r(\N,K)$ and the
+$\ell^r$ norm, the supremum norm if $r=\infty$. Suppose $Q\colon c_{00}(\N,K)^k\to\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi E)$
+is $k$\nobreakdash-linear, bounded for the supremum norm on $c_{00}(\N,K)$, and satisfies $Q(a,\dots,a)=\Lambda^k_\pi\mu_a$.
+Then for every $m\ge1$, with $1/r=0$ when $r=\infty$,
+\begin{equation}\label{fib:eq:quant}
+ \begin{gathered}
+ \norm Q\ge\frac{(1-\varrho^2)\ln m}{k(k-1)2^k(1+\ln(2\abs\kappa))}\quad\text{if }r=2,\\
+ m-1\le M_\varrho k(k-1)\norm Q(4m)^{2/r}4^{(k-2)/r}\quad\text{if }r>2.
+ \end{gathered}
+\end{equation}
+Hence no such $Q$ exists. Consequently $(E,E)$ is not good for Banach values in degree $k$; $A^k_{E,E;F}$ is analytic at
+no point for $F=\Lambda^k_\pi E$ and for $F=\widehat\Lambda^k_\pi E$; $(\mathrm S^k_E)$ and $(\mathrm R^k_E)$ fail; and
+$\widehat\Lambda^k_\pi E$ has no equivalent nonarchimedean norm.
+\end{theorem}
+
+\begin{corollary}[the $\ell^r$ threshold]\label{fib:cor:threshold}
+Let $1\le r\le\infty$, and let $E=\ell^r(\N,K)$, or $E=c_0(\N,K)$ if $r=\infty$. Then $(E,E)$ is good for Banach
+values in degree $k$ if and only if $r<2$; in that case $(E,D)$ and $(D,E)$ are good for Banach values for every normed
+$D$. The same holds, with good in place of good for Banach values, for the finitely supported sequences with the
+$\ell^r$ norm.
+\end{corollary}
+
+\begin{corollary}[pairs of $\ell^r$ spaces]\label{fib:cor:pairs}
+Let $1\le r_1,r_2\le\infty$, and let $E=\ell^{r_1}(\N,K)$ and $D=\ell^{r_2}(\N,K)$, with $c_0(\N,K)$ in place of
+$\ell^\infty$. The pair $(E,D)$ is good for Banach values in degree $k$ if $r_1<2$ or $r_2<2$, and it is not if
+$r_2=2\le r_1$ or if $r_1,r_2>2$.
+\end{corollary}
+
+The proofs are in Appendix~\ref{app:forcing}. The pairs with $r_1=2<r_2$ are good for Banach values in every degree
+(Corollary~\ref{cls:cor:lr-table}).
+
+\subsection{The product triangle bound}\label{obs:ssec:ptb}
+Throughout this subsection $K$ satisfies~\textup{(L)}. For $A\subseteq\N$ let $1_A$ be its indicator function, for
+$n\ge1$ let $[n]$ be the set of the first $n$ elements of $\N$, let $e_t$ ($t\in\N$) be the unit vectors, and for a
+sequence $x$ let $\abs x$ be the sequence of absolute values $\abs{x(t)}$.
+
+\begin{definition}\label{obs:def:sequence-spaces}
+A \emph{sequence space} is a normed space $D$ with $c_{00}(\N,K)\subseteq D\subseteq\linf(\N,K)$. It is
+\emph{symmetric} if there is a norm on $c_{00}(\N,\mathbb R)$, again written $\norm\cdot_D$, with
+$\norm f_D=\norm{\abs f}_D$, with $\norm f_D\le\norm g_D$ whenever $\abs f\le\abs g$ pointwise, invariant under every
+permutation of $\N$ and equal to $1$ at the unit vectors, such that $\norm x_D=\norm{\abs x}_D$ for $x\in c_{00}(\N,K)$ and
+$\norm x_D=\sup_n\norm{x1_{[n]}}_D$ for $x\in D$. A sequence space $E$ is \emph{$\ell^2$\nobreakdash-dominated} if there is
+$C_2$ with $\norm x_2\le C_2\norm x_E$ for all $x\in E$; for symmetric $E$ in which $c_{00}(\N,K)$ is dense, this is the
+$\ell^2$\nobreakdash-domination of the unit vectors in the sense of Section~\ref{sec:positive}, since $\norm x_E=\sup_n\norm{x1_{[n]}}_E$. The
+\emph{fundamental function} of $E$ is $\varphi_E(m)=\norm{1_{[m]}}_E$. For a symmetric sequence space $E$, a sequence
+space $D$ and $a\in c_{00}(\N,K)$, $\mu_a$ is bounded from $E$ to $D$ (Lemma~\ref{obs:lem:multiplier}(2)), and
+$\norm{\mu_a}_{E\to D}$ denotes its norm.
+\end{definition}
+
+For example, $\ell^r(\N,K)$ with $1\le r<\infty$ and $c_0(\N,K)$ are symmetric sequence spaces.
+
+\begin{lemma}[multiplier norms]\label{obs:lem:multiplier}
+Let $E$ be a symmetric sequence space.
+\begin{enumerate}
+\item $\norm x_\infty\le\norm x_E$ for $x\in E$, and $\norm{bx}_E\le\norm x_E$ for $x\in E$ and every finitely
+supported $b$ with $\abs b\le1$.
+\item For every sequence space $D$ and $a\in c_{00}(\N,K)$, $\mu_a\in\cL(E,D)$ and
+$\norm{\mu_a}_{E\to D}=\sup\{\norm{ax}_D:x\in c_{00}(\N,K),\ \operatorname{supp}x\subseteq\operatorname{supp}a,\
+\norm x_E\le1\}$.
+\item If $D$ is symmetric, then $a\mapsto\norm{\mu_a}_{E\to D}$ is a norm on $c_{00}(\N,K)$ with
+$\norm{\mu_a}_{E\to D}\ge\norm a_\infty$ and $\norm{\mu_{e_t}}_{E\to D}=1$. It does not change when the coordinates
+of $a$ are relabeled by an injective map $\N\to\N$ or when $a$ is multiplied by a sequence of absolute value $1$, and
+$\norm{\mu_a}_{E\to D}\le\norm{\mu_b}_{E\to D}$ when $\abs a\le\abs b$.
+\item If $\norm y_D\le C\norm y_E$ for $y\in c_{00}(\N,K)$, then $\norm{\mu_a}_{E\to D}\le C\norm a_\infty$. If $D$ is
+symmetric, then $\norm{\mu_a}_{c_0\to D}=\norm a_D$ and $\norm{\mu_a}_{E\to c_0}=\norm a_\infty$, where $c_0=c_0(\N,K)$.
+\end{enumerate}
+\end{lemma}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{definition}\label{obs:def:ptb}
+Let $E$ be a symmetric sequence space, $D$ a sequence space and $C\ge0$, and let $\cP_<$ be the strict triangle
+projection of the unit vectors: $\cP_<(e_t\otimes e_{t'})=e_t\otimes e_{t'}$ if $t<t'$ and $0$ otherwise. The pair $(E,D)$
+satisfies the \emph{product triangle bound} \textup{(PTB)} with constant $C$ if
+\begin{equation}\label{obs:eq:ptb}
+ \norm{\cP_<((ax)\otimes(by))}_{D\otimes_\pi D}\le C\norm{\mu_a}_{E\to D}\norm x_E\norm{\mu_b}_{E\to D}\norm y_E
+ \qquad(a,x,b,y\in c_{00}(\N,K)).
+\end{equation}
+We say that $\cP_<$ is bounded on $E\otimes_\pi E$ if $\norm{\cP_<(x\otimes y)}_{E\otimes_\pi E}\le C\norm x_E\norm y_E$
+for some $C$ and all $x,y\in c_{00}(\N,K)$.
+\end{definition}
+
+\begin{theorem}[product triangle bound]\label{obs:thm:ptb}
+Let $E$ and $D$ be symmetric sequence spaces, and suppose that $(E,D)$ is good for Banach values in degree $k$, with a
+lift $Q\colon\cL(E,D)^k\to\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ as in Lemma~\ref{fib:lem:test}. Then $(E,D)$
+satisfies \textup{(PTB)} with a constant that depends only on $k$, $K$ and $\norm Q$. No inclusion between $E$ and $D$ is
+assumed, and $c_{00}(\N,K)$ need not be dense in either.
+\end{theorem}
+
+\begin{lemma}[the triangle of one vector]\label{obs:lem:single-vector}
+Suppose that $K$ is dense in $\kappa((X))$, and let $D$ be a sequence space with $\norm y_\infty\le\norm y_D$ for
+$y\in D$. Then for every $x\in c_{00}(\N,K)$,
+\[
+ \norm x_2^2\le\frac{\norm{\cP_<(x\otimes x)}_{D\otimes_\pi D}}{1-\varrho}+\frac{\norm x_\infty^2}{1-\varrho^2}.
+\]
+\end{lemma}
+
+\begin{proposition}[$\ell^2$-domination]\label{obs:prop:l2-domination}
+Let $E$ be a symmetric sequence space and $D$ a sequence space with $\norm y_\infty\le\norm y_D$ for $y\in D$. Suppose
+that $\norm\xi_D\le C'\norm\xi_r$ for all $\xi\in c_{00}(\N,K)$, for some $r\in(2,\infty]$ and $C'\ge0$, and that $(E,D)$
+satisfies \textup{(PTB)} with constant $C$. Put $\mathfrak a=CC'^2/(1-\abs\vartheta)$ and
+$\mathfrak b=1/(1-\abs\vartheta^2)$. Then $\norm x_2\le C_2\norm x_E$ for all $x\in E$, where $C_2^2=\mathfrak a+\mathfrak b$
+if $r=\infty$ and $C_2^2=\max\bigl((2\mathfrak a)^{r/(r-2)},2\mathfrak b\bigr)$ if $r<\infty$. In particular $E$ is
+$\ell^2$\nobreakdash-dominated.
+\end{proposition}
+
+\begin{proposition}[polarizable symmetric spaces]\label{obs:prop:gamma-ptb}
+Let $E$ be a symmetric sequence space in which $c_{00}(\N,K)$ is dense. If $(\Gamma^k_E)$ holds, then $\cP_<$ is bounded
+on $E\otimes_\pi E$.
+\end{proposition}
+
+The proofs of Theorem~\ref{obs:thm:ptb}, Lemma~\ref{obs:lem:single-vector} and Propositions~\ref{obs:prop:l2-domination}
+and~\ref{obs:prop:gamma-ptb} are in Appendix~\ref{app:forcing}.
+
+\subsection{Nonarchimedean fibers}\label{obs:ssec:nonarch}
+Throughout this subsection $K$ satisfies~\textup{(L)}. The proofs, in Appendix~\ref{app:forcing}, take $K$ dense in
+$\kappa((X))$; Lemma~\ref{obs:lem:normalization} extends them to every $K$ satisfying~\textup{(L)}.
+
+\begin{lemma}[marking]\label{fib:lem:marking}
+Let $E$ be a normed space with an equivalent nonarchimedean norm and $\dim_{\Kh}\widehat E=\infty$. There are
+$e_n\in E$, $n\in\N$, an equivalent nonarchimedean norm $\norm\cdot'$ on $\widehat E$ with
+$\norm{\sum_n\xi_ne_n}'=\max_n\abs{\xi_n}$ for finitely supported $(\xi_n)$ in $\Kh$, and a $\Kh$\nobreakdash-linear map
+$\theta_E\colon\widehat E\to c_0(\N,\Kh)$, contractive for $\norm\cdot'$, that sends $e_n$ to the $n$th unit vector. If
+$E$ is complete, $\widehat\psi_E(\xi)=\sum_n\xi_ne_n$ defines an isometry of $c_0(\N,\Kh)$ into $(E,\norm\cdot')$ with
+$\theta_E\widehat\psi_E=\id$. If $K$ is complete, $\theta_E$ takes values in $c_0(\N,K)$.
+\end{lemma}
+
+\begin{theorem}[marking obstruction]\label{fib:thm:marking}
+Let $E,E'$ be normed spaces, let $\psi\colon c_{00}(\N,K)\to E$ and $\theta\colon E'\to\linf(\N,\Kh)$ be bounded
+linear maps, with the supremum norm on $c_{00}(\N,K)$, and let $a\mapsto u_a$ be a bounded linear map
+$c_{00}(\N,K)\to\cL(E,E')$ with
+\begin{equation}\label{fib:eq:marking}
+ \theta\bigl(u_a(\psi x)\bigr)=ax\qquad(a,x\in c_{00}(\N,K)).
+\end{equation}
+Let $\linf_{\Kh}=\linf(\N,\Kh)$, regarded over $K$. Let $F$ be normed, $\nu\in\Alt^k(E';F)$, and
+$\theta_F\colon F\to\widehat\Lambda^k_\pi\linf_{\Kh}$ bounded linear with
+$\theta_F\circ\nu=\omega_{\linf_{\Kh}}\circ(\theta,\dots,\theta)$.
+Then no bounded $k$\nobreakdash-linear $Q\colon c_{00}(\N,K)^k\to\Alt^k(E;F)$ satisfies $Q(a,\dots,a)=\nu\circ(u_a,\dots,u_a)$,
+and $A^k_{E,E';F}$ is analytic at no point. For $F=\Lambda^k_\pi E'$ and $F=\widehat\Lambda^k_\pi E'$, with
+$\nu=\omega_{E'}$ and $\theta_F$ induced by $\theta$, the pair $(E,E')$ is therefore not good, respectively not good for
+Banach values, in degree $k$.
+\end{theorem}
+
+\begin{theorem}[nonarchimedean fibers over a local field]\label{fib:thm:local}
+Let $E$ be a normed space with an equivalent nonarchimedean norm.
+\begin{enumerate}
+\item The following are equivalent: $\dim_{\Kh}\widehat E<\infty$; $(E,E')$ is good for Banach values in degree $k$ for every normed
+$E'$; $(E',E)$ is good for Banach values in degree $k$ for every normed $E'$.
+\item If $E$ is complete, these conditions are also equivalent to each of: $(E,E)$ is good in degree $k$; $(E,E)$ is
+good for Banach values in degree $k$.
+\item If $K$ is complete and $E'$ also has an equivalent nonarchimedean norm, then $(E,E')$ is good in degree $k$ if and
+only if it is good for Banach values, if and only if $\dim E<\infty$ or $\dim E'<\infty$.
+\end{enumerate}
+Each failure is shown by an explicit pair whose action with values in the completed exterior power of its second space
+is analytic at no point; these values admit no equivalent nonarchimedean norm, while complete nonarchimedean values
+never fail, by Corollary~\ref{cor:discrete-targets}.
+\end{theorem}
+
+By Theorem~\ref{fib:thm:lower}, $(c_0(\N,K),\ell^1(\N,K))$ is good for Banach values; so the hypothesis on $E'$ in~(3)
+cannot be dropped.
+
+\subsection{Characteristic two}\label{obs:ssec:char-two}
+Throughout this subsection condition~\textup{(L)} is not assumed. For a field $\Bbbk$, $e_t$ are the unit vectors of $\Bbbk^n$,
+$[n]=\{1,\dots,n\}$, $1_S=\sum_{t\in S}e_t$ for $S\subseteq[n]$, also read in $c_{00}(\N,K)$, matrices are
+written in sans-serif, $\cP_<\mathsf Z$ keeps the entries of $\mathsf Z$ above the diagonal and replaces the
+others by $0$, and $\Omega_w$ is the alternating matrix of $w\in\Lambda^2\Bbbk^n$. In characteristic $2$, $\Omega_w$ is
+symmetric with zero diagonal and $\Omega_{x\wedge y}=xy^{\mathsf T}+yx^{\mathsf T}$. For $t\ne t'$, $\pi_{tt'}$ is the
+coordinate projection of $\Lambda^2\Bbbk^n$ onto $\Bbbk\,e_t\wedge e_{t'}$, and for $a\in\Bbbk^n$, $\mu_a$ is
+multiplication by $a$, so that
+\begin{equation}\label{obs:eq:lambda-mu}
+\Lambda^2\mu_a=\sum_{t<t'}a_ta_{t'}\,\pi_{tt'} .
+\end{equation}
+For $L\subseteq[n]$ put $L^c=[n]\setminus L$, and for a vector $a$ of indeterminates $a_L=\prod_{t\in L}a_t$; for a
+polynomial $g$, $[a_Lb_{L^c}x_Ly_{L^c}]g$ is the coefficient of the monomial $a_Lb_{L^c}x_Ly_{L^c}$ in $g$. The
+Pfaffian of an alternating matrix of even size over a commutative ring of characteristic $2$ is the sum, over the
+partitions of the index set into pairs, of the products of the entries at the pairs; its square is the determinant, as
+for the generic alternating matrix over $\Z$. Sequence spaces are as in Definition~\ref{obs:def:sequence-spaces}, which
+does not use condition~\textup{(L)}, and in this subsection a sequence space $E$ is also assumed to satisfy
+$\norm x_\infty\le\norm x_E$ for $x\in E$; for finitely supported $a$, multiplication $\mu_a\colon x\mapsto ax$ then lies
+in $\cL(E)$, as $\norm{ax}_E\le\sum_t\abs{a_t}\abs{x_t}\norm{e_t}_E\le\bigl(\sum_t\abs{a_t}\norm{e_t}_E\bigr)\norm x_E$.
+Put $\bar\varphi_E(n)=\max_{S\subseteq[n]}\norm{1_S}_E$, which is nondecreasing in $n$. For $n\ge1$,
+$c_0(n)=c_0([n],K)$.
+
+Let $\Bbbk$ be a field of characteristic $2$ and $n\ge2$. A \emph{multiplier lift} on $\Bbbk^n$ is a $\Bbbk$-bilinear
+map $\Psi\colon\Bbbk^n\times\Bbbk^n\to\operatorname{End}_\Bbbk(\Lambda^2\Bbbk^n)$,
+$\Psi(a,b)=\sum_{t,t'}a_tb_{t'}\Psi_{tt'}$, with
+\begin{equation}\label{obs:eq:multiplier-lift}
+\Psi_{tt'}+\Psi_{t't}=\pi_{tt'}\qquad(t\ne t').
+\end{equation}
+Its \emph{output matrix} is $\mathsf M_\Psi(a,b,x,y)=\Omega_{\Psi(a,b)(x\wedge y)}$; regarding the entries of
+$a,b,x,y$ as indeterminates, it is a matrix over $\Bbbk[a,b,x,y]$. The \emph{ordering lift} $\Psi^<$ has
+$\Psi^<_{tt'}=\pi_{tt'}$ for $t<t'$ and $\Psi^<_{tt'}=0$ for $t\ge t'$; thus $\Psi^<(a,b)$ is given by
+formula~\eqref{ob:eq:ordering-lift} with $k=2$, $u_1=\mu_a$, $u_2=\mu_b$ and the natural order of $[n]$.
+
+If $\Psi(a,a)=\Lambda^2\mu_a$ for all $a\in\Bbbk^n$, then $\Psi$ is a multiplier lift: by \eqref{obs:eq:lambda-mu},
+$\Psi_{tt}=\Lambda^2\mu_{e_t}=0$ and
+$\Psi_{tt'}+\Psi_{t't}=\Lambda^2\mu_{e_t+e_{t'}}-\Lambda^2\mu_{e_t}-\Lambda^2\mu_{e_{t'}}=\pi_{tt'}$.
+
+\begin{theorem}[characteristic two]\label{obs:thm:char-two}
+\leavevmode
+\begin{enumerate}
+\item \textup{(Identities.)} Let $\Bbbk$ be a field of characteristic $2$ and $n\ge2$. If $n$ is even, every multiplier lift
+$\Psi$ on $\Bbbk^n$ satisfies
+\begin{equation}\label{obs:eq:pfaffian-identity}
+\sum_{L\subseteq[n],\ \abs L=n/2}\bigl[a_L\,b_{L^c}\,x_L\,y_{L^c}\bigr]\operatorname{Pf}\mathsf M_\Psi(a,b,x,y)=1,
+\end{equation}
+and some $\mathsf M_\Psi(a,b,x,y)$ with $a,b,x,y\in\{0,1\}^n$ is invertible. For every $\Bbbk$-linear
+$\sigma\colon\Lambda^2\Bbbk^n\to\Bbbk^{n\times n}$ with $\wedge\circ\sigma=\id$, where
+$\wedge\mathsf Z=\sum_{t<t'}(\mathsf Z_{tt'}+\mathsf Z_{t't})\,e_t\wedge e_{t'}$, there are $S,T\subseteq[n]$ with
+$\operatorname{rank}\sigma(1_S\wedge1_T)\ge n-1$, while $\sigma^<(x\wedge y)=\cP_<(xy^{\mathsf T}+yx^{\mathsf T})$,
+$x,y\in\Bbbk^n$, defines such a map with strictly upper triangular values, of rank at most $n-1$. For every
+$\Bbbk$-linear $\tau\colon\Bbbk^{n\times n}\to\Lambda^2\Bbbk^n$ with $\tau(\Omega_w)=w$ for every $w$, and even $n$,
+there is $S\subseteq[n]$ with $\Omega_{\tau(1_S1_S^{\mathsf T})}$ invertible.
+\item \textup{(Multiplier maps.)} Let $K$ be a nontrivially normed field of characteristic $2$, $k\ge2$, and $E$ a
+sequence space, with $\norm{e_t}_E=1$ for all $t$ if $k\ge3$. Every $k$-linear
+$Q\colon c_{00}(\N,K)^k\to\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi E)$ with
+$\norm{Q(a_1,\dots,a_k)}\le\norm Q\prod_i\norm{a_i}_\infty$ and $Q(a,\dots,a)=\Lambda^k_\pi\mu_a$ satisfies, for every
+even $n\ge2$,
+\begin{equation}\label{obs:eq:multiplier-bound}
+n\le k(k-1)\,\norm Q\,\bar\varphi_E(n)^2 .
+\end{equation}
+\item \textup{(Splittings.)} Let $K$ be as in \textup{(2)}, $E$ a sequence space and $n\ge2$. Every section $s$ of
+$\widehat\wedge{}^2_E$ has $\norm s\ge(n-1)/\bar\varphi_E(n)^2$, every retraction $\rho$ of $\alt^2_E$ has
+$\norm\rho\ge\lfloor n/2\rfloor/\bar\varphi_E(n)^2$, and every bounded linear projection $R_2$ of
+$\widehat\otimes{}^2_\pi E$ onto $\widehat\Gamma{}^2_\pi E$ has $\norm{R_2}\ge n/\bar\varphi_E(n)^2$. For the
+corresponding maps of $c_0(n)$ the bounds are $n-1$, $\lfloor n/2\rfloor$ and $n$.
+\item \textup{(Consequences.)} Let $K$ be as in \textup{(2)}, and let $E$ be $c_0(\N,K)$, $\ell^\infty(\N,K)$,
+$\ell^r(\N,K)$ with $2<r<\infty$, or a symmetric sequence space with $\sup_nn/\varphi_E(n)^2=\infty$. For every
+$k\ge2$, $(E,E)$ is not good for Banach values in degree $k$, $A^k_{E,E;F}$ is analytic at no point for
+$F=\Lambda^k_\pi E$ and for $F=\widehat\Lambda^k_\pi E$, neither $(\mathrm S^k_E)$ nor $(\mathrm R^k_E)$ holds, and
+$\widehat\Lambda^k_\pi E$ has no equivalent nonarchimedean norm; moreover $(\Gamma^2_E)$ fails. For
+$2<r_1,r_2\le\infty$, with $c_0(\N,K)$ in place of
+$\ell^\infty(\N,K)$, the pair $(\ell^{r_1}(\N,K),\ell^{r_2}(\N,K))$ is not good for Banach values in
+any degree $k\ge2$.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:obstruction-class}. In \eqref{obs:eq:multiplier-bound}, $\bar\varphi_E(n)=1$ for
+$c_0(\N,K)$ and $\ell^\infty(\N,K)$, and $\bar\varphi_E(n)=n^{1/r}$ for $\ell^r(\N,K)$; so $\norm Q\ge n/(k(k-1))$,
+respectively $\norm Q\ge n^{1-2/r}/(k(k-1))$, and for $E=\ell^2(\N,K)$ only $\norm Q\ge1/(k(k-1))$. The proof uses
+$Q$ only on vectors supported in $[n+k-2]$, and for $k=2$ the same argument applies to $E=c_0(n)$: for even $n$, every
+lift for $(c_0(n),c_0(n))$ in degree $2$, for Banach values, has norm at least $n/2$. Over Laurent series fields over
+infinite fields and over densely valued fields, the case $E=c_0(\N,K)$ for odd $p$ is Question~\ref{q:quest:residue}(1),
+and the case $E=\ell^2(\N,K)$ for $p=2$ is Question~\ref{q:quest:residue}(2).
+
+\begin{remark}[exactness without splitting]\label{obs:rem:c0-exact}
+Let $K$ be nonarchimedean, of any characteristic, and let $D=c_0(\N,K)$. Then
+\begin{equation}\label{obs:eq:alt-isometry}
+ \norm{\alt^2_Dw}_\pi=2\norm w_\pi\qquad(w\in\hLambda^2_\pi D),
+\end{equation}
+so the target sequence $\cR^2_D$ of Definition~\ref{ob:def:sequences} is exact. If $K$ has characteristic $2$, then
+$\cR^2_D$ does not split: by Lemma~\ref{ob:lem:target} a splitting would give $(\mathrm R^2_D)$, which
+Theorem~\ref{obs:thm:char-two}(4) excludes. So in characteristic $2$ the failure of $(\mathrm R^2_D)$ is a failure of
+$\cR^2_D$ to split, not of its exactness.
+\end{remark}
+
+\begin{proof}
+Let $\mathcal O$ be the closed unit ball of $K$, and let $\norm\cdot_\infty$ be the supremum norm.
+
+\emph{Step 1 (reduction).} Since $\alt^2_D(x\wedge y)=x\otimes y-y\otimes x$, the left side
+of~\eqref{obs:eq:alt-isometry} is at most the right side. Both sides are continuous in $w$, and the union of the spaces
+$\Lambda^2_KK^m$, where $K^m\subseteq D$ is the span of $e_1,\dots,e_m$, is dense in $\hLambda^2_\pi D$. The coordinate
+projection of $D$ onto $K^m$ is contractive and fixes $K^m$, so for $w\in\Lambda^2_KK^m$ both norms may be computed in
+$c_0(m)$. Put $T=\alt^2_Dw$, an alternating matrix in $K^{m\times m}$.
+
+\emph{Step 2 (elimination).} Let $a=T_{ij}$ be an entry of $T$ of maximal absolute value; then $i\ne j$. Let $B$ be the
+block of $T$ on the rows and columns $i,j$, and $C$ the part of the columns $i,j$ outside these rows. As
+$\abs{\det B}=\abs a^2$, the matrix $CB^{-1}$ has entries in $\mathcal O$. Let $g$ and $h$ be the unit vectors $e_i$
+and $e_j$ plus the first and second columns of $CB^{-1}$, placed in the rows other than $i,j$; so
+$\norm g_\infty=\norm h_\infty=1$. The Schur complement gives $T=a(gh^{\mathsf T}-hg^{\mathsf T})+T'$, where
+$T'=\alt^2_D(w-a\,g\wedge h)$ vanishes on the rows and columns $i,j$. Repeating with $T'$ gives
+$w=\sum_ka_k\,g_k\wedge h_k$ with $\norm{g_k}_\infty=\norm{h_k}_\infty=1$, so $\norm w_\pi\le\sum_k\abs{a_k}$, and
+$T=U\operatorname{diag}(a_1J,a_2J,\dots)U^{\mathsf T}$ with $U\in GL_m(\mathcal O)$, whose columns are the
+$g_k$, the $h_k$ and unit vectors, and $J=\begin{psmallmatrix}0&1\\-1&0\end{psmallmatrix}$.
+
+\emph{Step 3 (minors).} Let $\mu_1\ge\mu_2\ge\dots\ge\mu_{2r}$ be the numbers $\abs{a_k}$, each taken twice, and
+$\mu_{2r+1}=0$. By the Cauchy--Binet formula the minors of $T$ and of $\operatorname{diag}(a_kJ)$ are
+$\mathcal O$-linear combinations of each other, so the largest absolute value of an $l\times l$ minor of $T$ is
+$\mu_1\cdots\mu_l$. Let $T=\sum_qx_qy_q^{\mathsf T}$ be a finite representation, with costs
+$c_q=\norm{x_q}_\infty\norm{y_q}_\infty$ listed in decreasing order. The Cauchy--Binet formula and the ultrametric
+inequality bound every $l\times l$ minor of $T$ by $c_1\cdots c_l$. So $\mu_1\cdots\mu_l\le c_1\cdots c_l$ for
+$l\le2r$, and these $c_l$ are positive. Since $c-\mu\ge\mu\log(c/\mu)$ for $c,\mu>0$, Abel summation gives
+\[
+ \sum_{l\le2r}(c_l-\mu_l)\ge\sum_{l\le2r}\mu_l\log\frac{c_l}{\mu_l}
+ =\sum_{l\le2r}(\mu_l-\mu_{l+1})\log\frac{c_1\cdots c_l}{\mu_1\cdots\mu_l}\ge0 .
+\]
+Hence $2\norm w_\pi\le2\sum_k\abs{a_k}=\sum_l\mu_l\le\sum_qc_q$, and taking the infimum over representations gives
+$2\norm w_\pi\le\norm{\alt^2_Dw}_\pi$.
+\end{proof}

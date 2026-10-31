@@ -1,0 +1,506 @@
+\section{Exterior powers and the obstruction class}\label{sec:duality}
+
+\subsection{Projective tensor and exterior powers}\label{ob:ssec:powers}
+
+For $k\ge1$ give the algebraic exterior power $\Lambda^k_KE$ the seminorm
+\[
+ \norm z_\pi=\inf_{z=\sum_jx_{j1}\wedge\cdots\wedge x_{jk}}
+                 \sum_j\prod_{a=1}^k\norm{x_{ja}}.
+\]
+Its quotient by the zero-seminorm subspace is the normed space $\Lambda^k_\pi E$, with universal alternating map
+$\omega_E(x_1,\ldots,x_k)=[x_1\wedge\cdots\wedge x_k]$. Put $\Lambda^0_\pi E=K$ and $\omega_E()=1$.
+
+\begin{proposition}[representation]\label{prop:exterior}
+There is a natural linear isometry
+\[
+ \Alt^k(E;F)\cong\cL(\Lambda^k_\pi E,F)
+\]
+for every normed $F$. Under it, precomposition by $u\colon E\to D$ is precomposition by
+$\Lambda^k_\pi u\colon\Lambda^k_\pi E\to\Lambda^k_\pi D$.
+\end{proposition}
+\begin{proof}
+The algebraic linearization $\widetilde m$ of a bounded alternating map $m$ satisfies
+$\norm{\widetilde m(z)}\le\norm m\norm z_\pi$, by the definition of $\norm z_\pi$; so it kills the null subspace and
+descends contractively. Conversely, $\norm{\omega_E(x_1,\ldots,x_k)}\le\prod_a\norm{x_a}$, so composing a bounded linear
+map with $\omega_E$ is contractive. The two operations are inverse, hence isometric. Applying $u$ to each
+wedge factor gives the intertwining identity and $\norm{\Lambda^k_\pi u}\le\norm u^k$ for $k\ge1$; in degree zero the
+action is the identity on $K$.
+\end{proof}
+
+If $F$ is complete, the same correspondence holds with the completion $\widehat{\Lambda^k_\pi E}$.
+
+The projective tensor product $X_1\otimes_\pi\dots\otimes_\pi X_n$ of normed spaces, and $\otimes^k_\pi E$ with $k$
+factors $E$, are defined in the same way with $\otimes$ in place of $\wedge$. As in Proposition~\ref{prop:exterior},
+bounded $n$-linear maps $m$ on $X_1\times\dots\times X_n$ correspond isometrically to bounded linear maps $m^\otimes$ on
+$X_1\otimes_\pi\dots\otimes_\pi X_n$. For bounded operators $u_i$, $u_1\otimes\dots\otimes u_n$ has norm at most
+$\prod_i\norm{u_i}$ and is multilinear in $(u_1,\dots,u_n)$; $u^{\otimes k}=u\otimes\dots\otimes u$. Hats denote
+completions, maps extend to completions by continuity, and every normed space is a subspace of its completion. Let
+\[
+ \wedge^k_E\colon\otimes^k_\pi E\to\Lambda^k_\pi E,\qquad
+ \operatorname{alt}^k_E\colon\Lambda^k_\pi E\to\otimes^k_\pi E
+\]
+be the maps with $x_1\otimes\dots\otimes x_k\mapsto x_1\wedge\dots\wedge x_k$ and
+$x_1\wedge\dots\wedge x_k\mapsto\sum_{\sigma\in S_k}\sgn(\sigma)\,x_{\sigma(1)}\otimes\dots\otimes x_{\sigma(k)}$. The first is
+$\omega_E^\otimes$, a contraction. The second is well defined in every characteristic, since for $x_a=x_b$ the
+permutations $\sigma$ and $(a\ b)\circ\sigma$ give equal tensors with opposite signs; its norm is at most the real number
+$k!$, and $\wedge^k_E\circ\operatorname{alt}^k_E=k!$. Both maps are natural:
+$\wedge^k_D\circ u^{\otimes k}=\Lambda^k_\pi u\circ\wedge^k_E$ and
+$u^{\otimes k}\circ\operatorname{alt}^k_E=\operatorname{alt}^k_D\circ\Lambda^k_\pi u$ for $u\in\cL(E,D)$.
+
+\subsection{Universal and scalar tests}\label{ob:ssec:tests}
+
+Write $Y^*=\cL(Y,K)$ and $J_Y(y)(\lambda)=\lambda(y)$ for the canonical contraction into the continuous bidual; no
+point-separation or Hahn--Banach assumption is implicit.
+
+\begin{theorem}[universal and scalar tests]\label{thm:duality}
+Let $U$ be an open parameter domain and $W\colon U\to\cL(X,Y)$ a family. Define
+\[
+ R_F(t)(T)=T\circ W(t),\qquad
+ R_F\colon U\to\cL(\cL(Y,F),\cL(X,F)).
+\]
+For power-series analyticity, or for any fixed class $C^n$, the following statements hold.
+\begin{enumerate}
+\item $W$ is regular if and only if $R_F$ is regular for every normed $F$; the single target $Y$ suffices.
+\item $R_K$ is regular if and only if $J_YW$ is regular in $\cL(X,Y^{**})$, and if and only if
+$R_{G^*}$ is regular for every normed $G$. Any one nonzero continuous dual $G^*$ suffices for the last test.
+\item If $J_Y$ has a bounded linear left inverse, regularity of $R_K$ implies regularity of $W$.
+If $J_F$ has such a left inverse, regularity of $R_K$ implies regularity of $R_F$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+All identities below use bounded linear operations, which preserve each regularity class. Precomposition depends
+bounded-linearly on $W$, and $W(t)=R_Y(t)(\id_Y)$; this proves~(1). Exchanging the arguments defines a linear isometry
+\[
+ \Theta\colon\cL(Y^*,X^*)\longrightarrow\cL(X,Y^{**}),
+ \qquad (\Theta(B)x)(\lambda)=(B\lambda)(x),
+\]
+since both operator norms are the least $C$ bounding the displayed scalar by $C\norm x\norm\lambda$; its inverse exchanges
+the arguments again, and $\Theta(R_K(t))=J_YW(t)$. The isometry
+$\cL(X,G^*)\cong\cL(G,X^*)$, $T\mapsto[g\mapsto(x\mapsto T(x)(g))]$, identifies $R_{G^*}(t)$ with $S\mapsto R_K(t)\circ S$,
+which gives regularity for every dual target. Conversely, choose $v\in G^*$ and $g\in G$ with $v(g)=1$; the injection
+$\alpha\mapsto v\alpha$ and evaluation at $g$ compress $R_{G^*}$ to $R_K$. This proves~(2). For~(3), if $P_YJ_Y=\id_Y$,
+then $W=P_Y\Theta(R_K)$; if $P_FJ_F=\id_F$, then $R_F(t)(T)=P_F\circ R_{F^{**}}(t)(J_F\circ T)$.
+\end{proof}
+
+\subsection{Good pairs and one test target}\label{ob:ssec:good}
+
+A \emph{Banach space} is a complete normed $K$-space.
+
+\begin{definition}\label{fib:def:good}
+A pair $(E,D)$ of normed spaces is \emph{good in degree $k$} if $A^k_{E,D;F}$ is analytic for every normed $F$, and
+\emph{good for Banach values in degree $k$} if this holds for every Banach space $F$.
+\end{definition}
+
+\begin{lemma}[one test target]\label{fib:lem:test}
+The pair $(E,D)$ is good in degree $k$ if and only if $u\mapsto\Lambda^k_\pi u$ is analytic at some point of $\cL(E,D)$,
+and if and only if there is a bounded $k$\nobreakdash-linear $Q\colon\cL(E,D)^k\to\cL(\Lambda^k_\pi E,\Lambda^k_\pi D)$
+with $Q(u,\dots,u)=\Lambda^k_\pi u$. The same holds for Banach values, with $\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$
+in place of $\cL(\Lambda^k_\pi E,\Lambda^k_\pi D)$, also as the space in which $u\mapsto\Lambda^k_\pi u$ is analytic.
+\end{lemma}
+
+\begin{proof}
+Apply Theorem~\ref{thm:duality}(1) with $X=\Lambda^k_\pi E$, $W(u)=\Lambda^k_\pi u$, and $Y=\Lambda^k_\pi D$,
+respectively $Y=\widehat\Lambda^k_\pi D$. By Proposition~\ref{prop:exterior} and its completed form, $R_F$ is
+$A^k_{E,D;F}$ for every normed $F$, respectively every Banach $F$, and the target $Y$ suffices. Proposition~\ref{prop:homogeneous-lift}
+applies to $W$, with the closed isometry $T\mapsto T\circ\omega_E$ of $\cL(\Lambda^k_\pi E,Y)$ onto
+$\Alt^k(E;Y)\subseteq\Mult^k(E;Y)$ and the ambient map $(u_1,\dots,u_k)\mapsto\omega_D\circ(u_1,\dots,u_k)$.
+\end{proof}
+
+We use two splitting conditions on normed spaces:
+\begin{enumerate}
+\item[$(\mathrm S^k_E)$] there is a bounded linear $s\colon\Lambda^k_\pi E\to\widehat\otimes^k_\pi E$ with
+$\widehat\wedge^k_E\circ s=\id$;
+\item[$(\mathrm R^k_D)$] there is a bounded linear $\rho\colon\otimes^k_\pi D\to\widehat\Lambda^k_\pi D$ with
+$\rho\circ\operatorname{alt}^k_D=\id$.
+\end{enumerate}
+They hold \emph{without completion} if $s$ takes values in $\otimes^k_\pi E$, respectively $\rho$ in
+$\Lambda^k_\pi D$. Both hold without completion if $k!\ne0$ in $K$, with $s=\operatorname{alt}^k_E/k!$ and
+$\rho=\wedge^k_D/k!$, and if the space has finite continuous coordinates $(e_i,e^*_i)$, with
+\[
+ \begin{gathered}
+ s(x_1\wedge\dots\wedge x_k)=\sum_{i_1<\dots<i_k}\det\bigl(e^*_{i_a}(x_b)\bigr)_{a,b}\,
+ e_{i_1}\otimes\dots\otimes e_{i_k},\\
+ \rho(y_1\otimes\dots\otimes y_k)=\sum_{i_1<\dots<i_k}\prod_a e^*_{i_a}(y_a)\,e_{i_1}\wedge\dots\wedge e_{i_k}.
+ \end{gathered}
+\]
+
+\begin{proposition}[splittings]\label{fib:prop:split}
+Let $E$ and $D$ be normed spaces.
+\begin{enumerate}
+\item If $(\mathrm S^k_E)$ holds, then $(E,D)$ is good for Banach values in degree $k$ for every normed $D$:
+$Q(u_1,\dots,u_k)=\widehat\wedge^k_D\circ(u_1\otimes\dots\otimes u_k)\circ s$ is a lift as in
+Lemma~\ref{fib:lem:test}, of norm at most $\norm s$.
+\item If $(\mathrm R^k_D)$ holds, then $(E,D)$ is good for Banach values in degree $k$ for every normed $E$, with the
+lift $Q(u_1,\dots,u_k)=\rho\circ(u_1\otimes\dots\otimes u_k)\circ\operatorname{alt}^k_E$ of norm at most $k!\norm\rho$.
+\item If the condition holds without completion, the pairs in~(1), respectively~(2), are good in degree $k$.
+\item $(\mathrm S^k_E)$ holds if and only if the inclusions $j_{E,F}\colon\Alt^k(E;F)\to\Mult^k(E;F)$, for all Banach
+spaces $F$, have bounded linear retractions that commute with postcomposition by bounded linear maps $F\to F'$. It
+holds without completion if and only if such retractions exist for all normed $F$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\subsection{Three exact sequences}\label{ob:ssec:sequences}
+
+A sequence $\mathcal Y\colon0\to Y_1\xrightarrow{i}Y_2\xrightarrow{q}Y_3\to0$ of Banach spaces and bounded linear maps is
+\emph{exact} if $i$ is injective, $i(Y_1)=\ker q$, and for a constant $C$, $\norm y\le C\norm{iy}$ on $Y_1$ and every
+$z\in Y_3$ is $qy$ for some $y$ with $\norm y\le C\norm z$. It \emph{splits} if $q$ has a bounded linear right inverse.
+Exact sequences $\mathcal Y,\mathcal Y''$ with the same end terms are \emph{equivalent} if a bounded linear
+$T\colon Y_2\to Y''_2$ satisfies $Ti=i''$ and $q''T=q$; such a $T$ is bijective with bounded inverse, since $q$ is open and
+$i''$ is bounded below, so this is an equivalence relation, and it preserves splitting. $\Ext(Y_3,Y_1)$ is the set of
+classes $[\mathcal Y]$, and $0$ is the class of $0\to Y_1\to Y_1\oplus Y_3\to Y_3\to0$, with the inclusion, the projection
+and the norm $\norm{y_1}+\norm{y_3}$. Then $[\mathcal Y]=0$ if and only if $\mathcal Y$ splits: a left inverse $\lambda$ of
+$i$ (Lemma~\ref{ob:lem:split-criteria}(2)) gives the equivalence $y\mapsto(\lambda y,qy)$. For a bounded linear
+$\alpha\colon Y_1\to Y'$ into a Banach space, the \emph{pushout} $\alpha_*\mathcal Y$ is
+$0\to Y'\xrightarrow{i_\alpha}Y_\alpha\xrightarrow{q_\alpha}Y_3\to0$, where $Y_\alpha$ is the quotient of $Y'\oplus Y_2$,
+normed by $\norm{y'}+\norm y$, by $\{(\alpha y,-iy):y\in Y_1\}$, which is closed because $y\mapsto(\alpha y,-iy)$ is
+bounded below on the complete space $Y_1$; $i_\alpha y'=[(y',0)]$ and $q_\alpha[(y',y)]=qy$. Put
+$\alpha_*[\mathcal Y]=[\alpha_*\mathcal Y]$; an equivalence $T$ induces the equivalence $[(y',y)]\mapsto[(y',Ty)]$, so
+this depends only on $[\mathcal Y]$.
+
+\begin{lemma}[splitting criteria]\label{ob:lem:split-criteria}
+Let $\mathcal Y$ and $\mathcal Y'\colon0\to Y'_1\xrightarrow{i'}Y'_2\xrightarrow{q'}Y'_3\to0$ be exact.
+\begin{enumerate}
+\item Let $\alpha_a\colon Y_a\to Y'_a$, $a=1,2,3$, be bounded linear maps with $\alpha_2i=i'\alpha_1$ and
+$q'\alpha_2=\alpha_3q$. Then $\alpha_1=\tilde\alpha_1i$ for a bounded linear $\tilde\alpha_1\colon Y_2\to Y'_1$ if and only
+if $\alpha_3=q'\tilde\alpha_3$ for a bounded linear $\tilde\alpha_3\colon Y_3\to Y'_2$, and the two can be chosen with
+$\alpha_2=i'\tilde\alpha_1+\tilde\alpha_3q$.
+\item $\mathcal Y$ splits if and only if $i$ has a bounded linear left inverse.
+\item For a bounded linear $\alpha\colon Y_1\to Y'$ into a Banach space, $\alpha_*\mathcal Y$ is exact, and
+$\alpha_*[\mathcal Y]=0$ if and only if $\alpha$ extends to $Y_2$, that is, $\alpha=\tilde\alpha i$ for a bounded linear
+$\tilde\alpha\colon Y_2\to Y'$.
+\end{enumerate}
+\end{lemma}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{lemma}\label{ob:lem:metric-surjection}
+For a normed space $E$ and $k\ge1$, $\wedge^k_E$ is a metric surjection: $\norm y=\inf\{\norm z:\wedge^k_Ez=y\}$ for
+$y\in\Lambda^k_\pi E$. Its extension $\widehat\wedge^k_E\colon\widehat\otimes^k_\pi E\to\widehat\Lambda^k_\pi E$ is
+surjective and again a metric surjection.
+\end{lemma}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{definition}\label{ob:def:sequences}
+Let $E$, $D$, $P$ be normed spaces and $k,n\ge1$.
+\begin{enumerate}
+\item The \emph{source sequence} of $E$ in degree $k$ is the exact sequence (Lemma~\ref{ob:lem:metric-surjection})
+\begin{equation}\label{ob:eq:source}
+ \cS^k_E\colon\quad0\to\cN^k_E\to\widehat\otimes^k_\pi E\xrightarrow{\;\widehat\wedge^k_E\;}\widehat\Lambda^k_\pi E\to0,
+ \qquad \cN^k_E=\ker\widehat\wedge^k_E,
+\end{equation}
+whose first map is the inclusion.
+\item The \emph{target sequence} of $D$ in degree $k$ is
+$\cR^k_D\colon0\to\widehat\Lambda^k_\pi D\xrightarrow{\alt^k_D}\widehat\otimes^k_\pi D\to
+\widehat\otimes^k_\pi D/\overline{\alt^k_D(\widehat\Lambda^k_\pi D)}\to0$, with the quotient map last. It is exact if and
+only if $\alt^k_D$ is bounded below on $\widehat\Lambda^k_\pi D$.
+\item Let $\widehat\Gamma^n_\pi P$ be the closed linear span in $\widehat\otimes^n_\pi P$ of the pure powers
+$h^{\otimes n}=h\otimes\dots\otimes h$, $h\in P$. The \emph{parameter sequence} of $P$ in degree $n$ is the exact sequence
+$\cG^n_P\colon0\to\widehat\Gamma^n_\pi P\to\widehat\otimes^n_\pi P\to\widehat\otimes^n_\pi P/\widehat\Gamma^n_\pi P\to0$.
+The space $P$ is \emph{polarizable in degree $n$}, written $(\Gamma^n_P)$, if $\cG^n_P$ splits, that is
+(Lemma~\ref{ob:lem:split-criteria}(2)), if there is a bounded linear projection $R_n$ of $\widehat\otimes^n_\pi P$ onto
+$\widehat\Gamma^n_\pi P$. Let $g_n(P)$ be the infimum of the norms of such projections.
+\item For a Banach space $Y$, $\Mult^n_0(P;Y)$ is the closed subspace of $\Mult^n(P;Y)$ of the maps $\Phi$ with zero
+diagonal, $\Phi(h,\dots,h)=0$ for $h\in P$, and $\Poly^n(P;Y)$ is the quotient of $\Mult^n(P;Y)$ by $\Mult^n_0(P;Y)$,
+with the quotient norm; through $\Phi\mapsto(h\mapsto\Phi(h,\dots,h))$ its elements correspond to the diagonals of bounded
+$n$-linear maps $P^n\to Y$, the $n$-homogeneous continuous polynomials of Section~\ref{sec:descent}. The resulting exact sequence is
+\[
+ \cM^n(P;Y)\colon\quad0\to\Mult^n_0(P;Y)\to\Mult^n(P;Y)\to\Poly^n(P;Y)\to0.
+\]
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}\label{ob:lem:source}
+Condition $(\mathrm S^k_E)$ holds if and only if $\cS^k_E$ in~\eqref{ob:eq:source} splits, and if and only if $\cN^k_E$ is complemented in
+$\widehat\otimes^k_\pi E$. A section $s$ gives the projection $\id-s\,\widehat\wedge^k_E$ onto $\cN^k_E$, of norm at most
+$1+\norm s$; a bounded projection $\Pi$ onto $\cN^k_E$ gives the section $s(\widehat\wedge^k_Ez)=(\id-\Pi)z$, of norm at
+most $\norm{\id-\Pi}$.
+\end{lemma}
+
+\begin{proof}
+A section on $\Lambda^k_\pi E$ extends by continuity to a right inverse of $\widehat\wedge^k_E$, and a right inverse
+restricts to a section. The map $\id-s\,\widehat\wedge^k_E$ is the identity on $\cN^k_E$ and is killed by
+$\widehat\wedge^k_E$. Conversely, $\id-\Pi$ vanishes on $\cN^k_E$, so the formula defines $s$, and
+Lemma~\ref{ob:lem:metric-surjection} bounds its norm.
+\end{proof}
+
+\begin{lemma}\label{ob:lem:target}
+For a normed space $D$ and $k\ge1$ the following are equivalent: \textup{(1)} $(\mathrm R^k_D)$; \textup{(2)} $\cR^k_D$ is
+exact and splits; \textup{(3)} $\omega_D=\mathcal A_D\eta$ for some $\eta\in\Mult^k(D;\widehat\Lambda^k_\pi D)$, where
+$(\mathcal A_D\eta)(y_1,\dots,y_k)=\sum_{\sigma\in S_k}\sgn(\sigma)\,\eta(y_{\sigma(1)},\dots,y_{\sigma(k)})$ is
+unnormalized antisymmetrization.
+\end{lemma}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{lemma}\label{ob:lem:parameter}
+For a normed space $P$ and $n\ge1$ the following are equivalent.
+\begin{enumerate}
+\item $P$ is polarizable in degree $n$.
+\item The power map $P\to\widehat\Gamma^n_\pi P$, $h\mapsto h^{\otimes n}$, is the diagonal of a bounded $n$-linear map
+$P^n\to\widehat\Gamma^n_\pi P$.
+\item For every closed subspace $W$ of a Banach space $Z$, every bounded $n$-linear $\Phi\colon P^n\to Z$ with
+$\Phi(h,\dots,h)\in W$ for all $h\in P$, and every $\delta>0$, there is a bounded $n$-linear $Q\colon P^n\to W$ with
+$Q(h,\dots,h)=\Phi(h,\dots,h)$ for all $h$ and $\norm Q\le(g_n(P)+\delta)\norm\Phi$.
+\end{enumerate}
+Under these conditions $\cM^n(P;Y)$ splits for every Banach space $Y$, by right inverses that commute with postcomposition
+by bounded linear maps $Y\to Y'$.
+\end{lemma}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{definition}\label{ob:def:split-operators}
+Let $w\colon E\to G$ be a bounded linear map of normed spaces and $k\ge1$. Then $w$ is \emph{$\mathrm S^k$-split} if
+$\widehat\wedge^k_G\circ s=\Lambda^k_\pi w$ for a bounded linear $s\colon\Lambda^k_\pi E\to\widehat\otimes^k_\pi G$, and
+\emph{$\mathrm R^k$-split} if $\rho\circ\alt^k_E=\Lambda^k_\pi w$ for a bounded linear
+$\rho\colon\otimes^k_\pi E\to\widehat\Lambda^k_\pi G$; it is split \emph{without completion} if $s$ takes values in
+$\otimes^k_\pi G$, respectively $\rho$ in $\Lambda^k_\pi G$. It is \emph{$\mathrm S^{\le k}$-split}
+(\emph{$\mathrm R^{\le k}$-split}) if it is $\mathrm S^j$-split ($\mathrm R^j$-split) for every $j\le k$.
+\end{definition}
+
+Thus $(\mathrm S^k_E)$ says that $\id_E$ is $\mathrm S^k$-split, and $(\mathrm R^k_D)$ that $\id_D$ is
+$\mathrm R^k$-split. Every $w$ is $\mathrm S^1$- and $\mathrm R^1$-split, and $\mathrm S^j$- and $\mathrm R^j$-split
+whenever $j!\ne0$ in $K$, with $s=w^{\otimes j}\alt^j_E/j!$ and $\rho=\wedge^j_Gw^{\otimes j}/j!$, since
+$\wedge^j_Gw^{\otimes j}\alt^j_E=\Lambda^j_\pi w\,\wedge^j_E\alt^j_E=j!\,\Lambda^j_\pi w$.
+
+\begin{proposition}[split operators]\label{ob:prop:split-operators}
+Let $w\colon E\to G$ be a bounded linear map of normed spaces and $k\ge1$.
+\begin{enumerate}
+\item The map $w^{\otimes k}$ sends $\cN^k_E$ into $\cN^k_G$, and the following are equivalent: (a) $w$ is
+$\mathrm S^k$-split; (b) $\widehat\Lambda^k_\pi w=\widehat\wedge^k_G\circ\tilde s$ for a bounded linear
+$\tilde s\colon\widehat\Lambda^k_\pi E\to\widehat\otimes^k_\pi G$; (c) $w^{\otimes k}|_{\cN^k_E}\colon\cN^k_E\to\cN^k_G$
+extends to a bounded linear map $\widehat\otimes^k_\pi E\to\cN^k_G$; (d) the \emph{splitting class}
+$\operatorname{sp}_k(w)=(w^{\otimes k}|_{\cN^k_E})_*[\cS^k_E]\in\Ext(\widehat\Lambda^k_\pi E,\cN^k_G)$ vanishes. In
+particular $(\mathrm S^k_E)$ holds if and only if $\operatorname{sp}_k(\id_E)=0$, if and only if $[\cS^k_E]=0$
+(Lemma~\ref{ob:lem:source}).
+\item If $w$ is $\mathrm S^k$-split with $s$, and $v\colon G\to G_1$, $v'\colon G_0\to E$ are bounded linear, then $vwv'$
+is $\mathrm S^k$-split with $v^{\otimes k}s\,\Lambda^k_\pi v'$. If $w$ is $\mathrm R^k$-split with $\rho$, then $vwv'$ is
+$\mathrm R^k$-split with $\widehat\Lambda^k_\pi v\,\rho\,v'^{\otimes k}$. The same holds without completion.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{app:deferred}.
+
+\subsection{The obstruction class}\label{ob:ssec:class}
+
+Throughout this subsection $E$ and $D$ are normed spaces and $k\ge1$; $\Mult^k(\cL(E,D);\widehat\Lambda^k_\pi D)$ is a
+Banach space, and $\Mult^k_0(\cL(E,D);\widehat\Lambda^k_\pi D)$ is its closed subspace of maps with zero diagonal.
+
+\begin{lemma}[evaluation]\label{ob:lem:evaluation}
+There is a unique bounded linear map
+$\ev=\ev^k_{E,D}\colon\widehat\otimes^k_\pi E\to\Mult^k(\cL(E,D);\widehat\Lambda^k_\pi D)$ with
+\begin{equation}\label{ob:eq:evaluation}
+ \ev(x_1\otimes\dots\otimes x_k)(u_1,\dots,u_k)=u_1x_1\wedge\dots\wedge u_kx_k,
+\end{equation}
+and $\norm\ev\le1$. It satisfies $\ev(z)(u,\dots,u)=\widehat\Lambda^k_\pi u(\widehat\wedge^k_Ez)$ for
+$z\in\widehat\otimes^k_\pi E$ and $u\in\cL(E,D)$; in particular $\ev$ maps $\cN^k_E$ into
+$\Mult^k_0(\cL(E,D);\widehat\Lambda^k_\pi D)$.
+\end{lemma}
+
+\begin{proof}
+For $x\in E^k$ the right side of \eqref{ob:eq:evaluation} is $k$-linear in $(u_1,\dots,u_k)$, of norm at most
+$\prod_a\norm{x_a}$, and $k$-linear in $x$. Its linearization in $x$ is a contraction from $\otimes^k_\pi E$ into a
+Banach space and extends to $\widehat\otimes^k_\pi E$; pure tensors span a dense subspace, which gives uniqueness. For
+fixed $u$, both sides of the identity are bounded linear in $z$ and agree on pure tensors.
+\end{proof}
+
+Let $q$ be the quotient map of $\cM^k(\cL(E,D);\widehat\Lambda^k_\pi D)$. Since $q\circ\ev$ vanishes on $\cN^k_E$,
+Lemma~\ref{ob:lem:metric-surjection} gives a unique bounded linear
+$\overline\ev\colon\hLambda^k_\pi E\to\Poly^k(\cL(E,D);\widehat\Lambda^k_\pi D)$ with
+$q\circ\ev=\overline\ev\circ\widehat\wedge^k_E$. By Lemma~\ref{ob:lem:evaluation}, $\overline\ev(y)$ is the class of every
+map in $\Mult^k(\cL(E,D);\widehat\Lambda^k_\pi D)$ with diagonal $u\mapsto\widehat\Lambda^k_\pi u(y)$.
+
+The \emph{obstruction class} of the pair $(E,D)$ in degree $k$ is
+\begin{equation}\label{ob:eq:class}
+ \begin{split}
+ \ob_k(E,D)&=(\ev|_{\cN^k_E})_*[\cS^k_E]\\
+ &\in\Ext\bigl(\widehat\Lambda^k_\pi E,\Mult^k_0(\cL(E,D);\widehat\Lambda^k_\pi D)\bigr).
+ \end{split}
+\end{equation}
+
+\begin{theorem}[obstruction theorem]\label{ob:thm:obstruction}
+Let $E$ and $D$ be normed spaces and $k\ge1$. The following are equivalent.
+\begin{enumerate}
+\item The pair $(E,D)$ is good for Banach values in degree $k$.
+\item The restriction $\ev|_{\cN^k_E}$ extends to a bounded linear map
+$\widehat\otimes^k_\pi E\to\Mult^k_0(\cL(E,D);\widehat\Lambda^k_\pi D)$.
+\item $\ob_k(E,D)=0$ in~\eqref{ob:eq:class}.
+\end{enumerate}
+More precisely, a lift $Q\colon\cL(E,D)^k\to\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ as in
+Lemma~\ref{fib:lem:test} gives an extension in~(2) of norm at most $1+\norm Q$, and an extension $\xi$ in~(2) gives such a
+lift of norm at most $1+\norm\xi$.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{fib:lem:test}, (1) holds if and only if a lift $Q$ exists.
+
+\emph{Step 1 (lifts give extensions).} Bounded $k$-linear maps
+$Q\colon\cL(E,D)^k\to\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ correspond to bounded linear maps
+$Q^\sharp\colon\widehat\Lambda^k_\pi E\to\Mult^k(\cL(E,D);\widehat\Lambda^k_\pi D)$, by
+$Q^\sharp(y)(u_1,\dots,u_k)=Q(u_1,\dots,u_k)y$ for $y\in\Lambda^k_\pi E$, with $\norm{Q^\sharp}=\norm Q$. Given a lift $Q$,
+put $\xi=\ev-Q^\sharp\widehat\wedge^k_E$; it equals $\ev$ on $\cN^k_E=\ker\widehat\wedge^k_E$. By
+Lemma~\ref{ob:lem:evaluation}, $\xi(z)(u,\dots,u)=\Lambda^k_\pi u(\wedge^k_Ez)-Q(u,\dots,u)(\wedge^k_Ez)=0$ for
+$z\in\otimes^k_\pi E$, hence for all $z$ by continuity. So $\xi$ is an extension as in~(2). Since $\norm\ev\le1$ by
+Lemma~\ref{ob:lem:evaluation} and $\widehat\wedge^k_E$ is contractive, $\norm\xi\le\norm\ev+\norm{Q^\sharp}\le1+\norm Q$.
+
+\emph{Step 2 (extensions give lifts).} Given an extension $\xi$ as in~(2), the map $\ev-\xi$ vanishes on $\cN^k_E$. Since $\widehat\wedge^k_E$ is a
+metric surjection with kernel $\cN^k_E$ (Lemma~\ref{ob:lem:metric-surjection}), $\ev-\xi=Q^\sharp\widehat\wedge^k_E$ for a
+bounded linear $Q^\sharp$ with $\norm{Q^\sharp}=\norm{\ev-\xi}\le1+\norm\xi$, using $\norm\ev\le1$. The corresponding $Q$
+satisfies $Q(u,\dots,u)(\wedge^k_Ez)=\ev(z)(u,\dots,u)-\xi(z)(u,\dots,u)=\Lambda^k_\pi u(\wedge^k_Ez)$ for
+$z\in\otimes^k_\pi E$, by Lemma~\ref{ob:lem:evaluation} and since $\xi(z)$ has zero diagonal; so
+$Q(u,\dots,u)=\Lambda^k_\pi u$, since $\wedge^k_E$ is surjective.
+
+\emph{Step 3 (the class).} Conditions (2) and (3) are equivalent by Lemma~\ref{ob:lem:split-criteria}(3).
+\end{proof}
+
+If $D$ is dense in a normed $K$-space $D'$, the canonical maps $\otimes^k_\pi D\to\otimes^k_\pi D'$ and
+$\Lambda^k_\pi D\to\Lambda^k_\pi D'$ are isometric with dense range; so, with $\widehat D$ regarded as a normed $K$-space,
+$\widehat\otimes^k_\pi\widehat D=\widehat\otimes^k_\pi D$ and $\widehat\Lambda^k_\pi\widehat D=\widehat\Lambda^k_\pi D$.
+The maps are contractive. By continuity $\omega_D$ extends to a contractive map $\omega'\colon D'^k\to\widehat\Lambda^k_\pi D$,
+alternating because tuples with two equal entries in $D'^k$ are limits of such tuples in $D^k$; its linearization
+(Proposition~\ref{prop:exterior}) is a contraction $\Lambda^k_\pi D'\to\widehat\Lambda^k_\pi D$ restricting to the
+inclusion on $\Lambda^k_\pi D$, so the maps are isometric. Density follows from
+$x_1\wedge\dots\wedge x_k-y_1\wedge\dots\wedge y_k=\sum_ay_1\wedge\dots\wedge y_{a-1}\wedge(x_a-y_a)\wedge x_{a+1}\wedge\dots\wedge x_k$.
+The tensor case is the same.
+
+\begin{theorem}[ways for the class to vanish]\label{ob:thm:mechanisms}
+Let $E$ and $D$ be normed spaces and $k\ge1$.
+\begin{enumerate}
+\item \textup{(Source.)} If $(\mathrm S^k_E)$ holds, then $\ob_k(E,D)=0$. More generally, $\ob_k(E,D)=0$ if
+$\ev|_{\cN^k_E}=\tau\circ w^{\otimes k}|_{\cN^k_E}$ for an $\mathrm S^k$-split $w\colon E\to G$ and a bounded linear
+$\tau\colon\cN^k_G\to\Mult^k_0(\cL(E,D);\widehat\Lambda^k_\pi D)$. This applies when $w\colon E\to G$ is
+$\mathrm S^k$-split and $\varepsilon\colon\cL(E,D)\to\cL(G,\widehat D)$ is bounded linear with $\varepsilon(u)\circ w=u$
+for every $u$, with
+$\tau(\zeta)(u_1,\dots,u_k)=\widehat\wedge^k_{\widehat D}\bigl(\varepsilon(u_1)\otimes\dots\otimes\varepsilon(u_k)\bigr)\zeta$.
+\item \textup{(Parameter.)} If the sequence $\cM^k(\cL(E,D);\widehat\Lambda^k_\pi D)$ splits, and in particular if
+$\cL(E,D)$ is polarizable in degree $k$, then $\ob_k(E,D)=0$. More generally, $\ob_k(E,D)=0$ if there are a normed space $P$ with $(\Gamma^k_P)$, a
+bounded linear map $\psi\colon\cL(E,D)\to P$ and a bounded $k$-linear map
+$\Phi\colon P^k\to\cL(\widehat\otimes^k_\pi E,\widehat\Lambda^k_\pi D)$ such that $\Phi(h,\dots,h)$ vanishes on $\cN^k_E$
+for $h\in P$ and $\Phi(\psi u,\dots,\psi u)=\widehat\Lambda^k_\pi u\circ\widehat\wedge^k_E$ for $u\in\cL(E,D)$.
+\item \textup{(Target.)} Let
+$\alt_*\colon\Mult^k_0(\cL(E,D);\widehat\Lambda^k_\pi D)\to\Mult^k_0(\cL(E,D);\widehat\otimes^k_\pi D)$ be
+postcomposition with $\alt^k_D$. Then
+$(\alt_*\circ\ev|_{\cN^k_E})_*[\cS^k_E]=0$. If $(\mathrm R^k_D)$ holds, then $\ob_k(E,D)=0$.
+\item[(3$'$)] \textup{(Target, relative.)} If $w'\colon G\to\widehat D$ is $\mathrm R^k$-split and
+$\varepsilon\colon\cL(E,D)\to\cL(E,G)$ is bounded linear with $w'\circ\varepsilon(u)=u$ for every $u$, then
+$\ob_k(E,D)=0$.
+\end{enumerate}
+\end{theorem}
+The proof is in Appendix~\ref{app:deferred}.
+
+\begin{corollary}\label{ob:cor:mechanisms}
+Each of $(\mathrm S^k_E)$, $(\mathrm R^k_D)$ and $(\Gamma^k_{\cL(E,D)})$ makes $(E,D)$ good for Banach values in degree $k$;
+so does each of the data $(G,w,\varepsilon)$ of Theorem~\ref{ob:thm:mechanisms}(1) and $(G,w',\varepsilon)$ of
+Theorem~\ref{ob:thm:mechanisms}(3$'$).
+\end{corollary}
+
+\begin{proof}
+Theorems~\ref{ob:thm:mechanisms} and~\ref{ob:thm:obstruction}.
+\end{proof}
+
+\subsection{The ordering lift}\label{ob:ssec:ordering}
+
+Throughout this subsection $E$ and $D$ are normed spaces, $k\ge1$, and $(e_t)_{t\in\Sigma}$ is a linearly independent
+family in $E$, indexed by a totally ordered set $\Sigma$, whose span $V$ is dense in $E$; a Hamel basis of $E$ in any total
+order is one. Write $x=\sum_tx(t)e_t$ for $x\in V$, $\Mult^k=\Mult^k(\cL(E,D);\hLambda^k_\pi D)$ and
+$\Mult^k_0=\Mult^k_0(\cL(E,D);\hLambda^k_\pi D)$, and let $q$ and $\overline\ev$ be the maps defined after
+Lemma~\ref{ob:lem:evaluation}. By the description of $\overline\ev$ given there, in the notation of the proof of
+Theorem~\ref{ob:thm:obstruction}, a bounded linear $T\colon\hLambda^k_\pi E\to\Mult^k$ is $Q^\sharp$ for a lift $Q$ as in
+Lemma~\ref{fib:lem:test} if and only if $q\circ T=\overline\ev$. Let $c_k(E,D)\in[0,\infty]$ be the infimum of $\norm Q$
+over these lifts; by Lemma~\ref{fib:lem:test} it is finite if and only if $(E,D)$ is good for Banach values in degree $k$.
+
+Let $\Sigma^k_<\subseteq\Sigma^k$ be the set of strictly increasing $t$, and put $e^\wedge_t=e_{t_1}\wedge\dots\wedge e_{t_k}$
+and $e^\otimes_t=e_{t_1}\otimes\dots\otimes e_{t_k}$ for $t\in\Sigma^k$; the $e^\wedge_t$ with $t\in\Sigma^k_<$ form a basis
+of $\Lambda^k_KV$. Let $\wedge_V\colon\otimes^k_KV\to\Lambda^k_KV$ be the quotient map and
+$j_\Lambda\colon\Lambda^k_KV\to\hLambda^k_\pi E$, $j_\otimes\colon\otimes^k_KV\to\widehat\otimes^k_\pi E$ the canonical maps,
+so that $\widehat\wedge^k_E\circ j_\otimes=j_\Lambda\circ\wedge_V$, and put $\norm y_\pi=\norm{j_\Lambda y}$. By the paragraph
+before Theorem~\ref{ob:thm:mechanisms}, $\norm y_\pi$ is the projective seminorm of $y$ computed from representations with
+entries in $V$, and $j_\Lambda(\Lambda^k_KV)$ is dense in $\hLambda^k_\pi E$; the same holds for $j_\otimes$. Norms in
+$[0,\infty]$ of linear maps on $\Lambda^k_KV$, for $\norm\cdot_\pi$, and of $k$-linear maps on $V^k$ are best constants,
+as are the norms of lifts $Q$ and of the maps $Q^\sharp$.
+
+The \emph{ordering section} is the linear map $s_<\colon\Lambda^k_KV\to\otimes^k_KV$ with $s_<(e^\wedge_t)=e^\otimes_t$ for
+$t\in\Sigma^k_<$. Then $\wedge_V\circ s_<=\id$, and $s_<=\cP^{(k)}\circ\alt^k$ for the map $\cP^{(k)}$ of
+Proposition~\ref{spl:prop:ordering} and the antisymmetrization $\alt^k\colon\Lambda^k_KV\to\otimes^k_KV$. The
+\emph{ordering lift} assigns to $u_1,\dots,u_k\in\cL(E,D)$ the linear map
+$Q_<(u_1,\dots,u_k)\colon\Lambda^k_KV\to\Lambda^k_\pi D$ with
+\begin{equation}\label{ob:eq:ordering-lift}
+ Q_<(u_1,\dots,u_k)(e^\wedge_t)=u_1e_{t_1}\wedge\dots\wedge u_ke_{t_k}\qquad(t\in\Sigma^k_<);
+\end{equation}
+on $x_1\wedge\dots\wedge x_k$ with $x_1,\dots,x_k\in V$ it is the right side of~\eqref{ord:eq:canonical-lift}. Let
+$Q^\sharp_<\colon\Lambda^k_KV\to\Mult^k$ be the linear map with $Q^\sharp_<(y)(u_1,\dots,u_k)=Q_<(u_1,\dots,u_k)y$; it takes
+values in $\Mult^k$ by~\eqref{ob:eq:ordering-lift}. A \emph{zero-diagonal correction} is a linear map
+$L\colon\Lambda^k_KV\to\Mult^k_0$. The proofs of Theorems~\ref{ob:thm:ordering} and~\ref{ob:thm:ultrametric},
+Lemma~\ref{ob:lem:repeated} and Corollaries~\ref{ob:cor:adjacent} and~\ref{ob:cor:z-linear} are in
+Appendix~\ref{app:deferred}.
+
+\begin{theorem}[ordering representation]\label{ob:thm:ordering}
+\begin{enumerate}
+\item $\ev\circ j_\otimes\circ s_<=Q^\sharp_<$ and $q\circ Q^\sharp_<=\overline\ev\circ j_\Lambda$.
+\item For every lift $Q\colon\cL(E,D)^k\to\cL(\Lambda^k_\pi E,\hLambda^k_\pi D)$ as in Lemma~\ref{fib:lem:test},
+$L=Q^\sharp\circ j_\Lambda-Q^\sharp_<$ is a zero-diagonal correction; equivalently,
+$Q(u_1,\dots,u_k)\circ j_\Lambda=Q_<(u_1,\dots,u_k)+\Phi(u_1,\dots,u_k)$, where $\Phi(u_1,\dots,u_k)y=L(y)(u_1,\dots,u_k)$ is
+$k$-linear in $(u_1,\dots,u_k)$ and $\Phi(u,\dots,u)=0$ for $u\in\cL(E,D)$.
+\item For every zero-diagonal correction $L$ with $\norm{Q^\sharp_<+L}<\infty$ there is a unique lift $Q$ with
+$Q^\sharp\circ j_\Lambda=Q^\sharp_<+L$, and $\norm Q=\norm{Q^\sharp_<+L}$. Hence $c_k(E,D)=\inf_L\norm{Q^\sharp_<+L}$ over the
+zero-diagonal corrections $L$, and $(E,D)$ is good for Banach values in degree $k$ if and only if $\norm{Q^\sharp_<+L}<\infty$
+for some zero-diagonal correction $L$.
+\item \textup{(Defect form.)} The formula
+$\Omega_<(x)=\ev(x_1\otimes\dots\otimes x_k)-Q^\sharp_<(x_1\wedge\dots\wedge x_k)$, for $x\in V^k$, defines a $k$-linear map
+$\Omega_<\colon V^k\to\Mult^k_0$. For every zero-diagonal correction $L$, with $(L\circ\wedge)(x)=L(x_1\wedge\dots\wedge x_k)$,
+\[
+ \norm{Q^\sharp_<+L}\le1+\norm{\Omega_<-L\circ\wedge},\qquad\norm{\Omega_<-L\circ\wedge}\le1+\norm{Q^\sharp_<+L}.
+\]
+So $(E,D)$ is good for Banach values in degree $k$ if and only if $\Omega_<$ is the sum of a bounded $k$-linear map
+$V^k\to\Mult^k_0$ and an alternating $k$-linear map $V^k\to\Mult^k_0$. The infima $c_k(E,D)$ and
+$\inf_L\norm{\Omega_<-L\circ\wedge}$ are finite together, and then they differ by at most~$1$.
+\end{enumerate}
+\end{theorem}
+
+If $\norm{\cP_<(x\otimes y)}\le C\norm x\norm y$ for $x,y\in V$, as in Proposition~\ref{spl:prop:ordering}, no correction is
+needed: the lift $Q$ of
+Proposition~\ref{fib:prop:split}(1) built from the section $s=\cP^{(k)}\circ\alt^k_E$ of
+Proposition~\ref{spl:prop:ordering}(2) satisfies $Q(u_1,\dots,u_k)\circ j_\Lambda=Q_<(u_1,\dots,u_k)$, since
+$s\circ j_\Lambda=j_\otimes\circ s_<$.
+
+\begin{lemma}\label{ob:lem:repeated}
+The space $\cN^k_E$ is the closure in $\widehat\otimes^k_\pi E$ of the span of the pure tensors $x_1\otimes\dots\otimes x_k$
+with $x_a=x_{a+1}$ for some $a<k$, and also of the span of the pure tensors with two equal entries. The pure tensors of the
+first kind with all entries in $V$ span a dense subspace of $\cN^k_E$.
+\end{lemma}
+
+\begin{corollary}[adjacent diagonals]\label{ob:cor:adjacent}
+The pair $(E,D)$ is good for Banach values in degree $k$ if and only if there is a bounded $k$-linear
+$\Psi\colon E^k\to\Mult^k_0$ with
+\[
+ \Psi(x_1,\dots,x_k)(u_1,\dots,u_k)=u_1x_1\wedge\dots\wedge u_kx_k
+\]
+whenever two of the $x_a$ coincide, equivalently whenever $x_a=x_{a+1}$ for some $a<k$. A lift $Q$ gives such a $\Psi$ with
+$\norm\Psi\le1+\norm Q$, and such a $\Psi$ gives a lift $Q$ with $\norm Q\le1+\norm\Psi$.
+\end{corollary}
+
+\begin{corollary}[z-linear form]\label{ob:cor:z-linear}
+Let $\delta>0$, and let $\nu\colon\hLambda^k_\pi E\to\widehat\otimes^k_\pi E$ be a homogeneous map, $\nu(cy)=c\,\nu(y)$ for $c\in K$,
+with $\widehat\wedge^k_E\circ\nu=\id$ and $\norm{\nu(y)}\le(1+\delta)\norm y$; it exists by Lemma~\ref{ob:lem:metric-surjection},
+choosing $\nu(y)$ for one point $y$ of each orbit $K^\times y$, $y\ne0$, and extending homogeneously. Put
+$\Omega^\nu_<=\ev\circ\nu\circ j_\Lambda-Q^\sharp_<\colon\Lambda^k_KV\to\Mult^k$. Then $\Omega^\nu_<$ takes values in $\Mult^k_0$, is
+homogeneous, and is \emph{z-linear}:
+\[
+ \Bigl\lVert\Omega^\nu_<\Bigl(\sum_iy_i\Bigr)-\sum_i\Omega^\nu_<(y_i)\Bigr\rVert\le2(1+\delta)\sum_i\norm{y_i}_\pi
+\]
+for every finite family $(y_i)$ in $\Lambda^k_KV$. Let $\operatorname{dist}(\Omega^\nu_<)$ be the infimum, over the linear maps
+$L\colon\Lambda^k_KV\to\Mult^k_0$, of the infimum of the $C$ with $\norm{\Omega^\nu_<(y)-L(y)}\le C\norm y_\pi$ for all $y$. Then
+$\operatorname{dist}(\Omega^\nu_<)$ and $c_k(E,D)$ are finite together, and then they differ by at most $1+\delta$. In
+particular $\ob_k(E,D)=0$ if and only if $\Omega^\nu_<$ lies at finite distance from a linear map $\Lambda^k_KV\to\Mult^k_0$.
+\end{corollary}
+
+\begin{theorem}[nonarchimedean values]\label{ob:thm:ultrametric}
+Let $K$ be nonarchimedean, and suppose that $C_e=\sup_t\norm{e_t}<\infty$ and that $\abs{x(t)}\le C_c\norm x$ for $x\in V$,
+$t\in\Sigma$ and a constant $C_c$. Let $Y$ be a Banach space with a nonarchimedean norm $\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_Y$ and constants $0<c_-\le c_+$
+with $c_-\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_Y\le\norm\cdot\le c_+\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_Y$, and let $\alpha\colon\cN^k_E\to Y$ be bounded linear. Then there is a bounded linear
+$\tilde\alpha\colon\widehat\otimes^k_\pi E\to Y$ of norm at most $2(c_+/c_-)\norm\alpha(C_cC_e)^k$ with
+$\tilde\alpha(j_\otimes z)=\alpha\bigl(j_\otimes(z-s_<(\wedge_Vz))\bigr)$ for $z\in\otimes^k_KV$ and $\tilde\alpha=\alpha$ on $\cN^k_E$. Hence
+$\alpha_*[\cS^k_E]=0$. In particular $\ob_k(E,D)=0$ whenever $\hLambda^k_\pi D$ has an equivalent nonarchimedean norm.
+\end{theorem}

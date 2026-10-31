@@ -1,0 +1,469 @@
+\section{Degrees of splittings}\label{app:degrees}
+
+This appendix proves the results of Section~\ref{sec:combining} on degrees, composition, polarizability and permanence.
+Since $K$ is nontrivially normed, it is infinite, so the coefficients of a polynomial map from $K^d$ to a vector space are
+linear combinations of its values. Degree $0$ follows the paragraph on split operators in Section~\ref{cmb:ssec:degrees},
+with $\Lambda^0_\pi u=\id_K$.
+
+\subsection{Gaps in the degree sets}\label{dgr:ssec:gaps}
+
+\begin{lemma}[retracts and lines]\label{dgr:lem:lines}
+Let $E$ and $D$ be normed spaces and $k\ge1$.
+\begin{enumerate}
+\item Let $E_0$ and $D_0$ be normed spaces, and let $\iota_1\colon E_0\to E$, $\iota'_1\colon E\to E_0$,
+$\iota_2\colon D_0\to D$ and $\iota'_2\colon D\to D_0$ be bounded linear maps with $\iota'_1\iota_1=\id_{E_0}$ and
+$\iota'_2\iota_2=\id_{D_0}$. If $(E,D)$ is good, or good for Banach values, in degree $k$, then so is $(E_0,D_0)$. In
+particular, isomorphic pairs have the same degree sets.
+\item If $f\colon E\to K^d$ has as coordinates linearly independent bounded linear functionals $f_1,\dots,f_d$, then $E$
+is isomorphic to $\ker f\oplus K^d$ with the maximum norm.
+\item Give $E\oplus K$ and $D\oplus K$ the maximum norms. If $(E,D)$ is good, or good for Banach values, in every degree
+$n\le k$, then so is $(E\oplus K,D\oplus K)$ in degree $k$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) For Banach values this is Proposition~\ref{cmb:prop:permanence}(1). For goodness, if $Q$ is a lift for $(E,D)$ as in
+Lemma~\ref{fib:lem:test}, then
+$Q'(u_1,\dots,u_k)=\Lambda^k_\pi\iota'_2\circ Q(\iota_2u_1\iota'_1,\dots,\iota_2u_k\iota'_1)\circ\Lambda^k_\pi\iota_1$ is a
+lift for $(E_0,D_0)$, since $Q'(u,\dots,u)=\Lambda^k_\pi(\iota'_2\iota_2u\iota'_1\iota_1)=\Lambda^k_\pi u$ by
+Proposition~\ref{prop:exterior}. Isomorphic pairs are retracts of each other in this sense.
+
+(2) The map $f$ is onto, since a nonzero functional $c$ on $K^d$ vanishing on its image would give $\sum_ac_af_a=0$. For
+$x_1,\dots,x_d\in E$ with $f_a(x_b)=\delta_{ab}$, the maps $x\mapsto(x-\sum_af_a(x)x_a,f(x))$ and
+$(y,\lambda)\mapsto y+\sum_a\lambda_ax_a$ are mutually inverse bounded linear maps between $E$ and $\ker f\oplus K^d$.
+
+(3) Let $J_E,\Pi_E,J_K,\Pi_K$ be the inclusions and projections of $E\oplus K$, and $J_D,\Pi_D,J'_K,\Pi'_K$ those of
+$D\oplus K$. Since $J_E\Pi_E+J_K\Pi_K$ and $J_D\Pi_D+J'_K\Pi'_K$ are identities, every
+$u\in\cL(E\oplus K,D\oplus K)$ is $\psi_1(u)+\psi_2(u)+\psi_3(u)$ with $\psi_1(u)=J_D\Pi_DuJ_E\Pi_E$,
+$\psi_2(u)=J'_K\Pi'_KuJ_E\Pi_E$ and $\psi_3(u)=uJ_K\Pi_K$. For $n\le k$ and a lift $Q_n$ for $(E,D)$ in degree $n$, the map
+$\Lambda^n_\pi J_D\circ Q_n(\Pi_Du_1J_E,\dots,\Pi_Du_nJ_E)\circ\Lambda^n_\pi\Pi_E$, with $\widehat\Lambda^n_\pi J_D$ for
+Banach values, lifts $\psi_1$ in degree $n$. The operators $\psi_2(u)$ and $\psi_3(u)$ have rank at most one, so their exterior
+powers of degree $n\ge2$ vanish, and $\psi_2$ and $\psi_3$ are liftable in every degree, with the lift $0$ in degrees $n\ge2$. Theorem~\ref{cmb:thm:decomposition}(2)
+concludes.
+\end{proof}
+
+\begin{theorem}[no gap after the first failure]\label{dgr:thm:gap}
+Let $\operatorname{char}K=p>0$, let $E$ and $D$ each have $d$ linearly independent bounded linear functionals, and let
+$\fD$ be $\fD(E,D)$ or $\fD_B(E,D)$. If $\fD\ne\{1,2,\dots\}$ and $n$ is its least missing element, then none of
+$n,n+1,\dots,n+d$ lies in $\fD$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (splitting off lines).} Let $f\colon E\to K^d$ and $g\colon D\to K^d$ have the functionals as coordinates.
+For $0\le l\le d$ let $E^{(l)}=\ker f\oplus K^{d-l}$ and $D^{(l)}=\ker g\oplus K^{d-l}$ with the maximum norms, so that
+$E^{(l)}=E^{(l+1)}\oplus K$ and $D^{(l)}=D^{(l+1)}\oplus K$. Let $\fD^{(l)}$ be the set of the same kind for
+$(E^{(l)},D^{(l)})$, and $n^{(l)}$ its least missing element, or $\infty$ if there is none. By
+Lemma~\ref{dgr:lem:lines}(1),(2), $\fD^{(0)}=\fD$ and $n^{(0)}=n$.
+
+\emph{Step 2 (the first failure does not move).} The pair $(E^{(l+1)},D^{(l+1)})$ is a retract of $(E^{(l)},D^{(l)})$,
+so $\fD^{(l)}\subseteq\fD^{(l+1)}$ and $n^{(l)}\le n^{(l+1)}$ by Lemma~\ref{dgr:lem:lines}(1). If $i<n^{(l+1)}$, then
+$1,\dots,i\in\fD^{(l+1)}$, so $i\in\fD^{(l)}$ by Lemma~\ref{dgr:lem:lines}(3); hence $n^{(l)}\ge n^{(l+1)}$. By induction
+$n^{(l)}=n$ for every $l\le d$.
+
+\emph{Step 3 (descent).} Suppose that $k\in\fD$ with $n<k\le n+d$, and put $i=k-n$. By
+Corollary~\ref{fib:cor:degrees}(1), $n\ge p\ge2$, so $k,k-1,\dots,n+1\ge2$. Theorem~\ref{fib:thm:hyperplane}, applied with
+every normed, respectively Banach, space $F$, turns a degree $k'\ge2$ in $\fD^{(l)}$ into the degree $k'-1$ in
+$\fD^{(l+1)}$. Applied $i$ times, it gives $n\in\fD^{(i)}$, contradicting $n^{(i)}=n$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:initial-segments}]
+Since $E^*$ and $D^*$ are infinite-dimensional, Theorem~\ref{dgr:thm:gap} applies for every $d$. So if $\fD$, which is
+$\fD(E,D)$ or $\fD_B(E,D)$, has a least missing element $n$, then no degree $k\ge n$ lies in $\fD$, and
+$\fD=\{1,\dots,n-1\}$. By Corollary~\ref{fib:cor:degrees}(2), $n=p^h$ for a unique $h\ge1$.
+\end{proof}
+
+\subsection{Column constructions}\label{dgr:ssec:columns}
+
+Throughout this subsection $q,m\ge1$ and $n=qm$. For vectors $x_1,\dots,x_n$ and $C\subseteq\{1,\dots,n\}$, $x_C$ is the
+wedge of the $x_c$, $c\in C$, in increasing order. For disjoint sets $C_1,\dots,C_l$, $\epsilon(C_1,\dots,C_l)$ is the sign
+of the listing of $C_1$, then $C_2$, and so on, each increasingly, relative to the increasing listing of their union; so
+$x_{C_1}\wedge\dots\wedge x_{C_l}=\epsilon(C_1,\dots,C_l)\,x_{C_1\cup\dots\cup C_l}$. A listing
+$\lambda=(\lambda_1,\dots,\lambda_n)$ of $\{1,\dots,n\}$ has the sign $\sgn(\lambda)$ as a permutation, and $N_{q,m}$ is as
+in Theorem~\ref{cmb:thm:composition}.
+
+For a normed space $G$ let $\wedge^{[q,m]}_G\colon(\Lambda^m_\pi G)^{\otimes_\pi q}\to\Lambda^n_\pi G$ be the iterated
+wedge product $\xi_1\otimes\dots\otimes\xi_q\mapsto\xi_1\wedge\dots\wedge\xi_q$, contractive by Lemma~\ref{fib:lem:hopf},
+and $\sh^{[q,m]}_G=(\id\otimes\dots\otimes\id\otimes\sh^{m,m}_G)\circ\dots\circ(\id\otimes\sh^{m,(q-2)m}_G)\circ
+\sh^{m,(q-1)m}_G$ from $\Lambda^n_\pi G$ to $(\Lambda^m_\pi G)^{\otimes_\pi q}$, so that
+\[
+ \sh^{[q,m]}_G(x_1\wedge\dots\wedge x_n)=\sum_{(J_1,\dots,J_q)}\epsilon(J_1,\dots,J_q)\,x_{J_1}\otimes\dots\otimes x_{J_q},
+\]
+the sum over the ordered partitions of $\{1,\dots,n\}$ into $q$ blocks of size $m$. Both maps are natural in bounded
+operators, and iterating Lemma~\ref{fib:lem:hopf} gives, on $\otimes^n_\pi G=(\otimes^m_\pi G)^{\otimes_\pi q}$,
+\begin{equation}\label{dgr:eq:iterated}
+ \wedge^n_G=\wedge^{[q,m]}_G\circ(\wedge^m_G)^{\otimes q},\qquad
+ \alt^n_G=(\alt^m_G)^{\otimes q}\circ\sh^{[q,m]}_G .
+\end{equation}
+Their extensions to completions keep their names, with a hat on $\wedge^{[q,m]}_G$. In
+$\otimes^n_\pi G=(\otimes^q_\pi G)^{\otimes_\pi m}$, the $t$th block of $q$ factors is column $t$, and the $i$th factors of
+the columns form row $i$; the isometry $\tau_\zeta$ of Section~\ref{sec:canonical}, where $\zeta\in S_n$ sends the position
+$(t-1)q+i$ to $(i-1)m+t$, passes to the row-major order, in which row $i$ is the $i$th block of $m$ factors.
+
+\begin{lemma}\label{dgr:lem:unit}
+If $q$ and $m$ are powers of a prime $p$, then $p$ does not divide $N_{q,m}$. Hence, if $\operatorname{char}K=p$, the
+image of $N_{q,m}$ in $K$ is a nonzero element of the prime field, and its absolute value is $1$.
+\end{lemma}
+
+\begin{proof}
+By Legendre's formula, the exponent of $p$ in $(p^c)!$ is $p^{c-1}+\dots+1=(p^c-1)/(p-1)$. For $q=p^a$ and $m=p^b$, the
+exponent of $p$ in $N_{q,m}=(qm)!/((q!)^m\,m!)$ is therefore
+$\bigl((p^{a+b}-1)-p^b(p^a-1)-(p^b-1)\bigr)/(p-1)=0$. Every nonzero element of $\F_p$ is a root of unity, so its
+absolute value is $1$.
+\end{proof}
+
+\begin{proposition}[source column map]\label{dgr:prop:s-column}
+Let $w\colon E\to G$ have a section $s$ in degree $q$. There is a bounded linear map $\operatorname{col}_s$ from
+$\Lambda^n_\pi E$ to the completion of $(\Lambda^m_\pi G)^{\otimes_\pi q}$, of norm at most $N_{q,m}\norm s^m$ with
+$N_{q,m}$ read as a real number, such that
+\[
+ \widehat\wedge^{[q,m]}_G\circ\operatorname{col}_s=\eta\,N_{q,m}\,\Lambda^n_\pi w,
+\]
+where $\eta=\pm1$ depends only on $q$ and $m$. If $s$ takes values in $\otimes^q_\pi G$, then $\operatorname{col}_s$ takes
+values in $(\Lambda^m_\pi G)^{\otimes_\pi q}$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (regrouping).} Let $\Theta=(\wedge^m_G)^{\otimes q}\circ\tau_\zeta$, a contraction from $\otimes^n_\pi G$
+to $(\Lambda^m_\pi G)^{\otimes_\pi q}$. It sends the tensor with columns $g_{1t}\otimes\dots\otimes g_{qt}$ to
+$(g_{11}\wedge\dots\wedge g_{1m})\otimes\dots\otimes(g_{q1}\wedge\dots\wedge g_{qm})$. If $\gamma\in S_m$ and
+$\tau'_\gamma$ moves column $t$ to column $\gamma(t)$, then $\Theta\circ\tau'_\gamma=\sgn(\gamma)^q\,\Theta$, since $\gamma$
+permutes the factors of each of the $q$ row wedges. By~\eqref{dgr:eq:iterated} and Section~\ref{sec:canonical},
+$\wedge^{[q,m]}_G\circ\Theta=\wedge^n_G\circ\tau_\zeta=\eta\,\wedge^n_G$ with $\eta=\sgn(\zeta)$.
+
+\emph{Step 2 (the multilinear map).} For $x_1,\dots,x_n\in E$ put
+\[
+ \Xi_s(x_1,\dots,x_n)=\sum_{\{C_1,\dots,C_m\}}\epsilon(C_1,\dots,C_m)\,
+ \Theta\bigl(s(x_{C_1})\otimes\dots\otimes s(x_{C_m})\bigr),
+\]
+the sum over the partitions of $\{1,\dots,n\}$ into $m$ blocks of size $q$, each with some order of its blocks.
+Reordering the blocks by $\gamma\in S_m$ multiplies $\epsilon(C_1,\dots,C_m)$ by $\sgn(\gamma)^{q^2}=\sgn(\gamma)^q$ and,
+by Step~1, the $\Theta$-term by $\sgn(\gamma)^q$; so each term depends only on the partition. The map $\Xi_s$ is
+$n$-linear of norm at most $N_{q,m}\norm s^m$.
+
+\emph{Step 3 ($\Xi_s$ is alternating).} For a listing $\lambda$ of $\{1,\dots,n\}$, cut into $m$ consecutive groups of $q$
+entries, let $\Phi(\lambda)=\sgn(\lambda)\,\Theta\bigl(s(x_{\lambda_1}\wedge\dots\wedge x_{\lambda_q})\otimes
+s(x_{\lambda_{q+1}}\wedge\dots\wedge x_{\lambda_{2q}})\otimes\dots\bigr)$. Permuting entries inside a group changes
+$\sgn(\lambda)$ and that group's wedge by the same sign, so $\Phi(\lambda)$ is unchanged; and the term of a partition is
+$\Phi(\lambda)$ for $\lambda$ listing $C_1$, then $C_2$, and so on. Let $x_a=x_b$ with $a\ne b$. The terms with $a$ and
+$b$ in one block vanish. Exchanging $a$ and $b$ is an involution without fixed points on the partitions that separate
+them, and it replaces $\lambda$ by the listing $\lambda'$ with the entries $a$ and $b$ exchanged; since
+$\sgn(\lambda')=-\sgn(\lambda)$ and $x_a=x_b$, $\Phi(\lambda')=-\Phi(\lambda)$, so these terms cancel in pairs.
+Proposition~\ref{prop:exterior} gives $\operatorname{col}_s$ with $\operatorname{col}_s(x_1\wedge\dots\wedge x_n)=\Xi_s(x)$.
+
+\emph{Step 4 (the identity).} By Step~1, \eqref{dgr:eq:iterated} for $m$ blocks of size $q$, and
+$\widehat\wedge^q_Gs=\Lambda^q_\pi w$,
+\[
+\begin{aligned}
+ \widehat\wedge^{[q,m]}_G\Theta\bigl(s(x_{C_1})\otimes\dots\otimes s(x_{C_m})\bigr)
+ &=\eta\,\Lambda^q_\pi w(x_{C_1})\wedge\dots\wedge\Lambda^q_\pi w(x_{C_m})\\
+ &=\eta\,\epsilon(C_1,\dots,C_m)\,\Lambda^n_\pi w(x_1\wedge\dots\wedge x_n),
+\end{aligned}
+\]
+so each of the $N_{q,m}$ terms of $\Xi_s$ contributes $\eta\Lambda^n_\pi w(x_1\wedge\dots\wedge x_n)$. If $s$ takes values
+in $\otimes^q_\pi G$, every term lies in $(\Lambda^m_\pi G)^{\otimes_\pi q}$.
+\end{proof}
+
+\begin{proposition}[target column map]\label{dgr:prop:r-column}
+Let $w\colon G\to D$ have a retraction $\rho$ in degree $q$. There is a bounded linear map $\operatorname{col}^\rho$ from
+the completion of $(\widehat\Lambda^m_\pi G)^{\otimes_\pi q}$ to $\widehat\Lambda^n_\pi D$, of norm at most
+$(m!)^{q-1}\norm\rho^m$, such that
+\[
+ \operatorname{col}^\rho\circ\sh^{[q,m]}_G=\eta'\,N_{q,m}\,\Lambda^n_\pi w,
+\]
+where $\eta'=\pm1$ depends only on $q$ and $m$. If $\rho$ takes values in $\Lambda^q_\pi D$, then
+$\operatorname{col}^\rho$ maps $(\Lambda^m_\pi G)^{\otimes_\pi q}$ into $\Lambda^n_\pi D$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (the map).} For vectors $y_{i,t}\in G$ in rows $i$ and columns $t$, put
+\[
+ \Psi_\rho(y)=\sum_{g_2,\dots,g_q\in S_m}\sgn(g_2)\cdots\sgn(g_q)\bigwedge_{t=1}^m
+ \rho\bigl(y_{1,t}\otimes y_{2,g_2(t)}\otimes\dots\otimes y_{q,g_q(t)}\bigr)\in\widehat\Lambda^n_\pi D,
+\]
+the wedge taken in the order $t=1,\dots,m$. It is multilinear of norm at most $(m!)^{q-1}\norm\rho^m$.
+
+\emph{Step 2 (alternation in each row).} Let $y_{i,t}=y_{i,t'}$ with $t\ne t'$. If $i\ge2$, replacing $g_i$ by
+$(t\ t')\circ g_i$ keeps every factor and changes the sign. If $i=1$, replacing every $g_l$ by $g_l\circ(t\ t')$ exchanges
+the wedge factors in the positions $t$ and $t'$, which gives $(-1)^{q^2}=(-1)^q$, and multiplies the coefficient by
+$(-1)^{q-1}$; so the sign changes. Both replacements are involutions without fixed points, so the terms cancel in pairs.
+For $q=1$, $\Psi_\rho$ is alternating since $\rho=w$. By Proposition~\ref{prop:exterior} in each row, $\Psi_\rho$ induces
+a bounded linear map $\operatorname{col}^\rho$ on $(\Lambda^m_\pi G)^{\otimes_\pi q}$, which extends to the completion.
+
+\emph{Step 3 (arrays).} Let $x_1,\dots,x_n\in G$. For an ordered partition $(J_1,\dots,J_q)$ with
+$J_i=\{b_{i,1}<\dots<b_{i,m}\}$, the corresponding term of $\operatorname{col}^\rho\sh^{[q,m]}_G(x_1\wedge\dots\wedge x_n)$
+is $\epsilon(J_1,\dots,J_q)\Psi_\rho(y)$ with $y_{i,t}=x_{b_{i,t}}$. An \emph{array} is a bijection
+$\alpha\colon\{1,\dots,q\}\times\{1,\dots,m\}\to\{1,\dots,n\}$; $\sgn_{\mathrm{row}}(\alpha)$ and
+$\sgn_{\mathrm{col}}(\alpha)$ are the signs of its readings row by row and column by column, and
+$\sgn_{\mathrm{row}}=\eta'\sgn_{\mathrm{col}}$ for a sign $\eta'$ depending only on $q$ and $m$. Through
+$\alpha(1,t)=b_{1,t}$ and $\alpha(i,t)=b_{i,g_i(t)}$ for $i\ge2$, the pairs $((J_i),(g_i))$ correspond bijectively to the
+arrays with increasing first row, and $\epsilon(J_1,\dots,J_q)\prod_i\sgn(g_i)=\sgn_{\mathrm{row}}(\alpha)$. Hence
+\[
+ \operatorname{col}^\rho\sh^{[q,m]}_G(x_1\wedge\dots\wedge x_n)=\eta'\sum_\alpha\Phi(\alpha),\qquad
+ \Phi(\alpha)=\sgn_{\mathrm{col}}(\alpha)\bigwedge_{t=1}^m\rho\bigl(x_{\alpha(1,t)}\otimes\dots\otimes x_{\alpha(q,t)}\bigr),
+\]
+the sum over the arrays with increasing first row.
+
+\emph{Step 4 (columns).} Permuting the columns of an array by $\gamma\in S_m$ leaves $\Phi$ unchanged, since
+$\sgn_{\mathrm{col}}$ and the wedge of $m$ elements of degree $q$ both change by $\sgn(\gamma)^{q^2}$. Group the arrays
+by the partition $\{C_1,\dots,C_m\}$ formed by their column sets. For a fixed partition, the arrays with increasing first
+row correspond bijectively to the choices of an ordering $o_t$ of each $C_t$, since the first entries then fix the order
+of the columns. By the column invariance of $\Phi$, the partition contributes
+\[
+ \epsilon(C_1,\dots,C_m)\sum_{o_1,\dots,o_m}\prod_t\sgn(o_t)\bigwedge_t\rho(x_{o_t})
+ =\epsilon(C_1,\dots,C_m)\bigwedge_t\rho\bigl(\alt^q_G(x_{C_t})\bigr),
+\]
+where $x_{o_t}$ is the tensor of the $x_c$, $c\in C_t$, in the order $o_t$, and $\sgn(o_t)$ is relative to the increasing
+order. Since $\rho\alt^q_G=\Lambda^q_\pi w$, this is
+$\epsilon(C_1,\dots,C_m)\Lambda^q_\pi w(x_{C_1})\wedge\dots\wedge\Lambda^q_\pi w(x_{C_m})
+=\Lambda^n_\pi w(x_1\wedge\dots\wedge x_n)$. Summing over the $N_{q,m}$ partitions gives the identity on pure wedges,
+hence everywhere.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:composition}]
+Put $N=N_{q,m}$, invertible in $K$. (1) Let $s=(\eta N)^{-1}(s_2)^{\otimes q}\circ\operatorname{col}_{s_1}$, with
+$\operatorname{col}_{s_1}$ the map of Proposition~\ref{dgr:prop:s-column} for $w_1$ and $(s_2)^{\otimes q}$ from the
+completion of $(\Lambda^m_\pi G_1)^{\otimes_\pi q}$ to $\widehat\otimes^n_\pi G_2$, rows in the order $1,\dots,q$.
+By~\eqref{dgr:eq:iterated} and naturality of $\wedge^{[q,m]}$,
+$\widehat\wedge^n_{G_2}(s_2)^{\otimes q}=\widehat\wedge^{[q,m]}_{G_2}(\Lambda^m_\pi w_2)^{\otimes q}
+=\widehat\Lambda^n_\pi w_2\circ\widehat\wedge^{[q,m]}_{G_1}$, so Proposition~\ref{dgr:prop:s-column} gives
+$\widehat\wedge^n_{G_2}s=\Lambda^n_\pi(w_2w_1)$, and $\norm s\le N_{q,m}\norm{s_1}^m\norm{s_2}^q/\abs N$.
+
+(2) Let $\rho=(\eta'N)^{-1}\operatorname{col}^{\rho_2}\circ(\rho_1)^{\otimes q}$ on
+$\otimes^n_\pi E=(\otimes^m_\pi E)^{\otimes_\pi q}$, with $\operatorname{col}^{\rho_2}$ the map of
+Proposition~\ref{dgr:prop:r-column} for $w_2$. By~\eqref{dgr:eq:iterated}, $\rho_1\alt^m_E=\Lambda^m_\pi w_1$ and
+naturality of $\sh^{[q,m]}$, the map $\rho$ satisfies $\rho\,\alt^n_E=(\eta'N)^{-1}\operatorname{col}^{\rho_2}\sh^{[q,m]}_{G_1}\Lambda^n_\pi w_1
+=\Lambda^n_\pi(w_2w_1)$, and $\norm\rho\le(m!)^{q-1}\norm{\rho_2}^m\norm{\rho_1}^q/\abs N$. Uncompleted data give
+uncompleted maps, by the last assertions of Propositions~\ref{dgr:prop:s-column} and~\ref{dgr:prop:r-column}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:column}]
+Let $s_p$ be a section for $\id_Y$ in degree $p$. If $s_{p^j}$ is one in degree $p^j$, Theorem~\ref{cmb:thm:composition}(1)
+with $w_1=w_2=\id_Y$, $q=p$ and $m=p^j$, which applies by Lemma~\ref{dgr:lem:unit}, gives one in degree $p^{j+1}$. So
+$(\mathrm S^{p^j}_Y)$ holds for every $j\ge0$. By its base-$p$ expansion, every $n\ge1$ is a carry-free sum of powers of
+$p$, so $(\mathrm S^n_Y)$ holds by the Lucas step for split operators in Section~\ref{cmb:ssec:degrees}. For retractions
+use Theorem~\ref{cmb:thm:composition}(2) with $w_1=w_2=\id_Y$, $m=p^j$ and $q=p$. Uncompleted data stay uncompleted at each
+step.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cmb:cor:composition}]
+(1) Let $w=w_h\cdots w_1$ with each $w_l$ $\mathrm S^p$-split, and put $\gamma_l=w_l\cdots w_1$. Then $\gamma_l$ is
+$\mathrm S^{p^l}$-split for $l\le h$: for $l=1$ by hypothesis, and for $l\ge2$ by Theorem~\ref{cmb:thm:composition}(1)
+applied to $\gamma_{l-1}$ and $w_l$ with $q=p^{l-1}$ and $m=p$, by Lemma~\ref{dgr:lem:unit}. So $w=(w_h\cdots w_{l+1})\gamma_l$ is
+$\mathrm S^{p^l}$-split for $l\le h$, by Proposition~\ref{ob:prop:split-operators}(2). Every $n<p^{h+1}$ is a carry-free
+sum of powers $p^l$ with $l\le h$, so $w$ is $\mathrm S^n$-split by the Lucas step for split operators in
+Section~\ref{cmb:ssec:degrees}. For retractions use Theorem~\ref{cmb:thm:composition}(2) with the inner map
+$\gamma_{l-1}$, $m=p^{l-1}$, and the outer map $w_l$, $q=p$.
+(2) If $w=v_2v_1$ with $v_1\colon E\to Y$, $v_2\colon Y\to G$ and $(\mathrm S^p_Y)$, then $\id_Y$ is $\mathrm S^n$-split for
+every $n$ by Theorem~\ref{cmb:thm:column}, hence so is $w=v_2\,\id_Y\,v_1$ by Proposition~\ref{ob:prop:split-operators}(2).
+The same argument applies to $(\mathrm R^p_Y)$.
+\end{proof}
+
+\subsection{Polarizability in every degree}\label{dgr:ssec:polarizable}
+
+A bounded linear map $v\colon P\to P'$ of normed spaces is \emph{polarizable in degree $n$} if there is a bounded
+$n$-linear map $\Pi\colon P^n\to\hGamma^n_\pi P'$ with $\Pi(h,\dots,h)=(vh)^{\otimes n}$ for $h\in P$; by
+Lemma~\ref{ob:lem:parameter}, $\id_P$ is polarizable in degree $n$ if and only if $P$ is. Each isometry $\tau_\sigma$ of
+Section~\ref{sec:canonical} fixes every pure power, hence every point of $\hGamma^n_\pi P'$. Every tensor $y$ in the
+algebraic tensor power $\otimes^n_KP'$ with $\tau_\sigma y=y$ for all $\sigma\in S_n$ is a linear combination of pure
+powers: if $e_1,\dots,e_d$ is a basis of a finite-dimensional subspace containing the factors of $y$, then $y$ is a
+combination of the sums of the tensors $e_{i_1}\otimes\dots\otimes e_{i_n}$ over the rearrangements of a fixed index tuple,
+and each such sum is a coefficient of the polynomial $\lambda\mapsto(\sum_i\lambda_ie_i)^{\otimes n}$ on $K^d$. For
+$a,b\ge0$, $y\in\widehat\otimes^a_\pi P'$ and $z\in\widehat\otimes^b_\pi P'$, the \emph{shuffle product}
+$y*z\in\widehat\otimes^{a+b}_\pi P'$ is the sum of the $\binom{a+b}a$ tensors obtained from $y\otimes z$ by distributing the
+factors of $y$ and of $z$ over the $a+b$ slots in their orders; it is bilinear with
+$\norm{y*z}\le\binom{a+b}a\norm y\norm z$.
+
+\begin{lemma}[polarizable maps]\label{dgr:lem:polarizable}
+Let $v\colon P\to P'$ be a bounded linear map of normed spaces.
+\begin{enumerate}
+\item The shuffle product maps $\hGamma^a_\pi P'\times\hGamma^b_\pi P'$ into $\hGamma^{a+b}_\pi P'$. If $v$ is polarizable
+in degrees $a,b\ge1$, with $\Pi_a$ and $\Pi_b$, and $\binom{a+b}a\ne0$ in $K$, then $v$ is polarizable in degree $a+b$, with
+$(h_1,\dots,h_{a+b})\mapsto\binom{a+b}a^{-1}\Pi_a(h_1,\dots,h_a)*\Pi_b(h_{a+1},\dots,h_{a+b})$.
+\item If $n!\ne0$ in $K$, then $v$ is polarizable in degree $n$. Hence, if $\operatorname{char}K=p>0$, the degrees in which
+$v$ is polarizable contain $1,\dots,p-1$ and are closed under carry-free sums.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) For $h,h'\in P'$, $h^{\otimes a}*h'^{\otimes b}$ is the coefficient of $\lambda^a$ in
+$(\lambda h+h')^{\otimes(a+b)}$, hence a combination of pure powers; by bilinearity and continuity the shuffle product maps
+$\hGamma^a_\pi P'\times\hGamma^b_\pi P'$ into $\hGamma^{a+b}_\pi P'$. The stated map has diagonal
+$\binom{a+b}a^{-1}(vh)^{\otimes a}*(vh)^{\otimes b}=(vh)^{\otimes(a+b)}$. (2) By Proposition~\ref{can:prop:natural}(2),
+$R_n=\frac1{n!}\sum_\sigma\tau_\sigma$ is a projection onto $\hGamma^n_\pi P'$, and
+$\Pi(h_1,\dots,h_n)=R_n(vh_1\otimes\dots\otimes vh_n)$ has diagonal $(vh)^{\otimes n}$. By Lucas's theorem,
+$\binom{a+b}a\ne0$ in $K$ when $a$ and $b$ add without carry in base $p$, and~(1) gives the last assertion.
+\end{proof}
+
+\begin{lemma}[composition of polarizable maps]\label{dgr:lem:polarizable-composition}
+Let $q,m\ge1$ and $n=qm$, and suppose that the number $N_{m,q}$ of partitions of $\{1,\dots,n\}$ into $q$ blocks of size
+$m$ is nonzero in $K$. If $v_1\colon P\to P'$ is polarizable in degree $q$, with $\Pi_1$, and $v_2\colon P'\to P''$ is
+polarizable in degree $m$, with $\Pi_2$, then $v_2v_1$ is polarizable in degree $n$, with a map of norm at most
+$N_{m,q}\norm{\Pi_1}^m\norm{\Pi_2}^q/\abs{N_{m,q}}$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (the map).} Use the rows, columns and $\tau_\zeta$ of Subsection~\ref{dgr:ssec:columns}, with $P'$ and
+$P''$ in place of $G$. The stabilizer $S_{\mathrm{row}}\subseteq S_n$ of the partition into rows consists of the
+permutations inside rows composed with permutations of whole rows, and it has $N_{m,q}$ left cosets. For representatives $\sigma_1,\dots,\sigma_{N_{m,q}}$ put
+$T=\sum_l\tau_{\sigma_l}$ on $\widehat\otimes^n_\pi P''$, of norm at most $N_{m,q}$. If $\tau_\sigma Y=Y$ for all
+$\sigma\in S_{\mathrm{row}}$, then $TY$ does not depend on the representatives, and $\tau_\sigma TY=TY$ for all
+$\sigma\in S_n$. For an array $(h_{i,t})$ in $P$ let $c_t=\Pi_1(h_{1,t},\dots,h_{q,t})\in\hGamma^q_\pi P'$ and
+\[
+ Y(h)=(\Pi_2^\otimes)^{\otimes q}\,\tau_\zeta(c_1\otimes\dots\otimes c_m),\qquad \Pi(h)=N_{m,q}^{-1}\,T\,Y(h),
+\]
+where the linearization $\Pi_2^\otimes\colon\widehat\otimes^m_\pi P'\to\hGamma^m_\pi P''$ of $\Pi_2$ acts on each row.
+The map $\Pi$ is $n$-linear with the stated bound.
+
+\emph{Step 2 (invariance).} A permutation of whole rows permutes the $q$ factors of every column block in the same way,
+which fixes each $c_t$, so it fixes $\tau_\zeta(c_1\otimes\dots\otimes c_m)$. The operator $(\Pi_2^\otimes)^{\otimes q}$
+commutes with these permutations, and its values are fixed by permutations inside rows, since $\Pi_2^\otimes$ takes values
+in $\hGamma^m_\pi P''$. Hence $\tau_\sigma Y(h)=Y(h)$ for $\sigma\in S_{\mathrm{row}}$.
+
+\emph{Step 3 (the diagonal).} If every $h_{i,t}$ is $h$, then $c_t=(v_1h)^{\otimes q}$,
+$\tau_\zeta(c_1\otimes\dots\otimes c_m)=(v_1h)^{\otimes n}$, and $\Pi_2^\otimes$ sends each row $(v_1h)^{\otimes m}$ to
+$(v_2v_1h)^{\otimes m}$. So $Y(h)=(v_2v_1h)^{\otimes n}$, $TY(h)=N_{m,q}(v_2v_1h)^{\otimes n}$ and
+$\Pi(h,\dots,h)=(v_2v_1h)^{\otimes n}$.
+
+\emph{Step 4 (values).} Fix the array $h$, and choose $c^{(j)}_t\to c_t$ in the linear span of the pure powers in
+$\otimes^q_\pi P'$. Expanding, $\tau_\zeta(c^{(j)}_1\otimes\dots\otimes c^{(j)}_m)$ is a linear combination of tensors
+$\tau_\zeta(h'^{\otimes q}_1\otimes\dots\otimes h'^{\otimes q}_m)=y^{\otimes q}$ with $y=h'_1\otimes\dots\otimes h'_m$, and
+$(\Pi_2^\otimes)^{\otimes q}(y^{\otimes q})=z^{\otimes q}$ with $z=\Pi_2^\otimes(y)\in\hGamma^m_\pi P''$. For $z_l\to z$ in
+the linear span of the pure powers, $z_l^{\otimes q}$ lies in the algebraic tensor power and is fixed by $\tau_\sigma$ for
+$\sigma\in S_{\mathrm{row}}$, so $Tz_l^{\otimes q}$ is fixed by every $\tau_\sigma$ and is a linear combination of pure
+powers; hence $Tz^{\otimes q}=\lim_lTz_l^{\otimes q}$ lies in $\hGamma^n_\pi P''$. By linearity and continuity, so does
+$TY(h)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:polarizable-height}]
+If $P$ is polarizable in degrees $p$ and $p^i$, then Lemma~\ref{dgr:lem:polarizable-composition} with $v_1=v_2=\id_P$,
+$q=p$ and $m=p^i$, which applies by Lemma~\ref{dgr:lem:unit}, makes $P$ polarizable in degree $p^{i+1}$. By induction $P$
+is polarizable in every degree $p^i$, and Lemma~\ref{dgr:lem:polarizable} gives every degree, since every $n\ge1$ is a
+carry-free sum of powers of $p$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cmb:cor:parameter-degrees}]
+(1) The parameter space of a parameter piece of degree $p$ is polarizable in degree $p$, hence in every degree by
+Theorem~\ref{cmb:thm:polarizable-height}; so the piece, and every piece of a generalized decomposition of degree $p$ into
+parameter pieces, is a parameter piece of every degree. (2) By Theorem~\ref{cmb:thm:polarizable-height}, $\cL(E,D)$ is
+polarizable in every degree, and Corollary~\ref{ob:cor:mechanisms} applies in each degree.
+\end{proof}
+
+\subsection{Decompositions of degree \texorpdfstring{$p$}{p}}\label{dgr:ssec:decompositions}
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:mixed-degrees}]
+Let $w$ be $\mathrm S^{\le p}$-split, as every $\mathrm S^p$-split map is, since every map is $\mathrm S^n$-split for $n<p$.
+Every $n<p^2$ is $c_1p+c_0$ with base-$p$ digits $c_0,c_1<p$, a carry-free sum of copies of $p$ and of $1$, so $w$ is
+$\mathrm S^n$-split by the Lucas step for split operators in Section~\ref{cmb:ssec:degrees}. Thus $w$ is
+$\mathrm S^{\le p^2-1}$-split, and the same holds for $\mathrm R$. Hence every piece of the decomposition, including the
+single piece of a relative splitting, is of the same type in every degree $n<p^2$. Theorem~\ref{cmb:thm:decomposition}(3)
+gives the goodness; the Lucas step keeps uncompleted data uncompleted.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{cmb:prop:target-pieces}]
+Choose $f\in E^*$ and $x_0\in E$ with $f(x_0)=1$, and let the pieces be $(G_i,G'_i,w_i,w'_i,\varepsilon_i)$. For $y\in D$,
+the operator $u_y=f(\cdot)\,y\in\cL(E,D)$ has $\norm{u_y}\le\norm f\norm y$, and~\eqref{cmb:eq:decomposition} gives
+$y=u_yx_0=\sum_iw'_i\chi_i(y)$ with the bounded linear maps $\chi_i\colon D\to G'_i$, $\chi_i(y)=\varepsilon_i(u_y)w_ix_0$.
+So the inclusion $\iota_D$ of $D$ in $\widehat D$ is $\sum_iw'_i\chi_i$, which is $\mathrm R^{\le k}$-split, since every
+$w'_i$ is, by Proposition~\ref{ob:prop:split-operators}(2) and the paragraph on split operators in
+Section~\ref{cmb:ssec:degrees}. A
+retraction for $\iota_D$ in degree $k$ is a bounded linear
+$\rho\colon\otimes^k_\pi D\to\widehat\Lambda^k_\pi\widehat D=\widehat\Lambda^k_\pi D$ such that $\rho\alt^k_D$ is the
+inclusion of $\Lambda^k_\pi D$ in its completion; this is $(\mathrm R^k_D)$. Without completion, the maps $w'_i$ take values
+in $D$ and their retractions in the uncompleted exterior powers, and so does $\rho$. For $k=p$,
+Corollary~\ref{cmb:cor:column} gives the last assertion.
+\end{proof}
+
+\subsection{Permanence and its failure}\label{dgr:ssec:permanence}
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:cantor}]
+\emph{Step 0 (notation).} Order the words of each length $m$ lexicographically. For a normed space $U$, a step function of
+level $m$ on $\Omega^k$ is a function $z=\sum_\xi1_{C_{\xi_1}\times\dots\times C_{\xi_k}}u_\xi$, the sum over $k$-tuples
+$\xi$ of words of length $m$, with $u_\xi\in U$; put $\norm z_1=\sum_\xi2^{-mk}\norm{u_\xi}$ and
+$\norm z_\infty=\max_\xi\norm{u_\xi}$, and let $L^1(\Omega^k;U)$ be the completion of the step functions, in which the
+$U_0$-valued ones are dense if $U_0$ is dense in $U$. Let $\Delta_m\subseteq\Omega^k$ be the union of the cells
+$C_{\xi_1}\times\dots\times C_{\xi_k}$ of level $m$ with $\xi_1<\dots<\xi_k$, and $T_m$ the union of those with two equal
+words; $T_m$ has measure at most $\binom k22^{-m}$, so $\norm{1_{T_m}z}_1\le\binom k22^{-m}\norm z_\infty$ for step
+functions $z$. Every extension of a word $\xi$ precedes every extension of a later word of the same length, so
+$\Delta_m\subseteq\Delta_{m'}$ and $\Delta_{m'}\setminus\Delta_m\subseteq T_m$ for $m\le m'$.
+
+\emph{Step 1 (tensor powers).} For a finite set $I$ with weights $c_t>0$, the map $\sum_te_t\otimes u_t\mapsto(u_t)_t$ is
+an isometry of $\ell^1(I,c)\otimes_\pi U$ onto $U^I$ with the norm $\sum_tc_t\norm{u_t}$, since this decomposition costs
+$\sum_tc_t\norm{u_t}$ and $(\eta,u)\mapsto(\eta_tu)_t$ is contractive. With associativity and commutativity of
+$\otimes_\pi$, the contractive $k$-linear map $(f_1,\dots,f_k)\mapsto[\zeta\mapsto f_1(\zeta_1)\otimes\dots\otimes
+f_k(\zeta_k)]$ therefore linearizes to an isometry of the $k$th projective tensor power of the step functions of level $m$
+onto the $\otimes^k_\pi G$-valued step functions of level $m$ on $\Omega^k$; since the tensor power at level $m$ maps
+contractively into that of all step functions, it is an isometry of the latter onto all $\otimes^k_\pi G$-valued step
+functions. Passing to completions, $\widehat\otimes^k_\pi Y=L^1(\Omega^k;\widehat\otimes^k_\pi G)$; then
+$\widehat\wedge^k_Y$ sends $1_{C_1\times\dots\times C_k}(g_1\otimes\dots\otimes g_k)$ to
+$(1_{C_1}g_1)\wedge\dots\wedge(1_{C_k}g_k)$, and $\alt^k_Y$ sends $f_1\wedge\dots\wedge f_k$ to
+$\zeta\mapsto\sum_\sigma\sgn(\sigma)f_{\sigma(1)}(\zeta_1)\otimes\dots\otimes f_{\sigma(k)}(\zeta_k)$.
+
+\emph{Step 2 (ordered antisymmetrization).} For step functions $f_a=\sum_\xi1_{C_\xi}g_{a,\xi}$ of level at most $m$,
+let $\Phi_m(f)$ be the step function equal to $\sum_\sigma\sgn(\sigma)f_{\sigma(1)}(\zeta_1)\otimes\dots\otimes
+f_{\sigma(k)}(\zeta_k)$ on $\Delta_m$ and to $0$ elsewhere. Since $(\xi,\sigma)\mapsto\upsilon$ with
+$\upsilon_{\sigma(a)}=\xi_a$ is a bijection from the increasing $k$-tuples of words times $S_k$ onto the $k$-tuples of
+distinct words, $\norm{\Phi_m(f)}_1\le\sum_\upsilon2^{-mk}\prod_b\norm{g_{b,\upsilon_b}}\le\prod_b\norm{f_b}_1$. For
+$m'\ge m$, $\Phi_{m'}(f)$ and $\Phi_m(f)$ agree outside $T_m$ by Step~0, so
+$\norm{\Phi_{m'}(f)-\Phi_m(f)}_1\le k!\binom k22^{-m}\prod_a\norm{f_a}_\infty$. Hence $\Phi(f)=\lim_m\Phi_m(f)$ exists; it
+is $k$-linear, alternating, since the terms $\sigma$ and $\sigma\circ(a\ b)$ cancel when $f_a=f_b$, and bounded by
+$\prod_a\norm{f_a}_1$, so it extends to a contractive alternating map on $Y^k$.
+
+\emph{Step 3 (sections).} For the $f_a$ of Step~2, $f_1\wedge\dots\wedge f_k$ is the sum over $k$-tuples of words of
+$\bigwedge_a1_{C_{\xi_a}}g_{a,\xi_a}$. A tuple of distinct words is $(\xi_{\sigma^{-1}(1)},\dots,\xi_{\sigma^{-1}(k)})$
+for a unique increasing tuple $\xi$ and a unique $\sigma\in S_k$, and its wedge is
+$\sgn(\sigma)\bigwedge_b1_{C_{\xi_b}}g_{\sigma(b),\xi_b}$; by Step~1 these terms add up to $\widehat\wedge^k_Y\Phi_m(f)$.
+Since $\norm{1_{C_\xi}g}_1=2^{-m}\norm g$, the tuples with $\xi_a=\xi_b$ for some $a<b$ contribute at most
+$\sum_{a<b}2^{-m}\norm{f_a}_\infty\norm{f_b}_1\prod_{c\ne a,b}\norm{f_c}_1$ in norm. Letting $m\to\infty$ gives
+$f_1\wedge\dots\wedge f_k=\widehat\wedge^k_Y\Phi(f)$. By Proposition~\ref{prop:exterior}, $\Phi$ induces
+$s\colon\Lambda^k_\pi Y\to\widehat\otimes^k_\pi Y$ with $\norm s\le1$, and $\widehat\wedge^k_Ys=\id$ on wedges of step
+functions, hence everywhere, since these span a dense subspace (the paragraph before Theorem~\ref{ob:thm:mechanisms}).
+
+\emph{Step 4 (retractions).} For a step function $z$ of level at most $m$ and $m'\ge m$,
+$\norm{1_{\Delta_{m'}}z-1_{\Delta_m}z}_1\le\binom k22^{-m}\norm z_\infty$ by Step~0. So $\cP_\Delta z=\lim_m1_{\Delta_m}z$
+exists, with $\norm{\cP_\Delta z}_1\le\norm z_1$, and $\cP_\Delta$ extends to a contraction of
+$L^1(\Omega^k;\widehat\otimes^k_\pi G)=\widehat\otimes^k_\pi Y$. Let $\rho=\widehat\wedge^k_Y\circ\cP_\Delta$ on
+$\otimes^k_\pi Y$, so $\norm\rho\le1$. For step functions $f_a$, Step~1 gives
+$1_{\Delta_m}\alt^k_Y(f_1\wedge\dots\wedge f_k)=\Phi_m(f)$, so
+$\rho\alt^k_Y(f_1\wedge\dots\wedge f_k)=\widehat\wedge^k_Y\Phi(f)=f_1\wedge\dots\wedge f_k$ by Step~3; by density
+$\rho\alt^k_Y=\id$.
+
+\emph{Step 5 (polarization).} On step functions $\tau_\sigma z(\zeta)=\tau_\sigma\bigl(z(\zeta_{\sigma(1)},\dots,
+\zeta_{\sigma(k)})\bigr)$, so $\tau_\sigma(1_Sz)=1_{\sigma S}\tau_\sigma z$ with
+$\sigma S=\{\zeta:(\zeta_{\sigma(1)},\dots,\zeta_{\sigma(k)})\in S\}$; the sets $\sigma\Delta_m$, $\sigma\in S_k$, are
+disjoint with union $\Omega^k\setminus T_m$. Put $R_k=\sum_\sigma\tau_\sigma\cP_\Delta$, of norm at most $k!$. For a step
+function $h$, $h^{\otimes k}$ is fixed by every $\tau_\sigma$, so
+$R_kh^{\otimes k}=\lim_m1_{\Omega^k\setminus T_m}h^{\otimes k}=h^{\otimes k}$; by continuity $R_k$ fixes every point of
+$\hGamma^k_\pi Y$. For cells $C_1<\dots<C_k$ of level $m$ and $g_a\in G$,
+$\sum_\sigma\tau_\sigma(1_{C_1}g_1\otimes\dots\otimes1_{C_k}g_k)$ is the coefficient of $\lambda_1\cdots\lambda_k$ in
+$(\sum_a\lambda_a1_{C_a}g_a)^{\otimes k}$, hence a linear combination of pure powers. For a $\otimes^k_\pi G$-valued step
+function $z$ of level at most $m$, $1_{\Delta_m}z$ is a finite sum of such tensors, so
+$R_kz=\lim_m\sum_\sigma\tau_\sigma1_{\Delta_m}z$ lies in $\hGamma^k_\pi Y$; by continuity $R_k$ maps
+$\widehat\otimes^k_\pi Y$ onto $\hGamma^k_\pi Y$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cmb:cor:no-hereditary}]
+(1) The isometry $g\mapsto1_\Omega g$ has complete, hence closed, image. By Theorem~\ref{cmb:thm:cantor},
+$L^1(\Omega;E)$ and $L^1(\Omega;D)$ satisfy $(\mathrm S^n)$ and $(\mathrm R^n)$ for every $n$, and
+Proposition~\ref{fib:prop:split}(1),(2) gives the goodness statements.
+
+(2) The map $q_E\colon\ell^1(\operatorname{Ball}(E),\Kh)\to E$, $e_x\mapsto x$, is contractive. Fix $c\in K$ with
+$0<\abs c<1$. For $x\ne0$ in $E$ choose $j\in\Z$ with $\abs c^{j+1}<\norm x\le\abs c^j$; then $x/c^j\in\operatorname{Ball}(E)$,
+$q_E(c^je_{x/c^j})=x$ and $\norm{c^je_{x/c^j}}_1=\abs c^j<\abs c^{-1}\norm x$. So $q_E$ maps each open ball of radius
+$\delta$ onto a set containing the open ball of radius $\abs c\delta$; it is surjective and open, and $E$ is isomorphic to
+$\ell^1(\operatorname{Ball}(E),\Kh)/\ker q_E$. The unit vectors of $\ell^1(\operatorname{Ball}(E),\Kh)$ are linearly
+independent over $K$ with dense $K$-span, on which $\norm{\cP_<(x\otimes y)}\le\norm x_1\norm y_1$ for every total order
+of $\operatorname{Ball}(E)$. So Proposition~\ref{spl:prop:ordering} gives $(\mathrm S^n)$, $(\mathrm R^n)$ and
+polarizability in degree $n$ for every $n$, and Proposition~\ref{fib:prop:split}(1),(2) gives the goodness statements.
+The same holds for $D$.
+
+(3) By Theorem~\ref{fib:thm:ell2} with $r=\infty$ and Corollary~\ref{cls:cor:c0-not-polarizable},
+$(c_0(\N,K),c_0(\N,K))$ is not good for Banach values in degree $k$, and $c_0(\N,K)$ satisfies neither $(\mathrm S^k)$ nor
+$(\mathrm R^k)$ and is not polarizable in degree $k$. Proposition~\ref{cmb:prop:permanence}(3) transfers the last three
+statements to the completion $Y_0=c_0(\N,\Kh)$. If $(Y_0,Y_0)$ were good for Banach values in degree $k$, then
+Proposition~\ref{cmb:prop:permanence}(4), applied to the source with the complete target $Y_0$ and then to the target,
+would make $(c_0(\N,K),c_0(\N,K))$ good for Banach values in degree $k$. By~(1) and~(2) with $E=D=Y_0$, $Y_0$ is a closed
+subspace of $L^1(\Omega;Y_0)$ and isomorphic to a quotient of $\ell^1(\operatorname{Ball}(Y_0),\Kh)$; these two spaces
+satisfy the three conditions in degree $k$, and replacing either entry of $(Y_0,Y_0)$ by one of them gives a pair that is
+good for Banach values in degree $k$. Since the three conditions and goodness for Banach values are invariant under
+isomorphisms (Proposition~\ref{cmb:prop:permanence}(1)), the last assertion follows.
+\end{proof}

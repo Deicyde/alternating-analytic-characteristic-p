@@ -1,0 +1,234 @@
+\subsection{Proofs for Section~\ref{sec:combining}}\label{dfr:ssec:combining}
+
+The notation and the standing hypotheses are those of Section~\ref{sec:combining}.
+
+\begin{proof}[Proof of Lemma~\ref{fib:lem:hopf}]
+Concatenating representations gives $\norm{z\wedge w}\le\norm z\norm w$. The right side of~\eqref{fib:eq:shuffle} is
+$n$\nobreakdash-linear in $(x_1,\dots,x_n)$, of norm at most $\binom na$. It is alternating: if $x_i=x_j$ with $i\ne j$,
+the terms with $i$ and $j$ in one block vanish, and the others cancel in pairs by exchanging $i$ and $j$ between the
+blocks. Proposition~\ref{prop:exterior} gives $\operatorname{sh}^{a,b}_E$; naturality is checked on pure wedges. Each of
+the $\binom na$ terms of $\wedge^{a,b}_E\operatorname{sh}^{a,b}_E(x_1\wedge\dots\wedge x_n)$ is
+$\epsilon(S)x_S\wedge x_{S^c}=x_1\wedge\dots\wedge x_n$. The factorization of $\wedge^n_E$ holds on pure tensors; that of
+$\operatorname{alt}^n_E$ holds because every permutation of $\{1,\dots,n\}$ is uniquely a shuffle of two blocks followed
+by permutations within the blocks, and its sign is the product of their signs.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fib:thm:lucas}]
+Identify $\Alt^j(Y;F')$ with $\cL(\Lambda^j_\pi Y,F')$ by Proposition~\ref{prop:exterior}. For $T\in\Alt^n(D;F)$
+define $T^\flat\in\Alt^a(D;G)$ by $T^\flat(z)(w)=T(z\wedge w)$; then $\norm{T^\flat}\le\norm T$. Let $Q_a$ and $Q_b$ be
+bounded lifts of $A^a_{E,D;G}$ and $A^b_{E,D;F}$ (Proposition~\ref{prop:homogeneous-lift}). For
+$u_1,\dots,u_n\in\cL(E,D)$ the bilinear map on $\Lambda^a_\pi E\times\Lambda^b_\pi E$ given by
+\[
+ (z,w)\longmapsto\bigl[Q_b(u_{a+1},\dots,u_n)\bigl(Q_a(u_1,\dots,u_a)(T^\flat)(z)\bigr)\bigr](w)
+\]
+is bounded. Composing its linearization with
+$\binom na^{-1}\operatorname{sh}^{a,b}_E$ gives $Q_n(u_1,\dots,u_n)(T)\in\Alt^n(E;F)$, bounded and $n$\nobreakdash-linear
+in $(u_1,\dots,u_n)$, with values in $\cL(\Alt^n(D;F),\Alt^n(E;F))$. On the diagonal the bilinear map is
+$(z,w)\mapsto T(\Lambda^a_\pi u\,z\wedge\Lambda^b_\pi u\,w)$, so naturality and~\eqref{fib:eq:hopf} give
+$Q_n(u,\dots,u)(T)=T\circ\Lambda^n_\pi u=A^n_{E,D;F}(u)(T)$. For the last assertion take $a=1$:
+$A^1_{E,D;G}(u)(T)=T\circ u$ is linear in $u$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{fib:cor:degrees}]
+By Lucas's theorem, $\binom{a+b}a\ne0$ in $K$ exactly when the base-$p$ addition of $a$ and $b$ has no carry: over
+$\F_p$, $(1+X)^{a+b}=\prod_i(1+X^{p^i})^{c_i}$, where the $c_i$ are the base-$p$ digits of $a+b$.
+
+(1) Degrees below $p$ belong to $\fD$ by Proposition~\ref{prop:split-lift}(1). For a carry-free sum apply
+Theorem~\ref{fib:thm:lucas}; if $F$ is normed or Banach, so is $G=\Alt^b(D;F)$. For the scalar set,
+Theorem~\ref{thm:duality}(2) shows that $A^j_{E,D;K}$ is analytic exactly when $A^j_{E,D;Y^*}$ is analytic for every
+normed $Y$; apply Theorem~\ref{fib:thm:lucas} with $F=Y^*$, for which $G=\Alt^b(D;Y^*)$ is the dual of
+$\Lambda^b_\pi D\otimes_\pi Y$.
+
+(2) Let $N$ be the least missing element; $N\ge p$ by~(1). If $N$ is not a power of $p$ and $p^j$ is the largest power
+of $p$ below $N$, then $N=p^j+(N-p^j)$ is a carry-free sum with $0<N-p^j<N$, so $N\in\fD$, a contradiction. The second
+assertion follows.
+
+(3) The pair $(E,D)$ is not good in degree $n_F$; by~(2), the least degree in which it is not good is $p^i$ for some
+$i\ge1$, and $n_F\ge p^i$. If $n_F$ had a nonzero digit in a position $j<i$, then $(E,D)$ would be good in degree $p^j$,
+$A^{n_F-p^j}_{E,D;F}$ would be analytic, and $n_F=p^j+(n_F-p^j)$ would be carry-free, so
+Theorem~\ref{fib:thm:lucas} would make $A^{n_F}_{E,D;F}$ analytic.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{fib:thm:hyperplane}]
+Let $y=(0,1)\in E\oplus K$, and let $\operatorname{pr}_D$ and $\operatorname{pr}_K$ be the coordinate projections of
+$D\oplus K$ onto $D$ and $K$. Define bounded linear maps $R\colon\Alt^k(E\oplus K;F)\to\Alt^{k-1}(E;F)$, of norm at most
+one, and $J\colon\Alt^{k-1}(D;F)\to\Alt^k(D\oplus K;F)$, of norm at most $k$, by
+$R(m)(x_1,\dots,x_{k-1})=m((x_1,0),\dots,(x_{k-1},0),y)$ and
+\[
+ J(m)(z_1,\dots,z_k)=\sum_{i=1}^k(-1)^{k-i}\operatorname{pr}_K(z_i)\,
+ m(\operatorname{pr}_Dz_1,\dots,\widehat{\operatorname{pr}_Dz_i},\dots,\operatorname{pr}_Dz_k).
+\]
+The form $J(m)$ is alternating in every characteristic: if $z_a=z_b$ with $a<b$, only the terms $i=a$ and $i=b$ can be
+nonzero, their argument lists differ by moving one entry across $b-a-1$ others, and
+$(-1)^{k-a}+(-1)^{k-b}(-1)^{b-a-1}=0$. For $u\in\cL(E,D)$, $(u\oplus1)(x_i,0)=(ux_i,0)$ and $(u\oplus1)y=(0,1)$, so only
+the term $i=k$ survives and
+\[
+ A^{k-1}_{E,D;F}(u)=R\circ A^k_{E\oplus K,D\oplus K;F}(u\oplus1)\circ J.
+\]
+The right side is analytic in $u$, since $u\mapsto u\oplus1$ is affine and bounded.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{cmb:thm:decomposition}]
+\emph{Step 1 (pieces).} Let $n\le k$. For a piece of source type and a section $s_n$ for $w$ in degree $n$, the map
+$Q_n(u_1,\dots,u_n)=\widehat\wedge^n_{\widehat D}\circ(w'\varepsilon(u_1)\otimes\dots\otimes w'\varepsilon(u_n))\circ s_n$
+has diagonal $\Lambda^n_\pi(w'\varepsilon(u))\circ\Lambda^n_\pi w$, as in the proof of
+Proposition~\ref{cmb:prop:relative}(1). For a piece of target type and a retraction $\rho_n$ for $w'$ in degree $n$, the
+map $Q_n(u_1,\dots,u_n)=\rho_n\circ(\varepsilon(u_1)w\otimes\dots\otimes\varepsilon(u_n)w)\circ\alt^n_E$ has diagonal
+$\Lambda^n_\pi w'\circ\Lambda^n_\pi(\varepsilon(u)w)$, as in the proof of Proposition~\ref{cmb:prop:relative}(2). Both
+diagonals equal $\Lambda^n_\pi(w'\varepsilon(u)w)$, which proves~(1).
+
+\emph{Step 2 (two maps).} Let $\theta,\tilde\theta\colon\cL(E,D)\to\cL(E,\widehat D)$ be liftable in every degree
+$a\le k$, with lifts $Q_a$ and $\tilde Q_a$, and put $Q_0=\tilde Q_0=\id_K$. For $n\le k$ the map
+\[
+ Q^+_n(u_1,\dots,u_n)=\sum_{a=0}^n\wedge^{a,n-a}_{\widehat D}\circ\bigl(Q_a(u_1,\dots,u_a)\otimes
+ \tilde Q_{n-a}(u_{a+1},\dots,u_n)\bigr)\circ\operatorname{sh}^{a,n-a}_E ,
+\]
+with $\wedge^{a,n-a}_{\widehat D}$ extended to the completions, is bounded and $n$-linear with diagonal
+$\Lambda^n_\pi(\theta(u)+\tilde\theta(u))$, by~\eqref{cmb:eq:binomial} for $G=\widehat D$.
+
+\emph{Step 3 (conclusion).} By Step~2 and induction on $m$, the map $u\mapsto\sum_i\theta_i(u)=u$ is liftable in degree
+$k$, and Lemma~\ref{fib:lem:test} gives~(2); under the hypotheses of its last sentence, the formula of Step~2 keeps values
+in $\Lambda^n_\pi D$. Item~(3) follows from~(1) and~(2) for decompositions into pieces of source and target type, with
+Step~1 for decompositions without completion, and from Proposition~\ref{cmb:prop:relative} for relative splittings.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{cmb:prop:normal-form}]
+\emph{Step 1 (the two bilinear maps).} Given a decomposition~\eqref{cmb:eq:decomposition} into pieces of source and
+target type, let $b_S$ and $b_R$ be the sums of the bounded bilinear maps $b_i(u,x)=w'_i\varepsilon_i(u)w_ix$ over the
+pieces of source type and of target type; then $b_S(u,x)+b_R(u,x)=ux$. For a piece of source type, the map
+$\xi_i\colon G_i\to\cL(\cL(E,D),\widehat D)$, $\xi_i(g)(u)=w'_i\varepsilon_i(u)g$, is bounded linear and
+$w_{b_i}=\xi_iw_i$. For a piece of target type, the linear map $\lambda_i\colon\cL(E,D)\otimes_\pi E\to G'_i$ with
+$\lambda_i(u\otimes x)=\varepsilon_i(u)w_ix$ is bounded and $w'_{b_i}=w'_i\lambda_i$. By the paragraph on split operators
+in Section~\ref{cmb:ssec:degrees}, $w_{b_S}=\sum w_{b_i}$ is $\mathrm S^{\le k}$-split and $w'_{b_R}=\sum w'_{b_i}$ is
+$\mathrm R^{\le k}$-split.
+
+\emph{Step 2 (the two pieces).} Conversely, given $b_S$ and $b_R$, the piece
+$(\cL(\cL(E,D),\widehat D),\widehat D,w_{b_S},\id_{\widehat D},\varepsilon_S)$ with $\varepsilon_S(u)(T)=T(u)$ is of
+source type, the piece $(E,\cL(E,D)\otimes_\pi E,\id_E,w'_{b_R},\varepsilon_R)$ with $\varepsilon_R(u)(x)=u\otimes x$ is
+of target type, and $\varepsilon_S(u)w_{b_S}x+w'_{b_R}\varepsilon_R(u)x=b_S(u,x)+b_R(u,x)=ux$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{cmb:lem:subpair}]
+(1) By~\eqref{cmb:eq:decomposition}, $v=\Pi\Phi(v)J=\sum_i\Pi w'_i\,\varepsilon_i(\Phi v)\,w_iJ$, and by the ideal property
+(Proposition~\ref{ob:prop:split-operators}(2)) the pieces $(G_i,G'_i,w_iJ,\Pi w'_i,\varepsilon_i\circ\Phi)$ have the types
+of the given pieces. A source-side relative splitting $(G,w,\varepsilon)$ gives $(G,wJ,v\mapsto\Pi\varepsilon(\Phi v))$,
+and a target-side one $(G,w',\varepsilon)$ gives $(G,\Pi w',v\mapsto\varepsilon(\Phi v)J)$. (2) Apply
+Proposition~\ref{cmb:prop:transfer} with $G=E$, $G'=D$, $w=J$, $w'=\Pi|_D$ and $\varepsilon=\Phi$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{cmb:prop:parameter-pieces}]
+\emph{Step 1 (items (1) and (3)).} Item~(1) is Proposition~\ref{spl:prop:gamma-l1}. For~(3), let $J\colon P_0\to P$ and
+$\Pi'\colon P\to P_0$ be bounded linear with $\Pi'J=\id_{P_0}$, and let $R_n$ be a projection of $\widehat\otimes^n_\pi P$
+onto $\hGamma^n_\pi P$. Then ${\Pi'}^{\otimes n}R_nJ^{\otimes n}$ takes values in $\hGamma^n_\pi P_0$, since
+${\Pi'}^{\otimes n}$ maps pure powers to pure powers, and it fixes $h^{\otimes n}={\Pi'}^{\otimes n}(Jh)^{\otimes n}$ for
+$h\in P_0$.
+
+\emph{Step 2 (item (2)).} Let $n\le k$, let $J_1,J_2$ and $\Pi_1,\Pi_2$ be the inclusions and projections of
+$P=P_1\oplus P_2$, and let $R^{(1)}_a$, $R^{(2)}_a$ be projections onto $\hGamma^a_\pi P_1$, $\hGamma^a_\pi P_2$ for
+$a\le n$, with $R^{(1)}_0=R^{(2)}_0=\id_K$. For $0\le a\le n$ let
+$\operatorname{sh}_a\colon\widehat\otimes^a_\pi P_1\hot_\pi\widehat\otimes^{n-a}_\pi P_2\to\widehat\otimes^n_\pi P$ send
+$y\otimes z$ to the sum of the $\binom na$ tensors obtained by distributing the factors of $J_1^{\otimes a}y$ and of
+$J_2^{\otimes(n-a)}z$ over the $n$ slots, keeping their order, and put
+\[
+ R=\sum_{a=0}^n\operatorname{sh}_a\circ\bigl(R^{(1)}_a\otimes R^{(2)}_{n-a}\bigr)\circ
+ \bigl(\Pi_1^{\otimes a}\otimes\Pi_2^{\otimes(n-a)}\bigr).
+\]
+For $h=J_1h_1+J_2h_2$, $(\Pi_1^{\otimes a}\otimes\Pi_2^{\otimes(n-a)})(h^{\otimes n})=h_1^{\otimes a}\otimes
+h_2^{\otimes(n-a)}$ and $h^{\otimes n}=\sum_a\operatorname{sh}_a(h_1^{\otimes a}\otimes h_2^{\otimes(n-a)})$, so $R$ fixes
+$h^{\otimes n}$, hence $\hGamma^n_\pi P$. The tensor $\operatorname{sh}_a(y^{\otimes a}\otimes z^{\otimes(n-a)})$ is the
+coefficient of $\lambda^a$ in the polynomial $\lambda\mapsto(\lambda J_1y+J_2z)^{\otimes n}$, hence a linear combination of
+its values, $K$ being infinite. Since $R^{(1)}_a\otimes R^{(2)}_{n-a}$ takes values in the closed span of the tensors
+$y^{\otimes a}\otimes z^{\otimes(n-a)}$, the map $R$ takes values in $\hGamma^n_\pi P$.
+
+\emph{Step 3 (item (4)).} Let $n\le k$ and let $R_n$ be a projection onto $\hGamma^n_\pi P$. The operators that vanish on
+$\cN^n_E$ form a closed subspace $W$ of $Z=\cL(\widehat\otimes^n_\pi E,\widehat\Lambda^n_\pi D)$, and
+$T\mapsto T\circ\widehat\wedge^n_E$ is an isometry of $\cL(\widehat\Lambda^n_\pi E,\widehat\Lambda^n_\pi D)$ onto $W$
+(Lemma~\ref{ob:lem:metric-surjection}). Let $\Theta\colon\widehat\otimes^n_\pi P\to Z$ be the linearization of the bounded
+$n$-linear map
+$(y_1,\dots,y_n)\mapsto\widehat\wedge^n_{\widehat D}\circ\bigl(w'\varepsilon'(y_1)w\otimes\dots\otimes w'\varepsilon'(y_n)w\bigr)$.
+By naturality of $\wedge^n$, $\Theta(y^{\otimes n})=\widehat\Lambda^n_\pi(w'\varepsilon'(y)w)\circ\widehat\wedge^n_E$ lies in
+$W$, so $\Theta$ maps $\hGamma^n_\pi P$ into $W$. Hence
+$Q_n(u_1,\dots,u_n)=\Theta\bigl(R_n(\psi u_1\otimes\dots\otimes\psi u_n)\bigr)$, read in
+$\cL(\widehat\Lambda^n_\pi E,\widehat\Lambda^n_\pi D)$ and restricted to $\Lambda^n_\pi E$, is bounded and $n$-linear, and
+its diagonal is $\Lambda^n_\pi(w'\varepsilon(u)w)$, since $R_n$ fixes $(\psi u)^{\otimes n}$. The last assertion follows
+from Theorem~\ref{cmb:thm:decomposition}(1)--(3).
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cmb:cor:transport}]
+(1) Extend $w'$ to $\widehat G'$. Then $\theta_{E,D}(u)=w'\circ\theta_{G,G'}(\varepsilon(u))\circ w$ for $u\in\cL(E,D)$.
+Proposition~\ref{cmb:prop:naturality}(b), (c) and~(a), applied in this order to $w$, $w'$ and $\psi=\varepsilon$, give
+$\ob_k(E,D)=(\widehat\Lambda^k_\pi w)^*((\widehat\Lambda^k_\pi w')_\flat)_*(\varepsilon^\sharp)_*\ob_k(G,G')$, and pullbacks
+commute with pushouts (Corollary~\ref{ocl:cor:functorial}). (2) The family $\varepsilon$ on $\cL(E,D)$ satisfies
+$\theta_{E,D}=\varepsilon_w$, so Proposition~\ref{cmb:prop:naturality}(b) gives the formula. If $w$ is $\mathrm S^k$-split,
+then $\operatorname{sp}_k(w)=0$ by Proposition~\ref{ob:prop:split-operators}(1), and the pushout of a split sequence splits by
+Lemma~\ref{ob:lem:split-criteria}(2) and~(3).
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{cmb:prop:blocks}]
+\emph{Step 1 (the alternating map).} Fix $u^1,\dots,u^k\in\mathcal U$, and let $E_{\mathrm{fin}}\subseteq E$ be the
+subspace of vectors with finitely many nonzero blocks. For $\nu=(\nu_1,\dots,\nu_k)\in I^k$ let $i_1<\dots<i_m$ be the
+distinct entries of $\nu$, let $S_l=\{a:\nu_a=i_l\}$ and $n_l=\abs{S_l}$, and let $\epsilon(S_1,\dots,S_m)$ be the sign of
+the permutation of $\{1,\dots,k\}$ that lists $S_1$, then $S_2$, and so on, each in increasing order. For
+$x_1,\dots,x_k\in E_{\mathrm{fin}}$ put
+\[
+ \Phi(x_1,\dots,x_k)=\sum_{\nu\in I^k}\epsilon(S_1,\dots,S_m)\bigwedge_{l=1}^m\widehat\Lambda^{n_l}_\pi J'_{i_l}\,
+ Q^{i_l}_{n_l}\bigl(u^{(l)}_{i_l}\bigr)\Bigl(\bigwedge_{a\in S_l}\Pi_{i_l}x_a\Bigr),
+\]
+a finite sum in $\widehat\Lambda^k_\pi D$. Here $u^{(l)}_{i_l}$ is the tuple of the $u^j_{i_l}$ with
+$n_1+\dots+n_{l-1}<j\le n_1+\dots+n_l$, in increasing order of $j$; the wedges over $S_l$ are taken in increasing order;
+and the outer wedge is the iterated wedge product, extended to completions. Each $u^j$ enters one slot of one map
+$Q^{i_l}_{n_l}$, determined by the sizes $n_l$, so $\Phi$ is $k$-linear in $(x_1,\dots,x_k)$ and in $(u^1,\dots,u^k)$.
+It is alternating: let $x_a=x_b$ with $a\ne b$. The terms with $\nu_a=\nu_b$ vanish, since one block wedge contains
+$\Pi_{\nu_a}x_a$ twice. The term of $\nu\circ(a\ b)$ is minus the term of $\nu$ with $x_a$ and $x_b$ exchanged: the two
+tuples have the same entries and block sizes, the permutations defining their signs differ by the transposition $(a\ b)$
+followed by permutations inside the blocks, and each block factor is alternating in the vectors of its block; so the
+remaining terms cancel in pairs.
+
+\emph{Step 2 (the bound).} The wedge product is contractive and $\norm{\widehat\Lambda^n_\pi J'_i}\le1$, so the term of
+$\nu$ has norm at most $C^m\prod_j(c\norm{u^j})\prod_a\norm{\Pi_{\nu_a}x_a}\le C^kc^k\prod_j\norm{u^j}\prod_a
+\norm{\Pi_{\nu_a}x_a}$. Summing over $\nu$ gives $\norm{\Phi(x_1,\dots,x_k)}\le C^kc^k\prod_j\norm{u^j}\prod_a\norm{x_a}$,
+since $\sum_\nu\prod_a\norm{\Pi_{\nu_a}x_a}=\prod_a\norm{x_a}$. Hence $\Phi$ extends by continuity to a bounded
+$k$-linear map on $E^k$, alternating because a tuple in $E^k$ with two equal entries is a limit of such tuples in
+$E_{\mathrm{fin}}^k$, and Proposition~\ref{prop:exterior} gives $Q(u^1,\dots,u^k)\in\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$,
+$k$-linear in $(u^1,\dots,u^k)$, with $\norm Q\le C^kc^k$.
+
+\emph{Step 3 (the diagonal).} Let $u^j=u$ for every $j$. The $l$-th block factor of the term of $\nu$ is then
+$\bigwedge_{a\in S_l}J'_{i_l}u_{i_l}\Pi_{i_l}x_a$, so by the choice of the sign the term is
+$\bigwedge_{a=1}^kJ'_{\nu_a}u_{\nu_a}\Pi_{\nu_a}x_a$. Summing over $\nu$ gives
+$\bigwedge_a\bigl(\sum_iJ'_iu_i\Pi_ix_a\bigr)=ux_1\wedge\dots\wedge ux_k$ for $x_1,\dots,x_k\in E_{\mathrm{fin}}$. Wedges
+of vectors of $E_{\mathrm{fin}}$ span a dense subspace of $\Lambda^k_\pi E$, so $Q(u,\dots,u)=\Lambda^k_\pi u$. The last
+assertion is Lemma~\ref{fib:lem:test}.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{cmb:prop:permanence}]
+\emph{Step 1 (retracts and sums).} Let $J\colon Y_0\to Y$ and $\Pi'\colon Y\to Y_0$ be bounded linear with
+$\Pi'J=\id_{Y_0}$. Since $\id_{Y_0}=\Pi'\,\id_Y\,J$, the conditions $(\mathrm S^k)$ and $(\mathrm R^k)$ pass to $Y_0$ by
+Proposition~\ref{ob:prop:split-operators}(2), and polarizability by Proposition~\ref{cmb:prop:parameter-pieces}(3). For
+pairs, apply Lemma~\ref{cmb:lem:subpair}(2) in the situation of its second sentence. In~(2), the conditions pass from the
+sum to $Y_1$ and $Y_2$ by~(1). Conversely, $\id_{Y_1\oplus Y_2}$ is the sum of the inclusion-projection composites of the
+two summands, each $\mathrm S^{\le k}$-split, respectively $\mathrm R^{\le k}$-split, by the ideal property, so their sum
+is split in the same degrees by the paragraph on split operators in Section~\ref{cmb:ssec:degrees}; polarizability is
+Proposition~\ref{cmb:prop:parameter-pieces}(2). For the pairs, let $J_a,\Pi_a$ be the inclusion and projection of $E_a$
+in $E_1\oplus E_2$, and $J'_b,\Pi'_b$ those of $D_b$ in $D_1\oplus D_2$. Every $u\in\cL(E_1\oplus E_2,D_1\oplus D_2)$ is
+$\sum_{a,b}J'_b(\Pi'_buJ_a)\Pi_a$. For each $(a,b)$ the map $u\mapsto J'_b(\Pi'_buJ_a)\Pi_a$ is liftable in every degree
+$n\le k$, by the formula of Proposition~\ref{cmb:prop:transfer} for the pair $(E_a,D_b)$, with $w=\Pi_a$, $w'=J'_b$ and
+$\varepsilon(u)=\Pi'_buJ_a$. Theorem~\ref{cmb:thm:decomposition}(2), applied in each degree $n\le k$, concludes.
+
+\emph{Step 2 (completion of a space).} By the paragraph before Theorem~\ref{ob:thm:mechanisms}, applied to the dense
+subspace $Y$ of $\widehat Y$, the inclusion induces isometries $\otimes^k_\pi Y\to\otimes^k_\pi\widehat Y$ and
+$\Lambda^k_\pi Y\to\Lambda^k_\pi\widehat Y$ with dense images. So the completed powers of $Y$ and $\widehat Y$ agree, as do
+the maps $\widehat\wedge^k$ and $\alt^k$ on them, and $\hGamma^k_\pi Y=\hGamma^k_\pi\widehat Y$, since
+$h\mapsto h^{\otimes k}$ is continuous. Sections and retractions for $\id_Y$ extend by continuity to sections and
+retractions for $\id_{\widehat Y}$, since both sides of the defining identities are continuous, and those for
+$\id_{\widehat Y}$ restrict to ones for $\id_Y$. The projections onto $\hGamma^k_\pi Y=\hGamma^k_\pi\widehat Y$ are the
+same.
+
+\emph{Step 3 (completion of a pair).} Let $D$ be complete. Restriction is an isometry of $\cL(\widehat E,D)$ onto
+$\cL(E,D)$; write $\widehat u$ for the extension of $u\in\cL(E,D)$. By Step~2, $\Lambda^k_\pi E$ is a dense subspace of
+$\Lambda^k_\pi\widehat E$ with the induced norm. A lift $\widehat Q$ for $(\widehat E,D)$ gives the lift
+$Q(u_1,\dots,u_k)=\widehat Q(\widehat u_1,\dots,\widehat u_k)|_{\Lambda^k_\pi E}$ for $(E,D)$. A lift $Q$ for $(E,D)$ gives the lift for $(\widehat E,D)$ whose value at $(v_1,\dots,v_k)$ is the extension
+by continuity of $Q(v_1|_E,\dots,v_k|_E)$; its diagonal is $\Lambda^k_\pi v$, since $\Lambda^k_\pi v$ extends
+$\Lambda^k_\pi(v|_E)$. Finally $\cL(E,D)\subseteq\cL(E,\widehat D)$ isometrically for any normed $D$, and
+$\widehat\Lambda^k_\pi\widehat D=\widehat\Lambda^k_\pi D$, so a lift for $(E,\widehat D)$ restricts to a lift for
+$(E,D)$. Lemma~\ref{fib:lem:test} concludes.
+\end{proof}

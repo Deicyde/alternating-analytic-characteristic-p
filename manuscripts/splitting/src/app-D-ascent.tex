@@ -1,0 +1,393 @@
+\section{Ascent to an arbitrary base field}\label{app:ascent}\label{sec:ascent}
+
+Proposition~\ref{prop:ascent}, applied in Appendix~\ref{app:assembly} with $E_1$ and $F_1$ as in Theorem~\ref{thm:laurent},
+carries analyticity at no point from a spherically complete Laurent subfield $K_1$ to the completion $K'$ of the prescribed
+field, since a lift after scalar extension descends to $K_1$. Lemma~\ref{lem:descent} then passes from $K'$ to the field itself.
+
+\subsection{The Laurent subfield}
+We use spherical completeness in the sense used in Theorem~\ref{thm:spherical}: every nonempty family of pairwise-meeting
+closed balls has a common point. For the field case of the following lemma, see
+Schneider~\cite[Lemmas~1.3 and~1.6]{Sch}.
+
+\begin{lemma}[discrete distances]\label{lem:discdist}
+Let $Y$ be a complete nonarchimedean space whose distances lie in $r^\Z\cup\{0\}$ for some $r\in(0,1)$. Then $Y$ is
+spherically complete.
+\end{lemma}
+
+\begin{proof}
+Write $\cD(a,\rho)=\{y\in Y:\mathrm d(y,a)\le\rho\}$. In a nonarchimedean space, every point of a ball is a center.
+Consequently, whenever two closed balls meet, the one with the smaller radius lies in the other.
+The discrete distance assumption also gives
+\[
+\cD(a,\rho)=\cD(a,\rho^\flat),\qquad
+\rho^\flat:=\max\{s\in r^\Z\cup\{0\}:s\le\rho\}.
+\]
+We may therefore replace every radius by a value in $r^\Z\cup\{0\}$.
+
+Let $(\cD(a_i,\rho_i))_{i\in I}$ be a nonempty family of pairwise-meeting closed balls. If its radii have a least
+element $\rho_{i_0}$, then $\cD(a_{i_0},\rho_{i_0})$ lies in every ball of the family, so $a_{i_0}$ is a common point.
+Otherwise, discreteness implies that all the radii are positive and that their infimum is zero. Choose
+$i_1,i_2,\dots$ so that $\rho_{i_n}$ decreases strictly to zero. The corresponding balls are nested, and
+\[
+\mathrm d(a_{i_{n'}},a_{i_n})\le\rho_{i_n}\qquad(n'\ge n).
+\]
+Their centers form a Cauchy sequence. By completeness it has a limit $a$, and closedness puts $a$ in every ball
+of the sequence. For any $i\in I$, choose $n$ with $\rho_{i_n}\le\rho_i$. The $n$\nobreakdash-th ball then lies in
+$\cD(a_i,\rho_i)$, so $a$ belongs to every ball of the original family.
+\end{proof}
+
+
+
+\begin{lemma}[Laurent subfield]\label{lem:laurentsub}
+Let $K'$ be a complete nontrivially normed field of characteristic $p$, and let $t\in K'$ with $0<\abs t=r<1$.
+\begin{enumerate}
+\item $K'$ is nonarchimedean, and $\abs c=1$ for every $c\in\F_p^\times$.
+\item For $a_m,\dots,a_M\in\F_p$, not all zero, $\bigl\lvert\sum_{i=m}^Ma_it^i\bigr\rvert=r^{\min\{i:a_i\ne0\}}$.
+\item Give $\F_p((X))$ the absolute value with $\abs X=r$. There is a continuous isometric ring homomorphism
+$\mathrm{ev}_t\colon\F_p((X))\to K'$ such that
+$\mathrm{ev}_t\bigl(\sum_{i\ge m}a_iX^i\bigr)=\sum_{i\ge m}a_it^i$. Its image
+$K_1$ is a closed subfield of $K'$; it is the closure of $\F_p(t)$, and it is isometrically isomorphic to $\F_p((X))$.
+\item $K_1$ is spherically complete.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Lemma~\ref{lem:ultra} makes $K'$ nonarchimedean. For $c\in\F_p^\times$, the identity $c^{p-1}=1$ gives $\abs c=1$.
+
+(2) The nonzero terms $a_it^i$ have pairwise distinct absolute values $r^i$. In a nonarchimedean field,
+$\abs{x+y}=\abs x$ whenever $\abs y<\abs x$. Repeatedly applying this identity shows that the sum has the absolute
+value of its largest term, namely $r^{\min\{i:a_i\ne0\}}$.
+
+(3) Evaluation on Laurent polynomials defines a ring homomorphism
+$\mathrm{ev}_t\colon\F_p[X,X^{-1}]\to K'$, and (2) shows that
+$\abs{\mathrm{ev}_t(g)}=r^{\ord g}=\abs g$. Laurent polynomials are dense in $\F_p((X))$, since truncations converge.
+Completeness of $K'$ therefore gives a unique continuous extension to $\F_p((X))$. Passing to limits preserves the
+isometry and the ring operations. It also gives the stated evaluation formula, because the partial sums of
+$\sum_{i\ge m}a_iX^i$ map to the partial sums of $\sum_{i\ge m}a_it^i$.
+
+The image is complete as the isometric image of a complete space, hence closed in $K'$. It is a subfield: for
+$g\ne0$, the identity $\mathrm{ev}_t(g)\mathrm{ev}_t(g^{-1})=1$ provides the inverse. This subfield contains
+$\F_p(t)$, while the Laurent polynomials $\F_p[t,t^{-1}]\subseteq\F_p(t)$ are dense in it. The image is consequently
+exactly the closure of $\F_p(t)$.
+
+(4) By (3), $K_1$ is complete and has value group $\abs{K_1^\times}=r^\Z$. It is nonarchimedean by (1), so its distances
+lie in $r^\Z\cup\{0\}$. Lemma~\ref{lem:discdist} gives spherical completeness.
+\end{proof}
+
+\subsection{Ingleton's theorem and its consequences}
+Throughout the rest of this section we fix fields $K_1\subseteq K'$ with the following properties.
+\begin{enumerate}
+\item[(H1)] $K_1$, with the restricted absolute value, is nontrivially normed, complete and spherically complete.
+\item[(H2)] $K'$ is nonarchimedean.
+\end{enumerate}
+By multiplication, $K'$ is a nonarchimedean normed $K_1$\nobreakdash-space. In our application $K'=\Kh$ and $K_1$ is the field of
+Lemma~\ref{lem:laurentsub}.
+
+\begin{theorem}[Ingleton~\cite{In}; see also~\cite{vR}]\label{thm:ingleton}
+Let $K_1$ be a spherically complete nonarchimedean normed field, $V$ a $K_1$\nobreakdash-vector space with a nonarchimedean norm,
+$V_0\subseteq V$ a subspace, $C\ge0$, and $T_0\colon V_0\to K_1$ linear with $\abs{T_0v}\le C\norm v$ for $v\in V_0$. Then
+$T_0$ extends to a linear map $T\colon V\to K_1$ with $\abs{Tx}\le C\norm x$ for all $x\in V$.
+\end{theorem}
+
+Schneider~\cite[Prop.~9.2]{Sch} gives the more general formulation with a dominating nonarchimedean seminorm.
+
+We will use Theorem~\ref{thm:ingleton} on the nonarchimedean $K_1$\nobreakdash-space $K'$ in two ways: to obtain the scalar
+retraction below, and to extend finite-dimensional coordinate functionals in the proof of positivity of the
+projective tensor norm. Both applications have codomain $K_1$. The spaces $E_1$ and $F_1$ introduced later need not
+be nonarchimedean.
+
+\begin{corollary}[Ingleton projection]\label{cor:proj}
+There is a $K_1$\nobreakdash-linear map $\varpi\colon K'\to K_1$ with $\varpi|_{K_1}=\id$ and $\abs{\varpi(\lambda)}\le\abs\lambda$ for all
+$\lambda\in K'$.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:ingleton} with $V=K'$, $V_0=K_1$, $T_0=\id$ and $C=1$; its hypotheses hold by (H1) and (H2).
+\end{proof}
+
+\begin{samepage}
+\begin{lemma}[extension]\label{lem:ext}
+Let $\mathbb K\in\{K_1,K'\}$ and let $C\ge0$.
+\begin{enumerate}
+\item Let $V_0$ be a dense $\mathbb K$\nobreakdash-subspace of a normed $\mathbb K$\nobreakdash-space $V$, let $Y$ be a
+$\mathbb K$\nobreakdash-Banach space and $T_0\colon V_0\to Y$ a $\mathbb K$\nobreakdash-linear map with $\norm{T_0x}\le C\norm x$. Then $T_0$ extends
+uniquely to a continuous map $T\colon V\to Y$, which is $\mathbb K$\nobreakdash-linear with $\norm{Tx}\le C\norm x$.
+\item Let $V_1,\dots,V_k$ be normed $K'$\nobreakdash-spaces with dense subspaces $V_i^0$, $Y$ a $K'$\nobreakdash-Banach space, and
+$M\colon\prod_iV_i^0\to Y$ a $K'$\nobreakdash-multilinear map with $\norm{M(d)}\le C\prod_i\norm{d_i}$. Then $M$ extends uniquely to a
+continuous $K'$\nobreakdash-multilinear map $\overline M\colon\prod_iV_i\to Y$ with $\norm{\overline M}\le C$.
+\end{enumerate}
+\end{lemma}
+\end{samepage}
+
+\begin{proof}
+(1) The bound makes $T_0$ Lipschitz, hence uniformly continuous. Density of $V_0$ and completeness of $Y$ give a
+unique continuous extension. Linearity and the norm bound pass to limits by continuity of addition, scalar
+multiplication and the norm.
+
+(2) The case $k=0$ is immediate. For $k\ge1$, multilinearity gives the telescoping estimate
+\[
+\norm{M(d)-M(d')}\le C\rho^{k-1}\sum_i\norm{d_i-d'_i}
+\]
+whenever $\norm{d_i},\norm{d'_i}\le\rho$ for every $i$, with $\rho>0$. For any $v\in\prod_iV_i$, choose tuples
+$d^{(n)}\in\prod_iV_i^0$ converging to $v$. Their coordinates are uniformly bounded, so the estimate makes
+$M(d^{(n)})$ Cauchy in $Y$. Define $\overline M(v)$ to be its limit. The same estimate, applied to two approximating
+sequences, proves that this definition is independent of the choices and is continuous on bounded sets.
+Multilinearity and the product norm bound pass to limits. Finally, density of $\prod_iV_i^0$ proves uniqueness.
+\end{proof}
+
+\subsection{Projective base change}
+The next construction extends scalars while retaining the original norm and a contractive retraction whenever
+the original space is complete. The scalar retraction from Corollary~\ref{cor:proj} is the essential ingredient;
+the construction applies to arbitrary normed spaces.
+
+For a normed $K_1$\nobreakdash-space $V$ let $V_{K'}:=V\otimes_{K_1}K'$, a $K'$\nobreakdash-vector space through the second factor, and put
+\[
+\norm u_\pi:=\inf\Bigl\{\sum_j\norm{x_j}\,\abs{\lambda_j}\ :\ u=\sum_jx_j\otimes\lambda_j\Bigr\},
+\]
+the infimum over finite decompositions, with an ordinary sum. For a bounded $K_1$\nobreakdash-linear $\psi\colon K'\to K_1$ let
+$T_\psi\colon V_{K'}\to V$ be the $K_1$\nobreakdash-linear map with $T_\psi(x\otimes\lambda)=\psi(\lambda)x$; it exists because
+$(x,\lambda)\mapsto\psi(\lambda)x$ is $K_1$\nobreakdash-bilinear. Let $\iota_V\colon V\to V_{K'}$, $x\mapsto x\otimes1$; it is
+$K_1$\nobreakdash-linear, since $cx\otimes1=x\otimes c=c\cdot(x\otimes1)$ for $c\in K_1$.
+
+\begin{lemma}[projective base change]\label{lem:bc}
+Let $V$ be a normed $K_1$\nobreakdash-space; no nonarchimedean hypothesis is made on $V$.
+\begin{enumerate}
+\item $\norm{T_\psi u}\le\norm\psi\,\norm u_\pi$ for every bounded $K_1$\nobreakdash-linear $\psi\colon K'\to K_1$.
+\item $\norm\cdot_\pi$ is a $K'$\nobreakdash-norm on $V_{K'}$.
+\item $\iota_V$ is isometric.
+\item Let $V\widehat\otimes_\pi K'$ be the completion of $(V_{K'},\norm\cdot_\pi)$. If $V$ is complete, then $T_\varpi$, with
+$\varpi$ as in Corollary~\ref{cor:proj}, extends to a $K_1$\nobreakdash-linear map $\Pi_V\colon V\widehat\otimes_\pi K'\to V$ with
+$\norm{\Pi_V}\le1$ and $\Pi_V\circ\iota_V=\id_V$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) For every decomposition $u=\sum_jx_j\otimes\lambda_j$,
+\[
+\norm{T_\psi u}=\Bigl\lVert\sum_j\psi(\lambda_j)x_j\Bigr\rVert
+\le\sum_j\norm\psi\abs{\lambda_j}\norm{x_j}.
+\]
+Taking the infimum over decompositions proves the contraction estimate.
+
+(2) Concatenating decompositions gives the triangle inequality. Multiplying their second factors by
+$\mu\in K'$ gives $\norm{\mu u}_\pi\le\abs\mu\norm u_\pi$; for $\mu\ne0$, applying the same inequality with
+$\mu^{-1}$ gives equality. The zero-scalar case is immediate.
+
+It remains to prove positivity. Let $u\ne0$. Choose a finite tensor representation and rewrite its second
+factors in a basis of their $K_1$\nobreakdash-span. This gives
+\[
+u=\sum_{j=1}^nx_j\otimes\lambda_j
+\]
+with $\lambda_1,\dots,\lambda_n$ linearly independent over $K_1$. Some $x_{j_0}$ is nonzero, since otherwise
+$u=0$. On the finite-dimensional subspace $U:=\operatorname{span}_{K_1}\{\lambda_1,\dots,\lambda_n\}\subseteq K'$,
+take the coordinate functional $\psi_0(\lambda_j)=\delta_{jj_0}$. It is bounded by some $C\ge0$ by
+Lemma~\ref{lem:findim}, using completeness of $K_1$ in (H1). Apply Theorem~\ref{thm:ingleton} to the nonarchimedean
+$K_1$\nobreakdash-space $K'$ to extend it to $\psi\colon K'\to K_1$ with $\norm\psi\le C$. Then
+$T_\psi u=x_{j_0}$, so (1) gives
+\[
+0<\norm{x_{j_0}}\le C\norm u_\pi.
+\]
+Thus $\norm u_\pi>0$. This argument detects a nonzero vector coefficient by a functional on the \emph{scalar}
+factor $K'$; it requires no separating continuous dual on $V$.
+
+(3) The elementary tensor representation gives $\norm{x\otimes1}_\pi\le\norm x$. For the reverse inequality,
+use $\varpi(1)=1$ and $\norm\varpi\le1$ in (1):
+\[
+\norm x=\norm{T_\varpi(x\otimes1)}\le\norm{x\otimes1}_\pi.
+\]
+
+(4) When $V$ is complete, the contraction $T_\varpi$ on the dense tensor subspace extends by
+Lemma~\ref{lem:ext}(1), with $\mathbb K=K_1$, to a $K_1$\nobreakdash-linear contraction $\Pi_V$ with values in $V$.
+On the embedded copy of $V$ it satisfies
+$\Pi_V\iota_Vx=T_\varpi(x\otimes1)=\varpi(1)x=x$.
+\end{proof}
+
+We now fix the spaces to which the descent argument will be applied. Let $E_1$ be a normed $K_1$\nobreakdash-space
+and $F_1$ a $K_1$\nobreakdash-Banach space, and put
+\[
+E:=E_1\widehat\otimes_\pi K',\qquad F:=F_1\widehat\otimes_\pi K',
+\]
+the completions of $((E_1)_{K'},\norm\cdot_\pi)$ and $((F_1)_{K'},\norm\cdot_\pi)$. They are $K'$\nobreakdash-Banach spaces;
+$\iota_E\colon E_1\to E$ and $\iota_F\colon F_1\to F$ are $K_1$\nobreakdash-linear isometries, and $\Pi_F\colon F\to F_1$ is $K_1$\nobreakdash-linear
+with $\norm{\Pi_F}\le1$ and $\Pi_F\circ\iota_F=\id_{F_1}$ (Lemma~\ref{lem:bc}).
+
+\begin{lemma}[operators]\label{lem:ops}
+For $f\in\cL_{K_1}(E_1,E_1)$ the map $f\otimes\id$ on $(E_1)_{K'}$ is $K'$\nobreakdash-linear with
+$\norm{(f\otimes\id)u}_\pi\le\norm f\norm u_\pi$. Its extension $f_{K'}\in\cL_{K'}(E,E)$ satisfies $\norm{f_{K'}}\le\norm f$
+and $f_{K'}\circ\iota_E=\iota_E\circ f$, and $f\mapsto f_{K'}$ is $K_1$\nobreakdash-linear.
+\end{lemma}
+
+\begin{proof}
+For any decomposition $u=\sum_jx_j\otimes\lambda_j$, the image under $f\otimes\id$ has the decomposition
+$\sum_jf(x_j)\otimes\lambda_j$, whose cost is at most
+$\norm f\sum_j\norm{x_j}\abs{\lambda_j}$. Taking the infimum proves the norm bound on the algebraic tensor product.
+Since $E$ is complete, Lemma~\ref{lem:ext}(1), with $\mathbb K=K'$, gives the continuous extension $f_{K'}$ with the
+same bound. Its action on $x\otimes1$ proves the embedding identity. Additivity and $K_1$\nobreakdash-homogeneity in
+$f$ hold on elementary tensors, hence on their span, and then on $E$ by continuity.
+\end{proof}
+
+\begin{lemma}[forms]\label{lem:forms-bc}
+For $m\in\Alt^k_{K_1}(E_1;F_1)$ there is $m_{K'}\in\Alt^k_{K'}(E;F)$ with $\norm{m_{K'}}\le\norm m$ and
+\[
+m_{K'}(\iota_Ex_1,\dots,\iota_Ex_k)=\iota_F\bigl(m(x_1,\dots,x_k)\bigr)\qquad(x_i\in E_1),
+\]
+and $m\mapsto m_{K'}$ is $K_1$\nobreakdash-linear.
+\end{lemma}
+
+\begin{proof}
+We first define the form on algebraic tensors, then establish a bound independent of their decompositions, and
+finally pass to the completions. Fix a $K_1$\nobreakdash-basis $(\lambda_\beta)_{\beta\in\mathfrak B}$ of $K'$.
+Every $u\in(E_1)_{K'}$ has a unique finite expansion
+$u=\sum_\beta u^\beta\otimes\lambda_\beta$, with $u^\beta\in E_1$, and each coordinate map $u\mapsto u^\beta$ is
+$K_1$\nobreakdash-linear. Define
+\[
+m^{\mathrm{alg}}(u_1,\dots,u_k):=
+\sum_{\beta_1,\dots,\beta_k}
+m\bigl(u_1^{\beta_1},\dots,u_k^{\beta_k}\bigr)\otimes
+\lambda_{\beta_1}\cdots\lambda_{\beta_k}\in(F_1)_{K'}.
+\]
+The sum is finite, since each input has finitely many nonzero coordinates.
+
+\textup{(i)} Linearity of the coordinate maps and multilinearity of $m$ make $m^{\mathrm{alg}}$
+$K_1$\nobreakdash-multilinear.
+
+\textup{(ii)} On elementary tensors, the definition gives
+\[
+m^{\mathrm{alg}}(x_1\otimes\mu_1,\dots,x_k\otimes\mu_k)
+=m(x_1,\dots,x_k)\otimes\mu_1\cdots\mu_k
+\qquad(x_i\in E_1,\ \mu_i\in K').
+\]
+Indeed, writing $\mu_i=\sum_\beta c_{i\beta}\lambda_\beta$ with $c_{i\beta}\in K_1$ gives
+$x_i\otimes\mu_i=\sum_\beta(c_{i\beta}x_i)\otimes\lambda_\beta$. Substitution in the defining sum yields
+\[
+\sum_{\beta_1,\dots,\beta_k}
+\Bigl(\prod_ic_{i\beta_i}\Bigr)m(x)\otimes\prod_i\lambda_{\beta_i}
+=m(x)\otimes\prod_i\Bigl(\sum_\beta c_{i\beta}\lambda_\beta\Bigr),
+\]
+which is the asserted formula.
+
+\textup{(iii)} The map $m^{\mathrm{alg}}$ is $K'$\nobreakdash-multilinear. By additivity in each slot, it suffices
+to check $K'$\nobreakdash-homogeneity when every argument is an elementary tensor; there it follows from
+\textup{(ii)}. The same formula determines the map on all tuples of algebraic tensors, so the initial basis
+choice does not affect it.
+
+\textup{(iv)} For arbitrary decompositions $u_i=\sum_jx_{ij}\otimes\mu_{ij}$, multilinearity and \textup{(ii)} give
+\[
+m^{\mathrm{alg}}(u)=
+\sum_{j_1,\dots,j_k}m(x_{1j_1},\dots,x_{kj_k})\otimes\prod_i\mu_{ij_i}.
+\]
+The cost of this tensor decomposition is at most
+$\norm m\prod_i\bigl(\sum_j\norm{x_{ij}}\abs{\mu_{ij}}\bigr)$.
+Taking the infimum separately over the decompositions in each slot proves
+\[
+\norm{m^{\mathrm{alg}}(u_1,\dots,u_k)}_\pi\le\norm m\prod_i\norm{u_i}_\pi.
+\]
+
+\textup{(v)} To prove strong alternation, suppose two distinct slots $a,b$ both contain
+$u=\sum_jx_j\otimes\mu_j$. Use this \emph{same} decomposition in both slots and expand all arguments into
+elementary tensors. Terms using the same index $j$ in slots $a$ and $b$ vanish because $m$ has a repeated
+argument. For $j\ne j'$, the term using indices $(j,j')$ in these slots pairs with the term using $(j',j)$.
+Their scalar factors agree, while the values of $m$ are negatives of one another, so the pair sums to zero.
+Thus $m^{\mathrm{alg}}$ vanishes whenever any two arguments coincide. Pair cancellation remains valid in
+characteristic $2$; merely checking $m^{\mathrm{alg}}(u,\dots,u)=0$ would not establish strong alternation for
+$k\ge3$.
+
+\textup{(vi)} Regard $m^{\mathrm{alg}}$ as taking values in the completion $F$.
+By \textup{(iii)}, \textup{(iv)} and Lemma~\ref{lem:ext}(2), it extends to a continuous
+$K'$\nobreakdash-multilinear map $m_{K'}\colon E^k\to F$ with $\norm{m_{K'}}\le\norm m$.
+Strong alternation also passes to the limit: if $v_a=v_b$, approximate this common vector by one sequence in
+$(E_1)_{K'}$, and approximate the other entries separately. Every approximating tuple has equal entries in
+slots $a,b$, so \textup{(v)} and continuity give $m_{K'}(v)=0$.
+
+\textup{(vii)} Taking every scalar factor equal to one in \textup{(ii)} gives
+\[
+m_{K'}(\iota_Ex_1,\dots,\iota_Ex_k)
+=m^{\mathrm{alg}}(x_1\otimes1,\dots,x_k\otimes1)
+=m(x)\otimes1=\iota_F(m(x)).
+\]
+The defining formula is $K_1$\nobreakdash-linear in $m$. These linear identities pass to the continuous
+extensions by uniqueness, proving $K_1$\nobreakdash-linearity of $m\mapsto m_{K'}$.
+\end{proof}
+
+\begin{proposition}[descent of a lift]\label{prop:ascent}
+Assume \textup{(H1)} and \textup{(H2)}. Let $E_1$ be a normed $K_1$\nobreakdash-space, $F_1$ a $K_1$\nobreakdash-Banach space, and $E,F$ as
+above. If $A^{k,K'}_{E,E;F}$ admits a bounded $k$\nobreakdash-linear lift $P$ over $K'$, then $A^{k,K_1}_{E_1,E_1;F_1}$ admits a
+bounded $k$\nobreakdash-linear lift $P_1$ over $K_1$ with $\norm{P_1}\le\norm P$. Equivalently, by Proposition~\ref{prop:homogeneous-lift} over $K_1$ and over
+$K'$: if $A^{k,K_1}_{E_1,E_1;F_1}$ is analytic at no point, then $A^{k,K'}_{E,E;F}$ is analytic at no point either.
+\end{proposition}
+
+\begin{proof}
+Extend the operator and form inputs to $K'$, apply the given lift, and retract the value to $F_1$. Explicitly,
+for $f_1,\dots,f_k\in\cL_{K_1}(E_1,E_1)$, $m\in\Alt^k_{K_1}(E_1;F_1)$ and $x\in E_1^k$, set
+\[
+P_1(f_1,\dots,f_k)(m)(x_1,\dots,x_k):=
+\Pi_F\Bigl(P\bigl((f_1)_{K'},\dots,(f_k)_{K'}\bigr)(m_{K'})(\iota_Ex_1,\dots,\iota_Ex_k)\Bigr).
+\]
+We check the norm bound and then the diagonal identity.
+
+For fixed $f$ and $m$, the map $P((f_i)_{K'})(m_{K'})$ is a continuous alternating $K'$\nobreakdash-multilinear form
+on $E$. Precomposing each slot with the $K_1$\nobreakdash-linear isometry $\iota_E$ and postcomposing with
+$\Pi_F$ gives a $K_1$\nobreakdash-multilinear map on $E_1$, still vanishing whenever two arguments coincide.
+Lemmas~\ref{lem:bc}--\ref{lem:forms-bc} give
+\[
+\norm{P_1(f)(m)}
+\le\norm{\Pi_F}\norm P\prod_i\norm{(f_i)_{K'}}\norm{m_{K'}}
+\le\norm P\prod_i\norm{f_i}\norm m.
+\]
+In particular, $P_1(f)(m)\in\Alt^k_{K_1}(E_1;F_1)$.
+The form extension is $K_1$\nobreakdash-linear in $m$, the operator extension is $K_1$\nobreakdash-linear in each
+$f_i$, and $P$ is $K'$\nobreakdash-multilinear with values in $K'$\nobreakdash-linear operators.
+Consequently $P_1$ is $K_1$\nobreakdash-linear in $m$ and $K_1$\nobreakdash-multilinear in $(f_1,\dots,f_k)$.
+The displayed estimate proves boundedness at both levels and yields $\norm{P_1}\le\norm P$.
+
+On the diagonal, use $P(g,\dots,g)=A^{k,K'}(g)$ with $g=f_{K'}$, followed by the embedding identities in
+Lemmas~\ref{lem:ops} and~\ref{lem:forms-bc} and the retraction identity $\Pi_F\iota_F=\id$:
+\begin{align*}
+P_1(f,\dots,f)(m)(x)
+&=\Pi_F\bigl(m_{K'}(f_{K'}\iota_Ex_1,\dots,f_{K'}\iota_Ex_k)\bigr)\\
+&=\Pi_F\bigl(m_{K'}(\iota_Efx_1,\dots,\iota_Efx_k)\bigr)\\
+&=\Pi_F\bigl(\iota_F(m(fx_1,\dots,fx_k))\bigr)\\
+&=m(fx_1,\dots,fx_k)=A^{k,K_1}(f)(m)(x).\qedhere
+\end{align*}
+\end{proof}
+
+\begin{remark}\label{rem:ascent}
+Proposition~\ref{prop:ascent} is characteristic-free and uses no hypothesis on $k$. It transports negative results
+upward only, from $K_1$ to $K'$. Ingleton's theorem is used only on $K'$, with no nonarchimedean norm hypothesis on $F_1$. The completeness of $F_1$ is used essentially: it is what makes the retraction $\Pi_F$ land in $F_1$.
+\end{remark}
+
+\subsection{Incomplete base fields}
+The preceding construction takes place over the completion $\Kh$ of the prescribed field. To return to $K$,
+we restrict scalars on the resulting Banach spaces. Density of $K$ in $\Kh$ forces every continuous
+$K$\nobreakdash-multilinear map between these spaces to be $\Kh$\nobreakdash-multilinear, so a lift cannot appear under
+this restriction.
+
+\begin{lemma}\label{lem:descent}
+Let $K$ be a nontrivially normed field with completion $\Kh$, and let $E,E',F$ be $\Kh$\nobreakdash-Banach spaces, regarded as
+$K$\nobreakdash-Banach spaces by restriction of scalars (with the same norms). Then $\cL_K(E,E')=\cL_{\Kh}(E,E')$,
+$\Alt^k_K(E;F)=\Alt^k_{\Kh}(E;F)$ and $\Alt^k_K(E';F)=\Alt^k_{\Kh}(E';F)$ with the same norms, $A^{k,K}_{E,E';F}=A^{k,\Kh}_{E,E';F}$,
+and every bounded $k$\nobreakdash-linear lift of $A^{k,K}_{E,E';F}$ over $K$ is a bounded $k$\nobreakdash-linear lift of $A^{k,\Kh}_{E,E';F}$ over
+$\Kh$.
+\end{lemma}
+
+\begin{proof}
+Let $g$ be a continuous $K$\nobreakdash-linear map between normed spaces that already carry compatible
+$\Kh$\nobreakdash-scalar actions. For $\lambda\in\Kh$, choose $\lambda_n\in K$ with $\lambda_n\to\lambda$.
+Since $\norm{\lambda_nx-\lambda x}=\abs{\lambda_n-\lambda}\norm x$, continuity gives
+\[
+g(\lambda x)=\lim_n g(\lambda_nx)=\lim_n\lambda_ng(x)=\lambda g(x).
+\]
+Thus $g$ is $\Kh$\nobreakdash-linear. Applying the same argument with all but one slot fixed shows that every
+continuous $K$\nobreakdash-multilinear map is $\Kh$\nobreakdash-multilinear. Alternation is the same equal-input
+vanishing condition over either field.
+
+The spaces of bounded maps therefore coincide as sets. Their operator norms agree as well, since the norms are
+defined by the same pointwise bounds on the same vectors. They are $\Kh$\nobreakdash-Banach spaces, and
+$A^{k,K}_{E,E';F}$ and $A^{k,\Kh}_{E,E';F}$ agree by their defining precomposition formula.
+Finally, apply the slotwise density argument once more to a bounded $k$\nobreakdash-linear lift $P$ between these
+map spaces. It becomes $\Kh$\nobreakdash-multilinear with the same norm and the same diagonal identity, and hence
+is a lift over $\Kh$.
+\end{proof}
+
+\needspace{8\baselineskip}
+

@@ -1,0 +1,234 @@
+\subsection{Proofs for Section~\ref{sec:duality}}\label{dfr:ssec:duality}
+
+The notation is that of Section~\ref{sec:duality}.
+
+\begin{proof}[Proof of Proposition~\ref{fib:prop:split}]
+The maps $Q$ are bounded and $k$\nobreakdash-linear, and naturality gives
+$Q(u,\dots,u)=\Lambda^k_\pi u\circ\widehat\wedge^k_E\circ s=\Lambda^k_\pi u$ in~(1) and
+$Q(u,\dots,u)=\rho\circ\operatorname{alt}^k_D\circ\Lambda^k_\pi u=\Lambda^k_\pi u$ in~(2); Lemma~\ref{fib:lem:test}
+proves (1)--(3). For~(4), given $s$, send $m\in\Mult^k(E;F)$ to the alternating map $m^\otimes\circ s\circ\omega_E$. If
+$m=m'\circ\omega_E$ with $m'\in\cL(\Lambda^k_\pi E,F)$, then $m^\otimes=m'\circ\wedge^k_E$ and $m^\otimes\circ s=m'$; so
+this is a retraction, and it commutes with postcomposition since $(g\circ m)^\otimes=g\circ m^\otimes$. Conversely, the
+retraction for $F=\widehat\otimes^k_\pi E$ sends the canonical $k$\nobreakdash-linear map to $s\circ\omega_E$ for some
+$s\in\cL(\Lambda^k_\pi E,\widehat\otimes^k_\pi E)$. Postcomposition by $\widehat\wedge^k_E$ turns the canonical map into
+the alternating map $\omega_E$, so $\widehat\wedge^k_E\circ s\circ\omega_E=\omega_E$ and $\widehat\wedge^k_E\circ s=\id$. Without completion use
+$F=\otimes^k_\pi E$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{ob:lem:split-criteria}]
+(1) Given $\tilde\alpha_1$, $\alpha_2-i'\tilde\alpha_1$ vanishes on $\ker q$, so
+$\tilde\alpha_3(qy)=(\alpha_2-i'\tilde\alpha_1)y$ defines a linear map, bounded because $q$ is open, with
+$q'\tilde\alpha_3q=q'\alpha_2=\alpha_3q$. Given $\tilde\alpha_3$, $q'(\alpha_2-\tilde\alpha_3q)=0$, so
+$\alpha_2-\tilde\alpha_3q=i'\tilde\alpha_1$ for a linear $\tilde\alpha_1$, bounded because $i'$ is bounded below, and
+$i'\tilde\alpha_1i=\alpha_2i=i'\alpha_1$. (2) Apply (1) to $\mathcal Y'=\mathcal Y$ and the identities. (3) The space
+$Y_\alpha$ is a Banach space, and $q_\alpha$ is well defined, surjective and open, with kernel
+$\{[(y',iy)]\}=\{[(y'+\alpha y,0)]\}=i_\alpha(Y')$; and $\norm{y'}\le\norm{y'+\alpha y}+C\norm\alpha\norm{iy}$ for all $y$
+shows that $i_\alpha$ is injective and bounded below. An extension $\tilde\alpha$ gives the left inverse
+$[(y',y)]\mapsto y'+\tilde\alpha y$ of $i_\alpha$, and a left inverse $\lambda$ gives the extension $y\mapsto\lambda[(0,y)]$, since $[(0,iy)]=[(\alpha y,0)]$. Now apply (2).
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{ob:lem:metric-surjection}]
+Since $\wedge^k_E=\omega_E^\otimes$ is contractive, it suffices to find for $y$ and $\delta>0$ a preimage $z$ with
+$\norm z<\norm y+3\delta$. For $y\in\Lambda^k_\pi E$ take $z=\sum_jx_{j1}\otimes\dots\otimes x_{jk}$ for a representation
+$y=\sum_jx_{j1}\wedge\dots\wedge x_{jk}$ with $\sum_j\prod_a\norm{x_{ja}}<\norm y+\delta$. For
+$y\in\widehat\Lambda^k_\pi E$ write $y=\sum_{l\ge1}y_l$ with $y_l\in\Lambda^k_\pi E$, $\norm{y_1}<\norm y+\delta$ and
+$\sum_{l\ge2}\norm{y_l}<\delta$, and choose preimages $z_l$ with $\norm{z_l}<\norm{y_l}+2^{-l}\delta$; the series
+$z=\sum_lz_l$ converges, $\widehat\wedge^k_Ez=y$ and $\norm z<\norm y+3\delta$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{ob:lem:target}]
+(1)$\Rightarrow$(2): a retraction $\rho$, extended to $\widehat\otimes^k_\pi D$, satisfies $\rho\alt^k_D=\id$ on
+$\widehat\Lambda^k_\pi D$; so $\norm y\le\norm\rho\norm{\alt^k_Dy}$, $\rho$ is a left inverse of the first map of
+$\cR^k_D$, and Lemma~\ref{ob:lem:split-criteria}(2) applies. (2)$\Rightarrow$(1): restrict a bounded left inverse to
+$\otimes^k_\pi D$. (1)$\Leftrightarrow$(3): $\alt^k_D\omega_D$ is the antisymmetrization of
+$(y_1,\dots,y_k)\mapsto y_1\otimes\dots\otimes y_k$. So $\eta(y_1,\dots,y_k)=\rho(y_1\otimes\dots\otimes y_k)$ gives
+$\mathcal A_D\eta=\rho\alt^k_D\omega_D=\omega_D$; conversely $\rho=\eta^\otimes$ satisfies
+$\rho\alt^k_D\omega_D=\mathcal A_D\eta=\omega_D$, and the wedges span $\Lambda^k_\pi D$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{ob:lem:parameter}]
+(1)$\Rightarrow$(3): choose a projection $R_n$ onto $\widehat\Gamma^n_\pi P$ with $\norm{R_n}\le g_n(P)+\delta$. The
+linearization $\Phi^\otimes\colon\widehat\otimes^n_\pi P\to Z$ of $\Phi$, of norm $\norm\Phi$, maps each $h^{\otimes n}$,
+hence $\widehat\Gamma^n_\pi P$, into $W$. So $Q(h_1,\dots,h_n)=\Phi^\otimes R_n(h_1\otimes\dots\otimes h_n)$ takes values in
+$W$ and has diagonal $\Phi^\otimes(h^{\otimes n})$. (3)$\Rightarrow$(2): take $W=\widehat\Gamma^n_\pi P$, $Z=\widehat\otimes^n_\pi P$ and
+$\Phi(h_1,\dots,h_n)=h_1\otimes\dots\otimes h_n$. (2)$\Rightarrow$(1): the linearization of the $n$-linear map maps
+$\widehat\otimes^n_\pi P$ into $\widehat\Gamma^n_\pi P$ and fixes every $h^{\otimes n}$, hence every point of
+$\widehat\Gamma^n_\pi P$. For the last assertion, for
+$\Phi\in\Mult^n(P;Y)$ the $n$-linear map $(h_1,\dots,h_n)\mapsto\Phi^\otimes R_n(h_1\otimes\dots\otimes h_n)$ has the
+diagonal of $\Phi$, and it is $0$ when $\Phi$ has zero diagonal, since $\Phi^\otimes$ then vanishes on
+$\widehat\Gamma^n_\pi P$. So it defines a right inverse of the quotient map, of norm at most $\norm{R_n}$, that commutes
+with postcomposition.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{ob:prop:split-operators}]
+Naturality of $\wedge^k$, extended to completions, gives
+$\widehat\wedge^k_Gw^{\otimes k}=\widehat\Lambda^k_\pi w\,\widehat\wedge^k_E$. So $w^{\otimes k}(\cN^k_E)\subseteq\cN^k_G$,
+and $w^{\otimes k}|_{\cN^k_E}$, $w^{\otimes k}$, $\widehat\Lambda^k_\pi w$ satisfy the hypotheses of
+Lemma~\ref{ob:lem:split-criteria}(1) for $\cS^k_E$ and $\cS^k_G$. Now (a)$\Leftrightarrow$(b) because sections extend by
+continuity and restrict, (b)$\Leftrightarrow$(c) is Lemma~\ref{ob:lem:split-criteria}(1), and (c)$\Leftrightarrow$(d)
+is Lemma~\ref{ob:lem:split-criteria}(3). In (2), naturality of $\wedge^k$ and $\alt^k$ gives
+$\widehat\wedge^k_{G_1}v^{\otimes k}s\,\Lambda^k_\pi v'=\widehat\Lambda^k_\pi v\,\widehat\wedge^k_Gs\,\Lambda^k_\pi v'$ and
+$\widehat\Lambda^k_\pi v\,\rho\,v'^{\otimes k}\alt^k_{G_0}=\widehat\Lambda^k_\pi v\,\rho\alt^k_E\Lambda^k_\pi v'$; in
+either case the result is $\widehat\Lambda^k_\pi v\,\Lambda^k_\pi w\,\Lambda^k_\pi v'=\Lambda^k_\pi(vwv')$.
+\end{proof}
+
+From here on, $q$ and $\overline\ev$ are the maps defined after Lemma~\ref{ob:lem:evaluation}.
+
+\begin{proof}[Proof of Theorem~\ref{ob:thm:mechanisms}]
+In each case we give an extension as in Theorem~\ref{ob:thm:obstruction}(2), or a lift.
+
+\emph{Step 1 (source).} By Proposition~\ref{ob:prop:split-operators}(1), $w^{\otimes k}|_{\cN^k_E}$ has a bounded linear
+extension $\xi_w\colon\widehat\otimes^k_\pi E\to\cN^k_G$, and $\tau\xi_w$ extends $\ev|_{\cN^k_E}$. For $(\mathrm S^k_E)$
+take $w=\id_E$ and $\tau=\ev|_{\cN^k_E}$. For the data $(G,w,\varepsilon)$, the formula for $\tau$ in part~(1) defines a
+bounded linear map on $\widehat\otimes^k_\pi G$ with values in $\widehat\Lambda^k_\pi\widehat D=\widehat\Lambda^k_\pi D$ (the
+paragraph before Theorem~\ref{ob:thm:mechanisms}) and $\norm\tau\le\norm\varepsilon^k$. Naturality of $\wedge^k$ gives
+$\tau(\zeta)(u,\dots,u)=\widehat\Lambda^k_\pi\varepsilon(u)\,\widehat\wedge^k_G\zeta$, which vanishes for
+$\zeta\in\cN^k_G$. On pure tensors,
+$\tau(w^{\otimes k}(x_1\otimes\dots\otimes x_k))(u_1,\dots,u_k)=\varepsilon(u_1)wx_1\wedge\dots\wedge\varepsilon(u_k)wx_k
+=u_1x_1\wedge\dots\wedge u_kx_k$, so $\tau w^{\otimes k}=\ev$ by \eqref{ob:eq:evaluation} and continuity.
+
+\emph{Step 2 (parameter).} Let $\gamma$ be a bounded linear right inverse of $q$. Then
+$\xi=\ev-\gamma\overline{\ev}\,\widehat\wedge^k_E$ equals $\ev$ on $\cN^k_E$, and $q\xi=q\ev-\overline\ev\,\widehat\wedge^k_E=0$.
+If $(\Gamma^k_{\cL(E,D)})$ holds, $\cM^k(\cL(E,D);\widehat\Lambda^k_\pi D)$ splits by Lemma~\ref{ob:lem:parameter}. In the
+general form, the operators vanishing on $\cN^k_E$ form a closed subspace $W$ of
+$Z=\cL(\widehat\otimes^k_\pi E,\widehat\Lambda^k_\pi D)$, and $T\mapsto T\widehat\wedge^k_E$ is an isometry of
+$\cL(\widehat\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ onto $W$, by Lemma~\ref{ob:lem:metric-surjection}.
+Lemma~\ref{ob:lem:parameter}(3) gives a bounded $k$-linear
+$Q'\colon P^k\to\cL(\widehat\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ with $Q'(h,\dots,h)\widehat\wedge^k_E=\Phi(h,\dots,h)$.
+Then $Q(u_1,\dots,u_k)=Q'(\psi u_1,\dots,\psi u_k)|_{\Lambda^k_\pi E}$ is bounded and $k$-linear with
+$Q(u,\dots,u)=\Lambda^k_\pi u$, and Lemma~\ref{fib:lem:test} applies.
+
+\emph{Step 3 (target).} The formula
+$\xi'(z)(u_1,\dots,u_k)=\alt^k_D\bigl(\ev(z)(u_1,\dots,u_k)\bigr)-(u_1\otimes\dots\otimes u_k)\alt^k_E(\widehat\wedge^k_Ez)$
+defines a bounded linear $\xi'\colon\widehat\otimes^k_\pi E\to\Mult^k(\cL(E,D);\widehat\otimes^k_\pi D)$ that equals
+$\alt_*\ev$ on $\cN^k_E$. Its values have zero diagonal, since
+$\xi'(z)(u,\dots,u)=\alt^k_D\widehat\Lambda^k_\pi u\,\widehat\wedge^k_Ez-u^{\otimes k}\alt^k_E\widehat\wedge^k_Ez=0$ by
+naturality of $\alt^k$. Lemma~\ref{ob:lem:split-criteria}(3) gives the first assertion. If $\rho$ is a retraction of
+$\alt^k_D$, extended to $\widehat\otimes^k_\pi D$, then $\rho\circ\xi'$ extends $\rho\alt^k_D\ev|_{\cN^k_E}=\ev|_{\cN^k_E}$.
+
+\emph{Step 4 (relative target).} Let $\rho'\colon\otimes^k_\pi G\to\widehat\Lambda^k_\pi\widehat D=\widehat\Lambda^k_\pi D$
+satisfy $\rho'\alt^k_G=\Lambda^k_\pi w'$, and put
+\[
+ \xi(z)(u_1,\dots,u_k)=\ev(z)(u_1,\dots,u_k)-\rho'\bigl(\varepsilon(u_1)\otimes\dots\otimes\varepsilon(u_k)\bigr)
+ \alt^k_E(\widehat\wedge^k_Ez).
+\]
+This is a bounded linear map, of norm at most $1+k!\norm{\rho'}\norm\varepsilon^k$, that equals $\ev$ on $\cN^k_E$. By
+naturality of $\alt^k$ for $\varepsilon(u)\colon E\to G$,
+$\rho'\varepsilon(u)^{\otimes k}\alt^k_E=\rho'\alt^k_G\widehat\Lambda^k_\pi\varepsilon(u)
+=\widehat\Lambda^k_\pi w'\,\widehat\Lambda^k_\pi\varepsilon(u)=\widehat\Lambda^k_\pi u$, so $\xi(z)(u,\dots,u)=0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{ob:thm:ordering}]
+\emph{Step 1 (part~(1)).} By~\eqref{ob:eq:evaluation} and~\eqref{ob:eq:ordering-lift},
+$\ev(j_\otimes e^\otimes_t)=Q^\sharp_<(e^\wedge_t)$ for $t\in\Sigma^k_<$, which is the first identity on a basis. Hence
+$q\circ Q^\sharp_<=\overline\ev\circ\widehat\wedge^k_E\circ j_\otimes\circ s_<=\overline\ev\circ j_\Lambda\circ\wedge_V\circ s_<
+=\overline\ev\circ j_\Lambda$.
+
+\emph{Step 2 (part~(2)).} Since $Q$ is a lift, $q\circ Q^\sharp=\overline\ev$, so
+$q\circ L=\overline\ev\circ j_\Lambda-q\circ Q^\sharp_<=0$ by part~(1). Thus $L$ takes values in $\ker q=\Mult^k_0$, and
+$\Phi$ is $k$-linear with zero diagonal.
+
+\emph{Step 3 (part~(3)).} Put $T=Q^\sharp_<+L$. Since $\norm{Ty}\le\norm T\norm{j_\Lambda y}$, $j_\Lambda(\Lambda^k_KV)$ is
+dense and $\Mult^k$ is complete, $T=\widehat T\circ j_\Lambda$ for a bounded linear $\widehat T\colon\hLambda^k_\pi E\to\Mult^k$
+with $\norm{\widehat T}=\norm T$. By part~(1) and $q\circ L=0$, $q\circ\widehat T=\overline\ev$ on a dense subspace, hence
+everywhere. So $\widehat T=Q^\sharp$ for a lift $Q$, with $\norm Q=\norm T$, and $Q$ is unique by density. Conversely, a
+lift $Q$ gives the correction $L$ of part~(2), with $\norm{Q^\sharp_<+L}=\norm{Q^\sharp\circ j_\Lambda}=\norm Q$ by density.
+This proves the formula for $c_k(E,D)$ and the last assertion.
+
+\emph{Step 4 (part~(4)).} Since $q\circ\ev=\overline\ev\circ\widehat\wedge^k_E$, part~(1) gives
+$q(\ev(x_1\otimes\dots\otimes x_k))=\overline\ev(j_\Lambda(x_1\wedge\dots\wedge x_k))=q(Q^\sharp_<(x_1\wedge\dots\wedge x_k))$,
+so $\Omega_<$ takes values in $\Mult^k_0$. For $x\in V^k$,
+\[
+ \Omega_<(x)-L(x_1\wedge\dots\wedge x_k)=\ev(x_1\otimes\dots\otimes x_k)-(Q^\sharp_<+L)(x_1\wedge\dots\wedge x_k);
+\]
+since $\norm\ev\le1$ and $\norm{x_1\wedge\dots\wedge x_k}_\pi\le\prod_a\norm{x_a}$, this gives the second inequality. For the
+first, let $\delta>0$ and write $y\in\Lambda^k_KV$ as $\sum_ix_{i1}\wedge\dots\wedge x_{ik}$ with $x_{ia}\in V$ and
+$\sum_i\prod_a\norm{x_{ia}}<\norm y_\pi+\delta$. Summing the identity for $(x_{i1},\dots,x_{ik})$ over $i$ gives
+$\norm{(Q^\sharp_<+L)y}\le(1+\norm{\Omega_<-L\circ\wedge})(\norm y_\pi+\delta)$; let $\delta\to0$. The alternating $k$-linear
+maps $V^k\to\Mult^k_0$ are the maps $L\circ\wedge$, by the universal property of $\Lambda^k_KV$. So part~(3) and the two
+inequalities give the remaining assertions.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{ob:lem:repeated}]
+\emph{Step 1 (algebra).} Let $I_E\subseteq\otimes^k_KE$ be the span of the pure tensors with $x_a=x_{a+1}$ for some $a<k$.
+Modulo $I_E$, exchanging two adjacent entries changes the sign of a pure tensor, since
+$x\otimes y+y\otimes x=(x+y)\otimes(x+y)-x\otimes x-y\otimes y$. So $I_E$ contains every pure tensor with two equal entries,
+and it is the kernel of the quotient map $\otimes^k_KE\to\Lambda^k_KE$, by the universal property of $\Lambda^k_KE$. The
+same holds for $V$.
+
+\emph{Step 2 (closure).} Let $I$ be the image of $I_E$ in $\otimes^k_\pi E$, let $z\in\otimes^k_\pi E$ be the class of
+$\tilde z\in\otimes^k_KE$, and let $\delta>0$. Write the image of $\tilde z$ in $\Lambda^k_KE$ as
+$\sum_ix_{i1}\wedge\dots\wedge x_{ik}$ with $\sum_i\prod_a\norm{x_{ia}}<\norm{\wedge^k_Ez}+\delta$; by Step~1,
+$\tilde z-\sum_ix_{i1}\otimes\dots\otimes x_{ik}\in I_E$, so the distance from $z$ to $I$ is at most $\norm{\wedge^k_Ez}$. If
+$z\in\cN^k_E$ and $z_l\in\otimes^k_\pi E$ converge to $z$, then $\norm{\wedge^k_Ez_l}=\norm{\widehat\wedge^k_E(z_l-z)}\to0$, so
+$z$ lies in the closure of $I$. As $I\subseteq\cN^k_E$ and $\cN^k_E$ is closed, $\cN^k_E$ is the closure of $I$; with
+Step~1 this proves the first assertion.
+
+\emph{Step 3 (entries in $V$).} A pure tensor $x_1\otimes\dots\otimes x_k$ with $x_a=x_{a+1}$ is a limit of pure tensors with
+entries in $V$ and equal entries in the slots $a$ and $a+1$, since $V$ is dense and
+$(x_1,\dots,x_k)\mapsto x_1\otimes\dots\otimes x_k$ is continuous. With Step~2 this proves the last assertion.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{ob:cor:adjacent}]
+By linearization and continuity, the bounded $k$-linear maps $\Psi\colon E^k\to\Mult^k_0$ correspond to the bounded linear
+maps $\xi\colon\widehat\otimes^k_\pi E\to\Mult^k_0$, by $\xi(x_1\otimes\dots\otimes x_k)=\Psi(x_1,\dots,x_k)$, with
+$\norm\xi=\norm\Psi$. By~\eqref{ob:eq:evaluation} the displayed identity says
+$\xi(x_1\otimes\dots\otimes x_k)=\ev(x_1\otimes\dots\otimes x_k)$. If it holds whenever $x_a=x_{a+1}$ for some $a$, then
+$\xi=\ev$ on $\cN^k_E$ by Lemma~\ref{ob:lem:repeated} and continuity, so it holds whenever two entries coincide;
+conversely, an extension of $\ev|_{\cN^k_E}$ gives the identity on these tuples, whose pure tensors lie in $\cN^k_E$. So the
+maps $\Psi$ correspond to the extensions $\xi$ of Theorem~\ref{ob:thm:obstruction}(2), and that theorem with its constants
+gives the corollary.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{ob:cor:z-linear}]
+By Theorem~\ref{ob:thm:ordering}(1),
+$q\circ\ev\circ\nu\circ j_\Lambda=\overline\ev\circ\widehat\wedge^k_E\circ\nu\circ j_\Lambda=\overline\ev\circ j_\Lambda
+=q\circ Q^\sharp_<$, so $\Omega^\nu_<$ takes values in $\Mult^k_0$; it is homogeneous because $\nu$ is homogeneous and $\ev$,
+$j_\Lambda$, $Q^\sharp_<$ are linear. Since $Q^\sharp_<$ is linear,
+$\Omega^\nu_<(\sum_iy_i)-\sum_i\Omega^\nu_<(y_i)=\ev\bigl(\nu(\sum_ij_\Lambda y_i)-\sum_i\nu(j_\Lambda y_i)\bigr)$; the argument
+of $\ev$ lies in $\cN^k_E$ and has norm at most $2(1+\delta)\sum_i\norm{y_i}_\pi$ by the bound on $\nu$, and $\norm\ev\le1$.
+For a linear $L\colon\Lambda^k_KV\to\Mult^k_0$, $\Omega^\nu_<-L=\ev\circ\nu\circ j_\Lambda-(Q^\sharp_<+L)$ with
+$\norm{\ev(\nu(j_\Lambda y))}\le(1+\delta)\norm y_\pi$. So the least constant for $\Omega^\nu_<-L$ and $\norm{Q^\sharp_<+L}$
+each exceed the other by at most $1+\delta$, and Theorems~\ref{ob:thm:ordering}(3) and~\ref{ob:thm:obstruction} give the
+remaining assertions.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{ob:thm:ultrametric}]
+Put $C_\alpha=2(c_+/c_-)\norm\alpha(C_cC_e)^k$. For
+$z\in\otimes^k_KV$, $j_\otimes(z-s_<(\wedge_Vz))$ lies in $\cN^k_E$, since $\widehat\wedge^k_E\circ j_\otimes=j_\Lambda\circ\wedge_V$
+and $\wedge_V\circ s_<=\id$; let $\alpha_0(z)$ be its image under $\alpha$.
+
+\emph{Step 1 (expansion).} For $t\in\Sigma^k$ with a repeated entry put $\zeta_t=e^\otimes_t$. For $t\in\Sigma^k$ with
+distinct entries let $\sigma\in S_k$ be the permutation with $t\circ\sigma=(t_{\sigma(1)},\dots,t_{\sigma(k)})\in\Sigma^k_<$,
+and put $\zeta_t=e^\otimes_t-\sgn(\sigma)\,e^\otimes_{t\circ\sigma}$. Since $e_{t_1}\wedge\dots\wedge e_{t_k}$ is
+$\sgn(\sigma)\,e^\wedge_{t\circ\sigma}$ for distinct entries and $0$ otherwise, $\wedge_V\zeta_t=0$; and
+$\norm{j_\otimes\zeta_t}\le2C_e^k$. For $x_1,\dots,x_k\in V$, expanding $x_l=\sum_tx_l(t)e_t$ gives the finite sum
+\[
+ x_1\otimes\dots\otimes x_k-s_<(x_1\wedge\dots\wedge x_k)=\sum_{t\in\Sigma^k}\prod_{l=1}^kx_l(t_l)\,\zeta_t.
+\]
+
+\emph{Step 2 (bound).} Since $\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_Y$ is a nonarchimedean norm, Step~1 gives
+\[
+ \lvert\!\lvert\!\lvert\alpha_0(x_1\otimes\dots\otimes x_k)\rvert\!\rvert\!\rvert_Y\le\max_t\prod_{l=1}^k\abs{x_l(t_l)}\,\lvert\!\lvert\!\lvert\alpha(j_\otimes\zeta_t)\rvert\!\rvert\!\rvert_Y
+ \le C_c^k\prod_{l=1}^k\norm{x_l}\cdot\frac{2C_e^k\norm\alpha}{c_-},
+\]
+the maximum over the finitely many $t$ with $\prod_lx_l(t_l)\ne0$. As $\norm\cdot\le c_+\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_Y$, this gives
+$\norm{\alpha_0(x_1\otimes\dots\otimes x_k)}\le C_\alpha\prod_l\norm{x_l}$, and so
+$\norm{\alpha_0(z)}\le C_\alpha\sum_i\prod_l\norm{x_{il}}$ for every representation $z=\sum_ix_{i1}\otimes\dots\otimes x_{ik}$ of
+$z\in\otimes^k_KV$ with entries in $V$. By the paragraph before Theorem~\ref{ob:thm:mechanisms},
+$\norm{\alpha_0(z)}\le C_\alpha\norm{j_\otimes z}$. Since $j_\otimes(\otimes^k_KV)$ is dense and $Y$ is complete, there is a
+bounded linear $\tilde\alpha\colon\widehat\otimes^k_\pi E\to Y$ with $\tilde\alpha\circ j_\otimes=\alpha_0$ and
+$\norm{\tilde\alpha}\le C_\alpha$.
+
+\emph{Step 3 (agreement).} If $z\in\otimes^k_KV$ and $\wedge_Vz=0$, then $\tilde\alpha(j_\otimes z)=\alpha_0(z)=\alpha(j_\otimes z)$.
+The pure tensors with entries in $V$ and two equal adjacent entries lie in $\ker\wedge_V$, and their images span a dense
+subspace of $\cN^k_E$ by Lemma~\ref{ob:lem:repeated}. So $\tilde\alpha=\alpha$ on $\cN^k_E$ by continuity, and
+$\alpha_*[\cS^k_E]=0$ by Lemma~\ref{ob:lem:split-criteria}(3).
+
+\emph{Step 4 (the class).} Let $\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_D$ be a nonarchimedean norm on $\hLambda^k_\pi D$ with
+$c_-\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_D\le\norm\cdot\le c_+\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_D$. Take $Y=\Mult^k_0$ and, for $\Phi\in Y$, let
+$\lvert\!\lvert\!\lvert\Phi\rvert\!\rvert\!\rvert_Y$ be the least $C$ with $\lvert\!\lvert\!\lvert\Phi(u_1,\dots,u_k)\rvert\!\rvert\!\rvert_D\le C\prod_l\norm{u_l}$ for all $u_1,\dots,u_k\in\cL(E,D)$.
+Then $\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_Y$ is a nonarchimedean norm on the Banach space $Y$, since $\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_D$ is one, and $c_-\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_Y\le\norm\cdot\le c_+\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_Y$,
+since $\norm\Phi$ is the least $C$ with $\norm{\Phi(u_1,\dots,u_k)}\le C\prod_l\norm{u_l}$. The first part, with this $Y$ and
+$\alpha=\ev|_{\cN^k_E}$, gives $\ob_k(E,D)=0$.
+\end{proof}

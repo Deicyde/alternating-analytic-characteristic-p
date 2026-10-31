@@ -1,0 +1,179 @@
+\section{Which pairs are good}\label{sec:classification}
+
+Throughout this section $\kappa$, $\varrho$ and $K$ are as in condition~\textup{(L)}, and each result states its degrees. Symmetric sequence spaces,
+their fundamental functions $\varphi_E$, $\ell^2$\nobreakdash-domination and the product triangle bound \textup{(PTB)}
+are those of Definitions~\ref{obs:def:sequence-spaces} and~\ref{obs:def:ptb}. For a sequence space, $\cP_<$ is the
+strict triangle projection of the unit vectors $(e_t)_{t\in\N}$, and $c_{00}$, $c_0$ and $\ell^r$ stand for
+$c_{00}(\N,K)$, $c_0(\N,K)$ and $\ell^r(\N,K)$.
+
+\subsection{Symmetric spaces}
+
+\begin{theorem}[symmetric spaces]\label{cls:thm:symmetric}
+Let $E$ be a symmetric sequence space in which $c_{00}$ is dense. The following are equivalent:
+\begin{enumerate}
+\item $(E,E)$ is good for Banach values in some degree $k\ge p$;
+\item $(c_0,E)$ is good for Banach values in some degree $k\ge p$;
+\item $\cP_<$ is bounded on $E\otimes_\pi E$: there is $C$ with
+$\norm{\cP_<(x\otimes y)}_{E\otimes_\pi E}\le C\norm x_E\norm y_E$ for all $x,y\in c_{00}$;
+\item $(\mathrm S^k_E)$ holds for some $k\ge p$;
+\item $(\mathrm R^k_E)$ holds for some $k\ge p$;
+\item $E$ is polarizable in some degree $k\ge p$;
+\item for every normed $D$, the pairs $(E,D)$ and $(D,E)$ are good for Banach values in every degree.
+\end{enumerate}
+If these conditions hold, then $(\mathrm S^n_E)$, $(\mathrm R^n_E)$ and $(\Gamma^n_E)$ hold for every $n\ge1$, $E$ is
+$\ell^2$\nobreakdash-dominated, and there is $c>0$ with $\varphi_E(m)^2\ge c\,m\ln m$ for every $m\ge1$.
+\end{theorem}
+
+The proof is in Appendix~\ref{app:forcing}.
+
+\begin{corollary}[small fundamental functions]\label{cls:cor:symmetric-examples}
+Let $E$ be $\ell^r$ with $2\le r<\infty$, or $c_0$, or a symmetric sequence space in which $c_{00}$ is dense and
+$\varphi_E(m)^2\le Cm$ for some $C$ and every $m\ge1$. Then for every $k\ge p$ neither $(E,E)$ nor $(c_0,E)$ is good for
+Banach values in degree $k$, and $(\mathrm S^k_E)$, $(\mathrm R^k_E)$ and $(\Gamma^k_E)$ fail.
+\end{corollary}
+
+\begin{proof}
+For $E=\ell^r$ we have $\varphi_E(m)=m^{1/r}$, so $\varphi_E(m)^2\le m$ when $r\ge2$, and for $E=c_0$ we have
+$\varphi_E(m)=1$; in both cases $c_{00}$ is dense. If one of the pairs were good in a degree $k\ge p$, or one of the
+splittings held, Theorem~\ref{cls:thm:symmetric} would give $c\,m\ln m\le\varphi_E(m)^2\le Cm$ for every $m$, which
+fails for large $m$.
+\end{proof}
+
+\begin{corollary}\label{cls:cor:c0-not-polarizable}
+The space $c_0$ is not polarizable in any degree $k\ge p$.
+\end{corollary}
+
+\begin{proof}
+This is Corollary~\ref{cls:cor:symmetric-examples} for $E=c_0$.
+\end{proof}
+
+\subsection{Symmetric sources against \texorpdfstring{$r$}{r}-normed targets}
+
+For the targets of the next theorem, the necessary condition \textup{(PTB)} of Theorem~\ref{obs:thm:ptb} is also sufficient.
+
+\begin{theorem}[$r$-normed targets]\label{cls:thm:rnorm}
+Let $E$ be a symmetric sequence space in which $c_{00}$ is dense, and let $D$ be a symmetric sequence space with an
+equivalent $r$\nobreakdash-norm for some $r\in(2,\infty)$ or with an equivalent nonarchimedean norm. The following are
+equivalent:
+\begin{enumerate}
+\item $(E,D)$ is good for Banach values in some degree $k\ge p$;
+\item $(E,D)$ satisfies \textup{(PTB)} with some constant;
+\item $E$ is $\ell^2$\nobreakdash-dominated;
+\item $(E,D)$ is good for Banach values in every degree.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:forcing}. Under~(3), the coordinate map of $E$ into $\ell^r(\N,\Kh)$, with $r=3$ when
+$D$ has an equivalent nonarchimedean norm, is a relative ordering splitting: it is $\mathrm S^n$\nobreakdash-split for
+every $n$, and every $u\in\cL(E,D)$ factors through it (Theorem~\ref{spl:thm:relative-ordering}(1) and Step~1 of its
+proof, Corollary~\ref{spl:cor:relative-ordering-na}).
+
+\subsection{The \texorpdfstring{$\ell^r$}{l\textasciicircum r} scale}
+
+\begin{corollary}[the $\ell^r$ scale]\label{cls:cor:lr-table}
+Let $1\le r_1,r_2\le\infty$. For the pair $(\ell^{r_1},\ell^{r_2})$, with $c_0$ in place of $\ell^\infty$, the following
+are equivalent: it is good for Banach values in some degree $k\ge p$; it is good for Banach values in every degree;
+$\min(r_1,r_2)<2$, or $r_1=2<r_2$. Hence $\fD_B(\ell^{r_1},\ell^{r_2})$ is given by the following table, in which $r_i=\infty$ stands
+for $c_0$:
+\begin{center}
+\small
+\begin{tabular}{c|cccc}
+$r_1\backslash r_2$ & $[1,2)$ & $2$ & $(2,\infty)$ & $\infty$\\ \hline
+$[1,2)$ & $\{1,2,\dots\}$ & $\{1,2,\dots\}$ & $\{1,2,\dots\}$ & $\{1,2,\dots\}$\\
+$2$ & $\{1,2,\dots\}$ & $\{1,\dots,p-1\}$ & $\{1,2,\dots\}$ & $\{1,2,\dots\}$\\
+$(2,\infty)$ & $\{1,2,\dots\}$ & $\{1,\dots,p-1\}$ & $\{1,\dots,p-1\}$ & $\{1,\dots,p-1\}$\\
+$\infty$ & $\{1,2,\dots\}$ & $\{1,\dots,p-1\}$ & $\{1,\dots,p-1\}$ & $\{1,\dots,p-1\}$
+\end{tabular}
+\end{center}
+\end{corollary}
+
+The proof is in Appendix~\ref{app:forcing}.
+
+\subsection{Degrees and mechanisms}
+
+\begin{corollary}[one critical degree gives all]\label{cls:cor:dichotomy}
+For each of the following pairs $(E,D)$, the set $\fD_B(E,D)$ is $\{1,\dots,p-1\}$ or $\{1,2,\dots\}$:
+\begin{enumerate}
+\item $(E,E)$ and $(c_0,E)$, for $E$ as in Theorem~\ref{cls:thm:symmetric};
+\item $(E,D)$ as in Theorem~\ref{cls:thm:rnorm};
+\item $(\ell^{r_1},\ell^{r_2})$ for $1\le r_1,r_2\le\infty$, with $c_0$ in place of $\ell^\infty$;
+\item $(E,D)$ for complete $K$ and spaces $E$, $D$ with equivalent nonarchimedean norms.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{fib:cor:degrees}(1), $\{1,\dots,p-1\}\subseteq\fD_B(E,D)$. It remains to show that each listed pair
+that is good for Banach values in one degree $k\ge p$ is good for Banach values in every degree. For~(1)--(3) this is the
+equivalence of conditions~(1), (2) and~(7) of Theorem~\ref{cls:thm:symmetric}, of~(1) and~(4) of
+Theorem~\ref{cls:thm:rnorm}, and Corollary~\ref{cls:cor:lr-table}. For~(4), Theorem~\ref{fib:thm:local}(3) shows that
+goodness in a degree $k\ge p$ forces $\dim E<\infty$ or $\dim D<\infty$; that space has continuous coordinates by
+Lemma~\ref{lem:findim}, and Proposition~\ref{prop:split-lift}(2) gives a lift in every degree.
+\end{proof}
+
+\begin{remark}[mechanisms]\label{cls:rem:mechanisms}
+In every degree, each pair good for Banach values in Theorems~\ref{cls:thm:symmetric}, \ref{cls:thm:rnorm}
+and~\ref{fib:thm:local} and Corollary~\ref{cls:cor:lr-table} has a splitting decomposition
+(Definition~\ref{cmb:def:decomposition}) with one piece of one of three kinds: an ordering splitting of the source or the
+target (Theorem~\ref{fib:thm:lower}, Proposition~\ref{spl:prop:ordering}); the relative ordering splitting of the source
+described after Theorem~\ref{cls:thm:rnorm}; or a splitting of the source or the target by finite coordinates on its
+completion (proof of Theorem~\ref{fib:thm:local}). In each of these results, goodness implies the stated criterion by
+forcing (Theorems~\ref{fib:thm:ell2}, \ref{obs:thm:ptb} and~\ref{fib:thm:marking}).
+\end{remark}
+
+\subsection{Spreading spaces}\label{cls:ssec:spreading}
+
+\begin{definition}\label{cls:def:spreading}
+A sequence space $E$ is \emph{spreading} if it satisfies Definition~\ref{obs:def:sequence-spaces} for symmetric
+sequence spaces with invariance under permutations of $\N$ replaced by the following condition: for $d\ge1$ and
+$f\in\mathbb R^d$, the norm $\norm{\sum_{i=1}^df_ie_{t_i}}_E$ is the same for all $t_1<\dots<t_d$ in $\N$.
+\end{definition}
+
+Symmetric sequence spaces are spreading. In Banach space terms, the unit vectors of a spreading sequence space are
+$1$\nobreakdash-unconditional and $1$\nobreakdash-spreading, that is, $1$\nobreakdash-subsymmetric. A map from a subset of
+$\N$ to $\N$ is \emph{increasing} if it preserves the strict order.
+
+\begin{theorem}[spreading spaces]\label{cls:thm:spreading}
+Let $E$ and $D$ be spreading sequence spaces.
+\begin{enumerate}
+\item Lemma~\ref{obs:lem:multiplier} holds for $E$ and $D$, with relabeling by an injective map $\N\to\N$ replaced by
+relabeling along a map increasing on the support of $a$; so \textup{(PTB)} is defined for $(E,D)$ by
+Definition~\ref{obs:def:ptb}.
+\item Theorem~\ref{obs:thm:ptb}, Propositions~\ref{obs:prop:l2-domination} and~\ref{obs:prop:gamma-ptb},
+Theorems~\ref{cls:thm:symmetric} and~\ref{cls:thm:rnorm}, and Corollaries~\ref{cls:cor:symmetric-examples}
+and~\ref{cls:cor:dichotomy}(1),(2) hold with spreading sequence spaces in place of symmetric ones, and so does
+Remark~\ref{cls:rem:mechanisms} for the pairs of Theorems~\ref{cls:thm:symmetric} and~\ref{cls:thm:rnorm}.
+\item Over every nontrivially normed field $K$ of characteristic~$2$, without condition~\textup{(L)},
+Theorem~\ref{obs:thm:char-two}(4) holds for every spreading sequence space $E$ over $K$ with
+$\sup_nn/\varphi_E(n)^2=\infty$.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{app:forcing}. The spreading spaces form a larger class than the symmetric ones, also up
+to equivalent norms.
+
+\begin{example}[Garling spaces]\label{cls:ex:garling}
+In this example we identify $\N$ with $\{1,2,3,\dots\}$ through its order. Let $0<\alpha<1$, $1\le q<\infty$ and
+$\beta=(1-\alpha)/q$. For $f\in c_{00}(\N,\mathbb R)$ put
+\[
+ \norm f_{\alpha,q}=\sup\Bigl\{\Bigl(\sum_{j=1}^Lj^{-\alpha}\abs{f(t_j)}^q\Bigr)^{1/q}:L\ge1,\ t_1<\dots<t_L\Bigr\},
+\]
+a norm of the kind introduced by Garling~\cite{Ga} and studied in~\cite{AAW}, and let $E_{\alpha,q}$ be the closure of $c_{00}$ in the space
+of all $x\in\linf(\N,K)$ with $\norm x=\sup_n\norm{\abs{x1_{[n]}}}_{\alpha,q}<\infty$.
+\begin{enumerate}
+\item $E_{\alpha,q}$ is a spreading sequence space in which $c_{00}$ is dense, and
+$m^{2\beta}\le\varphi_{E_{\alpha,q}}(m)^2\le(1-\alpha)^{-2/q}m^{2\beta}$ for $m\ge1$.
+\item No norm on $c_{00}$ invariant under permutations of $\N$ is equivalent to that of $E_{\alpha,q}$, and the unit
+vectors of $E_{\alpha,q}$, in the order of $\N$, satisfy~\eqref{fib:eq:lower} for no $r\in(0,2)$ and $C\ge1$.
+\item If $2\beta\le1$, then for every $k\ge p$ neither $(E_{\alpha,q},E_{\alpha,q})$ nor $(c_0,E_{\alpha,q})$ is good for
+Banach values in degree $k$, and $(\mathrm S^k_{E_{\alpha,q}})$, $(\mathrm R^k_{E_{\alpha,q}})$ and
+$(\Gamma^k_{E_{\alpha,q}})$ fail. If $2\beta<1$, then over every nontrivially normed field $K$ of characteristic~$2$,
+with $E_{\alpha,q}$ formed over $K$ in the same way, the pair $(E_{\alpha,q},E_{\alpha,q})$ is good for Banach values in no
+degree $k\ge2$.
+\item If $2\beta>1$, then $\norm x_2^2\le\bigl(\sum_{m\ge1}m^{-2\beta}\bigr)\norm x^2$ for $x\in E_{\alpha,q}$.
+\end{enumerate}
+\end{example}
+
+The proof is in Appendix~\ref{app:forcing}. For $2\beta>1$ the necessary conditions of Theorem~\ref{cls:thm:symmetric}
+hold: $E_{\alpha,q}$ is $\ell^2$\nobreakdash-dominated by~(4), and $\varphi_{E_{\alpha,q}}(m)^2\ge m^{2\beta}$ grows faster than
+$m\ln m$; by~(2), Theorem~\ref{fib:thm:lower} does not apply to the unit vectors in their natural order
+(Question~\ref{q:quest:garling}).

@@ -1,0 +1,65 @@
+\subsection{Proofs for Section~\ref{sec:sharpness}}\label{dfr:ssec:sharpness}
+
+The notation is that of Section~\ref{sec:sharpness}.
+
+\begin{proof}[Proof of Lemma~\ref{obs:lem:normalization}]
+\emph{Step 1 (value group and residue field).} The field $\Kh$ is closed in the complete field $\kappa((X))$, hence
+complete. Put $\mathcal O=\{a\in\Kh:\abs a\le1\}$ and $\mathfrak m=\{a\in\Kh:\abs a<1\}$. For $a\in\Kh^\times$ there is
+$a'\in K$ with $\abs{a-a'}<\abs a$, hence $\abs{a'}=\abs a$; so $\abs{\Kh^\times}=\abs{K^\times}=\abs\vartheta^\Z$, and
+$\abs a\le\abs\vartheta$ for every $a\in\mathfrak m$. Since $\mathcal O=\Kh\cap\kappa[[X]]$ and
+$\mathfrak m=\Kh\cap X\kappa[[X]]$, the map $\coeff_0$ restricts to a ring homomorphism $\mathcal O\to\kappa$ with kernel
+$\mathfrak m$. So $\mathcal O/\mathfrak m$ is isomorphic to a subfield $\kappa_1$ of $\kappa$, and $\abs{\kappa_1}$ is a
+power of $p$.
+
+\emph{Step 2 (Teichm\"uller representatives).} Since $\Kh$ has characteristic $p$,
+$\operatorname{Fr}(a)=a^{\abs{\kappa_1}}$ is a continuous ring endomorphism of $\mathcal O$; let $\kappa'$ be its subring
+of fixed points. A nonzero $b\in\kappa'$ satisfies $b^{\abs{\kappa_1}-1}=1$, since $\mathcal O$ is a domain; so $\kappa'$
+is a field, $\abs b=1$, and the reduction map $\kappa'\to\mathcal O/\mathfrak m$ is injective. For surjectivity let
+$a\in\mathcal O$ and $a_n=\operatorname{Fr}^n(a)$. Since $y^{\abs{\kappa_1}}=y$ on $\kappa_1$, $w=\operatorname{Fr}(a)-a$
+lies in $\mathfrak m$, and $\abs{a_{n+1}-a_n}=\abs{w^{\abs{\kappa_1}^n}}\le\abs\vartheta^{\abs{\kappa_1}^n}$. Hence
+$a_n\to b\in\mathcal O$ with $\operatorname{Fr}(b)=b$ and $\abs{b-a}<1$. So $\kappa'\cong\kappa_1$ is a finite field of
+characteristic $p$.
+
+\emph{Step 3 (expansions).} Let $a\in\mathcal O$. By Step~2 there is $b_0\in\kappa'$ with $a-b_0\in\mathfrak m$, and
+$(a-b_0)/\vartheta\in\mathcal O$ by Step~1. Repeating this gives $b_0,b_1,\ldots\in\kappa'$ with
+$a-\sum_{i<n}b_i\vartheta^i\in\vartheta^n\mathcal O$ for every $n$, so $a=\sum_{i\ge0}b_i\vartheta^i$. If all $b_i$ lie
+in $\kappa'$ and $b_n\ne0$, then $\abs{\sum_{i\ge n}b_i\vartheta^i}=\abs\vartheta^n$, since $\abs{b_n\vartheta^n}=
+\abs\vartheta^n$ and the later terms have absolute value at most $\abs\vartheta^{n+1}$. Applied to the difference of two
+expansions, this shows that the expansion is unique.
+
+\emph{Step 4 (the isomorphism).} For $g=\sum_{i\ge m}b_iX^i$ in $\kappa'((X))$ put $\sigma(g)=\sum_{i\ge m}b_i\vartheta^i$,
+which converges since $\abs{b_i\vartheta^i}\le\abs\vartheta^i$. The map $\sigma$ is additive, and it is multiplicative
+since in the complete nonarchimedean field $\Kh$ the product of two convergent series is the sum of their Cauchy
+product, whose coefficients $\sum_{i+j=n}b_ib'_j$ lie in $\kappa'$. If $g\ne0$ has order $m$, Step~3 applied to
+$\vartheta^{-m}\sigma(g)$ gives $\abs{\sigma(g)}=\abs\vartheta^m$; so $\sigma$ is isometric, hence injective. For
+$a\in\Kh^\times$ choose $n$ with $\abs a=\abs\vartheta^n$ (Step~1); then $\vartheta^{-n}a=\sum_{i\ge0}b_i\vartheta^i$ by
+Step~3, and $a=\sigma(\sum_ib_iX^{i+n})$. So $\sigma$ is an isometric field isomorphism with $\sigma(X)=\vartheta$. It
+restricts to an isometric isomorphism of the dense subfield $\sigma^{-1}(K)$ of $\kappa'((X))$ onto $K$, and every
+statement that depends only on $K$ as a normed field transfers along this isomorphism.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{obs:lem:multiplier}]
+(1) For $x\in c_{00}(\N,K)$ and $t\in\N$, $\abs{x(t)}e_t\le\abs x$ pointwise, so $\abs{x(t)}\le\norm x_E$ by monotonicity
+and $\norm{e_t}_E=1$. For $x\in E$ and $t\in[n]$ this gives $\abs{x(t)}\le\norm{x1_{[n]}}_E\le\norm x_E$. If $b$ is
+finitely supported with $\abs b\le1$ and $[n]$ contains its support, then $bx=b(x1_{[n]})$ and $\abs{bx}\le\abs{x1_{[n]}}$,
+so $\norm{bx}_E\le\norm{x1_{[n]}}_E\le\norm x_E$.
+
+(2) For $x\in E$, $ax$ is finitely supported and $\norm{ax}_D\le\sum_{t\in\operatorname{supp}a}\abs{a(t)}\norm{e_t}_D
+\norm x_E$ by~(1); so $\mu_a$ is bounded. Moreover $ax=a(x1_{\operatorname{supp}a})$, where $x1_{\operatorname{supp}a}$ is
+supported in $\operatorname{supp}a$ and has norm at most $\norm x_E$ by~(1). This gives the formula.
+
+(3) The map $a\mapsto\mu_a$ is linear, and $\norm{\mu_ae_t}_D=\abs{a(t)}$ gives $\norm{\mu_a}_{E\to D}\ge\norm a_\infty$;
+so $a\mapsto\norm{\mu_a}_{E\to D}$ is a norm. Since $\mu_{e_t}x=x(t)e_t$, (1) gives $\norm{\mu_{e_t}}_{E\to D}=1$. For an
+injective map $\gamma\colon\N\to\N$ and finitely supported $y$, let $y^\gamma(\gamma(t))=y(t)$ and $y^\gamma=0$ off
+$\gamma(\N)$. Then $\norm{y^\gamma}=\norm y$ in $E$ and in $D$, since $\gamma$ restricted to $\operatorname{supp}y$
+extends to a permutation of $\N$. The vectors supported in $\operatorname{supp}a^\gamma$ are the $x^\gamma$ with
+$\operatorname{supp}x\subseteq\operatorname{supp}a$, and $a^\gamma x^\gamma=(ax)^\gamma$; so~(2) gives
+$\norm{\mu_{a^\gamma}}_{E\to D}=\norm{\mu_a}_{E\to D}$. Multiplication of $a$ by a sequence of absolute value $1$ does not
+change $\abs{ax}$. If $\abs a\le\abs b$, let $c=a/b$ on $\operatorname{supp}b$ and $c=0$ elsewhere; then $\abs c\le1$,
+$ax=b(cx)$ and $\norm{cx}_E\le\norm x_E$ by~(1).
+
+(4) For $x\in c_{00}(\N,K)$, $\abs{ax}\le\norm a_\infty\abs x$ pointwise, so
+$\norm{ax}_D\le C\norm{ax}_E\le C\norm a_\infty\norm x_E$. If $D$ is symmetric and $\norm x_\infty\le1$, then
+$\abs{ax}\le\abs a$, so $\norm{ax}_D\le\norm a_D$, with equality at $x=1_{\operatorname{supp}a}$. Finally
+$\norm{ax}_\infty\le\norm a_\infty\norm x_\infty\le\norm a_\infty\norm x_E$ by~(1), and~(3) gives the reverse inequality.
+\end{proof}

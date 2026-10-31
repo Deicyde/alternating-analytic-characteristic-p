@@ -1,0 +1,352 @@
+\section{The Banach exterior target over a Laurent series field}\label{app:laurent}\label{sec:laurent}
+
+We now realize the finite-field obstruction of Theorem~\ref{thm:FF} in a Banach-space setting.
+The space $F_1$ of Theorem~\ref{thm:laurent} is $\widehat\Lambda^k_\pi E_1$, the test target of
+Lemma~\ref{fib:lem:test} for the pair $(E_1,E_1)$, so Theorem~\ref{thm:laurent} says that $(E_1,E_1)$ is not good for
+Banach values in degree $k$ (Corollary~\ref{obs:cor:linf}).
+
+\begin{theorem}\label{thm:laurent}
+Let $\kappa$ be a finite field of characteristic $p$, let $k\ge p$ and $\varrho\in(0,1)$, and let $K_1=\kappa((X))$ with
+$\abs X=\varrho$. Let $E_1=\linf(\N,K_1)$, and let $F_1$ be the completion of $\Lambda^k_{K_1}E_1$ under the projective exterior
+norm. Then $A^{k,K_1}_{E_1,E_1;F_1}$ admits no bounded $k$\nobreakdash-linear lift over $K_1$. Consequently it is analytic at no point of
+$\cL(E_1,E_1)$.
+\end{theorem}
+
+\subsection{Setting}\label{ssec:laurentsetting}
+Throughout this section $k\ge1$, $\kappa$ is a field, $\varrho\in(0,1)$, and $K_1:=\kappa((X))$ is the Laurent series field with
+absolute value $\abs a:=\varrho^{\ord a}$ ($\abs0=0$). This field is complete, nontrivially normed and nonarchimedean, and
+$\abs c=1$ for every $c\in\kappa^\times$. Write $\coeff_n(a)\in\kappa$ for the $X^n$\nobreakdash-coefficient of $a\in K_1$.
+For a set $S$ and $y\in\linf(S,K_1)$ we take the constant coefficient coordinatewise:
+\[
+\coeff_0(y):=\bigl(\coeff_0(y(s))\bigr)_{s\in S}\in\kappa^S.
+\]
+The resulting \emph{constant-coefficient map} $\coeff_0$ is $\kappa$\nobreakdash-linear but not $K_1$\nobreakdash-linear.
+A nonzero Laurent series of absolute value less than one has order at least one. Consequently,
+\begin{equation}\label{eq:small}
+\norm y_\infty<1\ \Longrightarrow\ \coeff_0(y)=0,\qquad\text{hence}\qquad \norm{y-y'}_\infty<1\ \Longrightarrow\ \coeff_0(y)=\coeff_0(y').
+\end{equation}
+Put $E_1:=\linf(\N,K_1)$ with the sup norm, a nonarchimedean $K_1$\nobreakdash-Banach space, and let $E_0:=\kappa^\N\subseteq E_1$ be
+the $\kappa$\nobreakdash-subspace of sequences with entries in $\kappa$. Every nonzero $z\in E_0$ has $\norm z_\infty=1$. For
+$x\in E_1$ and $n\in\Z$ let $x_{[n]}:=(\coeff_n(x(i)))_{i\in\N}\in E_0$ be the $n$\nobreakdash-th Laurent component. For $x\ne0$
+the set $\{\ord x(i):x(i)\ne0\}$ is bounded below, because $\varrho^{\ord x(i)}\le\norm x_\infty$, so it has a minimum
+$\nu(x)$; then $\norm x_\infty=\varrho^{\nu(x)}$ and $x_{[n]}=0$ for $n<\nu(x)$. Finally put
+\[
+M_\varrho:=\max_{l\in\N}\,(l+1)\varrho^l .
+\]
+The maximum exists because $(l+1)\varrho^l\to0$. This constant will control the number of Laurent components that can
+contribute to a constant coefficient. For $\varrho\le\frac12$ one has $(l+1)\varrho^l\le(l+1)2^{-l}\le1$, so $M_\varrho=1$.
+
+\subsection{The projective exterior norm}\label{ssec:projnorm}
+On $\Lambda:=\Lambda^k_{K_1}E_1$ put
+\[
+\norm\omega_\pi:=\inf\Bigl\{\sum_j\prod_{i=1}^k\norm{x_{j,i}}_\infty\ :\ \omega=\sum_jx_{j,1}\wedge\dots\wedge x_{j,k}\Bigr\},
+\]
+where the infimum is over finite decompositions and the cost is an ordinary sum. Let $\Omega^{K_1}\colon\Lambda\to\linf(\N^k,K_1)$ be the determinant
+array of \S\ref{ssec:ext} with $L=K_1$, $S=\N$ and $V=E_1$, so that
+$\Omega^{K_1}(x_1\wedge\dots\wedge x_k)(i_1,\dots,i_k)=\det(x_b(i_a))_{a,b}$; its values are bounded by the next lemma.
+
+\needspace{9\baselineskip}
+\begin{lemma}\label{lem:proj}
+$\norm\cdot_\pi$ is a $K_1$\nobreakdash-norm on $\Lambda$ with $\norm{x_1\wedge\dots\wedge x_k}_\pi\le\prod_i\norm{x_i}_\infty$, and
+$\Omega^{K_1}$ is $K_1$\nobreakdash-linear and injective with $\norm{\Omega^{K_1}(\omega)}_\infty\le\norm\omega_\pi$. Let $F_1$ be the completion of
+$(\Lambda,\norm\cdot_\pi)$, a $K_1$\nobreakdash-Banach space, $J\colon F_1\to\linf(\N^k,K_1)$ the continuous extension of $\Omega^{K_1}$ (so
+$\norm J\le1$), and $\omega_{E_1}\colon E_1^k\to F_1$, $\omega_{E_1}(x):=x_1\wedge\dots\wedge x_k$. Then $\omega_{E_1}\in\Alt^k_{K_1}(E_1;F_1)$,
+$\norm{\omega_{E_1}}\le1$, and $J(\omega_{E_1}(x))=\Omega^{K_1}(x_1\wedge\dots\wedge x_k)$.
+\end{lemma}
+
+\begin{proof}
+For a pure wedge, each entry of the determinant array is a signed sum of products
+$x_1(i_{\sigma(1)})\cdots x_k(i_{\sigma(k)})$. Each product has absolute value at most
+$\prod_b\norm{x_b}_\infty$, so the nonarchimedean inequality in $K_1$ gives the same bound for the determinant.
+For any finite decomposition of $\omega$, it follows that
+\[
+\norm{\Omega^{K_1}(\omega)}_\infty
+\le\max_j\prod_i\norm{x_{j,i}}_\infty
+\le\sum_j\prod_i\norm{x_{j,i}}_\infty.
+\]
+Thus the array is bounded, and taking the infimum gives
+$\norm{\Omega^{K_1}(\omega)}_\infty\le\norm\omega_\pi$.
+The map $\Omega^{K_1}$ is linear and injective by Lemma~\ref{lem:detinj}, with $L=K_1$, $S=\N$ and $V=E_1$.
+In particular, $\norm\omega_\pi>0$ whenever $\omega\ne0$.
+
+The remaining norm laws follow directly from decompositions. Concatenation gives the triangle inequality.
+Since $k\ge1$, a scalar can be absorbed into the first factor of each wedge; for $\lambda\ne0$ this gives
+$\norm{\lambda\omega}_\pi\le\abs\lambda\norm\omega_\pi$, and applying the same inequality to $\lambda^{-1}$ gives
+equality. The pure-wedge bound follows by using a single summand.
+
+The array space $\linf(\N^k,K_1)$ is complete, so $\Omega^{K_1}$ extends to the contraction $J$ on $F_1$.
+The wedge map into $F_1$ is $K_1$\nobreakdash-multilinear and vanishes whenever two arguments coincide. The pure-wedge
+bound makes it continuous with norm at most one, and the asserted identity with $J$ holds on its values by
+construction.
+\end{proof}
+
+For $k\ge2$, $F_1$ is not nonarchimedean (Proposition~\ref{prop:nonultra}).
+
+\subsection{The support estimate}\label{ssec:suppest}
+We next show that the constant coefficient of every completed determinant array is represented by a finite
+algebraic exterior vector. The quantitative bound comes from counting the Laurent components needed as wedge
+\emph{factors}; the number of wedge summands may be much larger.
+
+Let $\Omega^\kappa\colon\Lambda^k_\kappa E_0\to\kappa^{\N^k}$ be the determinant array over $\kappa$; it is injective by
+Lemma~\ref{lem:detinj} with $L=\kappa$ and $V=E_0$. For $y_1,\dots,y_k\in E_0$ we have
+$\Omega^{K_1}(y_1\wedge\dots\wedge y_k)=\Omega^\kappa(y_1\wedge\dots\wedge y_k)$: the determinants are the same, with entries in
+$\kappa\subseteq K_1$. Support dimensions of elements of $\Lambda^k_\kappa E_0$ are computed in $E_0$ over $\kappa$.
+
+\begin{proposition}[support estimate]\label{prop:supp}
+For every $b\in F_1$ there is a unique $\eta(b)\in\Lambda^k_\kappa E_0$ with $\Omega^\kappa(\eta(b))=\coeff_0(Jb)$. The map $\eta$ is
+$\kappa$\nobreakdash-linear, and
+\begin{equation}\label{eq:suppest}
+\sdim\bigl(\eta(b)\bigr)\le kM_\varrho\,\norm b_{F_1}\qquad\text{for all }b\in F_1 .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1: one decomposable.} Let $x_1,\dots,x_k\in E_1$. If some $x_b=0$, the wedge is zero and we take $\eta=0$.
+Otherwise put $\nu_b:=\nu(x_b)$ and $l:=-\sum_b\nu_b$, so that
+$\prod_b\norm{x_b}_\infty=\varrho^{-l}$. The possible exponent tuples contributing to a constant coefficient form the set
+\[
+\mathcal N:=\Bigl\{n\in\Z^k:\ n_b\ge\nu_b\text{ for all }b,\ \sum_bn_b=0\Bigr\}.
+\]
+For such a tuple, the nonnegative integers $n_b-\nu_b$ sum to $l$. Hence $\mathcal N$ is empty if $l<0$;
+if $l\ge0$, every coordinate satisfies $\nu_b\le n_b\le\nu_b+l$, so $\mathcal N$ is finite.
+
+Fix $(i_1,\dots,i_k)\in\N^k$ and expand each entry as
+$x_b(i_a)=\sum_{n\ge\nu_b}\coeff_n(x_b(i_a))X^n$. In the determinant expansion
+\[
+\det(x_b(i_a))_{a,b}=\sum_\sigma\sgn(\sigma)\prod_bx_b(i_{\sigma(b)}),
+\]
+the constant coefficient of each product is its finite coefficient convolution over $\mathcal N$.
+Exchanging this finite sum with the permutation sum gives
+\[
+\coeff_0\det\bigl(x_b(i_a)\bigr)_{a,b}
+=\sum_{n\in\mathcal N}\det\bigl(x_{b,[n_b]}(i_a)\bigr)_{a,b}.
+\]
+The same finite set $\mathcal N$ works for every array coordinate. Thus
+$\coeff_0\bigl(\Omega^{K_1}(x_1\wedge\dots\wedge x_k)\bigr)=\Omega^\kappa(\eta)$, where
+\[
+\eta:=\sum_{n\in\mathcal N}x_{1,[n_1]}\wedge\dots\wedge x_{k,[n_k]}\in\Lambda^k_\kappa E_0.
+\]
+This is a finite sum in the algebraic exterior power. When $l<0$ it is zero. When $l\ge0$, all its wedge factors
+belong to the set
+$\{x_{b,[n]}:1\le b\le k,\ \nu_b\le n\le\nu_b+l\}$, which has at most $k(l+1)$ elements. Taking their span gives
+\[
+\sdim(\eta)\le k(l+1)=k\,(l+1)\varrho^l\cdot \varrho^{-l}\le kM_\varrho\prod_b\norm{x_b}_\infty.
+\]
+The final bound therefore holds in both cases.
+
+\emph{Step 2: an element of $\Lambda$.} Write $\omega=\sum_jw_j$, where
+$w_j=x_{j,1}\wedge\dots\wedge x_{j,k}$, and take $\eta_j$ from Step~1. Additivity gives
+\[
+\coeff_0(\Omega^{K_1}(\omega))
+=\sum_j\coeff_0(\Omega^{K_1}(w_j))
+=\Omega^\kappa\Bigl(\sum_j\eta_j\Bigr).
+\]
+Injectivity of $\Omega^\kappa$ shows that $\eta(\omega):=\sum_j\eta_j$ is independent of the chosen decomposition.
+Subadditivity of support dimension now yields
+\[
+\sdim(\eta(\omega))\le\sum_j\sdim(\eta_j)
+\le kM_\varrho\sum_j\prod_i\norm{x_{j,i}}_\infty.
+\]
+The left side is fixed while the decomposition varies. Taking the infimum therefore gives
+$\sdim(\eta(\omega))\le kM_\varrho\norm\omega_\pi$, without requiring a minimizing decomposition.
+
+\emph{Step 3: completion.} Choose $\omega_n\in\Lambda$ with $\norm{b-\omega_n}_{F_1}\to0$. Since $J$ is a contraction,
+\[
+\norm{Jb-\Omega^{K_1}(\omega_n)}_\infty\le\norm{b-\omega_n}_{F_1}<1
+\qquad(n\ge n_0).
+\]
+Equation~\eqref{eq:small} therefore gives the \emph{exact} identities
+\[
+\coeff_0(Jb)=\coeff_0(\Omega^{K_1}(\omega_n))=\Omega^\kappa(\eta(\omega_n))
+\qquad(n\ge n_0).
+\]
+By injectivity of $\Omega^\kappa$, the algebraic vectors $\eta(\omega_n)$ are eventually equal. Define $\eta(b)$
+to be this common value. Its array is $\coeff_0(Jb)$, so the same injectivity also proves independence of the
+approximating sequence and uniqueness. In particular, no limit in $\Lambda^k_\kappa E_0$ is involved.
+
+For every $n\ge n_0$ the fixed vector $\eta(b)$ satisfies
+$\sdim(\eta(b))\le kM_\varrho\norm{\omega_n}_\pi$. Since $\norm{\omega_n}_\pi\to\norm b_{F_1}$, this gives~\eqref{eq:suppest}.
+Finally, the array characterization proves $\kappa$\nobreakdash-linearity: $J$ is $K_1$\nobreakdash-linear, $\coeff_0$ is
+$\kappa$\nobreakdash-linear, and $\Omega^\kappa$ is linear and injective.
+\end{proof}
+
+\subsection{The coefficient lift}\label{ssec:Psi}
+The support estimate converts norm control into an algebraic obstruction. We apply it to a hypothetical lift,
+evaluated on coordinatewise multiplication operators and on the universal wedge map $\omega_{E_1}$.
+
+Suppose that $P$ is a bounded $k$\nobreakdash-linear lift of $A^{k,K_1}_{E_1,E_1;F_1}$ over $K_1$. For $a\in E_1$ let
+$\mu_a\in\cL(E_1,E_1)$ be coordinatewise multiplication, $\mu_ax=ax$. The map $a\mapsto \mu_a$ is $K_1$\nobreakdash-linear and
+$\norm{\mu_a}\le\norm a_\infty$. Define
+\begin{align*}
+\Phi(a_1,\dots,a_k;x_1,\dots,x_k)&:=P(\mu_{a_1},\dots,\mu_{a_k})(\omega_{E_1})(x_1,\dots,x_k)\in F_1,\\
+\Psi&:=\eta\circ\Phi|_{E_0^{2k}}\colon E_0^k\times E_0^k\to\Lambda^k_\kappa E_0 .
+\end{align*}
+Since $\Omega^\kappa\circ\eta=\coeff_0\circ J$, the map $\Psi$ is $\coeff_0\circ J\circ\Phi|_{E_0^{2k}}$, read in $\Lambda^k_\kappa E_0$
+through the injective map $\Omega^\kappa$.
+
+\begin{lemma}\label{lem:Psi}
+The map $\Psi$ has the following properties.
+\begin{enumerate}
+\item[($\Psi$1)] $\Psi$ is $2k$\nobreakdash-linear over $\kappa$.
+\item[($\Psi$2)] $\Psi$ is alternating in the last $k$ slots.
+\item[($\Psi$3)] $\sdim(\Psi(z))\le d:=\lfloor kM_\varrho\norm P\rfloor$ for \emph{all} $z\in E_0^{2k}$.
+\item[($\Psi$4)] $\Psi$ satisfies \eqref{eq:Pol} for the multiplier family $\mu^\kappa\colon E_0\to\End_\kappa(E_0)$,
+$\mu^\kappa_ax=ax$: for all $m\ge1$, $b_1,\dots,b_m\in E_0$, $\alpha\in\N^m$ with $\abs\alpha=k$, and $x\in E_0^k$,
+\[
+\sum_{\type f=\alpha}\Psi(b_f;x)=\sum_{\type f=\alpha}(b_{f(1)}x_1)\wedge\dots\wedge(b_{f(k)}x_k)\qquad\text{in }\Lambda^k_\kappa E_0 .
+\]
+In particular $\Psi$ satisfies \eqref{eq:Pol1}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The map $\Phi$ is $K_1$\nobreakdash-multilinear, so its restriction to $E_0^{2k}$ is $\kappa$\nobreakdash-multilinear.
+Composing with the $\kappa$\nobreakdash-linear map $\eta$ proves ($\Psi$1). Since
+$P(\mu_{a_1},\dots,\mu_{a_k})(\omega_{E_1})$ belongs to $\Alt^k_{K_1}(E_1;F_1)$, it vanishes when two of the last $k$ arguments
+coincide; the same holds after applying $\eta$, proving ($\Psi$2).
+
+For ($\Psi$3), all inputs from $E_0$ have norm at most one. Thus
+\[
+\norm{\Phi(a;x)}\le\norm P\prod_i\norm{\mu_{a_i}}\,\norm{\omega_{E_1}}\prod_i\norm{x_i}_\infty\le\norm P.
+\]
+Apply~\eqref{eq:suppest} and use that support dimension is an integer to obtain the stated bound by $d$.
+
+To prove ($\Psi$4), we first compare coefficients over the infinite field $K_1$, while the values still lie in
+$F_1$. Fix $b_1,\dots,b_m\in E_0$ and $x\in E_0^k$. For $\lambda\in K_1^m$ put
+$a_\lambda:=\sum_i\lambda_ib_i\in E_1$. The diagonal identity for the lift gives
+\[
+\Phi(a_\lambda,\dots,a_\lambda;x)
+=P(\mu_{a_\lambda},\dots,\mu_{a_\lambda})(\omega_{E_1})(x)
+=A(\mu_{a_\lambda})(\omega_{E_1})(x)
+=\omega_{E_1}(a_\lambda x_1,\dots,a_\lambda x_k).
+\]
+Expanding both sides by multilinearity gives
+$\sum_\alpha\lambda^\alpha(L_\alpha-R_\alpha)=0$ for all $\lambda\in K_1^m$, where
+\[
+L_\alpha:=\sum_{\type f=\alpha}\Phi(b_f;x)\in F_1,\qquad
+R_\alpha:=\sum_{\type f=\alpha}\omega_{E_1}(b_{f(1)}x_1,\dots,b_{f(k)}x_k)\in F_1.
+\]
+The field $K_1$ is infinite even when $\kappa$ is finite. Lemma~\ref{lem:idprinc}, applied in the
+$K_1$\nobreakdash-vector space $F_1$, therefore yields $L_\alpha=R_\alpha$ for every $\alpha$.
+
+We can now apply $\eta$. Additivity gives
+$\eta(L_\alpha)=\sum_{\type f=\alpha}\Psi(b_f;x)$. To identify the other side, take $y_1,\dots,y_k\in E_0$.
+By Lemma~\ref{lem:proj} and the determinant-array agreement preceding Proposition~\ref{prop:supp},
+\[
+J(\omega_{E_1}(y))=\Omega^{K_1}(y_1\wedge\dots\wedge y_k)
+=\Omega^\kappa(y_1\wedge\dots\wedge y_k).
+\]
+This array has entries in $\kappa$, so taking its constant coefficient leaves it unchanged. Uniqueness in
+Proposition~\ref{prop:supp} then gives
+$\eta(\omega_{E_1}(y))=y_1\wedge\dots\wedge y_k\in\Lambda^k_\kappa E_0$.
+Using $y_j=b_{f(j)}x_j$ in each summand of $R_\alpha$ proves
+\[
+\eta(R_\alpha)=\sum_{\type f=\alpha}(b_{f(1)}x_1)\wedge\dots\wedge(b_{f(k)}x_k),
+\]
+which is the required identity.
+\end{proof}
+
+The order of these operations is essential for the full identity ($\Psi$4). Evaluating the diagonal only at
+$\kappa$\nobreakdash-points would give \eqref{eq:Pw} there, which for $\kappa=\F_q$ and $k>q$ is strictly weaker than
+\eqref{eq:Pol} (Proposition~\ref{prop:diag}(3)). The proof below uses only the consequence~\eqref{eq:Pol1}.
+
+\subsection{No bounded lift over a Laurent series field}
+
+We now combine the support estimate (Proposition~\ref{prop:supp}) and the coefficient lift (Lemma~\ref{lem:Psi}) with the finite-field theorem of Appendix~\ref{app:FF} (Theorem~\ref{thm:FF}) to prove Theorem~\ref{thm:laurent}.
+
+\begin{proof}[Proof of Theorem~\ref{thm:laurent}]
+Suppose $P$ exists, and form $\Psi$ as in \S\ref{ssec:Psi}. By Lemma~\ref{lem:Psi},
+$\Psi\colon E_0^k\times E_0^k\to\Lambda^k_\kappa E_0$ with $E_0=\kappa^\N$ is $2k$\nobreakdash-linear over $\kappa$, alternating and hence
+antisymmetric in the last $k$ slots, satisfies \eqref{eq:Pol1}, and has $\sdim(\Psi(z))\le d$ for all inputs $z$. Moreover
+$k!=0$ in $\kappa$, since $k\ge p=\operatorname{char}\kappa$. This contradicts Theorem~\ref{thm:FF}(2) with $L=\kappa$
+and $E_0=\kappa^\N$. The last sentence follows from Proposition~\ref{prop:homogeneous-lift}.
+\end{proof}
+
+\begin{remark}\label{rem:infkappa}
+Lemmas~\ref{lem:proj} and~\ref{lem:Psi} and Proposition~\ref{prop:supp} hold for every field $\kappa$, and nothing in them
+uses a normalization of $\varrho$: the constant $M_\varrho$ makes the argument uniform in $\varrho\in(0,1)$. Only the final appeal to
+Theorem~\ref{thm:FF} needs $\kappa$ finite. We do not need, and do not discuss, the analogue of
+Theorem~\ref{thm:laurent} for infinite $\kappa$ with this particular pair $(E_1,F_1)$. For an infinite $\kappa$ of
+characteristic $p$ the field $\kappa((X))$ is covered by Theorem~\ref{thm:operator-obstructions}(1), with the pair obtained by ascent from its
+subfield $\F_p((X))$.
+\end{remark}
+
+\subsection{Multiplier families and \texorpdfstring{$c_0$}{c0} bases}\label{lau:ssec:multipliers}
+The proof of Theorem~\ref{thm:laurent} uses the hypothetical lift only on coordinatewise multiplication operators and
+only at the single form $\omega_{E_1}$. Moreover, Theorem~\ref{thm:FF}(1) needs only finitely supported test vectors with
+entries in $\{0,\pm1\}$. Both observations give a much smaller bad parameter space. Throughout this subsection
+$\kappa$, $k$, $\varrho$, $K_1$, $E_1$, $F_1$ and $\omega_{E_1}$ are as in Theorem~\ref{thm:laurent}, $c_0(\N,K_1)\subseteq E_1$ carries the
+supremum norm, and $\mu_a\in\cL(E_1,E_1)$ denotes multiplication by $a$.
+
+\begin{proposition}[multipliers on $c_0$]\label{lau:prop:c0-multipliers}
+The homogeneous map
+\[
+ \sigma\colon c_0(\N,K_1)\to\Alt^k_{K_1}(E_1;F_1),\qquad
+ \sigma(a)(x_1,\dots,x_k)=\omega_{E_1}(ax_1,\dots,ax_k)=(ax_1)\wedge\dots\wedge(ax_k),
+\]
+has no bounded $k$\nobreakdash-linear lift with values in $\Alt^k_{K_1}(E_1;F_1)$. Consequently, for every
+$u_0\in\cL(E_1,E_1)$, the map $a\mapsto A^{k,K_1}_{E_1,E_1;F_1}(u_0+\mu_a)(\omega_{E_1})$ is analytic at no point of $c_0(\N,K_1)$. In
+particular $a\mapsto A^{k,K_1}_{E_1,E_1;F_1}(u_0+\mu_a)$ is analytic at no point.
+\end{proposition}
+
+
+
+\begin{proof}[Proof of Proposition~\ref{lau:prop:c0-multipliers}]
+Suppose $p\colon c_0(\N,K_1)^k\to\Alt^k_{K_1}(E_1;F_1)$ is a bounded $k$\nobreakdash-linear lift of $\sigma$. Let
+$V_{\mathrm{fin}}=\kappa^{(\N)}$ be the finitely supported sequences with entries in $\kappa$; it lies in both $c_0(\N,K_1)$
+and $E_0$. Define $\Psi(a;x)=\eta\bigl(p(a_1,\dots,a_k)(x_1,\dots,x_k)\bigr)$ for $a,x\in V_{\mathrm{fin}}^k$. The proof of
+Lemma~\ref{lem:Psi} applies verbatim. The map $\Psi$ is $2k$\nobreakdash-linear over $\kappa$ and alternating in the last
+$k$ slots. Its inputs have supremum norm at most one, so~\eqref{eq:suppest} gives
+$\sdim\Psi(a;x)\le\lfloor kM_\varrho\norm p\rfloor$. The polarization points $a_\lambda=\sum_i\lambda_ib_i$, with
+$b_i\in V_{\mathrm{fin}}$, are finitely supported and hence lie in $c_0(\N,K_1)$, so the identity~\eqref{eq:Pol}, and in
+particular~\eqref{eq:Pol1}, follows from the diagonal identity as before. This contradicts Theorem~\ref{thm:FF}(1), since
+$k!=0$ in $\kappa$.
+
+For the second assertion, suppose that the map is analytic at $a_0$, with expansion $\sum_n p_n$ there. For
+$h\in c_0(\N,K_1)$ and $t\in K_1$, multilinearity gives, in $\Mult^k_{K_1}(E_1;F_1)$,
+\[
+ \omega_{E_1}\circ(u_0+\mu_{a_0}+t\mu_h,\dots,u_0+\mu_{a_0}+t\mu_h)=\sum_{r=0}^kt^rC_r(h),\qquad C_k(h)=\sigma(h).
+\]
+Comparing this with the given expansion on scalar lines, Lemma~\ref{lem:unique} shows, exactly as in
+Proposition~\ref{prop:homogeneous-lift}, that $p_k$ is a bounded lift of $\sigma$. This is impossible. The operator-valued
+statement follows by evaluation at $\omega_{E_1}$.
+\end{proof}
+
+\begin{corollary}[diagonal transitions over a $c_0$ base]\label{lau:cor:diagonal-bundle}
+Let $U$ be the open unit ball of $c_0(\N,K_1)$, an analytic manifold with one chart. Let $\mathcal V\to U$ be the
+trivial bundle with fiber $E_1$ and the two global trivializations $\tau_0(a,z)=(a,z)$ and $\tau_1(a,z)=(a,\mu_{1+a}z)$,
+and let $\mathcal B=U\times F_1$. Then $\mathcal V$ is an analytic normed vector bundle whose transitions are isometric
+diagonal automorphisms of $E_1$. The naturally induced atlas on $\Alt^k(\mathcal V;\mathcal B)$ is not analytic: the section
+that is constantly $\omega_{E_1}$ in the chart induced by $\tau_1$ is, in the chart induced by $\tau_0$, the map
+$a\mapsto \omega_{E_1}\circ(\mu_{1+a},\dots,\mu_{1+a})$, which is analytic at no point of $U$.
+\end{corollary}
+
+\begin{proof}
+For $a\in U$ every coordinate satisfies $\abs{1+a_i}=1$, so $\mu_{1+a}$ is an isometry of $E_1$. Its inverse
+$\mu_{(1+a)^{-1}}=\sum_{n\ge0}(-\mu_a)^n$ is a power series of radius one in $a$, since $\mu_a^n=\mu_{a^n}$ has norm at most
+$\norm a^n$. Hence both transitions are analytic. If $\theta_a\in\Alt^k(\mathcal V_a;F_1)$ has coordinates $m_0(a)$ and
+$m_1(a)$ in the two induced charts, then $m_0(a)=m_1(a)\circ(\mu_{1+a},\dots,\mu_{1+a})$. With $m_1\equiv \omega_{E_1}$, this is the
+map of Proposition~\ref{lau:prop:c0-multipliers} with $u_0=\id$, which is analytic at no point.
+\end{proof}
+
+
+The obstruction concerns the atlas obtained from the two analytic frames. The underlying pointwise bundle is trivial and has an analytic product structure; the failure is compatibility of that structure with the natural construction from all analytic frames. The complete target $F_1$ admits no equivalent nonarchimedean norm by Proposition~\ref{prop:nonultra}, so this example does not contradict Corollary~\ref{cor:discrete-targets}.
+
+\begin{corollary}[finite dimension is sharp for nonarchimedean bases]\label{lau:cor:dichotomy}
+Let $K=\F_q((X))$, where $q$ is a power of $p$, with an $X$\nobreakdash-adic absolute value, and let $k\ge p$. Let $P$ be a $K$\nobreakdash-Banach space admitting an equivalent nonarchimedean norm. The alternating construction preserves analytic bundles and their operator-valued analytic morphisms over every analytic manifold modeled on $P$, with arbitrary normed fibers, if and only if $P$ is finite-dimensional.
+\end{corollary}
+
+\begin{proof}
+If $P$ is finite-dimensional, Lemma~\ref{lem:findim} supplies continuous coordinates and Corollary~\ref{cor:bundle-cases} applies. Conversely, suppose that $P$ is infinite-dimensional. Round an equivalent nonarchimedean norm upwards to the discrete value group $\abs{K^\times}$; the result is still an equivalent nonarchimedean $K$\nobreakdash-norm, and its nonzero values lie in $\abs{K^\times}$. Serre's orthonormal-basis theorem~\cite[\S1, Proposition~1]{Se} then identifies $P$ topologically with $c_0(I,K)$ for an infinite set $I$. Choosing a countable subset of $I$ gives bounded linear maps
+\[
+ \iota\colon c_0(\N,K)\longrightarrow P,\qquad
+ \pi\colon P\longrightarrow c_0(\N,K),\qquad \pi\iota=\id.
+\]
+Apply the Laurent construction with $\kappa=\F_q$ and $K_1=K$. On the open set $V=\{x\in P:\norm{\pi x}<1\}$, take the trivial bundle with fiber $E_1$ and two analytic frames whose transition is $\mu_{1+\pi(x)}$, as in Corollary~\ref{lau:cor:diagonal-bundle}, and the trivial target bundle with fiber $F_1$. If the induced alternating transition were analytic at $x_0\in V$, restriction along $b\mapsto x_0+\iota b$ would make
+\[
+ b\longmapsto A^k_{E_1,E_1;F_1}\bigl(\mu_{1+\pi(x_0)}+\mu_b\bigr)
+\]
+analytic at zero. This contradicts Proposition~\ref{lau:prop:c0-multipliers} with $u_0=\mu_{1+\pi(x_0)}$.
+\end{proof}
+
+The dichotomy permits arbitrary normed target fibers. In the nonarchimedean Banach target category, Corollary~\ref{cor:discrete-targets} gives analyticity over every base for this discretely valued field.

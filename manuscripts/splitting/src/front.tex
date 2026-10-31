@@ -1,0 +1,41 @@
+\setlength{\emergencystretch}{1em}
+\title{Alternating bundles and the splitting of exterior powers}
+\author{Jack McCarthy}
+\thanks{The original counterexample and its initial write-up were developed with Anthropic's
+Claude. Subsequent research and exposition used Claude and OpenAI's Codex, and the organization of the paper was prepared
+with Claude and Codex. AI assistants contributed to mathematical arguments and independent proof audits. The original Lean
+formalization used Codex and Autoform. The remaining claims and the per-claim ledger were formalized with Anthropic's
+Claude Code in October 2026. The splitting theory and the classification of good pairs, that is, the results of
+Sections~\ref{sec:duality}--\ref{sec:questions} and Appendices~\ref{app:ordering}--\ref{app:families} not listed in
+Section~\ref{sec:verification}, and Proposition~\ref{prop:tangent-values} were developed and written with Claude and are
+not formalized. Section~\ref{sec:verification} records the verification scope.}
+\makeatletter
+% Keep the complete front matter on one page without changing the body layout.
+\patchcmd{\@maketitle}{\global\topskip42\p@}{\global\topskip30\p@}{}%
+  {\PackageError{charp}{Unable to adjust title spacing}{Check the amsart title definition.}}
+\patchcmd{\@maketitle}{\dimen@34\p@}{\dimen@10\p@}{}%
+  {\PackageError{charp}{Unable to adjust abstract spacing}{Check the amsart title definition.}}
+\patchcmd{\@setauthors}{\@topsep30\p@}{\@topsep18\p@}{}%
+  {\PackageError{charp}{Unable to adjust author spacing}{Check the amsart author definition.}}
+\g@addto@macro\@setauthors{\vskip6pt{\centering\footnotesize October 2026\par}}
+\makeatother
+\begin{document}
+\begin{abstract}
+The alternating-map bifunctor over a nontrivially normed field acts analytically on analytic bundles when
+precomposition is analytic. For normed $E$ and $D$, precomposition is analytic for all Banach values exactly
+when one class vanishes: the class of the exact sequence of completed projective tensor and exterior powers of $E$,
+pushed along an evaluation map. When $k!=0$, no splitting of this sequence for $E=K^k$ with the maximum norm commutes with
+the permutation matrix of a single $p$-cycle, where $p=\operatorname{char}K$. Source, target
+and parameter splittings, chiefly ordering splittings, make the class vanish; Ramsey forcing over finite residue fields
+obstructs it. Over subfields of $\kappa((X))$, $\kappa$ finite, this decides several classes of pairs, and rigid Banach
+spaces give vanishing classes that no splitting decomposition explains. Seventy-six statements, listed in
+Section~\ref{sec:verification}, have Lean proofs of corresponding statements.
+\end{abstract}
+\maketitle
+\setcounter{tocdepth}{1}
+\begingroup
+\small
+\linespacing=8pt
+\tableofcontents\removelastskip
+\endgroup
+\clearpage

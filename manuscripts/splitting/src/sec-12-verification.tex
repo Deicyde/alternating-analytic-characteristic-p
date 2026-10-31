@@ -1,0 +1,82 @@
+\section{Formal verification}\label{sec:verification}
+
+The Lean proofs are in~\cite{LeanP}. Its file \texttt{challenge.md} is a ledger of 76 claims of this paper. Each claim
+has a challenge file, stating it in Lean with \texttt{sorry} as proof, and a solution file proving the same statement.
+For a repository identifier \texttt{ID} such as \texttt{Thm4\_4}, \texttt{python3 scripts/check\_claim.py ID} builds
+both files and checks that the proof uses only the axioms \texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound} and that the two statements agree when printed with all implicit arguments (\texttt{pp.all}). All 76
+claims pass with Lean~\texttt{4.34.0-rc2} and the Mathlib fork \texttt{Deicyde/mathlib4} at \texttt{2b73d98}
+(upstream \texttt{0383a80e64} plus the commit of~\cite{PR}). The six statements of the comparator challenge in the
+same repository pass the comparator \url{https://github.com/leanprover/comparator} at revision \texttt{19e111e}.
+
+Table~\ref{ver:tab:ids} gives the identifiers of the 24 claims in Sections~\ref{sec:bundles}--\ref{sec:geometry}. The
+other 52 claims are the appendix statements \ref{lem:unique}--\ref{lem:findim}, \ref{lem:detinj}--\ref{lem:D},
+\ref{rem:FFunit}, \ref{thm:laurent}--\ref{lem:Psi}, \ref{lau:prop:c0-multipliers}--\ref{lau:cor:dichotomy},
+\ref{lem:discdist}--\ref{prop:ascent}, \ref{lem:descent}, \ref{prop:nonultra}, \ref{rem:spaces},
+\ref{thm:scalar-counter}--\ref{scalar:certificate}, \ref{fam:prop:tensor-homogeneous},
+\ref{fam:thm:tensor-analytic}--\ref{fam:cor:no-common-radius}, \ref{dom:split-incoming}--\ref{dom:degree-gap} and
+\ref{prop:scalar-countable}--\ref{rem:nonspherical-analytic-target}; the identifier of each is formed from its type and
+number, for example \texttt{LemB\_2} for Lemma~\ref{lem:detinj}.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Repository identifiers of the ledger claims in Sections~\ref{sec:bundles}--\ref{sec:geometry}}\label{ver:tab:ids}
+\begin{tabular}{ll@{\qquad}ll}
+\hline
+Statement & Identifier & Statement & Identifier\\
+\hline
+Theorem~\ref{thm:bundle-lifting} & \texttt{Thm2\_1} & Theorem~\ref{thm:summable-parameters}(2) & \texttt{Thm4\_5b}\\
+Proposition~\ref{prop:ambient-polynomial} & \texttt{Prop2\_2} & Corollary~\ref{cor:bundle-cases} & \texttt{Cor4\_6}\\
+Theorem~\ref{thm:coefficient-descent} & \texttt{Thm3\_1} & Theorem~\ref{thm:operator-obstructions}(1) & \texttt{Thm6\_1a}\\
+Lemma~\ref{lem:closed-smooth} & \texttt{Lem3\_2} & Theorem~\ref{thm:operator-obstructions}(2) & \texttt{Thm6\_1b}\\
+Proposition~\ref{prop:homogeneous-lift} & \texttt{Prop3\_3} & Corollary~\ref{cor:classification} & \texttt{Cor6\_2}\\
+Proposition~\ref{prop:exterior} & \texttt{Prop5\_1} & Theorem~\ref{thm:scalar-classification} & \texttt{Thm6\_3}\\
+Theorem~\ref{thm:duality} & \texttt{Thm5\_2} & Proposition~\ref{prop:universal-zero-dual} & \texttt{Sec9\_zeroDual}\\
+Proposition~\ref{prop:split-lift} & \texttt{Prop4\_1} & Proposition~\ref{prop:shear} & \texttt{Prop6\_4}\\
+Theorem~\ref{thm:spherical} & \texttt{Thm4\_2} & Corollary~\ref{cor:shear-bundle} & \texttt{Prop6\_4\_bundle}\\
+Corollary~\ref{cor:discrete-targets} & \texttt{Cor4\_3} & Proposition~\ref{prop:tangent-obstruction} & \texttt{Prop6\_5}\\
+Theorem~\ref{thm:finite-parameters} & \texttt{Thm4\_4} & Theorem~\ref{thm:ambient-forms} & \texttt{Thm7\_2}\\
+Theorem~\ref{thm:summable-parameters}(1) & \texttt{Thm4\_5a} & Proposition~\ref{prop:ambient-agreement} & \texttt{Prop7\_3}\\
+\hline
+\end{tabular}
+\end{table}
+
+A numbered statement of this paper has a Lean proof of a corresponding statement exactly when it is one of the 24
+claims of Table~\ref{ver:tab:ids} or the 52 claims just listed. Excluded are the definitions, the conjectures and
+questions of Section~\ref{sec:questions}, Remarks~\ref{rem:FFhyp}, \ref{rem:infkappa} and~\ref{rem:ascent},
+Proposition~\ref{prop:tangent-values}, the coefficient bound on retracts in Theorem~\ref{thm:summable-parameters}(1),
+and all other theorems, propositions, lemmas, corollaries and remarks of
+Sections~\ref{sec:duality}--\ref{sec:questions} and Appendices~\ref{app:ordering}--\ref{app:families}. The excluded
+results have written proofs only, except Lemma~\ref{rig:lem:ramsey}, which is cited from~\cite{Ra}, and apart from the
+Lean declarations named below.
+
+\texttt{challenge.md} and the docstrings of the challenge files list where a ledger statement differs from the text.
+The main differences: Theorem~\ref{thm:ambient-forms} and Proposition~\ref{prop:ambient-agreement} are stated on open
+subsets of a normed space, since Mathlib has no differential forms on manifolds; the Lean statement of
+Theorem~\ref{thm:bundle-lifting} groups the variables by variance, uses the canonical trivializations and does not state
+independence of the trivializing cover; Corollary~\ref{lau:cor:diagonal-bundle} is stated for the explicit transition
+and section maps, and Corollary~\ref{cor:bundle-cases} for objects and morphisms without the functor laws.
+
+In~\cite{LeanP}, \texttt{alternatingMapAction} is the joint action $B$ of Section~\ref{sec:bundles}, and
+the alternating bundle construction rests on the family-preservation premise: for $n\in\N\cup\{\infty,\omega\}$, a
+$C^n$ manifold $M$, normed spaces $E,D,F,F'$ and $B\colon\cL(E,D)\times\cL(F,F')\to\cL(\Alt^k(D;F),\Alt^k(E;F'))$,
+\begin{equation}\label{eq:mathlib-family-premise}
+ U\subseteq M\text{ open},\quad \gamma\colon M\to\cL(E,D)\times\cL(F,F'),\quad \gamma|_U\text{ is }C^n
+ \quad\Longrightarrow\quad (B\circ\gamma)|_U\text{ is }C^n.
+\end{equation}
+The predicate \texttt{PreservesAlternatingFamilies} states~\eqref{eq:mathlib-family-premise} and typechecks
+against~\cite{LeanP}. The declarations
+\begin{leancode}
+contMDiffOn_continuousAlternatingMapCoordChange_of_family
+alternatingVectorPrebundle_isContMDiff_of_family
+contMDiffVectorBundle_alternating_of_family
+contMDiffVectorBundle_alternating_of_finiteCoordinates
+alternatingBundleHom_of_family
+\end{leancode}
+of~\cite{LeanP} index alternating maps by \texttt{Fin k}. The first three assume~\eqref{eq:mathlib-family-premise}
+with $D=E$ and $F'=F$ and show that the alternating coordinate changes, prebundle and bundle are $C^n$. The fourth shows
+that over an analytic manifold modeled on a space $P$ with a continuous linear isomorphism $P\to K^d$ the alternating
+bundle of two analytic bundles is analytic, with the premise from Theorem~\ref{thm:finite-parameters}. The fifth
+assumes~\eqref{eq:mathlib-family-premise} and turns $C^n$ bundle morphisms into a $C^n$ morphism of the induced
+alternating bundles when these are $C^n$.
