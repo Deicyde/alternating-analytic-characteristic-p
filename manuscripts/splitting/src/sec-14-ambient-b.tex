@@ -1,0 +1,158 @@
+\subsection{Composition fails}\label{amb:ssec:failure}
+
+The failure comes from one constant: the average cost of replacing elementary tensors by symmetric tensors.
+
+\begin{definition}[averaged polarization constant, bad space]\label{amb:def:polarization}
+Let $X\ne0$ be a normed space and $n\ge1$. A \emph{family} is a finite set $I$ and elementary tensors $y=(y_l)_{l\in I}$ in $X^{\otimes n}$, given with their factors, $y_l=y_l^1\otimes\dots\otimes y_l^n$, such that $\norm{y_l}_{\rm e}=\norm{y_l^1}\cdots\norm{y_l^n}$ is nonzero for some $l$. Let $E_0$ be the span of the $y_l$, and $\mathcal P(y)$ the set of linear maps $\Psi\colon E_0\to\Gamma^n(X)$ that fix $E_0\cap\Gamma^n(X)$. Put
+\begin{equation}\label{amb:eq:lambda}
+ \mathfrak l(y)=\inf_{\Psi\in\mathcal P(y)}\frac{\sum_l\pi(\Psi y_l)}{\sum_l\norm{y_l}_{\rm e}},\qquad
+ \mathfrak l_n(X)=\sup_y\mathfrak l(y)\in[0,\infty].
+\end{equation}
+Let $\bar E=E_0/(E_0\cap\Gamma^n(X))$, with $\bar v$ the image of $v\in E_0$, and let $\mathcal N\subseteq\ell^1(I,K)$ be the space of the vectors $(\eta(\bar y_l))_{l\in I}$, for $\eta$ a linear form on $\bar E$. It is closed: it is the annihilator of $\{\lambda\in K^I:\sum_l\lambda_ly_l\in\Gamma^n(X)\}$. The \emph{universal space} of the family is $G(y)=\ell^1(I,K)/\mathcal N$ with the quotient norm. Let $\varepsilon_l$ be the image of the unit vector at $l$, and $t(y)=\sum_ly_l\otimes\varepsilon_l$.
+
+For a normed space $G$, let $\pi$ also denote the projective seminorm of $X^{\otimes n}\otimes G$, and for $t\in\Gamma^n(X)\otimes G$ let
+\begin{equation}\label{amb:eq:mu}
+ \mu(t)=\inf\Bigl\{\sum_q\pi(s_q)\norm{w_q}:\ t=\sum_qs_q\otimes w_q,\ s_q\in\Gamma^n(X),\ w_q\in G\Bigr\},
+\end{equation}
+the projective seminorm of $\Gamma^n_\pi(X)\otimes G$. Always $\pi\le\mu$.
+
+The $\ell^1$-sum of normed spaces $B_i$ is the space of the families $(u_i)_i$, $u_i\in B_i$, with $\sum_i\norm{u_i}<\infty$, and this sum as norm. Now let $\mathfrak l_n(X)=\infty$ in \eqref{amb:eq:lambda}. A \emph{bad space} is the $\ell^1$-sum $G$ of the $G(y^{(i)})$, $i\ge1$, for families with $\sup_i\mathfrak l(y^{(i)})=\infty$. Bounded forms separate the points of any $\ell^1$-sum of spaces $G(y)$: all linear forms on $K^I$ are bounded for $\ell^1(I,K)$, those vanishing on $\mathcal N$ separate the points of $G(y)$, and we compose them with the coordinate projections. So if $\pi$ is a norm on $X^{\otimes n}$ and $G$ is such a sum, then $\mu$ is a norm: for $t\ne0$ a bounded form $\eta$ on $G$ has $(1\otimes\eta)t\ne0$, and $\mu(t)\ge\pi(t)\ge\norm\eta^{-1}\pi((1\otimes\eta)t)>0$. In that case, for $G$ a bad space, put, with maximum norms on direct sums and $\mu$ as in \eqref{amb:eq:mu}, $H_X=X\oplus G$, $W_X=\Gamma^n_\pi(X)\oplus G$, $Y_X=(\Gamma^n(X)\otimes G,\mu)$, and
+\begin{equation}\label{amb:b:maps}
+ f_X\colon H_X\to W_X,\quad f_X(x,w)=(x^{\otimes n},w);\qquad
+ g_X\colon W_X\to Y_X,\quad g_X(s,w)=s\otimes w.
+\end{equation}
+Then $g_X$ is the diagonal of the bounded bilinear map $\beta_X((s,w),(s',w'))=s\otimes w'$.
+\end{definition}
+
+\begin{definition}[atomic spaces]\label{amb:def:atomic}
+Let $\operatorname{char}K=p$. For $m\ge1$, $X_m$ is $K^m$ with the quotient norm of $\ell^1(\F_p^m\setminus\{0\},K)$ under $e_{\mathsf x}\mapsto\mathsf x$:
+\[
+ \norm h_{X_m}=\inf\Bigl\{\sum_{\mathsf x}\abs{\lambda_{\mathsf x}}:\ h=\sum_{\mathsf x}\lambda_{\mathsf x}\mathsf x\Bigr\}.
+\]
+Vectors of $\F_p^m$ have norm at most $1$, and the coordinate forms of $K^m$ are bounded by $1$ on $X_m$. Let $X^{\rm at}$ be the $\ell^1$-sum of the $X_m$, $m\ge1$. The coordinate forms separate the points of $(X^{\rm at})^{\otimes n}$, so $\pi$ is a norm there. Let $I_m=(\F_p^m)^p$, and $y^{(m)}$ the family of all $y^1\otimes\dots\otimes y^p$, $(y^1,\dots,y^p)\in I_m$. Let $G_m=G(y^{(m)})$; it is the same computed in $X_m$ or in $X^{\rm at}$, as $\Gamma^p(X^{\rm at})\cap X_m^{\otimes p}=\Gamma^p(X_m)$. Let $G^{\rm at}$ be the $\ell^1$-sum of the $G_m$, and
+\[
+ H^{\rm at}=X^{\rm at}\oplus G^{\rm at},\qquad
+ W^{\rm at}=\Gamma^p_\pi(X^{\rm at})\oplus G^{\rm at},\qquad
+ Y^{\rm at}=(\Gamma^p(X^{\rm at})\otimes G^{\rm at},\mu),
+\]
+with maximum norms on direct sums, and with $f_X,g_X$ as in \eqref{amb:b:maps} for $X=X^{\rm at}$, $n=p$. Let $\widehat W^{\rm at},\widehat Y^{\rm at}$ be the completions, as normed $K$-spaces. If $K$ is complete, the $X_m,G_m$ are finite-dimensional, so complete; then $X^{\rm at},G^{\rm at}$ are the completed sums and $H^{\rm at}$ is a Banach space.
+\end{definition}
+
+\begin{theorem}[failure of composition]\label{amb:thm:failure}
+Let $K$ be any nontrivially normed field of characteristic $p$, complete or not. On $H^{\rm at}$, $f_X\colon H^{\rm at}\to W^{\rm at}$ is ambient analytic at every point, with every radius, the bound depending on the radius and the point; $g_X\colon W^{\rm at}\to Y^{\rm at}$ is the diagonal of a bounded bilinear map, so analytic everywhere; $g_X\circ f_X$ is a bounded law of degree $p+1$, divided-power analytic everywhere, and ambient analytic at no point, also as a map into $\widehat Y^{\rm at}$. So ambient analyticity is not closed under composition, not even under $\mathrm{An}\circ\mathrm{AA}$, an analytic map after an ambient analytic one. Moreover $\mathfrak k_{(p,1)}(H^{\rm at})=\infty$ and $\mathfrak a_{p+1}(H^{\rm at})=\infty$, for the constants of Definitions~\ref{amb:def:constants} and~\ref{amb:def:tame}.
+\end{theorem}
+The proof is in Appendix~\ref{amb:app}.
+
+Over every $K$ the map $\beta_X$ extends to the completions, so $g_X$ extends to the diagonal $\hat g_X\colon\widehat W^{\rm at}\to\widehat Y^{\rm at}$ of a bounded bilinear map. By Proposition~\ref{amb:prop:permanence}(1)(a), $f_X$ is ambient analytic into $\widehat W^{\rm at}$. So the failure also occurs with complete intermediate and final targets.
+
+\begin{proposition}[general form]\label{amb:prop:general-failure}
+Let $X$ be normed with $\pi$ a norm on $X^{\otimes n}$, $n\ge2$, $\mathfrak l_n(X)=\infty$, and $G$ a bad space. Then $f_X$ is ambient analytic at every point, with every radius, the bound depending on the radius and the point; $g_X$ is the diagonal of a bounded bilinear map, so analytic everywhere; $g_X\circ f_X$ is a bounded law of degree $n+1$, divided-power analytic everywhere, and ambient analytic at no point, also as a map into the completion of $Y_X$; and $\mathfrak k_{(n,1)}(H_X)=\infty$.
+\end{proposition}
+The proof is in Appendix~\ref{amb:app}. Theorem~\ref{amb:thm:failure} is the case $X=X^{\rm at}$, $G=G^{\rm at}$, $n=p$, by Lemma~\ref{amb:lem:atomic}; the constant $\mathfrak a_{p+1}(H^{\rm at})$ is infinite since $\mathfrak k_{\vec n}\le\mathfrak a_N$ by Definition~\ref{amb:def:constants}.
+
+\begin{corollary}[inverse functions, charts, sections]\label{amb:cor:charts}
+Let $K$ be complete of characteristic $p$, and let $H_1=H^{\rm at}\oplus\widehat W^{\rm at}\oplus\widehat Y^{\rm at}$ with the maximum norm, a Banach space. For $z_1\in H^{\rm at}$, $z_2\in\widehat W^{\rm at}$, $z_3\in\widehat Y^{\rm at}$ put
+\begin{equation}\label{amb:eq:delta}
+\begin{aligned}
+ \Delta(z_1,z_2,z_3)&=(z_1,\,z_2-f_X(z_1),\,z_3-\hat g_X(z_2)),\\
+ \Delta'(z_1,z_2,z_3)&=(z_1,\,z_2+f_X(z_1),\,z_3+\hat g_X(z_2+f_X(z_1))).
+\end{aligned}
+\end{equation}
+\begin{enumerate}
+\item $\Delta$ is a bijection of $H_1$ with inverse $\Delta'$. It is AA at every point, and its derivative is bijective with bounded inverse at every point. $\Delta'$ is DP everywhere and AA nowhere. So AA has no inverse function theorem.
+\item $\Delta''(z_2,z_3)=(z_2,z_3+\hat g_X(z_2))$ is an analytic automorphism of $\widehat W^{\rm at}\oplus\widehat Y^{\rm at}$. The map $(f_X,0)$ is AA everywhere, and $\Delta''\circ(f_X,0)$ is AA nowhere. So being AA depends on the analytic chart of the target.
+\item On $H_1$ let $\phi_1(z)=(z_1,z_2+f_X(z_1),z_3)$ and $\psi(z)=(z_1,z_2,z_3+\hat g_X(z_2))$. Call two global charts AA-compatible if both transitions are AA everywhere. Then $\id$ and $\phi_1$ are AA-compatible, $\phi_1$ and $\psi\circ\phi_1$ are AA-compatible, and $\id$ and $\psi\circ\phi_1$ are not. So AA-compatibility is not transitive.
+\item Let $\mathsf E^{\rm at}$ be the completion of $\Gamma^p_\pi(X^{\rm at})$, direct sum $\widehat Y^{\rm at}$, with the maximum norm. For $w\in G^{\rm at}$, the map $s\mapsto s\otimes w$ from $\Gamma^p_\pi(X^{\rm at})$ to $Y^{\rm at}$ has norm at most $\norm w$, so it extends to the completion of $\Gamma^p_\pi(X^{\rm at})$, with values in $\widehat Y^{\rm at}$. For $x=(x_X,x_G)$ in $H^{\rm at}$ let $\mathsf S(x)(s,z_3)=(s,z_3+s\otimes x_G)$. Then $\mathsf S$ and $x\mapsto\mathsf S(x)^{-1}$ are affine bounded maps from $H^{\rm at}$ to $\cL(\mathsf E^{\rm at})$, hence analytic, so $\mathsf S$ is a change of trivialization of the trivial analytic vector bundle $H^{\rm at}\times\mathsf E^{\rm at}$. The section $\mathsf v(x)=(x_X^{\otimes p},0)$ is AA everywhere, and the section $\mathsf S\mathsf v\colon x\mapsto\mathsf S(x)\mathsf v(x)$ is AA nowhere. So being AA depends on the trivialization, even for a trivial bundle with affine transitions.
+\end{enumerate}
+\end{corollary}
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{remark}[scope]\label{amb:rem:scope}
+Whether composition fails in characteristic $0$ is open (Question~\ref{amb:q:open}). A failure in which the composite is a bounded law, as here, cannot have an ultrametric final target, by Theorem~\ref{amb:thm:tame-examples}(4). The source spaces above are built from quotients of $\ell^1$-spaces, and this construction cannot be made ultrametric: the quotient of $c_0(\F_p^m\setminus\{0\},K)$ under $e_{\mathsf x}\mapsto\mathsf x$ is $K^m$ with the maximum norm, isometrically, because the vectors $\mathsf x$ have entries of absolute value at most $1$ and the unit vectors are among them. Over $K$ of characteristic $p$, on $c_0\oplus G$, with $G$ the $\ell^1$-sum of the universal spaces of the families of all tensors $y^1\otimes\dots\otimes y^p$ with $y^1,\dots,y^p\in\F_p^m\subseteq c_0$, the same failure holds if $K$ is discretely valued or $p=2$, see~\cite{II}; over densely valued $K$ of odd characteristic this is open.
+\end{remark}
+
+Composition is decided by the following constants of the source.
+
+\begin{definition}[composition constants]\label{amb:def:constants}
+Let $P$ be a normed space and $\mathcal C(N,r)$ the set of compositions $\vec n=(n_1,\dots,n_r)$ of $N$ into $r$ positive parts. Since $h^{\otimes N}=h^{\otimes n_1}\otimes\dots\otimes h^{\otimes n_r}$, we have $\Gamma^N(P)\subseteq\Gamma^{n_1}(P)\otimes\dots\otimes\Gamma^{n_r}(P)$. For $t$ in the latter space let $\pi_{\vec n}(t)$ be its projective seminorm in $\Gamma^{n_1}_\pi(P)\otimes\dots\otimes\Gamma^{n_r}_\pi(P)$, and put, with $0/0=0$ and $c/0=\infty$ for $c>0$,
+\[
+ \mathfrak k_{\vec n}(P)=\sup_{t\in\Gamma^N(P)}\frac{\pi_{\vec n}(t)}{\pi(t)}\in[0,\infty],\qquad
+ \mathfrak k(P)=\sup_{N\ge1}\max_{1\le r\le N}\max_{\vec n\in\mathcal C(N,r)}\mathfrak k_{\vec n}(P)^{1/N}.
+\]
+Write $\widehat\pi_{\vec n},\widehat{\mathfrak k}_{\vec n}(P),\widehat{\mathfrak k}(P)$ for the same quantities with each $\Gamma^{n_i}_\pi(P)$ replaced by its separated completion, with $t$ mapped there. On $\Gamma^N(P)$ we have $\pi\le\pi_{\vec n}\le\norm\cdot_\Gamma$: expand the factors of a representation for the lower bound, and note that $t=\sum_q\lambda_qh_q^{\otimes N}$ has cost at most $\sum_q\abs{\lambda_q}\norm{h_q}^N$ in $\pi_{\vec n}$. So $\mathfrak k_{\vec n}(P)\le\mathfrak a_N(P)$, with $\mathfrak a_N(P)=\sup_t\norm t_\Gamma/\pi(t)$ as in Definition~\ref{amb:def:tame}.
+\end{definition}
+
+\begin{theorem}[composition criterion]\label{amb:thm:composition}
+Let $P\ne0$ be a normed space. Consider:
+\begin{enumerate}
+\item[\textup{(i)}] for all normed $W,Y$: if $f$ maps an open subset of $P$ into $W$ and is AA at $x_0$, and $g$ maps an open subset of $W$ into $Y$ and is AA at $f(x_0)$, then $g\circ f$ is AA at $x_0$;
+\item[\textup{(ii)}] the same for Banach $W,Y$ and $g$ analytic at $f(x_0)$;
+\item[\textup{(iii)}] $\mathfrak k(P)<\infty$;
+\item[\textup{(iii$'$)}] $\widehat{\mathfrak k}(P)<\infty$.
+\end{enumerate}
+Then \textup{(iii)}$\Rightarrow$\textup{(i)}$\Rightarrow$\textup{(ii)}$\Rightarrow$\textup{(iii$'$)}, and \textup{(iii$'$)}$\Leftrightarrow$\textup{(iii)} if $K$ is complete. Over every $K$, \textup{(iii$'$)}, \textup{(i)} for Banach $W$, and \textup{(ii)} are equivalent.
+
+If $\mathfrak k_{\vec n}(P)=\infty$ for one $\vec n\in\mathcal C(N,r)$, let $W_{\vec n}=\bigoplus_i\Gamma^{n_i}_\pi(P)$, with the maximum norm, and $Y_{\vec n}=(\bigotimes_i\Gamma^{n_i}(P),\pi_{\vec n})$, or their separated quotients if these are only seminormed. Then the polynomial $f_{\vec n}(h)=(h^{\otimes n_1},\dots,h^{\otimes n_r})$ is AA at every point of $P$, the map $g_{\vec n}(s_1,\dots,s_r)=s_1\otimes\dots\otimes s_r$ is the diagonal of a bounded $r$-linear map, and $g_{\vec n}\circ f_{\vec n}$ is AA at no point of $P$.
+\end{theorem}
+The proof is in Appendix~\ref{amb:app}.
+
+\subsection{Why it fails}\label{amb:ssec:mechanism}
+
+Ambient analyticity means analyticity after moving the target $W$ into a larger space $Z$. That move carries maps into $W$ along. It does not carry analytic maps out of $W$: an analytic $g$ on $W$ need not extend to $Z$. Extension, with $g\circ f$ divided-power analytic, is a sufficient condition for $g\circ f$ to be ambient analytic.
+
+\begin{proposition}[extension along the enlargement]\label{amb:prop:extension}
+Let $f\colon U\to W$ be AA at $x_0$ with an ambient expansion through $j\colon W\to Z$, and let $g$ be a germ at $f(x_0)$ into $Y$. Suppose that $j_Y\circ g=\tilde g\circ j$ near $f(x_0)$, for a linear isometry $j_Y\colon Y\to Z_Y$ and a map $\tilde g$ from an open subset of $Z$ into $Z_Y$ that is AA at $j(f(x_0))$. If $g\circ f$ is DP at $x_0$, then $g\circ f$ is AA at $x_0$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (the composite after $j_Y$).} Near $x_0$ we have $j_Y\circ g\circ f=\tilde g\circ(j\circ f)$, and $j\circ f$ is analytic at $x_0$ by \eqref{amb:eq:aa}. So $j_Y\circ g\circ f$ is AA at $x_0$, by Proposition~\ref{amb:prop:permanence}(1)(b) and (1)(e).
+
+\emph{Step 2 (descent).} As $g\circ f$ is DP at $x_0$, the target descent of Proposition~\ref{amb:prop:permanence} gives the claim.
+\end{proof}
+
+For the maps $(x,w)\mapsto\beta_0(x^{\otimes n},w)$, of which $g_X\circ f_X$ is one, ambient analyticity is equivalent to the extension of one bilinear map.
+
+\begin{theorem}[one bilinear map]\label{amb:thm:channel}
+Let $X\ne0,G,Y$ be normed, $n\ge2$, $\beta_0\colon\Gamma^n_\pi(X)\times G\to Y$ bounded bilinear, and $L_{\beta_0}$ its linearization on $\Gamma^n(X)\otimes G$. The following are equivalent:
+\begin{enumerate}
+\item[\textup{(a)}] $(x,w)\mapsto\beta_0(x^{\otimes n},w)$ is AA at one point of $X\oplus G$;
+\item[\textup{(b)}] it is AA at every point of $X\oplus G$;
+\item[\textup{(c)}] there are a linear isometry $j_Y\colon Y\to Z_Y$ and a bounded bilinear map $\tilde\beta$ on $(X^{\otimes n},\pi)\times G$ that equals $j_Y\circ\beta_0$ on $\Gamma^n(X)\times G$;
+\item[\textup{(d)}] $\norm{L_{\beta_0}t}\le C\pi(t)$ for some $C$ and all $t\in\Gamma^n(X)\otimes G$, with $\pi$ the projective seminorm of $X^{\otimes n}\otimes G$.
+\end{enumerate}
+For fixed $X$ and $n$, all $G,Y,\beta_0$ satisfy these if and only if $\mathfrak l_n(X)<\infty$.
+\end{theorem}
+The proof is in Appendix~\ref{amb:app}. The statement on $g_X\circ f_X$ in Proposition~\ref{amb:prop:general-failure} is the case $\beta_0(s,w)=s\otimes w$, where $L_{\beta_0}$ is the identity and (d) fails. So the failure is exactly the non-extension of one bilinear map.
+
+Let $\operatorname{char}K=p$. Fixing one $Z$ does not help. Theorem~\ref{amb:thm:one-enlargement} gives one enlargement for any set of germs, and $g_X\circ f_X$ is still AA nowhere. The outer map must act on the envelope. For $K$ complete, the map $\Delta''$ of Corollary~\ref{amb:cor:charts}(2) is an analytic automorphism that destroys ambient analyticity. So ambient analyticity sees $W$ as a normed space, not as an analytic manifold. The following language records this.
+
+\begin{definition}[pairs]\label{amb:def:pairs}
+A \emph{pair} $(Z,W)$ is a Banach space $Z$ with a closed subspace $W$. A \emph{morphism germ} $\Phi\colon(Z,W)\to(Z',W')$ at $w_0\in W$ is the germ at $w_0$ of an analytic map from an open subset of $Z$ into $Z'$ with $\Phi(W)\subseteq W'$ near $w_0$. Put $\operatorname{Fg}(Z,W)=W$ and $\operatorname{Fg}\Phi=\Phi|_W$.
+\end{definition}
+
+\begin{proposition}[ambient analyticity as an image]\label{amb:prop:pairs}
+Pairs with a base point $w_0\in W$ and morphism germs preserving base points form a category, and $\operatorname{Fg}$ is a functor to pointed Banach spaces and germs of maps. Let $j\colon W\to Z$, $j'\colon W'\to Z'$ be the inclusions. For a morphism germ $\Phi$ we have $j'\circ\Phi|_W=\Phi\circ j$, so $\operatorname{Fg}\Phi$ is AA. Conversely, for Banach $P,W$, a germ from $P$ to $W$ is AA if and only if, after identifying $W$ with a closed subspace of a Banach space $Z$, it is $\operatorname{Fg}\Phi$ for a morphism germ $\Phi\colon(P,P)\to(Z,W)$.
+
+$\operatorname{Fg}$ is not injective on objects, so its image need not be a subcategory: $\operatorname{Fg}\Phi_2\circ\operatorname{Fg}\Phi_1$ is defined when $\Phi_1$ lands in $(Z,W)$ and $\Phi_2$ starts at $(W,W)$, while $\Phi_2\circ\Phi_1$ is not. Let $W$ be Banach and let $j_1\colon W\to Z_1$, $j_2\colon W\to Z_2$ be linear isometries into Banach spaces. The quotient $Z_3$ of the $\ell^1$-sum of $Z_1,Z_2$ by $\{(j_1w,-j_2w):w\in W\}$ is Banach, with linear isometries $i_1\colon Z_1\to Z_3$, $i_2\colon Z_2\to Z_3$ and $i_1j_1=i_2j_2$. So a morphism germ $\Phi_1$ into $(Z_1,j_1(W))$ gives the morphism germ $i_1\circ\Phi_1$ into $(Z_3,i_1j_1(W))$, with the same image under $\operatorname{Fg}$ after identifying $W$ with its images.
+\end{proposition}
+The proof is in Appendix~\ref{amb:app}. No such construction extends $\Phi_2$. Let $K$ be complete of characteristic $p$, let $j\colon\widehat W^{\rm at}\to Z$ be a linear isometry into a Banach space through which $f_X$ is analytic, so that $\Phi_1=j\circ f_X$ is a morphism germ from $(H^{\rm at},H^{\rm at})$ to $(Z,j(\widehat W^{\rm at}))$, and let $\Phi_2=\hat g_X$ on $(\widehat W^{\rm at},\widehat W^{\rm at})$. An analytic extension of $\hat g_X$ along $j$, after a linear isometry of its target, would make $g_X\circ f_X$ ambient analytic, by Proposition~\ref{amb:prop:extension}.
+
+A \emph{subquotient} is a filtered space $(Z;W_1,W_2)$ as in Definition~\ref{amb:def:filtered}, with $Z$ Banach, read as a pair with values in $W_1/W_2$. The pairs of Definition~\ref{amb:def:pairs} are the case $W_1=W$, $W_2=0$, and we use only these. Subquotients are allowed as targets, the source being a pair, since the image stays ambient analytic by bounded linear postcomposition, and as fibers with a linear action over an analytic base, as in Definition~\ref{amb:def:filtered}. If the source is a subquotient as well, then for $K$ complete and Banach spaces the image consists of all divided-power analytic germs, after identifying the source, with an equivalent norm, with a quotient of an $\ell^1$-space, see~\cite{II}.
+
+\begin{theorem}[inverse germs of pairs]\label{amb:thm:pair-inverse}
+Let $\Phi\colon(Z,W)\to(Z',W')$ be a morphism germ at $w_0$ that has an analytic inverse germ $\Phi^{-1}$ at $\Phi(w_0)$ on $Z'$, and let $\mathsf T_1=D\Phi(w_0)$. Then $\Phi^{-1}$ is a morphism germ if and only if $\mathsf T_1(W)=W'$.
+
+Let $K$ be complete of characteristic $p$, let $z^0\in H_1$ for $H_1$ as in Corollary~\ref{amb:cor:charts}, and let $j\colon H_1\to Z$, $j'\colon H_1\to Z'$ be linear isometries into Banach spaces. Then no analytic germ $\Phi$ from $Z$ to $Z'$ at $j(z^0)$ with an analytic inverse germ satisfies $\Phi\circ j=j'\circ\Delta$ near $z^0$.
+\end{theorem}
+The proof is in Appendix~\ref{amb:app}. Such a $\Phi$ would be a morphism germ with $\mathsf T_1(j(H_1))=j'(H_1)$, and its inverse germ would make $\Delta'$ ambient analytic.
+
+Fix a pair $(Z,W)$ with inclusion $j$. Say that the pair \emph{carries} a germ $f$ into $W$ if $j\circ f$ is analytic, and \emph{lifts} a germ on $W$ if the germ is $\operatorname{Fg}\Phi_g$ for a morphism germ $\Phi_g\colon(Z,W)\to(Z,W)$. A \emph{local automorphism} is a morphism germ $\Phi\colon(Z,W)\to(Z,W)$ at a point $w_0\in W$ with an analytic inverse germ and with $D\Phi(w_0)(W)=W$.
+
+\begin{corollary}[one pair]\label{amb:cor:one-pair}
+The germs of local automorphisms of a fixed pair $(Z,W)$ at points of $W$ form a groupoid. If the pair carries $f$, then it carries $\Phi|_W\circ f$ for a local automorphism $\Phi$ at the value of $f$ at the base point. If the pair lifts $g$, then it lifts $\Phi|_W\circ g\circ(\Phi'|_W)^{-1}$ for local automorphisms $\Phi$ at the value of $g$ and $\Phi'$ at the base point of $g$. By Corollary~\ref{amb:cor:charts}(2), for $K$ complete of characteristic $p$, no pair $(Z,\widehat W^{\rm at}\oplus\widehat Y^{\rm at})$ carries $(f_X,0)$ at a point $x_0$ and lifts $\Delta''$ at $(f_X,0)(x_0)$.
+\end{corollary}
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{remark}[why Section~\ref{amb:ssec:fixed} survives]\label{amb:rem:action}
+Let the model $P$ of $M$ and the value fiber $F$ be Banach. The transitions of $\Alt^k(M_1;M_0)$ in Section~\ref{amb:ssec:fixed} give the local automorphisms $(x,\mathsf m)\mapsto(\psi_{\mathsf{ab}}(x),\Theta_{\mathsf{ab}}(x)\mathsf m)$ of the pair $(P\times\Mult^k(E;F),P\times\Alt^k(E;F))$, with $\psi_{\mathsf{ab}}$ the change of chart of $M$. They are jointly analytic, as a bounded bilinear evaluation of an analytic operator family, and their inverses are transitions, so each derivative maps $P\times\Alt^k(E;F)$ onto itself, by difference quotients. Each $d$-linear operation of Theorem~\ref{amb:thm:seven-eight}(3) acts on the envelope, and inverse images change the base. Only the operations lift: $i(\mathsf s)^2=0$ holds on $\Alt^k$, fiberwise, and not on $\Mult^k$. One fixed enlargement alone does not suffice, by Theorem~\ref{amb:thm:one-enlargement}. What Section~\ref{amb:ssec:fixed} uses is that the transitions act on the envelope.
+\end{remark}

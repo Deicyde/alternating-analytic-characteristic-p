@@ -1,0 +1,297 @@
+\section{Base change}\label{dp:sec:base-change}
+
+Base change does not separate divided-power analyticity from analyticity by stability: both classes are stable, analytic germs with no loss of radius (Theorem~\ref{dp:thm:an-base-change}(1)), DP germs with a possible loss of radius (Theorem~\ref{dp:thm:germ-base-change}(1), Example~\ref{dp:ex:base-radius}). It cannot detect more than AA either: a DP germ whose base change is analytic or AA over $K'$ is AA over $K$, since base change is a particular enlargement of the target (Theorems~\ref{dp:thm:an-base-change}(3) and~\ref{dp:thm:aa-base-change}(3)). Roby's polynomial laws are defined through all base changes~\cite[pp.~219--220]{Ro}, and his $\Gamma$ commutes with base change~\cite[Th.~III.3]{Ro}: the algebra below is his, and the bounds are the estimates we need.
+
+Throughout, $K'$ is a \emph{valued extension} of $K$: a field containing $K$ with an absolute value extending that of $K$. It is nonarchimedean, since integers have absolute value at most $1$, and it is nontrivially valued, so the preceding sections apply over $K'$. A \emph{$K'$-law} is a law over $K'$. A \emph{$K'$-polynomial map} of degree $n$ from $X\otimes_KK'$ to a $K'$-vector space $Q$ is a map that is a homogeneous polynomial of degree $n$ with coefficients in $Q$ on every finite-dimensional $K'$-slice $s\mapsto\sum_is_iz_i$, $s\in K'^r$.
+
+\subsection{Spaces}
+
+\begin{definition}\label{dp:def:base-change}
+Let $X$ be a seminormed $K$-space. For $z\in X\otimes_KK'$ put
+\[
+ \pi(z)=\inf\sum_k\norm{x_k}\abs{\lambda_k},\qquad\pi_{\max}(z)=\inf\max_k\norm{x_k}\abs{\lambda_k},
+\]
+both infima over the representations $z=\sum_kx_k\otimes\lambda_k$. These are seminorms over $K'$, with scalars acting on the right factor. Also $\pi_{\max}\le\pi$, and $\pi_{\max}$ is ultrametric. The \emph{base change} $X_{K'}$ is the quotient of $X\otimes_KK'$ by the kernel of $\pi$, normed by $\pi$. The space $X^{\max}_{K'}$ is the quotient by the kernel of $\pi_{\max}$, normed by $\pi_{\max}$. In both, $\iota_X$ is the map $x\mapsto[x\otimes1]$. We write $\widehat{X_{K'}}$ and $\widehat{X^{\max}_{K'}}$ for the completions. \emph{With maxima} means that the spaces over $K$ are ultrametric, and that $\pi_{\max}$ and $X^{\max}_{K'}$ replace $\pi$ and $X_{K'}$.
+\end{definition}
+
+\begin{lemma}[universal property]\label{dp:bc:universal}
+Let $Q$ be a normed $K'$-space and $u\colon X\to Q$ a bounded $K$-linear map. Then $u_{K'}(x\otimes\lambda)=\lambda u(x)$ defines a $K'$-linear map $X_{K'}\to Q$ with $\norm{u_{K'}}=\norm u$, and $u\mapsto u_{K'}$ is a bijection onto the bounded $K'$-linear maps $X_{K'}\to Q$. The same holds with maxima if $Q$ is ultrametric.
+\end{lemma}
+
+\begin{proof}
+The map $(x,\lambda)\mapsto\lambda u(x)$ is $K$-bilinear. For $z=\sum_kx_k\otimes\lambda_k$ we have $\norm{u_{K'}(z)}\le\norm u\sum_k\norm{x_k}\abs{\lambda_k}$, with a maximum if $Q$ is ultrametric. So $\norm{u_{K'}(z)}\le\norm u\pi(z)$. Conversely $\norm{u(x)}=\norm{u_{K'}(\iota_Xx)}\le\norm{u_{K'}}\norm x$, as $\pi(x\otimes1)\le\norm x$. A $K'$-linear map $S$ is determined by $S\circ\iota_X$, since the vectors $\iota_X(x)$ span. So $S=(S\circ\iota_X)_{K'}$.
+\end{proof}
+
+\begin{lemma}[almost orthogonal bases]\label{dp:bc:orthogonal}
+Let $K$ be complete, $F\subseteq K'$ a $K$-subspace of finite dimension $d$, and $0<\mathfrak o<1$. Then $F$ has a basis $\omega_1,\dots,\omega_d$ with $\abs{\sum_lc_l\omega_l}\ge\mathfrak o\max_l\abs{c_l}\abs{\omega_l}$ for $c\in K^d$. If $1\in F$, one can take $\omega_1=1$, and then $\psi(\sum_lc_l\omega_l)=c_1$ is $K$-linear with $\psi(1)=1$ and $\abs{\psi(\lambda)}\le\mathfrak o^{-1}\abs\lambda$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (one vector).} Let $D\subsetneq F$ be a subspace and $0<\mathfrak o_1<1$. By~\cite[Lemma~A.3]{I}, $D$ is complete, hence closed in $K'$. So $\delta=\operatorname{dist}(\xi,D)>0$ for $\xi\in F\setminus D$. Choose $\mu_0\in D$ with $\abs{\xi-\mu_0}\le\delta/\mathfrak o_1$ and put $\omega=\xi-\mu_0$. For $\mu\in D$ and $c\in K^\times$, $\abs{\mu+c\omega}\ge\abs c\delta\ge\mathfrak o_1\abs{c\omega}$, and then $\abs\mu\le\max(\abs{\mu+c\omega},\abs{c\omega})\le\mathfrak o_1^{-1}\abs{\mu+c\omega}$. So $\abs{\mu+c\omega}\ge\mathfrak o_1\max(\abs\mu,\abs{c\omega})$. This also holds for $c=0$.
+
+\emph{Step 2 (the basis).} Start with $\omega_1=1$ if $1\in F$, and with any nonzero vector otherwise. If $d\ge2$, apply Step~1 with $\mathfrak o_1=\mathfrak o^{1/(d-1)}$ to the span of $\omega_1,\dots,\omega_i$, and induct. The bound on $\psi$ is the case $l=1$ of the inequality.
+\end{proof}
+
+\begin{theorem}[$X\to X_{K'}$ is isometric]\label{dp:thm:base-change-isometric}
+Let $X$ be a seminormed $K$-space.
+\begin{enumerate}
+\item For every $K'$, $\pi(x\otimes1)=\norm x$. If $X$ is ultrametric, also $\pi_{\max}(x\otimes1)=\norm x$.
+\item \textup{(Completion.)} Let $K'=\Kh$. The map $\mathrm{mult}\colon X\otimes_K\Kh\to\widehat X$, $x\otimes\lambda\mapsto\lambda x$, satisfies $\pi(z)=\norm{\mathrm{mult}(z)}$, and $\pi_{\max}(z)=\norm{\mathrm{mult}(z)}$ if $X$ is ultrametric. So $X_{\Kh}$ is the $\Kh$-span of $X$ in $\widehat X$, and $\widehat{X_{\Kh}}=\widehat X$.
+\item \textup{(Tensor powers.)} For $n\ge1$ let $\sigma_n\colon X^{\otimes n}\otimes_KK'\to(X\otimes_KK')^{\otimes_{K'}n}$ be the canonical isomorphism, $\sigma_n((x_1\otimes\dots\otimes x_n)\otimes\lambda)=\lambda(x_1\otimes1)\otimes\dots\otimes(x_n\otimes1)$. It preserves the seminorm $\pi$, where the left side is the base change of $(X^{\otimes n},\pi)$ and the right side is the tensor power of $(X\otimes_KK',\pi)$. The same holds with $\pi_{\max}$ everywhere.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item~(1), $K$ complete).} Let $x\otimes1=\sum_kx'_k\otimes\lambda_k$, and let $F$ be the $K$-span of $1$ and the $\lambda_k$. The identity holds in $X\otimes_KF$, which injects into $X\otimes_KK'$. Apply $\id\otimes\psi$, with $\psi$ from Lemma~\ref{dp:bc:orthogonal} for some $0<\mathfrak o<1$. Then $x=\sum_k\psi(\lambda_k)x'_k$, so $\norm x\le\mathfrak o^{-1}\sum_k\abs{\lambda_k}\norm{x'_k}$, with a maximum if $X$ is ultrametric. Take the infimum and let $\mathfrak o\to1$.
+
+\emph{Step 2 (item~(1), general $K$).} The closure of $K$ in $\widehat{K'}$ is a copy of $\Kh$, and $X$ maps isometrically to its separated completion $\widehat X$, a seminormed $\Kh$-space. The map $X\otimes_KK'\to\widehat X\otimes_{\Kh}\widehat{K'}$ carries a representation to one of the same cost. With Step~1 over $\Kh$, this gives $\norm x\le\pi(x\otimes1)\le\norm x$, and the same with maxima.
+
+\emph{Step 3 (item~(2)).} Clearly $\norm{\mathrm{mult}(z)}\le\pi(z)$. Let $z=\sum_{k\le r}x_k\otimes\lambda_k$ and $\varepsilon>0$, and choose $\lambda'_k\in K$ with $\abs{\lambda_k-\lambda'_k}\norm{x_k}\le\varepsilon$. Then $z=(\sum_k\lambda'_kx_k)\otimes1+\sum_kx_k\otimes(\lambda_k-\lambda'_k)$, so $\pi(z)\le\norm{\sum_k\lambda'_kx_k}+r\varepsilon\le\norm{\mathrm{mult}(z)}+2r\varepsilon$, with maxima in the ultrametric case. Let $\varepsilon\to0$.
+
+\emph{Step 4 (item~(3)).} Let $\sum_k\tau_k\otimes\lambda_k$ be a representation, with $\tau_k\in X^{\otimes n}$. Expanding each $\tau_k$ nearly optimally over $K$, and using $\pi(x\otimes1)\le\norm x$, we see that $\sigma_n$ does not increase the seminorm. Conversely, let $z_i=\sum_kx_{i,k}\otimes\lambda_{i,k}$ for $i=1,\dots,n$. Then
+\begin{equation}\label{dp:bc:sigma-inverse}
+ \sigma_n^{-1}(z_1\otimes\dots\otimes z_n)=\sum_{k_1,\dots,k_n}(x_{1,k_1}\otimes\dots\otimes x_{n,k_n})\otimes\lambda_{1,k_1}\cdots\lambda_{n,k_n},
+\end{equation}
+of cost at most $\prod_i\sum_k\norm{x_{i,k}}\abs{\lambda_{i,k}}$, with $\prod_i\max_k$ in place of it for $\pi_{\max}$. Take infima over the representations of each $z_i$, and then sum over a representation of a general tensor.
+\end{proof}
+
+\begin{theorem}[multilinear maps extend]\label{dp:thm:base-change-multilinear}
+Let $\beta\colon P^n\to Q$ be a bounded $K$-multilinear map into a normed $K'$-space $Q$. There is a unique $K'$-multilinear map $\beta^{K'}\colon(P_{K'})^n\to Q$ with $\beta^{K'}(\iota_Px_1,\dots,\iota_Px_n)=\beta(x_1,\dots,x_n)$, and $\norm{\beta^{K'}}=\norm\beta$. The same holds with maxima if $Q$ is ultrametric. For $\beta\colon P^n\to W$ put $\beta_{K'}=(\iota_W\circ\beta)^{K'}\colon(P_{K'})^n\to W_{K'}$; then $\norm{\beta_{K'}}=\norm\beta$.
+\end{theorem}
+
+\begin{proof}
+For $n=0$, $\beta$ is a vector and $\beta^{K'}=\beta$. Let $n\ge1$. The map $(x_i,\lambda_i)_i\mapsto\lambda_1\cdots\lambda_n\beta(x_1,\dots,x_n)$ is $K$-multilinear, so it defines a $K'$-multilinear map on $(P\otimes_KK')^n$. As in~\eqref{dp:bc:sigma-inverse}, its value at $z_i=\sum_kx_{i,k}\otimes\lambda_{i,k}$ has norm at most $\norm\beta\prod_i\sum_k\norm{x_{i,k}}\abs{\lambda_{i,k}}$, with $\prod_i\max_k$ if $Q$ is ultrametric. So it is at most $\norm\beta\prod_i\pi(z_i)$, and the map passes to the separated quotients. Uniqueness holds since $\iota_P(P)$ spans. The lower bound follows from $\pi(x\otimes1)\le\norm x$. The last claim uses Theorem~\ref{dp:thm:base-change-isometric}(1) for $W$.
+\end{proof}
+
+Bounded multilinear maps extend to completions with the same norm; we keep the notation.
+
+\subsection{Laws}
+
+Let $a\colon P\to W$ be a law of degree $n$, with linearization $L_a$. For $n\ge1$ and $z\in P\otimes_KK'$ put $\Theta(z)=\sigma_n^{-1}(z^{\otimes n})$ and $a_{K'}(z)=(L_a\otimes\id)(\Theta(z))$; for $n=0$ put $a_{K'}(z)=a(0)\otimes1$. Let $\norm{a_{K'}}\in[0,\infty]$ be the least $C$ with $\pi(a_{K'}(z))\le C\pi(z)^n$ for all $z$, and for ultrametric $P,W$ let $\norm{a_{K'}}_{\pi_{\max}}$ be the same with $\pi_{\max}$. The \emph{extension constants} are
+\[
+ \mathfrak e_n(P,K')=\sup\norm{a_{K'}}/\norm a,\qquad\mathfrak e(P,K')=\sup_{n\ge1}\mathfrak e_n(P,K')^{1/n},
+\]
+the supremum over normed $W$ and nonzero laws $a\colon P\to W$ of degree $n$, and $\mathfrak e_n=1$ if there are none. For ultrametric $P$, the constants $\mathfrak e^{\max}_n(P,K')$ and $\mathfrak e^{\max}(P,K')$ are the same with ultrametric $W$ and $\norm{a_{K'}}_{\pi_{\max}}$.
+
+\begin{proposition}[the extension of a law]\label{dp:prop:law-extension}
+\leavevmode
+\begin{enumerate}
+\item For every representation $z=\sum_{k\le r}x_k\otimes\lambda_k$,
+\begin{equation}\label{dp:bc:formula}
+ \Theta(z)=\sum_{\abs\alpha=n}O_\alpha(x_1,\dots,x_r)\otimes\lambda^\alpha\in\Gamma^n(P)\otimes_KK',\qquad a_{K'}(z)=\sum_{\abs\alpha=n}a^{[\alpha]}(x_1,\dots,x_r)\otimes\lambda^\alpha.
+\end{equation}
+The first formula is for $n\ge1$. The map $a_{K'}$ is $K'$-polynomial of degree $n$, and $a_{K'}(x\otimes1)=a(x)\otimes1$.
+\item \textup{(Uniqueness.)} Two $K'$-polynomial maps of degree $n$ from $P\otimes_KK'$ to a $K'$-space $Q$ that agree on the vectors $x\otimes1$ are equal.
+\item \textup{(Diagonals.)} If $\beta\colon P^n\to Q$ is as in Theorem~\ref{dp:thm:base-change-multilinear} and $\mathrm{diag}(h)=(h,\dots,h)$, then $z\mapsto\beta^{K'}(z,\dots,z)$ is the $K'$-polynomial map that restricts to $x\mapsto\beta(x,\dots,x)$. So $\beta_{K'}\circ\mathrm{diag}=(\beta\circ\mathrm{diag})_{K'}$.
+\item $\norm a\le\norm{a_{K'}}$, and $\norm a\le\norm{a_{K'}}_{\pi_{\max}}$ for ultrametric $P,W$. If $P$ has a nonzero law of degree $n$, then $\mathfrak e_n(P,K')=\norm{(\mathsf v_n)_{K'}}$, with $\mathsf v_n$ the universal law of Theorem~\ref{dp:thm:normed-roby}(3).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} For $n=0$ the map $a_{K'}$ is constant, and the second formula of~\eqref{dp:bc:formula} is its definition. Let $n\ge1$. Expand $z^{\otimes n}$ over the words in $[r]^n$. By~\eqref{dp:bc:sigma-inverse}, $\sigma_n^{-1}$ sends the term of a word to the tensor of that word in the $x_k$, tensored with the product of the corresponding $\lambda_k$. Grouping the words by content gives the formula for $\Theta(z)$, and $O_\alpha(x)\in\Gamma^n(P)$ by~\eqref{dp:eq:orbit}. Comparing the coefficients of $s^\alpha$ in $L_a$ of~\eqref{dp:eq:orbit} gives $L_a(O_\alpha(x))=a^{[\alpha]}(x)$. On a $K'$-slice, $(\sum_is_iz_i)^{\otimes n}$ is a homogeneous polynomial in $s$ by~\eqref{dp:eq:orbit} over $K'$. Its values lie in $\sigma_n(\Gamma^n(P)\otimes_KK')$ by the formula for $\Theta$, so its coefficients do too, by interpolation over the infinite field $K'$. Apply $(L_a\otimes\id)\circ\sigma_n^{-1}$. The case $r=1$, $\lambda_1=1$ gives the last formula.
+
+\emph{Step 2 (item~(2)).} For fixed $x_1,\dots,x_r\in P$, the difference of the two maps at $\sum_ks_k(x_k\otimes1)$ is a polynomial in $s$ over $K'$ that vanishes on $K^r$. As $K$ is infinite, its coefficients vanish. So it vanishes on $K'^r$. Every $z\in P\otimes_KK'$ has the form $\sum_ks_k(x_k\otimes1)$.
+
+\emph{Step 3 (item~(3)).} The diagonal is homogeneous of degree $n$ on slices, by multilinearity. Apply item~(2), and use $\beta_{K'}=(\iota_W\circ\beta)^{K'}$.
+
+\emph{Step 4 (item~(4)).} By Theorem~\ref{dp:thm:base-change-isometric}(1), $\norm{a(x)}=\pi(a_{K'}(x\otimes1))\le\norm{a_{K'}}\pi(x\otimes1)^n\le\norm{a_{K'}}\norm x^n$, and the same with $\pi_{\max}$. Next, $\mathsf v_n^{[\alpha]}(x)=[O_\alpha(x)]$ by~\eqref{dp:eq:orbit}, so~\eqref{dp:bc:formula} gives $a_{K'}=(L_a\otimes\id)\circ(\mathsf v_n)_{K'}$. A representation shows that $L_a\otimes\id$ has norm at most $\norm{L_a}=\norm a$ for $\pi$. So $\norm{a_{K'}}\le\norm a\norm{(\mathsf v_n)_{K'}}$. Conversely, $\mathsf v_n\ne0$ and $\norm{\mathsf v_n}\le1$ give $\norm{(\mathsf v_n)_{K'}}\le\mathfrak e_n(P,K')$.
+\end{proof}
+
+\begin{theorem}[universal bound, all norms]\label{dp:thm:base-change-law}
+For every $K'$, all normed $P,W$ and every law $a\colon P\to W$ of degree $n$,
+\begin{equation}\label{dp:bc:bound}
+ \norm a\le\norm{a_{K'}}\le C_0^n\norm a,\qquad\text{and}\qquad\pi(a_{K'}(z+y)-a_{K'}(z))\le C_0^n\norm a\bigl((\pi(z)+\pi(y))^n-\pi(z)^n\bigr).
+\end{equation}
+So $a_{K'}$ induces a $K'$-law $P_{K'}\to W_{K'}$ of norm $\norm{a_{K'}}$, which extends to the completions with that norm. Also $\mathfrak e(P,K')\le C_0$, and $\mathfrak e_n(P,\Kh)=1$.
+\end{theorem}
+
+\begin{proof}
+The case $n=0$ is clear; let $n\ge1$.
+
+\emph{Step 1 (the bounds).} Let $z=\sum_kx_k\otimes\lambda_k$ and $y=\sum_lx'_l\otimes\mu_l$, of costs $\mathsf A$ and $\mathsf B$ for $\pi$. By~\eqref{dp:bc:formula} for the concatenated representation and Lemma~\ref{dp:lem:elementary}(3), $a_{K'}(z+y)-a_{K'}(z)$ is the sum of the $a^{[(\alpha,\alpha')]}(x,x')\otimes\lambda^\alpha\mu^{\alpha'}$ over $\abs\alpha+\abs{\alpha'}=n$ with $\alpha'\ne0$. By Theorem~\ref{dp:thm:mixed}(3) and the multinomial theorem in $\mathbb R$, its cost is at most
+\[
+ C_0^n\norm a\sum_{\alpha'\ne0}\frac{n!}{\alpha!\alpha'!}\prod_k(\norm{x_k}\abs{\lambda_k})^{\alpha_k}\prod_l(\norm{x'_l}\abs{\mu_l})^{\alpha'_l}=C_0^n\norm a\bigl((\mathsf A+\mathsf B)^n-\mathsf A^n\bigr).
+\]
+Take infima. With $z=0$ this is the upper bound in~\eqref{dp:bc:bound}. The lower bound is Proposition~\ref{dp:prop:law-extension}(4).
+
+\emph{Step 2 (quotients and completions).} If $\pi(y)=0$, then~\eqref{dp:bc:bound} gives $\pi(a_{K'}(z+y)-a_{K'}(z))=0$. So $a_{K'}$ passes to the separated quotients. Apply~\cite[Lemma~Q.13(1)]{I} over $K'$ for the completions.
+
+\emph{Step 3 (the completion of $K$).} Let $K'=\Kh$. By~\cite[Lemma~Q.13(1)]{I}, $a$ extends to a $\Kh$-law $\hat a\colon\widehat P\to\widehat W$ with $\norm{\hat a}\le\norm a$. Both $\mathrm{mult}\circ a_{\Kh}$ and $\hat a\circ\mathrm{mult}$ are $\Kh$-polynomial and restrict to $a$. So they agree, by Proposition~\ref{dp:prop:law-extension}(2). With Theorem~\ref{dp:thm:base-change-isometric}(2), $\pi(a_{\Kh}(z))=\norm{\hat a(\mathrm{mult}(z))}\le\norm a\pi(z)^n$.
+\end{proof}
+
+\begin{theorem}[with maxima]\label{dp:thm:base-change-um}
+Let $P,W$ be ultrametric. For every $K'$ and every law $a\colon P\to W$ of degree $n$,
+\[
+ \norm a\le\norm{a_{K'}}_{\pi_{\max}}\le(\abs\varpi\mathfrak c_K)^{-n}\norm a.
+\]
+So $a_{K'}$ induces a $K'$-law $P^{\max}_{K'}\to W^{\max}_{K'}$ of norm $\norm{a_{K'}}_{\pi_{\max}}$, which extends to the completions with that norm, and $\mathfrak e^{\max}(P,K')\le(\abs\varpi\mathfrak c_K)^{-1}$. If $K$ is densely valued, then $\norm{a_{K'}}_{\pi_{\max}}=\norm a$ for every $K'$ and every $a$.
+\end{theorem}
+
+\begin{proof}
+The case $n=0$ is clear. For $n\ge1$, each term of the orbit sum $O_\alpha(x)$ is an elementary tensor of cost $\prod_k\norm{x_k}^{\alpha_k}$. So $\pi_{\max}(O_\alpha(x))\le\prod_k\norm{x_k}^{\alpha_k}$, and~\cite[Theorem~14.39(1), (14.9)]{I} gives $\norm{a^{[\alpha]}(x)}\le(\abs\varpi\mathfrak c_K)^{-n}\norm a\prod_k\norm{x_k}^{\alpha_k}$. As in Step~1 of the proof of Theorem~\ref{dp:thm:base-change-law}, now with maxima, $\pi_{\max}(a_{K'}(z+y)-a_{K'}(z))\le(\abs\varpi\mathfrak c_K)^{-n}\norm a\,\mathsf B\max(\mathsf A,\mathsf B)^{n-1}$, and $\pi_{\max}(a_{K'}(z))\le(\abs\varpi\mathfrak c_K)^{-n}\norm a\,\mathsf A^n$. Take infima. The rest is as in Step~2 there. The lower bound is Proposition~\ref{dp:prop:law-extension}(4). Over a densely valued $K$ we have $\mathfrak c_K=1$, and the bound holds with every $\varpi'\in K$, $0<\abs{\varpi'}<1$, in place of $\varpi$; let $\abs{\varpi'}\to1$.
+\end{proof}
+
+\emph{Where ultrametric norms are used.} With sums, the mixed term of index $\alpha$ must be bounded with the weight $n!/\alpha!$, so that the terms sum up, and this is what gives $C_0$. With maxima the multi-indices are not counted, so the constant is $(\abs\varpi\mathfrak c_K)^{-1}$, which is $1$ in the limit over densely valued $K$. Whether the constant for $\pi$ can be taken equal to $1$ over densely valued $K$ is Question~\ref{dp:q:base-change}(1).
+
+For a law $a\colon P\to W$ of degree $n$ put $\operatorname{amb}_{\max}(a)=\sup\{\norm{L_a(t)}/\pi_{\max}(t):t\in\Gamma^n(P)\}$, with the reading of quotients of Section~\ref{dp:sec:conv}. As $\pi_{\max}\le\pi$, we have $\norm a\le\operatorname{amb}(a)\le\operatorname{amb}_{\max}(a)$. If $ja=\beta\circ\mathrm{diag}$, with $j$ a linear isometry into an ultrametric space $Z$ and $\beta$ bounded and $n$-linear, then
+\begin{equation}\label{dp:bc:amb-rep}
+ \operatorname{amb}_{\max}(a)\le\norm\beta.
+\end{equation}
+Indeed, the linearization of $\beta$ on $P^{\otimes n}$ is bounded by $\norm\beta$ for $\pi_{\max}$, as $Z$ is ultrametric, and it equals $jL_a$ on $\Gamma^n(P)$. Conversely:
+
+\begin{lemma}[an ultrametric enlargement]\label{dp:bc:envelope}
+Let $P,W$ be ultrametric, $\rho>0$, $M\ge0$, and let $a_n\colon P\to W$ be laws of degree $n$ with $\operatorname{amb}_{\max}(a_n)\le M\rho^{-n}$ for all $n\ge0$. There are an ultrametric space $Z$, a linear isometry $j\colon W\to Z$ and $n$-linear maps $\beta_n\colon P^n\to Z$ with $\norm{\beta_n}\le M\rho^{-n}$ and $\beta_n\circ\mathrm{diag}=ja_n$.
+\end{lemma}
+
+\begin{proof}
+Let $\norm\cdot_Z$ be the seminorm on $W\oplus\bigoplus_nP^{\otimes n}$ given by
+\[
+ \norm{(v,\tau)}_Z=\inf_t\max\Bigl(\Bigl\lVert v+\sum_nL_{a_n}(t_n)\Bigr\rVert,\ \max_nM\rho^{-n}\pi_{\max}(\tau_n-t_n)\Bigr),
+\]
+the infimum over $t\in\bigoplus_n\Gamma^n(P)$, and let $Z$ be the quotient by its kernel. Put $j(v)=[v,0]$ and $\beta_n(h_1,\dots,h_n)=[0,h_1\otimes\dots\otimes h_n]$. This is the construction of Step~5 of the proof of~\cite[Theorem~14.39]{I}, with $\rho$ for $\abs\varpi\mathfrak c_KR$ and $M$ for the bound. That step uses only the bound on the $L_{a_n}$ for $\pi_{\max}$.
+\end{proof}
+
+\begin{proposition}[non-ambience persists]\label{dp:prop:nonambient-base}
+For every $K'$ and every law $a\colon P\to W$ of degree $n$, $\operatorname{amb}(a)\le\operatorname{amb}(a_{K'})$. If $a_{K'}$ is ambient of degree $n$ over $K'$, then $a$ is ambient of degree $n$ over $K$, with a multilinear map of no larger norm. So the laws of Propositions~\ref{dp:prop:nonambient}\textup{(2)} and~\ref{dp:prop:degree-p}\textup{(2)} are not ambient after any base change. With maxima, $\operatorname{amb}_{\max}(a)\le\operatorname{amb}_{\max}(a_{K'})$.
+\end{proposition}
+
+\begin{proof}
+On $\Gamma^n(P)$ we have $L_{a_{K'}}\circ\iota_P^{\otimes n}=\iota_W\circ L_a$, since both are $K$-linear and agree on powers. A representation of $t$ over $K$ gives one of $\iota_P^{\otimes n}t$ over $K'$ of no larger cost. With Theorem~\ref{dp:thm:base-change-isometric}(1), $\norm{L_a(t)}=\norm{L_{a_{K'}}(\iota_P^{\otimes n}t)}\le\operatorname{amb}(a_{K'})\pi(t)$, and the same with $\pi_{\max}$. If $j'a_{K'}=\beta'\circ\mathrm{diag}$ with a $K'$-linear isometry $j'$, then $j'\circ\iota_W$ is a $K$-linear isometry, and $\beta'\circ\iota_P^{\times n}$, with $\iota_P^{\times n}=(\iota_P,\dots,\iota_P)$, is $K$-multilinear of norm at most $\norm{\beta'}$, with diagonal $j'\iota_Wa$.
+\end{proof}
+
+\begin{theorem}[base change computes the ambient constant]\label{dp:thm:base-change-amb}
+Let $P,W$ be ultrametric and let $a\colon P\to W$ be a law of degree $n$. Work with maxima.
+\begin{enumerate}
+\item If $K'$ is densely valued, then $\operatorname{amb}_{\max}(a_{K'})=\norm{a_{K'}}_{\pi_{\max}}$.
+\item If $K$ is complete, then $\operatorname{amb}_{\max}(a_{K'})=\operatorname{amb}_{\max}(a)$ for every $K'$.
+\item So if $K$ is complete and $K'$ is densely valued, then $\norm{a_{K'}}_{\pi_{\max}}=\operatorname{amb}_{\max}(a)$. If $K$ is densely valued, complete or not, then $\operatorname{amb}_{\max}(a)=\norm a$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+If $n=0$, then $\operatorname{amb}_{\max}(a)=\operatorname{amb}_{\max}(a_{K'})=\norm{a_{K'}}_{\pi_{\max}}=\norm{a(0)}$, by Theorem~\ref{dp:thm:base-change-isometric}(1). Let $n\ge1$.
+
+\emph{Step 1 (item~(1)).} Apply~\cite[(14.9)]{I} over $K'$ to the law $a_{K'}$ between the ultrametric spaces $P^{\max}_{K'},W^{\max}_{K'}$. Here $\mathfrak c_{K'}=1$, and~\cite[(14.9)]{I} holds for every $\varpi'\in K'$ with $0<\abs{\varpi'}<1$; let $\abs{\varpi'}\to1$. This gives $\operatorname{amb}_{\max}(a_{K'})\le\norm{a_{K'}}_{\pi_{\max}}$. The other inequality holds for every law.
+
+\emph{Step 2 (item~(2), reduction).} One inequality is Proposition~\ref{dp:prop:nonambient-base}. For the other, let $\mathsf t\in\Gamma^n(P^{\max}_{K'})$. Lift it to $\mathsf t_0=\sum_ic_iz_i^{\otimes n}$ with $c_i\in K'$ and $z_i\in P\otimes_KK'$. A representation of $\mathsf t$ lifts at the same cost to a tensor that differs from $\mathsf t_0$ by a sum of elementary tensors with a null factor, and these have $\pi_{\max}=0$. So $\pi_{\max}(\mathsf t_0)\le\pi_{\max}(\mathsf t)$. Put $\mathsf t'=\sum_ic_i\Theta(z_i)\in\Gamma^n(P)\otimes_KK'$. Then $\sigma_n\mathsf t'=\mathsf t_0$, and $L_{a_{K'}}(\mathsf t)$ is the class of $(L_a\otimes\id)(\mathsf t')$.
+
+\emph{Step 3 (item~(2), the expansion).} Here $K$ complete is used. Let $\varepsilon>0$ and $0<\mathfrak o<1$. By Theorem~\ref{dp:thm:base-change-isometric}(3) there is a representation $\mathsf t'=\sum_k\tau_k\otimes\lambda_k$, $\tau_k\in P^{\otimes n}$, with $\max_k\pi_{\max}(\tau_k)\abs{\lambda_k}\le\pi_{\max}(\mathsf t_0)+\varepsilon$. Take a basis $\omega_l$ of the $K$-span of the $\lambda_k$ as in Lemma~\ref{dp:bc:orthogonal}, and write $\lambda_k=\sum_lc_{kl}\omega_l$. Then $\mathsf t'=\sum_lt_l\otimes\omega_l$ with $t_l=\sum_kc_{kl}\tau_k$. As $\mathsf t'\in\Gamma^n(P)\otimes_KK'$ and the $\omega_l$ are independent, $t_l\in\Gamma^n(P)$. Also $\abs{c_{kl}}\abs{\omega_l}\le\mathfrak o^{-1}\abs{\lambda_k}$, so $\pi_{\max}(t_l)\abs{\omega_l}\le\mathfrak o^{-1}(\pi_{\max}(\mathsf t_0)+\varepsilon)$. Therefore
+\[
+ \pi_{\max}\bigl((L_a\otimes\id)(\mathsf t')\bigr)\le\max_l\norm{L_a(t_l)}\abs{\omega_l}\le\operatorname{amb}_{\max}(a)\,\mathfrak o^{-1}(\pi_{\max}(\mathsf t)+\varepsilon).
+\]
+Let $\varepsilon\to0$ and $\mathfrak o\to1$.
+
+\emph{Step 4 (item~(3)).} The first claim is items (1) and (2). The second is~\cite[(14.9)]{I} with $\mathfrak c_K=1$ and $\abs{\varpi'}\to1$, for $\varpi'\in K$.
+\end{proof}
+
+With maxima the expansion in Step~3 costs nothing. With sums it costs the number of basis vectors, which is unbounded for infinite $K'$. This is the only place where the proof of item~(2) uses ultrametric norms.
+
+\begin{example}[the constant exceeds $1$]\label{dp:ex:base-law}
+Let $K=\mathbb Q_p$ with $\abs p=1/p$, $K'=\mathbb Q_{p^2}$, and let $\zeta\in K'$ be a unit whose residue is not in $\F_p$. Let $m\ge1$, $P=c_0([2m],K)$, $W=K$, and
+\[
+ \phi(s,s')=\frac{s^ps'-ss'^p}p,\qquad b_m(h)=\prod_{i=1}^m\phi(h_{2i-1},h_{2i}),
+\]
+a law of degree $m(p+1)$. Then $\norm{b_m}=1$ and $\norm{(b_m)_{K'}}_{\pi_{\max}}=\operatorname{amb}_{\max}(b_m)=p^m$. So $\mathfrak e^{\max}_{m(p+1)}(P,K')\ge p^m$.
+
+For $s,s'\in\mathbb Z_p$ we have $s^ps'-ss'^p\equiv0$ modulo $p$. By homogeneity and $\abs{K^\times}=p^{\Z}$, this gives $\abs{\phi(s,s')}\le\max(\abs s,\abs{s'})^{p+1}$. So $\norm{b_m}\le1$. Equality holds at the vector $(1,p,1,p,\dots)$, since $\phi(1,p)=1-p^{p-1}$ is a unit. Next, $\phi$ is the diagonal of a $(p+1)$-linear form of norm at most $p$, so $b_m$ is the diagonal of a form $\Phi_m$ of norm at most $p^m$, and $\operatorname{amb}_{\max}(b_m)\le p^m$ by~\eqref{dp:bc:amb-rep}. Here $W^{\max}_{K'}=K'$, by Lemma~\ref{dp:bc:universal} with $u=\id_K$ and $Q=K'$, and by~\eqref{dp:bc:formula}, $(b_m)_{K'}$ is the same polynomial in the $K'$-coordinates of $z$. With unit vectors $e_i$, the vector $z=\sum_{i\le m}(e_{2i-1}\otimes1+e_{2i}\otimes\zeta)$ has $\pi_{\max}(z)\le1$, and $\abs{\phi(1,\zeta)}=p\abs{\zeta-\zeta^p}=p$, as $\bar\zeta^p\ne\bar\zeta$. So $p^m\le\norm{(b_m)_{K'}}_{\pi_{\max}}\le\operatorname{amb}_{\max}((b_m)_{K'})=\operatorname{amb}_{\max}(b_m)\le p^m$, by Theorem~\ref{dp:thm:base-change-amb}(2).
+\end{example}
+
+\subsection{Germs}
+
+Let $U\subseteq P$ be open, and let $f\colon U\to W$ be DP at $x_0$ with coefficient laws $a_n$. We identify the points of $P$ with their images under $\iota_P$. The \emph{base change} $f_{K'}$ is the germ at $x_0$ defined by its series,
+\[
+ f_{K'}(x_0+z)=\sum_n(a_n)_{K'}(z),\qquad z\in\widehat{P_{K'}},\quad\pi(z)<\bigl(\limsup_n\norm{(a_n)_{K'}}^{1/n}\bigr)^{-1},
+\]
+with values in $\widehat{W_{K'}}$. By Theorem~\ref{dp:thm:base-change-law} this radius is at least $\rho_{\mathrm{DP}}(f,x_0)/C_0$, and it is $\rho_{\mathrm{DP}}(f_{K'},x_0)$. Statements about $f_{K'}$ concern this series only. A map can stop agreeing with its series outside the ball on which it is represented (Theorem~\ref{dp:thm:quasi-analytic}(3)). So a conclusion about a map $f$ that is DP at $x_0$ with radius $R$ carries the radius $\min(\cdot,R)$.
+
+\begin{theorem}[DP germs]\label{dp:thm:germ-base-change}
+Let $f$ be DP at $x_0$ with radius $R$, bound $M$ and coefficient laws $a_n$, and let $\mathfrak e=\mathfrak e(P,K')$.
+\begin{enumerate}
+\item $f_{K'}$ is DP over $K'$ at $x_0$ with radius $R/\mathfrak e$, bound $M$ and coefficient laws $(a_n)_{K'}$, and $\rho_{\mathrm{DP}}(f,x_0)/\mathfrak e\le\rho_{\mathrm{DP}}(f_{K'},x_0)\le\rho_{\mathrm{DP}}(f,x_0)$.
+\item $f_{K'}(x_0+h)=\iota_Wf(x_0+h)$ for $h\in P$, $\norm h<R/\mathfrak e$.
+\item \textup{(Uniqueness.)} If $f'$, from an open subset of $\widehat{P_{K'}}$ to $\widehat{W_{K'}}$, is DP over $K'$ at $x_0$ and $f'(x_0+h)=\iota_Wf(x_0+h)$ for small $h\in P$, then $f'=f_{K'}$ near $x_0$, with the same coefficient laws.
+\item \textup{(Functoriality.)} If $g$, from an open subset of $W$ to $Y$, is DP at $f(x_0)$, then $(g\circ f)_{K'}=g_{K'}\circ f_{K'}$ near $x_0$.
+\item \textup{(Descent.)} Independently of $f$, let $W$ be complete. Let $f'$, from an open subset of $\widehat{P_{K'}}$ to $\widehat{W_{K'}}$, be DP over $K'$ at $x_0\in P$ with radius $R'$ and bound $M'$, with $f'(x_0+h)\in\iota_W(W)$ for small $h\in P$. Then $f'(x_0+h)=\iota_Wf_0(x_0+h)$ on $\norm h<R'$ for a map $f_0$ into $W$ that is DP over $K$ at $x_0$ with radius $R'$ and bound $M'$, and $f'=(f_0)_{K'}$ near $x_0$.
+\end{enumerate}
+The same holds with maxima, with $\mathfrak e^{\max}(P,K')$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (items~(1) and~(2)).} For $n\ge1$, $\norm{(a_n)_{K'}}\le\mathfrak e^n\norm{a_n}\le M(R/\mathfrak e)^{-n}$, and $\norm{(a_0)_{K'}}=\norm{a_0}$. So the series converges for $\pi(z)<R/\mathfrak e$, and this is item~(1) with the lower bound on $\rho_{\mathrm{DP}}$. The upper bound is $\norm{a_n}\le\norm{(a_n)_{K'}}$. Item~(2) is $(a_n)_{K'}(\iota_Ph)=\iota_Wa_n(h)$, since $\mathfrak e\ge1$.
+
+\emph{Step 2 (item~(3)).} Let $a'_n$ be the coefficient laws of $f'$. Let $h\in P$. For $s\in K$ small, $\iota_Wf(x_0+sh)=f'(x_0+sh)=\sum_ns^na'_n(\iota_Ph)$, with geometric bounds. Lemma~\ref{dp:lem:coefficients-unique}(1), for $\iota_W\circ f$, gives $a'_n\circ\iota_P=\iota_W\circ a_n$. By Proposition~\ref{dp:prop:law-extension}(2), $a'_n=(a_n)_{K'}$ on $P_{K'}$, and on the completion by continuity. The two germs agree on the smaller ball.
+
+\emph{Step 3 (item~(4)).} By Theorem~\ref{dp:thm:calculus}(2) over $K'$, $g_{K'}\circ f_{K'}$ is DP over $K'$ at $x_0$. For small $h\in P$, item~(2) gives $g_{K'}(f_{K'}(x_0+h))=g_{K'}(\iota_Wf(x_0+h))=\iota_Yg(f(x_0+h))$. Apply item~(3) to $g\circ f$, which is DP at $x_0$ by the same theorem.
+
+\emph{Step 4 (item~(5)).} Let $a'_n$ be the coefficient laws of $f'$. The maps $a'_n\circ\iota_P$ are $K$-laws into $\widehat{W_{K'}}$ with $\norm{a'_n\circ\iota_P}\le\norm{a'_n}$, as $\pi(\iota_Ph)\le\norm h$. Choose $R''\le R'$ with $f'(x_0+h)\in\iota_W(W)$ for $\norm h<R''$. The map $\iota_W$ is an isometry with closed range, as $W$ is complete. By Theorem~\ref{dp:thm:target-descent}(2) on the ball of radius $R''$, the laws $a'_n\circ\iota_P$ take values in $\iota_W(W)$. So $a_n=\iota_W^{-1}\circ a'_n\circ\iota_P$ are laws with $\norm{a_n}\le M'R'^{-n}$. For $\norm h<R'$ the sum $f'(x_0+h)=\sum_na'_n(\iota_Ph)$ lies in the closed subspace $\iota_W(W)$, so $f_0(x_0+h)=\sum_na_n(h)$ is the required map. Item~(3) gives $f'=(f_0)_{K'}$ near $x_0$.
+\end{proof}
+
+\begin{theorem}[analytic germs]\label{dp:thm:an-base-change}
+Let $f$ be DP at $x_0$ with radius $R$ and coefficient laws $a_n$.
+\begin{enumerate}
+\item If $f$ is analytic at $x_0$ with radius $R_1$, bound $M_1$ and multilinear coefficients $\beta_n$, then $f_{K'}$ is analytic over $K'$ at $x_0$ with radius $R_1$, bound $M_1$ and coefficients $(\beta_n)_{K'}$. This holds for every $K$, every $K'$ and all norms.
+\item If $f_{K'}$ is analytic over $K'$ at $x_0$ with radius $R_1$ and bound $M_1$, then $\iota_W\circ f\colon U\to\widehat{W_{K'}}$ is analytic over $K$ at $x_0$ with radius $\min(R_1,R)$ and bound $M_1$. Conversely, if $\iota_W\circ f$ is analytic over $K$ at $x_0$ with radius $R_1$ and bound $M_1$, then $f_{K'}$ is analytic over $K'$ at $x_0$ with radius $R_1$ and bound $M_1$.
+\item So if $f_{K'}$ is analytic over $K'$ at $x_0$ with radius $R_1$ and bound $M_1$, then $f$ is AA over $K$ at $x_0$ with radius $\min(R_1,R)$ and bound $M_1$, through the isometry $\iota_W$.
+\end{enumerate}
+The same holds with maxima.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} By Lemma~\ref{dp:lem:coefficients-unique}(2), with $j=\id_W$, $a_n=\beta_n\circ\mathrm{diag}$. So the diagonal of $(\beta_n)_{K'}$ is $(a_n)_{K'}$, by Proposition~\ref{dp:prop:law-extension}(3). Also $\norm{(\beta_n)_{K'}}=\norm{\beta_n}\le M_1R_1^{-n}$ by Theorem~\ref{dp:thm:base-change-multilinear}. So the series of $f_{K'}$ converges for $\pi(z)<R_1$ and equals $\sum_n(\beta_n)_{K'}(z,\dots,z)$.
+
+\emph{Step 2 (item~(2)).} Let $\beta'_n$ be the $K'$-multilinear coefficients of $f_{K'}$. By Lemma~\ref{dp:lem:coefficients-unique}(2) over $K'$, the diagonal of $\beta'_n$ is $(a_n)_{K'}$. Put $\beta_n=\beta'_n\circ\iota_P^{\times n}$. This is $K$-multilinear with $\norm{\beta_n}\le\norm{\beta'_n}$ and diagonal $\iota_Wa_n$. So $\iota_Wf(x_0+h)=\sum_n\iota_Wa_n(h)=\sum_n\beta_n(h,\dots,h)$ wherever $f$ equals its series and the coefficients converge, that is, for $\norm h<\min(R_1,R)$.
+
+For the converse, let $\beta_n\colon P^n\to\widehat{W_{K'}}$ be the coefficients of $\iota_W\circ f$. By Lemma~\ref{dp:lem:coefficients-unique}(2), with $j=\iota_W$, their diagonals are $\iota_Wa_n$. By Theorem~\ref{dp:thm:base-change-multilinear} with $Q=\widehat{W_{K'}}$, $\norm{\beta_n^{K'}}\le M_1R_1^{-n}$, and by Proposition~\ref{dp:prop:law-extension}(3) and~(2) the diagonal of $\beta_n^{K'}$ is $(a_n)_{K'}$. So the series of $f_{K'}$ converges for $\pi(z)<R_1$ and equals $\sum_n\beta_n^{K'}(z,\dots,z)$. Since $f_{K'}$ is defined by its series, no condition $R_1\le R$ is needed in this direction.
+
+\emph{Step 3 (item~(3)).} By Theorem~\ref{dp:thm:base-change-isometric}(1), $\iota_W$ is an isometry, and the diagonals in Step~2 lie in $\iota_W(W)$.
+\end{proof}
+
+\begin{proposition}[descent of analyticity]\label{dp:prop:an-descent}
+Identify $\Kh$ with the closure of $K$ in $\widehat{K'}$. A \emph{bounded retraction} with constant $C$ is a $K$-linear map $\psi\colon K'\to\Kh$ with $\psi(1)=1$ and $\abs{\psi(\lambda)}\le C\abs\lambda$. By continuity, it is the same as such a $\Kh$-linear map on $\widehat{K'}$.
+\begin{enumerate}
+\item Let $W$ be complete, let $\psi$ be a bounded retraction with constant $C$, and let $f$ be DP at $x_0$ with radius $R$. If $f_{K'}$ is analytic over $K'$ at $x_0$ with radius $R_1$ and bound $M_1$, then $f$ is analytic over $K$ at $x_0$ with radius $\min(R_1,R)$ and bound $CM_1$. The same holds with maxima.
+\item If $\Kh$ is spherically complete, for instance if $K$ is discretely valued, there is a bounded retraction with $C=1$, for every $K'$. If $[\widehat{K'}:\Kh]<\infty$, there is one with $C=\mathfrak o^{-1}$ for every $\mathfrak o<1$.
+\item If $K$ is complete and not spherically complete, and $K'$ is spherically complete, then there is no bounded retraction.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} As $W$ is complete, it is a normed $\Kh$-space. Define $\Psi_0\colon W\otimes_KK'\to W$ by $\Psi_0(w\otimes\lambda)=\psi(\lambda)w$. It is $K$-linear. A representation gives $\norm{\Psi_0(z)}\le C\pi(z)$, and $\norm{\Psi_0(z)}\le C\pi_{\max}(z)$ if $W$ is ultrametric. So $\Psi_0$ extends to a $K$-linear map $\Psi\colon\widehat{W_{K'}}\to W$ with $\norm\Psi\le C$, and $\Psi\circ\iota_W=\id_W$. Let $\beta_n$ be as in Step~2 of the proof of Theorem~\ref{dp:thm:an-base-change}. Then $\Psi\circ\beta_n\colon P^n\to W$ is $K$-multilinear of norm at most $CM_1R_1^{-n}$, and $f(x_0+h)=\Psi(\iota_Wf(x_0+h))=\sum_n\Psi\beta_n(h,\dots,h)$ for $\norm h<\min(R_1,R)$.
+
+\emph{Step 2 (item~(2)).} For the first claim apply~\cite[Theorem~D.3]{I} over $\Kh$ to the space $\widehat{K'}$, the subspace $\Kh$ and the identity of $\Kh$, with constant $1$. If $K$ is discretely valued, $\Kh$ is spherically complete by~\cite[Lemma~D.1]{I}. The second claim is Lemma~\ref{dp:bc:orthogonal} over $\Kh$ with $F=\widehat{K'}$.
+
+\emph{Step 3 (item~(3)).} Suppose that $\psi\colon K'\to K$ is a bounded retraction. Let $\mathrm{pr}\colon\linf(\N,K)\to\mathsf E=\linf(\N,K)/c_0(\N,K)$ be the quotient map, with the quotient norm, and let $\mathbf 1$ be the constant sequence. Sequences in $c_0(\N,K)$ tend to $0$, so $\norm{\mathrm{pr}(\mathbf 1)}=1$, and $c\,\mathrm{pr}(\mathbf 1)\mapsto c$ is a $K$-linear contraction from $K\mathrm{pr}(\mathbf 1)$ to $K'$. It extends to a $K$-linear contraction $\chi\colon\mathsf E\to K'$. By Zorn's lemma it suffices to add one vector $\mathsf x$ to the domain $\mathsf D$ of a contraction $\chi_0$. The closed balls of center $-\chi_0(d)$ and radius $\norm{d+\mathsf x}$, $d\in\mathsf D$, have positive radii, as $c_0(\N,K)$ is closed in $\linf(\N,K)$. They meet pairwise, as $\abs{\chi_0(d)-\chi_0(d')}\le\norm{d-d'}\le\max(\norm{d+\mathsf x},\norm{d'+\mathsf x})$. As $K'$ is spherically complete, they have a common point $\mu$, which gives the contraction $d+c\mathsf x\mapsto\chi_0(d)+c\mu$: for $c\ne0$, $\abs{\chi_0(d)+c\mu}=\abs c\,\abs{\chi_0(c^{-1}d)+\mu}\le\abs c\,\norm{c^{-1}d+\mathsf x}=\norm{d+c\mathsf x}$. Now $\psi\circ\chi\circ\mathrm{pr}$ is a bounded functional on $\linf(\N,K)$ that vanishes on $c_0(\N,K)$ and takes the value $1$ at $\mathbf 1$. This contradicts~\cite[Th\'eor\`eme~4.1]{VdP}, as used in the proof of~\cite[Lemma~F.2]{I}: over such $K$, with unit vectors $e_i$, every bounded functional $\mathsf l$ on $\linf(\N,K)$ is $\mathsf l(x)=\sum_ix_i\mathsf l(e_i)$.
+\end{proof}
+
+Which other extensions have a bounded retraction is not determined here. Neither is descent along an extension without one; Question~\ref{dp:q:base-change}(3),(4) are test cases.
+
+\begin{theorem}[ambient analytic germs]\label{dp:thm:aa-base-change}
+Let $f$ be DP at $x_0$ with radius $R$ and coefficient laws $a_n$.
+\begin{enumerate}
+\item If $f$ is AA at $x_0$ with radius $\rho$ and bound $M$, then $f_{\Kh}$ is AA over $\Kh$ with radius $\rho$ and bound $M$.
+\item Let $K$ be complete and $P,W$ ultrametric. If $f$ is AA at $x_0$ with radius $\rho$ and bound $M$ through an ultrametric space, then $f_{K'}$, with maxima, is AA over $K'$ with radius $\rho$ and bound $M$ through an ultrametric space, for every $K'$.
+\item If $f_{K'}$ is AA over $K'$ with radius $\rho'$ and bound $M'$, then $f$ is AA over $K$ with radius $\min(\rho',R)$ and bound $M'$. So if $f$ is not AA over $K$, then $f_{K'}$ is not AA, and so not analytic, over any $K'$.
+\item Let $K$ be complete, $P,W$ ultrametric, and $\rho,M>0$. Consider: \textup{(a)} $f$ is AA at $x_0$ with radius $\rho$ and bound $M$ through an ultrametric space; \textup{(b)} $\operatorname{amb}_{\max}(a_n)\le M\rho^{-n}$ for all $n$; \textup{(c)} $f_{K'}$, with maxima, is DP at $x_0$ with radius $\rho$ and bound $M$ for some densely valued $K'$; \textup{(d)} the same for every densely valued $K'$. Then \textup{(b)}, \textup{(c)} and \textup{(d)} are equivalent; \textup{(a)} implies \textup{(b)}; and \textup{(b)} implies \textup{(a)} with radius $\min(\rho,R)$.
+\item If $K$ is densely valued, complete or not, and $P,W$ are ultrametric, and $f$ is DP at $x_0$ with radius $R$ and bound $M$, then $f$ is AA through an ultrametric space with the same radius and bound.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let $j\colon W\to Z$ and $\beta_n$ be the ambient data where they occur. By~\cite[Proposition~14.9]{I}, $ja_n=\beta_n\circ\mathrm{diag}$.
+
+\emph{Step 1 (item~(1)).} By Theorem~\ref{dp:thm:base-change-isometric}(2), $\widehat{P_{\Kh}}=\widehat P$ and $\widehat{W_{\Kh}}=\widehat W$. As $\norm{a_n}\le\norm{\beta_n}$ and $\mathfrak e(P,\Kh)=1$, the germ $f_{\Kh}$ is given by its series on the ball of radius $\rho$ in $\widehat P$. Let $\hat\jmath\colon\widehat W\to\widehat Z$ and $\hat\beta_n\colon\widehat P^n\to\widehat Z$ be the extensions by continuity. They are $\Kh$-linear, respectively $\Kh$-multilinear, and $\hat\jmath$ is an isometry with $\norm{\hat\beta_n}=\norm{\beta_n}$. By density, the diagonal of $\hat\beta_n$ is $\hat\jmath\circ(a_n)_{\Kh}$.
+
+\emph{Step 2 (item~(2)).} By~\eqref{dp:bc:amb-rep}, $\operatorname{amb}_{\max}(a_n)\le M\rho^{-n}$. By Theorem~\ref{dp:thm:base-change-amb}(2), $\operatorname{amb}_{\max}((a_n)_{K'})\le M\rho^{-n}$. So $\norm{(a_n)_{K'}}_{\pi_{\max}}\le M\rho^{-n}$. Apply Lemma~\ref{dp:bc:envelope} over $K'$ to the laws $(a_n)_{K'}$ between $P^{\max}_{K'}$ and $W^{\max}_{K'}$, and then complete the space and the maps, as in Step~1. The expansion holds on $\pi_{\max}(z)<\rho$.
+
+\emph{Step 3 (item~(3)).} Let $j',\beta'_n$ be the ambient data of $f_{K'}$. By Lemma~\ref{dp:lem:coefficients-unique}(2) over $K'$, $j'(a_n)_{K'}=\beta'_n\circ\mathrm{diag}$. Then $j'\circ\iota_W$ is a $K$-linear isometry, and $\beta'_n\circ\iota_P^{\times n}$ is $K$-multilinear of norm at most $M'\rho'^{-n}$, with diagonal $j'\iota_Wa_n$. The expansion holds where $f$ equals its series, that is, for $\norm h<\min(\rho',R)$.
+
+\emph{Step 4 (item~(4)).} For (a)$\Rightarrow$(b) use~\eqref{dp:bc:amb-rep}. If (b) holds, Lemma~\ref{dp:bc:envelope} gives ambient data with $\norm{\beta_n}\le M\rho^{-n}$ and $\beta_n\circ\mathrm{diag}=ja_n$. So $jf(x_0+h)=\sum_n\beta_n(h,\dots,h)$ for $\norm h<\min(\rho,R)$, which is (a) with that radius. For a densely valued $K'$, $\norm{(a_n)_{K'}}_{\pi_{\max}}=\operatorname{amb}_{\max}(a_n)$ by Theorem~\ref{dp:thm:base-change-amb}(3). This gives (b)$\Leftrightarrow$(c)$\Leftrightarrow$(d), provided a densely valued $K'$ exists. If $K$ is densely valued, take $K'=K$. If $K$ is discretely valued, take $K'=K(X)$ with the Gauss absolute value $\abs{\sum_ic_iX^i}=\max_i\abs{c_i}\mathsf r^i$, for $\mathsf r>0$ with $\log\mathsf r/\log\abs\vartheta$ irrational. It is multiplicative: for $\mathsf g,\mathsf g'\in K[X]$, if $i_0,i'_0$ are the least indices attaining the maxima for $\mathsf g,\mathsf g'$, then the coefficient of $X^{i_0+i'_0}$ in $\mathsf g\mathsf g'$ has a unique term of largest weight. So it extends to $K(X)$ by $\abs{\mathsf g/\mathsf g'}=\abs{\mathsf g}/\abs{\mathsf g'}$, and its value group $\abs\vartheta^{\Z}\mathsf r^{\Z}$ is dense in $(0,\infty)$.
+
+\emph{Step 5 (item~(5)).} By Theorem~\ref{dp:thm:base-change-amb}(3), $\operatorname{amb}_{\max}(a_n)=\norm{a_n}\le MR^{-n}$. Apply Lemma~\ref{dp:bc:envelope} with $\rho=R$. The expansion holds for $\norm h<R$.
+\end{proof}
+
+\begin{example}[the loss of radius is real]\label{dp:ex:base-radius}
+Let $K,K'$ be as in Example~\ref{dp:ex:base-law}, and work with maxima. Let $P=c_0(\N,K)$, with $\N$ partitioned into consecutive blocks $J_m$ of size $2m$, and let $f(h)=\sum_{m\ge1}b_m(h|_{J_m})$ on $B(0,1)$, with $b_m$ as in Example~\ref{dp:ex:base-law} in the coordinates of $J_m$. Then $\rho_{\mathrm{DP}}(f,0)=1$, while $\rho_{\mathrm{DP}}(f_{K'},0)=p^{-1/(p+1)}$. Also $f$ is analytic at $0$ with radius $p^{-1/(p+1)}$, and with no larger radius.
+
+The coefficient laws are $a_{m(p+1)}(h)=b_m(h|_{J_m})$, of norm $1$, and $a_n=0$ for the other $n$. So $\rho_{\mathrm{DP}}(f,0)=1$. Each $a_{m(p+1)}$ is the diagonal of the form $\Phi_m$ in the coordinates of $J_m$, of norm at most $p^m$. So $\norm{(a_{m(p+1)})_{K'}}_{\pi_{\max}}\le p^m$, by Theorem~\ref{dp:thm:base-change-multilinear} and Proposition~\ref{dp:prop:law-extension}(3). The vector of Example~\ref{dp:ex:base-law} placed in $J_m$ gives equality. So $\limsup_n\norm{(a_n)_{K'}}_{\pi_{\max}}^{1/n}=p^{1/(p+1)}$. Put $R_0=p^{-1/(p+1)}<1$. The forms satisfy $\norm{\Phi_m}\le R_0^{-m(p+1)}$, so $f$ is analytic at $0$ with radius $R_0$ and bound $1$. If $f$ is analytic at $0$ with radius $R_1$ and bound $M_1$, then Theorem~\ref{dp:thm:an-base-change}(1) gives $\norm{(a_n)_{K'}}_{\pi_{\max}}\le M_1R_1^{-n}$, so $R_1\le R_0$.
+\end{example}

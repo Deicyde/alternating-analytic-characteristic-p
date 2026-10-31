@@ -63,7 +63,7 @@ The joint action on multilinear maps
  B\colon\cL(E,D)\times\cL(F,F')
  \longrightarrow\cL\bigl(\Mult^k(D;F),\Mult^k(E;F')\bigr)
 \]
-is the diagonal of a bounded $(k+1)$-linear map, and hence is $C^\omega$. Its restriction to alternating inputs is analytic as a map into
+is the diagonal of a bounded $(k+1)$-linear map, and hence is $C^\omega$. For the second argument $\id_F$, the precomposition action $A^k_{E,D;F}$ followed by $j_{E,F}\circ{-}$ is the diagonal of the bounded $k$-linear map $(f_1,\ldots,f_k)\mapsto\bigl[m\mapsto m\circ(f_1,\ldots,f_k)\bigr]$, read on alternating $m$, of norm at most $1$. The restriction of $B$ to alternating inputs is analytic as a map into
 \[
  \cL\bigl(\Alt^k(D;F),\Mult^k(E;F')\bigr),
 \]
@@ -76,7 +76,7 @@ For $v_i=(f_i,g_i)$ in the product of hom spaces, define
  \Phi(v_0,\ldots,v_k)(m)(x_1,\ldots,x_k)
  =g_0\bigl(m(f_1x_1,\ldots,f_kx_k)\bigr).
 \]
-This map is multilinear in the $v_i$, has norm at most $1$, and has diagonal $B$. A diagonal of a bounded multilinear map has finite polynomial derivatives of every order, so it is $C^\omega$ even with incomplete range. Restricting $m$ to alternating maps is bounded linear and preserves analyticity. On the diagonal, two equal $x_i$ give two equal $fx_i$, so the output is alternating; the operator subspace is closed because $j_{E,F'}$ has closed range, applied pointwise. For $k=0$, the formula is postcomposition by $g_0$.
+This map is multilinear in the $v_i$, has norm at most $1$, and has diagonal $B$. It depends on $v_0$ only through $g_0$, so fixing $g_0=\id_F$ leaves a $k$-linear map of norm at most $1$ whose diagonal, read on alternating $m$, is $j_{E,F}\circ A^k_{E,D;F}$. A diagonal of a bounded multilinear map has finite polynomial derivatives of every order, so it is $C^\omega$ even with incomplete range. Restricting $m$ to alternating maps is bounded linear and preserves analyticity. On the diagonal, two equal $x_i$ give two equal $fx_i$, so the output is alternating; the operator subspace is closed because $j_{E,F'}$ has closed range, applied pointwise. For $k=0$, the formula is postcomposition by $g_0$.
 \end{proof}
 
 For bundles with analytic transition families $g_{ij}$ and $h_{ij}$, the induced alternating transitions $m\mapsto h_{ij}(x)\circ m\circ(g_{ji}(x),\ldots,g_{ji}(x))$ are therefore analytic as maps into the multilinear operator space. Whether their power-series coefficients can be chosen in the alternating operator space is the descent problem of Section~\ref{sec:descent}.

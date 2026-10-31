@@ -1,0 +1,265 @@
+\section{Vector functors and Bourbaki's \texorpdfstring{n\textsuperscript{o}~7.8}{no. 7.8}}\label{dp:sec:functors}
+
+Bourbaki defines vector functors of class $C^m$ by a regularity condition on their maps on hom spaces~\cite[n\textsuperscript{o}~7.6.1]{Bou}. Bourbaki defines the alternating functor $\alpha_d$ when $K$ has characteristic $0$ or the bundles have finite rank, and states that it is not known whether this restriction can be removed~\cite[n\textsuperscript{o}~7.8]{Bou}. This section puts DP in place of $C^m$. We write $k$ for Bourbaki's $d$, so the functor is $\alpha_k$. Theorem~\ref{dp:thm:seven-eight-dp} collects the results.
+
+\subsection{Polynomial functors}
+
+Let $\mathsf{Vec}_K$ be the category of normed spaces and bounded linear maps, $\mathsf{Ban}_K$ its full subcategory of Banach spaces, and $\cC_{\rm um}$ the category of ultrametric Banach spaces, a full subcategory of $\mathsf{Ban}_K$. In this section $\cC$ is one of these three. Let $I=I_+\sqcup I_-$ be a finite set. For families $\mathbf V=(V_i)_{i\in I}$ and $\mathbf V'=(V'_i)_{i\in I}$ of objects of $\cC$, put
+\[
+ \operatorname{Hom}(\mathbf V,\mathbf V')=\prod_{i\in I_+}\cL(V_i,V_i')\times\prod_{i\in I_-}\cL(V_i',V_i),
+\]
+with the maximum norm. Composition is entrywise, in the reverse order at the entries in $I_-$. It is bilinear, associative, unital and of norm at most $1$. A \emph{vector functor of type $I$ on $\cC$} assigns to each $\mathbf V$ a normed space $\mathfrak F(\mathbf V)$, a Banach space if $\cC\ne\mathsf{Vec}_K$, and to each $\mathbf f\in\operatorname{Hom}(\mathbf V,\mathbf V')$ an operator $\mathfrak F(\mathbf f)\in\cL(\mathfrak F(\mathbf V),\mathfrak F(\mathbf V'))$, with $\mathfrak F(\id)=\id$ and $\mathfrak F(\mathbf f'\circ\mathbf f)=\mathfrak F(\mathbf f')\mathfrak F(\mathbf f)$. Its \emph{hom maps} are the maps $\mathfrak F_{\mathbf V,\mathbf V'}\colon\operatorname{Hom}(\mathbf V,\mathbf V')\to\cL(\mathfrak F(\mathbf V),\mathfrak F(\mathbf V'))$.
+
+\begin{definition}\label{dp:def:poly-functor}
+Let $\mathfrak F$ be a vector functor of type $I$ on $\cC$, and let $n\ge0$.
+\begin{enumerate}
+\item $\mathfrak F$ is a \emph{bounded strict polynomial functor, homogeneous of degree $n$}, if every hom map is a law of degree $n$. It is \emph{contractive} if these laws have norm at most $1$.
+\item $\mathfrak F$ is \emph{multi-homogeneous of multidegree} $\mathbf d=(d_i)_{i\in I}\in\N^I$ if it is homogeneous of degree $\abs{\mathbf d}=\sum_id_i$ and $\mathfrak F((\lambda_if_i)_i)=\prod_i\lambda_i^{d_i}\,\mathfrak F(\mathbf f)$ for all scalars $\lambda_i$, with $\lambda^0=1$.
+\item $\mathfrak F$ is a bounded strict polynomial functor \emph{of degree at most $n$} if every hom map is a finite sum of laws of degrees at most $n$.
+\item $\mathfrak F$ is a \emph{DP vector functor} if every hom map is DP on its whole domain, and an \emph{analytic vector functor} if every hom map is analytic at every point of its domain.
+\end{enumerate}
+\end{definition}
+
+By Theorem~\ref{dp:thm:calculus}(3), analytic vector functors are DP vector functors.
+
+\emph{Examples.} Let $k\ge1$ and let $I_+=\{0\}$, $I_-=\{1\}$. The functors $\Mult^k(V_1;V_0)$ and $\alpha_k(V_1;V_0)=\Alt^k(V_1;V_0)$ act by $\alpha_k(f_0,f_1)(\beta)=f_0\circ\beta\circ(f_1\times\dots\times f_1)$, so $A^k_{E,D;F}(u)=\alpha_k(\id_F,u)$. The hom map of $\Mult^k$ is the diagonal of a bounded $(k+1)$\nobreakdash-linear map of norm at most $1$. So $\Mult^k$ is analytic and contractive, of multidegree $(1,k)$, and $\alpha_k$ is a closed subfunctor. In one covariant variable, $\hot^k_\pi$ is the completed projective tensor power. Its hom map is the diagonal of $(u_1,\dots,u_k)\mapsto u_1\otimes\dots\otimes u_k$, so it is analytic and contractive. The functor $\hLambda^k_\pi$ is its quotient by the kernel of the natural map $\widehat\wedge^k_E\colon\hot^k_\pi E\to\hLambda^k_\pi E$, a closed subfunctor, with the quotient norm~\cite[Lemma~3.7, Definition~3.8(1)]{I}.
+
+\begin{lemma}[two witnesses]\label{dp:fn:lem:witnesses}
+Let $p=\operatorname{char}K>0$ and $k\ge p$.
+\begin{enumerate}
+\item For the Banach spaces $E,F$ of~\cite[Theorem~7.2(1)]{I}, the maps $A^k_{E,E;F}$ and $u\mapsto\hLambda^k_\pi u$ are analytic at no point of $\cL(E,E)$.
+\item If $K$ is complete and not spherically complete, then $A^k_{E,D;K}$ is analytic at no point of $\cL(E,D)$, for the ultrametric Banach spaces $E,D$ of~\cite[Theorem~7.2(2)]{I}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (the maps $A^k$).} These statements are~\cite[Theorem~7.2]{I}.
+
+\emph{Step 2 (the map $u\mapsto\hLambda^k_\pi u$).} Restriction to the dense subspace $\Lambda^k_\pi E$ is an isometric isomorphism of $\cL(\hLambda^k_\pi E,\hLambda^k_\pi E)$ onto $\cL(\Lambda^k_\pi E,\hLambda^k_\pi E)$, and it sends $\hLambda^k_\pi u$ to $\Lambda^k_\pi u$. If $u\mapsto\hLambda^k_\pi u$ were analytic at a point, then by~\cite[Lemma~3.4]{I} the pair $(E,E)$ would be good for Banach values in degree $k$, which means that $A^k_{E,E;F}$ is analytic for every Banach $F$~\cite[Definition~3.3]{I}. This contradicts~\cite[Theorem~7.2(1)]{I}.
+\end{proof}
+
+Recall the normed space $\Gamma^n_{\mathrm s}(P)$, its completion $\hGamma^n(P)$ and the universal law $\mathsf v_n$ of Theorem~\ref{dp:thm:normed-roby}.
+
+\begin{lemma}[what represents laws]\label{dp:lem:functor-rep}
+\leavevmode
+\begin{enumerate}
+\item \textup{(Coefficients.)} Let $W$ be a vector space and $W_0\subseteq W$ a linear subspace. Let $a\colon P\to W$ have values in $W_0$, and suppose that, for all $h_1,\dots,h_r\in P$, the map $s\mapsto a(\sum_cs_ch_c)$ is a homogeneous polynomial of degree $n$ with coefficients in $W$. Then the coefficients lie in $W_0$.
+\item \textup{(Representing functor.)} For $n\ge0$, the assignment $\Gamma^n_{\mathrm s}(u)[t]=[u^{\otimes n}t]$ makes $E\mapsto\Gamma^n_{\mathrm s}(E)$ a contractive bounded strict polynomial functor, homogeneous of degree $n$, on $\mathsf{Vec}_K$. Extension to completions makes $\hGamma^n$ one on $\mathsf{Vec}_K$ and on $\mathsf{Ban}_K$. By Theorem~\ref{dp:thm:normed-roby}(3), $\cP_n(P;W)=\cL(\Gamma^n_{\mathrm s}(P),W)$ isometrically.
+\item \textup{(The divided-power category.)} Let $\cC^I_n$ be the category whose objects are the families $\mathbf V$ of objects of $\cC$ and whose hom spaces are $\Gamma^n_{\mathrm s}(\operatorname{Hom}(\mathbf V,\mathbf V'))$, with the composition induced by $[\mathbf f'^{\otimes n}]\circ[\mathbf f^{\otimes n}]=[(\mathbf f'\circ\mathbf f)^{\otimes n}]$. This composition is bilinear of norm at most $1$. A homogeneous bounded strict polynomial functor $\mathfrak F$ of type $I$ and degree $n$ on $\cC$ is the same as a functor $\Phi$ from $\cC^I_n$ to normed spaces, Banach if $\cC\ne\mathsf{Vec}_K$, that is bounded linear on each hom space, through $\mathfrak F(\mathbf f)=\Phi([\mathbf f^{\otimes n}])$. Then $\Phi=L_{\mathfrak F_{\mathbf V,\mathbf V'}}$ on $\Gamma^n_{\mathrm s}(\operatorname{Hom}(\mathbf V,\mathbf V'))$, with the same norm as the law $\mathfrak F_{\mathbf V,\mathbf V'}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} As $K$ is infinite, interpolation in each variable writes each coefficient as a finite linear combination of values of the polynomial. These values lie in $W_0$.
+
+\emph{Step 2 (item (2)).} A representation $t=\sum_l\lambda_lh_l^{\otimes n}$ gives $u^{\otimes n}t=\sum_l\lambda_l(uh_l)^{\otimes n}$, so $\norm{u^{\otimes n}t}_\Gamma\le\norm u^n\norm t_\Gamma$. For fixed $t$ and $u_1,\dots,u_r$, by~\eqref{dp:eq:orbit}, $s\mapsto(\sum_cs_cu_c)^{\otimes n}t$ is a homogeneous polynomial with coefficients in $\Gamma^n(D)$. The coefficients are linear in $[t]$, by uniqueness. Item (1), with $W$ the linear maps $\Gamma^n_{\mathrm s}(E)\to\Gamma^n_{\mathrm s}(D)$ and $W_0$ the bounded ones, shows that the hom map is a law of norm at most $1$. Extension to completions is a linear isometry of operator spaces.
+
+\emph{Step 3 (item (3)).} On $\operatorname{Hom}(\mathbf V,\mathbf V')^{\otimes n}$ composition is defined factor by factor, as the composition of $\operatorname{Hom}$ is bilinear. On representations, $(\sum_c\lambda_c(\mathbf f'_c)^{\otimes n})\circ(\sum_l\mu_l\mathbf f_l^{\otimes n})=\sum_{c,l}\lambda_c\mu_l(\mathbf f'_c\circ\mathbf f_l)^{\otimes n}$, which has cost at most $\sum_{c,l}\abs{\lambda_c\mu_l}\norm{\mathbf f'_c}^n\norm{\mathbf f_l}^n$. So the norm is at most $1$, and the composition passes to the quotients by the null vectors. Associativity and units hold on powers. If $\mathfrak F$ is given, $\Phi=L_{\mathfrak F_{\mathbf V,\mathbf V'}}$ is multiplicative, as both sides are bilinear and agree on powers by functoriality. Conversely, if $\Phi$ is given, $\mathfrak F$ is functorial, and its hom maps are laws by Theorem~\ref{dp:thm:normed-roby}(2). The norms agree by Theorem~\ref{dp:thm:normed-roby}(3).
+\end{proof}
+
+\begin{proposition}[closure]\label{dp:prop:functor-closure}
+Let $\mathfrak F,\mathfrak F'$ be bounded strict polynomial functors of type $I$ on $\cC$, homogeneous of degrees $n,n'$.
+\begin{enumerate}
+\item If $n=n'$, then $\mathfrak F\oplus\mathfrak F'$, with the maximum norm, is one of degree $n$.
+\item If $\cC=\mathsf{Vec}_K$, then $\mathbf V\mapsto\mathfrak F(\mathbf V)\otimes_\pi\mathfrak F'(\mathbf V)$, separated, is one of degree $n+n'$. In all three cases its completion is one of degree $n+n'$ on $\cC$. Multidegrees add.
+\item If $\mathfrak F''$ is one of type $\{1\}$, one covariant variable, homogeneous of degree $n''$, on one of the three categories, which contains the values of $\mathfrak F$ and is not $\mathsf{Vec}_K$ if $\cC\ne\mathsf{Vec}_K$, then $\mathfrak F''\circ\mathfrak F$ is one of degree $nn''$.
+\item If $\mathfrak F_0(\mathbf V)\subseteq\mathfrak F(\mathbf V)$ are closed subspaces with $\mathfrak F(\mathbf f)\mathfrak F_0(\mathbf V)\subseteq\mathfrak F_0(\mathbf V')$ for all $\mathbf f$, then the closed subfunctor $\mathfrak F_0$, with the restricted norms, is one of degree $n$.
+\item In the situation of~(4), the quotient $\mathfrak F/\mathfrak F_0$, with the quotient norms, is one of degree $n$.
+\item In one covariant variable, the dual $\mathfrak F^\#(E)=\mathfrak F(E^*)^*$, $\mathfrak F^\#(u)=\mathfrak F(u^*)^*$, is one of degree $n$ on $\mathsf{Vec}_K$. If $K$ is complete, its values are Banach spaces, and it is one on $\mathsf{Ban}_K$ and on $\cC_{\rm um}$.
+\end{enumerate}
+If the given functors are contractive, so is the result of each of the operations \textup{(1)--(6)}. If $\mathfrak F,\mathfrak F',\mathfrak F''$ are DP vector functors, with no condition on degrees, the operations \textup{(1)--(6)} give DP vector functors.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (items (1)--(3)).} Item (1) holds componentwise. With the maximum norm, its law has norm at most the larger of the two norms. For item (2), $s\mapsto\mathfrak F(\sum_cs_c\mathbf f_c)\otimes\mathfrak F'(\sum_cs_c\mathbf f_c)$ is a product of homogeneous polynomials with operator coefficients, and $\norm{T\otimes T'}\le\norm T\norm{T'}$ for $\pi$. So the law has norm at most the product of the two norms, and extension to the completions does not change this bound. For item (3), write $\mathfrak F(\sum_cs_c\mathbf f_c)=\sum_{\abs\gamma=n}s^\gamma T_\gamma$ with bounded operators $T_\gamma$. The law property of $\mathfrak F''$ on the vectors $T_\gamma$ makes $\mathfrak F''(\sum_\gamma z_\gamma T_\gamma)$ a homogeneous polynomial of degree $n''$ in the variables $z_\gamma$. Substitute $z_\gamma=s^\gamma$. The bound is the composite of the bounds of the two hom maps, so it is at most $1$ for contractive functors.
+
+\emph{Step 2 (items (4) and (5)).} By Lemma~\ref{dp:lem:functor-rep}(1), the coefficients of the hom map of $\mathfrak F$ preserve $\mathfrak F_0$. So they induce operators on $\mathfrak F_0$ and on the quotients. Restriction does not increase operator norms. The quotient maps are metric surjections, so passing to quotients does not increase them either. So the laws of items (4) and (5) have norm at most that of the law of $\mathfrak F$.
+
+\emph{Step 3 (item (6)).} The maps $u\mapsto u^*$ and $T\mapsto T^*$ are linear of norm at most $1$, so the hom map is a law by Lemma~\ref{dp:lem:elementary}(2). The same maps give the norm bound. Dual spaces over a complete field are complete. They are ultrametric, as $K$ is.
+
+\emph{Step 4 (DP vector functors).} A pair of DP maps is DP, and $(T,T')\mapsto T\oplus T'$ is bounded linear. The map $(T,T')\mapsto T\otimes T'$ is the diagonal of a bounded bilinear map, so it is DP by Theorem~\ref{dp:thm:calculus}(3),(1), and composites of DP maps are DP by Theorem~\ref{dp:thm:calculus}(2). This gives items (1), (2), (3), (6). For item (4), $T\mapsto T|_{\mathfrak F_0(\mathbf V)}$ carries the hom map of $\mathfrak F$ to the hom map of $\mathfrak F_0$ followed by the inclusion of $\cL(\mathfrak F_0(\mathbf V),\mathfrak F_0(\mathbf V'))$ in $\cL(\mathfrak F_0(\mathbf V),\mathfrak F(\mathbf V'))$, a linear isometry with closed range. Theorem~\ref{dp:thm:target-descent}(2) applies. For item (5), with $q,q'$ the quotient maps at $\mathbf V,\mathbf V'$, the map $T\mapsto q'T$ carries the hom map of $\mathfrak F$ to the hom map of the quotient followed by $S\mapsto S\circ q$. This is a linear isometry into $\cL(\mathfrak F(\mathbf V),\mathfrak F(\mathbf V')/\mathfrak F_0(\mathbf V'))$, and its range, the operators vanishing on $\mathfrak F_0(\mathbf V)$, is closed. Theorem~\ref{dp:thm:target-descent}(2) applies again.
+\end{proof}
+
+\subsection{Functors on bundles}
+
+Let $\mathcal M$ be a DP manifold and let $\mathbf M=(\mathsf M_i)_{i\in I}$ be DP vector bundles over $\mathcal M$, with fibers $G_i$ in $\cC$; put $\mathbf G=(G_i)_i$. Let $\mathsf t^i_x\colon G_i\to(\mathsf M_i)_x$ for $x\in U$ and $\mathsf t'^i_x\colon G_i\to(\mathsf M_i)_x$ for $x\in U'$ be local trivializations of all the $\mathsf M_i$. As in Corollary~\ref{dp:cor:bundles}, fibers carry norms up to equivalence, and $\mathfrak F(\mathbf M_x)$ is understood up to canonical isomorphism.
+
+Let $\psi_x\in\operatorname{Hom}(\mathbf M_x,\mathbf G)$ have entries $(\mathsf t^i_x)^{-1}$ for $i\in I_+$ and $\mathsf t^i_x$ for $i\in I_-$, and define $\psi'_x$ in the same way. Then $\mathbf t(x)=\psi'_x\circ\psi_x^{-1}\in\operatorname{Hom}(\mathbf G,\mathbf G)$ has entries $(\mathsf t'^i_x)^{-1}\mathsf t^i_x$ for $i\in I_+$ and $(\mathsf t^i_x)^{-1}\mathsf t'^i_x$ for $i\in I_-$. These are transition families of the $\mathsf M_i$, so $x\mapsto\mathbf t(x)$ is DP on $U\cap U'$.
+
+For a DP map $\mathsf w\colon\mathcal M\to\mathcal N$ and a family $\mathbf M'=(\mathsf M'_i)_i$ of DP vector bundles over $\mathcal N$ with fibers in $\cC$, a \emph{$\mathsf w$-morphism} $\mathsf M_i\to\mathsf M_i'$, respectively a \emph{$\mathsf w$-comorphism} $\mathsf M_i'\to\mathsf M_i$, is a family of linear maps $(\mathsf M_i)_x\to(\mathsf M_i')_{\mathsf w(x)}$, respectively $(\mathsf M_i')_{\mathsf w(x)}\to(\mathsf M_i)_x$, whose local operator-valued expressions are DP.
+
+\begin{theorem}[polynomial functors act on DP bundles]\label{dp:thm:functors-dp}
+\leavevmode
+\begin{enumerate}
+\item A bounded strict polynomial functor of finite degree on $\cC$ is a DP vector functor, with continuous hom maps.
+\end{enumerate}
+Let $\mathfrak F$ be a DP vector functor of type $I$ on $\cC$.
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item \textup{(n\textsuperscript{o}~7.6.2.)} There is exactly one structure of DP vector bundle on $\mathfrak F(\mathbf M)=\bigsqcup_x\mathfrak F(\mathbf M_x)$, with fiber $\mathfrak F(\mathbf G)$, for which every such family of trivializations gives the trivialization with inverse $\mathfrak F(\psi_x)$ over $U$. Its transition families are $x\mapsto\mathfrak F(\mathbf t(x))$.
+\item \textup{(n\textsuperscript{o}~7.6.3.)} Let $\mathbf u=(u_i)_i$ consist of $\mathsf w$-morphisms $\mathsf M_i\to\mathsf M'_i$ for $i\in I_+$ and of $\mathsf w$-comorphisms $\mathsf M'_i\to\mathsf M_i$ for $i\in I_-$. There is exactly one bundle map $\mathfrak F(\mathbf u)\colon\mathfrak F(\mathbf M)\to\mathfrak F(\mathbf M')$ over $\mathsf w$ that is $\mathfrak F(\mathbf u_x)$ on the fiber at each $x$, and it is a $\mathsf w$-morphism. Also $\mathfrak F(\mathsf w^*\mathbf M')$ and $\mathsf w^*\mathfrak F(\mathbf M')$ are canonically isomorphic.
+\item \textup{(n\textsuperscript{o}~7.6.4.)} Let $\mathfrak F_1,\dots,\mathfrak F_N$ be DP vector functors of type $I$ on $\cC$, and let $\theta$ be a family of bounded $N$\nobreakdash-linear maps $\theta_{\mathbf V}\colon\mathfrak F_1(\mathbf V)\times\dots\times\mathfrak F_N(\mathbf V)\to\mathfrak F(\mathbf V)$ with $\mathfrak F(\mathbf f)\circ\theta_{\mathbf V}=\theta_{\mathbf V'}\circ(\mathfrak F_1(\mathbf f)\times\dots\times\mathfrak F_N(\mathbf f))$. There is exactly one fiberwise $N$\nobreakdash-linear map $\theta_{\mathbf M}$ over $\id_{\mathcal M}$ equal to $\theta_{\mathbf M_x}$ on the fiber at each $x$. Its local operator-valued expressions are DP, and $\mathfrak F(\mathbf u)\circ\theta_{\mathbf M}=\theta_{\mathbf M'}\circ(\mathfrak F_1(\mathbf u)\times\dots\times\mathfrak F_N(\mathbf u))$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Each hom map is a finite sum of laws, which are continuous and DP on their domains by Theorem~\ref{dp:thm:calculus}(1). A finite sum of maps DP at a point is DP there, by adding the expansions.
+
+\emph{Step 2 (item (2)).} By functoriality, $\mathfrak F(\psi'_x)\mathfrak F(\psi_x)^{-1}=\mathfrak F(\mathbf t(x))$, and this is DP in $x$ by Theorem~\ref{dp:thm:calculus}(2). These families give a DP atlas, as in Corollary~\ref{dp:cor:bundles}. An atlas determines the structure, which gives uniqueness.
+
+\emph{Step 3 (item (3)).} A map on fibers is unique if it exists. In trivializations, the local expression of $\mathfrak F(\mathbf u)$ is $x\mapsto\mathfrak F(\mathbf u_{\rm loc}(x))$ with $\mathbf u_{\rm loc}$ DP, hence it is DP by Theorem~\ref{dp:thm:calculus}(2). The transitions of $\mathsf w^*\mathsf M_i'$ are those of $\mathsf M_i'$ composed with $\mathsf w$, so $\mathfrak F(\mathsf w^*\mathbf M')$ and $\mathsf w^*\mathfrak F(\mathbf M')$ have the same transition families.
+
+\emph{Step 4 (item (4)).} In trivializations, $\theta_{\mathbf M}$ is the constant $\theta_{\mathbf G}$, which is DP. The definition does not depend on the trivializations, because $\mathfrak F(\mathbf t(x))\circ\theta_{\mathbf G}=\theta_{\mathbf G}\circ(\mathfrak F_1(\mathbf t(x))\times\dots\times\mathfrak F_N(\mathbf t(x)))$. The last identity holds on each fiber by the condition on $\theta$.
+\end{proof}
+
+\subsection{Analytic vector functors}
+
+\begin{proposition}[closure of the analytic class]\label{dp:prop:analytic-closure}
+\leavevmode
+\begin{enumerate}
+\item Analytic vector functors are closed under finite direct sums, the tensor product of Proposition~\ref{dp:prop:functor-closure}\textup{(2)}, the composition of Proposition~\ref{dp:prop:functor-closure}\textup{(3)}, the duals of Proposition~\ref{dp:prop:functor-closure}\textup{(6)} and bounded natural retracts: if $\mathfrak F'$ is analytic and $\theta_{\rm in}\colon\mathfrak F\to\mathfrak F'$, $\theta_{\rm out}\colon\mathfrak F'\to\mathfrak F$ are natural with bounded components and $\theta_{\rm out}\theta_{\rm in}=\id$, then $\mathfrak F$ is analytic.
+\item Let $\operatorname{char}K=p>0$ and $k\ge p$. They are not closed under closed subfunctors or under quotients. If $K$ is complete and not spherically complete, then on $\cC_{\rm um}$, with ultrametric values, $\Mult^k$ is analytic and its closed subfunctor $\alpha_k$ is not. Over every $K$ of characteristic $p$, on $\mathsf{Vec}_K$ and on $\mathsf{Ban}_K$, $\Mult^k$ is analytic and $\alpha_k$ is not, and $\hot^k_\pi$ is analytic and its quotient $\hLambda^k_\pi$ is not.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} A pair of analytic maps is analytic. The map $(T,T')\mapsto T\otimes T'$ is the diagonal of a bounded bilinear map. Analytic germs compose, by~\cite[proof of Proposition~14.26, Step~1]{I}. That step assumes a complete final target. Apply it in the completion of the final target: the multilinear coefficients of the composite are finite sums of maps with values in the target itself, and the composite has values there, so the expansion holds in the target. This gives sums, tensor products, composition and duals. For a retract, naturality gives $\mathfrak F(\mathbf f)=\theta_{\rm out}\mathfrak F'(\mathbf f)\theta_{\rm in}$, a bounded linear image of $\mathfrak F'(\mathbf f)$.
+
+\emph{Step 2 (item (2)).} If $\alpha_k$ were analytic, its composite with the bounded affine map $u\mapsto(\id_F,u)$, which is $A^k_{E,D;F}$, would be analytic. Lemma~\ref{dp:fn:lem:witnesses} excludes this, for $F=K$ in the first case. The quotient is Lemma~\ref{dp:fn:lem:witnesses}(1).
+\end{proof}
+
+By Proposition~\ref{dp:prop:functor-closure} the DP vector functors are closed under finite direct sums, tensor products, composition, duals, closed subfunctors and quotients. They are also closed under bounded natural retracts, as $\mathfrak F(\mathbf f)=\theta_{\rm out}\mathfrak F'(\mathbf f)\theta_{\rm in}$ is a bounded linear image of $\mathfrak F'(\mathbf f)$.
+
+\begin{theorem}[multidegree threshold]\label{dp:thm:functor-threshold}
+Let $\mathbf d=(d_i)_{i\in I}\in\N^I$ and $n=\abs{\mathbf d}$.
+\begin{enumerate}
+\item Let $\prod_id_i!\ne0$ in $K$, and let $\mathfrak F$ be a bounded strict polynomial functor of multidegree $\mathbf d$ on $\cC$. Let $a=\mathfrak F_{\mathbf V,\mathbf V'}$, and let $\iota_i$ be the inclusion of the $i$th entry into $\operatorname{Hom}(\mathbf V,\mathbf V')$. Then $a$ is the diagonal of the bounded $n$\nobreakdash-linear map
+\begin{equation}\label{dp:fn:eq:lift}
+ Q\bigl((f_{i,c})_{i\in I,\,1\le c\le d_i}\bigr)=\Bigl(\prod_id_i!\Bigr)^{-1}a^{[1^n]}\bigl((\iota_if_{i,c})_{i,c}\bigr),\qquad
+ \norm Q\le\frac{(C_1n)^n\norm a}{\abs{\prod_id_i!}}\quad(\text{with }0^0=1).
+\end{equation}
+So $\mathfrak F$ is an analytic vector functor.
+\item If $\prod_id_i!=0$ in $K$, there is a contractive bounded strict polynomial functor of multidegree $\mathbf d$, on $\mathsf{Vec}_K$ and on $\mathsf{Ban}_K$, whose hom map on some $\operatorname{Hom}(\mathbf V,\mathbf V)$, with all $V_i$ Banach, is analytic at no point.
+\end{enumerate}
+So all bounded strict polynomial functors of multidegree $\mathbf d$, on $\mathsf{Vec}_K$ or on $\mathsf{Ban}_K$, are analytic if and only if $\prod_id_i!\ne0$ in $K$. For $\alpha_k$, of multidegree $(1,k)$, the condition is $k!\ne0$.
+\end{theorem}
+
+In one variable the algebra of~\eqref{dp:fn:eq:lift} is~\cite[Th.~II.1]{Ro}; the bound is the estimate we need.
+
+\begin{proof}
+\emph{Step 1 (item (1)).} If $n=0$, then $a$ is constant. Let $n\ge1$. By Lemma~\ref{dp:lem:elementary}(4), $a^{[1^n]}$ is $n$\nobreakdash-linear, and~\eqref{dp:laws:scaled} with all exponents equal to $1$ gives the bound. On the diagonal $f_{i,c}=f_i$, the value $a^{[1^n]}((\iota_if_i)_{i,c})$ is the coefficient of $\prod_{i,c}s_{i,c}$ in $a((\sum_cs_{i,c}f_i)_i)=\prod_i(\sum_cs_{i,c})^{d_i}a(\mathbf f)$, which is $\prod_id_i!\,a(\mathbf f)$. Precompose $Q$ with the projection of the slot $(i,c)$ of $\operatorname{Hom}(\mathbf V,\mathbf V')^n$ onto the $i$th entry, which has norm at most $1$. This gives a bounded $n$\nobreakdash-linear map on $\operatorname{Hom}(\mathbf V,\mathbf V')^n$, of norm at most $\norm Q$, with diagonal $a$. Lemma~\ref{dp:lem:lift-criterion} gives analyticity at every point.
+
+\emph{Step 2 (the functor for item (2)).} Let $p=\operatorname{char}K$ and choose $i_0$ with $d_{i_0}\ge p$. Let $E,F$ be the Banach spaces of~\cite[Theorem~7.2(1)]{I} for $k=d_{i_0}$. Put $\mathfrak H(V)=\hLambda^{d_{i_0}}_\pi V$ if $i_0\in I_+$, and $\mathfrak H(V)=\Alt^{d_{i_0}}(V;F)$ if $i_0\in I_-$, with $\mathfrak H(u)(\zeta)=\zeta\circ(u\times\dots\times u)$. For $j\ne i_0$ with $d_j\ge1$, put $\rho_j(V)=\hot^{d_j}_\pi V$ if $j\in I_+$ and $\rho_j(V)=\Mult^{d_j}(V;\Kh)$ if $j\in I_-$, with the action $\zeta\mapsto\zeta\circ(u\times\dots\times u)$. If $d_j=0$, put $\rho_j(V)=\Kh$, with the identity as the action on maps. Each is contractive, by the examples above and Theorem~\ref{dp:thm:calculus}(4). Composed with the projection of $\operatorname{Hom}$ onto its entry, each factor has degree $d_j$ in its own variable and $0$ in the others. By Proposition~\ref{dp:prop:functor-closure}(2),
+\[
+ \mathfrak F_{\mathbf d}(\mathbf V)=\mathfrak H(V_{i_0})\mathbin{\widehat\otimes_\pi}\rho_{j_1}(V_{j_1})\mathbin{\widehat\otimes_\pi}\dots\mathbin{\widehat\otimes_\pi}\rho_{j_{\abs I-1}}(V_{j_{\abs I-1}})
+\]
+is contractive of multidegree $\mathbf d$, where $j_1,\dots,j_{\abs I-1}$ are the elements of $I$ other than $i_0$, and the product is bracketed from the right, so that the first factor is $\mathfrak H(V_{i_0})$ and the second is the completed tensor product of the others. If $I=\{i_0\}$, then $\mathfrak F_{\mathbf d}=\mathfrak H$.
+
+\emph{Step 3 (recovering $\mathfrak H$).} Let $V_{i_0}=E$ and $V_j=\Kh$ for $j\ne i_0$, a Banach space over $K$. If $I=\{i_0\}$, Step~4 holds with $\Psi=\id$. Let $I\ne\{i_0\}$. Let $X=\mathfrak H(E)$, a Banach space, and let $Y$ be the completed tensor product of the $\rho_j(\Kh)$, bracketed in the same way, so that $\mathfrak F_{\mathbf d}(\mathbf V)=X\mathbin{\widehat\otimes_\pi}Y$. A Banach space over $K$ is a $\Kh$-space, with $\norm{\lambda\xi}=\abs\lambda\norm\xi$ for $\lambda\in\Kh$. Multiplication of the entries of $\hot^{d_j}_\pi\Kh$, evaluation of $\Mult^{d_j}(\Kh;\Kh)$ at $(1,\dots,1)$, and the identity of $\Kh$ have norm at most $1$, by the triangle inequality and multiplicativity in $\Kh$. Their product is a linear map $\mathfrak m\colon Y\to\Kh$ of norm at most $1$. It takes the value $1$ at a vector $y\in Y$ of norm at most $1$: the tensor of the vectors $1^{\otimes d_j}$, of the multiplication in $\Mult^{d_j}(\Kh;\Kh)$, and of $1$. Then $\xi\otimes y'\mapsto\mathfrak m(y')\xi$ extends to a contraction $\mathsf r\colon X\mathbin{\widehat\otimes_\pi}Y\to X$. The map $\Psi(T_1)(\xi)=\mathsf r(T_1(\xi\otimes y))$ is linear of norm at most $1$ from $\cL(X\mathbin{\widehat\otimes_\pi}Y,X\mathbin{\widehat\otimes_\pi}Y)$ to $\cL(X,X)$, and $\Psi(T\mathbin{\widehat\otimes}\id_Y)=T$.
+
+\emph{Step 4 (item (2)).} Let $\mathbf f_u\in\operatorname{Hom}(\mathbf V,\mathbf V)$ have entry $u$ at $i_0$ and $\id$ at the other entries. Then $\Psi(\mathfrak F_{\mathbf d}(\mathbf f_u))=\mathfrak H(u)$, and $u\mapsto\mathbf f_u$ is bounded affine. If the hom map of $\mathfrak F_{\mathbf d}$ were analytic at one point, it would be analytic everywhere by Lemma~\ref{dp:lem:lift-criterion}. Then $u\mapsto\mathfrak H(u)$ would be analytic on $\cL(E,E)$. This map is $\hLambda^{d_{i_0}}_\pi u$ if $i_0\in I_+$ and $A^{d_{i_0}}_{E,E;F}(u)$ if $i_0\in I_-$, which contradicts Lemma~\ref{dp:fn:lem:witnesses}(1).
+\end{proof}
+
+\begin{proposition}[the representing functor is not ambient]\label{dp:prop:gamma-not-ambient}
+Let $n\ge1$, and let $\mathfrak G$ be $\Gamma^n_{\mathrm s}$ or $\hGamma^n$.
+\begin{enumerate}
+\item $\mathfrak G$ is a DP vector functor on $\mathsf{Vec}_K$, and $\hGamma^n$ is one on $\mathsf{Ban}_K$.
+\item Let $p=\operatorname{char}K>0$, $n\ge p$, and let $D=K\oplus\mathcal E$ be the space of Proposition~\ref{dp:prop:degree-p}\textup{(2)}. The hom map of $\mathfrak G$ on $\cL(K,D)$ is not ambient of degree $n$. It is AA at no point, so it is analytic at no point. If $K$ is complete, $K$ and $D$ are Banach spaces, so for $\mathfrak G=\hGamma^n$ this happens on $\mathsf{Ban}_K$ too.
+\item In the situation of~\textup{(2)}, $\mathfrak G$ is not a subquotient of an analytic vector functor: there do not exist an analytic vector functor $\widetilde{\mathfrak F}$, closed subfunctors $\mathfrak F_2\subseteq\mathfrak F_1\subseteq\widetilde{\mathfrak F}$, and natural bounded isomorphisms from $\mathfrak G$ to $\mathfrak F_1/\mathfrak F_2$ with bounded inverses, on a category containing $K$ and $D$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} This is Lemma~\ref{dp:lem:functor-rep}(2) and Theorem~\ref{dp:thm:functors-dp}(1).
+
+\emph{Step 2 (item (2)).} The multiplication of $K^{\otimes n}$ gives $\abs{\sum_l\lambda_lh_l^n}\le\sum_l\abs{\lambda_l}\abs{h_l}^n$, so $\norm{\lambda\,1^{\otimes n}}_\Gamma=\abs\lambda$ for $\lambda\in K$. Thus $\Gamma^n_{\mathrm s}(K)=K$ and $\hGamma^n(K)=\Kh$, with $[1^{\otimes n}]$ corresponding to $1$. So evaluation at $[1^{\otimes n}]$ is an isometric isomorphism of $\cL(\mathfrak G(K),\mathfrak G(D))$ onto $\mathfrak G(D)$; for $\mathfrak G=\hGamma^n$ this uses that a bounded $K$-linear map $T$ from $\Kh$ to a Banach space has $T(\lambda)=\lambda T(1)$ for $\lambda\in\Kh$. It sends $\mathfrak G(u)$ to $\mathsf v_n(u(1))$, by the formula of Lemma~\ref{dp:lem:functor-rep}(2), read in $\hGamma^n(D)$ if $\mathfrak G=\hGamma^n$. The inclusion of $\Gamma^n_{\mathrm s}(D)$ in $\hGamma^n(D)$ is isometric. Evaluation at $1$ is an isometric isomorphism of $\cL(K,D)$ onto $D$. So the ambient constant of the hom map equals that of $\mathsf v_n$, which is $\sup\{\norm t_\Gamma/\pi(t):t\in\Gamma^n(D)\}=\mathfrak a_n(D)$. This is infinite by Proposition~\ref{dp:prop:all-norms}(2). So the hom map is not ambient of degree $n$. If it were AA at a point, then by~\cite[Proposition~14.9(2)]{I} it would be ambient of degree $n$.
+
+\emph{Step 3 (item (3)).} Suppose such data exist. Let $q\colon\mathfrak F_1(K)\to\mathfrak F_1(K)/\mathfrak F_2(K)$ and $q'\colon\widetilde{\mathfrak F}(D)\to\widetilde{\mathfrak F}(D)/\mathfrak F_2(D)$ be the quotient maps. The map $q$ is a metric surjection, and $\mathfrak F_1(D)/\mathfrak F_2(D)$ is a normed subspace of $\widetilde{\mathfrak F}(D)/\mathfrak F_2(D)$, as the two quotient norms are the same infimum. So $T\mapsto T\circ q$ is a linear isometry of $\cL(\mathfrak F_1(K)/\mathfrak F_2(K),\mathfrak F_1(D)/\mathfrak F_2(D))$ into $\cL(\mathfrak F_1(K),\widetilde{\mathfrak F}(D)/\mathfrak F_2(D))$. It sends the hom map of $\mathfrak F_1/\mathfrak F_2$ to $u\mapsto q'\circ\widetilde{\mathfrak F}(u)|_{\mathfrak F_1(K)}$, a bounded linear image of an analytic map. The hom map of $\mathfrak F_1/\mathfrak F_2$ is that of $\mathfrak G$ followed by a bounded linear bijection $\mathsf c$ with bounded inverse, so it is a law. By~\cite[Proposition~14.9(2)]{I}, applied to the isometry $T\mapsto T\circ q$, it is ambient. As $L_{\mathsf c\circ a}=\mathsf c\circ L_a$ for a law $a$, the hom map of $\mathfrak G$ has finite ambient constant too, against item~(2).
+\end{proof}
+
+\begin{theorem}[ultrametric spaces and values]\label{dp:thm:functors-um}
+Let $K$ be complete and let $\mathfrak F$ be a vector functor of type $I$ on $\cC_{\rm um}$.
+\begin{enumerate}
+\item If every value of $\mathfrak F$ has an equivalent norm that is ultrametric and spherically complete, then $\mathfrak F$ is a DP vector functor if and only if it is an analytic vector functor.
+\item If $K$ is discretely valued and every value of $\mathfrak F$ has an equivalent ultrametric norm, then $\mathfrak F$ is a DP vector functor if and only if it is an analytic vector functor.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (both items).} Analytic maps are DP by Theorem~\ref{dp:thm:calculus}(3). Conversely, $\operatorname{Hom}(\mathbf V,\mathbf V')$ is ultrametric, since an operator norm into an ultrametric space is ultrametric.
+
+\emph{Step 2 (item (1)).} Give $\mathfrak F(\mathbf V)$ and $\mathfrak F(\mathbf V')$ the equivalent norms. The resulting operator norm on $\cL(\mathfrak F(\mathbf V),\mathfrak F(\mathbf V'))$ is equivalent to the given one, and it is ultrametric and spherically complete by Lemma~\ref{dp:lem:operator-sph}. Apply Theorem~\ref{dp:thm:sph-agreement}(1) at every point.
+
+\emph{Step 3 (item (2)).} Give $\mathfrak F(\mathbf V)$ and $\mathfrak F(\mathbf V')$ the equivalent ultrametric norms. The resulting operator norm is ultrametric, and the operator space is Banach, as the values are. So Theorem~\ref{dp:thm:sph-agreement}(2) applies.
+\end{proof}
+
+\subsection{The statements of \texorpdfstring{n\textsuperscript{o}~7.8}{no. 7.8}}
+
+Bourbaki also says that $\Alt^k(\mathsf M_1;\mathsf M_0)$ is a vector subbundle of $\Mult^k(\mathsf M_1;\mathsf M_0)$~\cite[n\textsuperscript{o}~7.8.1]{Bou}, which asks for closed subspaces with a topological complement in suitable charts~\cite[n\textsuperscript{o}~7.5.1]{Bou}. We use the same definition for DP vector bundles, with their local trivializations as charts. We say that $\Alt^k(E;F)$ is \emph{complemented} if there is a bounded linear projection $\operatorname{Pr}$ of $\Mult^k(E;F)$ onto $\Alt^k(E;F)$.
+
+\begin{proposition}[the subbundle sentence]\label{dp:prop:subbundle}
+Let $k\ge1$ and let $E,F$ be normed spaces.
+\begin{enumerate}
+\item If $\Alt^k(E;F)$ is complemented, then $A^k_{E,D;F}$ is the diagonal of $(u_1,\dots,u_k)\mapsto(\zeta\mapsto\operatorname{Pr}(\zeta\circ(u_1\times\dots\times u_k)))$ for every normed $D$~\cite[Proposition~5.1 and its proof]{I}.
+\item Let $\operatorname{char}K=p$ and $k\ge p$. Then $\Alt^k(E;F)$ is not complemented for the Banach spaces $E,F$ of~\cite[Theorem~7.2(1)]{I}. If moreover $K$ is complete and not spherically complete, it is not complemented for the ultrametric Banach space $E$ of~\cite[Theorem~7.2(2)]{I} and $F=K$. Over every $K$, $\Alt^k(E;F)$ is complemented for all Banach $E,F$ if and only if $k!\ne0$ in $K$.
+\item It is complemented in each of the following cases.
+\begin{enumerate}
+\item $k!\ne0$ in $K$.
+\item $E$ has finite coordinates.
+\item $K$ is arbitrary, $E$ is finite-dimensional and $F$ is Banach.
+\item $E$ is arbitrary and $F$ has an equivalent norm that is ultrametric and spherically complete.
+\item $E$ is arbitrary, $K$ is discretely valued and $F$ is Banach with an equivalent ultrametric norm.
+\end{enumerate}
+\item Let $\mathsf M_1,\mathsf M_0$ be DP vector bundles over a nonempty DP manifold, with fibers $G_1,G_0$. Then $\Alt^k(\mathsf M_1;\mathsf M_0)$ is a vector subbundle of $\Mult^k(\mathsf M_1;\mathsf M_0)$ if and only if $\Alt^k(G_1;G_0)$ is complemented.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (2)).} By item (1), a projection would make $A^k_{E,E;F}$, respectively $A^k_{E,D;K}$, the diagonal of a bounded $k$\nobreakdash-linear map, hence analytic, against Lemma~\ref{dp:fn:lem:witnesses}. If $k!\ne0$, item (3)(a) applies; if $k!=0$, then $\operatorname{char}K=p\le k$ and the first case applies.
+
+\emph{Step 2 (item (3)(a),(b)).} For (a), take $\operatorname{Pr}(\beta)=\frac1{k!}\sum_{\nu\in S_k}\sgn(\nu)\,\beta\circ\nu$. For (b), let $\mathsf T\colon K^r\to E$ be a bounded linear bijection with bounded inverse, let $e_c$ be the images of the unit vectors, and let $e^*_c$ be the coordinate forms. Put
+\[
+ \operatorname{Pr}(\beta)(v_1,\dots,v_k)=\sum_{c_1<\dots<c_k}\det\bigl(e^*_{c_{\mathsf b}}(v_{\mathsf a})\bigr)_{\mathsf a,\mathsf b}\;\beta(e_{c_1},\dots,e_{c_k}).
+\]
+Two equal $v_{\mathsf a}$ give two equal rows, so $\operatorname{Pr}(\beta)$ is alternating. For alternating $\beta$, expanding by multilinearity gives $\operatorname{Pr}(\beta)=\beta$: terms with a repeated index vanish, and permuting the arguments changes the sign, in every characteristic.
+
+\emph{Step 3 (item (3)(c)).} Let $\widehat E$ be the completion of $E$. The $\Kh$-span of $E$ in $\widehat E$ is finite-dimensional over $\Kh$, hence complete by~\cite[Lemma~A.3]{I}, hence equal to $\widehat E$. So $\widehat E$ has finite coordinates over $\Kh$, by the same lemma. By the completion principle of~\cite[text before Lemma~H.5]{I}, restriction is an isometric bijection from the bounded $\Kh$-multilinear maps $\widehat E^k\to F$ onto $\Mult^k(E;F)$, and by continuity it maps alternating maps onto alternating maps. Transport the projection of~(b).
+
+\emph{Step 4 (item (3)(d),(e)).} For (d),~\cite[Theorem~5.2]{I} gives a contractive retraction for the equivalent norm; transport it to the given norm. For (e), rounding the equivalent norm as in~\cite[proof of Corollary~5.3]{I} gives an equivalent norm as in (d).
+
+\emph{Step 5 (item (4)).} A chart of $\Mult^k(\mathsf M_1;\mathsf M_0)$ induced by trivializations of $\mathsf M_1,\mathsf M_0$ preserves alternating maps. So it maps the subset $\Alt^k(\mathsf M_1;\mathsf M_0)$ onto $U\times\Alt^k(G_1;G_0)$, and a complement gives the subbundle property. Conversely, if a chart at a point of the nonempty base maps this subset over $U$ onto $U\times\mathsf F_0$ with $\mathsf F_0$ complemented, then at a point of $U$ the fiber of $\Alt^k$ is complemented in the fiber of $\Mult^k$. Trivializations of $\mathsf M_1,\mathsf M_0$ identify these fibers with $\Alt^k(G_1;G_0)$ and $\Mult^k(G_1;G_0)$.
+\end{proof}
+
+\begin{theorem}[n\textsuperscript{o}~7.8 and DP]\label{dp:thm:seven-eight-dp}
+Let $k\ge1$.
+\begin{enumerate}
+\item \textup{(DP, every characteristic, every $K$.)} On $\mathsf{Vec}_K$, on $\mathsf{Ban}_K$ and on $\cC_{\rm um}$, $\alpha_k$ is a DP vector functor, as is every bounded strict polynomial functor of finite degree, in particular $\hot^k_\pi$, $\hLambda^k_\pi$ and $\hGamma^k$. Theorem~\ref{dp:thm:functors-dp} holds for them. For DP vector bundles $\mathsf M_1,\mathsf M_0$ over a DP manifold $\mathcal M$, $\Alt^k(\mathsf M_1;\mathsf M_0)$ is a DP vector bundle and its inclusion into $\Mult^k(\mathsf M_1;\mathsf M_0)$ is a morphism. Let $k'\ge1$, and let $\mathsf M,\mathsf N,\mathsf N',\mathsf N''$ be DP vector bundles over $\mathcal M$ with fibers $G_1,G,G',G''$. Let $\varphi\colon\mathsf N\times_{\mathcal M}\mathsf N'\to\mathsf N''$ be a pairing whose local expression $x\mapsto\varphi_x$, with values in the bounded bilinear maps $G\times G'\to G''$, is DP. For $\omega$ in a fiber of $\Alt^k(\mathsf M;\mathsf N)$, $\omega'$ in the fiber of $\Alt^{k'}(\mathsf M;\mathsf N')$ at the same point, and $v_1,\dots,v_{k+k'}$ in the fiber of $\mathsf M$ there, the exterior product of~\cite[n\textsuperscript{o}~7.8.2]{Bou} is
+\begin{equation}\label{dp:fn:eq:exterior}
+ (\omega\wedge_\varphi\omega')(v_1,\dots,v_{k+k'})=\sum_\nu\sgn(\nu)\,\varphi\bigl(\omega(v_{\nu(1)},\dots,v_{\nu(k)}),\omega'(v_{\nu(k+1)},\dots,v_{\nu(k+k')})\bigr),
+\end{equation}
+summed over the permutations $\nu$ increasing on $\{1,\dots,k\}$ and on $\{k+1,\dots,k+k'\}$. It is a fiberwise bilinear map from $\Alt^k(\mathsf M;\mathsf N)\times_{\mathcal M}\Alt^{k'}(\mathsf M;\mathsf N')$ to $\Alt^{k+k'}(\mathsf M;\mathsf N'')$ with DP local expression.
+\item \textup{(Analytic, all normed or all Banach spaces, every $K$.)} The functors $\alpha_k$ and $\hLambda^k_\pi$ are analytic if and only if $k!\ne0$ in $K$, that is, $\operatorname{char}K=0$ or $\operatorname{char}K>k$. The functor $\hot^k_\pi$ is analytic for every $k$. On $\mathsf{Vec}_K$, the same threshold holds for $\Gamma^k_{\mathrm s}$ and $\hGamma^k$. Theorem~\ref{dp:thm:functor-threshold} gives the threshold for all functors of a given multidegree.
+\item \textup{(Ultrametric spaces, $K$ complete.)}
+\begin{enumerate}
+\item If $K$ is discretely valued, every DP vector functor on $\cC_{\rm um}$ with ultrametric values is analytic, in particular $\alpha_k$ in every degree. So in characteristic $p$ the condition $k!\ne0$ is sufficient and not necessary here.
+\item If $\operatorname{char}K=p$, $K$ is not spherically complete and $k\ge p$, then $\alpha_k$ is DP and not analytic on $\cC_{\rm um}$. If $\operatorname{char}K=0$, every $\alpha_k$ is analytic.
+\item If $\operatorname{char}K=p$, $K$ is densely valued and spherically complete and $k\ge p$, we do not decide whether $\alpha_k$ is analytic on $\cC_{\rm um}$ (\cite[Section~12]{I}; see also Question~\ref{dp:q:residual}). Every vector functor on $\cC_{\rm um}$ whose values have equivalent ultrametric spherically complete norms is DP if and only if it is analytic. For ultrametric Banach spaces $E,D,F,F'$ with $E$ or $D$ of countable type, the hom map of $\alpha_k$ on $\cL(F,F')\times\cL(E,D)$ is the diagonal of a bounded $(k+1)$\nobreakdash-linear map, so it is analytic, in every degree~\cite[Corollary~10.5]{I}.
+\end{enumerate}
+\item \textup{(Finite rank.)} Let $\cC_{\rm fd}$ be the full subcategory of finite-dimensional spaces in $\mathsf{Vec}_K$, and read Definition~\ref{dp:def:poly-functor} on it. Over every $K$, a vector functor on $\cC_{\rm fd}$ with Banach values is a DP vector functor if and only if it is an analytic vector functor. Over complete $K$ all finite-dimensional normed spaces are Banach, so $\alpha_k$ is analytic on $\cC_{\rm fd}$ in every characteristic. Over $K=\F_p(t)$ with the $t$-adic absolute value, for $k\ge p$, on finite-dimensional ultrametric spaces, where the values are finite-dimensional and incomplete, it can fail to be analytic.
+\item \textup{(The subbundle sentence.)} For DP vector bundles $\mathsf M_1,\mathsf M_0$ over a nonempty DP manifold, with fibers $G_1,G_0$, the bundle $\Alt^k(\mathsf M_1;\mathsf M_0)$ is a vector subbundle of $\Mult^k(\mathsf M_1;\mathsf M_0)$ if and only if $\Alt^k(G_1;G_0)$ is complemented. This holds in the cases of Proposition~\ref{dp:prop:subbundle}\textup{(3)}, including $G_1$ finite-dimensional and $G_0$ Banach over every $K$. For the spaces of Proposition~\ref{dp:prop:subbundle}\textup{(2)}, $\Alt^k(\mathsf M_1;\mathsf M_0)$ is a DP vector bundle and not a vector subbundle.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1), bundles).} By the examples above, Lemma~\ref{dp:lem:functor-rep}(2) and Proposition~\ref{dp:prop:functor-closure}, these functors are bounded strict polynomial functors on $\mathsf{Vec}_K$ and on $\mathsf{Ban}_K$, and on the full subcategory $\cC_{\rm um}$ by restriction. So Theorem~\ref{dp:thm:functors-dp}(1) applies. Both $\Mult^k$ and $\alpha_k$ are DP vector functors, and the inclusion is a natural bounded map, so Theorem~\ref{dp:thm:functors-dp}(4) with $N=1$ gives the morphism.
+
+\emph{Step 2 (item (1), exterior product).} For a bounded bilinear map $\varphi_0\colon G\times G'\to G''$, formula~\eqref{dp:fn:eq:exterior} defines a bounded bilinear map $\mathsf P_{\varphi_0}$ from $\Alt^k(G_1;G)\times\Alt^{k'}(G_1;G')$ to $\Mult^{k+k'}(G_1;G'')$. Its values are alternating in every characteristic, as in~\cite[proof of Theorem~10.7, Step~2]{I}: terms with two equal arguments in one block vanish, and the others cancel in pairs. The map $\varphi_0\mapsto\mathsf P_{\varphi_0}$ is linear, of norm at most $\binom{k+k'}k$. In trivializations, the exterior product is $x\mapsto\mathsf P_{\varphi_x}$, a bounded linear image of a DP family.
+
+\emph{Step 3 (item (2)).} For $\alpha_k$ this is~\cite[Corollary~7.3]{I}. For $\hLambda^k_\pi$, $\Gamma^k_{\mathrm s}$ and $\hGamma^k$ with $k!\ne0$, use Theorem~\ref{dp:thm:functor-threshold}(1). With $k!=0$, use Lemma~\ref{dp:fn:lem:witnesses}(1) and Proposition~\ref{dp:prop:gamma-not-ambient}(2), since $\operatorname{char}K\le k$. The examples above give $\hot^k_\pi$.
+
+\emph{Step 4 (item (3)).} Item (a) is Theorem~\ref{dp:thm:functors-um}(2), as $\Alt^k(V_1;V_0)$ is an ultrametric Banach space when $V_0$ is. Item (b) is Proposition~\ref{dp:prop:analytic-closure}(2) with item (1), and Theorem~\ref{dp:thm:functor-threshold}(1) for characteristic $0$. Item (c) is Theorem~\ref{dp:thm:functors-um}(1) and the citation.
+
+\emph{Step 5 (item (4)).} The hom spaces are finite-dimensional and the targets are Banach, so Theorem~\ref{dp:thm:agreement-finite}(2) applies at every point of every hom space (on the hom space $\{0\}$ every map is constant). Analytic maps are DP. Over complete $K$, the values of $\alpha_k$ on $\cC_{\rm fd}$ are finite-dimensional, so Banach by~\cite[Lemma~A.3]{I}, and $\alpha_k$ is DP by item (1). The last sentence is Theorem~\ref{dp:thm:agreement-finite}(3).
+
+\emph{Step 6 (item (5)).} This is Proposition~\ref{dp:prop:subbundle}(4),(3),(2) with item (1).
+\end{proof}

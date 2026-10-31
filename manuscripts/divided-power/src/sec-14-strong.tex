@@ -1,0 +1,341 @@
+\section{The strong norm}\label{dp:sec:strong}
+
+The strong norm of Definition~\ref{dp:def:strong-norm} bounds all the coefficients of a law. This section studies it twice. As a norm on laws, it loses no radius on ultrametric spaces (Theorems~\ref{dp:thm:strong-inverse} and~\ref{dp:thm:strong-recenter}), and there it is the law norm over a densely valued extension (Proposition~\ref{dp:prop:strong-intrinsic}(5)). As a class of germs, the strongly DP germs compete with the DP germs, and on $\ell^1(\N,K)$ they fail: with a non-ultrametric target they do not contain the analytic germs (Example~\ref{dp:ex:an-not-sdp}), and they are not closed under composition or inverses (Theorem~\ref{dp:thm:strong-failure}). If the source has an equivalent ultrametric norm, the strongly DP germs are the DP germs.
+
+The following expansion is used throughout. Let $a$ be a law of degree $n$, $\abs\alpha=n$, and let $x_c=\sum_l\lambda_{c,l}y_{c,l}$ be finite sums, for $1\le c\le r$. Expanding $a(\sum_cs_c\sum_l\lambda_{c,l}y_{c,l})$ in the vectors $y_{c,l}$ and comparing the coefficients of $s^\alpha$ gives
+\begin{equation}\label{dp:s:eq:slots}
+ a^{[\alpha]}(x_1,\dots,x_r)=\sum_\varepsilon\lambda^\varepsilon a^{[\varepsilon]}\bigl((y_{c,l})_{c,l}\bigr),
+\end{equation}
+the sum over the arrays $\varepsilon=(\varepsilon_{c,l})$ of integers $\ge0$ with $\sum_l\varepsilon_{c,l}=\alpha_c$ for each $c$, where $\lambda^\varepsilon=\prod_{c,l}\lambda_{c,l}^{\varepsilon_{c,l}}$.
+
+\subsection{The hull}\label{dp:s:ssec-hull}
+
+\begin{definition}\label{dp:def:hull}
+For a normed space $P$ and $x\in P$ put
+\[
+ \mathsf u(x)=\inf\bigl\{\max_l\norm{x_l}:\ x=\sum_lx_l\text{ a finite sum}\bigr\}.
+\]
+This is an ultrametric seminorm with $\mathsf u\le\norm\cdot$: concatenate decompositions for $\mathsf u(x+y)\le\max(\mathsf u(x),\mathsf u(y))$. Let $P^{\mathsf u}=P/\ker\mathsf u$, normed by $\mathsf u$, and let $\operatorname{pr}\colon P\to P^{\mathsf u}$ be the quotient map, which is contractive. For a law $\tilde a$ on $P^{\mathsf u}$ we write $\norm{\tilde a}_{\mathsf u}$ for its law norm. In \cite[proof of Theorem~14.39(4)]{I} this seminorm is written $\nu$; here $\nu$ is a norm on the space $V$ of Section~\ref{dp:sec:nonambient}.
+\end{definition}
+
+On $\ell^1(J,K)$ the seminorm $\mathsf u$ is the supremum norm. Indeed, for $\xi\in J$ we have $\abs{x_\xi}\le\max_l\abs{(x_l)_\xi}\le\max_l\norm{x_l}$. Conversely, let $\eta>0$, list the support of $x$, and cut it greedily into blocks of $\ell^1$-mass at most $\sup_\xi\abs{x_\xi}+\eta$. Each block but the last has mass above $\eta$, so there are finitely many. The last block may have infinite support, and it still lies in $\ell^1(J,K)$. Hence the completion of $\ell^1(J,K)^{\mathsf u}$ is $c_0(J,\Kh)$.
+
+\begin{proposition}[ultrametric targets see only the hull]\label{dp:prop:hull}
+Let $P$ be normed and $W$ ultrametric.
+\begin{enumerate}
+\item A bounded $n$\nobreakdash-linear map $\beta\colon P^n\to W$ satisfies $\norm{\beta(x_1,\dots,x_n)}\le\norm\beta\prod_c\mathsf u(x_c)$. So it factors through $(P^{\mathsf u})^n$, with the same norm.
+\item A law $a\colon P\to W$ of degree $n$ satisfies $\norm{a^{[\alpha]}(x_1,\dots,x_r)}\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\prod_c\mathsf u(x_c)^{\alpha_c}$. So $a=\tilde a\circ\operatorname{pr}$ for a unique law $\tilde a$ on $P^{\mathsf u}$, with $\lvert\!\lvert\!\lvert \tilde a\rvert\!\rvert\!\rvert=\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$ and
+\[
+ \norm{\tilde a}_{\mathsf u}\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\le\theta_n(K)\mathfrak s(P^{\mathsf u})^{-n}\norm{\tilde a}_{\mathsf u}.
+\]
+Also $\operatorname{lift}(a)=\operatorname{lift}(\tilde a)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Expand each slot over a decomposition $x_c=\sum_lx_{c,l}$. As $W$ is ultrametric, the norm of the sum is at most the maximum of the norms of the terms. Take infima, one slot at a time.
+
+\emph{Step 2 (the bound of item (2)).} Let $x_c=\sum_lx_{c,l}$. By~\eqref{dp:s:eq:slots} with all $\lambda_{c,l}=1$, and~\eqref{dp:laws:strong}, each term has norm at most $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\prod_c\max_l\norm{x_{c,l}}^{\alpha_c}$. As $W$ is ultrametric, so does the sum. Take infima.
+
+\emph{Step 3 (descent).} If $\mathsf u(y)=0$, then $a(x+y)=\sum_{i\le n}a^{[(n-i,i)]}(x,y)$, and by Step~2 the terms with $i\ge1$ vanish. So $\tilde a(\operatorname{pr}x)=a(x)$ is well defined, and $\tilde a(\sum_cs_c\operatorname{pr}x_c)=a(\sum_cs_cx_c)$ shows that it is a law with $\tilde a^{[\alpha]}(\operatorname{pr}x_1,\dots,\operatorname{pr}x_r)=a^{[\alpha]}(x_1,\dots,x_r)$. Step~2 gives $\lvert\!\lvert\!\lvert \tilde a\rvert\!\rvert\!\rvert\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$, and Lemma~\ref{dp:lem:strong-formal}(1) with $T_2=\operatorname{pr}$ gives the reverse. Always $\norm{\tilde a}_{\mathsf u}\le\lvert\!\lvert\!\lvert \tilde a\rvert\!\rvert\!\rvert$, and the last inequality is Lemma~\ref{dp:lem:strong-coefficients}(2) on $P^{\mathsf u}$. By item (1), lifts of $a$ and of $\tilde a$ correspond, with the same norm.
+\end{proof}
+
+The hull can vanish. On $K$-valued step functions on $[0,1)$ with $\norm h=\int\abs h$, cutting $h$ into $\mathsf N$ pieces shows $\mathsf u\equiv0$. Then every law of degree $n\ge1$ into an ultrametric space vanishes, and DP germs into ultrametric spaces are constant near each point.
+
+\begin{proposition}[the strong norm interpolates]\label{dp:prop:strong-interpolates}
+\leavevmode
+\begin{enumerate}
+\item Let $W$ be ultrametric and $P$ any normed space. A map analytic at $x_0$ with radius $R$ and bound $M$ is sDP at $x_0$ with radius $R$ and bound $M$.
+\item Let $\operatorname{char}K=0$, with $P,W$ arbitrary. A map sDP at $x_0$ with radius $R$ and bound $M$ is analytic at $x_0$ with radius $\mathfrak n_KR$ and bound $M$.
+\item Let $P$ be ultrametric and $W$ arbitrary. A map DP at $x_0$ with radius $R$ and bound $M$ is sDP at $x_0$ with radius $R/C_1$ and bound $M$; with radius $\theta_K\mathfrak s(P)R$ if $W$ is also ultrametric. So on ultrametric $P$ the DP germs and the sDP germs are the same.
+\item Let $K$ be complete and not spherically complete, $\operatorname{char}K=p\le k$, and $E,D$ as in \cite[Theorem~7.2(2)]{I}. Then $A^k_{E,D;K}$ is sDP at every point and analytic at no point. Over every $K$, the germ $\mathsf f$ of Example~\ref{dp:ex:l1} is DP at $0$ and not sDP at $0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} If $\beta_n$ expand the map, then $\beta_n$ has diagonal $a_n$ (Lemma~\ref{dp:lem:coefficients-unique}(2)). Apply Lemma~\ref{dp:lem:strong-formal}(5).
+
+\emph{Step 2 (item (2)).} The constant $\mathfrak n_K\in(0,1]$ is that of Section~\ref{dp:sec:agreement}. For $n\ge1$ put $\beta_n=a_n^{[1^n]}/n!$. It is $n$\nobreakdash-linear (Lemma~\ref{dp:lem:elementary}(4)) and has diagonal $a_n$ (Lemma~\ref{dp:lem:hasse-law}(5)). By~\eqref{dp:laws:strong}, $\norm{\beta_n}\le\abs{n!}^{-1}\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le M(\mathfrak n_KR)^{-n}$. With $\beta_0=a_0$ these expand the map for $\norm h<\mathfrak n_KR\le R$.
+
+\emph{Step 3 (item (3)).} The first radius is Lemma~\ref{dp:lem:strong-formal}(3). For the second, Lemma~\ref{dp:lem:strong-coefficients}(2) gives $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le\theta_K^{1-n}\mathfrak s(P)^{-n}MR^{-n}\le M(\theta_K\mathfrak s(P)R)^{-n}$ for $n\ge1$, as $\theta_K\le1$. For $n=0$ use $\norm{a_0}\le M$. As $\theta_K\mathfrak s(P)\le1$, the expansion holds on the smaller ball. The converse direction is $\norm\cdot\le\lvert\!\lvert\!\lvert \cdot\rvert\!\rvert\!\rvert$.
+
+\emph{Step 4 (item (4)).} By Step~3 of the proof of Theorem~\ref{dp:thm:calculus}, $A^k_{E,D;K}$ followed by an isometry is the diagonal of a $k$\nobreakdash-linear map of norm at most $1$ into $\cL(\Alt^k(D;K),\Mult^k(E;K))$, which is ultrametric. So $\lvert\!\lvert\!\lvert A^k_{E,D;K}\rvert\!\rvert\!\rvert\le1$ by Lemma~\ref{dp:lem:strong-formal}(1),(5), and a law is sDP at every point by Lemma~\ref{dp:lem:strong-formal}(3). It is analytic at no point by \cite[Theorem~7.2(2)]{I}. For $\mathsf f$, the law $a_n$ has coefficient $a_n^{[1^n]}(e_1,\dots,e_n)=\mathsf e_n$, so $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\ge n^n$. By Lemma~\ref{dp:lem:coefficients-unique}(1) the $a_n$ are the only possible laws of $\mathsf f$ at $0$, and $n^nR^n$ is unbounded for every $R>0$.
+\end{proof}
+
+So in characteristic $0$ the analytic and the sDP germs agree if $W$ or $P$ is ultrametric. They can differ otherwise.
+
+\begin{example}[an analytic germ that is not strongly DP]\label{dp:ex:an-not-sdp}
+Let $P=\ell^1(\N,K)$, over any $K$. Let $W$ be the $\ell^1$-sum of the spaces $\ell^1(\N^n,K)$, $n\ge1$, with inclusions $\iota_n$. Put $f(h)=\sum_{n\ge1}\iota_n(h^{\otimes n})$ for $\norm h<1$. Then $f$ is analytic at $0$ with radius $1$ and bound $1$, and it is not sDP at $0$. In characteristic $0$, by Proposition~\ref{dp:prop:strong-interpolates}(2), the sDP germs from $P$ to $W$ are strictly fewer than the analytic ones.
+\end{example}
+
+\begin{proof}[Verification]
+The maps $(h^1,\dots,h^n)\mapsto\iota_n(h^1\otimes\dots\otimes h^n)$ have norm at most $1$ and expand $f$. The sum lies in $W$, as its coordinates lie in $K$ and $\sum_n\norm h^n<\infty$. The law of degree $n$ of $f$ is $a_n(h)=\iota_n(h^{\otimes n})$. The coefficient of $s_1\cdots s_n$ in $a_n(\sum_{\mathsf i\le n}s_{\mathsf i}e_{\mathsf i})$ is a sum of $n!$ distinct unit vectors, of $\ell^1$-norm $n!$ in every characteristic. So $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\ge n!$, and $n!R^n$ is unbounded for every $R>0$.
+\end{proof}
+
+\subsection{Ultrametric targets}\label{dp:s:ssec-targets}
+
+With ultrametric Banach targets the class has a description with no reference to the strong norm. Recall the canonical cover $q_P$ (Definition~\ref{dp:def:cover}), and $\mathfrak c_K$ from Section~\ref{dp:sec:conv}.
+
+\begin{theorem}[strongly DP germs into ultrametric spaces]\label{dp:thm:strong-um}
+Let $W$ be an ultrametric Banach space, $P$ a normed space, $U\subseteq P$ open, $f\colon U\to W$ and $x_0\in U$. The following are equivalent.
+\begin{enumerate}
+\item $f$ is sDP at $x_0$.
+\item $f\circ q_P$ is analytic at some preimage of $x_0$, equivalently at every preimage.
+\item $f\circ Q$ is analytic at some preimage of $x_0$, for some bounded linear surjection $Q$ with a preimage constant.
+\item $j\circ f$ is analytic at $x_0$ for some linear isometry $j$ of $W$ into an ultrametric normed space.
+\item For some $R,M$, $f$ is DP at $x_0$ with radius $R$ and bound $M$, and its coefficient laws satisfy $\norm{\tilde a_n}_{\mathsf u}\le MR^{-n}$.
+\end{enumerate}
+Radius $R$ and bound $M$ in~\textup{(1)} give the same in~\textup{(2)} and~\textup{(5)}, and radius $\abs\varpi\mathfrak c_KR$ and bound $M$ in~\textup{(4)}. Radius $R$ and bound $M$ in~\textup{(3)}, with preimage constant $\mathsf c$, give radius $R/\mathsf c$ and bound $M$ in~\textup{(1)}. Radius $R$ and bound $M$ in~\textup{(4)} give the same in~\textup{(1)}. Radius $R$ and bound $M$ in~\textup{(5)} give radius $\theta_K\mathfrak s(P^{\mathsf u})R$ and bound $M$ in~\textup{(1)}.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 ((1) implies (2), (2) implies (3)).} Let $a_n$ be the laws of $f$ at $x_0$. The proof of Lemma~\ref{dp:lem:lift-cover} gives a lift of $a_n\circ q_P$ of norm at most $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le MR^{-n}$. As $\norm{q_P}\le1$, these lifts expand $f\circ q_P$ on the ball of radius $R$ around every preimage. For (3), take $Q=q_P$.
+
+\emph{Step 2 ((3) implies (1)).} The map $f\circ Q$ is DP with the same data (Theorem~\ref{dp:thm:calculus}(3)). By Proposition~\ref{dp:prop:source-descent}(1), $f$ is DP at $x_0$ with radius $R/\mathsf c$ and with laws $a_n$ such that $a_n\circ Q$ has a lift of norm at most $MR^{-n}$. Lemma~\ref{dp:lem:strong-formal}(5),(2) give $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le\mathsf c^nMR^{-n}$.
+
+\emph{Step 3 ((1) and (5)).} By Proposition~\ref{dp:prop:hull}(2), the laws descend. If (1) holds, then $\norm{\tilde a_n}_{\mathsf u}\le\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le MR^{-n}$, and $\norm{a_n}\le\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert$. If (5) holds, then for $n\ge1$,
+\[
+ \lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le\theta_K^{1-n}\mathfrak s(P^{\mathsf u})^{-n}\norm{\tilde a_n}_{\mathsf u}\le M\bigl(\theta_K\mathfrak s(P^{\mathsf u})R\bigr)^{-n},
+\]
+and $\theta_K\mathfrak s(P^{\mathsf u})\le1$.
+
+\emph{Step 4 ((5) implies (4)).} As $W$ is complete, $\tilde f=\sum_n\tilde a_n$ converges on the ball of radius $R$ of $P^{\mathsf u}$, and it is DP at $0$ with radius $R$ and bound $M$. As $P^{\mathsf u}$ and $W$ are ultrametric, \cite[Theorem~14.39(1)]{I} gives a linear isometry $j$ of $W$ into an ultrametric normed space $Z$ and $n$\nobreakdash-linear maps $\beta_n$ on $P^{\mathsf u}$, with $\norm{\beta_n}\le M(\abs\varpi\mathfrak c_KR)^{-n}$, that expand $j\circ\tilde f$. Since $\mathsf u\le\norm\cdot$, the maps $\beta_n\circ\operatorname{pr}^{\times n}$ expand $j\circ f$ at $x_0$.
+
+\emph{Step 5 ((4) implies (1)).} Let $\beta_n\colon P^n\to Z$ expand $j\circ f$, with $\norm{\beta_n}\le MR^{-n}$ and $Z$ ultrametric. As $W$ is complete, Theorem~\ref{dp:thm:target-descent}(2) gives that $f$ is DP at $x_0$, with laws $a_n$ such that $j\circ a_n$ is the diagonal of $\beta_n$ (Lemma~\ref{dp:lem:coefficients-unique}(2)). By Lemma~\ref{dp:lem:strong-formal}(1),(5), $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert=\lvert\!\lvert\!\lvert j\circ a_n\rvert\!\rvert\!\rvert\le\norm{\beta_n}$.
+\end{proof}
+
+\begin{corollary}[the two gaps]\label{dp:cor:two-gaps}
+Let $W$ be an ultrametric Banach space and $P$ a normed space. Germs from $P$ to $W$ satisfy: analytic implies sDP, and sDP implies DP.
+\begin{enumerate}
+\item \textup{(The first gap.)} Let $f$ be sDP at $x_0$ with laws $a_n$. Then $f$ is analytic at $x_0$ if and only if $\sum_n\tilde a_n$ is analytic at $0$ on $P^{\mathsf u}$. So the first gap is the question between the ultrametric spaces $P^{\mathsf u}$ and $W$. It closes if $\operatorname{char}K=0$; if $K$ is discretely valued; if $W$ has an equivalent ultrametric spherically complete norm; and if $K$ is complete and the completion of $P^{\mathsf u}$ is linearly homeomorphic to $c_0(J,K)$. For $K$ complete, not spherically complete, of characteristic $p$, there are ultrametric $P$ and $W$ for which it does not close.
+\item \textup{(The second gap.)} A DP germ is sDP if and only if the numbers $\norm{\tilde a_n}_{\mathsf u}$ have a geometric bound. By Lemma~\ref{dp:lem:strong-formal}(3), the excess $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert/\norm a$ is at most $(C_1n)^n$. On $\ell^1(\N,K)$ the germ $\mathsf f$ has $\norm{a_n}<\abs\varpi^{-1}$ and $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\ge n^n$.
+\item Let $\operatorname{char}K=0$. On every source, the analytic germs into ultrametric Banach spaces have source descent, and target descent along isometries between ultrametric Banach spaces, since they are the sDP germs.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+\emph{Step 1 (the inclusions).} Proposition~\ref{dp:prop:strong-interpolates}(1) and $\norm\cdot\le\lvert\!\lvert\!\lvert \cdot\rvert\!\rvert\!\rvert$.
+
+\emph{Step 2 (item (1)).} If $\beta_n$ expand $f$, then $\beta_n$ has diagonal $a_n$, and Proposition~\ref{dp:prop:hull}(1) gives maps on $P^{\mathsf u}$ of the same norms with diagonals $\tilde a_n$. Conversely, compose an expansion on $P^{\mathsf u}$ with $\operatorname{pr}$, which is contractive. By Theorem~\ref{dp:thm:strong-um}(5), $\sum_n\tilde a_n$ is DP at $0$ on $P^{\mathsf u}$. The first three cases are Theorem~\ref{dp:thm:agreement-char0}(2) and Theorem~\ref{dp:thm:sph-agreement}(2),(1). For the fourth, let $K$ be complete. By \cite[Lemma~Q.13(1)]{I}, $\tilde a_n$ extends to the completion of $P^{\mathsf u}$ with the same bound, and Theorem~\ref{dp:thm:c0-agreement}(2), transported through the homeomorphism with its constant, gives a lift with a geometric bound. That the gap does not close is \cite[Proposition~14.40(3)]{I}, where $P$ is ultrametric, so that $P^{\mathsf u}=P$.
+
+\emph{Step 3 (items (2) and (3)).} Item (2) is Theorem~\ref{dp:thm:strong-um}(5), Example~\ref{dp:ex:l1}(1) and Proposition~\ref{dp:prop:strong-interpolates}(4). For item (3), item (1) gives that the analytic germs are the sDP germs. If $f\circ Q$ is analytic, Theorem~\ref{dp:thm:strong-um}, (3) implies (1), shows that $f$ is sDP. If $j\circ f$ is analytic for an isometry $j$ into an ultrametric Banach space, (4) implies (1) shows the same.
+\end{proof}
+
+\subsection{Composition and inverse functions}\label{dp:s:ssec-composition}
+
+Let $f$ map an open subset of $P$ into $W$ and $g$ an open subset of $W$ into $Y$, with $f(x_0+h)=\sum_na_n(h)$ for $\norm h<R$, $g(f(x_0)+w)=\sum_mb_m(w)$ for $\norm w<R'$, $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le MR^{-n}$ for $n\ge1$, $\lvert\!\lvert\!\lvert b_m\rvert\!\rvert\!\rvert\le M'R'^{-m}$ and $M>0$. For a finitely supported sequence $\alpha=(\alpha_1,\alpha_2,\dots)$ put $\abs\alpha=\sum_n\alpha_n$ and $\deg\alpha=\sum_nn\alpha_n$. By \cite[Lemma~Q.3]{I}, the laws of $g\circ f$ at $x_0$ are
+\[
+ \Theta_d=\sum_{\deg\alpha=d}\phi_\alpha,\qquad\phi_\alpha(h)=b_{\abs\alpha}^{[\alpha]}(a_1(h),a_2(h),\dots).
+\]
+The algebra of composition is~\cite[VI~\S8, Prop.~VI.6, Cor.; Prop.~I.2; II~\S1]{Ro}; the bounds below are the estimates we need. Put $R_{\mathrm c}=R\min(1,R'/M)$. Put $R_{\mathrm e}=RR'/(M+R')$, and $R_{\mathrm e}=R_{\mathrm c}$ if $W$ is ultrametric.
+
+\begin{theorem}[composition]\label{dp:thm:strong-composition}
+\leavevmode
+\begin{enumerate}
+\item \textup{(Coefficients, all norms.)} For $h_1,\dots,h_r\in P$ and $\abs\delta=\deg\alpha$,
+\begin{equation}\label{dp:s:eq:composite-coefficient}
+ \phi_\alpha^{[\delta]}(h_1,\dots,h_r)=\sum_\varepsilon b_{\abs\alpha}^{[\varepsilon]}\bigl((a_n^{[\gamma]}(h_1,\dots,h_r))_{n,\gamma}\bigr),
+\end{equation}
+over the arrays $\varepsilon_{n,\gamma}\ge0$, with $\abs\gamma=n$, such that $\sum_\gamma\varepsilon_{n,\gamma}=\alpha_n$ and $\sum_{n,\gamma}\varepsilon_{n,\gamma}\gamma=\delta$. Each term has norm at most $\lvert\!\lvert\!\lvert b_{\abs\alpha}\rvert\!\rvert\!\rvert\prod_n\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert^{\alpha_n}\prod_c\norm{h_c}^{\delta_c}$.
+\item \textup{($Y$ ultrametric.)} We have $\lvert\!\lvert\!\lvert \Theta_d\rvert\!\rvert\!\rvert\le M'R_{\mathrm c}^{-d}$ for $d\ge1$, and $g\circ f(x_0+h)=\sum_d\Theta_d(h)$ for $\norm h<R_{\mathrm e}$. So $g\circ f$ is sDP at $x_0$ with radius $R_{\mathrm e}$ and bound $M'$.
+\item \textup{($W$ ultrametric, any $Y$.)} We have $\lvert\!\lvert\!\lvert \Theta_d\rvert\!\rvert\!\rvert\le M'(2C_1/R_{\mathrm c})^d$ for $d\ge1$. So $g\circ f$ is sDP at $x_0$.
+\item \textup{($P$ ultrametric, any $W,Y$.)} The map $g\circ f$ is sDP at $x_0$.
+\item \textup{($g$ a law, all norms.)} Let $g$ be a law of degree $k\ge1$ and $f(x_0)=0$. Then $\lvert\!\lvert\!\lvert \Theta_d\rvert\!\rvert\!\rvert\le\binom{d-1}{k-1}k^d\lvert\!\lvert\!\lvert g\rvert\!\rvert\!\rvert M^kR^{-d}$. So $g\circ f$ is sDP at $x_0$. If $f(x_0)\ne0$, then $g\circ f$ is still sDP at $x_0$. So sDP is stable under postcomposition with laws.
+\item \textup{(Formal.)} Let $a\colon P\to W$ and $\bar a\colon P\to W'$ be laws of the same degree. The pairing $(a,\bar a)$, into $W\oplus W'$ with the maximum norm, has $\lvert\!\lvert\!\lvert (a,\bar a)\rvert\!\rvert\!\rvert=\max(\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert,\lvert\!\lvert\!\lvert \bar a\rvert\!\rvert\!\rvert)$. Constants are sDP, and so are the sums and pairings of sDP germs and their compositions with bounded linear maps on either side.
+\end{enumerate}
+So $g\circ f$ is sDP if one of $P,W,Y$ has an equivalent ultrametric norm, since a renorming with constant $\mathsf c$ multiplies strong norms of laws of degree $n$ by at most $\mathsf c^n$ on the source and by $\mathsf c$ on the target.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Put $v_n=\sum_{\abs\gamma=n}s^\gamma a_n^{[\gamma]}(h_1,\dots,h_r)$, so that $a_n(\sum_cs_ch_c)=v_n$. By~\eqref{dp:s:eq:slots} with the scalars $s^\gamma$, $b_{\abs\alpha}^{[\alpha]}(v_1,v_2,\dots)$ is the sum over the arrays with $\sum_\gamma\varepsilon_{n,\gamma}=\alpha_n$ of $s^{\sum\varepsilon_{n,\gamma}\gamma}b_{\abs\alpha}^{[\varepsilon]}((a_n^{[\gamma]}(h_1,\dots,h_r))_{n,\gamma})$. Read off the coefficient of $s^\delta$. The bound is~\eqref{dp:laws:strong}, twice.
+
+\emph{Step 2 (item (2): bound).} Let $\deg\alpha=d$. As $Y$ is ultrametric, item (1) gives $\lvert\!\lvert\!\lvert \phi_\alpha\rvert\!\rvert\!\rvert\le M'R'^{-\abs\alpha}\prod_n(MR^{-n})^{\alpha_n}=M'(M/R')^{\abs\alpha}R^{-d}$. As $\abs\alpha\le d$, this is at most $M'R_{\mathrm c}^{-d}$. The sum over $\alpha$ is finite, and $Y$ is ultrametric.
+
+\emph{Step 3 (item (2): expansion).} Let $\norm h<R_{\mathrm e}$ and $\mathsf x=\norm h/R<1$. Then $\norm{a_n(h)}\le M\mathsf x^n$, so $w=\sum_{n\ge1}a_n(h)$ has $\norm w\le M\mathsf x/(1-\mathsf x)<R'$, and $\norm w\le M\mathsf x<R'$ if $W$ is ultrametric. By~\eqref{dp:laws:strong}, $\norm{\phi_\alpha(h)}\le M'(M/R')^{\abs\alpha}\mathsf x^{\deg\alpha}$. As $R_{\mathrm e}\le R_{\mathrm c}$, we have $\mathsf x\max(1,M/R')<1$. So $\phi_\alpha(h)\to0$ along the finite-to-one map $\alpha\mapsto\deg\alpha$. Hence the family $(\phi_\alpha(h))_\alpha$ is summable in the ultrametric $\widehat Y$, and it may be grouped in any way. By Lemma~\ref{dp:lem:elementary}(3), $b_m(\sum_{n\le\overline n}a_n(h))$ is the sum of the $\phi_\alpha(h)$ with $\abs\alpha=m$ and support in $[\overline n]$. As $b_m$ is continuous, grouping by $\abs\alpha=m$ gives $b_m(w)$, and $\sum_mb_m(w)=g\circ f(x_0+h)$. Grouping by $\deg\alpha=d$ gives $\sum_d\Theta_d(h)$. Both sides lie in $Y$. Finally, $\lvert\!\lvert\!\lvert \Theta_d\rvert\!\rvert\!\rvert\le M'R_{\mathrm c}^{-d}\le M'R_{\mathrm e}^{-d}$.
+
+\emph{Step 4 (item (3)).} By Proposition~\ref{dp:prop:hull}(2), $a_n=\tilde a_n\circ\operatorname{pr}$, so $\phi_\alpha=\tilde\phi_\alpha\circ\operatorname{pr}$ for a law $\tilde\phi_\alpha$ on $P^{\mathsf u}$. By~\eqref{dp:laws:strong} and Proposition~\ref{dp:prop:hull}(2), $\norm{\tilde\phi_\alpha}_{\mathsf u}\le\lvert\!\lvert\!\lvert b_{\abs\alpha}\rvert\!\rvert\!\rvert\prod_n\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert^{\alpha_n}\le M'R_{\mathrm c}^{-d}$. At most $2^{d-1}$ sequences $\alpha$ have degree $d$. On the ultrametric source $P^{\mathsf u}$, Lemma~\ref{dp:lem:strong-formal}(3) gives $\lvert\!\lvert\!\lvert \tilde\Theta_d\rvert\!\rvert\!\rvert\le C_1^d2^{d-1}M'R_{\mathrm c}^{-d}$, and $\lvert\!\lvert\!\lvert \Theta_d\rvert\!\rvert\!\rvert\le\lvert\!\lvert\!\lvert \tilde\Theta_d\rvert\!\rvert\!\rvert$ by Lemma~\ref{dp:lem:strong-formal}(1). By \cite[Lemma~Q.3]{I} the $\Theta_d$ expand $g\circ f$ near $x_0$.
+
+\emph{Step 5 (item (4)).} By Proposition~\ref{dp:prop:strong-interpolates}(3) both germs are DP, $g\circ f$ is DP by Theorem~\ref{dp:thm:calculus}(2), and it is sDP by Proposition~\ref{dp:prop:strong-interpolates}(3).
+
+\emph{Step 6 (item (5)).} Only $b_k=g$ occurs, so $\abs\alpha=k$, and at most $\binom{d-1}{k-1}$ sequences $\alpha$ have $\abs\alpha=k$ and degree $d$. Fix one. An array $\varepsilon$ of~\eqref{dp:s:eq:composite-coefficient} comes from at least one ordered decomposition of $\delta$ into $k$ vectors, by listing the $\gamma$ with their multiplicities. There are at most $\prod_ck^{\delta_c}=k^d$ such decompositions. So $\lvert\!\lvert\!\lvert \phi_\alpha\rvert\!\rvert\!\rvert\le k^d\lvert\!\lvert\!\lvert g\rvert\!\rvert\!\rvert\prod_n(MR^{-n})^{\alpha_n}=k^d\lvert\!\lvert\!\lvert g\rvert\!\rvert\!\rvert M^kR^{-d}$. By \cite[Lemma~Q.3]{I} the $\Theta_d$ expand $g\circ f$ near $x_0$. If $f(x_0)=w_0$, then $g(w_0+w)=\sum_{i\le k}g^{[(k-i,i)]}(w_0,w)$ is a finite sum of laws in $w$ (Lemma~\ref{dp:lem:strong-formal}(4)). The term $i=0$ is constant, and the first case applies to the others and to $f-w_0$. Conclude by item (6).
+
+\emph{Step 7 (item (6)).} The coefficients of a pair are the pairs of coefficients. Sums use the triangle inequality, with the smaller radius. Bounded linear maps are Lemma~\ref{dp:lem:strong-formal}(1).
+\end{proof}
+
+The next theorem shows that composition fails for general norms. In~\eqref{dp:s:eq:composite-coefficient} the arrays are counted, and the norm of an $\ell^1$-target adds their terms. Let $\mathcal D$ be the set of unordered pairs $\{\mathsf i,\mathsf j\}$ with $\mathsf i\le\mathsf j$ in $\N$, with a total order. Let $\mathcal M_m$ be the set of multisets of size $m$ in $\mathcal D$, and $\mathcal M=\bigsqcup_{m\ge2}\mathcal M_m$. A sum of multisets adds multiplicities. Let $\mathsf X=\ell^1(\N\sqcup\mathcal D\sqcup\mathcal M,K)$, which is isometric to $\ell^1(\N,K)$, with coordinates $x=(x_\N,x_{\mathcal D},x_{\mathcal M})$. For $\mathsf m\in\mathcal M_m$ and $w\in\ell^1(\mathcal D,K)$ put $w^{\mathsf m}=\prod_{\varsigma\in\mathsf m}w_\varsigma$, with multiplicities. Define
+\[
+ \mathbf{Sq}(h)=\sum_{\mathsf i\le\mathsf j}h_{\mathsf i}h_{\mathsf j}e_{\{\mathsf i,\mathsf j\}},\qquad\mathbf b_m(w)=\sum_{\mathsf m\in\mathcal M_m}w^{\mathsf m}e_{\mathsf m},\qquad\mathbf g(w)=\sum_{m\ge2}\mathbf b_m(w)\quad(\norm w<1),
+\]
+\[
+ F_1(x)=x+\mathbf{Sq}(x_\N),\qquad F_2(x)=x+\mathbf g(x_{\mathcal D}),\qquad\mathsf S(x)=x-\mathbf{Sq}(x_\N)-\mathbf g(x_{\mathcal D}).
+\]
+
+\begin{theorem}[failure on $\ell^1$]\label{dp:thm:strong-failure}
+Let $K$ be arbitrary, of any characteristic.
+\begin{enumerate}
+\item We have $\lvert\!\lvert\!\lvert \mathbf{Sq}\rvert\!\rvert\!\rvert\le1$ and $\lvert\!\lvert\!\lvert \mathbf b_m\rvert\!\rvert\!\rvert\le1$. The maps $\mathbf{Sq},\mathbf g,F_1,F_2,\mathsf S$ are sDP at every point of their domains, with $\norm{x_{\mathcal D}}<1$ where $\mathbf g$ enters, and with values in $\mathsf X$, reading $\ell^1(\mathcal D,K)$ and $\ell^1(\mathcal M,K)$ inside it. All are analytic at $0$.
+\item The map $\mathbf g\circ\mathbf{Sq}$ is analytic at $0$ and not sDP at $0$: its law of degree $2m$, $\mathbf t_m=\mathbf b_m\circ\mathbf{Sq}$, has $\lvert\!\lvert\!\lvert \mathbf t_m\rvert\!\rvert\!\rvert\ge(2m-1)!!$.
+\item \textup{(Composition fails.)} $F_1,F_2$ are local diffeomorphisms at $0$, sDP with sDP inverses, and $F_2\circ F_1$ is not sDP at $0$.
+\item \textup{(The inverse function theorem fails.)} $\mathsf S$ is sDP at $0$ with $D\mathsf S(0)=\id$. Its local inverse is $F_2\circ F_1$, which is analytic at $0$ and not sDP at $0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 ($\mathbf{Sq}$).} The coefficient of $\mathbf{Sq}$ of index $(1,1)$ at $(y,y')$ has coordinates $y_{\mathsf i}y'_{\mathsf j}+y_{\mathsf j}y'_{\mathsf i}$ for $\mathsf i<\mathsf j$ and $2y_{\mathsf i}y'_{\mathsf i}$ for $\mathsf i=\mathsf j$. As $\abs2\le1$, its $\ell^1$-norm is at most $\sum_{\mathsf i,\mathsf j}\abs{y_{\mathsf i}}\abs{y'_{\mathsf j}}=\norm y\norm{y'}$. Also $\norm{\mathbf{Sq}(y)}\le\norm y^2$. A lift is $\beta_{\mathbf{Sq}}(y,y')=\sum_{\mathsf i\le\mathsf j}y_{\mathsf i}y'_{\mathsf j}e_{\{\mathsf i,\mathsf j\}}$, of norm at most $1$.
+
+\emph{Step 2 ($\mathbf b_m$).} The coordinate at $\mathsf m$ of the coefficient of $s^\alpha$ in $\mathbf b_m(\sum_cs_cw_c)$ is a combination, with integer coefficients, of the products $\prod_cw_c^{\mathsf m_c}$ over the splittings $\mathsf m=\mathsf m_1+\dots+\mathsf m_r$ with $\abs{\mathsf m_c}=\alpha_c$. As integers have absolute value at most $1$, its absolute value is at most the sum of the $\prod_c\abs{w_c}^{\mathsf m_c}$. Each tuple $(\mathsf m_c)_c$ determines $\mathsf m$, so summing over $\mathsf m$ gives at most $\prod_c\sum_{\abs{\mathsf m_c}=\alpha_c}\abs{w_c}^{\mathsf m_c}\le\prod_c\norm{w_c}^{\alpha_c}$. So $\mathbf b_m$ is a law into $\ell^1(\mathcal M_m,K)$. A lift is
+\[
+ \beta_m(z^1,\dots,z^m)=\sum_{\varsigma_1\le\dots\le\varsigma_m}z^1_{\varsigma_1}\cdots z^m_{\varsigma_m}e_{\varsigma_1+\dots+\varsigma_m},
+\]
+over nondecreasing words in $\mathcal D$, where $\varsigma_1+\dots+\varsigma_m$ is the multiset with these elements. It has norm at most $1$.
+
+\emph{Step 3 (item (1)).} For $\norm w<1$ the series $\mathbf g(w)$ has summable norms and coordinates in $K$, so it lies in $\ell^1(\mathcal M,K)$, also over incomplete $K$. Let $\norm{w_0}<1$. For $i\ge0$ put $\mathbf g'_i(y)=\sum_{m\ge\max(i,2)}\mathbf b_m^{[(m-i,i)]}(w_0,y)$. The summands lie in the disjoint blocks $\ell^1(\mathcal M_m,K)$, so each coordinate of the sum is one element of $K$, and the same holds for the coefficients of $\mathsf g_i$. So $\mathbf g'_i$ is a law into $\ell^1(\mathcal M,K)$, and by Lemma~\ref{dp:lem:strong-formal}(4), $\lvert\!\lvert\!\lvert \mathbf g'_i\rvert\!\rvert\!\rvert\le\sum_{m\ge i}\norm{w_0}^{m-i}=(1-\norm{w_0})^{-1}$. For $\norm y<1-\norm{w_0}$, comparing coordinates gives $\mathbf g(w_0+y)=\sum_i\mathbf g'_i(y)$. So $\mathbf g$ is sDP at $w_0$ with radius $1-\norm{w_0}$. Theorem~\ref{dp:thm:strong-composition}(6) gives the statements for $F_1,F_2,\mathsf S$, and the lifts of Steps~1,~2 give analyticity at $0$.
+
+\emph{Step 4 (item (2)).} In $\mathbf t_m(\sum_{\mathsf i\le2m}s_{\mathsf i}e_{\mathsf i})$ the coordinate at $\mathsf m\in\mathcal M_m$ is $\prod_{\{\mathsf i,\mathsf j\}\in\mathsf m}s_{\mathsf i}s_{\mathsf j}$. It contains $s_1\cdots s_{2m}$, with coefficient $1$, exactly when $\mathsf m$ is a perfect matching of $[2m]$. So the coefficient of $s_1\cdots s_{2m}$ is a sum of $(2m-1)!!$ distinct unit vectors, and its $\ell^1$-norm is the real number $(2m-1)!!$, in every characteristic. By Lemma~\ref{dp:lem:coefficients-unique}(1), $\mathbf t_m$ is the law of degree $2m$ of $\mathbf g\circ\mathbf{Sq}$ at $0$, and $(2m-1)!!R^{2m}$ is unbounded for every $R>0$. The map $(x^1,\dots,x^{2m})\mapsto\beta_m(\beta_{\mathbf{Sq}}(x^1,x^2),\dots,\beta_{\mathbf{Sq}}(x^{2m-1},x^{2m}))$ is a lift of $\mathbf t_m$ of norm at most $1$, which gives analyticity.
+
+\emph{Step 5 (item (3)).} We have $F_1^{-1}(x)=x-\mathbf{Sq}(x_\N)$ and $F_2^{-1}(x)=x-\mathbf g(x_{\mathcal D})$. The $\mathcal M$-component of $F_2\circ F_1(x)$ is $x_{\mathcal M}+\mathbf g(x_{\mathcal D}+\mathbf{Sq}(x_\N))$. Precomposing with $h\mapsto(h,0,0)$ and projecting to $\mathcal M$ are contractive and give $\mathbf g\circ\mathbf{Sq}$. Lemma~\ref{dp:lem:strong-formal}(1) and item (2) conclude.
+
+\emph{Step 6 (item (4)).} By Step~5, $\mathsf S=F_1^{-1}\circ F_2^{-1}$, since both sides are $(x_\N,x_{\mathcal D}-\mathbf{Sq}(x_\N),x_{\mathcal M}-\mathbf g(x_{\mathcal D}))$. So the local inverse is $F_2\circ F_1$, which is not sDP at $0$ by item (3). As $\mathbf{Sq}$ and $\mathbf g$ have no terms of degree below $2$, $D\mathsf S(0)=\id$. For analyticity, $F_2\circ F_1(v)=v+\beta_{\mathbf{Sq}}(v_\N,v_\N)+\sum_m\beta_m(y,\dots,y)$ with $y=v_{\mathcal D}+\beta_{\mathbf{Sq}}(v_\N,v_\N)$. For each word in $\{1,2\}^m$ with entries of sum $N$, fill the slots of $\beta_m$ with $v_{\mathcal D}$ for the entry $1$ and with $\beta_{\mathbf{Sq}}(v_\N,v'_\N)$ for the entry $2$, taking $N$ arguments in order. At most $2^N$ words have sum $N$, so the part of degree $N$ is the diagonal of an $N$\nobreakdash-linear map of norm at most $2^N$. These maps expand $\sum_m\beta_m(y,\dots,y)$ for $\norm v<1/2$. Each coordinate of the sum over $N$ involves finitely many degrees, so the sum lies in $\ell^1(\mathcal M,K)$, over every $K$.
+\end{proof}
+
+Whether the same failure occurs on spaces with no equivalent ultrametric norm and no complemented copy of $\ell^1(\N,K)$ is open (Question~\ref{dp:q:strong}). On ultrametric Banach spaces there is an inverse function theorem with no loss. The formal inverse is~\cite[Th.~VI.3, Prop.~VI.8]{Ro}; the bound is the estimate we need.
+
+\begin{theorem}[inverse functions on ultrametric Banach spaces]\label{dp:thm:strong-inverse}
+Let $P$ be an ultrametric Banach space, and let $\psi(z)=z-\sum_{m\ge2}\Phi_m(z)$ for $\norm z<R$, with laws $\Phi_m$ of degree $m$ and $\lvert\!\lvert\!\lvert \Phi_m\rvert\!\rvert\!\rvert\le MR^{-m}$. Let $\rho_0=\min(R,R^2/M)$, with $\rho_0=R$ if $M=0$. Then for every $\rho\le\rho_0$, $\psi$ is an isometry of $B(0,\rho)$ onto itself, and its inverse is $\chi=\sum_{d\ge1}G_d$ with laws $G_d$ of degree $d$ and $\lvert\!\lvert\!\lvert G_d\rvert\!\rvert\!\rvert\le\rho_0^{1-d}$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (the formal inverse).} Put $G_1=\id$, and for $d\ge2$
+\begin{equation}\label{dp:s:eq:inverse-recursion}
+ G_d=\sum_{\abs\alpha\ge2,\ \deg\alpha=d}\Phi_{\abs\alpha}^{[\alpha]}(G_1,G_2,\dots).
+\end{equation}
+Only $G_n$ with $n<d$ enter. For $m\ge2$ we have $MR^{-m}\le\rho_0^{1-m}$, as $\rho_0\le R^2/M$ and $\rho_0\le R$. By Theorem~\ref{dp:thm:strong-composition}(1) and the ultrametric inequality, with induction, $\lvert\!\lvert\!\lvert G_d\rvert\!\rvert\!\rvert\le\max_mMR^{-m}\rho_0^{m-d}\le\rho_0^{1-d}$.
+
+\emph{Step 2 (right inverse).} For $\norm z<\rho_0$ we have $\norm{G_d(z)}\le\norm z(\norm z/\rho_0)^{d-1}$. As $P$ is complete, $\chi$ converges on $B(0,\rho_0)$ and maps each $B(0,\rho)$ into itself. Apply Theorem~\ref{dp:thm:strong-composition}(2) with $g=\psi$, $f=\chi$, outer laws $b_1=\id$ and $b_m=-\Phi_m$ for $m\ge2$, and all four constants of that theorem equal to $\rho_0$. The bounds hold by Step~1. Then $R_{\mathrm e}=R_{\mathrm c}=\rho_0$, and by~\eqref{dp:s:eq:inverse-recursion} the laws of $\psi\circ\chi$ are $\Theta_1=\id$ and $\Theta_d=0$ for $d\ne1$. So $\psi\circ\chi=\id$ on $B(0,\rho_0)$.
+
+\emph{Step 3 (isometry).} Let $z,z'\in B(0,\rho)$, $z\ne z'$, and $\rho'=\max(\norm{z'},\norm{z-z'})<\rho_0$. By~\eqref{dp:eq:coefficient-identity} and~\eqref{dp:laws:strong}, $\Phi_m(z)-\Phi_m(z')=\sum_{i\ge1}\Phi_m^{[(m-i,i)]}(z',z-z')$ has norm at most $MR^{-m}\rho'^{m-1}\norm{z-z'}\le(M\rho'/R^2)\norm{z-z'}$, and $M\rho'/R^2<1$. So $\norm{\psi(z)-\psi(z')}=\norm{z-z'}$. As $\psi(0)=0$, $\psi$ maps $B(0,\rho)$ into itself. With Step~2 it is onto, and $\chi$ is its inverse.
+\end{proof}
+
+\begin{proposition}[manifolds and the alternating bundle]\label{dp:prop:strong-bundle}
+\leavevmode
+\begin{enumerate}
+\item \textup{(Transition law, all norms, every characteristic.)} Let $E,D,F$ be normed spaces and $k\ge1$. We have $\lvert\!\lvert\!\lvert A^k_{E,D;F}\rvert\!\rvert\!\rvert\le k!$, and $\lvert\!\lvert\!\lvert A^k_{E,D;F}\rvert\!\rvert\!\rvert\le1$ if $F$ is ultrametric. So $A^k_{E,D;F}$ is sDP at every point, and if $\mathsf{tr}$ is sDP into $\cL(E,D)$, then $A^k_{E,D;F}\circ\mathsf{tr}$ is sDP. The same holds for the maps $u\mapsto\Lambda^k_\pi u$ and $u\mapsto\widehat\Lambda^k_\pi u$ of Theorem~\ref{dp:thm:calculus}(4), with $k!$, and for the joint action $B$ there, with $(k+1)!$.
+\item \textup{(Models with an equivalent ultrametric norm.)} On such a model the sDP germs on open sets are the DP germs, for every normed target. So an atlas has sDP transitions if and only if it has DP transitions, and Corollary~\ref{dp:cor:bundles} applies.
+\item \textup{(Models with a complemented $\ell^1(\N)$.)} Let $P$ have a complemented subspace linearly homeomorphic to $\ell^1(\N,K)$, so that after an equivalent norm $P=\mathsf X\oplus P_1$ with the maximum norm. Over every $K$ the sDP local diffeomorphisms of $P$ do not form a pseudogroup: on a small ball around $0$, take the charts $\id$, $F_1\times\id$, $(F_2\circ F_1)\times\id$. The changes from each chart to the next are sDP, and the change from the first to the third is not. So sDP compatibility of charts is not transitive, and maximal atlases with sDP transitions are not defined.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} By Step~3 of the proof of Theorem~\ref{dp:thm:calculus}, $A^k_{E,D;F}$ followed by an isometry is the diagonal of a $k$\nobreakdash-linear map of norm at most $1$ into $\cL(\Alt^k(D;F),\Mult^k(E;F))$, which is ultrametric if $F$ is. Lemma~\ref{dp:lem:strong-formal}(1),(5) give the bounds. The same step gives the other maps. Laws are sDP at every point by Lemma~\ref{dp:lem:strong-formal}(3), and Theorem~\ref{dp:thm:strong-composition}(5) gives the composite.
+
+\emph{Step 2 (item (2)).} Proposition~\ref{dp:prop:strong-interpolates}(3), after the renorming, which changes the strong norm of a law of degree $n$ by at most $\mathsf c^n$.
+
+\emph{Step 3 (item (3)).} By Proposition~\ref{dp:prop:strong-intrinsic}(2), being sDP does not depend on the choice of equivalent norm. By Theorem~\ref{dp:thm:strong-composition}(6) and Theorem~\ref{dp:thm:strong-failure}(1), $F_1\times\id$ and $F_2\times\id$ are sDP near $0$. If $(F_2\circ F_1)\times\id$ were sDP at $0$, restriction to $\mathsf X$ and projection onto $\mathsf X$ would make $F_2\circ F_1$ sDP at $0$, against Theorem~\ref{dp:thm:strong-failure}(3).
+\end{proof}
+
+For other non-ultrametric models the question is open (Question~\ref{dp:q:strong}).
+
+\subsection{Descents}\label{dp:s:ssec-descents}
+
+We use the germs and the properties (C1), (C2), (C3) of Section~\ref{dp:ssec:minimal}. Two forms of (C2) are used. (C2)$_{\rm u}$ is (C2) restricted to isometries between ultrametric Banach spaces. (C2)$_\times$ is (C2) with $Z$ an arbitrary Banach space, which is (C2) itself, written so for contrast.
+
+\begin{theorem}[what strong DP loses]\label{dp:thm:strong-descent}
+In every characteristic:
+\begin{enumerate}
+\item The sDP germs with Banach values have \textup{(C2)} and \textup{(C3)}. With radius $R$ and bound $M$, target descent keeps both, and source descent along a surjection with preimage constant $\mathsf c$ gives radius $R/\mathsf c$ and bound $M$. They can fail \textup{(C1)} when $P$ and $W$ are both non-ultrametric (Example~\ref{dp:ex:an-not-sdp}).
+\item Among germs with ultrametric Banach targets and all normed sources, the sDP germs have \textup{(C1)}, \textup{(C2)}$_{\rm u}$, \textup{(C3)}. They are the smallest class with \textup{(C1)} and \textup{(C3)}, and also the smallest class with \textup{(C1)} and \textup{(C2)}$_{\rm u}$. They are strictly fewer than the DP germs on $\ell^1(\N,K)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Let $j\circ f$ be sDP with laws $\mathsf a_n$, for an isometry $j$ of Banach spaces. By Theorem~\ref{dp:thm:target-descent}(2), $f$ is DP with the same radius, with laws $a_n$ such that $j\circ a_n=\mathsf a_n$. By Lemma~\ref{dp:lem:strong-formal}(1), $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert=\lvert\!\lvert\!\lvert \mathsf a_n\rvert\!\rvert\!\rvert$. Let $f\circ Q$ be sDP with laws $b_n$. By Proposition~\ref{dp:prop:source-descent}(1), $b_n=a_n\circ Q$, and Lemma~\ref{dp:lem:strong-formal}(2) gives $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le\mathsf c^n\lvert\!\lvert\!\lvert b_n\rvert\!\rvert\!\rvert$. In Example~\ref{dp:ex:an-not-sdp}, pass to $\widehat W$ by Lemma~\ref{dp:lem:strong-formal}(1) if $K$ is not complete.
+
+\emph{Step 2 (item (2)).} \textup{(C1)} is Proposition~\ref{dp:prop:strong-interpolates}(1). Let $\cC$ be a class with \textup{(C1)} and \textup{(C3)}, and let $f$ be sDP at $x_0$. By Theorem~\ref{dp:thm:strong-um}(2), $f\circ q_P$ is analytic, so it is in $\cC$, and so is $f$. Let $\cC$ have \textup{(C1)} and \textup{(C2)}$_{\rm u}$. By Theorem~\ref{dp:thm:strong-um}(4), $j\circ f$ is analytic for an isometry $j$ into an ultrametric normed space, which we may complete. So $j\circ f$, and then $f$, is in $\cC$. The germ $\mathsf f$ is DP and not sDP (Proposition~\ref{dp:prop:strong-interpolates}(4)).
+\end{proof}
+
+Theorem~\ref{dp:thm:minimal} does not apply to the class of item (1), as it fails (C1), nor to the class of item (2), as the enlargement in the proof of that theorem is not ultrametric. Table~\ref{dp:s:tab:descents} shows how the classes fail, for Banach values. Its rows for AA, TA and CA use Sections~\ref{dp:sec:chain} and~\ref{dp:sec:cover}.
+
+\begin{table}[htbp]
+\small
+\caption{Properties of the classes, for Banach values, in every characteristic unless a cell says otherwise. A ``no'' means that the property fails for some spaces allowed by the cell.}\label{dp:s:tab:descents}
+\begin{tabular}{@{}p{0.07\linewidth}p{0.06\linewidth}p{0.3\linewidth}p{0.07\linewidth}p{0.34\linewidth}@{}}
+Class & (C1) & (C2)$_{\rm u}$ & (C2)$_\times$ & (C3)\\
+\hline
+An & yes & char.\ $0$: yes; char.\ $p$: yes for $K$ discrete or $W$ spherically complete up to equivalence; no for $K$ complete, not spherically complete; else open & no & char.\ $0$: yes if $P$ or $W$ is ultrametric, else open; char.\ $p$: no; for ultrametric $W$: yes for $K$ discrete or $W$ spherically complete up to equivalence, no for $K$ complete, not spherically complete, else open\\
+AA & yes & yes & yes & no in char.\ $p$; char.\ $0$ open\\
+TA & yes & yes & yes & no in char.\ $p$; char.\ $0$ open\\
+sDP & no & yes & yes & yes\\
+CA & yes & yes & no & yes\\
+DP & yes & yes & yes & yes\\
+\end{tabular}
+\end{table}
+
+\emph{Sources of the entries.} An: Corollary~\ref{dp:cor:two-gaps}, Theorem~\ref{dp:thm:strong-um}, Proposition~\ref{dp:prop:other-classes}(1), Theorem~\ref{dp:thm:ultrametric-minimal}(3), Theorem~\ref{dp:thm:forcing}(2), and the germ $\mathsf f$ of Example~\ref{dp:ex:l1} for (C2)$_\times$. AA: Proposition~\ref{dp:prop:other-classes}(2), Theorem~\ref{dp:thm:singles-out}(4),(5). TA: Theorem~\ref{dp:thm:ta-composition}(4), Theorem~\ref{dp:thm:target-descent}(2), Theorem~\ref{dp:thm:singles-out}(2),(4),(5). sDP: Theorem~\ref{dp:thm:strong-descent}. CA: Lemma~\ref{dp:lem:cover-flat}(3) for (C1) and (C3). For (C2)$_{\rm u}$, Lemma~\ref{dp:lem:cover-flat}(5), by which CA $=$ sDP for ultrametric $W$, and the row of sDP. For (C2)$_\times$, the germ $\mathsf f$: by Example~\ref{dp:ex:l1}(2) and Lemma~\ref{dp:lem:cover-flat}(4), $j\circ\mathsf f$ is CA for an isometry $j$, while $\mathsf f$ is not sDP (Proposition~\ref{dp:prop:strong-interpolates}(4)), so not CA by Lemma~\ref{dp:lem:cover-flat}(5). DP: Theorem~\ref{dp:thm:minimal}. For the axiom (S) of Definition~\ref{dp:def:s-axiom}: DP has it; the analytic, sDP and CA germs fail it on $\ell^1(\N,K)$ (Proposition~\ref{dp:prop:s-axiom}); AA and TA fail it in characteristic $p$ (Proposition~\ref{dp:prop:s-fails}); in characteristic $0$ they have it if and only if they equal DP (Proposition~\ref{dp:prop:s-char0}).
+
+\subsection{The norm itself}\label{dp:s:ssec-norm}
+
+On ultrametric spaces $\lvert\!\lvert\!\lvert \cdot\rvert\!\rvert\!\rvert$ is the law norm over a densely valued extension (item (5) below). Base change is that of Section~\ref{dp:sec:base-change}: $P_{K'}$, $W_{K'}$, $a_{K'}$ with $\pi$, and $P^{\max}_{K'}$, $W^{\max}_{K'}$ with $\pi_{\max}$.
+
+\begin{proposition}[the strong norm is intrinsic]\label{dp:prop:strong-intrinsic}
+Let $a\colon P\to W$ be a law of degree $n$.
+\begin{enumerate}
+\item The coefficients $a^{[\alpha]}$ are determined by $a$, as $K$ is infinite. So $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$ is determined by $a$, with no enlargement to choose.
+\item An isometry on $W$ does not change $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$. A change of the norm of $P$ by a constant $\mathsf c$ changes it by at most the factor $\mathsf c^n$, and a change of the norm of $W$ by at most the factor $\mathsf c$. So sDP germs are invariant under linear homeomorphisms. Restriction to a subspace of $P$ does not increase it. For a quotient, see Lemma~\ref{dp:lem:strong-formal}(2).
+\item If $W$ is ultrametric, then $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert=\lvert\!\lvert\!\lvert \tilde a\rvert\!\rvert\!\rvert$ on $P^{\mathsf u}$.
+\item \textup{(Base change, all norms.)} For every valued extension $K'/K$ we have $\lvert\!\lvert\!\lvert a_{K'}\rvert\!\rvert\!\rvert=\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$. For ultrametric $P,W$ the same holds with $\pi_{\max}$. So if $f$ is sDP at $x_0$ with radius $R$, bound $M$ and laws $a_n$, then $\sum_n(a_n)_{K'}$, with values in the completion of $W_{K'}$, is sDP at $0$ with the same radius and bound; and the bounds $\lvert\!\lvert\!\lvert (a_n)_{K'}\rvert\!\rvert\!\rvert\le MR^{-n}$ descend to the $a_n$.
+\item Let $P,W$ be ultrametric. For a densely valued extension $K'$, $\norm{a_{K'}}_{\pi_{\max}}=\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$. If $K$ is complete, this number is $\operatorname{amb}_{\max}(a)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (items (1)--(3)).} Item (1) is the uniqueness of coefficients of a polynomial over an infinite field. Item (2) is Lemma~\ref{dp:lem:strong-formal}(1),(2). Item (3) is Proposition~\ref{dp:prop:hull}(2).
+
+\emph{Step 2 (item (4)).} Let $x_c=\sum_ly_{c,l}\otimes\lambda_{c,l}$ in $P\otimes_KK'$. As in~\eqref{dp:s:eq:slots}, $a_{K'}^{[\alpha]}(x_1,\dots,x_r)=\sum_\varepsilon a^{[\varepsilon]}((y_{c,l})_{c,l})\otimes\lambda^\varepsilon$. By~\eqref{dp:laws:strong}, its projective seminorm is at most
+\[
+ \lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\sum_\varepsilon\prod_{c,l}\bigl(\abs{\lambda_{c,l}}\norm{y_{c,l}}\bigr)^{\varepsilon_{c,l}}\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\prod_c\Bigl(\sum_l\abs{\lambda_{c,l}}\norm{y_{c,l}}\Bigr)^{\alpha_c},
+\]
+as multinomial coefficients are at least $1$. Take infima over the representations of the $x_c$. With $\pi_{\max}$, use maxima. For the reverse inequality, $P\to P_{K'}$ and $W\to W_{K'}$ are isometric (Theorem~\ref{dp:thm:base-change-isometric}), and $a_{K'}^{[\alpha]}(y_1\otimes1,\dots,y_r\otimes1)=a^{[\alpha]}(y_1,\dots,y_r)\otimes1$.
+
+\emph{Step 3 (item (5)).} Lemma~\ref{dp:lem:strong-coefficients}(2) over $K'$, between $P^{\max}_{K'}$ and $W^{\max}_{K'}$, gives $\norm{a_{K'}}_{\pi_{\max}}=\lvert\!\lvert\!\lvert a_{K'}\rvert\!\rvert\!\rvert$, and item (4) gives $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$. For $K$ complete, Theorem~\ref{dp:thm:base-change-amb}(3) gives $\norm{a_{K'}}_{\pi_{\max}}=\operatorname{amb}_{\max}(a)$.
+\end{proof}
+
+The law norm can lose radius under base change (Example~\ref{dp:ex:base-radius}); by item (4) the strong norm does not.
+
+\subsection{Radii}\label{dp:s:ssec-radii}
+
+Let $W$ be complete, $U\subseteq P$ open, and let $f\colon U\to W$ be sDP at $x_0$ with laws $a_n$. Its \emph{strong radius} $R_{\rm s}(f,x_0)$ is the supremum of the $R>0$ with $B(x_0,R)\subseteq U$ such that $f(x_0+h)=\sum_na_n(h)$ for $\norm h<R$ and $\sup_n\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert R^n<\infty$.
+
+\begin{theorem}[recentering in the strong norm]\label{dp:thm:strong-recenter}
+Let $W$ be complete, $U\subseteq P$ open, and let $f\colon U\to W$ be sDP at $x_0$ with laws $a_n$. Let $x_1=x_0+x$ with $\varrho=\norm x<R_{\rm s}(f,x_0)$. Let $R>\varrho$ be such that $B(x_0,R)\subseteq U$, $f(x_0+h)=\sum_na_n(h)$ for $\norm h<R$ and $M_R=\sup_n\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert R^n<\infty$; every $R$ with $\varrho<R<R_{\rm s}(f,x_0)$ is of this kind. Put $a'_i=\sum_{n\ge i}a_n^{[(n-i,i)]}(x,\cdot\,)$.
+\begin{enumerate}
+\item The series converges in the strong norm, $a'_i$ is a law of degree $i$, and
+\[
+ \lvert\!\lvert\!\lvert a'_i\rvert\!\rvert\!\rvert\le\frac{M_RR^{-i}}{1-\varrho/R},\quad\text{and}\quad\lvert\!\lvert\!\lvert a'_i\rvert\!\rvert\!\rvert\le M_RR^{-i}\text{ if $W$ is ultrametric.}
+\]
+\item $f(x_1+y)=\sum_ia'_i(y)$ for $\norm y<R-\varrho$, and for $\norm y<R$ if $P$ is ultrametric.
+\item So $f$ is sDP at $x_1$ and $R_{\rm s}(f,x_1)\ge R_{\rm s}(f,x_0)-\varrho$. If $P$ is ultrametric, then $R_{\rm s}(f,x_1)=R_{\rm s}(f,x_0)$.
+\end{enumerate}
+Without completeness of $W$, the same holds for $f$ as a map into $\widehat W$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} By~\eqref{dp:eq:coefficient-identity} and Lemma~\ref{dp:lem:strong-formal}(4), the term of degree $n$ has strong norm at most $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\varrho^{n-i}\le M_RR^{-i}(\varrho/R)^{n-i}$. Sum the geometric series, or take the maximum if $W$ is ultrametric. Convergence, and the law, are Lemma~\ref{dp:lem:strong-formal}(4).
+
+\emph{Step 2 (item (2)).} The case $\norm y<R-\varrho$ is Lemma~\ref{dp:lem:strong-formal}(4). Let $P$ be ultrametric and $\norm y<R$. Then $\norm{x+y}<R$, and $\norm{a_n^{[(n-i,i)]}(x,y)}\le\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\max(\varrho,\norm y)^n$. So the double series is bounded by $\sum_n(n+1)M_R(\max(\varrho,\norm y)/R)^n<\infty$. Summing over $i$ first gives $\sum_na_n(x+y)=f(x_1+y)$ by~\eqref{dp:eq:coefficient-identity}. Summing over $n$ first gives $\sum_ia'_i(y)$.
+
+\emph{Step 3 (item (3)).} By item (1), $\sup_i\lvert\!\lvert\!\lvert a'_i\rvert\!\rvert\!\rvert R'^i<\infty$ for $R'<R$. With item (2), $R_{\rm s}(f,x_1)\ge R-\varrho$, and $\ge R$ if $P$ is ultrametric. Let $R\uparrow R_{\rm s}(f,x_0)$. If $P$ is ultrametric, then $x_0\in B(x_1,R_{\rm s}(f,x_1))$, and the same argument with $x_0,x_1$ exchanged gives equality.
+\end{proof}
+
+Equality in item (3) fails without an ultrametric $P$. Let $K=\mathbb Q_2$, $P=K^2$ with $\norm{(y_1,y_2)}=\abs{y_1}_2+\abs{y_2}_2$, and $f=0$ on $B(0,1)$, $f=1$ elsewhere. At $0$ all laws vanish and $R_{\rm s}(f,0)=1$. Let $x_1=(2,0)$, so $\norm{x_1}=1/2$. Then $f=0$ on $B(x_1,1/2)$, so all laws at $x_1$ vanish, while $f(x_1+(0,2))=1$ with $\norm{(0,2)}=1/2$. So $R_{\rm s}(f,x_1)=1/2$.
+
+\begin{remark}[radii of the ambient and the divided-power class]\label{dp:rem:radius-contrast}
+Let $W$ be Banach and $f$ be DP at $x_0$, with laws $a_n$. Put $\rho_{\rm AA}(f,x_0)=(\limsup_n\operatorname{amb}(a_n)^{1/n})^{-1}$. For ultrametric $P,W$, with $\operatorname{amb}_{\max}$ of Section~\ref{dp:sec:base-change}, put $\rho^{\max}_{\rm AA}(f,x_0)=(\limsup_n\operatorname{amb}_{\max}(a_n)^{1/n})^{-1}$. As $\norm a\le\operatorname{amb}(a)\le\operatorname{amb}_{\max}(a)$, we have
+\[
+ \rho^{\max}_{\rm AA}(f,x_0)\le\rho_{\rm AA}(f,x_0)\le\rho_{\rm DP}(f,x_0).
+\]
+So the DP radius at a point is never smaller than the ambient radii there. As in Definition~\ref{dp:def:radius}, in statements about another point $f$ is the sum of its law series on the ball in question. Below, $x_1=x_0+x$ and $\varrho=\norm x$.
+
+\emph{The formula $R-\varrho$.} For $\varrho<\rho_{\rm AA}(f,x_0)$ we have $\rho_{\rm AA}(f,x_1)\ge\rho_{\rm AA}(f,x_0)-\varrho$, for all $K$ and norms \cite[Propositions~14.9(1), 14.12(2)]{I}. For $\varrho<\rho_{\rm DP}(f,x_0)$ the same holds for $\rho_{\rm DP}$ if $K$ is densely valued (Theorem~\ref{dp:thm:whole-ball}(2)). It fails over complete discretely valued $K$ with $\abs\vartheta<1/16$, for any residue field (Example~\ref{dp:ex:radius-drop}), so for local fields at the module normalization $\abs\vartheta=1/\mathsf q$ with $\mathsf q\ge17$. This inequality is not invariant under powers of the absolute value. The next one is.
+
+\emph{Constancy on the ball.} Let $P,W$ be ultrametric. Then $\rho^{\max}_{\rm AA}(f,x_1)\ge\rho^{\max}_{\rm AA}(f,x_0)$ for $\varrho<\rho^{\max}_{\rm AA}(f,x_0)$. Indeed, let $\varrho<R<\rho^{\max}_{\rm AA}(f,x_0)$ and $M=\sup_n\operatorname{amb}_{\max}(a_n)R^n$. This is finite, as each $\operatorname{amb}_{\max}(a_n)$ is finite by \cite[Theorem~14.39(1), (14.9)]{I}. If $M=0$, then all $a_n$ vanish and the claim is clear. If $M>0$, Lemma~\ref{dp:bc:envelope} gives an isometry $j$ of $W$ into an ultrametric space $Z$, which we complete, and $n$\nobreakdash-linear $\beta_n$ with $\norm{\beta_n}\le MR^{-n}$ and diagonals $j\circ a_n$. Re-expand as in \cite[Proposition~14.12(2)]{I}, with the maximum in place of the sum, since the terms of the expansion of $\beta_n(x+h,\dots,x+h)$ have norm at most $MR^{-n}\max(\varrho,\norm h)^n$: the part $\beta'_i$ of degree $i$ has $\norm{\beta'_i}\le MR^{-i}$, and it converges for $\norm h<R$. Here $f$ is DP at $x_1$, with laws $a'_i$ (Theorem~\ref{dp:thm:whole-ball}(1)). By Lemma~\ref{dp:lem:coefficients-unique}(2) the diagonal of $\beta'_i$ is $j\circ a'_i$, so $\operatorname{amb}_{\max}(a'_i)\le MR^{-i}$ by~\eqref{dp:bc:amb-rep}. Then $\varrho<\rho^{\max}_{\rm AA}(f,x_1)$, and exchanging $x_0$ and $x_1$ gives equality. If $\abs{K^\times}$ is dense, or $\kappa$ is infinite and $\mathfrak s(P)=1$, then $\norm\cdot=\lvert\!\lvert\!\lvert \cdot\rvert\!\rvert\!\rvert$ on laws (Lemma~\ref{dp:lem:strong-coefficients}(2)), and Theorem~\ref{dp:thm:strong-recenter} gives the same for the DP radius. Over complete discretely valued $K$ the DP radius can drop inside its ball: with any residue field and $\mathfrak s(P)<1$ (Example~\ref{dp:ex:radius-drop}), and with finite residue field, $\mathfrak s(P)=1$ and radius at $x_0$ in $\abs{K^\times}$ (Example~\ref{dp:ex:radius-drop-b}). In general, on ultrametric spaces, a map DP at $x_0$ with radius $R_0$ is DP with radius $\theta_K\mathfrak s(P)R_0$ at every point of $B(x_0,\theta_K\mathfrak s(P)R_0)$, by Proposition~\ref{dp:prop:strong-interpolates}(3) and by Theorem~\ref{dp:thm:strong-recenter} with $R=\theta_K\mathfrak s(P)R_0$.
+\end{remark}

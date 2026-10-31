@@ -1,0 +1,291 @@
+\section{Agreement with analyticity}\label{dp:sec:agreement}
+
+Analytic germs are DP, with the same radius and bound (Theorem~\ref{dp:thm:calculus}(3); the diagonal of a multilinear map $\beta$ has norm at most $\norm\beta$). This section asks when a DP germ is analytic. The answer depends on the setting, so we keep the settings apart. In a fixed degree $n$, the condition $n!\ne0$ in $K$ is exactly the threshold on all normed spaces and on all Banach spaces (Theorem~\ref{dp:thm:degree-threshold}(1)). Between ultrametric spaces it is sufficient over every $K$ and necessary over complete, not spherically complete $K$; over discretely valued $K$ every law with Banach values is analytic (Theorem~\ref{dp:thm:degree-threshold}(2)). Theorem~\ref{dp:thm:field-level} compares this with the functor $\alpha_k$ of~\cite[n\textsuperscript{o}~7.8.1]{Bou}, field by field.
+
+\subsection{Lifts}\label{dp:ssec:lifts}
+
+Let $a\colon P\to W$ be a law of degree $n$. A \emph{lift} of $a$ is a bounded $n$\nobreakdash-linear map $\beta\colon P^n\to W$ with $\beta(h,\dots,h)=a(h)$ for all $h$. As in Definition~\ref{dp:def:strong-norm}(1), $\operatorname{lift}(a)$ is the infimum of $\norm\beta$ over the lifts $\beta$ of $a$, and $\infty$ if there are none. Always $\norm a\le\operatorname{lift}(a)$, and $\operatorname{lift}(\lambda a)=\abs\lambda\operatorname{lift}(a)$ for $\lambda\in K^\times$. For $n\ge1$ the \emph{lifting constant} of $P$ is
+\[
+ \mathfrak b_n(P)=\sup\{\operatorname{lift}(a)/\norm a\}\in[1,\infty],
+\]
+over all normed $W$ and all nonzero laws $a\colon P\to W$ of degree $n$, and $\mathfrak b_n(P)=1$ if there are none. Let $\mathfrak b^{\rm u}_n(P)$ be the same with $W$ ultrametric. Put $\mathfrak B_P=\sup_{n\ge1}\mathfrak b_n(P)^{1/n}$ and $\mathfrak B^{\rm u}_P=\sup_{n\ge1}\mathfrak b^{\rm u}_n(P)^{1/n}$.
+
+\begin{lemma}[one point, one lift, everywhere]\label{dp:lem:lift-criterion}
+For a law $a\colon P\to W$ of degree $n$ the following are equivalent.
+\begin{enumerate}
+\item[(i)] $a$ is analytic at some point of $P$.
+\item[(ii)] $\operatorname{lift}(a)<\infty$.
+\item[(iii)] $a$ has at every point of $P$ a finite analytic expansion, valid on all of $P$.
+\end{enumerate}
+Moreover $\mathfrak a_n(P)\le\mathfrak b_n(P)$ for $n\ge1$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 ((i) implies (ii)).} Let $a(x_0+h)=\sum_l\beta_l(h,\dots,h)$ near $h=0$, with geometric bounds. By Theorem~\ref{dp:thm:mixed}(2), $a(x_0+h)=\sum_{i\le n}a^{[(n-i,i)]}(x_0,h)$ is the DP expansion of $a$ at $x_0$, and its term of degree $n$ is $a^{[(0,n)]}(x_0,h)=a(h)$. By Lemma~\ref{dp:lem:coefficients-unique}(2) with $j=\id_W$, $\beta_n(h,\dots,h)=a(h)$. So $\beta_n$ is a lift.
+
+\emph{Step 2 ((ii) implies (iii), (iii) implies (i)).} Let $\beta$ be a lift and $x_0\in P$. Expanding $\beta(x_0+h,\dots,x_0+h)$ by multilinearity and grouping the $\binom ni$ terms with $h$ in $i$ slots gives bounded $i$\nobreakdash-linear maps $\beta_i$ with $a(x_0+h)=\sum_{i\le n}\beta_i(h,\dots,h)$ for all $h$. The last implication is trivial.
+
+\emph{Step 3 (the ambience constant).} We may assume $\mathfrak b_n(P)<\infty$ and $\mathfrak a_n(P)>0$. Then the universal law $\mathsf v_n\colon P\to\Gamma^n_{\mathrm s}(P)$ of Theorem~\ref{dp:thm:normed-roby}(3) is nonzero, since $\norm\cdot_\Gamma$ does not vanish on $\Gamma^n(P)$, and of norm at most $1$. Let $\varepsilon>0$ and let $\beta$ be a lift of $\mathsf v_n$ with $\norm\beta\le\mathfrak b_n(P)+\varepsilon$. The linear map $\mathsf L$ on $P^{\otimes n}$ with $\mathsf L(h_1\otimes\dots\otimes h_n)=\beta(h_1,\dots,h_n)$ has $\norm{\mathsf L(\mathsf g)}\le\norm\beta\pi(\mathsf g)$ for $\mathsf g\in P^{\otimes n}$. On $\Gamma^n(P)$ it is the quotient map, as the two agree on powers. So $\norm{\mathsf g}_\Gamma\le\norm\beta\pi(\mathsf g)$ for $\mathsf g\in\Gamma^n(P)$, and $\mathfrak a_n(P)\le\mathfrak b_n(P)+\varepsilon$ for every $\varepsilon>0$.
+\end{proof}
+
+\begin{theorem}[agreement criterion]\label{dp:thm:agreement-criterion}
+The following are equivalent.
+\begin{enumerate}
+\item For every normed $W$, every open $U\subseteq P$ and every $f\colon U\to W$: if $f$ is DP at $x_0\in U$, then $f$ is analytic at $x_0$.
+\item $\mathfrak B_P<\infty$.
+\end{enumerate}
+The same holds with $W$ ultrametric in~\textup{(1)} and $\mathfrak B^{\rm u}_P$ in~\textup{(2)}. If $\mathfrak B_P<\infty$ and $f$ is DP at $x_0$ with radius $R$ and bound $M$, then $f$ is analytic at $x_0$ with radius $R/\mathfrak B_P$ and bound $2M$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 ((2) implies (1), with the constants).} Let $a_n$ be the coefficient laws. For $n\ge1$ and $a_n\ne0$, choose a lift $\beta_n$ with $\norm{\beta_n}\le2\operatorname{lift}(a_n)\le2\mathfrak B_P^nMR^{-n}$. For $a_n=0$ take $\beta_n=0$, and put $\beta_0=a_0$. As $\mathfrak B_P\ge1$, the series $\sum_n\beta_n(h,\dots,h)$ equals $f(x_0+h)$ for $\norm h<R/\mathfrak B_P$.
+
+\emph{Step 2 (a sum of spaces).} For the converse let $W_l$, $l\ge1$, be normed spaces, ultrametric in the second statement, and let $W$ be their $c_0$-sum: the sequences $(w_l)_l$ with $w_l\in W_l$ and $\norm{w_l}\to0$, with the supremum norm. It is ultrametric if all $W_l$ are. Let $\iota_l\colon W_l\to W$ and $\operatorname{pr}_l\colon W\to W_l$ be the inclusions and projections. They have norm at most $1$.
+
+\emph{Step 3 (some $\mathfrak b_n(P)=\infty$).} In the second statement read $\mathfrak b^{\rm u}_n$ for $\mathfrak b_n$ here and in Step~4. Put $\mathsf z_l=\varpi^l$. The ratio $\operatorname{lift}/\norm\cdot$ is unbounded and invariant under scalars. So there are laws $\mathsf a_l\colon P\to W_l$ of degree $n$ with $\abs\varpi<\norm{\mathsf a_l}\le1$ and $\operatorname{lift}(\mathsf a_l)\ge l/\abs{\mathsf z_l}$. Put $\mathsf A(h)=(\mathsf z_l\mathsf a_l(h))_l$. For $h_1,\dots,h_r\in P$ we have $\mathsf A(\sum_is_ih_i)=\sum_{\abs\gamma=n}s^\gamma(\mathsf z_l\mathsf a_l^{[\gamma]}(h_1,\dots,h_r))_l$. The coefficient sequences lie in $W$, because $\norm{\mathsf a_l^{[\gamma]}(h_1,\dots,h_r)}\le(8/\abs\varpi)^n(\sum_i\norm{h_i})^n$ by Theorem~\ref{dp:thm:mixed}(1) and $\mathsf z_l\to0$. Also $\norm{\mathsf A(h)}\le\abs\varpi\norm h^n$. So $\mathsf A$ is a law of degree $n$, and it is DP on $P$. A lift $\beta$ of $\mathsf A$ gives the lifts $\operatorname{pr}_l\beta$ of $\mathsf z_l\mathsf a_l$, so $\norm\beta\ge\abs{\mathsf z_l}\operatorname{lift}(\mathsf a_l)\ge l$ for all $l$. Hence $\mathsf A$ has no lift, and by Lemma~\ref{dp:lem:lift-criterion} it is analytic at no point.
+
+\emph{Step 4 (all $\mathfrak b_n(P)$ finite).} If the supremum is infinite while all terms are finite, then there are $n_1<n_2<\dots$ with $\mathfrak b_{n_l}(P)>(2l)^{n_l}$. Choose laws $\mathsf a_l\colon P\to W_l$ of degree $n_l$ with $\abs\varpi<\norm{\mathsf a_l}\le1$ and $\operatorname{lift}(\mathsf a_l)>(2l)^{n_l}\abs\varpi$. For $\norm h<1$ put $f(h)=(\mathsf a_l(h))_l$. It lies in $W$, as $\norm{\mathsf a_l(h)}\le\norm h^{n_l}\to0$, and $f=\sum_l\iota_l\mathsf a_l$ converges in $W$. So $f$ is DP at $0$ with radius $1$ and bound $1$. Suppose $f(h)=\sum_n\beta_n(h,\dots,h)$ for $\norm h<R'$ with $\norm{\beta_n}\le M'R'^{-n}$. By Lemma~\ref{dp:lem:coefficients-unique}(2), $\operatorname{pr}_l\beta_{n_l}$ is a lift of $\mathsf a_l$. So $(2l)^{n_l}\abs\varpi<M'R'^{-n_l}$, that is, $(2lR')^{n_l}<M'/\abs\varpi$. For $l>1/R'$ the left side exceeds $2^{n_l}$, and $n_l\ge l$. This fails for large $l$, so $f$ is not analytic at $0$.
+\end{proof}
+
+We recall from Section~\ref{dp:sec:laws} the \emph{scaling loss} $\mathfrak s(P)\in[\abs\varpi,1]$: the supremum of the $\mathsf c\in(0,1]$ such that every nonzero $h\in P$ has a multiple $\lambda h$, $\lambda\in K$, with $\mathsf c\le\norm{\lambda h}\le1$. Every $\mathsf c<\mathfrak s(P)$ has this property. If $\operatorname{char}K=0$, put $\mathfrak n_K=\inf_{n\ge1}\abs{n!}^{1/n}$. Then $\mathfrak n_K>0$. Indeed the integers $n$ with $\abs n<1$ form a prime ideal of $\Z$, by the ultrametric inequality. If it is $0$, then $\abs{n!}=1$ for all $n$. If it is $p\Z$, then $\abs{n!}=\abs p^{\ord_p(n!)}$ with $\ord_p(n!)\le n/(p-1)$, so $\mathfrak n_K\ge\abs p^{1/(p-1)}$.
+
+\begin{theorem}[characteristic $0$ on ultrametric sources]\label{dp:thm:agreement-char0}
+Let $P$ be ultrametric.
+\begin{enumerate}
+\item Let $n\ge1$ with $n!\ne0$ in $K$, and let $a\colon P\to W$ be a law of degree $n$. Then $\beta_a=a^{[1^n]}/n!$ is a lift of $a$, and
+\begin{equation}\label{dp:agr:eq:char0}
+ \norm{\beta_a}\le\abs{n!}^{-1}\bigl(2/\mathfrak s(P)\bigr)^n\norm a,\quad\text{and}\quad\norm{\beta_a}\le\abs{n!}^{-1}\mathfrak s(P)^{-n}\norm a\text{ if $W$ is ultrametric.}
+\end{equation}
+\item Let $\operatorname{char}K=0$. A map that is DP at $x_0$ with radius $R$ and bound $M$ is analytic at $x_0$ with radius $\mathfrak n_K\mathfrak s(P)R/2$ and bound $M$, and with radius $\mathfrak n_K\mathfrak s(P)R$ if $W$ is ultrametric. If moreover the residue characteristic is $0$, $W$ is ultrametric and $\mathfrak s(P)=1$, the two radii are equal.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (the lift).} The map $a^{[1^n]}$ is $n$\nobreakdash-linear by Lemma~\ref{dp:lem:elementary}(4), and $a^{[1^n]}(h,\dots,h)=n!\,a(h)$ by Lemma~\ref{dp:lem:hasse-law}(5).
+
+\emph{Step 2 (the bound).} By Lemma~\ref{dp:lem:polarization}, $\norm{\beta_a(h_1,\dots,h_n)}\le\abs{n!}^{-1}2^n\norm a\max_i\norm{h_i}^n$, without $2^n$ if $W$ is ultrametric. Let $h_1,\dots,h_n$ be nonzero and $\mathsf c<\mathfrak s(P)$. Choose $\lambda_i$ with $\mathsf c\le\norm{\lambda_ih_i}\le1$. By multilinearity, $\norm{\beta_a(h_1,\dots,h_n)}=\prod_i\abs{\lambda_i}^{-1}\norm{\beta_a(\lambda_1h_1,\dots,\lambda_nh_n)}\le\abs{n!}^{-1}2^n\norm a\prod_i(\norm{h_i}/\mathsf c)$. Let $\mathsf c\to\mathfrak s(P)$.
+
+\emph{Step 3 (germs).} Let $a_n$ be the coefficient laws and $\beta_n=\beta_{a_n}$ for $n\ge1$, $\beta_0=a_0$. As $\abs{n!}^{-1}\le\mathfrak n_K^{-n}$, \eqref{dp:agr:eq:char0} gives the radii, with bound $M$. In residue characteristic $0$ we have $\abs{n!}=1$.
+\end{proof}
+
+Compare \cite[Theorem~14.39(3) and Proposition~14.40(2)]{I}, with a larger constant.
+
+\begin{theorem}[finite-dimensional sources]\label{dp:thm:agreement-finite}
+\leavevmode
+\begin{enumerate}
+\item Let $T\colon K^r\to P$ be a bounded linear bijection with bounded inverse, $K^r$ with the maximum norm, and $P\ne\{0\}$. In every characteristic, $\mathfrak b_n(P)\le2^{r-1}(16r\norm T\norm{T^{-1}}/\abs\varpi)^n$. A map from an open subset of $P$ to a normed $W$ that is DP at $x_0$ with radius $R$ and bound $M$ is analytic there with radius $\abs\varpi R/(16r\norm T\norm{T^{-1}})$ and bound $2^{r-1}M$. If $K$ is complete, every finite-dimensional normed space has such a $T$~\cite[Lemma~A.3]{I}.
+\item Over every $K$, let $P\ne\{0\}$ be finite-dimensional and $W$ Banach. There are an integer $\mathsf r\ge1$ and a real $C_P\ge1$, depending only on $P$ and $\varpi$, such that every law $a\colon P\to W$ of degree $n\ge1$ has a lift of norm at most $2^{\mathsf r}C_P^n\norm a$. A map from an open subset of $P$ to $W$ that is DP at $x_0$ with radius $R$ and bound $M$ is analytic there with radius $R/C_P$ and bound $2^{\mathsf r}M$.
+\item Completeness of $W$ cannot be dropped in~\textup{(2)}. Let $K=\F_p(t)$ with the $t$-adic absolute value, let $k\ge p$, and let $(E_k,G)$ and $(D_k,G)$ be the pairs of finite-dimensional ultrametric spaces of~\cite[Theorem~H.4]{I}. The law $A^k_{E_k,D_k;G}$ of degree $k$, and the joint action $B$ of Theorem~\ref{dp:thm:calculus}(4) on $\cL(E_k,D_k)\times\cL(G,G)$, of degree $k+1$, are DP everywhere and analytic at no point. Their sources and targets are finite-dimensional and ultrametric.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} The bound on $\mathfrak b_n(P)$ is Step~2 of the proof of Theorem~\ref{dp:thm:calculus}, which constructs for each law $a$ a lift $\beta_a$ of norm at most $2^{r-1}(16r\norm T\norm{T^{-1}}/\abs\varpi)^n\norm a$. If $\norm{a_n}\le MR^{-n}$, then $\norm{\beta_{a_n}}\le2^{r-1}MR'^{-n}$ for $R'=\abs\varpi R/(16r\norm T\norm{T^{-1}})$, and $R'\le R$.
+
+\emph{Step 2 (item (2): the completion).} The space $W$ is a normed space over $\Kh$, by continuity. By \cite[Lemma~Q.13(1),(2)]{I}, $a$ extends to a law $\hat a\colon\widehat P\to W$ of degree $n$ over $\Kh$ with $\norm{\hat a}\le\norm a$, and $\widehat P$ has finite dimension $\mathsf r\ge1$ over $\Kh$. Choose a $\Kh$\nobreakdash-basis $\mathsf l_1,\dots,\mathsf l_{\mathsf r}$ of $\widehat P$ with $\norm{\mathsf l_c}\le1$. By \cite[Lemma~A.3]{I} over $\Kh$, its coordinate forms $\mathsf l_c^*$ are bounded. Put $\mathsf m_P=\max_c\norm{\mathsf l_c^*}\ge1$ and $C_P=16\mathsf r\mathsf m_P/\abs\varpi$.
+
+\emph{Step 3 (item (2): the lift).} By Theorem~\ref{dp:thm:mixed}(1) over $\Kh$, $\norm{\hat a^{[\gamma]}(\mathsf l_1,\dots,\mathsf l_{\mathsf r})}\le(8\mathsf r/\abs\varpi)^n\norm a$ for $\abs\gamma=n$. Put
+\[
+ \hat\beta(h_1,\dots,h_n)=\sum_{\mathsf w}\mathsf l^*_{\mathsf w_1}(h_1)\cdots\mathsf l^*_{\mathsf w_n}(h_n)\,\hat a^{[\gamma(\mathsf w)]}(\mathsf l_1,\dots,\mathsf l_{\mathsf r}),
+\]
+over the nondecreasing words $\mathsf w$ in $\{1,\dots,\mathsf r\}$ of length $n$, where $\gamma(\mathsf w)$ counts the letters of $\mathsf w$. Each monomial comes from exactly one such word, so $\hat\beta$ has diagonal $\hat a$. There are at most $2^{n+\mathsf r-1}$ words, so $\norm{\hat\beta}\le2^{\mathsf r}C_P^n\norm a$. The restriction of $\hat\beta$ to $P^n$ is a lift of $a$. The statement on germs follows as in Step~1.
+
+\emph{Step 4 (item (3)).} Both maps are laws, DP on their whole domains, by Theorem~\ref{dp:thm:calculus}(4),(3),(1). The proof of \cite[Theorem~H.4]{I} fixes the morphism of $G$ to be $\id_G$, so it shows that $A^k_{E_k,D_k;G}$ is not analytic. As $A^k_{E_k,D_k;G}(u)=B(u,\id_G)$, the map $B$ is not analytic either. By Lemma~\ref{dp:lem:lift-criterion} neither is analytic at any point. The spaces $E_k,D_k,G$ are finite-dimensional, and operator norms into ultrametric spaces are ultrametric, so the sources and targets are as claimed. The sources are nonzero. So, by item~(2), the targets are not complete.
+\end{proof}
+
+\begin{theorem}[fixed degree]\label{dp:thm:degree-threshold}
+Let $n\ge1$.
+\begin{enumerate}
+\item The following are equivalent: \textup{(a)} $n!\ne0$ in $K$, that is, $\operatorname{char}K=0$ or $\operatorname{char}K>n$; \textup{(b)} for all normed $P,W$, every law $P\to W$ of degree $n$ is analytic; \textup{(c)} for all Banach $P,W$, every law $P\to W$ of degree $n$ is analytic. Under~\textup{(a)}, $\operatorname{lift}(a)\le\abs{n!}^{-1}(8n/\abs\varpi^2)^n\norm a$ for every $P$, and $\operatorname{lift}(a)\le\abs{n!}^{-1}(2/\mathfrak s(P))^n\norm a$ for ultrametric $P$; here $\abs{n!}=1$ if $\operatorname{char}K>n$.
+\item Between ultrametric spaces the condition is as follows. Under~\textup{(a)}, every law of degree $n$ is analytic, by~\textup{(1)}. Let $\operatorname{char}K=p\le n$.
+\begin{enumerate}
+\item If $K$ is complete and not spherically complete, there are ultrametric Banach spaces $P,W$ and a law $P\to W$ of degree $n$ that is analytic at no point.
+\item If $K$ is discretely valued, every law of degree $n$ from an ultrametric $P$ to an ultrametric Banach space $W$ is analytic.
+\item If $K$ is densely valued and either spherically complete or incomplete, every law of degree $n$ from an ultrametric $P$ to a space $W$ with an equivalent ultrametric spherically complete norm is analytic. For other ultrametric Banach $W$, if $\Kh$ is spherically complete, we do not decide this in general (Question~\ref{dp:q:residual}); if $K$ is incomplete and $\Kh$ is not spherically complete, some law of degree $n$ between ultrametric Banach spaces is analytic at no point (the paragraph on incomplete fields after that question). Let $K$ be spherically complete and $E,D,F$ ultrametric Banach. The law $A^n_{E,D;F}$ has a lift if $F$ has an equivalent ultrametric spherically complete norm, or if $E$ or $D$ is a bounded linear retract of some $c_0(J,K)$, for instance of countable type. In general we do not decide this for $A^n_{E,D;F}$ either.
+\end{enumerate}
+Let $W$ be ultrametric and incomplete. If $P$ is as in Theorem~\ref{dp:thm:agreement-finite}(1), or $P$ is the space $c_{00}(J)$ of Section~\ref{dp:ssec:agree-ultrametric}, every law of degree $n$ from $P$ to $W$ is analytic. Over $K=\F_p(t)$, some law of degree $n$ between finite-dimensional ultrametric spaces, with incomplete target, is analytic at no point. Otherwise we do not decide this in general (Question~\ref{dp:q:residual}).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 ((a) implies (b), with the bounds).} As in Step~1 of the proof of Theorem~\ref{dp:thm:agreement-char0}, which does not use that $P$ is ultrametric, $\beta_a=a^{[1^n]}/n!$ is $n$\nobreakdash-linear with diagonal $a$. For nonzero $h_1,\dots,h_n$ choose $\lambda_i=\varpi^{l_i}$ with $\abs\varpi/n<\norm{\lambda_ih_i}\le1/n$. Then $\sum_i\norm{\lambda_ih_i}\le1$. So Theorem~\ref{dp:thm:mixed}(1) gives $\norm{a^{[1^n]}(\lambda_1h_1,\dots,\lambda_nh_n)}\le(8/\abs\varpi)^n\norm a$, and undoing the scaling gives $\norm{a^{[1^n]}(h_1,\dots,h_n)}\le(8n/\abs\varpi^2)^n\norm a\prod_i\norm{h_i}$. For ultrametric $P$ use~\eqref{dp:agr:eq:char0}. If $\operatorname{char}K=p>n$, then $n!$ is a nonzero element of $\F_p$, a root of unity, so $\abs{n!}=1$. A law with a lift is analytic by Lemma~\ref{dp:lem:lift-criterion}. Item~(b) implies item~(c) trivially.
+
+\emph{Step 2 ((c) implies (a)).} Let $\operatorname{char}K=p\le n$. By \cite[Theorem~7.2(1)]{I} with $k=n$, there are Banach spaces $E,F$ such that $A^n_{E,E;F}$ is analytic at no point. It is a law of degree $n$ (Theorem~\ref{dp:thm:calculus}(4),(3)) between Banach spaces.
+
+\emph{Step 3 (item (2)).} For (2)(a), take $A^n_{E,D;K}$ of Proposition~\ref{dp:prop:strict}(1)(c). Items (2)(b) and (2)(c) are Theorem~\ref{dp:thm:sph-agreement}(2),(1). A spherically complete $K$ is complete. So, for the laws $A^n_{E,D;F}$, \cite[Theorem~5.2]{I} and the sentence after it give a lift if $F$ has an equivalent ultrametric spherically complete norm, and \cite[Theorem~5.4]{I} gives one if $E$ or $D$ is a retract of some $c_0(J,K)$ or of countable type. In general the question is the one in \cite[Section~12]{I}. For $W$ incomplete, the sentences of item~(2) are Theorems~\ref{dp:thm:agreement-finite}(1), \ref{dp:thm:c0-agreement}(1) and~\ref{dp:thm:agreement-finite}(3).
+\end{proof}
+
+\subsection{Between ultrametric spaces}\label{dp:ssec:agree-ultrametric}
+
+A normed space $P$ is of \emph{countable type} if it has a dense subspace of countable dimension. Let $c_{00}(J)$ be the finitely supported vectors of $c_0(J)=c_0(J,K)$, with the supremum norm and unit vectors $e_{\mathsf j}$, $\mathsf j\in J$.
+
+\begin{lemma}[bases]\label{dp:lem:basis}
+Let $K$ be complete and $P$ an infinite-dimensional ultrametric Banach space of countable type. Let $0<\mathfrak o\le1$, with $\mathfrak o<1$ unless $K$ is discretely valued. Put $\mathfrak o'=\mathfrak c_K$ if $K$ is discretely valued and $\mathfrak o'=\mathfrak o$ otherwise. Then $P$ has a sequence $\mathsf l_1,\mathsf l_2,\dots$ with $\mathfrak o'<\norm{\mathsf l_i}\le1$ and
+\begin{equation}\label{dp:agr:eq:orthogonal}
+ \Bigl\lVert\sum_i\lambda_i\mathsf l_i\Bigr\rVert\ge\mathfrak o\max_i\abs{\lambda_i}\norm{\mathsf l_i}
+\end{equation}
+for finitely supported $(\lambda_i)_i$, such that $\Xi(\lambda)=\sum_i\lambda_i\mathsf l_i$ is a linear bijection $c_0(\N,K)\to P$ with $\norm\Xi\le1$ and $\norm{\Xi^{-1}}\le(\mathfrak o\mathfrak o')^{-1}$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (a dense sequence).} Let $\mathsf D$ be a dense subspace of $P$ of countable dimension. A finite-dimensional subspace of $P$ is complete~\cite[Lemma~A.3]{I}, hence closed, and so not dense. So $\mathsf D$ is infinite-dimensional. Let $\mathsf x_1,\mathsf x_2,\dots$ be a basis of $\mathsf D$ and $P_m=\spn(\mathsf x_1,\dots,\mathsf x_m)$.
+
+\emph{Step 2 (induction).} Choose $\mathsf t_m\in(0,1]$ with $\prod_m\mathsf t_m\ge\mathfrak o$: $\mathsf t_m=1$ if $\mathfrak o=1$, and $\mathsf t_m=\mathfrak o^{2^{-m}}$ otherwise. Put $\tau_1=1$ and $\tau_{m+1}=\mathsf t_m\tau_m$, so $\tau_m\ge\mathfrak o$. Suppose that $\mathsf l_1,\dots,\mathsf l_m$ is a basis of $P_m$ with $\norm{\sum_{i\le m}\lambda_i\mathsf l_i}\ge\tau_m\max_{i\le m}\abs{\lambda_i}\norm{\mathsf l_i}$; for $m=1$ take $\mathsf l_1=\mathsf x_1$. As $P_m$ is closed, $\mathsf d=\operatorname{dist}(\mathsf x_{m+1},P_m)>0$. Choose $y\in P_m$ with $\norm{\mathsf x_{m+1}-y}\le\mathsf t_m^{-1}\mathsf d$. This is possible for $\mathsf t_m<1$ because $\mathsf d>0$. For $\mathsf t_m=1$, $K$ is discretely valued and the distance is attained, by Step~4 of the proof of \cite[Lemma~Q.13]{I}, applied in $P_{m+1}$ with the subspace $P_m$. Put $\mathsf l_{m+1}=\mathsf x_{m+1}-y$. Then $\operatorname{dist}(\mathsf l_{m+1},P_m)=\mathsf d\ge\mathsf t_m\norm{\mathsf l_{m+1}}$. For $z=z'+\lambda\mathsf l_{m+1}$ with $z'\in P_m$, we get $\norm z\ge\mathsf t_m\abs\lambda\norm{\mathsf l_{m+1}}$, and $\norm{z'}\le\max(\norm z,\abs\lambda\norm{\mathsf l_{m+1}})\le\mathsf t_m^{-1}\norm z$. With the induction hypothesis for $z'$ and $\tau_m\le1$, this gives the inequality for $m+1$.
+
+\emph{Step 3 (scaling).} Scaling each $\mathsf l_i$ keeps the inequality, and it gives~\eqref{dp:agr:eq:orthogonal}, as $\tau_m\ge\mathfrak o$. Scale so that $\mathfrak o'<\norm{\mathsf l_i}\le1$: by powers of $\vartheta$ if $K$ is discretely valued. Otherwise $\abs{K^\times}$ is dense in $(0,\infty)$, as in Step~6 of the proof of \cite[Lemma~Q.13]{I}, so it meets $(\mathfrak o/\norm{\mathsf l_i},1/\norm{\mathsf l_i}]$.
+
+\emph{Step 4 (the bijection).} For finitely supported $\lambda$ we have $\mathfrak o\mathfrak o'\norm\lambda\le\mathfrak o\max_i\abs{\lambda_i}\norm{\mathsf l_i}\le\norm{\Xi\lambda}\le\max_i\abs{\lambda_i}\norm{\mathsf l_i}\le\norm\lambda$. For $\lambda\in c_0(\N,K)$ the terms $\lambda_i\mathsf l_i$ tend to $0$, so the series converges in the complete ultrametric $P$, and the bounds persist. So $\Xi$ is injective with closed range, as $c_0(\N,K)$ is complete. The range contains every $P_m$, hence is dense, hence is $P$.
+\end{proof}
+
+\begin{theorem}[$c_0$-type and countable-type sources]\label{dp:thm:c0-agreement}
+Let $W$ be ultrametric.
+\begin{enumerate}
+\item Let $n\ge1$, let $P=c_{00}(J)$, and fix a total order on $J$. Every law $a\colon P\to W$ of degree $n$ is the diagonal of the $n$\nobreakdash-linear map
+\[
+ \beta(x^1,\dots,x^n)=\sum_{\mathsf w}v_{\mathsf w}\,x^1_{\mathsf w_1}\cdots x^n_{\mathsf w_n},
+\]
+over the nondecreasing words $\mathsf w$ in $J$ of length $n$, a finite sum on $c_{00}(J)$, where $v_{\mathsf w}=a^{[\gamma]}(e_{\mathsf j_1},\dots,e_{\mathsf j_r})$ for the distinct letters $\mathsf j_1<\dots<\mathsf j_r$ of $\mathsf w$ and their multiplicities $\gamma$. Moreover $\norm\beta\le\abs\varpi^{-n}\norm a$.
+\item The same holds for $P=c_0(J)$ if $W$ is complete; the sum converges. In both cases, a map from an open subset of $P$ to $W$ that is DP at $x_0$ with radius $R$ and bound $M$ is analytic there with radius $\abs\varpi R$ and bound $M$.
+\item Let $K$ be complete, $P$ an ultrametric Banach space of countable type and $W$ ultrametric Banach. For $\mathfrak o,\mathfrak o'$ as in Lemma~\ref{dp:lem:basis}, a germ on $P$ that is DP at $x_0$ with radius $R$ and bound $M$ is analytic there with radius $\abs\varpi\mathfrak o\mathfrak o'R$ and bound $M$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} The map $\beta$ is $n$\nobreakdash-linear. For $h$ supported in a finite set $\{\mathsf j_1,\dots,\mathsf j_r\}$ we have $a(h)=\sum_\gamma h^\gamma a^{[\gamma]}(e_{\mathsf j_1},\dots,e_{\mathsf j_r})$, and each monomial comes from exactly one nondecreasing word. So $\beta(h,\dots,h)=a(h)$. The restriction of $a$ to $\spn(e_{\mathsf j_1},\dots,e_{\mathsf j_r})$, isometric to $c_0([r],K)$, has norm at most $\norm a$. So \cite[Lemma~Q.2(4)]{I} gives $\norm{v_{\mathsf w}}\le\abs\varpi^{-n}\norm a$. In the ultrametric $W$ the number of words is not counted, so $\norm{\beta(x^1,\dots,x^n)}\le\abs\varpi^{-n}\norm a\prod_c\norm{x^c}$.
+
+\emph{Step 2 (item (2)).} For $x^c\in c_0(J)$ and $\varepsilon>0$, only finitely many words have $\prod_c\abs{x^c_{\mathsf w_c}}>\varepsilon$. So the family is summable in the complete ultrametric $W$, with the same bound. We have $\beta(h,\dots,h)=a(h)$ on the dense subspace $c_{00}(J)$, and both sides are continuous, $a$ by Theorem~\ref{dp:thm:mixed}(2). For the statement on germs, let $a_n$ be the coefficient laws and $\beta_n$ the map above with diagonal $a_n$, for $n\ge1$, and put $\beta_0=a_0$. Then $\norm{\beta_n}\le M(\abs\varpi R)^{-n}$.
+
+\emph{Step 3 (item (3)).} We may assume $P\ne\{0\}$. If $P$ is infinite-dimensional, let $\Xi\colon c_0(\N,K)\to P$ be as in Lemma~\ref{dp:lem:basis}. If $\dim P=m$ is finite, let $\Xi\colon c_0([m],K)\to P$ be the map $\mathsf C$ of \cite[Lemma~Q.13(3)]{I} (with $\mathfrak o=1$ if $K$ is discretely valued, which only improves the bound). In both cases $\norm\Xi\le1$ and $\norm{\Xi^{-1}}\le(\mathfrak o\mathfrak o')^{-1}$. Let $a_n$ be the coefficient laws at $x_0$. The laws $a_n\circ\Xi$ have norm at most $MR^{-n}$ (Lemma~\ref{dp:lem:elementary}(2)). By item (2), for $n\ge1$, $a_n\circ\Xi$ is the diagonal of a map $\beta'_n$ of norm at most $\abs\varpi^{-n}MR^{-n}$. Then $\beta_n=\beta'_n\circ(\Xi^{-1})^{\times n}$ has diagonal $a_n$ and norm at most $M(\abs\varpi\mathfrak o\mathfrak o'R)^{-n}$. Put $\beta_0=a_0$.
+\end{proof}
+
+A norm $\norm\cdot'$ on $W$ is \emph{equivalent with constant $C_W$} if $\norm w\le\norm w'\le C_W\norm w$ for all $w\in W$. Every equivalent norm has this form after scaling by a positive real number, and scaling keeps a norm ultrametric and spherically complete.
+
+\begin{theorem}[spherically complete targets, discretely valued fields]\label{dp:thm:sph-agreement}
+Let $P$ be ultrametric, $U\subseteq P$ open and $f\colon U\to W$.
+\begin{enumerate}
+\item Let $W$ have an equivalent norm with constant $C_W$ that is ultrametric and spherically complete. Every law $a\colon P\to W$ of degree $n$ has a lift of norm at most $C_W(\abs\varpi\mathfrak c_K)^{-n}\norm a$. The map $f$ is DP at $x_0$ if and only if it is analytic at $x_0$. A DP expansion with radius $R$ and bound $M$ gives an analytic one with radius $\abs\varpi\mathfrak c_KR$ and bound $C_WM$.
+\item Let $K$ be discretely valued and $W$ Banach with an equivalent ultrametric norm with constant $C_W$. Every law $a$ of degree $n$ from $P$ to $W$ has a lift of norm at most $\mathfrak c_K^{-1}C_W(\abs\varpi\mathfrak c_K)^{-n}\norm a$. The same equivalence holds, with radius $\abs\varpi\mathfrak c_KR$ and bound $\mathfrak c_K^{-1}C_WM$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+A law into $W$ is a law into $(W,\norm\cdot')$, of norm at most $C_W$ times its old norm, and a lift for $\norm\cdot'$ is a lift for $\norm\cdot$ of no larger norm. So \cite[Proposition~14.40(1)]{I}, applied to $(W,\norm\cdot')$, gives both statements on laws and the passage from DP to analytic. In~(2), $(W,\norm\cdot')$ is an ultrametric Banach space, and we use the last sentence of that proposition. The converse is Theorem~\ref{dp:thm:calculus}(3).
+\end{proof}
+
+For incomplete ultrametric $W$ over discretely valued $K$, Theorem~\ref{dp:thm:sph-agreement}(2), applied to $\widehat W$, gives a lift only into $\widehat W$. A lift into $W$ need not exist over $\F_p(t)$ (Theorem~\ref{dp:thm:agreement-finite}(3)). For other $K$, whether it exists is part of Question~\ref{dp:q:residual}.
+
+\begin{lemma}[operator spaces]\label{dp:lem:operator-sph}
+Let $X$ be ultrametric and $Y$ ultrametric and spherically complete. Then $\cL(X,Y)$ with the operator norm is ultrametric and spherically complete.
+\end{lemma}
+
+\begin{proof}
+The operator norm into an ultrametric space is ultrametric. Consider a nonempty family of pairwise meeting closed balls in $\cL(X,Y)$, with centers $u_\theta$ and radii $\varrho_\theta$. Then $\norm{u_\theta-u_{\theta'}}\le\max(\varrho_\theta,\varrho_{\theta'})$. Step~1 of the proof of \cite[Theorem~5.2]{I}, with $\{0\}$ as the subspace on which the map is given, yields a linear $u\colon X\to Y$ with $\norm{ux-u_\theta x}\le\varrho_\theta\norm x$ for all $x$ and $\theta$. So $u$ is bounded, and $u$ lies in every ball.
+\end{proof}
+
+\begin{theorem}[where a DP germ that is not analytic can occur]\label{dp:thm:conservativity}
+Let $K$ be complete, $P$ ultrametric, $W$ an ultrametric Banach space, $U\subseteq P$ open and $f\colon U\to W$ DP at $x_0\in U$. Let $\widehat P$ be the completion of $P$.
+\begin{enumerate}
+\item The map $f$ is analytic at $x_0$ in each of the following cases: \textup{(a)} $\operatorname{char}K=0$; \textup{(b)} $K$ is discretely valued; \textup{(c)} $W$ has an equivalent ultrametric spherically complete norm; \textup{(d)} $\widehat P$ is linearly homeomorphic to $c_0(J,K)$ for some set $J$. Case~\textup{(d)} includes every $P$ of finite dimension and every $P$ of countable type.
+\item So if $f$ is not analytic at $x_0$, then all of the following hold: $\operatorname{char}K=p>0$; $K$ is densely valued; $\widehat P$ is not linearly homeomorphic to any $c_0(J,K)$; and $W$ has no equivalent ultrametric spherically complete norm.
+\item Such germs exist if $K$ has characteristic $p$ and is not spherically complete: $A^k_{E,D;K}$ for $k\ge p$ and the spaces of \cite[Theorem~7.2(2)]{I}.
+\item Items \textup{(1)}--\textup{(3)} also hold with AA in place of DP.
+\item Here $P$ and $W$ need not be ultrametric. Let $P$ be finite-dimensional and $W$ any normed space. A map from an open subset of $P$ to $W$ is DP at a point if and only if it is analytic there. So DP manifolds modeled on $K^m$ are the analytic manifolds, with the same maps, and DP vector bundles with normed fibers over such a base are the analytic ones.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (cases (a), (b), (c)).} These are Theorem~\ref{dp:thm:agreement-char0}(2) and Theorem~\ref{dp:thm:sph-agreement}(2),(1).
+
+\emph{Step 2 (case (d)).} We may assume $P\ne\{0\}$. Let $T\colon c_0(J,K)\to\widehat P$ be a bounded linear bijection with bounded inverse, and let $f$ have radius $R$, bound $M$ and coefficient laws $a_n$. Here $\Kh=K$ and $\widehat W=W$. By \cite[Lemma~Q.13(1)]{I}, for $n\ge1$ the law $a_n$ extends to a law $\hat a_n\colon\widehat P\to W$ with $\norm{\hat a_n}\le\norm{a_n}$. By Theorem~\ref{dp:thm:c0-agreement}(2), $\hat a_n\circ T$ is the diagonal of a map $\beta'_n$ of norm at most $\abs\varpi^{-n}\norm T^n\norm{a_n}$. The restriction of $\beta'_n\circ(T^{-1})^{\times n}$ to $P^n$ is a lift of $a_n$ of norm at most $M(\abs\varpi R/(\norm T\norm{T^{-1}}))^{-n}$. With $\beta_0=a_0$, this makes $f$ analytic at $x_0$ with bound $M$. If $P$ has finite dimension, so has $\widehat P$, and \cite[Lemma~A.3]{I} gives $T$ with $J$ finite. If $P$ is of countable type, so is $\widehat P$, and Lemma~\ref{dp:lem:basis} gives $T$ with $J=\N$ if $\widehat P$ is infinite-dimensional.
+
+\emph{Step 3 (items (2), (3), (4)).} Item (2) is the contrapositive of (1). For (3), see Proposition~\ref{dp:prop:strict}(1)(c): the source and the target are ultrametric Banach spaces, and the law is AA, hence DP, at every point and analytic at no point. For (4), AA germs are DP by \cite[Proposition~14.9(1)]{I}, and the germ of (3) is AA.
+
+\emph{Step 4 (item (5)).} We may assume $P\ne\{0\}$. As $K$ is complete, $P$ has a bijection $T$ as in Theorem~\ref{dp:thm:agreement-finite}(1), so a DP germ on $P$ is analytic. The converse is Theorem~\ref{dp:thm:calculus}(3). Transitions, maps in charts and bundle transition families have finite-dimensional sources. So being DP and being analytic are the same for them.
+\end{proof}
+
+Item~(2) gives necessary conditions only. It does not say that a given pair $(P,W)$ with these properties carries such a germ. Item~(3) leaves one class of fields open: whether such germs exist over a densely valued, spherically complete $K$ of characteristic $p$ (Question~\ref{dp:q:residual}).
+
+\subsection{General norms, and the comparison by fields}\label{dp:ssec:agree-general}
+
+\begin{theorem}[general norms]\label{dp:thm:general-norms-agreement}
+Let $P,W$ be normed. Always analytic germs are AA, and AA germs are DP.
+\begin{enumerate}
+\item \textup{(Agreement.)} DP, AA and analytic coincide at every point in each of these cases: \textup{(a)} $P$ is finite-dimensional, and $K$ is complete or $W$ is Banach; \textup{(b)} $\operatorname{char}K=0$ and $P$ is ultrametric. For $P$ finite-dimensional, DP and AA coincide for every $K$ and $W$. For $n!\ne0$ in $K$, every law of degree $n$ is analytic.
+\item \textup{(AA $=$ DP, analytic $\ne$ AA, every characteristic.)} On $P=\ell^1(J)$ every DP germ with values in a normed space is AA. The germ $\mathsf f$ of Example~\ref{dp:ex:l1}, on $\ell^1(\N,K)$ with values in $\Kh$, is AA at $0$ and not analytic at $0$.
+\item \textup{(Ultrametric sources.)} Let $P$ be ultrametric.
+\begin{enumerate}
+\item If $W$ is ultrametric, then DP $=$ AA. For $K$ complete and $W$ Banach, DP against analytic is Theorem~\ref{dp:thm:conservativity}. Now let $\operatorname{char}K=p$, with $K$ or $W$ incomplete. Then we have Theorems~\ref{dp:thm:agreement-finite}(1) and~\ref{dp:thm:c0-agreement}(1); for $W$ Banach, Theorems~\ref{dp:thm:agreement-finite}(2) and~\ref{dp:thm:c0-agreement}(2); for $W$ as there, Theorem~\ref{dp:thm:sph-agreement}(1); for $K$ discretely valued and $W$ Banach, Theorem~\ref{dp:thm:sph-agreement}(2); over $\F_p(t)$, the failure in Theorem~\ref{dp:thm:agreement-finite}(3); and for $K$ incomplete with $\Kh$ not spherically complete, the failure proved after Question~\ref{dp:q:residual}. We do not decide the rest.
+\item If $W$ is not ultrametric, AA and analytic can differ. Let $\operatorname{char}K=p$ and $k\ge p$. Under condition~\textup{(L)} of \cite[Section~7.1]{I}, which makes $K$ discretely valued, or if $p=k=2$, the power map $c_0\to\hGamma^k_\pi c_0$, with $c_0=c_0(\N,K)$, is AA everywhere and analytic nowhere (Proposition~\ref{dp:prop:strict}(1)(b)). Its target is not ultrametric.
+\item Every map from an open subset of an ultrametric space to a normed space that is DP at a point is AA there if and only if $\sup_n\mathfrak a_n(c_0(\N,K))^{1/n}<\infty$. This holds for $\operatorname{char}K=0$ \cite[Theorem~14.39(3)]{I}. For $\operatorname{char}K=p$ we do not decide it (Question~\ref{dp:q:c0}).
+\end{enumerate}
+\item \textup{(AA $\ne$ DP, characteristic $p$.)} Over every $K$ of characteristic $p$ there are DP germs that are AA at no point (Proposition~\ref{dp:prop:strict}(2)). A law that is not ambient has a non-ultrametric target, by \cite[Theorem~14.39(4)]{I}. The sources of the laws of Proposition~\ref{dp:prop:strict}(2) contain $\ell^1$-sums.
+\item \textup{(Characteristic $0$, general sources.)} Whether DP $=$ AA for every normed $P$ is not decided here \cite[Question~14.42(1)]{I}. It holds for ultrametric $P$, for $\ell^1(J)$ and in finite dimension.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (items (1), (2), (3)(a), (4), (5)).} Item (1) is Theorems~\ref{dp:thm:agreement-finite}, \ref{dp:thm:agreement-char0}(2) and~\ref{dp:thm:degree-threshold}(1). For (2), $\mathfrak a_n(\ell^1(J))\le C_0^n$ \cite[Theorem~14.39(2)]{I}, and \cite[Theorem~14.38(1)]{I} applies. Item (3)(a) is \cite[Theorem~14.39(1)]{I} with the cited theorems. Items (4) and (5) are the cited results, with (1) and (2). The case of DP and AA in finite dimension is Step~2.
+
+\emph{Step 2 (DP and AA for $P$ finite-dimensional).} We may assume $P\ne\{0\}$. Let $f\colon U\to W$ be DP at $x_0$ with radius $R$, bound $M$ and coefficient laws $a_n$, and let $j\colon W\to\widehat W$ be the inclusion. It is a linear isometry into a Banach space. By Theorem~\ref{dp:thm:agreement-finite}(2), for $n\ge1$ the law $j\circ a_n$ is the diagonal of a bounded $n$\nobreakdash-linear map $\beta_n\colon P^n\to\widehat W$ with $\norm{\beta_n}\le2^{\mathsf r}C_P^nMR^{-n}$. Put $\beta_0=j\circ a_0$. The diagonals lie in $j(W)$, and $jf(x_0+h)=\sum_n\beta_n(h,\dots,h)$ for $\norm h<R/C_P$. So $f$ is AA at $x_0$. The converse holds for every $P$, by \cite[Proposition~14.9(1)]{I}.
+
+\emph{Step 3 (item (3)(b)).} The source $c_0$ is ultrametric. The map is AA everywhere and analytic nowhere by Proposition~\ref{dp:prop:strict}(1)(b). It remains to see that the target is not ultrametric. Under~(L), $K$ is discretely valued~\cite[Section~7.1]{I}, and the target is Banach. So an ultrametric target would make the map analytic, by Theorem~\ref{dp:thm:sph-agreement}(2). Let $p=k=2$. Let $\mathsf g=e_1\otimes e_1+e_2\otimes e_2$, and let $\mathsf g=\sum_lx_l\otimes y_l$ be a representation in $c_0\otimes c_0$. Projecting to the first two coordinates gives $\id_{K^2}=\sum_l\bar x_l\bar y_l^{\mathsf T}$, where $\bar x_l,\bar y_l\in K^2$ are the projections of $x_l,y_l$. Taking determinants, the Cauchy--Binet formula gives $1=\sum_{l<l'}\det(\bar x_l,\bar x_{l'})\det(\bar y_l,\bar y_{l'})$. By the ultrametric inequality in $K$, some $l\ne l'$ has $\abs{\det(\bar x_l,\bar x_{l'})\det(\bar y_l,\bar y_{l'})}\ge1$. So $\norm{x_l}\norm{y_l}\norm{x_{l'}}\norm{y_{l'}}\ge1$, and hence $\norm{x_l}\norm{y_l}+\norm{x_{l'}}\norm{y_{l'}}\ge2$. Thus $\pi(\mathsf g)\ge2$, while $\pi(e_i\otimes e_i)\le1$ for $i=1,2$. So $\pi$ does not satisfy the ultrametric inequality on $\Gamma^2(c_0)$.
+
+\emph{Step 4 (item (3)(c)).} Let $\mathfrak q=\sup_n\mathfrak a_n(c_0(\N,K))^{1/n}<\infty$, and let $P$ be ultrametric. By Proposition~\ref{dp:prop:ultrametric}(3), $\mathfrak a_n(P,W)\le\mathfrak a_n(P)\le(\mathfrak c_K^{-1}\max(\mathfrak q,1))^n$. So \cite[Theorem~14.38(1)]{I} applies. Conversely, let $\mathfrak q=\infty$ and $P=c_0(\N,K)$. Let $W_n$ be the completion of $\Gamma^n_{\mathrm s}(P)$, and $W$ the $c_0$-sum of the Banach spaces $W_n$, as in Step~2 of the proof of Theorem~\ref{dp:thm:agreement-criterion}; it is Banach. The law $\iota_n\circ\mathsf v_n$ has norm at most $1$, and its linearization is $t\mapsto\iota_n[t]$, so $\mathfrak a_n(P,W)\ge\mathfrak a_n(P)$. Thus $(P,W)$ is not tame, and \cite[Proposition~14.37]{I} gives a germ into $W$ that is DP at a point and not AA there.
+\end{proof}
+
+The next table sums this up. An entry $=$ or $\ne$ means for all spaces of the row, or for some spaces of the row.
+
+\begin{center}
+\small
+\begin{tabular}{p{4.6cm}p{2.9cm}p{6.1cm}}
+\hline
+Setting & DP against AA & AA against analytic\\
+\hline
+$P$ finite-dimensional, $K$ complete or $W$ Banach & $=$ & $=$\\
+$P$ finite-dimensional, $K$ and $W$ incomplete & $=$ & $=$ for $P$ as in Theorem~\ref{dp:thm:agreement-finite}(1); $\ne$ for some spaces if $K=\F_p(t)$; not decided in general\\
+$\operatorname{char}K=0$, $P$ ultrametric & $=$ & $=$\\
+$\operatorname{char}K=0$, $P=\ell^1(\N,K)$ & $=$ & $\ne$\\
+$\operatorname{char}K=0$, $P$ general & not decided & $\ne$\\
+$\operatorname{char}K=p$, $P,W$ ultrametric, $K$ complete, $W$ Banach & $=$ & $=$ in the cases of Theorem~\ref{dp:thm:conservativity}(1); $\ne$ for some spaces if $K$ is not spherically complete; not decided in general if $K$ is densely valued and spherically complete\\
+$\operatorname{char}K=p$, $P,W$ ultrametric, $K$ complete, $W$ incomplete & $=$ & $=$ for $P$ finite-dimensional and for $P=c_{00}(J)$; otherwise not decided\\
+$\operatorname{char}K=p$, $P,W$ ultrametric, $K$ densely valued, incomplete & $=$ & $=$ for $W$ as in Theorem~\ref{dp:thm:sph-agreement}(1), for $P$ as in Theorem~\ref{dp:thm:agreement-finite}(1), for finite-dimensional $P$ with $W$ Banach, for $P=c_{00}(J)$, and for $P=c_0(J)$ with $W$ Banach; $\ne$ for some spaces if $\Kh$ is not spherically complete; otherwise not decided\\
+$\operatorname{char}K=p$, $P,W$ ultrametric, $K$ discretely valued, incomplete & $=$ & $=$ for $W$ Banach, for $P$ as in Theorem~\ref{dp:thm:agreement-finite}(1), and for $P=c_{00}(J)$; $\ne$ for some finite-dimensional spaces with $W$ incomplete if $K=\F_p(t)$; otherwise not decided\\
+$\operatorname{char}K=p$, $P$ ultrametric, $W$ not & not decided; $=$ for all $P$, $W$ if and only if the supremum in item~(3)(c) is finite & $\ne$ under (L) or for $p=2$\\
+$\operatorname{char}K=p$, general & $\ne$ & $\ne$\\
+\hline
+\end{tabular}
+\end{center}
+
+So a DP germ that is not analytic needs characteristic $p$ or a non-ultrametric source, by item~(1)(b). With an ultrametric source and a non-ultrametric target it occurs over discretely valued $K$ under~(L), although Theorem~\ref{dp:thm:sph-agreement}(2) excludes it for ultrametric Banach targets. Between ultrametric spaces over the discretely valued field $\F_p(t)$ it occurs with an incomplete target (Theorem~\ref{dp:thm:agreement-finite}(3)). The DP germs that are not AA, among those listed here, have characteristic $p$ and non-ultrametric norms. Between ultrametric spaces there are none.
+
+We now compare with the functor $\alpha_k$ of~\cite[n\textsuperscript{o}~7.8.1]{Bou}, where our $k$ is written $d$, and for which $\alpha_k(\id_F,u)=A^k_{E,D;F}(u)$~\cite[Section~10.2]{I}. Let $K$ be complete. Consider two statements.
+\begin{itemize}
+\item[$(\mathrm D_K)$] Every map between open subsets of ultrametric Banach spaces over $K$ that is DP at a point is analytic there.
+\item[$(\mathrm B_K)$] For all ultrametric Banach spaces $E,D,F,F'$ and every $k\ge1$, the maps $A^k_{E,D;F}$ and the joint action $B$ on $\cL(E,D)\times\cL(F,F')$, restricted to alternating maps, are analytic everywhere.
+\end{itemize}
+The statement $(\mathrm B_K)$ is what \cite[paragraph \emph{Bourbaki's question}, and the proof of Corollary~10.5]{I} means by saying that $\alpha_k$ is, on ultrametric Banach spaces, a vector functor of the analytic class in every degree.
+
+\begin{theorem}[comparison by fields]\label{dp:thm:field-level}
+Let $K$ be complete.
+\begin{enumerate}
+\item $(\mathrm D_K)$ implies $(\mathrm B_K)$.
+\item Both hold if $\operatorname{char}K=0$ or if $K$ is discretely valued.
+\item Both fail if $\operatorname{char}K=p>0$ and $K$ is not spherically complete.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} By Theorem~\ref{dp:thm:calculus}(4),(1), $A^k_{E,D;F}$ and $B$ are laws, DP on their whole domains. Their sources are $\cL(E,D)$ and $\cL(E,D)\times\cL(F,F')$, and their target is $\cL(\Alt^k(D;F),\Alt^k(E;F'))$. These spaces are ultrametric, since operator norms into ultrametric spaces are, and they are complete, since $D$ and $F'$ are complete and $\Alt^k(E;F')$ is closed in $\Mult^k(E;F')$. So $(\mathrm D_K)$ applies at every point.
+
+\emph{Step 2 (items (2), (3)).} If $\operatorname{char}K=0$, Theorem~\ref{dp:thm:agreement-char0}(2) gives $(\mathrm D_K)$. If $K$ is discretely valued, Theorem~\ref{dp:thm:sph-agreement}(2) gives $(\mathrm D_K)$. Then $(\mathrm B_K)$ holds by item (1). If $\operatorname{char}K=p$ and $K$ is not spherically complete, then for $k\ge p$ the map $A^k_{E,D;K}$ of \cite[Theorem~7.2(2)]{I} is analytic at no point. So $(\mathrm B_K)$ fails, and $(\mathrm D_K)$ fails by item (1).
+\end{proof}
+
+A complete discretely valued field is spherically complete~\cite[Lemma~D.1]{I}. So the one remaining case is $\operatorname{char}K=p$ with $K$ densely valued and spherically complete. There neither statement is decided here (\cite[Section~12]{I} and Question~\ref{dp:q:residual}). Theorem~\ref{dp:thm:field-level} is one implication, together with a comparison on the fields decided here: wherever $(\mathrm B_K)$ is decided here, $(\mathrm D_K)$ is decided with the same answer. Whether $(\mathrm B_K)$ implies $(\mathrm D_K)$ for such $K$ is open (Question~\ref{dp:q:residual}). A negative answer to $(\mathrm D_K)$ over a densely valued spherically complete $K$ would not decide $(\mathrm B_K)$; a failure of $(\mathrm B_K)$ there would give a failure of $(\mathrm D_K)$.
+
+\begin{remark}[pairs of spaces]\label{dp:rem:field-level-spaces}
+Theorem~\ref{dp:thm:field-level} is about fields. On a field where both statements fail, for many pairs of spaces every DP germ is analytic, by Theorems~\ref{dp:thm:c0-agreement} and~\ref{dp:thm:sph-agreement}. Those conditions concern the source and the target of a germ. The results of \cite{I} on $\alpha_k$ concern the fibers $E,D,F$, and the germ $A^k_{E,D;F}$ has source $\cL(E,D)$ and target $\cL(\Alt^k(D;F),\Alt^k(E;F))$.
+
+\emph{Spherically complete values.} Let $E,D$ be ultrametric and $F$ ultrametric and spherically complete. By \cite[Theorem~5.2]{I}, $\Alt^k(E;F)$ and $\Alt^k(D;F)$ are ultrametric and spherically complete. So the target of $A^k_{E,D;F}$ is spherically complete, by Lemma~\ref{dp:lem:operator-sph}. The source $\cL(E,D)$ is ultrametric, as $D$ is. Hence Theorem~\ref{dp:thm:sph-agreement}(1) makes $A^k_{E,D;F}$ the diagonal of a bounded $k$\nobreakdash-linear map. For ultrametric $E,D$, this recovers the last conclusion of \cite[Theorem~5.2]{I}, that $A^k_{E,D;F}$ is a continuous polynomial, from its first assertion.
+
+\emph{Countable type.} Here the results are only parallel. \cite[Corollary~10.5]{I} assumes $E$ or $D$ of countable type, and Theorem~\ref{dp:thm:c0-agreement}(3) assumes $P$ of countable type, and $\cL(E,D)$ need not be of countable type. Indeed, let $K$ be complete of characteristic $p$ and not spherically complete, and let $k\ge p$. For the spaces of \cite[Theorem~7.2(2)]{I} it is not, by Theorem~\ref{dp:thm:c0-agreement}(3), since $A^k_{E,D;K}$ is DP and not analytic. Neither result is deduced from the other here.
+\end{remark}

@@ -1,0 +1,267 @@
+\subsection{Inverse functions and the chain}\label{dp:ssec:chain}
+
+The tree norms, the class TA and the grafting map $\mathsf Q_{r,N}$ are those of Section~\ref{dp:ssec:tree} and Section~\ref{dp:ssec:ta}. For a germ with coefficient laws $a_N$ we write $L_N=L_{a_N}$.
+
+The algebra of the formal inverse is \cite[Th.~VI.3, Prop.~VI.8]{Ro}. The bound below is the estimate we need.
+
+\begin{theorem}[inverse functions for TA]\label{dp:thm:ta-inverse}
+Let $P,W$ be Banach spaces, and let $f$ map an open subset of $P$ into $W$, TA at $x_0$, with $\mathsf T_0=Df(x_0)$ bijective with bounded inverse. Then the local inverse germ of $f$ at $f(x_0)$, which is DP by Theorem~\ref{dp:thm:inverse}, is TA at $f(x_0)$.
+
+Let $P,Y,Y'$ be Banach spaces, let $\Phi$ map an open subset of $P\times Y$ into $Y'$, TA at $(x_0,y_0)$, with $\Phi(x_0,y_0)=0$ and with $D\Phi(x_0,y_0)(0,\cdot)\colon Y\to Y'$ bijective with bounded inverse. Then the map $\psi$ of Corollary~\ref{dp:cor:implicit}, with $\Phi(x,y)=0$ if and only if $y=\psi(x)$ near $(x_0,y_0)$, is TA at $x_0$.
+\end{theorem}
+
+\begin{proof}
+We may assume $P\ne0$. Let $f$ be TA at $x_0$ with radius $R$, bound $M>0$ and coefficient laws $a_N$, and put $M_{\mathsf T}=\norm{\mathsf T_0^{-1}}M$.
+
+\emph{Step 1 (the recursion).} By Theorem~\ref{dp:thm:differentiable}(1), $a_1=\mathsf T_0$. The germ $\mathsf T_0^{-1}\circ f$ is DP at $x_0$ with values in $P$, and its law of degree $1$ is $\id_P$. Apply \cite[Lemma~Q.14]{I} to it, and write $\mathsf R_m=-\mathsf T_0^{-1}\circ a_m$ for the laws called $\mathsf P_m$ there; so the remainder is $\mathsf R=\sum_{m\ge2}\mathsf R_m$. We obtain laws $\mathsf g_N$ of degree $N$ with $\mathsf g_1=\id_P$, a series $\mathsf g=\sum_N\mathsf g_N$ on a ball around $0$, and the local inverse germ
+\begin{equation}\label{dp:eq:ta-inverse-germ}
+ y\longmapsto x_0+\mathsf g\bigl(\mathsf T_0^{-1}(y-f(x_0))\bigr)
+\end{equation}
+of $f$ at $f(x_0)$. For $N\ge2$, the law $\mathsf g_N$ is the sum over $2\le r\le N$ and over the $\alpha$ with $\abs\alpha=r$, $\deg\alpha=N$ of the coefficients $\mathsf R_r^{[\alpha]}(\mathsf g_1,\dots,\mathsf g_{N-1})$. By Steps~1 and~2 of the proof of \cite[Lemma~Q.4]{I}, with inner laws $\mathsf g_n$ and outer law $\mathsf R_r$, this reads, on powers and so on all of $\Gamma^N(P)$,
+\begin{equation}\label{dp:eq:ta-inverse-recursion}
+ L_{\mathsf g_N}=\sum_{r=2}^NL_{\mathsf R_r}\circ\mathsf Q_{r,N},\qquad
+ \mathsf Q_{r,N}=\sum_{\vec n\in\mathcal C(N,r)}L_{\mathsf g_{n_1}}\otimes\dots\otimes L_{\mathsf g_{n_r}}.
+\end{equation}
+As $r\ge2$, all parts $n_i$ are below $N$.
+
+\emph{Step 2 (the tree bound).} Since $L_{\mathsf R_r}=-\mathsf T_0^{-1}L_r$, we have $\norm{L_{\mathsf R_r}s}\le M_{\mathsf T}R^{-r}\mathfrak t_r(s)$ for $s\in\Gamma^r(P)$. Define $\mathsf y_1=1$ and, for $N\ge2$,
+\begin{equation}\label{dp:eq:ta-majorant}
+ \mathsf y_N=\sum_{r=2}^NM_{\mathsf T}R^{-r}\sum_{\vec n\in\mathcal C(N,r)}\prod_{i=1}^r\mathsf y_{n_i}.
+\end{equation}
+We show by induction that $\norm{L_{\mathsf g_N}t}\le\mathsf y_N\mathfrak t_N(t)$ for $t\in\Gamma^N(P)$. For $N=1$ this is an equality, as $\mathfrak t_1=\norm\cdot$. Let $N\ge2$. Lemma~\ref{dp:lem:grafting}(2), with the maps $L_{\mathsf g_n}$ and constants $\mathsf y_n$ for $n<N$ and zero maps for $n\ge N$, which do not occur as $r\ge2$, gives
+\[
+ \mathfrak t_r(\mathsf Q_{r,N}t)\le\Bigl(\sum_{\vec n\in\mathcal C(N,r)}\prod_i\mathsf y_{n_i}\Bigr)\mathfrak t_N(t).
+\]
+With~\eqref{dp:eq:ta-inverse-recursion} and~\eqref{dp:eq:ta-majorant} this is the claim.
+
+\emph{Step 3 (a positive radius).} The coefficient of $\theta^N$ in $(\sum_{1\le i<N}\mathsf y_i\theta^i)^r$ is $\sum_{\vec n\in\mathcal C(N,r)}\prod_i\mathsf y_{n_i}$. So~\eqref{dp:eq:ta-majorant} is the sequence of Step~3 of the proof of \cite[Lemma~Q.14]{I}, with $M_{\mathsf T}$ for $\mathfrak b_{\mathsf T}$ and $1/R$ for $\varkappa$. Step~4 of that proof solves a quadratic equation and holds for all positive values of these two constants. Hence there is $R_0>0$ with $\mathsf Y(\theta)=\sum_N\mathsf y_N\theta^N<\infty$ for $0\le\theta<R_0$.
+
+\emph{Step 4 (the inverse germ).} Take $0<R_1<R_0$ so small that~\eqref{dp:eq:ta-inverse-germ} is the inverse germ for $\norm{\mathsf T_0^{-1}(y-f(x_0))}<R_1$. Its laws are $x_0$ in degree $0$ and $\mathsf g_N\circ\mathsf T_0^{-1}$ in degree $N\ge1$, with linearization $L_{\mathsf g_N}\circ(\mathsf T_0^{-1})^{\otimes N}$. By Lemma~\ref{dp:lem:tree}(2) and Step~2,
+\[
+ \norm{L_{\mathsf g_N}((\mathsf T_0^{-1})^{\otimes N}t)}\le\mathsf y_N\norm{\mathsf T_0^{-1}}^N\mathfrak t_N(t)\le\mathsf Y(R_1)\bigl(R_1/\norm{\mathsf T_0^{-1}}\bigr)^{-N}\mathfrak t_N(t)\qquad(t\in\Gamma^N(W)).
+\]
+So the inverse germ is TA at $f(x_0)$ with radius $R_1/\norm{\mathsf T_0^{-1}}$ and bound $\max(\norm{x_0},\mathsf Y(R_1))$.
+
+\emph{Step 5 (implicit functions).} The map $\Theta(x,y)=(x,\Phi(x,y))$ is TA at $(x_0,y_0)$, by the pairing in Theorem~\ref{dp:thm:ta-composition}. Its derivative there is bijective with bounded inverse, as in the proof of Corollary~\ref{dp:cor:implicit}. By the first part, its local inverse germ at $(x_0,0)$ is TA. This inverse preserves the first coordinate. Let $\tilde\psi(x)$ be the second coordinate of its value at $(x,0)$. Then $\tilde\psi$ is TA at $x_0$, by precomposition with the bounded linear map $x\mapsto(x,0)$ and postcomposition with a projection (Theorem~\ref{dp:thm:ta-composition}). Also $\Phi(x,\tilde\psi(x))=0$, and $\tilde\psi$ is continuous with $\tilde\psi(x_0)=y_0$. By the uniqueness in Corollary~\ref{dp:cor:implicit}, $\tilde\psi=\psi$ near $x_0$.
+\end{proof}
+
+\begin{remark}[depth]\label{dp:rem:ta-depth}
+The proof does not bound the depth of the trees. It bounds $L_{\mathsf g_N}$ by $\mathfrak t_N$, and not by $\mathfrak t^{(\ell)}_N$ for one $\ell$. So Theorem~\ref{dp:thm:ta-inverse} does not give inverse functions for $\mathrm{AA}^\circ$. See Section~\ref{dp:sec:questions}.
+\end{remark}
+
+\begin{corollary}[tree analytic bundles]\label{dp:cor:ta-bundles}
+Let all models and fibers be Banach spaces. Then \cite[Theorem~2.1]{I}, displayed in Section~\ref{dp:sec:conv}, holds with $C^m$ replaced by TA on open sets, for manifolds and vector bundles whose transition maps are TA on open sets. The replacement is also made in the definitions that the theorem uses: morphisms are bundle maps over the identity whose local operator-valued expressions are TA on open sets, and a functor is TA if all its maps on products of hom spaces are jointly TA on open sets. The alternating bifunctor $(E,F)\mapsto\Alt^k(E;F)$ and the functor $E\mapsto\hLambda^k_\pi E$, on Banach spaces, satisfy its hypothesis. So, in every characteristic, the alternating bundle of a TA vector bundle is a TA vector bundle, with TA induced morphisms.
+\end{corollary}
+
+\begin{proof}
+\emph{Step 1 (the calculus).} By Theorem~\ref{dp:thm:ta-composition}, maps that are TA on open sets compose and pair, and they restrict to open subsets. Bounded multilinear maps and constants are analytic at every point, so they are TA. In particular evaluation and composition of operators are TA. Being TA at a point depends only on the map near that point.
+
+\emph{Step 2 (the theorem).} The proof of Corollary~\ref{dp:cor:bundles} uses of its class only the properties of Step~1.
+
+\emph{Step 3 (the functors).} By Theorem~\ref{dp:thm:calculus}(4), the maps of these functors on hom spaces are bounded ambient laws. After an isometry of the target, such a law is the diagonal of a bounded multilinear map. So it is analytic at every point after that isometry, with diagonals in the image of the target, and it is AA at every point. As AA is $\mathrm{TA}_1$, it is TA at every point.
+\end{proof}
+
+For $\vec n\in\mathcal C(N,r)$ put $\operatorname{mult}(\vec n)=N!/\prod_in_i!$, a positive integer, and write $\abs{\operatorname{mult}(\vec n)}$ for the absolute value of its image in $K$. Let $p$ be a prime with $\abs p<1$ in $K$, that is, $p=\operatorname{char}K$, or $\operatorname{char}K=0$ and $p$ is the residue characteristic. If $N=\sum_i\mathsf d_ip^i$ in base $p$, the \emph{digit root} of $N$ is the composition that lists each $p^i$ exactly $\mathsf d_i$ times, in increasing order. Let $\operatorname{ds}_p(M)$ be the sum of the base-$p$ digits of $M$.
+
+\begin{proposition}[base-$p$ roots]\label{dp:prop:base-p}
+Let $P$ be a normed space and $t\in\Gamma^N(P)$.
+\begin{enumerate}
+\item \textup{(Block refinement.)} Let $\vec n\in\mathcal C(N,r)$, $r\ge1$. For each $i$ let $\vec m^{(i)}$ be a composition of $n_i$ with $\operatorname{mult}(\vec m^{(i)})\ne0$ in $K$, and let $\vec m$ be the concatenation of the $\vec m^{(i)}$. Then for every $\ell\ge1$
+\[
+ \mathfrak t^{(\ell)}_{\vec n}(t)\le\prod_{i=1}^r\frac{\operatorname{mult}(\vec m^{(i)})}{\abs{\operatorname{mult}(\vec m^{(i)})}}\ \mathfrak t^{(\ell)}_{\vec m}(t).
+\]
+The same holds with $\mathfrak t_{\vec n},\mathfrak t_{\vec m}$. In particular, taking $r=1$, so that $\vec n=(N)$, every composition $\vec m$ of $N$ with $\operatorname{mult}(\vec m)\ne0$ in $K$ has $\mathfrak t_N(t)\le\frac{\operatorname{mult}(\vec m)}{\abs{\operatorname{mult}(\vec m)}}\mathfrak t_{\vec m}(t)$.
+\item \textup{(Digit roots.)} For a prime $p$ with $\abs p<1$ in $K$, the digit root $\vec n$ of $N$ has $\abs{\operatorname{mult}(\vec n)}=1$.
+\item \textup{(Low degrees.)} Let $\operatorname{char}K=p$ and $2\le N\le p^2$. Then there is a constant $\mathsf A(N,p)$, depending only on $N$ and $p$, with
+\[
+ \mathfrak t^{(2)}_N\le\mathfrak t^{(\ell)}_N\le\mathfrak t_N\le\mathsf A(N,p)\,\mathfrak t^{(2)}_N\qquad(\ell\ge2).
+\]
+So all $\mathfrak t^{(\ell)}_N$, $\ell\ge2$, are equivalent in these degrees.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Let $r_i$ be the number of parts of $\vec m^{(i)}$, and let $t=\sum_q\bigotimes_i\bigotimes_{i'}s_{q,i,i'}$ with $s_{q,i,i'}\in\Gamma^{m^{(i)}_{i'}}(P)$. For each $i$, the $\operatorname{mult}(\vec m^{(i)})$ shuffle permutations of the slots of block $i$ fix the symmetric tensor $t$. Summing over the product of these sets of permutations gives
+\[
+ \prod_i\operatorname{mult}(\vec m^{(i)})\,t=\sum_q\bigotimes_{i=1}^r\bigl(s_{q,i,1}\cdot\ldots\cdot s_{q,i,r_i}\bigr),
+\]
+a representation of a multiple of $t$ in $\bigotimes_i\Gamma^{n_i}(P)$. The shuffle bound of Lemma~\ref{dp:lem:tree}(5), iterated at level $\ell$, gives $\mathfrak t^{(\ell)}_{n_i}(s_{q,i,1}\cdot\ldots\cdot s_{q,i,r_i})\le\operatorname{mult}(\vec m^{(i)})\prod_{i'}\mathfrak t^{(\ell)}_{m^{(i)}_{i'}}(s_{q,i,i'})$. Divide by $\prod_i\abs{\operatorname{mult}(\vec m^{(i)})}$ and take the infimum over representations. For $\mathfrak t$, take $\ell\ge N$.
+
+\emph{Step 2 (item (2)).} By Legendre's formula the exponent of $p$ in $M!$ is $(M-\operatorname{ds}_p(M))/(p-1)$. So the exponent of $p$ in $N!$ is $\sum_i\mathsf d_i(p^i-1)/(p-1)$, which is the exponent of $p$ in $\prod_i(p^i!)^{\mathsf d_i}$. Hence $\operatorname{mult}(\vec n)$ is an integer prime to $p$. Take integers $\mathsf a,\mathsf b$ with $\mathsf ap+\mathsf b\operatorname{mult}(\vec n)=1$. As $\abs p<1$ and integers have absolute value at most $1$, the ultrametric inequality forces $\abs{\operatorname{mult}(\vec n)}=1$.
+
+\emph{Step 3 (item (3)).} The first two inequalities are Lemma~\ref{dp:lem:tree}(1). Let $\vec n$ be a composition of $N$ with at least two parts. Each $n_i$ is below $p^2$, so its digit root $\vec m^{(i)}$ has parts in $\{1,p\}$. Let $\vec m$ be the concatenation, a composition of $N$ with at least two parts. By items (1) and (2), $\mathfrak t_{\vec n}\le\prod_i\operatorname{mult}(\vec m^{(i)})\,\mathfrak t_{\vec m}$. By Lemma~\ref{dp:lem:tree}(4), $\mathfrak t_p\le\mathsf c_p\pi$, where we may take $\mathsf c_p\ge1$, and $\mathfrak t_1=\norm\cdot$. So $\mathfrak t_{\vec m}\le\mathsf c_p^{N/p}\pi_{\vec m}$. Moreover $\pi_{\vec m}\le\mathfrak t^{(2)}_N$, by Lemma~\ref{dp:lem:tree}(3). By~\eqref{dp:eq:tree-fixed}, $\mathfrak t_N$ is the maximum of the $\mathfrak t_{\vec n}$ over the compositions with at least two parts, so item (3) follows, with $\mathsf A(N,p)$ the maximum over $\vec n$ of $\prod_i\operatorname{mult}(\vec m^{(i)})\,\mathsf c_p^{N/p}$.
+\end{proof}
+
+Item~(3) includes $N=p^2$. The argument stops at $N=p^2+1$. Among the compositions of $p^2+1$ with at least two parts, $(1,p^2)$ and $(p^2,1)$ have the part $p^2$, and in characteristic $p$ this part cannot be refined: for a composition $\vec m$ of $p^2$ with at least two parts, the exponent of $p$ in $\operatorname{mult}(\vec m)$ is $(\sum_j\operatorname{ds}_p(m_j)-1)/(p-1)>0$, so $\operatorname{mult}(\vec m)=0$ in $K$. The first degree this leaves undecided is $p^2+1$: whether $\mathfrak t_{p^2+1}$ is bounded by a constant times $\mathfrak t^{(2)}_{p^2+1}$; see Section~\ref{dp:sec:questions}. For fixed $p$, item~(3) covers finitely many degrees, so it does not decide whether $\mathrm{AA}^\circ=\mathrm{TA}$.
+
+In the rest of this subsection, let $\operatorname{char}K=p$. Let $\mathcal E$ and $\Gamma^p(\mathcal E)$, with the norm $\norm\cdot_\Gamma$, be as in Proposition~\ref{dp:prop:degree-p}, and let $\hGamma^p_\Gamma(\mathcal E)$ be the completion of this normed space, which is the space $\hGamma^p(\mathcal E)$ of Section~\ref{dp:sec:laws}.
+
+\begin{definition}[the class $\cC_p$]\label{dp:def:cp}
+$\cC_p$ is the class of germs $(P,U,f,x_0)$, with $P,W$ normed, $U\subseteq P$ open, $f\colon U\to W$, such that $f$ is DP at $x_0$ and its coefficient laws of degree $n\le p$ are ambient of degree $n$.
+\end{definition}
+
+\begin{theorem}[composition and target descent do not reach DP]\label{dp:thm:cp}
+Let $K$ be of characteristic $p$, complete or not.
+\begin{enumerate}
+\item $\mathrm{An}\subseteq\mathrm{AA}\subseteq\cC_p\subseteq\mathrm{DP}$.
+\item $\cC_p$ is closed under composition, pairing, bounded linear postcomposition, restriction to open subsets and to linear subspaces, and target descent along linear isometries $j$ for which the laws of $j\circ f$ lie in $j(W)$.
+\item The map $\gamma^\sharp_p\colon K\oplus\mathcal E\to\Gamma^p(\mathcal E)$, $\gamma^\sharp_p(\lambda,h)=h^{\otimes p}$, is DP at every point, and its germ at no point is in $\cC_p$, also as a map into $\hGamma^p_\Gamma(\mathcal E)$.
+\end{enumerate}
+So the smallest class of germs that contains the analytic germs and is closed under composition, pairing and target descent along linear isometries with closed range is contained in $\cC_p$ and is not DP. The same holds among germs with Banach values.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} By \cite[Proposition~14.9(1)]{I}, AA germs are DP with ambient laws, and analytic germs are AA.
+
+\emph{Step 2 (composition).} Let $f$ be in $\cC_p$ at $x_0$ with laws $a_n$, and $g$ in $\cC_p$ at $f(x_0)$ with laws $b_r$. By \cite[Lemma~Q.3]{I}, $g\circ f$ is DP at $x_0$. Let $1\le N\le p$. By \cite[Lemma~Q.4]{I}, its law of degree $N$ has linearization $\sum_{r=1}^NL_{b_r}\circ\mathsf Q_{r,N}$, with $\mathsf Q_{r,N}=\sum_{\vec n\in\mathcal C(N,r)}\bigotimes_iL_{a_{n_i}}$. The term $r=1$ is $L_{b_1}\circ L_{a_N}$ with $b_1$ bounded linear, so it is bounded for $\pi$ by $\norm{b_1}\operatorname{amb}(a_N)$. For $r\ge2$ all parts of $\vec n$ are below $p$, so $\pi_{\vec n}\le\prod_in_i!\,\pi$ on $\Gamma^N(P)$, by Lemma~\ref{dp:lem:kappa-bounds}. Hence $L_{b_r}\circ\mathsf Q_{r,N}$ is bounded for $\pi$ by $\operatorname{amb}(b_r)\sum_{\vec n}\prod_in_i!\operatorname{amb}(a_{n_i})$. This is finite, as $r\le p$ and all $n_i\le p$. So the law of degree $N$ of $g\circ f$ is ambient. The law of degree $0$ is a constant, so it is ambient.
+
+\emph{Step 3 (the other operations).} For a pair $(a,a')$ of laws, $\operatorname{amb}((a,a'))$ is the maximum of $\operatorname{amb}(a)$ and $\operatorname{amb}(a')$. For bounded linear $\Upsilon$, $\operatorname{amb}(\Upsilon a)\le\norm\Upsilon\operatorname{amb}(a)$. Restriction: on a linear subspace $P'\subseteq P$, the projective seminorm of $P'^{\otimes n}$ dominates that of $P^{\otimes n}$. Target descent: by Theorem~\ref{dp:thm:target-descent}, $f$ is DP with laws $j^{-1}\tilde a_n$, for $\tilde a_n$ the laws of $j\circ f$, and $\operatorname{amb}(j^{-1}\tilde a_n)=\operatorname{amb}(\tilde a_n)$.
+
+\emph{Step 4 (item (3)).} $\gamma^\sharp_p$ is a bounded law of degree $p$ and norm at most $1$, so it is DP at every point, by Theorem~\ref{dp:thm:calculus}(1). At every point its law of degree $p$ is $\gamma^\sharp_p$ itself, the top-degree part of the polynomial. By Proposition~\ref{dp:prop:degree-p}(2) with $n=p$, it is not ambient of degree $p$, also into the completion.
+
+\emph{Step 5 (the last sentence).} The class $\cC_p$ contains the analytic germs and has the operations of item (2). Target descent along an isometry with closed range is an instance of item (2), by Theorem~\ref{dp:thm:target-descent}(2). By item (3), with values in the Banach space $\hGamma^p_\Gamma(\mathcal E)$ for the last claim, $\cC_p$ is not DP.
+\end{proof}
+
+\begin{theorem}[inverse functions for $\cC_p$]\label{dp:thm:cp-inverse}
+Let $P,W$ be Banach spaces and $f$ a germ from $P$ to $W$ at $x_0$ with $Df(x_0)$ bijective with bounded inverse. If $f$ is in $\cC_p$ at $x_0$, then its local inverse germ is in $\cC_p$ at $f(x_0)$. If $f$ is in $\cC_p$ at every point of a neighborhood of $x_0$, then its local inverse germ is in $\cC_p$ at every point of a neighborhood of $f(x_0)$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (one point).} Use the notation of Step~1 of the proof of Theorem~\ref{dp:thm:ta-inverse}, a step that uses only that $f$ is DP: the inverse germ is DP with laws $\mathsf g_N\circ\mathsf T_0^{-1}$, and~\eqref{dp:eq:ta-inverse-recursion} holds. We show by induction that $\operatorname{amb}(\mathsf g_N)<\infty$ for $N\le p$. For $N=1$ this is clear. Let $2\le N\le p$ and $r\ge2$. All parts of $\vec n\in\mathcal C(N,r)$ are below $p$, so $\pi_{\vec n}\le\prod_in_i!\,\pi$ by Lemma~\ref{dp:lem:kappa-bounds}, and $\pi(\mathsf Q_{r,N}t)\le\sum_{\vec n}\prod_in_i!\operatorname{amb}(\mathsf g_{n_i})\pi(t)$. As $r\le p$, $\operatorname{amb}(\mathsf R_r)\le\norm{\mathsf T_0^{-1}}\operatorname{amb}(a_r)<\infty$. So $\operatorname{amb}(\mathsf g_N)<\infty$, and $\operatorname{amb}(\mathsf g_N\circ\mathsf T_0^{-1})\le\operatorname{amb}(\mathsf g_N)\norm{\mathsf T_0^{-1}}^N$. The law of degree $0$ of the inverse germ is the constant $x_0$, so it is ambient.
+
+\emph{Step 2 (nearby points).} Let $f$ be in $\cC_p$ on a neighborhood $U'$ of $x_0$. By Theorem~\ref{dp:thm:differentiable}(4), $f$ is $C^\infty$ on $U'$, and the operators bijective with bounded inverse are open in $\cL(P,W)$. So we may take $Df(x)$ bijective with bounded inverse for $x\in U'$. By Theorem~\ref{dp:thm:inverse}, after shrinking, there are open sets $U_0\subseteq U'$ and $U_1$ with $f\colon U_0\to U_1$ a bijection whose inverse $\mathsf h$ is DP on $U_1$. Let $y\in U_1$ and $x=\mathsf h(y)$. Step~1 at $x$ gives a local inverse germ $\mathsf h'$ of $f$ at $y$, in $\cC_p$ there. It is continuous and $\mathsf h'(y)=x\in U_0$, so $\mathsf h'$ has values in $U_0$ near $y$. As $f$ is injective on $U_0$, $\mathsf h'=\mathsf h$ near $y$.
+\end{proof}
+
+Two more classes sit between TA and $\cC_p$. Let $\cC_p^{\rm loc}$ be the class of germs that are in $\cC_p$ at every point of a neighborhood of the base point. Let $\cC_p^{\rm u}$ be the class of DP germs at $x_0$ such that for some radius $R$ and bound $M$, with $L_N$ the linearizations of the coefficient laws,
+\begin{equation}\label{dp:eq:cpu}
+ \norm{L_N(h^{\otimes(N-n)}\cdot t)}\le MR^{-N}\norm h^{N-n}\pi(t)\qquad(1\le n\le\min(N,p),\ h\in P,\ t\in\Gamma^n(P)).
+\end{equation}
+The class $\cC_p^{\rm loc}$ is closed under composition, as a DP germ is continuous at its base point. By Theorem~\ref{dp:thm:cp}(2) at each nearby point, and Theorem~\ref{dp:thm:target-descent}(2), it is closed under pairing, bounded linear postcomposition, restriction, and target descent along linear isometries with closed range.
+
+\begin{theorem}[the chain]\label{dp:thm:chain}
+For every $K$ of characteristic $p$, complete or not, among germs with Banach values,
+\[
+ \mathrm{AA}\subsetneq\mathrm{AA}^\circ\subseteq\mathrm{TA}\subseteq\cC_p^{\rm u}\subseteq\cC_p^{\rm loc}\subsetneq\cC_p\subsetneq\mathrm{DP}.
+\]
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (AA and $\mathrm{AA}^\circ$).} Let $f$ be AA with Banach values, through an isometry $j$ into a Banach space. Then $j$ has closed range and $j\circ f$ is analytic, so $f\in\mathrm{AA}^\circ$ by target descent. Now use the spaces of \cite[Theorem~14.17]{I}. Over every $K$, as stated after that theorem, $g_X$ extends to the diagonal $\hat g_X\colon\widehat W^{\rm at}\to\widehat Y^{\rm at}$ of a bounded bilinear map, and $f_X$ is AA into $\widehat W^{\rm at}$. So $\hat g_X\circ f_X$ is in $\mathrm{AA}^\circ$, and it is AA at no point.
+
+\emph{Step 2 ($\mathrm{AA}^\circ\subseteq\mathrm{TA}\subseteq\cC_p^{\rm u}$).} The first inclusion is Theorem~\ref{dp:thm:composition-closure}. Let $f$ be TA with radius $R$ and bound $M$, and let $n\le\min(N,p)$. By Lemma~\ref{dp:lem:tree}(5) and~(4),
+\[
+ \norm{L_N(h^{\otimes(N-n)}\cdot t)}\le MR^{-N}\binom Nn\norm h^{N-n}\mathfrak t_n(t)\le M\max_{i\le p}\mathsf c_i\,(R/2)^{-N}\norm h^{N-n}\pi(t).
+\]
+So~\eqref{dp:eq:cpu} holds with radius $R/2$ and bound $M\max_{i\le p}\mathsf c_i$.
+
+\emph{Step 3 ($\cC_p^{\rm u}\subseteq\cC_p^{\rm loc}$).} Let $f$ satisfy~\eqref{dp:eq:cpu}, with $f$ DP at $x_0$ with radius $R$; shrinking $R$ we may use one radius for both. By Theorem~\ref{dp:thm:whole-ball}, $f$ is DP on $B(x_0,R)$. By Theorem~\ref{dp:thm:differentiable}(2), for small $\norm h$ the law of degree $n$ of $f$ at $x_0+h$ is $v\mapsto\sum_{N\ge n}a_N^{[(N-n,n)]}(h,v)$, and $a_N^{[(N-n,n)]}(h,v)=L_N(h^{\otimes(N-n)}\cdot v^{\otimes n})$ by Step~1 of the proof of \cite[Lemma~Q.4]{I}. For $1\le n\le p$ and $\norm h<R$, the series $L'_n(t)=\sum_{N\ge n}L_N(h^{\otimes(N-n)}\cdot t)$ converges in the Banach target, by~\eqref{dp:eq:cpu}, and $\norm{L'_n(t)}\le MR^{-n}(1-\norm h/R)^{-1}\pi(t)$. As $L'_n$ linearizes that law, the law is ambient. The law of degree $0$ is a constant, so it is ambient. So $f$ is in $\cC_p$ at $x_0+h$ for small $\norm h$.
+
+\emph{Step 4 ($\cC_p^{\rm loc}\ne\cC_p$).} On $K\oplus\mathcal E$ let $\mathsf G_p(\lambda,h)=\lambda h^{\otimes p}$, with values in $\hGamma^p_\Gamma(\mathcal E)$. It is a bounded law of degree $p+1$, so it is DP everywhere. At $0$ its laws of degree at most $p$ vanish, so its germ at $0$ is in $\cC_p$. At $(\lambda_0,0)$ with $\lambda_0\ne0$ we have $\mathsf G_p(\lambda_0+\lambda,h)=\lambda_0h^{\otimes p}+\lambda h^{\otimes p}$. So the law of degree $p$ there is $\lambda_0\gamma^\sharp_p$, which is not ambient, by Theorem~\ref{dp:thm:cp}(3). Such points accumulate at $0$. So the germ of $\mathsf G_p$ at $0$ is in $\cC_p$ and not in $\cC_p^{\rm loc}$.
+
+\emph{Step 5 ($\cC_p\ne\mathrm{DP}$).} This is Theorem~\ref{dp:thm:cp}(3) with values in $\hGamma^p_\Gamma(\mathcal E)$.
+\end{proof}
+
+So, in characteristic $p$ and among germs with Banach values, the classes $\mathrm{AA}^\circ$, TA and $\cC_p$ are closed under composition and lie strictly between AA and DP, and $\mathrm{AA}^\circ\ne\cC_p$. Between Banach spaces, TA and $\cC_p$ also have the inverse function theorem. The chain does not say whether $\mathrm{AA}^\circ$, TA, $\cC_p^{\rm u}$ and $\cC_p^{\rm loc}$ are distinct. The conjecture and the questions on this are in Section~\ref{dp:sec:questions}.
+
+\subsection{What singles out DP}\label{dp:ssec:singles}
+
+In this subsection classes consist of germs with Banach values, and (C1), (C2), (C3) are the conditions of Section~\ref{dp:ssec:minimal}: containing the analytic germs, target descent, source descent. The germ $\mathsf f$ on $\ell^1(\N,K)$, with coefficients $\mathsf e_n$ and values in $\Kh$, is that of Example~\ref{dp:ex:l1}. Let $\mathfrak S$ be the class of germs $f$ at $x_0$ such that $f\circ Q$ is analytic at a preimage of $x_0$, for some bounded linear surjection $Q$ with a preimage constant.
+
+\begin{theorem}[what singles out DP]\label{dp:thm:singles-out}
+\leavevmode
+\begin{enumerate}
+\item DP is the smallest class with \textup{(C1), (C2), (C3)} (Theorem~\ref{dp:thm:minimal}).
+\item \textup{(Dropping (C3).)} AA is the smallest class with \textup{(C1), (C2)}. Adding composition and pairing gives $\mathrm{AA}^\circ$. The class TA, which contains $\mathrm{AA}^\circ$, has \textup{(C1), (C2)}, composition and pairing. It also has inverse and implicit functions, re-expansion on the whole ball, derivatives and bundle lifting, and for every $K$ of characteristic $p$ it is not DP. So, in characteristic $p$, no list of properties chosen from \textup{(C1), (C2)}, composition, pairing, inverse and implicit functions, re-expansion on the whole ball, derivatives and bundle lifting forces DP. In characteristic $0$, whether $\mathrm{TA}=\mathrm{DP}$ is open.
+\item \textup{(Dropping (C2).)} In every characteristic, $\mathfrak S$ is the smallest class with \textup{(C1), (C3)}. The germ of $\mathsf f$ at $0$ is AA, so DP, and it is not in $\mathfrak S$. Neither is its restriction to $\ell^1_{00}(\N,K)$. So \textup{(C2)} cannot be dropped for general norms.
+\item \textup{(Ultrametric spaces.)} Between ultrametric spaces, \textup{(C1), (C3)} already give DP (Theorem~\ref{dp:thm:ultrametric-minimal}), and $\mathrm{AA}=\mathrm{TA}=\mathrm{DP}$. In characteristic $0$, whether AA, TA and DP differ on non-ultrametric sources is open.
+\item \textup{(Failure of (C3).)} Let $\operatorname{char}K=p$, and read $\gamma^\sharp_p$ with values in $\hGamma^p_\Gamma(\mathcal E)$. Then $\gamma^\sharp_p$ is not in $\cC_p$, while $\gamma^\sharp_p\circ q_{K\oplus\mathcal E}$ is analytic, for the canonical cover $q_{K\oplus\mathcal E}$ of Definition~\ref{dp:def:cover}. So TA, $\mathrm{AA}^\circ$, $\cC_p^{\rm loc}$ and $\cC_p$ fail \textup{(C3)}. In general, a class with \textup{(C1), (C2)} has \textup{(C3)} only if it contains DP.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (2)).} The first sentence is Proposition~\ref{dp:prop:other-classes}. The second is the definition of $\mathrm{AA}^\circ$. TA contains $\mathrm{AA}^\circ$ by Theorem~\ref{dp:thm:composition-closure}, and it has the listed properties by Theorems~\ref{dp:thm:ta-composition}, \ref{dp:thm:ta-recenter}, \ref{dp:thm:ta-inverse} and Corollary~\ref{dp:cor:ta-bundles}. It has (C1), as analytic germs are TA. It has (C2): for a linear isometry $j$ of Banach spaces with $j\circ f$ TA, the germ $j\circ f$ is DP, so its laws lie in $j(W)$ by Theorem~\ref{dp:thm:target-descent}(2), and Theorem~\ref{dp:thm:ta-composition}(4) applies. By Theorem~\ref{dp:thm:chain}, $\mathrm{TA}\ne\mathrm{DP}$.
+
+\emph{Step 2 (item (3), the class).} $\mathfrak S$ contains An: take $Q=\id$. Let $f\circ Q\in\mathfrak S$, with $f\circ Q\circ Q'$ analytic. Then $Q\circ Q'$ is a bounded linear surjection with a preimage constant, the product of the two constants. So $\mathfrak S$ has (C3). A class with (C1), (C3) contains every germ of $\mathfrak S$, by the definition of $\mathfrak S$.
+
+\emph{Step 3 (item (3), the germ).} $\mathsf f$ is AA at $0$ by Example~\ref{dp:ex:l1}(2). Let $P_1$ be $\ell^1(\N,K)$ or $\ell^1_{00}(\N,K)$, and suppose that $\mathsf f|_{P_1}\circ Q$ is analytic at $\tilde x_0$, with $Q\colon P'\to P_1$ a bounded linear surjection with preimage constant $\mathsf c'$, and $Q(\tilde x_0)=0$. Let $e_i$ be the unit vectors, and choose $\tilde e_i\in P'$ with $Q(\tilde e_i)=e_i$ and $\norm{\tilde e_i}\le\mathsf c'$. On $\ell^1_{00}(\N,K)$ the map $\mathsf t(h)=\sum_ih_i\tilde e_i$ is linear, $\norm{\mathsf t(h)}\le\mathsf c'\norm h$, and $Q\circ\mathsf t=\id$. So $\mathsf f(h)=(\mathsf f|_{P_1}\circ Q)(\tilde x_0+\mathsf t(h))$ is analytic at $0$ on $\ell^1_{00}(\N,K)$, with $n$-linear coefficients $\beta_n$ into $\Kh$ and $\norm{\beta_n}\le M'R'^{-n}$. Step~3 of the proof of Example~\ref{dp:ex:l1} uses only the unit vectors, so it gives $n^n\le\abs{\mathsf e_n}\le\norm{\beta_n}$ for all $n$, a contradiction.
+
+\emph{Step 4 (item (4)).} Theorem~\ref{dp:thm:ultrametric-minimal} gives the first claim. By \cite[Theorem~14.39(1)]{I}, $\mathrm{AA}=\mathrm{DP}$ between ultrametric spaces, and $\mathrm{AA}\subseteq\mathrm{TA}\subseteq\mathrm{DP}$.
+
+\emph{Step 5 (item (5)).} $\gamma^\sharp_p$ is not in $\cC_p$ by Theorem~\ref{dp:thm:cp}(3). By Lemma~\ref{dp:lem:laws-cover}, the law $\gamma^\sharp_p\circ q_{K\oplus\mathcal E}$ on $\ell^1_{00}(I_{K\oplus\mathcal E})$ is the diagonal of a bounded $p$-linear map, so it is analytic. A class containing An with (C3) would contain $\gamma^\sharp_p$. By Theorem~\ref{dp:thm:chain} the four named classes lie in $\cC_p$. The last sentence is Theorem~\ref{dp:thm:minimal}.
+\end{proof}
+
+\begin{remark}[the three conditions]\label{dp:rem:conditions}
+The class of constant germs has (C2), (C3) and not (C1). The class of DP germs together with all germs on infinite-dimensional sources has (C1), (C2) and not (C3): take a discontinuous germ $g$ on $K$, which is not DP, and a bounded linear surjection $Q\colon P'\to K$ with a preimage constant and $\dim P'=\infty$; then $g\circ Q$ is in the class and $g$ is not. The class $\mathfrak S$ has (C1), (C3) and not (C2), by Theorem~\ref{dp:thm:singles-out}(3) and Example~\ref{dp:ex:l1}(2); by Lemma~\ref{dp:lem:cover-flat} it is the class CA of Section~\ref{dp:sec:cover}. In characteristic $p$, AA is a named class with (C1), (C2) and not (C3). In characteristic $0$ we have no such class, as $\mathrm{AA}\ne\mathrm{DP}$ is open there.
+\end{remark}
+
+\begin{remark}[the universal law]\label{dp:rem:universal-law}
+Theorem~\ref{dp:thm:singles-out} concerns the listed properties. Let $P$ be normed, let $\mathbf U$ be the completed $\ell^1$-sum of the spaces $\hGamma^n(P)$ of Section~\ref{dp:sec:laws}, $n\ge1$, with $\iota_n\colon\Gamma^n(P)\to\mathbf U$ the canonical maps, and put $\mathsf v(h)=\sum_{n\ge1}\iota_n(h^{\otimes n})$ for $\norm h<1$. Let $f$ be DP at $x_0$ with radius $R$, bound $M$ and laws $a_n$, with values in a Banach space $W$. Choose $\mathsf s\in K$ with $\abs{\mathsf s}\ge1/R$. By Theorem~\ref{dp:thm:normed-roby}, $\norm{\mathsf s^{-n}L_{a_n}t}\le M\norm t_\Gamma$. So $\iota_n(t)\mapsto\mathsf s^{-n}L_{a_n}t$ extends to a bounded linear map $\mathbf L\colon\mathbf U\to W$, and
+\[
+ f(x)=f(x_0)+\mathbf L\bigl(\mathsf v(\mathsf s(x-x_0))\bigr)\qquad(\norm{x-x_0}<1/\abs{\mathsf s}).
+\]
+So a class that contains the constants and the germs $\mathsf v$ and is closed under sums, bounded linear postcomposition and precomposition with affine maps contains every DP germ with Banach values. So these conditions, with no source descent, also reach every DP germ with Banach values.
+\end{remark}
+
+Table~\ref{dp:tab:classes} collects the comparison. Among the properties in it, only source descent and the row on all laws are not shared by TA, and source descent with (C1), (C2) forces DP. For TA, re-expansion keeps the radius $R-\varrho$ over every $K$ (Theorem~\ref{dp:thm:ta-recenter}). For DP, Theorem~\ref{dp:thm:whole-ball}(2) gives this inequality for the DP radius over densely valued $K$, when $f$ is the sum of its law series on the ball, and Example~\ref{dp:ex:radius-drop} shows that it can fail over discretely valued $K$.
+
+\begin{table}[htbp]
+\small
+\caption{Classes in characteristic $p$, for $K$ complete and Banach values, unless a row says otherwise. A dash means that the entry is not considered here.}\label{dp:tab:classes}
+\begin{tabular}{@{}p{0.19\linewidth}p{0.1\linewidth}p{0.085\linewidth}p{0.105\linewidth}p{0.085\linewidth}p{0.105\linewidth}p{0.11\linewidth}@{}}
+ & An & AA & $\mathrm{AA}^\circ$ & TA & $\cC_p^{\rm loc}$ & DP\\
+\hline
+Composition, every $K$ of char.\ $p$ & yes & no & yes & yes & yes & yes\\
+Target descent & no & yes & yes & yes & yes & yes\\
+Source descent & no & no & no & no & no & yes\\
+Inverse functions & --- & no & open & yes & yes & yes\\
+Whole ball & yes & yes & yes & yes & --- & yes, radius can drop\\
+All bounded laws & no & no & no & no & no & yes\\
+Laws bounded for & lifts in $W$ & $\pi$ & $\mathfrak t^{(\ell)}_N$, one $\ell$ & $\mathfrak t_N$ & $\pi$, degree $\le p$ & $\norm\cdot_\Gamma$\\
+Between ultrametric spaces & can differ from DP & $=\mathrm{DP}$ & $=\mathrm{DP}$ & $=\mathrm{DP}$ & $=\mathrm{DP}$ & $=\mathrm{DP}$\\
+\end{tabular}
+\end{table}
+
+\emph{Sources of the entries.} Composition: \cite[Proposition~14.26, proof, Step~1]{I} for An; \cite[Theorem~14.17]{I} for AA; the definition for $\mathrm{AA}^\circ$; Theorem~\ref{dp:thm:ta-composition} for TA; Theorem~\ref{dp:thm:cp}(2) and the paragraph before Theorem~\ref{dp:thm:chain} for $\cC_p^{\rm loc}$; \cite[Lemma~Q.3]{I} for DP. Target descent: Proposition~\ref{dp:prop:other-classes} for An and AA; the definition for $\mathrm{AA}^\circ$; Theorem~\ref{dp:thm:ta-composition}(4) with Theorem~\ref{dp:thm:target-descent}(2) for TA; the paragraph before Theorem~\ref{dp:thm:chain} for $\cC_p^{\rm loc}$; Theorem~\ref{dp:thm:target-descent} for DP. Source descent: Proposition~\ref{dp:prop:other-classes}, Theorem~\ref{dp:thm:singles-out}(5), Proposition~\ref{dp:prop:source-descent}. Inverse functions: \cite[Corollary~14.19(1)]{I} for AA; Theorems~\ref{dp:thm:ta-inverse}, \ref{dp:thm:cp-inverse}, \ref{dp:thm:inverse}; for $\mathrm{AA}^\circ$ see Section~\ref{dp:sec:questions}. Whole ball, meaning membership at every point of the ball of an expansion: Step~5 of the proof of \cite[Proposition~14.12]{I} with $j=\id$, for An; \cite[Proposition~14.12(2)]{I} for AA; Theorems~\ref{dp:thm:composition-closure} and~\ref{dp:thm:ta-recenter} for $\mathrm{AA}^\circ$ and TA; Theorem~\ref{dp:thm:whole-ball} and Example~\ref{dp:ex:radius-drop} for DP. All laws: Theorem~\ref{dp:thm:cp}(3), and Theorem~\ref{dp:thm:calculus}(1) for DP. The row ``laws bounded for'' names the seminorm for which the linearizations are bounded, with geometric constants, by \cite[Proposition~14.9(1)]{I}, Theorem~\ref{dp:thm:composition-closure} and Theorem~\ref{dp:thm:normed-roby}; for An the laws are diagonals of multilinear maps into $W$. Between ultrametric spaces: \cite[Proposition~14.40(3)]{I} for An, which agrees with DP if $K$ is discretely valued or $W$ is spherically complete, by \cite[Proposition~14.40(1)]{I}; the other entries by \cite[Theorem~14.39(1)]{I} and the chain.
+
+\subsection{Composition on all sources}\label{dp:ssec:all-sources}
+
+In this subsection the characteristic of $K$ is arbitrary. We use the data of \cite[Definition~14.15]{I}. For a normed space $X\ne0$, $n\ge1$ and a family $y=(y_l)_{l\in I}$ of elementary tensors of $X^{\otimes n}$, given with their factors, let $E_0$ be the span of the $y_l$ and $\mathcal P(y)$ the set of linear maps $\Psi\colon E_0\to\Gamma^n(X)$ that fix $E_0\cap\Gamma^n(X)$. Then
+\[
+ \mathfrak l(y)=\inf_{\Psi\in\mathcal P(y)}\frac{\sum_l\pi(\Psi y_l)}{\sum_l\norm{y_l}_{\rm e}},\qquad\mathfrak l_n(X)=\sup_y\mathfrak l(y).
+\]
+Put $\mathfrak L_n(K)=\sup_P\mathfrak l_n(P)$, over all normed spaces $P\ne0$. As $\Gamma^1(X)=X$, the map $\Psi=\id$ gives $\mathfrak l_1(X)\le1$. If $\operatorname{char}K=0$, symmetrization gives $\Psi$ with $\pi(\Psi y_l)\le(n!/\abs{n!})\norm{y_l}_{\rm e}$, the numerator being a real number; so every $\mathfrak l_n(X)$ is finite, and only the growth in $n$ is in question. If $\operatorname{char}K=p$, then $\mathfrak L_p(K)=\infty$ by \cite[Lemma~Q.9]{I}.
+
+Let $\mathsf A$ be a finite set, $\mathsf w=(\mathsf w_{\mathsf a})_{\mathsf a\in\mathsf A}$ positive real numbers, $m\ge1$, and $\operatorname{qm}\colon K^{\mathsf A}\to K^m$ a linear surjection. Let $X_{\mathsf A,\mathsf w,\operatorname{qm}}$ be $K^m$ with the norm
+\[
+ \norm h=\inf\Bigl\{\sum_{\mathsf a}\abs{\mathsf z_{\mathsf a}}\mathsf w_{\mathsf a}:\ \operatorname{qm}(\mathsf z)=h\Bigr\}.
+\]
+This is a quotient norm, and it is a norm since $\ker\operatorname{qm}$, the common kernel of finitely many bounded linear forms of the weighted $\ell^1$-norm on $K^{\mathsf A}$, is closed.
+
+\begin{proposition}[composition on all sources]\label{dp:prop:all-sources}
+\leavevmode
+\begin{enumerate}
+\item Let $P\ne0$ be normed and $\vec n\in\mathcal C(N,r)$, with $\mathfrak l_{n_i}(P)<\infty$ whenever $n_i\ge2$. Then $\mathfrak k_{\vec n}(P)\le\prod_{i:\,n_i\ge2}\abs\varpi^{-1}\mathfrak l_{n_i}(P)$. So $\sup_n\mathfrak l_n(P)^{1/n}<\infty$ implies $\mathfrak k(P)<\infty$, and if $\sup_n\mathfrak L_n(K)^{1/n}<\infty$, then composites of AA germs are AA on every normed source.
+\item Let $K$ be complete and $\sup_n\mathfrak L_n(K)^{1/n}=\infty$. Then there are a Banach space $H$ with $\mathfrak k(H)=\infty$, a germ $f$ on $H$ that is AA with values in a Banach space $W$, and an analytic germ $g$ on $W$ with values in a Banach space, such that $g\circ f$ is not AA.
+\item For every $n$, $\mathfrak L_n(K)$ is the supremum of $\mathfrak l_n(X)$ over the spaces $X=X_{\mathsf A,\mathsf w,\operatorname{qm}}$.
+\end{enumerate}
+\end{proposition}
+
+So for $K$ complete, $\mathfrak k(P)<\infty$ holds for every normed $P$ if and only if $\sup_n\mathfrak L_n(K)^{1/n}<\infty$, and by item~(3) this condition concerns finite-dimensional spaces only.
+
+\begin{proof}
+\emph{Step 1 (item (3)).} Each $X_{\mathsf A,\mathsf w,\operatorname{qm}}$ is a nonzero normed space, so the supremum in item~(3) is at most $\mathfrak L_n(K)$. Conversely, let $y$ be a family in $P^{\otimes n}$. Let $\mathsf A\subseteq P$ be the finite set of its nonzero factors, $\mathsf w_{\mathsf a}=\norm{\mathsf a}_P$, $Z$ the span of $\mathsf A$, $m=\dim Z$, and identify $Z$ with $K^m$. Let $\operatorname{qm}(\mathsf z)=\sum_{\mathsf a}\mathsf z_{\mathsf a}\mathsf a$, and let $X$ be $Z$ with the resulting norm. The triangle inequality gives $\norm h_P\le\norm h_X$ on $Z$, and $\norm{\mathsf a}_X\le\mathsf w_{\mathsf a}=\norm{\mathsf a}_P$. So the atoms have the same norm in $X$ and in $P$, and $\norm{y_l}_{\rm e}$ is the same in both. As $\Gamma^n$ is the space of symmetric tensors (Section~\ref{dp:sec:conv}), $\Gamma^n(P)\cap Z^{\otimes n}=\Gamma^n(Z)$. Since $E_0\subseteq Z^{\otimes n}$, the set $\mathcal P(y)$ is the same in $X$ and in $P$. The identity from $X$ to $P$ is a contraction, so $\pi_P\le\pi_X$ on $Z^{\otimes n}$. Hence $\mathfrak l(y)$ computed in $P$ is at most $\mathfrak l(y)$ computed in $X$.
+
+\emph{Step 2 (item (1), one block).} Let $t\in\Gamma^N(P)$. For $0\le i\le r$ let $\pi^{(i)}$ be the projective seminorm of $\Gamma^{n_1}_\pi(P)\otimes\dots\otimes\Gamma^{n_i}_\pi(P)\otimes P^{\otimes(n_{i+1}+\dots+n_r)}$, a space that contains $t$. Then $\pi^{(0)}(t)=\pi(t)$ and $\pi^{(r)}(t)=\pi_{\vec n}(t)$. We claim that $\pi^{(i)}(t)\le\abs\varpi^{-1}\mathfrak l_{n_i}(P)\pi^{(i-1)}(t)$ if $n_i\ge2$, and $\pi^{(i)}(t)=\pi^{(i-1)}(t)$ if $n_i=1$. The second holds as $\Gamma^1_\pi(P)=P$. Let $n_i\ge2$. Let $G_0$ be the tensor product of all the factors except block $i$, that is, $\Gamma^{n_1}_\pi(P)\otimes\dots\otimes\Gamma^{n_{i-1}}_\pi(P)\otimes P^{\otimes(n_{i+1}+\dots+n_r)}$, with its projective seminorm $\pi_{G_0}$. Let $G$ be its separated quotient, a normed space, with quotient map $\operatorname{sq}$. Moving block $i$ to the front, we read $t$ in $\Gamma^{n_i}(P)\otimes G_0$, and we put $t'=(1\otimes\operatorname{sq})t\in\Gamma^{n_i}(P)\otimes G$. Moving factors does not change projective seminorms, and the projective seminorm is associative. So $\pi(t')\le\pi^{(i-1)}(t)$, and \cite[Lemma~Q.7(2)]{I} gives $\mu(t')\le\abs\varpi^{-1}\mathfrak l_{n_i}(P)\pi^{(i-1)}(t)$. Let $t'=\sum_qs_q\otimes w'_q$ with $s_q\in\Gamma^{n_i}(P)$, $w'_q\in G$, and choose $w_q\in G_0$ with $\operatorname{sq}(w_q)=w'_q$ and $\pi_{G_0}(w_q)=\norm{w'_q}$. Then $t-\sum_qs_q\otimes w_q$ lies in $\Gamma^{n_i}(P)\otimes\ker\operatorname{sq}$, which has cost $0$. So $\pi^{(i)}(t)\le\sum_q\pi(s_q)\norm{w'_q}$, and taking the infimum, $\pi^{(i)}(t)\le\mu(t')$. This proves the claim.
+
+\emph{Step 3 (item (1), the conclusion).} Multiplying the claims gives the bound on $\mathfrak k_{\vec n}(P)$, for $\pi(t)=0$ as well. Let $\sup_n\mathfrak l_n(P)^{1/n}<\infty$, and let $\mathsf c\ge1$ be at least this supremum. At most $N$ blocks occur and $\sum_in_i=N$, so $\mathfrak k_{\vec n}(P)\le\abs\varpi^{-N}\mathsf c^N$, and $\mathfrak k(P)\le\mathsf c/\abs\varpi$. If $\sup_n\mathfrak L_n(K)^{1/n}<\infty$, this holds for every $P\ne0$, and \cite[Theorem~14.22]{I}, (iii) implies (i), gives the composites.
+
+\emph{Step 4 (item (2), the spaces).} For each $i\ge2$ choose $n_i$ with $\mathfrak L_{n_i}(K)>i^{n_i}$. By item~(3) there are a space $P_i=X_{\mathsf A,\mathsf w,\operatorname{qm}}$ and a family $y^{(i)}$ in $P_i^{\otimes n_i}$ with $\mathfrak l(y^{(i)})\ge i^{n_i}$. As $\mathfrak l_1\le1$, $n_i\ge2$. Let $X$ be the $\ell^1$-sum of the $P_i$, and $G$ the $\ell^1$-sum of the universal spaces $G(y^{(i)})$ of \cite[Definition~14.15]{I}. Over complete $K$ the $P_i$ and $G(y^{(i)})$ are finite-dimensional, so complete. So $X$, $G$ and $H=X\oplus G$, with the maximum norm, are Banach spaces.
+
+Each $P_i$ sits isometrically in $X$, with a contractive coordinate projection $\operatorname{pr}_i$. As $\Gamma^{n_i}(X)\cap P_i^{\otimes n_i}=\Gamma^{n_i}(P_i)$, the space $G(y^{(i)})$ is the same computed in $P_i$ or in $X$. If $\tilde\Psi$ is in $\mathcal P(y^{(i)})$ for $X$, then $\operatorname{pr}_i^{\otimes n_i}\circ\tilde\Psi$ is in $\mathcal P(y^{(i)})$ for $P_i$, with values of no larger $\pi$. So $\mathfrak l(y^{(i)})\ge i^{n_i}$ also holds in $X$.
+
+\emph{Step 5 (item (2), the constant).} Fix $i\ge2$ and write $n=n_i$. Steps~4, 5 and~7 of the proof of \cite[Proposition~14.18]{I} use one family at a time, and neither that $\mathfrak l_n(X)$ is infinite nor that all families have the same degree. For this family they give $\mathfrak k_{(n,1)}(H)\ge\mathfrak l(y^{(i)})/(n+1)\ge i^n/(n+1)$. As $n\ge2$, we have $n/(n+1)\ge2/3$ and $(n+1)^{1/(n+1)}\le2$, so
+\[
+ \mathfrak k(H)\ge\bigl(i^n/(n+1)\bigr)^{1/(n+1)}\ge i^{2/3}/2.
+\]
+This holds for all $i\ge2$, so $\mathfrak k(H)=\infty$. As $K$ is complete, \cite[Theorem~14.22]{I} says that \textup{(iii)}, \textup{(iii$'$)} and \textup{(ii)} are equivalent for $H$, so \textup{(ii)} fails, and this is the assertion.
+\end{proof}

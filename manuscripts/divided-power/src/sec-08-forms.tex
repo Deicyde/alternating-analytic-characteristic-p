@@ -1,0 +1,128 @@
+\section{Divided-power forms}\label{dp:sec:forms}
+
+Throughout this section $P,P'$ are normed model spaces, $F,F_1,F_2,F_3$ are normed value spaces, and $k,l\ge0$ are integers. The characteristic of $K$ is arbitrary unless this is said. We read $\Mult^0(P;F)=\Alt^0(P;F)=F$. So $\cL(P,\Alt^0(P;F))=\cL(P,F)=\Alt^1(P;F)$.
+
+\subsection{The de Rham complex}\label{dp:ssec:de-rham}
+
+Let $\cM$ be a DP manifold modeled on $P$. A section of the DP bundle $\Alt^k(T\cM;F)$ of Proposition~\ref{dp:prop:categories}(3) is \emph{DP} if its representative in every chart of $\cM$ is DP. A \emph{DP $F$-valued $k$-form} on $\cM$ is a DP section of this bundle; for $k=0$ it is a DP map $\cM\to F$. Write $\Omega^k_{\mathrm{DP}}(\cM;F)$ for the space of these forms. A representative in a chart is a map $\eta\colon U\to\Alt^k(P;F)$ on an open set $U\subseteq P$.
+
+Let $U\subseteq P$ and $U'\subseteq P'$ be open, $f\colon U\to U'$ be DP on $U$, and $\eta\colon U'\to\Alt^k(P';F)$. The \emph{pullback} is
+\begin{equation}\label{dp:f:pullback}
+ (f^*\eta)(x)=A^k_{P,P';F}\bigl(Df(x)\bigr)\bigl(\eta(f(x))\bigr)=\eta(f(x))\circ\bigl(Df(x),\dots,Df(x)\bigr),
+\end{equation}
+which for $k=0$ reads $f^*\eta=\eta\circ f$. Let $\delta_k\colon\cL(P,\Alt^k(P;F))\to\Mult^{k+1}(P;F)$ be the linear map, of norm at most $k+1$, given by
+\[
+ \delta_k(\mathsf T)(v_0,\dots,v_k)=\sum_{i=0}^k(-1)^i\mathsf T(v_i)(v_0,\dots,\widehat{v_i},\dots,v_k).
+\]
+For a differentiable map $\eta\colon U\to\Alt^k(P;F)$ the \emph{exterior derivative} is $d\eta=\delta_k\circ D\eta$; this is the formula~\cite[(10.3)]{I}. For a bounded bilinear pairing $F_1\times F_2\to F_3$, the \emph{wedge product} of an $F_1$-valued $k$-form and an $F_2$-valued $l$-form is the shuffle formula~\cite[(10.2)]{I}, with values multiplied in the pairing.
+
+\begin{theorem}[DP de Rham complex]\label{dp:thm:de-rham}
+In every characteristic:
+\begin{enumerate}
+\item \textup{(Pullback.)} If $f$ is DP on $U$ and $\eta$ is DP on $U'$, then $f^*\eta$ is DP on $U$, and $(f_1\circ f)^*=f^*f_1^*$ for a further DP map $f_1$ from $U'$ to an open subset of a normed space. Hence a section of $\Alt^k(T\cM;F)$ is DP if and only if its representative in one chart around each point is DP. Representatives in charts $\chi,\chi'$ are related by $\eta_\chi=(\chi'\circ\chi^{-1})^*\eta_{\chi'}$, and DP maps of manifolds pull back DP forms.
+\item \textup{(Exterior derivative.)} If $\eta\colon U\to\Alt^k(P;F)$ is DP on $U$, then $d\eta$ has values in $\Alt^{k+1}(P;F)$ and is DP on $U$.
+\item \textup{(Naturality.)} For $f,\eta$ as in item~\textup{(1)}, $d(f^*\eta)=f^*(d\eta)$. Hence $d\colon\Omega^k_{\mathrm{DP}}(\cM;F)\to\Omega^{k+1}_{\mathrm{DP}}(\cM;F)$ is well defined, independently of charts.
+\item $d\circ d=0$.
+\item \textup{(Products.)} The wedge product of DP forms is DP and commutes with pullback, and $d(\eta\wedge\xi)=d\eta\wedge\xi+(-1)^k\eta\wedge d\xi$ for a $k$-form $\eta$. For scalar forms it is associative and graded commutative.
+\end{enumerate}
+So $\Omega^\bullet_{\mathrm{DP}}(-;K)$ is a sheaf of differential graded algebras on DP manifolds, contravariant for DP maps.
+\end{theorem}
+
+\begin{proof}
+Steps~2--5 repeat the algebra of Steps~2--6 of the proof of~\cite[Theorem~10.7]{I}. It is written there for scalar values and uses only linearity in the values, bilinearity of the pairing, the chain and product rules, and the symmetry of second derivatives. These hold for DP maps by Theorem~\ref{dp:thm:differentiable}(1), (3) and~(4), in every characteristic.
+
+\emph{Step 1 (pullback).} For $k=0$ this is Theorem~\ref{dp:thm:calculus}(2). Let $k\ge1$. By Theorem~\ref{dp:thm:differentiable}(3) and Theorem~\ref{dp:thm:calculus}(2), the map $x\mapsto(Df(x),\eta(f(x)))$ is DP into $\cL(P,P')\times\Alt^k(P';F)$; a map into a product is DP when its components are, by Step~1 of the proof of Corollary~\ref{dp:cor:bundles}. The map $A=A^k_{P,P';F}$ is DP on $\cL(P,P')$ by Theorem~\ref{dp:thm:calculus}(4) and~(1), and evaluation of operators is bounded bilinear. Composing, $f^*\eta$ is DP. The composition rule is the chain rule. The bundle $\Alt^k(T\cM;F)$ has transitions $A(D(\chi'\circ\chi^{-1}))$, which gives the relation between representatives. So a representative that is DP on a chart domain gives representatives that are DP on the overlaps with every other chart, and being DP at a point depends only on the map near that point. In charts, the pullback along a DP map of manifolds is~\eqref{dp:f:pullback}, so it preserves DP forms.
+
+\emph{Step 2 ($d\eta$).} By Theorem~\ref{dp:thm:differentiable}(3), $D\eta\colon U\to\cL(P,\Alt^k(P;F))$ is DP. The map $\delta_k$ has alternating values. Let $v_i=v_q$ with $i<q$. The summands with index other than $i,q$ contain this vector twice and vanish. The two others differ by moving it across $q-i-1$ entries, so they cancel, with $(-1)^i$ and $(-1)^q(-1)^{q-i-1}=(-1)^{i+1}$; here an alternating map changes sign under a transposition, also in characteristic $2$. Hence $d\eta=\delta_k\circ D\eta$ is a DP map followed by a bounded linear map into $\Alt^{k+1}(P;F)$.
+
+\emph{Step 3 (naturality).} Let $u=Df(x)$ and $u_2=D^2f(x)$. By Step~1 and Theorem~\ref{dp:thm:differentiable}(1), $f^*\eta$ is differentiable into $\Alt^k(P;F)$, and the inclusion into $\Mult^k(P;F)$ is an isometry. In $\Mult^k(P;F)$, the right side of~\eqref{dp:f:pullback} is the bounded $(k+1)$\nobreakdash-linear map $(m,t_1,\dots,t_k)\mapsto m\circ(t_1,\dots,t_k)$ at $(\eta\circ f,Df,\dots,Df)$. So the product rule gives
+\begin{multline*}
+ D(f^*\eta)(x)(v_0)(v_1,\dots,v_k)=D\eta(f(x))(uv_0)(uv_1,\dots,uv_k)\\
+ +\sum_{q=1}^k\eta(f(x))(uv_1,\dots,u_2(v_0,v_q),\dots,uv_k).
+\end{multline*}
+Apply $\delta_k$. The terms that differentiate $\eta$ give $f^*(d\eta)(x)(v_0,\dots,v_k)$. The remaining terms give the sum over $i\ne q$ of $(-1)^iX_{iq}$, where $X_{iq}$ is $\eta(f(x))$ on the list $(uv_c)_{c\ne i}$ with $uv_q$ replaced by $u_2(v_i,v_q)$. For $i<q$, symmetry of $u_2$ and alternation of $\eta(f(x))$ give $X_{iq}=(-1)^{q-1-i}X_{qi}$, so $(-1)^iX_{iq}+(-1)^qX_{qi}=0$. Applied to transitions, this shows that the local $d\eta_\chi$ satisfy the relation of item~(1), so they define a global DP section.
+
+\emph{Step 4 ($d^2=0$).} Since $\delta_k$ is bounded linear, $D(d\eta)=\delta_k\circ D^2\eta$. So $d(d\eta)(x)(v_0,\dots,v_{k+1})$ is the sum over $i\ne q$ of $\epsilon_{iq}D^2\eta(x)(v_i,v_q)$ on the other arguments in order, with $\epsilon_{iq}=(-1)^{i+q-1}$ for $i<q$ and $\epsilon_{iq}=(-1)^{i+q}$ for $i>q$. The terms $(i,q)$ and $(q,i)$ have opposite signs and, by symmetry of $D^2\eta(x)$, equal values.
+
+\emph{Step 5 (products).} By Step~2 of the proof of~\cite[Theorem~10.7]{I}, the shuffle formula is a bounded bilinear map $\Alt^k(P;F_1)\times\Alt^l(P;F_2)\to\Alt^{k+l}(P;F_3)$ that commutes with simultaneous precomposition, and for scalar values it is associative and graded commutative. So the wedge product of DP forms is DP, by Step~1 of the proof of Corollary~\ref{dp:cor:bundles}, and commutes with~\eqref{dp:f:pullback}. The Leibniz rule is Step~6 of the proof of~\cite[Theorem~10.7]{I}: a derivative index placed in the second block moves past $k$ arguments and contributes $(-1)^k$.
+
+\emph{Step 6 (the sheaf).} Being DP at a point depends only on the map near that point, by Step~1 of the proof of Corollary~\ref{dp:cor:bundles}, and sums of DP maps are DP, since addition is bounded linear. So DP forms restrict to open subsets and glue along open covers. With items~(1)--(5) this gives the last sentence of the theorem.
+\end{proof}
+
+Now we compare with the ambient forms of~\cite[Section~10.3]{I}. Let $j\colon\Alt^k(P;K)\to\Mult^k(P;K)$ be the inclusion.
+
+\begin{proposition}[comparison with ambient forms]\label{dp:prop:forms-compare}
+Let $K$ be complete, and let $\cM$ be a Hausdorff analytic manifold as in~\cite[Section~10.3]{I}. Its transitions are analytic, hence DP by Theorem~\ref{dp:thm:calculus}(3), so $\cM$ is a DP manifold, whose maximal DP atlas contains the analytic atlas.
+\begin{enumerate}
+\item Every ambient analytic form $\eta\in\Omega^k_{\mathrm{amb}}(\cM)$ is a DP form. So $\Omega^\bullet_{\mathrm{amb}}(\cM)\subseteq\Omega^\bullet_{\mathrm{DP}}(\cM;K)$, and $d$, $\wedge$ and pullback along analytic maps of~\cite[Theorem~10.7]{I} are the restrictions of those of Theorem~\ref{dp:thm:de-rham}.
+\item Let $f\colon U\to U'$ and $\omega\colon U'\to\Alt^k(P';K)$ be analytic on open sets. Then $f^*\omega$ is DP on $U$. Suppose moreover that $K$ has characteristic $p>0$ and is not spherically complete, and that $k\ge p$. Then there are Banach spaces $N,Y$, a polynomial analytic map $f_0\colon N\to Y$ and an analytic map $\omega_0\colon Y\to\Alt^k(Y;K)$ such that the DP form $f_0^*\omega_0$ is analytic at no point as an $\Alt^k(N;K)$-valued map.
+\item If the model $P$ has finite coordinates, or if $\operatorname{char}K=0$ and $P$ is ultrametric, then three classes of $k$-forms on $\cM$ coincide: DP forms, ambient analytic forms, and forms whose representatives in the charts of the analytic atlas are analytic into $\Alt^k(P;K)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Let $\eta_\chi$ be the representative of $\eta$ in a chart $\chi$ of the analytic atlas of $\cM$. The map $j\circ\eta_\chi$ is analytic into the Banach space $\Mult^k(P;K)$. The map $j$ is an isometry, and its range is closed, since vanishing on repeated arguments is a closed condition. So the diagonals of an expansion of $j\circ\eta_\chi$ lie in the range of $j$, by~\cite[Theorem~2.3]{I}, and $\eta_\chi$ is AA at each point of its domain. By~\cite[Proposition~14.9(1)]{I} it is DP there. So $\eta$ is a DP form, by Theorem~\ref{dp:thm:de-rham}(1). As $\eta_\chi$ is differentiable into $\Alt^k(P;K)$, the chain rule gives $D(j\circ\eta_\chi)=j\circ D\eta_\chi$. So~\cite[(10.3)]{I} gives the same form in $\Mult^k$ and in $\Alt^k$. The wedge product and pullback are the same pointwise formulas.
+
+\emph{Step 2 (item (2)).} Analytic maps are DP (Theorem~\ref{dp:thm:calculus}(3)), so Theorem~\ref{dp:thm:de-rham}(1) applies. The maps $f_0,\omega_0$ are those named $h,\omega_0$ in~\cite[Proposition~10.3(2)]{I}, whose hypotheses are the ones stated.
+
+\emph{Step 3 (item (3)).} A form with analytic representatives is ambient analytic, by composing with $j$, and an ambient analytic form is DP by item~(1). Let $\eta$ be a DP form, with representative $\eta_\chi$ in a chart $\chi$ of the analytic atlas. If $P$ has finite coordinates, $\eta_\chi$ is analytic by Theorem~\ref{dp:thm:calculus}(3). If $\operatorname{char}K=0$ and $P$ is ultrametric, it is analytic by~\cite[Proposition~14.40(2)]{I}, with target $\Alt^k(P;K)$. So a DP form has analytic representatives, and the three classes coincide.
+\end{proof}
+
+\subsection{Weights}\label{dp:ssec:weights}
+
+\emph{Derivatives of laws.} Let $a\in\cP_n(P;W)$ for a normed space $W$, and let $x\in P$. By Theorem~\ref{dp:thm:mixed}(2), $v\mapsto\sum_{i\le n}a^{[(n-i,i)]}(x,v)$ is the expansion of $a$ at $x$. So by Theorem~\ref{dp:thm:differentiable}(1), with $a^{(1)}$ as in~\eqref{dp:laws:hasse},
+\begin{equation}\label{dp:f:law-derivative}
+ Da(x)=a^{(1)}(x)\quad(n\ge1),\qquad Da=0\quad(n=0).
+\end{equation}
+By Lemma~\ref{dp:lem:hasse-law}(1), $x\mapsto Da(x)$ is a bounded polynomial law of degree $n-1$ into $\cL(P,W)$, of norm at most $C_2^n\norm a$ for $n\ge1$. By the case of one derivative in Lemma~\ref{dp:lem:hasse-law}(5), and trivially for $n=0$,
+\begin{equation}\label{dp:f:law-euler}
+ Da(x)(x)=n\,a(x).
+\end{equation}
+
+Let $\eta_n\colon P\to\Alt^k(P;F)$ be a bounded polynomial law of degree $n$. It is a form on $P$, DP everywhere by Theorem~\ref{dp:thm:calculus}(1). Its \emph{total weight} is $n+k$. Its \emph{contraction with the Euler field} $x\mapsto x$ is
+\begin{equation}\label{dp:f:contraction}
+ (\iota\eta_n)(x)(v_1,\dots,v_{k-1})=\eta_n(x)(x,v_1,\dots,v_{k-1})\quad(k\ge1),\qquad\iota\eta_n=0\quad(k=0).
+\end{equation}
+For $k\ge1$, $\iota\eta_n\in\cP_{n+1}(P;\Alt^{k-1}(P;F))$ and $\norm{\iota\eta_n}\le\norm{\eta_n}$. Indeed, on $x=\sum_cs_ch_c$ the map~\eqref{dp:f:contraction} is the product of a homogeneous polynomial of degree $n$ in $s$ with a linear one, paired by the bilinear map $(m,x)\mapsto m(x,\cdot)$ on $\Alt^k(P;F)\times P$ of norm at most $1$. Also, by Lemma~\ref{dp:lem:elementary}(2) and Theorem~\ref{dp:thm:de-rham}(2), $d\eta_n=\delta_k\circ D\eta_n$ is a law of degree $n-1$ into $\Alt^{k+1}(P;F)$ for $n\ge1$, of norm at most $(k+1)C_2^n\norm{\eta_n}$, and $d\eta_0=0$. So $\iota d\eta_n$ is defined.
+
+\begin{proposition}[Euler--Cartan identity]\label{dp:prop:euler}
+For a law $\eta_n\in\cP_n(P;\Alt^k(P;F))$, we have $(d\iota+\iota d)\eta_n=(n+k)\,\eta_n$, in every characteristic.
+\end{proposition}
+
+\begin{proof}
+Write $\mathbf v=(v_0,\dots,v_{k-1})$, and $\mathbf v_{\hat\imath}$ for this list without $v_i$.
+
+\emph{Step 1 ($d\iota$, for $k\ge1$).} By the product rule, $D(\iota\eta_n)(x)(v_0)=D\eta_n(x)(v_0)(x,\cdot)+\eta_n(x)(v_0,\cdot)$. Apply $\delta_{k-1}$. Moving $v_i$ to its place costs $(-1)^i$, so the second terms give $k\,\eta_n(x)(\mathbf v)$. Hence
+\[
+ d\iota\eta_n(x)(\mathbf v)=\sum_{i=0}^{k-1}(-1)^iD\eta_n(x)(v_i)(x,\mathbf v_{\hat\imath})+k\,\eta_n(x)(\mathbf v).
+\]
+
+\emph{Step 2 ($\iota d$).} By definition,
+\[
+ \iota d\eta_n(x)(\mathbf v)=D\eta_n(x)(x)(\mathbf v)+\sum_{i=0}^{k-1}(-1)^{i+1}D\eta_n(x)(v_i)(x,\mathbf v_{\hat\imath}).
+\]
+The sums cancel against Step~1.
+
+\emph{Step 3 (the sum).} By~\eqref{dp:f:law-euler}, $D\eta_n(x)(x)=n\,\eta_n(x)$. So $(d\iota+\iota d)\eta_n=n\eta_n+k\eta_n$. For $k=0$ only Steps~2 and~3 occur, with empty sums.
+\end{proof}
+
+\begin{theorem}[weight splitting]\label{dp:thm:weight-splitting}
+Let $F$ be a Banach space and $k\ge1$. Let $\eta\colon U\to\Alt^k(P;F)$ be DP on an open set $U$ containing $0$, with $B(0,R)\subseteq U$, $\eta(x)=\sum_n\eta_n(x)$ for $\norm x<R$, laws $\eta_n\in\cP_n(P;\Alt^k(P;F))$ with $\norm{\eta_n}\le MR^{-n}$, and $d\eta=0$ near $0$.
+\begin{enumerate}
+\item Every $\eta_n$ is closed.
+\item If $\operatorname{char}K=p>0$, the series $\zeta=\sum_{p\nmid n+k}(n+k)^{-1}\iota\eta_n$ converges on $B(0,R)$ and is DP at $0$ and on $B(0,R/C_2)$. The series $\eta_{[p]}=\sum_{p\mid n+k}\eta_n$ is closed on $B(0,R/C_2)$, and $\eta=d\zeta+\eta_{[p]}$ there.
+\item If $\operatorname{char}K=0$, the series $\zeta=\sum_n(n+k)^{-1}\iota\eta_n$ converges on $B(0,R)$ and is DP at $0$ and on $B(0,R/C_2)$, and $\eta=d\zeta$ there. So closed $F$-valued DP germs at $0$ of degree $k\ge1$ are exact (Poincar\'e lemma); by translation the same holds at every point.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (termwise derivative).} Let $r>0$, let $k'\in\{k-1,k\}$, so that $\Alt^{k'}(P;F)$ is complete, and let $g=\sum_na_n$ with laws $a_n\in\cP_n(P;\Alt^{k'}(P;F))$ and $\sup_n\norm{a_n}r^n<\infty$. Then $g$ is DP on $B(0,r)$ by Theorem~\ref{dp:thm:whole-ball}(1). Theorem~\ref{dp:thm:differentiable}(3) gives $Dg(x)=\sum_nDa_n(x)$ for $\norm x<r/C_2$, by~\eqref{dp:f:law-derivative}. Applying $\delta_{k'}$, we get $dg=\sum_nda_n$ on $B(0,r/C_2)$.
+
+\emph{Step 2 (item (1)).} Step~1 with $g=\eta$ and $r=R$ gives $d\eta=\sum_nd\eta_n$ on $B(0,R/C_2)$. For $n\ge1$, the law $d\eta_n$ of degree $n-1$ has norm at most $(k+1)C_2^n\norm{\eta_n}\le(k+1)M(C_2/R)^n$. So this is an expansion as in Definition~\ref{dp:def:laws}(3), and by Lemma~\ref{dp:lem:coefficients-unique}(1) the condition $d\eta=0$ near $0$ forces $d\eta_n=0$ for every $n$.
+
+\emph{Step 3 (inverses of integers).} There is $\mathsf z\ge0$ with $\abs{w^{-1}}\le w^{\mathsf z}$ for every integer $w\ge1$ invertible in $K$. If $\operatorname{char}K=p$, then $w$ prime to $p$ is a root of unity in $\F_p$, so $\abs{w^{-1}}=1$ and $\mathsf z=0$ works. Let $\operatorname{char}K=0$. The set of integers $w$ with $\abs w<1$ is a prime ideal of $\Z$, because $\abs{\cdot}$ is ultrametric and multiplicative. If it is zero, then $\mathsf z=0$ works. Otherwise it is generated by a prime $p_0$; define $\mathsf z>0$ by $\abs{p_0}=p_0^{-\mathsf z}$. If $p_0^e$ is the exact power of $p_0$ dividing $w$, then $\abs w=p_0^{-e\mathsf z}\ge w^{-\mathsf z}$.
+
+\emph{Step 4 (the series, items (2), (3)).} Let $n+k$ be invertible in $K$, and put $\zeta_{n+1}=(n+k)^{-1}\iota\eta_n$; put $\zeta_{n+1}=0$ for the other $n$, and $\zeta_0=0$. By item~(1) and Proposition~\ref{dp:prop:euler}, $d\zeta_{n+1}=\eta_n$ when $n+k$ is invertible. By Step~3, $\norm{\zeta_{n+1}}\le(n+k)^{\mathsf z}MR^{-n}$. So $\sup_n\norm{\zeta_{n+1}}r^{n+1}<\infty$ for every $r<R$, the series $\zeta$ converges on $B(0,R)$, and it is DP at $0$. Step~1 for each $r<R$ shows that $\zeta$ is DP on $B(0,R/C_2)$ and that there $d\zeta$ is the sum of the $\eta_n$ with $n+k$ invertible. In characteristic $0$ this is all of $\eta$. In characteristic $p$, the series $\eta_{[p]}$ has the bounds of $\eta$, so Step~1 and item~(1) give $d\eta_{[p]}=\sum_{p\mid n+k}d\eta_n=0$ on $B(0,R/C_2)$, and $\eta-\eta_{[p]}=d\zeta$ there.
+
+\emph{Step 5 (germs).} Let $\operatorname{char}K=0$, and let $\eta$ be a closed germ at $0$ of degree $k\ge1$ that is DP into the complete space $\Alt^k(P;F)$. It is DP at $0$ with some radius $R$ and bound $M$. By Theorem~\ref{dp:thm:whole-ball}(1) it is DP on $B(0,R)$, so the hypotheses hold with $U=B(0,R)$, and item~(3) applies. Translations are DP with DP inverses, so items~(1) and~(3) of Theorem~\ref{dp:thm:de-rham} carry the statement to every point.
+\end{proof}

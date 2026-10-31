@@ -1,0 +1,227 @@
+\section{Divided-power germs}\label{dp:sec:germs}
+
+A DP germ is a sum of laws with geometric bounds. This section gives the calculus of such sums, shows that the laws are determined by the germ, and shows that, for complete $W$, the germ stays DP on its whole ball of convergence.
+
+\subsection{Expansions}\label{dp:ssec:expansions}
+
+A normed space $P$ has \emph{finite coordinates} if, for some $r\ge0$, there is a bounded linear bijection $T\colon K^r\to P$ with bounded inverse, where $K^r$ carries the maximum norm.
+
+\begin{theorem}[divided-power calculus]\label{dp:thm:calculus}
+\leavevmode
+\begin{enumerate}
+\item \textup{(Mixed terms.)} If $b\colon W\to Y$ is a bounded polynomial law of degree $m$, then
+\[
+ \norm{b^{[\alpha]}(w_1,\dots,w_r)}\le(8/\abs\varpi)^m\norm b\,(\norm{w_1}+\dots+\norm{w_r})^m
+ \qquad(w_1,\dots,w_r\in W,\ \abs\alpha=m).
+\]
+Every bounded polynomial law is continuous and DP on its whole domain.
+\item \textup{(Composition.)} Let $f$ map an open subset of $P$ to $W$ and $g$ an open subset of $W$ to $Y$. If $f$ is
+DP at $x_0$ and $g$ is DP at $f(x_0)$, then $g\circ f$, which is defined near $x_0$, is DP at $x_0$.
+\item \textup{(Comparison.)} A map ambient of degree $n$, for instance the diagonal of a bounded $n$\nobreakdash-linear
+map, is a bounded polynomial law of degree $n$, and a map analytic at a point is DP there. If $P$ has finite
+coordinates, a map DP at a point is analytic there.
+\item \textup{(Alternating maps.)} Let $E$, $D$, $F$ and $F'$ be normed spaces and $k\ge1$. The maps
+$A^k_{E,D;F}\colon\cL(E,D)\to\cL(\Alt^k(D;F),\Alt^k(E;F))$, $\cL(E,D)\to\cL(\Lambda^k_\pi E,\Lambda^k_\pi D)$,
+$u\mapsto\Lambda^k_\pi u$, and $\cL(E,D)\to\cL(\widehat\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$,
+$u\mapsto\widehat\Lambda^k_\pi u$, are ambient of degree $k$, and the joint action $B^k_{E,D;F,F'}$ of
+\cite[Proposition~2.2]{I}, restricted to alternating maps, is ambient of degree $k+1$ as a map from
+$\cL(E,D)\times\cL(F,F')$ to $\cL(\Alt^k(D;F),\Alt^k(E;F'))$. As bounded polynomial laws, all four have norm at most $1$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (items (1) and (2)).} Item~(1) is Theorem~\ref{dp:thm:mixed}(1),(2). Item~(2) is \cite[Lemma~Q.3]{I}. The algebra of composition follows from \cite[VI~\S8, Prop.~VI.6, Cor.; Prop.~I.2; II~\S1]{Ro}; the bound on the coefficient laws of $g\circ f$ is the estimate we need.
+
+\emph{Step 2 (item (3)).} Let $ja(h)=\beta(h,\dots,h)$ as in Definition~\ref{dp:def:laws}(2). By \cite[Lemma~Q.1(3)]{I}, $a$ is a bounded polynomial law of degree $n$, with $\norm a\le\norm\beta$. In particular
+analytic maps are DP. Now let $P$ have finite coordinates, with $T\colon K^r\to P$ as in the definition above. If $r=0$, then $P=0$ and there is nothing to prove. So let $r\ge1$, let $e_1,\dots,e_r$ be the unit vectors of $K^r$, and let $a\colon P\to W$ be a bounded polynomial law of degree $n$. Then
+$a(Tz)=\sum_{\abs\gamma=n}v_\gamma z^\gamma$ with $v_\gamma=(a\circ T)^{[\gamma]}(e_1,\dots,e_r)$, and
+$\norm{v_\gamma}\le(8r/\abs\varpi)^n\norm T^n\norm a$ by~(1). The $n$\nobreakdash-linear map
+\[
+ \beta_a(h^1,\dots,h^n)=\sum_{t_1\le\dots\le t_n}v_{\gamma(t)}\prod_{c=1}^n(T^{-1}h^c)_{t_c},
+\]
+summed over the nondecreasing words $t$ in $\{1,\dots,r\}$, where $\gamma(t)$ counts the letters of $t$, has diagonal
+$a$, since each monomial $z^\gamma$ comes from exactly one such word, and
+$\norm{\beta_a}\le\binom{n+r-1}n(8r\norm T\norm{T^{-1}}/\abs\varpi)^n\norm a\le2^{r-1}(16r\norm T\norm{T^{-1}}/\abs\varpi)^n\norm a$.
+Applied to the coefficient laws of a DP expansion, this bound, geometric in $n$, gives an analytic expansion with a
+smaller positive radius.
+
+\emph{Step 3 (item (4)).} By \cite[Proposition~2.2]{I} and its proof, the restriction of $B^k_{E,D;F,F'}$ to
+alternating maps is the diagonal of a bounded $(k+1)$\nobreakdash-linear map of norm at most $1$ with values in
+$\cL(\Alt^k(D;F),\Mult^k(E;F'))$, and its values lie in $\cL(\Alt^k(D;F),\Alt^k(E;F'))$, which postcomposition by
+$j_{E,F'}$ embeds isometrically. The same holds for $A^k_{E,D;F}(u)=B^k_{E,D;F,F}(u,\id_F)$ in degree $k$.
+
+Let $\otimes^k_\pi E$ be the normed quotient of $E^{\otimes k}$ by the null space of $\pi$, as in \cite[Section~3.1]{I}. For $u_1,\dots,u_k\in\cL(E,D)$, the operator $u_1\otimes\dots\otimes u_k\colon\otimes^k_\pi E\to\otimes^k_\pi D$ has norm at most $\prod_c\norm{u_c}$ and is multilinear in $(u_1,\dots,u_k)$. Let $\wedge^k_E\colon\otimes^k_\pi E\to\Lambda^k_\pi E$ and $\wedge^k_D\colon\otimes^k_\pi D\to\Lambda^k_\pi D$ be the canonical maps. Postcomposition with the inclusion $\Lambda^k_\pi D\subseteq\widehat\Lambda^k_\pi D$ is a linear isometry of $\cL(\Lambda^k_\pi E,\Lambda^k_\pi D)$ into $\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$. By \cite[Lemma~3.7]{I}, $\Theta\mapsto\Theta\circ\wedge^k_E$ is a linear isometry of
+$\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ into $\cL(\otimes^k_\pi E,\widehat\Lambda^k_\pi D)$. Restriction to the dense
+subspace $\Lambda^k_\pi E$ is an isometric isomorphism of $\cL(\widehat\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$ onto
+$\cL(\Lambda^k_\pi E,\widehat\Lambda^k_\pi D)$, as $\widehat\Lambda^k_\pi D$ is complete. These isometries map
+$\Lambda^k_\pi u$ and $\widehat\Lambda^k_\pi u$ to $\wedge^k_D\circ(u\otimes\dots\otimes u)$, the diagonal of the
+$k$\nobreakdash-linear map $(u_1,\dots,u_k)\mapsto\wedge^k_D\circ(u_1\otimes\dots\otimes u_k)$ of norm at most $1$. Item~(3)
+bounds the four norms by $1$.
+\end{proof}
+
+DP and analyticity differ. Let $\operatorname{char}K=p>0$ and $k\ge p$. For all normed $E,D,F$, the map $A^k_{E,D;F}$ is DP on $\cL(E,D)$ by
+Theorem~\ref{dp:thm:calculus}(4) and~(1). For the spaces $E$, $D=E$, $F$ of \cite[Theorem~7.2(1)]{I} it is analytic at
+no point.
+
+\begin{lemma}[coefficient laws are determined by the germ]\label{dp:lem:coefficients-unique}
+Let $f$ be DP at $x_0$ with radius $R$ and coefficient laws $a_n$, and let $h\in P$.
+\begin{enumerate}
+\item If $\mathsf r>0$, $w_n\in W$, $\sup_n\norm{w_n}\mathsf r^n<\infty$ and $f(x_0+sh)=\sum_ns^nw_n$ for all $s\in K$ with $\abs s<\mathsf r$, then $w_n=a_n(h)$ for all $n$. In particular, the $a_n$ depend only on the germ of $f$ at $x_0$: a second DP expansion at $x_0$ has the same laws.
+\item Let $j\colon W\to Z$ be a linear isometry into a normed space, and let $\beta_n\colon P^n\to Z$ be bounded $n$\nobreakdash-linear maps with $\sup_n\norm{\beta_n}R'^n<\infty$ for some $R'>0$ and $jf(x_0+h')=\sum_n\beta_n(h',\dots,h')$ for $\norm{h'}<R'$. Then $ja_n(h)=\beta_n(h,\dots,h)$ for all $n$. No condition on the diagonals of the $\beta_n$ is assumed; the identity shows that they lie in $j(W)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Let $\mathsf r'>0$ satisfy $\mathsf r'\le\mathsf r$ and $\mathsf r'\norm h<R$. For $\abs s<\mathsf r'$ we have $f(x_0+sh)=\sum_ns^na_n(h)$, and $\norm{a_n(h)}\mathsf r'^n$ is bounded. So $\sum_ns^n(a_n(h)-w_n)$ converges to $0$ for $\abs s<\mathsf r'$, and \cite[Lemma~A.1]{I} gives $a_n(h)=w_n$. A second expansion gives a second sequence $w_n$, with the second laws evaluated at $h$.
+
+\emph{Step 2 (item (2)).} Let $\mathsf r'>0$ satisfy $\mathsf r'\norm h<\min(R,R')$. For $\abs s<\mathsf r'$ both $\sum_ns^nja_n(h)$ and $\sum_ns^n\beta_n(h,\dots,h)$ converge to $jf(x_0+sh)$ in $Z$, with geometric bounds. Apply \cite[Lemma~A.1]{I} in $Z$ to their difference.
+\end{proof}
+
+\begin{definition}\label{dp:def:hasse}
+Let $f$ be DP at $x_0$ with coefficient laws $a_n$. The \emph{Hasse derivative of order $n$} of $f$ at $x_0$ is $D^{(n)}f(x_0)=a_n\in\cP_n(P;W)$. The \emph{Hasse jet of order $r$} of $f$ at $x_0$, for $r\in\N\cup\{\infty\}$, is $(D^{(n)}f(x_0))_{0\le n\le r}$. The \emph{Hasse jet} is the one of order $\infty$. For $P=K$, $D^{(n)}f(x_0)(h)=w_nh^n$, with $w_n$ the $n$-th coefficient of the power series of $f$ at $x_0$.
+\end{definition}
+
+\begin{theorem}[quasi-analyticity]\label{dp:thm:quasi-analytic}
+Let $U\subseteq P$ be open, $x_0\in U$, and let $f,g\colon U\to W$ be DP at $x_0$.
+\begin{enumerate}
+\item If $D^{(n)}f(x_0)=D^{(n)}g(x_0)$ for all $n$, then $f=g$ on $B(x_0,R)$ for every $R$ such that $f$ and $g$ are both DP at $x_0$ with radius $R$. Conversely, if $f=g$ near $x_0$, their Hasse jets at $x_0$ agree.
+\item \textup{(Identity on the ball.)} If $f$ is DP at $x_0$ with radius $R$ and vanishes on a nonempty open subset $U'$ of $B(x_0,R)$, then $D^{(n)}f(x_0)=0$ for all $n$ and $f=0$ on $B(x_0,R)$.
+\item \textup{(No identity on larger sets.)} If $\phi$ is a nonzero bounded linear functional on $P$ and $w\in W$ is nonzero, then the map equal to $w$ on $\{y\in P:\abs{\phi(y)}\le1\}$ and to $0$ elsewhere is DP on $P$ and not constant. If $P$ is ultrametric and nonzero, the same holds with an open ball of $P$ in place of this set.
+\item If $W$ is complete and $(a_n)$ is a sequence with $a_n\in\cP_n(P;W)$ and $\sup_n\norm{a_n}R^n<\infty$ for some $R>0$, then $h\mapsto\sum_na_n(h)$, $\norm h<R$, is DP at $0$ with Hasse jet $(a_n)$. So for $W$ complete, taking the Hasse jet is a bijection from DP germs at $x_0$ onto sequences of laws with geometric bounds.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Both maps equal $\sum_na_n(h)$ at $x_0+h$ for $\norm h<R$, with the common laws $a_n$. The converse is Lemma~\ref{dp:lem:coefficients-unique}(1).
+
+\emph{Step 2 (item (2), on a line through $x_0$).} Let $M=\sup_n\norm{a_n}R^n$. Let $y\in P$ with $\norm y<R$, and choose $\mathsf r_0>1$ with $\mathsf r_0\norm y<R$. Put $\mathsf c_n=a_n(y)$ and $\mathsf g(s)=f(x_0+sy)$. Then $\norm{\mathsf c_n}\le M\mathsf r_0^{-n}$ and $\mathsf g(s)=\sum_n\mathsf c_ns^n$ for $\abs s<\mathsf r_0$. Suppose that $\mathsf g(s)=0$ for $\abs{s-1}<\delta$, where $0<\delta\le1$. For $\abs\lambda\le1$,
+\[
+ \mathsf g(1+\lambda)=\sum_n\sum_{i\le n}\binom ni \mathsf c_n\lambda^i.
+\]
+This double series converges absolutely in $\widehat W$, since $\abs{\binom ni}\le1$ in $K$ and $\sum_n(n+1)M\mathsf r_0^{-n}<\infty$. So $\mathsf g(1+\lambda)=\sum_i\mathsf b_i\lambda^i$ with $\mathsf b_i=\sum_{n\ge i}\binom ni\mathsf c_n$ and $\norm{\mathsf b_i}\le\sum_n(n+1)M\mathsf r_0^{-n}$. By \cite[Lemma~A.1]{I} in $\widehat W$ with radius $\delta$, all $\mathsf b_i$ vanish. So $\mathsf g(1+\lambda)=0$ for all $\abs\lambda\le1$, hence $\mathsf g(s)=0$ for $\abs s<1$. By the same lemma with radius $1$, all $\mathsf c_n$ vanish.
+
+\emph{Step 3 (item (2), the ball).} Let $x'\in U'$ and $y_0=x'-x_0$. For $y$ near $y_0$ and $s$ near $1$, $x_0+sy\in U'$. So Step~2 gives $a_n(y)=0$ for all $n$ and all $y$ in a neighborhood of $y_0$. Let $n\ge0$ and $h\in P$. The polynomial $s\mapsto a_n(y_0+sh)$ vanishes for all small $\abs s$, hence identically, and its coefficient of $s^n$ is $a_n(h)$. So $a_n=0$, and $f=0$ on $B(x_0,R)$.
+
+\emph{Step 4 (item (3)).} The set $V_\phi=\{y:\abs{\phi(y)}\le1\}$ is open and closed: $\phi$ is continuous, and if $\abs\lambda\le1$ and $\abs{\lambda'-\lambda}<1$ then $\abs{\lambda'}\le1$, while if $\abs\lambda>1$ and $\abs{\lambda'-\lambda}<\abs\lambda$ then $\abs{\lambda'}=\abs\lambda$. So the map is locally constant. A locally constant map is DP at every point, with $a_0$ its value and $a_n=0$ for $n\ge1$. It is not constant: $\phi(y)\ne0$ for some $y$, and suitable multiples of $y$ lie inside and outside $V_\phi$. On an ultrametric space an open ball is open and closed, and multiples of a nonzero vector lie outside it.
+
+\emph{Step 5 (item (4)).} For $\norm h\le R_1<R$, $\norm{a_n(h)}\le\sup_m(\norm{a_m}R^m)(R_1/R)^n$, so the series converges in $W$. So the map is DP at $0$ with these laws. The map from germs to jets is injective by item~(1), and it is surjective by the first assertion, after a translation to $x_0$.
+\end{proof}
+
+\subsection{The whole ball}\label{dp:ssec:ball}
+
+\begin{lemma}[node lemma]\label{dp:lem:node}
+Let $\varpi'\in K$ with $0<\abs{\varpi'}<1$ and $\mathsf a_{\varpi'}=\log_2(1/\abs{\varpi'})$. Let $W$ be a normed space, $n\ge1$, $\tau\in K^\times$, and $\mathsf p(s)=\sum_{i=0}^n\mathsf c_is^i$ with $\mathsf c_i\in W$. Let $\mathsf k$ be least with $2^{\mathsf k}\ge n+1$, and let $S=\{\sum_{l<\mathsf k}\mathsf d_l\varpi'^l:\mathsf d_l\in\{0,1\}\}$. Then $S$ has $N=2^{\mathsf k}\le2n$ elements, $\abs\xi\le1$ for $\xi\in S$, and with $\mathsf V=\max_{\xi\in S}\norm{\mathsf p(\tau\xi)}$,
+\begin{equation}\label{dp:4a:eq:node}
+ \norm{\mathsf c_i}\le2n\,\mathsf V\,\abs\tau^{-i}\Bigl(\frac{2\mathrm en}i\Bigr)^{\mathsf a_{\varpi'} i}\qquad(1\le i\le n).
+\end{equation}
+If $K$ has $n+1$ elements of absolute value at most $1$ at pairwise distance $1$, for instance if its residue field is infinite, then $\norm{\mathsf c_i}\le(n+1)\mathsf V'\abs\tau^{-i}$ for $0\le i\le n$, with $\mathsf V'$ the maximum of $\norm{\mathsf p(\tau\xi)}$ over these elements $\xi$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (spacing).} Let $\xi\ne\xi'$ in $S$ have first differing digit at $l$. Then $\abs{\xi-\xi'}=\abs{\varpi'}^l$, since the digit difference is $\pm1$ and the later terms are smaller. So $S$ has $2^{\mathsf k}$ elements. As $2^{\mathsf k-1}\le n$, $N\le2n$. For fixed $\xi$, the number of $\xi'$ at distance $\abs{\varpi'}^l$ is $2^{\mathsf k-l-1}$. Hence $\prod_{\xi'\ne\xi}\abs{\xi-\xi'}=\abs{\varpi'}^{\mathsf D}$ with $\mathsf D=\sum_{l<\mathsf k}l2^{\mathsf k-l-1}$, the same for all $\xi$. Taking $\xi=0$: the set $S\setminus\{0\}$ has $2^{\mathsf k-l-1}$ elements of absolute value $\abs{\varpi'}^l$, and $\prod_{\eta\in S\setminus\{0\}}\abs\eta=\abs{\varpi'}^{\mathsf D}$.
+
+\emph{Step 2 (Lagrange coefficients).} Let $\ell_\xi(s)=\prod_{\eta\ne\xi}(s-\eta)/\prod_{\eta\ne\xi}(\xi-\eta)$, with $\eta$ in $S$. The coefficient of $s^i$ in the numerator is, up to sign, the elementary symmetric function of degree $N-1-i$ of $S\setminus\{\xi\}$. A nonzero product in it runs over a subset $\mathsf T\subseteq S\setminus\{0,\xi\}$ of size $N-1-i$. Let $\mathsf I=(S\setminus\{0\})\setminus\mathsf T$, of size $i$. Then $\prod_{\mathsf T}\abs\eta=\abs{\varpi'}^{\mathsf D}/\prod_{\mathsf I}\abs\eta\le\abs{\varpi'}^{\mathsf D}/\mathsf Q_i$, with $\mathsf Q_i$ the product of the $i$ smallest absolute values on $S\setminus\{0\}$. So the coefficient of $s^i$ in $\ell_\xi$ has absolute value at most $1/\mathsf Q_i$.
+
+\emph{Step 3 (size of $\mathsf Q_i$).} The $c$-th smallest absolute value on $S\setminus\{0\}$ is $\abs{\varpi'}^{\mathsf k-1-\lfloor\log_2c\rfloor}$: one element at level $\mathsf k-1$, two at level $\mathsf k-2$, and so on. So $\mathsf Q_i=\abs{\varpi'}^{\mathsf E}$ with
+\[
+ \mathsf E=\sum_{c\le i}(\mathsf k-1-\lfloor\log_2c\rfloor)\le\sum_{c\le i}(\mathsf k-\log_2c)=i\mathsf k-\log_2i!\le i\log_2(\mathrm eN/i),
+\]
+using $i!\ge(i/\mathrm e)^i$. As $\abs{\varpi'}^{-\log_2\mathsf y}=\mathsf y^{\mathsf a_{\varpi'}}$ for $\mathsf y>0$, we get $1/\mathsf Q_i\le(\mathrm eN/i)^{\mathsf a_{\varpi'} i}\le(2\mathrm en/i)^{\mathsf a_{\varpi'} i}$.
+
+\emph{Step 4 (interpolation).} The polynomial $\mathsf p(\tau s)$ has degree at most $n\le N-1$. So $\mathsf p(\tau s)=\sum_\xi\mathsf p(\tau\xi)\ell_\xi(s)$, and $\mathsf c_i\tau^i$ is the sum over $\xi$ of $\mathsf p(\tau\xi)$ times the coefficient of $s^i$ in $\ell_\xi$. There are $N\le2n$ terms, which gives~\eqref{dp:4a:eq:node}. In the second case, interpolate on the $n+1$ given elements: the numerators have coefficients of absolute value at most $1$, and the denominators have absolute value $1$.
+\end{proof}
+
+\begin{definition}\label{dp:def:radius}
+Let $f$ be DP at $x_0$ with coefficient laws $a_n$. The series $\sum_na_n(h)$ is the \emph{law series} of $f$ at $x_0$. The \emph{DP radius} of $f$ at $x_0$ is $\rho_{\mathrm{DP}}(f,x_0)=(\limsup_n\norm{a_n}^{1/n})^{-1}\in(0,\infty]$. By Lemma~\ref{dp:lem:coefficients-unique}(1) it depends only on the germ of $f$ at $x_0$. If $f$ is DP at $x_0$ with radius $R$, then $\rho_{\mathrm{DP}}(f,x_0)\ge R$. A map DP at $x_0$ can differ from its law series away from $x_0$ (Theorem~\ref{dp:thm:quasi-analytic}(3)). So in statements about radii at another point we assume that $f$ is the sum of its law series on the ball of the radius in question.
+\end{definition}
+
+\begin{theorem}[a law series is DP on its whole ball]\label{dp:thm:whole-ball}
+Let $W$ be complete, and let $f\colon U\to W$ be DP at $x_0$ with radius $R$ and bound $M$. Let $x_1=x_0+x$ with $\varrho=\norm x<R$. Let $\varpi'\in K$ with $0<\abs{\varpi'}<1$, $\mathsf a_{\varpi'}=\log_2(1/\abs{\varpi'})$, $0<\sigma<R-\varrho$ and $\mathsf t=(\varrho+\sigma)/R<1$. Then $f$ is DP at $x_1$ with radius
+\begin{equation}\label{dp:4a:eq:radius}
+ r_1=\min\Bigl(R-\varrho,\ \abs{\varpi'}\sigma\,\bigl(\tfrac{\ln(1/\mathsf t)}{4\mathsf a_{\varpi'}}\bigr)^{\mathsf a_{\varpi'}}\Bigr)
+\end{equation}
+and bound $M\max\bigl(R/(R-\varrho),\,2\sqrt{\mathsf t}/(1-\sqrt{\mathsf t})^2\bigr)$. There is no further hypothesis on $K$, and the norms need not be ultrametric. Consequently:
+\begin{enumerate}
+\item $f$ is DP at every point of $B(x_0,R)$.
+\item Let $K$ be densely valued, and let $f$ be the sum of its law series on $B(x_0,\rho_{\mathrm{DP}}(f,x_0))$. Then $\rho_{\mathrm{DP}}(f,x_2)\ge\rho_{\mathrm{DP}}(f,x_0)-\norm{x_2-x_0}$ for every $x_2\in B(x_0,\rho_{\mathrm{DP}}(f,x_0))$.
+\item Let the residue field of $K$ be infinite, and let $f$ be the sum of its law series on $B(x_0,\rho_{\mathrm{DP}}(f,x_0))$. Then, for every $x_2$ in this ball and every $\varpi'$ as above,
+\[
+ \rho_{\mathrm{DP}}(f,x_2)\ge\abs{\varpi'}\bigl(\rho_{\mathrm{DP}}(f,x_0)-\norm{x_2-x_0}\bigr).
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (one law).} Let $a_n$ be the coefficient laws, so that $\norm{a_n}\le MR^{-n}$. Put $a_{n,i}(h)=a_n^{[(n-i,i)]}(x,h)$ for $0\le i\le n$. By~\eqref{dp:eq:coefficient-identity}, $a_{n,i}$ is a bounded polynomial law of degree $i$ in $h$, and $a_n(x+h)=\sum_{i\le n}a_{n,i}(h)$. Let $h\ne0$ and $n\ge1$. The polynomial $\mathsf p(s)=a_n(x+sh)$ has the coefficients $a_{n,i}(h)$. Choose $\tau\in K^\times$ with $\abs{\varpi'}\sigma<\abs\tau\norm h\le\sigma$. For $\xi$ in the set $S$ of Lemma~\ref{dp:lem:node}, $\norm{\mathsf p(\tau\xi)}\le\norm{a_n}(\varrho+\sigma)^n\le M\mathsf t^n$. By~\eqref{dp:4a:eq:node},
+\begin{equation}\label{dp:4a:eq:one-law}
+ \norm{a_{n,i}(h)}\le2nM\mathsf t^n\Bigl(\frac{\norm h}{\abs{\varpi'}\sigma}\Bigr)^i\Bigl(\frac{2\mathrm en}i\Bigr)^{\mathsf a_{\varpi'} i}\qquad(1\le i\le n).
+\end{equation}
+
+\emph{Step 2 (summing in $n$).} Put $\mathsf w=\sqrt{\mathsf t}$ and $\mathsf G=(4\mathsf a_{\varpi'}/\ln(1/\mathsf t))^{\mathsf a_{\varpi'}}$. For real $\mathsf y>0$, the maximum of $(2\mathrm e\mathsf y)^{\mathsf a_{\varpi'}}\mathsf w^{\mathsf y}$ is at $\mathsf y=\mathsf a_{\varpi'}/\ln(1/\mathsf w)$, and it equals $(2\mathsf a_{\varpi'}/\ln(1/\mathsf w))^{\mathsf a_{\varpi'}}=\mathsf G$. With $\mathsf y=n/i$ this gives $(2\mathrm en/i)^{\mathsf a_{\varpi'} i}\mathsf w^n\le\mathsf G^i$. As $\mathsf t^n=\mathsf w^n\mathsf w^n$, we may divide~\eqref{dp:4a:eq:one-law} by $\norm h^i$ and take the supremum over $h\ne0$. This gives $\norm{a_{n,i}}\le2n\mathsf w^nM(\mathsf G/(\abs{\varpi'}\sigma))^i$ for $1\le i\le n$. Hence
+\begin{equation}\label{dp:4a:eq:sum-n}
+ \sum_{n\ge i}\norm{a_{n,i}}\le M\Bigl(\sum_{n\ge1}2n\mathsf w^n\Bigr)\Bigl(\frac{\mathsf G}{\abs{\varpi'}\sigma}\Bigr)^i=\frac{2\mathsf wM}{(1-\mathsf w)^2}\Bigl(\frac{\mathsf G}{\abs{\varpi'}\sigma}\Bigr)^i\qquad(i\ge1).
+\end{equation}
+
+\emph{Step 3 (completeness of the space of laws).} The space $\cP_i(P;W)$ is complete, as $W$ is. Indeed, on the span of $h_1,\dots,h_r$ the coefficients of a law are fixed linear combinations of its values at finitely many points, by interpolation, as $K$ is infinite. So a Cauchy sequence of laws converges pointwise to a law, and in norm.
+
+\emph{Step 4 (the expansion).} By~\eqref{dp:4a:eq:sum-n} and Step~3, $a'_i=\sum_{n\ge i}a_{n,i}$ converges in $\cP_i(P;W)$ for $i\ge1$, with
+\begin{equation}\label{dp:4a:eq:recentered}
+ \norm{a'_i}\le\frac{2\mathsf wM}{(1-\mathsf w)^2}\Bigl(\frac{\mathsf G}{\abs{\varpi'}\sigma}\Bigr)^i.
+\end{equation}
+Also $\sum_n\norm{a_n(x)}\le MR/(R-\varrho)$, so $a'_0=\sum_na_n(x)$ converges in $W$, with $\norm{a'_0}\le MR/(R-\varrho)$. Since $r_1\le\abs{\varpi'}\sigma/\mathsf G$, the number $\norm{a'_i}r_1^i$ is at most the stated bound for all $i$. Let $\norm h<r_1$. Then $\norm{x+h}<R$, and the family $(a_{n,i}(h))_{n,i}$ is absolutely summable, by $\norm{a_{n,i}(h)}\le\norm{a_{n,i}}\norm h^i$ and~\eqref{dp:4a:eq:sum-n} for $i\ge1$, and by the bound on $\sum_n\norm{a_n(x)}$ for $i=0$. Grouping it, and using $a_n(x+h)=\sum_{i\le n}a_{n,i}(h)$,
+\[
+ f(x_1+h)=\sum_na_n(x+h)=\sum_n\sum_{i\le n}a_{n,i}(h)=\sum_ia'_i(h).
+\]
+So $f$ is DP at $x_1$ with radius $r_1$ and the stated bound, and the $a'_i$ are its coefficient laws.
+
+\emph{Step 5 (items).} Item~(1) follows with $\sigma=(R-\varrho)/2$. For items~(2) and~(3), we apply Steps~1--4 to other data. Let $x_2\in B(x_0,\rho_{\mathrm{DP}}(f,x_0))$ and $\varrho_2=\norm{x_2-x_0}$. Let $R_2$ satisfy $\varrho_2<R_2<\rho_{\mathrm{DP}}(f,x_0)$, and let $0<\sigma<R_2-\varrho_2$. Then $f$ is DP at $x_0$ with radius $R_2$, for some bound. So Steps~1--4 hold with $x_2-x_0$, $\varrho_2$, $R_2$ in place of $x$, $\varrho$, $R$, and with this bound as $M$. The laws $a'_i$ are then the coefficient laws of $f$ at $x_2$, and they do not depend on $\varpi'$.
+
+For item~(2), \eqref{dp:4a:eq:recentered} gives $\rho_{\mathrm{DP}}(f,x_2)\ge\abs{\varpi'}\sigma/\mathsf G$ for every $\varpi'$. Since $K$ is densely valued, we may let $\abs{\varpi'}\to1$. Then $\mathsf a_{\varpi'}\to0$ and $\mathsf G\to1$, so $\rho_{\mathrm{DP}}(f,x_2)\ge\sigma$. Let $\sigma\uparrow R_2-\varrho_2$, and then $R_2\uparrow\rho_{\mathrm{DP}}(f,x_0)$.
+
+For item~(3), use the second case of Lemma~\ref{dp:lem:node} in Step~1. It gives $\norm{a_{n,i}(h)}\le(n+1)M\mathsf t^n(\norm h/(\abs{\varpi'}\sigma))^i$. So $\norm{a'_i}\le M(1-\mathsf t)^{-2}(\abs{\varpi'}\sigma)^{-i}$, and $\rho_{\mathrm{DP}}(f,x_2)\ge\abs{\varpi'}\sigma$. Let $\sigma$ and $R_2$ tend to their limits as before.
+\end{proof}
+
+\begin{remark}\label{dp:rem:whole-ball}
+The bound of Theorem~\ref{dp:thm:mixed}(2) loses $C_2^n$ for every $i$, and by itself it reaches only $\norm x<R/C_2$. By~\eqref{dp:4a:eq:one-law} the mixed coefficient $a_n^{[(n-i,i)]}(x,h)$ has no loss geometric in $n$ when $i$ is small against $n$. Take $\sigma=(R-\varrho)/2$ in~\eqref{dp:4a:eq:radius}. As $\varrho\to R$, the radius $r_1$ divided by $(R-\varrho)^{1+\mathsf a_{\varpi'}}R^{-\mathsf a_{\varpi'}}$ tends to $\abs{\varpi'}/\bigl(2(8\mathsf a_{\varpi'})^{\mathsf a_{\varpi'}}\bigr)$.
+\end{remark}
+
+The next two examples show that the inequality of Theorem~\ref{dp:thm:whole-ball}(2) does not hold over every field, and that the DP radius can drop below $\rho_{\mathrm{DP}}(f,x_0)$ inside the ball. In both, $P$ is ultrametric and $W=K$. For $\mathsf u>0$ one may replace the absolute value of $K$ and the norm of $P$ by their $\mathsf u$-th powers. They stay ultrametric, and every DP radius is raised to the power $\mathsf u$. The inequality of Theorem~\ref{dp:thm:whole-ball}(2) is not invariant under this. The strict inequality $\rho_{\mathrm{DP}}(f,x_1)<\rho_{\mathrm{DP}}(f,x_0)$ is invariant.
+
+\begin{example}[the drop over every complete discretely valued field]\label{dp:ex:radius-drop}
+Let $K$ be complete and discretely valued, with arbitrary residue field, and let $W=K$. Let $P=K^2$ with the ultrametric norm $\norm{(h_1,h_2)}=\max(\abs{h_1},\abs\vartheta^{1/2}\abs{h_2})$, so that the scaling loss of Section~\ref{dp:sec:laws} is $\mathfrak s(P)=\abs\vartheta^{1/2}<1$. Put $R=\abs\vartheta^{-1/4}$ and, on $B(0,R)$,
+\[
+ f(h)=\frac1{1-\vartheta(h_1h_2)^2}=\sum_{m\ge0}\vartheta^m(h_1h_2)^{2m}.
+\]
+\begin{enumerate}
+\item $\rho_{\mathrm{DP}}(f,0)=R$.
+\item At $x_1=(1,0)$ we have $\norm{x_1}=1<R$ and $\rho_{\mathrm{DP}}(f,x_1)=1<R$, for every value of $\abs\vartheta$.
+\item $\rho_{\mathrm{DP}}(f,x_1)<R-\norm{x_1}$ if and only if $\abs\vartheta<1/16$. So the inequality of Theorem~\ref{dp:thm:whole-ball}(2) fails for every local field with $\mathsf q\ge17$ residue elements at its module normalization $\abs\vartheta=1/\mathsf q$, for instance for $\mathbb Q_{17}$.
+\end{enumerate}
+\end{example}
+
+\begin{proof}[Verification]
+\emph{Step 1 (item (1)).} All norms on $P$ lie in $\abs\vartheta^{\Z}\cup\abs\vartheta^{\Z+1/2}$, so every nonzero vector has a multiple of norm in $[\abs\vartheta^{1/2},1]$, and the multiples of $(0,1)$ have norms in $\abs\vartheta^{\Z+1/2}$ only. This gives $\mathfrak s(P)=\abs\vartheta^{1/2}$. If $h_1h_2=0$, the ratio below vanishes. Let $h_1,h_2\ne0$ with $\abs{h_1}=\abs\vartheta^{\mathsf m_1}$ and $\abs{h_2}=\abs\vartheta^{\mathsf m_2}$, $\mathsf m_1,\mathsf m_2\in\Z$. If $\mathsf m_1\le\mathsf m_2$, then $\norm h=\abs\vartheta^{\mathsf m_1}$ and $\abs{h_1h_2}/\norm h^2=\abs\vartheta^{\mathsf m_2-\mathsf m_1}\le1$. If $\mathsf m_1\ge\mathsf m_2+1$, then $\norm h=\abs\vartheta^{\mathsf m_2+1/2}$ and the ratio is $\abs\vartheta^{\mathsf m_1-\mathsf m_2-1}\le1$. There is equality at $(1,1)$. So $\abs{\vartheta(h_1h_2)^2}<1$ on $B(0,R)$, the coefficient law of degree $4m$ is $a_{4m}=\vartheta^m(h_1h_2)^{2m}$, of norm exactly $\abs\vartheta^m$, and $\limsup_n\norm{a_n}^{1/n}=\abs\vartheta^{1/4}$.
+
+\emph{Step 2 (the laws at $x_1$).} Put $a'_i(h)=\sum_{c+2m=i}\vartheta^m\binom{2m}ch_1^ch_2^{2m}$. Each monomial satisfies $\abs{\vartheta^mh_1^ch_2^{2m}}\le\abs\vartheta^m\norm h^c(\abs\vartheta^{-1/2}\norm h)^{2m}=\norm h^i$, and $\abs{\binom{2m}c}\le1$. So $\norm{a'_i}\le1$. For $\norm h<1$ we have $\norm{x_1+h}=1<R$, the monomials tend to $0$ with $i$, and regrouping $\sum_m\vartheta^m(1+h_1)^{2m}h_2^{2m}$ gives $f(x_1+h)=\sum_ia'_i(h)$. So $f$ is DP at $x_1$ with radius $1$, and $\rho_{\mathrm{DP}}(f,x_1)\ge1$. Conversely $a'_{2m}(0,1)=\vartheta^m$ and $\norm{(0,1)}^{2m}=\abs\vartheta^m$, so $\norm{a'_{2m}}\ge1$, and $\rho_{\mathrm{DP}}(f,x_1)\le1$.
+
+\emph{Step 3 (item (3)).} $R-1>1$ if and only if $\abs\vartheta^{-1/4}>2$, that is, $\abs\vartheta<1/16$.
+\end{proof}
+
+\begin{example}[the drop with $R\in\abs{K^\times}$ and $\mathfrak s(P)=1$]\label{dp:ex:radius-drop-b}
+Let $K$ be complete and discretely valued, with residue field of $\mathsf q<\infty$ elements, let $W=K$, let $\mathcal O$ be the valuation ring, and let $P=K^2$ with the maximum norm, so that $\mathfrak s(P)=1$. For $l\ge1$ fix a set $\mathsf A_l$ of representatives of $\mathcal O/\vartheta^l\mathcal O$ and a set $\mathsf B_l$ of representatives of $\vartheta\mathcal O/\vartheta^l\mathcal O$, with $0\in\mathsf B_l$ representing $0$. Put $n_l=\mathsf q^l+\mathsf q^{l-1}$, $\mathsf v_l=n_l-(\mathsf q^l-1)/(\mathsf q-1)$,
+\[
+ \mathsf H_l(h)=\prod_{\zeta\in\mathsf A_l}(h_2-\zeta h_1)\prod_{\zeta'\in\mathsf B_l}(h_1-\zeta'h_2),\qquad f=\sum_{l\ge1}\vartheta^{\mathsf v_l}\mathsf H_l\quad\text{on }B(0,R),\qquad R=\abs\vartheta^{-1}.
+\]
+\begin{enumerate}
+\item $\norm{\mathsf H_l}\le\abs\vartheta^{(\mathsf q^l-1)/(\mathsf q-1)}$, and $f$ is DP at $0$ with radius $R\in\abs{K^\times}$ and bound $1$.
+\item At $x_1=(1,0)\in B(0,R)$, $\rho_{\mathrm{DP}}(f,x_1)\le\abs\vartheta^{-1+1/(\mathsf q(\mathsf q-1))}<R$.
+\end{enumerate}
+\end{example}
+
+\begin{proof}[Verification]
+\emph{Step 1 (item (1)).} The factors of $\mathsf H_l$ are, up to sign, the determinants of $h$ with the $n_l$ vectors $(1,\zeta)$ and $(\zeta',1)$, and these vectors represent the points of $\mathbb P^1(\mathcal O/\vartheta^l\mathcal O)$ once each. Let $h\in\mathcal O^2$ with $\norm h=1$, and let $1\le c\le l$. Exactly $\mathsf q^{l-c}$ of these points reduce modulo $\vartheta^c$ to the class of $h$, and the factor of such a point is divisible by $\vartheta^c$. A point that reduces to the class of $h$ exactly for the levels $c\le c_0$ has its factor divisible by $\vartheta^{c_0}$, and it occurs in $c_0$ pairs (point, level). So $\abs{\mathsf H_l(h)}$ is at most $\abs\vartheta$ to the power of the number of such pairs, that is, $\abs{\mathsf H_l(h)}\le\abs\vartheta^{\sum_{c=1}^l\mathsf q^{l-c}}$. All norms on $P$ lie in $\abs{K^\times}$, so homogeneity gives the bound on $\norm{\mathsf H_l}$. Hence $\norm{\vartheta^{\mathsf v_l}\mathsf H_l}\le\abs\vartheta^{n_l}=R^{-n_l}$. The $n_l$ are strictly increasing, so these are the coefficient laws of $f$ at $0$.
+
+\emph{Step 2 (one coefficient).} The polynomial $\mathsf H_l(1,s)=\prod_\zeta(s-\zeta)\prod_{\zeta'}(1-\zeta's)$ has degree at most $n_l-1$ in $s$, as $0\in\mathsf B_l$. Its coefficients lie in $\mathcal O$. The first product is monic of degree $\mathsf q^l$, and the second is $1$ plus terms in $s^c$, $c\ge1$, with coefficients of absolute value at most $\abs\vartheta$. So the coefficient of $s^{\mathsf q^l}$ has absolute value $1$.
+
+\emph{Step 3 (item (2)).} For $\abs s\le1$ the terms of $\sum_l\vartheta^{\mathsf v_l}\mathsf H_l(1,s)$ tend to $0$, so $f(1,s)=\sum_iw_is^i$ with $w_i=\sum_l\vartheta^{\mathsf v_l}[s^i]\mathsf H_l(1,s)$ and $\abs{w_i}\le1$. By Theorem~\ref{dp:thm:whole-ball}(1), $f$ is DP at $x_1$. Let $a'_i$ be its coefficient laws. By Lemma~\ref{dp:lem:coefficients-unique}(1), $a'_i(0,1)=w_i$. The sequence $\mathsf v_l$ is strictly increasing, since $\mathsf v_{l+1}-\mathsf v_l=\mathsf q^{l-1}(\mathsf q^2-\mathsf q-1)>0$. Fix $l$ and $i=\mathsf q^l$. For $l'<l$, $\mathsf H_{l'}(1,s)$ has degree at most $n_{l'}-1<\mathsf q^l$. For $l'>l$ the term of $l'$ contributes at most $\abs\vartheta^{\mathsf v_{l'}}<\abs\vartheta^{\mathsf v_l}$. So $\abs{w_{\mathsf q^l}}=\abs\vartheta^{\mathsf v_l}$ by Step~2. As $\norm{(0,1)}=1$, this gives $\norm{a'_{\mathsf q^l}}\ge\abs\vartheta^{\mathsf v_l}$. Finally $\mathsf v_l/\mathsf q^l\to1+\frac1{\mathsf q}-\frac1{\mathsf q-1}=1-\frac1{\mathsf q(\mathsf q-1)}$, which gives the bound.
+\end{proof}

@@ -1,0 +1,295 @@
+\section{Jets}\label{dp:sec:jets}
+
+The higher-order data of a DP map are its Hasse derivatives, by Theorem~\ref{dp:thm:quasi-analytic}(1) and Proposition~\ref{dp:prop:frechet-hasse}. This section assembles them into jet bundles over DP manifolds, in every characteristic and for all normed models. It then asks when the jet bundle of an analytic manifold is analytic. The answer is governed by a bounded linear section of the diagonal $\Mult^k(P;W)\to\cP_k(P;W)$.
+
+\subsection{The composition rule as a law}\label{dp:ssec:chain-law}
+
+In this section $P,P',W,Y$ are normed spaces and $r\ge1$. Put
+\[
+ \mathbb J_r(P;W)=\prod_{n=0}^r\cP_n(P;W),\qquad \mathbb J^-_r(P;W)=\prod_{n=1}^r\cP_n(P;W),
+\]
+with the maximum norm; here $\cP_0(P;W)=W$. For $a\in\mathbb J_r(P;W)$, $a^-\in\mathbb J^-_r(P;W)$ drops the component of degree $0$. For $\alpha\in\N^r$ we write $\deg\alpha=\sum_nn\alpha_n$.
+
+Let $\alpha\in\N^r$ with $\deg\alpha=d\ge1$ and $\abs\alpha=m$. For $b\in\cP_m(W;Y)$ and $\ell=(\ell_n)_n\in\mathbb J^-_r(P;W)$, let $\mathcal F_\alpha(b,\ell)$ be the map $h\mapsto b^{[\alpha]}(\ell_1(h),\dots,\ell_r(h))$. Define
+\[
+ \Theta_r\colon\mathbb J_r(W;Y)\times\mathbb J^-_r(P;W)\to\mathbb J_r(P;Y)
+\]
+by
+\[
+ \Theta_r(b,\ell)_0=b_0,\qquad\Theta_r(b,\ell)_d=\sum_{\deg\alpha=d}\mathcal F_\alpha(b_{\abs\alpha},\ell)\quad(1\le d\le r).
+\]
+
+\begin{lemma}[the composition rule is a law]\label{dp:lem:chain-law}
+\leavevmode
+\begin{enumerate}
+\item \textup{(Refinement.)} Let $b\in\cP_m(W;Y)$, $\alpha\in\N^q$ with $\abs\alpha=m$, let $I_1,\dots,I_q$ be finite sets, and let $w_{i,l}\in W$, $s_{i,l}\in K$ for $1\le i\le q$, $l\in I_i$. Then
+\begin{equation}\label{dp:13:eq:refine}
+ b^{[\alpha]}\Bigl(\sum_{l\in I_1}s_{1,l}w_{1,l},\dots,\sum_{l\in I_q}s_{q,l}w_{q,l}\Bigr)=\sum_\delta\prod_{i,l}s_{i,l}^{\delta_{i,l}}\;b^{[\delta]}\bigl((w_{i,l})_{i,l}\bigr),
+\end{equation}
+the sum over the arrays $\delta=(\delta_{i,l})$ of integers $\delta_{i,l}\ge0$ with $\sum_l\delta_{i,l}=\alpha_i$ for every $i$.
+\item If moreover $\ell_i\in\cP_{d_i}(P;W)$ with $d_i\ge0$, then $h\mapsto b^{[\alpha]}(\ell_1(h),\dots,\ell_q(h))$ lies in $\cP_d(P;Y)$ with $d=\sum_i\alpha_id_i$, and its norm is at most $C_0^m\frac{m!}{\alpha!}\norm b\prod_i\norm{\ell_i}^{\alpha_i}$.
+\item Let $\alpha\in\N^r$ with $\deg\alpha=d\ge1$, $\abs\alpha=m$. The map $\mathcal F_\alpha$ is a law of degree $1+m$ from $\cP_m(W;Y)\times\mathbb J^-_r(P;W)$ to $\cP_d(P;Y)$, of norm at most $C_0^mm!/\alpha!$, linear in $b$. The map $\ell\mapsto\mathcal F_\alpha({\cdot},\ell)$ is a law of degree $m$ from $\mathbb J^-_r(P;W)$ to $\cL(\cP_m(W;Y),\cP_d(P;Y))$, with the same bound.
+\item $\Theta_r$ is DP on its whole domain, and linear in $b$.
+\item \textup{(Jet chain rule.)} If $f$ is DP at $x_0$ with coefficient laws $a_n$, and $g$ is DP at $f(x_0)$ with coefficient laws $b_m$, then the Hasse jet of order $r$ of $g\circ f$ at $x_0$, that is, $(D^{(n)}(g\circ f)(x_0))_{0\le n\le r}$, is $\Theta_r((b_m)_{m\le r},(a_n)_{1\le n\le r})$.
+\item \textup{(Associativity.)} For $b\in\mathbb J_r(W;Y)$, $a\in\mathbb J_r(P';W)$ and $\ell\in\mathbb J^-_r(P;P')$,
+\[
+ \Theta_r\bigl(b,\Theta_r(a,\ell)^-\bigr)=\Theta_r\bigl(\Theta_r(b,a^-),\ell\bigr).
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} Put $\mathsf v_i=\sum_ls_{i,l}w_{i,l}$ and expand $b(\sum_i\lambda_i\mathsf v_i)$, $\lambda\in K^q$, in two ways. In the vectors $\mathsf v_i$ it is $\sum_{\abs{\alpha'}=m}\lambda^{\alpha'}b^{[\alpha']}(\mathsf v_1,\dots,\mathsf v_q)$. In the vectors $w_{i,l}$, with the scalars $\lambda_is_{i,l}$, it is $\sum_\delta\prod_{i,l}(\lambda_is_{i,l})^{\delta_{i,l}}b^{[\delta]}((w_{i,l})_{i,l})$. As $K$ is infinite, the coefficients of $\prod_i\lambda_i^{\alpha_i}$ agree.
+
+\emph{Step 2 (item~(2)).} For $h_1,\dots,h_{l'}\in P$ and $s\in K^{l'}$ we have the expansion $\ell_i(\sum_\nu s_\nu h_\nu)=\sum_{\abs{\alpha'}=d_i}s^{\alpha'}\ell_i^{[\alpha']}(h_1,\dots,h_{l'})$. Apply~\eqref{dp:13:eq:refine} with the index $l$ running over these $\alpha'$, $w_{i,\alpha'}=\ell_i^{[\alpha']}(h_1,\dots,h_{l'})$ and $s_{i,\alpha'}=s^{\alpha'}$. The result is a polynomial in $s$ with coefficients in $Y$, each monomial of degree $\sum_{i,\alpha'}\abs{\alpha'}\delta_{i,\alpha'}=\sum_id_i\alpha_i=d$. The bound is~\eqref{dp:laws:scaled}.
+
+\emph{Step 3 (item~(3)).} Item~(2) with $d_n=n$ gives the values of $\mathcal F_\alpha$ and $\norm{\mathcal F_\alpha(b,\ell)}\le C_0^m\frac{m!}{\alpha!}\norm b\prod_n\norm{\ell_n}^{\alpha_n}$. Let $(b^{(\nu)},\ell^{(\nu)})$, $1\le\nu\le l'$, be points and $s\in K^{l'}$. By linearity of $b\mapsto b^{[\alpha]}$ and~\eqref{dp:13:eq:refine},
+\[
+ \mathcal F_\alpha\Bigl(\sum_\nu s_\nu b^{(\nu)},\sum_\nu s_\nu\ell^{(\nu)}\Bigr)(h)=\sum_\nu\sum_\delta s_\nu\prod_{n,i}s_i^{\delta_{n,i}}\,(b^{(\nu)})^{[\delta]}\bigl(\ell^{(1)}_1(h),\dots,\ell^{(l')}_r(h)\bigr).
+\]
+By item~(2), each map of $h$ on the right lies in $\cP_d(P;Y)$, of degree $\sum_{n,i}n\delta_{n,i}=\sum_nn\alpha_n=d$. So we have a polynomial in $s$ with coefficients in $\cP_d(P;Y)$, homogeneous of degree $1+m$. For the operator statement, take $b^{(\nu)}=b$ fixed and vary only $\ell$: the coefficient of each monomial is the operator $b\mapsto[h\mapsto b^{[\delta]}(\ell^{(1)}_1(h),\dots)]$, bounded by item~(2).
+
+\emph{Step 4 (items~(4), (5)).} $\Theta_r$ is a finite sum of laws, composed with bounded linear projections and inclusions. Laws are DP on their whole domain (Theorem~\ref{dp:thm:calculus}(1)), and maps into a product, sums and bounded linear images of DP maps are DP (Theorem~\ref{dp:thm:calculus}(2) and Section~\ref{dp:ssec:inverse}). Item~(5) is Proposition~\ref{dp:prop:chain-rule}.
+
+\emph{Step 5 (item~(6)).} Let $\mathsf e(h)=\sum_{1\le n\le r}\ell_n(h)$ on $P$, $f(x)=\sum_{n\le r}a_n(x)$ on $P'$, and $g(w)=\sum_{m\le r}b_m(w-a_0)$ on $W$. These are DP everywhere, and their Hasse jets of order $r$ at $0$, $0$, $a_0$ are $\ell$, $a$, $b$. By item~(5) applied to $(g\circ f)\circ\mathsf e=g\circ(f\circ\mathsf e)$ at $0$, both sides are the Hasse jet of order $r$ of the same map.
+\end{proof}
+
+\subsection{DP jet bundles}\label{dp:ssec:jets}
+
+\begin{definition}\label{dp:def:jets}
+Let $\mathcal M,\mathcal N$ be DP manifolds (Definition~\ref{dp:def:manifold}(1)) modeled on $P$ and $W$. For DP maps $\mathsf F,\mathsf G$ defined on neighborhoods of $\mathsf m\in\mathcal M$ with values in $\mathcal N$, write $\mathsf F\sim^r_{\mathsf m}\mathsf G$ if $\mathsf F(\mathsf m)=\mathsf G(\mathsf m)$ and, for one pair of charts $\varphi$ at $\mathsf m$ and $\chi$ at $\mathsf F(\mathsf m)$,
+\[
+ D^{(n)}(\chi\circ\mathsf F\circ\varphi^{-1})(\varphi(\mathsf m))=D^{(n)}(\chi\circ\mathsf G\circ\varphi^{-1})(\varphi(\mathsf m))\qquad(1\le n\le r).
+\]
+The class $j^r_{\mathsf m}\mathsf F$ is the \emph{$r$-jet} of $\mathsf F$ at $\mathsf m$. The set of all $r$-jets is $J^r(\mathcal M,\mathcal N)$, with the \emph{source} $j^r_{\mathsf m}\mathsf F\mapsto\mathsf m$ and the \emph{target} $j^r_{\mathsf m}\mathsf F\mapsto\mathsf F(\mathsf m)$. Put $J^0(\mathcal M,\mathcal N)=\mathcal M\times\mathcal N$. For a normed space $W$, read as a DP manifold with the single chart $\id_W$, put $J^r(\mathcal M;W)=J^r(\mathcal M,W)$.
+\end{definition}
+
+The relation does not depend on the charts. For other charts $\varphi',\chi'$ put $\psi=\varphi'\circ\varphi^{-1}$ and $\xi=\chi'\circ\chi^{-1}$. Near $\varphi'(\mathsf m)$ we have $\chi'\circ\mathsf F\circ\varphi'^{-1}=\xi\circ(\chi\circ\mathsf F\circ\varphi^{-1})\circ\psi^{-1}$. By Lemma~\ref{dp:lem:chain-law}(5) applied twice, its Hasse jet of order $r$ is a function of that of $\chi\circ\mathsf F\circ\varphi^{-1}$ at $\varphi(\mathsf m)$ alone.
+
+For a chart change $\psi$ on $\mathcal M$ and a point $\tilde x$ of its range put $\ell^\psi(\tilde x)=(D^{(n)}(\psi^{-1})(\tilde x))_{1\le n\le r}\in\mathbb J^-_r(P;P)$. Let $\mathsf T(\ell)\colon\mathbb J_r(P;W)\to\mathbb J_r(P;W)$, for $\ell\in\mathbb J^-_r(P;P)$, be the operator $\mathsf T(\ell)a=\Theta_r(a,\ell)$, and put $\mathsf T^\psi(x)=\mathsf T(\ell^\psi(\psi(x)))$. This is the \emph{operator family} of $\psi$.
+
+\begin{theorem}[local form]\label{dp:thm:jet-local}
+In the notation of Definition~\ref{dp:def:jets}, let $U_\varphi,U_\chi$ be the chart domains, and let $\Omega_{\varphi,\chi}\subseteq J^r(\mathcal M,\mathcal N)$ be the set of jets with source in $U_\varphi$ and target in $U_\chi$. The map
+\[
+ \Xi_{\varphi,\chi}\colon\Omega_{\varphi,\chi}\to\varphi(U_\varphi)\times\chi(U_\chi)\times\mathbb J^-_r(P;W),
+\]
+\[
+ j^r_{\mathsf m}\mathsf F\mapsto\Bigl(\varphi(\mathsf m),\chi(\mathsf F(\mathsf m)),\bigl(D^{(n)}(\chi\circ\mathsf F\circ\varphi^{-1})(\varphi(\mathsf m))\bigr)_{1\le n\le r}\Bigr),
+\]
+is a bijection onto this open subset of $P\times W\times\mathbb J^-_r(P;W)$. For a second pair $(\varphi',\chi')$, the transition $\Xi_{\varphi',\chi'}\circ\Xi_{\varphi,\chi}^{-1}$ is defined on $\varphi(U_\varphi\cap U_{\varphi'})\times\chi(U_\chi\cap U_{\chi'})\times\mathbb J^-_r(P;W)$ and equals
+\begin{equation}\label{dp:13:eq:transition}
+ (x,y,a)\longmapsto\Bigl(\psi(x),\ \xi(y),\ \Theta_r\bigl(\mathsf b(y),\ \Theta_r\bigl((y,a),\ \ell^\psi(\psi(x))\bigr)^-\bigr)^-\Bigr),
+\end{equation}
+where $\mathsf b(y)=(D^{(m)}\xi(y))_{0\le m\le r}$ and $(y,a)=(y,a_1,\dots,a_r)$. It is DP, with DP inverse.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (bijection).} Injectivity is the definition of $\sim^r_{\mathsf m}$. Let $(x,y,a)$ be in the product. The map $\hat{\mathsf G}(\tilde x)=y+\sum_{n=1}^ra_n(\tilde x-x)$ is DP everywhere and continuous, with Hasse jet $(y,a_1,\dots,a_r)$ at $x$. On an open neighborhood $O$ of $x$ in $\varphi(U_\varphi)$ with $\hat{\mathsf G}(O)\subseteq\chi(U_\chi)$, the map $\mathsf F=\chi^{-1}\circ\hat{\mathsf G}\circ\varphi$ is DP on $\varphi^{-1}(O)$, and $\Xi_{\varphi,\chi}(j^r_{\mathsf m}\mathsf F)=(x,y,a)$ for $\mathsf m=\varphi^{-1}(x)$.
+
+\emph{Step 2 (the formula).} Let $\hat{\mathsf F}=\chi\circ\mathsf F\circ\varphi^{-1}$ near $x=\varphi(\mathsf m)$, with Hasse jet $(y,a)$ at $x$. Near $\psi(x)$ we have $\chi'\circ\mathsf F\circ\varphi'^{-1}=\xi\circ\hat{\mathsf F}\circ\psi^{-1}$. By Lemma~\ref{dp:lem:chain-law}(5), the jet of $\hat{\mathsf F}\circ\psi^{-1}$ at $\psi(x)$ is $\Theta_r((y,a),\ell^\psi(\psi(x)))$. Its value is $y$, so the jet of $\xi\circ(\hat{\mathsf F}\circ\psi^{-1})$ is the outer $\Theta_r$ in~\eqref{dp:13:eq:transition}. The target point is $\xi(y)$ and the source point is $\psi(x)$.
+
+\emph{Step 3 (DP).} The maps $\psi,\xi,\psi^{-1}$ are DP on open sets. By Theorem~\ref{dp:thm:differentiable}(2), $\tilde x\mapsto D^{(n)}(\psi^{-1})(\tilde x)$ and $y\mapsto D^{(m)}\xi(y)$ are DP on open sets, with values in $\cP_n(P;P)$ and $\cP_m(W;W)$. So $x\mapsto\ell^\psi(\psi(x))$ and $y\mapsto\mathsf b(y)$ are DP. $\Theta_r$ is DP by Lemma~\ref{dp:lem:chain-law}(4). The map~\eqref{dp:13:eq:transition} is obtained from these by pairs, composition and projections, so it is DP on its open domain. Its inverse is the transition in the other direction, DP by the same argument. DP maps are continuous, so the transition is a homeomorphism between open sets.
+\end{proof}
+
+\begin{theorem}[DP jet bundles]\label{dp:thm:dp-jets}
+Let $\mathcal M,\mathcal N$ be DP manifolds with normed models $P$ and $W$, in any characteristic, with no completeness and no ultrametric assumption.
+\begin{enumerate}
+\item There is a unique topology and maximal DP atlas on $J^r(\mathcal M,\mathcal N)$ for which every $\Xi_{\varphi,\chi}$ is a chart. With it, $J^r(\mathcal M,\mathcal N)$ is a DP manifold modeled on $P\times\mathbb J_r(P;W)$.
+\item The forgetful maps $J^r\to J^{r-1}\to\dots\to J^0=\mathcal M\times\mathcal N$ are DP. In the charts of item~\textup{(1)} they are coordinate projections.
+\item \textup{(Prolongation.)} For a DP map $\mathsf F\colon\mathcal M\to\mathcal N$, the map $j^r\mathsf F\colon\mathsf m\mapsto j^r_{\mathsf m}\mathsf F$ is a DP section of the source.
+\item \textup{(Functoriality.)} For a DP map $\mathsf G\colon\mathcal N\to\mathcal N'$, the map $j^r_{\mathsf m}\mathsf F\mapsto j^r_{\mathsf m}(\mathsf G\circ\mathsf F)$ is DP. For a DP diffeomorphism $H\colon\mathcal M'\to\mathcal M$, the map $j^r_{\mathsf m}\mathsf F\mapsto j^r_{H^{-1}(\mathsf m)}(\mathsf F\circ H)$ from $J^r(\mathcal M,\mathcal N)$ to $J^r(\mathcal M',\mathcal N)$ is DP. Both are compatible with composition and identities.
+\item The source $J^r(\mathcal M;W)\to\mathcal M$ is a DP vector bundle (Definition~\ref{dp:def:manifold}(2)) with fiber $\mathbb J_r(P;W)$, whose transition for a chart change $\psi$ is $(x,a)\mapsto(\psi(x),\mathsf T^\psi(x)a)$. The forgetful maps are DP bundle morphisms, and $j^r\mathsf F$ is a DP section for every DP map $\mathsf F\colon\mathcal M\to W$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} The sets $\Omega_{\varphi,\chi}$ cover $J^r(\mathcal M,\mathcal N)$. By Theorem~\ref{dp:thm:jet-local}, the charts are bijections onto open sets, and the images of the overlaps are open, with transitions DP homeomorphisms between them. So there is a unique topology making each $\Omega_{\varphi,\chi}$ open and each $\Xi_{\varphi,\chi}$ a homeomorphism onto its image, and the charts form a DP atlas. Two jets with different pairs (source, target) are separated by preimages of disjoint open sets under the continuous map to the Hausdorff space $\mathcal M\times\mathcal N$. Two jets with the same pair lie in one $\Omega_{\varphi,\chi}$, which is homeomorphic to a subset of a normed space.
+
+\emph{Step 2 (items~(2), (3)).} In charts the forgetful map is bounded linear: it is $(x,y,a_1,\dots,a_r)\mapsto(x,y,a_1,\dots,a_{r-1})$. For $\hat{\mathsf F}=\chi\circ\mathsf F\circ\varphi^{-1}$, the map $j^r\mathsf F$ reads $x\mapsto(x,\hat{\mathsf F}(x),(D^{(n)}\hat{\mathsf F}(x))_{n\le r})$, which is DP by Theorem~\ref{dp:thm:differentiable}(2).
+
+\emph{Step 3 (item~(4)).} For $\hat{\mathsf G}=\chi''\circ\mathsf G\circ\chi^{-1}$ and $\hat H=\varphi\circ H\circ\varphi_1^{-1}$ the two maps read
+\begin{gather*}
+ (x,y,a)\mapsto\bigl(x,\hat{\mathsf G}(y),\Theta_r((D^{(m)}\hat{\mathsf G}(y))_{m\le r},a)^-\bigr),\\
+ (x,y,a)\mapsto\bigl(\hat H^{-1}(x),y,\Theta_r((y,a),(D^{(n)}\hat H(\hat H^{-1}(x)))_{1\le n\le r})^-\bigr).
+\end{gather*}
+Both are DP as in Step~3 of the proof of Theorem~\ref{dp:thm:jet-local}. Compatibility with composition and identities holds on representatives.
+
+\emph{Step 4 (item~(5)).} For $\mathcal N=W$ we have $\xi=\id_W$ and $\mathsf b(y)=(y,\id_W,0,\dots,0)$. The only $\alpha$ with $\abs\alpha=1$ and $\deg\alpha=d$ is the unit vector at $d$, so the outer $\Theta_r$ in~\eqref{dp:13:eq:transition} is the identity on jets. So the transition is $(x,a)\mapsto(\psi(x),\mathsf T^\psi(x)a)$, for $a=(a_0,\dots,a_r)$, linear in $a$. By Lemma~\ref{dp:lem:chain-law}(3), $\ell\mapsto\mathsf T(\ell)$ is a finite sum of laws into $\cL(\mathbb J_r(P;W),\mathbb J_r(P;W))$, each $\mathcal F_\alpha({\cdot},\ell)$ placed in its block by bounded linear maps of norm $1$, plus the constant identity on the block of degree $0$. So it is DP, and $\mathsf T^\psi$ is DP as a composite. By Lemma~\ref{dp:lem:chain-law}(5),(6), the family $\mathsf T^\psi$ satisfies the cocycle identity, and it is invertible with inverse the family of the reversed chart change. In these charts the forgetful maps are the coordinate projections $\mathbb J_r\to\mathbb J_{r-1}$, and $j^r\mathsf F$ is DP by Step~2.
+\end{proof}
+
+\subsection{Jet bundles of analytic manifolds}\label{dp:ssec:analytic-jets}
+
+An \emph{analytic manifold} is a Hausdorff space with an atlas modeled on a normed space whose transitions are analytic at every point of their domains. By Theorem~\ref{dp:thm:calculus}(3) it is a DP manifold. Below, charts of an analytic manifold are those of its analytic atlas. Analytic maps compose. Let $f$ be analytic at $x_0$ with multilinear coefficients $\beta_n$, $\norm{\beta_n}\le MR^{-n}$, and $g$ analytic at $f(x_0)$ with multilinear coefficients $\beta'_m$, $\norm{\beta'_m}\le M'R'^{-m}$. Substituting gives in degree $d\ge1$ the finite sum of the $\beta'_m(\beta_{n_1},\dots,\beta_{n_m})$ over $m\ge1$ and $n_1+\dots+n_m=d$ with all $n_i\ge1$. It is a bounded $d$-linear map into the target of $g$, of norm at most $M'R^{-d}(M/R')(1+M/R')^{d-1}$. For small $\norm h$ the family is absolutely summable in the completion of that target, and its sum lies in the target.
+
+For $k\ge1$ let $\Delta_k\colon\Mult^k(P;W)\to\cP_k(P;W)$, $\Delta_k\beta(h)=\beta(h,\dots,h)$, a bounded linear map of norm at most $1$. We say that \emph{$(\mathrm{Sec}_k)$ holds for $(P,W)$} if $\Delta_k$ has a bounded linear right inverse $\mathsf s_k$, a \emph{section}. Read $\Mult^0(P;W)=W$, $\Delta_0=\id_W$ and $\mathsf s_0=\id_W$, so that $(\mathrm{Sec}_0)$ is trivial. Put $Z_k=\cP_k(P;W)$. The law
+\[
+ \ev_k\colon P\to\cL(Z_k,W),\qquad\ev_k(h)(a)=a(h),
+\]
+has degree $k$ and norm at most $1$: the coefficients of $s\mapsto\ev_k(\sum_is_ih_i)$ are the operators $a\mapsto a^{[\alpha]}(h_1,\dots,h_q)$, bounded by Theorem~\ref{dp:thm:mixed}. A section is one linear choice of lifts for all laws at once; item~(5) of Theorem~\ref{dp:thm:analytic-jets} uses this linearity.
+
+\begin{lemma}[coefficients through a lift]\label{dp:13:lem:lifts}
+\leavevmode
+\begin{enumerate}
+\item If $b=\Delta_m\beta$ for a bounded $m$-linear $\beta\colon W^m\to Y$, then for $\alpha\in\N^q$ with $\abs\alpha=m$,
+\begin{equation}\label{dp:13:eq:lift-coeff}
+ b^{[\alpha]}(w_1,\dots,w_q)=\sum_\sigma\beta\bigl(w_{\sigma(1)},\dots,w_{\sigma(m)}\bigr),
+\end{equation}
+the sum over the $m!/\alpha!$ maps $\sigma\colon[m]\to[q]$ with $\abs{\sigma^{-1}(i)}=\alpha_i$ for all $i$.
+\item For $\alpha\in\N^r$ with $\deg\alpha=d\ge1$ and $\abs\alpha=m$, the formula
+\[
+ \mathsf N_\alpha\bigl(\beta,\ell^{(1)},\dots,\ell^{(m)}\bigr)(h)=\sum_\sigma\beta\bigl(\ell^{(1)}_{\sigma(1)}(h),\dots,\ell^{(m)}_{\sigma(m)}(h)\bigr),\qquad\ell^{(i)}\in\mathbb J^-_r(P;W),
+\]
+defines a bounded $(m+1)$-linear map from $\Mult^m(W;Y)\times\mathbb J^-_r(P;W)^m$ to $\cP_d(P;Y)$, and $\mathsf N_\alpha(\beta,\ell,\dots,\ell)=\mathcal F_\alpha(\Delta_m\beta,\ell)$.
+\item Let $g\colon U\to Y$, $U\subseteq W$ open, be analytic at every point, and analytic at $w_0$ with radius $R$, bound $M$ and multilinear coefficients $\beta_m$. For $n\le m$ and $S\subseteq[m]$ with $\abs S=n$, let $\beta_m^S(h_1,\dots,h_{m-n};h'_1,\dots,h'_n)$ be $\beta_m$ with $h'_1,\dots,h'_n$ in the slots of $S$ and $h_1,\dots,h_{m-n}$ in the others, each in order, and put $\beta_{m,n}=\sum_S\beta_m^S$. Then $\norm{\beta_{m,n}}\le M(2/R)^m$, and for $\norm h<R/2$,
+\begin{equation}\label{dp:13:eq:hasse-analytic}
+ D^{(n)}g(w_0+h)=\Delta_n\mathsf H_n(w_0+h),\qquad\mathsf H_n(w_0+h)=\sum_{m\ge n}\beta_{m,n}(h,\dots,h)\ \text{ in }\Mult^n(W;\widehat Y).
+\end{equation}
+So $w\mapsto D^{(n)}g(w)$ is analytic on $U$ into $\cP_n(W;Y)$, and $\mathsf H_n$ is analytic into $\Mult^n(W;\widehat Y)$ with coefficients in $\Mult^n(W;Y)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (items~(1), (2)).} Expand $\beta(\sum_is_iw_i,\dots,\sum_is_iw_i)$ by multilinearity and compare the coefficients of $s^\alpha$, as $K$ is infinite. For item~(2), let $\ell_1,\dots,\ell_m$ be laws of degrees $d_1,\dots,d_m$ into $W$. Substituting their expansions shows that $h\mapsto\beta(\ell_1(h),\dots,\ell_m(h))$ is a law of degree $\sum_id_i$ and norm at most $\norm\beta\prod_i\norm{\ell_i}$. For each $\sigma$ the degree is $\sum_i\sigma(i)=\deg\alpha=d$. So $\mathsf N_\alpha$ has norm at most $m!/\alpha!$. The last formula is~\eqref{dp:13:eq:lift-coeff}.
+
+\emph{Step 2 (item~(3)).} There are $\binom mn\le2^m$ sets $S$, which gives the bound. For $\norm h+\norm{h'}<R/2$, expanding $\beta_m(h+h',\dots,h+h')$ gives a family with $\sum_{m,n}\binom mnMR^{-m}\norm h^{m-n}\norm{h'}^n=\sum_mMR^{-m}(\norm h+\norm{h'})^m<\infty$, absolutely summable in $\widehat Y$. Grouping by the degree in $h'$ gives $g(w_0+h+h')=\sum_n\mathsf H_n(w_0+h)(h',\dots,h')$. As $g$ is DP at $w_0+h$, uniqueness of law expansions in $\widehat Y$ (Lemma~\ref{dp:lem:elementary}(5)) gives~\eqref{dp:13:eq:hasse-analytic}. Applying $\Delta_n$ to the series gives an expansion of $D^{(n)}g$ with coefficients in $\cP_n(W;Y)$.
+\end{proof}
+
+\begin{definition}[the shear manifold]\label{dp:13:def:shear}
+For a normed space $V$, let $X_V=V\times V\times K$, with the two global charts $\id$ and $\psi_V(v,z,c)=(v,z+cv,c)$. The chart change $\psi_V$ and its inverse $(v,z,c)\mapsto(v,z-cv,c)$ are polynomial and analytic. This is an analytic manifold, the \emph{shear manifold} of $V$. Below, the operator family and the transition of the shear manifold mean those of $\psi=\psi_V$ or of $\psi=\psi_V^{-1}$, with $\xi=\id_W$ for the transition; each statement holds for either one.
+\end{definition}
+
+\begin{theorem}[jet bundles of analytic manifolds]\label{dp:thm:analytic-jets}
+Let $k\ge1$.
+\begin{enumerate}
+\item \textup{(Reformulations.)} The following are equivalent: \textup{(a)} $(\mathrm{Sec}_k)$ holds for $(P,W)$; \textup{(b)} $\ev_k$ is the diagonal of a bounded $k$-linear map into $\cL(Z_k,W)$; \textup{(c)} $\ev_k$ is analytic at one point. Then every law in $Z_k$ has a lift of norm at most $\norm{\mathsf s_k}$ times its norm. $(\mathrm{Sec}_k)$ passes to bounded linear retracts of $P$.
+\item \textup{(Sufficiency.)} If $(\mathrm{Sec}_k)$ holds for $(P,W)$ for $1\le k\le r$, then for all analytic manifolds $\mathcal M,\mathcal N$ with models $P,W$, the transitions~\eqref{dp:13:eq:transition} of $J^r(\mathcal M,\mathcal N)$ and the operator families $\mathsf T^\psi$ of $J^r(\mathcal M;W)$ are analytic.
+\item \textup{(Necessity.)} If, for the shear manifold of $V$ and $\psi=\psi_V^{\pm1}$, the operator family $\mathsf T^\psi$ of $J^r(X_V;W)$ or the transition~\eqref{dp:13:eq:transition} with $\mathcal N=W$ is analytic at one point, then $(\mathrm{Sec}_k)$ holds for $(V,W)$ for $1\le k\le r$.
+\item \textup{(Where sections exist.)} $(\mathrm{Sec}_k)$ holds for $(P,W)$ in each of these cases:
+\begin{enumerate}
+\item $k!\ne0$ in $K$, all normed $P,W$, with $\mathsf s_k(a)=a^{[1^k]}/k!$;
+\item $P$ finite-dimensional, with $K$ complete or $W$ Banach;
+\item $P=\ell^1(J)$, $W$ Banach;
+\item $P$ ultrametric, $W$ with an equivalent ultrametric spherically complete norm; in particular $W=K$ with $K$ spherically complete;
+\item $K$ discretely valued, $P$ ultrametric, $W$ Banach with an equivalent ultrametric norm;
+\item $K$ complete, $P$ ultrametric, $W$ ultrametric Banach, $\widehat P$ linearly homeomorphic to some $c_0(J,K)$, which includes $\widehat P$ of countable type.
+\end{enumerate}
+\item \textup{(What a section gives.)} If $(\mathrm{Sec}_k)$ holds for $(\cL(E,D),F)$, then $A^k_{E,D;F}$ is the diagonal of a bounded $k$-linear map into $\cL(\Alt^k(D;F),\Alt^k(E;F))$.
+\item \textup{(Where sections fail.)} Let $\operatorname{char}K=p>0$ and $k\ge p$.
+\begin{enumerate}
+\item Over every such $K$, with $E,F$ of \cite[Theorem~7.2(1)]{I}, $(\mathrm{Sec}_k)$ fails for $(\cL(E,E),F)$.
+\item If $K$ is complete and not spherically complete, with $E,D$ of \cite[Theorem~7.2(2)]{I}, $(\mathrm{Sec}_k)$ fails for $(\cL(E,D),K)$, with scalar values and all spaces ultrametric Banach.
+\item It fails for every pair $(P,W)$ with a law of degree $k$ that has no lift. Examples: $A^k_{E,E;F}$ as in~\textup{(a)}, on $\cL(E,E)$ with $W=\cL(\Alt^k(E;F),\Alt^k(E;F))$; $A^k_{E,D;K}$ as in~\textup{(b)}, for $K$ complete and not spherically complete; the power map $c_0\to\hGamma^k_\pi c_0$ under the conditions of Proposition~\ref{dp:prop:strict}\textup{(1)(b)}; and, with $k=p$, the law $\gamma_{\mathcal E}(h)=h^{\otimes p}$ on the space $\mathcal E$ of Proposition~\ref{dp:prop:degree-p}\textup{(2)}, with $W=\hGamma^p_\Gamma(\mathcal E)$, the completion of $\Gamma^p(\mathcal E)$ for $\norm\cdot_\Gamma$.
+\end{enumerate}
+So in each case, for $V$ the source space and $r\ge k$, the operator families of $J^r(X_V;W)$ are analytic at no point; they are DP by Theorem~\ref{dp:thm:dp-jets}.
+\end{enumerate}
+\end{theorem}
+
+Items (1)--(3), (4)(a)--(c) and (5) assume no ultrametric norm, over every $K$. Ultrametric norms enter only in (4)(d)--(f), through the agreement theorems of Section~\ref{dp:sec:agreement}, and they place (6)(b) between ultrametric spaces.
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} The formula $\mathsf E(x_1,\dots,x_k)(a)=\mathsf s_k(a)(x_1,\dots,x_k)$ matches sections with lifts $\mathsf E$ of $\ev_k$. The diagonal of $\mathsf s_k(a)$ is $a$ for all $a$ exactly when the diagonal of $\mathsf E$ is $\ev_k$, and the bounds agree. So (a) and (b) are equivalent. A diagonal of a bounded $k$-linear map is analytic at every point~\cite[Proposition~2.5]{I}. Conversely, let $\ev_k(h_0+h)=\sum_i\beta_i(h,\dots,h)$ near $0$. For fixed $h$ and small $\lambda\in K$, the left side at $\lambda h$ is a polynomial in $\lambda$ with coefficient of $\lambda^k$ equal to $\ev_k(h)$. By~\cite[Lemma~A.1]{I}, $\beta_k(h,\dots,h)=\ev_k(h)$. For retracts, let $\mathsf t\colon P'\to P$ and $\mathsf r\colon P\to P'$ be bounded linear with $\mathsf r\circ\mathsf t=\id$. Then $a\mapsto\mathsf s_k(a\circ\mathsf r)\circ\mathsf t^{\times k}$ is a section for $(P',W)$.
+
+\emph{Step 2 (item~(2), the inner composition).} As $\psi^{-1}$ is analytic, $x\mapsto\ell^\psi(\psi(x))$ is analytic, by Lemma~\ref{dp:13:lem:lifts}(3) and composition. By Lemma~\ref{dp:13:lem:lifts}(2) for the spaces $P,W$ in place of $W,Y$, with $\beta=\mathsf s_m(a_m)$, the map $(a_m,\ell^{(1)},\dots,\ell^{(m)})\mapsto\mathsf N_\alpha(\mathsf s_m(a_m),\ell^{(1)},\dots,\ell^{(m)})$ is bounded $(m+1)$-linear, and its value at $\ell^{(i)}=\ell$ is $\mathcal F_\alpha(a_m,\ell)$. So $(x,y,a)\mapsto\Theta_r((y,a),\ell^\psi(\psi(x)))$ is analytic. Leaving $a_m$ as the input, the bounded $m$-linear map $(\ell^{(1)},\dots,\ell^{(m)})\mapsto\mathsf N_\alpha(\mathsf s_m({\cdot}),\ell^{(1)},\dots,\ell^{(m)})$ has diagonal $\ell\mapsto\mathcal F_\alpha({\cdot},\ell)$. So $\mathsf T^\psi$, with the constant identity on the block of degree~$0$, is analytic.
+
+\emph{Step 3 (item~(2), the outer composition).} By Lemma~\ref{dp:13:lem:lifts}(3), $D^{(m)}\xi(y)=\Delta_m\mathsf H_m(y)$ with $\mathsf H_m$ analytic. By Lemma~\ref{dp:13:lem:lifts}(2), for the spaces $W,\widehat W$ in place of $W,Y$, we have $\mathcal F_\alpha(D^{(m)}\xi(y),\ell)=\mathsf N_\alpha(\mathsf H_m(y),\ell,\dots,\ell)$. No section is needed here. So the outer $\Theta_r$ in~\eqref{dp:13:eq:transition} is analytic in $(y,\ell)$, at first with values in $\cP_d(P;\widehat W)$. Each coefficient of the resulting series is a finite sum of bounded multilinear maps with values in $\cP_d(P;W)$, so the expansion lives in $\cP_d(P;W)$. The components $\psi$ and $\xi$ are analytic, and analytic maps compose.
+
+\emph{Step 4 (item~(3), the operator family).} Let $\psi=\psi_V$. At $x=(v,z,c)$ the map $\psi^{-1}$ has $(\ell^\psi(\psi(x)))_1(v',z',c')=(v',z'-c'v-cv',c')$, since $\psi$ changes neither $v$ nor $c$. Let $\operatorname{pr}_2(v,z,c)=z$, and let $\mathsf i_k,\mathsf p_k$ be the inclusion of and the projection onto the block of degree $k$ of $\mathbb J_r(X_V;W)$. Define the bounded linear map $\mathsf C$ from $\cL(\mathbb J_r(X_V;W),\mathbb J_r(X_V;W))$ to $\cL(\cP_k(V;W),W)$ by
+\[
+ \mathsf C(\mathsf S)(a)=\bigl(\mathsf p_k\mathsf S\mathsf i_k(a\circ\operatorname{pr}_2)\bigr)(0,0,1).
+\]
+For a jet with only one component $a'\in\cP_k(X_V;W)$, the component of degree $k$ of $\mathsf T(\ell)a'$ comes only from $\alpha$ with $\abs\alpha=\deg\alpha=k$, that is, $\alpha=(k,0,\dots)$, and it is $a'\circ\ell_1$. So
+\begin{equation}\label{dp:13:eq:compression}
+ \mathsf C\bigl(\mathsf T^\psi(v,z,c)\bigr)(a)=a\bigl(\operatorname{pr}_2(0,-v,1)\bigr)=a(-v)=(-1)^k\ev_k(v)(a).
+\end{equation}
+If $\mathsf T^\psi$ is analytic at $(v_0,z_0,c_0)$, restriction to the slice $v\mapsto(v,z_0,c_0)$ and $\mathsf C$ make $\ev_k$ analytic at $v_0$, and item~(1) applies. For $\psi_V^{-1}$ the signs are $+$, and the same argument gives $\ev_k(v)$.
+
+\emph{Step 5 (item~(3), the transition).} Let $\mathcal N=W$. By Theorem~\ref{dp:thm:dp-jets}(5), the block of degree $k$ of the transition is $\Phi(x,a)=\mathsf p_k\mathsf T^\psi(x)a$, linear in $a$. Let $\Phi(x_0+h,a^\circ+a'')=\sum_m\beta_m((h,a''),\dots,(h,a''))$ with $\norm{\beta_m}\le MR^{-m}$. By~\cite[Lemma~A.1]{I}, the coefficient of $s$ in $s\mapsto\Phi(x_0+h,a^\circ+sa'')$ gives
+\[
+ \mathsf p_k\mathsf T^\psi(x_0+h)a''=\sum_m\sum_{l\le m}\beta_m\bigl((h,0),\dots,(0,a''),\dots,(h,0)\bigr),
+\]
+with $(0,a'')$ in slot $l$. The right side is an operator-valued series in $h$ with coefficients of norm at most $mMR^{-m}$. So $x\mapsto\mathsf p_k\mathsf T^\psi(x)$ is analytic at $x_0$, and $\mathsf C$ uses only $\mathsf p_k\mathsf S$.
+
+\emph{Step 6 (item~(4)).} (a): $a^{[1^k]}/k!$ is $k$-linear by Lemma~\ref{dp:lem:elementary}(4), bounded linearly in $a$ by~\eqref{dp:laws:scaled}, and has diagonal $a$ by Lemma~\ref{dp:lem:hasse-law}(5). (c): fix a total order on $J$, let $e_\theta$ be the unit vectors, and put
+\[
+ \mathsf s_k(a)(x^1,\dots,x^k)=\sum_{\mathsf w}a^{[\alpha(\mathsf w)]}(e_{\theta_1},\dots,e_{\theta_q})\,x^1_{\mathsf w_1}\cdots x^k_{\mathsf w_k},
+\]
+the sum over the nondecreasing words $\mathsf w$ of length $k$ in $J$, with distinct letters $\theta_1<\dots<\theta_q$ and multiplicities $\alpha(\mathsf w)$. By~\eqref{dp:laws:scaled} the coefficients have norm at most $C_0^kk!\norm a$, and $\sum_{\mathsf w}\prod_l\abs{x^l_{\mathsf w_l}}\le\prod_l\norm{x^l}$. So the sum converges in the Banach space $W$. Its diagonal is $a$ on finitely supported vectors, since words correspond to monomials, and both sides are continuous.
+
+In the other cases $\ev_k$ is DP at $0$ by Theorem~\ref{dp:thm:calculus}(1), and we show that it is analytic there. Item~(1) then finishes. The target $\cL(Z_k,W)$ is Banach if $W$ is, and ultrametric if $W$ is. (b): Theorem~\ref{dp:thm:agreement-finite}(1) if $K$ is complete, and (2) if $W$ is Banach; for $P=\{0\}$ we have $Z_k=0$. (d): replace the norm of $W$ by the equivalent one, which does not affect $(\mathrm{Sec}_k)$. Then $Z_k$ is ultrametric, $\cL(Z_k,W)$ is ultrametric and spherically complete by Lemma~\ref{dp:lem:operator-sph}, and Theorem~\ref{dp:thm:sph-agreement}(1) applies. (e): replace the norm of $W$ as in (d). Then $\cL(Z_k,W)$ is an ultrametric Banach space, and Theorem~\ref{dp:thm:sph-agreement}(2) applies. (f): Theorem~\ref{dp:thm:conservativity}(1)(d).
+
+\emph{Step 7 (item~(5)).} For $\omega\in\Alt^k(D;F)$ and $\mathsf v_1,\dots,\mathsf v_k\in E$ let $a_{\omega,\mathsf v}\in\cP_k(\cL(E,D);F)$ be $a_{\omega,\mathsf v}(u)=\omega(u\mathsf v_1,\dots,u\mathsf v_k)$, the diagonal of a bounded $k$-linear map, of norm at most $\norm\omega\prod_i\norm{\mathsf v_i}$. The map $(\omega,\mathsf v)\mapsto a_{\omega,\mathsf v}$ is linear in $\omega$, multilinear in $\mathsf v$, and zero if two $\mathsf v_i$ coincide. So
+\[
+ \mathsf A\colon\cL(\cP_k(\cL(E,D);F),F)\to\cL(\Alt^k(D;F),\Alt^k(E;F)),\qquad\mathsf A(\Upsilon)(\omega)(\mathsf v_1,\dots,\mathsf v_k)=\Upsilon(a_{\omega,\mathsf v}),
+\]
+is a well-defined bounded linear map of norm at most $1$: $\mathsf A(\Upsilon)(\omega)$ is alternating because $\Upsilon$ is linear. And $\mathsf A(\ev_k(u))(\omega)(\mathsf v_1,\dots,\mathsf v_k)=a_{\omega,\mathsf v}(u)=A^k_{E,D;F}(u)(\omega)(\mathsf v_1,\dots,\mathsf v_k)$. So $A^k_{E,D;F}=\mathsf A\circ\ev_k$. By item~(1), $\ev_k$ is the diagonal of a bounded $k$-linear map, and composing with $\mathsf A$ gives the claim. Each $a_{\omega,\mathsf v}$ has the lift $\omega(u_1\mathsf v_1,\dots,u_k\mathsf v_k)$, which is not alternating in $\mathsf v$. So the linearity of the section is what is used.
+
+\emph{Step 8 (item~(6)).} (a), (b): by item~(5), a section would make $A^k$ a diagonal of a bounded $k$-linear map, hence analytic, against~\cite[Theorem~7.2]{I}. (c): the implication is item~(1). $A^k$ and the power map have no lift, since a lift would make them analytic, against~\cite[Theorem~7.2]{I} and Proposition~\ref{dp:prop:strict}(1)(b). A lift of $\gamma_{\mathcal E}$ would make it ambient of degree $p$. If $\gamma_{\mathcal E}$ were ambient of degree $p$, then so would be $(\lambda,h)\mapsto h^{\otimes p}$ on $K\oplus\mathcal E$, by precomposing a lift with the projection, against Proposition~\ref{dp:prop:degree-p}(2) with $n=p$. The last sentence is item~(3) and Theorem~\ref{dp:thm:dp-jets}.
+\end{proof}
+
+\begin{corollary}[the dichotomy]\label{dp:cor:jet-dichotomy}
+Let $K$ be complete of characteristic $p>0$. For $r\ge p$ the following are equivalent: \textup{(i)} $K$ is spherically complete; \textup{(ii)} for every ultrametric normed space $P$ and every analytic manifold $\mathcal M$ modeled on $P$, the scalar jet bundle $J^r(\mathcal M;K)$ has analytic operator families and transitions. For $r<p$, \textup{(ii)} always holds. In all cases $J^r(\mathcal M;K)$ is a DP bundle.
+\end{corollary}
+
+\begin{proof}
+(i)$\Rightarrow$(ii): Theorem~\ref{dp:thm:analytic-jets}(4)(d),(2). (ii)$\Rightarrow$(i): if $K$ is not spherically complete, let $V=\cL(E,D)$ be as in Theorem~\ref{dp:thm:analytic-jets}(6)(b) with $k=p$. Then $X_V$ is ultrametric, and by items (6)(b) and (3) its scalar jet bundle has operator families and transitions analytic at no point. For $r<p$: items (4)(a) and (2). The DP bundle is Theorem~\ref{dp:thm:dp-jets}(5).
+\end{proof}
+
+The statement of the corollary does not mention alternating forms. Its proof does, through Theorem~\ref{dp:thm:analytic-jets}(5). The proof produces no scalar law without a lift: the map that fails to be analytic has values in $\cL(\mathbb J_r(X_V;K),\mathbb J_r(X_V;K))$. The source $X_V$ and this target are ultrametric and the family is DP, so by~\cite[Theorem~14.39(1)]{I} the family is AA. So the corollary separates An from $\mathrm{AA}=\mathrm{DP}$, and not AA from DP. The separation from AA is Proposition~\ref{dp:prop:jets-not-ambient} below, outside ultrametric spaces.
+
+Theorem~\ref{dp:thm:analytic-jets}(2) needs sections on the model, and item~(3) gives them on $V$ only. The next proposition closes this gap.
+
+\begin{proposition}[sections and products]\label{dp:prop:sec-products}
+Let $P_1,P_2,V$ be normed spaces and $k\ge1$.
+\begin{enumerate}
+\item If $(\mathrm{Sec}_i)$ holds for $(P_1,W)$ and $(\mathrm{Sec}_n)$ for $(P_2,W)$ whenever $i+n=k$, then $(\mathrm{Sec}_k)$ holds for $(P_1\times P_2,W)$.
+\item $(\mathrm{Sec}_k)$ holds for $(K,W)$.
+\item If $(\mathrm{Sec}_k)$ holds for $(P\times K,W)$, then $(\mathrm{Sec}_n)$ holds for $(P,W)$ for all $n\le k$.
+\item The following are equivalent: \textup{(A)} $(\mathrm{Sec}_n)$ holds for $(V,W)$, $1\le n\le r$; \textup{(B)} $(\mathrm{Sec}_r)$ holds for $(X_V,W)$; \textup{(B$'$)} $(\mathrm{Sec}_n)$ holds for $(X_V,W)$, $1\le n\le r$; \textup{(C)} for all analytic manifolds $\mathcal M,\mathcal N$ with models $X_V,W$, the transitions of $J^r(\mathcal M,\mathcal N)$ and the operator families of $J^r(\mathcal M;W)$ are analytic; \textup{(D)} on the shear manifold of $V$, the operator family or the transition of $J^r(X_V;W)$ is analytic at one point.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} For $a\in\cP_k(P_1\times P_2;W)$ write $a(x_1,x_2)=\sum_{i+n=k}a_{i,n}(x_1,x_2)$, with $a_{i,n}(x_1,x_2)=a^{[(i,n)]}((x_1,0),(0,x_2))$. By Theorem~\ref{dp:thm:mixed}(2), $\norm{a_{i,n}(x_1,x_2)}\le C_2^k\norm a\norm{x_1}^i\norm{x_2}^n$. By Lemma~\ref{dp:lem:chain-law}(2), $a_{i,n}({\cdot},x_2)\in\cP_i(P_1;W)$. By~\eqref{dp:13:eq:refine} and Lemma~\ref{dp:lem:chain-law}(2), $x_2\mapsto a_{i,n}({\cdot},x_2)$ is a law of degree $n$ into $\cP_i(P_1;W)$. Let $\mathsf s^{(1)}_i,\mathsf s^{(2)}_n$ be the sections. For $x^1,\dots,x^i\in P_1$ put $\mathsf c(x_2)=\mathsf s^{(1)}_i(a_{i,n}({\cdot},x_2))(x^1,\dots,x^i)$. Composing with the bounded linear map $\mathsf s^{(1)}_i({\cdot})(x^1,\dots,x^i)$ shows that $\mathsf c\in\cP_n(P_2;W)$, and $\mathsf c$ is linear in $a$ and multilinear in $(x^1,\dots,x^i)$. Then
+\[
+ \mathsf L_{i,n}(x^1,\dots,x^i;\mathsf y^1,\dots,\mathsf y^n)=\mathsf s^{(2)}_n(\mathsf c)(\mathsf y^1,\dots,\mathsf y^n)
+\]
+is bounded and multilinear in all arguments, because $\mathsf s^{(2)}_n$ is linear. At $x^l=x_1$, $\mathsf y^l=x_2$ its value is $\mathsf c(x_2)=a_{i,n}(x_1,x_2)$. With the projections $\operatorname{pr}_1,\operatorname{pr}_2$ of $P_1\times P_2$, the map
+\[
+ \mathsf s_k(a)(\mathsf z^1,\dots,\mathsf z^k)=\sum_{i+n=k}\mathsf L_{i,n}\bigl(\operatorname{pr}_1\mathsf z^1,\dots,\operatorname{pr}_1\mathsf z^i;\operatorname{pr}_2\mathsf z^{i+1},\dots,\operatorname{pr}_2\mathsf z^k\bigr)
+\]
+is a section.
+
+\emph{Step 2 (items~(2), (3)).} (2): $\mathsf s_k(s\mapsto s^kw)(s_1,\dots,s_k)=s_1\cdots s_kw$. (3): for $b\in\cP_n(P;W)$ put $a(v,\lambda)=\lambda^{k-n}b(v)$, a law of degree $k$ with $\norm a\le\norm b$, linear in $b$, and let $\beta=\mathsf s_k(a)$. The coefficient of $\lambda^{k-n}$ in $\beta((v,\lambda),\dots,(v,\lambda))=\lambda^{k-n}b(v)$ is $\sum_S\beta^S(v,\dots,v)$, the sum over $S\subseteq[k]$ with $\abs S=k-n$, where $\beta^S$ has $(0,1)$ in the slots of $S$ and its arguments, in the form $(v,0)$, in the others. So $(v_1,\dots,v_n)\mapsto\sum_S\beta^S(v_1,\dots,v_n)$ is $n$-linear, bounded by $\binom kn\norm{\mathsf s_k}\norm b$, linear in $b$, with diagonal $b$.
+
+\emph{Step 3 (item~(4)).} (A)$\Rightarrow$(B$'$): items (1), (2), first for $V\times K$ and then for $V\times(V\times K)$. (B$'$)$\Rightarrow$(B) is trivial. (B)$\Rightarrow$(A): $V\times K$ is a retract of $X_V$, so Theorem~\ref{dp:thm:analytic-jets}(1) and item~(3) apply. (B$'$)$\Rightarrow$(C) is Theorem~\ref{dp:thm:analytic-jets}(2). (C)$\Rightarrow$(D) is trivial. (D)$\Rightarrow$(A) is Theorem~\ref{dp:thm:analytic-jets}(3).
+\end{proof}
+
+So if $P$ is linearly homeomorphic to $P\times P\times K$, then the transitions of all $J^r(\mathcal M,\mathcal N)$ and the operator families of all $J^r(\mathcal M;W)$, with models $P,W$, are analytic exactly when $(\mathrm{Sec}_r)$ holds for $(P,W)$.
+
+The law $\ev_k$ also decides ambience. Recall $\operatorname{amb}$ and $\mathfrak a_k(P,W)$ from Section~\ref{dp:sec:conv}, and $\cC_p$ from Definition~\ref{dp:def:cp}. For the next proposition let $p=\operatorname{char}K>0$ in item~(4), with $\mathcal E$ as in Proposition~\ref{dp:prop:degree-p}(2).
+
+\begin{proposition}[the ambient form of the criterion]\label{dp:prop:jets-not-ambient}
+\leavevmode
+\begin{enumerate}
+\item $\operatorname{amb}(\ev_k)=\mathfrak a_k(P,W)$. So $\ev_k$ is ambient if and only if $\mathfrak a_k(P,W)<\infty$, and $(\mathrm{Sec}_k)$ implies $\mathfrak a_k(P,W)\le\norm{\mathsf s_k}$.
+\item \textup{(Sufficiency.)} If $\mathfrak a_m(P,W)<\infty$ for $1\le m\le r$, then for every analytic manifold $\mathcal M$ with model $P$, the operator families $\mathsf T^\psi$ of $J^r(\mathcal M;W)$ are AA at every point.
+\item \textup{(Necessity.)} If on the shear manifold of $V$ the operator family of $J^r(X_V;W)$ is AA at one point, then $\mathfrak a_k(V,W)<\infty$ for $1\le k\le r$.
+\item \textup{(Separation.)} Let $r\ge p$ and $W=\hGamma^p_\Gamma(\mathcal E)$. On the shear manifold of $\mathcal E$, the operator family of $J^r(X_{\mathcal E};W)$ is DP at every point, and its germ at no point is in $\cC_p$. So at no point is it AA, and at no point is it TA.
+\end{enumerate}
+\end{proposition}
+
+So the single law $\ev_k$ sorts the three classes: it is analytic at a point if and only if $(\mathrm{Sec}_k)$ holds, it is AA at a point if and only if $\mathfrak a_k(P,W)<\infty$, and it is always DP. Whether $\mathfrak a_n(V,W)<\infty$ for $n\le r$ implies the same for $X_V$ is open, so we have no ambient form of Proposition~\ref{dp:prop:sec-products}(4). Item~(2) does not cover the transitions of $J^r(\mathcal M;W)$: they arise from the operator family by the bilinear evaluation, and an analytic map after an AA map need not be AA in characteristic $p$~\cite[Theorem~14.17]{I}.
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} For $t\in\Gamma^k(P)$ and $a\in Z_k$ we have $L_{\ev_k}(t)(a)=L_a(t)$, since both sides are linear in $t$ and agree on powers. So
+\[
+ \operatorname{amb}(\ev_k)=\sup_t\sup_{a\ne0}\frac{\norm{L_a(t)}}{\norm a\,\pi(t)}=\sup_{a\ne0}\frac{\operatorname{amb}(a)}{\norm a}=\mathfrak a_k(P,W).
+\]
+By Theorem~\ref{dp:thm:analytic-jets}(1), a section gives a lift of $\ev_k$ of norm at most $\norm{\mathsf s_k}$. Its linearization on $P^{\otimes k}$ restricts to $L_{\ev_k}$, and it is bounded by $\norm{\mathsf s_k}$ for $\pi$.
+
+\emph{Step 2 (item~(2)).} Let $1\le m\le r$ and $Z_m=\cP_m(P;W)$. By item~(1) there are a linear isometry $\iota\colon\cL(Z_m,W)\to Z$ and a bounded $m$-linear $\beta\colon P^m\to Z$ with $\iota\circ\ev_m=\Delta_m\beta$. Let $\alpha\in\N^r$ with $\abs\alpha=m$ and $\deg\alpha=d\ge1$. The map sending $\mathsf S'\in\cL(Z_m,\cP_d(P;W))$ to the law $h\mapsto\iota(a\mapsto\mathsf S'(a)(h))$ is a linear isometry $\mathsf J$ into $\cP_d(P;Z)$; the values are laws because the coefficients $a\mapsto\mathsf S'(a)^{[\alpha']}(h_1,\dots,h_{l'})$ are bounded in $a$, by Theorem~\ref{dp:thm:mixed}. We have $\mathcal F_\alpha(a,\ell)(h)=a^{[\alpha]}(\ell(h))=\ev_m^{[\alpha]}(\ell(h))(a)$, where $\ell(h)$ stands for $\ell_1(h),\dots,\ell_r(h)$. So~\eqref{dp:13:eq:lift-coeff} for $\iota\circ\ev_m$ gives $\mathsf J(\mathcal F_\alpha({\cdot},\ell))=\mathsf N_\alpha(\beta,\ell,\dots,\ell)$, for the spaces $P,Z$ in place of $W,Y$. By Lemma~\ref{dp:13:lem:lifts}(2) this is the diagonal of a bounded $m$-linear map of $\ell$. So $\ell\mapsto\mathcal F_\alpha({\cdot},\ell)$ is ambient of degree $m$. An ambient law is AA at every point: expanding its lift by multilinearity gives a finite expansion, whose diagonals are images of the values of its coefficient laws. So $\ell\mapsto\mathsf T(\ell)$ is a finite sum of AA maps, after bounded linear maps into blocks, plus a constant. By Lemma~\ref{dp:13:lem:lifts}(3) and composition, $x\mapsto\ell^\psi(\psi(x))$ is analytic. Now apply~\cite[Proposition~14.12(1)]{I}: linear postcomposition, analytic precomposition and sums.
+
+\emph{Step 3 (item~(3)).} Restrict to the slice $v\mapsto(v,z_0,c_0)$ and apply $\mathsf C$ of Step~4 of the proof of Theorem~\ref{dp:thm:analytic-jets}, by~\cite[Proposition~14.12(1)]{I}. By~\eqref{dp:13:eq:compression}, and its form without the sign for $\psi_V^{-1}$, the map $v\mapsto\pm\ev_k(v)$ is AA at $v_0$. Its coefficient law of degree $k$ at $v_0$ is $\pm\ev_k$, the top part of the polynomial $s\mapsto\ev_k(v_0+sh)$. By~\cite[Proposition~14.9(1)]{I} this law is ambient, and item~(1) applies.
+
+\emph{Step 4 (item~(4)).} The family is DP by Theorem~\ref{dp:thm:dp-jets}(5). By Step~8 of the proof of Theorem~\ref{dp:thm:analytic-jets}, $\gamma_{\mathcal E}\in\cP_p(\mathcal E;W)$ is not ambient, so $\mathfrak a_p(\mathcal E,W)=\infty$ and $\ev_p$ is not ambient, by item~(1). Let $\psi=\psi_{\mathcal E}^{\pm1}$, and suppose that the germ of $\mathsf T^\psi$ at $(v_0,z_0,c_0)$ is in $\cC_p$. The slice is an analytic map, so it is in $\cC_p$ by Theorem~\ref{dp:thm:cp}(1), and $\mathsf C$ is bounded linear. By Theorem~\ref{dp:thm:cp}(2) and~\eqref{dp:13:eq:compression}, with $k=p\le r$, the germ of $\pm\ev_p$ at $v_0$ is in $\cC_p$. Its coefficient law of degree $p$ is $\pm\ev_p$, so $\ev_p$ is ambient of degree $p$. This is a contradiction. AA germs are in $\cC_p$ by Theorem~\ref{dp:thm:cp}(1). The space $W$ is Banach, so $\cP_n(X_{\mathcal E};W)$ is complete by Theorem~\ref{dp:thm:normed-roby}(3), and $\mathsf T^\psi$ has values in the Banach space $\cL(\mathbb J_r(X_{\mathcal E};W),\mathbb J_r(X_{\mathcal E};W))$. So Theorem~\ref{dp:thm:chain} applies: $\mathrm{TA}\subseteq\cC_p$ among germs with Banach values.
+\end{proof}

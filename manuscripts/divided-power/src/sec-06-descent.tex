@@ -1,0 +1,295 @@
+\section{Descent and minimality}\label{dp:sec:descent}
+
+We prove that divided-power analyticity descends along isometries of the target and along surjections of the source. Then we write each divided-power germ as an analytic germ after one enlargement of the target and one cover of the source. It follows that the divided-power germs are the smallest class containing the analytic germs with these two descents (Theorem~\ref{dp:thm:minimal}). Between ultrametric spaces source descent alone suffices (Theorem~\ref{dp:thm:ultrametric-minimal}). The section ends with what this minimality depends on (Example~\ref{dp:ex:l1}).
+
+The analytic and the AA germs are as in \cite[Definition~14.7]{I}, with $M$ for the bound. Recall $C_1=8/\abs\varpi^2$ and $C_0=\mathrm eC_1$.
+
+\subsection{The two descents}\label{dp:ssec:two-descents}
+
+\begin{theorem}[target descent]\label{dp:thm:target-descent}
+Let $j\colon W\to Z$ be a linear isometry of normed spaces, $U\subseteq P$ open, $f\colon U\to W$ and $x_0\in U$. Suppose that $j\circ f$ is DP at $x_0$ with radius $R$, bound $M$ and coefficient laws $a'_n\colon P\to Z$.
+\begin{enumerate}
+\item If every $a'_n$ takes values in $j(W)$, then $f$ is DP at $x_0$ with radius $R$ and bound $M$, with coefficient laws $a_n=j^{-1}\circ a'_n$ and $\norm{a_n}=\norm{a'_n}$.
+\item If $j(W)$ is closed in $Z$, for instance if $W$ is complete, the hypothesis of~(1) holds. So divided-power analyticity, at a point or on an open set, descends along linear isometries with closed range, with the same radius and bound.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Let $h_1,\dots,h_r\in P$ and $\abs\alpha=n$. The vector $(a'_n)^{[\alpha]}(h_1,\dots,h_r)$ is a coefficient of the polynomial $\lambda\mapsto a'_n(\sum_i\lambda_ih_i)$ on $K^r$, whose values lie in $j(W)$. As $K$ is infinite, interpolation shows that this coefficient lies in $j(W)$. So $a_n(\sum_i\lambda_ih_i)=\sum_\alpha\lambda^\alpha j^{-1}(a'_n)^{[\alpha]}(h_1,\dots,h_r)$ is a homogeneous polynomial with coefficients in $W$, and $\norm{a_n}=\norm{a'_n}\le MR^{-n}$ because $j$ is isometric. For $\norm h<R$ the partial sums $\sum_{n\le N}a_n(h)\in W$ have images converging to $jf(x_0+h)$, so they converge to $f(x_0+h)$.
+
+\emph{Step 2 (item (2)).} For $h=0$ the values $a'_n(0)$ are $jf(x_0)$ and $0$. Fix $h\ne0$ and put $\rho=R/\norm h$. For $\abs s<\rho$ we have $\psi(s)=jf(x_0+sh)=\sum_ns^na'_n(h)$, with $\norm{a'_n(h)}\rho^n\le M$. We show $a'_n(h)\in j(W)$ by induction on $n$. First, $a'_0(h)=jf(x_0)$. If $a'_m(h)\in j(W)$ for $m<n$, then for $0<\abs s<\rho$,
+\begin{gather*}
+ \delta_n(s)=s^{-n}\Bigl(\psi(s)-\sum_{m<n}s^ma'_m(h)\Bigr)\in j(W),\\
+ \norm{\delta_n(s)-a'_n(h)}\le\sum_{m>n}M\rho^{-m}\abs s^{m-n}=M\rho^{-n}\frac{\abs s/\rho}{1-\abs s/\rho}.
+\end{gather*}
+As $K$ is nontrivially valued, $s$ can tend to $0$, so $a'_n(h)$ lies in the closure of $j(W)$, which is $j(W)$. If $W$ is complete, then $j(W)$ is complete, hence closed.
+\end{proof}
+
+Without closed range, target descent can fail at every point.
+
+\begin{example}[a dense isometry]\label{dp:ex:dense-isometry}
+Let $K$ be complete. Let $Z=c_0(\N,K)$ and $\Delta=\{y\in K:\abs y<1\}$. Put $\mathsf F(y)=(y^i)_{i\ge0}\in Z$, with $0^0=1$. Let $W$ be the linear span of $\mathsf F(\Delta)$, with the norm of $Z$, and let $j\colon W\to Z$ be the inclusion. Then:
+\begin{enumerate}
+\item $j\circ\mathsf F$ is analytic at every point of $\Delta$, with radius $1$ and bound $1$. So is $\mathsf F$ as a map into the closure $\overline W$ of $W$ in $Z$, which is a completion of $W$.
+\item $\mathsf F\colon\Delta\to W$ is DP at no point of $\Delta$, and it is differentiable at no point as a $W$-valued map.
+\end{enumerate}
+So in \cite[Definition~14.7]{I} the condition on diagonals cannot be dropped: the maps $\beta_n$ of the proof expand $j\circ\mathsf F$ with no condition on their diagonals, while $\mathsf F$ is AA at no point, as AA germs are DP \cite[Proposition~14.9(1)]{I}.
+\end{example}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Let $y_0\in\Delta$. For $\abs s<1$ we have $\abs{y_0+s}<1$ and, coordinatewise, $(y_0+s)^i=\sum_{n\le i}\binom iny_0^{i-n}s^n$. Put $z_n=(\binom iny_0^{i-n})_{i\ge0}$, with entry $0$ for $i<n$. Then $z_n\in Z$ and $\norm{z_n}\le1$, as $\abs{\binom in}\le1$ and $\abs{y_0}^{i-n}\to0$ as $i\to\infty$. Since $Z$ is complete, $\sum_ns^nz_n$ converges in $Z$, and coordinatewise it converges to $\mathsf F(y_0+s)$. So $j\mathsf F(y_0+s)=\sum_n\beta_n(s,\dots,s)$ with the $n$-linear maps $\beta_n(s_1,\dots,s_n)=s_1\cdots s_nz_n$, of norm at most $1$. Now apply Theorem~\ref{dp:thm:target-descent}(2) to the inclusion of the closed subspace $\overline W$ in $Z$, with Lemma~\ref{dp:lem:coefficients-unique}(2). This gives $z_n=\beta_n(1,\dots,1)\in\overline W$, so the $\beta_n$ expand $\mathsf F$ as a map into $\overline W$.
+
+\emph{Step 2 (the vector that leaves $W$).} Suppose $\mathsf F$ is DP into $W$ at $y_0$, with laws $a_n$. By Lemma~\ref{dp:lem:coefficients-unique}(2), $ja_n(s)=\beta_n(s,\dots,s)$. So $z_1=(\mathsf d_i)_{i\ge0}$, with $\mathsf d_i=iy_0^{i-1}$ and $\mathsf d_0=0$, lies in $W$. The vector $z_1$ is also the limit in $Z$ of the difference quotients $s^{-1}(\mathsf F(y_0+s)-\mathsf F(y_0))$, so a derivative of $\mathsf F$ in $W$ at $y_0$ would also force $z_1\in W$.
+
+\emph{Step 3 ($z_1\notin W$).} Let $\sh$ be the shift, $(\sh\mathsf t)_i=\mathsf t_{i+1}$, on sequences $\mathsf t$. The identity $(i+2)y^{i+1}-2y(i+1)y^i+y^2iy^{i-1}=0$ gives $(\sh-y_0)^2z_1=0$, while $((\sh-y_0)z_1)_0=\mathsf d_1-y_0\mathsf d_0=1$. Suppose $z_1=\sum_{l\le r}\lambda_l\mathsf F(y_l)$ with distinct $y_l\in\Delta$. Since $(\sh-y_l)\mathsf F(y_l)=0$, also for $y_l=0$, we get $\prod_l(\sh-y_l)z_1=0$. The polynomials $\mathsf g\in K[X]$ with $\mathsf g(\sh)z_1=0$ form an ideal, and its monic generator divides both $(X-y_0)^2$ and the squarefree $\prod_l(X-y_l)$. So it divides $X-y_0$, and $(\sh-y_0)z_1=0$. This is a contradiction.
+\end{proof}
+
+\begin{corollary}[values in the completion]\label{dp:cor:completion}
+Let $U\subseteq P$ be open, $f\colon U\to W$ and $x_0\in U$. Then $f$ is DP at $x_0$ as a $W$-valued map if and only if it is DP at $x_0$ as a $\widehat W$-valued map and, for every $h\in P$ and $n\ge0$, the coefficient of $s^n$ in $s\mapsto f(x_0+sh)$, computed in $\widehat W$, lies in $W$. Radii and bounds agree. The second condition can fail at every point of an open set on which $f$ is analytic into $\widehat W$ (Example~\ref{dp:ex:dense-isometry}).
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{dp:thm:target-descent}(1) with $j\colon W\to\widehat W$, and Lemma~\ref{dp:lem:coefficients-unique}(1). The converse is immediate.
+\end{proof}
+
+Recall from Lemma~\ref{dp:lem:strong-formal}(2) that a bounded linear surjection $Q\colon P'\to P$ has \emph{preimage constant} $\mathsf c>0$ if every $h\in P$ has a preimage $\tilde h$ with $\norm{\tilde h}\le\mathsf c\norm h$.
+
+\begin{proposition}[source descent]\label{dp:prop:source-descent}
+Let $Q\colon P'\to P$ be a bounded linear surjection with preimage constant $\mathsf c$. Let $U\subseteq P$ be open, $f\colon U\to W$, $\tilde x_0\in Q^{-1}(U)$ and $x_0=Q(\tilde x_0)$.
+\begin{enumerate}
+\item If $f\circ Q$ is DP at $\tilde x_0$ with radius $R'$, bound $M$ and coefficient laws $b_n$, then $b_n=a_n\circ Q$ for bounded laws $a_n\colon P\to W$ with $\norm{a_n}\le\mathsf c^n\norm{b_n}$, and $f$ is DP at $x_0$ with radius $R'/\mathsf c$, bound $M$ and coefficient laws $a_n$.
+\item If $f$ is DP at $x_0$ with radius $R$, bound $M$ and coefficient laws $a_n$, then $f\circ Q$ is DP at $\tilde x_0$ with radius $R/\norm Q$ (any radius if $Q=0$), bound $M$ and coefficient laws $a_n\circ Q$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 ($b_n$ is constant on fibers).} Let $\tilde h\in P'$ and $\mathsf k\in\ker Q$. For small $s$ we have $f\circ Q(\tilde x_0+s(\tilde h+\mathsf k))=f\circ Q(\tilde x_0+s\tilde h)$. Both sides are power series in $s$ with geometric bounds, with coefficients $b_n(\tilde h+\mathsf k)$ and $b_n(\tilde h)$. By Lemma~\ref{dp:lem:coefficients-unique}(1), $b_n(\tilde h+\mathsf k)=b_n(\tilde h)$. So $a_n(h)=b_n(\tilde h)$, for any preimage $\tilde h$ of $h$, is well defined, and $b_n=a_n\circ Q$.
+
+\emph{Step 2 ($a_n$ is a bounded law).} For $h_1,\dots,h_r\in P$ with preimages $\tilde h_i$, the vector $\sum_i\lambda_i\tilde h_i$ is a preimage of $\sum_i\lambda_ih_i$. So $a_n(\sum_i\lambda_ih_i)=b_n(\sum_i\lambda_i\tilde h_i)$ is a homogeneous polynomial of degree $n$ with coefficients in $W$. Taking $\norm{\tilde h}\le\mathsf c\norm h$ gives $\norm{a_n(h)}\le\norm{b_n}\mathsf c^n\norm h^n$.
+
+\emph{Step 3 (expansion).} For $\norm h<R'/\mathsf c$ take $\tilde h$ with $\norm{\tilde h}\le\mathsf c\norm h<R'$. Then $x_0+h\in U$ and $f(x_0+h)=f\circ Q(\tilde x_0+\tilde h)=\sum_nb_n(\tilde h)=\sum_na_n(h)$. Also $\norm{a_n}\le\mathsf c^nMR'^{-n}=M(R'/\mathsf c)^{-n}$.
+
+\emph{Step 4 (item (2)).} The map $a_n\circ Q$ is a bounded law with $\norm{a_n\circ Q}\le\norm Q^n\norm{a_n}$, and $f\circ Q(\tilde x_0+\tilde h)=\sum_na_n(Q\tilde h)$ for $\norm Q\norm{\tilde h}<R$.
+\end{proof}
+
+\subsection{The canonical cover}\label{dp:ssec:cover}
+
+\begin{definition}[canonical cover]\label{dp:def:cover}
+Recall $\ell^1(J)$ and $\ell^1_{00}(J)$ from Section~\ref{dp:sec:conv}, and write $e_\theta$ for the unit vectors. For a normed space $P$ let $I_P=\{h\in P:\abs\varpi<\norm h\le1\}$, and let $q_P\colon\ell^1_{00}(I_P)\to P$ be the linear map with $q_P(e_h)=h$. If $K$ and $P$ are complete, let $\hat q_P\colon\ell^1(I_P)\to P$, $\mathsf v\mapsto\sum_{h\in I_P}\mathsf v_hh$.
+\end{definition}
+
+The maps $q_P$, $\hat q_P$ are contractive, as $\norm{\sum_h\mathsf v_hh}\le\sum_h\abs{\mathsf v_h}\norm h\le\norm{\mathsf v}$. Each has preimage constant $\abs\varpi^{-1}$. Indeed, for $h\ne0$ choose $\lambda\in K$ with $\abs\varpi<\abs\lambda\norm h\le1$. Then $\lambda h\in I_P$, $h=q_P(\lambda^{-1}e_{\lambda h})$ and $\abs\lambda^{-1}<\abs\varpi^{-1}\norm h$.
+
+For a set $J$ with a fixed total order, and a law $b\colon\ell^1_{00}(J)\to W$ of degree $n$, we use the following construction. For a nondecreasing word $\mathsf w=(\mathsf w_1\le\dots\le\mathsf w_n)$ in $J$, with distinct letters $\theta_1<\dots<\theta_r$ occurring $\alpha_1,\dots,\alpha_r$ times, put $v_{\mathsf w}=b^{[\alpha]}(e_{\theta_1},\dots,e_{\theta_r})$. For finitely supported $h^1,\dots,h^n$ put
+\begin{equation}\label{dp:eq:word-lift}
+ \beta_b(h^1,\dots,h^n)=\sum_{\mathsf w}h^1_{\mathsf w_1}\cdots h^n_{\mathsf w_n}\,v_{\mathsf w},
+\end{equation}
+a finite sum over nondecreasing words. This map is $n$-linear. Let $h$ be supported in a finite set $J_0\subseteq J$. By Lemma~\ref{dp:lem:elementary}(3), $b(h)$ is the sum over $\alpha\in\N^{J_0}$ with $\abs\alpha=n$ of $h^\alpha b^{[\alpha]}((e_\theta)_{\theta\in J_0})$, and arguments with $\alpha_\theta=0$ can be deleted. Each monomial $h^\alpha$ comes from exactly one nondecreasing word. So $\beta_b(h,\dots,h)=b(h)$. For $n=0$, $\beta_b$ is the constant $b$.
+
+\begin{lemma}[laws on $\ell^1_{00}$ are diagonals]\label{dp:lem:laws-cover}
+Let $W$ be normed, and fix a total order on $J$. Every bounded law $b\colon\ell^1_{00}(J)\to W$ of degree $n$ is the diagonal of the $n$-linear map $\beta_b\colon\ell^1_{00}(J)^n\to W$, with $\norm{\beta_b}\le C_0^n\,n!\,\norm b$. So $b$ is analytic everywhere.
+\end{lemma}
+
+\begin{proof}
+By Theorem~\ref{dp:thm:mixed}(3), $\norm{v_{\mathsf w}}\le C_0^n\norm b\,n!/\prod_c\alpha_c!\le C_0^nn!\norm b$. Also $\sum_{\mathsf w}\prod_c\abs{h^c_{\mathsf w_c}}\le\prod_c\norm{h^c}$. The last assertion is \cite[Proposition~2.5]{I}, with $j=\id_W$.
+\end{proof}
+
+The factor $n!$ is not geometric. Removing it is what the enlargement in Theorem~\ref{dp:thm:normal-form} is for. Recall $\operatorname{lift}(a)$ from Definition~\ref{dp:def:strong-norm}(1).
+
+\begin{lemma}[lifts after the cover]\label{dp:lem:lift-cover}
+Let $W$ be normed and let $a\colon P\to W$ be a law of degree $n$. Fix a total order on $I_P$. The map $\beta_{a\circ q_P}$ of~\eqref{dp:eq:word-lift}, for $J=I_P$, has norm at most $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$. So $\operatorname{lift}(a\circ q_P)\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$.
+\end{lemma}
+
+\begin{proof}
+Let $b=a\circ q_P$, and take $\beta_b$ of~\eqref{dp:eq:word-lift} for $J=I_P$. For a word with letters $\xi_1<\dots<\xi_r$ in $I_P$ and multiplicities $\alpha$ we have $v_{\mathsf w}=a^{[\alpha]}(\xi_1,\dots,\xi_r)$, as $q_P$ is linear. As $\norm{\xi_c}\le1$, Definition~\ref{dp:def:strong-norm} gives $\norm{v_{\mathsf w}}\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$. Conclude as in Lemma~\ref{dp:lem:laws-cover}.
+\end{proof}
+
+\begin{remark}[failures of the two descents for analyticity]\label{dp:rem:an-no-descent}
+\emph{Target.} Let $\operatorname{char}K=p$, $k\ge p$, and let $E,F$ be as in \cite[Theorem~7.2(1)]{I}. Then $(j_{E,F}\circ{-})\circ A^k_{E,E;F}$ is analytic everywhere, $j_{E,F}\circ{-}$ has closed range, and $A^k_{E,E;F}$ is analytic at no point \cite[Remark~14.13]{I}. In every characteristic, the germ $\mathsf f$ of Example~\ref{dp:ex:l1} shows the same.
+
+\emph{Source.} Let $\operatorname{char}K=p$ and let $a$ be the law of Proposition~\ref{dp:prop:degree-p}(2) with $n=p$, into the completion of $\Gamma^p(\mathcal E)$. By Lemma~\ref{dp:lem:laws-cover}, $a\circ q_{K\oplus\mathcal E}$ is analytic everywhere. By \cite[Proposition~14.9(2)]{I} with $j=\id$, $a$ is analytic at no point, since it is not ambient.
+\end{remark}
+
+\begin{theorem}[normal form]\label{dp:thm:normal-form}
+Let $W$ be a Banach space, $U\subseteq P$ open, $f\colon U\to W$, $x_0\in U$, and $\tilde x_0\in\ell^1_{00}(I_P)$ with $q_P(\tilde x_0)=x_0$. Let $\mathfrak U$, $u_0$ be as in \cite[(14.8)]{I}, and let $j_W\colon W\to W\hot_\pi\mathfrak U$, $w\mapsto w\otimes u_0$, which is a linear isometry into a Banach space \cite[Remark~14.41]{I}. The following are equivalent:
+\begin{enumerate}
+\item $f$ is DP at $x_0$;
+\item $f\circ q_P$ is AA at $\tilde x_0$;
+\item there are a Banach space $Z$ and a linear isometry $j\colon W\to Z$ such that $j\circ f\circ q_P$ is analytic at $\tilde x_0$;
+\item $j_W\circ f\circ q_P$ is analytic at $\tilde x_0$.
+\end{enumerate}
+Radius $R$ and bound $M$ in~(1) give radius $R/C_0$ and bound $M$ in~(2), (3), (4). Radius $R'$ and bound $M$ in~(3) or~(4) give radius $\abs\varpi R'$ and bound $M$ in~(1).
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 ((1) implies (2)).} By Proposition~\ref{dp:prop:source-descent}(2) and $\norm{q_P}\le1$, $f\circ q_P$ is DP at $\tilde x_0$ with radius $R$, bound $M$ and laws $b_n=a_n\circ q_P$. By \cite[Theorem~14.39(2)]{I} and $\norm{L_{b_n}(t)}\le\norm{b_n}\norm t_\Gamma$ (Theorem~\ref{dp:thm:normed-roby}(1)), we get
+\begin{equation}\label{dp:eq:amb-cover}
+ \operatorname{amb}(b_n)\le C_0^nMR^{-n}=M(R/C_0)^{-n},
+\end{equation}
+and for $n=0$ the law is a constant of norm at most $M$. As $C_0>1$, \cite[Proposition~14.9(1)]{I} gives that $f\circ q_P$ is AA with radius $R/C_0$ and bound $M$.
+
+\emph{Step 2 ((2) implies (3)).} This is \cite[Remark~14.13]{I}, with the same radius and bound.
+
+\emph{Step 3 ((3) implies (1)).} The map $j\circ f\circ q_P$ is DP at $\tilde x_0$ with radius $R'$ and bound $M$ \cite[Proposition~14.9(1)]{I}. As $W$ is complete, Theorem~\ref{dp:thm:target-descent}(2) gives the same for $f\circ q_P$. Proposition~\ref{dp:prop:source-descent}(1) with $\mathsf c=\abs\varpi^{-1}$ gives that $f$ is DP at $x_0$ with radius $\abs\varpi R'$ and bound $M$.
+
+\emph{Step 4 ((1) implies (4)).} This is the construction of \cite[Remark~14.41]{I}, stated there on $\ell^1(J)$. On $\ell^1_{00}(J)$, with $J=I_P$, every sum below is finite. Recall that $u_0=\sum_{i\le N}\mathsf u_{N,i}$ with $\norm{\mathsf u_{N,i}}\le1/N$. Fix $n\ge1$. For finitely supported $\alpha\in\N^J$ with $\abs\alpha=n$ let $O_\alpha(e)$ be the orbit sum of the unit vectors in the support of $\alpha$, and $w_\alpha=L_{b_n}(O_\alpha(e))$. There are $N_\alpha=n!/\prod_\theta\alpha_\theta!$ words $\mathsf w\in J^n$ of content $\alpha$, that is, in which each $\theta$ occurs $\alpha_\theta$ times. So $\pi(O_\alpha(e))\le N_\alpha$ and $\norm{w_\alpha}\le\operatorname{amb}(b_n)N_\alpha$. Number these words, and put $\mathsf z_{\mathsf w}=w_\alpha\otimes\mathsf u_{N_\alpha,i}$ if $\mathsf w$ is the $i$-th. Then $\norm{\mathsf z_{\mathsf w}}\le\operatorname{amb}(b_n)$, and the $\mathsf z_{\mathsf w}$ of content $\alpha$ sum to $w_\alpha\otimes u_0$. Put
+\[
+ \beta_n(h^1,\dots,h^n)=\sum_{\mathsf w\in J^n}h^1_{\mathsf w_1}\cdots h^n_{\mathsf w_n}\,\mathsf z_{\mathsf w}.
+\]
+Then $\norm{\beta_n}\le\operatorname{amb}(b_n)\le M(R/C_0)^{-n}$ by~\eqref{dp:eq:amb-cover}, and by~\eqref{dp:eq:orbit},
+\[
+ \beta_n(h,\dots,h)=\sum_\alpha h^\alpha w_\alpha\otimes u_0=L_{b_n}(h^{\otimes n})\otimes u_0=j_W(b_n(h)).
+\]
+With $\beta_0=j_W(f(x_0))$ this expands $j_W\circ f\circ q_P$ at $\tilde x_0$ with radius $R/C_0$ and bound $M$.
+
+\emph{Step 5 ((4) implies (3)).} Take $j=j_W$.
+\end{proof}
+
+\subsection{Minimality}\label{dp:ssec:minimal}
+
+Here a \emph{germ} is a quadruple $(P,U,f,x_0)$: $P$ a normed space, $U\subseteq P$ open, $x_0\in U$ and $f\colon U\to W$ with $W$ a Banach space. Consider three properties of a class $\cC$ of germs.
+\begin{itemize}
+\item[(C1)] Every germ $(P,U,f,x_0)$ with $f$ analytic at $x_0$ is in $\cC$.
+\item[(C2)] \emph{(Target descent.)} If $j\colon W\to Z$ is a linear isometry of Banach spaces and $(P,U,j\circ f,x_0)\in\cC$, then $(P,U,f,x_0)\in\cC$.
+\item[(C3)] \emph{(Source descent.)} If $Q\colon P'\to P$ is a bounded linear surjection with a preimage constant, $\tilde x_0\in Q^{-1}(U)$ and $(P',Q^{-1}(U),f\circ Q,\tilde x_0)\in\cC$, then $(P,U,f,Q(\tilde x_0))\in\cC$.
+\end{itemize}
+
+\begin{theorem}[the smallest class with these descents]\label{dp:thm:minimal}
+\leavevmode
+\begin{enumerate}
+\item The DP germs satisfy (C1), (C2), (C3).
+\item Every class of germs with (C1), (C2), (C3) contains every DP germ. It suffices to require (C1) for the sources $\ell^1_{00}(J)$, (C2) for the isometries $j_W$ of Theorem~\ref{dp:thm:normal-form} and (C3) for the canonical covers $q_P$.
+\item So the DP germs are the smallest class of germs with (C1), (C2), (C3).
+\item Let $K$ be complete. The DP germs with Banach sources are the smallest class of germs with Banach sources that has (C1) and (C2) and has (C3) for surjections between Banach spaces.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} (C1) is Theorem~\ref{dp:thm:calculus}(3). For (C2), an isometry from a Banach space has closed range, and Theorem~\ref{dp:thm:target-descent}(2) applies. (C3) is Proposition~\ref{dp:prop:source-descent}(1).
+
+\emph{Step 2 (item (2)).} Let $(P,U,f,x_0)$ be a DP germ, and choose $\tilde x_0$ with $q_P(\tilde x_0)=x_0$. By Theorem~\ref{dp:thm:normal-form}(4), $(\ell^1_{00}(I_P),q_P^{-1}(U),j_W\circ f\circ q_P,\tilde x_0)\in\cC$ by (C1). So $(\ell^1_{00}(I_P),q_P^{-1}(U),f\circ q_P,\tilde x_0)\in\cC$ by (C2), and $(P,U,f,x_0)\in\cC$ by (C3). Item~(3) follows from items~(1) and~(2).
+
+\emph{Step 3 (item (4)).} Let $P$ be a Banach space and choose $\tilde x_0\in\ell^1(I_P)$ with $\hat q_P(\tilde x_0)=x_0$. As $K$ is complete, $\ell^1(I_P)$ is a Banach space, and $\hat q_P$ is contractive with preimage constant $\abs\varpi^{-1}$. By \cite[Theorem~14.39(2)]{I} for $\ell^1(I_P)$, Steps~1 and~2 of the proof of Theorem~\ref{dp:thm:normal-form} apply with $\hat q_P$ in place of $q_P$. They give a Banach space $Z$ and a linear isometry $j\colon W\to Z$ with $j\circ f\circ\hat q_P$ analytic at $\tilde x_0$. Then (C1), (C2), (C3) apply as in Step~2, and all sources involved are Banach spaces.
+\end{proof}
+
+\begin{proposition}[the two other classes]\label{dp:prop:other-classes}
+\leavevmode
+\begin{enumerate}
+\item The analytic germs satisfy (C1). Over every $K$ they fail (C2). If $\operatorname{char}K=p$ they fail (C3). If $\operatorname{char}K=0$, then (C2) and (C3) hold for germs whose source $P$ is ultrametric, the source $P'$ of $Q$ in (C3) being arbitrary.
+\item The AA germs are the smallest class of germs with (C1) and (C2). If $\operatorname{char}K=p$ they fail (C3).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} The failures are Example~\ref{dp:ex:l1} and Remark~\ref{dp:rem:an-no-descent}. Let $\operatorname{char}K=0$ and $P$ be ultrametric. If $j\circ f$ is analytic, it is DP, so $f$ is DP (Theorem~\ref{dp:thm:target-descent}(2)), so $f$ is analytic \cite[Proposition~14.40(2)]{I}. If $f\circ Q$ is analytic, it is DP, so $f$ is DP (Proposition~\ref{dp:prop:source-descent}(1)), and again $f$ is analytic.
+
+\emph{Step 2 (item (2): minimality).} Analytic germs are AA, with $j=\id$. If $\cC$ has (C1) and (C2), and $f$ is AA at $x_0$, then \cite[Remark~14.13]{I} gives a Banach space $Z$ and an isometry $j$ with $j\circ f$ analytic. So $f\in\cC$.
+
+\emph{Step 3 (item (2): the AA germs have (C2)).} Let $j\colon W\to Z$ be an isometry of Banach spaces with $j\circ f$ AA. By \cite[Remark~14.13]{I} there is an isometry $j'$ of $Z$ into a Banach space with $j'\circ j\circ f$ analytic. So $f$ is AA, through $j'\circ j$, by the same remark.
+
+\emph{Step 4 (item (2): failure of (C3)).} Let $a$ be the law of Remark~\ref{dp:rem:an-no-descent}. It has Banach values and is not ambient. If it were AA at a point, \cite[Remark~14.13]{I} and \cite[Proposition~14.9(2)]{I} would make it ambient. And $a\circ q_{K\oplus\mathcal E}$ is analytic, hence AA, everywhere.
+\end{proof}
+
+In characteristic $0$, on non-ultrametric sources, the analytic germs with ultrametric Banach targets have (C3) (Corollary~\ref{dp:cor:two-gaps}). For non-ultrametric sources and targets in characteristic $0$, whether they have (C3) is open.
+
+The descents (C2), (C3) are properties of $C^\infty$ maps. For (C2) this is \cite[Lemma~2.4]{I}. For (C3):
+
+\begin{proposition}[$C^m$ descends along source quotients]\label{dp:prop:cn-descends}
+Let $Q\colon P'\to P$ be a bounded linear surjection with preimage constant $\mathsf c$, $U\subseteq P$ open, $W$ normed, $m\in\N\cup\{\infty\}$ and $f\colon U\to W$. If $f\circ Q$ is $C^m$ on $Q^{-1}(U)$, then $f$ is $C^m$ on $U$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 ($m=0$).} Let $x_0=Q(\tilde x_0)\in U$. For $x$ near $x_0$ choose $\tilde x$ with $Q\tilde x=x$ and $\norm{\tilde x-\tilde x_0}\le\mathsf c\norm{x-x_0}$. Then $f(x)-f(x_0)=f\circ Q(\tilde x)-f\circ Q(\tilde x_0)\to0$.
+
+\emph{Step 2 ($m=1$).} Let $x=Q\tilde x$ and $T=D(f\circ Q)(\tilde x)$. For $\mathsf k\in\ker Q$ and small $s$ we have $f\circ Q(\tilde x+s\mathsf k)=f(x)$, so $T\mathsf k=0$. Hence $T=T_0\circ Q$ for a unique linear $T_0\colon P\to W$, and $\norm{T_0h}=\norm{T\tilde h}\le\mathsf c\norm T\norm h$. Also $\norm{f(x+h)-f(x)-T_0h}=\norm{f\circ Q(\tilde x+\tilde h)-f\circ Q(\tilde x)-T\tilde h}=o(\norm{\tilde h})=o(\norm h)$, so $Df(x)=T_0$. For $x'$ near $x$ choose $\tilde x'$ with $Q\tilde x'=x'$ and $\norm{\tilde x'-\tilde x}\le\mathsf c\norm{x'-x}$. Then $\norm{Df(x')-Df(x)}\le\mathsf c\norm{D(f\circ Q)(\tilde x')-D(f\circ Q)(\tilde x)}\to0$.
+
+\emph{Step 3 (induction).} We induct on $m$, for all normed $W$. The map $Q^*\colon\cL(P,W)\to\cL(P',W)$, $T_0\mapsto T_0\circ Q$, is linear with $\norm{Q^*T_0}\ge\norm{T_0}/\mathsf c$. By Step~2 its range is the set of operators that vanish on $\ker Q$, which is closed. By the chain rule, $D(f\circ Q)=Q^*\circ(Df)\circ Q$. If $f\circ Q$ is $C^{m+1}$, then $D(f\circ Q)$ is $C^m$ with values in the closed range of $Q^*$. By \cite[Lemma~2.4]{I} it is $C^m$ as a map into that range. Composing with the bounded inverse of $Q^*$ on its range, $(Df)\circ Q$ is $C^m$. By induction, applied to $Df\colon U\to\cL(P,W)$, $Df$ is $C^m$, so $f$ is $C^{m+1}$. For $m=\infty$ apply this for every finite $m$.
+\end{proof}
+
+So Theorem~\ref{dp:thm:minimal} reads: the DP germs are the smallest class that contains the analytic germs and has the two descents of $C^\infty$ maps.
+
+\subsection{Ultrametric spaces}\label{dp:ssec:um-minimal}
+
+Between ultrametric spaces the DP germs are already the AA germs, through an ultrametric enlargement \cite[Theorem~14.39(1)]{I}. Here ultrametric norms simplify further: no target descent is needed. The reason is in the bound of Lemma~\ref{dp:lem:laws-cover}. Its factor $n!$ counts the words that share a monomial, and removing it needs an enlargement of $W$. If $W$ is ultrametric and the cover has the supremum norm, the sum~\eqref{dp:eq:word-lift} has no count of terms and each $v_{\mathsf w}$ is bounded geometrically. So the cover alone makes each law a $W$-valued diagonal. In this subsection, unless said otherwise, the target of a germ is any normed space. Conditions (C1) and (C3) are read among the germs of each statement, so in (C3) the source $P'$ of $Q$ is also one of the sources of that statement.
+
+\begin{theorem}[between ultrametric spaces]\label{dp:thm:ultrametric-minimal}
+Let $P$ and $W$ be ultrametric normed spaces. Let $q^{\rm u}_P\colon c_{00}(I_P)\to P$, $e_h\mapsto h$, where $c_{00}(I_P)$ has the supremum norm. Then $q^{\rm u}_P$ is contractive with preimage constant $\abs\varpi^{-1}$. For $U\subseteq P$ open, $f\colon U\to W$ and $x_0=q^{\rm u}_P(\tilde x_0)\in U$:
+\begin{enumerate}
+\item $f$ is DP at $x_0$ if and only if $f\circ q^{\rm u}_P$ is analytic at $\tilde x_0$. Radius $R$ and bound $M$ give radius $\abs\varpi R$ and bound $M$, in both directions.
+\item Among germs with ultrametric sources and ultrametric targets, the DP germs are the smallest class with (C1) and (C3).
+\item The analytic germs between ultrametric spaces have (C3) if and only if every DP germ between ultrametric spaces is analytic. This fails for $K$ complete, not spherically complete, of characteristic $p$.
+\item Let $K$ be complete and let $P$, $W$ be Banach. Items~(1) and~(2) hold, within Banach spaces, with the cover $c_0(I_P)\to P$, $\mathsf v\mapsto\sum_h\mathsf v_hh$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (the cover).} As $P$ is ultrametric, $\norm{\sum_h\mathsf v_hh}\le\max_h\abs{\mathsf v_h}\norm h\le\norm{\mathsf v}_\infty$. The preimages are those of the paragraph after Definition~\ref{dp:def:cover}, of supremum norm $\abs\lambda^{-1}<\abs\varpi^{-1}\norm h$.
+
+\emph{Step 2 (laws on the cover).} Let $J$ be a totally ordered set and $b\colon c_{00}(J)\to W$ a bounded law of degree $n$. Define $v_{\mathsf w}$ and $\beta_b$ as before~\eqref{dp:eq:word-lift}; the same computation gives $\beta_b(h,\dots,h)=b(h)$. On the span of the letters of $\mathsf w$, which carries the maximum norm, \cite[Lemma~Q.2(4)]{I} gives $\norm{v_{\mathsf w}}\le\abs\varpi^{-n}\norm b$. As $W$ is ultrametric, $\norm{\beta_b(h^1,\dots,h^n)}\le\max_{\mathsf w}\prod_c\abs{h^c_{\mathsf w_c}}\norm{v_{\mathsf w}}\le\abs\varpi^{-n}\norm b\prod_c\norm{h^c}_\infty$. So $\norm{\beta_b}\le\abs\varpi^{-n}\norm b$.
+
+\emph{Step 3 (item (1)).} Let $f$ be DP at $x_0$ with radius $R$, bound $M$ and laws $a_n$. By Proposition~\ref{dp:prop:source-descent}(2), $f\circ q^{\rm u}_P$ is DP at $\tilde x_0$ with laws $a_n\circ q^{\rm u}_P$ of norm at most $MR^{-n}$. By Step~2 each is the diagonal of an $n$-linear map into $W$ of norm at most $M(\abs\varpi R)^{-n}$. So $f\circ q^{\rm u}_P$ is analytic at $\tilde x_0$ with radius $\abs\varpi R$ and bound $M$. Conversely, an analytic germ with radius $R$ and bound $M$ is DP with the same data \cite[Proposition~14.9(1)]{I}, and Proposition~\ref{dp:prop:source-descent}(1) with $\mathsf c=\abs\varpi^{-1}$ gives radius $\abs\varpi R$ and bound $M$.
+
+\emph{Step 4 (item (2)).} The DP germs contain the analytic germs and have (C3). Let $\cC$ have (C1) and (C3), and let $f$ be DP at $x_0$. By item~(1), $f\circ q^{\rm u}_P$ is analytic, so it is in $\cC$. As $c_{00}(I_P)$ is ultrametric, the germ stays in the class of germs considered, and (C3) puts $f$ in $\cC$.
+
+\emph{Step 5 (item (3)).} If the analytic germs have (C3) and $f$ is DP, then $f\circ q^{\rm u}_P$ is analytic by item~(1), so $f$ is analytic. Conversely, if the analytic germs are the DP germs, they have (C3) by Proposition~\ref{dp:prop:source-descent}(1). For the failure, \cite[Proposition~14.40(3)]{I} gives a function on an ultrametric Banach space that is AA, hence DP, at every point and analytic at no point.
+
+\emph{Step 6 (item (4)).} The map $\mathsf v\mapsto\sum_h\mathsf v_hh$ is defined: the sum converges, as $\mathsf v_hh\to0$ in the complete ultrametric $P$. The map has the properties of Step~1. Let $b\colon c_0(J)\to W$ be a bounded law of degree $n$, with $v_{\mathsf w}$ as in Step~2. For $h^1,\dots,h^n\in c_0(J)$ and $\varepsilon>0$, only finitely many words have $\prod_c\abs{h^c_{\mathsf w_c}}>\varepsilon$. So~\eqref{dp:eq:word-lift} converges in the Banach space $W$, with $\norm{\beta_b}\le\abs\varpi^{-n}\norm b$. The maps $h\mapsto\beta_b(h,\dots,h)$ and $b$ are continuous (Theorem~\ref{dp:thm:calculus}(1)) and agree on the dense subspace $c_{00}(J)$. Steps~3 and~4 then apply.
+\end{proof}
+
+\begin{corollary}[ultrametric sources, every target]\label{dp:cor:um-cover}
+Let $P$ be ultrametric and $W$ normed, and let $f$ be DP at $x_0$ with radius $R$ and bound $M$. Then $f\circ q_P$ is analytic at every preimage of $x_0$, with radius $R/C_1$ and bound $M$. So every class of germs that has (C1) for the sources $\ell^1_{00}(J)$ and (C3) for the canonical covers contains every DP germ on an ultrametric source, with no target descent.
+\end{corollary}
+
+\begin{proof}
+Let $a_n$ be the laws of $f$ at $x_0$. By Lemma~\ref{dp:lem:lift-cover} and Lemma~\ref{dp:lem:strong-formal}(3), $a_n\circ q_P$ is the diagonal of a bounded $n$-linear map into $W$ of norm at most $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le C_1^n\norm{a_n}\le M(R/C_1)^{-n}$. By Proposition~\ref{dp:prop:source-descent}(2), these laws expand $f\circ q_P$.
+\end{proof}
+
+For $P\ne0$ the source $\ell^1_{00}(I_P)$ of this cover is not ultrametric. In characteristic $0$ the DP germs on ultrametric sources are the analytic germs \cite[Proposition~14.40(2)]{I}, so (C1) alone gives them. In characteristic $p$, whether, among germs with ultrametric sources and Banach targets, the DP germs are the smallest class with (C1), (C2), (C3) is open; see Question~\ref{dp:q:c0}(2).
+
+\subsection{What the descents reach}\label{dp:ssec:reach}
+
+Let $(Z;W_1,W_2)$ and $(Z';W_1',W_2')$ be filtered spaces as in \cite[Definition~14.1]{I}, with $Z,Z'$ Banach, and with quotient maps $\operatorname{qt}\colon W_1\to W_1/W_2$ and $\operatorname{qt}'\colon W_1'\to W_1'/W_2'$. Let $w_0\in W_1$. A \emph{morphism germ} at $w_0$ is the germ of a map $\Phi$, from an open neighborhood $\mathsf O$ of $w_0$ in $Z$ into $Z'$, analytic at $w_0$, with $\Phi(\mathsf O\cap W_1)\subseteq W_1'$ and with $\Phi(w+w')-\Phi(w)\in W_2'$ whenever $w,w+w'\in\mathsf O\cap W_1$ and $w'\in W_2$. It induces a germ $\varphi$ at $\operatorname{qt}(w_0)$ from $W_1/W_2$ to $W_1'/W_2'$, by $\varphi(\operatorname{qt}(w))=\operatorname{qt}'(\Phi(w))$. As $Z'$ is complete, rearranging the series shows that a map analytic at $w_0$ is analytic on a ball around $w_0$, so this agrees with \cite[Definition~14.25]{I} when $W_2=W_2'=0$. If $W_2=0$, the induced germs are AA: $\Phi|_{W_1}$ is AA into the Banach space $W_1'$ \cite[Remark~14.13]{I}, and so is $\operatorname{qt}'\circ\Phi|_{W_1}$ \cite[Proposition~14.12(1)]{I}. With a quotient source, every DP germ between Banach spaces is induced, after the identifications of Proposition~\ref{dp:prop:subquotients}(2). For $K$ complete of characteristic $p$ these include germs that are AA at no point: the law $a$ of Remark~\ref{dp:rem:an-no-descent}, by Step~4 of the proof of Proposition~\ref{dp:prop:other-classes}, as AA at a point does not change under an equivalent norm on the source. In characteristic $0$ we do not decide whether they go beyond the AA germs: this is the case of Banach sources in \cite[Question~14.42(1)]{I}.
+
+\begin{proposition}[subquotient sources]\label{dp:prop:subquotients}
+\leavevmode
+\begin{enumerate}
+\item Every germ induced by a morphism germ between filtered spaces as above is DP at $\operatorname{qt}(w_0)$.
+\item Let $K$ be complete, let $P,W$ be Banach spaces and let $f\colon U\to W$ be DP at $x_0\in U$. Then $f$ is induced by a morphism germ, after two identifications: of $P$, with an equivalent norm, with $\ell^1(I_P)/\ker\hat q_P$, and of $W$ with a closed subspace of a Banach space.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} As a map from $W_1$ into $Z'$, $\Phi|_{W_1}$ is analytic at $w_0$, hence DP at $w_0$ (Theorem~\ref{dp:thm:calculus}(3)). Its values near $w_0$ lie in the closed subspace $W_1'$, so it is DP into $W_1'$ (Theorem~\ref{dp:thm:target-descent}(2)). Composing with the bounded linear $\operatorname{qt}'$ keeps this. Near $w_0$ we have $\varphi\circ\operatorname{qt}=\operatorname{qt}'\circ\Phi|_{W_1}$, so $\varphi\circ\operatorname{qt}$ is DP at $w_0$. The map $\operatorname{qt}$ is open, so $\varphi$ is defined on the open set $\operatorname{qt}(\mathsf O\cap W_1)$, and $\operatorname{qt}$ has preimage constant $\abs\varpi^{-1}$ for the quotient norm. Proposition~\ref{dp:prop:source-descent}(1) gives that $\varphi$ is DP at $\operatorname{qt}(w_0)$.
+
+\emph{Step 2 (item (2)).} By the proof of Theorem~\ref{dp:thm:minimal}(4), there are $\tilde x_0\in\ell^1(I_P)$ with $\hat q_P(\tilde x_0)=x_0$ and a linear isometry $j$ of $W$ into a Banach space $Z'$ with $\Phi=j\circ f\circ\hat q_P$ analytic at $\tilde x_0$. The map $\Phi$ has values in the closed subspace $j(W)$ and is constant on the cosets of $\ker\hat q_P$. So it is a morphism germ from $(\ell^1(I_P);\ell^1(I_P),\ker\hat q_P)$ to $(Z';j(W),0)$. As $\hat q_P$ is contractive with preimage constant $\abs\varpi^{-1}$, it induces a bijection of $\ell^1(I_P)/\ker\hat q_P$ onto $P$ with $\norm{\hat q_P(\mathsf v)}\le\norm{[\mathsf v]}\le\abs\varpi^{-1}\norm{\hat q_P(\mathsf v)}$. Under this bijection and $j$, the germ induced by $\Phi$ is $f$.
+\end{proof}
+
+An equivalent norm on the source changes the radius and keeps the class of DP germs. So, for $K$ complete and Banach spaces, the germs induced with quotient sources allowed are exactly the DP germs. This is Theorem~\ref{dp:thm:minimal} again: sub-pairs are target descent, and quotient sources are source descent.
+
+Now the example that shows what this minimality rests on.
+
+\begin{example}[the $\ell^1$ germ]\label{dp:ex:l1}
+Let $P=\ell^1(\N,K)$ and $W=\Kh$. Choose $\mathsf e_n\in K$ with $n^n\le\abs{\mathsf e_n}<\abs\varpi^{-1}n^n$, and put
+\[
+ a_n(h)=\mathsf e_nh_1h_2\cdots h_n,\qquad\mathsf f(h)=\sum_{n\ge1}a_n(h)\qquad(\norm h<1).
+\]
+For $K$ complete this is the germ of \cite[Theorem~14.33(1)]{I}. Over every $K$:
+\begin{enumerate}
+\item $\norm{a_n}<\abs\varpi^{-1}$, so $\mathsf f$ is DP at $0$ with radius $1$ and bound $\abs\varpi^{-1}$.
+\item $\mathsf f$ is AA at $0$ with radius $1/C_0$ and bound $\abs\varpi^{-1}$. So $j\circ\mathsf f$ is analytic at $0$ for a linear isometry $j$ of $\Kh$ into a Banach space.
+\item $\mathsf f$ is not analytic at $0$.
+\end{enumerate}
+So the analytic germs fail (C2) in every characteristic. By items~(1) and~(3), finite coordinates cannot be dropped from Theorem~\ref{dp:thm:calculus}(3).
+\end{example}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} By the arithmetic--geometric mean inequality, $\prod_{i\le n}\abs{h_i}\le(\norm h/n)^n$. So $\norm{a_n}\le\abs{\mathsf e_n}n^{-n}<\abs\varpi^{-1}$.
+
+\emph{Step 2 (item (2)).} By \cite[Theorem~14.39(2)]{I}, $\operatorname{amb}(a_n)\le C_0^n\norm{a_n}<\abs\varpi^{-1}C_0^n$. Then \cite[Proposition~14.9(1)]{I} and \cite[Remark~14.13]{I} apply.
+
+\emph{Step 3 (item (3)).} Suppose $\mathsf f(h)=\sum_n\beta_n(h,\dots,h)$ near $0$, with $n$-linear $\beta_n\colon P^n\to\Kh$ and $\norm{\beta_n}\le MR^{-n}$. By Lemma~\ref{dp:lem:coefficients-unique}(2) with $j=\id$, $\beta_n(h,\dots,h)=a_n(h)$. As $K$ is infinite, comparing coefficients of $s_1\cdots s_n$ at $h=\sum_{i\le n}s_ie_i$ gives $\sum_{\sigma\in S_n}\beta_n(e_{\sigma(1)},\dots,e_{\sigma(n)})=\mathsf e_n$. The absolute value is nonarchimedean and $\norm{e_i}=1$, so $\norm{\beta_n}\ge\abs{\mathsf e_n}\ge n^n$. This is not at most $MR^{-n}$ for large $n$.
+\end{proof}
+
+\emph{The mechanism.} The norm of $\ell^1$ adds real numbers. So the arithmetic--geometric mean inequality applies, with a gain of $n^{-n}$, and $\mathsf e_nh_1\cdots h_n$ stays bounded with $\abs{\mathsf e_n}$ about $n^n$. A multilinear map $\beta$ with this diagonal has $\sum_\sigma\beta(e_{\sigma(1)},\dots,e_{\sigma(n)})=\mathsf e_n$. Over $\mathbb C$ the $n!$ orderings could share the load: $\beta$ could take values $\mathsf e_n/n!$, of size about $\mathrm e^n$. In $\Kh$ they cannot, as a sum equal to $\mathsf e_n$ has a term of absolute value at least $\abs{\mathsf e_n}$. Multilinear maps into an ultrametric space see only the supremum norm on $\ell^1$ (Proposition~\ref{dp:prop:hull}(1) and the paragraph before it), and there $h_1\cdots h_n$ has size $1$. So $\sum_na_n$ converges on the ball of $\ell^1$ because of an inequality between real numbers on the source. No divided power occurs: the example has the same form for $K=\mathbb C((t))$, in residue characteristic $0$. A non-ultrametric enlargement $Z$ can hold the shares in separate coordinates, which is why $j\circ\mathsf f$ is analytic for some $j$.
+
+\emph{What this says about minimality.} By Example~\ref{dp:ex:l1}(2), every class with (C1) and (C2) contains $\mathsf f$. Among germs with Banach values, the class CA of germs analytic after a cover (Section~\ref{dp:sec:cover}) is the smallest class with (C1) and (C3), and it does not contain $\mathsf f$ (Lemma~\ref{dp:lem:cover-flat}(3), Theorem~\ref{dp:thm:cah}(5)). Within ultrametric targets, the strongly DP germs have (C1), (C3) and target descent along isometries between ultrametric spaces (Theorem~\ref{dp:thm:strong-descent}), and do not contain $\mathsf f$, as the coefficient of $a_n$ at $e_1,\dots,e_n$ has absolute value at least $n^n$. So the minimality of Theorem~\ref{dp:thm:minimal} on general sources rests on target descent into non-ultrametric spaces. On general sources, (C1) and (C3) alone do not reach the DP germs. Two axioms that reach them when added are (C2), by Theorem~\ref{dp:thm:minimal}, and the axiom (S) of Section~\ref{dp:sec:ledger}, by Proposition~\ref{dp:prop:s-axiom}(4). On ultrametric sources, (C1) and (C3) alone reach them, through covers that are not ultrametric (Corollary~\ref{dp:cor:um-cover}). Section~\ref{dp:sec:ledger} lists what each disagreement with analyticity is forced by.

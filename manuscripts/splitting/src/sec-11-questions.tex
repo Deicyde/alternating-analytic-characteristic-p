@@ -155,28 +155,6 @@ and then the pair is good for Banach values in every degree. The necessary condi
 hold, and Theorem~\ref{fib:thm:lower} does not apply to the unit vectors in their natural order
 (Example~\ref{cls:ex:garling}(2),(4)).
 
-\begin{question}\label{q:quest:polynomial-laws}
-Let $K$ be nonarchimedean of characteristic $p>0$. Is every bounded polynomial law on $c_0(\N,K)$ ambient of its degree?
-\end{question}
-
-Bounded polynomial laws of degree below $p$ are ambient (Section~\ref{sec:dp}), and for $p=2$ so are those of degree
-$2$ on nonarchimedean normed spaces (Proposition~\ref{dp:prop:ultrametric}(1),(4)). By
-Proposition~\ref{dp:prop:ultrametric}(1),(3), every bounded polynomial law of degree $n$ on $c_0(\N,K)$ is ambient of
-degree $n$ if and only if every bounded polynomial law of degree $n$ on every nonarchimedean normed space over $K$ is.
-As $K\oplus c_0(\N,K)$, with the maximum norm, is isometric to $c_0(\N,K)$, Proposition~\ref{dp:prop:ultrametric}(1),(2) shows that the degrees
-with a positive answer form an initial segment of the positive integers: a negative answer in some degree gives a
-negative answer in every higher degree, and a positive answer in infinitely many degrees gives one in all. Frobenius
-laws are ambient, and every bounded polynomial law of degree $p$ on a normed space $P$, with values in any normed space,
-is ambient of degree $p$ if and only if $P$ satisfies $(\mathrm N_P)$ with some constant
-(Theorem~\ref{dp:thm:frobenius}(2),(3)); so for $p\ge3$, in degree $p$ the question asks whether $c_0(\N,K)$ satisfies
-$(\mathrm N_{c_0(\N,K)})$ with some constant. Over every $K$ and in every degree $n\ge p$,
-Proposition~\ref{dp:prop:degree-p}(2) gives a law that is not ambient of degree $n$, on a space that is a Banach space if
-$K$ is complete; if $K$ is discretely valued or $p=2$, Proposition~\ref{dp:prop:nonambient}(2) gives such laws in every
-degree $n\ge p+1$ also on the space $H=K\oplus c_0(\N,K)\oplus G$ of Section~\ref{sec:dp}. These spaces have no
-equivalent nonarchimedean norm: they contain $\ell^1$-sums of finite-dimensional quotients of weighted $\ell^1$-spaces,
-and both proofs obtain their lower bounds, for $\nu$ and for $\norm\cdot_\Gamma$, by adding up contributions of the
-coordinates of these $\ell^1$-spaces.
-
 \paragraph{\textit{Targets, bases and domains.}}
 An equivalent nonarchimedean, spherically complete norm makes a Banach space $F$ a universal target
 (Section~\ref{obs:ssec:counterexamples}, Theorem~\ref{thm:spherical}), but the given norm of $F$ need not be spherically
@@ -193,3 +171,17 @@ $K$ complete, $\Alt^k(TM;K)$ is analytic on every analytic manifold $M$ (Corolla
 not know this over incomplete fields such as $\kappa(X)$, nor for tangent-valued forms on $\ell^r(\N,K)$, $4<r<\infty$
 (Theorem~\ref{fam2:thm:tangent}(3)). Nor do we know whether Bourbaki's $\alpha_k$ is a vector functor of class $C^r$
 over densely valued, spherically complete fields with $k!=0$.
+
+\paragraph{\textit{Ambient analyticity.}}
+Questions~\ref{amb:q:lower-bound} and~\ref{amb:q:open} state what is open on ambient analyticity:
+whether it is closed under composition in characteristic~$0$, or in characteristic $p$ on ultrametric sources with a
+non-ultrametric final target; whether Proposition~\ref{amb:prop:general-failure} applies to $c_0(\N,K)$ over densely valued
+$K$ of odd characteristic; whether a source $P$ with $\mathfrak k(P)<\infty$ (Definition~\ref{amb:def:constants}) admits a
+divided-power analytic germ into a Banach space that is not ambient analytic; whether $c_0(\N,K)$ is tame
+(Definition~\ref{amb:def:tame}); whether the sections ambient for $\Mult^k(-;K)$ are ambient for every functorial envelope;
+whether a section of $\Alt^k(TM;K)$ can be ambient analytic in one analytic chart and not in another;
+and whether $\Alt^k(M_1;M_0)$ has an analytic structure for which every analytic automorphism of $(M_1,M_0)$ induces an
+analytic morphism. One more question is open. Let $K$ be complete of characteristic $p$, not spherically complete, and let $\mathfrak E$ be a functorial
+envelope of $\Alt^k(-;K)$ (Definition~\ref{amb:def:envelope}) with $\Alt^k(E;K)\subseteq\mathfrak E(E)\subseteq\Mult^k(E;K)$,
+the inclusions being isometric and natural in $E$. We do not know whether $\mathfrak E(E)$ is always the range of a bounded
+linear projection of $\Mult^k(E;K)$ natural in $E$.

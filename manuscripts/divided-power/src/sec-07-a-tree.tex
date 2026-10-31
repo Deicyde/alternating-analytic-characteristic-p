@@ -1,0 +1,236 @@
+\section{Classes between ambient and divided-power analyticity}\label{dp:sec:chain}
+
+Paper~\cite{I} shows that ambient analyticity is not closed under composition. Over every $K$ of characteristic $p$, on the space $H^{\rm at}$ of~\cite[Definition~14.16]{I}, the map $f_X$ is AA at every point, the map $g_X$ on $W^{\rm at}$ is the diagonal of a bounded bilinear map, and $g_X\circ f_X$ is a bounded law of degree $p+1$ that is DP everywhere and AA at no point~\cite[Theorem~14.17]{I}. In general the question depends on the source. Let $\mathcal C(N,r)$ be the set of compositions of $N$ into $r$ positive parts, and for $\vec n\in\mathcal C(N,r)$ let $\pi_{\vec n}$ be the projective seminorm of $\Gamma^{n_1}_\pi(P)\otimes\dots\otimes\Gamma^{n_r}_\pi(P)$, which contains $\Gamma^N(P)$. If $\mathfrak k(P)=\sup_{N,\vec n}\bigl(\sup_{t\in\Gamma^N(P)}\pi_{\vec n}(t)/\pi(t)\bigr)^{1/N}$ is finite, then composites of AA germs on $P$ are AA; for $K$ complete the converse holds, already for an analytic germ after an AA germ, with values in Banach spaces~\cite[Definition~14.21, Theorem~14.22]{I}. This section describes what composition produces from analytic germs, and compares the result with DP.
+
+\subsection{Tree norms}\label{dp:ssec:tree}
+
+We begin with the constants $\mathfrak k_{\vec n}(P)=\sup_t\pi_{\vec n}(t)/\pi(t)$ of~\cite[Definition~14.21]{I}, with $0/0=0$ and $c/0=\infty$ for $c>0$, and with $\mathfrak a_N(P)$ as in~\cite[Definition~14.36]{I}.
+
+\begin{lemma}[bounds for the composition constants]\label{dp:lem:kappa-bounds}
+Let $P$ be normed and $\vec n\in\mathcal C(N,r)$.
+\begin{enumerate}
+\item On $\Gamma^N(P)$ we have $\pi\le\pi_{\vec n}\le\norm\cdot_\Gamma$, so $\mathfrak k_{\vec n}(P)\le\mathfrak a_N(P)$. If $r=1$ or $r=N$, then $\pi_{\vec n}=\pi$.
+\item If $n_i!\ne0$ in $K$ for all $i$, then $\mathfrak k_{\vec n}(P)\le\prod_in_i!/\abs{n_i!}$, where the numerator is a real number and $\abs{n_i!}$ is the absolute value of the image of $n_i!$ in $K$. If $\operatorname{char}K=p$ and all $n_i<p$, then $\mathfrak k_{\vec n}(P)\le\prod_in_i!$.
+\item $\mathfrak k_{\vec n}(\ell^1(J,K))\le1$ for every set $J$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} The inequalities are in~\cite[Definition~14.21]{I}. For $r=1$ the definition of $\pi_{\vec n}$ reads $\pi_{(N)}=\pi$. For $r=N$ all $n_i$ are $1$ and $\Gamma^1(P)=P$.
+
+\emph{Step 2 (item (2)).} Let $n!\ne0$ in $K$ and $\operatorname{Sym}_n=\frac1{n!}\sum_{\sigma\in S_n}\sigma$ on $P^{\otimes n}$. For $x_1,\dots,x_n\in P$, the tensor $\operatorname{Sym}_n(x_1\otimes\dots\otimes x_n)=\frac1{n!}O_{(1,\dots,1)}(x_1,\dots,x_n)$ lies in $\Gamma^n(P)$, by~\eqref{dp:eq:orbit}, and it has $\pi$ at most $(n!/\abs{n!})\norm{x_1}\cdots\norm{x_n}$. Let $t\in\Gamma^N(P)$. The operator $\operatorname{Sym}_{n_1}\otimes\dots\otimes\operatorname{Sym}_{n_r}$ fixes the powers, so it fixes $t$. Apply it to a representation of $t$ in $P^{\otimes N}$ of cost close to $\pi(t)$. This gives a representation of $t$ in $\bigotimes_i\Gamma^{n_i}(P)$ of cost at most $\prod_in_i!/\abs{n_i!}$ times that cost. In characteristic $p$, for $n<p$ the element $n!$ is a nonzero element of $\F_p$, so $\abs{n!}=1$.
+
+\emph{Step 3 (the norm on $\ell^1$).} Let $P=\ell^1(J,K)$, with coordinates $t(\vec u)$ on $P^{\otimes N}$, $\vec u\in J^N$. Every representation $t=\sum_qx_{q,1}\otimes\dots\otimes x_{q,N}$ satisfies $\sum_{\vec u}\abs{t(\vec u)}\le\sum_q\prod_i\norm{x_{q,i}}$, so $\pi(t)\ge\sum_{\vec u}\abs{t(\vec u)}$. In particular $\pi$ is a norm. For $t\in(K^{J_1})^{\otimes N}$ with $J_1\subseteq J$ finite, the expansion of $t$ in the unit vectors $\mathbf e_u$ gives equality.
+
+\emph{Step 4 (item (3), finitely supported $t$).} Let $J_1\subseteq J$ be finite, $\mathbf e=(\mathbf e_u)_{u\in J_1}$, and $t\in\Gamma^N(K^{J_1})$. Call the elements of $J_1^N$ words; a word has content $\bar\alpha\in\N^{J_1}$ if each $u\in J_1$ occurs $\bar\alpha_u$ times. As $t$ is symmetric, $t=\sum_{\bar\alpha}t_{\bar\alpha}O_{\bar\alpha}(\mathbf e)$ over the $\bar\alpha\in\N^{J_1}$ with $\abs{\bar\alpha}=N$, where $t_{\bar\alpha}$ is the coordinate of $t$ at the words of content $\bar\alpha$. By Step~3, $\pi(t)=\sum_{\bar\alpha}(N!/\bar\alpha!)\abs{t_{\bar\alpha}}$. A word of content $\bar\alpha$ splits uniquely into $r$ blocks of lengths $n_i$, of contents $\alpha_i$, so
+\[
+ t=\sum_{\bar\alpha}t_{\bar\alpha}\sum_{\substack{\alpha_1+\dots+\alpha_r=\bar\alpha\\\abs{\alpha_i}=n_i}}O_{\alpha_1}(\mathbf e)\otimes\dots\otimes O_{\alpha_r}(\mathbf e).
+\]
+Here $O_{\alpha_i}(\mathbf e)\in\Gamma^{n_i}(P)$ and $\pi(O_{\alpha_i}(\mathbf e))\le n_i!/\alpha_i!$. Counting words by their blocks gives $\sum\prod_in_i!/\alpha_i!=N!/\bar\alpha!$, the sum over the same index set. So $\pi_{\vec n}(t)\le\pi(t)$.
+
+\emph{Step 5 (item (3), general $t$).} Let $t=\sum_qc_qh_q^{\otimes N}\in\Gamma^N(P)$, let $\mathsf p_{J_1}$ be the coordinate projection onto $K^{J_1}$, of norm at most $1$, and $t_{J_1}=\mathsf p_{J_1}^{\otimes N}t$. Then $\pi_{\vec n}(t_{J_1})\le\pi(t_{J_1})\le\pi(t)$ by Step~4, and by item~(1),
+\[
+ \pi_{\vec n}(t-t_{J_1})\le\norm{t-t_{J_1}}_\Gamma\le\sum_q\abs{c_q}\norm{h_q^{\otimes N}-(\mathsf p_{J_1}h_q)^{\otimes N}}_\Gamma.
+\]
+By Step~3, $\pi$ is a norm on $\Gamma^N(P)$, and so is $\norm\cdot_\Gamma\ge\pi$. The map $h\mapsto h^{\otimes N}$ is a law of norm at most $1$ into the normed space $(\Gamma^N(P),\norm\cdot_\Gamma)$ by~\cite[Lemma~Q.1(2)]{I}, so by~\cite[(Q.3)]{I} the right side tends to $0$ as $J_1$ increases, because $\norm{h_q-\mathsf p_{J_1}h_q}\to0$. So $\pi_{\vec n}(t)\le\pi_{\vec n}(t_{J_1})+\pi_{\vec n}(t-t_{J_1})\le\pi(t)+\pi_{\vec n}(t-t_{J_1})$, and letting $J_1$ increase gives $\pi_{\vec n}(t)\le\pi(t)$.
+\end{proof}
+
+\begin{definition}[tree norms]\label{dp:def:tree}
+Let $P$ be normed. For $\ell\ge1$ and $N\ge1$ we define seminorms $\mathfrak t^{(\ell)}_N$ on $\Gamma^N(P)$, and for $\vec n\in\mathcal C(N,r)$ seminorms $\mathfrak t^{(\ell)}_{\vec n}$ on $\bigotimes_i\Gamma^{n_i}(P)$, as follows. Put $\mathfrak t^{(1)}_N=\pi$. Given the $\mathfrak t^{(\ell)}_n$, let $\mathfrak t^{(\ell)}_{\vec n}$ be the projective seminorm of the spaces $(\Gamma^{n_i}(P),\mathfrak t^{(\ell)}_{n_i})$:
+\begin{equation}\label{dp:eq:tree-root}
+ \mathfrak t^{(\ell)}_{\vec n}(t)=\inf\Bigl\{\sum_q\prod_{i=1}^r\mathfrak t^{(\ell)}_{n_i}(s_{q,i}):\ t=\sum_qs_{q,1}\otimes\dots\otimes s_{q,r},\ s_{q,i}\in\Gamma^{n_i}(P)\Bigr\}.
+\end{equation}
+Put $\mathfrak t^{(\ell+1)}_1=\norm\cdot$, and $\mathfrak t^{(\ell+1)}_N=\max_{r\ge2}\max_{\vec n\in\mathcal C(N,r)}\mathfrak t^{(\ell)}_{\vec n}$ for $N\ge2$. Also $\mathfrak t^{(\ell)}_0=\abs\cdot$ on $\Gamma^0(P)=K$. We write $\mathfrak t^{(\ell)}_N(P)$ when the space must be named.
+\end{definition}
+
+Note that $\mathfrak t^{(1)}_{\vec n}=\pi_{\vec n}$ and $\mathfrak t^{(\ell)}_{(N)}=\mathfrak t^{(\ell)}_N$. The recursion runs over rooted trees with $N$ leaves: a composition is the root, and the compositions of its parts are the next level.
+
+\begin{lemma}[stabilization]\label{dp:lem:tree-stable}
+Let $P$ be normed. We have $\mathfrak t^{(\ell)}_1=\norm\cdot$ for all $\ell\ge1$. For $N\ge2$ and $\ell\ge N-1$, the seminorm $\mathfrak t^{(\ell)}_N$ does not depend on $\ell$.
+\end{lemma}
+
+\begin{proof}
+For the first claim, $\pi$ on $\Gamma^1(P)=P$ is $\norm\cdot$. For the second use induction on $N$. For $N=2$ the only composition with $r\ge2$ is $(1,1)$, and $\mathfrak t^{(\ell)}_{(1,1)}=\pi$, so $\mathfrak t^{(\ell)}_2=\pi$ for all $\ell$. For $N\ge3$ and $\ell\ge N-1$, the seminorm $\mathfrak t^{(\ell)}_N$ is built from the $\mathfrak t^{(\ell-1)}_{n_i}$ with $n_i\le N-1$ and $\ell-1\ge n_i-1$, and these do not depend on $\ell$ by induction.
+\end{proof}
+
+Put $\mathfrak t_N=\mathfrak t^{(N)}_N$ for $N\ge1$ and $\mathfrak t_0=\abs\cdot$ on $\Gamma^0(P)=K$, so that $\mathfrak t^{(\ell)}_n=\mathfrak t_n$ for $\ell\ge\max(n,1)$. Let $\mathfrak t_{\vec n}$ be~\eqref{dp:eq:tree-root} with $\mathfrak t_{n_i}$ in place of $\mathfrak t^{(\ell)}_{n_i}$. Then $\mathfrak t^{(\ell)}_{\vec n}=\mathfrak t_{\vec n}$ for $\ell\ge N$, so
+\begin{equation}\label{dp:eq:tree-fixed}
+ \mathfrak t_N=\max_{r\ge2}\max_{\vec n\in\mathcal C(N,r)}\mathfrak t_{\vec n}\qquad(N\ge2).
+\end{equation}
+
+We use the shuffle product $s\cdot t$ of Section~\ref{dp:sec:conv}; it maps $\Gamma^m(P)\times\Gamma^{m'}(P)$ into $\Gamma^{m+m'}(P)$. We read $1\cdot t=t$.
+
+\begin{lemma}[properties of the tree norms]\label{dp:lem:tree}
+Let $P$ be normed and $\ell,N\ge1$.
+\begin{enumerate}
+\item $\pi\le\mathfrak t^{(\ell)}_N\le\mathfrak t^{(\ell+1)}_N\le\mathfrak t_N\le\norm\cdot_\Gamma$, and $\mathfrak t^{(\ell)}_N(h^{\otimes N})\le\norm h^N$.
+\item For a bounded linear map $T\colon P\to P'$ we have $\mathfrak t^{(\ell)}_N(P')(T^{\otimes N}t)\le\norm T^N\mathfrak t^{(\ell)}_N(P)(t)$. The same holds with $\mathfrak t_N$ in place of $\mathfrak t^{(\ell)}_N$.
+\item $\mathfrak t^{(2)}_N=\max_{\vec n}\pi_{\vec n}$ over the $\vec n$ with $r\ge2$, for $N\ge2$. On $\ell^1(J,K)$ we have $\mathfrak t^{(\ell)}_N=\mathfrak t_N=\pi$.
+\item If $\operatorname{char}K=p$ and $N\le p$, then $\mathfrak t_N\le\mathsf c_N\pi$, with $\mathsf c_N$ depending only on $N$.
+\item \textup{(Shuffle bound.)} For $s\in\Gamma^m(P)$, $t\in\Gamma^{m'}(P)$, $m,m'\ge0$,
+\begin{equation}\label{dp:eq:shuffle}
+ \mathfrak t^{(\ell)}_{m+m'}(s\cdot t)\le\binom{m+m'}m\mathfrak t^{(\ell)}_m(s)\,\mathfrak t^{(\ell)}_{m'}(t).
+\end{equation}
+So, for $x\in P$, $\mathfrak t^{(\ell)}_{m+m'}(x^{\otimes m}\cdot t)\le\binom{m+m'}m\norm x^m\mathfrak t^{(\ell)}_{m'}(t)$. Both bounds hold with $\mathfrak t_{m+m'},\mathfrak t_m,\mathfrak t_{m'}$ in place of the seminorms of level $\ell$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} First $\mathfrak t^{(\ell)}_N\le\norm\cdot_\Gamma$, by induction on $\ell$. For $\ell=1$ this is $\pi\le\norm\cdot_\Gamma$. For the step let $N\ge2$, $\vec n\in\mathcal C(N,r)$, $r\ge2$. A representation $t=\sum_qc_qh_q^{\otimes N}$ gives $t=\sum_qc_qh_q^{\otimes n_1}\otimes\dots\otimes h_q^{\otimes n_r}$, of cost at most $\sum_q\abs{c_q}\norm{h_q}^N$ in~\eqref{dp:eq:tree-root}, since $\mathfrak t^{(\ell)}_{n_i}\le\norm\cdot_\Gamma$. Taking $t=h^{\otimes N}$ gives the bound on powers. Next $\mathfrak t^{(\ell)}_N\le\mathfrak t^{(\ell+1)}_N$, by induction on $\ell$. For $\ell=1$ and $N\ge2$, Lemma~\ref{dp:lem:kappa-bounds}(1) gives $\pi\le\pi_{\vec n}=\mathfrak t^{(1)}_{\vec n}\le\mathfrak t^{(2)}_N$. For the step, $\mathfrak t^{(\ell-1)}_{n_i}\le\mathfrak t^{(\ell)}_{n_i}$ gives $\mathfrak t^{(\ell-1)}_{\vec n}\le\mathfrak t^{(\ell)}_{\vec n}$, hence $\mathfrak t^{(\ell)}_N\le\mathfrak t^{(\ell+1)}_N$. Finally $\mathfrak t^{(\ell)}_N\le\mathfrak t_N$ by monotonicity and Lemma~\ref{dp:lem:tree-stable}.
+
+\emph{Step 2 (item (2)).} Induction on $\ell$. The case $\ell=1$ is the same statement for $\pi$. For the step, $T^{\otimes N}$ carries a representation in~\eqref{dp:eq:tree-root} to the representation with factors $T^{\otimes n_i}s_{q,i}$, and $\prod_i\norm T^{n_i}=\norm T^N$. The statement for $\mathfrak t_N$ is the case $\ell=N$.
+
+\emph{Step 3 (item (3)).} The first assertion is the definition, as $\mathfrak t^{(1)}_{\vec n}=\pi_{\vec n}$. On $\ell^1(J,K)$ use induction on $N$. If $\mathfrak t_n=\pi$ for $n<N$, then $\mathfrak t_{\vec n}=\pi_{\vec n}$ for $r\ge2$, and $\pi_{\vec n}\le\pi$ on $\Gamma^N(P)$ by Lemma~\ref{dp:lem:kappa-bounds}(3). So $\mathfrak t_N\le\pi$ by~\eqref{dp:eq:tree-fixed}, and item~(1) gives the rest.
+
+\emph{Step 4 (item (4)).} Let $\mathsf c_1=1$. Let $2\le N\le p$ and $r\ge2$. All parts of $\vec n$ are below $p$, so $\pi_{\vec n}\le\prod_in_i!\,\pi$ by Lemma~\ref{dp:lem:kappa-bounds}(2). By induction $\mathfrak t_{n_i}\le\mathsf c_{n_i}\pi$, so $\mathfrak t_{\vec n}\le\prod_i\mathsf c_{n_i}\,\pi_{\vec n}$. By~\eqref{dp:eq:tree-fixed} we may take $\mathsf c_N=\max_{\vec n}\prod_i\mathsf c_{n_i}n_i!$.
+
+\emph{Step 5 (item (5), set-up).} The cases $m=0$ or $m'=0$ are trivial. Let $m,m'\ge1$ and use induction on $\ell$. For $\ell=1$: each shuffle is an isometry for $\pi$, and $\pi(s\otimes t)\le\pi(s)\pi(t)$. Assume~\eqref{dp:eq:shuffle} at level $\ell$. Put $N=m+m'$ and let $\vec n\in\mathcal C(N,r)$, $r\ge2$. It is enough to show $\mathfrak t^{(\ell)}_{\vec n}(s\cdot t)\le\binom Nm\mathfrak t^{(\ell+1)}_m(s)\mathfrak t^{(\ell+1)}_{m'}(t)$.
+
+\emph{Step 6 (item (5), the blocks).} A shuffle of $m$ and $m'$ letters into $N$ slots, divided into blocks of sizes $n_i$, determines the numbers $m_i,m'_i$ of letters of each kind in block $i$, with $m_i+m'_i=n_i$, and a shuffle in each block. The letters of each kind enter in order. Fix a vector $(m_i)_i$ with $0\le m_i\le n_i$ and $\sum_im_i=m$. Read $s$ in $\bigotimes_{m_i>0}\Gamma^{m_i}(P)$ and $t$ in $\bigotimes_{m'_i>0}\Gamma^{m'_i}(P)$, with representations $s=\sum_q\bigotimes_is_{q,i}$ and $t=\sum_{q'}\bigotimes_it_{q',i}$; where $m_i=0$ or $m'_i=0$, read the missing factor as $1$. The sum of the shuffles with this vector is then
+\begin{equation}\label{dp:eq:shuffle-blocks}
+ \sum_{q,q'}\bigotimes_{i=1}^r\bigl(s_{q,i}\cdot t_{q',i}\bigr).
+\end{equation}
+By~\eqref{dp:eq:shuffle} at level $\ell$, the cost of~\eqref{dp:eq:shuffle-blocks} in~\eqref{dp:eq:tree-root} is at most
+\[
+ \prod_i\binom{n_i}{m_i}\Bigl(\sum_q\prod_i\mathfrak t^{(\ell)}_{m_i}(s_{q,i})\Bigr)\Bigl(\sum_{q'}\prod_i\mathfrak t^{(\ell)}_{m'_i}(t_{q',i})\Bigr).
+\]
+If $(m_i)_i$ has at least two nonzero parts, the infimum of the first factor over representations is $\mathfrak t^{(\ell)}_{\vec m}(s)$, for the composition $\vec m$ of $m$ formed by the nonzero $m_i$, and this is at most $\mathfrak t^{(\ell+1)}_m(s)$. If it has one nonzero part, use $s$ itself: the factor is $\mathfrak t^{(\ell)}_m(s)\le\mathfrak t^{(\ell+1)}_m(s)$. The same holds for $t$. Summing over the vectors $(m_i)_i$, and using $\sum\prod_i\binom{n_i}{m_i}=\binom Nm$, we get $\mathfrak t^{(\ell)}_{\vec n}(s\cdot t)\le\binom Nm\mathfrak t^{(\ell+1)}_m(s)\mathfrak t^{(\ell+1)}_{m'}(t)$. Take the maximum over $\vec n$. The second bound follows with item~(1). For $\mathfrak t$, take $\ell=\max(m+m',1)$: then the seminorms of level $\ell$ in degrees $m+m'$, $m$, $m'$ are $\mathfrak t_{m+m'},\mathfrak t_m,\mathfrak t_{m'}$.
+\end{proof}
+
+\subsection{Tree analytic germs}\label{dp:ssec:ta}
+
+\begin{definition}[tree analytic germs, the composition closure]\label{dp:def:ta}
+Let $U\subseteq P$ be open, $x_0\in U$, $R>0$ with $B(x_0,R)\subseteq U$, $M\ge0$, $\ell\ge1$.
+\begin{enumerate}
+\item A map $f\colon U\to W$ is $\mathrm{TA}_\ell$ at $x_0$ with radius $R$ and bound $M$ if $f(x_0+h)=\sum_{N\ge0}L_N(h^{\otimes N})$ for $\norm h<R$, with linear maps $L_N\colon\Gamma^N(P)\to W$ such that
+\begin{equation}\label{dp:eq:ta-bound}
+ \norm{L_Nt}\le MR^{-N}\mathfrak t^{(\ell)}_N(t)\qquad(N\ge0,\ t\in\Gamma^N(P)).
+\end{equation}
+It is \emph{tree analytic}, or TA, at $x_0$ with radius $R$ and bound $M$ if this holds with $\mathfrak t_N$ in place of $\mathfrak t^{(\ell)}_N$. It is $\mathrm{TA}_\ell$ or TA at $x_0$ if this holds for some $R,M$, and on $U$ if it holds at every point of $U$.
+\item $\mathrm{AA}^\circ$ is the smallest class of germs of maps from open subsets of normed spaces into Banach spaces that contains the analytic germs and is closed under composition, under pairing $(f_1,f_2)$ into the sum with the maximum norm, and under target descent: if $j\colon W\to Z$ is a linear isometry of Banach spaces and $j\circ f$ is in the class, then so is $f$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[first properties]\label{dp:rem:ta-basic}
+Let $f\colon U\to W$ be $\mathrm{TA}_\ell$ or TA at $x_0$ with radius $R$ and bound $M$, with linear maps $L_N$.
+\begin{enumerate}
+\item The same holds with every smaller radius and every larger bound. If $f$ is $\mathrm{TA}_\ell$, it is $\mathrm{TA}_{\ell'}$ for $\ell'\ge\ell$, and it is TA, with the same radius and bound.
+\item By Lemma~\ref{dp:lem:tree}(1) and~\cite[Lemma~Q.1(2)]{I}, $a_N(h)=L_N(h^{\otimes N})$ is a law with $\norm{a_N}\le MR^{-N}$. So $f$ is DP at $x_0$ with radius $R$ and bound $M$, and the $L_N=L_{a_N}$ are the linearizations of its coefficient laws. Hence $\mathrm{TA}_\ell\subseteq\mathrm{TA}_{\ell+1}\subseteq\mathrm{TA}\subseteq\mathrm{DP}$, with the same radius and bound.
+\item By~\cite[Proposition~14.9(1)]{I}, $\mathrm{TA}_1=\mathrm{AA}$, with the same radius and bound.
+\item An AA germ into a Banach space $W$ is in $\mathrm{AA}^\circ$: the enlargement $Z$ may be taken Banach~\cite[text after Definition~14.7]{I}, then $j\circ f$ is analytic, and target descent applies.
+\end{enumerate}
+\end{remark}
+
+The next lemma is the estimate for the map $\mathsf Q_{r,N}$ of~\cite[(Q.8)]{I}. The algebra of~\cite[(Q.8)]{I} follows from~\cite[VI~\S8, Prop.~VI.6, Cor.; Prop.~I.2; II~\S1]{Ro}, see~\cite[Section~Q.4]{I}; the bound below is the estimate we need.
+
+\begin{lemma}[grafting]\label{dp:lem:grafting}
+Let $P,W$ be normed. For $n\ge1$ let $L_n\colon\Gamma^n(P)\to W$ be linear and $\mathsf m_n\ge0$, with $\norm{L_nt}\le\mathsf m_n\mathfrak t_n(t)$ for $t\in\Gamma^n(P)$. For $1\le r\le N$ put
+\[
+ \mathsf Q_{r,N}=\sum_{\vec n\in\mathcal C(N,r)}L_{n_1}\otimes\dots\otimes L_{n_r},\qquad
+ \mathsf B_{r,N}=\sum_{\vec n\in\mathcal C(N,r)}\prod_i\mathsf m_{n_i}.
+\]
+Then $\mathsf Q_{r,N}$ maps $\Gamma^N(P)$ to $\Gamma^r(W)$, and:
+\begin{enumerate}
+\item if $\ell\ge1$ and $\norm{L_nt}\le\mathsf m_n\mathfrak t^{(\ell)}_n(t)$ for all $n$ and $t$, then for all $e\ge1$, $\mathfrak t^{(e)}_r(W)(\mathsf Q_{r,N}t)\le\mathsf B_{r,N}\mathfrak t^{(\ell+e)}_N(P)(t)$;
+\item $\mathfrak t_r(W)(\mathsf Q_{r,N}t)\le\mathsf B_{r,N}\mathfrak t_N(P)(t)$;
+\item if each $L_n$ is the restriction to $\Gamma^n(P)$ of a linear map $\tilde L_n\colon(P^{\otimes n},\pi)\to W$ of norm at most $\mathsf m_n$, then for all $e\ge1$, $\mathfrak t^{(e)}_r(W)(\mathsf Q_{r,N}t)\le\mathsf B_{r,N}\mathfrak t^{(e)}_N(P)(t)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (values).} By Lemma~\ref{dp:lem:tree}(1) and~\cite[Lemma~Q.1(2)]{I}, $h\mapsto L_n(h^{\otimes n})$ is a law. The hypotheses of items~(1) and~(3) imply the standing bound $\norm{L_nt}\le\mathsf m_n\mathfrak t_n(t)$, by Lemma~\ref{dp:lem:tree}(1). So Steps~2 and~3 of the proof of~\cite[Lemma~Q.4]{I} show that $\mathsf Q_{r,N}$ has values in $\Gamma^r(W)$.
+
+\emph{Step 2 (item (1), base cases).} Use induction on $e$, for all $r,N$. If $r=1$, then $\mathsf Q_{1,N}=L_N$, $\mathsf B_{1,N}=\mathsf m_N$ and $\mathfrak t^{(e)}_1=\norm\cdot$, and $\mathfrak t^{(\ell)}_N\le\mathfrak t^{(\ell+e)}_N$. Let $e=1$, $r\ge2$. Applying $\bigotimes_iL_{n_i}$ to a representation of $t$ in~\eqref{dp:eq:tree-root} gives
+\[
+ \pi\Bigl(\bigl(\bigotimes_iL_{n_i}\bigr)t\Bigr)\le\prod_i\mathsf m_{n_i}\,\mathfrak t^{(\ell)}_{\vec n}(t)\le\prod_i\mathsf m_{n_i}\,\mathfrak t^{(\ell+1)}_N(t).
+\]
+Sum over $\vec n$.
+
+\emph{Step 3 (item (1), the step).} Assume item~(1) at level $e$, and let $r\ge2$. Let $\vec r\in\mathcal C(r,r')$, $r'\ge2$. A composition $\vec n\in\mathcal C(N,r)$ cut into consecutive blocks of lengths $r_1,\dots,r_{r'}$ has block sums $\vec N\in\mathcal C(N,r')$, and it is determined by $\vec N$ and the blocks, which are elements of the $\mathcal C(N_i,r_i)$. So, reading $t$ in $\bigotimes_i\Gamma^{N_i}(P)$,
+\begin{equation}\label{dp:eq:grafting-cut}
+ \mathsf Q_{r,N}(t)=\sum_{\vec N\in\mathcal C(N,r')}\Bigl(\bigotimes_{i=1}^{r'}\mathsf Q_{r_i,N_i}\Bigr)(t),\qquad
+ \mathsf B_{r,N}=\sum_{\vec N\in\mathcal C(N,r')}\prod_i\mathsf B_{r_i,N_i},
+\end{equation}
+with empty sums for $N_i<r_i$. Let $\delta>0$. For each $\vec N$ take a representation $t=\sum_q\bigotimes_is_{q,i}$, $s_{q,i}\in\Gamma^{N_i}(P)$, with
+\[
+ \sum_q\prod_i\mathfrak t^{(\ell+e)}_{N_i}(s_{q,i})\le\mathfrak t^{(\ell+e)}_{\vec N}(t)+\delta\le\mathfrak t^{(\ell+e+1)}_N(t)+\delta.
+\]
+Then $\sum_q\bigotimes_i\mathsf Q_{r_i,N_i}(s_{q,i})$ represents $(\bigotimes_i\mathsf Q_{r_i,N_i})t$ in $\bigotimes_i\Gamma^{r_i}(W)$. By item~(1) at level $e$, its cost in~\eqref{dp:eq:tree-root} for $W$ at level $e$ is at most $\prod_i\mathsf B_{r_i,N_i}(\mathfrak t^{(\ell+e+1)}_N(t)+\delta)$. Sum over $\vec N$ with~\eqref{dp:eq:grafting-cut}, let $\delta\to0$, and take the maximum over $\vec r$.
+
+\emph{Step 4 (item (2)).} Fix $N$. Replacing $L_n$ by $0$ for $n>N$ changes neither $\mathsf Q_{r,N}$ nor $\mathsf B_{r,N}$. By Lemma~\ref{dp:lem:tree-stable}, $\mathfrak t_n=\mathfrak t^{(N)}_n$ for $n\le N$, so the hypothesis of item~(1) holds with $\ell=N$. Item~(1) with $\ell=e=N$ gives item~(2), as $\mathfrak t^{(N)}_r=\mathfrak t_r$ for $r\le N$ and $\mathfrak t^{(2N)}_N=\mathfrak t_N$.
+
+\emph{Step 5 (item (3)).} The induction is that of Steps~2 and~3, with $\mathfrak t^{(e)}$ in place of $\mathfrak t^{(\ell+e)}$. If $r=1$: $\norm{L_Nt}\le\mathsf m_N\pi(t)\le\mathsf m_N\mathfrak t^{(e)}_N(t)$. If $e=1$, $r\ge2$: $\mathsf Q_{r,N}$ is the restriction to $\Gamma^N(P)$ of $\sum_{\vec n}\bigotimes_i\tilde L_{n_i}$ on $P^{\otimes N}$; applied to a representation of $t$ in $P^{\otimes N}$, this gives $\pi(\mathsf Q_{r,N}t)\le\mathsf B_{r,N}\pi(t)$. For the step, choose the representations with $\sum_q\prod_i\mathfrak t^{(e)}_{N_i}(s_{q,i})\le\mathfrak t^{(e)}_{\vec N}(t)+\delta\le\mathfrak t^{(e+1)}_N(t)+\delta$.
+\end{proof}
+
+\begin{theorem}[composition]\label{dp:thm:ta-composition}
+Let $\ell,e\ge1$. Let $f\colon U\to W$ be $\mathrm{TA}_\ell$ at $x_0$ with radius $R$ and bound $M>0$, and let $g$ map an open subset of $W$ into a normed space $Y$, $\mathrm{TA}_e$ at $f(x_0)$ with radius $R'$ and bound $M'$. Let $\Xi_N$ be the laws of $g\circ f$ at $x_0$, as in~\cite[Lemma~Q.3]{I}.
+\begin{enumerate}
+\item For $N\ge1$ and $t\in\Gamma^N(P)$,
+\begin{equation}\label{dp:eq:ta-composition}
+ \norm{L_{\Xi_N}t}\le M'\frac M{R'}\Bigl(1+\frac M{R'}\Bigr)^{N-1}R^{-N}\mathfrak t^{(\ell+e)}_N(t),
+\end{equation}
+and $g\circ f$ is $\mathrm{TA}_{\ell+e}$ at $x_0$ with radius $R_1=\min(R/2,RR'/(8C_0M))$ and bound $M'$.
+\item The same holds with TA in place of $\mathrm{TA}_\ell$, $\mathrm{TA}_e$, $\mathrm{TA}_{\ell+e}$, and $\mathfrak t_N$ in~\eqref{dp:eq:ta-composition}.
+\item If $f$ is analytic at $x_0$ with radius $R$ and bound $M$, then~\eqref{dp:eq:ta-composition} holds with $\mathfrak t^{(e)}_N$, and $g\circ f$ is $\mathrm{TA}_e$ at $x_0$ with radius $R_1$ and bound $M'$.
+\item $\mathrm{TA}_\ell$ and TA are closed under pairing, sums, bounded linear postcomposition, precomposition with analytic maps, restriction to open subsets, and target descent along linear isometries $j\colon W\to Z$ for which the laws of $j\circ f$ lie in $j(W)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (the estimate).} Let $a_n$, $b_r$ be the coefficient laws of $f$, $g$. By Remark~\ref{dp:rem:ta-basic}(2), both germs are DP, so~\cite[Lemmas~Q.3, Q.4]{I} apply, with $b_r$ for the law called $d_r$ there: for $\norm h<R_1$, $g(f(x_0+h))=\sum_N\Xi_N(h)$, and $L_{\Xi_N}=\sum_{r=1}^NL_{b_r}\circ\mathsf Q_{r,N}$. Apply Lemma~\ref{dp:lem:grafting}(1) with $L_n=L_{a_n}$ and $\mathsf m_n=MR^{-n}$. Then $\mathsf B_{r,N}=\binom{N-1}{r-1}M^rR^{-N}$, since $\abs{\mathcal C(N,r)}=\binom{N-1}{r-1}$. By~\eqref{dp:eq:ta-bound} for $g$,
+\[
+ \norm{L_{b_r}\mathsf Q_{r,N}t}\le M'R'^{-r}\mathfrak t^{(e)}_r(W)(\mathsf Q_{r,N}t)\le M'R'^{-r}\binom{N-1}{r-1}M^rR^{-N}\mathfrak t^{(\ell+e)}_N(t).
+\]
+Summing over $r$ gives~\eqref{dp:eq:ta-composition}.
+
+\emph{Step 2 (radius and bound).} As $C_0\ge1$, we have $1+M/R'\le\max(2,8C_0M/R')=R/R_1$. So~\eqref{dp:eq:ta-composition} gives $\norm{L_{\Xi_N}t}\le M'(1+M/R')^NR^{-N}\mathfrak t^{(\ell+e)}_N(t)\le M'R_1^{-N}\mathfrak t^{(\ell+e)}_N(t)$ for $N\ge1$. For $N=0$, $\Xi_0=g(f(x_0))$ has norm at most $M'$. This proves item~(1).
+
+\emph{Step 3 (items (2), (3)).} For item~(2) use Lemma~\ref{dp:lem:grafting}(2) in Step~1. For item~(3), by~\cite[Proposition~14.9(1)]{I} with $j=\id_W$, the law $a_n$ is the diagonal of a bounded $n$-linear map of norm at most $MR^{-n}$. Let $\tilde L_n$ be its linearization on $(P^{\otimes n},\pi)$; then $L_{a_n}=\tilde L_n|_{\Gamma^n(P)}$. Use Lemma~\ref{dp:lem:grafting}(3) in Step~1.
+
+\emph{Step 4 (item (4)).} By Remark~\ref{dp:rem:ta-basic}(1) we may take a common radius and level for two germs, and raise a bound to make it positive. For a pairing, the linearizations are pairs, and the norm of the sum is the maximum. For sums and bounded linear postcomposition the bound~\eqref{dp:eq:ta-bound} is immediate. Precomposition with analytic maps is item~(3), and for TA item~(2), as analytic germs are TA. Restriction is clear. For target descent, let $L^Z_N$ be the linearizations of the laws of $j\circ f$. By hypothesis $L^Z_N$ has values in $j(W)$, since $\Gamma^N(P)$ is spanned by the powers. Put $L_N=j^{-1}L^Z_N$. Then $\norm{L_Nt}=\norm{L^Z_Nt}$, and the series $\sum_NL_N(h^{\otimes N})$ converges to $f(x_0+h)$, since $j$ is an isometry.
+\end{proof}
+
+\begin{theorem}[the composition closure]\label{dp:thm:composition-closure}
+Over every $K$, every germ in $\mathrm{AA}^\circ$ is in $\bigcup_\ell\mathrm{TA}_\ell$. If $K$ is complete, then $\mathrm{AA}^\circ$ is the class of germs in $\bigcup_\ell\mathrm{TA}_\ell$ with Banach values.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (the inclusion $\subseteq$).} The class $\bigcup_\ell\mathrm{TA}_\ell$ contains the analytic germs, by Remark~\ref{dp:rem:ta-basic}(3), and Theorem~\ref{dp:thm:ta-composition} gives closure under composition and pairing. For target descent, let $j\colon W\to Z$ be a linear isometry of Banach spaces, and let $j\circ f$ be $\mathrm{TA}_\ell$. It is DP, by Remark~\ref{dp:rem:ta-basic}(2), and $j(W)$ is closed. So Theorem~\ref{dp:thm:target-descent}(2) puts the laws of $j\circ f$ in $j(W)$, and Theorem~\ref{dp:thm:ta-composition}(4) applies.
+
+From here on $K$ is complete. Fix $P$ and $x_0\in P$.
+
+\emph{Step 2 (universal germs).} Let $\mathbf W_\ell$ be the completed $\ell^1$-sum of the separated completions of $(\Gamma^N(P),\mathfrak t^{(\ell)}_N)$, $N\ge1$, with $\iota^{(\ell)}_N\colon\Gamma^N(P)\to\mathbf W_\ell$ the natural maps. Put $\mathsf v_\ell(h)=\sum_{N\ge1}\iota^{(\ell)}_N(h^{\otimes N})$ for $\norm h<1$. By Lemma~\ref{dp:lem:tree}(1), $\mathsf v_\ell$ is $\mathrm{TA}_\ell$ at $0$ with radius $1$ and bound $1$, and $\norm{\mathsf v_\ell(h)}<1$ for $\norm h<\frac12$. Its coefficient laws are $a_n(h)=\iota^{(\ell)}_n(h^{\otimes n})$.
+
+\emph{Step 3 (one more level).} Let $\mathsf s\in K^\times$. We show by induction that the germ at $x_0$ of $\mathsf v'_\ell(x)=\mathsf v_\ell(\mathsf s(x-x_0))$ is in $\mathrm{AA}^\circ$. By Theorem~\ref{dp:thm:ta-composition}(3), $\mathsf v'_1$ is AA, so it is in $\mathrm{AA}^\circ$, by Remark~\ref{dp:rem:ta-basic}(4). Let $\mathsf v'_\ell$ be in $\mathrm{AA}^\circ$. Let $Y$ be the completed $\ell^1$-sum of the spaces $\widehat\otimes^r_\pi\mathbf W_\ell$, $r\ge1$, with inclusions $\iota'_r$, and $g(w)=\sum_{r\ge1}\iota'_r(w^{\otimes r})$ for $\norm w<1$. This $g$ is analytic at $0$ with radius $1$ and bound $1$, and $L_{b_r}=\iota'_r$ on $\Gamma^r(\mathbf W_\ell)$. By~\cite[Lemma~Q.4]{I}, the composite $g\circ\mathsf v_\ell$ has laws $\Xi_N$ with $L_{\Xi_N}=\sum_r\iota'_r\mathsf Q_{r,N}$, where $(\bigotimes_iL_{a_{n_i}})t$ is the image of $t$ in the block of $\mathbf W_\ell^{\otimes r}$ indexed by $\vec n$. Blocks with different $\vec n$ are disjoint, also for different $N$. By~\cite[Lemma~Q.5(2),(1)]{I}, for finitely many $t_N\in\Gamma^N(P)$,
+\begin{equation}\label{dp:eq:closure-norm}
+ \Bigl\lVert\sum_NL_{\Xi_N}t_N\Bigr\rVert_Y=\sum_N\mathfrak x_N(t_N),\qquad
+ \mathfrak x_N(t)=\sum_{r=1}^N\sum_{\vec n\in\mathcal C(N,r)}\mathfrak t^{(\ell)}_{\vec n}(t)\ge\mathfrak t^{(\ell+1)}_N(t).
+\end{equation}
+Let $Y_0$ be the closed span in $Y$ of the ranges of the $L_{\Xi_N}$. The germ $g\circ\mathsf v'_\ell$ is in $\mathrm{AA}^\circ$. By~\cite[Lemma~Q.3]{I}, near $x_0$ it equals $\sum_{N\ge1}L_{\Xi_N}((\mathsf s(x-x_0))^{\otimes N})$, so it has values in $Y_0$, and by target descent its germ into $Y_0$ is in $\mathrm{AA}^\circ$. By~\eqref{dp:eq:closure-norm} the assignment $L_{\Xi_N}t\mapsto\iota^{(\ell+1)}_Nt$ is well defined on the span of the ranges and has norm at most $1$. It extends to a bounded linear map $\mathbf c\colon Y_0\to\mathbf W_{\ell+1}$, and, applying the continuous map $\mathbf c$ term by term to this series, $\mathbf c\circ g\circ\mathsf v'_\ell=\mathsf v'_{\ell+1}$ near $x_0$. A bounded linear map is analytic, so $\mathsf v'_{\ell+1}$ is in $\mathrm{AA}^\circ$.
+
+\emph{Step 4 (general germs).} Let $f\colon U\to W$ be $\mathrm{TA}_\ell$ at $x_0$ with radius $R$ and bound $M$, with $W$ Banach and linear maps $L_N$. Choose $\mathsf s\in K$ with $\abs{\mathsf s}\ge1/R$. By~\eqref{dp:eq:ta-bound}, $\norm{\mathsf s^{-N}L_Nt}\le M\mathfrak t^{(\ell)}_N(t)$ for $N\ge1$. So $\iota^{(\ell)}_N(t)\mapsto\mathsf s^{-N}L_Nt$ extends to a bounded linear map $\mathbf L\colon\mathbf W_\ell\to W$, and
+\[
+ f(x)=f(x_0)+\mathbf L\bigl(\mathsf v_\ell(\mathsf s(x-x_0))\bigr)\qquad(\norm{x-x_0}<\abs{\mathsf s}^{-1}).
+\]
+The map $w\mapsto f(x_0)+\mathbf Lw$ is analytic between Banach spaces. So $f$ is in $\mathrm{AA}^\circ$ by Step~3.
+\end{proof}
+
+For $K$ complete, Step~3 shows that $\mathsf v'_\ell$ arises from the AA germ $\mathsf v'_1$ by $\ell-1$ steps, each a composition with an analytic germ, a target descent and a bounded linear map.
+
+\begin{theorem}[re-expansion and derivatives]\label{dp:thm:ta-recenter}
+Let $W$ be Banach and let $f$ be $\mathrm{TA}_\ell$ at $x_0$ with radius $R$ and bound $M$. Let $x_1\in B(x_0,R)$ and $\varrho=\norm{x_1-x_0}$. Then $f$ is $\mathrm{TA}_\ell$ at $x_1$ with radius $R-\varrho$ and bound $MR/(R-\varrho)$. Moreover $f$ is $C^\infty$ on $B(x_0,R)$, and for each $\mathsf d\ge1$ and $0<R_2<R$, the map $D^{\mathsf d}f$ is $\mathrm{TA}_\ell$ at $x_0$ with radius $R_2$, into $\Mult^{\mathsf d}(P;W)$. The same holds with TA in place of $\mathrm{TA}_\ell$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (re-expansion).} Let $L_N$ be as in Definition~\ref{dp:def:ta}, $\xi=x_1-x_0$. For $\norm h<R-\varrho$, \eqref{dp:eq:orbit} gives $(\xi+h)^{\otimes N}=\sum_{n=0}^N\xi^{\otimes(N-n)}\cdot h^{\otimes n}$. For $t\in\Gamma^n(P)$ put $L'_n(t)=\sum_{N\ge n}L_N(\xi^{\otimes(N-n)}\cdot t)$. By Lemma~\ref{dp:lem:tree}(5),
+\[
+ \norm{L'_nt}\le\sum_{N\ge n}MR^{-N}\binom Nn\varrho^{N-n}\mathfrak t^{(\ell)}_n(t)=MR^{-n}\Bigl(1-\frac\varrho R\Bigr)^{-n-1}\mathfrak t^{(\ell)}_n(t)=\frac{MR}{R-\varrho}(R-\varrho)^{-n}\mathfrak t^{(\ell)}_n(t).
+\]
+The sum over $N$ in this display is a sum of real numbers, and the series defining $L'_nt$ converges in the Banach space $W$. The double series is absolutely summable, since $\sum_N\sum_{n\le N}MR^{-N}\binom Nn\varrho^{N-n}\norm h^n=M\sum_N((\varrho+\norm h)/R)^N$ is finite. So $f(x_1+h)=\sum_nL'_n(h^{\otimes n})$.
+
+\emph{Step 2 (the first derivative).} By Step~1, $f$ is DP on $B(x_0,R)$, so it is $C^\infty$ there by Theorem~\ref{dp:thm:differentiable}, and $Df(x_1)$ is the law of degree $1$ at $x_1$. For $\norm h<R$ and $z\in P$, Step~1 with $x_1=x_0+h$ gives $Df(x_0+h)z=\sum_{N\ge1}L_N(h^{\otimes(N-1)}\cdot z)$. For $n\ge0$ and $t\in\Gamma^n(P)$ put $\mathsf D_n(t)z=L_{n+1}(t\cdot z)$. By~\eqref{dp:eq:shuffle}, $\norm{\mathsf D_nt}\le(n+1)MR^{-n-1}\mathfrak t^{(\ell)}_n(t)$ in $\cL(P,W)$. For $0<R_2<R$ the number $M_2=\sup_n(n+1)MR^{-n-1}R_2^n$ is finite, so the $\mathsf D_n$ satisfy~\eqref{dp:eq:ta-bound} with radius $R_2$ and bound $M_2$. For $\norm h<R_2$ the series $\sum_n\mathsf D_n(h^{\otimes n})$ converges absolutely in the Banach space $\cL(P,W)$, and by the formula above its sum is $Df(x_0+h)$. So $Df$ is $\mathrm{TA}_\ell$ at $x_0$ with radius $R_2$ and bound $M_2$.
+
+\emph{Step 3 (higher derivatives).} Use induction on $\mathsf d$. Let $D^{\mathsf d}f$ be $\mathrm{TA}_\ell$ at $x_0$ with every radius below $R$, and let $0<R_2<R$. The space $\Mult^{\mathsf d}(P;W)$ is Banach. Apply Step~2 to $D^{\mathsf d}f$, with a radius between $R_2$ and $R$, and use the isometry $\cL(P,\Mult^{\mathsf d}(P;W))=\Mult^{\mathsf d+1}(P;W)$. The argument for TA is the same with $\mathfrak t_n$, by Lemma~\ref{dp:lem:tree}(5).
+\end{proof}
+
+So, among germs with Banach values, TA and each $\mathrm{TA}_\ell$ are open conditions, and so is $\mathrm{AA}^\circ$ if $K$ is complete, by Theorem~\ref{dp:thm:composition-closure}. By Theorem~\ref{dp:thm:whole-ball}, a DP germ with Banach values is also DP on its whole ball. The difference is the radius. Theorem~\ref{dp:thm:ta-recenter} gives $R-\varrho$ over every $K$, for a radius $R$ in the sense of~\eqref{dp:eq:ta-bound}. For a radius in the sense of DP this formula can fail over discretely valued $K$, by Example~\ref{dp:ex:radius-drop}. The two proofs differ in the cost of mixed terms. By~\eqref{dp:eq:shuffle} it is $\binom Nn$ for the tree norms. For laws the bounds we have are~\cite[(Q.2)]{I}, which loses a factor geometric in $N$, and~\eqref{dp:4a:eq:one-law}.

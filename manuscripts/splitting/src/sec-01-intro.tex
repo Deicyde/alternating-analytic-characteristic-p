@@ -100,12 +100,7 @@ settings in which fiberwise alternating maps form an analytic bifunctor; Proposi
 Corollary~\ref{cor:shear-bundle} and Proposition~\ref{prop:tangent-obstruction} give analytic atlases with nonanalytic
 induced alternating or cotangent atlases, the latter over complete fields of characteristic $p>0$ that are not
 spherically complete, in degrees $k\ge p$; over complete fields, ambient analytic forms keep pullback, wedge products
-and exterior derivatives (Theorem~\ref{thm:ambient-forms}). Over nonarchimedean fields, with bounded polynomial laws
-in place of bounded multilinear maps as Taylor coefficients, divided-power analytic maps compose
-(Theorem~\ref{dp:thm:calculus}(2)), and in every characteristic the alternating and projective exterior power bundles of
-divided-power analytic vector bundles are divided-power analytic (Corollary~\ref{dp:cor:bundles}). If $K$ has characteristic $p>0$, then in every degree at least $p$ there are bounded polynomial laws that are not
-diagonals of bounded multilinear maps, even after an isometric embedding of their target
-(Propositions~\ref{dp:prop:nonambient} and~\ref{dp:prop:degree-p}).
+and exterior derivatives (Theorem~\ref{thm:ambient-forms}).
 
 \begin{introtheorem}[how the class vanishes]\label{intro:thm:C}
 Let $E$ and $D$ be normed spaces and $k\ge1$.
@@ -249,9 +244,28 @@ Theorem~\ref{intro:thm:G} collects Proposition~\ref{fam2:prop:reductions}, Corol
 Theorems~\ref{fam2:thm:reduction}, \ref{fam2:thm:polarizable} and~\ref{fam2:thm:bases},
 Proposition~\ref{fam2:prop:fibers} and Theorem~\ref{fam2:thm:tangent}.
 
-Section~\ref{sec:questions} collects questions. Every theorem, proposition, lemma and corollary of the paper is proved
+Section~\ref{amb:sec} treats ambient analyticity as a structure, not a class of maps. Fixed envelopes come first: in every
+characteristic the transitions act analytically on $\Mult^k$, preserving the alternating forms, and this gives
+n\textsuperscript{o}~7.8.1--7.8.4 of~\cite{Bou} on ambient sections of filtered analytic bundles
+(Theorem~\ref{amb:thm:seven-eight}). If the enlargement may depend on the map, the maps so obtained are not a usable class:
+over every field of characteristic $p>0$ they are not closed under composition (Theorem~\ref{amb:thm:failure}), and the
+mechanism is that enlarging the target carries maps into the space, not analytic maps out of it
+(Section~\ref{amb:ssec:mechanism}). For $K$ complete and scalar values, $\Mult^k(-;K)$ is initial among the functorial
+envelopes of $\Alt^k(-;K)$ with a multilinear action (Theorem~\ref{amb:thm:initial}). On tame pairs, such as ultrametric
+spaces or $\ell^1(J,K)$, ambient analyticity has composition and inverse functions, and there it coincides with
+divided-power analyticity, which takes bounded polynomial laws as Taylor coefficients
+(Theorems~\ref{amb:thm:tame-calculus} and~\ref{amb:thm:tame-examples}). A sequel~\cite{II} studies divided-power
+analyticity.
+
+Section~\ref{sec:questions} collects questions; those on ambient analyticity are at the end of Section~\ref{amb:sec}, and
+the proofs of that section are in Appendix~\ref{amb:app}. Every theorem, proposition, lemma and corollary of the paper is proved
 in the text, except Theorem~\ref{thm:ingleton} and Lemma~\ref{rig:lem:ramsey}, which are cited;
-Section~\ref{sec:verification} lists the statements that also have Lean proofs of corresponding statements. Proofs
+Section~\ref{sec:verification} lists the statements that also have Lean proofs of corresponding statements.
+Sections~\ref{sec:bundles}, \ref{ob:ssec:powers}, \ref{ob:ssec:tests}, \ref{spl:ssec:one-value},
+\ref{spl:ssec:parameter}, \ref{spl:ssec:bundle}, \ref{obs:ssec:counterexamples} and~\ref{sec:geometry} with
+Appendices~\ref{app:obstruction-preliminaries}--\ref{app:coordinate-methods} form the formalized core; besides it, they use
+only Definition~\ref{ob:def:sequences}, the sign $\epsilon(S)$ of Section~\ref{cmb:ssec:degrees} and condition~\textup{(L)} of
+Section~\ref{obs:ssec:field}. Proofs
 that would interrupt the text are collected in Appendix~\ref{app:deferred}.
 
 \subsection*{Related work}
@@ -264,8 +278,7 @@ construction~\cite{G1,G2} covers characteristic zero; the finite-dimensional cas
 in~\cite{G1}, is Proposition~\ref{prop:split-lift}(2) over complete fields. Closed-range reflection of smoothness is
 formalized in~\cite{PR}. The nonarchimedean extension mechanism is a norm-controlled form of spherical
 completeness~\cite{In,Schi,Sch,Yuan}. Completed nonarchimedean exterior powers go back to Serre~\cite{Se} and
-Gruson~\cite{Gr}, who do not study sections of the quotient map; we know no source on these splittings in positive
-characteristic. The rigid spaces of Section~\ref{sec:beyond} transfer a construction of Kalton and Roberts~\cite{KR}.
+Gruson~\cite{Gr}, who do not study sections of the quotient map. The rigid spaces of Section~\ref{sec:beyond} transfer a construction of Kalton and Roberts~\cite{KR}.
 Corollary~\ref{ob:cor:z-linear} detects the class by the distance of a $z$-linear map from the linear maps, as for
 twisted sums~\cite{Ka,KP,CSC}.
 
@@ -275,7 +288,7 @@ $\Alt^k(E;F)$ those vanishing whenever two arguments coincide; this condition, n
 in characteristic two. The degree-zero space is $F$. Products carry the maximum norm. $E$ denotes a source fiber, $D$
 a target fiber, $F$ a value space (a \emph{target fiber} in Corollary~\ref{cor:bundle-cases} and
 Appendix~\ref{app:laurent}), $G$ an intermediate space, and $P$ a base model or parameter space. \emph{Finite
-coordinates} means a bounded linear isomorphism with $K^d$; over a complete field this is finite dimension. Hats
+coordinates} means a bounded linear isomorphism with $K^d$; equivalently, a basis $e_1,\ldots,e_d$ with bounded coordinate functionals $e^*_1,\ldots,e^*_d$, which we also call finite continuous coordinates $(e_i,e^*_i)$; over a complete field this is finite dimension. Hats
 denote completions (Section~\ref{sec:duality}). Exponents are written $r$; $\ell^r$, lower $r$-estimates, $r$-norms
 and $\ell^2$-domination of a family are defined in Section~\ref{sec:positive}, symmetric sequence spaces in
 Definition~\ref{obs:def:sequence-spaces}. A finite field $\kappa$ has $\abs\kappa$ elements. Condition~\textup{(L)} is

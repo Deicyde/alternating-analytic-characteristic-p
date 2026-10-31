@@ -21,7 +21,7 @@ CI runs the comparator on the original six-statement challenge. The 76 ledger ch
 | Path | Contents |
 |---|---|
 | [paper/](paper/) | The manuscript, PDF and LaTeX, and `Section8.lean`, the definition displayed in Section 8 of the paper. |
-| [manuscripts/](manuscripts/) | Later manuscripts, PDF and LaTeX. [manuscripts/splitting/](manuscripts/splitting/) is *Alternating bundles and the splitting of exterior powers*, the rewrite that followed `paper/`; `charp.tex` is `src/main.tex` flattened. The ledger's page and theorem numbers refer to `paper/`, not to these. |
+| [manuscripts/](manuscripts/) | Later manuscripts, PDF and LaTeX. [manuscripts/splitting/](manuscripts/splitting/) is *Alternating bundles and the splitting of exterior powers*, the rewrite that followed `paper/`; `charp.tex` is `src/main.tex` flattened. [manuscripts/divided-power/](manuscripts/divided-power/) is its sequel, *Divided-power analytic maps between normed spaces*, with `dp.tex` and `dp.pdf`. The ledger's page and theorem numbers refer to `paper/`, not to these. |
 | [challenge.md](challenge.md) | The claim ledger. |
 | [Challenges/](Challenges/) | Each claim stated in Lean with `sorry`, plus a comparator config `<ID>.json`. |
 | [Solutions/](Solutions/) | The same statements, proved from the library. |

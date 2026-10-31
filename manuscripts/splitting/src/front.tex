@@ -8,7 +8,8 @@ formalization used Codex and Autoform. The remaining claims and the per-claim le
 Claude Code in October 2026. The splitting theory and the classification of good pairs, that is, the results of
 Sections~\ref{sec:duality}--\ref{sec:questions} and Appendices~\ref{app:ordering}--\ref{app:families} not listed in
 Section~\ref{sec:verification}, and Proposition~\ref{prop:tangent-values} were developed and written with Claude and are
-not formalized. Section~\ref{sec:verification} records the verification scope.}
+not formalized. Section~\ref{amb:sec} and Appendix~\ref{amb:app} were developed and written with Claude and are not
+formalized. Section~\ref{sec:verification} records the verification scope.}
 \makeatletter
 % Keep the complete front matter on one page without changing the body layout.
 \patchcmd{\@maketitle}{\global\topskip42\p@}{\global\topskip30\p@}{}%
@@ -28,7 +29,9 @@ pushed along an evaluation map. When $k!=0$, no splitting of this sequence for $
 the permutation matrix of a single $p$-cycle, where $p=\operatorname{char}K$. Source, target
 and parameter splittings, chiefly ordering splittings, make the class vanish; Ramsey forcing over finite residue fields
 obstructs it. Over subfields of $\kappa((X))$, $\kappa$ finite, this decides several classes of pairs, and rigid Banach
-spaces give vanishing classes that no splitting decomposition explains. Seventy-six statements, listed in
+spaces give vanishing classes that no splitting decomposition explains. The last section treats ambient analyticity as a
+structure, not a class of maps: the fixed envelope $\Mult^k$ gives Bourbaki's formulas on ambient sections in every
+characteristic, while over every field of characteristic $p>0$ ambient analyticity is not closed under composition. Seventy-six statements, listed in
 Section~\ref{sec:verification}, have Lean proofs of corresponding statements.
 \end{abstract}
 \maketitle

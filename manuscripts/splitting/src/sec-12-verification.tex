@@ -47,13 +47,15 @@ claims of Table~\ref{ver:tab:ids} or the 52 claims just listed. Excluded are the
 questions of Section~\ref{sec:questions}, Remarks~\ref{rem:FFhyp}, \ref{rem:infkappa} and~\ref{rem:ascent},
 Proposition~\ref{prop:tangent-values}, the coefficient bound on retracts in Theorem~\ref{thm:summable-parameters}(1),
 and all other theorems, propositions, lemmas, corollaries and remarks of
-Sections~\ref{sec:duality}--\ref{sec:questions} and Appendices~\ref{app:ordering}--\ref{app:families}. The excluded
+Sections~\ref{sec:duality}--\ref{sec:questions} and~\ref{amb:sec} and Appendices~\ref{app:ordering}--\ref{app:families}
+and~\ref{amb:app}. The excluded
 results have written proofs only, except Lemma~\ref{rig:lem:ramsey}, which is cited from~\cite{Ra}, and apart from the
 Lean declarations named below.
 
 \texttt{challenge.md} and the docstrings of the challenge files list where a ledger statement differs from the text.
 The main differences: Theorem~\ref{thm:ambient-forms} and Proposition~\ref{prop:ambient-agreement} are stated on open
 subsets of a normed space, since Mathlib has no differential forms on manifolds; the Lean statement of
+Proposition~\ref{prop:ambient-polynomial} concerns the joint action $B$ and does not include the clause for $g=\id_F$; the Lean statement of
 Theorem~\ref{thm:bundle-lifting} groups the variables by variance, uses the canonical trivializations and does not state
 independence of the trivializing cover; Corollary~\ref{lau:cor:diagonal-bundle} is stated for the explicit transition
 and section maps, and Corollary~\ref{cor:bundle-cases} for objects and morphisms without the functor laws.

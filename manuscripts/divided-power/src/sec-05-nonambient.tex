@@ -1,0 +1,158 @@
+\section{Laws that are not ambient}\label{dp:sec:nonambient}\label{sec:dp}
+
+Let $p=\operatorname{char}K>0$. In degrees below $p$ every bounded polynomial law is ambient. A law of degree $0$ is constant. Let $a\colon P\to W$ be a law of degree $n$ with $1\le n<p$, and put
+\[
+ \beta(h_1,\dots,h_n)=a^{[(1,\dots,1)]}(h_1,\dots,h_n)/n!.
+\]
+This map is $n$\nobreakdash-linear: compare coefficients in $a(s_1h_1+s_1'h_1'+s_2h_2+\dots+s_nh_n)$ after the substitutions $s_1'=s_1$, $s_1'=0$ and $s_1=0$, scale $s_1$, and do the same in every slot. It has diagonal $a$, since $a((s_1+\dots+s_n)h)=(s_1+\dots+s_n)^na(h)$ gives $a^{[(1,\dots,1)]}(h,\dots,h)=n!\,a(h)$. It is bounded by Theorem~\ref{dp:thm:mixed}(1). The algebra is \cite[Th.~II.1]{Ro}; the bound is the estimate we need.
+
+We also use the one-point lemma \cite[Proposition~14.9(2)]{I}: a law $a\colon P\to W$ of degree $n$ such that $j\circ a$ is analytic at one point, for a linear isometry $j$ of $W$ into a normed space, is ambient of degree $n$.
+
+In degrees at least $p$ bounded polynomial laws need not be ambient. Let $c_0=c_0(\N,K)$, and identify $K^m$ with the span of the first $m$ unit vectors, $m\ge1$. Recall that $\Gamma^p(K^m)\subseteq(K^m)^{\otimes p}$ is the space of symmetric tensors. Put $Q_m=(K^m)^{\otimes p}/\Gamma^p(K^m)$, and let $\bar v\in Q_m$ be the image of $v\in(K^m)^{\otimes p}$. Let $I_m$ be the set of the $p^{pm}$ tuples $l=(y_l^1,\dots,y_l^p)$ of vectors in $K^m$ with entries in the prime field $\F_p$, and put $y_l=y_l^1\otimes\dots\otimes y_l^p$. Let $N_m\subseteq\ell^1(I_m,K)$ consist of the vectors $(\phi(\bar y_l))_{l\in I_m}$, $\phi$ a linear form on $Q_m$. Let $G_m=\ell^1(I_m,K)/N_m$ with the quotient norm ($N_m$ is closed, being the common kernel of finitely many linear forms on $K^{I_m}$, each a combination of the bounded coordinate forms), and let $\varepsilon_l\in G_m$ be the image of the unit vector at $l$.
+
+Let $G$ be the $\ell^1$-sum of the spaces $G_m$, $m\ge1$. We read $G_m$ as the $m$-th summand of $G$. Let $H=K\oplus c_0\oplus G$, with the maximum norm; it is a Banach space if $K$ is complete. Let $V$ be the span of the tensors $u^{\otimes p}\otimes g$, $u\in c_0$, $g\in G$, in $c_0^{\otimes p}\otimes G$, with the norm
+\[
+ \nu(t)=\inf\Bigl\{\sum_i\abs{c_i}\norm{u_i}^p\norm{g_i}:t=\sum_ic_i\,u_i^{\otimes p}\otimes g_i\Bigr\},
+\]
+which dominates the projective norm $\pi$ of $c_0^{\otimes p}\otimes G$. Both are norms, since the coordinate forms of $c_0$, and the linear forms on the spaces $G_m$ composed with the projections of $G$ onto $G_m$, are bounded and separate points.
+
+\begin{proposition}[laws that are not ambient]\label{dp:prop:nonambient}
+Assume that either (a) $K$ is discretely valued, that is, $\abs{K^\times}=\abs\vartheta^{\Z}$ for some $\vartheta\in K$ with $0<\abs\vartheta<1$, or (b) $p=2$. Put $t_m=\sum_{l\in I_m}y_l\otimes\varepsilon_l$.
+\begin{enumerate}
+\item $t_m\in V$ and $\pi(t_m)\le p^{pm}$; under~(a), $\nu(t_m)\ge mp^{pm}/\bigl(2^pM_{\abs\vartheta}(1+\lfloor\log_pm\rfloor)\bigr)$ with $M_{\abs\vartheta}=\max_{i\ge0}(i+1)\abs\vartheta^{\,i}$, and under~(b), $\nu(t_m)\ge m4^{m-1}$.
+\item For $n\ge p+1$, $R_n(\lambda,x,g)=\lambda^{n-p-1}\,x^{\otimes p}\otimes g$, with $\lambda^0=1$, defines a bounded polynomial law $R_n\colon H\to V$ of degree $n$ and norm at most $1$ that is not ambient of degree $n$, also as a map into the completion of $V$.
+\end{enumerate}
+\end{proposition}
+The proof is in Appendix~\ref{dp:app:proofs}.
+
+Under~(a) or~(b) of Proposition~\ref{dp:prop:nonambient}, the same lower bounds hold for the smaller norm $\mu$ below, and this shows that composition fails on $c_0\oplus G$. From here on elements of $G$ are written $w$, since $g_X$ will be a map. As $\Gamma^p(c_0)$ is spanned by the powers $u^{\otimes p}$, we have $V=\Gamma^p(c_0)\otimes G$. Let $\mu$ be the projective norm of $\Gamma^p_\pi(c_0)\otimes G$ on $V$, as in \cite[(14.4)]{I} with $X=c_0$ and $n=p$:
+\[
+ \mu(t)=\inf\Bigl\{\sum_q\pi(\mathsf s_q)\norm{w_q}:t=\sum_q\mathsf s_q\otimes w_q,\ \mathsf s_q\in\Gamma^p(c_0),\ w_q\in G\Bigr\}.
+\]
+Here $\pi(\mathsf s_q)$ is the projective norm of $\mathsf s_q$ in $c_0^{\otimes p}$. Then $\pi\le\mu\le\nu$ on $V$, so $\mu$ is a norm, as $\pi$ is. For the first inequality expand each $\mathsf s_q$ nearly optimally in $c_0^{\otimes p}$. For the second, a representation for $\nu$ is one for $\mu$, as $\pi(c\,u^{\otimes p})\le\abs c\norm u^p$. Let $\pi_m$ be the projective norm of $(K^m)^{\otimes p}$, with the maximum norm on $K^m$. Let $y^{(m)}$ be the family $(y_l)_{l\in I_m}$ in $c_0^{\otimes p}$, in the sense of \cite[Definition~14.15]{I}, with its factors $y_l^1,\dots,y_l^p$. Let $\mathfrak l(y^{(m)})$ and $\mathfrak l_p(c_0)$ be the constants of \cite[(14.3)]{I}. A \emph{projection onto the symmetric tensors} is a linear map of $(K^m)^{\otimes p}$ into $\Gamma^p(K^m)$ that fixes $\Gamma^p(K^m)$.
+
+\begin{lemma}[lower bounds on $c_0$]\label{dp:lem:c0-lower}
+Assume~\textup{(a)} or~\textup{(b)} of Proposition~\ref{dp:prop:nonambient}, and let $m\ge1$. Put $\mathsf b_m=mp^{pm}/\bigl(2^pM_{\abs\vartheta}(1+\lfloor\log_pm\rfloor)\bigr)$ under~\textup{(a)} and $\mathsf b_m=m4^{m-1}$ under~\textup{(b)}. If both hold, the statements below hold with each value.
+\begin{enumerate}
+\item For every projection $\Psi_K$ of $(K^m)^{\otimes p}$ onto the symmetric tensors, $\sum_{l\in I_m}\pi_m(\Psi_Ky_l)\ge\mathsf b_m$.
+\item In $c_0$, $\mathfrak l(y^{(m)})\ge\mathsf b_m/p^{pm}$. So $\mathfrak l(y^{(m)})\ge m/\bigl(2^pM_{\abs\vartheta}(1+\lfloor\log_pm\rfloor)\bigr)$ under~\textup{(a)} and $\mathfrak l(y^{(m)})\ge m/4$ under~\textup{(b)}, and $\mathfrak l_p(c_0)=\infty$.
+\item $\mu(t_m)\ge\mathsf b_m$.
+\end{enumerate}
+\end{lemma}
+The proof is in Appendix~\ref{dp:app:proofs}.
+
+The universal space $G(y^{(m)})$ of \cite[Definition~14.15]{I} is $G_m$, since $I_m$ contains the tuples of unit vectors, so the span of the $y_l$ is $(K^m)^{\otimes p}$, and this span meets $\Gamma^p(c_0)$ in $\Gamma^p(K^m)$. So, under~(a) or~(b) of Proposition~\ref{dp:prop:nonambient}, $G$ is a bad space for $X=c_0$, $n=p$, by Lemma~\ref{dp:lem:c0-lower}(2). Let $H_0=c_0\oplus G$ and $W_X=\Gamma^p_\pi(c_0)\oplus G$, with the maximum norms, let $Y_X=(V,\mu)$, and let
+\[
+ f_X\colon H_0\to W_X,\quad f_X(x,w)=(x^{\otimes p},w);\qquad
+ g_X\colon W_X\to Y_X,\quad g_X(\mathsf s,w)=\mathsf s\otimes w,
+\]
+as in \cite[(14.5)]{I}.
+
+\begin{theorem}[composition fails on $c_0\oplus G$]\label{dp:thm:c0-failure}
+Assume~\textup{(a)} or~\textup{(b)} of Proposition~\ref{dp:prop:nonambient}.
+\begin{enumerate}
+\item $f_X$ is AA at every point, with every radius, the bound depending on the radius and the point.
+\item $g_X$ is the diagonal of a bounded bilinear map, so it is analytic everywhere.
+\item $g_X\circ f_X$ is a bounded law of degree $p+1$, DP everywhere, and AA at no point, also as a map into the completion of $Y_X$.
+\item $\mathfrak k_{(p,1)}(H_0)=\infty$, for the constant of \cite[Definition~14.21]{I}.
+\end{enumerate}
+\end{theorem}
+The proof is in Appendix~\ref{dp:app:proofs}; it applies \cite[Proposition~14.18]{I}. Over densely valued $K$ of odd characteristic it is open whether $\mathfrak l_p(c_0)=\infty$ \cite[Question~14.42(2)]{I}, and it is open whether this failure occurs on $c_0\oplus G$ \cite[Remark~14.20]{I}. A failure on $c_0\oplus G$ would give $\mathfrak l_p(c_0)=\infty$, by \cite[Theorem~14.24]{I}. Over every $K$ of characteristic $p$, composition fails on another space, by \cite[Theorem~14.17]{I}.
+
+Let $\kappa$ be the residue field of $K$. A projection of $(\kappa^m)^{\otimes p}$ onto the symmetric tensors is defined as for $K$, with the space of all symmetric tensors. The bounds under~(a) rest on Cohen's structure theorem~\cite{Co}, on \cite[Lemma~K.2(2)]{I}, and on \cite[Lemma~Q.6(4)]{I}, by which every such projection takes, on average over the tensors $y_l$, values whose $m\times m^{p-1}$ matrices of entries have large rank. The bounds under~(b) rest on \cite[Proposition~N.12]{I}, from which, for $m\ge2$, every projection $\Psi_K$ of $(K^m)^{\otimes2}$ onto the symmetric tensors has some $\Psi_K(y_l)$ whose determinant has absolute value at least $1$, and on \cite[Lemma~N.15(2)]{I}, which turns this into a lower bound for its projective norm. Condition~(a) holds under condition~\textup{(L)} of \cite[Section~7.1]{I}, with the element $\vartheta$ and the number $\varrho$ there, and then $M_{\abs\vartheta}\le M_\varrho$.
+
+By Theorem~\ref{dp:thm:calculus}(1), $R_n$ is DP on $H$. Under~(a) or~(b) of Proposition~\ref{dp:prop:nonambient}, by item~(2) there and the one-point lemma, $jR_n$ is analytic at no point for every linear isometry $j$ of $V$, or of its completion, into a normed space.
+
+In degree $p$ itself bounded polynomial laws need not be ambient either, over every $K$ of characteristic $p$. Recall the space $\Gamma^p(P)$ and the seminorm $\norm\cdot_\Gamma$ of~\eqref{dp:eq:gamma-norm} with $n=p$, which dominates the projective seminorm $\pi$ of $P^{\otimes p}$; both are norms if the bounded linear forms on $P$ separate points. For integers $m\ge1$ and $d\ge0$ let $\N^m_d$ be the set of $\alpha\in\N^m$ with $\abs\alpha=d$, and let $e_1,\dots,e_m$ be the unit vectors of $K^m$. For a symmetric tensor $T\in(\F_p^m)^{\otimes p}$ and $\alpha\in\N^m_p$ let $T_\alpha$ be its coefficient at $e_{i_1}\otimes\dots\otimes e_{i_p}$ for any $(i_1,\dots,i_p)$ in which each $i$ occurs $\alpha_i$ times. For $\gamma\in\N^m_{p-1}$ let the \emph{slice} $\partial^\gamma T\in\F_p^m$ be the vector whose $i$-th entry is $T_{\gamma^{+i}}$, where $\gamma^{+i}\in\N^m_p$ is $\gamma$ with its $i$-th entry raised by $1$. For a real number $\tau\ge1$ let $\mathcal E_{T,\tau}$ be $K^m$ with the norm
+\begin{equation}\label{dp:eq:weighted-norm}
+ \norm h_{T,\tau}=\inf\Bigl\{\sum_{i=1}^m\abs{z_i}+\tau\sum_{\gamma\in\N^m_{p-1}}\abs{z_\gamma}:
+ h=\sum_{i=1}^mz_ie_i+\sum_{\gamma\in\N^m_{p-1}}z_\gamma\,\partial^\gamma T\Bigr\},
+\end{equation}
+the infimum over the scalars $z_i,z_\gamma\in K$. It is a norm, and the coordinate forms of $\mathcal E_{T,\tau}$ are bounded: as the entries of $T$ lie in $\F_p$ and $\tau\ge1$, no entry of $h$ has absolute value above $\norm h_{T,\tau}$. The tensor $T$ lies in $\Gamma^p(\mathcal E_{T,\tau})$.
+
+\begin{proposition}[laws that are not ambient, over every $K$]\label{dp:prop:degree-p}
+Let $p=\operatorname{char}K>0$.
+\begin{enumerate}
+\item For every $m\ge1$ there are a nonzero symmetric tensor $T\in(\F_p^m)^{\otimes p}$ and a real number $\tau\ge1$ such that, in $\Gamma^p(\mathcal E_{T,\tau})$,
+\begin{equation}\label{dp:eq:degree-p-ratio}
+ \norm T_\Gamma\ge\frac{(p-1)!}{3p^{3/2}(2p-1)!}\Bigl(\frac m{1+\log_pm}\Bigr)^{1/2}\pi(T).
+\end{equation}
+\item Choose such $T^{(m)}$ and $\tau^{(m)}$ for every $m\ge1$, and let $\mathcal E$ be the $\ell^1$-sum of the spaces $\mathcal E_m=\mathcal E_{T^{(m)},\tau^{(m)}}$, $m\ge1$; it is a Banach space if $K$ is complete. For $n\ge p$, the map $(\lambda,h)\mapsto\lambda^{n-p}h^{\otimes p}$, with $\lambda^0=1$, from $K\oplus\mathcal E$, with the maximum norm, to $\Gamma^p(\mathcal E)$, with the norm $\norm\cdot_\Gamma$ of~\eqref{dp:eq:gamma-norm}, is a bounded polynomial law of degree $n$ and norm at most $1$ that is not ambient of degree $n$, also as a map into the completion of $\Gamma^p(\mathcal E)$.
+\end{enumerate}
+\end{proposition}
+The proof is in Appendix~\ref{dp:app:proofs}.
+
+A representation of $T$ in $\Gamma^p(\mathcal E_{T,\tau})$ gives a symmetric tensor over $\F_p$ in $m+\binom{m+p-2}{p-1}$ symbols, which stand for the vectors $e_i$ and $\partial^\gamma T$. It maps to $T$, and its nonzero coefficients have total weight at most the cost $\sum_i\abs{c_i}\norm{h_i}^p$ of the representation; a coefficient at two or more slices weighs at least $\tau^2$, the others at least $1$. The coefficients at exactly one slice act on $T$ through a linear map $\mathsf L^\sharp$ of Lemma~\ref{dp:lem:linear}, an identity for symmetric tensors in characteristic $p$ by which $\id-\mathsf L^\sharp$ has rank at least $(p-1)!\,m^p/(2p-1)!$. So for most $T$ every such tensor has many nonzero coefficients, or many at two or more slices. By Theorem~\ref{dp:thm:calculus}(1) the law of~(2) is DP on $K\oplus\mathcal E$, while, as for $R_n$, its composite with a linear isometry of $\Gamma^p(\mathcal E)$, or of its completion, into a normed space is analytic at no point. For $n\ge p+1$ this gives laws with the properties of Proposition~\ref{dp:prop:nonambient}(2) over every $K$, on another space.
+
+For $h_1,\dots,h_p\in P$ the tensor $\sum_{\sigma\in S_p}h_{\sigma(1)}\otimes\dots\otimes h_{\sigma(p)}$ lies in $\Gamma^p(P)$, by \cite[(4.2)]{I}; the elements of the span of these tensors are \emph{hollow}. For $t\in\Gamma^p(P)$ let
+\[
+ \norm t_{\mathrm F}=\inf\{\norm{t'}_\Gamma:t'\in\Gamma^p(P),\ t-t'\text{ hollow}\},
+\]
+the quotient seminorm of $\norm\cdot_\Gamma$ modulo the hollow tensors. For $C\ge0$, $P$ satisfies \emph{$(\mathrm N_P)$ with constant $C$} if $\norm t_\Gamma\le C\pi(t)$ for every hollow $t$, and \emph{$(\mathrm F_P)$ with constant $C$} if $\norm t_{\mathrm F}\le C\pi(t)$ for every $t\in\Gamma^p(P)$. A \emph{Frobenius law} is a map $a\colon P\to W$ with $a(h+h')=a(h)+a(h')$ and $a(\lambda h)=\lambda^pa(h)$ for $h,h'\in P$ and $\lambda\in K$, and with $\norm a=\sup_{h\ne0}\norm{a(h)}/\norm h^p$ finite; it is a bounded polynomial law of degree $p$, as $a(s_1h_1+\dots+s_rh_r)=s_1^pa(h_1)+\dots+s_r^pa(h_r)$.
+
+\begin{theorem}[laws of degree $p$]\label{dp:thm:frobenius}
+Let $p=\operatorname{char}K>0$.
+\begin{enumerate}
+\item $P$ satisfies $(\mathrm F_P)$ with constant $p$, and with constant $\dim P$ if $\dim P<p$.
+\item Every Frobenius law $a\colon P\to W$ is ambient of degree $p$, with a $p$\nobreakdash-linear map $\beta$ of norm at most $p\norm a$ in Definition~\ref{dp:def:laws}(2).
+\item If $P$ satisfies $(\mathrm N_P)$ with constant $C$, then $\norm t_\Gamma\le(p+(p+1)C)\pi(t)$ for every $t\in\Gamma^p(P)$, and every bounded polynomial law $a\colon P\to W$ of degree $p$ is ambient of degree $p$, with a $p$\nobreakdash-linear map $\beta$ of norm at most $(p+(p+1)C)\norm a$. Conversely, if every bounded polynomial law of degree $p$ on $P$, with values in any normed space, is ambient of degree $p$, then $P$ satisfies $(\mathrm N_P)$ with some constant.
+\end{enumerate}
+\end{theorem}
+The proof is in Appendix~\ref{dp:app:proofs}. It rests on Lemma~\ref{dp:lem:bases}: if $t\in\Gamma^p(P)$ is a sum of elementary tensors with nonzero factors, some of these factors form a basis of the span of all of them for which $t$ is congruent, modulo the hollow tensors, to a combination of the $p$-th powers of the basis vectors in which the power of each basis vector $h$, taken as a factor of a term $h_1\otimes\dots\otimes h_p$, has a coefficient of absolute value at most $\norm{h_1}\cdots\norm{h_p}/\norm h^p$. By~(3), the space $K\oplus\mathcal E$ of Proposition~\ref{dp:prop:degree-p}(2) does not satisfy $(\mathrm N_{K\oplus\mathcal E})$ with any constant, as the law there with $n=p$ is not ambient of degree $p$.
+
+From here through Proposition~\ref{dp:prop:all-norms} the characteristic of $K$ is arbitrary. For $n\ge1$ recall that $\mathfrak a_n(P)\in[0,\infty]$ is the infimum of the $C\ge0$ with $\norm t_\Gamma\le C\pi(t)$ for all $t\in\Gamma^n(P)$, as in \cite[Definition~14.36]{I}; if it is finite, it is the least such $C$. For $m\ge1$ let $[m]=\{1,\dots,m\}$, and let $c_0([m],K)$ be $K^m$ with the maximum norm, read as the span of the first $m$ unit vectors of $c_0(\N,K)$. Recall that $\mathfrak c_K=\abs\vartheta$ if $K$ is discretely valued, with $\vartheta$ as in Proposition~\ref{dp:prop:nonambient}(a), and $\mathfrak c_K=1$ otherwise.
+
+\begin{proposition}[ambience constants]\label{dp:prop:ultrametric}
+Let $n\ge1$.
+\begin{enumerate}
+\item If $\mathfrak a_n(P)<\infty$, then every bounded polynomial law $a\colon P\to W$ of degree $n$ is ambient of degree $n$, with an $n$\nobreakdash-linear map $\beta$ of norm at most $\mathfrak a_n(P)\norm a$ in Definition~\ref{dp:def:laws}(2). Conversely, if every bounded polynomial law of degree $n$ on $P$, with values in any normed space, is ambient of degree $n$, then $\mathfrak a_n(P)<\infty$.
+\item $\mathfrak a_n(P)\le(n+1)\,\mathfrak a_{n+1}(K\oplus P)$, with the maximum norm on $K\oplus P$.
+\item If $P$ is ultrametric, then $\mathfrak a_n(P)\le\mathfrak c_K^{-n}\sup_{m\ge1}\mathfrak a_n(c_0([m],K))\le\mathfrak c_K^{-n}\,\mathfrak a_n(c_0(\N,K))$.
+\item If $P$ is ultrametric, then $\mathfrak a_2(P)\le\frac32\,\mathfrak c_K^{-2}$.
+\end{enumerate}
+\end{proposition}
+The proof is in Appendix~\ref{dp:app:proofs}. By~(1) and~(3), if every bounded polynomial law of degree $n$ on $c_0(\N,K)$ is ambient of degree $n$, then so is every bounded polynomial law of degree $n$ on every ultrametric normed space. By~(1) and~(4), every bounded polynomial law of degree $2$ on an ultrametric normed space is ambient of degree $2$.
+
+\begin{proposition}[a bound for all norms]\label{dp:prop:all-norms}
+Let $n\ge1$.
+\begin{enumerate}
+\item If $n!\ne0$ in $K$, then $\mathfrak a_n(P)\le(2n/\abs\varpi)^n/\abs{n!}$ for every normed space $P$, and $\mathfrak a_n(P)\le(2/\abs\varpi)^n/\abs{n!}$ if $P$ is ultrametric.
+\item If $n\ge p=\operatorname{char}K>0$, then $\mathfrak a_n(K\oplus\mathcal E)=\infty$, for the space $\mathcal E$ of Proposition~\ref{dp:prop:degree-p}(2).
+\end{enumerate}
+So $\sup_P\mathfrak a_n(P)<\infty$ if and only if $n!\ne0$ in $K$.
+\end{proposition}
+The proof is in Appendix~\ref{dp:app:proofs}.
+
+\begin{remark}[the norms $\mu$ and $\nu$]\label{dp:rem:nu-mu}
+Let $p=\operatorname{char}K=2$. Then $\nu\le\mathfrak a_2(c_0)\mu\le\frac32\mathfrak c_K^{-2}\mu$ on $V$. Indeed, let $t=\sum_q\mathsf s_q\otimes w_q$ with $\mathsf s_q\in\Gamma^2(c_0)$ and $w_q\in G$. Representing each $\mathsf s_q$ with cost close to $\norm{\mathsf s_q}_\Gamma\le\mathfrak a_2(c_0)\pi(\mathsf s_q)$ gives a representation for $\nu$, and $\mathfrak a_2(c_0)\le\frac32\mathfrak c_K^{-2}$ by Proposition~\ref{dp:prop:ultrametric}(4). So $\mu$ and $\nu$ are equivalent. Let $\operatorname{pr}\colon H\to H_0$ be the coordinate projection. By \cite[Proposition~14.12(1)(b)]{I}, $f_X\circ\operatorname{pr}$ is AA everywhere, and $R_3=g_X\circ f_X\circ\operatorname{pr}$ as maps into the vector space $V$. So for $p=2$ the law $R_3$ is, up to an equivalent target norm, an analytic map after an AA map.
+\end{remark}
+
+Let $\mathrm{An}$, $\mathrm{AA}$ and $\mathrm{DP}$ be the classes of germs that are analytic, AA and DP. Then $\mathrm{An}\subseteq\mathrm{AA}$ by definition, and $\mathrm{AA}\subseteq\mathrm{DP}$ by \cite[Proposition~14.9(1)]{I}. Both inclusions are strict in characteristic $p$. The first is also strict between ultrametric spaces, for $K$ complete and not spherically complete.
+
+\begin{proposition}[characteristic $p$: both inclusions are strict]\label{dp:prop:strict}
+Let $p=\operatorname{char}K>0$ and $k\ge p$.
+\begin{enumerate}
+\item Each of the following maps is AA at every point and analytic at no point.
+\begin{enumerate}
+\item $A^k_{E,E;F}$ on $\cL(E,E)$, for the Banach spaces $E,F$ of \cite[Theorem~7.2(1)]{I}.
+\item If $p=k=2$, or if $K$ satisfies condition~\textup{(L)} of \cite[Section~7.1]{I}: the power map $c_0\to\hGamma^k_\pi c_0$, $h\mapsto h^{\otimes k}$.
+\item If $K$ is complete and not spherically complete: $A^k_{E,D;K}$ on $\cL(E,D)$, for the ultrametric Banach spaces $E,D$ of \cite[Theorem~7.2(2)]{I}. Its source $\cL(E,D)$ and its target $\cL(\Alt^k(D;K),\Alt^k(E;K))$ are ultrametric Banach spaces.
+\item If $K$ is discretely valued or $p=2$: the power map $\operatorname{pw}\colon c_0\to\Gamma^p_\pi(c_0)$, $\operatorname{pw}(h)=h^{\otimes p}$, also as a map into the completion of $\Gamma^p_\pi(c_0)$.
+\end{enumerate}
+\item If $K$ is discretely valued or $p=2$, the laws of Proposition~\ref{dp:prop:nonambient}(2), and over every $K$ of characteristic $p$ the laws of Proposition~\ref{dp:prop:degree-p}(2), are DP at every point and AA at no point.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (items (1)(a) and (1)(c)).} By \cite[Proposition~2.2]{I}, $A^k_{E,D;F}$ followed by $j_{E,F}\circ{-}$ is the diagonal of a bounded $k$-linear map, read on alternating inputs, and $j_{E,F}\circ{-}$ is a linear isometry whose range, the operators with values in $\Alt^k(E;F)$, is closed. Expanding by multilinearity gives a finite expansion at every point. The condition on diagonals holds as the range is closed. So $A^k_{E,D;F}$ is AA at every point. It is analytic at no point in~(1)(a) and~(1)(c), by \cite[Theorem~7.2]{I}. In~(1)(c), an operator norm with ultrametric target is ultrametric, and $\Alt^k(D;K)$ and $\Alt^k(E;K)$ are ultrametric, as their values lie in $K$. These spaces are Banach, as $K$ and $D$ are complete.
+
+\emph{Step 2 (item (1)(b)).} The power map is the diagonal of the bounded $k$-linear map $(x_1,\dots,x_k)\mapsto x_1\otimes\dots\otimes x_k$ into the completion of $(c_0^{\otimes k},\pi)$. The subspace $\hGamma^k_\pi c_0$ of this completion is closed, by \cite[Definition~3.8]{I}, so the condition on diagonals holds as in Step~1. Expanding by multilinearity shows that the power map is AA at every point. By \cite[Proposition~2.5]{I}, it is analytic at some point if and only if it is the diagonal of a bounded $k$-linear map into $\hGamma^k_\pi c_0$. By \cite[Lemma~3.11]{I}, this holds if and only if $c_0$ is polarizable in degree $k$. That fails for $p=k=2$ by \cite[Theorem~7.20(4)]{I}, and under~\textup{(L)} by \cite[Corollary~8.3]{I}.
+
+\emph{Step 3 (item (1)(d)).} The map $\operatorname{pw}$ is $f_X$ on the summand $c_0$ of $H_0$, followed by the projection of $W_X$ onto $\Gamma^p_\pi(c_0)$. So it is AA at every point, by Theorem~\ref{dp:thm:c0-failure}(1) and \cite[Proposition~14.12(1)]{I}, also into the completion. The completion of $\Gamma^p_\pi(c_0)$ is $\hGamma^p_\pi c_0$ \cite[Section~Q.4]{I}. Suppose $\operatorname{pw}$ is analytic at $u_0$ as a map into $\hGamma^p_\pi c_0$; this covers the map into $\Gamma^p_\pi(c_0)$. Write $\operatorname{pw}(u_0+u)=\sum_{i\ge0}\beta_i(u,\dots,u)$ for $\norm u<R$, with $\norm{\beta_i}\le MR^{-i}$. The bilinear map $(\mathsf s,w)\mapsto\mathsf s\otimes w$ has norm at most $1$ for $\mu$, so it extends to a bilinear map $\boxtimes$ of norm at most $1$ from $\hGamma^p_\pi c_0\times G$ to the completion of $Y_X$. Fix $w_0\in G$. For $h=(u,w)$ in $H_0$ with $\norm h<R$,
+\[
+ (g_X\circ f_X)\bigl((u_0,w_0)+h\bigr)=\sum_{i\ge0}\bigl(\beta_i(u,\dots,u)\boxtimes w_0+\beta_i(u,\dots,u)\boxtimes w\bigr).
+\]
+This series converges absolutely, so it may be grouped by degree. The term of degree $n$ is the diagonal of the $n$-linear map $(u_r,w_r)_{1\le r\le n}\mapsto\beta_n(u_1,\dots,u_n)\boxtimes w_0+\beta_{n-1}(u_1,\dots,u_{n-1})\boxtimes w_n$, of norm at most $M(\norm{w_0}+R)R^{-n}$; for $n=0$ only the first term occurs. So $g_X\circ f_X$ is analytic at $(u_0,w_0)$ as a map into the completion of $Y_X$, against Theorem~\ref{dp:thm:c0-failure}(3).
+
+\emph{Step 4 (item (2)).} Let $a$ be one of these laws, of degree $n$. It is DP at every point by Theorem~\ref{dp:thm:calculus}(1). If $a$ were AA at a point, then $j\circ a$ would be analytic there for a linear isometry $j$ of its target. By the one-point lemma, $a$ would be ambient of degree $n$, against Propositions~\ref{dp:prop:nonambient}(2) and~\ref{dp:prop:degree-p}(2).
+\end{proof}

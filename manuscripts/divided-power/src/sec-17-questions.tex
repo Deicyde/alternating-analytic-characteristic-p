@@ -1,0 +1,206 @@
+\section{Questions}\label{dp:sec:questions}
+
+This section lists what this paper and~\cite{I} do not decide, with what they do give. We prove no case of the conjectures below. We write $c_0=c_0(\N,K)$.
+
+\begin{question}\label{q:quest:polynomial-laws}
+Let $K$ be nonarchimedean of characteristic $p>0$. Is every bounded polynomial law on $c_0(\N,K)$ ambient of its degree?
+\end{question}
+
+Bounded polynomial laws of degree below $p$ are ambient (Section~\ref{dp:sec:nonambient}), and for $p=2$ so are those of degree $2$ on ultrametric normed spaces (Proposition~\ref{dp:prop:ultrametric}(1),(4)). By Proposition~\ref{dp:prop:ultrametric}(1),(3), every bounded polynomial law of degree $n$ on $c_0(\N,K)$ is ambient of degree $n$ if and only if every bounded polynomial law of degree $n$ on every ultrametric normed space over $K$ is. As $K\oplus c_0(\N,K)$, with the maximum norm, is isometric to $c_0(\N,K)$, Proposition~\ref{dp:prop:ultrametric}(1),(2) shows that the degrees with a positive answer form an initial segment of the positive integers: a negative answer in some degree gives a negative answer in every higher degree, and a positive answer in infinitely many degrees gives one in all. Frobenius laws are ambient, and every bounded polynomial law of degree $p$ on a normed space $P$, with values in any normed space, is ambient of degree $p$ if and only if $P$ satisfies $(\mathrm N_P)$ with some constant (Theorem~\ref{dp:thm:frobenius}(2),(3)); so for $p\ge3$, in degree $p$ the question asks whether $c_0(\N,K)$ satisfies $(\mathrm N_{c_0(\N,K)})$ with some constant. Over every $K$ and in every degree $n\ge p$, Proposition~\ref{dp:prop:degree-p}(2) gives a law that is not ambient of degree $n$, on a space that is a Banach space if $K$ is complete; if $K$ is discretely valued or $p=2$, Proposition~\ref{dp:prop:nonambient}(2) gives such laws in every degree $n\ge p+1$ also on the space $H=K\oplus c_0(\N,K)\oplus G$ of Section~\ref{dp:sec:nonambient}. These spaces have no equivalent ultrametric norm: they contain $\ell^1$-sums of finite-dimensional quotients of weighted $\ell^1$-spaces, and both proofs obtain their lower bounds, for $\nu$ and for $\norm\cdot_\Gamma$, by adding up contributions of the coordinates of these $\ell^1$-spaces.
+
+\begin{question}\label{dp:q:char0}
+Let $\operatorname{char}K=0$. Is $\sup_{n\ge1}\mathfrak a_n(P)^{1/n}<\infty$ for every normed space $P$? Is $\mathrm{TA}=\mathrm{DP}$?
+\end{question}
+
+By \cite[Proposition~14.37]{I}, the first question is the second part of \cite[Question~14.42(1)]{I}: a positive answer for $P$ says that every DP germ from $P$ into a Banach space is AA. The supremum is finite for ultrametric $P$ and for $\ell^1(J)$ \cite[Theorem~14.39(2),(3)]{I}, and in finite dimension (Theorem~\ref{dp:thm:agreement-finite}(2)). For general $P$ the bound of Proposition~\ref{dp:prop:all-norms} is not geometric. By Proposition~\ref{dp:prop:s-char0}, AA has the property (S) of Definition~\ref{dp:def:s-axiom} if and only if $\mathrm{AA}=\mathrm{DP}$, and the same holds for TA. By Proposition~\ref{dp:prop:all-sources}, for $K$ complete, the first part of \cite[Question~14.42(1)]{I}, whether $\mathfrak k(P)<\infty$ for every normed $P$, is a question on finite-dimensional spaces.
+
+\begin{question}\label{dp:q:c0}
+\leavevmode
+\begin{enumerate}
+\item Let $\operatorname{char}K=p$. Is $\sup_{n\ge1}\mathfrak a_n(c_0)^{1/n}<\infty$?
+\item Let $\operatorname{char}K=p$. Among germs with ultrametric sources and Banach targets, are the DP germs the smallest class with \textup{(C1), (C2), (C3)}?
+\item Over every $K$, is $(P,W)$ tame for every normed $P$ and every ultrametric $W$?
+\end{enumerate}
+\end{question}
+
+For $n<p$ and for $n=2$, $\mathfrak a_n(c_0)$ is finite, by Propositions~\ref{dp:prop:all-norms} and~\ref{dp:prop:ultrametric}(4). So Question~\ref{q:quest:polynomial-laws} is undecided only for $n\ge\max(3,p)$. Item~(1) concerns non-ultrametric targets only, as $(P,W)$ is tame for ultrametric $P,W$ \cite[Theorem~14.39(1)]{I}. Item~(3) is the first sentence of \cite[Question~14.42(4)]{I}; the other sentences there are item~(1) and Question~\ref{q:quest:polynomial-laws}. In each degree the constant in item~(3) is finite \cite[Theorem~14.39(4)]{I}.
+
+Items~(1) and~(2) are equivalent.
+
+\emph{Step 1 ((1) implies (2)).} Let $f\colon U\to W$ be DP at $x_0$, with $P$ ultrametric and $W$ Banach, and let $q^{\rm u}_P$ be the cover of Theorem~\ref{dp:thm:ultrametric-minimal}. Then $f\circ q^{\rm u}_P$ is DP (Proposition~\ref{dp:prop:source-descent}). By Proposition~\ref{dp:prop:ultrametric}(3), $\mathfrak a_n(c_{00}(I_P))\le\mathfrak c_K^{-n}\mathfrak a_n(c_0)$, which is geometric, so $f\circ q^{\rm u}_P$ is AA \cite[Theorem~14.38(1)]{I}. By \cite[Theorem~14.11]{I} there is a linear isometry $\mathsf j$ of $W$ into a Banach space with $\mathsf j\circ f\circ q^{\rm u}_P$ analytic. Then (C1), (C2), (C3) put $f$ in the class, and all sources involved are ultrametric. The DP germs have (C1), (C2), (C3), by Theorem~\ref{dp:thm:minimal}(1).
+
+\emph{Step 2 (a class with the three properties).} Let $\mathfrak M$ be the class of germs $(P,U,f,x_0)$, with $P$ ultrametric and Banach values, for which there are an ultrametric $P'$, a bounded linear surjection $Q\colon P'\to P$ with a preimage constant, and $\tilde x_0\in Q^{-1}(x_0)$ with $f\circ Q$ AA at $\tilde x_0$. It has (C1), with $Q=\id$. It has (C2), as AA has (C2) (Proposition~\ref{dp:prop:other-classes}(2)). It has (C3), as a composite of two such surjections is again one.
+
+\emph{Step 3 ((2) implies (1)).} Assume~(2). Then $\mathfrak M$ contains every DP germ on $c_{00}(\N)$ into a Banach space $W$. For such a germ $f$ at $x_0$, let $Q,\tilde x_0$ be as in Step~2, with preimage constant $\mathsf d$. Choose $\tilde e_i\in P'$ with $Q\tilde e_i=e_i$ and $\norm{\tilde e_i}\le\mathsf d$. As $P'$ is ultrametric, $\mathsf s(x)=\sum_ix_i\tilde e_i$ is a bounded linear map, and $Q\mathsf s=\id$. So $f(x)=(f\circ Q)(\tilde x_0+\mathsf s(x-x_0))$ near $x_0$, and $f$ is AA at $x_0$ \cite[Proposition~14.12(1)(b)]{I}. By \cite[Proposition~14.37]{I}, $(c_{00}(\N),W)$ is tame for every Banach $W$. Take for $W$ the $c_0$-sum of the completions of the spaces $\Gamma^n_{\mathrm s}(c_{00}(\N))$, as in Step~4 of the proof of Theorem~\ref{dp:thm:general-norms-agreement}. This gives $\sup_n\mathfrak a_n(c_{00}(\N))^{1/n}<\infty$. The inclusion of $c_0([m],K)$ into $c_{00}(\N)$ and the coordinate projection back are contractive, so $\mathfrak a_n(c_0([m],K))\le\mathfrak a_n(c_{00}(\N))$. Now Proposition~\ref{dp:prop:ultrametric}(3) gives~(1).
+
+\begin{question}\label{dp:q:residual}
+Let $\operatorname{char}K=p$.
+\begin{enumerate}
+\item Let $K$ be complete, densely valued and spherically complete. Does $(\mathrm D_K)$ hold, that is, is every DP germ between ultrametric Banach spaces analytic? Does $(\mathrm B_K)$ hold? Does $(\mathrm B_K)$ imply $(\mathrm D_K)$?
+\item Let $p$ be odd, and let $K$ be densely valued and spherically complete. Let $P$ be ultrametric and $W$ a Banach space with no equivalent ultrametric norm. Is every DP germ from $P$ to $W$ analytic?
+\item Let $K$ be discretely valued and complete, $n\ge p$, $P$ ultrametric and infinite-dimensional, and $W$ ultrametric and incomplete. Is every law of degree $n$ from $P$ to $W$ the diagonal of a bounded $n$\nobreakdash-linear map into $W$?
+\end{enumerate}
+\end{question}
+
+These are the rows L10, L14 and L7 of Table~\ref{dp:tab:ledger}. In~(1), $(\mathrm D_K)$ and $(\mathrm B_K)$ are the statements given before Theorem~\ref{dp:thm:field-level}, which proves that $(\mathrm D_K)$ implies $(\mathrm B_K)$, and neither statement is decided for this $K$ (\cite[Section~12]{I}). Also in~(1), by Theorem~\ref{dp:thm:conservativity}, a germ that is DP and not analytic needs $\widehat P\not\cong c_0(J,K)$ and $W$ with no equivalent ultrametric spherically complete norm. In~(3), for $W$ Banach the answer is yes, by Theorem~\ref{dp:thm:sph-agreement}(2). For $P$ finite-dimensional it is yes, by Theorem~\ref{dp:thm:agreement-finite}(1), and for $P=c_{00}(J)$ it is yes, by Theorem~\ref{dp:thm:c0-agreement}(1). The row L5, characteristic $0$ with $P$ and $W$ not ultrametric, is in Questions~\ref{dp:q:char0} and~\ref{dp:q:cover}.
+
+\emph{Incomplete fields, Banach targets.} Let $K$ be incomplete, $P$ ultrametric and $W$ a Banach space. Then $W$ and the completion $\widehat P$ are normed spaces over $\Kh$, and bounded $K$-multilinear maps between normed spaces over $\Kh$ are $\Kh$-multilinear, by continuity. So a germ between normed spaces over $\Kh$ with Banach target is analytic over $K$ if and only if it is analytic over $\Kh$. Coefficient laws from $P$ to $W$ extend to $\widehat P$ over $\Kh$ with the same bounds \cite[Lemma~Q.13(1),(2)]{I}, a DP germ extends through its law series, and a lift over $\Kh$ restricts to a lift over $K$. So every DP germ from an ultrametric space into an ultrametric Banach space over $K$ is analytic if and only if $(\mathrm D_{\Kh})$ holds. If $\Kh$ is spherically complete, this is~(1) over $\Kh$, and in the same way the case of $W$ Banach with no equivalent ultrametric norm is~(2) over $\Kh$. If $\Kh$ is not spherically complete, the answer is no. Let $k\ge p$, let $E,D$ be the spaces of \cite[Theorem~7.2(2)]{I} over $\Kh$, and read them over $K$. The map $A^k_{E,D;\Kh}$ is a law over $K$, so it is DP, and it is analytic at no point over $K$, by the above and \cite[Theorem~7.2(2)]{I}. Its source and target are ultrametric Banach spaces. Its target has no equivalent ultrametric spherically complete norm, by Theorem~\ref{dp:thm:sph-agreement}(1), and its source is infinite-dimensional, by Theorem~\ref{dp:thm:agreement-finite}(2). By the retract argument of Section~\ref{dp:ssec:regimes}, the same holds with the target $W_0\oplus\ell^1(\N,\Kh)$, where $W_0$ is the target above, and this has no equivalent ultrametric norm.
+
+\emph{Incomplete fields, incomplete targets.} Over the incomplete field $\F_p(t)$ with the $t$-adic absolute value, the question in~(3), without the completeness of $K$ and the infinite dimension of $P$, has the answer no in every degree $n\ge p$ (Theorem~\ref{dp:thm:agreement-finite}(3), Lemma~\ref{dp:lem:lift-criterion}). For other incomplete discretely valued $K$ we do not decide it. Over incomplete densely valued $K$ with $W$ incomplete, whether every DP germ between ultrametric spaces is analytic is not decided here either, beyond the cases of Theorem~\ref{dp:thm:general-norms-agreement}(3)(a).
+
+\begin{question}\label{dp:q:odd-c0}
+Let $\operatorname{char}K=p$ be odd.
+\begin{enumerate}
+\item Let $K$ be densely valued. Is $\mathfrak l_p(c_0)=\infty$?
+\item Is the law $R_{p+1}$ of Proposition~\ref{dp:prop:nonambient}, into the completion of $(V,\nu)$, in TA?
+\end{enumerate}
+\end{question}
+
+Item~(1) is part of \cite[Question~14.42(2)]{I}. A positive answer gives the conclusions of Theorem~\ref{dp:thm:c0-failure} over this $K$, with $G$ replaced by a bad space for $X=c_0$, $n=p$, by \cite[Proposition~14.18]{I}.
+
+Item~(2) is equivalent to $\mathfrak a_p(c_0)<\infty$. If $\mathfrak a_p(c_0)<\infty$, the answer is yes, by Lemma~\ref{dp:lem:type-iv}(2) and Theorem~\ref{dp:thm:chain}. Conversely, let the germ of $R_{p+1}$ at some point be in TA. By Theorem~\ref{dp:thm:chain} it is in $\cC_p^{\rm u}$. Its coefficient law of degree $p+1$ at that point is $R_{p+1}$, by Theorem~\ref{dp:thm:mixed}(2), so~\eqref{dp:eq:cpu} holds for the linearization $L$ of $R_{p+1}$, with some radius $R'$ and bound $M$. As $Q_1=0$, we have $N_1=0$ and $G_1=\ell^1(I_1,K)$. Let $w\in G_1$ be a unit vector of this space, and let $\phi$ be the coordinate form with $\phi(w)=1$, composed with the projection of $G$ onto $G_1$; it has norm $1$. Apply~\eqref{dp:eq:cpu} with $N=p+1$, $n=p$, with $(0,0,w)\in H$ as $h$, and with $t\in\Gamma^p(c_0)$. For $t=x^{\otimes p}$, comparing coefficients in $R_{p+1}(0,sx,s'w)=s^ps'\,x^{\otimes p}\otimes w$ gives $L((0,0,w)\cdot t)=t\otimes w$, and the powers span $\Gamma^p(c_0)$. So $\nu(t\otimes w)\le MR'^{-p-1}\pi(t)$, with $\pi$ the projective norm of $c_0^{\otimes p}$, which dominates that of $H^{\otimes p}$. Applying $\id\otimes\phi$ to a representation of $t\otimes w$ for $\nu$ gives $\norm t_\Gamma\le\nu(t\otimes w)$. Hence $\mathfrak a_p(c_0)\le MR'^{-p-1}$. Whether $\mathfrak a_p(c_0)<\infty$ for odd $p$ is Question~\ref{q:quest:polynomial-laws} in degree $p$.
+
+\begin{question}\label{dp:q:ta}
+Let $\operatorname{char}K=p$.
+\begin{enumerate}
+\item Is $\mathrm{AA}^\circ=\mathrm{TA}$? Does $\mathrm{AA}^\circ$ have the inverse function theorem?
+\item Is there a constant $\mathsf A$, depending only on $p$, with $\mathfrak t_{p^2+1}\le\mathsf A\,\mathfrak t^{(2)}_{p^2+1}$ on $\Gamma^{p^2+1}(P)$ for every normed $P$?
+\item Is every germ of $\cC_p^{\rm loc}$ in $\cC_p^{\rm u}$?
+\end{enumerate}
+\end{question}
+
+By Theorem~\ref{dp:thm:composition-closure}, for $K$ complete and Banach targets, the first part of~(1) asks whether $\mathrm{TA}=\bigcup_\ell\mathrm{TA}_\ell$. The proof of Theorem~\ref{dp:thm:ta-inverse} does not bound the depth of the trees (Remark~\ref{dp:rem:ta-depth}). Degrees $N\le p^2$ are decided by Proposition~\ref{dp:prop:base-p}(3); the first undecided case is~(2).
+
+\begin{conjecture}\label{dp:conj:ta}
+Let $\operatorname{char}K=p$. Among germs with Banach values, $\mathrm{TA}\subsetneq\cC_p^{\rm u}$.
+\end{conjecture}
+
+The inclusion is Theorem~\ref{dp:thm:chain}.
+
+\begin{question}\label{dp:q:strong}
+\leavevmode
+\begin{enumerate}
+\item Which models $P$ with no equivalent ultrametric norm admit a pseudogroup of strongly DP local diffeomorphisms? Is failure tied to a complemented copy of $\ell^1(\N,K)$?
+\item For which $P$ is $\sup_n\bigl(\sup_a\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert/\norm a\bigr)^{1/n}<\infty$, with $a$ over the nonzero laws of degree $n$ on $P$, with values in any normed space?
+\end{enumerate}
+\end{question}
+
+Proposition~\ref{dp:prop:strong-bundle} treats models with an equivalent ultrametric norm and models with a complemented copy of $\ell^1(\N,K)$. A positive answer to~(2) for $P$ gives $\mathrm{DP}=\mathrm{sDP}$ on $P$ for all $W$. It holds for ultrametric $P$ (Lemma~\ref{dp:lem:strong-formal}(3)) and fails on $\ell^1(\N,K)$, by the coefficient laws $\mathsf e_nh_1\cdots h_n$ of Example~\ref{dp:ex:l1}.
+
+\begin{question}\label{dp:q:cover}
+\leavevmode
+\begin{enumerate}
+\item Let $\operatorname{char}K=0$. Is $\mathrm{CA}=\mathrm{An}$ for all $P,W$ with no equivalent ultrametric norm, with $P$ infinite-dimensional and not linearly homeomorphic to any $\ell^1(J)$ or $\ell^1_{00}(J)$?
+\item Let $W$ be Banach. If $f$ is CA on an open set, is $Df$ CA? Is $\mathrm{CA}^{\rm H}=\mathrm{CA}$? Does $\mathrm{CA}^{\rm H}$ have \textup{(C3)}?
+\item Let $\operatorname{char}K=0$. Is $\mathrm{CA}\subseteq\mathrm{AA}$?
+\item Is there a largest class containing CA, with composition and inverse functions, that excludes the germ $\mathsf f$ of Example~\ref{dp:ex:l1}? Is $\mathrm{CA}^{\rm H}$ maximal for any list of properties?
+\item On $\ell^1(J)$ with $J$ infinite and $W$ incomplete, is $\mathrm{CA}=\mathrm{An}$?
+\end{enumerate}
+\end{question}
+
+By Lemma~\ref{dp:lem:cover-flat}(3), among germs with Banach values, CA is the smallest class with (C1), (C3). So, for $W$ Banach,~(1) asks whether An has (C3) there. A counterexample needs a surjection $Q$ with no bounded linear section $\mathsf s$, since $f=(f\circ Q)\circ\mathsf s$ for a section. In~(2), the answer on $Df$ is yes if $P$ or $W$ is ultrametric (Remark~\ref{dp:rem:cah-um}, Lemma~\ref{dp:lem:cover-flat}(5)). In~(3), the reverse inclusion fails, by $\mathsf f$, and in characteristic $p$ the two classes are incomparable (Theorem~\ref{dp:thm:descents-independent}). A class as in~(4) fails (S), by Proposition~\ref{dp:prop:s-axiom}. In~(5), for $W$ Banach the answer is yes (Lemma~\ref{dp:lem:cover-flat}(6)).
+
+\begin{question}\label{dp:q:base-change}
+In items~(1)--(4), let $K'$ be a valued extension of $K$.
+\begin{enumerate}
+\item Let $K$ be densely valued. Is $\mathfrak e_n(P,K')=1$ for all normed $P$ and all $n$? Is there a universal bound better than the $C_0^n$ of Theorem~\ref{dp:thm:base-change-law}?
+\item Let $K$ be complete and $[K':K]=\infty$, and let $X_0\subseteq X$ be a linear isometry with $X$ not ultrametric. Is $(X_0)_{K'}\to X_{K'}$ bounded below?
+\item Let $K$ be complete, not spherically complete, of characteristic $p$, and $K'$ spherically complete. Between ultrametric spaces, with maxima, is there a germ $f$, DP at its base point, that is not analytic over $K$ with $f_{K'}$ analytic over $K'$?
+\item Let $K,K'$ be as in~\textup{(3)}, let $k\ge p$, and let $E,D$ be as in \cite[Theorem~7.2(2)]{I}. Is $(A^k_{E,D;K})_{K'}$ analytic over $K'$?
+\item Let $K$ be complete, not spherically complete, of characteristic $p$, and $P$ ultrametric. Is every law $a\colon P\to K$ of degree $n$ the diagonal of a bounded $n$\nobreakdash-linear form $\beta$? Is there a constant $C$ with $\norm\beta\le C^n\norm a$?
+\end{enumerate}
+\end{question}
+
+In~(1), with maxima the constant is $1$ over densely valued $K$ (Theorem~\ref{dp:thm:base-change-um}). A positive answer to~(2) is what the proof of Theorem~\ref{dp:thm:aa-base-change}(2) needs for general norms. For $W$ complete, analyticity descends along $K'$ if $\widehat{K'}$ has a bounded retraction onto $\Kh$, and no spherically complete $K'$ over a complete, not spherically complete $K$ has one (Proposition~\ref{dp:prop:an-descent}). Which other extensions have one is not determined here, and neither is descent along an extension with none, or for incomplete $W$. Items~(3), (4) are the test cases. By Theorem~\ref{dp:thm:an-base-change}(2), with maxima, (4) asks whether $A^k_{E,D;K}$ is analytic over $K$ as a map into the completion of $(W_{E,D})^{\max}_{K'}$, with $W_{E,D}=\cL(\Alt^k(D;K),\Alt^k(E;K))$. That germ is DP and AA through an ultrametric space, so its base change is too (Theorems~\ref{dp:thm:germ-base-change}, \ref{dp:thm:aa-base-change}(2)). In~(5), a counterexample needs $\widehat P$ not linearly homeomorphic to any $c_0(J,K)$ (Theorem~\ref{dp:thm:conservativity}(1)(d)). The operator-valued question is decided by \cite[Theorem~7.2(2)]{I}, and the scalar one is not.
+
+\begin{question}\label{dp:q:jets}
+\leavevmode
+\begin{enumerate}
+\item Which sequences of laws $(a_i)$ are given by a $C^\infty_{\mathrm{BGN}}$ map $f$ and a point $x$, through finite Taylor expansions $f(x+\tau v)=\sum_{i\le k}\tau^ia_i(v)+o(\abs\tau^k)$?
+\item Let $K$ be densely valued and spherically complete, of characteristic $p$. Does $(\mathrm{Sec}_k)$ hold for all ultrametric $P$ and all ultrametric Banach $W$?
+\item Over an incomplete $K$, and for $P$ not ultrametric with scalar values over a spherically complete $K$, when does $(\mathrm{Sec}_k)$ hold?
+\item Let $\cG$ be a group in DP manifolds, modeled on $P$. Let $\operatorname{Dist}_r(\cG)$ be the dual of the jets of order $r$ of scalar DP germs at the identity. Is $\bigcup_r\operatorname{Dist}_r(\cG)$ an algebra under the convolution dual to the group law, through the truncated composition of Lemma~\ref{dp:lem:chain-law}? If $\operatorname{char}K=p$, does it see a $p$\nobreakdash-operation?
+\item Does $\mathfrak a_n(V,W)<\infty$ for $1\le n\le r$ imply $\mathfrak a_n(V\times V\times K,W)<\infty$ for $1\le n\le r$?
+\end{enumerate}
+\end{question}
+
+In~(1), for DP germs into a complete $W$ the answer is the geometric sequences (Theorems~\ref{dp:thm:bgn}(4), \ref{dp:thm:quasi-analytic}). For $P$ Banach, a positive answer to Question~\ref{dp:q:residual}(1) gives~(2), as $\ev_k$ is a law into an ultrametric Banach space, and $(\mathrm{Sec}_k)$ is the analyticity of $\ev_k$ at one point (Theorem~\ref{dp:thm:analytic-jets}(1)). In~(4), by Theorem~\ref{dp:thm:normed-roby} the space $\operatorname{Dist}_r(\cG)$ receives a canonical map from $\bigoplus_{j\le r}\Gamma^j_{\mathrm s}(P)$.
+
+\begin{question}\label{dp:q:quotients}
+\leavevmode
+\begin{enumerate}
+\item Let $P$ be ultrametric. For a map $f$ that is DP at $x_0$, is $\norm{f^{[k]}(z)}\le M\sigma^{-k}$ on a full box of $U^{[k]}$: point coordinates near $x_0$, direction coordinates of norm at most $1$, scalar coordinates small?
+\item Let $P$ be two-dimensional. If $f$ is defined on a polydisc in $P$ and, along every affine coordinate line, is given by one power series converging on the whole disc, is $f$ analytic near the center?
+\item Let $K$ be discretely valued with finite residue field. If $f$ is bounded on $B(x_0,R)$ and, on every slice of dimension at most $2$, is a series of homogeneous polynomials converging on the $R$-ball, is $f$ DP at $x_0$ with some radius?
+\item Let $K$ be a local field and $W$ complete. What is the infimum of $\rho_{\mathrm{DP}}(f,x_1)$, over normed $P$ and over $f$ that are the sum of their law series on $B(x_0,R)$, with $\rho_{\mathrm{DP}}(f,x_0)=R$ and $\norm{x_1-x_0}=\varrho<R$? Is the behaviour of the radius in Remark~\ref{dp:rem:whole-ball} sharp as $\varrho\to R$?
+\item Let $W$ be complete, and let $K$ be discretely valued with $\mathsf q\le16$ residue elements and $\abs\vartheta=1/\mathsf q$. If $f$ is the sum of its law series on $B(x_0,\rho_{\mathrm{DP}}(f,x_0))$ and $\varrho=\norm{x_1-x_0}<\rho_{\mathrm{DP}}(f,x_0)$, is $\rho_{\mathrm{DP}}(f,x_1)\ge\rho_{\mathrm{DP}}(f,x_0)-\varrho$?
+\end{enumerate}
+\end{question}
+
+In~(1), for $W$ complete, a bound on a box that contains $\mathcal Z_k(\rho)$ implies DP (Proposition~\ref{dp:prop:div-bgn}(4)). On $\ell^1(\N,K)$ no such bound holds for the germ $\mathsf f$ of Example~\ref{dp:ex:l1} at $0$. Put $z_0=0$ and $z_i=(z_{i-1},(e_i,0,\dots,0),0)$, with $(e_i,0,\dots,0)\in P_{i-1}$. By Theorem~\ref{dp:thm:bgn}(1),(3) and induction, $\mathsf f^{[k]}(z_k)$ is the coefficient of $s_1\cdots s_k$ in $\mathsf f(\sum_is_ie_i)$. This is $\mathsf e_k$, of absolute value at least $k^k$.
+
+In~(2), the map of Example~\ref{dp:ex:slice-needed}(1) is not separately analytic in this sense. In~(3), Theorem~\ref{dp:thm:banach-steinhaus} gives this for $P$ Banach when the homogeneous parts are bounded laws. Values do not bound coefficients over such $K$: for $\mathsf u(x)=(x^{\mathsf q}-x)/\vartheta$ the iterate $\mathsf u^{\circ l}$ is bounded by $1$ on the unit ball, has degree $\mathsf q^l$, and its linear coefficient has absolute value $\abs\vartheta^{-l}$. The uniform radius in~(3) cannot be dropped: the map $g_2$ of Example~\ref{dp:ex:slice-needed}(2) is locally bounded, analytic on every finite-dimensional affine subspace of $c_0$, and not DP at $0$. In~(5), Theorem~\ref{dp:thm:whole-ball}(2) gives the inequality over densely valued $K$, and Example~\ref{dp:ex:radius-drop} shows that it fails for $\mathsf q\ge17$.
+
+\begin{question}\label{dp:q:functors}
+Let $\operatorname{char}K=p$. For a normed space $P$ let $P^{(1)}=K\otimes_{\mathrm{Frob}}P$, with $c\otimes\lambda x=c\lambda^p\otimes x$, and let $\norm\cdot_{\mathrm s}$ be the largest seminorm with $\norm{c\otimes x}_{\mathrm s}\le\abs c\norm x^p$. Let $\widehat P^{(1)}$ be the separated completion and $\mathrm{Fr}_P\colon P\to\widehat P^{(1)}$, $x\mapsto1\otimes x$.
+\begin{enumerate}
+\item Is $\mathrm{Fr}_P$ the diagonal of a bounded $p$\nobreakdash-linear map, for every Banach space $P$?
+\item Let $K$ be densely valued, and let $E$ be an ultrametric Banach space. Here $E_{K^{1/p}}$ and $\pi_{\max}$ are as in Section~\ref{dp:sec:base-change}. Is there a bounded map $\beta$ from $E^p$ to the completion of $(E_{K^{1/p}},\pi_{\max})$, additive in each variable, with $\beta(\dots,\lambda x_i,\dots)=\lambda^{1/p}\beta(\dots,x_i,\dots)$ and $\beta(x,\dots,x)=x\otimes1$?
+\item Which bounded strict polynomial functors of degree $n\ge p$ are analytic on all Banach spaces? Is every such functor a natural retract of one built from tensor powers by $\oplus$, $\otimes_\pi$, composition and duality?
+\item Let $K$ be complete. Is every DP vector functor on $\mathsf{Ban}_K$ obtained from the analytic vector functors and the completed divided powers $\hGamma^n$ by finite sums, $\otimes_\pi$, composition, closed subfunctors, quotients and isomorphism?
+\end{enumerate}
+\end{question}
+
+In~(1), $\mathrm{Fr}_P$ is a Frobenius law, so it is ambient of degree $p$ (Theorem~\ref{dp:thm:frobenius}(2)). The twist $u\mapsto u^{(1)}=\id\otimes u$, with values in the completed twists, has $(\sum_ls_lu_l)^{(1)}=\sum_ls_l^pu_l^{(1)}$ and $\norm{u^{(1)}}\le\norm u^p$. So it is a contractive bounded strict polynomial functor of degree $p$ on $\mathsf{Ban}_K$, and a DP vector functor (Theorem~\ref{dp:thm:functors-dp}). Let $K$ be complete. Its hom map on $\cL(K,P)=P$ is $\mathrm{Fr}_P$, so by Lemma~\ref{dp:lem:lift-criterion} a negative answer to~(1) makes it not analytic. The answer is yes for $K$ complete, $[K:K^p]<\infty$ and $P=c_0(J,K)$. Indeed, the $K$-linear map $P^{(1)}\to P$, $c\otimes x\mapsto(cx_i^p)_{i\in J}$, has the inverse $\mathsf D(z)=\sum_\xi\xi\otimes(\mathsf r_\xi(z_i))_i$, where $\xi$ runs over a basis of $K$ over $K^p$ and $c=\sum_\xi\xi\,\mathsf r_\xi(c)^p$. It is bounded, as all $K^p$-norms on $K$ are equivalent, and $(h_1,\dots,h_p)\mapsto\mathsf D((h_{1,i}\cdots h_{p,i})_i)$ is a lift. A test case is $c_0$ with $[K:K^p]=\infty$.
+
+In~(2), for $K$ complete and $E=c_0(J,K)$, the map $\beta(h_1,\dots,h_p)=((h_{1,i}\cdots h_{p,i})^{1/p})_i$ is such a map, into $c_0(J,K^{1/p})$. A test case is $E=\ell^\infty(\N,K)$ with $[K:K^p]=\infty$.
+
+Let $K$ be complete. Item~(4) includes the divided powers because finite sums, closed subfunctors, quotients and isomorphism alone do not reach them. A closed subfunctor of a quotient $\mathfrak F_1/\mathfrak F_2$ is a quotient of a closed subfunctor, and a quotient of $\mathfrak F_1/\mathfrak F_2$ is a quotient of $\mathfrak F_1$. So finite sums, closed subfunctors, quotients and isomorphism do not leave the functors isomorphic to subquotients of analytic vector functors. For $n\ge p$, $\hGamma^n$ is a DP vector functor and not such a subquotient (Proposition~\ref{dp:prop:gamma-not-ambient}(3)). So the DP vector functors are not the smallest class containing the analytic ones with these closure properties. Whether $\otimes_\pi$ and composition reach the divided powers is not decided here.
+
+Let $S^n_\pi E$ be the quotient of $(E^{\otimes n},\pi)$ by the closed span of the $y-\varsigma y$, with $\varsigma$ a permutation of the factors, and $\widehat S^n_\pi E$ its completion.
+
+\begin{conjecture}\label{dp:conj:symmetric}
+For every $K$ of odd characteristic $p$ and every $n\ge p$, $\widehat S^n_\pi$ is not an analytic vector functor on $\mathsf{Ban}_K$.
+\end{conjecture}
+
+For $n!\ne0$ it is analytic (Theorem~\ref{dp:thm:functor-threshold}).
+
+\begin{question}\label{dp:q:forms}
+Let $\operatorname{char}K=p$.
+\begin{enumerate}
+\item What replaces the constant rank theorem for DP maps?
+\item Can two analytic Banach manifolds, or analytic bundles, that are not analytically isomorphic become DP isomorphic?
+\end{enumerate}
+\end{question}
+
+In~(1), the classical statement fails: $x\mapsto x^p$ on $K$ has zero derivative and is not locally constant.
+
+Let $K$ be complete of characteristic $p$, let $P$ be a Banach space, and let $\mathrm H^k$ be the $k$-th cohomology of the complex of scalar DP germs at $0$ on $P$. By Theorem~\ref{dp:thm:weight-splitting}, for $k\ge1$ every class has a representative with laws of total weight in $p\Z$. For DP functions $\theta,\psi_1,\dots,\psi_k$ put
+\[
+ \operatorname{Car}^{-1}(\theta\,d\psi_1\wedge\dots\wedge d\psi_k)=\theta^p\psi_1^{p-1}\cdots\psi_k^{p-1}\,d\psi_1\wedge\dots\wedge d\psi_k,
+\]
+a closed DP form.
+
+\begin{conjecture}\label{dp:conj:cartier}
+The map $\operatorname{Car}^{-1}$ extends additively to a well-defined map from finite sums of such products to $\mathrm H^k$.
+\end{conjecture}
+
+The image of this map does not span $\mathrm H^k$ over $K$ in general. Let $P=K$ with $[K:K^p]=\infty$, and let $k=1$. Here every $1$-form is closed, and scalar DP germs at $0$ are convergent power series in one variable $x$ (Theorem~\ref{dp:thm:divided-one}).
+
+\emph{Step 1 (a coefficient).} For a power series $\psi$ and $a\ge0$, the coefficient of $x^{pa+p-1}\,dx$ in $\psi^{p-1}\,d\psi$ is the $p$-th power of the coefficient of $x^a$ in $\psi'$. Indeed, this coefficient depends on finitely many coefficients of $\psi$. Modulo exact forms, $\psi\mapsto\psi^{p-1}\,d\psi$ is additive, as the polynomial $((y+z)^p-y^p-z^p)/p$ has integer coefficients. Exact forms have no monomial $x^{pa+p-1}\,dx$. For $\psi=cx^i$ we get $ic^px^{ip-1}\,dx$, and $ic^p=(ic)^p$. So the coefficient of $x^{pa+p-1}\,dx$ in $\theta^p\psi^{p-1}\,d\psi$ is the $p$-th power of the coefficient of $x^a$ in $\theta\psi'$, and it lies in $K^p$.
+
+\emph{Step 2 (the class).} Choose $\mathsf c_a\in K$, $a\ge0$, linearly independent over $K^p$, with $\abs{\mathsf c_a}\le1$; this is possible after scaling by elements of $K^p$. The form $\sum_a\mathsf c_ax^{pa+p-1}\,dx$ is DP at $0$ with radius $1$. Suppose that it equals $\sum_{l\le\mathsf L}\lambda_l\theta_l^p\psi_l^{p-1}\,d\psi_l$ plus an exact form near $0$, with $\lambda_l\in K$. By Step~1, every $\mathsf c_a$ lies in the $K^p$-span of $\lambda_1,\dots,\lambda_{\mathsf L}$. This is false, as that span is finite-dimensional over $K^p$.
+
+The space $P=K$ satisfies $(\mathrm S^j_P)$ and $(\mathrm R^j_P)$ of \cite[Section~3]{I} for every $j\ge1$, as $\Lambda^j_\pi K=0$ for $j\ge2$. The form of Step~2 is a convergent series of values of $\operatorname{Car}^{-1}$ with coefficients in $K$.
+
+\begin{question}\label{dp:q:cartier}
+Let $P$ satisfy $(\mathrm S^j_P)$ and $(\mathrm R^j_P)$ of \cite[Section~3]{I} for every $j\ge1$. Is every class of $\mathrm H^k$, $k\ge1$, represented by the sum of a series, convergent on a ball, of forms $c\,\theta^p\psi_1^{p-1}\cdots\psi_k^{p-1}\,d\psi_1\wedge\dots\wedge d\psi_k$ with $c\in K$?
+\end{question}
+
+The hypothesis comes from forms with values in a Banach space. Under condition~(L) of \cite[Section~7.1]{I}, for $Y=c_0$, the closed constant form $\omega_Y$ with values in $\hLambda^p_\pi Y$ has no primitive near any point (\cite[Proposition~10.9]{I}, \cite[Theorem~7.7]{I}). This paper gives no scalar form of this kind.
+
+\begin{question}\label{dp:q:largest}
+Is there a list of properties, with no bound on slices or on divided differences, for which the DP germs are the largest class inside $C^\infty_{\mathrm{BGN}}$ with these properties? Two properties that such a list can contain are determination by the Hasse jet at a point, as in Theorem~\ref{dp:thm:quasi-analytic}, and closure under composition.
+\end{question}
+
+With a bound on slices in the list the answer is yes and says nothing, by Proposition~\ref{dp:prop:slices}; the same holds for planar divided differences, by Theorem~\ref{dp:thm:divided-planes}. Theorem~\ref{dp:thm:minimal} says that the DP germs are the smallest class with (C1), (C2), (C3).

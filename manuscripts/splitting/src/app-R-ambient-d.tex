@@ -1,0 +1,314 @@
+\subsection{Tame pairs}\label{amb:ssec:proofs-tame}
+
+The completion $\widehat P$ of a normed space $P$ is a normed space over $\Kh$, the scalar multiplication extending by
+continuity, and it is ultrametric if $P$ is.
+
+\begin{lemma}[coordinates]\label{amb:lem:coordinates}
+\leavevmode
+\begin{enumerate}
+\item Let $P,W$ be normed, and let $a\colon P\to W$ be a bounded polynomial law of degree $n\ge1$. Then $a$
+extends uniquely to a continuous map $\hat a\colon\widehat P\to\widehat W$, and $\hat a$ is a bounded polynomial law of
+degree $n$ over $\Kh$ with $\norm{\hat a}\le\norm a$.
+\item Let $P_0\ne\{0\}$ be a finite-dimensional normed space. Then $\widehat P_0$ has finite dimension $m'\ge1$ over
+$\Kh$, and $\mathfrak c_{\Kh}=\mathfrak c_K$.
+\item Let $K$ be complete and let $P_0$ be ultrametric of finite dimension $m'\ge1$. If $K$ is discretely valued, put
+$\mathfrak o=1$ and $\mathfrak o'=\mathfrak c_K$; otherwise let $0<\mathfrak o<1$ and put $\mathfrak o'=\mathfrak o$. There
+is a linear bijection $\mathsf C\colon c_0([m'],K)\to P_0$ with $\norm{\mathsf C}\le1$ and
+$\norm{\mathsf C^{-1}}\le(\mathfrak o\mathfrak o')^{-1}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1): the extension).} By~\eqref{amb:eq:lipschitz}, $a$ is Lipschitz on every bounded subset of $P$. So
+it extends uniquely to a continuous map $\hat a\colon\widehat P\to\widehat W$, and $\norm{\hat a(x)}\le\norm a\norm x^n$ by
+continuity.
+
+\emph{Step 2 (item (1): the law).} Let $r\ge1$ and $\abs\alpha=n$. By interpolation in each variable on $n+1$ distinct
+elements of $K$, there are finitely many scalars $\lambda_i$ and $\xi_{i,1},\dots,\xi_{i,r}$ in $K$, depending only on $r$
+and $\alpha$, with $a^{[\alpha]}(h_1,\dots,h_r)=\sum_i\lambda_ia(\xi_{i,1}h_1+\dots+\xi_{i,r}h_r)$ on $P^r$. Define
+$\hat a^{[\alpha]}$ on $\widehat P^r$ by the same formula with $\hat a$. The identity
+\[
+ \hat a(s_1h_1+\dots+s_rh_r)=\sum_{\abs\alpha=n}s_1^{\alpha_1}\cdots s_r^{\alpha_r}\,\hat a^{[\alpha]}(h_1,\dots,h_r)
+\]
+holds on $K^r\times P^r$. Both sides are continuous on $\Kh^r\times\widehat P^r$, so it holds there. Hence $\hat a$ is a bounded polynomial law of degree $n$ over $\Kh$, and $\norm{\hat a}\le\norm a$ by Step~1.
+
+\emph{Step 3 (item (2)).} The $\Kh$\nobreakdash-span of a basis of $P_0$ in $\widehat P_0$ is complete by
+Lemma~\ref{lem:findim}, hence closed, and it contains the dense subspace $P_0$. So it is $\widehat P_0$. If
+$\lambda_i\to\lambda\ne0$ in $\Kh$ with $\lambda_i\in K$, then $\abs{\lambda_i-\lambda}<\abs\lambda$ for large $i$, so
+$\abs{\lambda_i}=\abs\lambda$. Hence $\abs{\Kh^\times}=\abs{K^\times}$ and $\mathfrak c_{\Kh}=\mathfrak c_K$.
+
+\emph{Step 4 (item (3): distances).} Let $P_1$ be a subspace of $P_0$ and $x\in P_0\setminus P_1$. By
+Lemma~\ref{lem:findim}, $P_1$ is complete, hence closed, so $\operatorname{dist}(x,P_1)>0$. Let $K$ be discretely valued.
+If nonzero vectors $v_1,\dots,v_i$ of $P_0$ have norms in distinct cosets of $\mathfrak c_K^{\Z}$ in $(0,\infty)$, the
+nonzero numbers among $\abs{\lambda_1}\norm{v_1},\dots,\abs{\lambda_i}\norm{v_i}$ are distinct. So the ultrametric
+inequality gives $\norm{\sum_q\lambda_qv_q}=\max_q\abs{\lambda_q}\norm{v_q}$, the $v_q$ are independent, and $i\le m'$.
+Thus the nonzero values of the norm of $P_0$ lie in at most $m'$ cosets, and there are only finitely many values in
+$[\operatorname{dist}(x,P_1),\norm x]$. Hence $\norm{x-x'}=\operatorname{dist}(x,P_1)$ for some $x'\in P_1$.
+
+\emph{Step 5 (item (3): orthogonal bases).} Let $0<\mathfrak o_1\le1$, with $\mathfrak o_1<1$ unless $K$ is discretely
+valued. We show by induction on $m'$, for all such $\mathfrak o_1$ and all ultrametric $P_0$ of dimension $m'$, that $P_0$ has
+a basis $\mathsf l_1,\dots,\mathsf l_{m'}$ with
+\begin{equation}\label{amb:eq:orthogonal}
+ \norm{\lambda_1\mathsf l_1+\dots+\lambda_{m'}\mathsf l_{m'}}\ge\mathfrak o_1\max_q\abs{\lambda_q}\norm{\mathsf l_q}
+ \qquad(\lambda_1,\dots,\lambda_{m'}\in K).
+\end{equation}
+For $m'=1$ every nonzero vector will do. Let $m'\ge2$, let $P_1$ be a hyperplane of $P_0$, and let
+$\mathsf l_1,\dots,\mathsf l_{m'-1}$ be a basis of $P_1$ with~\eqref{amb:eq:orthogonal} for $\mathfrak o_1^{1/2}$. Let
+$x\in P_0\setminus P_1$. By Step~4 (since $\operatorname{dist}(x,P_1)>0$ if $\mathfrak o_1<1$, and by its last sentence if $\mathfrak o_1=1$) there is $x'\in P_1$ with $\norm{x-x'}\le\mathfrak o_1^{-1/2}\operatorname{dist}(x,P_1)$.
+Put $\mathsf l_{m'}=x-x'$, so that $\operatorname{dist}(\mathsf l_{m'},P_1)\ge\mathfrak o_1^{1/2}\norm{\mathsf l_{m'}}$. Let
+$v=v'+\lambda_{m'}\mathsf l_{m'}$ with $v'=\sum_{q<m'}\lambda_q\mathsf l_q$. As $-\lambda_{m'}^{-1}v'\in P_1$ if
+$\lambda_{m'}\ne0$, we get $\norm v\ge\mathfrak o_1^{1/2}\abs{\lambda_{m'}}\norm{\mathsf l_{m'}}$. By the ultrametric
+inequality, $\norm{v'}\le\max(\norm v,\abs{\lambda_{m'}}\norm{\mathsf l_{m'}})\le\mathfrak o_1^{-1/2}\norm v$. Hence
+$\mathfrak o_1\max_{q<m'}\abs{\lambda_q}\norm{\mathsf l_q}\le\mathfrak o_1^{1/2}\norm{v'}\le\norm v$, and
+$\mathfrak o_1\abs{\lambda_{m'}}\norm{\mathsf l_{m'}}\le\norm v$.
+
+\emph{Step 6 (item (3): the bijection).} Take the basis of Step~5 with $\mathfrak o_1=\mathfrak o$. Scaling keeps~\eqref{amb:eq:orthogonal}. If $K$
+is discretely valued, scale so that $\mathfrak c_K<\norm{\mathsf l_q}\le1$. Otherwise $\abs{K^\times}$ is a subgroup of $(0,\infty)$ that contains a number other than $1$ and is not of the form $\mathfrak c^{\Z}$, so it is dense in
+$(0,\infty)$; scale so that $\mathfrak o<\norm{\mathsf l_q}\le1$. Put $\mathsf C(\lambda)=\sum_q\lambda_q\mathsf l_q$. The
+ultrametric inequality in $P_0$ gives $\norm{\mathsf C(\lambda)}\le\max_q\abs{\lambda_q}\norm{\mathsf l_q}\le\norm\lambda$,
+with no count of the $m'$ terms, and~\eqref{amb:eq:orthogonal} gives
+$\norm{\mathsf C(\lambda)}\ge\mathfrak o\mathfrak o'\norm\lambda$.
+\end{proof}
+
+The seminorm $\pi_{\max}$ of Section~\ref{amb:ssec:tame} is ultrametric, by concatenating representations, and
+$\pi_{\max}\le\pi$, as a maximum is at most a sum. For normed $P$ and $n\ge1$, let $\mathsf W_n$ be as in Section~\ref{amb:ssec:tame}, and let
+$a_\Gamma(h)\in \mathsf W_n$ be the class of $h^{\otimes n}$. By~\eqref{amb:eq:orbit}, $a_\Gamma$ is a bounded law of degree $n$ with
+$\norm{a_\Gamma}\le1$, and $a_\Gamma^{[\alpha]}(h_1,\dots,h_r)$ is the class of $O_\alpha(h_1,\dots,h_r)$.
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:tame-examples}]
+Throughout, $a\colon P\to W$ is a bounded law of degree $n\ge1$.
+
+\emph{Step 1 (item (1): a finite-dimensional subspace).} Let $P,W$ be ultrametric, $t\in\Gamma^n(P)$ with $t\ne0$ (for $t=0$ there is nothing to prove), $\delta>0$, and
+$t=\sum_lx_{l,1}\otimes\dots\otimes x_{l,n}$ with $\max_l\prod_q\norm{x_{l,q}}\le\pi_{\max}(t)+\delta$. Let $P_0$ be the span
+of the $x_{l,q}$; $P_0\ne\{0\}$, as $t\ne0$. Then $t$ is a symmetric tensor in $P_0^{\otimes n}$, so $t\in\Gamma^n(P_0)$ by
+Section~\ref{dgr:ssec:polarizable}, and $\pi_{\max}(t)$ computed in $P_0$ is at most $\pi_{\max}(t)+\delta$.
+
+\emph{Step 2 (item (1): completion).} By Lemma~\ref{amb:lem:coordinates}(1),(2), $a|_{P_0}$ extends to a bounded law
+$\hat a\colon\widehat P_0\to\widehat W$ over $\Kh$ with $\norm{\hat a}\le\norm a$, and $\widehat P_0$ has finite dimension
+$m'\ge1$ over $\Kh$. Let $\hat t$ be the image of $t$ in $\widehat P_0^{\otimes_{\Kh}n}$. It lies in $\Gamma^n(\widehat P_0)$,
+and if $t=\sum_i\lambda_ih_i^{\otimes n}$ with $h_i\in P_0$, then $L_a(t)=\sum_i\lambda_i\hat a(h_i)=L_{\hat a}(\hat t)$. A
+representation of $t$ in $P_0$ is one of $\hat t$, so $\pi_{\max}(\hat t)\le\pi_{\max}(t)+\delta$.
+
+\emph{Step 3 (item (1): coordinates).} The space $\widehat P_0$ is ultrametric, as $P_0$ is, so it has coordinates for the maximum norm: take $\mathsf C\colon
+c_0([m'],\Kh)\to\widehat P_0$ and $\mathfrak o,\mathfrak o'$ from Lemma~\ref{amb:lem:coordinates}(3) over $\Kh$, and put
+$t'=(\mathsf C^{-1})^{\otimes n}\hat t$. As $t'$ is symmetric, $t'=\sum_\alpha t'_\alpha O_\alpha(e_1,\dots,e_{m'})$, with
+$t'_\alpha$ the common coordinate of $t'$ at the words in $[m']^n$ of content $\alpha$, that is, in which each $q$ occurs $\alpha_q$ times, and so
+$\hat t=\sum_\alpha t'_\alpha O_\alpha(\mathsf Ce_1,\dots,\mathsf Ce_{m'})$. Comparing the coefficients of $s^\alpha$ in
+$L_{\hat a}((\sum_qs_q\mathsf Ce_q)^{\otimes n})=\hat a(\sum_qs_q\mathsf Ce_q)$, by~\eqref{amb:eq:orbit}, gives
+$L_{\hat a}(O_\alpha(\mathsf Ce))=(\hat a\circ\mathsf C)^{[\alpha]}(e)$. By~\eqref{amb:eq:node} with $K'=\Kh$, as $\widehat W$ is ultrametric and
+$\norm{\hat a\circ\mathsf C}\le\norm a$, this has norm at most $\abs\varpi^{-n}\norm a$. If
+$t'=\sum_lx'_{l,1}\otimes\dots\otimes x'_{l,n}$, the coordinate of $t'$ at a word $\mathsf w$ is
+$\sum_l\prod_qx'_{l,q}(\mathsf w_q)$, of absolute value at most $\max_l\prod_q\norm{x'_{l,q}}$, since $\Kh$ is
+nonarchimedean. So $\abs{t'_\alpha}\le\pi_{\max}(t')\le\norm{\mathsf C^{-1}}^n(\pi_{\max}(t)+\delta)$.
+
+\emph{Step 4 (item (1): the estimate).} The ultrametric inequality in $\widehat W$ is used here: the multi-indices $\alpha$
+are not counted, and
+\[
+ \norm{L_a(t)}=\Bigl\lVert\sum_\alpha t'_\alpha L_{\hat a}(O_\alpha(\mathsf Ce))\Bigr\rVert
+ \le(\abs\varpi\mathfrak o\mathfrak o')^{-n}\norm a\,(\pi_{\max}(t)+\delta).
+\]
+Let $\delta\to0$ and, if $K$ is densely valued, $\mathfrak o\to1$. As $\mathfrak c_{\Kh}=\mathfrak c_K$, this
+is~\eqref{amb:eq:pimax}. As $\pi_{\max}\le\pi$, it gives $\mathfrak a_n(P,W)\le(\abs\varpi\mathfrak c_K)^{-n}$.
+
+\emph{Step 5 (item (1): germs).} Let $f$ be DP at $x_0$ with radius $R$, bound $\mathfrak b$, laws $a_n$, and put
+$R_{\max}=\abs\varpi\mathfrak c_KR<R$. By~\eqref{amb:eq:pimax} for each $a_n$, $\norm{L_{a_n}(t_n)}\le \mathfrak bR_{\max}^{-n}\pi_{\max}(t_n)$ for $t_n\in\Gamma^n(P)$,
+also for $n=0$, with $\pi_{\max}=\abs\cdot$ on $P^{\otimes0}=K$, as $\norm{a_0}\le \mathfrak b$. Let $L_\oplus(t)=\sum_nL_{a_n}(t_n)$ on $\bigoplus_n\Gamma^n(P)$. Replace the sums in~\eqref{amb:eq:pushout} by
+maxima: on $W\oplus\bigoplus_nP^{\otimes n}$ let
+\[
+ \norm{(v,y)}_Z=\inf\Bigl\{\max\Bigl(\norm{v+L_\oplus(t)},\ \max_n\mathfrak bR_{\max}^{-n}\pi_{\max}(y_n-t_n)\Bigr):t\in\bigoplus_n\Gamma^n(P)\Bigr\},
+\]
+the quotient of an ultrametric seminorm by the subspace of the pairs $(L_\oplus(t),-t)$, hence ultrametric. Let $Z$ be the
+quotient by its kernel, $[v,y]$ the class of $(v,y)$, and $j(v)=[v,0]$. Then $j$ is an isometry. Indeed $t=0$ gives
+$\norm{j(v)}\le\norm v$; and if $\norm{v+L_\oplus(t)}<\norm v$, the ultrametric inequality in $W$ gives
+$\norm v=\norm{L_\oplus(t)}\le\max_n\norm{L_{a_n}(t_n)}\le\max_n\mathfrak bR_{\max}^{-n}\pi_{\max}(t_n)$. So the maximum in the infimum is always
+at least $\norm v$. Put
+$b_n(h_1,\dots,h_n)=[0,\iota_n(h_1\otimes\dots\otimes h_n)]$. Then $\norm{b_n}\le \mathfrak bR_{\max}^{-n}$, and taking $t=\iota_nh^{\otimes n}$ gives
+$b_n(h,\dots,h)=[a_n(h),0]=ja_n(h)$. So $f$ is ambient analytic at $x_0$ with radius $R_{\max}$, bound $\mathfrak b$,
+through the ultrametric space $Z$. With Proposition~\ref{amb:prop:criterion}(1), this gives DP $=$ AA between ultrametric
+spaces.
+
+\emph{Step 6 (item (2): the projective seminorm on $\ell^1$).} Let $P$ be $\ell^1(J)$ or $\ell^1_{00}(J)$, and let $t\in P^{\otimes n}$ have
+coordinates $t(\mathsf w)$, $\mathsf w\in J^n$. The coordinate forms separate the points of $P$, hence those of $P^{\otimes n}$, so $t$ is determined by its coordinates. We claim $\pi(t)=\sum_{\mathsf w}\abs{t(\mathsf w)}$. As
+$\sum_{\mathsf w}\abs{(x_1\otimes\dots\otimes x_n)(\mathsf w)}=\prod_q\norm{x_q}$, the triangle inequality gives $\ge$. If $t$
+is finitely supported, $t=\sum_{\mathsf w}t(\mathsf w)e_{\mathsf w_1}\otimes\dots\otimes e_{\mathsf w_n}$ gives $\le$. In
+general let $\operatorname{pr}_{J_0}$ be the coordinate projection onto a finite $J_0\subseteq J$, of norm at most $1$. Then
+$\operatorname{pr}_{J_0}^{\otimes n}t\to t$ for $\pi$ as $J_0$ increases, by telescoping on elementary tensors, and the
+finitely supported case gives $\le$ again.
+
+\emph{Step 7 (item (2): the bound).} Let $t$ be a symmetric tensor supported in $J_0^n$, $J_0\subseteq J$ finite. Then $t(\mathsf w)$
+depends only on the content $\alpha\in\N^{J_0}$ of $\mathsf w$; call it $t_\alpha$. So $t=\sum_\alpha t_\alpha O_\alpha(e)$, with $e$
+listing the unit vectors $e_c$, $c\in J_0$, and $\pi(t)=\sum_\alpha(n!/\alpha!)\abs{t_\alpha}$ by Step~6, as $n!/\alpha!$ words have
+content $\alpha$. By~\eqref{amb:eq:multinomial} for $a_\Gamma$, $\norm{O_\alpha(e)}_\Gamma\le C_0^nn!/\alpha!$. Hence
+$\norm t_\Gamma\le C_0^n\pi(t)$. This settles $\ell^1_{00}(J)$. Let $t=\sum_i\lambda_ih_i^{\otimes n}\in\Gamma^n(\ell^1(J))$ and
+$t_0=\operatorname{pr}_{J_0}^{\otimes n}t=\sum_i\lambda_i(\operatorname{pr}_{J_0}h_i)^{\otimes n}$. Then
+$\norm{t_0}_\Gamma\le C_0^n\pi(t_0)\le C_0^n\pi(t)$. As $J_0$ increases,
+$\norm{t-t_0}_\Gamma\le\sum_i\abs{\lambda_i}\norm{a_\Gamma(h_i)-a_\Gamma(\operatorname{pr}_{J_0}h_i)}\to0$, by~\eqref{amb:eq:lipschitz}.
+Hence $\norm t_\Gamma\le C_0^n\pi(t)$.
+
+\emph{Step 8 (item (3)).} Let $\operatorname{char}K=0$, $P$ ultrametric. The absolute value is at most $1$ on $\Z$. At most one prime $p_0$
+has $\abs{p_0}<1$, since $1$ is an integer combination of any two distinct primes and $K$ is nonarchimedean. If there is one,
+$\abs{n!}=\abs{p_0}^{\sum_{i\ge1}\lfloor n/p_0^i\rfloor}$ with $\sum_{i\ge1}\lfloor n/p_0^i\rfloor\le n/(p_0-1)$; otherwise
+$\abs{n!}=1$. So $\abs{1/n!}\le\mathfrak d^n$. Put
+$\beta_a(x_1,\dots,x_n)=\frac1{n!}L_a(O_{(1,\dots,1)}(x_1,\dots,x_n))$, which uses characteristic~$0$. It is
+$n$\nobreakdash-linear with values in $W$. Its diagonal is $a$, as $O_{(1,\dots,1)}(h,\dots,h)=n!\,h^{\otimes n}$. By
+Lemma~\ref{amb:lem:linearization}(1) and~\eqref{amb:eq:sym}, where the ultrametric norm of $P$ removes the factor $n^n$,
+$\norm{\beta_a}\le(8\mathfrak d/\abs\varpi^2)^n\norm a$. For $a=a_\Gamma$, the linearization of
+$\beta_{a_\Gamma}$ on $P^{\otimes n}$ and the quotient map agree on powers, hence on $\Gamma^n(P)$. So
+$\norm t_\Gamma\le\norm{\beta_{a_\Gamma}}\pi(t)$, which is the bound on $\mathfrak a_n(P)$.
+
+\emph{Step 9 (item (4): the hull).} Let $P$ be any normed space and $W$ ultrametric. Put
+$\nu(x)=\inf\{\max_i\norm{x_i}:x=\sum_ix_i\text{ a finite sum}\}$. It is an ultrametric seminorm, by concatenating sums, and
+$\nu\le\norm\cdot$. Let $x=\sum_ix_i$. Then $a(x)=\sum_{\abs\alpha=n}a^{[\alpha]}(x_1,x_2,\dots)$. For each $\alpha$ at most $n$
+vectors enter, so~\eqref{amb:eq:mixed-sum} gives $\norm{a^{[\alpha]}(x_1,x_2,\dots)}\le(8/\abs\varpi)^n\norm a(n\max_i\norm{x_i})^n$.
+The ultrametric inequality in $W$ is used here: the number of $\alpha$ is not counted. Taking the infimum,
+\begin{equation}\label{amb:d:eq:hull-bound}
+ \norm{a(x)}\le \mathfrak b_a\nu(x)^n,\qquad \mathfrak b_a=(8n/\abs\varpi)^n\norm a.
+\end{equation}
+
+\emph{Step 10 (item (4): descent to the quotient).} Let $\nu(z)=0$ and $x\in P$. As $\nu(x+sz)\le\nu(x)$ for every $s\in K$, the
+polynomial $s\mapsto a(x+sz)=\sum_iv_is^i$ is bounded on $K$ by~\eqref{amb:d:eq:hull-bound}. In the ultrametric $W$,
+$\norm{\sum_iv_is^i}=\max_i\norm{v_i}\abs s^i$ for all large $\abs s$. So $v_i=0$ for $i\ge1$, and $a(x+z)=a(x)$. Thus $a$
+induces a bounded law $\tilde a$ of degree $n$ on $P_\nu=P/\ker\nu$, normed by $\nu$, with $\norm{\tilde a}\le \mathfrak b_a$. The
+space $P_\nu$ is ultrametric.
+
+\emph{Step 11 (item (4): the estimate).} If $P_\nu=\{0\}$, then $a=0$ by~\eqref{amb:d:eq:hull-bound}, and there is nothing to prove. Otherwise let $\tilde t$ be the image of $t\in\Gamma^n(P)$ in $\Gamma^n(P_\nu)$. On powers,
+$L_{\tilde a}(\tilde t)=L_a(t)$, hence on $\Gamma^n(P)$. A representation of $t$ maps to one of $\tilde t$, and $\nu$ is at
+most the norm, so $\pi_{\max}(\tilde t)\le\pi_{\max}(t)$. By~\eqref{amb:eq:pimax} for $\tilde a$,
+$\norm{L_a(t)}\le(\abs\varpi\mathfrak c_K)^{-n}\mathfrak b_a\pi_{\max}(t)$, which is~\eqref{amb:eq:hull}. As $\pi_{\max}\le\pi$, this bounds
+$\mathfrak a_n(P,W)$, and $a$ is ambient by Lemma~\ref{amb:lem:linearization}(4).
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{amb:prop:tame-exact}]
+\emph{Step 1 (one degree).} Let $n\ge1$ and suppose $\operatorname{amb}(a)<\infty$ for every bounded law $a\colon P\to W$ of
+degree $n$. We show $\mathfrak a_n(P,W)<\infty$. The bounded laws of degree $n$ form a complete normed space, whether or not $K$ is
+complete: on the span of finitely many vectors the coefficients of a law are fixed linear combinations of its values at
+finitely many points, by interpolation, so a Cauchy sequence of laws converges pointwise to a law, in norm, as $W$ is
+complete. For $t\in\Gamma^n(P)$ the map $a\mapsto L_a(t)$ is continuous and linear, by Lemma~\ref{amb:lem:linearization}(1) and the uniqueness in it. So
+$\{a:\operatorname{amb}(a)\le N\}=\{a:\norm{L_a(t)}\le N\pi(t)\text{ for all }t\}$ is closed for each integer $N\ge1$. By
+hypothesis these sets cover the space, so by Baire's theorem one of them contains a ball of center $a_0$ and radius
+$\delta>0$. For $\norm a<\delta$, $\operatorname{amb}(a)\le\operatorname{amb}(a_0+a)+\operatorname{amb}(a_0)\le2N$. For $a\ne0$ choose
+$\lambda\in K^\times$ with $\abs\varpi\delta\le\abs\lambda\norm a<\delta$. Then
+$\operatorname{amb}(a)=\abs\lambda^{-1}\operatorname{amb}(\lambda a)\le(2N/(\abs\varpi\delta))\norm a$.
+
+\emph{Step 2 ((i) implies (ii), and (ii) implies (iii)).} If $(P,W)$ is tame, then $\mathfrak a_n(P,W)\le\mathfrak q^n$ for $n\ge1$ with $\mathfrak q=\max(1,\sup_{n\ge1}\mathfrak a_n(P,W)^{1/n})$. So Theorem~\ref{amb:thm:tame-calculus}(1), with $C=1$, whose proof below uses
+only Proposition~\ref{amb:prop:criterion}, makes every DP germ from $P$ to $W$ ambient analytic. A germ at $0$ given by a law series
+is a DP germ.
+
+\emph{Step 3 ((iii) implies (i)).} Suppose $(P,W)$ is not tame. If $\mathfrak a_n(P,W)=\infty$ for one $n$, Step~1 gives a law $a$ of
+degree $n$ with $\operatorname{amb}(a)=\infty$. It is a DP germ at $0$, and it is not ambient analytic there, by
+Proposition~\ref{amb:prop:criterion}(1). Otherwise $\sup_n\mathfrak a_n(P,W)^{1/n}=\infty$ with all terms finite, and finitely many terms are bounded. So there are
+$n_1<n_2<\dots$ and laws $a_{n_i}$ of degree $n_i$ with $\operatorname{amb}(a_{n_i})/\norm{a_{n_i}}>i^{n_i}$. Multiplying each law by a scalar, which does not change the quotient, we may assume
+$\abs\varpi\le\norm{a_{n_i}}\le1$ and $\operatorname{amb}(a_{n_i})\ge\abs\varpi\,i^{n_i}$. The series $f=\sum_ia_{n_i}$ converges
+for $\norm h<1$, as $W$ is complete, and is DP at $0$ with radius $1$. Its coefficient laws are the $a_{n_i}$ and~$0$. As
+$\operatorname{amb}(a_{n_i})^{1/n_i}$ is unbounded, $f$ is not ambient analytic at $0$, by
+Proposition~\ref{amb:prop:criterion}(1).
+\end{proof}
+
+\begin{lemma}[inverse germs]\label{amb:lem:inverse}
+Let $P$ be a Banach space, $U$ an open subset of $P$ and $f\colon U\to P$ a map that is DP at $x_0$ with radius $R$, bound $\mathfrak b$
+and coefficient laws $a_n$. Suppose that $\mathsf T_0=a_1$, a bounded linear map, is bijective with bounded inverse. Put
+$\mathsf P_m=-\mathsf T_0^{-1}\circ a_m$ for $m\ge2$, $\mathsf g_1=\id_P$, and, for $d\ge2$, with $\abs\alpha$ and $\deg\alpha$ as in
+Section~\ref{amb:ssec:proofs-composition},
+\begin{equation}\label{amb:d:eq:inverse-recursion}
+ \mathsf g_d(z)=\sum_{m=2}^d\ \sum_{\abs\alpha=m,\ \deg\alpha=d}\mathsf P_m^{[\alpha]}\bigl(\mathsf g_1(z),\dots,\mathsf g_{d-1}(z)\bigr).
+\end{equation}
+Then $\mathsf g_d$ is a bounded law of degree $d$, the series $\mathsf g=\sum_d\mathsf g_d$ converges on a ball around $0$, and
+$y\mapsto x_0+\mathsf g(\mathsf T_0^{-1}(y-f(x_0)))$ is DP at $f(x_0)$. There are open sets $U_0\ni x_0$ and $U_1\ni f(x_0)$ such
+that $f$ restricts to a bijection $U_0\to U_1$ whose inverse is this map on $U_1$.
+\end{lemma}
+
+The formal inverse is Roby's~\cite[Th.~VI.3, Prop.~VI.8]{Ro}; only the estimates are added here.
+
+\begin{proof}
+\emph{Step 1 (normal form).} Put $\tilde f(z)=\mathsf T_0^{-1}(f(x_0+z)-f(x_0))$ for $\norm z<R$. As $a_0=f(x_0)$, we have
+$\tilde f(z)=z-\mathsf P(z)$ with $\mathsf P=\sum_{m\ge2}\mathsf P_m$. Each $\mathsf P_m$ is a bounded law of degree $m$ with
+$\norm{\mathsf P_m}\le \mathfrak b_{\mathsf T}R^{-m}$, where $\mathfrak b_{\mathsf T}=\norm{\mathsf T_0^{-1}}\mathfrak b$.
+
+\emph{Step 2 (the recursion).} Since $m\ge2$, every $\alpha$ with $\abs\alpha=m$ and $\deg\alpha=d$ is supported in
+$\{1,\dots,d-1\}$, so~\eqref{amb:d:eq:inverse-recursion} is a recursion. By Lemma~\ref{amb:lem:composition}(1), for the polynomial germs $\sum_{i<d}\mathsf g_i$ and $\mathsf P_m$ at $0$,
+which are DP, each term is a bounded law of degree $d$.
+
+\emph{Step 3 (majorant).} Put $\varkappa=C_0/R$ and $\mathsf K(\theta)=\mathfrak b_{\mathsf T}\sum_{m\ge2}(\varkappa\theta)^m$. Define $\mathsf y_1=1$ and
+$\mathsf y_d=[s^d]\,\mathsf K(\sum_{i<d}\mathsf y_is^i)$ for $d\ge2$, where $[s^d]$ denotes the coefficient of $s^d$ in a power series in $s$. We show $\norm{\mathsf g_d}\le\mathsf y_d$ by induction. By~\eqref{amb:eq:multinomial},
+\[
+ \bigl\lVert\mathsf P_m^{[\alpha]}(\mathsf g_1(z),\dots,\mathsf g_{d-1}(z))\bigr\rVert
+ \le C_0^m\norm{\mathsf P_m}\frac{m!}{\prod_i\alpha_i!}\prod_i\norm{\mathsf g_i}^{\alpha_i}\ \norm z^{\deg\alpha}.
+\]
+Summing over $\alpha$ with the multinomial theorem, and then over $m$, as $C_0^m\norm{\mathsf P_m}\le \mathfrak b_{\mathsf T}\varkappa^m$,
+$\norm{\mathsf g_d}\le[s^d]\,\mathsf K(\sum_{i<d}\norm{\mathsf g_i}s^i)\le\mathsf y_d$, since the coefficients of $\mathsf K$ are
+nonnegative.
+
+\emph{Step 4 (a positive radius).} The series $\sum_d\mathsf y_ds^d$ is the unique formal power series with zero constant term that solves
+$\mathsf y=s+\mathsf K(\mathsf y)$, the coefficients being forced by the recursion. As $\mathsf K(\theta)=\mathfrak b_{\mathsf T}\varkappa^2\theta^2/(1-\varkappa\theta)$, this equation
+reads $\varkappa(1+\mathfrak b_{\mathsf T}\varkappa)\mathsf y^2-(1+\varkappa s)\mathsf y+s=0$, whose root vanishing at $s=0$ is
+\[
+ \mathsf y_*(s)=\frac{(1+\varkappa s)-\sqrt{(1+\varkappa s)^2-4\varkappa(1+\mathfrak b_{\mathsf T}\varkappa)s}}{2\varkappa(1+\mathfrak b_{\mathsf T}\varkappa)}.
+\]
+The polynomial under the root has value $1$ at $s=0$, so $\mathsf y_*$ is a convergent power series near $0$. It satisfies the
+equation near $0$, so its Taylor series is the formal solution. Hence there is $R_0>0$ with
+$\mathsf y(\theta)=\sum_d\mathsf y_d\theta^d<\infty$ for $0\le\theta<R_0$, and $\mathsf y(\theta)\to0$ as $\theta\to0$.
+
+\emph{Step 5 (a right inverse).} As $P$ is complete, $\mathsf g(z)=\sum_d\mathsf g_d(z)$ converges absolutely for
+$\norm z<R_0$, with $\norm{\mathsf g(z)}\le\mathsf y(\norm z)$, and $\mathsf g$ is DP at $0$, with radius $R_3$ and bound $\mathsf y(R_3)>0$ for any $0<R_3<R_0$. Apply
+Lemma~\ref{amb:lem:composition} with inner germ $\mathsf g$, whose laws are $0$ in degree $0$ and $\mathsf g_d$ for $d\ge1$, and outer
+germ $\tilde f$ at $0$, whose laws are $0$, $\id_P$ and $-\mathsf P_m$, $m\ge2$ (radius $R$, bound $\max(R,\mathfrak b_{\mathsf T})$). The law of the composite in degree $0$ is $0$, in
+degree $1$ it is $\mathsf g_1=\id_P$, and in degree $d\ge2$ it is $\mathsf g_d$ minus the right side
+of~\eqref{amb:d:eq:inverse-recursion}, which is $0$. So $\tilde f(\mathsf g(z))=z$ for small $z$.
+
+\emph{Step 6 (injectivity).} Let $\norm z,\norm{z'}\le R_{\rm i}$. By~\eqref{amb:eq:lipschitz} with radius $2R_{\rm i}$,
+\[
+ \norm{\mathsf P_m(z)-\mathsf P_m(z')}\le m(16/\abs\varpi^2)^m\norm{\mathsf P_m}(2R_{\rm i})^{m-1}\norm{z-z'}
+ \le\frac{16\mathfrak b_{\mathsf T}}{\abs\varpi^2R}\,m\Bigl(\frac{32R_{\rm i}}{\abs\varpi^2R}\Bigr)^{m-1}\norm{z-z'}.
+\]
+The sum over $m\ge2$ of these coefficients tends to $0$ with $R_{\rm i}$. Fix $R_{\rm i}$ with $32R_{\rm i}<\abs\varpi^2R$ for which it is at most
+$\frac12$. Then
+$\frac12\norm{z-z'}\le\norm{\tilde f(z)-\tilde f(z')}\le\frac32\norm{z-z'}$ on the closed ball of radius $R_{\rm i}$. So $\tilde f$ is
+injective and continuous there.
+
+\emph{Step 7 (the local inverse).} Choose $0<R_2<R_0$ with $\mathsf y(R_2)<R_{\rm i}$ and $\tilde f(\mathsf g(z))=z$ for $\norm z<R_2$. Let
+$B_2$ and $B_{\rm i}$ be the open balls around $0$ of radii $R_2$ and $R_{\rm i}$, and $B=B_{\rm i}\cap\tilde f^{-1}(B_2)$, an open set. Then
+$\mathsf g(B_2)\subseteq B$, and $\tilde f\colon B\to B_2$ is a bijection with inverse $\mathsf g|_{B_2}$. As $f(x_0+z)=f(x_0)+\mathsf T_0\tilde f(z)$, the
+sets $U_0=x_0+B$ and $U_1=f(x_0)+\mathsf T_0(B_2)$ have the stated property. The germ at $f(x_0)$ is DP: its laws are $x_0$ in degree $0$ and $\mathsf g_d\circ\mathsf T_0^{-1}$ in degree $d\ge1$,
+of norm at most $\mathsf y_d\norm{\mathsf T_0^{-1}}^d$, so for $0<R_3<R_0$ the radius $R_3/\norm{\mathsf T_0^{-1}}$ and the bound $\max(\norm{x_0},\mathsf y(R_3))$ will do.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:tame-calculus}]
+\emph{Step 1 (item (1)).} For $n\ge1$, $\operatorname{amb}(a_n)\le C\mathfrak q^n\norm{a_n}\le C\mathfrak b(R/\mathfrak q)^{-n}$. For $n=0$,
+$\operatorname{amb}(a_0)=\norm{a_0}\le \mathfrak b\le C\mathfrak b$. As $f$ is DP with radius $R/\mathfrak q\le R$,
+Proposition~\ref{amb:prop:criterion}(1) applies. A tame pair has such constants: $C=1$ and $\mathfrak q=\max(1,\sup_{n\ge1}\mathfrak a_n(P,W)^{1/n})$.
+
+\emph{Step 2 (item (2)).} Ambient analytic germs are DP (Proposition~\ref{amb:prop:criterion}(1)). DP germs compose
+(Lemma~\ref{amb:lem:composition}), with no condition on $Y$. Apply item~(1), with constants for $(P,W)$, to the composite, a DP germ from $P$ to $W$.
+
+\emph{Step 3 (item (3)).} By Lemma~\ref{amb:lem:inverse}, $f$ has a local inverse germ that is DP at $f(x_0)$. By item~(1) for the
+pair $(P,P)$, with constants for that pair, it is ambient analytic at $f(x_0)$, with a radius that we shrink so that the ball lies in the set $U_1$ of
+Lemma~\ref{amb:lem:inverse}. As $P$ is Banach, Proposition~\ref{amb:prop:permanence}(2) makes it ambient analytic at every point of
+that ball.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{amb:prop:agreement}]
+\emph{Step 1 (item (1): laws).} Let $a\colon P\to W$ be a bounded law of degree $n$, and $C_a=(\abs\varpi\mathfrak c_K)^{-n}\norm a$.
+For $n=0$ take $\beta=a$. Let $n\ge1$. By~\eqref{amb:eq:pimax}, $\norm{L_a(t)}\le C_a\pi_{\max}(t)$ on the subspace $\Gamma^n(P)$ of
+$(P^{\otimes n},\pi_{\max})$, an ultrametric seminormed space: here the ultrametric norms of $P$ and $W$ are used. Step~1 of the proof
+of Theorem~\ref{thm:spherical}, with the single operator $0$ and radius $C_a$, extends $L_a$ to a linear map $L_a'\colon
+P^{\otimes n}\to W$ with $\norm{L_a'(t)}\le C_a\pi_{\max}(t)$. This uses that $W$ is spherically complete. Put
+$\beta(h_1,\dots,h_n)=L_a'(h_1\otimes\dots\otimes h_n)$. It is $n$\nobreakdash-linear with $\norm\beta\le C_a$, and
+$\beta(h,\dots,h)=a(h)$.
+
+\emph{Step 2 (item (1): discretely valued $K$).} Let $\abs{K^\times}=\mathfrak c_K^{\Z}$ and let $W$ be an ultrametric Banach space.
+As in the proof of Corollary~\ref{cor:discrete-targets}, let $\norm w'$ be the least element of $\mathfrak c_K^{\Z}$ at least
+$\norm w$, with $\norm0'=0$. It is an ultrametric norm with $\norm\cdot\le\norm\cdot'\le\mathfrak c_K^{-1}\norm\cdot$, complete with
+distances in $\mathfrak c_K^{\Z}\cup\{0\}$, hence spherically complete by Lemma~\ref{lem:discdist}. For this norm $a$ has norm at
+most $\mathfrak c_K^{-1}\norm a$. Step~1 gives $\beta$ with $\norm\beta\le\mathfrak c_K^{-1}C_a$, also for the norm of $W$.
+
+\emph{Step 3 (item (1): germs).} If $f$ is DP at $x_0$ with radius $R$, bound $\mathfrak b$, laws $a_n$, the maps $\beta_n$ that Steps~1 and~2 give for $a_n$ have norm at most
+$\mathfrak b(\abs\varpi\mathfrak c_KR)^{-n}$, with one more factor $\mathfrak c_K^{-1}$ in Step~2. So $f$ is analytic at $x_0$ with radius
+$\abs\varpi\mathfrak c_KR$ and bound $\mathfrak b$, respectively $\mathfrak c_K^{-1}\mathfrak b$.
+
+\emph{Step 4 (item (2)).} Let $f$ be DP at $x_0$ with radius $R$, bound $\mathfrak b$, laws $a_n$. By
+Theorem~\ref{amb:thm:tame-examples}(3), $a_n$ is for $n\ge1$ the diagonal of an $n$-linear map of norm at most $\mathfrak b(\abs\varpi^2R/(8\mathfrak d))^{-n}$, and $a_0$ is a constant. So $f$ is
+analytic at $x_0$. Analytic germs are ambient analytic, and ambient analytic germs are DP.
+
+\emph{Step 5 (item (3)).} Let $K$ be complete, not spherically complete, of characteristic $p$. Let $\mathsf f_\flat$ on the ultrametric Banach space $X_\flat$ be as in Step~3 of the proof of
+Corollary~\ref{amb:cor:nothing-lost}. That step shows that $\mathsf f_\flat$ is DP at every point and analytic at no point. As $X_\flat$ and $K$ are ultrametric, Theorem~\ref{amb:thm:tame-examples}(1) makes $\mathsf f_\flat$ ambient analytic at every point.
+\end{proof}

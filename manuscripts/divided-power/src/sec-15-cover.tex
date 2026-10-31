@@ -1,0 +1,237 @@
+\section{Germs analytic after a cover}\label{dp:sec:cover}
+
+This section studies a class of germs beside the DP germs: those that become analytic after the canonical cover $q_P$ of Definition~\ref{dp:def:cover}. We call them CA. The class has (C1) and (C3). For $K$ complete and Banach spaces it has composition, inverse functions and bundles. On ultrametric sources it is the class of DP germs. It does not contain the germ $\mathsf f$ of Example~\ref{dp:ex:l1}. So its theorems show what target descent into arbitrary Banach spaces adds to that list (Theorem~\ref{dp:thm:descents-independent}).
+
+In this section $\mathcal C(N,l)$ is the set of $\vec n=(n_1,\dots,n_l)$ of positive integers with sum $N$, $\hat q_P$ is as in Definition~\ref{dp:def:cover}, and $\mathsf c=\abs\varpi^{-1}$ is the preimage constant of $q_P$ and $\hat q_P$. The conditions (C1), (C2), (C3) are those of Section~\ref{dp:ssec:minimal}.
+
+\subsection{The class}\label{dp:ssec:ca-class}
+
+\begin{definition}\label{dp:def:flat}
+Let $P,W$ be normed. For $w\in W$ and an integer $\mathsf N\ge1$ put
+\[
+ \norm w_{(\mathsf N)}=\inf\Bigl\{\max_{i\le\mathsf N}\norm{w_i}:\ w=\sum_{i\le\mathsf N}w_i\Bigr\}.
+\]
+For $a\in\cP_n(P;W)$, $n\ge1$, put
+\[
+ \lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert_\flat=\sup\frac{\norm{a^{[\alpha]}(h_1,\dots,h_l)}_{(n!/\alpha!)}}{\norm{h_1}^{\alpha_1}\cdots\norm{h_l}^{\alpha_l}},
+\]
+the supremum over $l\ge1$, nonzero $h_1,\dots,h_l\in P$ and $\abs\alpha=n$. For $n=0$ read $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert_\flat=\norm{a(0)}$.
+\end{definition}
+
+Always $\norm w_{(\mathsf N)}\le\norm w$, and equality holds if $W$ is ultrametric. Also $\norm{\mu w}_{(\mathsf N)}=\abs\mu\norm w_{(\mathsf N)}$ for $\mu\in K$. For a positive integer $\mathsf m$, repeating each piece of a decomposition $\mathsf m$ times gives
+\begin{equation}\label{dp:eq:ca-repeat}
+ \norm{\mathsf m w}_{(\mathsf m\mathsf N)}\le\norm w_{(\mathsf N)}.
+\end{equation}
+
+\begin{definition}\label{dp:def:ca}
+Let $U\subseteq P$ be open, $f\colon U\to W$ and $x_0\in U$. The map $f$ is \emph{analytic after a cover}, or \emph{CA}, at $x_0$ if it is DP at $x_0$, with coefficient laws $a_n$, and $\sup_n\operatorname{lift}(a_n\circ q_P)R^n<\infty$ for some $R>0$. It is CA on $U$ if it is CA at every point of $U$.
+\end{definition}
+
+Shrinking $R$, we can take $R$ to be a radius of $f$ at $x_0$. Recall from Section~\ref{dp:ssec:singles} the class $\mathfrak S$: the germs $f$ at $x_0$ such that $f\circ Q$ is analytic at a preimage of $x_0$, for some bounded linear surjection $Q$ with a preimage constant. Here we allow any normed target in it.
+
+\begin{lemma}\label{dp:lem:cover-flat}
+Let $P,W$ be normed and let $a\in\cP_n(P;W)$.
+\begin{enumerate}
+\item We have
+\[
+ \abs\varpi^n\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert_\flat\le\operatorname{lift}(a\circ q_P)\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert_\flat\le\min\bigl(\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert,\operatorname{lift}(a)\bigr),\qquad\norm a\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert_\flat.
+\]
+\item If $Q\colon P'\to P$ is a bounded linear surjection with preimage constant $\mathsf c'$, then $\operatorname{lift}(a\circ q_P)\le\mathsf c'^n\operatorname{lift}(a\circ Q)$.
+\item For $f\colon U\to W$ and $x_0\in U$ the following are equivalent: $f$ is CA at $x_0$; $f\circ q_P$ is analytic at every preimage of $x_0$; $f\circ q_P$ is analytic at some preimage of $x_0$; the germ of $f$ at $x_0$ is in $\mathfrak S$. So, among germs with Banach values, CA is the smallest class with \textup{(C1)} and \textup{(C3)}.
+\item Strongly DP germs are CA, and CA germs are DP. Analytic germs are CA. Every bounded law is CA at every point.
+\item If $W$ is ultrametric, then CA germs are the strongly DP germs. If $P$ is ultrametric, then for every $W$ the CA germs, the strongly DP germs and the DP germs coincide.
+\item Let $P=\ell^1_{00}(J)$ and $W$ be arbitrary, or $P=\ell^1(J)$ and $W$ Banach. Then $\operatorname{lift}(a\circ q_P)=\operatorname{lift}(a)$. So on these spaces a germ is CA if and only if it is analytic, with the same radius.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (a formula for the lifting norm).} Let $J$ be a set and $b\colon\ell^1_{00}(J)\to W$ a law of degree $n\ge1$. A bounded $n$-linear map $\beta$ on $\ell^1_{00}(J)$ is the same as an arbitrary bounded function $\mathsf w\mapsto v_{\mathsf w}=\beta(e_{\mathsf w_1},\dots,e_{\mathsf w_n})$ on words $\mathsf w\in J^n$, and $\norm\beta=\sup_{\mathsf w}\norm{v_{\mathsf w}}$. The \emph{content} of a word records how often each letter occurs. For finitely supported $h$,
+\[
+ \beta(h,\dots,h)=\sum_\alpha h^\alpha\sum_{\mathsf w\text{ of content }\alpha}v_{\mathsf w},\qquad b(h)=\sum_\alpha h^\alpha b^{[\alpha]}(e).
+\]
+As $K$ is infinite, $\beta$ has diagonal $b$ if and only if, for each content $\alpha$, the $n!/\alpha!$ vectors $v_{\mathsf w}$ of content $\alpha$ sum to $b^{[\alpha]}(e)$. Contents can be treated one at a time, so
+\begin{equation}\label{dp:eq:ca-word}
+ \operatorname{lift}(b)=\sup\bigl\{\norm{b^{[\alpha]}(e_{\theta_1},\dots,e_{\theta_l})}_{(n!/\alpha!)}:\ l\ge1,\ \theta_1,\dots,\theta_l\in J\text{ distinct},\ \alpha_c\ge1,\ \abs\alpha=n\bigr\}.
+\end{equation}
+
+\emph{Step 2 (item (1)).} The case $n=0$ is immediate. Let $n\ge1$. For $b=a\circ q_P$ and distinct $\xi_1,\dots,\xi_l\in I_P$ we have $b^{[\alpha]}(e_{\xi_1},\dots,e_{\xi_l})=a^{[\alpha]}(\xi_1,\dots,\xi_l)$. As $\norm{\xi_c}\le1$, formula~\eqref{dp:eq:ca-word} gives $\operatorname{lift}(a\circ q_P)\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert_\flat$.
+
+For the left inequality, let $h_1,\dots,h_l\in P$ be nonzero and $\abs\alpha=n$. Arguments with $\alpha_c=0$ can be deleted, by Lemma~\ref{dp:lem:elementary}, without changing $n!/\alpha!$. Choose $\lambda_c\in K$ with $\abs\varpi<\abs{\lambda_c}\norm{h_c}\le1$, and put $\xi_c=\lambda_ch_c\in I_P$. Then $a^{[\alpha]}(\xi_1,\dots,\xi_l)=\lambda^\alpha a^{[\alpha]}(h_1,\dots,h_l)$ and $\abs{\lambda_c}^{-1}<\abs\varpi^{-1}\norm{h_c}$. If the $\xi_c$ are distinct, \eqref{dp:eq:ca-word} bounds $\norm{a^{[\alpha]}(\xi_1,\dots,\xi_l)}_{(n!/\alpha!)}$ by $\operatorname{lift}(a\circ q_P)$. Suppose $\xi_1=\xi_2$. Comparing coefficients in $a((s_1+s_2)\xi_1+\sum_{c\ge3}s_c\xi_c)$ gives $a^{[\alpha]}(\xi_1,\xi_1,\xi_3,\dots)=\binom{\alpha_1+\alpha_2}{\alpha_1}a^{[(\alpha_1+\alpha_2,\alpha_3,\dots)]}(\xi_1,\xi_3,\dots)$. Repeating, $a^{[\alpha]}(\xi_1,\dots,\xi_l)=\mathsf m\,a^{[\alpha']}(\xi')$ with $\xi'$ distinct and $\mathsf m=\alpha'!/\alpha!$ a positive integer. Since $n!/\alpha!=\mathsf m\,n!/\alpha'!$, \eqref{dp:eq:ca-repeat} gives the same bound. So $\norm{a^{[\alpha]}(h_1,\dots,h_l)}_{(n!/\alpha!)}\le\abs\varpi^{-n}\prod_c\norm{h_c}^{\alpha_c}\operatorname{lift}(a\circ q_P)$.
+
+The inequality $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert_\flat\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$ follows from $\norm\cdot_{(\mathsf N)}\le\norm\cdot$. If $\beta$ is a lift of $a$, then $a^{[\alpha]}(h_1,\dots,h_l)$ is the sum of $\beta(h_{c_1},\dots,h_{c_n})$ over the $n!/\alpha!$ tuples in which each $c$ occurs $\alpha_c$ times, and each term has norm at most $\norm\beta\prod_c\norm{h_c}^{\alpha_c}$. So $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert_\flat\le\operatorname{lift}(a)$. Taking $l=1$ gives $\norm a\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert_\flat$.
+
+\emph{Step 3 (item (2)).} Choose $\tilde\xi\in P'$ with $Q\tilde\xi=\xi$ and $\norm{\tilde\xi}\le\mathsf c'\norm\xi\le\mathsf c'$ for each $\xi\in I_P$. The linear map $\mathsf t\colon\ell^1_{00}(I_P)\to P'$, $e_\xi\mapsto\tilde\xi$, has $\norm{\mathsf t}\le\mathsf c'$ and $Q\mathsf t=q_P$. If $\beta$ is a lift of $a\circ Q$, then $\beta\circ\mathsf t^{\times n}$ is a lift of $a\circ q_P$ of norm at most $\mathsf c'^n\norm\beta$.
+
+\emph{Step 4 (item (3)).} Let $f$ be CA at $x_0$, with radius $R$ and $\operatorname{lift}(a_n\circ q_P)\le MR^{-n}$, and let $q_P(\tilde x_0)=x_0$. Choose lifts $\beta_n$ of $a_n\circ q_P$ with $\norm{\beta_n}\le(M+1)R^{-n}$. As $q_P$ is contractive, $f\circ q_P(\tilde x_0+\tilde h)=\sum_n\beta_n(\tilde h,\dots,\tilde h)$ for $\norm{\tilde h}<R$. So $f\circ q_P$ is analytic at $\tilde x_0$. The next two implications are trivial, with $Q=q_P$. Now let $f\circ Q$ be analytic at a preimage of $x_0$, with $Q$ of preimage constant $\mathsf c'$, radius $R$, bound $M$ and multilinear coefficients $\beta_n$. By Theorem~\ref{dp:thm:calculus}(3) and Proposition~\ref{dp:prop:source-descent}(1), $f$ is DP at $x_0$ with laws $a_n$ such that $a_n\circ Q$ are the laws of $f\circ Q$. By Lemma~\ref{dp:lem:coefficients-unique}(2), $\beta_n$ is a lift of $a_n\circ Q$. By item~(2), $\operatorname{lift}(a_n\circ q_P)\le\mathsf c'^nMR^{-n}$. So $f$ is CA at $x_0$. The last sentence is Theorem~\ref{dp:thm:singles-out}(3).
+
+\emph{Step 5 (items (4) and (5)).} If $f$ is strongly DP with radius $R$ and bound $M$, Lemma~\ref{dp:lem:lift-cover} gives $\operatorname{lift}(a_n\circ q_P)\le MR^{-n}$. Every law is strongly DP at every point, by Lemma~\ref{dp:lem:strong-formal}(3). Analytic germs are in $\mathfrak S$, with $Q=\id$. If $W$ is ultrametric, $\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert_\flat=\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert$, so item~(1) gives $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le\abs\varpi^{-n}\operatorname{lift}(a_n\circ q_P)$, and a CA germ with radius $R$ and $\operatorname{lift}(a_n\circ q_P)\le MR^{-n}$ is strongly DP with radius $\abs\varpi R$ and bound $M$. If $P$ is ultrametric, DP germs are strongly DP by Lemma~\ref{dp:lem:strong-formal}(3).
+
+\emph{Step 6 (item (6)).} By item~(1), $\operatorname{lift}(a\circ q_P)\le\operatorname{lift}(a)$. For the converse, unit vectors have norm $1$, so they lie in $I_P$. The map $\mathsf t_0\colon\ell^1_{00}(J)\to\ell^1_{00}(I_P)$, $e_\theta\mapsto e_{e_\theta}$, is a linear isometry, and $q_P\mathsf t_0$ is the inclusion of $\ell^1_{00}(J)$ in $P$. If $\beta$ is a lift of $a\circ q_P$, then $\beta\circ\mathsf t_0^{\times n}$ has norm at most $\norm\beta$ and diagonal $a$ on $\ell^1_{00}(J)$. For $P=\ell^1_{00}(J)$ this is a lift of $a$. For $P=\ell^1(J)$ and $W$ Banach it extends to $P^n$ by density, with the same norm, and its diagonal is $a$, as $a$ is continuous (Theorem~\ref{dp:thm:calculus}(1)). For the last sentence, let $f$ be CA with radius $R$ and $\operatorname{lift}(a_n\circ q_P)\le MR^{-n}$. Then $\operatorname{lift}(a_n)\le MR^{-n}$, so there are lifts $\beta_n$ of $a_n$ with $\norm{\beta_n}\le(M+1)R^{-n}$, and $f(x_0+h)=\sum_n\beta_n(h,\dots,h)$ for $\norm h<R$. Conversely, let $f$ be analytic with radius $R$, bound $M$ and multilinear coefficients $\beta_n$. By Theorem~\ref{dp:thm:calculus}(3) and Lemma~\ref{dp:lem:coefficients-unique}(2), $f$ is DP with radius $R$ and $\beta_n$ is a lift of $a_n$, so $\operatorname{lift}(a_n\circ q_P)\le MR^{-n}$.
+\end{proof}
+
+For $P=\ell^1(J)$ with $J$ infinite and $W$ incomplete, we do not decide whether CA germs are analytic. The proof above gives lifts with values in $\widehat W$ only (Question~\ref{dp:q:cover}).
+
+\begin{proposition}\label{dp:prop:ca-open}
+Let $W$ be Banach. Let $f$ be CA at $x_0$, with radius $R$ and $\operatorname{lift}(a_n\circ q_P)\le MR^{-n}$. Then $f$ is CA at every point of $B(x_0,\abs\varpi R)$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (a preimage).} Choose lifts $\beta_n$ of $a_n\circ q_P$ with $\norm{\beta_n}\le(M+1)R^{-n}$, and $\tilde x_0$ with $q_P(\tilde x_0)=x_0$. Let $\norm{x-x_0}<\abs\varpi R$, and choose $\tilde h_1\in\ell^1_{00}(I_P)$ with $q_P\tilde h_1=x-x_0$ and $\norm{\tilde h_1}\le\abs\varpi^{-1}\norm{x-x_0}<R$.
+
+\emph{Step 2 (grouping slots).} Let $\norm{\tilde h}<R-\norm{\tilde h_1}$. Then $f\circ q_P(\tilde x_0+\tilde h_1+\tilde h)=\sum_n\beta_n(\tilde h_1+\tilde h,\dots,\tilde h_1+\tilde h)$. Expand each term by multilinearity. For $d\ge0$ and $n\ge d$, let $\mathsf A_{n,d}$ be the $d$-linear map obtained by summing over the subsets $\sigma\subseteq\{1,\dots,n\}$ of size $d$, with its arguments placed in the slots $\sigma$ and $\tilde h_1$ in the other slots of $\beta_n$. Then $\norm{\mathsf A_{n,d}}\le\binom nd(M+1)R^{-n}\norm{\tilde h_1}^{n-d}$. With $\mathsf r=\norm{\tilde h_1}/R<1$,
+\[
+ \sum_{n\ge d}\binom nd\mathsf r^{n-d}=(1-\mathsf r)^{-d-1}.
+\]
+As $W$ is complete, $\mathsf A_d=\sum_{n\ge d}\mathsf A_{n,d}$ converges among bounded $d$-linear maps, with $\norm{\mathsf A_d}\le(M+1)R^{-d}(1-\mathsf r)^{-d-1}=\frac{M+1}{1-\mathsf r}(R-\norm{\tilde h_1})^{-d}$.
+
+\emph{Step 3 (conclusion).} The double series is absolutely summable for $\norm{\tilde h}<R-\norm{\tilde h_1}$, since $\sum_n(M+1)((\norm{\tilde h_1}+\norm{\tilde h})/R)^n<\infty$. So $f\circ q_P(\tilde x_0+\tilde h_1+\tilde h)=\sum_d\mathsf A_d(\tilde h,\dots,\tilde h)$. Thus $f\circ q_P$ is analytic at the preimage $\tilde x_0+\tilde h_1$ of $x$. Apply Lemma~\ref{dp:lem:cover-flat}(3).
+\end{proof}
+
+\subsection{Composition and inverse functions}\label{dp:ssec:ca-calculus}
+
+Pairs and bounded linear maps are formal. A pair of lifts is a lift of the pair, with the maximum of the norms, and $\operatorname{lift}(\Upsilon\circ b)\le\norm\Upsilon\operatorname{lift}(b)$ for a law $b$ and bounded linear $\Upsilon$. So pairs of CA germs into products with the maximum norm, and their bounded linear images, are CA.
+
+\begin{theorem}[composition]\label{dp:thm:ca-composition}
+Let $K$ be complete, of any characteristic, $P$ normed and $W,Y$ Banach. Let $f$ be CA at $x_0$, with laws $a_n$, and let $g$ map an open subset of $W$ to $Y$, CA at $f(x_0)$, with laws $b_m$. Then $g\circ f$ is CA at $x_0$. If $\operatorname{lift}(a_n\circ q_P)\le MR^{-n}$ for $n\ge1$ and $\operatorname{lift}(b_m\circ q_W)\le M'R'^{-m}$ for $m\ge0$, then for $N\ge1$,
+\[
+ \operatorname{lift}\bigl(D^{(N)}(g\circ f)(x_0)\circ q_P\bigr)\le M'\frac{\mathsf cM}{R'}\Bigl(1+\frac{\mathsf cM}{R'}\Bigr)^{N-1}R^{-N}.
+\]
+\end{theorem}
+
+\begin{proof}
+Fix $M_1>M$ and $M_1'>M'$. Let $\rho\le R$ and $\rho'\le R'$ be radii of $f$ at $x_0$ and of $g$ at $f(x_0)$, and let $q_P(\tilde x_0)=x_0$.
+
+\emph{Step 1 (lifting through $q_W$).} Choose lifts $\beta_n$ of $a_n\circ q_P$, $n\ge1$, with $\norm{\beta_n}\le M_1R^{-n}$. Define a map $\mathsf l_W\colon W\to\ell^1_{00}(I_W)$, not linear, with $q_W\circ\mathsf l_W=\id_W$ and $\norm{\mathsf l_W(w)}\le\mathsf c\norm w$, as in the paragraph after Definition~\ref{dp:def:cover}. A multilinear map on $\ell^1_{00}(I_P)$ can be prescribed freely on words. So there is an $n$-linear $\tilde\beta_n\colon\ell^1_{00}(I_P)^n\to\ell^1_{00}(I_W)$ with $\tilde\beta_n(e_{\mathsf w_1},\dots,e_{\mathsf w_n})=\mathsf l_W(\beta_n(e_{\mathsf w_1},\dots,e_{\mathsf w_n}))$ on words $\mathsf w$. Then $\norm{\tilde\beta_n}\le\mathsf cM_1R^{-n}$ and $q_W\circ\tilde\beta_n=\beta_n$.
+
+\emph{Step 2 (the inner map).} As $K$ is complete, $\ell^1(I_W)$ is a Banach space. So for $\norm{\tilde h}<\rho$ the series $\mathsf I(\tilde h)=\sum_{n\ge1}\tilde\beta_n(\tilde h,\dots,\tilde h)$ converges there, with $\sum_{n\ge1}\norm{\tilde\beta_n(\tilde h,\dots,\tilde h)}\le\mathsf V(\tilde h)$, where $\mathsf V(\tilde h)=\sum_{n\ge1}\mathsf cM_1(\norm{\tilde h}/R)^n$. Applying $\hat q_W$ gives $\hat q_W\mathsf I(\tilde h)=f(x_0+q_P\tilde h)-f(x_0)$.
+
+\emph{Step 3 (the outer map).} Choose lifts $\beta'_m$ of $b_m\circ q_W$ with $\norm{\beta'_m}\le M_1'R'^{-m}$. As $Y$ is complete, they extend to $\ell^1(I_W)^m$ with the same norm. The diagonal of the extension is $b_m\circ\hat q_W$, as both are continuous and agree on the dense subspace. So $\sum_m\beta'_m(\tilde w,\dots,\tilde w)=g(f(x_0)+\hat q_W\tilde w)$ for $\norm{\tilde w}<\rho'$.
+
+\emph{Step 4 (substitution).} For $\norm{\tilde h}<\rho$ with $\mathsf V(\tilde h)<\rho'$, substitute $\tilde w=\mathsf I(\tilde h)$. The resulting family is absolutely summable, since $\sum_m\norm{\beta'_m}\mathsf V(\tilde h)^m<\infty$. Grouping by total degree, $g\circ f\circ q_P(\tilde x_0+\tilde h)$ equals $b_0$ plus $\sum_{N\ge1}\Xi_N(\tilde h,\dots,\tilde h)$, where
+\[
+ \Xi_N=\sum_{l=1}^N\sum_{\vec n\in\mathcal C(N,l)}\beta'_l\circ(\tilde\beta_{n_1}\times\dots\times\tilde\beta_{n_l})
+\]
+is $N$-linear, each $\tilde\beta_{n_i}$ taking its own block of $n_i$ arguments. As $\mathcal C(N,l)$ has $\binom{N-1}{l-1}$ elements,
+\[
+ \norm{\Xi_N}\le\sum_{l=1}^N\binom{N-1}{l-1}M_1'R'^{-l}(\mathsf cM_1)^lR^{-N}=M_1'\frac{\mathsf cM_1}{R'}\Bigl(1+\frac{\mathsf cM_1}{R'}\Bigr)^{N-1}R^{-N}.
+\]
+
+\emph{Step 5 (conclusion).} The germ $g\circ f$ is DP at $x_0$ (Theorem~\ref{dp:thm:calculus}(2)), and $g\circ f\circ q_P$ is DP at $\tilde x_0$ with laws $D^{(N)}(g\circ f)(x_0)\circ q_P$ (Proposition~\ref{dp:prop:source-descent}(2)). By Lemma~\ref{dp:lem:coefficients-unique}(2) these are the diagonals of the $\Xi_N$. Letting $M_1\to M$ and $M_1'\to M'$ gives the bound. It is geometric in $N$, so $g\circ f$ is CA at $x_0$.
+\end{proof}
+
+\begin{theorem}[inverse and implicit functions]\label{dp:thm:ca-inverse}
+Let $K$ be complete.
+\begin{enumerate}
+\item Let $P,W$ be Banach, let $f$ be CA at $x_0$, and let $\mathsf T_0=Df(x_0)$ be bijective with bounded inverse. Then the local inverse germ of $f$, which is DP by Theorem~\ref{dp:thm:inverse}, is CA at $f(x_0)$.
+\item Let $P,Y,Y'$ be Banach. In Corollary~\ref{dp:cor:implicit}, if $\Phi$ is CA at $(x_0,y_0)$, then $\psi$ is CA at $x_0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (normal form).} Let $f$ be CA at $x_0$ with radius $R$ and laws $a_n$, and put $\tilde f(z)=\mathsf T_0^{-1}(f(x_0+z)-f(x_0))$. By Theorem~\ref{dp:thm:differentiable}(1), $a_1=\mathsf T_0$. So $\tilde f(z)=z-\sum_{m\ge2}\mathsf R_m(z)$ for $\norm z<R$, with $\mathsf R_m=-\mathsf T_0^{-1}\circ a_m$. Shrinking $R$, choose $M>0$ and lifts $\beta_m$ of $\mathsf R_m\circ q_P$ with $\norm{\beta_m}\le MR^{-m}$, $m\ge2$.
+
+\emph{Step 2 (lifting to $\ell^1(I_P)$).} As in Step~1 of the proof of Theorem~\ref{dp:thm:ca-composition}, there are $m$-linear $\tilde\beta_m\colon\ell^1_{00}(I_P)^m\to\ell^1_{00}(I_P)$ with $q_P\circ\tilde\beta_m=\beta_m$ and $\norm{\tilde\beta_m}\le\mathsf cMR^{-m}$. As $K$ and $P$ are complete, $\tilde\beta_m$ and $\beta_m$ extend to $\ell^1(I_P)^m$, with values in $\ell^1(I_P)$ and $P$. By continuity, $\hat q_P\circ\tilde\beta_m=\beta_m$, and the diagonal of $\beta_m$ is $\mathsf R_m\circ\hat q_P$. Put $\mathsf F(u)=u-\sum_{m\ge2}\tilde\beta_m(u,\dots,u)$ for $u\in\ell^1(I_P)$, $\norm u<R$. Then $\hat q_P\circ\mathsf F=\tilde f\circ\hat q_P$ on this ball.
+
+\emph{Step 3 (the inverse on the cover).} Define $N$-linear maps on $\ell^1(I_P)$ with values in $\ell^1(I_P)$: $\mathsf G_1=\id$ and, for $N\ge2$,
+\[
+ \mathsf G_N=\sum_{l=2}^N\sum_{\vec n\in\mathcal C(N,l)}\tilde\beta_l\circ(\mathsf G_{n_1}\times\dots\times\mathsf G_{n_l}),
+\]
+each $\mathsf G_{n_i}$ taking its own block of arguments. Then $\norm{\mathsf G_N}\le\mathsf y_N$, where $\mathsf y_1=1$ and
+\[
+ \mathsf y_N=\sum_{l=2}^N\mathsf cMR^{-l}\sum_{\vec n\in\mathcal C(N,l)}\prod_{i=1}^l\mathsf y_{n_i}\qquad(N\ge2).
+\]
+This is the sequence of Step~3 of the proof of~\cite[Lemma~Q.14]{I}, with $\mathsf cM$ for $\mathfrak b_{\mathsf T}$ and $1/R$ for $\varkappa$. Step~4 of that proof holds for all positive values of these constants. So there is $R_0>0$ with $\mathsf Y(t)=\sum_N\mathsf y_Nt^N<\infty$ for $0\le t<R_0$ and $\mathsf Y(t)\to0$ as $t\to0$. Shrink $R_0$ so that $\mathsf Y(t)<R$ on $[0,R_0)$. For $\norm u<R_0$ the series $\mathsf G(u)=\sum_N\mathsf G_N(u,\dots,u)$ converges, with $\norm{\mathsf G(u)}\le\mathsf Y(\norm u)$. Substituting and regrouping an absolutely summable family gives $\mathsf F(\mathsf G(u))=u$.
+
+\emph{Step 4 (descent to $P$).} By Steps~2 and~3, $\tilde f(\hat q_P\mathsf G(u))=\hat q_P\mathsf F(\mathsf G(u))=\hat q_Pu$ for $\norm u<R_0$. By Theorem~\ref{dp:thm:inverse}, $\tilde f$ restricts to a bijection between neighborhoods of $0$, with inverse $\tilde g$. As $\norm{\hat q_P\mathsf G(u)}\le\mathsf Y(\norm u)$, for small $u$ we get $\hat q_P\mathsf G(u)=\tilde g(\hat q_Pu)$. So $\tilde g\circ\hat q_P$ has the expansion $\sum_N\hat q_P\circ\mathsf G_N$, with $\norm{\hat q_P\circ\mathsf G_N}\le\mathsf y_N$, geometric in $N$. Restricting to $\ell^1_{00}(I_P)$, $\tilde g\circ q_P$ is analytic at $0$.
+
+\emph{Step 5 (item (1)).} The local inverse germ of $f$ is $w\mapsto x_0+\tilde g(\mathsf T_0^{-1}(w-f(x_0)))$. The map $Q=\mathsf T_0\circ q_P$ is a bounded linear surjection onto $W$ with preimage constant $\mathsf c\norm{\mathsf T_0^{-1}}$. Choose $\tilde w_0$ with $Q(\tilde w_0)=f(x_0)$. The local inverse germ evaluated at $Q(\tilde w_0+u)$ is $x_0+\tilde g(q_Pu)$. So the germ is in $\mathfrak S$, and it is CA by Lemma~\ref{dp:lem:cover-flat}(3).
+
+\emph{Step 6 (item (2)).} The map $\mathsf H(x,y)=(x,\Phi(x,y))$ is CA at $(x_0,y_0)$, as a pair of CA germs. Its derivative has a bounded inverse, by Step~1 of the proof of Corollary~\ref{dp:cor:implicit}. By that proof, $\psi(x)$ is the second coordinate of $\mathsf H^{-1}(x,0)$. So $\psi$ is CA at $x_0$, by item~(1), Theorem~\ref{dp:thm:ca-composition}, and the fact that bounded linear maps are analytic.
+\end{proof}
+
+\emph{CA on open sets.} Let $K$ be complete. By Proposition~\ref{dp:prop:ca-open} and Theorems~\ref{dp:thm:ca-composition}, \ref{dp:thm:ca-inverse}, the local inverse of a map between Banach spaces that is CA on an open set, with derivative at the base point bijective with bounded inverse, is again CA on an open set. Maps that are CA on open sets, with Banach models and fibers, have the four properties (i)--(iv) of Section~\ref{dp:sec:conv}. Indeed, composition is Theorem~\ref{dp:thm:ca-composition}; tuples are pairs; evaluation and composition of operators are bounded bilinear, hence analytic; constants are analytic; and the definition is local. So Definition~\ref{dp:def:manifold}(1),(2), with DP replaced by CA on open sets and with Banach models and fibers, gives manifolds and vector bundles. The proof of Corollary~\ref{dp:cor:bundles} applies. As there, the replacement is also made in the definitions that \cite[Theorem~2.1]{I} uses: bundle morphisms are those of Definition~\ref{dp:def:manifold}(2), and a functor is in the class if all its maps on products of hom spaces are jointly CA on open sets. By Step~3 of that proof, the maps of the alternating bifunctor on Banach spaces and of the functor $\widehat\Lambda^k_\pi$ on hom spaces are bounded laws, here with Banach values, so they are CA at every point (Lemma~\ref{dp:lem:cover-flat}(4)). So in every characteristic the alternating and $\widehat\Lambda^k_\pi$ bundles of such a bundle are bundles of the same kind.
+
+\subsection{Derivatives}\label{dp:ssec:ca-derivatives}
+
+Tangent bundles and jets need the derivatives of a germ. In this subsection all targets are Banach, so each $\cP_d(P;W)$ is Banach (Theorem~\ref{dp:thm:normed-roby}(3)). If $P$ or $W$ is ultrametric, derivatives of CA maps are CA (Remark~\ref{dp:rem:cah-um}). In general we do not decide whether $Df$ is CA when $f$ is (Question~\ref{dp:q:cover}). So we build it into a definition.
+
+\begin{definition}\label{dp:def:cah}
+Let $U\subseteq P$ be open and $W$ Banach. A map $f\colon U\to W$ is \emph{CA$^{\rm H}$} on $U$ if it is DP on $U$ and, for every $d\ge0$, the map $x\mapsto D^{(d)}f(x)\in\cP_d(P;W)$ is CA at every point of $U$.
+\end{definition}
+
+For composition we use the map of Lemma~\ref{dp:lem:chain-law}, with $r=d$: for $\alpha\in\N^d$ with $\deg\alpha=d\ge1$, $\mathcal F_\alpha(b,(\ell_n)_{1\le n\le d})$ is the law $h\mapsto b^{[\alpha]}(\ell_1(h),\dots,\ell_d(h))$ of degree $d$. By Lemma~\ref{dp:lem:chain-law}(3), it is a bounded law in $(b,(\ell_n)_n)$ on $\cP_{\abs\alpha}(W;Y)\times\prod_{1\le n\le d}\cP_n(P;W)$. By Proposition~\ref{dp:prop:chain-rule},
+\begin{equation}\label{dp:eq:ca-chain}
+ D^{(d)}(g\circ f)(x)=\sum_{\deg\alpha=d}\mathcal F_\alpha\bigl(D^{(\abs\alpha)}g(f(x)),(D^{(n)}f(x))_{1\le n\le d}\bigr)\qquad(d\ge1).
+\end{equation}
+
+\begin{theorem}\label{dp:thm:cah}
+Let all targets be Banach, and in items \textup{(1)--(4)} let $K$ be complete, of any characteristic.
+\begin{enumerate}
+\item CA$^{\rm H}$ contains the maps analytic on an open set and all bounded laws. It is closed under composition, pairing and bounded linear postcomposition. If $f$ is CA$^{\rm H}$ on $U$, then so is $D^{(d)}f\colon U\to\cP_d(P;W)$, for every $d$.
+\item Let $P,W$ be Banach, and let $f$ be CA$^{\rm H}$ on $U$ with $Df(x_0)$ bijective with bounded inverse. Then the local inverse is CA$^{\rm H}$ on a neighborhood of $f(x_0)$. The map $\psi$ of Corollary~\ref{dp:cor:implicit} is CA$^{\rm H}$ near $x_0$ if $\Phi$ is CA$^{\rm H}$.
+\item Theorem~2.1 of~\cite{I}, displayed in Section~\ref{dp:sec:conv}, holds with $C^m$ replaced by CA$^{\rm H}$ on open sets, for Banach models and fibers, with the replacement also made in the definitions that the theorem uses, as in Corollary~\ref{dp:cor:bundles}. So Definition~\ref{dp:def:manifold}, with DP replaced by CA$^{\rm H}$ on open sets and with Banach models and fibers, gives manifolds with tangent bundles, and the alternating and $\widehat\Lambda^k_\pi$ bundles of CA$^{\rm H}$ bundles are CA$^{\rm H}$ bundles.
+\item For CA$^{\rm H}$ manifolds $\mathcal M,\mathcal N$ with Banach models, Theorem~\ref{dp:thm:dp-jets} holds with DP replaced by CA$^{\rm H}$. The jet space $J^r(\mathcal M,\mathcal N)$ is a CA$^{\rm H}$ manifold, with CA$^{\rm H}$ forgetful maps, prolongations and functorial maps.
+\item Over every $K$, the germ of $\mathsf f$ of Example~\ref{dp:ex:l1} at $0$ is not CA, so it is not the germ of a CA$^{\rm H}$ map.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1): analytic maps).} Let $f$ be analytic on $U$, and let $x_1\in U$, with radius $R$, bound $M$ and multilinear coefficients $\beta_n$. Then $f$ is DP on $U$. By~\eqref{dp:4b:eq:hasse-expansion}, $D^{(d)}f(x_1+h)=\sum_{n\ge d}D^{(d)}_{a_n}(h)$ near $0$, with $a_n$ the diagonal of $\beta_n$. Expanding $\beta_n(sh+s'z,\dots,sh+s'z)$ shows that $D^{(d)}_{a_n}(h)(z)$ is the sum, over the subsets $\sigma\subseteq\{1,\dots,n\}$ of size $d$, of $\beta_n$ with $z$ in the slots $\sigma$ and $h$ in the others. So $D^{(d)}_{a_n}$ is the diagonal of a bounded $(n-d)$-linear map into $\cP_d(P;W)$ of norm at most $\binom nd\norm{\beta_n}\le M(2/R)^n$. Hence $D^{(d)}f$ is analytic at $x_1$, so it is CA there.
+
+\emph{Step 2 (item (1): laws).} A bounded law $a$ is DP on $P$. By Lemma~\ref{dp:lem:hasse-law}(1),(3) and Lemma~\ref{dp:lem:coefficients-unique}, $x\mapsto D^{(d)}a(x)=D^{(d)}_a(x)$ is a bounded law with values in $\cP_d(P;W)$, and it is $0$ if $d$ exceeds the degree of $a$. So it is CA at every point (Lemma~\ref{dp:lem:cover-flat}(4)).
+
+\emph{Step 3 (item (1): composition).} Let $f$ be CA$^{\rm H}$ on $U$, $g$ CA$^{\rm H}$ on an open subset $U'$ of $W$, and $x\in f^{-1}(U')$. By Theorem~\ref{dp:thm:calculus}(2), $g\circ f$ is DP on the open set $f^{-1}(U')$. In~\eqref{dp:eq:ca-chain}, the map $D^{(\abs\alpha)}g\circ f$ is CA at $x$ by Theorem~\ref{dp:thm:ca-composition}, and each $D^{(n)}f$ is CA at $x$. The pair is CA, and $\mathcal F_\alpha$ is a bounded law, so it is CA at every point. Theorem~\ref{dp:thm:ca-composition} applies again, and finite sums are bounded linear images of tuples. For $d=0$, $g\circ f$ itself is CA by Theorem~\ref{dp:thm:ca-composition}.
+
+\emph{Step 4 (item (1): the formal operations).} For a pair, $D^{(d)}(f_1,f_2)(x)$ is the image of $(D^{(d)}f_1(x),D^{(d)}f_2(x))$ under the isometry $\cP_d(P;W_1)\times\cP_d(P;W_2)\to\cP_d(P;W_1\times W_2)$. Bounded linear postcomposition is composition with an analytic map.
+
+\emph{Step 5 (item (1): closure under $D^{(d)}$).} By Theorem~\ref{dp:thm:differentiable}(2), $D^{(d)}f$ is DP on $U$. Let $d'\ge0$. By~\eqref{dp:4b:eq:hasse-iterated-law}, $D^{(d')}(D^{(d)}f)(x)=\mathsf D_{d',d}(D^{(d'+d)}f(x))$, where $\mathsf D_{d',d}\colon\cP_{d'+d}(P;W)\to\cP_{d'}(P;\cP_d(P;W))$ sends $a$ to $h\mapsto a^{[(d',d)]}(h,\cdot\,)$. This map is linear, and it is bounded by Lemma~\ref{dp:lem:hasse-law}(1). So $D^{(d')}(D^{(d)}f)$ is CA at every point of $U$.
+
+\emph{Step 6 (item (2)).} Theorem~\ref{dp:thm:inverse} gives open sets $V\ni x_0$ and $V'\ni f(x_0)$, with $f$ a bijection $V\to V'$ and inverse $\mathsf g$ DP on $V'$. For $w\in V'$, the chain rule shows that $Df(\mathsf g(w))$ is bijective with inverse $D\mathsf g(w)$. Fix $w\in V'$. Theorem~\ref{dp:thm:inverse} at $\mathsf g(w)$ gives a neighborhood $V_1$ of $\mathsf g(w)$ on which $f$ is injective, and a local inverse $\mathsf g_1$ with values in $V_1$, near $w$. As $\mathsf g$ is continuous, $\mathsf g(w')\in V_1$ for $w'$ near $w$, and $f(\mathsf g(w'))=w'$, so $\mathsf g=\mathsf g_1$ near $w$. As $f$ is CA at $\mathsf g(w)$, Theorem~\ref{dp:thm:ca-inverse}(1) gives that $\mathsf g$ is CA at $w$. So $\mathsf g$ is CA on $V'$. We show by induction on $d$ that $D^{(d)}\mathsf g$ is CA on $V'$. The case $d=0$ is done. On the open set of invertible operators in $\cL(P,W)$, the map $\operatorname{inv}\colon\mathsf T\mapsto\mathsf T^{-1}$ is analytic: near $\mathsf T_1$ it is $\mathsf T_1+\mathsf E\mapsto\sum_n\mathsf T_1^{-1}(-\mathsf E\mathsf T_1^{-1})^n$, a series of diagonals of bounded $n$-linear maps of norm at most $\norm{\mathsf T_1^{-1}}^{n+1}$. As $D\mathsf g=\operatorname{inv}\circ Df\circ\mathsf g$, the case $d=1$ follows from Theorem~\ref{dp:thm:ca-composition}. Let $d\ge2$. Apply~\eqref{dp:eq:ca-chain} to $f\circ\mathsf g=\id$. The only $\alpha$ with $\abs\alpha=1$ and $\deg\alpha=d$ is the unit vector at $d$, and its term is $Df(\mathsf g(w))\circ D^{(d)}\mathsf g(w)$. So
+\[
+ D^{(d)}\mathsf g(w)=-D\mathsf g(w)\circ\sum_{\abs\alpha\ge2,\ \deg\alpha=d}\mathcal F_\alpha\bigl(D^{(\abs\alpha)}f(\mathsf g(w)),(D^{(n)}\mathsf g(w))_{1\le n\le d}\bigr).
+\]
+In these terms $\alpha_d=0$, so the entry $n=d$ does not occur and may be replaced by $0$. Composition of operators with laws is bounded bilinear. By induction and Theorem~\ref{dp:thm:ca-composition}, $D^{(d)}\mathsf g$ is CA on $V'$. Implicit functions: as in Step~6 of the proof of Theorem~\ref{dp:thm:ca-inverse}, using item~(1).
+
+\emph{Step 7 (item (3)).} By item~(1), CA$^{\rm H}$ on open sets has the properties (i)--(iv) of Section~\ref{dp:sec:conv}, as in the paragraph on CA on open sets above. The transitions of the tangent bundle are CA$^{\rm H}$ by item~(1) with $d=1$, under the isometry $\cP_1(P;P)=\cL(P,P)$. The maps of the functors on hom spaces are bounded laws, so they are CA$^{\rm H}$.
+
+\emph{Step 8 (item (4)).} The proofs of Theorems~\ref{dp:thm:jet-local} and~\ref{dp:thm:dp-jets} and of Lemma~\ref{dp:lem:chain-law}(3),(4) use of the class only analytic maps (constants, translations, bounded linear maps), bounded laws, composition, pairing, finite sums, restriction, and closure under the maps $D^{(d)}$. Restriction is immediate from Definition~\ref{dp:def:cah}, finite sums are bounded linear images of tuples, and the others are in item~(1). The inverse of a chart change is itself a chart change, so no inverse function theorem enters. The model spaces $P\times W\times\prod_{1\le d\le r}\cP_d(P;W)$, and all the spaces of jets through which these proofs compose, are Banach.
+
+\emph{Step 9 (item (5)).} On $P=\ell^1(\N,K)$ with the Banach target $\Kh$, Lemma~\ref{dp:lem:cover-flat}(6) shows that a CA germ is analytic. By Example~\ref{dp:ex:l1}(3), $\mathsf f$ is not analytic at $0$. As $D^{(0)}f=f$, a CA$^{\rm H}$ map is CA.
+\end{proof}
+
+\begin{remark}\label{dp:rem:cah-um}
+Let $U\subseteq P$ be open and $W$ Banach. A map $f\colon U\to W$ that is strongly DP at every point of $U$ is CA$^{\rm H}$ on $U$. Indeed, it is DP on $U$. By Lemma~\ref{dp:lem:strong-formal}(4) and Lemma~\ref{dp:lem:coefficients-unique}, $D^{(d)}f$ is strongly DP at every point of $U$ as a map into $(\cP_d(P;W),\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert)$. As $\norm\cdot\le\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert$, it is strongly DP into $\cP_d(P;W)$ with the law norm, by Lemma~\ref{dp:lem:strong-formal}(1), hence CA by Lemma~\ref{dp:lem:cover-flat}(4). So, by Lemma~\ref{dp:lem:cover-flat}(5), if $P$ or $W$ is ultrametric, then a map that is CA on $U$ is CA$^{\rm H}$ on $U$.
+\end{remark}
+
+\begin{remark}\label{dp:rem:cah-types}
+All germs of Types II, III, IVa and IVb of Definition~\ref{dp:def:types} are bounded laws, with values in a Banach space after completing the target if needed. So they are in CA$^{\rm H}$, by Step~2 of the proof of Theorem~\ref{dp:thm:cah}, which uses no completeness of $K$. The germ of Type I is excluded by Theorem~\ref{dp:thm:cah}(5).
+\end{remark}
+
+\subsection{What target descent adds}\label{dp:ssec:ca-descents}
+
+Recall (C2)$_{\rm u}$ and (C2)$_\times$ from Section~\ref{dp:s:ssec-descents}. Consider one more property of a class $\cC$ of germs with Banach values that is closed under translation in the source. It is Definition~\ref{dp:def:s-axiom}.
+\begin{itemize}
+\item[(S)] Let $P$ be a normed space, $W$ a Banach space, and $b_n\colon P\to W$ laws of degree $n$, $n\ge0$, whose germs at $0$ are in $\cC$, with $\sup_n\norm{b_n}R^n<\infty$ for some $R>0$. Then the germ at $0$ of $h\mapsto\sum_nb_n(h)$, $\norm h<R$, is in $\cC$.
+\end{itemize}
+
+\begin{theorem}\label{dp:thm:descents-independent}
+Consider germs with Banach values.
+\begin{enumerate}
+\item Let $K$ be complete. CA has \textup{(C1)}, \textup{(C2)}$_{\rm u}$, \textup{(C3)}, composition, pairing, inverse and implicit functions on Banach spaces, and it contains all bounded laws. It does not contain the germ of $\mathsf f$ of Example~\ref{dp:ex:l1} at $0$, and it fails \textup{(C2)}$_\times$. So, in every characteristic, DP is not forced by the properties of this list without \textup{(C2)}$_\times$.
+\item Let $\operatorname{char}K=p$. TA (Definition~\ref{dp:def:ta}) has \textup{(C1)}, \textup{(C2)}$_\times$, composition, pairing, inverse and implicit functions on Banach spaces. It does not contain any germ of the map $\gamma^\sharp_p$ of Theorem~\ref{dp:thm:cp}(3), with values in $\hGamma^p_\Gamma(\mathcal E)$. So DP is not forced by the properties of this list without \textup{(C3)}.
+\item Let $\operatorname{char}K=p$. AA and CA are incomparable, and so are TA and CA. The germ of $\mathsf f$ at $0$ lies in $\mathrm{AA}\subseteq\mathrm{TA}$ and not in CA. The germs of $\gamma^\sharp_p$, with values in $\hGamma^p_\Gamma(\mathcal E)$, lie in CA and in neither AA nor TA.
+\item A class closed under translation in the source, with \textup{(C1)}, \textup{(C3)} and \textup{(S)}, contains every DP germ with Banach values, in every characteristic and with no target descent. CA fails \textup{(S)}, over every $K$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} (C1), (C3) and the bounded laws are Lemma~\ref{dp:lem:cover-flat}(3),(4). Composition, pairing, inverse and implicit functions are Section~\ref{dp:ssec:ca-calculus}. For (C2)$_{\rm u}$, let $j\colon W\to Z$ be an isometry between ultrametric Banach spaces with $j\circ f$ CA. By Theorem~\ref{dp:thm:target-descent}(2), $f$ is DP with laws $a_n$, and the laws of $j\circ f$ are $j\circ a_n$. By Lemma~\ref{dp:lem:cover-flat}(5), $j\circ f$ is strongly DP. By Lemma~\ref{dp:lem:strong-formal}(1), $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert=\lvert\!\lvert\!\lvert j\circ a_n\rvert\!\rvert\!\rvert$. So $f$ is strongly DP, hence CA. The germ of $\mathsf f$ is not CA by Theorem~\ref{dp:thm:cah}(5). By Example~\ref{dp:ex:l1}(2), $j\circ\mathsf f$ is analytic at $0$ for an isometry $j$ of $\Kh$ into a Banach space. So $j\circ\mathsf f$ is CA, and (C2)$_\times$ fails. As $\mathsf f$ is DP at $0$, CA is not DP.
+
+\emph{Step 2 (item (2)).} TA contains AA, hence the analytic germs (Theorem~\ref{dp:thm:chain}). An isometry of Banach spaces has closed range, so Theorem~\ref{dp:thm:target-descent}(2) puts the laws of $j\circ f$ in $j(W)$, and Theorem~\ref{dp:thm:ta-composition}(2),(4) gives target descent, composition and pairing. Inverse and implicit functions are Theorem~\ref{dp:thm:ta-inverse}. By Theorem~\ref{dp:thm:cp}(3) no germ of $\gamma^\sharp_p$ is in $\cC_p$, and $\mathrm{TA}\subseteq\cC_p$ by Theorem~\ref{dp:thm:chain}. As $\gamma^\sharp_p$ is DP at every point, TA is not DP.
+
+\emph{Step 3 (item (3)).} $\mathsf f$ is AA at $0$ by Example~\ref{dp:ex:l1}(2), and $\mathrm{AA}\subseteq\mathrm{TA}$. It is not CA by Theorem~\ref{dp:thm:cah}(5). The map $\gamma^\sharp_p$ is a bounded law, so it is CA at every point. It is not TA at any point by Step~2, and $\mathrm{AA}\subseteq\mathrm{TA}$.
+
+\emph{Step 4 (item (4)).} Let $\cC$ have (C1), (C3), (S). By Lemma~\ref{dp:lem:cover-flat}(3),(4), $\cC$ contains every germ of a bounded law, so the germ at $0$ of each coefficient law of a DP germ. A DP germ at $x_0$ is, by translation, the germ at $0$ of $\sum_na_n$ with $\sup_n\norm{a_n}R^n<\infty$. So (S) applies. For the failure, CA is closed under translation in the source, as the laws and lifts do not change. Put $b_0=0$ and let $b_n=a_n$, $n\ge1$, be the laws of Example~\ref{dp:ex:l1}. These are bounded laws with $\norm{b_n}<\abs\varpi^{-1}$, so each of their germs at $0$ is CA. Their sum $\mathsf f$ is not CA at $0$ (Theorem~\ref{dp:thm:cah}(5)).
+\end{proof}
+
+On ultrametric sources the CA germs are the DP germs (Lemma~\ref{dp:lem:cover-flat}(5)), so the difference between the two classes lies on non-ultrametric sources. The germ $\mathsf f$ shows, in every characteristic, that AA is not contained in CA. In characteristic $p$, CA is not contained in AA (Theorem~\ref{dp:thm:descents-independent}(3)). In characteristic $0$ we do not decide whether CA is contained in AA. In characteristic $0$ we also do not decide, in general, whether the CA germs are the analytic germs when neither $P$ nor $W$ is ultrametric; they are for the spaces of Lemma~\ref{dp:lem:cover-flat}(6), and for $P$ with finite coordinates (Theorem~\ref{dp:thm:calculus}(3)). In every characteristic, whether CA$^{\rm H}$ has (C3) is open. See Question~\ref{dp:q:cover}.

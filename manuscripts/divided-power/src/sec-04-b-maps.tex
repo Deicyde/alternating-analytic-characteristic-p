@@ -1,0 +1,200 @@
+\subsection{Derivatives}\label{dp:ssec:derivatives}
+
+In this subsection $U\subseteq P$ is open, $f\colon U\to W$ is a map and $x_0\in U$. We use the Hasse derivatives $D^{(n)}f(x_0)=a_n$ of Subsection~\ref{dp:ssec:expansions}, the Hasse coefficients $D^{(j)}_a$ and $a^{(k)}$ of~\eqref{dp:laws:hasse}, the isometry $\cP_1(P;W)=\cL(P,W)$, and the isometric identification of $\cL(P,\Mult^k(P;W))$ with $\Mult^{k+1}(P;W)$. Here $C^\infty$ means iterated Fr\'echet differentiability.
+
+\begin{theorem}[differentiability]\label{dp:thm:differentiable}
+Let $f$ be DP at $x_0$ with radius $R$, bound $M$ and coefficient laws $a_n$.
+\begin{enumerate}
+\item \textup{(Strict differentiability.)} For $0<\rho<R/(2C_2)$ and $\norm h,\norm{h'}\le\rho$,
+\begin{equation}\label{dp:4b:eq:strict}
+ \norm{f(x_0+h)-f(x_0+h')-a_1(h-h')}\le\mathsf L(\rho)\norm{h-h'},\qquad
+ \mathsf L(\rho)=\sum_{n\ge2}nC_2^nMR^{-n}(2\rho)^{n-1},
+\end{equation}
+and $\mathsf L(\rho)\to0$ as $\rho\to0$. So $f$ is strictly differentiable at $x_0$, with $Df(x_0)=a_1$.
+\item \textup{(Hasse derivatives.)} Let $f$ be DP on $U$. For every $j\ge0$ the map $x\mapsto D^{(j)}f(x)$ from $U$ to $\cP_j(P;W)$ is DP on $U$. For $\norm h<R/C_2$,
+\begin{equation}\label{dp:4b:eq:hasse-expansion}
+ D^{(j)}f(x_0+h)=\sum_{n\ge j}D^{(j)}_{a_n}(h),
+\end{equation}
+the series converging in $\cP_j(P;W)$, with $n$th term a law of degree $n-j$ in $h$ of norm at most $C_2^nMR^{-n}$. So $D^{(j)}f$ is DP at $x_0$ with radius $R/C_2$ and bound $M(C_2/R)^j$, and
+\begin{equation}\label{dp:4b:eq:hasse-iterated-law}
+ D^{(i)}\bigl(D^{(j)}f\bigr)(x_0)=\bigl(h\mapsto a_{i+j}^{[(i,j)]}(h,\cdot)\bigr)\in\cP_i\bigl(P;\cP_j(P;W)\bigr).
+\end{equation}
+\item \textup{(Derivative.)} Let $f$ be DP on $U$. Then $Df\colon U\to\cL(P,W)$ exists and is DP on $U$, and $Df(x_0+h)=\sum_{n\ge1}a_n^{(1)}(h)$ for $\norm h<R/C_2$, with $\norm{a_n^{(1)}}\le\mathrm e\,n\,C_1^nMR^{-n}$.
+\item \textup{(Higher derivatives.)} Let $f$ be DP on $U$. Then $f$ is $C^\infty$ on $U$. For every $k\ge1$, $D^kf\colon U\to\Mult^k(P;W)$ is DP on $U$, with $D^kf(x_0+h)=\sum_{n\ge k}a_n^{(k)}(h)$ on a ball around $0$, and
+\begin{equation}\label{dp:4b:eq:frechet-law}
+ D^kf(x_0)(v_1,\dots,v_k)=a_k^{[1^k]}(v_1,\dots,v_k),\qquad D^kf(x_0)(h,\dots,h)=k!\,a_k(h).
+\end{equation}
+In particular $D^kf(x_0)$ is symmetric, in every characteristic.
+\end{enumerate}
+If $W$ is complete, $f$ is DP on $B(x_0,R)$ by Theorem~\ref{dp:thm:whole-ball}, so items \textup{(2)--(4)} apply with $U=B(x_0,R)$.
+\end{theorem}
+
+The radius $R/C_2$ in~\eqref{dp:4b:eq:hasse-expansion} is the DP radius that the bound on the terms gives at $x_0$. For $f$ DP on $U$, the identity itself holds for all $\norm h<R$. By Step~4 of the proof of Theorem~\ref{dp:thm:whole-ball}, applied to $f$ as a map into $\widehat W$, the coefficient law of degree $j$ at $x_0+h$ is $\sum_{n\ge j}D^{(j)}_{a_n}(h)$, and the argument of Step~3 below places this series in $\cP_j(P;W)$. So the formula of item~(3) for $Df$ also holds for all $\norm h<R$. The Hasse derivatives are Roby's divided partial derivatives~\cite[II~\S5]{Ro}; the bounds are the estimates we need.
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} For $n\ge2$, expanding $a_n(h)=a_n(h'+(h-h'))$ and using Theorem~\ref{dp:thm:mixed}(2),
+\begin{multline*}
+ \norm{a_n(h)-a_n(h')}=\Bigl\lVert\sum_{i=1}^na_n^{[(n-i,i)]}(h',h-h')\Bigr\rVert\\
+ \le C_2^n\norm{a_n}\sum_{i=1}^n\norm{h'}^{n-i}\norm{h-h'}^i\le nC_2^n\norm{a_n}(2\rho)^{n-1}\norm{h-h'},
+\end{multline*}
+as $\norm{h'}\le2\rho$ and $\norm{h-h'}\le2\rho$. Summing over $n\ge2$ gives~\eqref{dp:4b:eq:strict}, since $a_0$ cancels and $a_1(h)-a_1(h')=a_1(h-h')$ by Lemma~\ref{dp:lem:elementary}(1). The series $\mathsf L(\rho)$ converges for $2C_2\rho<R$. For $\rho\le\rho_0<R/(2C_2)$ every term has $n-1\ge1$, so $\mathsf L(\rho)\le(\rho/\rho_0)\mathsf L(\rho_0)$, and $\mathsf L(\rho)\to0$. With $h'=0$, \eqref{dp:4b:eq:strict} says that $a_1$ is the Fr\'echet derivative of $f$ at $x_0$, and the uniform form is strict differentiability.
+
+\emph{Step 2 (item~(2): the double series).} Let $\norm h+\norm y<R/C_2$. By Lemma~\ref{dp:lem:hasse-law}(3) and~(1), $a_n(h+y)=\sum_{j\le n}D^{(j)}_{a_n}(h)(y)$, and the $j$th term has norm at most $C_2^nMR^{-n}\norm h^{n-j}\norm y^j$. So the double family is absolutely summable in $\widehat W$. As $C_2>1$, also $\norm{h+y}<R$, so
+\[
+ f(x_0+h+y)=\sum_j\mathsf m_j(h)(y),\qquad \mathsf m_j(h)=\sum_{n\ge j}D^{(j)}_{a_n}(h),
+\]
+with $\mathsf m_j(h)$ converging in the complete space $\cP_j(P;\widehat W)$ (Step~3 of the proof of Theorem~\ref{dp:thm:whole-ball}) and $\norm{\mathsf m_j(h)}\le M(C_2/R)^j(1-C_2\norm h/R)^{-1}$.
+
+\emph{Step 3 (item~(2): identification).} As $f$ is DP at $x_0+h$, uniqueness of law expansions (Lemma~\ref{dp:lem:elementary}(5), in $\widehat W$) gives $\mathsf m_j(h)=D^{(j)}f(x_0+h)\in\cP_j(P;W)$. The partial sums of $\mathsf m_j(h)$ lie in $\cP_j(P;W)$, which sits isometrically in $\cP_j(P;\widehat W)$, and their limit lies there too. So~\eqref{dp:4b:eq:hasse-expansion} converges in $\cP_j(P;W)$. By Lemma~\ref{dp:lem:hasse-law}(1) its $n$th term is a law of degree $n-j$ in $h$ of norm at most $C_2^nMR^{-n}=M(C_2/R)^j(R/C_2)^{-(n-j)}$. This is a DP expansion at $x_0$, and $x_0\in U$ was arbitrary. Uniqueness in the normed space $\cP_j(P;W)$ says that the law of degree $i$ is the term $n=i+j$, which is~\eqref{dp:4b:eq:hasse-iterated-law}.
+
+\emph{Step 4 (item~(3)).} By item~(1) at $x_0+h$, $Df(x_0+h)=D^{(1)}f(x_0+h)$. Apply item~(2) with $j=1$, and the bound of Lemma~\ref{dp:lem:hasse-law}(2).
+
+\emph{Step 5 (item~(4)).} We argue by induction on $k$. Suppose that $D^{k-1}f\colon U\to\Mult^{k-1}(P;W)$ is DP on $U$ with coefficient laws $a_n^{(k-1)}$ at $x_0$; for $k=1$ this is the hypothesis, with $\Mult^0(P;W)=W$ and $a_n^{(0)}=a_n$. Item~(3), for this map, shows that $D^kf$ exists and is DP on $U$, and Lemma~\ref{dp:lem:hasse-law}(4) identifies its coefficient laws as $a_n^{(k)}$. DP maps are continuous by item~(1), so $f$ is $C^k$ for every $k$. At $h=0$ only $n=k$ contributes, and $a_k^{(k)}(0)=a_k^{[(0,1^k)]}(0,\cdot)=a_k^{[1^k]}$ as the argument with exponent $0$ may be deleted (Lemma~\ref{dp:lem:elementary}(3)). This is symmetric by Lemma~\ref{dp:lem:elementary}(4), and the second formula of~\eqref{dp:4b:eq:frechet-law} is Lemma~\ref{dp:lem:hasse-law}(5).
+\end{proof}
+
+In the following statement, $h^{\times m}$ denotes $m$ consecutive arguments equal to $h$, and $\alpha!=\prod_c\alpha_c!$.
+
+\begin{proposition}[Hasse and Fr\'echet derivatives]\label{dp:prop:frechet-hasse}
+Let $f$ and $g$ be DP on $U$, and let $x\in U$.
+\begin{enumerate}
+\item For $i,j\ge0$ and $h\in P$, $D^{(i)}\bigl(D^{(j)}f\bigr)(x)(h)(h)=\binom{i+j}iD^{(i+j)}f(x)(h)$.
+\item For a law $a$ of degree $k$, $h_1,\dots,h_r\in P$ and $\abs\alpha=k$,
+\begin{equation}\label{dp:4b:eq:full-polarization}
+ a^{[1^k]}\bigl(h_1^{\times\alpha_1},\dots,h_r^{\times\alpha_r}\bigr)=\alpha!\,a^{[\alpha]}(h_1,\dots,h_r).
+\end{equation}
+So $a^{[1^k]}=0$ if and only if $a^{[\alpha]}=0$ for every $r$ and every $\alpha\in\N^r$ with $\abs\alpha=k$ and $\alpha!\ne0$ in $K$. If $k!\ne0$ in $K$, then $a^{[1^k]}=0$ if and only if $a=0$.
+\item $D^kf(x)=D^kg(x)$ for all $k\ge0$ if and only if $(D^{(k)}f(x)-D^{(k)}g(x))^{[\alpha]}=0$ for all $k$ and all $\alpha$ with $\abs\alpha=k$ and $\alpha!\ne0$ in $K$. If $\operatorname{char}K=0$, this holds if and only if $f=g$ near $x$, and $D^{(k)}f(x)(h)=D^kf(x)(h,\dots,h)/k!$ for every $f$ that is DP on $U$.
+\item Let $p=\operatorname{char}K>0$, let $\phi$ be a nonzero bounded linear functional on $P$ and $w\in W\setminus\{0\}$. The map $f_1(x)=\phi(x)^pw$ is a law, $D^kf_1\equiv0$ for all $k\ge1$, $D^{(1)}f_1\equiv0$, and $D^{(p)}f_1(x)(h)=\phi(h)^pw\ne0$ when $\phi(h)\ne0$. Also $f_1(0)=0$, and $f_1$ is not identically $0$ on any neighborhood of $0$. So neither the Fr\'echet derivatives nor the iterates of first-order Hasse derivatives determine a DP germ.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} By~\eqref{dp:4b:eq:hasse-iterated-law} at $x$, the left side is $a^{[(i,j)]}(h,h)$ with $a=D^{(i+j)}f(x)$. This is the coefficient of $s^is'^j$ in $a(sh+s'h)=(s+s')^{i+j}a(h)$.
+
+\emph{Step 2 (item~(2)).} Let $v_1,\dots,v_k$ be the arguments on the left of~\eqref{dp:4b:eq:full-polarization}, in consecutive blocks of sizes $\alpha_1,\dots,\alpha_r$, and let $\mathsf S_c$ be the sum of the variables $t_l$ of block $c$. Then $a(\sum_lt_lv_l)=a(\sum_c\mathsf S_ch_c)=\sum_{\abs\gamma=k}\mathsf S^\gamma a^{[\gamma]}(h_1,\dots,h_r)$. The coefficient of $t_1\cdots t_k$ on the left is $a^{[1^k]}(v_1,\dots,v_k)$. On the right, the blocks are disjoint, so $\mathsf S^\gamma$ contains $t_1\cdots t_k$ only for $\gamma=\alpha$, and then with coefficient $\alpha!$. For the kernel: if $a^{[1^k]}=0$, then~\eqref{dp:4b:eq:full-polarization} gives $a^{[\alpha]}=0$ when $\alpha!\ne0$; conversely $1^k$ is one of these $\alpha$. If $k!\ne0$, take $r=1$ and $\alpha=(k)$, for which $a^{[(k)]}=a$.
+
+\emph{Step 3 (item~(3)).} By~\eqref{dp:4b:eq:frechet-law}, $D^kf(x)=D^kg(x)$ means $(D^{(k)}f(x)-D^{(k)}g(x))^{[1^k]}=0$. For $k=0$ both sides are $f(x)$ and $g(x)$, as $D^0f(x)=f(x)=D^{(0)}f(x)$. Apply item~(2). In characteristic $0$ all $k!\ne0$, so the Hasse derivatives agree, and Theorem~\ref{dp:thm:quasi-analytic} gives $f=g$ near $x$. The last formula is~\eqref{dp:4b:eq:frechet-law}.
+
+\emph{Step 4 (item~(4)).} The map $f_1$ is a law of degree $p$ with $\norm{f_1}\le\norm\phi^p\norm w$, and it is DP on $P$ by Theorem~\ref{dp:thm:calculus}(1). By additivity of Frobenius, $f_1(x+h)=\phi(x)^pw+\phi(h)^pw$. So $D^{(p)}f_1(x)=\phi(\cdot)^pw$ and $D^{(n)}f_1(x)=0$ for $n\ne0,p$. Also $(\sum_lt_l\phi(v_l))^p=\sum_lt_l^p\phi(v_l)^p$ has no monomial $t_1\cdots t_p$, so the coefficient $a^{[1^p]}$ of $a=\phi(\cdot)^pw$ vanishes, and~\eqref{dp:4b:eq:frechet-law} gives $D^kf_1\equiv0$ for $k\ge1$. Scaling a vector $h$ with $\phi(h)\ne0$ gives the last claim.
+\end{proof}
+
+\begin{proposition}[chain rule]\label{dp:prop:chain-rule}
+Let $f$ be DP at $x_0$ with coefficient laws $a_n$, and let $g$ map an open subset of $W$ to $Y$, DP at $f(x_0)$ with coefficient laws $b_m$. Then $g\circ f$ is DP at $x_0$, $D^{(0)}(g\circ f)(x_0)=b_0$, and for $d\ge1$,
+\begin{equation}\label{dp:4b:eq:chain-rule}
+ D^{(d)}(g\circ f)(x_0)(h)=\sum_{\deg\alpha=d}b_{\abs\alpha}^{[\alpha]}\bigl(a_1(h),\dots,a_d(h)\bigr),
+\end{equation}
+the finite sum over $\alpha\in\N^d$ with $\sum_nn\alpha_n=d$. The law of degree $d$ of $g\circ f$ has linearization $\sum_{r=1}^dL_{b_r}\circ\mathsf Q_{r,d}$ on $\Gamma^d(P)$, with $\mathsf Q_{r,d}$ as in~\cite[Lemma~Q.4]{I}. It involves only the $a_n$ with $1\le n\le d$ and the $b_m$ with $m\le d$.
+\end{proposition}
+
+\begin{proof}
+Formula~\eqref{dp:4b:eq:chain-rule} is~\cite[Lemma~Q.3]{I}, and the linearization is~\cite[Lemma~Q.4]{I}. The condition $\deg\alpha=d$ forces $\alpha_n=0$ for $n>d$ and $\abs\alpha\le d$. The algebra is~\cite[VI~\S8, Prop.~VI.6, Cor.; Prop.~I.2; II~\S1]{Ro}; the bound behind~\cite[Lemma~Q.3]{I} is the estimate we need.
+\end{proof}
+
+\subsection{Products and inverse functions}\label{dp:ssec:inverse}
+
+Let $\mathcal A$ be a normed $K$\nobreakdash-algebra, so $\norm{ww'}\le\norm w\norm{w'}$. A map into a product with the maximum norm is DP at a point when its components are, since a pair of laws of degree $n$ is a law of degree $n$.
+
+\begin{proposition}[products and inversion]\label{dp:prop:products}
+\leavevmode
+\begin{enumerate}
+\item If $a,b\colon P\to\mathcal A$ are laws of degrees $m$ and $n$, then $ab\colon h\mapsto a(h)b(h)$ is a law of degree $m+n$ with $\norm{ab}\le\norm a\norm b$.
+\item Let $f,g\colon U\to\mathcal A$ be DP at $x_0$ with radii $R,R'$, bounds $M,M'$ and coefficient laws $a_n,b_n$, and let $R_1=\min(R,R')$. Then $(fg)(x_0+h)=\sum_d\mathsf m_d(h)$ for $\norm h<R_1$, with $\mathsf m_d=\sum_{m+n=d}a_mb_n$, $\norm{\mathsf m_d}\le(d+1)MM'R_1^{-d}$, and $\norm{\mathsf m_d}\le MM'R_1^{-d}$ if $\mathcal A$ is ultrametric. So $fg$ is DP at $x_0$.
+\item For $U\subseteq P$ open, the DP maps $U\to\mathcal A$ form a $K$\nobreakdash-algebra, unital if $\mathcal A$ is, and they form a sheaf of $K$\nobreakdash-algebras on $P$. For $\mathcal A=K$ we write $\mathcal O_{\rm DP}$ for this sheaf.
+\item Let $\mathcal A$ be a unital Banach algebra or $\mathcal A=K$. Let $g\colon U\to\mathcal A$ be DP at $x_0$ with radius $R$ and coefficient laws $a_n$, with $\sup_{n\ge1}\norm{a_n}R^n\le M$ and $M>0$, and let $w_0=g(x_0)$ be invertible. Then $x\mapsto g(x)^{-1}$ is defined near $x_0$ and DP at $x_0$, with every radius below $R/(1+\norm{w_0^{-1}}M)$, and with radius $R\min(1,1/(\norm{w_0^{-1}}M))$ if $\mathcal A$ is ultrametric.
+\item The stalks of $\mathcal O_{\rm DP}$ are local rings: a germ is invertible if and only if its value at the point is nonzero.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} On the span of finitely many vectors, $a$ and $b$ are homogeneous polynomials with coefficients in $\mathcal A$, and their pointwise product is a homogeneous polynomial of degree $m+n$. The norm bound is immediate.
+
+\emph{Step 2 (item~(2)).} For $\norm h<R_1$ both series converge absolutely, so their Cauchy product converges in $\widehat{\mathcal A}$ to $f(x_0+h)g(x_0+h)\in\mathcal A$. Its partial sums lie in $\mathcal A$, so it converges in $\mathcal A$. The bounds on $\mathsf m_d$ are item~(1) with the triangle or the ultrametric inequality. For $\theta<R_1$, $\sup_d\norm{\mathsf m_d}\theta^d<\infty$.
+
+\emph{Step 3 (item~(3)).} Sums and scalar multiples are clear, constants are DP, and products are item~(2). Being DP on $U$ is the condition of being DP at every point, and this depends only on the germ. So restriction and gluing hold.
+
+\emph{Step 4 (item~(4): the majorant).} Write $g(x_0+h)=w_0(1+\zeta(h))$ with $\zeta=\sum_{n\ge1}\zeta_n$, $\zeta_n=w_0^{-1}a_n$, so $\norm{\zeta_n}\le\norm{w_0^{-1}}MR^{-n}$. For real $\theta\ge0$ let $\bar\zeta(\theta)=\sum_{n\ge1}\norm{\zeta_n}\theta^n$, which is at most $\norm{w_0^{-1}}M(\theta/R)(1-\theta/R)^{-1}$ for $\theta<R$. Let $\mathsf i_0=1$ and
+\[
+ \mathsf i_d=\sum_{l\ge1}(-1)^l\sum_{n_1+\dots+n_l=d,\ n_i\ge1}\zeta_{n_1}\cdots\zeta_{n_l}\qquad(d\ge1).
+\]
+By item~(1), $\mathsf i_d$ is a law of degree $d$, and for $d\ge1$, $\norm{\mathsf i_d}$ is at most the coefficient of $\theta^d$ in $(1-\bar\zeta(\theta))^{-1}$. This power series has nonnegative coefficients and converges when $\bar\zeta(\theta)<1$, which holds for $\theta<R/(1+\norm{w_0^{-1}}M)$. So $\sup_d\norm{\mathsf i_d}\theta^d<\infty$ for such $\theta$.
+
+\emph{Step 5 (item~(4): the inverse).} Let $\norm h\le\theta$ with $\theta$ as in Step~4. Then $\sum_l\norm{\zeta(h)}^l\le\sum_l\bar\zeta(\theta)^l<\infty$. So $\sum_l(-\zeta(h))^l$ converges absolutely to $(1+\zeta(h))^{-1}$, and regrouping the absolutely summable family of products by degree gives $\sum_d\mathsf i_d(h)$. Hence $g(x_0+h)^{-1}=\sum_d\mathsf i_d(h)w_0^{-1}$, a DP expansion. If $\mathcal A=K$, the same computation runs in $\Kh$. There $(1+\zeta(h))^{-1}$ lies in $K$, as $\abs{\zeta(h)}<1$, and so do the partial sums, so the series converges in $K$.
+
+\emph{Step 6 (item~(4): ultrametric $\mathcal A$).} Put $\theta_0=R\min(1,1/(\norm{w_0^{-1}}M))$. Let $\norm h<\theta_0$ and $\delta=\max(\norm{w_0^{-1}}M\norm h/R,\norm h/R)<1$. Then $\norm{\zeta(h)}<1$, so $\sum_l(-\zeta(h))^l$ converges to $(1+\zeta(h))^{-1}$, in $\Kh$ if $\mathcal A=K$. A product $\zeta_{n_1}(h)\cdots\zeta_{n_l}(h)$ with $\sum_in_i=d$ has norm at most $(\norm{w_0^{-1}}M\norm h/R)^l(\norm h/R)^{d-l}\le\delta^d$, and for each $d$ there are finitely many. So the family is summable and may be regrouped by degree, which gives $\sum_d\mathsf i_d(h)$, in $K$ if $\mathcal A=K$ as in Step~5. Next, $\norm{\zeta_n}\theta_0^n\le(\norm{w_0^{-1}}M\theta_0/R)(\theta_0/R)^{n-1}\le1$ for $n\ge1$, so item~(1) and the ultrametric inequality give $\norm{\mathsf i_d}\theta_0^d\le1$ for $d\ge1$. Hence $g(x_0+h)^{-1}=\sum_d\mathsf i_d(h)w_0^{-1}$ is a DP expansion with radius $\theta_0$ and bound $\norm{w_0^{-1}}$.
+
+\emph{Step 7 (item~(5)).} A germ with nonzero value at $x$ is nonzero near $x$, as DP maps are continuous, and its inverse is DP at each nearby point by item~(4). So the noninvertible germs are those that vanish at $x$, and they form an ideal.
+\end{proof}
+
+\begin{theorem}[inverse functions]\label{dp:thm:inverse}
+Let $P$ and $W$ be Banach spaces, where $K$ need not be complete. Let $f\colon U\to W$ be DP at $x_0\in U$, and suppose that $\mathsf T_0=Df(x_0)$ is bijective with bounded inverse. Then there are open sets $V\ni x_0$ and $V'\ni f(x_0)$ such that $f$ restricts to a bijection $V\to V'$, DP on $V$, whose inverse is DP on $V'$. In positive degree $d$, the coefficient law of the inverse at $f(x_0)$ is $\mathsf g_d\circ\mathsf T_0^{-1}$, with $\mathsf g_d$ given by the recursion~\cite[(Q.14)]{I} for the map $\mathsf T_0^{-1}\circ f$.
+\end{theorem}
+
+The formal inverse is Roby's~\cite[Th.~VI.3, Prop.~VI.8]{Ro}; only the majorant in the proof of~\cite[Lemma~Q.14]{I} is the estimate we need.
+
+\begin{proof}
+\emph{Step 1 (normal form).} Let $R$ be a radius of $f$ at $x_0$, with coefficient laws $a_n$. The map $\tilde f=\mathsf T_0^{-1}\circ f\colon U\to P$ is DP at $x_0$, with coefficient laws $\mathsf T_0^{-1}\circ a_n$, and its law of degree $1$ is $\id_P$ by Theorem~\ref{dp:thm:differentiable}(1). Put $z_0=\tilde f(x_0)$. By~\cite[Lemma~Q.14]{I} there are open sets $U_0\ni x_0$ and $U_1\ni z_0$ and the map $\tilde g(z)=x_0+\sum_{d\ge1}\mathsf g_d(z-z_0)$, DP at $z_0$ with some radius $R_0$, such that $\tilde f$ restricts to a bijection $U_0\to U_1$ whose inverse is $\tilde g$ on $U_1$.
+
+\emph{Step 2 (open sets).} As $P$ and $W$ are complete, Theorem~\ref{dp:thm:whole-ball} shows that $\tilde g$ is DP on $B(z_0,R_0)$ and that $f$ and $\tilde f$ are DP on $B(x_0,R)$. DP maps are continuous. So $B_1=U_1\cap B(z_0,R_0)$ and $V_0'=\{y\in B_1:\tilde g(y)\in B(x_0,R)\}$ are open and contain $z_0$. Put $V=\tilde g(V_0')$. Then $V=U_0\cap B(x_0,R)\cap\tilde f^{-1}(B_1)$, which is open. Put $V'=\mathsf T_0(V_0')$, which is open because $\mathsf T_0$ is a homeomorphism. Then $f=\mathsf T_0\circ\tilde f$ restricts to a bijection $V\to V'$ with inverse $\tilde g\circ\mathsf T_0^{-1}$. The map $f$ is DP on $V\subseteq B(x_0,R)$, and $\tilde g\circ\mathsf T_0^{-1}$ is DP on $V'$ by Theorem~\ref{dp:thm:calculus}(2).
+
+\emph{Step 3 (the coefficient laws).} As $\mathsf T_0^{-1}f(x_0)=z_0$, for small $\norm h$ we have $(\tilde g\circ\mathsf T_0^{-1})(f(x_0)+h)=x_0+\sum_{d\ge1}\mathsf g_d(\mathsf T_0^{-1}h)$. Each $\mathsf g_d\circ\mathsf T_0^{-1}$ is a law of degree $d$ by Lemma~\ref{dp:lem:elementary}(2). For fixed $h$ the series along the line $sh$ converges for small $\abs s$, so its terms have a geometric bound. So Lemma~\ref{dp:lem:coefficients-unique}(1) says that the coefficient law of degree $d\ge1$ of the inverse at $f(x_0)$ is $\mathsf g_d\circ\mathsf T_0^{-1}$.
+\end{proof}
+
+\begin{corollary}[implicit functions]\label{dp:cor:implicit}
+Let $P$, $Y$ and $Y'$ be Banach spaces, let $U\subseteq P\times Y$ be open, and let $\Phi\colon U\to Y'$ be DP at $(x_0,y_0)$ with $\Phi(x_0,y_0)=0$. Suppose that $\partial_Y\Phi(x_0,y_0)=D\Phi(x_0,y_0)(0,\cdot)$ is a bijection $Y\to Y'$ with bounded inverse. Then there are open sets $V_1\ni x_0$ and $V_2\ni y_0$ and a map $\psi\colon V_1\to V_2$, DP on $V_1$, such that for $(x,y)\in V_1\times V_2$: $\Phi(x,y)=0$ if and only if $y=\psi(x)$.
+\end{corollary}
+
+\begin{proof}
+\emph{Step 1 (a map to invert).} The map $\Theta(x,y)=(x,\Phi(x,y))$ into $P\times Y'$ is DP at $(x_0,y_0)$. Put $\partial_P\Phi=D\Phi(x_0,y_0)(\cdot,0)$, and write $\partial_Y\Phi$ for $\partial_Y\Phi(x_0,y_0)$. The derivative of $\Theta$ at $(x_0,y_0)$, which is $(v,v')\mapsto(v,\partial_P\Phi v+\partial_Y\Phi v')$, has the bounded inverse $(v,v'')\mapsto(v,(\partial_Y\Phi)^{-1}(v''-\partial_P\Phi v))$.
+
+\emph{Step 2 (shrinking).} Theorem~\ref{dp:thm:inverse} gives open sets $V\ni(x_0,y_0)$ and $V'\ni(x_0,0)$ and a DP inverse $\Theta^{-1}\colon V'\to V$, of the form $(x,v'')\mapsto(x,\Theta_2(x,v''))$. Choose open sets with $(x_0,y_0)\in V_0\times V_2\subseteq V$. The image $\Theta(V_0\times V_2)$ is open, as $\Theta|_V$ is a homeomorphism onto $V'$, and it contains $(x_0,0)$. So $V_1=\{x\in V_0:(x,0)\in\Theta(V_0\times V_2)\}$ is an open neighborhood of $x_0$. As $\Theta$ preserves the first coordinate, $(x,0)=\Theta(x',y)$ with $(x',y)\in V_0\times V_2$ forces $x'=x$. So $\Theta_2(x,0)\in V_2$ for $x\in V_1$.
+
+\emph{Step 3 (the function).} Put $\psi(x)=\Theta_2(x,0)$, which is DP on $V_1$ by composition with the bounded linear map $x\mapsto(x,0)$ and the projection to $Y$. For $(x,y)\in V_1\times V_2$: $\Phi(x,y)=0$ if and only if $\Theta(x,y)=(x,0)$, if and only if $(x,y)=\Theta^{-1}(x,0)=(x,\psi(x))$, by injectivity of $\Theta$ on $V$.
+\end{proof}
+
+\begin{remark}[completeness is needed]\label{dp:rem:completeness}
+Let $P=c_{00}(\N,K)$ be the space of finitely supported sequences $x=(\mathsf x_1,\mathsf x_2,\dots)$ with the supremum norm, $\sh$ the right shift, $e_1$ the first unit vector, and $f(x)=x-\mathsf x_1\sh(x)$. Then $f$ is the identity minus the diagonal of the bounded bilinear map $(x,y)\mapsto\mathsf x_1\sh(y)$, so it is analytic and DP on $P$, with $Df(0)=\id_P$. But $te_1\notin f(P)$ for every $t\ne0$. If $f(x)=te_1$, then $\mathsf x_1=t$, as $\sh(x)$ has first coordinate $0$, and so $x=te_1+t\sh(x)$. If $l$ is the largest index with $\mathsf x_l\ne0$, the right side has the nonzero coordinate $t\mathsf x_l$ at $l+1$, a contradiction. So $f$ is not open at $0$, and Theorem~\ref{dp:thm:inverse} fails for this incomplete $P$. In $c_0(\N,K)$ with $0<\abs t<1$, the equation has the solution $\mathsf x_l=t^l$.
+\end{remark}
+
+\subsection{Manifolds and bundles}\label{dp:ssec:bundles}
+
+\begin{definition}\label{dp:def:manifold}
+Let $P$ be a normed space.
+\begin{enumerate}
+\item A \emph{DP atlas} on a Hausdorff space $\mathcal M$, modeled on $P$, is a family of homeomorphisms $\chi_i\colon U_i\to\chi_i(U_i)$ from an open cover of $\mathcal M$ onto open subsets of $P$ whose transitions $\chi_i\circ\chi_j^{-1}$ are DP on $\chi_j(U_i\cap U_j)$. A \emph{DP manifold} is $\mathcal M$ with a maximal DP atlas. A \emph{DP map} is a continuous map between DP manifolds that is DP in charts.
+\item A \emph{DP vector bundle} over $\mathcal M$ with fiber a normed space $E$ is a vector bundle with local trivializations whose transition families $x\mapsto\mathsf o_{ij}(x)\in\cL(E,E)$ are DP in charts. A \emph{morphism} is a bundle map over $\id_{\mathcal M}$ whose local operator-valued expressions are DP.
+\item The \emph{tangent bundle} $T\mathcal M$ has fiber $P$ and transition families $x\mapsto D(\chi_i\circ\chi_j^{-1})(\chi_j(x))$.
+\item Let $P_0\subseteq P$ be a closed subspace with a bounded linear projection $\mathsf r_0\colon P\to P_0$. A subset $\cS\subseteq\mathcal M$ is a \emph{DP submanifold} modeled on $P_0$ if every point of $\cS$ lies in a chart $\chi\colon U\to P$ with $\chi(U\cap\cS)=\chi(U)\cap P_0$.
+\end{enumerate}
+\end{definition}
+
+\begin{corollary}[divided-power bundles]\label{dp:cor:bundles}
+Theorem~2.1 of~\cite{I}, displayed in Section~\ref{dp:sec:conv}, holds with $C^m$ replaced by DP on open sets throughout, for the DP manifolds and DP vector bundles of Definition~\ref{dp:def:manifold}(1),(2), whose chart changes and operator-valued transition families are DP on open sets. The replacement is also made in the definitions that the theorem uses: bundle morphisms are those of Definition~\ref{dp:def:manifold}(2), and a functor is DP if all its maps on products of hom spaces are DP at every point of these products. For $k\ge1$, the alternating bifunctor $(E,F)\mapsto\Alt^k(E;F)$ and the functors $E\mapsto\Lambda^k_\pi E$ and $E\mapsto\widehat\Lambda^k_\pi E$ satisfy its hypothesis. So in every characteristic and for all normed fibers, the alternating and the projective exterior power bundles of a DP vector bundle are DP vector bundles, with DP induced morphisms.
+\end{corollary}
+
+\begin{proof}
+\emph{Step 1 (the calculus).} By Theorem~\ref{dp:thm:calculus}(2), maps that are DP on open sets compose. By Theorem~\ref{dp:thm:calculus}(3) and~(1), bounded multilinear maps, in particular bounded linear maps and evaluation of operators, and constants are DP on their whole domains: a bounded $r$\nobreakdash-linear map $\beta$ on $E_1\times\dots\times E_r$ is the diagonal of the bounded $r$\nobreakdash-linear map $(v^1,\dots,v^r)\mapsto\beta(v^1_1,\dots,v^r_r)$ on the $r$th power of this product. A map into a product is DP at a point when its components are. Composition of operators is bounded bilinear, so local operator families compose. Being DP at a point depends only on the map near that point.
+
+\emph{Step 2 (the theorem).} The proof of~\cite[Theorem~2.1]{I} uses of the class $C^m$ only the four properties (i)--(iv) listed in Section~\ref{dp:sec:conv}, and Step~1 gives them for DP maps. Independence of the trivialization multiplies by the DP families $\mathsf o_{ij}$ and $\mathsf o_{ji}$, so no inversion is needed.
+
+\emph{Step 3 (the functors).} By Theorem~\ref{dp:thm:calculus}(4) and~(1), the maps of the three functors on hom spaces, which for the bifunctor is the joint action $B$, are bounded polynomial laws and DP on their whole domains.
+\end{proof}
+
+\begin{proposition}[categories]\label{dp:prop:categories}
+\leavevmode
+\begin{enumerate}
+\item A homeomorphism from an open subset of $\mathcal M$ onto an open subset of $P$ is a \emph{chart}. A chart is \emph{compatible} with a DP atlas if its transitions, in both directions, with every chart of the atlas are DP. Compatibility is transitive, in the sense that two charts compatible with a DP atlas have DP transitions, so every DP atlas lies in a unique maximal DP atlas. DP manifolds and DP maps form a category. For each DP manifold $\mathcal M$, DP vector bundles over $\mathcal M$ form a category, to which Corollary~\ref{dp:cor:bundles} applies.
+\item Let $f\colon\mathcal M\to\mathcal N$ be a DP map, with models $P$ and $P'$. Then $f$ is $C^\infty$ in charts. $T\mathcal M$ is a DP vector bundle and a DP manifold modeled on $P\times P$. The map $Tf$, in charts $(x,v)\mapsto(f(x),Df(x)v)$, is DP, and it is a bundle map over $f$ with DP local operator family. And $\mathcal M\mapsto T\mathcal M$ is a functor on DP manifolds.
+\item For every normed space $F$ and $k\ge1$, the bundles $\Alt^k(T\mathcal M;F)$, $\Lambda^k_\pi T\mathcal M$, $\widehat\Lambda^k_\pi T\mathcal M$ and $\Alt^k(T\mathcal M;T\mathcal M)$ are DP vector bundles, in every characteristic.
+\item A DP submanifold $\cS$ modeled on $P_0$ is a DP manifold modeled on $P_0$ with the restricted charts, and the inclusion $\cS\to\mathcal M$ is DP.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item~(1)).} Let $\chi,\chi'$ be compatible with every chart of a DP atlas, and let $\mathsf u$ lie in both domains. For a chart $\chi_i$ of the atlas at $\mathsf u$, near $\chi(\mathsf u)$ we have $\chi'\circ\chi^{-1}=(\chi'\circ\chi_i^{-1})\circ(\chi_i\circ\chi^{-1})$, which is DP at $\chi(\mathsf u)$ by Theorem~\ref{dp:thm:calculus}(2). So the charts compatible with the atlas form a DP atlas, and it contains every DP atlas that contains the given one. The two categories exist by Step~1 of the proof of Corollary~\ref{dp:cor:bundles}: DP maps compose, identities are DP, being DP at a point depends only on the germ, and local operator families compose.
+
+\emph{Step 2 (item~(2)).} In charts, $f$ is DP on open sets, hence $C^\infty$ with DP derivative $Df$ on open sets, by Theorem~\ref{dp:thm:differentiable}(3),(4). The transition families of $T\mathcal M$ are therefore DP into $\cL(P,P)$, after composition with the DP transitions, and they satisfy the cocycle identity by the chain rule for Fr\'echet derivatives. The map $(x,v)\mapsto(f(x),Df(x)v)$ is the composite of the DP map $(x,v)\mapsto(f(x),Df(x),v)$ with the bounded bilinear evaluation, hence DP, and its local operator family is $x\mapsto Df(x)$. Applied to the transitions of $\mathcal M$, this gives the DP atlas of $T\mathcal M$. The total space is Hausdorff: points over different base points are separated by preimages of neighborhoods in $\mathcal M$, and points of one fiber by a trivialization. The chain rule shows that $Tf$ does not depend on the charts, and that $\mathcal M\mapsto T\mathcal M$ is a functor.
+
+\emph{Step 3 (item~(3)).} Apply Corollary~\ref{dp:cor:bundles} to the DP bundle $T\mathcal M$, and, for the bifunctor $\Alt^k$, to the pair of $T\mathcal M$ with the constant bundle of fiber $F$ and to the pair $(T\mathcal M,T\mathcal M)$, whose map on hom spaces is the joint action $B$ of Theorem~\ref{dp:thm:calculus}(4).
+
+\emph{Step 4 (item~(4)).} Let $\chi\colon U\to P$ and $\chi'\colon U'\to P$ be charts as in Definition~\ref{dp:def:manifold}(4). As $\chi(U\cap\cS)=\chi(U)\cap P_0$ and $\chi$ is injective, $P_0\cap\chi(U\cap U')=\chi(U\cap U'\cap\cS)$, which is open in $P_0$. On it $\chi'\circ\chi^{-1}$ has values in $P_0$, so it equals $\mathsf r_0\circ\chi'\circ\chi^{-1}$. So the transition of the restricted charts is $x\mapsto\mathsf r_0(\chi'\circ\chi^{-1}(x))$, the composite of the bounded linear inclusion $P_0\to P$, a DP map and the bounded linear map $\mathsf r_0$, and it is DP. The space $\cS$ is Hausdorff, and the restricted charts are homeomorphisms onto open subsets of $P_0$. In the chart $\chi$, the inclusion of $\cS$ is the inclusion $P_0\to P$.
+\end{proof}

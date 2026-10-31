@@ -1,0 +1,166 @@
+\section{Ambient analyticity: a structure, not a class of maps}\label{amb:sec}
+
+Ambient analyticity is not a usable class of analytic maps between normed spaces: over every field of characteristic $p$ it is not closed under composition, and for $K$ complete it has no inverse function theorem, depends on the target chart, and gives no transitive compatibility of charts; in characteristic $0$ this is open. On tame pairs (Section~\ref{amb:ssec:tame}), such as ultrametric spaces or $\ell^1(J)$, it has composition and inverse functions, but there it coincides with divided-power analyticity, so this is no separate argument for it. The mechanism behind the failure of Theorem~\ref{amb:thm:failure} is that enlarging the target carries maps into the space, not analytic maps out of it. Within analytic maps on normed spaces, the formulas of n\textsuperscript{o}~7.8.1--7.8.4 of~\cite{Bou} use a structure instead: the fixed envelope $\Mult^k$, on which the transitions act analytically, preserving the alternating forms. In every characteristic this gives those formulas on ambient sections of filtered analytic bundles, and, for $K$ complete and scalar values, $\Mult^k(-;K)$ is initial among the functorial envelopes of $\Alt^k(-;K)$ with a multilinear action. In general it does not give Bourbaki's vector functor in the analytic class, a direct factor, or an analytic induced atlas.
+
+Section~\ref{amb:ssec:fixed} holds over every nontrivially normed field. From Section~\ref{amb:ssec:some-j} on, $K$ is nonarchimedean. Norms need not be complete or ultrametric unless this is said.
+
+\subsection{Fixed envelopes}\label{amb:ssec:fixed}
+
+\begin{definition}[filtered analytic vector bundle]\label{amb:def:filtered}
+A \emph{filtered space} $\mathbb V=(\tilde V;V_1,V_2)$ is a normed space $\tilde V$ with closed subspaces $V_2\subseteq V_1\subseteq\tilde V$. Its \emph{fiber} is $V=V_1/V_2$ with the quotient norm, and $\operatorname{qt}\colon V_1\to V$ is the quotient map. For filtered spaces $\mathbb V$, $\mathbb V'$ put
+\[
+ \cL(\mathbb V,\mathbb V')=\{T\in\cL(\tilde V,\tilde V'):\ TV_1\subseteq V_1',\ TV_2\subseteq V_2'\},
+\]
+a closed subspace of $\cL(\tilde V,\tilde V')$, and let $\rho\colon\cL(\mathbb V,\mathbb V')\to\cL(V,V')$ be the induced map on fibers, $\rho(T)\operatorname{qt}(v)=\operatorname{qt}'(Tv)$ for $v\in V_1$. It is linear and multiplicative, and $\norm{\rho(T)}\le\norm T$.
+
+A \emph{filtered analytic vector bundle} over an analytic manifold $M$ is an analytic vector bundle $\widetilde{\mathcal B}$ with typical fiber $\tilde V$, closed subspaces $V_2\subseteq V_1\subseteq\tilde V$, and an analytic atlas of $\widetilde{\mathcal B}$ whose transitions $\Theta_{\mathsf{ab}}$, which convert coordinates of chart $\mathsf b$ to coordinates of chart $\mathsf a$, take values in $\cL(\mathbb V,\mathbb V)$. In this section a \emph{chart} of $\widetilde{\mathcal B}$ is a chart of this atlas. The inverse $\Theta_{\mathsf{ba}}(x)$ of $\Theta_{\mathsf{ab}}(x)$ also preserves the filtration, so $\Theta_{\mathsf{ab}}(x)$ maps $V_1$ onto $V_1$ and $V_2$ onto $V_2$. Hence the subsets $\mathcal B_1,\mathcal B_2\subseteq\widetilde{\mathcal B}$ given in each chart by $V_1,V_2$ are well defined and fiberwise closed, and $\mathcal B=\mathcal B_1/\mathcal B_2$ is a bundle of vector spaces with fiber $V$ and transitions $\rho(\Theta_{\mathsf{ab}})$. The bundle is of \emph{sub type} if $V_2=0$.
+\end{definition}
+
+\begin{definition}[ambient sections, operations]\label{amb:def:section}
+A section of $\mathcal B$ over an open subset of $M$ is \emph{ambient} if, near each point and in some chart, its local expression is $\operatorname{qt}\circ\varsigma$, with $\varsigma$ analytic into $\tilde V$ and with values in $V_1$. For sub type these are the analytic sections of $\widetilde{\mathcal B}$ lying in $\mathcal B_1$.
+
+For filtered spaces $\mathbb V^{(1)},\dots,\mathbb V^{(d)},\mathbb V'$, with quotient maps $\operatorname{qt}^{(i)}$ and $\operatorname{qt}'$, let $\cL(\mathbb V^{(1)},\dots,\mathbb V^{(d)};\mathbb V')$ be the space of bounded $d$-linear maps $T\colon\tilde V^{(1)}\times\dots\times\tilde V^{(d)}\to\tilde V'$ with $T(V^{(1)}_1\times\dots\times V^{(d)}_1)\subseteq V_1'$ and with $T(v_1,\dots,v_d)\in V_2'$ whenever all $v_i\in V^{(i)}_1$ and some $v_i\in V^{(i)}_2$. Put $\rho_d(T)(\operatorname{qt}^{(1)}v_1,\dots,\operatorname{qt}^{(d)}v_d)=\operatorname{qt}'T(v_1,\dots,v_d)$ for $v_i\in V^{(i)}_1$. A \emph{$d$-linear operation} from $\mathcal B^{(1)},\dots,\mathcal B^{(d)}$ to $\mathcal B'$ is a map $\mathcal B^{(1)}\times_M\dots\times_M\mathcal B^{(d)}\to\mathcal B'$ over $\id_M$, $d$-linear on fibers, whose local expressions are locally $\rho_d(\Theta(x))$, with $\Theta$ analytic into the bounded $d$-linear maps of the $\tilde V^{(i)}$ into $\tilde V'$ and with values in $\cL(\mathbb V^{(1)},\dots,\mathbb V^{(d)};\mathbb V')$.
+\end{definition}
+
+\begin{proposition}\label{amb:prop:sections}
+Being ambient does not depend on the chart. Ambient sections form a module over the analytic scalar functions, and a $d$-linear operation carries ambient sections to an ambient section. If the filtered space is split, that is, if $\operatorname{qt}$ has a bounded linear section and $V_1$ has a bounded linear retraction in $\tilde V$, then the transitions $\rho(\Theta_{\mathsf{ab}})$ are analytic, and the analytic sections of $\mathcal B$ are exactly its ambient sections.
+\end{proposition}
+
+The proof is in Appendix~\ref{amb:app}.
+
+The main example is this. Let $M_1,M_0$ be analytic vector bundles over $M$ with normed fibers $E,F$ and transition families $\mathbf g^1_{\mathsf{ab}},\mathbf g^0_{\mathsf{ab}}$ over a common trivializing cover, and fix $k\ge1$. Let $\mathfrak m_k$ be the action on multilinear maps, $\mathfrak m_k(\mathbf f_1,\mathbf f_0)\mathsf m=\mathbf f_0\circ\mathsf m\circ \mathbf f_1^{\times k}$, and let $\alpha_k$ be Bourbaki's functor, with values $\Alt^k(E;F)$. Let $\cL(M_1,\dots,M_1;M_0)$ be the bundle with fiber $\Mult^k(E;F)$, as in~\cite[n\textsuperscript{o}~7.8.1]{Bou}, and with transitions
+\[
+ \Theta_{\mathsf{ab}}(x)=\mathfrak m_k\bigl(\mathbf g^1_{\mathsf{ba}}(x),\mathbf g^0_{\mathsf{ab}}(x)\bigr).
+\]
+They are jointly analytic, as a bounded multilinear evaluation of analytic operator families (Proposition~\ref{prop:ambient-polynomial} and its proof, which needs no retraction), so this is an analytic bundle. They preserve $\Alt^k(E;F)$, and the inverse of $\Theta_{\mathsf{ab}}(x)$ is $\Theta_{\mathsf{ba}}(x)$. Analytic vector charts of $M_1,M_0$ induce charts of $\cL(M_1,\dots,M_1;M_0)$ and of its fiberwise subset $\Alt^k(M_1;M_0)$, with fiber $\Alt^k(E;F)$; these are the \emph{induced charts}. In the same way $\Lambda^k_\pi E$ is the quotient type: $\tilde V=V_1=\otimes^k_\pi E$, with $V_2$ the closed kernel of $\wedge^k_E$.
+
+\begin{theorem}[n\textsuperscript{o}~7.8.1--7.8.4 on ambient sections]\label{amb:thm:seven-eight}
+Let $K$ be a nontrivially normed field of any characteristic, complete or not. Let $k\ge1$, and in items \textup{(3)(b),(c)} also $k=0$, with $\Alt^0(M_1;\mathcal Q)=\mathcal Q$ for a bundle $\mathcal Q$, filtered by $V_1=\tilde V$ and $V_2=0$; this $k$ is Bourbaki's $d$. Let $M$ be an analytic manifold and $M_1,M_0$ analytic vector bundles over $M$ with normed fibers.
+\begin{enumerate}
+\item $\alpha_k$ is a closed subfunctor of the analytic functor $\mathfrak m_k$ on normed spaces, whose hom maps are continuous polynomials with a representative of norm at most $1$.
+\item $\Alt^k(M_1;M_0)$ is a filtered analytic vector bundle of sub type inside $\cL(M_1,\dots,M_1;M_0)$: it is fiberwise closed and invariant under the analytic transitions. Its atlas is the one induced by all analytic vector charts of $M_1,M_0$, so the bundle and its ambient sections do not depend on a trivializing cover. Its underlying bundle is the $C^\infty$ bundle of Theorem~\ref{thm:bundle-lifting}.
+\item On ambient sections, by the formulas of~\cite[n\textsuperscript{o}~7.8]{Bou} in \textup{(a)--(d)}, and by~\cite[n\textsuperscript{o}~7.6.3]{Bou} in \textup{(e)}:
+\begin{enumerate}
+\item $\omega(\mathsf s_1,\dots,\mathsf s_k)$ is an analytic section of $M_0$ for ambient $\omega$ and analytic sections $\mathsf s_i$ of $M_1$ (n\textsuperscript{o}~7.8.1);
+\item for an \emph{analytic pairing} $\varphi\colon\mathcal Q\times_M\mathcal Q'\to\mathcal Q''$ of analytic bundles, that is, a map bilinear on fibers whose local expressions $x\mapsto\varphi_x$ are analytic into the bounded bilinear maps, and for a degree $k'\ge0$, the exterior product $\wedge_\varphi$ is a bilinear operation from $\Alt^k(M_1;\mathcal Q)$ and $\Alt^{k'}(M_1;\mathcal Q')$ to $\Alt^{k+k'}(M_1;\mathcal Q'')$ (n\textsuperscript{o}~7.8.2);
+\item for an analytic bundle $\mathsf A$ of associative commutative unital algebras, whose multiplication is an analytic pairing, the ambient sections of the bundles $\Alt^k(M_1;\mathsf A)$, $k\ge0$, form over each open $U$ a graded algebra $\Omega^*(U)$ over the analytic scalars, associative and anticommutative (n\textsuperscript{o}~7.8.3);
+\item for $k\ge1$ the interior product $i$ is a bilinear operation from $M_1$ and $\Alt^k(M_1;\mathsf A)$ to $\Alt^{k-1}(M_1;\mathsf A)$ (n\textsuperscript{o}~7.8.4), and Bourbaki's formulas (1)--(7) of n\textsuperscript{o}~7.8.2--7.8.4 hold;
+\item for analytic $\gamma\colon M'\to M$, the bundle $\Alt^k(\gamma^*M_1;\gamma^*M_0)$ is the inverse image of the filtered bundle $\Alt^k(M_1;M_0)$, with transitions $\Theta_{\mathsf{ab}}\circ\gamma$, and $\omega\circ\gamma$ is an ambient section of it for ambient $\omega$ (n\textsuperscript{o}~7.6.3).
+\end{enumerate}
+\item For $M_1=TM$, $M_0$ the trivial line bundle $M\times K$, and $K$ complete, the ambient sections of $\Alt^k(M_1;M_0)$ are the forms of $\Omega^k_{\mathrm{amb}}(M)$ of Section~\ref{sec:forms}.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{amb:app}.
+
+What lifts to $\Mult^k$ are the operations: evaluation, the shuffle formula for $\varphi$ and insertion of a vector act on multilinear maps, with analytic local expressions. Not every identity lifts: $i(\mathsf s)^2=0$ holds only on $\Alt^k$, as an identity in each fiber. The identities of item~(3) are claimed only on $\Alt^k$, which is all that item needs. Theorem~\ref{amb:thm:seven-eight} concerns n\textsuperscript{o}~7.8.1--7.8.4 and ambient sections. It does not say that $\alpha_k$ is a vector functor of class $C^r$ in the sense of~\cite[n\textsuperscript{o}~7.6.1]{Bou}, and n\textsuperscript{o}~7.8.5 is not treated. Inverse images come from n\textsuperscript{o}~7.6.3, since n\textsuperscript{o}~7.8 has no pullback of forms.
+
+\begin{theorem}[what this does not give in general]\label{amb:thm:limits}
+In items \textup{(1)}--\textup{(4)} let $K$ have characteristic $p>0$ and let $k\ge p$.
+\begin{enumerate}
+\item There are $M,M_1,M_0$ for which the charts of $\Alt^k(M_1;M_0)$ induced by analytic vector charts of $M_1,M_0$ are not analytically compatible (Corollary~\ref{cor:shear-bundle} with Theorem~\ref{thm:operator-obstructions}, and Proposition~\ref{prop:tangent-values}; for scalar values Proposition~\ref{prop:tangent-obstruction}, $K$ complete and not spherically complete).
+\item There are $E,F$ such that $\Alt^k(E;F)$ has no bounded linear retraction in $\Mult^k(E;F)$. So $\Alt^k(M_1;M_0)$ need not be locally a direct factor of $\cL(M_1,\dots,M_1;M_0)$.
+\item If $K$ is complete and not spherically complete, ambient sections need not be analytic in induced charts (Proposition~\ref{prop:tangent-obstruction}(2)).
+\item In the situation of Corollary~\ref{cor:shear-bundle}, no analytic vector bundle structure on $\Alt^k(M\times H;M\times F)$ contains the induced product chart and makes the map induced by the shear automorphism an analytic morphism. By Proposition~\ref{prop:homogeneous-lift}, $A^k_{E,D;F}$ is then analytic nowhere, and a structure for which all analytic automorphisms of $M\times H$, over all open subsets of $M$, induce analytic morphisms contains no chart induced by an analytic vector chart of $M\times H$ and the product chart of $M\times F$.
+\end{enumerate}
+Now let $K$ be any nontrivially normed field and $k\ge1$, with fibers $E,F$ of $M_1,M_0$.
+\begin{enumerate}\setcounter{enumi}{4}
+\item If $\alpha_k$ is analytic on the hom spaces $\cL(E,E)\times\cL(F,F)$ of the fibers (for instance if $k!\ne0$, Corollary~\ref{cor:classification}; or in the setting of Corollary~\ref{fib:cor:bourbaki} with $E$ of countable type), then $\Alt^k(M_1;M_0)$ is an analytic vector bundle and its analytic sections are ambient. If moreover $j_{E,F}$ has a bounded linear retraction (if $k!\ne0$, or if $F$ is as in Theorem~\ref{thm:spherical}), then ambient sections are exactly the analytic ones.
+\end{enumerate}
+\end{theorem}
+
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{remark}\label{amb:rem:limits}
+In condition~(b) of~\cite[n\textsuperscript{o}~7.6.1]{Bou} only analyticity fails: with Fr\'echet $C^\infty$ in place of analytic the condition holds (Section~\ref{sec:bundles}). The inputs $M_1,M_0$ must be analytic, and the induced charts do not make the output $\Alt^k(M_1;M_0)$ an analytic bundle in general, so the construction is not iterated here. A single induced chart can still be an atlas, as for the trivial bundle of Corollary~\ref{cor:shear-bundle}. Whether there is an analytic structure for which every analytic automorphism of $(M_1,M_0)$ induces an analytic morphism is asked in Question~\ref{amb:q:open}.
+\end{remark}
+
+\subsection{Maps that become analytic after an enlargement}\label{amb:ssec:some-j}
+
+Section~\ref{amb:ssec:fixed} used one enlargement, chosen with the fiber, and the transitions act on it. Now the enlargement is allowed to depend on the map. From here on $K$ is nonarchimedean, so $K$ is infinite, and $\varpi\in K$ is fixed with $0<\abs\varpi<1$.
+
+\emph{Notation.} A normed space is \emph{ultrametric} if its norm is nonarchimedean. $P,P'$ are source spaces and $W,Y$ are targets, all normed. For $n\ge0$, $P^{\otimes n}$ is the algebraic tensor power and $\pi$ is its projective seminorm; for $n=0$ we read $P^{\otimes0}=K$, $\pi=\abs\cdot$, $h^{\otimes0}=1$, and $\norm h^0=1$ also at $h=0$. $\Gamma^n(P)\subseteq P^{\otimes n}$ is the span of the powers $h^{\otimes n}$, $h\in P$; it is the space of symmetric tensors, by the opening paragraph of Section~\ref{dgr:ssec:polarizable}. $\Gamma^n_\pi(P)$ is $\Gamma^n(P)$ with the restriction of $\pi$, and on $\Gamma^n(P)$ we also use the seminorm $\norm t_\Gamma=\inf\{\sum_i\abs{c_i}\norm{h_i}^n:\ t=\sum_ic_ih_i^{\otimes n}\}$, so that $\pi\le\norm\cdot_\Gamma$. For $h_1,\dots,h_r\in P$ and integers $\alpha_i\ge0$ with $\abs\alpha=\alpha_1+\dots+\alpha_r=n$, the \emph{orbit sum} $O_\alpha(h_1,\dots,h_r)$ is the sum of the tensors $h_{i_1}\otimes\dots\otimes h_{i_n}$ over the tuples $(i_1,\dots,i_n)$ in which each $i$ occurs $\alpha_i$ times, so that, with $\lambda^\alpha=\prod_i\lambda_i^{\alpha_i}$,
+\begin{equation}\label{amb:eq:orbit}
+ \Bigl(\sum_i\lambda_ih_i\Bigr)^{\otimes n}=\sum_{\abs\alpha=n}\lambda^\alpha O_\alpha(h_1,\dots,h_r)\qquad(\lambda\in K^r),
+\end{equation}
+and $O_\alpha(h_1,\dots,h_r)\in\Gamma^n(P)$, since each coefficient of a polynomial with values in a subspace lies in that subspace, by interpolation.
+
+\begin{definition}[some $j$]\label{amb:def:aa}
+Let $U\subseteq P$ be open, $f\colon U\to W$, $x_0\in U$, $R>0$ with $B(x_0,R)\subseteq U$, and $\mathfrak b\ge0$. An \emph{ambient expansion} of $f$ at $x_0$ with radius $R$ and bound $\mathfrak b$ is a linear isometry $j\colon W\to Z$ into a normed space and bounded $n$-linear maps $b_n\colon P^n\to Z$, $n\ge0$, with $\norm{b_n}\le \mathfrak bR^{-n}$, with $b_n(h,\dots,h)\in j(W)$ for all $h\in P$, and with
+\begin{equation}\label{amb:eq:aa}
+ jf(x_0+h)=\sum_{n\ge0}b_n(h,\dots,h)\qquad(\norm h<R).
+\end{equation}
+The map $f$ is \emph{ambient analytic}, or \emph{AA}, at $x_0$ with radius $R$ and bound $\mathfrak b$ if it has such an expansion. It is AA at $x_0$ if this holds for some $R,\mathfrak b$, and AA on $U$ if it is AA at every point of $U$. For $Z=W$ and $j=\id_W$ we say \emph{analytic} at $x_0$ with radius $R$ and bound $\mathfrak b$, and analytic with radius $R$ if this holds for some $\mathfrak b$.
+\end{definition}
+
+This is a condition on a map into the one space $W$, not on a map up to changes of chart in $W$. The term extends the ambient expansion of Section~\ref{sec:descent}, where $j(W)$ is closed by assumption; here it need not be. If $j(W)$ is closed in $Z$, the condition on diagonals is automatic, by Step~1 of the proof of Theorem~\ref{thm:coefficient-descent}. Replacing $Z$ by its completion keeps all the conditions, so $Z$ may be taken Banach. If $W$ is Banach, then $j(W)$ is complete, hence closed, and the definition is~\eqref{eq:ambient-series} with its radius and bound named. For $K$ complete and some incomplete $W$ the condition on diagonals cannot be dropped, see~\cite{II}.
+
+\begin{definition}[laws, divided-power germs]\label{amb:def:law}
+Let $n\ge0$.
+\begin{enumerate}
+\item A map $a\colon P\to W$ is a \emph{bounded polynomial law of degree $n$}, or a \emph{law}, if, for all $h_1,\dots,h_r\in P$, the map $\lambda\mapsto a(\lambda_1h_1+\dots+\lambda_rh_r)$ on $K^r$ is a homogeneous polynomial of degree $n$ with coefficients in $W$, and $\norm a=\sup_{h\ne0}\norm{a(h)}/\norm h^n$ is finite; for $P=0$ read $\norm a=\norm{a(0)}$. For $\abs\alpha=n$, $a^{[\alpha]}(h_1,\dots,h_r)\in W$ is the coefficient of $\lambda^\alpha$.
+\item A map $a\colon P\to W$ is \emph{ambient of degree $n$} if $ja(h)=\beta(h,\dots,h)$ for all $h\in P$, for a linear isometry $j$ of $W$ into a normed space $Z$ and a bounded $n$-linear map $\beta\colon P^n\to Z$.
+\item For $U,x_0,R,\mathfrak b$ as in Definition~\ref{amb:def:aa}, a map $f\colon U\to W$ is \emph{divided-power analytic}, or \emph{DP}, at $x_0$ with radius $R$ and bound $\mathfrak b$ if $f(x_0+h)=\sum_na_n(h)$ for $\norm h<R$, with laws $a_n\colon P\to W$ of degree $n$ and $\norm{a_n}\le \mathfrak bR^{-n}$. It is DP at $x_0$ with radius $R$ if this holds for some $\mathfrak b$, DP at $x_0$ if it holds for some $R,\mathfrak b$, and DP on $U$ if it is DP at every point of $U$. The $a_n$ are the \emph{coefficient laws} of $f$ at $x_0$. By Lemma~\ref{lem:unique} on the lines $\lambda\mapsto x_0+\lambda h$, they depend only on $f$.
+\end{enumerate}
+\end{definition}
+
+A sequel~\cite{II} studies this class. By Lemma~\ref{amb:lem:linearization}, a law $a$ of degree $n$ has a unique linearization: a linear map $L_a\colon\Gamma^n(P)\to W$ with $L_a(h^{\otimes n})=a(h)$. Its \emph{ambient constant} is
+\[
+ \operatorname{amb}(a)=\sup\{\norm{L_a(t)}/\pi(t):\ t\in\Gamma^n(P)\}\in[0,\infty],
+\]
+with $c/0=\infty$ for $c>0$ and $0/0=0$. By the same lemma, $a$ is ambient of degree $n$ if and only if $\operatorname{amb}(a)<\infty$. Also $\norm a\le\operatorname{amb}(a)$, since $\norm{L_a(h^{\otimes n})}\le\operatorname{amb}(a)\pi(h^{\otimes n})\le\operatorname{amb}(a)\norm h^n$.
+
+\begin{proposition}[no choice of enlargement]\label{amb:prop:criterion}
+\leavevmode
+\begin{enumerate}
+\item A map $f\colon U\to W$ is AA at $x_0$ with radius $R$ and bound $\mathfrak b$ if and only if it is DP at $x_0$ with radius $R$ and its coefficient laws satisfy $\operatorname{amb}(a_n)\le \mathfrak bR^{-n}$ for all $n$. It is then DP with bound $\mathfrak b$, since $\norm{a_n}\le\operatorname{amb}(a_n)$, and $ja_n(h)=b_n(h,\dots,h)$ for every ambient expansion with this radius.
+\item A law $a$ of degree $n$ such that $j\circ a$ is analytic at one point, for a linear isometry $j$ of $W$ into a normed space, is ambient of degree $n$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{remark}\label{amb:rem:one-envelope}
+The sections of Definition~\ref{amb:def:section} are the case of one fixed $j$. For a filtered space $\mathbb V$ let $\iota_{\mathbb V}\colon V\to\tilde V/V_2$ be the inclusion, an isometry whose range is closed, as its preimage in $\tilde V$ is $V_1$. The map $S\mapsto\iota_{\mathbb V}\circ S\circ\operatorname{qt}$ is a linear isometry $\mathsf J$ of $\cL(V)$ into $\cL(V_1,\tilde V/V_2)$, since each $x\in V$ has lifts $v\in V_1$ with $\norm v$ arbitrarily close to $\norm x$. Its range is closed: it consists of the operators that vanish on $V_2$ and have values in $\iota_{\mathbb V}(V)$. For $T\in\cL(\mathbb V,\mathbb V)$, $\mathsf J\rho(T)$ is $T|_{V_1}$ followed by the quotient map $\tilde V\to\tilde V/V_2$, a bounded linear function of $T\in\cL(\tilde V)$. So the transitions $\rho(\Theta_{\mathsf{ab}})$ are AA at every point through the one enlargement $\mathsf J$, and each ambient section is AA through the one isometry $\iota_{\mathbb V}$; for sub type, ambient sections are exactly the sections that are analytic through $\iota_{\mathbb V}$. What Section~\ref{amb:ssec:fixed} uses is only this case, precomposition with analytic maps, and bounded multilinear operations on the fixed $\tilde V$: no step composes two AA maps.
+\end{remark}
+
+\begin{theorem}[one enlargement]\label{amb:thm:one-enlargement}
+Let $(f_i)_{i\in I}$ be a set of germs into one normed space $W$, with arbitrary sources, each $f_i$ AA at a point $x_i$ with radius $R_i$ and bound $\mathfrak b_i$. There is one linear isometry $j\colon W\to Z$ into a Banach space through which every $f_i$ has an ambient expansion with radius $R_i$ and bound $\mathfrak b_i$. In particular, a map that is AA on $U$ has one $j$ for all points of $U$.
+\end{theorem}
+
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{proposition}[what is kept]\label{amb:prop:permanence}
+Let $U\subseteq P$ be open and $x_0\in U$.
+
+\emph{Target descent.} Let $f_Y\colon U\to Y$ be DP at $x_0$, with $j_Y\circ f_Y$ AA at $x_0$ with radius $R'$ and bound $\mathfrak b'$ for a linear isometry $j_Y\colon Y\to Z_Y$. Then $f_Y$ is AA at $x_0$ with radius $R'$ and bound $\mathfrak b'$.
+
+Now let $f\colon U\to W$ be AA at $x_0$ with radius $R$ and bound $\mathfrak b$.
+\begin{enumerate}
+\item The following are AA at the relevant point:
+\begin{enumerate}
+\item \emph{(linear postcomposition)} $\Upsilon\circ f$, for bounded linear $\Upsilon\colon W\to Y$;
+\item \emph{(analytic precomposition)} $f\circ\gamma$ at $x_0'$, for $\gamma$ from an open subset of $P'$ into $U$, analytic at $x_0'$, with $\gamma(x_0')=x_0$;
+\item \emph{(pairing, sums)} $(f,f')\colon U\to W\oplus W'$, and $f+f'$ if $W'=W$, for $f'\colon U\to W'$ AA at $x_0$;
+\item \emph{(scalar factors)} $\zeta f$, for $\zeta\colon U\to K$ analytic at $x_0$;
+\item \emph{(germs)} every map that agrees with $f$ near $x_0$.
+\end{enumerate}
+\item Let $W$ be Banach. Then $f$ is AA at every $x_1$ with $\varrho=\norm{x_1-x_0}<R$, with radius $R-\varrho$ and bound $\mathfrak bR/(R-\varrho)$. If $f$ is AA on $U$, then it is $C^\infty$, and every $D^\ell f\colon U\to\Mult^\ell(P;W)$ is AA on $U$.
+\end{enumerate}
+\end{proposition}
+
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{remark}\label{amb:rem:descent}
+For a Banach space $W$, Definition~\ref{amb:def:aa} says: $f$ is AA with radius $R$ and bound $\mathfrak b$ if and only if $j\circ f$ is analytic with this radius and bound for one linear isometry $j$ of $W$ into a Banach space. So AA is reached from analyticity by one target descent, and this is close to the definition. Analytic maps do not have the descent, for $K$ of characteristic $p>0$, $k\ge p$ and the spaces $E,F$ of Theorem~\ref{thm:operator-obstructions}(1): following $A^k_{E,E;F}$ by $j_{E,F}\circ{-}$ makes it analytic (Proposition~\ref{prop:ambient-polynomial}), and $A^k_{E,E;F}$ is analytic at no point. For $K$ complete of any characteristic, see Theorem~\ref{amb:thm:more}(1).
+\end{remark}
+
+\begin{remark}\label{amb:rem:splitting}
+This is the link with the title of the paper. Let $W$ be Banach and $f$ AA at $x_0$ with radius $R$, bound $\mathfrak b>0$ and coefficient laws $a_n$. Let $Z_f$ be the completion of the pushout~\eqref{amb:eq:pushout} of $f$, with its isometry $j_f$ (classes $[v,y]$, $j_f(v)=[v,0]$, $y=(y_n)_n$, and $\iota_n$ the inclusion of the $n$-th summand, as there). Then $f$ is analytic with radius $R$ if and only if $j_f$ has a bounded linear retraction.
+
+\emph{Step 1 (a retraction gives an expansion).} In $Z_f$ we have $[L_{a_n}(t),0]=[0,\iota_nt]$ for $t\in\Gamma^n(P)$, and $\norm{[0,\iota_ny]}\le \mathfrak bR^{-n}\pi(y)$. If $\mathsf r$ is a retraction, the maps $q_n(h_1,\dots,h_n)=\mathsf r[0,\iota_n(h_1\otimes\dots\otimes h_n)]$ have norm at most $\norm{\mathsf r}\mathfrak bR^{-n}$ and diagonals $a_n$, so they expand $f$ in $W$.
+
+\emph{Step 2 (an expansion gives a retraction).} Let $q_n\colon P^n\to W$ expand $f$ with radius $R$ and $\norm{q_n}\le \mathfrak b'R^{-n}$. By Lemma~\ref{lem:unique} on lines, $q_n(h,\dots,h)=a_n(h)$, so the linearization $q_n^\otimes$ of $q_n$ on $P^{\otimes n}$ agrees with $L_{a_n}$ on powers, hence on $\Gamma^n(P)$. So $\mathsf r[v,y]=v+\sum_nq_n^\otimes(y_n)$ is well defined on the pushout, bounded by $\max(1,\mathfrak b'/\mathfrak b)$, and extends to a retraction of $j_f$ on $Z_f$.
+
+At fixed radius this is formal: a map out of a subspace extends if and only if its pushout splits. A retraction of $j_{E,F}$ gives this for $A^k_{E,D;F}$ (Proposition~\ref{prop:split-lift}). For one germ at radius $R$ the exact condition is that its own $j_f$ has a retraction. As $f$ is also AA with every radius $R'\le R$ and bound $\mathfrak b$, the germ is analytic at $x_0$ if and only if this holds at some radius $R'\le R$.
+\end{remark}

@@ -1,0 +1,183 @@
+\section{Proofs for Section~\ref{amb:sec}}\label{amb:app}
+
+This appendix uses the notation of Section~\ref{amb:sec}. Subsection~\ref{amb:ssec:proofs-fixed} holds over every nontrivially normed field. Elsewhere $K$ is nonarchimedean and $\varpi$ is as there.
+
+\subsection{Laws}\label{amb:ssec:laws}
+
+\begin{lemma}[linearization]\label{amb:lem:linearization}
+Let $n\ge0$.
+\begin{enumerate}
+\item A bounded polynomial law $a\colon P\to W$ of degree $n$ has a unique linear map $L_a\colon\Gamma^n(P)\to W$ with $L_a(h^{\otimes n})=a(h)$ for $h\in P$, and $\norm{L_a(t)}\le\norm a\,\norm t_\Gamma$.
+\item If $\mathsf{Lin}\colon\Gamma^n(P)\to W$ is linear with $\norm{\mathsf{Lin}(t)}\le C\norm t_\Gamma$, then $h\mapsto\mathsf{Lin}(h^{\otimes n})$ is a bounded polynomial law of degree $n$ and norm at most $C$.
+\item If a map $a\colon P\to W$ satisfies $ja(h)=\beta(h,\dots,h)$ for a linear isometry $j\colon W\to Z$ and a bounded $n$\nobreakdash-linear $\beta\colon P^n\to Z$, then $a$ is a bounded polynomial law of degree $n$, with $\norm a\le\norm\beta$ and $\operatorname{amb}(a)\le\norm\beta$.
+\item If $\operatorname{amb}(a)<\infty$, then $a$ is ambient of degree $n$, with an $n$\nobreakdash-linear map of norm $\operatorname{amb}(a)$.
+\end{enumerate}
+\end{lemma}
+
+Without norms, and since $K$ is an infinite field, the maps of Definition~\ref{amb:def:law}(1) are the maps induced by homogeneous polynomial laws in the sense of Roby, and each determines its law~\cite[Th.~I.1, Props.~I.1, I.8, IV.6]{Ro}; items (1) and~(2) are then the linearization~\cite[Th.~IV.1, Prop.~IV.5]{Ro}.
+
+\begin{proof}
+\emph{Step 1 (the linear map, item (1)).} Let $\sum_i\lambda_ih_i^{\otimes n}=0$. Choose a basis $e_1,\dots,e_{m'}$ of the span of the $h_i$ and write $h_i=\sum_c\theta_{i,c}e_c$, and put $\theta_i^\alpha=\prod_c\theta_{i,c}^{\alpha_c}$. By~\eqref{amb:eq:orbit}, $\sum_\alpha(\sum_i\lambda_i\theta_i^\alpha)\allowbreak O_\alpha(e_1,\dots,e_{m'})=0$. The tensors $O_\alpha(e_1,\dots,e_{m'})$ are sums of disjoint sets of basis tensors, so they are linearly independent and every $\sum_i\lambda_i\theta_i^\alpha$ vanishes. Hence $\sum_i\lambda_ia(h_i)=\sum_\alpha(\sum_i\lambda_i\theta_i^\alpha)a^{[\alpha]}(e_1,\dots,e_{m'})=0$. So $L_a(\sum_i\lambda_ih_i^{\otimes n})=\sum_i\lambda_ia(h_i)$ is well defined on the span of the powers, which is $\Gamma^n(P)$, and this span gives uniqueness. Also $\norm{L_a(t)}\le\norm a\sum_i\abs{\lambda_i}\norm{h_i}^n$; take the infimum over representations of $t$.
+
+\emph{Step 2 (the converse, item (2)).} By~\eqref{amb:eq:orbit}, $\mathsf{Lin}((\sum_i\lambda_ih_i)^{\otimes n})=\sum_\alpha\lambda^\alpha\mathsf{Lin}(O_\alpha(h_1,\dots,h_r))$ is a homogeneous polynomial of degree $n$ with coefficients in $W$, and $\norm{\mathsf{Lin}(h^{\otimes n})}\le C\norm h^n$.
+
+\emph{Step 3 (ambient diagonals are laws, item (3)).} For $h_1,\dots,h_r\in P$, the map $\lambda\mapsto\beta(\sum_c\lambda_ch_c,\dots,\sum_c\lambda_ch_c)$ is a homogeneous polynomial of degree $n$ with coefficients in $Z$. As $K$ is infinite, interpolation in each variable writes its coefficients as combinations of its values, which lie in $j(W)$. So $a$ is a law, and $\norm{a(h)}=\norm{\beta(h,\dots,h)}\le\norm\beta\norm h^n$. Let $\beta_\otimes\colon P^{\otimes n}\to Z$ linearize $\beta$. Then $jL_a$ and $\beta_\otimes$ agree on powers, hence on $\Gamma^n(P)$, and $\norm{L_a(t)}=\norm{\beta_\otimes(t)}\le\norm\beta\,\pi(t)$.
+
+\emph{Step 4 (the pushout of one law, item (4)).} Put $C=\operatorname{amb}(a)$. On $W\oplus P^{\otimes n}$ let $\norm{(v,y)}_Z=\inf\{\norm{v+L_a(t)}+C\pi(y-t):t\in\Gamma^n(P)\}$. This is the quotient seminorm of $\norm v+C\pi(y)$ modulo the pairs $(L_a(t),-t)$. Let $Z$ be the quotient by its kernel, with classes $[v,y]$, and put $j(v)=[v,0]$. Taking $t=0$ gives $\norm{j(v)}\le\norm v$, and $\norm{v+L_a(t)}+C\pi(t)\ge\norm v-\norm{L_a(t)}+C\pi(t)\ge\norm v$; so $j$ is an isometry. The map $\beta(h_1,\dots,h_n)=[0,h_1\otimes\dots\otimes h_n]$ has norm at most $C$, and taking $t=h^{\otimes n}$ shows $\beta(h,\dots,h)=[a(h),0]=ja(h)$. Item~(3) gives $\norm\beta\ge C$.
+\end{proof}
+
+\begin{lemma}[mixed terms]\label{amb:lem:mixed}
+Let $a\colon W\to Y$ be a bounded polynomial law of degree $m$.
+\begin{enumerate}
+\item For $w_1,\dots,w_r\in W$ and $\alpha\in\N^r$ with $\abs\alpha=m$,
+\begin{equation}\label{amb:eq:mixed-sum}
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}\le(8/\abs\varpi)^m\norm a\,(\norm{w_1}+\dots+\norm{w_r})^m.
+\end{equation}
+\item For $x,y\in W$ and $0\le i\le m$,
+\begin{equation}\label{amb:eq:binomial}
+ \norm{a^{[(m-i,i)]}(x,y)}\le(16/\abs\varpi^2)^m\norm a\,\norm x^{m-i}\norm y^i.
+\end{equation}
+So $a(x+y)=\sum_{i\le m}a^{[(m-i,i)]}(x,y)$ is a finite expansion at $x$ by laws in $y$: $a$ is continuous and DP on $W$. It is Lipschitz on bounded sets: for $m\ge1$, $R>0$ and $\norm x,\norm y\le R$,
+\begin{equation}\label{amb:eq:lipschitz}
+ \norm{a(x+y)-a(x)}\le m(16/\abs\varpi^2)^m\norm a\,R^{m-1}\norm y.
+\end{equation}
+\item With $C_0=8\mathrm e/\abs\varpi^2$, for $w_i$ and $\alpha$ as in~(1),
+\begin{equation}\label{amb:eq:multinomial}
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}\le C_0^m\norm a\,\frac{m!}{\alpha_1!\cdots\alpha_r!}\prod_i\norm{w_i}^{\alpha_i}.
+\end{equation}
+\item Let $K'\supseteq K$ be a nonarchimedean field whose absolute value extends that of $K$, let $W$ be $K'^{\,m'}$ with the maximum norm, written $c_0([m'],K')$, with unit vectors $e_1,\dots,e_{m'}$, and let $Y$ be an ultrametric normed $K'$\nobreakdash-space and $a$ a law over $K'$. For $\alpha\in\N^{m'}$ with $\abs\alpha=m$,
+\begin{equation}\label{amb:eq:node}
+ \norm{a^{[\alpha]}(e_1,\dots,e_{m'})}\le\abs\varpi^{-m}\norm a.
+\end{equation}
+\item If $P$ is ultrametric and $x_1,\dots,x_m\in P$, then
+\begin{equation}\label{amb:eq:sym}
+ \norm{O_{(1,\dots,1)}(x_1,\dots,x_m)}_\Gamma\le(8/\abs\varpi^2)^m\prod_i\norm{x_i}.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (nodes).} For an integer $\ell\ge0$ with binary digits $\ell_u$, so that $\ell=\sum_u\ell_u2^u$, put $\xi_\ell=\sum_u\ell_u\varpi^u\in K$. Then $\abs{\xi_\ell}\le1$. For $\ell\ne\ell'$ the least $u$ with $\ell_u\ne\ell'_u$ is $\ord_2(\ell-\ell')$, so $\abs{\xi_\ell-\xi_{\ell'}}=\abs\varpi^{\ord_2(\ell-\ell')}$. For $0\le\ell\le i$ the numbers $\abs{\ell-\ell'}$, with $\ell'\le i$ and $\ell'\ne\ell$, are $1,\dots,\ell$ and $1,\dots,i-\ell$, and $\ord_2(\ell!)\le\ell$, $\ord_2((i-\ell)!)\le i-\ell$. So $\prod_{\ell'\le i,\ell'\ne\ell}\abs{\xi_\ell-\xi_{\ell'}}^{-1}\le\abs\varpi^{-i}$. Hence the divided difference $\sum_{\ell\le i}\tau(\xi_\ell)\prod_{\ell'\le i,\ell'\ne\ell}(\xi_\ell-\xi_{\ell'})^{-1}$ of order $i$ of a map $\tau$ into a normed space is a combination of its $i+1$ values at these nodes with coefficients of absolute value at most $\abs\varpi^{-i}$.
+
+\emph{Step 2 (interpolation on the nodes, item (1)).} If $m=0$, $a$ is constant. Arguments with $\alpha_c=0$ do not change $a^{[\alpha]}(w)$, so assume all $\alpha_c\ge1$; then $r\le m$. If $r=1$, $a^{[\alpha]}(w_1)=a(w_1)$. Let $r\ge2$ and $N=r-1$. The map $\Pi(\lambda)=a(\lambda_1w_1+\dots+\lambda_Nw_N+w_r)$ on $K^N$ is a polynomial of total degree at most $m$ with coefficients in $Y$, and $a^{[\alpha]}(w)$ is its coefficient of $\lambda_1^{\alpha_1}\cdots\lambda_N^{\alpha_N}$. Newton's interpolation formula on $\xi_0,\dots,\xi_m$ in each variable gives
+\[
+ \Pi(\lambda)=\sum_{\mathbf i\in\{0,\dots,m\}^N}\mathsf c_{\mathbf i}\prod_{c=1}^N\mathsf N_{i_c}(\lambda_c),\qquad\mathsf N_i(\lambda_c)=\prod_{\ell<i}(\lambda_c-\xi_\ell),
+\]
+where $\mathsf c_{\mathbf i}\in Y$ is the divided difference of $\Pi$ of order $i_c$ in $\lambda_c$ on $\xi_0,\dots,\xi_{i_c}$, for each $c$. A divided difference of order $i$ kills polynomials of degree below $i$, so $\mathsf c_{\mathbf i}=0$ unless $\abs{\mathbf i}\le m$. By Step~1, $\mathsf c_{\mathbf i}$ is a combination of at most $\prod_c(i_c+1)\le2^{\abs{\mathbf i}}$ values of $\Pi$ at points with coordinates $\xi_\ell$, with coefficients of absolute value at most $\abs\varpi^{-\abs{\mathbf i}}$. Each value has norm at most $\norm a(\sum_c\norm{w_c})^m$. The $\mathsf N_i$ have coefficients of absolute value at most $1$. So the coefficient of $\lambda_1^{\alpha_1}\cdots\lambda_N^{\alpha_N}$ is a sum of at most $\binom{m+N}N\le4^m$ terms, each of norm at most $(2/\abs\varpi)^m\norm a(\sum_c\norm{w_c})^m$.
+
+\emph{Step 3 (two arguments, item (2)).} If $x,y\ne0$, choose $\lambda_1,\lambda_2\in K$ with $\abs\varpi<\abs{\lambda_1}\norm x\le1$ and $\abs\varpi<\abs{\lambda_2}\norm y\le1$. As $a^{[(m-i,i)]}(\lambda_1x,\lambda_2y)=\lambda_1^{m-i}\lambda_2^ia^{[(m-i,i)]}(x,y)$, \eqref{amb:eq:mixed-sum} gives~\eqref{amb:eq:binomial}, which is trivial if $x=0$ or $y=0$. For fixed $x$, $y\mapsto a^{[(m-i,i)]}(x,y)$ is a coefficient of a polynomial on the span of finitely many vectors, so by~\eqref{amb:eq:binomial} it is a bounded law of degree $i$. Summing~\eqref{amb:eq:binomial} over $1\le i\le m$ gives~\eqref{amb:eq:lipschitz}, since $a^{[(m,0)]}(x,y)=a(x)$.
+
+\emph{Step 4 (scaling each argument, item (3)).} If $m=0$, $a$ is constant. Otherwise drop the $w_i$ with $\alpha_i=0$; if some remaining $w_i=0$, both sides vanish. Choose $\lambda_i\in K$ with $\abs\varpi\alpha_i/m<\abs{\lambda_i}\norm{w_i}\le\alpha_i/m$. Then $\sum_i\abs{\lambda_i}\norm{w_i}\le1$, so $\norm{a^{[\alpha]}(\lambda_1w_1,\dots,\lambda_rw_r)}\le(8/\abs\varpi)^m\norm a$ by~\eqref{amb:eq:mixed-sum}. Undoing the scaling gives
+\[
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}\le(8/\abs\varpi^2)^m\norm a\,m^m\prod_i\alpha_i^{-\alpha_i}\prod_i\norm{w_i}^{\alpha_i},
+\]
+and $m^m\le\mathrm e^mm!$, $\alpha_i^{\alpha_i}\ge\alpha_i!$.
+
+\emph{Step 5 (ultrametric cases, items (4) and~(5)).} For~(4), follow Step~2 with the unit vectors $e_c$, $\alpha_c\ge1$, in place of the $w_c$. Every node point has maximum norm $1$, so every value of $\Pi$ has norm at most $\norm a$. In the ultrametric $Y$ this gives $\norm{\mathsf c_{\mathbf i}}\le\abs\varpi^{-\abs{\mathbf i}}\norm a$ with no count of terms, and the coefficient is an ultrametric sum over $\abs{\mathbf i}\le m$. For~(5), let $\mathsf W_m$ be the quotient of $\Gamma^m(P)$ by the kernel of $\norm\cdot_\Gamma$. By Lemma~\ref{amb:lem:linearization}(2), $h\mapsto[h^{\otimes m}]$ is a law into $\mathsf W_m$ of norm at most $1$, and by~\eqref{amb:eq:orbit} its coefficient of index $(1,\dots,1)$ is the class of $O_{(1,\dots,1)}$. In Step~2 the node points have norm at most $\max_i\norm{x_i}$, as $P$ is ultrametric, and the rest is unchanged; so $\norm{O_{(1,\dots,1)}(x_1,\dots,x_m)}_\Gamma\le(8/\abs\varpi)^m\max_i\norm{x_i}^m$. Both sides of~\eqref{amb:eq:sym} vanish if some $x_i=0$; otherwise scale each $x_i$ to $\abs\varpi<\abs{\lambda_i}\norm{x_i}\le1$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{amb:prop:criterion}]
+\emph{Step 1 (coefficients).} Let $f$ be DP at $x_0$ with radius $R$, bound $\mathfrak b$ and laws $a_n$. For $h\ne0$, $f(x_0+\lambda h)=\sum_n\lambda^na_n(h)$ for $\abs\lambda<R/\norm h$, with $\norm{a_n(h)}(R/\norm h)^n\le \mathfrak b$. By Lemma~\ref{lem:unique}, $f$ determines the $a_n$. If $f$ also has an ambient expansion~\eqref{amb:eq:aa}, the same lemma in $Z$ gives $ja_n(h)=b_n(h,\dots,h)$; the case $h=0$ is clear.
+
+\emph{Step 2 (ambient analytic implies DP).} Let $f$ have an ambient expansion with radius $R$ and bound $\mathfrak b$, and put $a_n(h)=j^{-1}(b_n(h,\dots,h))$. By Lemma~\ref{amb:lem:linearization}(3), $a_n$ is a law with $\norm{a_n}$ and $\operatorname{amb}(a_n)$ at most $\norm{b_n}\le \mathfrak bR^{-n}$. The partial sums $\sum_{n\le N}a_n(h)$ lie in $W$, and their images under the isometry $j$ converge to $jf(x_0+h)$; so they converge to $f(x_0+h)$.
+
+\emph{Step 3 (the pushout).} On $\bigoplus_nP^{\otimes n}$, with $\iota_n$ the inclusion of the $n$\nobreakdash-th summand, put $\norm y_{\pi,R}=\sum_nR^{-n}\pi(y_n)$. Let $f$ be DP at $x_0$ with radius $R$ and $\operatorname{amb}(a_n)\le \mathfrak bR^{-n}$ for all $n$. Then $L_\oplus(t)=\sum_nL_{a_n}(t_n)$ on $\bigoplus_n\Gamma^n(P)$ satisfies $\norm{L_\oplus(t)}\le \mathfrak b\norm t_{\pi,R}$. On $W\oplus\bigoplus_nP^{\otimes n}$ let
+\begin{equation}\label{amb:eq:pushout}
+ \norm{(v,y)}_Z=\inf\Bigl\{\norm{v+L_\oplus(t)}+\mathfrak b\norm{y-t}_{\pi,R}:\ t\in\bigoplus_n\Gamma^n(P)\Bigr\},
+\end{equation}
+the quotient seminorm of $\norm v+\mathfrak b\norm y_{\pi,R}$ modulo the pairs $(L_\oplus(t),-t)$. Let $Z$ be the quotient by its kernel, with classes $[v,y]$, and put $j(v)=[v,0]$. As in Step~4 of the proof of Lemma~\ref{amb:lem:linearization}, $j$ is an isometry. The maps $b_n(h_1,\dots,h_n)=[0,\iota_n(h_1\otimes\dots\otimes h_n)]$ have norm at most $\mathfrak bR^{-n}$, and taking $t=\iota_nh^{\otimes n}$ shows $b_n(h,\dots,h)=[a_n(h),0]=ja_n(h)\in j(W)$. So $jf(x_0+h)=\sum_nb_n(h,\dots,h)$ for $\norm h<R$. Completing $Z$ keeps all of this. With Steps~1 and~2 this proves~(1).
+
+\emph{Step 4 (one point suffices, item (2)).} Let $a$ be a bounded law of degree $n$ with $ja(h_0+h)=\sum_ib_i(h,\dots,h)$ near $h=0$. The polynomial $\lambda\mapsto ja(h_0+\lambda h)$ has coefficient $ja(h)$ at $\lambda^n$. Lemma~\ref{lem:unique} on the line gives $b_n(h,\dots,h)=ja(h)$, so $a$ is ambient of degree $n$.
+\end{proof}
+
+\subsection{Fixed envelopes}\label{amb:ssec:proofs-fixed}
+
+Let $\beta$ be a bounded $d$\nobreakdash-linear map and let $\varsigma_1,\dots,\varsigma_d$ be maps analytic at a point. Then $\beta(\varsigma_1,\dots,\varsigma_d)$ is analytic at that point: for small increments the family of all values of $\beta$ at terms of the expansions is absolutely summable in the completion of the target, and grouping it by total degree gives finite sums in the target, whose partial sums converge there, with multilinear coefficients of geometric bound after the radius is shrunk.
+
+\begin{proof}[Proof of Proposition~\ref{amb:prop:sections}]
+\emph{Step 1 (charts, module).} Let $s_{\mathsf a},s_{\mathsf b}$ be local expressions of a section of $\mathcal B$ in charts of the analytic atlas of $\widetilde{\mathcal B}$, so that $s_{\mathsf a}(x)=\rho(\Theta_{\mathsf{ab}}(x))s_{\mathsf b}(x)$. If $s_{\mathsf b}=\operatorname{qt}\circ\varsigma$ with $\varsigma$ analytic into $\tilde V$ and values in $V_1$, then $s_{\mathsf a}=\operatorname{qt}\circ(\Theta_{\mathsf{ab}}\varsigma)$, as $\rho(\Theta)\operatorname{qt}=\operatorname{qt}\Theta$ on $V_1$. The map $x\mapsto\Theta_{\mathsf{ab}}(x)\varsigma(x)$ is analytic with values in $V_1$. Sums and analytic scalar multiples lift in the same way.
+
+\emph{Step 2 (operations).} Let $\mathsf o$ be an operation on ambient sections $s_1,\dots,s_d$, with lifts $\varsigma_1,\dots,\varsigma_d$, with local expression $\rho_d(\Theta(x))$, and with quotient map $\operatorname{qt}'$ of its target. The identities $\rho_d(\Theta)\circ(\rho(\Theta_1)\times\dots\times\rho(\Theta_d))=\rho_d(\Theta\circ(\Theta_1\times\dots\times\Theta_d))$ and $\rho(\Theta')\circ\rho_d(\Theta)=\rho_d(\Theta'\circ\Theta)$ show that this form of the local expression does not depend on the charts. The local expression of $\mathsf o(s_1,\dots,s_d)$ is $\operatorname{qt}'$ applied to $x\mapsto\Theta(x)(\varsigma_1(x),\dots,\varsigma_d(x))$, which is analytic with values in $V_1'$.
+
+\emph{Step 3 (the split case).} Let $\mathsf l$ be a bounded linear section of $\operatorname{qt}$ and $\mathsf r$ a bounded linear retraction of $\tilde V$ onto $V_1$. For $T$ preserving the filtration, $\rho(T)=\operatorname{qt}\circ\mathsf r\circ T\circ\mathsf l$, since $T\mathsf lv\in V_1$ is fixed by $\mathsf r$. So $\rho(\Theta_{\mathsf{ab}})$ is a bounded linear image of $\Theta_{\mathsf{ab}}$, hence analytic, with inverse family $\rho(\Theta_{\mathsf{ba}})$. An analytic local expression $s$ lifts to the analytic map $\mathsf l\circ s$. Conversely, if $s=\operatorname{qt}\circ\varsigma$, then $\varsigma=\mathsf r\circ\varsigma$ is analytic into $V_1$ and $s$ is analytic.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:seven-eight}]
+\emph{Step 1 (the subfunctor, item (1)).} By Proposition~\ref{prop:ambient-polynomial} and its proof, $\mathfrak m_k$ is the joint action $B$, the diagonal of a bounded $(k+1)$\nobreakdash-linear map of norm at most $1$. The subspace $\Alt^k(E;F)$ is closed in $\Mult^k(E;F)$, and two equal arguments stay equal under $\mathbf f_1$; so $\mathfrak m_k(\mathbf f_1,\mathbf f_0)$ preserves alternating maps, and its restriction is $\alpha_k(\mathbf f_1,\mathbf f_0)$.
+
+\emph{Step 2 (the filtered bundle, item (2)).} Over a common trivializing cover, $\Theta_{\mathsf{ab}}(x)=\mathfrak m_k(\mathbf g^1_{\mathsf{ba}}(x),\mathbf g^0_{\mathsf{ab}}(x))$ is jointly analytic, as a bounded multilinear evaluation of analytic operator families. Functoriality gives $\Theta_{\mathsf{ab}}\Theta_{\mathsf{bc}}=\Theta_{\mathsf{ac}}$ and the inverse $\Theta_{\mathsf{ba}}$, so these transitions glue the analytic bundle $\cL(M_1,\dots,M_1;M_0)$, as in Step~1 of the proof of Theorem~\ref{thm:bundle-lifting}. By Step~1 they preserve $\Alt^k(E;F)$, and so does the inverse: this is a filtered analytic bundle of sub type. Their restrictions $\alpha_k(\mathbf g^1_{\mathsf{ba}},\mathbf g^0_{\mathsf{ab}})$ are the transitions of the $C^\infty$ bundle of Theorem~\ref{thm:bundle-lifting}, which applies by Corollary~\ref{cor:classification}. The union of two analytic atlases of $M_1$, and of two of $M_0$, is again an analytic atlas, and the argument applies to it. So all the charts induced by analytic vector charts of $M_1,M_0$ form one such atlas, and by Proposition~\ref{amb:prop:sections} the bundle and its ambient sections do not depend on the cover.
+
+\emph{Step 3 (evaluation, n\textsuperscript{o}~7.8.1).} The local expression of an ambient $\omega$ is analytic into $\Mult^k(E;F)$ and those of the $\mathsf s_i$ are analytic into $E$. Evaluation is bounded $(k+1)$\nobreakdash-linear, so $\omega(\mathsf s_1,\dots,\mathsf s_k)$ is analytic.
+
+\emph{Step 4 (exterior products, n\textsuperscript{o}~7.8.2).} Let $\mathcal Q,\mathcal Q',\mathcal Q''$ have fibers $F_{\mathcal Q},F_{\mathcal Q'},F_{\mathcal Q''}$, so that $\varphi_x\colon F_{\mathcal Q}\times F_{\mathcal Q'}\to F_{\mathcal Q''}$ is the local expression of the pairing $\varphi$. On $\Mult^k(E;F_{\mathcal Q})\times\Mult^{k'}(E;F_{\mathcal Q'})$ let $\operatorname{sh}_{\varphi_x}$ be Bourbaki's formula~(1), the formula~\eqref{eq:form-shuffle} with $\varphi_x$ in place of the product and with degrees $k,k'$. In degree $0$ the fiber $F_{\mathcal Q}$ is the filtered space $(F_{\mathcal Q};F_{\mathcal Q},0)$. The map $\varphi_x\mapsto\operatorname{sh}_{\varphi_x}$ is bounded linear, of norm at most $\binom{k+k'}k$, so $x\mapsto\operatorname{sh}_{\varphi_x}$ is analytic. Let two arguments agree and let the inputs be alternating. Terms with both in one block vanish. Shuffles placing them in opposite blocks cancel in pairs with opposite signs, as in Step~2 of the proof of Theorem~\ref{thm:ambient-forms}; this uses only bilinearity of $\varphi_x$, in every characteristic. So $\wedge_\varphi$ is a bilinear operation, and Proposition~\ref{amb:prop:sections} applies.
+
+\emph{Step 5 (the graded algebra, n\textsuperscript{o}~7.8.3).} The multiplication of $\mathsf A$ is an analytic pairing, so Step~4 gives the product on $\Omega^*(U)$, with $\Alt^0(M_1;\mathsf A)=\mathsf A$. The operations of Steps~3, 4 and~6 act on $\Mult$, but the identities below are claimed only for alternating maps, at each point of $U$; this suffices, as ambient sections have alternating values. Associativity and anticommutativity follow as in Step~2 of the proof of Theorem~\ref{thm:ambient-forms}, from associativity and commutativity of the fiber $\mathsf A_x$. Formula~(2) is the Laplace expansion, by induction on the number of factors, from~(1).
+
+\emph{Step 6 (interior products, n\textsuperscript{o}~7.8.4).} Let $\operatorname{ins}(v,\mathsf m)=\mathsf m(v,\cdot,\dots,\cdot)$. For a transition $\mathbf f_1$ of $M_1$ and a transition $\mathbf f_0$ of $\mathsf A$,
+\[
+ \operatorname{ins}\bigl(\mathbf f_1v,\ \mathbf f_0\circ\mathsf m\circ(\mathbf f_1^{-1})^{\times k}\bigr)=\mathbf f_0\circ\operatorname{ins}(v,\mathsf m)\circ(\mathbf f_1^{-1})^{\times(k-1)},
+\]
+so the local expression of $\operatorname{ins}$ is the same constant in every induced chart. It is bounded bilinear of norm at most $1$ and maps $E\times\Alt^k(E;F)$ into $\Alt^{k-1}(E;F)$, for the fiber $F$ of $\mathsf A$. So it is a bilinear operation, with $E$ read as $(E;E,0)$. Formulas (3) and~(5) are its definition and~(4) is alternation, with $i(\mathsf s)=0$ on degree $0$ as in~\cite[n\textsuperscript{o}~7.8.4]{Bou}. For~(6), split the sum in~(1) by the block containing the inserted argument; in the second block it moves past $k$ arguments. Formula~(7) follows from (5) and~(6) by induction.
+
+\emph{Step 7 (inverse images and forms, items (3)(e) and~(4)).} For an analytic map $\gamma\colon M'\to M$ the transitions of the pulled-back bundles are the composites with $\gamma$, so those of $\Alt^k(\gamma^*M_1;\gamma^*M_0)$ inside its multilinear bundle are $\Theta_{\mathsf{ab}}\circ\gamma$. This is $\gamma^*$ of the filtered bundle, and lifts compose with $\gamma$. For $M_1=TM$, $M_0=M\times K$ and $K$ complete the transitions are given by derivatives of analytic chart changes, and being ambient in the induced charts is the definition of $\Omega^k_{\mathrm{amb}}(M)$ in Section~\ref{sec:forms}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:limits}]
+\emph{Step 1 (incompatible charts, item (1)).} Take $E,F$ from Theorem~\ref{thm:operator-obstructions}(1) and apply Corollary~\ref{cor:shear-bundle} with $D=E$. Propositions~\ref{prop:tangent-values}(1) and~\ref{prop:tangent-obstruction}(1) give the same with $M_1=TM$.
+
+\emph{Step 2 (no retraction, item (2)).} For these $E,F$, a bounded retraction of $j_{E,F}$ would give a bounded $k$\nobreakdash-linear lift of $A^k_{E,E;F}$ by Proposition~\ref{prop:split-lift}. Then $A^k_{E,E;F}$ would be a continuous polynomial, against Theorem~\ref{thm:operator-obstructions}(1). For $M_1=M\times E$ and $M_0=M\times F$ every fiber of $\Alt^k(M_1;M_0)$ is then not a direct factor of the fiber of $\cL(M_1,\dots,M_1;M_0)$.
+
+\emph{Step 3 (ambient, not analytic, item (3)).} This is Proposition~\ref{prop:tangent-obstruction}(2), with the Banach space named $N$ there as the manifold $M$ in its one chart, $M_1=TM$ and $M_0=M\times K$.
+
+\emph{Step 4 (no compatible structure, item (4)).} In the induced product chart, used on both sides, the local expression of the map induced by the shear $(u,z)\mapsto(u,g(u)z)$ is $u\mapsto g(u)^*$. This is not analytic at $u_0$ by Proposition~\ref{prop:shear}, while an analytic morphism has analytic local expressions in all charts. For the other claim, automorphisms are taken over open subsets of $M$, and $A^k_{E,D;F}$ is analytic nowhere, by Proposition~\ref{prop:homogeneous-lift}. Let $\mathcal S$ be such a structure containing the chart $\mathsf X$ over an open $U$ induced by an analytic vector chart of $M\times H$ and the product chart of $M\times F$. After a constant isomorphism of model spaces, the frame of this vector chart is an analytic map $\mathbf k$ from $U$ to the invertible operators of $H$, with analytic inverse family, and $(u,z)\mapsto(u,\mathbf k(u)z)$ is an analytic automorphism of $M\times H$ over $U$. Let $\mathbf k_*$ be the map it induces, chosen with $\mathsf X\circ\mathbf k_*^{-1}$ the induced product chart over $U$. By hypothesis $\mathbf k_*$ and $\mathbf k_*^{-1}$ are analytic morphisms of $\mathcal S$, and the transitions between $\mathsf X$ and $\mathsf X\circ\mathbf k_*^{-1}$ are local expressions of these maps; so $\mathcal S$ contains the induced product chart over $U$. The previous sentences, over $U$ and at any $u_0\in U$, give a contradiction.
+
+\emph{Step 5 (when the fibers behave, item (5)).} If $\alpha_k$ is analytic on the hom spaces of the fibers, the transitions $\alpha_k(\mathbf g^1_{\mathsf{ba}},\mathbf g^0_{\mathsf{ab}})$ are analytic and glue an analytic bundle, by Step~1 of the proof of Theorem~\ref{thm:bundle-lifting}. Composing an analytic section with $j_{E,F}$ makes it ambient. If $j_{E,F}$ has a bounded retraction, the split clause of Proposition~\ref{amb:prop:sections} applies, with $\operatorname{qt}=\id$ and $\mathsf l=\id$. The instances named in the statement are Corollaries~\ref{cor:classification} and~\ref{fib:cor:bourbaki} for analyticity, and normalized antisymmetrization and Theorem~\ref{thm:spherical} for the retraction.
+\end{proof}
+
+\subsection{Enlargements}\label{amb:ssec:proofs-aa}
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:one-enlargement}]
+\emph{Step 1 (data).} Let the germs be $f_i\colon U_i\to W$, $i\in I$, with $U_i$ open in $P_i$, at $x_i$, with radius $R_i$ and bound $\mathfrak b_i$. Let $a^i_n$ be their coefficient laws and $L_{\oplus,i}=\sum_nL_{a^i_n}$, so that $\norm{L_{\oplus,i}(t)}\le \mathfrak b_i\norm t_{\pi,R_i}$ on $\bigoplus_n\Gamma^n(P_i)$ by Proposition~\ref{amb:prop:criterion}.
+
+\emph{Step 2 (amalgamated pushout).} On $W\oplus\bigoplus_{i\in I}\bigoplus_nP_i^{\otimes n}$ put
+\[
+ \norm{(v,(y_i)_i)}_Z=\inf\Bigl\{\Bigl\lVert v+\sum_iL_{\oplus,i}(t_i)\Bigr\rVert+\sum_i\mathfrak b_i\norm{y_i-t_i}_{\pi,R_i}\Bigr\},
+\]
+over finitely supported families $t_i\in\bigoplus_n\Gamma^n(P_i)$. This is a quotient seminorm, as in~\eqref{amb:eq:pushout}. Let $Z$ be the completion of the quotient by its kernel, $j(v)=[v,0]$, and let $b^i_n(h_1,\dots,h_n)$ be the class of $h_1\otimes\dots\otimes h_n$ in the $n$\nobreakdash-th summand of the $i$\nobreakdash-th family.
+
+\emph{Step 3 ($j$ is an isometry).} All $t_i=0$ gives $\norm{j(v)}\le\norm v$. For every family, $\norm{v+\sum_iL_{\oplus,i}(t_i)}+\sum_i\mathfrak b_i\norm{t_i}_{\pi,R_i}\ge\norm v-\sum_i\norm{L_{\oplus,i}(t_i)}+\sum_i\mathfrak b_i\norm{t_i}_{\pi,R_i}\ge\norm v$.
+
+\emph{Step 4 (expansions).} We have $\norm{b^i_n}\le \mathfrak b_iR_i^{-n}$, and taking $t_i=\iota_nh^{\otimes n}$, the other terms zero, shows $b^i_n(h,\dots,h)=ja^i_n(h)\in j(W)$. So $jf_i(x_i+h)=\sum_nb^i_n(h,\dots,h)$ for $\norm h<R_i$. For the last assertion take $I=U$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{amb:prop:permanence}]
+Let $f$ have radius $R$, bound $\mathfrak b$ and laws $a_n$.
+
+\emph{Step 1 (target descent).} Let $f_Y\colon U\to Y$ be DP at $x_0$ with laws $a^Y_n$, and let $j_Yf_Y$ be ambient analytic at $x_0$ with radius $R'$ and bound $\mathfrak b'$, for a linear isometry $j_Y\colon Y\to Z_Y$. By Proposition~\ref{amb:prop:criterion} and Step~1 of its proof, the coefficient laws of $j_Yf_Y$ are $j_Ya^Y_n$, and $\operatorname{amb}(a^Y_n)=\operatorname{amb}(j_Ya^Y_n)\le \mathfrak b'R'^{-n}$, as $L_{j_Ya^Y_n}=j_YL_{a^Y_n}$; also $\norm{a^Y_n}\le\operatorname{amb}(a^Y_n)$. For $\norm h<R'$ the partial sums $\sum_{n\le N}a^Y_n(h)$ lie in $Y$, and their images under $j_Y$ converge to $j_Yf_Y(x_0+h)$; so they converge to $f_Y(x_0+h)$, and $f_Y$ is DP with radius $R'$. Proposition~\ref{amb:prop:criterion} applies to $f_Y$.
+
+\emph{Step 2 (postcomposition, pairs, germs).} For bounded linear $\Upsilon\colon W\to Y$, $\Upsilon f$ has laws $\Upsilon a_n$ with $L_{\Upsilon a_n}=\Upsilon L_{a_n}$, so $\operatorname{amb}(\Upsilon a_n)\le\norm\Upsilon \mathfrak bR^{-n}$. For $f'\colon U\to W'$ ambient analytic at $x_0$ with radius $R_{W'}$ and bound $\mathfrak b_{W'}$ and with laws $a'_n$, $(f,f')$ has laws $(a_n,a'_n)$ into $W\oplus W'$ with the maximum norm, and $\operatorname{amb}(a_n,a'_n)\le\max(\operatorname{amb}(a_n),\operatorname{amb}(a'_n))$, so $(f,f')$ has radius $\min(R,R_{W'})$ and bound $\max(\mathfrak b,\mathfrak b_{W'})$. Sums follow with the addition map. Apply Proposition~\ref{amb:prop:criterion}. Dependence only on the germ is clear after shrinking the radius.
+
+\emph{Step 3 (scalar factors).} Take an ambient expansion $(j,(b_n))$ of $f$, and let $\zeta(x_0+h)=\sum_i\zeta_i(h,\dots,h)$ with $\zeta_i\colon P^i\to K$, $\norm{\zeta_i}\le \mathfrak b_\zeta R_\zeta^{-i}$. Put
+\[
+ \beta_N(h_1,\dots,h_N)=\sum_{i+n=N}\zeta_i(h_1,\dots,h_i)\,b_n(h_{i+1},\dots,h_N),
+\]
+of norm at most $(N+1)\mathfrak b_\zeta \mathfrak b\min(R,R_\zeta)^{-N}$. Its diagonal $\sum_{i+n=N}\zeta_i(h,\dots,h)ja_n(h)$ lies in $j(W)$. For $R_3<\min(R,R_\zeta)$ this norm is at most $\mathfrak b_3R_3^{-N}$ for a suitable $\mathfrak b_3$. For $\norm h<R_3$ the double series converges absolutely in the completion of $Z$, with sum $j(\zeta f)(x_0+h)\in Z$, and its partial sums in $N$ lie in $Z$. So $\zeta f$ is ambient analytic with radius $R_3$.
+
+\emph{Step 4 (precomposition).} Let $\gamma$ map an open subset of $P'$ into $U$, with $\gamma(x'_0)=x_0$ and $\gamma(x'_0+h)=x_0+\sum_{l\ge1}\gamma_l(h,\dots,h)$, $\norm{\gamma_l}\le \mathfrak b_\gamma R_\gamma^{-l}$. Take an ambient expansion $(j,(b_m))$ of $f$. Put $\beta_0=b_0$ and, for $n\ge1$,
+\[
+ \beta_n(h_1,\dots,h_n)=\sum_{1\le m\le n}\ \sum_{l_1+\dots+l_m=n,\ l_c\ge1}b_m\bigl(\gamma_{l_1}(h_1,\dots,h_{l_1}),\dots,\gamma_{l_m}(h_{n-l_m+1},\dots,h_n)\bigr).
+\]
+With $R_1=R_\gamma/(1+\mathfrak b_\gamma/R)$, counting compositions of $n$ gives
+\[
+ \norm{\beta_n}\le\sum_{1\le m\le n}\binom{n-1}{m-1}\mathfrak bR^{-m}\mathfrak b_\gamma^mR_\gamma^{-n}\le \mathfrak bR_1^{-n}.
+\]
+For $\norm h<R_1$ we have $\sum_l\norm{\gamma_l(h,\dots,h)}<R$, and the family, indexed by $m$ and $(l_1,\dots,l_m)$, of the values of $b_m$ at the vectors $\gamma_{l_c}(h,\dots,h)$ is absolutely summable in the completion of $Z$. Grouped by $m$ it has sum $jf(\gamma(x'_0+h))\in Z$, and grouped by $n$ it has the finite groups $\beta_n(h,\dots,h)\in Z$. So $jf\gamma(x'_0+h)=\sum_n\beta_n(h,\dots,h)$ in $Z$. For the diagonals, fix $h$ and $1\le m\le n$, and put $\gamma_{\le n}(\lambda)=\sum_{l=1}^n\lambda^l\gamma_l(h,\dots,h)$. Then $\lambda\mapsto b_m(\gamma_{\le n}(\lambda),\dots,\gamma_{\le n}(\lambda))$ is a polynomial with coefficients in $Z$ and values in $j(W)$, so Lagrange interpolation puts every coefficient in $j(W)$. Its coefficient at $\lambda^n$ is the inner sum of $\beta_n(h,\dots,h)$. Hence $\beta_n(h,\dots,h)\in j(W)$.
+
+\emph{Step 5 (re-expansion).} Let $W$ be Banach. Take an ambient expansion with $Z$ Banach and $j(W)$ closed, and put $h_1=x_1-x_0$. For $\norm h<R-\varrho$ expand $b_n(h_1+h,\dots,h_1+h)$ into $2^n$ terms indexed by the sets of slots holding $h$. The family of all terms is absolutely summable, since $\sum_n\mathfrak bR^{-n}(\varrho+\norm h)^n<\infty$. Grouping by the number $i$ of slots holding $h$ gives bounded $i$\nobreakdash-linear maps $b'_i$ with
+\[
+ \norm{b'_i}\le\sum_{n\ge i}\binom ni\mathfrak bR^{-n}\varrho^{n-i}=\frac{\mathfrak bR}{R-\varrho}(R-\varrho)^{-i},
+\]
+and $jf(x_1+h)=\sum_ib'_i(h,\dots,h)$. Step~1 of the proof of Theorem~\ref{thm:coefficient-descent} puts the diagonals in $j(W)$.
+
+\emph{Step 6 (derivatives).} Let $W$ be Banach and $f$ ambient analytic on $U$; fix $x_1\in U$ and an expansion at $x_1$ as in Step~5, with radius $R_2$ and bound $\mathfrak b_2$. Step~5 at $x_1+h$, $\norm h<R_2$, shows that $jf$ is differentiable there, the terms with $i\ge2$ being of order $\norm v^2$ in the increment $v$, with derivative $\sum_{n\ge1}b''_{n-1}(h,\dots,h)$, where $b''_{n-1}(v_1,\dots,v_{n-1})\in\cL(P,Z)$ is $u\mapsto\sum_{l=1}^nb_n(v_1,\dots,v_{l-1},u,v_l,\dots,v_{n-1})$, of norm at most $n\mathfrak b_2R_2^{-n}$. So $D(jf)$ is analytic at $x_1$ with every radius smaller than $R_2$. Postcomposition by $j$ is a linear isometry $\cL(P,W)\to\cL(P,Z)$ with closed range, and by Lemma~\ref{lem:closed-smooth} and its proof $f$ is differentiable with $jDf=D(jf)$. So $Df$ is ambient analytic at $x_1$ with values in the Banach space $\cL(P,W)$. Induct, using $\cL(P,\Mult^\ell(P;W))=\Mult^{\ell+1}(P;W)$. Each $D^\ell f$ is continuous, so $f$ is $C^\infty$.
+\end{proof}

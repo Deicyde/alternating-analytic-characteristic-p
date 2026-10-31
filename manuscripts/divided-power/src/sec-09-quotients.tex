@@ -1,0 +1,308 @@
+\section{Slices and difference quotients}\label{dp:sec:quotients}
+
+Throughout this section $K$ is nonarchimedean, $P$ and $W$ are normed spaces, $U$ is an open subset of $P$, $\bar B(x,r)$ is the closed ball, and $\mathcal O=\{\lambda\in K:\abs\lambda\le1\}$. Radius and bound are as in Definition~\ref{dp:def:laws}, and $D^{(j)}f(x)$ is the Hasse derivative of $f$ at $x$, its coefficient law of degree $j$. Proposition~\ref{dp:prop:slices} restates the definition of a DP germ, and Proposition~\ref{dp:prop:div-bgn}(4) restates Theorem~\ref{dp:thm:divided-planes}; the other numbered statements have content of their own. Theorems~\ref{dp:thm:banach-steinhaus}, \ref{dp:thm:planes}, \ref{dp:thm:divided-one} and~\ref{dp:thm:divided-planes} replace the bounds on laws by a Baire hypothesis, by multilinear bounds on planes, or by bounds on divided differences. Theorem~\ref{dp:thm:bgn} and Proposition~\ref{dp:prop:div-bgn}(1)--(3) compare DP germs with difference quotients. Examples~\ref{dp:ex:slice-needed} and~\ref{dp:ex:zero-jets} show what the hypotheses contain.
+
+\subsection{Slices}\label{dp:sq:ssec-slices}
+
+A map on a finite-dimensional subspace $V\subseteq P$ is a \emph{homogeneous polynomial of degree $n$} if it is one, with coefficients in $W$, in the coordinates of some basis of $V$, equivalently of every basis.
+
+\begin{lemma}[affine lines]\label{dp:sq:lines}
+Let $n\ge0$ and let $\phi\colon P\to W$ satisfy $\phi(\lambda h)=\lambda^n\phi(h)$ for $\lambda\in K$ and $h\in P$. Suppose that for all $h,y\in P$ the map $s\mapsto\phi(h+sy)$ on $K$ is a polynomial of degree at most $n$ with coefficients in $W$. Then for all $h_1,\dots,h_r\in P$ the map $(s_1,\dots,s_r)\mapsto\phi(s_1h_1+\dots+s_rh_r)$ is a homogeneous polynomial of degree $n$ with coefficients in $W$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (separately polynomial).} We show by induction on $r$ that for all $h_0,\dots,h_r\in P$ the map $\Phi(s)=\phi(h_0+s_1h_1+\dots+s_rh_r)$ is a polynomial of degree at most $n$ in each variable. For $r=1$ this is the hypothesis. For $r\ge2$ fix distinct $\mu_0,\dots,\mu_n\in K$, and let $\ell_i$ be the Lagrange polynomials with $\ell_i(\mu_i)=1$ and $\ell_i(\mu_{i'})=0$ for $i'\ne i$. Then $\Phi(s)=\sum_{i\le n}\ell_i(s_1)\phi(h_0+\mu_ih_1+s_2h_2+\dots+s_rh_r)$, and by induction each value of $\phi$ here is a polynomial in $(s_2,\dots,s_r)$ of degree at most $n$ in each variable.
+
+\emph{Step 2 (homogeneity).} Take $h_0=0$ and write $\Phi=\sum_d\Phi_d$ with $\Phi_d$ homogeneous of degree $d$. For fixed $s$ and all $\lambda\in K$, $\sum_d\lambda^d\Phi_d(s)=\Phi(\lambda s)=\lambda^n\Phi(s)$. As $K$ is infinite, $\Phi_d(s)=0$ for $d\ne n$.
+\end{proof}
+
+\begin{proposition}[slices]\label{dp:prop:slices}
+Let $f\colon U\to W$, $x_0\in U$, $R>0$ with $B(x_0,R)\subseteq U$, and $M\ge0$. The following are equivalent.
+\begin{enumerate}
+\item $f$ is DP at $x_0$ with radius $R$ and bound $M$.
+\item For every finite-dimensional subspace $V\subseteq P$ there are homogeneous polynomials $a_n^V\colon V\to W$ of degree $n$ with $\norm{a_n^V(h)}\le MR^{-n}\norm h^n$ for $h\in V$, and $f(x_0+h)=\sum_na_n^V(h)$ for $h\in V$ with $\norm h<R$.
+\item The same as \textup{(2)}, for every subspace $V$ of dimension at most $2$.
+\end{enumerate}
+\end{proposition}
+
+This is a restatement of the definition: the size of each homogeneous part is measured by its values, with the same $R$ and $M$. Its only content is Lemma~\ref{dp:sq:lines}, which lets planes replace all finite-dimensional subspaces.
+
+\begin{proof}
+\emph{Step 1 (restriction).} The restriction of a law of degree $n$ to $V$ is a homogeneous polynomial of degree $n$ with the same bound, so (1) implies (2). And (3) is a special case of (2).
+
+\emph{Step 2 (compatibility).} Assume (3). Let $V\subseteq V'$ have dimension at most $2$ and let $h\in V\setminus\{0\}$. For $\abs s<R/\norm h$ both $\sum_ns^na_n^V(h)$ and $\sum_ns^na_n^{V'}(h)$ converge to $f(x_0+sh)$, and $\Delta_n=a_n^V(h)-a_n^{V'}(h)$ satisfies $\norm{\Delta_n}(R/\norm h)^n\le2M$. By~\cite[Lemma~A.1]{I}, $\Delta_n=0$. At $h=0$ both polynomials give $f(x_0)$ for $n=0$ and $0$ for $n\ge1$. So $a_n^{V'}=a_n^V$ on $V$.
+
+\emph{Step 3 (the laws).} Put $a_n(h)=a_n^{Kh}(h)$. By Step 2, $a_n$ restricts to $a_n^V$ on every $V$ of dimension at most $2$. So $a_n(\lambda h)=\lambda^na_n(h)$, and $s\mapsto a_n(h+sy)$ is a polynomial of degree at most $n$, since $h+sy$ stays in the span of $h$ and $y$. By Lemma~\ref{dp:sq:lines}, $a_n$ is a polynomial law of degree $n$, and $\norm{a_n}\le MR^{-n}$. Finally $f(x_0+h)=\sum_na_n^{Kh}(h)=\sum_na_n(h)$ for $\norm h<R$.
+\end{proof}
+
+\begin{example}[what the uniformity contains]\label{dp:ex:slice-needed}
+\leavevmode
+\begin{enumerate}
+\item \emph{Lines through the base point do not suffice.} Let $P=K^2$ with the maximum norm and $U$ its open unit ball. Define $g_1\colon U\to K$ by $g_1(\xi,\eta)=1/(1-\xi)$ if $\abs\xi\ge\abs\eta$ and $g_1(\xi,\eta)=1/(1-\eta)$ otherwise, and put $\psi_n(\xi,\eta)=\xi^n$ if $\abs\xi\ge\abs\eta$ and $\psi_n(\xi,\eta)=\eta^n$ otherwise. Then $g_1$ is continuous and bounded by $1$. For $h\ne0$ and $\abs s<1/\norm h$, $g_1(sh)=\sum_ns^n\psi_n(h)$ with $\abs{\psi_n(h)}=\norm h^n$. So on every line through $0$ it is a power series with the constants $R=M=1$. It is not DP at $0$.
+\item \emph{The radius must be uniform in the slice.} Let $P=c_0(\N,K)$ with unit vectors $e_m$, let $B_m=B(\varpi^me_m,\abs\varpi^{m+1})$ for $m\ge1$, and define $g_2\colon P\to K$ by $g_2=\varpi^m$ on $B_m$ and $g_2=0$ off $\bigcup_mB_m$. The $B_m$ are pairwise disjoint, $g_2$ is continuous, $\abs{g_2(h)}\le\norm h$, and $g_2$ is locally constant on $P\setminus\{0\}$. For every finite-dimensional subspace $V$, $g_2$ vanishes on a neighborhood of $0$ in $V$. It is not DP at $0$.
+\end{enumerate}
+\end{example}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} For $s\ne0$, $\abs{s\xi}\ge\abs{s\eta}$ if and only if $\abs\xi\ge\abs\eta$, and $1/(1-s\xi)=\sum_n(s\xi)^n$ for $\abs{s\xi}<1$; this gives the expansions. The sets $\{\abs\xi\ge\abs\eta\}\setminus\{0\}$ and $\{\abs\xi<\abs\eta\}$ are open, and $\abs{g_1(\xi,\eta)-1}\le\norm{(\xi,\eta)}$; this gives continuity at every point. If $g_1(h)=\sum_na_n(h)$ near $0$ with laws $a_n$, then $a_n=\psi_n$ by~\cite[Lemma~A.1]{I} on each line through $0$. But $\psi_2$ is not a law: $s\mapsto\psi_2(s,1)$ equals $1$ for $\abs s<1$ and $s^2$ for $\abs s\ge1$, and no polynomial agrees with both on these infinite sets.
+
+\emph{Step 2 (item (2), disjointness and local constancy).} If $h\in B_m$, then $\abs{h_m}=\abs\varpi^m=\norm h$ and $\abs{h_i}<\abs\varpi^{m+1}$ for $i\ne m$. If also $h\in B_{m'}$ with $m<m'$, then $\abs{h_m}=\abs\varpi^m$ and $\abs{h_m}<\abs\varpi^{m'+1}$, which is impossible. Each $B_m$ is open and closed. Let $x\ne0$. If $\abs\varpi^m<\norm x$, then $B_m\subseteq B(0,\norm x)$, which is disjoint from $B(x,\norm x)$. So $B(x,\norm x)$ meets finitely many $B_m$, and $g_2$ is constant near $x$. At $0$, $\abs{g_2(h)}=\norm h$ on $B_m$.
+
+\emph{Step 3 (item (2), slices).} Let $\widehat V$ be the $\Kh$-span of $V$ in $c_0(\N,\Kh)$, with basis $b_1,\dots,b_r$. By~\cite[Lemma~A.3]{I} there is $C_V$ with $\abs{\lambda_i}\le C_V\norm{\sum_i\lambda_ib_i}$. If $\mathsf y\in V\cap B_m$, then $\mathsf z=\varpi^{-m}\mathsf y\in\widehat V$ has $\norm{\mathsf z}=1$ and $\abs{\mathsf z_m}=1$, while $\abs{\mathsf z_m}\le C_V\max_i\abs{(b_i)_m}$, which tends to $0$ as $m\to\infty$. So $V\cap B_m=\emptyset$ for $m\ge m_V$, and $g_2=0$ on $V\cap B(0,\abs\varpi^{m_V-1})$.
+
+\emph{Step 4 (item (2), not DP).} If $g_2(h)=\sum_na_n(h)$ for $\norm h<\sigma$, then by Step 3 and~\cite[Lemma~A.1]{I} every $a_n$ vanishes, so $g_2=0$ on $B(0,\sigma)$. But $g_2(\varpi^me_m)=\varpi^m\ne0$ for every $m\ge1$ with $\abs\varpi^m<\sigma$.
+\end{proof}
+
+\begin{theorem}[Banach--Steinhaus for laws]\label{dp:thm:banach-steinhaus}
+Let $P$ be a Banach space, $x_0\in U$, $f\colon U\to W$ and $B(x_0,R)\subseteq U$. Let $a_n\colon P\to W$ be bounded polynomial laws of degree $n$, no bound uniform in $n$ being assumed, and suppose that $f(x_0+h)=\sum_na_n(h)$, convergent in $W$, for $\norm h<R$. Then there are $M\ge0$ and a ball $B(h_1,\delta)\subseteq B(0,R)$ with $\norm{a_n(h)}\le M$ on it for all $n$. For any such $M$, $h_1$ and $\delta$, $\norm{a_n}\le M(2/(\abs\varpi^2\delta))^n$, and $f$ is DP at $x_0$ with radius $\abs\varpi^2\delta/2$ and bound $M$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (Baire).} For $\norm h<R$ the terms $a_n(h)$ of a convergent series are bounded in $n$. So the sets $\{h\in B(0,R):\norm{a_n(h)}\le M\text{ for all }n\}$, $M\in\N$, cover $B(0,R)$. They are closed in $B(0,R)$, since laws are continuous (Theorem~\ref{dp:thm:calculus}(1)), and $B(0,R)$ is a Baire space. So one of them contains a ball.
+
+\emph{Step 2 (leading coefficients).} Let $\norm y<\delta$. For $s\in\mathcal O$, $h_1+sy\in B(h_1,\delta)$, so the polynomial $G(s)=a_n(h_1+sy)$ of degree at most $n$ has $\norm{G(s)}\le M$ on $\mathcal O$. Its coefficient of $s^n$ is $a_n(y)$. Let $\mu_0,\dots,\mu_n\in\mathcal O$ be the first $n+1$ nodes of Step~2 of the proof of Theorem~\ref{dp:thm:mixed}, with $\varpi'=\varpi$. By~\eqref{dp:laws:nodes}, $\prod_{i'\ne i}\abs{\mu_i-\mu_{i'}}^{-1}\le\abs\varpi^{-n}$. By Lagrange interpolation $a_n(y)=\sum_iG(\mu_i)\prod_{i'\ne i}(\mu_i-\mu_{i'})^{-1}$. So $\norm{a_n(y)}\le(n+1)\abs\varpi^{-n}M\le(2/\abs\varpi)^nM$.
+
+\emph{Step 3 (scaling).} We may assume $P\ne0$. Let $y\ne0$ and $0<\delta'<\delta$, and choose $\lambda\in K$ with $\abs\varpi\delta'\le\norm{\lambda y}<\delta'$. By Step 2, $\norm{a_n(y)}=\abs\lambda^{-n}\norm{a_n(\lambda y)}\le(\norm y/(\abs\varpi\delta'))^n(2/\abs\varpi)^nM$. Letting $\delta'\to\delta$ gives the bound on $\norm{a_n}$. Both $h_1$ and $h_1+\lambda y$ lie in $B(0,R)$, so $\abs\varpi\delta'\le\norm{\lambda y}<2R$. Hence $\sigma=\abs\varpi^2\delta/2$ satisfies $\sigma\le\abs\varpi R<R$, and $\sup_n\norm{a_n}\sigma^n\le M$.
+\end{proof}
+
+\begin{theorem}[analyticity on planes]\label{dp:thm:planes}
+Let $K$ be complete.
+\begin{enumerate}
+\item Every subspace $V\subseteq P$ of dimension $r\le2$ has a linear isomorphism $T\colon K^r\to V$, with the maximum norm on $K^r$, such that $\norm T\le2$ and $\norm{T^{-1}}\le3/\abs\varpi$.
+\item Every bounded polynomial law $a\colon V\to W$ of degree $n$ on such a $V$ is the diagonal of a bounded $n$\nobreakdash-linear map $V^n\to W$ of norm at most $(n+1)(96/\abs\varpi^2)^n\norm a\le(192/\abs\varpi^2)^n\norm a$.
+\item Let $f\colon U\to W$, $x_0\in U$, $R>0$ with $B(x_0,R)\subseteq U$, and $M\ge0$. Consider the condition: for every subspace $V$ of dimension at most $2$ there are bounded $n$\nobreakdash-linear maps $\beta^V_n\colon V^n\to W$ with $\norm{\beta^V_n}\le MR^{-n}$ and $f(x_0+h)=\sum_n\beta^V_n(h,\dots,h)$ for $h\in V$, $\norm h<R$. If this condition holds with $(R,M)$, then $f$ is DP at $x_0$ with radius $R$ and bound $M$. If $f$ is DP at $x_0$ with radius $R$ and bound $M$, then the condition holds with $(\abs\varpi^2R/192,M)$.
+\end{enumerate}
+\end{theorem}
+
+So, for $K$ complete, a DP germ is a germ that is analytic on every plane through its base point, with constants independent of the plane.
+
+\begin{proof}
+\emph{Step 1 (item (1), $r\le1$).} For $r=0$ there is nothing to prove. For $r=1$ pick $b_1\in V$ with $\abs\varpi<\norm{b_1}\le1$ and put $T(\lambda)=\lambda b_1$. Then $\norm T\le1$ and $\norm{T^{-1}}\le1/\abs\varpi$.
+
+\emph{Step 2 (item (1), $r=2$).} Take $b_1$ as in Step 1. The line $Kb_1$ is complete, as $K$ is, hence closed in $V$. Take $b'\in V\setminus Kb_1$. Then $\mathsf D=\operatorname{dist}(b',Kb_1)>0$, and there is $b''\in Kb_1$ with $\norm{b'-b''}\le2\mathsf D$. Put $b_2=\lambda'(b'-b'')$ with $\abs\varpi<\norm{b_2}\le1$, so that $\operatorname{dist}(b_2,Kb_1)=\abs{\lambda'}\mathsf D\ge\norm{b_2}/2$. For $b=\lambda_1b_1+\lambda_2b_2$ we get $\norm b\ge\abs{\lambda_2}\operatorname{dist}(b_2,Kb_1)\ge\abs{\lambda_2}\norm{b_2}/2$, so $\abs{\lambda_2}\le2\norm b/\abs\varpi$. Then $\abs{\lambda_1}\norm{b_1}\le\norm b+\abs{\lambda_2}\norm{b_2}\le3\norm b$, so $\abs{\lambda_1}\le3\norm b/\abs\varpi$. Also $\norm T\le\norm{b_1}+\norm{b_2}\le2$.
+
+\emph{Step 3 (item (2)).} Let $e_1,\dots,e_r$ be the unit vectors of $K^r$. Then $a(T\lambda)=\sum_{\abs\gamma=n}w_\gamma\lambda^\gamma$ for $\lambda\in K^r$, with $w_\gamma=(a\circ T)^{[\gamma]}(e_1,\dots,e_r)$, and $\norm{w_\gamma}\le(8r\norm T/\abs\varpi)^n\norm a$ by Theorem~\ref{dp:thm:mixed}(1). The $n$\nobreakdash-linear map $(h^1,\dots,h^n)\mapsto\sum_{\mathsf w_1\le\dots\le\mathsf w_n}w_{\gamma(\mathsf w)}\prod_l(T^{-1}h^l)_{\mathsf w_l}$, summed over the nondecreasing words $\mathsf w$ in $\{1,\dots,r\}$ with $\gamma(\mathsf w)$ counting the letters of $\mathsf w$, has diagonal $a$. Its norm is at most $\binom{n+r-1}n(8r\norm T\norm{T^{-1}}/\abs\varpi)^n\norm a$. For $r=2$ this is $(n+1)(96/\abs\varpi^2)^n\norm a$. For $r=1$ it is at most $(8/\abs\varpi^2)^n\norm a$, by the bounds of Step 1, and $r=0$ is clear. Finally $n+1\le2^n$.
+
+\emph{Step 4 (item (3)).} On $V$ the diagonal of $\beta^V_n$ is a homogeneous polynomial of degree $n$ with $\norm{\beta^V_n(h,\dots,h)}\le MR^{-n}\norm h^n$, so the condition gives item (3) of Proposition~\ref{dp:prop:slices}. Conversely, let $f$ be DP with laws $a_n$, $\norm{a_n}\le MR^{-n}$. By item (2) the restriction $a_n|_V$ has a lift $\beta^V_n$ with $\norm{\beta^V_n}\le(192/\abs\varpi^2)^nMR^{-n}$, and the expansion holds for $\norm h<\abs\varpi^2R/192\le R$.
+\end{proof}
+
+\subsection{Difference quotients}\label{dp:sq:ssec-quotients}
+
+\begin{definition}\label{dp:def:bgn}
+Let $P_0=P$ and $P_{k+1}=P_k\times P_k\times K$, and let $U^{[0]}=U$ and $U^{[k+1]}=\{(x,v,\tau)\in U^{[k]}\times P_k\times K:x+\tau v\in U^{[k]}\}$, an open subset of $P_{k+1}$. A map $f\colon U\to W$ is \emph{$C^0_{\mathrm{BGN}}$} if it is continuous. It is \emph{$C^1_{\mathrm{BGN}}$} if there is a continuous $f^{[1]}\colon U^{[1]}\to W$ with
+\[
+ f^{[1]}(x,v,\tau)=\tau^{-1}\bigl(f(x+\tau v)-f(x)\bigr)\qquad(\tau\ne0).
+\]
+It is \emph{$C^{k+1}_{\mathrm{BGN}}$}, $k\ge1$, if it is $C^1_{\mathrm{BGN}}$ and $f^{[1]}$ is $C^k_{\mathrm{BGN}}$ on $U^{[1]}$, and it is \emph{$C^\infty_{\mathrm{BGN}}$} if it is $C^k_{\mathrm{BGN}}$ for all $k$.
+\end{definition}
+
+This is the differentiability of~\cite{BGN}, specialized to normed spaces; the statements below concern the definition as written here. The map $f^{[1]}$ is unique, since the points with $\tau\ne0$ are dense in $U^{[1]}$. Put $f^{[0]}=f$ and $f^{[k+1]}=(f^{[k]})^{[1]}$ on $U^{[k+1]}$. By induction $(f^{[1]})^{[k]}=f^{[k+1]}$, and $f$ is $C^k_{\mathrm{BGN}}$ if and only if $f^{[j]}$ exists and is continuous for every $j\le k$.
+
+\begin{theorem}[DP germs and difference quotients]\label{dp:thm:bgn}
+Let $f\colon U\to W$ be DP on $U$.
+\begin{enumerate}
+\item For $x\in U$, $R$ such that $f$ is DP at $x$ with radius $R$, $v\in P$ and $\tau\in K$ with $\abs\tau\norm v<R$, the map $f^{[1]}$ of item \textup{(2)} satisfies
+\begin{equation}\label{dp:sq:quotient-series}
+ f^{[1]}(x,v,\tau)=\sum_{j\ge1}\tau^{j-1}D^{(j)}f(x)(v),\qquad\text{in particular } f^{[1]}(x,v,0)=D^{(1)}f(x)v=Df(x)v.
+\end{equation}
+\item $f$ is $C^1_{\mathrm{BGN}}$, and $f^{[1]}$ is DP on $U^{[1]}$.
+\item $f$ is $C^\infty_{\mathrm{BGN}}$, and every $f^{[k]}$ is DP on $U^{[k]}$.
+\item Let $x\in U$, $v\in P$ and $k\ge0$. If $f(x+\tau v)=\sum_{j\le k}\tau^jw_j+o(\abs\tau^k)$ as $\tau\to0$, with $w_j\in W$, then $w_j=D^{(j)}f(x)(v)$. So the Hasse derivatives are the coefficients of every finite Taylor expansion along lines.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (the map, item (1)).} Let $\abs\tau\norm v<R$. By homogeneity $\sum_{j\ge0}\tau^jD^{(j)}f(x)(v)$ converges in $W$ to $f(x+\tau v)$. Subtracting $f(x)=D^{(0)}f(x)$ and dividing by $\tau\ne0$ gives~\eqref{dp:sq:quotient-series} for $\tau\ne0$. Define $f^{[1]}$ on $U^{[1]}$ by the quotient for $\tau\ne0$ and by $f^{[1]}(x,v,0)=D^{(1)}f(x)v$, which is $Df(x)v$ by Theorem~\ref{dp:thm:differentiable}(1). Since $\norm{D^{(j)}f(x)(v)}\le MR^{-j}\norm v^j$ for a bound $M$ at $x$,~\eqref{dp:sq:quotient-series} also gives
+\begin{equation}\label{dp:sq:limit}
+ \lim_{\tau\to0}f^{[1]}(x,v,\tau)=f^{[1]}(x,v,0).
+\end{equation}
+
+\emph{Step 2 (DP at points with $\tau_0\ne0$).} Near $(x_0,v_0,\tau_0)\in U^{[1]}$ with $\tau_0\ne0$ we have $f^{[1]}(x,v,\tau)=\tau^{-1}(f(x+\tau v)-f(x))$. The map $(x,v,\tau)\mapsto x+\tau v$ is a bounded linear map plus the diagonal of a bounded bilinear map, hence DP (Theorem~\ref{dp:thm:calculus}(1),(3)). The map $\tau\mapsto\tau^{-1}$ is analytic at $\tau_0$, hence DP there. Scalar multiplication $K\times W\to W$ is bounded bilinear. A pair of DP maps is DP into the product, since pairs of laws are laws for the maximum norm. A finite sum or difference of maps DP at a point is DP there, as sums and differences of laws are laws. By composition (Theorem~\ref{dp:thm:calculus}(2)), $f^{[1]}$ is DP at $(x_0,v_0,\tau_0)$.
+
+\emph{Step 3 (points $(x_0,v_0,0)$: the expansion).} Let $f$ be DP at $x_0$ with radius $R$, bound $M$ and laws $a_n$. Put $\Lambda_0=\max(1,\norm{v_0})$. For $(h,u,\tau)\in P_1$ write $v=v_0+u$. If $\norm h<R$ and $\norm{h+\tau v}<R$, then
+\[
+ f(x_0+h+\tau v)-f(x_0+h)=\sum_{n\ge1}\sum_{j=1}^n\sum_{i=0}^j\tau^ja_n^{[(n-j,j-i,i)]}(h,v_0,u),
+\]
+by Lemma~\ref{dp:lem:elementary}(3) and a comparison of the coefficients of $a_n(\lambda_1h+\lambda_2v_0+\lambda_2u)$. Define $\mathsf t_{n,j,i}(h,u,\tau)=\tau^{j-1}a_n^{[(n-j,j-i,i)]}(h,v_0,u)$. Then $\mathsf t_{n,j,i}$ is a bounded polynomial law of degree $n+i-1$ on $P_1$. Indeed, for vectors $(h_c,u_c,\tau_c)$ of $P_1$ the vector $a_n^{[(n-j,j-i,i)]}(\sum_cs_ch_c,v_0,\sum_cs_cu_c)$ is the coefficient of $\lambda_1^{n-j}\lambda_2^{j-i}\lambda_3^i$ in $a_n(\sum_c\lambda_1s_ch_c+\lambda_2v_0+\sum_c\lambda_3s_cu_c)$, so it is a homogeneous polynomial in $s$ of degree $n-j+i$. Also $(\sum_cs_c\tau_c)^{j-1}$ is a homogeneous polynomial in $s$ of degree $j-1$, so the product is homogeneous of degree $n+i-1$ with coefficients in $W$. As $n!/\alpha!\le3^n$ for three indices, Theorem~\ref{dp:thm:mixed}(3) gives
+\begin{equation}\label{dp:sq:t-bound}
+ \norm{\mathsf t_{n,j,i}(h,u,\tau)}\le(3C_0)^nMR^{-n}\norm{v_0}^{j-i}\,\norm{(h,u,\tau)}^{n+i-1}.
+\end{equation}
+Fix $0<r_0\le1$ with $3C_0\Lambda_0r_0<R$ and $r_0(1+\Lambda_0+r_0)<R$. For $\norm{(h,u,\tau)}\le r_0$ we have $\norm h<R$ and $\norm{h+\tau v}<R$, and since $\norm{v_0}^{j-i}r_0^i\le\Lambda_0^n$,
+\[
+ \sum_{n\ge1}\sum_{j=1}^n\sum_{i=0}^j\norm{\mathsf t_{n,j,i}(h,u,\tau)}\le\sum_{n\ge1}(n+1)^2M(3C_0\Lambda_0/R)^nr_0^{n-1}<\infty.
+\]
+So the family is absolutely summable in $\widehat W$, uniformly on this ball. For $\tau\ne0$ its sum is $f^{[1]}(x_0+h,v,\tau)$. Each term is continuous in $\tau$, so the sum is continuous in $\tau$, and~\eqref{dp:sq:limit} at the point $x_0+h$ shows that its value at $\tau=0$ is $f^{[1]}(x_0+h,v,0)$.
+
+\emph{Step 4 (points $(x_0,v_0,0)$: grouping).} For $N\ge0$ let $\mathsf a_N=\sum_{n+i-1=N}\mathsf t_{n,j,i}$, a finite sum of at most $(N+2)^2$ terms with $n\le N+1$, so a bounded polynomial law of degree $N$ on $P_1$. With $\Lambda=3C_0\Lambda_0\max(1,R^{-1})\ge1$,~\eqref{dp:sq:t-bound} gives $\norm{\mathsf a_N}\le(N+2)^2M\Lambda^{N+1}$. Regrouping by $N$ gives $f^{[1]}(x_0+h,v_0+u,\tau)=\sum_N\mathsf a_N(h,u,\tau)$ for $\norm{(h,u,\tau)}\le r_0$, convergent in $\widehat W$, hence in $W$, as the terms and the sum lie in $W$. So $f^{[1]}$ is DP at $(x_0,v_0,0)$, with radius $\min(r_0,\sigma)$ for any $\sigma<1/\Lambda$.
+
+\emph{Step 5 (items (2), (3)).} By Steps 2--4, $f^{[1]}$ is DP on $U^{[1]}$, hence continuous (Theorem~\ref{dp:thm:differentiable}(1)). So $f$ is $C^1_{\mathrm{BGN}}$. Steps 1--4 apply to $f^{[1]}$ on the open subset $U^{[1]}$ of $P_1$, and item (3) follows by induction.
+
+\emph{Step 6 (item (4)).} By~\eqref{dp:sq:quotient-series}, $f(x+\tau v)=\sum_{j\le k}\tau^jD^{(j)}f(x)(v)+O(\abs\tau^{k+1})$. So $\sum_{j\le k}\tau^j(w_j-D^{(j)}f(x)(v))=o(\abs\tau^k)$. If $j_0$ is the least index with a nonzero difference, dividing by $\tau^{j_0}$ and letting $\tau\to0$ gives a contradiction.
+\end{proof}
+
+\subsection{Divided differences}\label{dp:sq:ssec-divided}
+
+For a map $\phi$ from a subset $S\subseteq K$ to $W$ and pairwise distinct $t_0,\dots,t_k\in S$, put
+\[
+ \operatorname{dd}_k\phi(t_0,\dots,t_k)=\sum_{i=0}^k\frac{\phi(t_i)}{\prod_{l\ne i}(t_i-t_l)}.
+\]
+Let $\mathsf N_k(t)=\prod_{i<k}(t-t_i)$, and let $\mathsf h_r$ be the complete homogeneous symmetric polynomial of degree $r$, with $\mathsf h_r=0$ for $r<0$.
+
+\begin{lemma}[interpolation]\label{dp:sq:interpolation}
+\leavevmode
+\begin{enumerate}
+\item $\operatorname{dd}_k\phi$ is symmetric and linear in $\phi$, $\operatorname{dd}_0\phi(t_0)=\phi(t_0)$, and for $k\ge1$
+\begin{equation}\label{dp:sq:dd-recursion}
+ \operatorname{dd}_k\phi(t_0,\dots,t_k)=\frac{\operatorname{dd}_{k-1}\phi(t_0,\dots,t_{k-1})-\operatorname{dd}_{k-1}\phi(t_1,\dots,t_k)}{t_0-t_k}.
+\end{equation}
+\item For $t\notin\{t_0,\dots,t_{n-1}\}$,
+$\phi(t)=\sum_{k<n}\operatorname{dd}_k\phi(t_0,\dots,t_k)\mathsf N_k(t)+\operatorname{dd}_n\phi(t_0,\dots,t_{n-1},t)\mathsf N_n(t)$. For $t=t_l$ with $l<n$, $\phi(t_l)=\sum_{k\le l}\operatorname{dd}_k\phi(t_0,\dots,t_k)\mathsf N_k(t_l)$.
+\item For $x_0\in K$ and $m\ge0$, $\operatorname{dd}_k[t\mapsto(t-x_0)^m](t_0,\dots,t_k)=\mathsf h_{m-k}(t_0-x_0,\dots,t_k-x_0)$, of absolute value at most $\max_i\abs{t_i-x_0}^{m-k}$. So $\operatorname{dd}_k$ kills polynomials of degree below $k$. The coefficient of $h^l$ in $\mathsf N_k(x_0+h)$ has absolute value at most $\max_{i<k}\abs{t_i-x_0}^{k-l}$. Here we read $0^0=1$, and the maximum of the empty set as $0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Compare the coefficient of each $\phi(t_i)$ on both sides of~\eqref{dp:sq:dd-recursion}.
+
+\emph{Step 2 (item (2)).} Induct on $n$ with $\operatorname{dd}_n\phi(t_0,\dots,t_{n-1},t)=\operatorname{dd}_n\phi(t_0,\dots,t_n)+(t-t_n)\operatorname{dd}_{n+1}\phi(t_0,\dots,t_n,t)$, which is~\eqref{dp:sq:dd-recursion} with symmetry; for $t=t_l$ use the formula with $n=l$.
+
+\emph{Step 3 (item (3)).} We may take $x_0=0$, as the differences do not change. Induct on $k$ with~\eqref{dp:sq:dd-recursion} and $\prod_{i<k}(1-t_iX)^{-1}-\prod_{0<i\le k}(1-t_iX)^{-1}=X(t_0-t_k)\prod_{i\le k}(1-t_iX)^{-1}$, the generating function identity of the $\mathsf h_r$. The two bounds hold because these polynomials are sums of monomials with coefficients $\pm1$ and $K$ is nonarchimedean.
+\end{proof}
+
+\begin{theorem}[one variable]\label{dp:thm:divided-one}
+Let $U\subseteq K$ be open, $x_0\in U$ and $f\colon U\to W$. A germ on $K$ is DP with radius $R$ and bound $M$ if and only if $f(x_0+h)=\sum_kw_kh^k$ for $\abs h<R$ with $\norm{w_k}R^k\le M$, that is, if and only if it is analytic with the same radius and bound.
+\begin{enumerate}
+\item If $f$ is DP at $x_0$ with radius $R$ and bound $M$, then for $0<\rho<R$, all $k\ge0$ and pairwise distinct $t_0,\dots,t_k\in\bar B(x_0,\rho)$,
+\begin{equation}\label{dp:sq:one-variable-bound}
+ \norm{\operatorname{dd}_kf(t_0,\dots,t_k)}\le\frac{M}{1-\rho/R}R^{-k},\qquad\text{and}\quad\le MR^{-k}\text{ if $W$ is ultrametric}.
+\end{equation}
+\item Let $W$ be complete, $\rho,\sigma>0$ with $B(x_0,\rho)\subseteq U$, and $M\ge0$ with $\norm{\operatorname{dd}_kf(t_0,\dots,t_k)}\le M\sigma^{-k}$ for all $k\ge0$ and all pairwise distinct $t_0,\dots,t_k\in B(x_0,\rho)$. Then $f$ is DP at $x_0$ with radius $\min(\rho,\sigma)$ and bound $M$, and its coefficients satisfy $\norm{w_k}\le M\sigma^{-k}$.
+\item So for complete $W$, $f$ is DP at $x_0$ if and only if such $\rho,\sigma,M$ exist, and the supremum of the DP radii at $x_0$ is the supremum of $\min(\rho,\sigma)$ over such pairs.
+\end{enumerate}
+No continuity of $f$ is assumed in item \textup{(2)}.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (the first sentence).} A law on $K$ of degree $k$ is $h\mapsto w_kh^k$, the diagonal of $(h_1,\dots,h_k)\mapsto w_kh_1\cdots h_k$ of the same norm.
+
+\emph{Step 2 (item (1)).} As $\operatorname{dd}_k$ is a combination of values, Lemma~\ref{dp:sq:interpolation}(3) writes $\operatorname{dd}_kf(t_0,\dots,t_k)$ as the sum over $m\ge k$ of $w_m\mathsf h_{m-k}(t_0-x_0,\dots,t_k-x_0)$, with terms of norm at most $MR^{-m}\rho^{m-k}$. Summing, or taking the maximum if $W$ is ultrametric, gives~\eqref{dp:sq:one-variable-bound}.
+
+\emph{Step 3 (item (2), a Newton series).} Put $R'=\min(\rho,\sigma)$. Fix $0<\rho'<R'$ and pairwise distinct nodes $t_0,t_1,\dots\in\bar B(x_0,\rho')$, which exist as balls of positive radius in $K$ are infinite. For $\abs h\le\rho'$ and $t=x_0+h$ we have $\abs{t-t_i}\le\rho'$. If $t$ is not a node, the remainder in Lemma~\ref{dp:sq:interpolation}(2) has norm at most $M\sigma^{-n}\rho'^n\to0$; if $t$ is a node the expansion terminates. So $f(t)=\sum_k\operatorname{dd}_kf(t_0,\dots,t_k)\mathsf N_k(t)$.
+
+\emph{Step 4 (item (2), power series).} Write $\mathsf N_k(x_0+h)=\sum_{l\le k}\mathsf n_{k,l}h^l$, with $\abs{\mathsf n_{k,l}}\le\rho'^{k-l}$. For $\abs h\le\rho'$ the double family $\operatorname{dd}_kf(t_0,\dots,t_k)\mathsf n_{k,l}h^l$ has norms at most $M(\rho'/\sigma)^k$, so it is absolutely summable. Hence $f(x_0+h)=\sum_lw_lh^l$ in the complete space $W$, with $\norm{w_l}\le M\sigma^{-l}/(1-\rho'/\sigma)$.
+
+\emph{Step 5 (item (2), independence of the choices).} For two choices of $\rho'$ and nodes, both power series represent $f$ on a ball, with geometric bounds, so by~\cite[Lemma~A.1]{I} they have the same coefficients. Letting $\rho'\to0$ gives $\norm{w_l}\le M\sigma^{-l}$, and letting $\rho'\to R'$ gives the expansion on $B(x_0,R')$. Then $\norm{w_l}R'^l\le M$.
+
+\emph{Step 6 (item (3)).} Items (1) and (2), with $\rho<R$ arbitrary in item (1) and $\sigma=R$.
+\end{proof}
+
+Let $f\colon U\to W$ and $x_0\in U$. For $\mathbf v=(v_1,v_2)\in P^2$ with $\norm{v_1},\norm{v_2}\le1$ put $F_{\mathbf v}(s_1,s_2)=f(x_0+s_1v_1+s_2v_2)$. For pairwise distinct $t_0,\dots,t_{k_1}$ and pairwise distinct $t'_0,\dots,t'_{k_2}$ in $K$, let $\operatorname{dd}_{k_1,k_2}F_{\mathbf v}(t;t')$ be the divided difference of order $k_1$ in $s_1$ of the divided difference of order $k_2$ in $s_2$. The two operations commute, as both give one finite sum of values.
+
+\begin{theorem}[planes]\label{dp:thm:divided-planes}
+\leavevmode
+\begin{enumerate}
+\item If $f$ is DP at $x_0$ with radius $R$ and bound $M$, put $\rho=R/(2C_2)$ and $\sigma=R/C_2$. For all $\mathbf v$ as above, all $k_1,k_2$ and all pairwise distinct nodes in $B(0,\rho)$, $F_{\mathbf v}$ is defined at the nodes and $\norm{\operatorname{dd}_{k_1,k_2}F_{\mathbf v}(t;t')}\le4M\sigma^{-(k_1+k_2)}$.
+\item Let $W$ be complete, let $\rho,\sigma>0$ and $M\ge0$, and suppose that $B(x_0,2\rho)\subseteq U$ and that $\norm{\operatorname{dd}_{k_1,k_2}F_{\mathbf v}(t;t')}\le M\sigma^{-(k_1+k_2)}$ for all $\mathbf v$, all $k_1,k_2$ and all pairwise distinct nodes in $B(0,\rho)$. Then $f$ is DP at $x_0$ with radius $\abs\varpi\min(\rho,\sigma)$ and bound $M$.
+\item Lines do not suffice: the map $g_1$ of Example~\textup{\ref{dp:ex:slice-needed}(1)} satisfies, on every line $s\mapsto sh$ with $\norm h=1$ and every $0<\rho<1$, the bound $\abs{\operatorname{dd}_k[s\mapsto g_1(sh)]}\le1$ on $\bar B(0,\rho)$, and it is not DP at $0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} Let $a_n$ be the laws of $f$ at $x_0$. For $\abs{s_1},\abs{s_2}<\rho$ we have $\norm{s_1v_1+s_2v_2}<2\rho<R$, and $F_{\mathbf v}(s)=\sum_n\sum_{m_1+m_2=n}a_n^{[(m_1,m_2)]}(v_1,v_2)s_1^{m_1}s_2^{m_2}$ by Lemma~\ref{dp:lem:elementary}(3), with $\norm{a_n^{[(m_1,m_2)]}(v_1,v_2)}\le C_2^nMR^{-n}$ by Theorem~\ref{dp:thm:mixed}(2). By Lemma~\ref{dp:sq:interpolation}(3) in each variable, the divided differences of $s_1^{m_1}s_2^{m_2}$ have absolute value at most $\rho^{m_1+m_2-k_1-k_2}$. Since $C_2\rho/R=1/2$,
+\[
+ \norm{\operatorname{dd}_{k_1,k_2}F_{\mathbf v}}\le\sum_{m_1\ge k_1,\,m_2\ge k_2}M(C_2/R)^{m_1+m_2}\rho^{m_1+m_2-k_1-k_2}=4M\sigma^{-(k_1+k_2)}.
+\]
+
+\emph{Step 2 (item (2), two-variable Newton series).} Fix $\mathbf v$, put $R'=\min(\rho,\sigma)$, and fix $0<\rho'<R'$ and pairwise distinct nodes $t_0,t_1,\dots$ and $t'_0,t'_1,\dots$ in $\bar B(0,\rho')$. Put $\mathsf N'_k(t)=\prod_{i<k}(t-t'_i)$. For $s\in\bar B(0,\rho')^2$ apply Lemma~\ref{dp:sq:interpolation}(2) in $s_2$, with remainder bounded by the hypothesis for $k_1=0$, and then in $s_1$, with remainder at most $M\sigma^{-n-k_2}\rho'^n$. This gives
+\[
+ F_{\mathbf v}(s)=\sum_{k_1,k_2}\operatorname{dd}_{k_1,k_2}F_{\mathbf v}(t_0,\dots,t_{k_1};t'_0,\dots,t'_{k_2})\mathsf N_{k_1}(s_1)\mathsf N'_{k_2}(s_2),
+\]
+with terms of norm at most $M(\rho'/\sigma)^{k_1+k_2}$. Expanding the Newton polynomials as in Step 4 of the proof of Theorem~\ref{dp:thm:divided-one} gives $F_{\mathbf v}(s)=\sum_{m\in\N^2}w^{\mathbf v}_ms^m$ on $\bar B(0,\rho')^2$, with $\norm{w^{\mathbf v}_m}\le M\sigma^{-\abs m}/(1-\rho'/\sigma)^2$. Two-variable power series with geometric bounds that agree on a polydisc have equal coefficients, by~\cite[Lemma~A.1]{I} in each variable. So the $w^{\mathbf v}_m$ do not depend on the choices, $\norm{w^{\mathbf v}_m}\le M\sigma^{-\abs m}$, and the expansion holds for $\abs{s_1},\abs{s_2}<R'$.
+
+\emph{Step 3 (item (2), the laws).} For $h\ne0$ choose $\lambda\in K$ with $\abs\varpi<\norm{\lambda h}\le1$ and put $\mathbf v=(\lambda h,0)$. By Step 2, for $\abs s<\abs\lambda R'$ we have $f(x_0+sh)=\sum_n\lambda^{-n}w^{\mathbf v}_{(n,0)}s^n$, and by~\cite[Lemma~A.1]{I} the coefficients $a_n(h)=\lambda^{-n}w^{\mathbf v}_{(n,0)}$ depend only on $h$. Put $a_n(0)=0$ for $n\ge1$ and $a_0(0)=f(x_0)$. Then $a_n(\theta h)=\theta^na_n(h)$ for $\theta\in K$. For any $\mathbf v=(v_1,v_2)$ with $\norm{v_1},\norm{v_2}\le1$, any $\theta_1,\theta_2\in K$ and small $s$, regrouping gives $f(x_0+s(\theta_1v_1+\theta_2v_2))=\sum_ns^n\sum_{\abs m=n}w^{\mathbf v}_m\theta_1^{m_1}\theta_2^{m_2}$. So $a_n(\theta_1v_1+\theta_2v_2)=\sum_{\abs m=n}w^{\mathbf v}_m\theta_1^{m_1}\theta_2^{m_2}$, by the same lemma. Any two vectors of $P$ are scalar multiples of vectors of norm at most $1$, so $a_n$ is a homogeneous polynomial of degree $n$ on every plane through $0$. Hence it is a polynomial of degree at most $n$ on every affine line, and Lemma~\ref{dp:sq:lines} makes $a_n$ a polynomial law of degree $n$.
+
+\emph{Step 4 (item (2), bounds).} With $\lambda$ and $\mathbf v=(\lambda h,0)$ as in Step 3, $\norm{a_n(h)}=\abs\lambda^{-n}\norm{w^{\mathbf v}_{(n,0)}}\le(\norm h/(\abs\varpi\sigma))^nM$, so $\norm{a_n}\le M(\abs\varpi\sigma)^{-n}$. If $\norm h<\abs\varpi R'$, then $\abs\lambda^{-1}<R'$, and $f(x_0+h)=F_{\mathbf v}(\lambda^{-1},0)=\sum_na_n(h)$. Also $\norm{a_n}(\abs\varpi R')^n\le M$.
+
+\emph{Step 5 (item (3)).} By Example~\ref{dp:ex:slice-needed}(1), $s\mapsto g_1(sh)$ is a power series with coefficients of absolute value $1$ and radius $1$. Apply Theorem~\ref{dp:thm:divided-one}(1) with ultrametric values.
+\end{proof}
+
+For $U\subseteq K$ open, a map $\phi\colon U\to W$ is \emph{$C^k_{\mathrm{div}}$} if for every $j\le k$ the map $\operatorname{dd}_j\phi$, on the pairwise distinct tuples of $U$, extends to a continuous map $\overline{\operatorname{dd}}_j\phi$ on $U^{j+1}$; its \emph{diagonal values} are the $\overline{\operatorname{dd}}_j\phi(x,\dots,x)$. It is \emph{$C^\infty_{\mathrm{div}}$} if this holds for all $k$. If a $C^k_{\mathrm{div}}$ map $\phi$ is DP at $x$ and $D^{(k)}\phi(x)(h)=w_kh^k$, then $\overline{\operatorname{dd}}_k\phi(x,\dots,x)=w_k$: recenter Step 2 of the proof of Theorem~\ref{dp:thm:divided-one} at $x$ and let all $t_i\to x$. So the diagonal values are the Hasse derivatives. The next example shows that the bounds of Theorems~\ref{dp:thm:divided-one} and~\ref{dp:thm:divided-planes} cannot be restricted to the diagonal.
+
+\begin{example}[zero jets, not DP]\label{dp:ex:zero-jets}
+Let $K$ be complete. Define $\omega\colon\mathcal O\to K$ by $\omega(0)=0$ and $\omega(x)=\varpi^{\mathsf r^2}$ if $\abs\varpi^{\mathsf r+1}<\abs x\le\abs\varpi^{\mathsf r}$, $\mathsf r\ge0$. Put $\bar B_{\mathsf r}=\bar B(0,\abs\varpi^{\mathsf r})$. Say that $\bar B_{\mathsf r}$ \emph{separates} a tuple if some of its entries lie in $\bar B_{\mathsf r}$ and some do not.
+\begin{enumerate}
+\item $\omega$ is locally constant on $\mathcal O\setminus\{0\}$ and Fr\'echet differentiable on $\mathcal O$ with $\omega'\equiv0$, so it is Fr\'echet $C^\infty$ with all derivatives of order at least $1$ zero. It is $C^\infty_{\mathrm{div}}$, with $\overline{\operatorname{dd}}_k\omega(x,\dots,x)=0$ for all $k\ge1$ and $x\in\mathcal O$.
+\item For $k\ge1$ and pairwise distinct $t_0,\dots,t_k\in\mathcal O$,
+\begin{equation}\label{dp:sq:omega-bound}
+ \abs{\operatorname{dd}_k\omega(t_0,\dots,t_k)}\le\max\bigl\{\abs\varpi^{(\mathsf r-1)^2-\mathsf rk}:\mathsf r\ge1,\ \bar B_{\mathsf r}\text{ separates }(t_0,\dots,t_k)\bigr\},
+\end{equation}
+where the maximum of the empty set is $0$.
+\item $\omega$ is not DP at $0$. For $k\ge1$, $0\le\mathsf r<\mathsf r'$ and the pairwise distinct points $t_0=\varpi^{\mathsf r}$, $t_l=\varpi^{\mathsf r'}(1+\varpi^l)$, $1\le l\le k$, we have $\abs{\operatorname{dd}_k\omega(t_0,\dots,t_k)}=\abs\varpi^{\mathsf r^2-k\mathsf r}$.
+\end{enumerate}
+\end{example}
+
+\begin{proof}
+\emph{Step 1 (decomposition).} Put $\mathsf v_{\mathsf r}=\varpi^{\mathsf r^2}$ and, for $\mathsf r\ge1$, $\mathsf d_{\mathsf r}=\mathsf v_{\mathsf r}-\mathsf v_{\mathsf r-1}$, so that $\abs{\mathsf d_{\mathsf r}}=\abs\varpi^{(\mathsf r-1)^2}$. If $\abs\varpi^{\mathsf r'+1}<\abs x\le\abs\varpi^{\mathsf r'}$, then $x\in\bar B_{\mathsf r}$ if and only if $\mathsf r\le\mathsf r'$. So $\omega=\mathsf v_0+\sum_{\mathsf r\ge1}\mathsf d_{\mathsf r}1_{\bar B_{\mathsf r}}$ pointwise on $\mathcal O$, also at $x=0$.
+
+\emph{Step 2 (one ball).} Let $B=\bar B(0,\rho)$, $\rho>0$, and let $t_0,\dots,t_k$ be pairwise distinct, $k\ge1$. Let $I$ be the set of $i$ with $t_i\in B$ and $J$ the rest. If $I$ or $J$ is empty, $\operatorname{dd}_k1_B(t)=0$. Otherwise, with $\Upsilon_J(x)=\prod_{j\in J}(x-t_j)^{-1}$ and $\mathsf i=\abs I-1$,
+\[
+ \operatorname{dd}_k1_B(t)=\sum_{i\in I}\frac{\Upsilon_J(t_i)}{\prod_{i'\in I\setminus\{i\}}(t_i-t_{i'})}=\operatorname{dd}_{\mathsf i}\Upsilon_J(t_i:i\in I).
+\]
+Let $\varrho=\min_{j\in J}\abs{t_j}>\rho$. On $\abs x\le\rho$ we have $(x-t_j)^{-1}=-\sum_mx^mt_j^{-m-1}$, so $\Upsilon_J(x)=\sum_m\mathsf b_mx^m$ with $\abs{\mathsf b_m}\le\varrho^{-m-\abs J}$. By Lemma~\ref{dp:sq:interpolation}(3), $\operatorname{dd}_{\mathsf i}\Upsilon_J(t_i:i\in I)=\sum_{m\ge\mathsf i}\mathsf b_m\mathsf h_{m-\mathsf i}(t_i:i\in I)$, of absolute value at most $\varrho^{-\mathsf i-\abs J}=\varrho^{-k}<\rho^{-k}$.
+
+\emph{Step 3 (item (2)).} By Step 1, $\operatorname{dd}_k\omega(t)=\sum_{\mathsf r\ge1}\mathsf d_{\mathsf r}\operatorname{dd}_k1_{\bar B_{\mathsf r}}(t)$, as $\operatorname{dd}_k$ is a finite combination of values and kills $\mathsf v_0$. By Step 2 only the $\mathsf r$ for which $\bar B_{\mathsf r}$ separates the tuple contribute, each with absolute value at most $\abs\varpi^{(\mathsf r-1)^2-\mathsf rk}$, which tends to $0$ as $\mathsf r\to\infty$. This gives~\eqref{dp:sq:omega-bound}. For $\mathsf T\ge1$ write $\omega=\omega_{\le\mathsf T}+\omega_{>\mathsf T}$ with $\omega_{\le\mathsf T}=\mathsf v_0+\sum_{\mathsf r\le\mathsf T}\mathsf d_{\mathsf r}1_{\bar B_{\mathsf r}}$. The same argument gives $\abs{\operatorname{dd}_k\omega_{>\mathsf T}}\le\varepsilon_{\mathsf T}=\sup_{\mathsf r>\mathsf T}\abs\varpi^{(\mathsf r-1)^2-\mathsf rk}$ on distinct tuples, and $\varepsilon_{\mathsf T}\to0$.
+
+\emph{Step 4 (item (1)).} The sets $\{\abs\varpi^{\mathsf r+1}<\abs x\le\abs\varpi^{\mathsf r}\}$ are open. At $0$, on such a set, $\abs{\omega(x)}/\abs x<\abs\varpi^{\mathsf r^2-\mathsf r-1}$, which tends to $0$ as $\mathsf r\to\infty$; so $\omega'\equiv0$. In particular $\omega$ is continuous, which is the condition for $j=0$. Now let $k\ge1$. Each $\operatorname{dd}_k1_B$ extends continuously to $K^{k+1}$. Indeed, near a tuple of $K^{k+1}$ the partition $I,J$ is constant and the numbers $\abs{t_j}$, $j\in J$, are constant. On that neighborhood the series of Step 2 is a uniformly convergent series of continuous functions, also at tuples with repeated entries. So $\operatorname{dd}_k\omega_{\le\mathsf T}$ extends continuously to a map $\mathsf E_{\mathsf T}$. As distinct tuples are dense, $\abs{\mathsf E_{\mathsf T}-\mathsf E_{\mathsf T'}}\le\max(\varepsilon_{\mathsf T},\varepsilon_{\mathsf T'})$ everywhere. So $\mathsf E_{\mathsf T}$ converges uniformly, $K$ being complete, to a continuous extension of $\operatorname{dd}_k\omega$. For $x\ne0$, $\omega$ is constant near $x$, so the extension vanishes at $(x,\dots,x)$. Tuples in $\bar B_{\mathsf T}^{k+1}$ are separated only by $\bar B_{\mathsf r}$ with $\mathsf r>\mathsf T$, so there $\abs{\operatorname{dd}_k\omega}\le\varepsilon_{\mathsf T}$, and the extension vanishes at $(0,\dots,0)$.
+
+\emph{Step 5 (item (3)).} We have $\abs{t_l}=\abs\varpi^{\mathsf r'}$ for $l\ge1$, and $t_l-t_{l'}=\varpi^{\mathsf r'}(\varpi^l-\varpi^{l'})\ne0$. So $\omega$ takes the value $\mathsf v_{\mathsf r}$ at $t_0$ and $\mathsf v_{\mathsf r'}$ at the others. As $\operatorname{dd}_k$ kills constants, $\operatorname{dd}_k\omega(t)=(\mathsf v_{\mathsf r}-\mathsf v_{\mathsf r'})/\prod_{l\ge1}(t_0-t_l)$, of absolute value $\abs\varpi^{\mathsf r^2-k\mathsf r}$. If $\omega$ were DP at $0$ with radius $R$, then~\eqref{dp:sq:one-variable-bound} would bound $\operatorname{dd}_k\omega$ by a geometric sequence on $\bar B(0,\rho)$, $\rho<R$. But for $\abs\varpi^{\mathsf r_0}\le\rho$, $k\ge\max(1,2\mathsf r_0)$, $\mathsf r=\lfloor k/2\rfloor\ge\mathsf r_0$ and $\mathsf r'=\mathsf r+1$, these points lie in $\bar B(0,\rho)$ and the absolute value is $\abs\varpi^{-\lfloor k^2/4\rfloor}$, which no geometric sequence bounds.
+\end{proof}
+
+For a subset $Z$ of a normed space and $g\colon Z\to W$ put $Z^{\{0\}}=Z$, $g^{[0]}=g$ and, recursively,
+\begin{gather*}
+ Z^{\{j+1\}}=\{(z,v,\tau):\tau\ne0,\ z\in Z^{\{j\}},\ z+\tau v\in Z^{\{j\}}\},\\
+ g^{[j+1]}(z,v,\tau)=\tau^{-1}\bigl(g^{[j]}(z+\tau v)-g^{[j]}(z)\bigr).
+\end{gather*}
+So $g^{[j]}$ is defined on $Z^{\{j\}}$, as a finite combination of values of $g$, and no continuity of $g$ is assumed. By induction on $b$, $(Z^{\{a\}})^{\{b\}}=Z^{\{a+b\}}$ and $(g^{[a]})^{[b]}=g^{[a+b]}$. For $Z$ open and $g$ of class $C^j_{\mathrm{BGN}}$ we have $Z^{\{j\}}\subseteq Z^{[j]}$, and $g^{[j]}$ is the restriction of the map of Definition~\ref{dp:def:bgn}.
+
+\begin{proposition}[divided differences and difference quotients]\label{dp:prop:div-bgn}
+\leavevmode
+\begin{enumerate}
+\item Let $U\subseteq K$ be open, $k\ge0$ and $f\colon U\to W$. Then $f$ is $C^k_{\mathrm{div}}$ if and only if it is $C^k_{\mathrm{BGN}}$, and in that case, on $U^{[k]}$,
+\begin{equation}\label{dp:sq:explicit}
+ f^{[k]}(z)=\sum_{\mathsf e\in\mathcal I_k}\mathsf p_{\mathsf e}(z)\,\overline{\operatorname{dd}}_{j_{\mathsf e}}f\bigl(\mathsf L_{\mathsf e,0}(z),\dots,\mathsf L_{\mathsf e,j_{\mathsf e}}(z)\bigr),\qquad j_{\mathsf e}\le k,
+\end{equation}
+a finite sum over a set $\mathcal I_k$, with $\mathsf p_{\mathsf e},\mathsf L_{\mathsf e,i}$ polynomials over $\Z$ in the coordinates of $z$, independent of $f$ and $U$, and $\mathsf L_{\mathsf e,i}(U^{[k]})\subseteq U$. In particular $\omega$ of Example~\textup{\ref{dp:ex:zero-jets}} is $C^\infty_{\mathrm{BGN}}$.
+\item Let $Z$ be a subset of a normed space, $g\colon Z\to W$, $\mathsf c(s)=z_0+sv_0$ for $s\in S\subseteq K$ with $\mathsf c(S)\subseteq Z$, and $s_0,\dots,s_j\in S$ pairwise distinct. Put $\zeta^{(0)}(s)=\mathsf c(s)$, $v^{(0)}=v_0$, and for $1\le i\le j$
+\[
+ \zeta^{(i)}(s)=\bigl(\zeta^{(i-1)}(s_i),\,v^{(i-1)},\,s-s_i\bigr),\qquad v^{(i)}=(0,\dots,0,1).
+\]
+Then $\zeta^{(j)}(s_0)\in Z^{\{j\}}$ and $\operatorname{dd}_j(g\circ\mathsf c)(s_0,\dots,s_j)=g^{[j]}(\zeta^{(j)}(s_0))$. If $Z$ is open, then $\zeta^{(j)}(s_0)\in Z^{[j]}$ also when the $s_i$ repeat, and its coordinates are polynomial in the $s_i$.
+\item Let $f\colon U\to W$, $x_0$, $\mathbf v$ and nodes be as before Theorem~\textup{\ref{dp:thm:divided-planes}}. For $\mathsf s\in K$ let $\zeta'(\mathsf s)$ be the point $\zeta^{(k_2)}(t'_0)$ of item \textup{(2)} for the line $s\mapsto x_0+\mathsf sv_1+sv_2$ and the nodes $t'_0,\dots,t'_{k_2}$; it is affine in $\mathsf s$. Let $\zeta_{\mathbf v}(t;t')$ be the point $\zeta^{(k_1)}(t_0)$ of item \textup{(2)} for the line $\mathsf s\mapsto\zeta'(\mathsf s)$ and the nodes $t_0,\dots,t_{k_1}$. This point is polynomial in $x_0,v_1,v_2$ and the nodes, and it does not depend on $f$. If $x_0+t_iv_1+t'_lv_2\in U$ for all $i,l$, then $\operatorname{dd}_{k_1,k_2}F_{\mathbf v}(t;t')=f^{[k_1+k_2]}(\zeta_{\mathbf v}(t;t'))$. Here $f^{[k]}$ is the map defined before this proposition, with $g=f$ and $Z=U$.
+\item Let $W$ be complete and $x_0\in U$. For $\rho>0$ and $k\ge0$ let $\mathcal Z_k(\rho)$ be the set of the points $\zeta_{\mathbf v}(t;t')$ of item \textup{(3)} with $k_1+k_2=k$, $\norm{v_1},\norm{v_2}\le1$ and all nodes in $B(0,\rho)$. Then $f$ is DP at $x_0$ if and only if there are $\rho,\sigma>0$ and $M\ge0$ with $B(x_0,2\rho)\subseteq U$ and $\norm{f^{[k]}(\zeta)}\le M\sigma^{-k}$ for all $k$ and all $\zeta\in\mathcal Z_k(\rho)$. No continuity of $f$ is assumed.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (2)).} Only the last coordinate of $\zeta^{(i)}(s)$ depends on $s$, so $\zeta^{(i)}(s)=\zeta^{(i)}(s')+(s-s')v^{(i)}$, and the same holds for $\zeta^{(0)}$. We show $\zeta^{(i)}(s)\in Z^{\{i\}}$ and $\operatorname{dd}_i(g\circ\mathsf c)(s,s_1,\dots,s_i)=g^{[i]}(\zeta^{(i)}(s))$ for $s\in S\setminus\{s_1,\dots,s_i\}$, by induction on $i$. The case $i=0$ is the definition. Let $i\ge1$. By the induction hypothesis, $\zeta^{(i-1)}(s_i)$ and $\zeta^{(i-1)}(s)$ lie in $Z^{\{i-1\}}$, and $s-s_i\ne0$, so $\zeta^{(i)}(s)\in Z^{\{i\}}$. By~\eqref{dp:sq:dd-recursion}, symmetry and the induction hypothesis at $s$ and at $s_i$, the left side is
+\[
+ \frac{g^{[i-1]}(\zeta^{(i-1)}(s))-g^{[i-1]}(\zeta^{(i-1)}(s_i))}{s-s_i}=g^{[i]}\bigl(\zeta^{(i-1)}(s_i),v^{(i-1)},s-s_i\bigr).
+\]
+Take $s=s_0$, $i=j$. If $Z$ is open, the same induction gives $\zeta^{(i)}(s)\in Z^{[i]}$ for all $s\in S$, as $\zeta^{(i-1)}(s_i)$ and $\zeta^{(i-1)}(s)$ lie in $Z^{[i-1]}$. The coordinates are polynomial in the $s_i$ by the recursion.
+
+\emph{Step 2 (item (3)).} In the recursion of item (2), $\mathsf s$ enters only through the coordinate $\zeta^{(0)}(t'_1)=x_0+\mathsf sv_1+t'_1v_2$, or $x_0+\mathsf sv_1+t'_0v_2$ if $k_2=0$. So $\zeta'$ is affine in $\mathsf s$, and the point $\zeta_{\mathbf v}(t;t')$ is polynomial as stated and does not depend on $f$. Now let $x_0+t_iv_1+t'_lv_2\in U$ for all $i,l$, and fix $i$. Item (2) for $g=f$ on the line $s\mapsto x_0+t_iv_1+sv_2$, with $S=\{t'_0,\dots,t'_{k_2}\}$ and nodes $t'$, gives $\zeta'(t_i)\in U^{\{k_2\}}$ and $\operatorname{dd}_{0,k_2}F_{\mathbf v}(t_i;t')=f^{[k_2]}(\zeta'(t_i))$. Item (2) for $g=f^{[k_2]}$ on $Z=U^{\{k_2\}}$, on the line $\zeta'$ with $S=\{t_0,\dots,t_{k_1}\}$ and nodes $t$, gives the claim, since $(f^{[k_2]})^{[k_1]}=f^{[k_1+k_2]}$.
+
+\emph{Step 3 (item (4)).} Item (3) with Theorem~\ref{dp:thm:divided-planes}(1),(2). In item (1) of that theorem, $B(x_0,2\rho)=B(x_0,R/C_2)\subseteq U$, as $C_2\ge1$.
+
+\emph{Step 4 (item (1), the sums).} Assume $f$ is $C^k_{\mathrm{div}}$. By~\eqref{dp:sq:dd-recursion}, symmetry, density of the distinct tuples and continuity, replacing the entries of a tuple one at a time gives, for $j<k$,
+\begin{equation}\label{dp:sq:exchange}
+ \overline{\operatorname{dd}}_jf(\mathsf x_0,\dots,\mathsf x_j)-\overline{\operatorname{dd}}_jf(\mathsf x'_0,\dots,\mathsf x'_j)=\sum_{i=0}^j(\mathsf x_i-\mathsf x'_i)\,\overline{\operatorname{dd}}_{j+1}f(\mathsf x_0,\dots,\mathsf x_i,\mathsf x'_i,\dots,\mathsf x'_j).
+\end{equation}
+We prove~\eqref{dp:sq:explicit} by induction on $k$. For $k=0$ take $\mathsf p=1$, $\mathsf L_0(x)=x$. Let $\mathsf g=\mathsf p\cdot\overline{\operatorname{dd}}_jf\circ(\mathsf L_0,\dots,\mathsf L_j)$ be a term of $f^{[k-1]}$ on $Z=U^{[k-1]}$, with $j\le k-1$ and all $\mathsf L_i(Z)\subseteq U$. In $\Z[z,v,\tau]$, $\tau$ divides $\mathsf p(z+\tau v)-\mathsf p(z)$ and $\mathsf L_i(z+\tau v)-\mathsf L_i(z)$; call the quotients $\mathsf p^\flat$ and $\mathsf L_i^\flat$. By~\eqref{dp:sq:exchange}, for $\tau\ne0$,
+\begin{multline*}
+ \frac{\mathsf g(z+\tau v)-\mathsf g(z)}\tau=\mathsf p^\flat\,\overline{\operatorname{dd}}_jf\bigl(\mathsf L(z+\tau v)\bigr)\\
+ +\sum_{i=0}^j\mathsf p(z)\mathsf L_i^\flat\,\overline{\operatorname{dd}}_{j+1}f\bigl(\mathsf L_0(z+\tau v),\dots,\mathsf L_i(z+\tau v),\mathsf L_i(z),\dots,\mathsf L_j(z)\bigr).
+\end{multline*}
+The right side is defined and continuous on all of $Z^{[1]}$, and it has the form~\eqref{dp:sq:explicit} with $j+1\le k$. So $\mathsf g^{[1]}$ exists and is continuous, and the new $\mathsf L$'s map $Z^{[1]}=U^{[k]}$ into $U$. Summing over the terms gives $f^{[k]}$, so $f$ is $C^k_{\mathrm{BGN}}$.
+
+\emph{Step 5 (item (1), the converse).} Let $f$ be $C^k_{\mathrm{BGN}}$ and $j\le k$. Item (2) with $g=f$ and $\mathsf c(s)=s$ gives a polynomial map $(s_0,\dots,s_j)\mapsto\zeta^{(j)}(s_0)$ from $U^{j+1}$ to $U^{[j]}$. So $f^{[j]}\circ\zeta^{(j)}$ is a continuous extension of $\operatorname{dd}_jf$.
+\end{proof}

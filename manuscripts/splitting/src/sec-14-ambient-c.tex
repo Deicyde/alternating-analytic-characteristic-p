@@ -1,0 +1,181 @@
+\subsection{Which envelope}\label{amb:ssec:envelope}
+
+Section~\ref{amb:ssec:fixed} used the envelope $\Mult^k$. Here we compare it with the other envelopes. Throughout this subsection $K$ is complete, as in Section~\ref{sec:forms}, so $\Alt^k(E;K)$ is closed in every isometric enlargement.
+
+\begin{definition}[functorial envelope]\label{amb:def:envelope}
+Fix $k\ge1$. Let $\mathcal V$ be one of two categories, with bounded linear maps as morphisms: (A) all normed spaces; (B) all ultrametric normed spaces. A \emph{functorial envelope} of $\Alt^k(-;K)$ on $\mathcal V$ is a contravariant functor $\mathfrak E$ from $\mathcal V$ to normed spaces, whose hom maps $T\mapsto\mathfrak E(T)$ are analytic at $0$, with linear isometries $j_E\colon\Alt^k(E;K)\to\mathfrak E(E)$ such that $\mathfrak E(T)j_D(\omega)=j_E(\omega\circ T^{\times k})$ for $T\in\cL(E,D)$.
+
+For a manifold $M$ as in Section~\ref{sec:forms}, modeled on $E$ in $\mathcal V$, a section $\omega$ of $\Alt^k(TM;K)$ is \emph{$\mathfrak E$-ambient} if, in each chart, $j_E\circ\omega$ is analytic into the completion of $\mathfrak E(E)$. The completion is used because a change of chart re-expands the coefficients as infinite sums. By Lemma~\ref{amb:lem:homogeneous} and the change-of-chart formula of Section~\ref{sec:forms}, one atlas suffices. Write $\Omega_{\mathfrak E}$ for the class of these sections.
+
+\emph{Example.} Let $\mathcal U$ be a normed space and $u_0\in\mathcal U$ with $\norm{u_0}=1$. Then $\Mult^k(-;\mathcal U)$ is an envelope, with $\mathfrak E(T)\mathsf m=\mathsf m\circ T^{\times k}$ and $j_E(\omega)=\omega\,u_0$. We define $\Omega_{\mathcal U}$, with $u_0$ understood, as the class of the envelope $\Mult^k(-;\widehat{\mathcal U})$. For $\mathcal U=K$, $u_0=1$ we have $\Omega_K=\Omega^k_{\mathrm{amb}}$ of Section~\ref{sec:forms}.
+
+\emph{Coefficient space.} Let $\mathsf L_k=K^k$, with the sum norm in case (A) and the maximum norm in case (B), and unit vectors $e_1,\dots,e_k$. Let $\det$ be the determinant on $\mathsf L_k$; its norm is $1$. For $v\in E^k$ let $T_v\colon\mathsf L_k\to E$, $T_ve_i=v_i$. For $\lambda\in K^k$ let $\mathsf t_\lambda=\operatorname{diag}(\lambda_1,\dots,\lambda_k)$. By Lemma~\ref{amb:lem:homogeneous}, $\mathfrak E(\lambda\id_E)=\sum_n\lambda^n\mathsf q_n^E$ near $\lambda=0$, with natural bounded orthogonal idempotents $\mathsf q_n^E$; the subfunctor $\mathfrak E_k(E)=\mathsf q_k^E\mathfrak E(E)$ has hom maps that are diagonals of bounded $k$-linear maps. So $\lambda\mapsto\mathfrak E_k(\mathsf t_\lambda)$ is a polynomial, homogeneous of degree $k$. Multiplicativity, and $K$ being infinite, give
+\[
+ \mathfrak E_k(\mathsf t_\lambda)=\sum_{\abs\alpha=k}\lambda^\alpha\mathsf p_\alpha,
+\]
+with bounded orthogonal idempotents $\mathsf p_\alpha$ of sum $\id$. Put $\mathsf p=\mathsf p_{(1,\dots,1)}$. The \emph{coefficient space} and \emph{coefficient vector} of $\mathfrak E$ are
+\[
+ \mathcal U_{\mathfrak E}=\mathsf p\,\mathfrak E_k(\mathsf L_k),\qquad u_{\mathfrak E}=j_{\mathsf L_k}(\det),\qquad\norm{u_{\mathfrak E}}=1.
+\]
+Here $u_{\mathfrak E}\in\mathcal U_{\mathfrak E}$, as $\det\circ\mathsf t_\lambda^{\times k}=\lambda_1\cdots\lambda_k\det$. For $\Mult^k(-;\mathcal U)$ the coefficient space is isomorphic to $\mathcal U^{k!}$: it consists of the maps supported on the words that are permutations of $(1,\dots,k)$. The line $Ku_{\mathfrak E}$ is \emph{split} if a bounded linear form $\eta_0$ on $\mathcal U_{\mathfrak E}$ has $\eta_0(u_{\mathfrak E})=1$.
+\end{definition}
+
+\begin{theorem}[comparison]\label{amb:thm:comparison}
+Let $(\mathfrak E,j)$ be a functorial envelope.
+\begin{enumerate}
+\item For $\xi\in\mathfrak E_k(E)$ and $v\in E^k$ put $\chi_E(\xi)(v_1,\dots,v_k)=\mathsf p\,\mathfrak E_k(T_v)\xi$. Then $\chi_E$ is a bounded linear map $\mathfrak E_k(E)\to\Mult^k(E;\mathcal U_{\mathfrak E})$, natural in $E$, and $\chi_E(j_E\omega)=\omega\,u_{\mathfrak E}$.
+\item For every normed $\mathcal U'$, each natural family of bounded linear maps $\mathfrak E(E)\to\Mult^k(E;\mathcal U')$ equals $\mathsf h_*\circ\chi_E\circ\mathsf q_k^E$ for exactly one $\mathsf h\in\cL(\mathcal U_{\mathfrak E},\mathcal U')$, and every such $\mathsf h$ gives a natural family.
+\item $\Omega_{\mathfrak E}\subseteq\Omega_{\mathcal U_{\mathfrak E}}$, for the vector $u_{\mathfrak E}$. If the line $Ku_{\mathfrak E}$ is split, $\Omega_{\mathfrak E}\subseteq\Omega_K$.
+\end{enumerate}
+\end{theorem}
+The proof is in Appendix~\ref{amb:app}.
+
+A \emph{multilinear action} on an envelope is a family of bounded $k$-linear maps $\beta^{\mathfrak E}_{E,D}\colon\cL(E,D)^k\to\cL(\mathfrak E(D),\mathfrak E(E))$ such that, for $T,T_i\in\cL(E,D)$ and $T_i'\in\cL(E',E)$,
+\begin{equation}\label{amb:c:action}
+\begin{gathered}
+ \beta^{\mathfrak E}_{E,E}(\id,\dots,\id)=\id,\qquad\beta^{\mathfrak E}_{E,D}(T,\dots,T)=\mathfrak E(T),\\
+ \beta^{\mathfrak E}_{E',D}(T_1T_1',\dots,T_kT_k')=\beta^{\mathfrak E}_{E',E}(T_1',\dots,T_k')\circ\beta^{\mathfrak E}_{E,D}(T_1,\dots,T_k).
+\end{gathered}
+\end{equation}
+The envelope $\mathfrak E=\Mult^k(-;\mathcal U)$ has one: $\beta^{\mathfrak E}_{E,D}(T_1,\dots,T_k)\mathsf m=\mathsf m\circ(T_1\times\dots\times T_k)$. Every multilinear form is obtained from an alternating form by this action (Lemma~\ref{amb:lem:generation}).
+
+A \emph{morphism} of envelopes $\mathfrak E\to\mathfrak E'$ is a family of bounded linear maps $\mathfrak E(E)\to\mathfrak E'(E)$, natural in $E$, that commutes with $j$ and $j'$. If both envelopes have a multilinear action, the morphism is \emph{equivariant} if it also commutes with $\beta^{\mathfrak E}$ and $\beta^{\mathfrak E'}$.
+
+\begin{theorem}[$\Mult^k$ is initial]\label{amb:thm:initial}
+\begin{enumerate}
+\item Let $(\mathfrak E,j,\beta^{\mathfrak E})$ be an envelope with a multilinear action. There is a unique family of bounded linear maps $\mathsf i_E\colon\Mult^k(E;K)\to\mathfrak E(E)$ that extends $j_E$ and satisfies $\mathsf i_E(\mathsf m\circ(T_1\times\dots\times T_k))=\beta^{\mathfrak E}_{E,D}(T_1,\dots,T_k)\,\mathsf i_D(\mathsf m)$. So $\Mult^k(-;K)$ is initial among envelopes with a multilinear action and equivariant morphisms.
+\item For such an envelope $\Omega_K\subseteq\Omega_{\mathfrak E}$, with equality if the line $Ku_{\mathfrak E}$ is split.
+\item For $k\ge2$, $\Mult^k(-;K)$ is not initial among all envelopes and morphisms: it has more than one morphism to itself. For $k=1$ it is initial among all envelopes and morphisms.
+\end{enumerate}
+\end{theorem}
+The proof is in Appendix~\ref{amb:app}.
+
+Now the upper bound $\Omega_K$ of Theorem~\ref{amb:thm:comparison}(3) can fail when the line is not split. Let $\mathfrak V$ be the space $K\oplus\bigoplus_{N\ge1}K^N$ with the norm $\norm{(c,(c_{N,i}))}=\abs c+\sum_N\frac1N\sum_{i\le N}\abs{c_{N,i}}$. Let $\mathsf r_N=(1,-(1,\dots,1)_N)$, with $(1,\dots,1)_N$ in the summand $K^N$, and let $\mathfrak U$ be the separated quotient of $\mathfrak V$ by the span of the $\mathsf r_N$. Put $u_0=[1,0]$ and let $\mathsf u_{N,i}$ be the class of the $i$-th unit vector of $K^N$. Then
+\begin{equation}\label{amb:c:frakU}
+ u_0=\sum_{i\le N}\mathsf u_{N,i},\qquad\norm{\mathsf u_{N,i}}\le\frac1N,\qquad\norm{u_0}=1.
+\end{equation}
+For a manifold with a chosen atlas, write $\Omega_{\mathrm{AA}}$ for the class of sections whose expression in each chart of the atlas is ambient analytic into $\Alt^k(E;K)$, with an enlargement chosen per chart.
+
+\begin{theorem}[more than $\Omega_K$]\label{amb:thm:more}
+Let $K$ be complete, of any characteristic. Choose $\mathsf e_n\in K$ with $n^n\le\abs{\mathsf e_n}<\abs\varpi^{-1}n^n$. For $h$ in the open unit ball of $\ell^1(\N,K)$ put $\mathsf f(h)=\sum_{n\ge1}\mathsf e_nh_1\cdots h_n$. On the object $E=\ell^1(\N,K)\oplus K^k$ of case (A), with the sum norm, put $\omega_{\mathsf f}(x,y)=\mathsf f(x)\,\mathrm dy_1\wedge\dots\wedge\mathrm dy_k$. Let $\mathsf O$ be the open subset $\{\norm x<\mathrm e^{-1}\}$ of $E$, with its identity chart, where $\mathrm e$ is Euler's number.
+\begin{enumerate}
+\item $\mathsf f$ is ambient analytic at $0$ and not analytic at $0$.
+\item $\Omega_{\widehat{\mathfrak U}}\supsetneq\Omega_K$ on $\mathsf O$: the form $\omega_{\mathsf f}$ lies in $\Omega_{\widehat{\mathfrak U}}$ and not in $\Omega_K$. And $\widehat{\mathfrak U}$ has no bounded linear form nonzero at $u_0$. So for the envelope $\Mult^k(-;\widehat{\mathfrak U})$ the line $Ku_{\mathfrak E}$ is not split: the coordinates of $u_{\mathfrak E}$ in $\widehat{\mathfrak U}^{k!}$ are $\pm u_0$.
+\item A chart-by-chart enlargement gives more: $\Omega_K\subsetneq\Omega_{\mathrm{AA}}$ on $\mathsf O$, again by $\omega_{\mathsf f}$.
+\item Let $\operatorname{char}K=p$, put $M=H^{\rm at}$, and let $\mathsf E^{\rm at}$, $\mathsf S$, $\mathsf v$ be as in Corollary~\ref{amb:cor:charts}(4). Put $M_1=M\times K^k$, with the maximum norm on $K^k$, and $M_0=M\times\mathsf E^{\rm at}$. With $\det$ the determinant on $K^k$, the section $\det\cdot\,\mathsf v$ of $\Alt^k(M_1;M_0)$ is ambient analytic at every point, for an enlargement chosen per chart. In the vector bundle chart of $M_0$ changed by $\mathsf S$ its expression $\det\cdot\,(\mathsf S\mathsf v)$ is ambient analytic at no point.
+\end{enumerate}
+\end{theorem}
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{corollary}[where nothing is lost]\label{amb:cor:nothing-lost}
+Let $K$ be complete and $k\ge1$. Consider the following property of an ultrametric Banach space $E$: every map from an open subset of $E$ into $\Alt^k(E;K)$ that is divided-power analytic at a point is analytic at that point as a map into $\Mult^k(E;K)$. If $\operatorname{char}K=0$, every ultrametric Banach space has this property. If $\operatorname{char}K=p$, every ultrametric Banach space has it if and only if $K$ is spherically complete.
+\end{corollary}
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{question}[a lower bound]\label{amb:q:lower-bound}
+Let $\operatorname{char}K=p$, let $k\ge p$, and let $K$ be not spherically complete. Is $\Omega_K\subseteq\Omega_{\mathfrak E}$ for every functorial envelope? This is open. For all other $K$ and $k$ the inclusion holds: if $k!\ne0$, or if $K$ is spherically complete (Theorem~\ref{thm:spherical}), then $\Alt^k(E;K)$ has a bounded linear retraction $\vartheta_E$ in $\Mult^k(E;K)$, and $j_E\circ\vartheta_E$ is a bounded linear extension of $j_E$ to $\Mult^k(E;K)$. The inclusion also holds with a multilinear action, by Theorem~\ref{amb:thm:initial}. It would follow if every $j_E$ extended to a bounded linear map on $\Mult^k(E;K)$. The converse of this last implication is open.
+\end{question}
+
+\subsection{Tame pairs}\label{amb:ssec:tame}
+
+The calculus of composition and inverse functions uses only tameness, a condition on a pair of spaces. Tameness is sufficient for composition; for $K$ complete, the exact condition on the source is $\mathfrak k(P)<\infty$ (Theorem~\ref{amb:thm:composition}). Ultrametric norms are used in four other places, for four reasons.
+
+\emph{Finiteness in each degree, from an ultrametric target.} Values add without counting the summands, so every bounded law into an ultrametric space is ambient (Theorem~\ref{amb:thm:tame-examples}(4)). For a general source a hypothesis on the target is needed: over a field of characteristic $p$ the composite of Theorem~\ref{amb:thm:failure}, on the non-ultrametric source $H^{\rm at}$, is a bounded law that is not ambient. No such hypothesis is needed for $P=\ell^1(J)$ (item~(2)), or for ultrametric $P$ in characteristic $0$ (item~(3)). For $P=c_0$ in characteristic $p$, see Question~\ref{amb:q:open}(4).
+
+\emph{Removal of the factor $n^n$, from an ultrametric source.} This factor is what a non-ultrametric norm on $P$ costs in Theorem~\ref{amb:thm:tame-examples}(4). An ultrametric norm on $P$ removes it from the bound on $\mathfrak a_n(P,W)$ (item~(1)), and so does $P=\ell^1(J)$ (item~(2)). Whether it can be removed for every $P$ is Question~\ref{amb:q:open}(4).
+
+\emph{The ambient space.} For $P,W$ ultrametric the enlargement can be built with maxima in place of sums, so it can be taken ultrametric (Theorem~\ref{amb:thm:tame-examples}(1)).
+
+\emph{An extension theorem.} In characteristic $p$, agreement with analytic maps uses the extension of contractions into spherically complete spaces (Proposition~\ref{amb:prop:agreement}(1)). The ultrametric source is needed for this: the germ of Theorem~\ref{amb:thm:more}(1) has source $\ell^1(\N,K)$ and target $K$, and $K$ may be spherically complete.
+
+\begin{definition}[tame]\label{amb:def:tame}
+For normed $P,W$ and $n\ge1$ let $\mathfrak a_n(P,W)$ be the supremum of $\operatorname{amb}(a)/\norm a$ over the nonzero bounded laws $a\colon P\to W$ of degree $n$, and $0$ if there are none. The pair $(P,W)$ is \emph{tame} if $\sup_{n\ge1}\mathfrak a_n(P,W)^{1/n}<\infty$. The space $P$ is \emph{tame} if $(P,W)$ is tame for every normed $W$. Put $\mathfrak a_n(P)=\sup\{\norm t_\Gamma/\pi(t):t\in\Gamma^n(P)\}$, with $c/0=\infty$ for $c>0$ and $0/0=0$.
+\end{definition}
+
+The bound $\norm{L_a(t)}\le\norm a\norm t_\Gamma$ gives $\mathfrak a_n(P,W)\le\mathfrak a_n(P)$. Equality holds for $\mathsf W_n$, the separated quotient of $(\Gamma^n(P),\norm\cdot_\Gamma)$: the law $h\mapsto[h^{\otimes n}]$ has norm at most $1$ and linearization $t\mapsto[t]$ (Lemma~\ref{amb:lem:linearization}(2)), and if this law vanishes then $\mathfrak a_n(P)=0$. Enlarging a target isometrically does not lower $\mathfrak a_n$, and the $\ell^1$-sum of the $\mathsf W_n$ contains each $\mathsf W_n$. So $P$ is tame if and only if $\sup_n\mathfrak a_n(P)^{1/n}<\infty$.
+
+\begin{proposition}[tame is exact]\label{amb:prop:tame-exact}
+Let $W$ be a Banach space. The following are equivalent: (i) $(P,W)$ is tame; (ii) every map from an open subset of $P$ into $W$ that is divided-power analytic at a point is ambient analytic there; (iii) the same at the point $0$, for germs given by one series of bounded laws.
+\end{proposition}
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{theorem}[calculus on a tame pair]\label{amb:thm:tame-calculus}
+\begin{enumerate}
+\item Let $(P,W)$ be tame, with $\mathfrak a_n(P,W)\le C\mathfrak q^n$ for $n\ge1$ and $\mathfrak q,C\ge1$. A germ from $P$ to $W$ that is divided-power analytic at $x_0$ with radius $R$ and bound $\mathfrak b$ is ambient analytic there with radius $R/\mathfrak q$ and bound $C\mathfrak b$.
+\item Let $(P,W)$ be tame and $Y$ any normed space. Let $f$, from an open subset of $P$ into $Y$, be divided-power analytic (for instance ambient analytic) at $x_0$, and $g$, from an open subset of $Y$ into $W$, be divided-power analytic (for instance ambient analytic) at $f(x_0)$. Then $g\circ f$ is ambient analytic at $x_0$.
+\item Let $P$ be Banach and $(P,P)$ tame. Let $f$, from an open subset of $P$ into $P$, be divided-power analytic at $x_0$, with coefficient law $a_1$ bijective with bounded inverse. Then $f$ has a local inverse germ, which is ambient analytic at $f(x_0)$ and at every point of a ball around it.
+\end{enumerate}
+\end{theorem}
+The proof is in Appendix~\ref{amb:app}.
+
+Item~(2) uses only the pair $(P,W)$ and item~(3) only $(P,P)$. On a tame pair ambient analyticity coincides with divided-power analyticity, by item~(1), so this is no separate argument for it.
+
+Now the main examples. Let $\mathfrak c_K$ be the generator below $1$ of $\abs{K^\times}$ if $K$ is discretely valued, and $\mathfrak c_K=1$ otherwise. On $P^{\otimes n}$ let
+\[
+ \pi_{\max}(t)=\inf\Bigl\{\max_l\prod_{i=1}^n\norm{x_{l,i}}:\ t=\sum_lx_{l,1}\otimes\dots\otimes x_{l,n}\Bigr\},
+\]
+an ultrametric seminorm with $\pi_{\max}\le\pi$. Put $C_0=8\mathrm e/\abs\varpi^2$. Let $\ell^1(J)=\ell^1(J,K)$ for a set $J$, and $\ell^1_{00}(J)$ its subspace of finitely supported vectors. If $\operatorname{char}K=0$, at most one prime $p_0$ has $\abs{p_0}<1$ in $K$; put $\mathfrak d=\abs{p_0}^{-1/(p_0-1)}$ if there is one, and $\mathfrak d=1$ otherwise.
+
+\begin{theorem}[examples]\label{amb:thm:tame-examples}
+Let $n\ge1$.
+\begin{enumerate}
+\item Let $P,W$ be ultrametric. For every bounded law $a\colon P\to W$ of degree $n$,
+\begin{equation}\label{amb:eq:pimax}
+ \norm{L_a(t)}\le(\abs\varpi\mathfrak c_K)^{-n}\norm a\,\pi_{\max}(t)\qquad(t\in\Gamma^n(P)).
+\end{equation}
+So $\mathfrak a_n(P,W)\le(\abs\varpi\mathfrak c_K)^{-n}$. A germ from $P$ to $W$ that is divided-power analytic at $x_0$ with radius $R$ and bound $\mathfrak b$ is ambient analytic there with radius $\abs\varpi\mathfrak c_KR$ and bound $\mathfrak b$, and the ambient space can be taken ultrametric. Hence between ultrametric spaces the divided-power analytic and the ambient analytic germs coincide.
+\item If $P=\ell^1(J)$ or $P=\ell^1_{00}(J)$, then $\mathfrak a_n(P)\le C_0^n$.
+\item Let $\operatorname{char}K=0$ and $P$ be ultrametric. Then $\mathfrak a_n(P)\le(8\mathfrak d/\abs\varpi^2)^n$. For every normed $W$, every bounded law $a\colon P\to W$ of degree $n$ is the diagonal of an $n$-linear map into $W$ of norm at most $(8\mathfrak d/\abs\varpi^2)^n\norm a$.
+\item Let $P$ be any normed space and $W$ ultrametric. For every bounded law $a\colon P\to W$ of degree $n$,
+\begin{equation}\label{amb:eq:hull}
+ \norm{L_a(t)}\le\Bigl(\frac{8n}{\abs\varpi^2\mathfrak c_K}\Bigr)^n\norm a\,\pi_{\max}(t)\qquad(t\in\Gamma^n(P)).
+\end{equation}
+So every bounded law into $W$ is ambient and $\mathfrak a_n(P,W)<\infty$ in each degree. Whether $(P,W)$ is always tame is open.
+\end{enumerate}
+\end{theorem}
+The proof is in Appendix~\ref{amb:app}.
+
+\begin{proposition}[agreement with analytic maps]\label{amb:prop:agreement}
+\begin{enumerate}
+\item Let $P,W$ be ultrametric and $W$ spherically complete. Every bounded law $a\colon P\to W$ of degree $n\ge0$ is the diagonal of an $n$-linear map into $W$ of norm at most $(\abs\varpi\mathfrak c_K)^{-n}\norm a$. So a germ from $P$ to $W$ that is divided-power analytic at $x_0$ with radius $R$ and bound $\mathfrak b$ is analytic there with radius $\abs\varpi\mathfrak c_KR$ and bound $\mathfrak b$. The same holds for every ultrametric Banach space $W$ over a discretely valued $K$, with an extra factor $\mathfrak c_K^{-1}$ in both bounds.
+\item If $\operatorname{char}K=0$ and $P$ is ultrametric, then for every normed $W$ the divided-power analytic, ambient analytic and analytic germs from $P$ to $W$ coincide (Theorem~\ref{amb:thm:tame-examples}(3)).
+\item If $K$ is complete, not spherically complete, of characteristic $p$, there is a function on an ultrametric Banach space that is ambient analytic at every point and analytic at no point.
+\end{enumerate}
+\end{proposition}
+The proof is in Appendix~\ref{amb:app}. For finer agreement statements, see~\cite{II}.
+
+\begin{remark}[one enlargement for a class of sources]\label{amb:rem:one-space}
+\emph{Ultrametric sources.} Let $K$ be spherically complete and $W$ ultrametric with $\norm W\subseteq\abs K$. Let $\mathcal F_W$ be the set of $K$-linear maps $\phi\colon W\to K$ with $\abs{\phi(w)}\le\norm w$, and $\operatorname{ev}_W\colon W\to\ell^\infty(\mathcal F_W,K)$, $\operatorname{ev}_W(w)=(\phi(w))_\phi$. This is an isometry. Indeed, for $w\ne0$ choose $c_w\in K$ with $\abs{c_w}=\norm w$; the isometry $\lambda w\mapsto\lambda c_w$ on $Kw$ extends to some $\phi\in\mathcal F_W$, by Step~1 of the proof of Theorem~\ref{thm:spherical}. The space $\ell^\infty(\mathcal F_W,K)$ is ultrametric and spherically complete: if balls $\overline B(z_\theta,r_\theta)$ meet pairwise, then so do their coordinates in $K$, and common points of the coordinates form a bounded family, which lies in every ball. So if $P$ is ultrametric and $f$ into $W$ is divided-power analytic at $x_0$ with radius $R$ and bound $\mathfrak b$, then $\operatorname{ev}_W\circ f$ is analytic at $x_0$ with radius $\abs\varpi\mathfrak c_KR$ and bound $\mathfrak b$, by Proposition~\ref{amb:prop:agreement}(1). One isometry serves all ultrametric sources.
+
+\emph{The sources $\ell^1(J)$.} Here $K$ need not be spherically complete or complete: the definition of $\mathfrak U$ and \eqref{amb:c:frakU} use no completeness. Let $W$ be normed, and $W\hot_\pi\mathfrak U$ the separated completion of $(W\otimes\mathfrak U,\pi)$. The map $w\mapsto w\otimes u_0$ is an isometry. It is contractive, as $\norm{u_0}=1$. For the converse, the bilinear map $(w,(c,(c_{N,i})))\mapsto(cw,(c_{N,i}w))$ from $W\times\mathfrak V$ into $W\oplus\bigoplus_NW^N$, with the norm of $\mathfrak V$ and $\norm\cdot$ of $W$ in place of $\abs\cdot$, has norm at most $1$. Let $\operatorname{lin}$ be its linearization, so $\norm{\operatorname{lin}(t)}\le\pi(t)$. For finitely many $w_N\in W$,
+\[
+ \Bigl\lVert\operatorname{lin}\Bigl(w\otimes(1,0)+\sum_Nw_N\otimes\mathsf r_N\Bigr)\Bigr\rVert=\Bigl\lVert w+\sum_Nw_N\Bigr\rVert+\sum_N\norm{w_N}\ge\norm w,
+\]
+and by continuity the same bound holds with $\sum_Nw_N\otimes\mathsf r_N$ replaced by any tensor in $W\otimes\ker(\mathfrak V\to\mathfrak U)$, as this kernel is the closure of the span of the $\mathsf r_N$. Lifting a representation of $w\otimes u_0$ in $W\otimes\mathfrak U$ to $\mathfrak V$ with arbitrarily small loss gives $\pi(w\otimes u_0)\ge\norm w$.
+
+Let $f$, from an open subset of $\ell^1(J)$ into $W$, be ambient analytic at $x_0$ with radius $R$, bound $\mathfrak b$ and coefficient laws $a_n$. Fix $n\ge1$. For a finitely supported $\alpha\in\N^J$ with $\abs\alpha=n$, a word $\mathsf w\in J^n$ has \emph{content} $\alpha$ if each $\theta\in J$ occurs $\alpha_\theta$ times in it. There are $N_\alpha=n!/\prod_\theta\alpha_\theta!$ such words. The orbit sum $O_\alpha(e)$, with $e$ listing the unit vectors $e_\theta$ for $\theta$ in the support of $\alpha$, has $\pi(O_\alpha(e))\le N_\alpha$. So $w_\alpha=L_{a_n}(O_\alpha(e))$ has $\norm{w_\alpha}\le\operatorname{amb}(a_n)N_\alpha$. Number the words of content $\alpha$ from $1$ to $N_\alpha$, and let $\mathsf z_{\mathsf w}=w_\alpha\otimes\mathsf u_{N_\alpha,i}$ if $\mathsf w$ is the $i$-th. By \eqref{amb:c:frakU}, $\norm{\mathsf z_{\mathsf w}}\le\operatorname{amb}(a_n)$ and the $\mathsf z_{\mathsf w}$ of content $\alpha$ sum to $w_\alpha\otimes u_0$. Then
+\[
+ b_n(h^1,\dots,h^n)=\sum_{\mathsf w\in J^n}h^1_{\mathsf w_1}\cdots h^n_{\mathsf w_n}\,\mathsf z_{\mathsf w}
+\]
+converges absolutely, $\norm{b_n}\le\operatorname{amb}(a_n)\le \mathfrak bR^{-n}$, and for finitely supported $h$, by~\eqref{amb:eq:orbit},
+\[
+ b_n(h,\dots,h)=\sum_\alpha h^\alpha w_\alpha\otimes u_0=L_{a_n}(h^{\otimes n})\otimes u_0=a_n(h)\otimes u_0.
+\]
+Both ends are continuous in $h$, so this holds for all $h$. With $b_0=f(x_0)\otimes u_0$, the map $f$ becomes analytic at $x_0$ with the same radius and bound, after one isometry that depends only on $W$.
+\end{remark}
+
+\subsection{Conclusion and questions}\label{amb:ssec:end}
+
+Between ultrametric spaces, ambient analyticity coincides with divided-power analyticity; it is closed under composition and, on Banach spaces, has the inverse function theorem. For general norms over a field of characteristic $p$ it is not closed under composition, and, for $K$ complete, it has no inverse function theorem and its charts and sections depend on choices; in characteristic $0$ this is open. Over a field of characteristic $p$, repairing composition alone does not single out a class: there are composition-closed classes of germs with Banach values strictly between ambient and divided-power analyticity, two of them with an inverse function theorem between Banach spaces~\cite{II}. Paper~\cite{II} studies divided-power analyticity, the smallest class of germs with Banach values that contains the analytic germs and has target and source descent.
+
+\begin{question}\label{amb:q:open}
+Each of the following is open.
+\begin{enumerate}
+\item Let $\operatorname{char}K=0$. Is $\mathfrak k(P)<\infty$ for every normed $P$? Is every divided-power analytic germ from a normed space to a Banach space ambient analytic?
+\item Let $\operatorname{char}K=p$. Is ambient analyticity closed under composition on every ultrametric source, with a non-ultrametric final target? Let moreover $K$ be densely valued and $p$ odd. Is $\mathfrak l_p(c_0)=\infty$, so that Proposition~\ref{amb:prop:general-failure} applies with $X=c_0$ and $n=p$?
+\item Is there a normed $P$ with $\mathfrak k(P)<\infty$ and a divided-power analytic germ from $P$ into a Banach space that is not ambient analytic?
+\item Is $(P,W)$ tame for every normed $P$ and every ultrametric $W$? Let $\operatorname{char}K=p$ and $c_0=c_0(\N,K)$. Is $c_0$ tame? Is every bounded law from $c_0$ into a normed space ambient?
+\item Let $\operatorname{char}K=p$ and $k\ge p$. Is there, for all analytic vector bundles $M_1,M_0$ over an analytic manifold, an analytic vector bundle structure on $\Alt^k(M_1;M_0)$, compatible with its $C^\infty$ structure, for which every analytic automorphism of $(M_1,M_0)$ induces an analytic morphism?
+\item Let $K$ be complete and $k\ge1$. Is there an analytic manifold $M$, modeled on a normed space, and a section of $\Alt^k(TM;K)$ that is ambient analytic in one analytic chart, through some enlargement, and not in another?
+\end{enumerate}
+\end{question}

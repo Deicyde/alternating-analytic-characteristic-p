@@ -1,0 +1,256 @@
+\section{What forces each disagreement}\label{dp:sec:ledger}
+
+This section lists the disagreements between DP germs and analytic germs that are stated in this paper and in~\cite{I}, and says what forces each one. It is a list of those disagreements only, and we do not claim that it is complete. In characteristic $p$, on ultrametric sources with non-ultrametric targets, whether DP and AA differ is open (Question~\ref{dp:q:c0}), and a germ that is DP and not AA there would be of none of the types below.
+
+\subsection{The regimes}\label{dp:ssec:regimes}
+
+In Table~\ref{dp:tab:ledger}, ``$=$'' means that DP germs and analytic germs coincide for all spaces of the row, ``$\ne$'' means that they differ for some spaces of the row, and ``open'' means that we do not decide this. The types are those of Definition~\ref{dp:def:types}. The rows marked ``see the text'' are treated in the paragraphs after the table.
+
+\begin{table}[htbp]
+\footnotesize
+\caption{Regimes. Here ``um'' abbreviates ultrametric, ``sph'' abbreviates spherically complete, and ``discrete'' and ``dense'' refer to the value group of $K$.}\label{dp:tab:ledger}
+\begin{tabular}{@{}p{0.05\linewidth}p{0.155\linewidth}p{0.135\linewidth}p{0.135\linewidth}p{0.195\linewidth}p{0.185\linewidth}@{}}
+ & $K$ & $P$ & $W$ & DP against An & Where\\
+\hline
+L0 & $\mathbb R$, $\mathbb C$ & any & any & $=$ & see the text\\
+L1 & any & finite-dim. & any if $K$ is complete; otherwise Banach & $=$ & Thm.~\ref{dp:thm:agreement-finite}\\
+L2 & $\F_p(t)$; other incomplete $K$ not considered & finite-dim., um & finite-dim., incomplete & $\ne$, Type V & Thm.~\ref{dp:thm:agreement-finite}(3)\\
+L3 & char.\ $0$ & um & any & $=$, radius factor $\mathfrak n_K\mathfrak s(P)/2$ & Thm.~\ref{dp:thm:agreement-char0}\\
+L4 & char.\ $0$ & non-um, e.g.\ $\ell^1$ & um, e.g.\ $\Kh$ & $\ne$, Type I; sDP $=$ An & Ex.~\ref{dp:ex:l1}, Prop.~\ref{dp:prop:strong-interpolates}(1),(2), Cor.~\ref{dp:cor:two-gaps}\\
+L5 & char.\ $0$ & non-um & non-um & $\ne$, Type I, for some; DP against AA open; An against CA open & see the text, Q.~\ref{dp:q:char0}, Q.~\ref{dp:q:cover}\\
+\hline
+L6 & char.\ $p$ & um & um, sph up to equivalence & $=$ & Thm.~\ref{dp:thm:sph-agreement}(1)\\
+L7 & char.\ $p$, discrete, complete or not & um & um & $=$ for $W$ Banach; $W$ incomplete: $\ne$ over $\F_p(t)$ (L2), otherwise open & Thm.~\ref{dp:thm:sph-agreement}(2), Thm.~\ref{dp:thm:agreement-finite}(3), Q.~\ref{dp:q:residual}\\
+L8 & char.\ $p$, complete & um; $\widehat P\cong c_0(J)$, or of countable type & um Banach & $=$ & Thm.~\ref{dp:thm:c0-agreement}, Thm.~\ref{dp:thm:conservativity}\\
+L9 & char.\ $p$, complete, not sph & um & um, not sph & $\ne$, Type II & \cite[Theorem~7.2(2)]{I}, Prop.~\ref{dp:prop:strict}(1)(c)\\
+L10 & char.\ $p$, complete, dense, sph & um, $\widehat P\not\cong c_0(J)$ & um, no equivalent sph norm & open & Q.~\ref{dp:q:residual}\\
+L11 & char.\ $p$, incomplete, dense & um, infinite-dim. & um, no equivalent sph norm & $\ne$ for some spaces if $\Kh$ is not sph, by restriction of scalars; if $\Kh$ is sph and $W$ is Banach, L10 over $\Kh$; $W$ incomplete: open for general such spaces & Thm.~\ref{dp:thm:general-norms-agreement}(3)(a), Q.~\ref{dp:q:residual} and the text after it\\
+L12 & char.\ $p$, discrete, or $p=2$ & um, e.g.\ $c_0$ & non-um & $\ne$, Type III & Prop.~\ref{dp:prop:strict}(1)(b),(d)\\
+L13 & char.\ $p$ odd, $\Kh$ not sph & um & non-um, with the target of Type II as a bounded retract & $\ne$, Type II; for $K$ incomplete, after restriction of scalars & see the text, and the text after Q.~\ref{dp:q:residual}\\
+L14 & char.\ $p$ odd, dense, $\Kh$ sph & um & non-um & open & Q.~\ref{dp:q:residual}, \cite[Remark~E.2]{I}\\
+L15 & char.\ $p$ & non-um & um & $\ne$, Type I, if $P$ has a complemented copy of $\ell^1(\N)$; sDP against An is DP against An on $(P^{\mathsf u},W)$, for the hull $P^{\mathsf u}$ of Section~\ref{dp:sec:strong} & see the text, Cor.~\ref{dp:cor:two-gaps}\\
+L16 & char.\ $p$ & non-um & non-um & $\ne$, Types I, III, IV; here also DP $\ne$ AA & Prop.~\ref{dp:prop:strict}(2), see the text\\
+\end{tabular}
+\end{table}
+
+\emph{Row L0.} This row is outside the standing assumptions of this paper: over $K=\mathbb R$ or $\mathbb C$ the definitions are read verbatim. Let $a$ be a law of degree $n\ge1$. Comparing coefficients in $a(\sum_i\varepsilon_ix_i)$ gives $\sum_{\varepsilon\in\{\pm1\}^n}\varepsilon_1\cdots\varepsilon_na(\sum_i\varepsilon_ix_i)=2^na^{[1^n]}(x_1,\dots,x_n)$. As in Section~\ref{dp:sec:nonambient}, $a^{[1^n]}$ is $n$\nobreakdash-linear with $a^{[1^n]}(h,\dots,h)=n!\,a(h)$; that algebra does not use the absolute value. So $\norm{a^{[1^n]}(x_1,\dots,x_n)}\le\norm a(\sum_i\norm{x_i})^n$. Scaling to $\norm{x_i}=1/n$ shows that $a^{[1^n]}/n!$ is a lift of $a$ of norm at most $(n^n/n!)\norm a\le\mathrm e^n\norm a$. So a DP germ with radius $R$ and bound $M$ is analytic with radius $R/\mathrm e$ and bound $M$.
+
+\emph{Rows with a retract.} Let $\iota\colon W'\to W$ and $\rho\colon W\to W'$ be bounded linear with $\rho\iota=\id$. If $f$ maps into $W'$, then $\iota\circ f$ is DP if $f$ is, and if $\iota\circ f$ is analytic at a point, then so is $f=\rho\circ\iota\circ f$. Let $k\ge p$, let $E,D$ be as in \cite[Theorem~7.2(2)]{I}, and put $W_0=\cL(\Alt^k(D;K),\Alt^k(E;K))$. The retract gives L13 from Type II, for instance with $W'=W_0$ and $W=W_0\oplus\ell^1(\N,K)$. It gives L5 from L4, with $f=\mathsf f$ and $W=\Kh\oplus\ell^1(\N,\Kh)$. The same applies on the source. Let $\iota'\colon P'\to P$ and $\rho'\colon P\to P'$ be bounded linear with $\rho'\iota'=\id$, and let $f$ be a germ at $0$ on $P'$ that is DP and not analytic. Then $f\circ\rho'$ is DP at $0$, and it is not analytic at $0$, as $f=f\circ\rho'\circ\iota'$. With $f=\mathsf f$ this gives L15. With both kinds of retract it gives the Types I and III in L16, from $\mathsf f$ and from the maps of Type III. For densely valued $K$ and odd $p$ only Type III (iii) is available.
+
+In L13, containing that target isometrically is not enough. Let $\mathsf Y_K$ be the space $\cL(\Alt^k(D;K),\Mult^k(E;K))$. Then $\mathsf Y_K\oplus\ell^1(\N,K)$ contains $W_0$ isometrically, and $A^k_{E,D;K}$, as a map into it, is the diagonal of a bounded $k$\nobreakdash-linear map~\cite[Proposition~2.2]{I}, so it is analytic.
+
+\emph{DP against AA across the table.} They agree on ultrametric $P,W$~\cite[Theorem~14.39(1)]{I} and on $P=\ell^1(J)$~\cite[Theorem~14.39(2)]{I}. They differ in L16, by Proposition~\ref{dp:prop:strict}(2). It is open in L5 (Question~\ref{dp:q:char0}), in L12--L14 (Question~\ref{dp:q:c0}(1), by Theorem~\ref{dp:thm:general-norms-agreement}(3)(c); laws of degree $2$ and of degree below $p$ are ambient, by Propositions~\ref{dp:prop:ultrametric}(1),(4) and~\ref{dp:prop:all-norms}(1)), and in L4 and L15 in general \cite[Question~14.42(4)]{I}.
+
+\subsection{The types}\label{dp:ssec:types}
+
+Recall (C1), (C2), (C3) from Section~\ref{dp:sec:descent}. As in Section~\ref{dp:ssec:ca-descents}, we write (C2)$_\times$ for (C2), along all linear isometries of Banach spaces, and (C2)$_{\rm u}$ for (C2) along linear isometries between ultrametric Banach spaces only.
+
+Let $\mathsf f$ be the germ of Example~\ref{dp:ex:l1}, whose mechanism is described after that example. Let $V,\mu,\nu,R_n,H,H_0,G,c_0$ be as in Section~\ref{dp:sec:nonambient}, and let $\widehat V_\mu,\widehat V_\nu$ be the completions of $(V,\mu),(V,\nu)$. We write $(\lambda,x,w)$ for the points of $H=K\oplus c_0\oplus G$, so that $R_{p+1}(\lambda,x,w)=x^{\otimes p}\otimes w$. We write $f_{c_0},g_{c_0}$ for the maps $f_X,g_X$ of that section, with $X=c_0$. Conditions~(a) and~(b) are those of Proposition~\ref{dp:prop:nonambient}. Let $H^{\rm at},\widehat W^{\rm at},\widehat Y^{\rm at}$ be the spaces of \cite[Definition~14.16]{I} and the completions used after \cite[Theorem~14.17]{I}, with $X=X^{\rm at}$ there, and let $f^{\rm at},\hat g^{\rm at}$ be the maps $f_X,\hat g_X$ of that theorem and of the paragraph after it. Let $\mathcal E$ and $\hGamma^p_\Gamma(\mathcal E)$ be as in Section~\ref{dp:sec:chain}. For $\operatorname{char}K=p$ and $n\ge p$, put
+\[
+ \gamma^\sharp_n\colon K\oplus\mathcal E\to\hGamma^p_\Gamma(\mathcal E),\qquad\gamma^\sharp_n(\lambda,h)=\lambda^{n-p}h^{\otimes p},
+\]
+with $\lambda^0=1$, the laws of Proposition~\ref{dp:prop:degree-p}(2), with $\gamma^\sharp_p$ as in Theorem~\ref{dp:thm:cp}.
+
+\begin{definition}[types]\label{dp:def:types}
+We name the following germs and laws. Each is DP and not analytic.
+\begin{itemize}
+\item[] \textbf{Type I.} The germ $\mathsf f$ at $0$, on $\ell^1(\N,K)$, with values in $\Kh$, over every $K$. Its laws have norm less than $\abs\varpi^{-1}$, and a lift of its law of degree $n$ has norm at least $n^n$.
+\item[] \textbf{Type II.} For $K$ complete, not spherically complete, of characteristic $p$, and $k\ge p$: the law $A^k_{E,D;K}$, for the ultrametric Banach spaces $E,D$ of \cite[Theorem~7.2(2)]{I}. It is ambient, with no lift.
+\item[] \textbf{Type III.} For $\operatorname{char}K=p$: \textup{(i)} for $k\ge p$, the power map $c_0\to\hGamma^k_\pi c_0$, $h\mapsto h^{\otimes k}$, in the cases of Proposition~\ref{dp:prop:strict}(1)(b); \textup{(ii)} the power map $c_0\to\hGamma^p_\pi c_0$, $h\mapsto h^{\otimes p}$, if $K$ is discretely valued or $p=2$; \textup{(iii)} $A^k_{E,E;F}$, $k\ge p$, for the spaces $E,F$ of \cite[Theorem~7.2(1)]{I}. All are ambient, with no lift. In (i), (ii) the source is ultrametric, and the target has no equivalent ultrametric norm. In (iii), the space $F$ has no equivalent ultrametric norm, and over a general $K$ it is not asserted that $E$ is ultrametric \cite[Remark~E.2]{I}.
+\item[] \textbf{Type IVa.} For $\operatorname{char}K=p$: \textup{(i)} the laws $R_n$, $n\ge p+1$, into $\widehat V_\mu$, under~(a) or~(b); \textup{(ii)} the laws $R_n$ into $\widehat V_\nu$, for $p=2$; \textup{(iii)} the law $\hat g^{\rm at}\circ f^{\rm at}$ on $H^{\rm at}$, into $\widehat Y^{\rm at}$, over every $K$. These are laws that are not ambient.
+\item[] \textbf{Type IVb.} For $\operatorname{char}K=p$ and every $K$: the laws $\gamma^\sharp_n$, $n\ge p$. They are not ambient.
+\item[] \textbf{Type V.} Over $K=\F_p(t)$ with the $t$-adic absolute value, and for $k\ge p$: the joint action $B$ on the morphisms of \cite[Theorem~H.4]{I}, with incomplete finite-dimensional values.
+\end{itemize}
+For $K$ discretely valued and $p$ odd, the laws $R_n$ into $\widehat V_\nu$ are not ambient, by Proposition~\ref{dp:prop:nonambient}(2), and we do not assign them a type (Question~\ref{dp:q:odd-c0}).
+\end{definition}
+
+We justify the assertions of Definition~\ref{dp:def:types}. The norm bound in Type I is Example~\ref{dp:ex:l1}, and the bound on lifts is Step~3 of its proof. The germ $\mathsf f$ is DP and not analytic by the same example. The maps of Types II and III are ambient and analytic at no point (Proposition~\ref{dp:prop:strict}(1)), so they have no lift (Lemma~\ref{dp:lem:lift-criterion}). In Type III (i), (ii), suppose that the target had an equivalent ultrametric norm. It would be an ultrametric Banach space, and by Theorem~\ref{dp:thm:c0-agreement}(2) the power map would be the diagonal of a bounded multilinear map, so it would be analytic. This is false. In (iii), the assertion on $F$ is \cite[Theorem~7.2(1)]{I}. The laws of Type IV are bounded, so they are DP (Theorem~\ref{dp:thm:calculus}(1)). They are not ambient, by Lemma~\ref{dp:lem:type-iv} and Proposition~\ref{dp:prop:degree-p}(2), so they are not analytic (Lemma~\ref{dp:lem:lift-criterion}). Type V is Theorem~\ref{dp:thm:agreement-finite}(3).
+
+\begin{lemma}[Type IV]\label{dp:lem:type-iv}
+Let $\operatorname{char}K=p$. A class means a class of germs with Banach values.
+\begin{enumerate}
+\item For every $K$ of characteristic $p$ and every $n\ge p+1$, $R_n$ into $\widehat V_\mu$ is in $\mathrm{AA}^\circ$ at every point. Every class that has \textup{(C1)}, \textup{(C2)}$_\times$, composition and pairing contains the germs of $R_n$ at every point. Under~\textup{(a)} or~\textup{(b)} it is not ambient of degree $n$.
+\item If $\mathfrak a_p(c_0)<\infty$, then $R_n$ into $\widehat V_\nu$ is in $\mathrm{AA}^\circ$ at every point. This holds if $p=2$, and then $R_n$ into $\widehat V_\nu$ is not ambient of degree $n$. For odd $p$, whether $\mathfrak a_p(c_0)<\infty$ is open.
+\item For every $K$ of characteristic $p$, $\hat g^{\rm at}\circ f^{\rm at}$ on $H^{\rm at}$ is in $\mathrm{AA}^\circ$ at every point, and it is a law of degree $p+1$ that is not ambient.
+\item For every $n\ge p$, no germ of $\gamma^\sharp_n$ is in TA.
+\end{enumerate}
+So, as $\mathrm{AA}^\circ\subseteq\mathrm{TA}$ (Theorem~\ref{dp:thm:chain}), a law that is not ambient can lie in TA.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item (1): membership).} On $H$ let $\mathsf a'(\lambda,x,w)=x^{\otimes p}$, into the completion $\hGamma^p_\pi c_0$ of $\Gamma^p_\pi(c_0)$, and $\mathsf a''(\lambda,x,w)=w$, into $\widehat G$. Let $j$ be the isometry of $\hGamma^p_\pi c_0$ into the completion of $(c_0^{\otimes p},\pi)$. Then $j\circ\mathsf a'$ is the diagonal of the bounded $p$\nobreakdash-linear map $((\lambda_i,x_i,w_i))_{i\le p}\mapsto x_1\otimes\dots\otimes x_p$, so it is analytic at every point. And $\mathsf a''$ is bounded linear. So a class with (C1) and (C2)$_\times$ contains the germs of $\mathsf a'$ and $\mathsf a''$. By the definition of $\mu$, the map $(s,w)\mapsto s\otimes w$ from $\Gamma^p_\pi(c_0)\times G$ to $(V,\mu)$ has norm at most $1$. So it extends to a bounded bilinear map $\boxtimes$ from $\hGamma^p_\pi c_0\times\widehat G$ to $\widehat V_\mu$, which is analytic. We have $R_{p+1}=\boxtimes\circ(\mathsf a',\mathsf a'')$. For $n>p+1$, $R_n$ is the pair $(\lambda^{n-p-1},R_{p+1})$, with analytic first entry, followed by the bounded bilinear scalar multiplication $\Kh\times\widehat V_\mu\to\widehat V_\mu$. So pairing and composition put $R_n$ in the class. The class $\mathrm{AA}^\circ$ has these properties by definition.
+
+\emph{Step 2 (item (1): not ambient).} Assume~(a) or~(b), and suppose that $R_n$ into $\widehat V_\mu$ is ambient of degree $n$: $j_1\circ R_n$ is the diagonal of a bounded $n$\nobreakdash-linear map $\beta$, for a linear isometry $j_1$ of $\widehat V_\mu$. For $(x,w)\in H_0$ we have $g_{c_0}\circ f_{c_0}(x,w)=R_n(1,x,w)$. Expanding $\beta((1,x,w),\dots,(1,x,w))$ by multilinearity shows that $j_1\circ g_{c_0}\circ f_{c_0}$ is analytic at $0$. By the one-point lemma \cite[Proposition~14.9(2)]{I}, the law $g_{c_0}\circ f_{c_0}$ into $\widehat V_\mu$ is ambient, so it is AA at $0$ \cite[Proposition~14.9(1)]{I}. This contradicts Theorem~\ref{dp:thm:c0-failure}(3).
+
+\emph{Step 3 (item (2)).} As in Remark~\ref{dp:rem:nu-mu}, $\nu\le\mathfrak a_p(c_0)\mu$ on $V$. So if $\mathfrak a_p(c_0)<\infty$, the identity of $V$ extends to a bounded linear map $\widehat V_\mu\to\widehat V_\nu$. It is analytic, and composing with it keeps $\mathrm{AA}^\circ$. If $p=2$, then $\mathfrak a_2(c_0)\le\frac32\mathfrak c_K^{-2}$ by Proposition~\ref{dp:prop:ultrametric}(4), and non-ambience is Proposition~\ref{dp:prop:nonambient}(2) under~(b). The last sentence of item~(2) is part of \cite[Question~14.42(4)]{I}; see Question~\ref{dp:q:c0}.
+
+\emph{Step 4 (item (3)).} By the paragraph after \cite[Theorem~14.17]{I}, $f^{\rm at}$ is AA into $\widehat W^{\rm at}$ at every point, and $\hat g^{\rm at}$ is the diagonal of a bounded bilinear map. So $\hat g^{\rm at}\circ f^{\rm at}$ is in $\mathrm{AA}^\circ$ at every point. By \cite[Theorem~14.17]{I} it is AA at no point. So it is not ambient, as an ambient law is AA at $0$ \cite[Proposition~14.9(1)]{I}.
+
+\emph{Step 5 (item (4), $n=p$).} By Theorem~\ref{dp:thm:cp}(3), no germ of $\gamma^\sharp_p$ is in $\cC_p$, and $\mathrm{TA}\subseteq\cC_p$ by Theorem~\ref{dp:thm:chain}.
+
+\emph{Step 6 (item (4), $n>p$).} Let $(\lambda_1,x_1)\in K\oplus\mathcal E$ with $\lambda_1\ne0$. Write the increment as $(\mathsf m,\mathsf h)$. The law of degree $p$ of $\gamma^\sharp_n$ at $(\lambda_1,x_1)$ is the part of degree $p$ in $(\mathsf m,\mathsf h)$ of $(\lambda_1+\mathsf m)^{n-p}(x_1+\mathsf h)^{\otimes p}$. At $\mathsf m=0$ it is $\mathsf h\mapsto\lambda_1^{n-p}\mathsf h^{\otimes p}$. If that law were ambient, then, restricting to $\mathcal E$, dividing by $\lambda_1^{n-p}$ and precomposing with the projection of $K\oplus\mathcal E$ onto $\mathcal E$, the law $\gamma^\sharp_p$ would be ambient, against Proposition~\ref{dp:prop:degree-p}(2). So the germ at $(\lambda_1,x_1)$ is not in $\cC_p$, hence not in TA. At a point $(0,x_1)$: by Theorem~\ref{dp:thm:chain}, a germ in TA is in $\cC_p^{\rm loc}$, that is, in $\cC_p$ at all nearby points. Points with $\lambda_1\ne0$ occur arbitrarily near. So the germ at $(0,x_1)$ is not in TA.
+\end{proof}
+
+\subsection{What forces them}\label{dp:ssec:forcing}
+
+In this subsection a class means a class of germs with Banach values, as in Section~\ref{dp:sec:descent}, closed under bounded linear postcomposition. Type V has incomplete values and is treated separately. A class \emph{contains} a type if it contains the germs of its maps at every point of their domains, and at $0$ for Type I.
+
+\begin{theorem}[forcing]\label{dp:thm:forcing}
+\leavevmode
+\begin{enumerate}
+\item \textup{(Type I.)} Every class with \textup{(C1)} and \textup{(C2)}$_\times$ contains Type I. Let $K$ be complete. The properties \textup{(C1)}, \textup{(C3)}, composition, pairing, inverse and implicit functions, all bounded laws and alternating bundles do not force Type I, even jointly: the class CA, on open sets and for Banach models and fibers, has all of them and does not contain Type I. Among germs with ultrametric Banach targets, sDP has \textup{(C1)}, \textup{(C2)}$_{\rm u}$, \textup{(C3)}, composition and every $A^k_{E,D;F}$ with $F$ an ultrametric Banach space, and it does not contain Type I.
+\item \textup{(Type II.)} Let $K$ be complete, not spherically complete, of characteristic $p$. Each of the following forces Type II: \textup{(C1)} with \textup{(C2)}$_{\rm u}$; \textup{(C1)} with \textup{(C3)}; containing the transition families $u\mapsto g(u)^*$ of the alternating bundle of the shear bundle \cite[Proposition~10.1, Corollary~10.2]{I}, with $F=K$.
+\item \textup{(Type III.)} Let $\operatorname{char}K=p$. Each of \textup{(C1)} with \textup{(C2)}$_\times$ and \textup{(C1)} with \textup{(C3)} forces Type III. For Banach $E,F$, containing the families $u\mapsto g(u)^*$ with $D=E$ forces $A^k_{E,E;F}$.
+\item \textup{(Type IV.)} Let $\operatorname{char}K=p$.
+\begin{enumerate}
+\item \textup{(C1)}, \textup{(C2)}$_\times$, composition and pairing force Type IVa.
+\item \textup{(C1)} with \textup{(C3)} forces every bounded law, so Types IVa, IVb, and the laws $R_n$ into $\widehat V_\nu$.
+\item TA has \textup{(C1)}, \textup{(C2)}$_\times$, composition, pairing, inverse and implicit functions and bundle lifting, and it does not contain Type IVb.
+\item Let $r\ge p$. A class closed under restriction to affine subspaces that contains the operator family $\mathsf T^\psi$ of $J^r(X_{\mathcal E};\hGamma^p_\Gamma(\mathcal E))$, for $\psi=\psi_{\mathcal E}^{\pm1}$, on the shear manifold $X_{\mathcal E}$ of Proposition~\ref{dp:prop:jets-not-ambient}(4), contains the law $h\mapsto h^{\otimes p}$ on $\mathcal E$.
+\end{enumerate}
+\item \textup{(Type V.)} Among germs with arbitrary normed values, containing the joint actions forces Type V. Into the completion of its target, the map of Type V is analytic.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} By Example~\ref{dp:ex:l1}(2) there are a Banach space $Z$ and a linear isometry $j\colon\Kh\to Z$ with $j\circ\mathsf f$ analytic at $0$. Apply (C1) and (C2)$_\times$. The coefficient law $a_n$ of $\mathsf f$ of degree $n$ has $a_n^{[1^n]}(e_1,\dots,e_n)=\mathsf e_n$. So its strong norm is at least $n^n$, and by Lemma~\ref{dp:lem:coefficients-unique} $\mathsf f$ is not sDP at $0$. As $\Kh$ is ultrametric, $\mathsf f$ is not CA at $0$, by Lemma~\ref{dp:lem:cover-flat}(5). Now let $K$ be complete. By Theorem~\ref{dp:thm:descents-independent}(1), CA has (C1), (C3), composition, pairing, inverse and implicit functions and all bounded laws. CA is an open condition (Proposition~\ref{dp:prop:ca-open}), and on open sets it carries the alternating bundles, by the paragraph \emph{CA on open sets} of Section~\ref{dp:sec:cover}. The properties of sDP are Theorem~\ref{dp:thm:strong-descent}, Theorem~\ref{dp:thm:strong-composition} and Proposition~\ref{dp:prop:strong-bundle}.
+
+\emph{Step 2 (every bounded law from \textup{(C1)}, \textup{(C3)}).} Let $a\colon P\to W$ be a bounded law with $W$ Banach, and let $x_0=q_P(\tilde x_0)$. By Lemma~\ref{dp:lem:laws-cover}, $a\circ q_P$ is analytic at $\tilde x_0$. So (C1) and (C3) put the germ of $a$ at $x_0$ in the class. This gives the (C1), (C3) clauses of items~(2) and~(3), and item~(4)(b).
+
+\emph{Step 3 (the (C2) clauses of items (2), (3)).} Let $\mathsf Y_F=\cL(\Alt^k(D;F),\Mult^k(E;F))$. By \cite[Proposition~2.2]{I}, $A^k_{E,D;F}$ followed by the isometry $j_{E,F}\circ{-}$ into $\mathsf Y_F$ is the diagonal of a bounded $k$\nobreakdash-linear map, so it is analytic at every point. For item~(2), take $F=K$: then $\mathsf Y_K$ and $\cL(\Alt^k(D;K),\Alt^k(E;K))$ are ultrametric Banach spaces, and (C1), (C2)$_{\rm u}$ apply. For Type III (iii) apply (C1), (C2)$_\times$. For Type III (i), (ii), the power map into $\hGamma^k_\pi c_0$, followed by the isometry into the completion of $(c_0^{\otimes k},\pi)$, is the diagonal of $(x_1,\dots,x_k)\mapsto x_1\otimes\dots\otimes x_k$. Apply (C1), (C2)$_\times$.
+
+\emph{Step 4 (the bundle clauses).} Let $\mathsf D_1=D\oplus E$, $g(u)(d,e)=(d+ue,e)$, and let $\mathsf J,\mathsf{Res}$ be the bounded linear maps of the proof of \cite[Proposition~10.1]{I}, with $\mathsf J\colon\Alt^k(D;F)\to\Alt^k(\mathsf D_1;F)$ and $\mathsf{Res}\colon\Alt^k(\mathsf D_1;F)\to\Alt^k(E;F)$. There $\mathsf D_1$ and $\mathsf{Res}$ are called $H$ and $R$. By \cite[(10.1)]{I}, $\mathsf{Res}\circ g(u)^*\circ\mathsf J=A^k_{E,D;F}(u)$. The map $\mathsf S\mapsto\mathsf{Res}\circ\mathsf S\circ\mathsf J$ is bounded linear. So a class closed under bounded linear postcomposition that contains the germs of $u\mapsto g(u)^*$ contains those of $A^k_{E,D;F}$.
+
+\emph{Step 5 (item (4)(a),(c)).} By Definition~\ref{dp:def:ta}, $\mathrm{AA}^\circ$ is the smallest class with the properties of item~(a), and Type IVa lies in it, by Lemma~\ref{dp:lem:type-iv}(1),(2),(3). For item~(c), TA contains the analytic germs and has the listed properties by Theorems~\ref{dp:thm:ta-composition}, \ref{dp:thm:ta-inverse} and Corollary~\ref{dp:cor:ta-bundles}. It does not contain Type IVb, by Lemma~\ref{dp:lem:type-iv}(4).
+
+\emph{Step 6 (item (4)(d)).} Let $Z_p=\cP_p(\mathcal E;\hGamma^p_\Gamma(\mathcal E))$. Fix $z_1\in\mathcal E$ and $\mathsf c_1\in K$. Restrict the operator family $\mathsf T^\psi$ to the slice $v\mapsto(v,z_1,\mathsf c_1)$ and apply the bounded linear map $\mathsf C$ of Step~4 of the proof of Theorem~\ref{dp:thm:analytic-jets}. By~\eqref{dp:13:eq:compression} this gives the map $v\mapsto\pm\ev_p(v)$ into $\cL(Z_p,\hGamma^p_\Gamma(\mathcal E))$, with $\ev_p(v)(a)=a(v)$. Evaluation at the law $h\mapsto h^{\otimes p}$ in $Z_p$, and multiplication by $\pm1$, are bounded linear. They give $v\mapsto v^{\otimes p}$.
+
+\emph{Step 7 (item (5)).} The first assertion is the definition. The second is Theorem~\ref{dp:thm:agreement-finite}(2), as the source is finite-dimensional.
+\end{proof}
+
+Item~(4)(d) is about $\mathcal E$. To reach $\gamma^\sharp_p$ on $K\oplus\mathcal E$, one more precomposition, with the projection, is needed.
+
+\subsection{Closure under series of laws}\label{dp:ssec:series}
+
+Outside the list in Theorem~\ref{dp:thm:forcing}(1), and besides (C2)$_\times$, one more property forces Type I. We recall it from Section~\ref{dp:ssec:ca-descents}.
+
+\begin{definition}\label{dp:def:s-axiom}
+Let $\cC$ be a class of germs with Banach values, closed under translation in the source. It has \emph{\textup{(S)}} if the following holds. Let $P$ be a normed space, $W$ a Banach space, and $b_n\colon P\to W$ laws of degree $n$, $n\ge0$, whose germs at $0$ are in $\cC$, with $\sup_n\norm{b_n}R^n<\infty$ for some $R>0$. Then the germ at $0$ of $h\mapsto\sum_nb_n(h)$, $\norm h<R$, is in $\cC$.
+\end{definition}
+
+\begin{proposition}[series of laws]\label{dp:prop:s-axiom}
+\leavevmode
+\begin{enumerate}
+\item A class with \textup{(C1)} and \textup{(S)} contains Type I, over every $K$, with no target descent.
+\item The classes An, sDP and CA fail \textup{(S)} on $(\ell^1(\N,K),\Kh)$, over every $K$; so does $\mathrm{CA}^{\rm H}$ for $K$ complete.
+\item DP has \textup{(S)}. If $\operatorname{char}K=0$ and $P$ is ultrametric, the analytic germs on $P$ have the property in \textup{(S)}, for every Banach $W$.
+\item A class with \textup{(C1)}, \textup{(C3)} and \textup{(S)} contains every DP germ with Banach values, with no target descent.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (item (1)).} The law $a_n(h)=\mathsf e_nh_1\cdots h_n$ on $\ell^1(\N,K)$ is the diagonal of the bounded map $(x^1,\dots,x^n)\mapsto\mathsf e_nx^1_1\cdots x^n_n$, so its germ at $0$ is analytic. Also $\norm{a_n}<\abs\varpi^{-1}$ by Example~\ref{dp:ex:l1}(1). Apply (S) with $R=1$ and $a_0=0$.
+
+\emph{Step 2 (item (2)).} Each $a_n$ is analytic, so its germ is in An. It is in sDP by Lemma~\ref{dp:lem:strong-formal}(5), as $\Kh$ is ultrametric. It is in CA by Lemma~\ref{dp:lem:cover-flat}(4), and in $\mathrm{CA}^{\rm H}$ by Theorem~\ref{dp:thm:cah}(1). The sum $\mathsf f$ is not analytic (Example~\ref{dp:ex:l1}(3)), and it is neither sDP nor CA, by Step~1 of the proof of Theorem~\ref{dp:thm:forcing}. As $\mathrm{CA}^{\rm H}\subseteq\mathrm{CA}$, it is not in $\mathrm{CA}^{\rm H}$.
+
+\emph{Step 3 (item (3)).} Let $M=\sup_n\norm{b_n}R^n$. For $\norm h<R$ the sum of the $\norm{b_n(h)}$ is at most $M\sum_n(\norm h/R)^n$, which is finite, and $W$ is complete. So $\sum_nb_n$ is DP at $0$ with radius $R$ and bound $M$, by Definition~\ref{dp:def:laws}(3). If $\operatorname{char}K=0$ and $P$ is ultrametric, this germ is analytic, by Theorem~\ref{dp:thm:agreement-char0}(2).
+
+\emph{Step 4 (item (4)).} By Step~2 of the proof of Theorem~\ref{dp:thm:forcing}, (C1) and (C3) put every bounded law in the class. A DP germ at $x_0$ is the translate of $\sum_n\mathsf a_n$, with coefficient laws $\mathsf a_n$ and $\sup_n\norm{\mathsf a_n}R^n<\infty$. Apply (S).
+\end{proof}
+
+\begin{proposition}[in characteristic $0$]\label{dp:prop:s-char0}
+Let $\operatorname{char}K=0$, and let $\cC$ be a class of germs with Banach values, closed under translation in the source, with \textup{(C1)} and \textup{(S)}. Then $\cC$ contains every DP germ with Banach values. So a class with \textup{(C1)} and translations, inside DP, has \textup{(S)} if and only if it equals DP. In particular AA has \textup{(S)} if and only if $\mathrm{AA}=\mathrm{DP}$, and TA has \textup{(S)} if and only if $\mathrm{TA}=\mathrm{DP}$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (laws).} Let $a$ be a law of degree $n\ge1$. By Theorem~\ref{dp:thm:degree-threshold}(1), as $n!\ne0$, $a$ is the diagonal of the bounded $n$\nobreakdash-linear map $a^{[1^n]}/n!$. So the germ of $a$ at $0$ is analytic, hence in $\cC$. A law of degree $0$ is constant.
+
+\emph{Step 2 (series).} A DP germ at $x_0$ is the translate of $\sum_n\mathsf a_n$, with coefficient laws $\mathsf a_n$ and $\sup_n\norm{\mathsf a_n}R^n<\infty$. Apply (S). The second sentence follows with Proposition~\ref{dp:prop:s-axiom}(3). AA and TA contain the analytic germs, lie in DP and are closed under translation.
+\end{proof}
+
+\begin{proposition}[in characteristic $p$]\label{dp:prop:s-fails}
+Let $\operatorname{char}K=p$. There are laws $\mathsf b_n\colon K\oplus\mathcal E\to\hGamma^p_\Gamma(\mathcal E)$ of degree $n$, $n\ge p$, each the diagonal of a bounded $n$\nobreakdash-linear map, with $\norm{\mathsf b_n}\le1$, whose sum is not in TA at $0$. So AA and TA fail \textup{(S)}.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1 (the laws).} Let $\mathcal E_m,T^{(m)}$ be as in Proposition~\ref{dp:prop:degree-p}, and $\operatorname{pr}_m\colon\mathcal E\to\mathcal E_m$ the contractive projection. By~\eqref{dp:eq:degree-p-ratio}, for each $n\ge p$ there is $m_n$ with $\norm{T^{(m_n)}}_\Gamma\ge n^n\pi(T^{(m_n)})$ in $\Gamma^p(\mathcal E_{m_n})$. Here $\pi(T^{(m_n)})>0$, as $T^{(m_n)}\ne0$ and $\pi$ is a norm on $\mathcal E_{m_n}^{\otimes p}$. Put $\mathsf b_n(\lambda,h)=\lambda^{n-p}(\operatorname{pr}_{m_n}h)^{\otimes p}$. Then $\norm{\mathsf b_n}\le1$.
+
+\emph{Step 2 (diagonals).} The law $\mathsf b_n$ factors through the bounded linear map $\id_K\times\operatorname{pr}_{m_n}$ onto the finite-dimensional space $K\oplus\mathcal E_{m_n}$. On it, the law is the diagonal of a bounded $n$\nobreakdash-linear map into the Banach space $\hGamma^p_\Gamma(\mathcal E)$, by Theorem~\ref{dp:thm:agreement-finite}(2). So the germ of $\mathsf b_n$ at $0$ is analytic, hence AA and TA.
+
+\emph{Step 3 (a coefficient).} Suppose that $\sum_n\mathsf b_n$ is in TA at $0$. By Theorem~\ref{dp:thm:chain} it is in $\cC_p^{\rm u}$: for some $R,M$ the linearizations $\mathsf L_n$ of its coefficient laws, which are the $\mathsf b_n$, satisfy~\eqref{dp:eq:cpu}. Let $\mathsf z_0=(1,0)$. For $h\in\mathcal E_{m_n}$, the coefficient of $\lambda^{n-p}$ in $\mathsf L_n((\lambda\mathsf z_0+h)^{\otimes n})=\mathsf b_n(\lambda,h)=\lambda^{n-p}h^{\otimes p}$ gives $\mathsf L_n(\mathsf z_0^{\otimes(n-p)}\cdot h^{\otimes p})=h^{\otimes p}$. As the powers span, $\mathsf L_n(\mathsf z_0^{\otimes(n-p)}\cdot s)=s$ for $s\in\Gamma^p(\mathcal E_{m_n})$.
+
+\emph{Step 4 (the bound).} By~\eqref{dp:eq:cpu}, with $N$ there equal to our $n$, with $n$ there equal to $p$, and with $h=\mathsf z_0$, we get $\norm s_\Gamma\le MR^{-n}\pi(s)$. Here $\norm s_\Gamma$ is computed in $\Gamma^p(\mathcal E)$, and $\pi$ in $(K\oplus\mathcal E)^{\otimes p}$, which is at most $\pi$ in $\mathcal E_{m_n}^{\otimes p}$, as inclusions are contractive. Applying $\operatorname{pr}_{m_n}^{\otimes p}$ to a representation of $s$ in $\mathcal E$ shows that $\norm s_\Gamma$ computed in $\mathcal E$ is at least $\norm s_\Gamma$ computed in $\mathcal E_{m_n}$. Take $s=T^{(m_n)}$: $n^n\le MR^{-n}$ for all $n\ge p$, which is false.
+\end{proof}
+
+So, in characteristic $p$, (S) separates DP from every other class of Tables~\ref{dp:tab:compare} and~\ref{dp:tab:compare-b}. In characteristic $0$ it separates DP from each such class that differs from DP. The property (S) is close to the definition of DP.
+
+\subsection{Summary}\label{dp:ssec:summary}
+
+Table~\ref{dp:tab:types} says, for each type, which failure it answers and what forces it. In the row of Type I, the analytic germs on $(\ell^1,W)$ with $W$ ultrametric Banach and $\operatorname{char}K=0$ have (C2)$_{\rm u}$ and (C3) (Corollary~\ref{dp:cor:two-gaps}(3)), composition \cite[Proposition~14.26, proof, Step~1]{I}, every $A^k$ (Theorem~\ref{dp:thm:degree-threshold}(1)) and jet sections (Theorem~\ref{dp:thm:analytic-jets}(4)(a),(2)); they fail (C2)$_\times$ and (S).
+
+\begin{table}[htbp]
+\small
+\caption{The types.}\label{dp:tab:types}
+\begin{tabular}{@{}p{0.08\linewidth}p{0.46\linewidth}p{0.4\linewidth}@{}}
+Type & Failure it answers & What forces it\\
+\hline
+I & (C2)$_\times$ and (S), on $(\ell^1,W)$, $W$ ultrametric Banach, $\operatorname{char}K=0$. By Theorem~\ref{dp:thm:forcing}(1) the other properties of that list do not force it & (C1) with (C2)$_\times$; (C1) with (S)\\
+II & The functor $\alpha_k$ of~\cite[n\textsuperscript{o}~7.8.1]{Bou} (Theorem~\ref{dp:thm:seven-eight-dp}), its bundles \cite[Corollary~10.2]{I}, scalar jets (Corollary~\ref{dp:cor:jet-dichotomy}) & (C1) with (C2)$_{\rm u}$; (C1) with (C3); the alternating bundle of the shear bundle\\
+III & The power maps of $c_0$ (Proposition~\ref{dp:prop:strict}(1)); $\Alt^k$ with values in $F$ of \cite[Theorem~7.2(1)]{I} & (C1) with (C2)$_\times$; (C1) with (C3); for (iii), the alternating bundle of the shear bundle\\
+IVa & Composition for AA \cite[Theorem~14.17]{I}, Theorem~\ref{dp:thm:c0-failure} & (C1), (C2)$_\times$, composition, pairing; (C1) with (C3)\\
+IVb & (C3) for AA, TA (Proposition~\ref{dp:prop:other-classes}(2), Theorem~\ref{dp:thm:singles-out}(5)); jets (Proposition~\ref{dp:prop:jets-not-ambient}) & (C1) with (C3); jets, for $r\ge p$, on $\mathcal E$. Not composition (Theorem~\ref{dp:thm:forcing}(4)(c))\\
+V & Incomplete values; none after completion & Containing the joint actions\\
+\end{tabular}
+\end{table}
+
+Tables~\ref{dp:tab:compare} and~\ref{dp:tab:compare-b} compare the classes. They hold for $\operatorname{char}K=p$, $K$ complete and Banach values, unless a row or a cell says otherwise. A dash means that the entry is not considered here. Their last row says that, between ultrametric spaces, AA, TA, sDP, CA and DP are one class of germs. There $\mathrm{CA}^{\rm H}$ is this class too, as a DP germ is DP on a ball (Theorem~\ref{dp:thm:whole-ball}), its derivatives $D^{(j)}$ are DP (Theorem~\ref{dp:thm:differentiable}), and DP germs on an ultrametric source are CA (Lemma~\ref{dp:lem:cover-flat}(5)).
+
+Two cells of Table~\ref{dp:tab:compare-b} need one more remark, as CA$^{\rm H}$ germs are germs of maps on open sets. A map into a Banach space that is analytic at a point is analytic on a ball around it (Section~\ref{dp:ssec:reach}), so its germ is in $\mathrm{CA}^{\rm H}$ by Theorem~\ref{dp:thm:cah}(1). So $\mathrm{CA}^{\rm H}$ fails (C2)$_\times$: with $j$ as in Example~\ref{dp:ex:l1}(2), $j\circ\mathsf f$ is in $\mathrm{CA}^{\rm H}$ at $0$, and $\mathsf f$ is not, by Theorem~\ref{dp:thm:cah}(5). And if $\operatorname{char}K=0$ and $P$ or $W$ is ultrametric, then $\mathrm{CA}^{\rm H}=\mathrm{An}$. The inclusion $\mathrm{An}\subseteq\mathrm{CA}^{\rm H}$ is the second sentence of this paragraph. Conversely $\mathrm{CA}^{\rm H}\subseteq\mathrm{CA}\subseteq\mathrm{DP}$, for $P$ ultrametric $\mathrm{DP}=\mathrm{An}$ (Theorem~\ref{dp:thm:agreement-char0}(2)), and for $W$ ultrametric $\mathrm{CA}=\mathrm{sDP}=\mathrm{An}$ (Lemma~\ref{dp:lem:cover-flat}(5), Proposition~\ref{dp:prop:strong-interpolates}(1),(2)).
+
+\begin{table}[htbp]
+\small
+\caption{Comparison, first part.}\label{dp:tab:compare}
+\begin{tabular}{@{}p{0.15\linewidth}p{0.29\linewidth}p{0.23\linewidth}p{0.23\linewidth}@{}}
+ & An & AA & TA\\
+\hline
+Composition & yes, \cite[Proposition~14.26, proof, Step~1]{I} & no, \cite[Theorem~14.17]{I} & yes, Thm.~\ref{dp:thm:ta-composition}\\
+Inverse functions & --- & no, \cite[Corollary~14.19(1)]{I} & yes, Thm.~\ref{dp:thm:ta-inverse}\\
+Charts: compatibility is transitive & yes, by composition, \cite[Proposition~14.26, proof, Step~1]{I} & no, \cite[Corollary~14.19(3)]{I} & yes, Cor.~\ref{dp:cor:ta-bundles}\\
+Alternating bundle & no for $k\ge p$, \cite[Theorem~7.2, Corollary~10.2]{I} & sections depend on the trivialization, \cite[Corollary~14.19(4)]{I} & yes, Cor.~\ref{dp:cor:ta-bundles}\\
+Jets, $r\ge p$ & no for some non-ultrametric $W$, Thm.~\ref{dp:thm:analytic-jets}(3),(6)(a); scalar, ultrametric models: no iff $K$ is not spherically complete, Cor.~\ref{dp:cor:jet-dichotomy} & no, Prop.~\ref{dp:prop:jets-not-ambient} & no, Prop.~\ref{dp:prop:jets-not-ambient}\\
+(C2)$_{\rm u}$ & no if $K$ is complete and not spherically complete, Thm.~\ref{dp:thm:forcing}(2); yes if $K$ is discrete or $W$ is spherically complete up to equivalence, Thm.~\ref{dp:thm:strong-um}, Cor.~\ref{dp:cor:two-gaps}(1); else open & yes, Prop.~\ref{dp:prop:other-classes}(2) & yes, Thm.~\ref{dp:thm:ta-composition}\\
+(C2)$_\times$ & no, Ex.~\ref{dp:ex:l1} & yes, Prop.~\ref{dp:prop:other-classes}(2) & yes, Thm.~\ref{dp:thm:ta-composition}\\
+(C3) & no, Prop.~\ref{dp:prop:other-classes}(1) & no, Prop.~\ref{dp:prop:other-classes}(2) & no, Thm.~\ref{dp:thm:singles-out}(5)\\
+(S) & no on $\ell^1$, Prop.~\ref{dp:prop:s-axiom}(2) & no, Prop.~\ref{dp:prop:s-fails}; char.\ $0$: iff $=$ DP, Prop.~\ref{dp:prop:s-char0} & no, Prop.~\ref{dp:prop:s-fails}; char.\ $0$: iff $=$ DP, Prop.~\ref{dp:prop:s-char0}\\
+Contains An & & yes, \cite[Definition~14.7]{I} & yes, Thm.~\ref{dp:thm:chain}\\
+All bounded laws & no, Prop.~\ref{dp:prop:strict}(1) & no, Prop.~\ref{dp:prop:strict}(2) & no, Lem.~\ref{dp:lem:type-iv}(4)\\
+Excludes Type I & yes, Ex.~\ref{dp:ex:l1}(3) & no, Ex.~\ref{dp:ex:l1}(2) & no, Ex.~\ref{dp:ex:l1}(2), Thm.~\ref{dp:thm:chain}\\
+Char.\ $0$: agrees with An & & $P$ ultrametric: yes, \cite[Proposition~14.40(2)]{I}; on $\ell^1$: no, Ex.~\ref{dp:ex:l1} & $P$ ultrametric: yes, Thm.~\ref{dp:thm:agreement-char0}; on $\ell^1$: no, Ex.~\ref{dp:ex:l1}\\
+Between ultrametric spaces & Rows L6--L11 of Table~\ref{dp:tab:ledger} & $=$ DP, \cite[Theorem~14.39(1)]{I} & $=$ DP, Thm.~\ref{dp:thm:singles-out}(4)\\
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\small
+\caption{Comparison, second part.}\label{dp:tab:compare-b}
+\begin{tabular}{@{}p{0.15\linewidth}p{0.3\linewidth}p{0.27\linewidth}p{0.18\linewidth}@{}}
+ & sDP & $\mathrm{CA}^{\rm H}$ & DP\\
+\hline
+Composition & yes if one of $P,W,Y$ has an equivalent ultrametric norm, Thm.~\ref{dp:thm:strong-composition}; no on $\ell^1$, Thm.~\ref{dp:thm:strong-failure} & yes, Thm.~\ref{dp:thm:cah}(1); for CA, Thm.~\ref{dp:thm:ca-composition} & yes, Thm.~\ref{dp:thm:calculus}(2)\\
+Inverse functions & no on $\ell^1$, Thm.~\ref{dp:thm:strong-failure}; yes on ultrametric Banach spaces, Thm.~\ref{dp:thm:strong-inverse} & yes, Thm.~\ref{dp:thm:cah}(2); for CA, Thm.~\ref{dp:thm:ca-inverse} & yes, Thm.~\ref{dp:thm:inverse}\\
+Charts: compatibility is transitive & no on $\ell^1$, Prop.~\ref{dp:prop:strong-bundle} & yes, Thm.~\ref{dp:thm:cah}(1) & yes, Prop.~\ref{dp:prop:categories}\\
+Alternating bundle & the law: yes; manifolds: on models with an equivalent ultrametric norm; not with a complemented $\ell^1(\N)$; else open, Prop.~\ref{dp:prop:strong-bundle} & yes, Thm.~\ref{dp:thm:cah}(3); also CA on open sets, Thm.~\ref{dp:thm:forcing}(1) & yes, Cor.~\ref{dp:cor:bundles}\\
+Jets, $r\ge p$ & on models with an equivalent ultrametric norm, Prop.~\ref{dp:prop:strong-bundle}, Thm.~\ref{dp:thm:dp-jets}; not with a complemented $\ell^1(\N)$; else open & yes, Thm.~\ref{dp:thm:cah}(4) & yes, Thm.~\ref{dp:thm:dp-jets}\\
+(C2)$_{\rm u}$ & yes, Thm.~\ref{dp:thm:strong-descent} & yes, Thm.~\ref{dp:thm:descents-independent}(1), Rem.~\ref{dp:rem:cah-um} & yes, Thm.~\ref{dp:thm:minimal}(1)\\
+(C2)$_\times$ & yes, Thm.~\ref{dp:thm:strong-descent} & no, Ex.~\ref{dp:ex:l1}(2), Thm.~\ref{dp:thm:cah}(1),(5) & yes, Thm.~\ref{dp:thm:minimal}(1)\\
+(C3) & yes, Thm.~\ref{dp:thm:strong-descent} & for CA: yes, Lem.~\ref{dp:lem:cover-flat}(3); for $\mathrm{CA}^{\rm H}$: open, Q.~\ref{dp:q:cover} & yes, Thm.~\ref{dp:thm:minimal}(1)\\
+(S) & no on $\ell^1$, Prop.~\ref{dp:prop:s-axiom}(2) & no on $\ell^1$, Prop.~\ref{dp:prop:s-axiom}(2) & yes, Prop.~\ref{dp:prop:s-axiom}(3)\\
+Contains An & if $P$ or $W$ is ultrametric, Prop.~\ref{dp:prop:strong-interpolates}; not on $(\ell^1,W)$ for some non-ultrametric $W$, Ex.~\ref{dp:ex:an-not-sdp} & yes, Thm.~\ref{dp:thm:cah}(1) & yes, Thm.~\ref{dp:thm:calculus}(3)\\
+All bounded laws & yes, Lem.~\ref{dp:lem:strong-formal}(3) & yes, Thm.~\ref{dp:thm:cah}(1) & yes, Thm.~\ref{dp:thm:calculus}(1)\\
+Excludes Type I & yes, Thm.~\ref{dp:thm:forcing}(1) & yes, Thm.~\ref{dp:thm:cah}(5) & no, Ex.~\ref{dp:ex:l1}(1)\\
+Char.\ $0$: agrees with An & $P$ or $W$ ultrametric: yes, Prop.~\ref{dp:prop:strong-interpolates}; strictly smaller on $(\ell^1,W)$ for some non-ultrametric $W$, Ex.~\ref{dp:ex:an-not-sdp} & $P$ or $W$ ultrametric: yes, Thm.~\ref{dp:thm:cah}(1), Thm.~\ref{dp:thm:agreement-char0}(2), Lem.~\ref{dp:lem:cover-flat}(5), Prop.~\ref{dp:prop:strong-interpolates}; $\ell^1(J)$, $W$ Banach: yes, Lem.~\ref{dp:lem:cover-flat}(6); else open, Q.~\ref{dp:q:cover} & $P$ ultrametric: yes, Thm.~\ref{dp:thm:agreement-char0}; on $\ell^1$: no, Ex.~\ref{dp:ex:l1}\\
+Between ultrametric spaces & $=$ DP, Lem.~\ref{dp:lem:strong-formal}(3) & $=$ DP, see the text & Rows L6--L11 of Table~\ref{dp:tab:ledger}\\
+\end{tabular}
+\end{table}
+
+On ultrametric sources $\mathrm{DP}=\mathrm{sDP}=\mathrm{CA}$, so (C1) and (C3) with $\ell^1$ covers already give DP; on general sources DP can be larger than CA, by Type I, and that excess is what (C2)$_\times$ or (S) adds.

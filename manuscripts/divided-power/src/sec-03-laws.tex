@@ -1,0 +1,269 @@
+\section{Bounded polynomial laws}\label{dp:sec:laws}
+
+This section defines laws and divided-power germs and collects the estimates on coefficients used in the rest of the paper. The algebra of laws is Roby's~\cite{Ro}; the bounds below are the estimates we need. We keep the conventions of Section~\ref{dp:sec:conv}: $P$, $P'$, $W$ and $Y$ are normed spaces, not necessarily complete or ultrametric. We fix the constants
+\[
+ C_1=8/\abs\varpi^2,\qquad C_2=16/\abs\varpi^2,\qquad C_0=\mathrm eC_1=8\mathrm e/\abs\varpi^2.
+\]
+
+\subsection{Laws and germs}
+
+\begin{definition}\label{dp:def:laws}
+Let $n\ge0$.
+\begin{enumerate}
+\item A map $a\colon P\to W$ is a \emph{bounded polynomial law of degree $n$}, or a \emph{law}, if, for all $h_1,\dots,h_r\in P$, the map $s\mapsto a(s_1h_1+\dots+s_rh_r)$ on $K^r$ is a homogeneous polynomial of degree $n$ with coefficients in $W$, and $\norm a=\sup_{h\ne0}\norm{a(h)}/\norm h^n$ is finite; a law of degree $0$ is constant, and then $\norm a=\norm{a(0)}$. For $\alpha=(\alpha_1,\dots,\alpha_r)$ with integers $\alpha_c\ge0$ and $\abs\alpha=\alpha_1+\dots+\alpha_r=n$, $a^{[\alpha]}(h_1,\dots,h_r)\in W$ is the coefficient of $s_1^{\alpha_1}\cdots s_r^{\alpha_r}$, unique since $K$ is infinite.
+\item A map $a\colon P\to W$ is \emph{ambient of degree $n$} if $ja(h)=\beta(h,\dots,h)$ for all $h\in P$, for a linear isometry $j$ of $W$ into a normed space $Z$ and a bounded $n$\nobreakdash-linear map $\beta\colon P^n\to Z$.
+\item Let $U\subseteq P$ be open, $f\colon U\to W$, $x_0\in U$, $R>0$ with $B(x_0,R)\subseteq U$, and $M\ge0$. The map $f$ is \emph{divided-power analytic}, or \emph{DP}, at $x_0$ with radius $R$ and bound $M$ if $f(x_0+h)=\sum_na_n(h)$ for $\norm h<R$, with laws $a_n\colon P\to W$ of degree $n$ and $\norm{a_n}\le MR^{-n}$. It is DP at $x_0$ with radius $R$ if this holds for some $M$, DP at $x_0$ if it holds for some $R,M$, and DP on $U$ if it is DP at every point of $U$. The $a_n$ are the \emph{coefficient laws} of $f$ at $x_0$. By \cite[Lemma~A.1]{I} on the lines $s\mapsto x_0+sh$, they depend only on $f$.
+\end{enumerate}
+\end{definition}
+
+The constancy in Definition~\ref{dp:def:laws}(1) follows from $r=1$, comparing $s=0$ with $s=1$. The space $\cP_n(P;W)$ is the vector space of laws $P\to W$ of degree $n$ with the norm $\norm a$. Sums of laws are laws, as the polynomials add. Here $\N=\{0,1,2,\dots\}$ and $[n]=\{1,\dots,n\}$. We write $\alpha!=\prod_c\alpha_c!$, $s^\gamma=\prod_cs_c^{\gamma_c}$, and $1^k$ for a run of $k$ ones. So $(n-k,1^k)=(n-k,1,\dots,1)$. The space $\Mult^k(P;W)$ consists of the bounded $k$\nobreakdash-linear maps, with $\Mult^0(P;W)=W$, and $\cL(P,\Mult^{k-1}(P;W))=\Mult^k(P;W)$ isometrically for $k\ge1$.
+
+Without the bound on $\norm a$, the maps in Definition~\ref{dp:def:laws}(1) are the maps $P\to W$ induced by the polynomial laws on $(P,W)$ in the sense of Roby~\cite{Ro} that are homogeneous of degree $n$, and each of these maps determines its law, since $K$ is an infinite field and the linear forms on the vector space $W$ separate its points~\cite[Th.~I.1, Props.~I.1, I.8, IV.6, IV.7]{Ro}. The $a^{[\alpha]}$ are the values on $P$ of Roby's polarizations~\cite[II~\S1]{Ro}.
+
+Recall the seminorm $\norm\cdot_\Gamma$ of~\eqref{dp:eq:gamma-norm}. Let $\Gamma^n_{\mathrm s}(P)$ be the quotient of $\Gamma^n(P)$ by the kernel of $\norm\cdot_\Gamma$, normed by $\norm\cdot_\Gamma$, let $\hGamma^n(P)$ be its completion, and let $\mathsf v_n\colon P\to\Gamma^n_{\mathrm s}(P)$ be the map $\mathsf v_n(h)=[h^{\otimes n}]$.
+
+\begin{theorem}[laws as linear maps]\label{dp:thm:normed-roby}
+Let $n\ge0$.
+\begin{enumerate}
+\item For every $a\in\cP_n(P;W)$ there is a unique linear map $L_a\colon\Gamma^n(P)\to W$ with $L_a(h^{\otimes n})=a(h)$ for $h\in P$, and $\norm{L_a(t)}\le\norm a\,\norm t_\Gamma$.
+\item If $\mathsf L\colon\Gamma^n(P)\to W$ is linear with $\norm{\mathsf L(t)}\le C\norm t_\Gamma$, then $h\mapsto\mathsf L(h^{\otimes n})$ is a law of degree $n$ and norm at most $C$.
+\item By item (1), $L_a$ vanishes on the kernel of $\norm\cdot_\Gamma$, and we also write $L_a$ for the induced map on $\Gamma^n_{\mathrm s}(P)$. The map $a\mapsto L_a$ is an isometric linear isomorphism from $\cP_n(P;W)$ onto $\cL(\Gamma^n_{\mathrm s}(P),W)$. If $W$ is Banach, this space is $\cL(\hGamma^n(P),W)$. Equivalently, $\mathsf v_n$ is a universal law of degree $n$ and norm at most $1$: every law factors uniquely as $a=L_a\circ\mathsf v_n$, with $\norm{L_a}=\norm a$.
+\item The seminorm $\norm\cdot_\Gamma$ is the largest seminorm $\sigma$ on $\Gamma^n(P)$ with $\sigma(h^{\otimes n})\le\norm h^n$ for all $h\in P$.
+\end{enumerate}
+\end{theorem}
+
+Without the bounds, items (1)--(3) are~\cite[Th.~IV.1, Prop.~IV.5]{Ro}. The bound is the estimate we need.
+
+\begin{proof}
+\emph{Step 1 (items (1) and (2): citation).} These are \cite[Lemma~Q.1(1),(2)]{I}.
+
+\emph{Step 2 (item (3): the isometry).} A linear map bounded for $\norm\cdot_\Gamma$ vanishes on the kernel of $\norm\cdot_\Gamma$, so it is the same as a bounded linear map on $\Gamma^n_{\mathrm s}(P)$. We use the same letter for it. By item (2), applied to the quotient map, $\mathsf v_n$ is a law of norm at most $1$. If $W$ is Banach, a bounded linear map on $\Gamma^n_{\mathrm s}(P)$ extends uniquely to the completion with the same norm. The extension is linear over $K$, and over $\Kh$ for the $\Kh$\nobreakdash-structure that the complete space $W$ carries by continuity. By items (1) and (2), $a\mapsto L_a$ and $\mathsf L\mapsto\mathsf L\circ\mathsf v_n$ are mutually inverse, and item (1) gives $\norm{L_a}\le\norm a$. Since $\norm{h^{\otimes n}}_\Gamma\le\norm h^n$ by~\eqref{dp:eq:gamma-norm}, also $\norm{a(h)}=\norm{L_a(h^{\otimes n})}\le\norm{L_a}\norm h^n$, and for $n=0$ this reads $\norm{a(0)}\le\norm{L_a}$. So $\norm a\le\norm{L_a}$.
+
+\emph{Step 3 (item (4): the largest seminorm).} We have $\norm{h^{\otimes n}}_\Gamma\le\norm h^n$. If $\sigma$ is a seminorm with $\sigma(h^{\otimes n})\le\norm h^n$, then $\sigma(t)\le\sum_l\abs{\lambda_l}\norm{h_l}^n$ for every representation $t=\sum_l\lambda_lh_l^{\otimes n}$. So $\sigma\le\norm\cdot_\Gamma$.
+\end{proof}
+
+\begin{lemma}[elementary facts]\label{dp:lem:elementary}
+Let $a\in\cP_n(P;W)$.
+\begin{enumerate}
+\item A map $P\to W$ is a law of degree $1$ if and only if it is bounded linear, with the same norm. So $\cP_1(P;W)=\cL(P,W)$ isometrically.
+\item If $T_2\in\cL(P',P)$ and $T_1\in\cL(W,Y)$, then $T_1\circ a\circ T_2\in\cP_n(P';Y)$, with $\norm{T_1\circ a\circ T_2}\le\norm{T_1}\,\norm a\,\norm{T_2}^n$.
+\item For $w_1,\dots,w_r\in P$, scalars $\lambda_c$ and $\abs\alpha=n$, we have
+\[
+ a^{[\alpha]}(\lambda_1w_1,\dots,\lambda_rw_r)=\prod_c\lambda_c^{\alpha_c}\,a^{[\alpha]}(w_1,\dots,w_r).
+\]
+Arguments $w_c$ with $\alpha_c=0$ may be deleted. Also $a^{[\alpha]}(w_1,\dots,w_r)=0$ if $w_c=0$ for some $c$ with $\alpha_c\ge1$, and $a(w_1+\dots+w_r)=\sum_{\abs\alpha=n}a^{[\alpha]}(w_1,\dots,w_r)$.
+\item (Partial coefficients are laws.) Let $h_1,\dots,h_r\in P$, let $i,k\ge0$, and let $\gamma\in\N^r$ with $\abs\gamma=n-i$, respectively $\abs\gamma=n-k$. The map $y\mapsto a^{[(\gamma,i)]}(h_1,\dots,h_r,y)$ lies in $\cP_i(P;W)$, and for $y_1,\dots,y_{r'}\in P$ and $\delta\in\N^{r'}$ with $\abs\delta=i$ its coefficients are
+\begin{equation}\label{dp:laws:partial}
+ \bigl(a^{[(\gamma,i)]}(h_1,\dots,h_r,\cdot\,)\bigr)^{[\delta]}(y_1,\dots,y_{r'})=a^{[(\gamma,\delta)]}(h_1,\dots,h_r,y_1,\dots,y_{r'}).
+\end{equation}
+The map sending $(y_1,\dots,y_k)$ to $a^{[(\gamma,1^k)]}(h_1,\dots,h_r,y_1,\dots,y_k)$ is bounded, symmetric and $k$\nobreakdash-linear.
+\item (Uniqueness.) If $\sum_na_n(h)=\sum_na_n'(h)$ for $\norm h<R$, with $a_n,a_n'\in\cP_n(P;W)$ and $\sup_n(\norm{a_n}+\norm{a_n'})R^n<\infty$, then $a_n=a_n'$ for all $n$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (items (1)--(3): substitutions).} For (1), let $a$ have degree $1$. Then $a(s_1h_1+s_2h_2)=s_1\mathsf w_1+s_2\mathsf w_2$ with $\mathsf w_1,\mathsf w_2\in W$, and $s=(1,0),(0,1)$ give $\mathsf w_1=a(h_1)$, $\mathsf w_2=a(h_2)$. So $a$ is additive and homogeneous. The converse is clear. For (2), the polynomial $s\mapsto T_1a(\sum_cs_cT_2h_c)$ has as coefficients the images under $T_1$ of those of $a$ at the vectors $T_2h_c$. For (3), substitute $s_c\mapsto\lambda_cs_c$, take $\lambda_c=0$ for the vanishing statement, set $s_c=0$ for the variables that do not occur to delete arguments, and set $s=(1,\dots,1)$ for the last formula.
+
+\emph{Step 2 (item (4): the coefficients of a partial law).} Let $y=\sum_{l=1}^{r'}\tau_ly_l$ with $\tau_l\in K$. Expand $a(\sum_cs_ch_c+z\sum_l\tau_ly_l)$ in the variables $s_c,z$ in two ways. In the vectors $h_1,\dots,h_r,y$, the coefficient of $s^\gamma z^i$ is $a^{[(\gamma,i)]}(h_1,\dots,h_r,y)$. In the vectors $h_1,\dots,h_r,y_1,\dots,y_{r'}$, with the scalars $s_c$ and $z\tau_l$, the same coefficient is $\sum_{\abs\delta=i}a^{[(\gamma,\delta)]}(h_1,\dots,h_r,y_1,\dots,y_{r'})\,\tau^\delta$. This is a homogeneous polynomial of degree $i$ in $\tau$ with the coefficients~\eqref{dp:laws:partial}. Its value at $y$ has norm at most $C_0^n\norm a\,\frac{n!}{\gamma!\,i!}\prod_c\norm{h_c}^{\gamma_c}\,\norm y^i$, by~\cite[(Q.4)]{I}. For the second assertion, apply the first in each slot $y_l$ separately with $i=1$, and use item (1). Symmetry holds because permuting $y_1,\dots,y_k$ permutes the variables attached to them. Boundedness is~\cite[(Q.4)]{I} again.
+
+\emph{Step 3 (item (5): one line at a time).} Let $h\ne0$ and $\mathsf w_n=a_n(h)-a_n'(h)$. Then $\sum_n\lambda^n\mathsf w_n$ converges to $0$ for $\abs\lambda<R/\norm h$, and $\norm{\mathsf w_n}(R/\norm h)^n\le(\norm{a_n}+\norm{a_n'})R^n$ is bounded. So $\mathsf w_n=0$ by \cite[Lemma~A.1]{I}. The case $h=0$ is clear.
+\end{proof}
+
+\subsection{Mixed terms}
+
+The next theorem is the main estimate. Items (1)--(3) hold on every normed space and are proved in~\cite{I}. On ultrametric sources, item (4) removes the factor $m^m\prod_c\alpha_c^{-\alpha_c}$ of item (3). The reason is that the points at which the polynomial is interpolated stay in the ball of radius $\max_c\norm{w_c}$.
+
+\begin{theorem}[mixed terms]\label{dp:thm:mixed}
+Let $a\colon P\to W$ be a law of degree $m$, let $w_1,\dots,w_r\in P$, and let $\alpha\in\N^r$ with $\abs\alpha=m$. We read $0^0=1$.
+\begin{enumerate}
+\item We have $\norm{a^{[\alpha]}(w_1,\dots,w_r)}\le(8/\abs\varpi)^m\norm a\,(\norm{w_1}+\dots+\norm{w_r})^m$.
+\item For $x,y\in P$ and $0\le i\le m$, we have $\norm{a^{[(m-i,i)]}(x,y)}\le C_2^m\norm a\,\norm x^{m-i}\norm y^i$. So $a(x+y)=\sum_{i\le m}a^{[(m-i,i)]}(x,y)$ is a finite expansion at $x$ by laws in $y$, and $a$ is continuous and DP on $P$.
+\item We have
+\begin{equation}\label{dp:laws:scaled}
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}\le C_1^m\norm a\,\frac{m^m}{\prod_c\alpha_c^{\alpha_c}}\prod_c\norm{w_c}^{\alpha_c}\le C_0^m\norm a\,\frac{m!}{\alpha!}\prod_c\norm{w_c}^{\alpha_c}.
+\end{equation}
+\item If $P$ is ultrametric, then, for every normed $W$,
+\begin{equation}\label{dp:laws:ultrametric}
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}\le C_1^m\norm a\prod_c\norm{w_c}^{\alpha_c}.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (items (1)--(3): citation and the scaled bound).} Items (1) and (2) and the outer inequality of~\eqref{dp:laws:scaled} are~\cite[Lemma~Q.2(1),(2),(3)]{I}. The first inequality of~\eqref{dp:laws:scaled} is Step~4 of its proof, as follows. If $m=0$, then $a$ is constant. Otherwise delete the $w_c$ with $\alpha_c=0$; if a remaining $w_c$ vanishes, both sides vanish. Choose $\lambda_c\in K$ with $\abs\varpi\alpha_c/m<\abs{\lambda_c}\norm{w_c}\le\alpha_c/m$. Then $\sum_c\abs{\lambda_c}\norm{w_c}\le1$, so $\norm{a^{[\alpha]}(\lambda_1w_1,\dots,\lambda_rw_r)}\le(8/\abs\varpi)^m\norm a$ by item (1). Undoing the scaling with Lemma~\ref{dp:lem:elementary}(3) gives the first inequality. The second follows from $m^m\le\mathrm e^mm!$ and $\alpha_c^{\alpha_c}\ge\alpha_c!$.
+
+\emph{Step 2 (nodes).} Let $\varpi'\in K$ with $0<\abs{\varpi'}<1$. For an integer $\ell\ge0$ with binary digits $\ell_u$, put $\xi_\ell=\sum_u\ell_u\varpi'^u\in K$. Then $\abs{\xi_\ell}\le1$. For $\ell\ne\ell'$ the least $u$ with $\ell_u\ne\ell'_u$ is $\ord_2(\ell-\ell')$, the largest $u$ with $2^u\mid\ell-\ell'$, so $\abs{\xi_\ell-\xi_{\ell'}}=\abs{\varpi'}^{\ord_2(\ell-\ell')}$. For $0\le\ell\le d$ the numbers $\abs{\ell-\ell'}$, with $\ell'\le d$ and $\ell'\ne\ell$, are $1,\dots,\ell$ and $1,\dots,d-\ell$, and $\ord_2(\ell!)\le\ell$. Hence
+\begin{equation}\label{dp:laws:nodes}
+ \prod_{\ell'\le d,\ \ell'\ne\ell}\abs{\xi_\ell-\xi_{\ell'}}^{-1}\le\abs{\varpi'}^{-d}\qquad(0\le\ell\le d).
+\end{equation}
+So a divided difference of order $d$ on $\xi_0,\dots,\xi_d$ of a map into a normed space is a combination of its $d+1$ values at these nodes, with coefficients of absolute value at most $\abs{\varpi'}^{-d}$.
+
+\emph{Step 3 (item (4) on the unit ball).} Let $P$ be ultrametric and use Step~2 with $\varpi'=\varpi$. If $m=0$, then $a$ is constant and~\eqref{dp:laws:ultrametric} is clear. Let $m\ge1$. By Lemma~\ref{dp:lem:elementary}(3) we may assume that $\alpha_c\ge1$ for all $c$, so $r\le m$. First let $\norm{w_c}\le1$ for all $c$. We show that
+\begin{equation}\label{dp:laws:unit}
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}\le(8/\abs\varpi)^m\norm a.
+\end{equation}
+If $r=1$, then $a^{[\alpha]}(w_1)=a(w_1)$. Let $r\ge2$ and put $\Phi(s)=a(s_1w_1+\dots+s_{r-1}w_{r-1}+w_r)$ on $K^{r-1}$. This is a polynomial of total degree at most $m$ with coefficients in $W$, and $a^{[\alpha]}(w_1,\dots,w_r)$ is its coefficient of $s_1^{\alpha_1}\cdots s_{r-1}^{\alpha_{r-1}}$. Newton's interpolation formula on $\xi_0,\dots,\xi_m$ in each variable gives $\Phi(s)=\sum_g\mathsf d_g\prod_{c<r}\mathsf N_{g_c}(s_c)$, over $g\in\{0,\dots,m\}^{r-1}$. Here $\mathsf N_d(s_c)=\prod_{\ell<d}(s_c-\xi_\ell)$ has coefficients of absolute value at most $1$, and $\mathsf d_g\in W$ is the iterated divided difference of $\Phi$, of order $g_c$ in $s_c$. A divided difference of order $d$ kills polynomials of degree below $d$, so $\mathsf d_g=0$ unless $\abs g\le m$. By Step~2, $\mathsf d_g$ is a combination of at most $\prod_c(g_c+1)\le2^{\abs g}$ values of $\Phi$ at points with coordinates $\xi_\ell$, with coefficients of absolute value at most $\abs\varpi^{-\abs g}$. Each such value is $a$ at a point $\sum_{c<r}\xi_{\ell_c}w_c+w_r$. This point has norm at most $\max_c\norm{w_c}\le1$, because $P$ is ultrametric and $\abs{\xi_\ell}\le1$. So each value has norm at most $\norm a$, and $\norm{\mathsf d_g}\le(2/\abs\varpi)^m\norm a$ by the triangle inequality in $W$. The coefficient of $s_1^{\alpha_1}\cdots s_{r-1}^{\alpha_{r-1}}$ is a sum over at most $\binom{m+r-1}{r-1}\le2^{m+r-1}\le4^m$ indices $g$ of $\mathsf d_g$ times a scalar of absolute value at most $1$. This gives~\eqref{dp:laws:unit}.
+
+\emph{Step 4 (item (4) by scaling).} If some $w_c=0$, both sides of~\eqref{dp:laws:ultrametric} vanish. Otherwise choose $\lambda_c\in K$ with $\abs\varpi<\abs{\lambda_c}\norm{w_c}\le1$. By Lemma~\ref{dp:lem:elementary}(3) and~\eqref{dp:laws:unit},
+\[
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}=\prod_c\abs{\lambda_c}^{-\alpha_c}\norm{a^{[\alpha]}(\lambda_1w_1,\dots,\lambda_rw_r)}\le(8/\abs\varpi)^m\norm a\prod_c\bigl(\norm{w_c}/\abs\varpi\bigr)^{\alpha_c},
+\]
+which is~\eqref{dp:laws:ultrametric}.
+\end{proof}
+
+For $a\in\cP_n(P;W)$, $h\in P$ and $0\le i,k\le n$, define the \emph{Hasse coefficients}
+\begin{equation}\label{dp:laws:hasse}
+ D^{(i)}_a(h)=a^{[(n-i,i)]}(h,\cdot\,)\in\cP_i(P;W),\qquad a^{(k)}(h)=a^{[(n-k,1^k)]}(h,\cdot,\dots,\cdot)\in\Mult^k(P;W),
+\end{equation}
+which lie in these spaces by Lemma~\ref{dp:lem:elementary}(4). For $k=1$ the two agree, by Lemma~\ref{dp:lem:elementary}(1).
+
+\begin{lemma}[Hasse coefficients are laws]\label{dp:lem:hasse-law}
+Let $a\in\cP_n(P;W)$.
+\begin{enumerate}
+\item The map $h\mapsto D^{(i)}_a(h)$ is a law of degree $n-i$ with values in $\cP_i(P;W)$, of norm at most $C_2^n\norm a$.
+\item The map $h\mapsto a^{(k)}(h)$ is a law of degree $n-k$ with values in $\Mult^k(P;W)$, of norm at most $\mathrm e^kn^kC_1^n\norm a$, with $0^0=1$, and its values are symmetric. For $k=1$ this is a law into $\cL(P,W)$ of norm at most $\mathrm e\,n\,C_1^n\norm a$.
+\item We have $a(h+y)=\sum_{i=0}^nD^{(i)}_a(h)(y)$.
+\item For $0\le k<n$, we have $(a^{(k)})^{(1)}(h)(v)(v_1,\dots,v_k)=a^{(k+1)}(h)(v,v_1,\dots,v_k)$, where the left side is the Hasse coefficient~\eqref{dp:laws:hasse} of the law $a^{(k)}$ of degree $n-k$.
+\item We have $a^{(k)}(h)(h,\dots,h)=\frac{n!}{(n-k)!}\,a(h)$. In particular, for $n\ge1$, $a^{(n)}$ is the constant $a^{[1^n]}$, and $a^{[1^n]}(h,\dots,h)=n!\,a(h)$.
+\end{enumerate}
+\end{lemma}
+
+The algebra of items (1) and (3) is~\cite[Prop.~IV.10; II~\S4]{Ro}, and item (5) is~\cite[Th.~II.1]{Ro}. The bounds are the estimates we need.
+
+\begin{proof}
+\emph{Step 1 (item (1): the expansion on a span).} Let $h_1,\dots,h_r\in P$. Expanding $a(z\sum_cs_ch_c+z'y)$ in the vectors $h_1,\dots,h_r,y$ and reading off the coefficient of $z^{n-i}z'^i$ gives
+\begin{equation}\label{dp:laws:hasse-expansion}
+ D^{(i)}_a\Bigl(\sum_cs_ch_c\Bigr)(y)=\sum_{\abs\gamma=n-i}s^\gamma a^{[(\gamma,i)]}(h_1,\dots,h_r,y).
+\end{equation}
+This is a homogeneous polynomial of degree $n-i$ in $s$, with coefficients in $\cP_i(P;W)$ by Lemma~\ref{dp:lem:elementary}(4). The norm bound is Theorem~\ref{dp:thm:mixed}(2).
+
+\emph{Step 2 (item (2): the same expansion with linear slots).} The same computation with $a(z\sum_cs_ch_c+\sum_l\tau_lv_l)$ and the coefficient of $z^{n-k}\tau_1\cdots\tau_k$ gives a homogeneous polynomial of degree $n-k$ in $s$, with coefficients in $\Mult^k(P;W)$ by Lemma~\ref{dp:lem:elementary}(4). By~\eqref{dp:laws:scaled} with $\alpha=(n-k,1^k)$, the norm is at most $C_1^n\norm a\,n^n(n-k)^{-(n-k)}$. For $k<n$ we have $n^n(n-k)^{-(n-k)}=n^k(1+k/(n-k))^{n-k}\le\mathrm e^kn^k$, and for $k=n$ the factor is $n^n=n^k$.
+
+\emph{Step 3 (items (3) and (4): coefficients).} Item (3) is the case $z=z'=1$ of $a(z h+z'y)=\sum_ia^{[(n-i,i)]}(h,y)z^{n-i}z'^i$. For (4), the value $a^{(k)}(s_0h+s_1v)(v_1,\dots,v_k)$ is the coefficient of $z^{n-k}\tau_1\cdots\tau_k$ in
+\[
+ a\Bigl((zs_0)h+(zs_1)v+\sum_l\tau_lv_l\Bigr)=\sum_{\gamma=(\gamma_0,\dots,\gamma_{k+1})}a^{[\gamma]}(h,v,v_1,\dots,v_k)(zs_0)^{\gamma_0}(zs_1)^{\gamma_1}\prod_l\tau_l^{\gamma_{l+1}},
+\]
+and its coefficient of $s_0^{n-k-1}s_1$ is $a^{[(n-k-1,1,1^k)]}(h,v,v_1,\dots,v_k)=a^{(k+1)}(h)(v,v_1,\dots,v_k)$.
+
+\emph{Step 4 (item (5): the diagonal).} The value $a^{(k)}(h)(h,\dots,h)$ is the coefficient of $z^{n-k}\tau_1\cdots\tau_k$ in $a((z+\sum_l\tau_l)h)=(z+\sum_l\tau_l)^na(h)$, which is $\frac{n!}{(n-k)!}a(h)$.
+\end{proof}
+
+\begin{lemma}[polarization]\label{dp:lem:polarization}
+Let $a\colon P\to W$ be a law of degree $n\ge1$ and $h_1,\dots,h_n\in P$. Then
+\begin{equation}\label{dp:laws:polarization}
+ a^{[1^n]}(h_1,\dots,h_n)=\sum_{S\subseteq[n]}(-1)^{n-\abs S}\,a\Bigl(\sum_{c\in S}h_c\Bigr).
+\end{equation}
+If $P$ is ultrametric, then $\norm{a^{[1^n]}(h_1,\dots,h_n)}\le2^n\norm a\max_c\norm{h_c}^n$, and $\le\norm a\max_c\norm{h_c}^n$ if $W$ is also ultrametric.
+\end{lemma}
+
+The coefficient $a^{[1^n]}$ is the value on $P$ of Roby's complete polarization~\cite[II~\S1]{Ro}.
+
+\begin{proof}
+\emph{Step 1 (the formula).} For $S\subseteq[n]$ let $1_S\in K^n$ be its indicator vector. By definition, $a(\sum_{c\in S}h_c)=\sum_{\abs\gamma=n}(1_S)^\gamma a^{[\gamma]}(h_1,\dots,h_n)$, and $(1_S)^\gamma$ is $1$ if the support of $\gamma$ lies in $S$ and $0$ otherwise. Hence $\sum_S(-1)^{n-\abs S}(1_S)^\gamma=\sum_{S\supseteq\operatorname{supp}\gamma}(-1)^{n-\abs S}=(1-1)^{n-\abs{\operatorname{supp}\gamma}}$. This is $1$ if $\gamma$ has full support and $0$ otherwise. The only $\gamma$ with $\abs\gamma=n$ and full support is $1^n$. Summing over $\gamma$ gives~\eqref{dp:laws:polarization}.
+
+\emph{Step 2 (the bounds).} If $P$ is ultrametric, then $\norm{\sum_{c\in S}h_c}\le\max_c\norm{h_c}$, so each of the $2^n$ terms of~\eqref{dp:laws:polarization} has norm at most $\norm a\max_c\norm{h_c}^n$. In an ultrametric $W$ the norm of the sum is at most the maximum.
+\end{proof}
+
+\subsection{The lifting norm and the strong norm}
+
+\begin{definition}\label{dp:def:strong-norm}
+Let $a\in\cP_n(P;W)$.
+\begin{enumerate}
+\item The \emph{lifting norm} of $a$ is $\operatorname{lift}(a)=\inf\{\norm\beta:\ \beta\colon P^n\to W$ bounded $n$\nobreakdash-linear with $\beta(h,\dots,h)=a(h)$ for all $h\in P\}$, with $\inf\emptyset=\infty$. Always $\norm a\le\operatorname{lift}(a)$.
+\item The \emph{strong norm} of $a$ is
+\[
+ \lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert=\sup\frac{\norm{a^{[\alpha]}(h_1,\dots,h_r)}}{\norm{h_1}^{\alpha_1}\cdots\norm{h_r}^{\alpha_r}},
+\]
+the supremum over $r\ge1$, nonzero $h_1,\dots,h_r\in P$ and $\abs\alpha=n$. For $n=0$ read $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert=\norm{a(0)}$.
+\item For $U,x_0,R,M$ as in Definition~\ref{dp:def:laws}(3), the map $f\colon U\to W$ is \emph{strongly DP}, or \emph{sDP}, at $x_0$ with radius $R$ and bound $M$ if $f(x_0+h)=\sum_na_n(h)$ for $\norm h<R$, with laws $a_n$ of degree $n$ and $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le MR^{-n}$. It is sDP at $x_0$ with radius $R$ if this holds for some $M$, sDP at $x_0$ if it holds for some $R,M$, and sDP on $U$ if it is sDP at every point of $U$. By Lemma~\ref{dp:lem:strong-formal}(3), such an $f$ is DP at $x_0$ with the same radius and bound, and the $a_n$ are its coefficient laws.
+\end{enumerate}
+\end{definition}
+
+By Lemma~\ref{dp:lem:elementary}(3), with $0^0=1$,
+\begin{equation}\label{dp:laws:strong}
+ \norm{a^{[\alpha]}(h_1,\dots,h_r)}\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\prod_c\norm{h_c}^{\alpha_c}\qquad(h_1,\dots,h_r\in P).
+\end{equation}
+By Lemma~\ref{dp:lem:strong-formal}(3) below, $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$ is finite and at least $\norm a$, so $\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert$ is a norm on $\cP_n(P;W)$.
+
+We use one case of~\eqref{dp:laws:partial} often. For $a\in\cP_n(P;W)$, $x\in P$ and $0\le i\le n$, the map $b(y)=a^{[(n-i,i)]}(x,y)$ is a law of degree $i$, and for $h_1,\dots,h_r\in P$ and $\abs\delta=i$,
+\begin{equation}\label{dp:eq:coefficient-identity}
+ b^{[\delta]}(h_1,\dots,h_r)=a^{[(n-i,\delta)]}(x,h_1,\dots,h_r),\qquad a(x+y)=\sum_{i\le n}a^{[(n-i,i)]}(x,y).
+\end{equation}
+The first formula is~\eqref{dp:laws:partial} with one argument $x$, and the second is Lemma~\ref{dp:lem:hasse-law}(3).
+
+\begin{lemma}[formal properties of the strong norm]\label{dp:lem:strong-formal}
+Let $a\in\cP_n(P;W)$, with $P$ and $W$ arbitrary normed spaces.
+\begin{enumerate}
+\item If $T_2\in\cL(P',P)$ and $T_1\in\cL(W,Y)$, then $\lvert\!\lvert\!\lvert T_1\circ a\circ T_2\rvert\!\rvert\!\rvert\le\norm{T_1}\,\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\,\norm{T_2}^n$. For a linear isometry $j$ of $W$ into a normed space, $\lvert\!\lvert\!\lvert j\circ a\rvert\!\rvert\!\rvert=\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$.
+\item Let $Q\colon P'\to P$ be a bounded linear surjection with preimage constant $\mathsf c$, that is, every $h\in P$ has a preimage $\tilde h$ with $\norm{\tilde h}\le\mathsf c\norm h$. Then $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\le\mathsf c^n\lvert\!\lvert\!\lvert a\circ Q\rvert\!\rvert\!\rvert$.
+\item We have $\norm a\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\le(C_1n)^n\norm a$, with $0^0=1$. If $P$ is ultrametric, then $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\le C_1^n\norm a$, for every $W$. So every law is sDP at every point. On an ultrametric $P$, and for every $W$, a map that is DP at $x_0$ with radius $R$ and bound $M$ is sDP at $x_0$ with radius $R/C_1$ and bound $M$. Conversely, for all $P,W$, a map that is sDP at $x_0$ with radius $R$ and bound $M$ is DP at $x_0$ with radius $R$ and bound $M$.
+\item (a) Let $W$ be any normed space. For $0\le i\le n$ and $x\in P$, we have $\lvert\!\lvert\!\lvert a^{[(n-i,i)]}(x,\cdot\,)\rvert\!\rvert\!\rvert\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\,\norm x^{n-i}$, and the law $D^{(i)}_a$ of Lemma~\ref{dp:lem:hasse-law}(1) has strong norm at most $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$ as a law into $(\cP_i(P;W),\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert)$.
+
+(b) Let $W$ be Banach, and let $f$ be sDP at $x_0$ with radius $R$, bound $M$ and laws $a_n$. For $\norm x<R$ and $i\ge0$, the series $b_i(x)=\sum_{n\ge i}a_n^{[(n-i,i)]}(x,\cdot\,)$ converges in $(\cP_i(P;W),\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert)$, and $f(x_0+x+y)=\sum_ib_i(x)(y)$ for $\norm y<R-\norm x$. The map $x_0+x\mapsto b_i(x)$ into $(\cP_i(P;W),\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert)$ is sDP at $x_0$ with radius $R$ and bound $MR^{-i}$. If $W$ is not complete, part (b) holds with $f$ regarded as a map into $\widehat W$.
+\item If $W$ is ultrametric, then $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\le\operatorname{lift}(a)$. For every $W$, if $\operatorname{lift}(a)<\infty$, then
+\[
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}\le\frac{n!}{\alpha!}\operatorname{lift}(a)\prod_c\norm{w_c}^{\alpha_c}.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (items (1) and (2): linear maps).} We have $(T_1\circ a\circ T_2)^{[\alpha]}(h_1,\dots,h_r)=T_1a^{[\alpha]}(T_2h_1,\dots,T_2h_r)$, so (1) follows from~\eqref{dp:laws:strong}. An isometry $j$ gives equality of the norms of the coefficients. For (2), let $Q\tilde h_c=h_c$ with $\norm{\tilde h_c}\le\mathsf c\norm{h_c}$. Then $a^{[\alpha]}(h_1,\dots,h_r)=(a\circ Q)^{[\alpha]}(\tilde h_1,\dots,\tilde h_r)$, and~\eqref{dp:laws:strong} for $a\circ Q$ gives the claim.
+
+\emph{Step 2 (item (5): expanding a lift).} Let $\beta$ be a lift of $a$. Expanding $\beta(\sum_cs_cw_c,\dots,\sum_cs_cw_c)$ shows that $a^{[\alpha]}(w_1,\dots,w_r)$ is the sum of $\beta(w_{c_1},\dots,w_{c_n})$ over the $n!/\alpha!$ tuples $(c_1,\dots,c_n)$ in which each $c$ occurs $\alpha_c$ times. Each term has norm at most $\norm\beta\prod_c\norm{w_c}^{\alpha_c}$. In an ultrametric $W$ the norm of the sum is at most the maximum. Take the infimum over $\beta$.
+
+\emph{Step 3 (item (4), part (a): the bounds).} By~\eqref{dp:eq:coefficient-identity} and~\eqref{dp:laws:strong}, the coefficient of $a^{[(n-i,i)]}(x,\cdot\,)$ at $h_1,\dots,h_r$ of index $\delta$ has norm at most $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\,\norm x^{n-i}\prod_c\norm{h_c}^{\delta_c}$. By~\eqref{dp:laws:hasse-expansion}, the coefficient of index $\gamma$ of the law $D^{(i)}_a$ at $w_1,\dots,w_r$ is $a^{[(\gamma,i)]}(w_1,\dots,w_r,\cdot\,)$. By~\eqref{dp:laws:partial} and~\eqref{dp:laws:strong}, it has strong norm at most $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\prod_c\norm{w_c}^{\gamma_c}$.
+
+\emph{Step 4 (item (3): comparing the norms).} The case $r=1$ of the supremum gives $\norm a\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$. The first inequality of~\eqref{dp:laws:scaled} and $\alpha_c^{\alpha_c}\ge1$ give $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\le(C_1n)^n\norm a$, and Theorem~\ref{dp:thm:mixed}(4) gives the ultrametric bound. By~\eqref{dp:eq:coefficient-identity} and Step~3, a law is at each point $x_0$ a finite sum of laws of finite strong norm, so it is sDP at $x_0$ with every radius. If $P$ is ultrametric and $f$ is DP at $x_0$ with radius $R$, bound $M$ and laws $a_n$, then $\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert\le C_1^nMR^{-n}=M(R/C_1)^{-n}$, and the expansion holds for $\norm h<R/C_1$, as $C_1>1$. The converse follows from $\norm{a_n}\le\lvert\!\lvert\!\lvert a_n\rvert\!\rvert\!\rvert$.
+
+\emph{Step 5 (completeness).} Let $W$ be Banach. Then $(\cP_i(P;W),\lvert\!\lvert\!\lvert\cdot\rvert\!\rvert\!\rvert)$ is complete. Indeed, let $(\mathsf b_N)$ be a Cauchy sequence, and let $\mathsf b$ be its pointwise limit, which exists by~\eqref{dp:laws:strong} with $r=1$. By~\eqref{dp:laws:strong}, all the coefficients $\mathsf b_N^{[\delta]}(h_1,\dots,h_r)$ are Cauchy in $W$. Their limits are the coefficients of the polynomials $s\mapsto\mathsf b(\sum_cs_ch_c)$. Also $\norm{\mathsf b}\le\sup_N\lvert\!\lvert\!\lvert\mathsf b_N\rvert\!\rvert\!\rvert<\infty$, so $\mathsf b$ is a law. If $\lvert\!\lvert\!\lvert\mathsf b_N-\mathsf b_{N'}\rvert\!\rvert\!\rvert\le\varepsilon$ for $N,N'\ge N_0$, then letting $N'\to\infty$ in~\eqref{dp:laws:strong} gives $\lvert\!\lvert\!\lvert\mathsf b_N-\mathsf b\rvert\!\rvert\!\rvert\le\varepsilon$ for $N\ge N_0$.
+
+\emph{Step 6 (item (4), part (b): derivatives).} Let $\norm x<R$. By Step~3, the term of degree $n$ of $b_i(x)$ has strong norm at most $MR^{-n}\norm x^{n-i}=MR^{-i}(\norm x/R)^{n-i}$. So the series converges, by Step~5. The double series
+\[
+ \sum_n\sum_{i\le n}\norm{a_n^{[(n-i,i)]}(x,y)}\le\sum_nMR^{-n}\sum_{i\le n}\norm x^{n-i}\norm y^i\le\sum_nM\Bigl(\frac{\norm x+\norm y}R\Bigr)^n
+\]
+is finite for $\norm y<R-\norm x$. Summing over $i$ first gives $\sum_na_n(x+y)=f(x_0+x+y)$ by~\eqref{dp:eq:coefficient-identity}. Summing over $n$ first gives $\sum_ib_i(x)(y)$. The coefficient law of degree $m$ of $x_0+x\mapsto b_i(x)$ is $D^{(i)}_{a_{m+i}}$. By Step~3 its strong norm is at most $\lvert\!\lvert\!\lvert a_{m+i}\rvert\!\rvert\!\rvert\le(MR^{-i})R^{-m}$. If $W$ is not complete, regard the $a_n$ as laws into $\widehat W$ and use item (1).
+\end{proof}
+
+\subsection{Ultrametric spaces}
+
+Let $\mathcal O=\{\lambda\in K:\abs\lambda\le1\}$, with residue field $\kappa$. A subgroup of $\mathbb R_{>0}$ is discrete or dense, so exactly one of the following holds: (a) $\kappa$ is infinite; (b) $\kappa$ is finite and $\abs{K^\times}$ is dense; (c) $K$ is discretely valued and $\kappa$ has $\mathsf q<\infty$ elements. Put $\theta_n(K)=1$ and $\theta_K=1$ in cases (a) and (b). In case (c), with $\vartheta$ as in Section~\ref{dp:sec:conv}, put
+\[
+ \theta_n(K)=\abs\vartheta^{-V_{\mathsf q}(n)},\qquad V_{\mathsf q}(n)=\sum_{u\ge1}\lfloor n/\mathsf q^u\rfloor,\qquad\theta_K=\abs\vartheta^{1/(\mathsf q-1)}.
+\]
+Summing over the base-$\mathsf q$ digits of $n$ gives $V_{\mathsf q}(n)=(n-\sum_un_u)/(\mathsf q-1)\le(n-1)/(\mathsf q-1)$ for $n\ge1$, where $n_u$ are the digits. So $\theta_n(K)\le\theta_K^{1-n}$ for $n\ge1$. The \emph{scaling loss} $\mathfrak s(P)$ is the supremum of the $\eta\in(0,1]$ such that every nonzero $h\in P$ has a multiple $\lambda h$, $\lambda\in K$, with $\eta\le\norm{\lambda h}\le1$. Then $\abs\varpi\le\mathfrak s(P)\le1$, as powers of $\varpi$ rescale each $h$ into norms in $(\abs\varpi,1]$. Also $\mathfrak s(P)=1$ if $\abs{K^\times}$ is dense, and also if $\norm{P\setminus0}\subseteq\abs{K^\times}$, for instance for the space $c_0(J,K)$ of families in $K$ indexed by a set $J$ and tending to $0$, with the supremum norm.
+
+\begin{lemma}[coefficients on ultrametric spaces]\label{dp:lem:strong-coefficients}
+Let $P$ and $W$ be ultrametric, $a\colon P\to W$ a law of degree $n$, $w_1,\dots,w_r\in P$ and $\abs\alpha=n$.
+\begin{enumerate}
+\item We have
+\[
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}\le\theta_n(K)\norm a\max_c\norm{w_c}^n.
+\]
+For every $\varpi'\in K$ with $0<\abs{\varpi'}<1$, we also have
+\[
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}\le\abs{\varpi'}^{-n}\norm a\max_c\norm{w_c}^n.
+\]
+\item We have $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\le\theta_n(K)\mathfrak s(P)^{-n}\norm a$. So $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert=\norm a$ if $\abs{K^\times}$ is dense, and also if $\kappa$ is infinite and $\mathfrak s(P)=1$. In case (c), for $n\ge1$, $\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert\le\abs\vartheta^{-V_{\mathsf q}(n)}\mathfrak s(P)^{-n}\norm a\le\theta_K^{1-n}\mathfrak s(P)^{-n}\norm a$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (nodes).} For pairwise distinct nodes $\xi_0,\xi_1,\dots$ in $\mathcal O$ put
+\[
+ \mathsf D_d=\max_{\ell\le d}\prod_{\ell'\le d,\,\ell'\ne\ell}\abs{\xi_\ell-\xi_{\ell'}}^{-1}.
+\]
+A divided difference of order $d$ on $\xi_0,\dots,\xi_d$ is a combination of values with coefficients of absolute value at most $\mathsf D_d$. We use three systems of nodes. If $\kappa$ is infinite, take nodes with pairwise distinct residues, so that $\mathsf D_d=1$. For any $\varpi'$, the binary nodes of Step~2 of the proof of Theorem~\ref{dp:thm:mixed} have $\mathsf D_d\le\abs{\varpi'}^{-d}$, by~\eqref{dp:laws:nodes}. In case (c), let $\rho_0=0,\rho_1,\dots,\rho_{\mathsf q-1}\in\mathcal O$ represent the residues and put $\xi_\ell=\sum_u\rho_{\ell_u}\vartheta^u$, with $\ell_u$ the base-$\mathsf q$ digits of $\ell$. For a nonzero integer $e$, let $\ord_{\mathsf q}(e)$ be the largest $u$ with $\mathsf q^u\mid e$. For $\ell\ne\ell'$ the digits agree below position $\ord_{\mathsf q}(\ell-\ell')$ and differ there, so $\abs{\xi_\ell-\xi_{\ell'}}=\abs\vartheta^{\ord_{\mathsf q}(\ell-\ell')}$. The numbers $\abs{\ell-\ell'}$, with $\ell'\le d$ and $\ell'\ne\ell$, are $1,\dots,\ell$ and $1,\dots,d-\ell$. We have $\sum_{e=1}^d\ord_{\mathsf q}(e)=V_{\mathsf q}(d)$ for every $d$. The function $V_{\mathsf q}$ is increasing, and it is superadditive, since $\lfloor e/\mathsf q^u\rfloor+\lfloor e'/\mathsf q^u\rfloor\le\lfloor(e+e')/\mathsf q^u\rfloor$ for integers $e,e'\ge0$. So we get $\mathsf D_d=\max_{\ell\le d}\abs\vartheta^{-V_{\mathsf q}(\ell)-V_{\mathsf q}(d-\ell)}\le\abs\vartheta^{-V_{\mathsf q}(d)}$.
+
+\emph{Step 2 (item (1): Newton interpolation).} If $n=0$, then $a$ is constant. Otherwise we may assume that every $\alpha_c\ge1$ and $r\ge2$, since for $r=1$ the coefficient is $a(w_1)$. As in Step~3 of the proof of Theorem~\ref{dp:thm:mixed}, $a^{[\alpha]}(w_1,\dots,w_r)$ is a coefficient of $\Phi(s)=a(s_1w_1+\dots+s_{r-1}w_{r-1}+w_r)$, and Newton's formula on nodes as in Step~1 gives $\Phi(s)=\sum_{\abs g\le n}\mathsf d_g\prod_{c<r}\mathsf N_{g_c}(s_c)$ with $\mathsf N_d\in\mathcal O[s_c]$. Here $\mathsf d_g$ is a combination of values of $\Phi$ at node points, with coefficients of absolute value at most $\prod_c\mathsf D_{g_c}$. With residue nodes this product is $1$. With the nodes of case (c) it is at most $\abs\vartheta^{-\sum_cV_{\mathsf q}(g_c)}\le\abs\vartheta^{-V_{\mathsf q}(n)}$, as $V_{\mathsf q}$ is superadditive and increasing and $\abs g\le n$. With binary nodes it is at most $\abs{\varpi'}^{-n}$. Each value has norm at most $\norm a\max_c\norm{w_c}^n$, as $P$ is ultrametric and $\abs{\xi_\ell}\le1$. As $W$ is ultrametric, $\mathsf d_g$ obeys the same bound with the product as factor, and so does the coefficient of $\Phi$, which is a combination of the $\mathsf d_g$ with coefficients in $\mathcal O$. This gives the second bound of item (1), and the first in cases (a) and (c). In case (b), choose $\varpi'$ with $\abs{\varpi'}$ arbitrarily close to $1$.
+
+\emph{Step 3 (item (2): scaling).} Let $w_1,\dots,w_r$ be nonzero and let $\eta\in(0,1]$ be as in the definition of $\mathfrak s(P)$. Choose $\lambda_c\in K$ with $\eta\le\norm{\lambda_cw_c}\le1$ for each $c$. By item (1) and Lemma~\ref{dp:lem:elementary}(3),
+\[
+ \norm{a^{[\alpha]}(w_1,\dots,w_r)}=\prod_c\abs{\lambda_c}^{-\alpha_c}\norm{a^{[\alpha]}(\lambda_1w_1,\dots,\lambda_rw_r)}\le\theta_n(K)\norm a\prod_c\bigl(\norm{w_c}/\eta\bigr)^{\alpha_c}.
+\]
+Let $\eta$ tend to $\mathfrak s(P)$ and divide by $\prod_c\norm{w_c}^{\alpha_c}$. The equality cases follow from $\norm a\le\lvert\!\lvert\!\lvert a\rvert\!\rvert\!\rvert$, and the last bound from $\theta_n(K)\le\theta_K^{1-n}$.
+\end{proof}
+
+\begin{remark}
+In case (c) the constant $\theta_{\mathsf q+1}(K)=\abs\vartheta^{-1}$ of Lemma~\ref{dp:lem:strong-coefficients}(2) is attained. Let $P=K^2$ with the maximum norm and $\omega(s_1,s_2)=(s_1^{\mathsf q}s_2-s_1s_2^{\mathsf q})/\vartheta$, with values in $K$. For $s_1,s_2\in\mathcal O$ we have $\abs{s_1^{\mathsf q}-s_1},\abs{s_2-s_2^{\mathsf q}}\le\abs\vartheta$, so $\omega(s_1,s_2)=(s_1^{\mathsf q}-s_1)s_2/\vartheta+s_1(s_2-s_2^{\mathsf q})/\vartheta$ has absolute value at most $1$. Every nonzero $h\in P$ is $\mu h'$ with $\abs\mu=\norm h$ and $\norm{h'}=1$, and $\omega$ is homogeneous of degree $\mathsf q+1$. So $\norm\omega\le1$. The coefficient of $\omega$ of index $(\mathsf q,1)$ at the unit vectors is $1/\vartheta$. So $\omega\ne0$ and $\lvert\!\lvert\!\lvert\omega\rvert\!\rvert\!\rvert\ge\abs\vartheta^{-1}\norm\omega$, while here $\mathfrak s(P)=1$ and $V_{\mathsf q}(\mathsf q+1)=1$.
+\end{remark}

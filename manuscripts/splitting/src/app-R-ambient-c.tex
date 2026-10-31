@@ -1,0 +1,176 @@
+\subsection{The mechanism}\label{amb:ssec:proofs-mechanism}
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:channel}]
+\emph{Step 1 (the law).} Put $a_{\beta_0}(x,w)=\beta_0(x^{\otimes n},w)$ on $X\oplus G$, with the maximum norm. It is a bounded law of degree $n+1$: on a finite span it is a homogeneous polynomial of degree $n+1$, by \eqref{amb:eq:orbit}, and $\norm{a_{\beta_0}(x,w)}\le\norm{\beta_0}\norm x^n\norm w$.
+
+\emph{Step 2 ((d) implies (c)).} Take $C>0$ in (d). Let $Z_Y$ be the separated quotient of $Y\oplus(X^{\otimes n}\otimes G)$, with the seminorm $(\mathsf y,t')\mapsto\norm{\mathsf y}+C\pi(t')$, by the subspace of the $(L_{\beta_0}t,-t)$, $t\in\Gamma^n(X)\otimes G$. Put $j_Y(\mathsf y)=[\mathsf y,0]$. By (d), $\norm{\mathsf y+L_{\beta_0}t}+C\pi(t)\ge\norm{\mathsf y}$, so $j_Y$ is a linear isometry. For $\tau\in X^{\otimes n}$ put $\tilde\beta(\tau,w)=[0,\tau\otimes w]$; then $\norm{\tilde\beta(\tau,w)}\le C\pi(\tau)\norm w$. The relation with $t=s\otimes w$ gives $\tilde\beta(s,w)=[L_{\beta_0}(s\otimes w),0]=j_Y\beta_0(s,w)$ for $s\in\Gamma^n(X)$.
+
+\emph{Step 3 ((c) implies (b), and (b) implies (a)).} Let $\tilde\beta$ be the bilinear map of (c). The map $(h^1,\dots,h^{n+1})\mapsto\tilde\beta(\operatorname{pr}_Xh^1\otimes\dots\otimes\operatorname{pr}_Xh^n,\operatorname{pr}_Gh^{n+1})$ is bounded and $(n+1)$-linear, with diagonal $j_Y\circ a_{\beta_0}$. Expanding it at $z_0=(x_0,w_0)$ writes $j_Ya_{\beta_0}(z_0+h)=\sum_{n'\le n+1}b_{n'}(h,\dots,h)$ with bounded $n'$-linear $b_{n'}$. For $h=(u,v)$, $b_{n'}(h,\dots,h)$ is $j_Y$ of the coefficient of $\lambda^{n'}$ in $\beta_0((x_0+\lambda u)^{\otimes n},w_0+\lambda v)$. That coefficient lies in $Y$, as the coefficients of $(x_0+\lambda u)^{\otimes n}$ are orbit sums in $\Gamma^n(X)$. So this is an ambient expansion at $z_0$. Item (b) gives (a), as $X\oplus G$ is not empty.
+
+\emph{Step 4 ((a) implies (d)).} By Proposition~\ref{amb:prop:criterion}(2) and Lemma~\ref{amb:lem:linearization}(3), $\operatorname{amb}(a_{\beta_0})<\infty$. Let $\operatorname{Ins}\colon X^{\otimes n}\otimes G\to(X\oplus G)^{\otimes(n+1)}$ be defined as in Step~4 of the proof of Proposition~\ref{amb:prop:general-failure}, which uses neither hypothesis on $G$ or $\pi$: $\pi(\operatorname{Ins}t)\le(n+1)\pi(t)$, and $\operatorname{Ins}(u^{\otimes n}\otimes w)\in\Gamma^{n+1}(X\oplus G)$ is the coefficient of $\lambda$ in $(u+\lambda w)^{\otimes(n+1)}$. So $L_{a_{\beta_0}}$ sends it to the coefficient of $\lambda$ in $a_{\beta_0}(u+\lambda w)=\lambda\beta_0(u^{\otimes n},w)$. Hence $L_{a_{\beta_0}}\circ\operatorname{Ins}=L_{\beta_0}$ on $\Gamma^n(X)\otimes G$, and $\norm{L_{\beta_0}t}\le(n+1)\operatorname{amb}(a_{\beta_0})\pi(t)$.
+
+\emph{Step 5 (all $\beta_0$ and $G$).} Let $\mathfrak l_n(X)<\infty$. By \eqref{amb:eq:mu}, $\norm{L_{\beta_0}t}\le\norm{\beta_0}\mu(t)$, so Lemma~\ref{amb:lem:family}(2) gives (d). Let $\mathfrak l_n(X)=\infty$. Take a bad space $G$, the $\ell^1$-sum of the $G(y^{(i)})$ with $\sup_i\mathfrak l(y^{(i)})=\infty$, let $Y$ be the separated quotient of $(\Gamma^n(X)\otimes G,\mu)$, and let $\beta_0(s,w)$ be the class of $s\otimes w$. Then $\norm{L_{\beta_0}t}=\mu(t)$. Step~5 of the proof of Proposition~\ref{amb:prop:general-failure} does not use that $\pi$ is a norm. It gives, for $t_i=t(y^{(i)})$ and $\Sigma_i=\sum_l\norm{y^{(i)}_l}_{\rm e}>0$, that $\mu(t_i)\ge\mathfrak l(y^{(i)})\Sigma_i$ and $\pi(t_i)\le\Sigma_i$, computed in $G(y^{(i)})$ or in $G$. So no $C$ satisfies (d).
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{amb:prop:pairs}]
+\emph{Step 1 (composition).} Let $\Phi_1$ be a morphism germ at $w_0$, with value $w_0'$ there, and $\Phi_2$ a morphism germ at $w_0'$. Write $\Phi_1(w_0+h)=w_0'+\sum_{l\ge1}b^1_l(h,\dots,h)$ and $\Phi_2(w_0'+v)=\sum_{r\ge0}b^2_r(v,\dots,v)$, with $\norm{b^1_l}\le \mathfrak b_{\Phi_1}R_{\Phi_1}^{-l}$ and $\norm{b^2_r}\le \mathfrak b_{\Phi_2}R_{\Phi_2}^{-r}$. Substitution gives the multilinear coefficients $\sum_r\sum_{l_1+\dots+l_r=n}b^2_r\circ(b^1_{l_1}\times\dots\times b^1_{l_r})$. Their norms are bounded by the coefficients of the real series $\mathfrak b_{\Phi_2}\sum_r\bigl(R_{\Phi_2}^{-1}\mathfrak b_{\Phi_1}(\theta/R_{\Phi_1})/(1-\theta/R_{\Phi_1})\bigr)^r$, of positive radius of convergence. For small $h$ we have $\sum_l\norm{b^1_l(h,\dots,h)}<R_{\Phi_2}$, and the family of the values of $b^2_r$ at the vectors $b^1_{l_c}(h,\dots,h)$ is absolutely summable in the complete final target. Grouped by $r$ it has sum $\Phi_2(\Phi_1(w_0+h))$, and grouped by $n$ it gives the coefficients above. So $\Phi_2\circ\Phi_1$ is analytic. This argument uses completeness of the final target only. The composite preserves the subspaces near $w_0$, and it sends $w_0$ to the value of $\Phi_2$ at $w_0'$. Identity germs are morphisms, and restriction preserves composition, so $\operatorname{Fg}$ is a functor to pointed Banach spaces and germs of maps, the spaces being Banach as closed subspaces.
+
+\emph{Step 2 (the image).} For a morphism germ $\Phi$, $j'\circ\operatorname{Fg}\Phi=\Phi\circ j$ is analytic, with diagonals in $j'(W')$ by Theorem~\ref{thm:coefficient-descent}. So $\operatorname{Fg}\Phi$ is AA. Conversely, let $f$ be AA at $x_0$ from a Banach space $P$ into a Banach space $W$, through $j\colon W\to Z$ with $Z$ Banach. Then $j(W)$ is closed, and $j\circ f$ is a morphism germ from $(P,P)$ to $(Z,j(W))$. Identifying $W$ with $j(W)$, its image under $\operatorname{Fg}$ is $f$.
+
+\emph{Step 3 (composites).} $\operatorname{Fg}(Z,W)=W=\operatorname{Fg}(W,W)$. Let $\Phi_1$ land in $(Z,W)$ and let $\Phi_2$ start at $(W,W)$, with $Z\ne W$. These two pairs are different objects, so $\Phi_2\circ\Phi_1$ is not defined, while $\operatorname{Fg}\Phi_2\circ\operatorname{Fg}\Phi_1$ is. That composite can leave the image. Let $K$ be complete of characteristic $p$, and take $\Phi_1=j\circ f_X$ and $\Phi_2=\hat g_X$ as in the paragraph after the proposition. By Theorem~\ref{amb:thm:failure}, $\hat g_X\circ f_X$ is ambient analytic at no point, so by Step~2 it is not $\operatorname{Fg}$ of a morphism germ.
+
+\emph{Step 4 (directedness).} Let $W$ be Banach and let $j_1\colon W\to Z_1$, $j_2\colon W\to Z_2$ be linear isometries into Banach spaces. As $W$ is Banach, the subspace of the $(j_1w,-j_2w)$ in the $\ell^1$-sum of $Z_1,Z_2$ is complete, hence closed, so the quotient $Z_3$ is Banach. Put $i_1(z)=[z,0]$ and $i_2(z)=[0,z]$. Then $i_1j_1=i_2j_2$. The inequality $\norm{z+j_1w}+\norm{j_2w}\ge\norm z$ makes $i_1$ isometric, and $i_2$ likewise. So $i_1\circ\Phi_1$ is a morphism germ into $(Z_3,i_1j_1(W))$ with the same image under $\operatorname{Fg}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:pair-inverse}]
+\emph{Step 1 (the derivative).} Let $w_0'=\Phi(w_0)\in W'$. An analytic germ is strictly differentiable: if $\norm{b_n}\le \mathfrak bR^{-n}$, then for $\norm h,\norm{h'}\le r<R$ the term of degree $n$ changes by at most $n\norm{b_n}r^{n-1}\norm{h-h'}$, and the terms with $n\ge2$ sum to at most $\bigl(\sum_{n\ge2}n\mathfrak bR^{-n}r^{n-1}\bigr)\norm{h-h'}$, whose coefficient tends to $0$ with $r$. By the chain rule $\mathsf T_1$ is bijective, with bounded inverse $D\Phi^{-1}(w_0')$.
+
+\emph{Step 2 (only if).} For $u\in W$, $\mathsf T_1u=\lim_{\lambda\to0}\lambda^{-1}(\Phi(w_0+\lambda u)-w_0')$ lies in the closed subspace $W'$. If $\Phi^{-1}$ is a morphism germ, likewise $\mathsf T_1^{-1}(W')\subseteq W$. So $\mathsf T_1(W)=W'$.
+
+\emph{Step 3 (if).} Let $\mathsf T_1(W)=W'$. The map $z\mapsto z-\mathsf T_1^{-1}\Phi(z)$ has strict derivative $0$ at $w_0$. Choose $r>0$ such that, on the closed ball of radius $r$ about $w_0$ in $Z$, this map is $\frac12$-Lipschitz and $\Phi^{-1}\circ\Phi=\id$, and $\Phi$ maps the part of the ball in $W$ into $W'$. Let $B$ be that part of the ball, a complete metric space. Let $w'\in W'$ with $\norm{\mathsf T_1^{-1}(w'-w_0')}\le r/2$, and $\mathsf{Ct}_{w'}(w)=w+\mathsf T_1^{-1}(w'-\Phi(w))$. Then $\mathsf{Ct}_{w'}$ preserves $W$ on $B$, as $\mathsf T_1^{-1}(W')\subseteq W$. It is $\frac12$-Lipschitz with $\norm{\mathsf{Ct}_{w'}(w_0)-w_0}\le r/2$, so it maps $B$ to $B$. Its fixed point $w\in B$ has $\Phi(w)=w'$, so $\Phi^{-1}(w')=w\in W$. So $\Phi^{-1}(W')\subseteq W$ near $w_0'$, and $\Phi^{-1}$ is a morphism germ.
+
+\emph{Step 4 (the map $\Delta$).} Let $K$ be complete of characteristic $p$, let $z^0\in H_1$, let $j,j'$ be as in the theorem, and suppose that $\Phi$ is an analytic germ from $Z$ to $Z'$ at $j(z^0)$ with an analytic inverse germ and $\Phi\circ j=j'\circ\Delta$ near $z^0$. Then $\Phi$ is a morphism germ from $(Z,j(H_1))$ to $(Z',j'(H_1))$, and $\mathsf T_1j=j'D\Delta(z^0)$, by the chain rule, as $\Delta$ is differentiable. As $D\Delta(z^0)$ is bijective on $H_1$ (Corollary~\ref{amb:cor:charts}(1)), $\mathsf T_1(j(H_1))=j'(H_1)$ holds automatically. By Step~3, $\Phi^{-1}(j'(z'))=j(z)$ for $z'$ near $\Delta(z^0)$, with $z$ near $z^0$. Then $j'\Delta(z)=\Phi(jz)=j'(z')$, so $z=\Delta'(z')$. Hence $j\circ\Delta'=\Phi^{-1}\circ j'$ is analytic near $\Delta(z^0)$, so $\Delta'$ is AA there, against Corollary~\ref{amb:cor:charts}(1).
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{amb:cor:one-pair}]
+\emph{Step 1 (groupoid).} Identity germs are local automorphisms. Composites are, by Step~1 of the proof of Proposition~\ref{amb:prop:pairs} and the chain rule. Inverses are, by Theorem~\ref{amb:thm:pair-inverse}, with $D\Phi^{-1}(\Phi(w_0))=D\Phi(w_0)^{-1}$.
+
+\emph{Step 2 (invariance).} Let $\Phi$ be a local automorphism at $f(x_0)$. If $j\circ f$ is analytic at $x_0$, then $j\circ(\Phi|_W\circ f)=\Phi\circ(j\circ f)$ is analytic at $x_0$, by Step~1 of the proof of Proposition~\ref{amb:prop:pairs}. Let $g=\operatorname{Fg}\Phi_g$, and let $\Phi,\Phi'$ be local automorphisms at the value and at the base point of $g$. By the same Step and Theorem~\ref{amb:thm:pair-inverse}, $\Phi\circ\Phi_g\circ\Phi'^{-1}$ is a morphism germ, and its restriction to $W$ is $\Phi|_W\circ g\circ(\Phi'|_W)^{-1}$.
+
+\emph{Step 3 (no single envelope).} Let $K$ be complete of characteristic $p$, let $j$ be the inclusion of $\widehat W^{\rm at}\oplus\widehat Y^{\rm at}$ in $Z$, let $j\circ(f_X,0)$ be analytic at $x_0$, and let $\Delta''=\operatorname{Fg}\Phi_{\Delta''}$ near $(f_X,0)(x_0)$, for a morphism germ $\Phi_{\Delta''}$ of the pair. Then $j\circ\Delta''\circ(f_X,0)=\Phi_{\Delta''}\circ(j\circ(f_X,0))$ is analytic at $x_0$, by Step~1 of the proof of Proposition~\ref{amb:prop:pairs}. So $\Delta''\circ(f_X,0)$ is AA at $x_0$, against Corollary~\ref{amb:cor:charts}(2).
+\end{proof}
+
+\subsection{Envelopes}\label{amb:ssec:proofs-envelope}
+
+Throughout this subsection $K$ is complete, as in Section~\ref{amb:ssec:envelope}. Where an envelope occurs, $(\mathfrak E,j)$ is a functorial envelope, with the notation of Definition~\ref{amb:def:envelope}. For alternating $\omega$ on $E$ and $v\in E^k$,
+\begin{equation}\label{amb:c:det}
+ \omega\circ T_v^{\times k}=\omega(v_1,\dots,v_k)\det .
+\end{equation}
+The bounded linear maps below extend to completions, and we do not repeat this.
+
+\begin{lemma}[reduction to the homogeneous part]\label{amb:lem:homogeneous}
+\leavevmode
+\begin{enumerate}
+\item For every $E$ and small $\lambda\in K$, $\mathfrak E(\lambda\id_E)=\sum_n\lambda^n\mathsf q_n^E$ with bounded $\mathsf q_n^E$, natural in $E$, with $(\mathsf q_n^E)^2=\mathsf q_n^E$, and with $\mathsf q_n^E\mathsf q_{n'}^E=0$ for $n\ne n'$. Put $\mathfrak E_k(E)=\mathsf q_k^E\mathfrak E(E)$.
+\item $\mathfrak E_k$ is a subfunctor of $\mathfrak E$, $\mathfrak E_k(\lambda T)=\lambda^k\mathfrak E_k(T)$ for all $\lambda\in K$, and $j_E$ maps into $\mathfrak E_k(E)$.
+\item For all $E,D$ there is a bounded $k$-linear $\beta^{\rm lift}_{E,D}\colon\cL(E,D)^k\to\cL(\mathfrak E_k(D),\mathfrak E_k(E))$ with $\mathfrak E_k(T)=\beta^{\rm lift}_{E,D}(T,\dots,T)$.
+\item A map into $\Alt^k(E;K)$ is analytic after $j_E$ into the completion of $\mathfrak E(E)$ if and only if it is analytic after $j_E$ into the completion of $\mathfrak E_k(E)$.
+\item Let $M$ be a manifold as in Section~\ref{sec:forms}, modeled on $E$, and let $\omega$ be a section of $\Alt^k(TM;K)$. If $j_E\circ\omega$ is analytic at a point into the completion of $\mathfrak E(E)$ in one chart around the point, then it is so in every chart around the point.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item 1).} Restrict the expansion of the hom map at $0$ to the line $\lambda\id_E$. From $\mathfrak E(\lambda\id_E)\mathfrak E(\lambda'\id_E)=\mathfrak E(\lambda\lambda'\id_E)$ and Lemma~\ref{lem:unique} in each variable, $(\mathsf q_n^E)^2=\mathsf q_n^E$ and $\mathsf q_n^E\mathsf q_{n'}^E=0$ for $n\ne n'$. From $\mathfrak E(T)\mathfrak E(\lambda\id_D)=\mathfrak E(\lambda T)=\mathfrak E(\lambda\id_E)\mathfrak E(T)$, $\mathfrak E(T)\mathsf q_n^D=\mathsf q_n^E\mathfrak E(T)$.
+
+\emph{Step 2 (item 2).} Naturality gives the subfunctor. On $\mathfrak E_k(E)$, $\mathfrak E(\lambda\id_E)=\lambda^k$ for small $\lambda$. For general $\lambda$ take small $\lambda'\ne0$ with $\lambda\lambda'$ small: $\mathfrak E(\lambda\id_E)(\lambda')^k=\mathfrak E(\lambda\lambda'\id_E)=(\lambda\lambda')^k$ on $\mathfrak E_k(E)$. Also $\mathfrak E(\lambda\id_E)j_E\omega=\lambda^kj_E\omega$, so $\mathsf q_k^Ej_E\omega=j_E\omega$ and $\mathsf q_n^Ej_E\omega=0$ for $n\ne k$.
+
+\emph{Step 3 (item 3).} Let $T\mapsto\mathfrak E_k(T)=\mathsf q_k^E\mathfrak E(T)\mathsf q_k^D$ have the expansion $\sum_nb_n(T,\dots,T)$ near $0$. Comparison with $\mathfrak E_k(\lambda T)=\lambda^k\mathfrak E_k(T)$ on lines gives $b_n(T,\dots,T)=0$ for $n\ne k$ and $\mathfrak E_k(T)=b_k(T,\dots,T)$ for small $T$, hence by homogeneity for all $T$. Take $\beta^{\rm lift}_{E,D}=b_k$. This lift is a choice, and we do not use naturality of it.
+
+\emph{Step 4 (item 4).} $\mathsf q_k^E$ is bounded with $\mathsf q_k^Ej_E=j_E$, and the inclusion of $\mathfrak E_k(E)$ is isometric.
+
+\emph{Step 5 (item 5).} Let $\omega^1,\omega^2$ be the expressions of $\omega$ in two charts around the point, with $\omega^1(y)=\omega^2(\psi(y))\circ D\psi(y)^{\times k}$ for the change of chart $\psi$, as in Section~\ref{sec:forms}. By the definition of an envelope and items~2 and~3,
+\[
+ j_E\omega^1(y)=\mathfrak E(D\psi(y))\,j_E\omega^2(\psi(y))=\beta^{\rm lift}_{E,E}(D\psi(y),\dots,D\psi(y))\,j_E\omega^2(\psi(y)).
+\]
+Let $j_E\circ\omega^2$ be analytic at $\psi(y_0)$ into the completion of $\mathfrak E(E)$. By item~4 it is analytic there into the completion of $\mathfrak E_k(E)$, and $\psi$, $D\psi$ are analytic at $y_0$. The tuple of the maps $D\psi$ and $j_E\circ\omega^2\circ\psi$ is analytic at $y_0$, by Step~1 of the proof of Proposition~\ref{amb:prop:pairs}, which uses completeness of the final target only. A bounded $(k+1)$-linear map has a finite expansion at every point. So the same Step makes $j_E\circ\omega^1$ analytic at $y_0$ into the completion of $\mathfrak E_k(E)$, and item~4 gives the claim.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:comparison}]
+\emph{Step 1 ($\chi_E$).} For $\lambda\in K^k$, $T_{(\lambda_cv_c)_c}=T_v\circ\mathsf t_\lambda$, so $\mathsf p\,\mathfrak E_k(T_{(\lambda_cv_c)_c})=\lambda_1\cdots\lambda_k\mathsf p\,\mathfrak E_k(T_v)$. By Lemma~\ref{amb:lem:homogeneous}(3), $v\mapsto\mathsf p\,\mathfrak E_k(T_v)\xi$ is a polynomial map on $E^k$. It is homogeneous of degree $1$ in each $v_c$, hence linear in each $v_c$. As $\norm{T_v}\le\max_c\norm{v_c}$, $\norm{\chi_E(\xi)(v)}\le\norm{\mathsf p}\norm{\beta^{\rm lift}_{\mathsf L_k,E}}\max_c\norm{v_c}^k\norm\xi$. Scaling each $v_c\ne0$ by $\lambda_c$ with $\abs\varpi<\abs{\lambda_c}\norm{v_c}\le1$ bounds the operator norm by $\abs\varpi^{-k}\norm{\mathsf p}\norm{\beta^{\rm lift}_{\mathsf L_k,E}}\norm\xi$. For $S\in\cL(E',E)$, $ST_{v'}=T_{Sv'}$ gives naturality. By \eqref{amb:c:det}, $\chi_E(j_E\omega)(v)=\mathsf p\,j_{\mathsf L_k}(\omega\circ T_v^{\times k})=\omega(v)u_{\mathfrak E}$.
+
+\emph{Step 2 (natural families).} Let $\mathsf V_E\colon\mathfrak E(E)\to\Mult^k(E;\mathcal U')$ be a natural family of bounded linear maps, that is, $\mathsf V_E(\mathfrak E(T)\xi)=\mathsf V_D(\xi)\circ T^{\times k}$ for $T\in\cL(E,D)$ and $\xi\in\mathfrak E(D)$. Put $\mathsf h(\xi')=\mathsf V_{\mathsf L_k}(\xi')(e_1,\dots,e_k)$ for $\xi'\in\mathcal U_{\mathfrak E}$, a bounded linear map. Naturality along $\lambda\id_E$ gives $\mathsf V_E\mathfrak E(\lambda\id_E)=\lambda^k\mathsf V_E$, so $\mathsf V_E=\mathsf V_E\mathsf q_k^E$. For $\xi\in\mathfrak E_k(E)$, naturality along $T_v$ gives $\mathsf V_E(\xi)(v)=\mathsf V_{\mathsf L_k}(\mathfrak E_k(T_v)\xi)(e_1,\dots,e_k)$. For $\xi''=\mathsf p_\alpha\xi''$ in $\mathfrak E_k(\mathsf L_k)$, multilinearity and naturality along $\mathsf t_\lambda$ give
+\[
+ \lambda_1\cdots\lambda_k\mathsf V_{\mathsf L_k}(\xi'')(e_1,\dots,e_k)=\mathsf V_{\mathsf L_k}(\xi'')(\mathsf t_\lambda e_1,\dots,\mathsf t_\lambda e_k)=\lambda^\alpha\mathsf V_{\mathsf L_k}(\xi'')(e_1,\dots,e_k),
+\]
+so this value is $0$ unless $\alpha=(1,\dots,1)$. As the $\mathsf p_\alpha$ have sum $\id$, this gives $\mathsf V_E(\xi)(v)=\mathsf h(\chi_E(\xi)(v))$, that is, $\mathsf V_E=\mathsf h_*\circ\chi_E\circ\mathsf q_k^E$. Conversely, for $\mathsf h\in\cL(\mathcal U_{\mathfrak E},\mathcal U')$ the family $\mathsf h_*\circ\chi_E\circ\mathsf q_k^E$ is natural, and on $\xi'\in\mathcal U_{\mathfrak E}$ its value at $(e_1,\dots,e_k)$ is $\mathsf h(\mathsf p\,\xi')=\mathsf h(\xi')$, as $T_{(e_1,\dots,e_k)}=\id$. So $\mathsf h$ is determined by the family.
+
+\emph{Step 3 (sections).} Let $\omega$ be $\mathfrak E$-ambient, in a chart. By Lemma~\ref{amb:lem:homogeneous}(4), $j_E\circ\omega$ is analytic into the completion of $\mathfrak E_k(E)$. Applying $\chi_E$, $\omega\,u_{\mathfrak E}$ is analytic into $\Mult^k(E;\widehat{\mathcal U}_{\mathfrak E})$. If the line is split, let $\eta_0$ be the form of Definition~\ref{amb:def:envelope}. It extends to $\widehat{\mathcal U}_{\mathfrak E}$, as $K$ is complete. Applying $(\eta_0)_*$, $\omega$ is analytic into $\Mult^k(E;K)$.
+\end{proof}
+
+Let $E^{(k)}$ be the sum of $k$ copies of $E$, with the sum norm in case (A) and the maximum norm in case (B), with inclusions $\operatorname{in}_c$, projections $\operatorname{pr}_c$, $\operatorname{sum}=\sum_c\operatorname{pr}_c$, and scalings $\operatorname{sc}_\lambda=\bigoplus_c\lambda_c$. For $\omega'\in\Alt^k(E^{(k)};K)$ write $\omega'\circ\operatorname{sc}_\lambda^{\times k}=\sum_{\abs\alpha=k}\lambda^\alpha\omega'_\alpha$. By interpolation, as $K$ is infinite, each $\omega'_\alpha$ is alternating. The \emph{part of weight $(1,\dots,1)$} of $\omega'$ is $\omega'_{(1,\dots,1)}$. For $\mathsf m\in\Mult^k(E;K)$ and $z_1,\dots,z_k\in E^{(k)}$ put
+\[
+ \operatorname{Alt}'(\mathsf m)(z_1,\dots,z_k)=\sum_{\sigma\in S_k}\sgn(\sigma)\,\mathsf m(\operatorname{pr}_1z_{\sigma(1)},\dots,\operatorname{pr}_kz_{\sigma(k)}).
+\]
+
+\begin{lemma}[generation]\label{amb:lem:generation}
+$\operatorname{Alt}'(\mathsf m)\in\Alt^k(E^{(k)};K)$, $\norm{\operatorname{Alt}'(\mathsf m)}\le\norm{\mathsf m}$, and $\operatorname{Alt}'(\mathsf m)\circ(\operatorname{in}_1\times\dots\times\operatorname{in}_k)=\mathsf m$. For alternating $\omega$, $\operatorname{Alt}'(\omega)$ is the part of weight $(1,\dots,1)$ of $\omega\circ\operatorname{sum}^{\times k}$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (alternating, norm).} If $z_c=z_{c'}$ with $c\ne c'$, the terms of $\sigma$ and $(c\,c')\circ\sigma$ are equal with opposite signs, so the sum vanishes in every characteristic. The norm bound holds as $\norm{\operatorname{pr}_c}\le1$ and $K$ is ultrametric.
+
+\emph{Step 2 (restriction).} Since $\operatorname{pr}_c\operatorname{in}_{\sigma(c)}=0$ unless $\sigma(c)=c$, only $\sigma=\id$ survives on $\operatorname{in}_1x_1,\dots,\operatorname{in}_kx_k$.
+
+\emph{Step 3 (the part of weight $(1,\dots,1)$).} The part of weight $(1,\dots,1)$ of $\omega\circ\operatorname{sum}^{\times k}$ is $\sum_{\sigma}\omega(\operatorname{pr}_{\sigma^{-1}(1)}z_1,\dots,\operatorname{pr}_{\sigma^{-1}(k)}z_k)$. Reordering the arguments of $\omega$ by $\sigma$ gives the sign $\sgn(\sigma)$ and $\operatorname{Alt}'(\omega)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:initial}]
+Write $\beta=\beta^{\mathfrak E}$ and $\beta(\operatorname{in})=\beta_{E,E^{(k)}}(\operatorname{in}_1,\dots,\operatorname{in}_k)$. By \eqref{amb:c:action}, $\mathfrak E(\lambda\id_E)=\lambda^k\id$, so $\mathsf q_k^E=\id$.
+
+\emph{Step 1 (uniqueness).} By Lemma~\ref{amb:lem:generation}, $\mathsf m=\operatorname{Alt}'(\mathsf m)\circ(\operatorname{in}_1\times\dots\times\operatorname{in}_k)$. Equivariance and $\mathsf i|_{\Alt^k}=j$ force $\mathsf i_E(\mathsf m)=\beta(\operatorname{in})\,j_{E^{(k)}}(\operatorname{Alt}'(\mathsf m))$. Take this as the definition of $\mathsf i_E$; then $\norm{\mathsf i_E}\le\norm{\beta_{E,E^{(k)}}}$.
+
+\emph{Step 2 (it extends $j$).} Let $\omega$ be alternating on $E$. As $\operatorname{sum}\circ\operatorname{in}_c=\id_E$, \eqref{amb:c:action} gives $j_E\omega=\beta(\operatorname{in})\mathfrak E(\operatorname{sum})j_E\omega=\beta(\operatorname{in})\,j_{E^{(k)}}(\omega\circ\operatorname{sum}^{\times k})$. For $\omega'\in\Alt^k(E^{(k)};K)$, as $\operatorname{sc}_\lambda\operatorname{in}_c=\lambda_c\operatorname{in}_c$,
+\[
+ \sum_{\abs\alpha=k}\lambda^\alpha\beta(\operatorname{in})\,j_{E^{(k)}}\omega'_\alpha=\beta(\operatorname{in})\,j_{E^{(k)}}(\omega'\circ\operatorname{sc}_\lambda^{\times k})=\beta(\operatorname{in})\mathfrak E(\operatorname{sc}_\lambda)j_{E^{(k)}}\omega'=\lambda_1\cdots\lambda_k\beta(\operatorname{in})\,j_{E^{(k)}}\omega'.
+\]
+Comparing coefficients of $\lambda_1\cdots\lambda_k$ gives $\beta(\operatorname{in})\,j_{E^{(k)}}\omega'_{(1,\dots,1)}=\beta(\operatorname{in})\,j_{E^{(k)}}\omega'$. With $\omega'=\omega\circ\operatorname{sum}^{\times k}$ and Lemma~\ref{amb:lem:generation}, $j_E\omega=\mathsf i_E(\omega)$.
+
+\emph{Step 3 (equivariance).} Let $\mathsf m\in\Mult^k(D;K)$, $T_c\in\cL(E,D)$, and $\widehat T=\bigoplus_cT_c\colon E^{(k)}\to D^{(k)}$. Then $\operatorname{Alt}'(\mathsf m\circ(T_1\times\dots\times T_k))=\operatorname{Alt}'(\mathsf m)\circ\widehat T^{\times k}$ and $\widehat T\operatorname{in}_c^E=\operatorname{in}_c^DT_c$. By \eqref{amb:c:action},
+\begin{align*}
+ \mathsf i_E(\mathsf m\circ(T_1\times\dots\times T_k))&=\beta(\operatorname{in}^E)\mathfrak E(\widehat T)\,j_{D^{(k)}}\operatorname{Alt}'(\mathsf m)=\beta_{E,D^{(k)}}(\operatorname{in}^D_1T_1,\dots,\operatorname{in}^D_kT_k)\,j_{D^{(k)}}\operatorname{Alt}'(\mathsf m)\\
+ &=\beta_{E,D}(T_1,\dots,T_k)\,\mathsf i_D(\mathsf m).
+\end{align*}
+Taking $T_1=\dots=T_k$ shows that $\mathsf i$ is natural. So $\mathsf i$ is an equivariant morphism, and Step~1 makes it the only one.
+
+\emph{Step 4 (classes).} If $\omega$ is analytic into $\Mult^k(E;K)$ in a chart, then $j_E\circ\omega=\mathsf i_E\circ\omega$ is analytic into the completion of $\mathfrak E(E)$. So $\Omega_K\subseteq\Omega_{\mathfrak E}$. If the line is split, Theorem~\ref{amb:thm:comparison}(3) gives equality.
+
+\emph{Step 5 (all envelopes).} Let $k\ge2$, and let $(1\,2)$ be the exchange of the arguments in slots $1$ and $2$. The families $\mathsf m\mapsto\mathsf m$ and $\mathsf m\mapsto-\mathsf m\circ(1\,2)$ on $\Mult^k(-;K)$ are natural and bounded, and both are the identity on $\Alt^k$. So they are morphisms of $\Mult^k(-;K)$ to itself. They are distinct: with $e^*_c$ the coordinate forms of $\mathsf L_k$, at $\mathsf m=e_1^*\otimes\dots\otimes e_k^*$ their values at $(e_1,\dots,e_k)$ are $1$ and $0$. For $k=1$, $\Mult^1=\Alt^1$, and $j$ is the unique morphism to any envelope.
+\end{proof}
+
+\begin{lemma}[from scalars to forms]\label{amb:lem:scalars}
+Let $P$ be an object of $\mathcal V$, $\mathsf f$ a scalar germ on $P$ at $x_0$, $E=P\oplus K^k$ \textup{(}sum norm in case \textup{(A)}, maximum norm in case \textup{(B)}\textup{)}, $\mathrm dy_c$ the coordinate forms on the summand $K^k$, $\partial_c$ its unit vectors, and $\omega_{\mathsf f}(x,y)=\mathsf f(x)\,\mathrm dy_1\wedge\dots\wedge\mathrm dy_k$.
+\begin{enumerate}
+\item For $\mathcal U$ with $\norm{u_0}=1$: $\omega_{\mathsf f}\,u_0$ is analytic into $\Mult^k(E;\mathcal U)$ at $(x_0,y_0)$ if and only if $\mathsf f\,u_0$ is analytic into $\mathcal U$ at $x_0$. In particular, $\omega_{\mathsf f}$ is analytic into $\Mult^k(E;K)$ at $(x_0,y_0)$ if and only if $\mathsf f$ is analytic at $x_0$.
+\item $\omega_{\mathsf f}$ is AA at $(x_0,y_0)$ as a map into $\Alt^k(E;K)$ if and only if $\mathsf f$ is AA at $x_0$. The same holds for DP.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1 (item 1, if).} If $\mathsf f\,u_0$ is analytic, precompose with the projection to $P$ and postcompose with the bounded linear map $u\mapsto(\mathrm dy_1\wedge\dots\wedge\mathrm dy_k)\,u$.
+
+\emph{Step 2 (item 1, only if).} Postcompose with the evaluation at $(\partial_1,\dots,\partial_k)$, which gives $\mathsf f\,u_0$, and restrict to $y=y_0$.
+
+\emph{Step 3 (item 2).} For AA the same two maps pass between $\omega_{\mathsf f}$ and $\mathsf f$, by Proposition~\ref{amb:prop:permanence}(1). For DP, the coefficient laws of $\omega_{\mathsf f}$ are $a_n(\operatorname{pr}_Ph)\,\mathrm dy_1\wedge\dots\wedge\mathrm dy_k$, with $a_n$ those of $\mathsf f$, and the same two maps pass between them.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{amb:thm:more}]
+Put $a_n(h)=\mathsf e_nh_1\cdots h_n$ on $\ell^1(\N,K)$, and let $e_i$ be the unit vectors of this space.
+
+\emph{Step 1 (item 1, AA).} For $t\in\ell^1(\N,K)^{\otimes n}$ with coordinates $t(\mathsf w)$, $\mathsf w\in\N^n$, the triangle inequality gives $\sum_{\mathsf w}\abs{t(\mathsf w)}\le\pi(t)$. If $t$ is symmetric, its $n!$ coordinates at the reorderings of $(1,\dots,n)$ agree, so $n!\,\abs{t(1,\dots,n)}\le\pi(t)$, with $n!$ the integer. The arithmetic and geometric means give $\norm{a_n}\le\abs{\mathsf e_n}n^{-n}<\abs\varpi^{-1}$. Also $L_{a_n}(t)=\mathsf e_nt(1,\dots,n)$, so $\abs{L_{a_n}(t)}\le\abs\varpi^{-1}(n^n/n!)\pi(t)\le\abs\varpi^{-1}\mathrm e^n\pi(t)$. By Proposition~\ref{amb:prop:criterion}(1), $\mathsf f$ is AA at $0$ with radius $\mathrm e^{-1}$ and bound $\abs\varpi^{-1}$.
+
+\emph{Step 2 (item 1, not analytic).} Suppose $\mathsf f(h)=\sum_nb_n(h,\dots,h)$ near $0$, with $b_n\colon\ell^1(\N,K)^n\to K$ bounded $n$-linear. By Lemma~\ref{lem:unique}, $b_n(h,\dots,h)=a_n(h)$. The coefficient of $\lambda_1\cdots\lambda_n$ in $b_n(\sum_i\lambda_ie_i,\dots,\sum_i\lambda_ie_i)$ is $\sum_{\sigma\in S_n}b_n(e_{\sigma(1)},\dots,e_{\sigma(n)})$, and it is $\mathsf e_n$. As $K$ is ultrametric, $\norm{b_n}\ge\abs{\mathsf e_n}\ge n^n$, so no radius exists.
+
+\emph{Step 3 (item 2).} In \eqref{amb:c:frakU}, the sum formula is the relation $[\mathsf r_N]=0$ and the bound on $\mathsf u_{N,i}$ is the weight. The norm of $u_0$ is the infimum over finitely supported $(c_N)$ of $\abs{1+\sum_Nc_N}+\sum_N\abs{c_N}$, which is at least $1$ by the triangle inequality; so $\norm{u_0}=1$. If $\phi$ is a linear form on $\widehat{\mathfrak U}$ with $\abs\phi\le C\norm\cdot$, then $\abs{\phi(u_0)}\le\max_i\abs{\phi(\mathsf u_{N,i})}\le C/N$ for all $N$, so $\phi(u_0)=0$. Let $\operatorname{nb}\colon S_n\to\{1,\dots,n!\}$ be a bijection and
+\[
+ b_n(h^1,\dots,h^n)=\mathsf e_n\sum_{\sigma\in S_n}h^1_{\sigma(1)}\cdots h^n_{\sigma(n)}\,\mathsf u_{n!,\operatorname{nb}(\sigma)} .
+\]
+Then $\norm{b_n}\le\abs{\mathsf e_n}/n!\le\abs\varpi^{-1}\mathrm e^n$, and $b_n(h,\dots,h)=\mathsf e_nh_1\cdots h_nu_0$. So $\mathsf f\,u_0$ is analytic at $0$ into $\widehat{\mathfrak U}$ with radius $\mathrm e^{-1}$. Regrouping $b_n(x_1+h,\dots,x_1+h)$ by multilinearity, as in Step~5 of the proof of Proposition~\ref{amb:prop:permanence}, makes it analytic at every point $x_1$ of the ball of radius $\mathrm e^{-1}$, with radius $\mathrm e^{-1}-\norm{x_1}$. By Lemma~\ref{amb:lem:scalars}(1), $\omega_{\mathsf f}\in\Omega_{\widehat{\mathfrak U}}$ on $\mathsf O$, and $\omega_{\mathsf f}\notin\Omega_K$ by Step~2. The map $\mathsf m\mapsto\mathsf m\,u_0$ gives $\Omega_K\subseteq\Omega_{\widehat{\mathfrak U}}$.
+
+For the envelope $\Mult^k(-;\widehat{\mathfrak U})$, a bounded linear form on the coefficient space is a sum, over the words $(\sigma(1),\dots,\sigma(k))$, of bounded linear forms $\phi_\sigma$ on $\widehat{\mathfrak U}$ applied to the coordinates, since $\norm{u\,e^*_{\sigma(1)}\otimes\dots\otimes e^*_{\sigma(k)}}\le\norm u$ for $u\in\widehat{\mathfrak U}$, with $e^*_1,\dots,e^*_k$ the coordinate forms of $\mathsf L_k$. The vector $u_{\mathfrak E}=\det\,u_0$ has the coordinate $\sgn(\sigma)u_0$ at that word, and $\phi_\sigma(u_0)=0$. So the form vanishes at $u_{\mathfrak E}$, and the line $Ku_{\mathfrak E}$ is not split.
+
+\emph{Step 4 (item 3).} A section analytic into $\Mult^k(E;K)$ with values in the closed subspace $\Alt^k(E;K)$ is AA, so $\Omega_K\subseteq\Omega_{\mathrm{AA}}$. By Step~1 and Proposition~\ref{amb:prop:permanence}(2), $\mathsf f$ is AA on the ball of radius $\mathrm e^{-1}$, and Lemma~\ref{amb:lem:scalars}(2) puts $\omega_{\mathsf f}$ in $\Omega_{\mathrm{AA}}$ on $\mathsf O$. By Step~3 it is not in $\Omega_K$.
+
+\emph{Step 5 (item 4).} $\det\cdot\,\mathsf v$ is AA by bounded linear postcomposition, as $\mathsf v$ is AA (Corollary~\ref{amb:cor:charts}(4)). If $\det\cdot\,(\mathsf S\mathsf v)$ were AA at a point, evaluation at the unit vectors of $K^k$ would make $\mathsf S\mathsf v$ AA there, against that Corollary.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{amb:cor:nothing-lost}]
+\emph{Step 1 (from laws to coefficients).} Let $E$ be an ultrametric Banach space and $\omega$ DP at $x_0$ with radius $R$, bound $\mathfrak b$ and laws $a_n$. On the ultrametric space $E\oplus E^{(k)}$ (maximum norm), $a'_n(h,v_1,\dots,v_k)=a_n(h)(v_1,\dots,v_k)$ is a law of degree $n+k$ into $K$, as it is linear in each $v_c$, with $\norm{a_n'}\le\norm{a_n}$. Suppose that $C\ge1$ and that each $a_n'$ is the diagonal of an $(n+k)$-linear $\beta_n$ into $K$ with $\norm{\beta_n}\le C^{n+k}\norm{a_n}$. Let $\beta_n'(h_1,\dots,h_n;v_1,\dots,v_k)$ be the sum of $\beta_n$ over all placements of $\operatorname{in}_1v_1,\dots,\operatorname{in}_kv_k$ among its $n+k$ slots, with $h_1,\dots,h_n$ in order in the other slots. Then $\norm{\beta_n'}\le\norm{\beta_n}$, as $K$ is ultrametric. Its diagonal in $h$ is the coefficient of $\lambda_1\cdots\lambda_k$ in $\beta_n(z,\dots,z)$, $z=h+\sum_c\lambda_c\operatorname{in}_cv_c$, and $\beta_n(z,\dots,z)=\lambda_1\cdots\lambda_ka_n(h)(v_1,\dots,v_k)$. So $\beta_n'$ is an $n$-linear map into $\Mult^k(E;K)$ with diagonal $a_n$, and $\omega$ is analytic at $x_0$ into $\Mult^k(E;K)$, with radius $R/C$.
+
+\emph{Step 2 (the positive cases).} If $\operatorname{char}K=p$ and $K$ is spherically complete, Proposition~\ref{amb:prop:agreement}(1) with $W=K$ gives $\beta_n$ with $C=(\abs\varpi\mathfrak c_K)^{-1}$. If $\operatorname{char}K=0$, Theorem~\ref{amb:thm:tame-examples}(3) gives $\beta_n$ with $C=8\mathfrak d/\abs\varpi^2$.
+
+\emph{Step 3 (a law analytic nowhere).} Let $\operatorname{char}K=p$ and let $K$ be complete, not spherically complete. Take the ultrametric Banach spaces $E_\flat,D_\flat$ of Theorem~\ref{thm:operator-obstructions}(2) in degree $p$. Let $\mathsf Q^\flat$ be the separated completion of $(E_\flat^{\otimes p},\pi_{\max})$ modulo the closure of the kernel of the quotient map $E_\flat^{\otimes p}\to\Lambda^p_KE_\flat$ of Section~\ref{ob:ssec:powers}, an ultrametric Banach space. As $K$ is ultrametric, a form on $E_\flat^{\otimes p}$ has the same norm for $\pi_{\max}$ as on elementary tensors. So a bounded form on $\mathsf Q^\flat$ is a form on $E_\flat^{\otimes p}$, bounded for $\pi_{\max}$, that kills that kernel; that is, an alternating $p$-linear form of the same norm. Hence the bounded forms on $\mathsf Q^\flat$ are $\Alt^p(E_\flat;K)$, isometrically. Let $X_\flat=\cL(E_\flat,D_\flat)\oplus\Alt^p(D_\flat;K)\oplus\mathsf Q^\flat$ (maximum norm), an ultrametric Banach space, and $\mathsf f_\flat(T,\omega_\flat,\mathsf k)=\langle\omega_\flat\circ T^{\times p},\mathsf k\rangle$. This is a bounded law of degree $p+2$ and norm at most $1$, the coefficients in $T$ being alternating by interpolation, so it is DP at every point by \eqref{amb:eq:binomial}.
+
+Suppose it is analytic at $(T_0,\omega_0,\mathsf k_0)$, with coefficients $b_n$, $\norm{b_n}\le \mathfrak b_\flat R_\flat^{-n}$. For $n\ge2$ let $b^\flat_n(h^1,\dots,h^{n-2})(\omega_\flat,\mathsf k)$ be the sum over ordered pairs of slots of $b_n$ with $(0,\omega_\flat,0)$ and $(0,0,\mathsf k)$ in that pair and $(h^i,0,0)$, in order, in the other slots. Then $\norm{b^\flat_n}\le\norm{b_n}$, as $K$ is ultrametric. Fix $\omega_\flat,\mathsf k$ and $\norm h<R_\flat$. For small $\lambda_1,\lambda_2$ the terms of the expansion at $(T_0+h,\omega_0+\lambda_1\omega_\flat,\mathsf k_0+\lambda_2\mathsf k)$ tend to $0$ in $K$, so they regroup by powers of $\lambda_1,\lambda_2$. Lemma~\ref{lem:unique}, in $\lambda_1$ and then in $\lambda_2$, gives $\langle\omega_\flat\circ(T_0+h)^{\times p},\mathsf k\rangle=\sum_nb^\flat_n(h,\dots,h)(\omega_\flat,\mathsf k)$ for $\norm h<R_\flat$. The values $b^\flat_n(h^1,\dots,h^{n-2})$ are bounded operators from $\Alt^p(D_\flat;K)$ to $\Alt^p(E_\flat;K)$, as $\mathsf Q^\flat$ has dual $\Alt^p(E_\flat;K)$ isometrically, and the series converges in operator norm, as this operator space is complete. So $A^p_{E_\flat,D_\flat;K}$ is analytic at $T_0$, with coefficients $b^\flat_n$, against Theorem~\ref{thm:operator-obstructions}(2). Hence $\mathsf f_\flat$ is analytic at no point.
+
+\emph{Step 4 (only if).} For every $k\ge1$, $E=X_\flat\oplus K^k$ (maximum norm) is an ultrametric Banach space. By Lemma~\ref{amb:lem:scalars}, $\omega_{\mathsf f_\flat}$ is DP everywhere into $\Alt^k(E;K)$ and analytic nowhere into $\Mult^k(E;K)$.
+\end{proof}

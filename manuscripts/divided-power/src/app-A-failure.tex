@@ -1,0 +1,74 @@
+\section{Proofs for Section~\ref{dp:sec:nonambient}}\label{dp:app:proofs}
+
+\subsection{Tensors as functions}\label{dp:ssec:tensor-notation}
+
+For the proofs of Proposition~\ref{dp:prop:degree-p} and Lemma~\ref{dp:lem:bases} we use the following notation. It is the notation of \cite[Section~Q.5]{I}. For a field $\Bbbk$ and integers $m,n\ge1$, read a tensor $t\in(\Bbbk^m)^{\otimes n}$ as the function $t(i_1,\dots,i_n)$ on $[m]^n$, where $[m]=\{1,\dots,m\}$. For linear forms $\phi_1,\dots,\phi_n$ on $\Bbbk^m$ let $t(\phi_1,\dots,\phi_n)$ be the value of $\phi_1\otimes\dots\otimes\phi_n$ at $t$. Let $\Gamma^n(\Bbbk^m)$ be the space of symmetric tensors, also for finite $\Bbbk$, where it can be larger than the span of the powers.
+
+The proof of Lemma~\ref{dp:lem:c0-lower} uses two more notions from the same place. The \emph{flattening rank} $\operatorname{frk}(t)$ is the rank of the $m\times m^{n-1}$ matrix of the entries $t(i_1,\dots,i_n)$, with rows indexed by $i_1$. A \emph{projection onto the symmetric tensors} is a linear map of $(\Bbbk^m)^{\otimes n}$ into $\Gamma^n(\Bbbk^m)$ that fixes $\Gamma^n(\Bbbk^m)$. Symmetric tensors with entries in a commutative $\Bbbk$\nobreakdash-algebra are combinations of symmetric tensors over $\Bbbk$. So the linear extension of such a map to these entries maps tensors with these entries to symmetric ones and fixes the symmetric ones.
+
+\subsection{Non-ambient laws and composition on \texorpdfstring{$c_0\oplus G$}{c0+G}}\label{dp:af:c0}
+
+In this subsection $p=\operatorname{char}K>0$, and the notation is that of Section~\ref{dp:sec:nonambient}. Let $\kappa$ be the residue field of $K$, so $\F_p\subseteq\kappa$. Let $\operatorname{pr}_m\colon c_0\to K^m$ and $\operatorname{pr}_{G_m}\colon G\to G_m$ be the coordinate projections. Both have norm at most $1$. We write $\mathsf X$ for an indeterminate, which is called $X$ in \cite[Appendix~K]{I}; here $X$ stands for the normed space of \cite[Definition~14.15]{I}.
+
+\begin{proof}[Proof of Lemma~\ref{dp:lem:c0-lower}]
+\emph{Step 0 (the field under (a)).} This step is used only under~(a). The completion $\Kh$ has characteristic $p$, so its valuation ring is a complete discrete valuation ring containing the prime field $\F_p$, with $\vartheta$ as a uniformizer and with residue field $\kappa$. By Cohen's structure theorem for complete regular local rings containing a field~\cite{Co}, this ring contains a coefficient field, that is, a field which the residue map sends isomorphically onto $\kappa$. We identify this field with $\kappa$; it contains $\F_p$. As the ring is complete and $\vartheta$ is a uniformizer, every element of the ring is uniquely a series $\sum_{i\ge0}\zeta_i\vartheta^i$ with $\zeta_i\in\kappa$. So the ring is isomorphic to the power series ring $\kappa[[\mathsf X]]$, by an isomorphism taking $\vartheta$ to $\mathsf X$. It extends to an isomorphism of $\Kh$ onto $\kappa((\mathsf X))$, which is isometric for the absolute value $\abs\xi=\abs\vartheta^{\ord\xi}$ on $\kappa((\mathsf X))$. All objects in the lemma are defined from $K$ as a normed field. So under~(a) we may assume that $K$ is a subfield of $\kappa((\mathsf X))$ with this absolute value. Write $\coeff_0$ for the constant coefficient of a Laurent series, applied entrywise to tensors.
+
+\emph{Step 1 (projections for the family).} As $I_m$ contains the tuples of unit vectors, the span $E_0$ of the tensors $y_l$, $l\in I_m$, is $(K^m)^{\otimes p}$. As $K$ is infinite, $\Gamma^p(c_0)$ is the space of symmetric tensors in $c_0^{\otimes p}$, by Section~\ref{dp:sec:conv}. The inclusion of $(K^m)^{\otimes p}$ in $c_0^{\otimes p}$ is injective and commutes with permutations of the factors, so $E_0\cap\Gamma^p(c_0)=\Gamma^p(K^m)$. Let $\Psi\in\mathcal P(y^{(m)})$, in the sense of \cite[Definition~14.15]{I}, and put $\Psi_m=\operatorname{pr}_m^{\otimes p}\circ\Psi$. The map $\operatorname{pr}_m^{\otimes p}$ commutes with permutations of the factors, so it maps $\Gamma^p(c_0)$ into $\Gamma^p(K^m)$, and it is the identity on $(K^m)^{\otimes p}$. As $\Psi$ fixes $\Gamma^p(K^m)$, the map $\Psi_m$ is a projection of $(K^m)^{\otimes p}$ onto the symmetric tensors. As $\operatorname{pr}_m$ has norm at most $1$, the map $\operatorname{pr}_m^{\otimes p}$ does not increase the cost of a representation, so
+\begin{equation}\label{dp:af:projection-cost}
+ \pi_m(\Psi_my_l)\le\pi(\Psi y_l)\qquad(l\in I_m).
+\end{equation}
+
+\emph{Step 2 (item (1) under (a)).} Assume~(a), let $K\subseteq\kappa((\mathsf X))$ be as in Step~0, let $\Psi_K$ be a projection of $(K^m)^{\otimes p}$ onto the symmetric tensors, and put $\sigma_l=\Psi_K(y_l)$. By Section~\ref{dp:ssec:tensor-notation} with $\Bbbk=K$, the linear extension $\widetilde\Psi$ of $\Psi_K$ to entries in $\kappa((\mathsf X))$ is a projection of $(\kappa((\mathsf X))^m)^{\otimes p}$ onto $\Gamma^p(\kappa((\mathsf X))^m)$. For $\mathsf z\in(\kappa^m)^{\otimes p}$ put $\Psi_\kappa(\mathsf z)=\coeff_0\widetilde\Psi(\mathsf z)$. Then $\Psi_\kappa$ is $\kappa$\nobreakdash-linear with symmetric values and fixes the symmetric tensors over $\kappa$. So it is a projection of $(\kappa^m)^{\otimes p}$ onto $\Gamma^p(\kappa^m)$. As the $y_l$ have entries in $\F_p\subseteq K\cap\kappa$, we have $\widetilde\Psi(y_l)=\sigma_l$ and $\Psi_\kappa(y_l)=\coeff_0\sigma_l$.
+
+Read $\sigma_l$ as a matrix with rows indexed by the first index, in the completion of $\linf([m],K)\otimes_\pi\linf([m]^{p-1},K)$. Its norm there is at most $\pi_m(\sigma_l)$, since an elementary tensor of $p-1$ vectors of $K^m$, read as a function on $[m]^{p-1}$, has as maximum norm the product of their maximum norms. By the opening paragraph of \cite[Appendix~K]{I}, \cite[Lemma~K.2(2)]{I} holds for every field of characteristic $p$ in place of the finite field there, so for $\kappa$. With $\abs\vartheta$ in place of $\varrho$ and the index sets $[m]$ and $[m]^{p-1}$, it gives $\operatorname{frk}\Psi_\kappa(y_l)\le M_{\abs\vartheta}\pi_m(\sigma_l)$. Summing over $l$,
+\begin{equation}\label{dp:eq:rank-sum}
+ \sum_{l\in I_m}\operatorname{frk}\Psi_\kappa(y_l)\le M_{\abs\vartheta}\sum_{l\in I_m}\pi_m(\sigma_l).
+\end{equation}
+The tensors $y_l$, $l\in I_m$, are the $y^1\otimes\dots\otimes y^p$ with $(y^1,\dots,y^p)\in(\F_p^m)^p$. So by \cite[Lemma~Q.6(4)]{I}, applied to $\Psi_\kappa$ with $\Bbbk=\kappa$, the left side of~\eqref{dp:eq:rank-sum} is at least $mp^{pm}/\bigl(2^p(1+\lfloor\log_pm\rfloor)\bigr)$. Hence $\sum_{l\in I_m}\pi_m(\sigma_l)\ge\mathsf b_m$.
+
+\emph{Step 3 (item (1) under (b)).} Assume~(b), so $p=2$. For $S\subseteq[m]$ let $1_S\in\F_2^m$ have the entries $1$ at the elements of $S$ and $0$ elsewhere, so that $I_m$ consists of the pairs $l=(1_S,1_{S'})$, $S,S'\subseteq[m]$. Identify $(K^m)^{\otimes2}$ with $K^{m\times m}$ by $u\otimes v\mapsto uv^{\mathsf T}$. Then $\Gamma^2(K^m)$ is the space of symmetric matrices, and $y_l=1_S1_{S'}^{\mathsf T}$ for $l=(1_S,1_{S'})$. Let $\Psi_K$ be a projection onto the symmetric tensors, and put $\sigma_l=\Psi_K(y_l)$.
+
+First, $\abs{\det\sigma_{l_0}}\ge1$ for some $l_0\in I_m$. If $m=1$, then $\Psi_K=\id$ and $\sigma_{l_0}=1$ for $l_0=(1_{\{1\}},1_{\{1\}})$. Let $m\ge2$, and let $\wedge\colon K^{m\times m}\to\Lambda^2K^m$ be the linear map of \cite[Theorem~7.20(1)]{I}, with $m$ in place of its $n$:
+\[
+ \wedge\mathsf Z=\sum_{i<i'}(\mathsf Z_{ii'}+\mathsf Z_{i'i})\,e_i\wedge e_{i'}.
+\]
+Here $e_1,\dots,e_m$ are the unit vectors of $K^m$. The map is onto, its kernel is the space of symmetric matrices, and $\wedge(uv^{\mathsf T})=u\wedge v$, as $-1=1$ in $K$. As $\Psi_K-\id$ vanishes on the symmetric matrices, it is $\chi\circ\wedge$ for a linear map $\chi\colon\Lambda^2K^m\to K^{m\times m}$. As $\Psi_K$ takes symmetric values, $\wedge\circ\chi\circ\wedge=-\wedge=\wedge$, and $\wedge$ is onto, so $\wedge\circ\chi=\id$. Moreover $\Psi_K(uv^{\mathsf T})=\chi(u\wedge v)+uv^{\mathsf T}$. So \cite[Proposition~N.12]{I}, applied over the field $K$ to $\chi$, with $m$ in place of its $n$, gives $\sum_{S,S'\subseteq[m]}\det\Psi_K(1_S1_{S'}^{\mathsf T})=1$. As $K$ is nonarchimedean, some term has absolute value at least $1$.
+
+By \cite[Lemma~N.15(2)]{I}, $\pi_m(\sigma_{l_0})\ge m$. By \cite[Lemma~Q.6(3)]{I}, applied to the norm $\pi_m$ and to the map $(y^1,y^2)\mapsto\Psi_K(y^1\otimes y^2)$, the average of $\pi_m(\sigma_l)$ over the $4^m$ elements $l\in I_m$ is at least $\pi_m(\sigma_{l_0})/4$. So $\sum_{l\in I_m}\pi_m(\sigma_l)\ge m4^{m-1}=\mathsf b_m$.
+
+\emph{Step 4 (items (2) and (3)).} Let $\norm{y_l}_{\rm e}=\norm{y_l^1}\cdots\norm{y_l^p}$, as in \cite[Definition~14.15]{I}. The factors of the $y_l$ have entries in $\F_p$, so they have norm at most $1$, and the tuple $l=(e_1,\dots,e_1)$ of unit vectors has $\norm{y_l}_{\rm e}=1$. So $0<\sum_{l\in I_m}\norm{y_l}_{\rm e}\le\abs{I_m}=p^{pm}$. Let $\Psi\in\mathcal P(y^{(m)})$. By~\eqref{dp:af:projection-cost} and item~(1) for the projection $\Psi_m$,
+\begin{equation}\label{dp:af:family-sum}
+ \sum_{l\in I_m}\pi(\Psi y_l)\ge\sum_{l\in I_m}\pi_m(\Psi_my_l)\ge\mathsf b_m.
+\end{equation}
+Hence $\mathfrak l(y^{(m)})\ge\mathsf b_m/p^{pm}$. This is $m/\bigl(2^pM_{\abs\vartheta}(1+\lfloor\log_pm\rfloor)\bigr)$ under~(a) and $m/4$ under~(b). Both tend to infinity with $m$, so $\mathfrak l_p(c_0)=\infty$.
+
+For item~(3), recall from Section~\ref{dp:sec:nonambient} that $G(y^{(m)})=G_m$, with the same elements $\varepsilon_l$, so that the tensor $t(y^{(m)})=\sum_{l\in I_m}y_l\otimes\varepsilon_l$ of \cite[Definition~14.15]{I} is $t_m$. By \cite[Lemma~Q.7(1)]{I}, with $c_0$ and $p$ in place of its $X$ and $n$, and by~\eqref{dp:af:family-sum}, the norm $\mu$ of $t_m$ in $\Gamma^p_\pi(c_0)\otimes G_m$ is at least $\mathsf b_m$. It remains to pass from $G_m$ to $G$. Let $t_m=\sum_q\mathsf s_q\otimes w_q$ with $\mathsf s_q\in\Gamma^p(c_0)$ and $w_q\in G$. As $\operatorname{pr}_{G_m}$ fixes $G_m$, also $t_m=\sum_q\mathsf s_q\otimes\operatorname{pr}_{G_m}(w_q)$, and this representation in $\Gamma^p(c_0)\otimes G_m$ has no greater cost. So $\mu(t_m)\ge\mathsf b_m$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{dp:thm:c0-failure}]
+We check the hypotheses of \cite[Proposition~14.18]{I} with $c_0$ and $p\ge2$ in place of its $X$ and $n$. The coordinate forms of $c_0$ are bounded, and their products are bounded for $\pi$ and separate the points of $c_0^{\otimes p}$, so $\pi$ is a norm on $c_0^{\otimes p}$. By Lemma~\ref{dp:lem:c0-lower}(2), $\mathfrak l_p(c_0)=\infty$ and $\sup_m\mathfrak l(y^{(m)})=\infty$. The space $G$ is the $\ell^1$-sum of the universal spaces $G(y^{(m)})=G_m$, $m\ge1$, so it is a bad space. With these spaces and this $G$, the objects $H_X$, $W_X$, $Y_X$, $f_X$, $g_X$ of \cite[Definition~14.15]{I} are $H_0$, $W_X$, $Y_X$, $f_X$, $g_X$ of Section~\ref{dp:sec:nonambient}. So \cite[Proposition~14.18]{I} gives items~(1)--(4). Its statement on $g_X\circ f_X$ includes the map into the completion of $Y_X$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{dp:prop:nonambient}]
+\emph{Step 1 (item (1)).} By \cite[Lemma~Q.7(1)]{I}, with $c_0$ and $p$ in place of its $X$ and $n$, the tensor $t_m=t(y^{(m)})$ lies in $\Gamma^p(c_0)\otimes G_m$, and its projective norm in $c_0^{\otimes p}\otimes G_m$ is at most $\sum_{l\in I_m}\norm{y_l}_{\rm e}$, which is at most $p^{pm}$ by Step~4 of the proof of Lemma~\ref{dp:lem:c0-lower}. The inclusion of $G_m$ in $G$ is isometric. So $t_m\in\Gamma^p(c_0)\otimes G=V$ and $\pi(t_m)\le p^{pm}$. By Section~\ref{dp:sec:nonambient}, $\nu\ge\mu$ on $V$, and by Lemma~\ref{dp:lem:c0-lower}(3), $\mu(t_m)\ge\mathsf b_m$. This is item~(1).
+
+\emph{Step 2 (item (2): a law).} Let $n\ge p+1$ and $r\ge1$, and let $(\lambda_i,x_i,g_i)\in H$ and $s_i\in K$ for $1\le i\le r$. By~\eqref{dp:eq:orbit},
+\[
+ R_n\Bigl(\sum_is_i(\lambda_i,x_i,g_i)\Bigr)=\Bigl(\sum_is_i\lambda_i\Bigr)^{n-p-1}\Bigl(\sum_{\abs\alpha=p}s^\alpha O_\alpha(x_1,\dots,x_r)\Bigr)\otimes\Bigl(\sum_is_ig_i\Bigr),
+\]
+a homogeneous polynomial of degree $n$ in $s$. Its coefficients lie in $\Gamma^p(c_0)\otimes G=V$, as $O_\alpha(x_1,\dots,x_r)\in\Gamma^p(c_0)$. Moreover $\nu(R_n(\lambda,x,g))\le\abs\lambda^{n-p-1}\norm x^p\norm g\le\norm{(\lambda,x,g)}^n$. So $R_n$ is a law of degree $n$ with $\norm{R_n}\le1$.
+
+\emph{Step 3 (item (2): comparing coefficients).} Suppose $jR_n(h)=\beta(h,\dots,h)$ for $h\in H$, for a linear isometry $j$ of $V$ or of its completion into a normed space $Z$, and a bounded $n$\nobreakdash-linear map $\beta\colon H^n\to Z$. Let $\beta_\otimes\colon(H^{\otimes n},\pi)\to Z$ be the linear map with $\beta_\otimes(h_1\otimes\dots\otimes h_n)=\beta(h_1,\dots,h_n)$, of norm at most $\norm\beta$. Put $\mathbf 1=(1,0,0)\in H$ and $d_n=n!/(p!\,(n-p-1)!)$. For $t\in c_0^{\otimes p}\otimes G$, read in $H^{\otimes(p+1)}$, let $\iota(t)\in H^{\otimes n}$ be the sum of one term for each of the $d_n$ words $\mathsf w\in\{1,2,3\}^n$ with $p$ letters $1$ and one letter $2$. The term of $\mathsf w$ is the tensor obtained from $t\otimes\mathbf 1^{\otimes(n-p-1)}$ by moving the first $p$ factors, in order, to the positions of the letters $1$ of $\mathsf w$, the $(p+1)$-st factor to the position of the letter $2$, and the factors $\mathbf 1$ to the positions of the letters $3$. The inclusions of $c_0$ and $G$ in $H$ are isometric, permutations of the factors preserve the projective norm, and $\norm{\mathbf 1}=1$. So $\iota(t)$ has projective norm at most $d_n\pi(t)$ in $H^{\otimes n}$.
+
+For $x\in c_0$, $g\in G$ and $s=(s_1,s_2,s_3)\in K^3$ put $h_s=(s_3,s_1x,s_2g)$. Then
+\[
+ \beta_\otimes(h_s^{\otimes n})=\beta(h_s,\dots,h_s)=jR_n(h_s)=s_1^ps_2s_3^{n-p-1}\,j(x^{\otimes p}\otimes g),
+\]
+and $\iota(x^{\otimes p}\otimes g)$ is the coefficient of $s_1^ps_2s_3^{n-p-1}$ in the polynomial $h_s^{\otimes n}$. As $K$ is infinite, comparing coefficients gives $\beta_\otimes(\iota(x^{\otimes p}\otimes g))=j(x^{\otimes p}\otimes g)$. So $\beta_\otimes\circ\iota=j$ on $V$.
+
+\emph{Step 4 (item (2): the contradiction).} By Steps~1 and~3,
+\[
+ \nu(t_m)=\norm{j(t_m)}\le\norm\beta\,d_n\pi(t_m)\le d_n\norm\beta\,p^{pm}.
+\]
+With item~(1) this gives $m\le2^pd_nM_{\abs\vartheta}\norm\beta(1+\lfloor\log_pm\rfloor)$ under~(a) and $m\le4d_n\norm\beta$ under~(b), for every $m\ge1$. As $m/(1+\lfloor\log_pm\rfloor)$ is unbounded, this is impossible.
+\end{proof}
