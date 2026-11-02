@@ -2,7 +2,7 @@
 
 [![Comparator](https://github.com/Deicyde/alternating-analytic-characteristic-p/actions/workflows/comparator.yml/badge.svg)](https://github.com/Deicyde/alternating-analytic-characteristic-p/actions/workflows/comparator.yml)
 
-This repository holds the paper [*Alternating bundles and analytic descent*](paper/charp.pdf) (Jack McCarthy, October 2026) and a Lean 4 / Mathlib formalization of its numbered results.
+This repository holds the paper [*Alternating bundles and analytic descent*](paper/charp.pdf) (Jack McCarthy, October 2026), a Lean 4 / Mathlib formalization of its numbered results, and the two papers that followed it (see [Papers](#papers)).
 
 The paper asks when the construction E, F ↦ Alt^k(E; F) of bounded alternating maps is analytic: as a functor on normed spaces over a nontrivially normed field K, and on analytic vector bundles. In short:
 
@@ -10,18 +10,27 @@ The paper asks when the construction E, F ↦ Alt^k(E; F) of bounded alternating
 - Over a base with finite coordinates, it takes analytic bundles to analytic bundles in every characteristic (Corollary 4.6).
 - In characteristic p with k ≥ p it can fail: there are Banach counterexamples over every such field (Theorem 6.1), and, over complete fields, for scalar targets exactly when K is not spherically complete (Theorem 6.3).
 
+## Papers
+
+- [*Alternating bundles and analytic descent*](paper/charp.pdf) (69 pages, October 2026; [LaTeX](paper/charp.tex)). The formalization and its ledger refer to this version.
+- [*Alternating bundles and the splitting of exterior powers*](manuscripts/splitting/charp.pdf) (208 pages; [LaTeX](manuscripts/splitting/charp.tex), [sources](manuscripts/splitting/src/)), the rewrite that followed it.
+- [*Divided-power analytic maps between normed spaces*](manuscripts/divided-power/dp.pdf) (156 pages; [LaTeX](manuscripts/divided-power/dp.tex), [sources](manuscripts/divided-power/src/)), its sequel.
+- [*Precomposition on continuous alternating maps is not analytic in characteristic 2*](https://github.com/Deicyde/alternating-analytic-counterexample/blob/main/paper/counterexample.pdf), with its own Lean formalization, in [Deicyde/alternating-analytic-counterexample](https://github.com/Deicyde/alternating-analytic-counterexample).
+
+Earlier versions: [sources/](sources/) holds the manuscript as it stood when formalization started (2026-09-23), and commit [`fc84a4e`](https://github.com/Deicyde/alternating-analytic-characteristic-p/blob/fc84a4e44fa32857e39f5ec32347fd358bd965e3/manuscripts/splitting/charp.pdf) holds the 186-page text that was split into the second and third papers.
+
 ## Status
 
 Every theorem, proposition, lemma and corollary of the paper except Proposition 6.6 has a Lean proof of a corresponding statement, as do three remarks and two unnumbered statements: 76 ledger rows in all (Theorems 4.5 and 6.1 have two rows each). [challenge.md](challenge.md) lists them, one row per claim, with links to the Lean statement and its proof, and notes where the Lean statement differs from the paper. Proposition 6.6 has a written proof only.
 
-CI runs the comparator on the original six-statement challenge. The 76 ledger checks are run locally with `scripts/check_claim.py`; [challenge.md](challenge.md) records the last run. The paper cites the commit of this repository that holds the Lean code and the ledger; `main` is that commit plus the final copy of the paper.
+CI runs the comparator on the original six-statement challenge. The 76 ledger checks are run locally with `scripts/check_claim.py`; [challenge.md](challenge.md) records the last run. The paper cites the commit of this repository that holds the Lean code and the ledger; `main` is that commit plus the final copy of the paper and the later papers.
 
 ## Layout
 
 | Path | Contents |
 |---|---|
 | [paper/](paper/) | The manuscript, PDF and LaTeX, and `Section8.lean`, the definition displayed in Section 8 of the paper. |
-| [manuscripts/](manuscripts/) | Later manuscripts, PDF and LaTeX. [manuscripts/splitting/](manuscripts/splitting/) is *Alternating bundles and the splitting of exterior powers*, the rewrite that followed `paper/`; `charp.tex` is `src/main.tex` flattened. [manuscripts/divided-power/](manuscripts/divided-power/) is its sequel, *Divided-power analytic maps between normed spaces*, with `dp.tex` and `dp.pdf`. The ledger's page and theorem numbers refer to `paper/`, not to these. |
+| [manuscripts/](manuscripts/) | The two later papers (see [Papers](#papers)): [splitting/](manuscripts/splitting/) and [divided-power/](manuscripts/divided-power/), each with the PDF, the LaTeX flattened from `src/main.tex`, and `src/`. The ledger's page and theorem numbers refer to `paper/`, not to these. |
 | [challenge.md](challenge.md) | The claim ledger. |
 | [Challenges/](Challenges/) | Each claim stated in Lean with `sorry`, plus a comparator config `<ID>.json`. |
 | [Solutions/](Solutions/) | The same statements, proved from the library. |
