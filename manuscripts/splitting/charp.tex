@@ -404,8 +404,8 @@ n\textsuperscript{o}~7.8.1--7.8.4 of~\cite{Bou} on ambient sections of filtered 
 over every field of characteristic $p>0$ they are not closed under composition (Theorem~\ref{amb:thm:failure}), and the
 mechanism is that enlarging the target carries maps into the space, not analytic maps out of it
 (Section~\ref{amb:ssec:mechanism}). For $K$ complete and scalar values, $\Mult^k(-;K)$ is initial among the functorial
-envelopes of $\Alt^k(-;K)$ with a multilinear action (Theorem~\ref{amb:thm:initial}). On tame pairs, such as ultrametric
-spaces or $\ell^1(J,K)$, ambient analyticity has composition and inverse functions, and there it coincides with
+envelopes of $\Alt^k(-;K)$ with a multilinear action and equivariant morphisms (Theorem~\ref{amb:thm:initial}). On tame
+pairs, such as ultrametric spaces or $\ell^1(J,K)$, ambient analyticity has composition and inverse functions, and there it coincides with
 divided-power analyticity, which takes bounded polynomial laws as Taylor coefficients
 (Theorems~\ref{amb:thm:tame-calculus} and~\ref{amb:thm:tame-examples}). A sequel~\cite{II} studies divided-power
 analyticity.
@@ -416,8 +416,8 @@ in the text, except Theorem~\ref{thm:ingleton} and Lemma~\ref{rig:lem:ramsey}, w
 Section~\ref{sec:verification} lists the statements that also have Lean proofs of corresponding statements.
 Sections~\ref{sec:bundles}, \ref{ob:ssec:powers}, \ref{ob:ssec:tests}, \ref{spl:ssec:one-value},
 \ref{spl:ssec:parameter}, \ref{spl:ssec:bundle}, \ref{obs:ssec:counterexamples} and~\ref{sec:geometry} with
-Appendices~\ref{app:obstruction-preliminaries}--\ref{app:coordinate-methods} form the formalized core; besides it, they use
-only Definition~\ref{ob:def:sequences}, the sign $\epsilon(S)$ of Section~\ref{cmb:ssec:degrees} and condition~\textup{(L)} of
+Appendices~\ref{app:obstruction-preliminaries}--\ref{app:coordinate-methods} contain all of those statements and use, from
+the rest of the paper, only Definition~\ref{ob:def:sequences}, the sign $\epsilon(S)$ of Section~\ref{cmb:ssec:degrees} and condition~\textup{(L)} of
 Section~\ref{obs:ssec:field}. Proofs
 that would interrupt the text are collected in Appendix~\ref{app:deferred}.
 
@@ -3636,7 +3636,7 @@ alternating bundles when these are $C^n$.
 %% ---- begin sec-14-ambient-a.tex
 \section{Ambient analyticity: a structure, not a class of maps}\label{amb:sec}
 
-Ambient analyticity is not a usable class of analytic maps between normed spaces: over every field of characteristic $p$ it is not closed under composition, and for $K$ complete it has no inverse function theorem, depends on the target chart, and gives no transitive compatibility of charts; in characteristic $0$ this is open. On tame pairs (Section~\ref{amb:ssec:tame}), such as ultrametric spaces or $\ell^1(J)$, it has composition and inverse functions, but there it coincides with divided-power analyticity, so this is no separate argument for it. The mechanism behind the failure of Theorem~\ref{amb:thm:failure} is that enlarging the target carries maps into the space, not analytic maps out of it. Within analytic maps on normed spaces, the formulas of n\textsuperscript{o}~7.8.1--7.8.4 of~\cite{Bou} use a structure instead: the fixed envelope $\Mult^k$, on which the transitions act analytically, preserving the alternating forms. In every characteristic this gives those formulas on ambient sections of filtered analytic bundles, and, for $K$ complete and scalar values, $\Mult^k(-;K)$ is initial among the functorial envelopes of $\Alt^k(-;K)$ with a multilinear action. In general it does not give Bourbaki's vector functor in the analytic class, a direct factor, or an analytic induced atlas.
+Ambient analyticity is not a usable class of analytic maps between normed spaces: over every field of characteristic $p$ it is not closed under composition, and for $K$ complete it has no inverse function theorem, depends on the target chart, and gives no transitive compatibility of charts; in characteristic $0$ this is open. On tame pairs (Section~\ref{amb:ssec:tame}), such as ultrametric spaces or $\ell^1(J)$, it has composition and inverse functions, but there it coincides with divided-power analyticity, so this is no separate argument for it. The mechanism behind the failure of Theorem~\ref{amb:thm:failure} is that enlarging the target carries maps into the space, not analytic maps out of it. Within analytic maps on normed spaces, the formulas of n\textsuperscript{o}~7.8.1--7.8.4 of~\cite{Bou} use a structure instead: the fixed envelope $\Mult^k$, on which the transitions act analytically, preserving the alternating forms. In every characteristic this gives those formulas on ambient sections of filtered analytic bundles, and, for $K$ complete and scalar values, $\Mult^k(-;K)$ is initial among the functorial envelopes of $\Alt^k(-;K)$ with a multilinear action and equivariant morphisms. In general it does not give Bourbaki's vector functor in the analytic class, a direct factor, or an analytic induced atlas.
 
 Section~\ref{amb:ssec:fixed} holds over every nontrivially normed field. From Section~\ref{amb:ssec:some-j} on, $K$ is nonarchimedean. Norms need not be complete or ultrametric unless this is said.
 
